@@ -1,0 +1,3461 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Blazor.Extensions.Keys
+  commentId: T:Mapsui.UI.Blazor.Extensions.Keys
+  id: Keys
+  parent: Mapsui.UI.Blazor.Extensions
+  children:
+  - Mapsui.UI.Blazor.Extensions.Keys.Alt
+  - Mapsui.UI.Blazor.Extensions.Keys.AltLeft
+  - Mapsui.UI.Blazor.Extensions.Keys.AltRight
+  - Mapsui.UI.Blazor.Extensions.Keys.ArrowDown
+  - Mapsui.UI.Blazor.Extensions.Keys.ArrowLeft
+  - Mapsui.UI.Blazor.Extensions.Keys.ArrowRight
+  - Mapsui.UI.Blazor.Extensions.Keys.ArrowUp
+  - Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeDown
+  - Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeMute
+  - Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeUp
+  - Mapsui.UI.Blazor.Extensions.Keys.Backquote
+  - Mapsui.UI.Blazor.Extensions.Keys.Backslash
+  - Mapsui.UI.Blazor.Extensions.Keys.Backspace
+  - Mapsui.UI.Blazor.Extensions.Keys.BracketLeft
+  - Mapsui.UI.Blazor.Extensions.Keys.BracketRight
+  - Mapsui.UI.Blazor.Extensions.Keys.CapsLock
+  - Mapsui.UI.Blazor.Extensions.Keys.Comma
+  - Mapsui.UI.Blazor.Extensions.Keys.ContextMenu
+  - Mapsui.UI.Blazor.Extensions.Keys.Control
+  - Mapsui.UI.Blazor.Extensions.Keys.ControlLeft
+  - Mapsui.UI.Blazor.Extensions.Keys.ControlRight
+  - Mapsui.UI.Blazor.Extensions.Keys.Delete
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit0
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit1
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit2
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit3
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit4
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit5
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit6
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit7
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit8
+  - Mapsui.UI.Blazor.Extensions.Keys.Digit9
+  - Mapsui.UI.Blazor.Extensions.Keys.End
+  - Mapsui.UI.Blazor.Extensions.Keys.Enter
+  - Mapsui.UI.Blazor.Extensions.Keys.Equal
+  - Mapsui.UI.Blazor.Extensions.Keys.Escape
+  - Mapsui.UI.Blazor.Extensions.Keys.F1
+  - Mapsui.UI.Blazor.Extensions.Keys.F10
+  - Mapsui.UI.Blazor.Extensions.Keys.F11
+  - Mapsui.UI.Blazor.Extensions.Keys.F12
+  - Mapsui.UI.Blazor.Extensions.Keys.F2
+  - Mapsui.UI.Blazor.Extensions.Keys.F3
+  - Mapsui.UI.Blazor.Extensions.Keys.F4
+  - Mapsui.UI.Blazor.Extensions.Keys.F5
+  - Mapsui.UI.Blazor.Extensions.Keys.F6
+  - Mapsui.UI.Blazor.Extensions.Keys.F7
+  - Mapsui.UI.Blazor.Extensions.Keys.F8
+  - Mapsui.UI.Blazor.Extensions.Keys.F9
+  - Mapsui.UI.Blazor.Extensions.Keys.Home
+  - Mapsui.UI.Blazor.Extensions.Keys.Insert
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyA
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyB
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyC
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyD
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyE
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyF
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyG
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyH
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyI
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyJ
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyK
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyL
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyM
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyN
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyO
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyP
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyQ
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyR
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyS
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyT
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyU
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyV
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyW
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyX
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyY
+  - Mapsui.UI.Blazor.Extensions.Keys.KeyZ
+  - Mapsui.UI.Blazor.Extensions.Keys.LaunchApplication1
+  - Mapsui.UI.Blazor.Extensions.Keys.LaunchApplication2
+  - Mapsui.UI.Blazor.Extensions.Keys.LaunchMediaPlayer
+  - Mapsui.UI.Blazor.Extensions.Keys.MetaLeft
+  - Mapsui.UI.Blazor.Extensions.Keys.MetaRight
+  - Mapsui.UI.Blazor.Extensions.Keys.Minus
+  - Mapsui.UI.Blazor.Extensions.Keys.None
+  - Mapsui.UI.Blazor.Extensions.Keys.NumLock
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad0
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad1
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad2
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad3
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad4
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad5
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad6
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad7
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad8
+  - Mapsui.UI.Blazor.Extensions.Keys.Numpad9
+  - Mapsui.UI.Blazor.Extensions.Keys.NumpadAdd
+  - Mapsui.UI.Blazor.Extensions.Keys.NumpadDecimal
+  - Mapsui.UI.Blazor.Extensions.Keys.NumpadDivide
+  - Mapsui.UI.Blazor.Extensions.Keys.NumpadMultiply
+  - Mapsui.UI.Blazor.Extensions.Keys.NumpadSubtract
+  - Mapsui.UI.Blazor.Extensions.Keys.PageDown
+  - Mapsui.UI.Blazor.Extensions.Keys.PageUp
+  - Mapsui.UI.Blazor.Extensions.Keys.Pause
+  - Mapsui.UI.Blazor.Extensions.Keys.Period
+  - Mapsui.UI.Blazor.Extensions.Keys.PrintScreen
+  - Mapsui.UI.Blazor.Extensions.Keys.Quote
+  - Mapsui.UI.Blazor.Extensions.Keys.ScrollLock
+  - Mapsui.UI.Blazor.Extensions.Keys.Semicolon
+  - Mapsui.UI.Blazor.Extensions.Keys.ShiftLeft
+  - Mapsui.UI.Blazor.Extensions.Keys.ShiftRight
+  - Mapsui.UI.Blazor.Extensions.Keys.Slash
+  - Mapsui.UI.Blazor.Extensions.Keys.Space
+  - Mapsui.UI.Blazor.Extensions.Keys.Tab
+  langs:
+  - csharp
+  - vb
+  name: Keys
+  nameWithType: Keys
+  fullName: Mapsui.UI.Blazor.Extensions.Keys
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Keys
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 2
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public static class Keys
+    content.vb: Public Module Keys
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.UI.Blazor.Extensions.Keys.None
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.None
+  id: None
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: Keys.None
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.None
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: None
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 4
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int None = 0
+    return:
+      type: System.Int32
+    content.vb: Public Const None As Integer = 0
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Backspace
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Backspace
+  id: Backspace
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Backspace
+  nameWithType: Keys.Backspace
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Backspace
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Backspace
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 5
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Backspace = 8
+    return:
+      type: System.Int32
+    content.vb: Public Const Backspace As Integer = 8
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Tab
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Tab
+  id: Tab
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Tab
+  nameWithType: Keys.Tab
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Tab
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Tab
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 6
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Tab = 9
+    return:
+      type: System.Int32
+    content.vb: Public Const Tab As Integer = 9
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Enter
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Enter
+  id: Enter
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Enter
+  nameWithType: Keys.Enter
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Enter
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Enter
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Enter = 13
+    return:
+      type: System.Int32
+    content.vb: Public Const Enter As Integer = 13
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ShiftLeft
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ShiftLeft
+  id: ShiftLeft
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ShiftLeft
+  nameWithType: Keys.ShiftLeft
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ShiftLeft
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShiftLeft
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 8
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ShiftLeft = 16
+    return:
+      type: System.Int32
+    content.vb: Public Const ShiftLeft As Integer = 16
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ShiftRight
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ShiftRight
+  id: ShiftRight
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ShiftRight
+  nameWithType: Keys.ShiftRight
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ShiftRight
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShiftRight
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ShiftRight = 16
+    return:
+      type: System.Int32
+    content.vb: Public Const ShiftRight As Integer = 16
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Control
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Control
+  id: Control
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Control
+  nameWithType: Keys.Control
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Control
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Control
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 10
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Control = 17
+    return:
+      type: System.Int32
+    content.vb: Public Const Control As Integer = 17
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ControlLeft
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ControlLeft
+  id: ControlLeft
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ControlLeft
+  nameWithType: Keys.ControlLeft
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ControlLeft
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ControlLeft
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 11
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ControlLeft = 17
+    return:
+      type: System.Int32
+    content.vb: Public Const ControlLeft As Integer = 17
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ControlRight
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ControlRight
+  id: ControlRight
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ControlRight
+  nameWithType: Keys.ControlRight
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ControlRight
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ControlRight
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 12
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ControlRight = 17
+    return:
+      type: System.Int32
+    content.vb: Public Const ControlRight As Integer = 17
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Alt
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Alt
+  id: Alt
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Alt
+  nameWithType: Keys.Alt
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Alt
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Alt
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 13
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Alt = 18
+    return:
+      type: System.Int32
+    content.vb: Public Const Alt As Integer = 18
+- uid: Mapsui.UI.Blazor.Extensions.Keys.AltLeft
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.AltLeft
+  id: AltLeft
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: AltLeft
+  nameWithType: Keys.AltLeft
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.AltLeft
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AltLeft
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 14
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int AltLeft = 18
+    return:
+      type: System.Int32
+    content.vb: Public Const AltLeft As Integer = 18
+- uid: Mapsui.UI.Blazor.Extensions.Keys.AltRight
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.AltRight
+  id: AltRight
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: AltRight
+  nameWithType: Keys.AltRight
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.AltRight
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AltRight
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 15
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int AltRight = 18
+    return:
+      type: System.Int32
+    content.vb: Public Const AltRight As Integer = 18
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Pause
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Pause
+  id: Pause
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Pause
+  nameWithType: Keys.Pause
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Pause
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Pause
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Pause = 19
+    return:
+      type: System.Int32
+    content.vb: Public Const Pause As Integer = 19
+- uid: Mapsui.UI.Blazor.Extensions.Keys.CapsLock
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.CapsLock
+  id: CapsLock
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: CapsLock
+  nameWithType: Keys.CapsLock
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.CapsLock
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CapsLock
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int CapsLock = 20
+    return:
+      type: System.Int32
+    content.vb: Public Const CapsLock As Integer = 20
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Escape
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Escape
+  id: Escape
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Escape
+  nameWithType: Keys.Escape
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Escape
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Escape
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 18
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Escape = 27
+    return:
+      type: System.Int32
+    content.vb: Public Const Escape As Integer = 27
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Space
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Space
+  id: Space
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Space
+  nameWithType: Keys.Space
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Space
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Space
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 19
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Space = 32
+    return:
+      type: System.Int32
+    content.vb: Public Const Space As Integer = 32
+- uid: Mapsui.UI.Blazor.Extensions.Keys.PageUp
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.PageUp
+  id: PageUp
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: PageUp
+  nameWithType: Keys.PageUp
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.PageUp
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PageUp
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 20
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int PageUp = 33
+    return:
+      type: System.Int32
+    content.vb: Public Const PageUp As Integer = 33
+- uid: Mapsui.UI.Blazor.Extensions.Keys.PageDown
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.PageDown
+  id: PageDown
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: PageDown
+  nameWithType: Keys.PageDown
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.PageDown
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PageDown
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 21
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int PageDown = 34
+    return:
+      type: System.Int32
+    content.vb: Public Const PageDown As Integer = 34
+- uid: Mapsui.UI.Blazor.Extensions.Keys.End
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.End
+  id: End
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: End
+  nameWithType: Keys.End
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.End
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: End
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 22
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int End = 35
+    return:
+      type: System.Int32
+    content.vb: Public Const End As Integer = 35
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Home
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Home
+  id: Home
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Home
+  nameWithType: Keys.Home
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Home
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Home
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 23
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Home = 36
+    return:
+      type: System.Int32
+    content.vb: Public Const Home As Integer = 36
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ArrowLeft
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ArrowLeft
+  id: ArrowLeft
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ArrowLeft
+  nameWithType: Keys.ArrowLeft
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ArrowLeft
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowLeft
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 24
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ArrowLeft = 37
+    return:
+      type: System.Int32
+    content.vb: Public Const ArrowLeft As Integer = 37
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ArrowUp
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ArrowUp
+  id: ArrowUp
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ArrowUp
+  nameWithType: Keys.ArrowUp
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ArrowUp
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowUp
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 25
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ArrowUp = 38
+    return:
+      type: System.Int32
+    content.vb: Public Const ArrowUp As Integer = 38
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ArrowRight
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ArrowRight
+  id: ArrowRight
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ArrowRight
+  nameWithType: Keys.ArrowRight
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ArrowRight
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowRight
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 26
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ArrowRight = 39
+    return:
+      type: System.Int32
+    content.vb: Public Const ArrowRight As Integer = 39
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ArrowDown
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ArrowDown
+  id: ArrowDown
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ArrowDown
+  nameWithType: Keys.ArrowDown
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ArrowDown
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowDown
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 27
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ArrowDown = 40
+    return:
+      type: System.Int32
+    content.vb: Public Const ArrowDown As Integer = 40
+- uid: Mapsui.UI.Blazor.Extensions.Keys.PrintScreen
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.PrintScreen
+  id: PrintScreen
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: PrintScreen
+  nameWithType: Keys.PrintScreen
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.PrintScreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PrintScreen
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 28
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int PrintScreen = 44
+    return:
+      type: System.Int32
+    content.vb: Public Const PrintScreen As Integer = 44
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Insert
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Insert
+  id: Insert
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Insert
+  nameWithType: Keys.Insert
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Insert
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Insert
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 29
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Insert = 45
+    return:
+      type: System.Int32
+    content.vb: Public Const Insert As Integer = 45
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Delete
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Delete
+  id: Delete
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Delete
+  nameWithType: Keys.Delete
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Delete
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Delete
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 30
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Delete = 46
+    return:
+      type: System.Int32
+    content.vb: Public Const Delete As Integer = 46
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit0
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit0
+  id: Digit0
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit0
+  nameWithType: Keys.Digit0
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit0
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit0
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit0 = 48
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit0 As Integer = 48
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit1
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit1
+  id: Digit1
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit1
+  nameWithType: Keys.Digit1
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit1
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit1
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 32
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit1 = 49
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit1 As Integer = 49
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit2
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit2
+  id: Digit2
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit2
+  nameWithType: Keys.Digit2
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit2
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit2
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 33
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit2 = 50
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit2 As Integer = 50
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit3
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit3
+  id: Digit3
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit3
+  nameWithType: Keys.Digit3
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit3
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit3
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 34
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit3 = 51
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit3 As Integer = 51
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit4
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit4
+  id: Digit4
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit4
+  nameWithType: Keys.Digit4
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit4
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit4
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 35
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit4 = 52
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit4 As Integer = 52
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit5
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit5
+  id: Digit5
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit5
+  nameWithType: Keys.Digit5
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit5
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit5
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 36
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit5 = 53
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit5 As Integer = 53
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit6
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit6
+  id: Digit6
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit6
+  nameWithType: Keys.Digit6
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit6
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit6
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 37
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit6 = 54
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit6 As Integer = 54
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit7
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit7
+  id: Digit7
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit7
+  nameWithType: Keys.Digit7
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit7
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit7
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 38
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit7 = 55
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit7 As Integer = 55
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit8
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit8
+  id: Digit8
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit8
+  nameWithType: Keys.Digit8
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit8
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit8
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 39
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit8 = 56
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit8 As Integer = 56
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Digit9
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Digit9
+  id: Digit9
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Digit9
+  nameWithType: Keys.Digit9
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Digit9
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Digit9
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 40
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Digit9 = 57
+    return:
+      type: System.Int32
+    content.vb: Public Const Digit9 As Integer = 57
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyA
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyA
+  id: KeyA
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyA
+  nameWithType: Keys.KeyA
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyA
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyA
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 41
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyA = 65
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyA As Integer = 65
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyB
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyB
+  id: KeyB
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyB
+  nameWithType: Keys.KeyB
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyB
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyB
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 42
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyB = 66
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyB As Integer = 66
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyC
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyC
+  id: KeyC
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyC
+  nameWithType: Keys.KeyC
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyC
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyC
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 43
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyC = 67
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyC As Integer = 67
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyD
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyD
+  id: KeyD
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyD
+  nameWithType: Keys.KeyD
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyD
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyD
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 44
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyD = 68
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyD As Integer = 68
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyE
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyE
+  id: KeyE
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyE
+  nameWithType: Keys.KeyE
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyE
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyE
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 45
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyE = 69
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyE As Integer = 69
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyF
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyF
+  id: KeyF
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyF
+  nameWithType: Keys.KeyF
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyF
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyF
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 46
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyF = 70
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyF As Integer = 70
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyG
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyG
+  id: KeyG
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyG
+  nameWithType: Keys.KeyG
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyG
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyG
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 47
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyG = 71
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyG As Integer = 71
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyH
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyH
+  id: KeyH
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyH
+  nameWithType: Keys.KeyH
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyH
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyH
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 48
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyH = 72
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyH As Integer = 72
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyI
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyI
+  id: KeyI
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyI
+  nameWithType: Keys.KeyI
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyI
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyI
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 49
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyI = 73
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyI As Integer = 73
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyJ
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyJ
+  id: KeyJ
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyJ
+  nameWithType: Keys.KeyJ
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyJ
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyJ
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 50
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyJ = 74
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyJ As Integer = 74
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyK
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyK
+  id: KeyK
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyK
+  nameWithType: Keys.KeyK
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyK
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyK
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 51
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyK = 75
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyK As Integer = 75
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyL
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyL
+  id: KeyL
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyL
+  nameWithType: Keys.KeyL
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyL
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyL
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 52
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyL = 76
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyL As Integer = 76
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyM
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyM
+  id: KeyM
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyM
+  nameWithType: Keys.KeyM
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyM
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyM
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 53
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyM = 77
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyM As Integer = 77
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyN
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyN
+  id: KeyN
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyN
+  nameWithType: Keys.KeyN
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyN
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyN
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 54
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyN = 78
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyN As Integer = 78
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyO
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyO
+  id: KeyO
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyO
+  nameWithType: Keys.KeyO
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyO
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyO
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 55
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyO = 79
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyO As Integer = 79
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyP
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyP
+  id: KeyP
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyP
+  nameWithType: Keys.KeyP
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyP
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyP
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 56
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyP = 80
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyP As Integer = 80
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyQ
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyQ
+  id: KeyQ
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyQ
+  nameWithType: Keys.KeyQ
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyQ
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyQ
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 57
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyQ = 81
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyQ As Integer = 81
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyR
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyR
+  id: KeyR
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyR
+  nameWithType: Keys.KeyR
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyR
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyR
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 58
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyR = 82
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyR As Integer = 82
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyS
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyS
+  id: KeyS
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyS
+  nameWithType: Keys.KeyS
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyS
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyS
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 59
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyS = 83
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyS As Integer = 83
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyT
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyT
+  id: KeyT
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyT
+  nameWithType: Keys.KeyT
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyT
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyT
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 60
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyT = 84
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyT As Integer = 84
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyU
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyU
+  id: KeyU
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyU
+  nameWithType: Keys.KeyU
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyU
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyU
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 61
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyU = 85
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyU As Integer = 85
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyV
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyV
+  id: KeyV
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyV
+  nameWithType: Keys.KeyV
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyV
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyV
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 62
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyV = 86
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyV As Integer = 86
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyW
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyW
+  id: KeyW
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyW
+  nameWithType: Keys.KeyW
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyW
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyW
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 63
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyW = 87
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyW As Integer = 87
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyX
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyX
+  id: KeyX
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyX
+  nameWithType: Keys.KeyX
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyX
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyX
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 64
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyX = 88
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyX As Integer = 88
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyY
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyY
+  id: KeyY
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyY
+  nameWithType: Keys.KeyY
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyY
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyY
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 65
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyY = 89
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyY As Integer = 89
+- uid: Mapsui.UI.Blazor.Extensions.Keys.KeyZ
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.KeyZ
+  id: KeyZ
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: KeyZ
+  nameWithType: Keys.KeyZ
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.KeyZ
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KeyZ
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 66
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int KeyZ = 90
+    return:
+      type: System.Int32
+    content.vb: Public Const KeyZ As Integer = 90
+- uid: Mapsui.UI.Blazor.Extensions.Keys.MetaLeft
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.MetaLeft
+  id: MetaLeft
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: MetaLeft
+  nameWithType: Keys.MetaLeft
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.MetaLeft
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MetaLeft
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 67
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int MetaLeft = 91
+    return:
+      type: System.Int32
+    content.vb: Public Const MetaLeft As Integer = 91
+- uid: Mapsui.UI.Blazor.Extensions.Keys.MetaRight
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.MetaRight
+  id: MetaRight
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: MetaRight
+  nameWithType: Keys.MetaRight
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.MetaRight
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MetaRight
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 68
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int MetaRight = 92
+    return:
+      type: System.Int32
+    content.vb: Public Const MetaRight As Integer = 92
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ContextMenu
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ContextMenu
+  id: ContextMenu
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ContextMenu
+  nameWithType: Keys.ContextMenu
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ContextMenu
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ContextMenu
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 69
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ContextMenu = 93
+    return:
+      type: System.Int32
+    content.vb: Public Const ContextMenu As Integer = 93
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad0
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad0
+  id: Numpad0
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad0
+  nameWithType: Keys.Numpad0
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad0
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad0
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 70
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad0 = 96
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad0 As Integer = 96
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad1
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad1
+  id: Numpad1
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad1
+  nameWithType: Keys.Numpad1
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad1
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad1
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 71
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad1 = 97
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad1 As Integer = 97
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad2
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad2
+  id: Numpad2
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad2
+  nameWithType: Keys.Numpad2
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad2
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad2
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 72
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad2 = 98
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad2 As Integer = 98
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad3
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad3
+  id: Numpad3
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad3
+  nameWithType: Keys.Numpad3
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad3
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad3
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 73
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad3 = 99
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad3 As Integer = 99
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad4
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad4
+  id: Numpad4
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad4
+  nameWithType: Keys.Numpad4
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad4
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad4
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 74
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad4 = 100
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad4 As Integer = 100
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad5
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad5
+  id: Numpad5
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad5
+  nameWithType: Keys.Numpad5
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad5
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad5
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 75
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad5 = 101
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad5 As Integer = 101
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad6
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad6
+  id: Numpad6
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad6
+  nameWithType: Keys.Numpad6
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad6
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad6
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 76
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad6 = 102
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad6 As Integer = 102
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad7
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad7
+  id: Numpad7
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad7
+  nameWithType: Keys.Numpad7
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad7
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad7
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 77
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad7 = 103
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad7 As Integer = 103
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad8
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad8
+  id: Numpad8
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad8
+  nameWithType: Keys.Numpad8
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad8
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad8
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 78
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad8 = 104
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad8 As Integer = 104
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Numpad9
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Numpad9
+  id: Numpad9
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Numpad9
+  nameWithType: Keys.Numpad9
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Numpad9
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Numpad9
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 79
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Numpad9 = 105
+    return:
+      type: System.Int32
+    content.vb: Public Const Numpad9 As Integer = 105
+- uid: Mapsui.UI.Blazor.Extensions.Keys.NumpadMultiply
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.NumpadMultiply
+  id: NumpadMultiply
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: NumpadMultiply
+  nameWithType: Keys.NumpadMultiply
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.NumpadMultiply
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NumpadMultiply
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 80
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int NumpadMultiply = 106
+    return:
+      type: System.Int32
+    content.vb: Public Const NumpadMultiply As Integer = 106
+- uid: Mapsui.UI.Blazor.Extensions.Keys.NumpadAdd
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.NumpadAdd
+  id: NumpadAdd
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: NumpadAdd
+  nameWithType: Keys.NumpadAdd
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.NumpadAdd
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NumpadAdd
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 81
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int NumpadAdd = 107
+    return:
+      type: System.Int32
+    content.vb: Public Const NumpadAdd As Integer = 107
+- uid: Mapsui.UI.Blazor.Extensions.Keys.NumpadSubtract
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.NumpadSubtract
+  id: NumpadSubtract
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: NumpadSubtract
+  nameWithType: Keys.NumpadSubtract
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.NumpadSubtract
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NumpadSubtract
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 82
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int NumpadSubtract = 109
+    return:
+      type: System.Int32
+    content.vb: Public Const NumpadSubtract As Integer = 109
+- uid: Mapsui.UI.Blazor.Extensions.Keys.NumpadDecimal
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.NumpadDecimal
+  id: NumpadDecimal
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: NumpadDecimal
+  nameWithType: Keys.NumpadDecimal
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.NumpadDecimal
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NumpadDecimal
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 83
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int NumpadDecimal = 110
+    return:
+      type: System.Int32
+    content.vb: Public Const NumpadDecimal As Integer = 110
+- uid: Mapsui.UI.Blazor.Extensions.Keys.NumpadDivide
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.NumpadDivide
+  id: NumpadDivide
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: NumpadDivide
+  nameWithType: Keys.NumpadDivide
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.NumpadDivide
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NumpadDivide
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 84
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int NumpadDivide = 111
+    return:
+      type: System.Int32
+    content.vb: Public Const NumpadDivide As Integer = 111
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F1
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F1
+  id: F1
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F1
+  nameWithType: Keys.F1
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F1
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F1
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 85
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F1 = 112
+    return:
+      type: System.Int32
+    content.vb: Public Const F1 As Integer = 112
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F2
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F2
+  id: F2
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F2
+  nameWithType: Keys.F2
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F2
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F2
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 86
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F2 = 113
+    return:
+      type: System.Int32
+    content.vb: Public Const F2 As Integer = 113
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F3
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F3
+  id: F3
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F3
+  nameWithType: Keys.F3
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F3
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F3
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 87
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F3 = 114
+    return:
+      type: System.Int32
+    content.vb: Public Const F3 As Integer = 114
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F4
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F4
+  id: F4
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F4
+  nameWithType: Keys.F4
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F4
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F4
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 88
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F4 = 115
+    return:
+      type: System.Int32
+    content.vb: Public Const F4 As Integer = 115
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F5
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F5
+  id: F5
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F5
+  nameWithType: Keys.F5
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F5
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F5
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 89
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F5 = 116
+    return:
+      type: System.Int32
+    content.vb: Public Const F5 As Integer = 116
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F6
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F6
+  id: F6
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F6
+  nameWithType: Keys.F6
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F6
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F6
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 90
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F6 = 117
+    return:
+      type: System.Int32
+    content.vb: Public Const F6 As Integer = 117
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F7
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F7
+  id: F7
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F7
+  nameWithType: Keys.F7
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F7
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F7
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 91
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F7 = 118
+    return:
+      type: System.Int32
+    content.vb: Public Const F7 As Integer = 118
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F8
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F8
+  id: F8
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F8
+  nameWithType: Keys.F8
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F8
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F8
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 92
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F8 = 119
+    return:
+      type: System.Int32
+    content.vb: Public Const F8 As Integer = 119
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F9
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F9
+  id: F9
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F9
+  nameWithType: Keys.F9
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F9
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F9
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 93
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F9 = 120
+    return:
+      type: System.Int32
+    content.vb: Public Const F9 As Integer = 120
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F10
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F10
+  id: F10
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F10
+  nameWithType: Keys.F10
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F10
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F10
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 94
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F10 = 121
+    return:
+      type: System.Int32
+    content.vb: Public Const F10 As Integer = 121
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F11
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F11
+  id: F11
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F11
+  nameWithType: Keys.F11
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F11
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F11
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 95
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F11 = 122
+    return:
+      type: System.Int32
+    content.vb: Public Const F11 As Integer = 122
+- uid: Mapsui.UI.Blazor.Extensions.Keys.F12
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.F12
+  id: F12
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: F12
+  nameWithType: Keys.F12
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.F12
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: F12
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 96
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int F12 = 123
+    return:
+      type: System.Int32
+    content.vb: Public Const F12 As Integer = 123
+- uid: Mapsui.UI.Blazor.Extensions.Keys.NumLock
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.NumLock
+  id: NumLock
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: NumLock
+  nameWithType: Keys.NumLock
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.NumLock
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NumLock
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 97
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int NumLock = 144
+    return:
+      type: System.Int32
+    content.vb: Public Const NumLock As Integer = 144
+- uid: Mapsui.UI.Blazor.Extensions.Keys.ScrollLock
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.ScrollLock
+  id: ScrollLock
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: ScrollLock
+  nameWithType: Keys.ScrollLock
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.ScrollLock
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ScrollLock
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 98
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int ScrollLock = 145
+    return:
+      type: System.Int32
+    content.vb: Public Const ScrollLock As Integer = 145
+- uid: Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeMute
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeMute
+  id: AudioVolumeMute
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: AudioVolumeMute
+  nameWithType: Keys.AudioVolumeMute
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeMute
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AudioVolumeMute
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 99
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int AudioVolumeMute = 173
+    return:
+      type: System.Int32
+    content.vb: Public Const AudioVolumeMute As Integer = 173
+- uid: Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeDown
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeDown
+  id: AudioVolumeDown
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: AudioVolumeDown
+  nameWithType: Keys.AudioVolumeDown
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeDown
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AudioVolumeDown
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 100
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int AudioVolumeDown = 174
+    return:
+      type: System.Int32
+    content.vb: Public Const AudioVolumeDown As Integer = 174
+- uid: Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeUp
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeUp
+  id: AudioVolumeUp
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: AudioVolumeUp
+  nameWithType: Keys.AudioVolumeUp
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.AudioVolumeUp
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AudioVolumeUp
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 101
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int AudioVolumeUp = 175
+    return:
+      type: System.Int32
+    content.vb: Public Const AudioVolumeUp As Integer = 175
+- uid: Mapsui.UI.Blazor.Extensions.Keys.LaunchMediaPlayer
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.LaunchMediaPlayer
+  id: LaunchMediaPlayer
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: LaunchMediaPlayer
+  nameWithType: Keys.LaunchMediaPlayer
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.LaunchMediaPlayer
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LaunchMediaPlayer
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 102
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int LaunchMediaPlayer = 181
+    return:
+      type: System.Int32
+    content.vb: Public Const LaunchMediaPlayer As Integer = 181
+- uid: Mapsui.UI.Blazor.Extensions.Keys.LaunchApplication1
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.LaunchApplication1
+  id: LaunchApplication1
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: LaunchApplication1
+  nameWithType: Keys.LaunchApplication1
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.LaunchApplication1
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LaunchApplication1
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 103
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int LaunchApplication1 = 182
+    return:
+      type: System.Int32
+    content.vb: Public Const LaunchApplication1 As Integer = 182
+- uid: Mapsui.UI.Blazor.Extensions.Keys.LaunchApplication2
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.LaunchApplication2
+  id: LaunchApplication2
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: LaunchApplication2
+  nameWithType: Keys.LaunchApplication2
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.LaunchApplication2
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LaunchApplication2
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 104
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int LaunchApplication2 = 183
+    return:
+      type: System.Int32
+    content.vb: Public Const LaunchApplication2 As Integer = 183
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Semicolon
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Semicolon
+  id: Semicolon
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Semicolon
+  nameWithType: Keys.Semicolon
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Semicolon
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Semicolon
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 105
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Semicolon = 186
+    return:
+      type: System.Int32
+    content.vb: Public Const Semicolon As Integer = 186
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Equal
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Equal
+  id: Equal
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Equal
+  nameWithType: Keys.Equal
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Equal
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equal
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 106
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Equal = 187
+    return:
+      type: System.Int32
+    content.vb: Public Const Equal As Integer = 187
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Comma
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Comma
+  id: Comma
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Comma
+  nameWithType: Keys.Comma
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Comma
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Comma
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 107
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Comma = 188
+    return:
+      type: System.Int32
+    content.vb: Public Const Comma As Integer = 188
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Minus
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Minus
+  id: Minus
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Minus
+  nameWithType: Keys.Minus
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Minus
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Minus
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 108
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Minus = 189
+    return:
+      type: System.Int32
+    content.vb: Public Const Minus As Integer = 189
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Period
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Period
+  id: Period
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Period
+  nameWithType: Keys.Period
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Period
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Period
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 109
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Period = 190
+    return:
+      type: System.Int32
+    content.vb: Public Const Period As Integer = 190
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Slash
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Slash
+  id: Slash
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Slash
+  nameWithType: Keys.Slash
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Slash
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Slash
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 110
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Slash = 191
+    return:
+      type: System.Int32
+    content.vb: Public Const Slash As Integer = 191
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Backquote
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Backquote
+  id: Backquote
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Backquote
+  nameWithType: Keys.Backquote
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Backquote
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Backquote
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 111
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Backquote = 192
+    return:
+      type: System.Int32
+    content.vb: Public Const Backquote As Integer = 192
+- uid: Mapsui.UI.Blazor.Extensions.Keys.BracketLeft
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.BracketLeft
+  id: BracketLeft
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: BracketLeft
+  nameWithType: Keys.BracketLeft
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.BracketLeft
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BracketLeft
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 112
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int BracketLeft = 219
+    return:
+      type: System.Int32
+    content.vb: Public Const BracketLeft As Integer = 219
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Backslash
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Backslash
+  id: Backslash
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Backslash
+  nameWithType: Keys.Backslash
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Backslash
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Backslash
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 113
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Backslash = 220
+    return:
+      type: System.Int32
+    content.vb: Public Const Backslash As Integer = 220
+- uid: Mapsui.UI.Blazor.Extensions.Keys.BracketRight
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.BracketRight
+  id: BracketRight
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: BracketRight
+  nameWithType: Keys.BracketRight
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.BracketRight
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BracketRight
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 114
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int BracketRight = 221
+    return:
+      type: System.Int32
+    content.vb: Public Const BracketRight As Integer = 221
+- uid: Mapsui.UI.Blazor.Extensions.Keys.Quote
+  commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Quote
+  id: Quote
+  parent: Mapsui.UI.Blazor.Extensions.Keys
+  langs:
+  - csharp
+  - vb
+  name: Quote
+  nameWithType: Keys.Quote
+  fullName: Mapsui.UI.Blazor.Extensions.Keys.Quote
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/Keys.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Quote
+    path: ../../Mapsui.UI.Blazor/Extensions/Keys.cs
+    startLine: 115
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public const int Quote = 222
+    return:
+      type: System.Int32
+    content.vb: Public Const Quote As Integer = 222
+references:
+- uid: Mapsui.UI.Blazor.Extensions
+  commentId: N:Mapsui.UI.Blazor.Extensions
+  href: Mapsui.html
+  name: Mapsui.UI.Blazor.Extensions
+  nameWithType: Mapsui.UI.Blazor.Extensions
+  fullName: Mapsui.UI.Blazor.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Blazor
+    name: Blazor
+    href: Mapsui.UI.Blazor.html
+  - name: .
+  - uid: Mapsui.UI.Blazor.Extensions
+    name: Extensions
+    href: Mapsui.UI.Blazor.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Blazor
+    name: Blazor
+    href: Mapsui.UI.Blazor.html
+  - name: .
+  - uid: Mapsui.UI.Blazor.Extensions
+    name: Extensions
+    href: Mapsui.UI.Blazor.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer

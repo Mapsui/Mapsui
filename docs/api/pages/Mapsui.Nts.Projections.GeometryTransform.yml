@@ -1,0 +1,757 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Projections.GeometryTransform
+  commentId: T:Mapsui.Nts.Projections.GeometryTransform
+  id: GeometryTransform
+  parent: Mapsui.Nts.Projections
+  children:
+  - Mapsui.Nts.Projections.GeometryTransform.#ctor(System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo})
+  - Mapsui.Nts.Projections.GeometryTransform.Done
+  - Mapsui.Nts.Projections.GeometryTransform.Filter(NetTopologySuite.Geometries.CoordinateSequence,System.Int32)
+  - Mapsui.Nts.Projections.GeometryTransform.GeometryChanged
+  langs:
+  - csharp
+  - vb
+  name: GeometryTransform
+  nameWithType: GeometryTransform
+  fullName: Mapsui.Nts.Projections.GeometryTransform
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Extensions/Projections/GeometryTransform.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GeometryTransform
+    path: ../../Mapsui.Extensions/Projections/GeometryTransform.cs
+    startLine: 4
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Nts.Projections
+  syntax:
+    content: 'public sealed class GeometryTransform : ICoordinateSequenceFilter'
+    content.vb: Public NotInheritable Class GeometryTransform Implements ICoordinateSequenceFilter
+  inheritance:
+  - System.Object
+  implements:
+  - NetTopologySuite.Geometries.ICoordinateSequenceFilter
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Nts.Projections.GeometryTransform.#ctor(System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo})
+  commentId: M:Mapsui.Nts.Projections.GeometryTransform.#ctor(System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo})
+  id: '#ctor(System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo})'
+  parent: Mapsui.Nts.Projections.GeometryTransform
+  langs:
+  - csharp
+  - vb
+  name: GeometryTransform((ProjectionInfo? From, ProjectionInfo? To))
+  nameWithType: GeometryTransform.GeometryTransform((ProjectionInfo? From, ProjectionInfo? To))
+  fullName: Mapsui.Nts.Projections.GeometryTransform.GeometryTransform((DotSpatial.Projections.ProjectionInfo? From, DotSpatial.Projections.ProjectionInfo? To))
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Extensions/Projections/GeometryTransform.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Extensions/Projections/GeometryTransform.cs
+    startLine: 8
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Nts.Projections
+  syntax:
+    content: public GeometryTransform((ProjectionInfo? From, ProjectionInfo? To) transform)
+    parameters:
+    - id: transform
+      type: System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo}
+    content.vb: Public Sub New(transform As (From As ProjectionInfo, [To] As ProjectionInfo))
+  overload: Mapsui.Nts.Projections.GeometryTransform.#ctor*
+  nameWithType.vb: GeometryTransform.New((From As ProjectionInfo, To As ProjectionInfo))
+  fullName.vb: Mapsui.Nts.Projections.GeometryTransform.New((From As DotSpatial.Projections.ProjectionInfo, To As DotSpatial.Projections.ProjectionInfo))
+  name.vb: New((From As ProjectionInfo, To As ProjectionInfo))
+- uid: Mapsui.Nts.Projections.GeometryTransform.Done
+  commentId: P:Mapsui.Nts.Projections.GeometryTransform.Done
+  id: Done
+  parent: Mapsui.Nts.Projections.GeometryTransform
+  langs:
+  - csharp
+  - vb
+  name: Done
+  nameWithType: GeometryTransform.Done
+  fullName: Mapsui.Nts.Projections.GeometryTransform.Done
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Extensions/Projections/GeometryTransform.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Done
+    path: ../../Mapsui.Extensions/Projections/GeometryTransform.cs
+    startLine: 13
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Nts.Projections
+  summary: Reports whether the application of this filter can be terminated.
+  remarks: >-
+    Once this method returns <code>true</code>, it must
+
+    continue to return <code>true</code> on every subsequent call.
+  example: []
+  syntax:
+    content: public bool Done { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property Done As Boolean
+  overload: Mapsui.Nts.Projections.GeometryTransform.Done*
+  implements:
+  - NetTopologySuite.Geometries.ICoordinateSequenceFilter.Done
+- uid: Mapsui.Nts.Projections.GeometryTransform.GeometryChanged
+  commentId: P:Mapsui.Nts.Projections.GeometryTransform.GeometryChanged
+  id: GeometryChanged
+  parent: Mapsui.Nts.Projections.GeometryTransform
+  langs:
+  - csharp
+  - vb
+  name: GeometryChanged
+  nameWithType: GeometryTransform.GeometryChanged
+  fullName: Mapsui.Nts.Projections.GeometryTransform.GeometryChanged
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Extensions/Projections/GeometryTransform.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GeometryChanged
+    path: ../../Mapsui.Extensions/Projections/GeometryTransform.cs
+    startLine: 15
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Nts.Projections
+  summary: >-
+    Reports whether the execution of this filter has modified the coordinates of the geometry.
+
+    If so, <xref href="NetTopologySuite.Geometries.Geometry.GeometryChanged" data-throw-if-not-resolved="false"></xref> will be executed
+
+    after this filter has finished being executed.
+  remarks: Most filters can simply return a constant value reflecting whether they are able to change the coordinates.
+  example: []
+  syntax:
+    content: public bool GeometryChanged { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property GeometryChanged As Boolean
+  overload: Mapsui.Nts.Projections.GeometryTransform.GeometryChanged*
+  implements:
+  - NetTopologySuite.Geometries.ICoordinateSequenceFilter.GeometryChanged
+- uid: Mapsui.Nts.Projections.GeometryTransform.Filter(NetTopologySuite.Geometries.CoordinateSequence,System.Int32)
+  commentId: M:Mapsui.Nts.Projections.GeometryTransform.Filter(NetTopologySuite.Geometries.CoordinateSequence,System.Int32)
+  id: Filter(NetTopologySuite.Geometries.CoordinateSequence,System.Int32)
+  parent: Mapsui.Nts.Projections.GeometryTransform
+  langs:
+  - csharp
+  - vb
+  name: Filter(CoordinateSequence, int)
+  nameWithType: GeometryTransform.Filter(CoordinateSequence, int)
+  fullName: Mapsui.Nts.Projections.GeometryTransform.Filter(NetTopologySuite.Geometries.CoordinateSequence, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Extensions/Projections/GeometryTransform.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Filter
+    path: ../../Mapsui.Extensions/Projections/GeometryTransform.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Nts.Projections
+  summary: Performs an operation on a coordinate in a <xref href="NetTopologySuite.Geometries.CoordinateSequence" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void Filter(CoordinateSequence seq, int i)
+    parameters:
+    - id: seq
+      type: NetTopologySuite.Geometries.CoordinateSequence
+      description: the <code>CoordinateSequence</code> to which the filter is applied
+    - id: i
+      type: System.Int32
+      description: i the index of the coordinate to apply the filter to
+    content.vb: Public Sub Filter(seq As CoordinateSequence, i As Integer)
+  overload: Mapsui.Nts.Projections.GeometryTransform.Filter*
+  implements:
+  - NetTopologySuite.Geometries.ICoordinateSequenceFilter.Filter(NetTopologySuite.Geometries.CoordinateSequence,System.Int32)
+  nameWithType.vb: GeometryTransform.Filter(CoordinateSequence, Integer)
+  fullName.vb: Mapsui.Nts.Projections.GeometryTransform.Filter(NetTopologySuite.Geometries.CoordinateSequence, Integer)
+  name.vb: Filter(CoordinateSequence, Integer)
+references:
+- uid: Mapsui.Nts.Projections
+  commentId: N:Mapsui.Nts.Projections
+  href: Mapsui.html
+  name: Mapsui.Nts.Projections
+  nameWithType: Mapsui.Nts.Projections
+  fullName: Mapsui.Nts.Projections
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Projections
+    name: Projections
+    href: Mapsui.Nts.Projections.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Projections
+    name: Projections
+    href: Mapsui.Nts.Projections.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: NetTopologySuite.Geometries.ICoordinateSequenceFilter
+  commentId: T:NetTopologySuite.Geometries.ICoordinateSequenceFilter
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: ICoordinateSequenceFilter
+  nameWithType: ICoordinateSequenceFilter
+  fullName: NetTopologySuite.Geometries.ICoordinateSequenceFilter
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: NetTopologySuite.Geometries
+  commentId: N:NetTopologySuite.Geometries
+  isExternal: true
+  name: NetTopologySuite.Geometries
+  nameWithType: NetTopologySuite.Geometries
+  fullName: NetTopologySuite.Geometries
+  spec.csharp:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+  spec.vb:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Nts.Projections.GeometryTransform.#ctor*
+  commentId: Overload:Mapsui.Nts.Projections.GeometryTransform.#ctor
+  href: Mapsui.Nts.Projections.GeometryTransform.html#Mapsui_Nts_Projections_GeometryTransform__ctor_System_ValueTuple_DotSpatial_Projections_ProjectionInfo_DotSpatial_Projections_ProjectionInfo__
+  name: GeometryTransform
+  nameWithType: GeometryTransform.GeometryTransform
+  fullName: Mapsui.Nts.Projections.GeometryTransform.GeometryTransform
+  nameWithType.vb: GeometryTransform.New
+  fullName.vb: Mapsui.Nts.Projections.GeometryTransform.New
+  name.vb: New
+- uid: System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo}
+  commentId: T:System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo}
+  parent: System
+  definition: System.ValueTuple`2
+  href: https://learn.microsoft.com/dotnet/api/system.valuetuple-dotspatial.projections.projectioninfo,dotspatial.projections.projectioninfo-.from
+  name: (ProjectionInfo From, ProjectionInfo To)
+  nameWithType: (ProjectionInfo From, ProjectionInfo To)
+  fullName: (DotSpatial.Projections.ProjectionInfo From, DotSpatial.Projections.ProjectionInfo To)
+  nameWithType.vb: (From As ProjectionInfo, To As ProjectionInfo)
+  fullName.vb: (From As DotSpatial.Projections.ProjectionInfo, To As DotSpatial.Projections.ProjectionInfo)
+  name.vb: (From As ProjectionInfo, To As ProjectionInfo)
+  spec.csharp:
+  - name: (
+  - uid: DotSpatial.Projections.ProjectionInfo
+    name: ProjectionInfo
+    isExternal: true
+  - name: " "
+  - uid: System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo}.From
+    name: From
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-dotspatial.projections.projectioninfo,dotspatial.projections.projectioninfo-.from
+  - name: ','
+  - name: " "
+  - uid: DotSpatial.Projections.ProjectionInfo
+    name: ProjectionInfo
+    isExternal: true
+  - name: " "
+  - uid: System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo}.To
+    name: To
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-dotspatial.projections.projectioninfo,dotspatial.projections.projectioninfo-.to
+  - name: )
+  spec.vb:
+  - name: (
+  - uid: System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo}.From
+    name: From
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-dotspatial.projections.projectioninfo,dotspatial.projections.projectioninfo-.from
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: DotSpatial.Projections.ProjectionInfo
+    name: ProjectionInfo
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: System.ValueTuple{DotSpatial.Projections.ProjectionInfo,DotSpatial.Projections.ProjectionInfo}.To
+    name: To
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-dotspatial.projections.projectioninfo,dotspatial.projections.projectioninfo-.to
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: DotSpatial.Projections.ProjectionInfo
+    name: ProjectionInfo
+    isExternal: true
+  - name: )
+- uid: System.ValueTuple`2
+  commentId: T:System.ValueTuple`2
+  name: (T1, T2)
+  nameWithType: (T1, T2)
+  fullName: (T1, T2)
+  spec.csharp:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+  spec.vb:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+- uid: Mapsui.Nts.Projections.GeometryTransform.Done*
+  commentId: Overload:Mapsui.Nts.Projections.GeometryTransform.Done
+  href: Mapsui.Nts.Projections.GeometryTransform.html#Mapsui_Nts_Projections_GeometryTransform_Done
+  name: Done
+  nameWithType: GeometryTransform.Done
+  fullName: Mapsui.Nts.Projections.GeometryTransform.Done
+- uid: NetTopologySuite.Geometries.ICoordinateSequenceFilter.Done
+  commentId: P:NetTopologySuite.Geometries.ICoordinateSequenceFilter.Done
+  parent: NetTopologySuite.Geometries.ICoordinateSequenceFilter
+  isExternal: true
+  name: Done
+  nameWithType: ICoordinateSequenceFilter.Done
+  fullName: NetTopologySuite.Geometries.ICoordinateSequenceFilter.Done
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: NetTopologySuite.Geometries.Geometry.GeometryChanged
+  commentId: M:NetTopologySuite.Geometries.Geometry.GeometryChanged
+  isExternal: true
+  name: GeometryChanged()
+  nameWithType: Geometry.GeometryChanged()
+  fullName: NetTopologySuite.Geometries.Geometry.GeometryChanged()
+  spec.csharp:
+  - uid: NetTopologySuite.Geometries.Geometry.GeometryChanged
+    name: GeometryChanged
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: NetTopologySuite.Geometries.Geometry.GeometryChanged
+    name: GeometryChanged
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Mapsui.Nts.Projections.GeometryTransform.GeometryChanged*
+  commentId: Overload:Mapsui.Nts.Projections.GeometryTransform.GeometryChanged
+  href: Mapsui.Nts.Projections.GeometryTransform.html#Mapsui_Nts_Projections_GeometryTransform_GeometryChanged
+  name: GeometryChanged
+  nameWithType: GeometryTransform.GeometryChanged
+  fullName: Mapsui.Nts.Projections.GeometryTransform.GeometryChanged
+- uid: NetTopologySuite.Geometries.ICoordinateSequenceFilter.GeometryChanged
+  commentId: P:NetTopologySuite.Geometries.ICoordinateSequenceFilter.GeometryChanged
+  parent: NetTopologySuite.Geometries.ICoordinateSequenceFilter
+  isExternal: true
+  name: GeometryChanged
+  nameWithType: ICoordinateSequenceFilter.GeometryChanged
+  fullName: NetTopologySuite.Geometries.ICoordinateSequenceFilter.GeometryChanged
+- uid: NetTopologySuite.Geometries.CoordinateSequence
+  commentId: T:NetTopologySuite.Geometries.CoordinateSequence
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: CoordinateSequence
+  nameWithType: CoordinateSequence
+  fullName: NetTopologySuite.Geometries.CoordinateSequence
+- uid: Mapsui.Nts.Projections.GeometryTransform.Filter*
+  commentId: Overload:Mapsui.Nts.Projections.GeometryTransform.Filter
+  href: Mapsui.Nts.Projections.GeometryTransform.html#Mapsui_Nts_Projections_GeometryTransform_Filter_NetTopologySuite_Geometries_CoordinateSequence_System_Int32_
+  name: Filter
+  nameWithType: GeometryTransform.Filter
+  fullName: Mapsui.Nts.Projections.GeometryTransform.Filter
+- uid: NetTopologySuite.Geometries.ICoordinateSequenceFilter.Filter(NetTopologySuite.Geometries.CoordinateSequence,System.Int32)
+  commentId: M:NetTopologySuite.Geometries.ICoordinateSequenceFilter.Filter(NetTopologySuite.Geometries.CoordinateSequence,System.Int32)
+  parent: NetTopologySuite.Geometries.ICoordinateSequenceFilter
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: Filter(CoordinateSequence, int)
+  nameWithType: ICoordinateSequenceFilter.Filter(CoordinateSequence, int)
+  fullName: NetTopologySuite.Geometries.ICoordinateSequenceFilter.Filter(NetTopologySuite.Geometries.CoordinateSequence, int)
+  nameWithType.vb: ICoordinateSequenceFilter.Filter(CoordinateSequence, Integer)
+  fullName.vb: NetTopologySuite.Geometries.ICoordinateSequenceFilter.Filter(NetTopologySuite.Geometries.CoordinateSequence, Integer)
+  name.vb: Filter(CoordinateSequence, Integer)
+  spec.csharp:
+  - uid: NetTopologySuite.Geometries.ICoordinateSequenceFilter.Filter(NetTopologySuite.Geometries.CoordinateSequence,System.Int32)
+    name: Filter
+    isExternal: true
+  - name: (
+  - uid: NetTopologySuite.Geometries.CoordinateSequence
+    name: CoordinateSequence
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: NetTopologySuite.Geometries.ICoordinateSequenceFilter.Filter(NetTopologySuite.Geometries.CoordinateSequence,System.Int32)
+    name: Filter
+    isExternal: true
+  - name: (
+  - uid: NetTopologySuite.Geometries.CoordinateSequence
+    name: CoordinateSequence
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer

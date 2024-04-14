@@ -1,0 +1,1463 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  commentId: T:Mapsui.Widgets.InfoWidgets.LoggingWidget
+  id: LoggingWidget
+  parent: Mapsui.Widgets.InfoWidgets
+  children:
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.Log(Mapsui.Logging.LogLevel,System.String,System.Exception)
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor
+  langs:
+  - csharp
+  - vb
+  name: LoggingWidget
+  nameWithType: LoggingWidget
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LoggingWidget
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 22
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  summary: Widget which shows log entries
+  remarks: >-
+    With this, the user could see the log entries on the screen.
+
+    without saving them to a file or somewhere else.
+  example: []
+  syntax:
+    content: 'public class LoggingWidget : TextBoxWidget, IWidget'
+    content.vb: Public Class LoggingWidget Inherits TextBoxWidget Implements IWidget
+  inheritance:
+  - System.Object
+  - Mapsui.Widgets.BaseWidget
+  - Mapsui.Widgets.BoxWidgets.BoxWidget
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  implements:
+  - Mapsui.Widgets.IWidget
+  inheritedMembers:
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget.Padding
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget.Text
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextSize
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextColor
+  - Mapsui.Widgets.BoxWidgets.BoxWidget.CornerRadius
+  - Mapsui.Widgets.BoxWidgets.BoxWidget.BackColor
+  - Mapsui.Widgets.BoxWidgets.BoxWidget.Opacity
+  - Mapsui.Widgets.BaseWidget.InputAreaType
+  - Mapsui.Widgets.BaseWidget.HorizontalAlignment
+  - Mapsui.Widgets.BaseWidget.VerticalAlignment
+  - Mapsui.Widgets.BaseWidget.Margin
+  - Mapsui.Widgets.BaseWidget.Position
+  - Mapsui.Widgets.BaseWidget.Width
+  - Mapsui.Widgets.BaseWidget.Height
+  - Mapsui.Widgets.BaseWidget.Envelope
+  - Mapsui.Widgets.BaseWidget.Enabled
+  - Mapsui.Widgets.BaseWidget.NeedsRedraw
+  - Mapsui.Widgets.BaseWidget.InputTransparent
+  - Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+  - Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+  - Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor
+  commentId: M:Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor
+  id: '#ctor'
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: LoggingWidget()
+  nameWithType: LoggingWidget.LoggingWidget()
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LoggingWidget()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 31
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  syntax:
+    content: public LoggingWidget()
+    content.vb: Public Sub New()
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor*
+  nameWithType.vb: LoggingWidget.New()
+  fullName.vb: Mapsui.Widgets.InfoWidgets.LoggingWidget.New()
+  name.vb: New()
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap
+  commentId: P:Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap
+  id: ShowLoggingInMap
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: ShowLoggingInMap
+  nameWithType: LoggingWidget.ShowLoggingInMap
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShowLoggingInMap
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 47
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  summary: >-
+    Global setting to control logging in the map. Note, that there will never be logging in the map if the 
+
+    Enabled field of the logging widget is false.
+  example: []
+  syntax:
+    content: public static ShowLoggingInMap ShowLoggingInMap { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+    content.vb: Public Shared Property ShowLoggingInMap As ShowLoggingInMap
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap*
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.Log(Mapsui.Logging.LogLevel,System.String,System.Exception)
+  commentId: M:Mapsui.Widgets.InfoWidgets.LoggingWidget.Log(Mapsui.Logging.LogLevel,System.String,System.Exception)
+  id: Log(Mapsui.Logging.LogLevel,System.String,System.Exception)
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: Log(LogLevel, string, Exception?)
+  nameWithType: LoggingWidget.Log(LogLevel, string, Exception?)
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.Log(Mapsui.Logging.LogLevel, string, System.Exception?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Log
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 53
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  summary: Event handler for logging
+  example: []
+  syntax:
+    content: public void Log(LogLevel level, string description, Exception? exception)
+    parameters:
+    - id: level
+      type: Mapsui.Logging.LogLevel
+    - id: description
+      type: System.String
+    - id: exception
+      type: System.Exception
+    content.vb: Public Sub Log(level As LogLevel, description As String, exception As Exception)
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.Log*
+  nameWithType.vb: LoggingWidget.Log(LogLevel, String, Exception)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.LoggingWidget.Log(Mapsui.Logging.LogLevel, String, System.Exception)
+  name.vb: Log(LogLevel, String, Exception)
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear
+  commentId: M:Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear
+  id: Clear
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: LoggingWidget.Clear()
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Clear
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 70
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  syntax:
+    content: public void Clear()
+    content.vb: Public Sub Clear()
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear*
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries
+  commentId: P:Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries
+  id: ListOfLogEntries
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: ListOfLogEntries
+  nameWithType: LoggingWidget.ListOfLogEntries
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ListOfLogEntries
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 82
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  syntax:
+    content: public ConcurrentQueue<LoggingWidget.LogEntry> ListOfLogEntries { get; }
+    parameters: []
+    return:
+      type: System.Collections.Concurrent.ConcurrentQueue{Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry}
+    content.vb: Public ReadOnly Property ListOfLogEntries As ConcurrentQueue(Of LoggingWidget.LogEntry)
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries*
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter
+  commentId: P:Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter
+  id: LogLevelFilter
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: LogLevelFilter
+  nameWithType: LoggingWidget.LogLevelFilter
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LogLevelFilter
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 90
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  summary: >-
+    Filter for LogLevel
+
+    Only this or higher levels are printed
+  example: []
+  syntax:
+    content: public LogLevel LogLevelFilter { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Logging.LogLevel
+    content.vb: Public Property LogLevelFilter As LogLevel
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter*
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep
+  commentId: P:Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep
+  id: MaxNumberOfLogEntriesToKeep
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: MaxNumberOfLogEntriesToKeep
+  nameWithType: LoggingWidget.MaxNumberOfLogEntriesToKeep
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MaxNumberOfLogEntriesToKeep
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 104
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  syntax:
+    content: public int MaxNumberOfLogEntriesToKeep { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property MaxNumberOfLogEntriesToKeep As Integer
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep*
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor
+  commentId: P:Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor
+  id: ErrorTextColor
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: ErrorTextColor
+  nameWithType: LoggingWidget.ErrorTextColor
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ErrorTextColor
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 121
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  summary: Color for errors
+  example: []
+  syntax:
+    content: public Color ErrorTextColor { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Property ErrorTextColor As Color
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor*
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor
+  commentId: P:Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor
+  id: WarningTextColor
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: WarningTextColor
+  nameWithType: LoggingWidget.WarningTextColor
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WarningTextColor
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 138
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  summary: Color for warnings
+  example: []
+  syntax:
+    content: public Color WarningTextColor { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Property WarningTextColor As Color
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor*
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor
+  commentId: P:Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor
+  id: InformationTextColor
+  parent: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  langs:
+  - csharp
+  - vb
+  name: InformationTextColor
+  nameWithType: LoggingWidget.InformationTextColor
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: InformationTextColor
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 155
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  summary: Color for information text
+  example: []
+  syntax:
+    content: public Color InformationTextColor { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Property InformationTextColor As Color
+  overload: Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor*
+references:
+- uid: Mapsui.Widgets.InfoWidgets
+  commentId: N:Mapsui.Widgets.InfoWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.InfoWidgets
+  nameWithType: Mapsui.Widgets.InfoWidgets
+  fullName: Mapsui.Widgets.InfoWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets
+    name: InfoWidgets
+    href: Mapsui.Widgets.InfoWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets
+    name: InfoWidgets
+    href: Mapsui.Widgets.InfoWidgets.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Widgets.BaseWidget
+  commentId: T:Mapsui.Widgets.BaseWidget
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.BaseWidget.html
+  name: BaseWidget
+  nameWithType: BaseWidget
+  fullName: Mapsui.Widgets.BaseWidget
+- uid: Mapsui.Widgets.BoxWidgets.BoxWidget
+  commentId: T:Mapsui.Widgets.BoxWidgets.BoxWidget
+  parent: Mapsui.Widgets.BoxWidgets
+  href: Mapsui.Widgets.BoxWidgets.BoxWidget.html
+  name: BoxWidget
+  nameWithType: BoxWidget
+  fullName: Mapsui.Widgets.BoxWidgets.BoxWidget
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  commentId: T:Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  parent: Mapsui.Widgets.BoxWidgets
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html
+  name: TextBoxWidget
+  nameWithType: TextBoxWidget
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+- uid: Mapsui.Widgets.IWidget
+  commentId: T:Mapsui.Widgets.IWidget
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.IWidget.html
+  name: IWidget
+  nameWithType: IWidget
+  fullName: Mapsui.Widgets.IWidget
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget.Padding
+  commentId: P:Mapsui.Widgets.BoxWidgets.TextBoxWidget.Padding
+  parent: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_Padding
+  name: Padding
+  nameWithType: TextBoxWidget.Padding
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget.Padding
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget.Text
+  commentId: P:Mapsui.Widgets.BoxWidgets.TextBoxWidget.Text
+  parent: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_Text
+  name: Text
+  nameWithType: TextBoxWidget.Text
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget.Text
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextSize
+  commentId: P:Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextSize
+  parent: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_TextSize
+  name: TextSize
+  nameWithType: TextBoxWidget.TextSize
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextSize
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextColor
+  commentId: P:Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextColor
+  parent: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_TextColor
+  name: TextColor
+  nameWithType: TextBoxWidget.TextColor
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextColor
+- uid: Mapsui.Widgets.BoxWidgets.BoxWidget.CornerRadius
+  commentId: P:Mapsui.Widgets.BoxWidgets.BoxWidget.CornerRadius
+  parent: Mapsui.Widgets.BoxWidgets.BoxWidget
+  href: Mapsui.Widgets.BoxWidgets.BoxWidget.html#Mapsui_Widgets_BoxWidgets_BoxWidget_CornerRadius
+  name: CornerRadius
+  nameWithType: BoxWidget.CornerRadius
+  fullName: Mapsui.Widgets.BoxWidgets.BoxWidget.CornerRadius
+- uid: Mapsui.Widgets.BoxWidgets.BoxWidget.BackColor
+  commentId: P:Mapsui.Widgets.BoxWidgets.BoxWidget.BackColor
+  parent: Mapsui.Widgets.BoxWidgets.BoxWidget
+  href: Mapsui.Widgets.BoxWidgets.BoxWidget.html#Mapsui_Widgets_BoxWidgets_BoxWidget_BackColor
+  name: BackColor
+  nameWithType: BoxWidget.BackColor
+  fullName: Mapsui.Widgets.BoxWidgets.BoxWidget.BackColor
+- uid: Mapsui.Widgets.BoxWidgets.BoxWidget.Opacity
+  commentId: P:Mapsui.Widgets.BoxWidgets.BoxWidget.Opacity
+  parent: Mapsui.Widgets.BoxWidgets.BoxWidget
+  href: Mapsui.Widgets.BoxWidgets.BoxWidget.html#Mapsui_Widgets_BoxWidgets_BoxWidget_Opacity
+  name: Opacity
+  nameWithType: BoxWidget.Opacity
+  fullName: Mapsui.Widgets.BoxWidgets.BoxWidget.Opacity
+- uid: Mapsui.Widgets.BaseWidget.InputAreaType
+  commentId: P:Mapsui.Widgets.BaseWidget.InputAreaType
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_InputAreaType
+  name: InputAreaType
+  nameWithType: BaseWidget.InputAreaType
+  fullName: Mapsui.Widgets.BaseWidget.InputAreaType
+- uid: Mapsui.Widgets.BaseWidget.HorizontalAlignment
+  commentId: P:Mapsui.Widgets.BaseWidget.HorizontalAlignment
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_HorizontalAlignment
+  name: HorizontalAlignment
+  nameWithType: BaseWidget.HorizontalAlignment
+  fullName: Mapsui.Widgets.BaseWidget.HorizontalAlignment
+- uid: Mapsui.Widgets.BaseWidget.VerticalAlignment
+  commentId: P:Mapsui.Widgets.BaseWidget.VerticalAlignment
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_VerticalAlignment
+  name: VerticalAlignment
+  nameWithType: BaseWidget.VerticalAlignment
+  fullName: Mapsui.Widgets.BaseWidget.VerticalAlignment
+- uid: Mapsui.Widgets.BaseWidget.Margin
+  commentId: P:Mapsui.Widgets.BaseWidget.Margin
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Margin
+  name: Margin
+  nameWithType: BaseWidget.Margin
+  fullName: Mapsui.Widgets.BaseWidget.Margin
+- uid: Mapsui.Widgets.BaseWidget.Position
+  commentId: P:Mapsui.Widgets.BaseWidget.Position
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Position
+  name: Position
+  nameWithType: BaseWidget.Position
+  fullName: Mapsui.Widgets.BaseWidget.Position
+- uid: Mapsui.Widgets.BaseWidget.Width
+  commentId: P:Mapsui.Widgets.BaseWidget.Width
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Width
+  name: Width
+  nameWithType: BaseWidget.Width
+  fullName: Mapsui.Widgets.BaseWidget.Width
+- uid: Mapsui.Widgets.BaseWidget.Height
+  commentId: P:Mapsui.Widgets.BaseWidget.Height
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Height
+  name: Height
+  nameWithType: BaseWidget.Height
+  fullName: Mapsui.Widgets.BaseWidget.Height
+- uid: Mapsui.Widgets.BaseWidget.Envelope
+  commentId: P:Mapsui.Widgets.BaseWidget.Envelope
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Envelope
+  name: Envelope
+  nameWithType: BaseWidget.Envelope
+  fullName: Mapsui.Widgets.BaseWidget.Envelope
+- uid: Mapsui.Widgets.BaseWidget.Enabled
+  commentId: P:Mapsui.Widgets.BaseWidget.Enabled
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Enabled
+  name: Enabled
+  nameWithType: BaseWidget.Enabled
+  fullName: Mapsui.Widgets.BaseWidget.Enabled
+- uid: Mapsui.Widgets.BaseWidget.NeedsRedraw
+  commentId: P:Mapsui.Widgets.BaseWidget.NeedsRedraw
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_NeedsRedraw
+  name: NeedsRedraw
+  nameWithType: BaseWidget.NeedsRedraw
+  fullName: Mapsui.Widgets.BaseWidget.NeedsRedraw
+- uid: Mapsui.Widgets.BaseWidget.InputTransparent
+  commentId: P:Mapsui.Widgets.BaseWidget.InputTransparent
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_InputTransparent
+  name: InputTransparent
+  nameWithType: BaseWidget.InputTransparent
+  fullName: Mapsui.Widgets.BaseWidget.InputTransparent
+- uid: Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+  commentId: M:Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+  parent: Mapsui.Widgets.BaseWidget
+  isExternal: true
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_
+  name: UpdateEnvelope(double, double, double, double)
+  nameWithType: BaseWidget.UpdateEnvelope(double, double, double, double)
+  fullName: Mapsui.Widgets.BaseWidget.UpdateEnvelope(double, double, double, double)
+  nameWithType.vb: BaseWidget.UpdateEnvelope(Double, Double, Double, Double)
+  fullName.vb: Mapsui.Widgets.BaseWidget.UpdateEnvelope(Double, Double, Double, Double)
+  name.vb: UpdateEnvelope(Double, Double, Double, Double)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+    name: UpdateEnvelope
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+    name: UpdateEnvelope
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+  commentId: M:Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+  parent: Mapsui.Widgets.BaseWidget
+  isExternal: true
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Invalidate_System_String_
+  name: Invalidate(string)
+  nameWithType: BaseWidget.Invalidate(string)
+  fullName: Mapsui.Widgets.BaseWidget.Invalidate(string)
+  nameWithType.vb: BaseWidget.Invalidate(String)
+  fullName.vb: Mapsui.Widgets.BaseWidget.Invalidate(String)
+  name.vb: Invalidate(String)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+    name: Invalidate
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Invalidate_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+    name: Invalidate
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Invalidate_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnTapped(Navigator, WidgetEventArgs)
+  nameWithType: BaseWidget.OnTapped(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnTapped
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnTapped
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+- uid: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnPointerPressed(Navigator, WidgetEventArgs)
+  nameWithType: BaseWidget.OnPointerPressed(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerPressed
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerPressed
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+- uid: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnPointerMoved(Navigator, WidgetEventArgs)
+  nameWithType: BaseWidget.OnPointerMoved(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerMoved
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerMoved
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+- uid: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnPointerReleased(Navigator, WidgetEventArgs)
+  nameWithType: BaseWidget.OnPointerReleased(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerReleased
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerReleased
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  href: Mapsui.html
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+- uid: Mapsui.Widgets.BoxWidgets
+  commentId: N:Mapsui.Widgets.BoxWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.BoxWidgets
+  nameWithType: Mapsui.Widgets.BoxWidgets
+  fullName: Mapsui.Widgets.BoxWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.BoxWidgets
+    name: BoxWidgets
+    href: Mapsui.Widgets.BoxWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.BoxWidgets
+    name: BoxWidgets
+    href: Mapsui.Widgets.BoxWidgets.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget__ctor
+  name: LoggingWidget
+  nameWithType: LoggingWidget.LoggingWidget
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LoggingWidget
+  nameWithType.vb: LoggingWidget.New
+  fullName.vb: Mapsui.Widgets.InfoWidgets.LoggingWidget.New
+  name.vb: New
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_ShowLoggingInMap
+  name: ShowLoggingInMap
+  nameWithType: LoggingWidget.ShowLoggingInMap
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  commentId: T:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  parent: Mapsui.Widgets.InfoWidgets
+  href: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html
+  name: ShowLoggingInMap
+  nameWithType: ShowLoggingInMap
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.Log*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.Log
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_Log_Mapsui_Logging_LogLevel_System_String_System_Exception_
+  name: Log
+  nameWithType: LoggingWidget.Log
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.Log
+- uid: Mapsui.Logging.LogLevel
+  commentId: T:Mapsui.Logging.LogLevel
+  parent: Mapsui.Logging
+  href: Mapsui.Logging.LogLevel.html
+  name: LogLevel
+  nameWithType: LogLevel
+  fullName: Mapsui.Logging.LogLevel
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
+- uid: Mapsui.Logging
+  commentId: N:Mapsui.Logging
+  href: Mapsui.html
+  name: Mapsui.Logging
+  nameWithType: Mapsui.Logging
+  fullName: Mapsui.Logging
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Logging
+    name: Logging
+    href: Mapsui.Logging.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Logging
+    name: Logging
+    href: Mapsui.Logging.html
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_Clear
+  name: Clear
+  nameWithType: LoggingWidget.Clear
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_ListOfLogEntries
+  name: ListOfLogEntries
+  nameWithType: LoggingWidget.ListOfLogEntries
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries
+- uid: System.Collections.Concurrent.ConcurrentQueue{Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry}
+  commentId: T:System.Collections.Concurrent.ConcurrentQueue{Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry}
+  parent: System.Collections.Concurrent
+  definition: System.Collections.Concurrent.ConcurrentQueue`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  name: ConcurrentQueue<LoggingWidget.LogEntry>
+  nameWithType: ConcurrentQueue<LoggingWidget.LogEntry>
+  fullName: System.Collections.Concurrent.ConcurrentQueue<Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry>
+  nameWithType.vb: ConcurrentQueue(Of LoggingWidget.LogEntry)
+  fullName.vb: System.Collections.Concurrent.ConcurrentQueue(Of Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry)
+  name.vb: ConcurrentQueue(Of LoggingWidget.LogEntry)
+  spec.csharp:
+  - uid: System.Collections.Concurrent.ConcurrentQueue`1
+    name: ConcurrentQueue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  - name: <
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget
+    name: LoggingWidget
+    href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
+    name: LogEntry
+    href: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Concurrent.ConcurrentQueue`1
+    name: ConcurrentQueue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget
+    name: LoggingWidget
+    href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
+    name: LogEntry
+    href: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html
+  - name: )
+- uid: System.Collections.Concurrent.ConcurrentQueue`1
+  commentId: T:System.Collections.Concurrent.ConcurrentQueue`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  name: ConcurrentQueue<T>
+  nameWithType: ConcurrentQueue<T>
+  fullName: System.Collections.Concurrent.ConcurrentQueue<T>
+  nameWithType.vb: ConcurrentQueue(Of T)
+  fullName.vb: System.Collections.Concurrent.ConcurrentQueue(Of T)
+  name.vb: ConcurrentQueue(Of T)
+  spec.csharp:
+  - uid: System.Collections.Concurrent.ConcurrentQueue`1
+    name: ConcurrentQueue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Concurrent.ConcurrentQueue`1
+    name: ConcurrentQueue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Concurrent
+  commentId: N:System.Collections.Concurrent
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Concurrent
+  nameWithType: System.Collections.Concurrent
+  fullName: System.Collections.Concurrent
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Concurrent
+    name: Concurrent
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Concurrent
+    name: Concurrent
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_LogLevelFilter
+  name: LogLevelFilter
+  nameWithType: LoggingWidget.LogLevelFilter
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_MaxNumberOfLogEntriesToKeep
+  name: MaxNumberOfLogEntriesToKeep
+  nameWithType: LoggingWidget.MaxNumberOfLogEntriesToKeep
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_ErrorTextColor
+  name: ErrorTextColor
+  nameWithType: LoggingWidget.ErrorTextColor
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Color.html
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_WarningTextColor
+  name: WarningTextColor
+  nameWithType: LoggingWidget.WarningTextColor
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_InformationTextColor
+  name: InformationTextColor
+  nameWithType: LoggingWidget.InformationTextColor
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor

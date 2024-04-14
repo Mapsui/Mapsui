@@ -1,0 +1,793 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Cache.IUrlPersistentCache
+  commentId: T:Mapsui.Cache.IUrlPersistentCache
+  id: IUrlPersistentCache
+  parent: Mapsui.Cache
+  children:
+  - Mapsui.Cache.IUrlPersistentCache.Add(System.String,System.Byte[])
+  - Mapsui.Cache.IUrlPersistentCache.Add(System.String,System.Byte[],System.Byte[])
+  - Mapsui.Cache.IUrlPersistentCache.Find(System.String)
+  - Mapsui.Cache.IUrlPersistentCache.Find(System.String,System.Byte[])
+  - Mapsui.Cache.IUrlPersistentCache.Remove(System.String)
+  - Mapsui.Cache.IUrlPersistentCache.Remove(System.String,System.Byte[])
+  langs:
+  - csharp
+  - vb
+  name: IUrlPersistentCache
+  nameWithType: IUrlPersistentCache
+  fullName: Mapsui.Cache.IUrlPersistentCache
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Cache/IUrlPersistentCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IUrlPersistentCache
+    path: ../../Mapsui/Cache/IUrlPersistentCache.cs
+    startLine: 2
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Cache
+  syntax:
+    content: public interface IUrlPersistentCache
+    content.vb: Public Interface IUrlPersistentCache
+  extensionMethods:
+  - Mapsui.Cache.IUrlPersistentCache.Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  - Mapsui.Cache.IUrlPersistentCache.Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Cache.IUrlPersistentCache.Add(System.String,System.Byte[],System.Byte[])
+  commentId: M:Mapsui.Cache.IUrlPersistentCache.Add(System.String,System.Byte[],System.Byte[])
+  id: Add(System.String,System.Byte[],System.Byte[])
+  parent: Mapsui.Cache.IUrlPersistentCache
+  langs:
+  - csharp
+  - vb
+  name: Add(string, byte[]?, byte[])
+  nameWithType: IUrlPersistentCache.Add(string, byte[]?, byte[])
+  fullName: Mapsui.Cache.IUrlPersistentCache.Add(string, byte[]?, byte[])
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Cache/IUrlPersistentCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Add
+    path: ../../Mapsui/Cache/IUrlPersistentCache.cs
+    startLine: 4
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Cache
+  syntax:
+    content: void Add(string url, byte[]? postData, byte[] tile)
+    parameters:
+    - id: url
+      type: System.String
+    - id: postData
+      type: System.Byte[]
+    - id: tile
+      type: System.Byte[]
+    content.vb: Sub Add(url As String, postData As Byte(), tile As Byte())
+  overload: Mapsui.Cache.IUrlPersistentCache.Add*
+  nameWithType.vb: IUrlPersistentCache.Add(String, Byte(), Byte())
+  fullName.vb: Mapsui.Cache.IUrlPersistentCache.Add(String, Byte(), Byte())
+  name.vb: Add(String, Byte(), Byte())
+- uid: Mapsui.Cache.IUrlPersistentCache.Add(System.String,System.Byte[])
+  commentId: M:Mapsui.Cache.IUrlPersistentCache.Add(System.String,System.Byte[])
+  id: Add(System.String,System.Byte[])
+  parent: Mapsui.Cache.IUrlPersistentCache
+  langs:
+  - csharp
+  - vb
+  name: Add(string, byte[])
+  nameWithType: IUrlPersistentCache.Add(string, byte[])
+  fullName: Mapsui.Cache.IUrlPersistentCache.Add(string, byte[])
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Cache/IUrlPersistentCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Add
+    path: ../../Mapsui/Cache/IUrlPersistentCache.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Cache
+  syntax:
+    content: void Add(string url, byte[] tile)
+    parameters:
+    - id: url
+      type: System.String
+    - id: tile
+      type: System.Byte[]
+    content.vb: Sub Add(url As String, tile As Byte())
+  overload: Mapsui.Cache.IUrlPersistentCache.Add*
+  nameWithType.vb: IUrlPersistentCache.Add(String, Byte())
+  fullName.vb: Mapsui.Cache.IUrlPersistentCache.Add(String, Byte())
+  name.vb: Add(String, Byte())
+- uid: Mapsui.Cache.IUrlPersistentCache.Remove(System.String,System.Byte[])
+  commentId: M:Mapsui.Cache.IUrlPersistentCache.Remove(System.String,System.Byte[])
+  id: Remove(System.String,System.Byte[])
+  parent: Mapsui.Cache.IUrlPersistentCache
+  langs:
+  - csharp
+  - vb
+  name: Remove(string, byte[]?)
+  nameWithType: IUrlPersistentCache.Remove(string, byte[]?)
+  fullName: Mapsui.Cache.IUrlPersistentCache.Remove(string, byte[]?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Cache/IUrlPersistentCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Remove
+    path: ../../Mapsui/Cache/IUrlPersistentCache.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Cache
+  syntax:
+    content: void Remove(string url, byte[]? postData)
+    parameters:
+    - id: url
+      type: System.String
+    - id: postData
+      type: System.Byte[]
+    content.vb: Sub Remove(url As String, postData As Byte())
+  overload: Mapsui.Cache.IUrlPersistentCache.Remove*
+  nameWithType.vb: IUrlPersistentCache.Remove(String, Byte())
+  fullName.vb: Mapsui.Cache.IUrlPersistentCache.Remove(String, Byte())
+  name.vb: Remove(String, Byte())
+- uid: Mapsui.Cache.IUrlPersistentCache.Remove(System.String)
+  commentId: M:Mapsui.Cache.IUrlPersistentCache.Remove(System.String)
+  id: Remove(System.String)
+  parent: Mapsui.Cache.IUrlPersistentCache
+  langs:
+  - csharp
+  - vb
+  name: Remove(string)
+  nameWithType: IUrlPersistentCache.Remove(string)
+  fullName: Mapsui.Cache.IUrlPersistentCache.Remove(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Cache/IUrlPersistentCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Remove
+    path: ../../Mapsui/Cache/IUrlPersistentCache.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Cache
+  syntax:
+    content: void Remove(string url)
+    parameters:
+    - id: url
+      type: System.String
+    content.vb: Sub Remove(url As String)
+  overload: Mapsui.Cache.IUrlPersistentCache.Remove*
+  nameWithType.vb: IUrlPersistentCache.Remove(String)
+  fullName.vb: Mapsui.Cache.IUrlPersistentCache.Remove(String)
+  name.vb: Remove(String)
+- uid: Mapsui.Cache.IUrlPersistentCache.Find(System.String,System.Byte[])
+  commentId: M:Mapsui.Cache.IUrlPersistentCache.Find(System.String,System.Byte[])
+  id: Find(System.String,System.Byte[])
+  parent: Mapsui.Cache.IUrlPersistentCache
+  langs:
+  - csharp
+  - vb
+  name: Find(string, byte[]?)
+  nameWithType: IUrlPersistentCache.Find(string, byte[]?)
+  fullName: Mapsui.Cache.IUrlPersistentCache.Find(string, byte[]?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Cache/IUrlPersistentCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Find
+    path: ../../Mapsui/Cache/IUrlPersistentCache.cs
+    startLine: 16
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Cache
+  syntax:
+    content: byte[]? Find(string url, byte[]? postData)
+    parameters:
+    - id: url
+      type: System.String
+    - id: postData
+      type: System.Byte[]
+    return:
+      type: System.Byte[]
+    content.vb: Function Find(url As String, postData As Byte()) As Byte()
+  overload: Mapsui.Cache.IUrlPersistentCache.Find*
+  nameWithType.vb: IUrlPersistentCache.Find(String, Byte())
+  fullName.vb: Mapsui.Cache.IUrlPersistentCache.Find(String, Byte())
+  name.vb: Find(String, Byte())
+- uid: Mapsui.Cache.IUrlPersistentCache.Find(System.String)
+  commentId: M:Mapsui.Cache.IUrlPersistentCache.Find(System.String)
+  id: Find(System.String)
+  parent: Mapsui.Cache.IUrlPersistentCache
+  langs:
+  - csharp
+  - vb
+  name: Find(string)
+  nameWithType: IUrlPersistentCache.Find(string)
+  fullName: Mapsui.Cache.IUrlPersistentCache.Find(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Cache/IUrlPersistentCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Find
+    path: ../../Mapsui/Cache/IUrlPersistentCache.cs
+    startLine: 17
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Cache
+  syntax:
+    content: byte[]? Find(string url)
+    parameters:
+    - id: url
+      type: System.String
+    return:
+      type: System.Byte[]
+    content.vb: Function Find(url As String) As Byte()
+  overload: Mapsui.Cache.IUrlPersistentCache.Find*
+  nameWithType.vb: IUrlPersistentCache.Find(String)
+  fullName.vb: Mapsui.Cache.IUrlPersistentCache.Find(String)
+  name.vb: Find(String)
+references:
+- uid: Mapsui.Cache
+  commentId: N:Mapsui.Cache
+  href: Mapsui.html
+  name: Mapsui.Cache
+  nameWithType: Mapsui.Cache
+  fullName: Mapsui.Cache
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Cache
+    name: Cache
+    href: Mapsui.Cache.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Cache
+    name: Cache
+    href: Mapsui.Cache.html
+- uid: Mapsui.Cache.IUrlPersistentCache.Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  parent: Mapsui.Extensions.CacheExtensions
+  definition: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  name: UrlCachedArrayAsync(IUrlPersistentCache, string, Func<string, Task<Stream>>)
+  nameWithType: CacheExtensions.UrlCachedArrayAsync(IUrlPersistentCache, string, Func<string, Task<Stream>>)
+  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache, string, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>)
+  nameWithType.vb: CacheExtensions.UrlCachedArrayAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
+  fullName.vb: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache, String, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)))
+  name.vb: UrlCachedArrayAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
+  spec.csharp:
+  - uid: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+    name: UrlCachedArrayAsync
+    href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  - name: (
+  - uid: Mapsui.Cache.IUrlPersistentCache
+    name: IUrlPersistentCache
+    href: Mapsui.Cache.IUrlPersistentCache.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: '>'
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+    name: UrlCachedArrayAsync
+    href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  - name: (
+  - uid: Mapsui.Cache.IUrlPersistentCache
+    name: IUrlPersistentCache
+    href: Mapsui.Cache.IUrlPersistentCache.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+  - name: )
+  - name: )
+- uid: Mapsui.Cache.IUrlPersistentCache.Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  parent: Mapsui.Extensions.CacheExtensions
+  definition: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  name: UrlCachedStreamAsync(IUrlPersistentCache, string, Func<string, Task<Stream>>)
+  nameWithType: CacheExtensions.UrlCachedStreamAsync(IUrlPersistentCache, string, Func<string, Task<Stream>>)
+  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache, string, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>)
+  nameWithType.vb: CacheExtensions.UrlCachedStreamAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
+  fullName.vb: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache, String, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)))
+  name.vb: UrlCachedStreamAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
+  spec.csharp:
+  - uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+    name: UrlCachedStreamAsync
+    href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  - name: (
+  - uid: Mapsui.Cache.IUrlPersistentCache
+    name: IUrlPersistentCache
+    href: Mapsui.Cache.IUrlPersistentCache.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: '>'
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+    name: UrlCachedStreamAsync
+    href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  - name: (
+  - uid: Mapsui.Cache.IUrlPersistentCache
+    name: IUrlPersistentCache
+    href: Mapsui.Cache.IUrlPersistentCache.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+  - name: )
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  isExternal: true
+  href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  name: UrlCachedArrayAsync(IUrlPersistentCache, string, Func<string, Task<Stream>>)
+  nameWithType: CacheExtensions.UrlCachedArrayAsync(IUrlPersistentCache, string, Func<string, Task<Stream>>)
+  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache, string, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>)
+  nameWithType.vb: CacheExtensions.UrlCachedArrayAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
+  fullName.vb: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache, String, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)))
+  name.vb: UrlCachedArrayAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
+  spec.csharp:
+  - uid: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+    name: UrlCachedArrayAsync
+    href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  - name: (
+  - uid: Mapsui.Cache.IUrlPersistentCache
+    name: IUrlPersistentCache
+    href: Mapsui.Cache.IUrlPersistentCache.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: '>'
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+    name: UrlCachedArrayAsync
+    href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  - name: (
+  - uid: Mapsui.Cache.IUrlPersistentCache
+    name: IUrlPersistentCache
+    href: Mapsui.Cache.IUrlPersistentCache.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+  - name: )
+  - name: )
+- uid: Mapsui.Extensions.CacheExtensions
+  commentId: T:Mapsui.Extensions.CacheExtensions
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.CacheExtensions.html
+  name: CacheExtensions
+  nameWithType: CacheExtensions
+  fullName: Mapsui.Extensions.CacheExtensions
+- uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+  isExternal: true
+  href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  name: UrlCachedStreamAsync(IUrlPersistentCache, string, Func<string, Task<Stream>>)
+  nameWithType: CacheExtensions.UrlCachedStreamAsync(IUrlPersistentCache, string, Func<string, Task<Stream>>)
+  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache, string, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>)
+  nameWithType.vb: CacheExtensions.UrlCachedStreamAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
+  fullName.vb: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache, String, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)))
+  name.vb: UrlCachedStreamAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
+  spec.csharp:
+  - uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+    name: UrlCachedStreamAsync
+    href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  - name: (
+  - uid: Mapsui.Cache.IUrlPersistentCache
+    name: IUrlPersistentCache
+    href: Mapsui.Cache.IUrlPersistentCache.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: '>'
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
+    name: UrlCachedStreamAsync
+    href: Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
+  - name: (
+  - uid: Mapsui.Cache.IUrlPersistentCache
+    name: IUrlPersistentCache
+    href: Mapsui.Cache.IUrlPersistentCache.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+  - name: )
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Cache.IUrlPersistentCache.Add*
+  commentId: Overload:Mapsui.Cache.IUrlPersistentCache.Add
+  href: Mapsui.Cache.IUrlPersistentCache.html#Mapsui_Cache_IUrlPersistentCache_Add_System_String_System_Byte___System_Byte___
+  name: Add
+  nameWithType: IUrlPersistentCache.Add
+  fullName: Mapsui.Cache.IUrlPersistentCache.Add
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Cache.IUrlPersistentCache.Remove*
+  commentId: Overload:Mapsui.Cache.IUrlPersistentCache.Remove
+  href: Mapsui.Cache.IUrlPersistentCache.html#Mapsui_Cache_IUrlPersistentCache_Remove_System_String_System_Byte___
+  name: Remove
+  nameWithType: IUrlPersistentCache.Remove
+  fullName: Mapsui.Cache.IUrlPersistentCache.Remove
+- uid: Mapsui.Cache.IUrlPersistentCache.Find*
+  commentId: Overload:Mapsui.Cache.IUrlPersistentCache.Find
+  href: Mapsui.Cache.IUrlPersistentCache.html#Mapsui_Cache_IUrlPersistentCache_Find_System_String_System_Byte___
+  name: Find
+  nameWithType: IUrlPersistentCache.Find
+  fullName: Mapsui.Cache.IUrlPersistentCache.Find

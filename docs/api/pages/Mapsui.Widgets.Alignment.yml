@@ -1,0 +1,258 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.Alignment
+  commentId: T:Mapsui.Widgets.Alignment
+  id: Alignment
+  parent: Mapsui.Widgets
+  children:
+  - Mapsui.Widgets.Alignment.Auto
+  - Mapsui.Widgets.Alignment.Center
+  - Mapsui.Widgets.Alignment.Left
+  - Mapsui.Widgets.Alignment.Right
+  langs:
+  - csharp
+  - vb
+  name: Alignment
+  nameWithType: Alignment
+  fullName: Mapsui.Widgets.Alignment
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Widgets/Alignment/Alignment.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Alignment
+    path: ../../Mapsui/Widgets/Alignment/Alignment.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  syntax:
+    content: public enum Alignment
+    content.vb: Public Enum Alignment
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Widgets.Alignment.Left
+  commentId: F:Mapsui.Widgets.Alignment.Left
+  id: Left
+  parent: Mapsui.Widgets.Alignment
+  langs:
+  - csharp
+  - vb
+  name: Left
+  nameWithType: Alignment.Left
+  fullName: Mapsui.Widgets.Alignment.Left
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Widgets/Alignment/Alignment.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Left
+    path: ../../Mapsui/Widgets/Alignment/Alignment.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  syntax:
+    content: Left = 0
+    return:
+      type: Mapsui.Widgets.Alignment
+- uid: Mapsui.Widgets.Alignment.Center
+  commentId: F:Mapsui.Widgets.Alignment.Center
+  id: Center
+  parent: Mapsui.Widgets.Alignment
+  langs:
+  - csharp
+  - vb
+  name: Center
+  nameWithType: Alignment.Center
+  fullName: Mapsui.Widgets.Alignment.Center
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Widgets/Alignment/Alignment.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Center
+    path: ../../Mapsui/Widgets/Alignment/Alignment.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  syntax:
+    content: Center = 1
+    return:
+      type: Mapsui.Widgets.Alignment
+- uid: Mapsui.Widgets.Alignment.Right
+  commentId: F:Mapsui.Widgets.Alignment.Right
+  id: Right
+  parent: Mapsui.Widgets.Alignment
+  langs:
+  - csharp
+  - vb
+  name: Right
+  nameWithType: Alignment.Right
+  fullName: Mapsui.Widgets.Alignment.Right
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Widgets/Alignment/Alignment.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Right
+    path: ../../Mapsui/Widgets/Alignment/Alignment.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  syntax:
+    content: Right = 2
+    return:
+      type: Mapsui.Widgets.Alignment
+- uid: Mapsui.Widgets.Alignment.Auto
+  commentId: F:Mapsui.Widgets.Alignment.Auto
+  id: Auto
+  parent: Mapsui.Widgets.Alignment
+  langs:
+  - csharp
+  - vb
+  name: Auto
+  nameWithType: Alignment.Auto
+  fullName: Mapsui.Widgets.Alignment.Auto
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Widgets/Alignment/Alignment.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Auto
+    path: ../../Mapsui/Widgets/Alignment/Alignment.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  syntax:
+    content: Auto = 3
+    return:
+      type: Mapsui.Widgets.Alignment
+references:
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  href: Mapsui.html
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Widgets.Alignment
+  commentId: T:Mapsui.Widgets.Alignment
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.Alignment.html
+  name: Alignment
+  nameWithType: Alignment
+  fullName: Mapsui.Widgets.Alignment

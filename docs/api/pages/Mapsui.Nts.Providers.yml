@@ -1,0 +1,70 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Providers
+  commentId: N:Mapsui.Nts.Providers
+  id: Mapsui.Nts.Providers
+  children:
+  - Mapsui.Nts.Providers.GeoJsonProvider
+  - Mapsui.Nts.Providers.GeometryIntersectionProvider
+  - Mapsui.Nts.Providers.GeometrySimplifyProvider
+  - Mapsui.Nts.Providers.IndexedMemoryProvider
+  - Mapsui.Nts.Providers.ObservableCollectionProvider`1
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Nts.Providers
+  nameWithType: Mapsui.Nts.Providers
+  fullName: Mapsui.Nts.Providers
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Nts.Providers.GeoJsonProvider
+  commentId: T:Mapsui.Nts.Providers.GeoJsonProvider
+  href: Mapsui.Nts.Providers.GeoJsonProvider.html
+  name: GeoJsonProvider
+  nameWithType: GeoJsonProvider
+  fullName: Mapsui.Nts.Providers.GeoJsonProvider
+- uid: Mapsui.Nts.Providers.GeometryIntersectionProvider
+  commentId: T:Mapsui.Nts.Providers.GeometryIntersectionProvider
+  href: Mapsui.Nts.Providers.GeometryIntersectionProvider.html
+  name: GeometryIntersectionProvider
+  nameWithType: GeometryIntersectionProvider
+  fullName: Mapsui.Nts.Providers.GeometryIntersectionProvider
+- uid: Mapsui.Nts.Providers.GeometrySimplifyProvider
+  commentId: T:Mapsui.Nts.Providers.GeometrySimplifyProvider
+  href: Mapsui.Nts.Providers.GeometrySimplifyProvider.html
+  name: GeometrySimplifyProvider
+  nameWithType: GeometrySimplifyProvider
+  fullName: Mapsui.Nts.Providers.GeometrySimplifyProvider
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider
+  commentId: T:Mapsui.Nts.Providers.IndexedMemoryProvider
+  href: Mapsui.Nts.Providers.IndexedMemoryProvider.html
+  name: IndexedMemoryProvider
+  nameWithType: IndexedMemoryProvider
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider
+- uid: Mapsui.Nts.Providers.ObservableCollectionProvider`1
+  commentId: T:Mapsui.Nts.Providers.ObservableCollectionProvider`1
+  href: Mapsui.Nts.Providers.ObservableCollectionProvider-1.html
+  name: ObservableCollectionProvider<T>
+  nameWithType: ObservableCollectionProvider<T>
+  fullName: Mapsui.Nts.Providers.ObservableCollectionProvider<T>
+  nameWithType.vb: ObservableCollectionProvider(Of T)
+  fullName.vb: Mapsui.Nts.Providers.ObservableCollectionProvider(Of T)
+  name.vb: ObservableCollectionProvider(Of T)
+  spec.csharp:
+  - uid: Mapsui.Nts.Providers.ObservableCollectionProvider`1
+    name: ObservableCollectionProvider
+    href: Mapsui.Nts.Providers.ObservableCollectionProvider-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Nts.Providers.ObservableCollectionProvider`1
+    name: ObservableCollectionProvider
+    href: Mapsui.Nts.Providers.ObservableCollectionProvider-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

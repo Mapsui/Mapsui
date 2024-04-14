@@ -1,0 +1,412 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions
+  commentId: T:Mapsui.Rendering.Skia.Extensions.AlignmentExtensions
+  id: AlignmentExtensions
+  parent: Mapsui.Rendering.Skia.Extensions
+  children:
+  - Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.ToRichTextKit(Mapsui.Widgets.Alignment)
+  langs:
+  - csharp
+  - vb
+  name: AlignmentExtensions
+  nameWithType: AlignmentExtensions
+  fullName: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Extensions/AlignmentExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AlignmentExtensions
+    path: ../../Mapsui.Rendering.Skia/Extensions/AlignmentExtensions.cs
+    startLine: 5
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Extensions
+  syntax:
+    content: public static class AlignmentExtensions
+    content.vb: Public Module AlignmentExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.ToRichTextKit(Mapsui.Widgets.Alignment)
+  commentId: M:Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.ToRichTextKit(Mapsui.Widgets.Alignment)
+  id: ToRichTextKit(Mapsui.Widgets.Alignment)
+  isExtensionMethod: true
+  parent: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToRichTextKit(Alignment)
+  nameWithType: AlignmentExtensions.ToRichTextKit(Alignment)
+  fullName: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.ToRichTextKit(Mapsui.Widgets.Alignment)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Extensions/AlignmentExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToRichTextKit
+    path: ../../Mapsui.Rendering.Skia/Extensions/AlignmentExtensions.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Extensions
+  syntax:
+    content: public static TextAlignment ToRichTextKit(this Alignment textAlignment)
+    parameters:
+    - id: textAlignment
+      type: Mapsui.Widgets.Alignment
+    return:
+      type: Topten.RichTextKit.TextAlignment
+    content.vb: Public Shared Function ToRichTextKit(textAlignment As Alignment) As TextAlignment
+  overload: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.ToRichTextKit*
+references:
+- uid: Mapsui.Rendering.Skia.Extensions
+  commentId: N:Mapsui.Rendering.Skia.Extensions
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia.Extensions
+  nameWithType: Mapsui.Rendering.Skia.Extensions
+  fullName: Mapsui.Rendering.Skia.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Extensions
+    name: Extensions
+    href: Mapsui.Rendering.Skia.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Extensions
+    name: Extensions
+    href: Mapsui.Rendering.Skia.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.ToRichTextKit*
+  commentId: Overload:Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.ToRichTextKit
+  href: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.html#Mapsui_Rendering_Skia_Extensions_AlignmentExtensions_ToRichTextKit_Mapsui_Widgets_Alignment_
+  name: ToRichTextKit
+  nameWithType: AlignmentExtensions.ToRichTextKit
+  fullName: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.ToRichTextKit
+- uid: Mapsui.Widgets.Alignment
+  commentId: T:Mapsui.Widgets.Alignment
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.Alignment.html
+  name: Alignment
+  nameWithType: Alignment
+  fullName: Mapsui.Widgets.Alignment
+- uid: Topten.RichTextKit.TextAlignment
+  commentId: T:Topten.RichTextKit.TextAlignment
+  parent: Topten.RichTextKit
+  isExternal: true
+  href: https://github.com/toptensoftware/RichTextKit/blob/ae434c82d8a197e3d259761879fb3f862f12efd8/Topten.RichTextKit/TextAlignment.cs
+  name: TextAlignment
+  nameWithType: TextAlignment
+  fullName: Topten.RichTextKit.TextAlignment
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  href: Mapsui.html
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+- uid: Topten.RichTextKit
+  commentId: N:Topten.RichTextKit
+  isExternal: true
+  name: Topten.RichTextKit
+  nameWithType: Topten.RichTextKit
+  fullName: Topten.RichTextKit
+  spec.csharp:
+  - uid: Topten
+    name: Topten
+    isExternal: true
+  - name: .
+  - uid: Topten.RichTextKit
+    name: RichTextKit
+    isExternal: true
+  spec.vb:
+  - uid: Topten
+    name: Topten
+    isExternal: true
+  - name: .
+  - uid: Topten.RichTextKit
+    name: RichTextKit
+    isExternal: true

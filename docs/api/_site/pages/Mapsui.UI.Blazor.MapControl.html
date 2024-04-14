@@ -1,0 +1,1758 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class MapControl </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class MapControl ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.UI.Blazor.MapControl">
+
+
+
+  <h1 id="Mapsui_UI_Blazor_MapControl" data-uid="Mapsui.UI.Blazor.MapControl" class="text-break">Class MapControl</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase">ComponentBase</a></div>
+    <div class="level2"><span class="xref">MapControl</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.icomponent">IComponent</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.ihandleevent">IHandleEvent</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.ihandleafterrender">IHandleAfterRender</a></div>
+    <div><a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.buildrendertree">ComponentBase.BuildRenderTree(RenderTreeBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitializedasync">ComponentBase.OnInitializedAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparametersset">ComponentBase.OnParametersSet()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparameterssetasync">ComponentBase.OnParametersSetAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.statehaschanged">ComponentBase.StateHasChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.shouldrender">ComponentBase.ShouldRender()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrender">ComponentBase.OnAfterRender(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrenderasync">ComponentBase.OnAfterRenderAsync(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.invokeasync#microsoft-aspnetcore-components-componentbase-invokeasync(system-action)">ComponentBase.InvokeAsync(Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.invokeasync#microsoft-aspnetcore-components-componentbase-invokeasync(system-func((system-threading-tasks-task)))">ComponentBase.InvokeAsync(Func&lt;Task&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.setparametersasync">ComponentBase.SetParametersAsync(ParameterView)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.UI.html">UI</a>.<a class="xref" href="Mapsui.UI.Blazor.html">Blazor</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.UI.Blazor.dll</h6>
+  <h5 id="Mapsui_UI_Blazor_MapControl_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MapControl : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender, IMapControl, INotifyPropertyChanged, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl__ctor.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L39">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl__ctor_" data-uid="Mapsui.UI.Blazor.MapControl.#ctor*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl__ctor" data-uid="Mapsui.UI.Blazor.MapControl.#ctor">MapControl()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapControl()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl__elementId.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl._elementId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L16">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Blazor_MapControl__elementId" data-uid="Mapsui.UI.Blazor.MapControl._elementId">_elementId</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly string _elementId</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl__lastMovePosition.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl._lastMovePosition%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L23">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Blazor_MapControl__lastMovePosition" data-uid="Mapsui.UI.Blazor.MapControl._lastMovePosition">_lastMovePosition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ScreenPosition? _lastMovePosition</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a>?</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl__viewCpu.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl._viewCpu%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L14">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Blazor_MapControl__viewCpu" data-uid="Mapsui.UI.Blazor.MapControl._viewCpu">_viewCpu</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SKCanvasView? _viewCpu</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor.skcanvasview">SKCanvasView</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl__viewGpu.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl._viewGpu%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L15">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Blazor_MapControl__viewGpu" data-uid="Mapsui.UI.Blazor.MapControl._viewGpu">_viewGpu</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SKGLView? _viewGpu</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor.skglview">SKGLView</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_Cursor.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.Cursor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L213">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_Cursor_" data-uid="Mapsui.UI.Blazor.MapControl.Cursor*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_Cursor" data-uid="Mapsui.UI.Blazor.MapControl.Cursor">Cursor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Cursor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_ElementId.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.ElementId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L33">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_ElementId_" data-uid="Mapsui.UI.Blazor.MapControl.ElementId*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_ElementId" data-uid="Mapsui.UI.Blazor.MapControl.ElementId">ElementId</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ElementId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.Map%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L428">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_Map_" data-uid="Mapsui.UI.Blazor.MapControl.Map*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_Map" data-uid="Mapsui.UI.Blazor.MapControl.Map">Map</h4>
+  <div class="markdown level1 summary"><p>Map holding data for which is shown in this MapControl</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Parameter]
+public Map Map { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_MaxTapGestureMovement.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L70">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_MaxTapGestureMovement_" data-uid="Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_MaxTapGestureMovement" data-uid="Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement">MaxTapGestureMovement</h4>
+  <div class="markdown level1 summary"><p>The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxTapGestureMovement { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_MoveButton.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.MoveButton%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L29">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_MoveButton_" data-uid="Mapsui.UI.Blazor.MapControl.MoveButton*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_MoveButton" data-uid="Mapsui.UI.Blazor.MapControl.MoveButton">MoveButton</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MoveButton { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_MoveCursor.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.MoveCursor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L28">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_MoveCursor_" data-uid="Mapsui.UI.Blazor.MapControl.MoveCursor*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_MoveCursor" data-uid="Mapsui.UI.Blazor.MapControl.MoveCursor">MoveCursor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string MoveCursor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_MoveModifier.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.MoveModifier%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L30">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_MoveModifier_" data-uid="Mapsui.UI.Blazor.MapControl.MoveModifier*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_MoveModifier" data-uid="Mapsui.UI.Blazor.MapControl.MoveModifier">MoveModifier</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MoveModifier { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_Performance.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.Performance%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L228">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_Performance_" data-uid="Mapsui.UI.Blazor.MapControl.Performance*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_Performance" data-uid="Mapsui.UI.Blazor.MapControl.Performance">Performance</h4>
+  <div class="markdown level1 summary"><p>Object to save performance information about the drawing of the map</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Performance? Performance { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Performance.html">Performance</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_UI_Blazor_MapControl_Performance_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If this is null, no performance information is saved.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_PixelDensity.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.PixelDensity%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L241">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_PixelDensity_" data-uid="Mapsui.UI.Blazor.MapControl.PixelDensity*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_PixelDensity" data-uid="Mapsui.UI.Blazor.MapControl.PixelDensity">PixelDensity</h4>
+  <div class="markdown level1 summary"><p>The number of pixel per device independent unit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PixelDensity { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_Renderer.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.Renderer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L246">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_Renderer_" data-uid="Mapsui.UI.Blazor.MapControl.Renderer*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_Renderer" data-uid="Mapsui.UI.Blazor.MapControl.Renderer">Renderer</h4>
+  <div class="markdown level1 summary"><p>Renderer that is used from this MapControl</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRenderer Renderer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_UpdateInterval.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.UpdateInterval%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L204">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_UpdateInterval_" data-uid="Mapsui.UI.Blazor.MapControl.UpdateInterval*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_UpdateInterval" data-uid="Mapsui.UI.Blazor.MapControl.UpdateInterval">UpdateInterval</h4>
+  <div class="markdown level1 summary"><p>Interval between two redraws of the MapControl in ms</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int UpdateInterval { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_UseFling.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.UseFling%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L76">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_UseFling_" data-uid="Mapsui.UI.Blazor.MapControl.UseFling*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_UseFling" data-uid="Mapsui.UI.Blazor.MapControl.UseFling">UseFling</h4>
+  <div class="markdown level1 summary"><p>Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a
+short time after the user has lifted the finger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseFling { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_UseGPU.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.UseGPU%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L27">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_UseGPU_" data-uid="Mapsui.UI.Blazor.MapControl.UseGPU*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_UseGPU" data-uid="Mapsui.UI.Blazor.MapControl.UseGPU">UseGPU</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool UseGPU { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_ZoomButton.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.ZoomButton%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L31">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_ZoomButton_" data-uid="Mapsui.UI.Blazor.MapControl.ZoomButton*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_ZoomButton" data-uid="Mapsui.UI.Blazor.MapControl.ZoomButton">ZoomButton</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int ZoomButton { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_ZoomModifier.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.ZoomModifier%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L32">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_ZoomModifier_" data-uid="Mapsui.UI.Blazor.MapControl.ZoomModifier*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_ZoomModifier" data-uid="Mapsui.UI.Blazor.MapControl.ZoomModifier">ZoomModifier</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int ZoomModifier { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L196">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_Dispose_" data-uid="Mapsui.UI.Blazor.MapControl.Dispose*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_Dispose" data-uid="Mapsui.UI.Blazor.MapControl.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.Dispose(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L202">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_Dispose_" data-uid="Mapsui.UI.Blazor.MapControl.Dispose*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_Dispose_System_Boolean_" data-uid="Mapsui.UI.Blazor.MapControl.Dispose(System.Boolean)">Dispose(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_ForceUpdate.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.ForceUpdate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L195">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_ForceUpdate_" data-uid="Mapsui.UI.Blazor.MapControl.ForceUpdate*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_ForceUpdate" data-uid="Mapsui.UI.Blazor.MapControl.ForceUpdate">ForceUpdate()</h4>
+  <div class="markdown level1 summary"><p>Force a update of control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ForceUpdate()</code></pre>
+  </div>
+  <h5 id="Mapsui_UI_Blazor_MapControl_ForceUpdate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control draws itself once</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L496">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_GetMapInfo_" data-uid="Mapsui.UI.Blazor.MapControl.GetMapInfo*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_" data-uid="Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)">GetMapInfo(ScreenPosition, int)</h4>
+  <div class="markdown level1 summary"><p>Check, if a feature at a given screen position is hit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td><p>Screen position to check for widgets and features</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">margin</span></td>
+        <td><p>An optional extra margin around the feature to enlarge the hit area.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfo.html">MapInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L502">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_GetSnapshot_" data-uid="Mapsui.UI.Blazor.MapControl.GetSnapshot*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.Blazor.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Create a snapshot form map as PNG image</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] GetSnapshot(IEnumerable&lt;ILayer&gt;? layers = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td><p>Layers that should be included in snapshot</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><p>Byte array with snapshot in png format. If there are any problems than returns null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnInitialized.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnInitialized%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L52">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnInitialized_" data-uid="Mapsui.UI.Blazor.MapControl.OnInitialized*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnInitialized" data-uid="Mapsui.UI.Blazor.MapControl.OnInitialized">OnInitialized()</h4>
+  <div class="markdown level1 summary"><p>Method invoked when the component is ready to start, having received its
+initial parameters from its parent in the render tree.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnInitialized()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitialized">ComponentBase.OnInitialized()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L489">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnMapInfo_" data-uid="Mapsui.UI.Blazor.MapControl.OnMapInfo*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)">OnMapInfo(MapInfoEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnMapInfo(MapInfoEventArgs mapInfoEventArgs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a></td>
+        <td><span class="parametername">mapInfoEventArgs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnMouseDown_Microsoft_AspNetCore_Components_Web_MouseEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnMouseDown(Microsoft.AspNetCore.Components.Web.MouseEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L150">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnMouseDown_" data-uid="Mapsui.UI.Blazor.MapControl.OnMouseDown*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnMouseDown_Microsoft_AspNetCore_Components_Web_MouseEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnMouseDown(Microsoft.AspNetCore.Components.Web.MouseEventArgs)">OnMouseDown(MouseEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnMouseDown(MouseEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.mouseeventargs">MouseEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnMouseMove_Microsoft_AspNetCore_Components_Web_MouseEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnMouseMove(Microsoft.AspNetCore.Components.Web.MouseEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L165">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnMouseMove_" data-uid="Mapsui.UI.Blazor.MapControl.OnMouseMove*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnMouseMove_Microsoft_AspNetCore_Components_Web_MouseEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnMouseMove(Microsoft.AspNetCore.Components.Web.MouseEventArgs)">OnMouseMove(MouseEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnMouseMove(MouseEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.mouseeventargs">MouseEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnMouseUp_Microsoft_AspNetCore_Components_Web_MouseEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnMouseUp(Microsoft.AspNetCore.Components.Web.MouseEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L182">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnMouseUp_" data-uid="Mapsui.UI.Blazor.MapControl.OnMouseUp*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnMouseUp_Microsoft_AspNetCore_Components_Web_MouseEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnMouseUp(Microsoft.AspNetCore.Components.Web.MouseEventArgs)">OnMouseUp(MouseEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnMouseUp(MouseEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.mouseeventargs">MouseEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnMouseWheel_Microsoft_AspNetCore_Components_Web_WheelEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnMouseWheel(Microsoft.AspNetCore.Components.Web.WheelEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L104">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnMouseWheel_" data-uid="Mapsui.UI.Blazor.MapControl.OnMouseWheel*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnMouseWheel_Microsoft_AspNetCore_Components_Web_WheelEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnMouseWheel(Microsoft.AspNetCore.Components.Web.WheelEventArgs)">OnMouseWheel(WheelEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnMouseWheel(WheelEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.wheeleventargs">WheelEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnPaintSurface_SkiaSharp_SKCanvas_SkiaSharp_SKImageInfo_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnPaintSurface(SkiaSharp.SKCanvas%2CSkiaSharp.SKImageInfo)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L76">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnPaintSurface_" data-uid="Mapsui.UI.Blazor.MapControl.OnPaintSurface*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnPaintSurface_SkiaSharp_SKCanvas_SkiaSharp_SKImageInfo_" data-uid="Mapsui.UI.Blazor.MapControl.OnPaintSurface(SkiaSharp.SKCanvas,SkiaSharp.SKImageInfo)">OnPaintSurface(SKCanvas, SKImageInfo)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnPaintSurface(SKCanvas canvas, SKImageInfo info)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/skiasharp.skcanvas">SKCanvas</a></td>
+        <td><span class="parametername">canvas</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/skiasharp.skimageinfo">SKImageInfo</a></td>
+        <td><span class="parametername">info</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnPaintSurfaceCPU_SkiaSharp_Views_Blazor_SKPaintSurfaceEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU(SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L58">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnPaintSurfaceCPU_" data-uid="Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnPaintSurfaceCPU_SkiaSharp_Views_Blazor_SKPaintSurfaceEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU(SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs)">OnPaintSurfaceCPU(SKPaintSurfaceEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor.skpaintsurfaceeventargs">SKPaintSurfaceEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnPaintSurfaceGPU_SkiaSharp_Views_Blazor_SKPaintGLSurfaceEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU(SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L67">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnPaintSurfaceGPU_" data-uid="Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnPaintSurfaceGPU_SkiaSharp_Views_Blazor_SKPaintGLSurfaceEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU(SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs)">OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor.skpaintglsurfaceeventargs">SKPaintGLSurfaceEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnPropertyChanged(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L269">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnPropertyChanged_" data-uid="Mapsui.UI.Blazor.MapControl.OnPropertyChanged*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnPropertyChanged_System_String_" data-uid="Mapsui.UI.Blazor.MapControl.OnPropertyChanged(System.String)">OnPropertyChanged(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnPropertyChanged(string propertyName = &quot;&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnTouchEnd_Microsoft_AspNetCore_Components_Web_TouchEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnTouchEnd(Microsoft.AspNetCore.Components.Web.TouchEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L254">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnTouchEnd_" data-uid="Mapsui.UI.Blazor.MapControl.OnTouchEnd*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnTouchEnd_Microsoft_AspNetCore_Components_Web_TouchEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnTouchEnd(Microsoft.AspNetCore.Components.Web.TouchEventArgs)">OnTouchEnd(TouchEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTouchEnd(TouchEventArgs _)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.toucheventargs">TouchEventArgs</a></td>
+        <td><span class="parametername">_</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnTouchMove_Microsoft_AspNetCore_Components_Web_TouchEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnTouchMove(Microsoft.AspNetCore.Components.Web.TouchEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L238">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnTouchMove_" data-uid="Mapsui.UI.Blazor.MapControl.OnTouchMove*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnTouchMove_Microsoft_AspNetCore_Components_Web_TouchEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnTouchMove(Microsoft.AspNetCore.Components.Web.TouchEventArgs)">OnTouchMove(TouchEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTouchMove(TouchEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.toucheventargs">TouchEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OnTouchStart_Microsoft_AspNetCore_Components_Web_TouchEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OnTouchStart(Microsoft.AspNetCore.Components.Web.TouchEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L224">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OnTouchStart_" data-uid="Mapsui.UI.Blazor.MapControl.OnTouchStart*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OnTouchStart_Microsoft_AspNetCore_Components_Web_TouchEventArgs_" data-uid="Mapsui.UI.Blazor.MapControl.OnTouchStart(Microsoft.AspNetCore.Components.Web.TouchEventArgs)">OnTouchStart(TouchEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTouchStart(TouchEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.toucheventargs">TouchEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_OpenInBrowser_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.OpenInBrowser(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Blazor/MapControl.cs/#L215">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_OpenInBrowser_" data-uid="Mapsui.UI.Blazor.MapControl.OpenInBrowser*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_OpenInBrowser_System_String_" data-uid="Mapsui.UI.Blazor.MapControl.OpenInBrowser(System.String)">OpenInBrowser(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OpenInBrowser(string url)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">url</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_Refresh_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.Refresh(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L313">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_Refresh_" data-uid="Mapsui.UI.Blazor.MapControl.Refresh*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_Refresh_Mapsui_ChangeType_" data-uid="Mapsui.UI.Blazor.MapControl.Refresh(Mapsui.ChangeType)">Refresh(ChangeType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Refresh(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_RefreshData_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.RefreshData(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L484">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_RefreshData_" data-uid="Mapsui.UI.Blazor.MapControl.RefreshData*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_RefreshData_Mapsui_ChangeType_" data-uid="Mapsui.UI.Blazor.MapControl.RefreshData(Mapsui.ChangeType)">RefreshData(ChangeType)</h4>
+  <div class="markdown level1 summary"><p>Refresh data of Map, but don't paint it</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshData(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_RefreshGraphics.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.RefreshGraphics%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L318">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_RefreshGraphics_" data-uid="Mapsui.UI.Blazor.MapControl.RefreshGraphics*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_RefreshGraphics" data-uid="Mapsui.UI.Blazor.MapControl.RefreshGraphics">RefreshGraphics()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshGraphics()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_StartUpdates_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.StartUpdates(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L171">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_StartUpdates_" data-uid="Mapsui.UI.Blazor.MapControl.StartUpdates*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_StartUpdates_System_Boolean_" data-uid="Mapsui.UI.Blazor.MapControl.StartUpdates(System.Boolean)">StartUpdates(bool)</h4>
+  <div class="markdown level1 summary"><p>Start updates for control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StartUpdates(bool refresh = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">refresh</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_UI_Blazor_MapControl_StartUpdates_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control is redrawn if needed</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_StopUpdates.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.StopUpdates%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L184">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_StopUpdates_" data-uid="Mapsui.UI.Blazor.MapControl.StopUpdates*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_StopUpdates" data-uid="Mapsui.UI.Blazor.MapControl.StopUpdates">StopUpdates()</h4>
+  <div class="markdown level1 summary"><p>Stop updates for control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StopUpdates()</code></pre>
+  </div>
+  <h5 id="Mapsui_UI_Blazor_MapControl_StopUpdates_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control stops to redraw itself,
+even if it is needed</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L476">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_ToDeviceIndependentUnits_" data-uid="Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_" data-uid="Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)">ToDeviceIndependentUnits(MPoint)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in pixels to device independent units (or DIP or DP).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">coordinateInPixels</span></td>
+        <td><p>Coordinate in pixels</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_ToPixels_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.ToPixels(Mapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L468">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_ToPixels_" data-uid="Mapsui.UI.Blazor.MapControl.ToPixels*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_ToPixels_Mapsui_MPoint_" data-uid="Mapsui.UI.Blazor.MapControl.ToPixels(Mapsui.MPoint)">ToPixels(MPoint)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in device independent units (or DIP or DP) to pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">coordinateInDeviceIndependentUnits</span></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><p>Coordinate in pixels</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.Unsubscribe%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L278">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Blazor_MapControl_Unsubscribe_" data-uid="Mapsui.UI.Blazor.MapControl.Unsubscribe*"></a>
+  <h4 id="Mapsui_UI_Blazor_MapControl_Unsubscribe" data-uid="Mapsui.UI.Blazor.MapControl.Unsubscribe">Unsubscribe()</h4>
+  <div class="markdown level1 summary"><p>Unsubscribe from map events</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Unsubscribe()</code></pre>
+  </div>
+  <h3 id="events">Events
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_Info.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.Info%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L252">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Blazor_MapControl_Info" data-uid="Mapsui.UI.Blazor.MapControl.Info">Info</h4>
+  <div class="markdown level1 summary"><p>Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+the layers that have IsMapInfoLayer set to true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapInfoEventArgs&gt;? Info</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl_PropertyChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl.PropertyChanged%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L260">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Blazor_MapControl_PropertyChanged" data-uid="Mapsui.UI.Blazor.MapControl.PropertyChanged">PropertyChanged</h4>
+  <div class="markdown level1 summary"><p>Called whenever a property is changed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler? PropertyChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler">PropertyChangedEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.icomponent">IComponent</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.ihandleevent">IHandleEvent</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.ihandleafterrender">IHandleAfterRender</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Blazor_MapControl.md&amp;value=---%0Auid%3A%20Mapsui.UI.Blazor.MapControl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L47" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

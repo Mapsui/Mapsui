@@ -1,0 +1,238 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  commentId: T:Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  id: OGCFilterCollection.JunctorEnum
+  parent: Mapsui.Providers.Wfs.Utilities
+  children:
+  - Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.And
+  - Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.Or
+  langs:
+  - csharp
+  - vb
+  name: OGCFilterCollection.JunctorEnum
+  nameWithType: OGCFilterCollection.JunctorEnum
+  fullName: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  type: Enum
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/OGCFilter_FE1_1_0.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: JunctorEnum
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/OGCFilter_FE1_1_0.cs
+    startLine: 29
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: This enumeration consists of expressions denoting FE logical operators.
+  example: []
+  syntax:
+    content: public enum OGCFilterCollection.JunctorEnum
+    content.vb: Public Enum OGCFilterCollection.JunctorEnum
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.And
+  commentId: F:Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.And
+  id: And
+  parent: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  langs:
+  - csharp
+  - vb
+  name: And
+  nameWithType: OGCFilterCollection.JunctorEnum.And
+  fullName: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.And
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/OGCFilter_FE1_1_0.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: And
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/OGCFilter_FE1_1_0.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  syntax:
+    content: And = 0
+    return:
+      type: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+- uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.Or
+  commentId: F:Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.Or
+  id: Or
+  parent: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  langs:
+  - csharp
+  - vb
+  name: Or
+  nameWithType: OGCFilterCollection.JunctorEnum.Or
+  fullName: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.Or
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/OGCFilter_FE1_1_0.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Or
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/OGCFilter_FE1_1_0.cs
+    startLine: 32
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  syntax:
+    content: Or = 1
+    return:
+      type: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+references:
+- uid: Mapsui.Providers.Wfs.Utilities
+  commentId: N:Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.html
+  name: Mapsui.Providers.Wfs.Utilities
+  nameWithType: Mapsui.Providers.Wfs.Utilities
+  fullName: Mapsui.Providers.Wfs.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities
+    name: Utilities
+    href: Mapsui.Providers.Wfs.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities
+    name: Utilities
+    href: Mapsui.Providers.Wfs.Utilities.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  commentId: T:Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.html
+  name: OGCFilterCollection.JunctorEnum
+  nameWithType: OGCFilterCollection.JunctorEnum
+  fullName: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection
+    name: OGCFilterCollection
+    href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+    name: JunctorEnum
+    href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection
+    name: OGCFilterCollection
+    href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+    name: JunctorEnum
+    href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.html

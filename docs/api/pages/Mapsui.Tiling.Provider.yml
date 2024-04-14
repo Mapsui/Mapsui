@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Tiling.Provider
+  commentId: N:Mapsui.Tiling.Provider
+  id: Mapsui.Tiling.Provider
+  children:
+  - Mapsui.Tiling.Provider.RasterizingTileProvider
+  - Mapsui.Tiling.Provider.TileProvider
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Tiling.Provider
+  nameWithType: Mapsui.Tiling.Provider
+  fullName: Mapsui.Tiling.Provider
+  type: Namespace
+  assemblies:
+  - Mapsui.Tiling
+references:
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider
+  commentId: T:Mapsui.Tiling.Provider.RasterizingTileProvider
+  href: Mapsui.Tiling.Provider.RasterizingTileProvider.html
+  name: RasterizingTileProvider
+  nameWithType: RasterizingTileProvider
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider
+- uid: Mapsui.Tiling.Provider.TileProvider
+  commentId: T:Mapsui.Tiling.Provider.TileProvider
+  href: Mapsui.Tiling.Provider.TileProvider.html
+  name: TileProvider
+  nameWithType: TileProvider
+  fullName: Mapsui.Tiling.Provider.TileProvider

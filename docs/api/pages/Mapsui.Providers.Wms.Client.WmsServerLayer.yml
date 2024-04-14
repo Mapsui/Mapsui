@@ -1,0 +1,893 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer
+  commentId: T:Mapsui.Providers.Wms.Client.WmsServerLayer
+  id: Client.WmsServerLayer
+  parent: Mapsui.Providers.Wms
+  children:
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.Abstract
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.BoundingBoxes
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.CRS
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.ChildLayers
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.Keywords
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.LatLonBoundingBox
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.Name
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.Queryable
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.Style
+  - Mapsui.Providers.Wms.Client.WmsServerLayer.Title
+  langs:
+  - csharp
+  - vb
+  name: Client.WmsServerLayer
+  nameWithType: Client.WmsServerLayer
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer
+  type: Struct
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WmsServerLayer
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 79
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Structure for holding information about a WMS Layer
+  example: []
+  syntax:
+    content: public struct Client.WmsServerLayer
+    content.vb: Public Structure Client.WmsServerLayer
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.Abstract
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.Abstract
+  id: Abstract
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: Abstract
+  nameWithType: Client.WmsServerLayer.Abstract
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.Abstract
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Abstract
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 84
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Abstract
+  example: []
+  syntax:
+    content: public string? Abstract
+    return:
+      type: System.String
+    content.vb: Public Abstract As String
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.ChildLayers
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.ChildLayers
+  id: ChildLayers
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: ChildLayers
+  nameWithType: Client.WmsServerLayer.ChildLayers
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.ChildLayers
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ChildLayers
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 89
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Collection of child layers
+  example: []
+  syntax:
+    content: public Client.WmsServerLayer[] ChildLayers
+    return:
+      type: Mapsui.Providers.Wms.Client.WmsServerLayer[]
+    content.vb: Public ChildLayers As Client.WmsServerLayer()
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.CRS
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.CRS
+  id: CRS
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: CRS
+  nameWithType: Client.WmsServerLayer.CRS
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.CRS
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CRS
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 94
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Coordinate Reference Systems supported by layer
+  example: []
+  syntax:
+    content: public string[] CRS
+    return:
+      type: System.String[]
+    content.vb: Public CRS As String()
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.BoundingBoxes
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.BoundingBoxes
+  id: BoundingBoxes
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: BoundingBoxes
+  nameWithType: Client.WmsServerLayer.BoundingBoxes
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.BoundingBoxes
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BoundingBoxes
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 99
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Coordinate Reference Systems supported by layer
+  example: []
+  syntax:
+    content: public IDictionary<string, MRect> BoundingBoxes
+    return:
+      type: System.Collections.Generic.IDictionary{System.String,Mapsui.MRect}
+    content.vb: Public BoundingBoxes As IDictionary(Of String, MRect)
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.Keywords
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.Keywords
+  id: Keywords
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: Keywords
+  nameWithType: Client.WmsServerLayer.Keywords
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.Keywords
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Keywords
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 104
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Keywords
+  example: []
+  syntax:
+    content: public string[] Keywords
+    return:
+      type: System.String[]
+    content.vb: Public Keywords As String()
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.LatLonBoundingBox
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.LatLonBoundingBox
+  id: LatLonBoundingBox
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: LatLonBoundingBox
+  nameWithType: Client.WmsServerLayer.LatLonBoundingBox
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.LatLonBoundingBox
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LatLonBoundingBox
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 109
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Extent of this layer in latitudinal/longitudinal coordinates
+  example: []
+  syntax:
+    content: public MRect LatLonBoundingBox
+    return:
+      type: Mapsui.MRect
+    content.vb: Public LatLonBoundingBox As MRect
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.Name
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.Name
+  id: Name
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: Client.WmsServerLayer.Name
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.Name
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Name
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 114
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Unique name of this layer used for requesting layer
+  example: []
+  syntax:
+    content: public string? Name
+    return:
+      type: System.String
+    content.vb: Public Name As String
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.Queryable
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.Queryable
+  id: Queryable
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: Queryable
+  nameWithType: Client.WmsServerLayer.Queryable
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.Queryable
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Queryable
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 119
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Specifies whether this layer is queryable using GetFeatureInfo requests
+  example: []
+  syntax:
+    content: public bool Queryable
+    return:
+      type: System.Boolean
+    content.vb: Public Queryable As Boolean
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.Style
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.Style
+  id: Style
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: Style
+  nameWithType: Client.WmsServerLayer.Style
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.Style
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Style
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 124
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: List of styles supported by layer
+  example: []
+  syntax:
+    content: public Client.WmsLayerStyle[] Style
+    return:
+      type: Mapsui.Providers.Wms.Client.WmsLayerStyle[]
+    content.vb: Public Style As Client.WmsLayerStyle()
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer.Title
+  commentId: F:Mapsui.Providers.Wms.Client.WmsServerLayer.Title
+  id: Title
+  parent: Mapsui.Providers.Wms.Client.WmsServerLayer
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: Client.WmsServerLayer.Title
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer.Title
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Providers/Wms/Client.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Title
+    path: ../../Mapsui/Providers/Wms/Client.cs
+    startLine: 129
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers.Wms
+  summary: Layer title
+  example: []
+  syntax:
+    content: public string? Title
+    return:
+      type: System.String
+    content.vb: Public Title As String
+references:
+- uid: Mapsui.Providers.Wms
+  commentId: N:Mapsui.Providers.Wms
+  href: Mapsui.html
+  name: Mapsui.Providers.Wms
+  nameWithType: Mapsui.Providers.Wms
+  fullName: Mapsui.Providers.Wms
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wms
+    name: Wms
+    href: Mapsui.Providers.Wms.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wms
+    name: Wms
+    href: Mapsui.Providers.Wms.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer[]
+  isExternal: true
+  href: Mapsui.Providers.Wms.Client.WmsServerLayer.html
+  name: WmsServerLayer[]
+  nameWithType: Client.WmsServerLayer[]
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer[]
+  nameWithType.vb: Client.WmsServerLayer()
+  fullName.vb: Mapsui.Providers.Wms.Client.WmsServerLayer()
+  name.vb: WmsServerLayer()
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Client.WmsServerLayer
+    name: WmsServerLayer
+    href: Mapsui.Providers.Wms.Client.WmsServerLayer.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Client.WmsServerLayer
+    name: WmsServerLayer
+    href: Mapsui.Providers.Wms.Client.WmsServerLayer.html
+  - name: (
+  - name: )
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IDictionary{System.String,Mapsui.MRect}
+  commentId: T:System.Collections.Generic.IDictionary{System.String,Mapsui.MRect}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<string, MRect>
+  nameWithType: IDictionary<string, MRect>
+  fullName: System.Collections.Generic.IDictionary<string, Mapsui.MRect>
+  nameWithType.vb: IDictionary(Of String, MRect)
+  fullName.vb: System.Collections.Generic.IDictionary(Of String, Mapsui.MRect)
+  name.vb: IDictionary(Of String, MRect)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Providers.Wms.Client.WmsLayerStyle[]
+  isExternal: true
+  href: Mapsui.Providers.Wms.Client.WmsLayerStyle.html
+  name: WmsLayerStyle[]
+  nameWithType: Client.WmsLayerStyle[]
+  fullName: Mapsui.Providers.Wms.Client.WmsLayerStyle[]
+  nameWithType.vb: Client.WmsLayerStyle()
+  fullName.vb: Mapsui.Providers.Wms.Client.WmsLayerStyle()
+  name.vb: WmsLayerStyle()
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Client.WmsLayerStyle
+    name: WmsLayerStyle
+    href: Mapsui.Providers.Wms.Client.WmsLayerStyle.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Client.WmsLayerStyle
+    name: WmsLayerStyle
+    href: Mapsui.Providers.Wms.Client.WmsLayerStyle.html
+  - name: (
+  - name: )

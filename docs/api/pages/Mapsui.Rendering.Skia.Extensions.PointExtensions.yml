@@ -1,0 +1,445 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.Extensions.PointExtensions
+  commentId: T:Mapsui.Rendering.Skia.Extensions.PointExtensions
+  id: PointExtensions
+  parent: Mapsui.Rendering.Skia.Extensions
+  children:
+  - Mapsui.Rendering.Skia.Extensions.PointExtensions.ToSkiaPath(NetTopologySuite.Geometries.Point,Mapsui.Viewport,SkiaSharp.SKRect,System.Single)
+  langs:
+  - csharp
+  - vb
+  name: PointExtensions
+  nameWithType: PointExtensions
+  fullName: Mapsui.Rendering.Skia.Extensions.PointExtensions
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Extensions/PointExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PointExtensions
+    path: ../../Mapsui.Rendering.Skia/Extensions/PointExtensions.cs
+    startLine: 6
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Extensions
+  syntax:
+    content: public static class PointExtensions
+    content.vb: Public Module PointExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Rendering.Skia.Extensions.PointExtensions.ToSkiaPath(NetTopologySuite.Geometries.Point,Mapsui.Viewport,SkiaSharp.SKRect,System.Single)
+  commentId: M:Mapsui.Rendering.Skia.Extensions.PointExtensions.ToSkiaPath(NetTopologySuite.Geometries.Point,Mapsui.Viewport,SkiaSharp.SKRect,System.Single)
+  id: ToSkiaPath(NetTopologySuite.Geometries.Point,Mapsui.Viewport,SkiaSharp.SKRect,System.Single)
+  isExtensionMethod: true
+  parent: Mapsui.Rendering.Skia.Extensions.PointExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToSkiaPath(Point, Viewport, SKRect, float)
+  nameWithType: PointExtensions.ToSkiaPath(Point, Viewport, SKRect, float)
+  fullName: Mapsui.Rendering.Skia.Extensions.PointExtensions.ToSkiaPath(NetTopologySuite.Geometries.Point, Mapsui.Viewport, SkiaSharp.SKRect, float)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Extensions/PointExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToSkiaPath
+    path: ../../Mapsui.Rendering.Skia/Extensions/PointExtensions.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Extensions
+  summary: Converts a LineString in world coordinates to a Skia path
+  example: []
+  syntax:
+    content: public static SKPath ToSkiaPath(this Point point, Viewport viewport, SKRect clipRect, float strokeWidth)
+    parameters:
+    - id: point
+      type: NetTopologySuite.Geometries.Point
+      description: List of points in Mapsui world coordinates.
+    - id: viewport
+      type: Mapsui.Viewport
+      description: The Viewport that is used for the conversions.
+    - id: clipRect
+      type: SkiaSharp.SKRect
+      description: Rectangle to clip to. All lines outside aren't drawn.
+    - id: strokeWidth
+      type: System.Single
+      description: stroke Width
+    return:
+      type: SkiaSharp.SKPath
+      description: ''
+    content.vb: Public Shared Function ToSkiaPath(point As Point, viewport As Viewport, clipRect As SKRect, strokeWidth As Single) As SKPath
+  overload: Mapsui.Rendering.Skia.Extensions.PointExtensions.ToSkiaPath*
+  nameWithType.vb: PointExtensions.ToSkiaPath(Point, Viewport, SKRect, Single)
+  fullName.vb: Mapsui.Rendering.Skia.Extensions.PointExtensions.ToSkiaPath(NetTopologySuite.Geometries.Point, Mapsui.Viewport, SkiaSharp.SKRect, Single)
+  name.vb: ToSkiaPath(Point, Viewport, SKRect, Single)
+references:
+- uid: Mapsui.Rendering.Skia.Extensions
+  commentId: N:Mapsui.Rendering.Skia.Extensions
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia.Extensions
+  nameWithType: Mapsui.Rendering.Skia.Extensions
+  fullName: Mapsui.Rendering.Skia.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Extensions
+    name: Extensions
+    href: Mapsui.Rendering.Skia.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Extensions
+    name: Extensions
+    href: Mapsui.Rendering.Skia.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Rendering.Skia.Extensions.PointExtensions.ToSkiaPath*
+  commentId: Overload:Mapsui.Rendering.Skia.Extensions.PointExtensions.ToSkiaPath
+  href: Mapsui.Rendering.Skia.Extensions.PointExtensions.html#Mapsui_Rendering_Skia_Extensions_PointExtensions_ToSkiaPath_NetTopologySuite_Geometries_Point_Mapsui_Viewport_SkiaSharp_SKRect_System_Single_
+  name: ToSkiaPath
+  nameWithType: PointExtensions.ToSkiaPath
+  fullName: Mapsui.Rendering.Skia.Extensions.PointExtensions.ToSkiaPath
+- uid: NetTopologySuite.Geometries.Point
+  commentId: T:NetTopologySuite.Geometries.Point
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: Point
+  nameWithType: Point
+  fullName: NetTopologySuite.Geometries.Point
+- uid: Mapsui.Viewport
+  commentId: T:Mapsui.Viewport
+  parent: Mapsui
+  href: Mapsui.Viewport.html
+  name: Viewport
+  nameWithType: Viewport
+  fullName: Mapsui.Viewport
+- uid: SkiaSharp.SKRect
+  commentId: T:SkiaSharp.SKRect
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skrect
+  name: SKRect
+  nameWithType: SKRect
+  fullName: SkiaSharp.SKRect
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: SkiaSharp.SKPath
+  commentId: T:SkiaSharp.SKPath
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skpath
+  name: SKPath
+  nameWithType: SKPath
+  fullName: SkiaSharp.SKPath
+- uid: NetTopologySuite.Geometries
+  commentId: N:NetTopologySuite.Geometries
+  isExternal: true
+  name: NetTopologySuite.Geometries
+  nameWithType: NetTopologySuite.Geometries
+  fullName: NetTopologySuite.Geometries
+  spec.csharp:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+  spec.vb:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: SkiaSharp
+  commentId: N:SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp
+  name: SkiaSharp
+  nameWithType: SkiaSharp
+  fullName: SkiaSharp

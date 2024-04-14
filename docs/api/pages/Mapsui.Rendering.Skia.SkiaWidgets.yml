@@ -1,0 +1,125 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.SkiaWidgets
+  commentId: N:Mapsui.Rendering.Skia.SkiaWidgets
+  id: Mapsui.Rendering.Skia.SkiaWidgets
+  children:
+  - Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer
+  - Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+  - Mapsui.Rendering.Skia.SkiaWidgets.IconButtonWidgetRenderer
+  - Mapsui.Rendering.Skia.SkiaWidgets.InputOnlyWidgetRenderer
+  - Mapsui.Rendering.Skia.SkiaWidgets.LoggingWidgetRenderer
+  - Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer
+  - Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
+  - Mapsui.Rendering.Skia.SkiaWidgets.TextBoxWidgetRenderer
+  - Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer
+  - Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Rendering.Skia.SkiaWidgets
+  nameWithType: Mapsui.Rendering.Skia.SkiaWidgets
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets
+  type: Namespace
+  assemblies:
+  - Mapsui.Rendering.Skia
+references:
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer
+  href: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.html
+  name: BoxWidgetRenderer
+  nameWithType: BoxWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.IconButtonWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.IconButtonWidgetRenderer
+  href: Mapsui.Rendering.Skia.SkiaWidgets.IconButtonWidgetRenderer.html
+  name: IconButtonWidgetRenderer
+  nameWithType: IconButtonWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.IconButtonWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.InputOnlyWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.InputOnlyWidgetRenderer
+  href: Mapsui.Rendering.Skia.SkiaWidgets.InputOnlyWidgetRenderer.html
+  name: InputOnlyWidgetRenderer
+  nameWithType: InputOnlyWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.InputOnlyWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+  parent: Mapsui.Rendering.Skia.SkiaWidgets
+  href: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html
+  name: ISkiaWidgetRenderer
+  nameWithType: ISkiaWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.LoggingWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.LoggingWidgetRenderer
+  href: Mapsui.Rendering.Skia.SkiaWidgets.LoggingWidgetRenderer.html
+  name: LoggingWidgetRenderer
+  nameWithType: LoggingWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.LoggingWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer
+  href: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.html
+  name: PerformanceWidgetRenderer
+  nameWithType: PerformanceWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
+  href: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html
+  name: ScaleBarWidgetRenderer
+  nameWithType: ScaleBarWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.TextBoxWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.TextBoxWidgetRenderer
+  href: Mapsui.Rendering.Skia.SkiaWidgets.TextBoxWidgetRenderer.html
+  name: TextBoxWidgetRenderer
+  nameWithType: TextBoxWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.TextBoxWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer
+  href: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.html
+  name: WidgetRenderer
+  nameWithType: WidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer
+  href: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.html
+  name: ZoomInOutWidgetRenderer
+  nameWithType: ZoomInOutWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets
+  commentId: N:Mapsui.Rendering.Skia.SkiaWidgets
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia.SkiaWidgets
+  nameWithType: Mapsui.Rendering.Skia.SkiaWidgets
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets
+    name: SkiaWidgets
+    href: Mapsui.Rendering.Skia.SkiaWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets
+    name: SkiaWidgets
+    href: Mapsui.Rendering.Skia.SkiaWidgets.html

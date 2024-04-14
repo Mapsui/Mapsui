@@ -1,0 +1,983 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Animations.Easing
+  commentId: T:Mapsui.Animations.Easing
+  id: Easing
+  parent: Mapsui.Animations
+  children:
+  - Mapsui.Animations.Easing.#ctor(System.Func{System.Double,System.Double})
+  - Mapsui.Animations.Easing.BounceIn
+  - Mapsui.Animations.Easing.BounceOut
+  - Mapsui.Animations.Easing.CubicIn
+  - Mapsui.Animations.Easing.CubicInOut
+  - Mapsui.Animations.Easing.CubicOut
+  - Mapsui.Animations.Easing.Ease(System.Double)
+  - Mapsui.Animations.Easing.Linear
+  - Mapsui.Animations.Easing.QuarticIn
+  - Mapsui.Animations.Easing.QuarticOut
+  - Mapsui.Animations.Easing.SinIn
+  - Mapsui.Animations.Easing.SinInOut
+  - Mapsui.Animations.Easing.SinOut
+  - Mapsui.Animations.Easing.SpringIn
+  - Mapsui.Animations.Easing.SpringOut
+  - Mapsui.Animations.Easing.op_Implicit(System.Func{System.Double,System.Double})~Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: Easing
+  nameWithType: Easing
+  fullName: Mapsui.Animations.Easing
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Easing
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 30
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public class Easing
+    content.vb: Public Class Easing
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Animations.Easing.Linear
+  commentId: F:Mapsui.Animations.Easing.Linear
+  id: Linear
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: Linear
+  nameWithType: Easing.Linear
+  fullName: Mapsui.Animations.Easing.Linear
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Linear
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 32
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing Linear
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly Linear As Easing
+- uid: Mapsui.Animations.Easing.SinOut
+  commentId: F:Mapsui.Animations.Easing.SinOut
+  id: SinOut
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: SinOut
+  nameWithType: Easing.SinOut
+  fullName: Mapsui.Animations.Easing.SinOut
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SinOut
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 34
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing SinOut
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly SinOut As Easing
+- uid: Mapsui.Animations.Easing.SinIn
+  commentId: F:Mapsui.Animations.Easing.SinIn
+  id: SinIn
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: SinIn
+  nameWithType: Easing.SinIn
+  fullName: Mapsui.Animations.Easing.SinIn
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SinIn
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 35
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing SinIn
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly SinIn As Easing
+- uid: Mapsui.Animations.Easing.SinInOut
+  commentId: F:Mapsui.Animations.Easing.SinInOut
+  id: SinInOut
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: SinInOut
+  nameWithType: Easing.SinInOut
+  fullName: Mapsui.Animations.Easing.SinInOut
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SinInOut
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 36
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing SinInOut
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly SinInOut As Easing
+- uid: Mapsui.Animations.Easing.CubicIn
+  commentId: F:Mapsui.Animations.Easing.CubicIn
+  id: CubicIn
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: CubicIn
+  nameWithType: Easing.CubicIn
+  fullName: Mapsui.Animations.Easing.CubicIn
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CubicIn
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 38
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing CubicIn
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly CubicIn As Easing
+- uid: Mapsui.Animations.Easing.CubicOut
+  commentId: F:Mapsui.Animations.Easing.CubicOut
+  id: CubicOut
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: CubicOut
+  nameWithType: Easing.CubicOut
+  fullName: Mapsui.Animations.Easing.CubicOut
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CubicOut
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 39
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing CubicOut
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly CubicOut As Easing
+- uid: Mapsui.Animations.Easing.CubicInOut
+  commentId: F:Mapsui.Animations.Easing.CubicInOut
+  id: CubicInOut
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: CubicInOut
+  nameWithType: Easing.CubicInOut
+  fullName: Mapsui.Animations.Easing.CubicInOut
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CubicInOut
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 40
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing CubicInOut
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly CubicInOut As Easing
+- uid: Mapsui.Animations.Easing.QuarticIn
+  commentId: F:Mapsui.Animations.Easing.QuarticIn
+  id: QuarticIn
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: QuarticIn
+  nameWithType: Easing.QuarticIn
+  fullName: Mapsui.Animations.Easing.QuarticIn
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: QuarticIn
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 42
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing QuarticIn
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly QuarticIn As Easing
+- uid: Mapsui.Animations.Easing.QuarticOut
+  commentId: F:Mapsui.Animations.Easing.QuarticOut
+  id: QuarticOut
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: QuarticOut
+  nameWithType: Easing.QuarticOut
+  fullName: Mapsui.Animations.Easing.QuarticOut
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: QuarticOut
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 43
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing QuarticOut
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly QuarticOut As Easing
+- uid: Mapsui.Animations.Easing.BounceOut
+  commentId: F:Mapsui.Animations.Easing.BounceOut
+  id: BounceOut
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: BounceOut
+  nameWithType: Easing.BounceOut
+  fullName: Mapsui.Animations.Easing.BounceOut
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BounceOut
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 45
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing BounceOut
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly BounceOut As Easing
+- uid: Mapsui.Animations.Easing.BounceIn
+  commentId: F:Mapsui.Animations.Easing.BounceIn
+  id: BounceIn
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: BounceIn
+  nameWithType: Easing.BounceIn
+  fullName: Mapsui.Animations.Easing.BounceIn
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BounceIn
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 46
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing BounceIn
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly BounceIn As Easing
+- uid: Mapsui.Animations.Easing.SpringIn
+  commentId: F:Mapsui.Animations.Easing.SpringIn
+  id: SpringIn
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: SpringIn
+  nameWithType: Easing.SpringIn
+  fullName: Mapsui.Animations.Easing.SpringIn
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SpringIn
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 48
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing SpringIn
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly SpringIn As Easing
+- uid: Mapsui.Animations.Easing.SpringOut
+  commentId: F:Mapsui.Animations.Easing.SpringOut
+  id: SpringOut
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: SpringOut
+  nameWithType: Easing.SpringOut
+  fullName: Mapsui.Animations.Easing.SpringOut
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SpringOut
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 49
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static readonly Easing SpringOut
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared ReadOnly SpringOut As Easing
+- uid: Mapsui.Animations.Easing.#ctor(System.Func{System.Double,System.Double})
+  commentId: M:Mapsui.Animations.Easing.#ctor(System.Func{System.Double,System.Double})
+  id: '#ctor(System.Func{System.Double,System.Double})'
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: Easing(Func<double, double>)
+  nameWithType: Easing.Easing(Func<double, double>)
+  fullName: Mapsui.Animations.Easing.Easing(System.Func<double, double>)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 80
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public Easing(Func<double, double> easingFunc)
+    parameters:
+    - id: easingFunc
+      type: System.Func{System.Double,System.Double}
+    content.vb: Public Sub New(easingFunc As Func(Of Double, Double))
+  overload: Mapsui.Animations.Easing.#ctor*
+  nameWithType.vb: Easing.New(Func(Of Double, Double))
+  fullName.vb: Mapsui.Animations.Easing.New(System.Func(Of Double, Double))
+  name.vb: New(Func(Of Double, Double))
+- uid: Mapsui.Animations.Easing.Ease(System.Double)
+  commentId: M:Mapsui.Animations.Easing.Ease(System.Double)
+  id: Ease(System.Double)
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: Ease(double)
+  nameWithType: Easing.Ease(double)
+  fullName: Mapsui.Animations.Easing.Ease(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Ease
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 85
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public double Ease(double v)
+    parameters:
+    - id: v
+      type: System.Double
+    return:
+      type: System.Double
+    content.vb: Public Function Ease(v As Double) As Double
+  overload: Mapsui.Animations.Easing.Ease*
+  nameWithType.vb: Easing.Ease(Double)
+  fullName.vb: Mapsui.Animations.Easing.Ease(Double)
+  name.vb: Ease(Double)
+- uid: Mapsui.Animations.Easing.op_Implicit(System.Func{System.Double,System.Double})~Mapsui.Animations.Easing
+  commentId: M:Mapsui.Animations.Easing.op_Implicit(System.Func{System.Double,System.Double})~Mapsui.Animations.Easing
+  id: op_Implicit(System.Func{System.Double,System.Double})~Mapsui.Animations.Easing
+  parent: Mapsui.Animations.Easing
+  langs:
+  - csharp
+  - vb
+  name: implicit operator Easing(Func<double, double>)
+  nameWithType: Easing.implicit operator Easing(Func<double, double>)
+  fullName: Mapsui.Animations.Easing.implicit operator Mapsui.Animations.Easing(System.Func<double, double>)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/Animations/Easing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Implicit
+    path: ../../Mapsui/Animations/Easing.cs
+    startLine: 90
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public static implicit operator Easing(Func<double, double> func)
+    parameters:
+    - id: func
+      type: System.Func{System.Double,System.Double}
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public Shared Widening Operator CType(func As Func(Of Double, Double)) As Easing
+  overload: Mapsui.Animations.Easing.op_Implicit*
+  nameWithType.vb: Easing.CType(Func(Of Double, Double))
+  fullName.vb: Mapsui.Animations.Easing.CType(System.Func(Of Double, Double))
+  name.vb: CType(Func(Of Double, Double))
+references:
+- uid: Mapsui.Animations
+  commentId: N:Mapsui.Animations
+  href: Mapsui.html
+  name: Mapsui.Animations
+  nameWithType: Mapsui.Animations
+  fullName: Mapsui.Animations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Animations.Easing
+  commentId: T:Mapsui.Animations.Easing
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.Easing.html
+  name: Easing
+  nameWithType: Easing
+  fullName: Mapsui.Animations.Easing
+- uid: Mapsui.Animations.Easing.#ctor*
+  commentId: Overload:Mapsui.Animations.Easing.#ctor
+  href: Mapsui.Animations.Easing.html#Mapsui_Animations_Easing__ctor_System_Func_System_Double_System_Double__
+  name: Easing
+  nameWithType: Easing.Easing
+  fullName: Mapsui.Animations.Easing.Easing
+  nameWithType.vb: Easing.New
+  fullName.vb: Mapsui.Animations.Easing.New
+  name.vb: New
+- uid: System.Func{System.Double,System.Double}
+  commentId: T:System.Func{System.Double,System.Double}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<double, double>
+  nameWithType: Func<double, double>
+  fullName: System.Func<double, double>
+  nameWithType.vb: Func(Of Double, Double)
+  fullName.vb: System.Func(Of Double, Double)
+  name.vb: Func(Of Double, Double)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Mapsui.Animations.Easing.Ease*
+  commentId: Overload:Mapsui.Animations.Easing.Ease
+  href: Mapsui.Animations.Easing.html#Mapsui_Animations_Easing_Ease_System_Double_
+  name: Ease
+  nameWithType: Easing.Ease
+  fullName: Mapsui.Animations.Easing.Ease
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Animations.Easing.op_Implicit*
+  commentId: Overload:Mapsui.Animations.Easing.op_Implicit
+  name: implicit operator
+  nameWithType: Easing.implicit operator
+  fullName: Mapsui.Animations.Easing.implicit operator
+  nameWithType.vb: Easing.CType
+  fullName.vb: Mapsui.Animations.Easing.CType
+  name.vb: CType
+  spec.csharp:
+  - name: implicit
+  - name: " "
+  - name: operator

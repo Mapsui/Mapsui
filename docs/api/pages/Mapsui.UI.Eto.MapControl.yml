@@ -1,0 +1,5680 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Eto.MapControl
+  commentId: T:Mapsui.UI.Eto.MapControl
+  id: MapControl
+  parent: Mapsui.UI.Eto
+  children:
+  - Mapsui.UI.Eto.MapControl.#ctor
+  - Mapsui.UI.Eto.MapControl.Dispose(System.Boolean)
+  - Mapsui.UI.Eto.MapControl.ForceUpdate
+  - Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  - Mapsui.UI.Eto.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  - Mapsui.UI.Eto.MapControl.Info
+  - Mapsui.UI.Eto.MapControl.Map
+  - Mapsui.UI.Eto.MapControl.MaxTapGestureMovement
+  - Mapsui.UI.Eto.MapControl.MoveButton
+  - Mapsui.UI.Eto.MapControl.MoveCursor
+  - Mapsui.UI.Eto.MapControl.MoveModifier
+  - Mapsui.UI.Eto.MapControl.OnKeyDown(Eto.Forms.KeyEventArgs)
+  - Mapsui.UI.Eto.MapControl.OnKeyUp(Eto.Forms.KeyEventArgs)
+  - Mapsui.UI.Eto.MapControl.OnLoadComplete(System.EventArgs)
+  - Mapsui.UI.Eto.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)
+  - Mapsui.UI.Eto.MapControl.OnMouseDown(Eto.Forms.MouseEventArgs)
+  - Mapsui.UI.Eto.MapControl.OnMouseMove(Eto.Forms.MouseEventArgs)
+  - Mapsui.UI.Eto.MapControl.OnMouseUp(Eto.Forms.MouseEventArgs)
+  - Mapsui.UI.Eto.MapControl.OnMouseWheel(Eto.Forms.MouseEventArgs)
+  - Mapsui.UI.Eto.MapControl.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+  - Mapsui.UI.Eto.MapControl.OnPropertyChanged(System.String)
+  - Mapsui.UI.Eto.MapControl.OnSizeChanged(System.EventArgs)
+  - Mapsui.UI.Eto.MapControl.OpenInBrowser(System.String)
+  - Mapsui.UI.Eto.MapControl.Performance
+  - Mapsui.UI.Eto.MapControl.PixelDensity
+  - Mapsui.UI.Eto.MapControl.PropertyChanged
+  - Mapsui.UI.Eto.MapControl.Refresh(Mapsui.ChangeType)
+  - Mapsui.UI.Eto.MapControl.RefreshData(Mapsui.ChangeType)
+  - Mapsui.UI.Eto.MapControl.RefreshGraphics
+  - Mapsui.UI.Eto.MapControl.Renderer
+  - Mapsui.UI.Eto.MapControl.StartUpdates(System.Boolean)
+  - Mapsui.UI.Eto.MapControl.StopUpdates
+  - Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  - Mapsui.UI.Eto.MapControl.ToPixels(Mapsui.MPoint)
+  - Mapsui.UI.Eto.MapControl.Unsubscribe
+  - Mapsui.UI.Eto.MapControl.UpdateInterval
+  - Mapsui.UI.Eto.MapControl.UseFling
+  - Mapsui.UI.Eto.MapControl.ZoomButton
+  - Mapsui.UI.Eto.MapControl.ZoomModifier
+  langs:
+  - csharp
+  - vb
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.Eto.MapControl
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MapControl
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 46
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  syntax:
+    content: 'public class MapControl : SkiaDrawable, IHandlerSource, IBindable, IMouseInputSource, IKeyboardInputSource, ICallbackSource, IBindableWidgetContainer, IMapControl, INotifyPropertyChanged, IDisposable'
+    content.vb: Public Class MapControl Inherits SkiaDrawable Implements IHandlerSource, IBindable, IMouseInputSource, IKeyboardInputSource, ICallbackSource, IBindableWidgetContainer, IMapControl, INotifyPropertyChanged, IDisposable
+  inheritance:
+  - System.Object
+  - Eto.Widget
+  - Eto.Forms.BindableWidget
+  - Eto.Forms.Control
+  - Eto.Forms.Container
+  - Eto.Forms.Panel
+  - Eto.Forms.Drawable
+  - Eto.SkiaDraw.SkiaDrawable
+  implements:
+  - Eto.IHandlerSource
+  - Eto.Forms.IBindable
+  - Eto.Forms.IMouseInputSource
+  - Eto.Forms.IKeyboardInputSource
+  - Eto.ICallbackSource
+  - Eto.Forms.IBindableWidgetContainer
+  - Mapsui.UI.IMapControl
+  - System.ComponentModel.INotifyPropertyChanged
+  - System.IDisposable
+  inheritedMembers:
+  - Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.Forms.PaintEventArgs)
+  - Eto.SkiaDraw.SkiaDrawable.Paint
+  - Eto.Forms.Drawable.CreateGraphics
+  - Eto.Forms.Drawable.Update(Eto.Drawing.Rectangle)
+  - Eto.Forms.Drawable.GetCallback
+  - Eto.Forms.Drawable.SupportsCreateGraphics
+  - Eto.Forms.Drawable.CanFocus
+  - Eto.Forms.Panel.Remove(Eto.Forms.Control)
+  - Eto.Forms.Panel.Controls
+  - Eto.Forms.Panel.Padding
+  - Eto.Forms.Panel.MinimumSize
+  - Eto.Forms.Panel.ContextMenu
+  - Eto.Forms.Panel.Content
+  - Eto.Forms.Container.ApplyStyles(System.Object,System.String)
+  - Eto.Forms.Container.OnStyleChanged(System.EventArgs)
+  - Eto.Forms.Container.OnPreLoad(System.EventArgs)
+  - Eto.Forms.Container.OnLoad(System.EventArgs)
+  - Eto.Forms.Container.OnUnLoad(System.EventArgs)
+  - Eto.Forms.Container.Remove(System.Collections.Generic.IEnumerable{Eto.Forms.Control})
+  - Eto.Forms.Container.RemoveAll
+  - Eto.Forms.Container.RemoveParent(Eto.Forms.Control)
+  - Eto.Forms.Container.SetLogicalParent(Eto.Forms.Control)
+  - Eto.Forms.Container.RemoveLogicalParent(Eto.Forms.Control)
+  - Eto.Forms.Container.SetParent(Eto.Forms.Control,System.Action,Eto.Forms.Control)
+  - Eto.Forms.Container.FindChild``1(System.String)
+  - Eto.Forms.Container.FindChild(System.Type,System.String)
+  - Eto.Forms.Container.FindChild(System.String)
+  - Eto.Forms.Container.ClientSize
+  - Eto.Forms.Container.Children
+  - Eto.Forms.Container.VisualChildren
+  - Eto.Forms.Container.StyleProvider
+  - Eto.Forms.Container.Styles
+  - Eto.Forms.Control.SizeChangedEvent
+  - Eto.Forms.Control.KeyDownEvent
+  - Eto.Forms.Control.KeyUpEvent
+  - Eto.Forms.Control.TextInputEvent
+  - Eto.Forms.Control.MouseDownEvent
+  - Eto.Forms.Control.MouseUpEvent
+  - Eto.Forms.Control.MouseMoveEvent
+  - Eto.Forms.Control.MouseLeaveEvent
+  - Eto.Forms.Control.MouseEnterEvent
+  - Eto.Forms.Control.MouseDoubleClickEvent
+  - Eto.Forms.Control.MouseWheelEvent
+  - Eto.Forms.Control.GotFocusEvent
+  - Eto.Forms.Control.LostFocusEvent
+  - Eto.Forms.Control.ShownEvent
+  - Eto.Forms.Control.DragDropEvent
+  - Eto.Forms.Control.DragOverEvent
+  - Eto.Forms.Control.DragEnterEvent
+  - Eto.Forms.Control.DragLeaveEvent
+  - Eto.Forms.Control.EnabledChangedEvent
+  - Eto.Forms.Control.OnTextInput(Eto.Forms.TextInputEventArgs)
+  - Eto.Forms.Control.OnMouseLeave(Eto.Forms.MouseEventArgs)
+  - Eto.Forms.Control.OnMouseEnter(Eto.Forms.MouseEventArgs)
+  - Eto.Forms.Control.OnMouseDoubleClick(Eto.Forms.MouseEventArgs)
+  - Eto.Forms.Control.OnGotFocus(System.EventArgs)
+  - Eto.Forms.Control.OnLostFocus(System.EventArgs)
+  - Eto.Forms.Control.OnShown(System.EventArgs)
+  - Eto.Forms.Control.OnDragDrop(Eto.Forms.DragEventArgs)
+  - Eto.Forms.Control.OnDragOver(Eto.Forms.DragEventArgs)
+  - Eto.Forms.Control.OnDragEnter(Eto.Forms.DragEventArgs)
+  - Eto.Forms.Control.OnDragLeave(Eto.Forms.DragEventArgs)
+  - Eto.Forms.Control.OnEnabledChanged(System.EventArgs)
+  - Eto.Forms.Control.Invalidate
+  - Eto.Forms.Control.Invalidate(System.Boolean)
+  - Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle)
+  - Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle,System.Boolean)
+  - Eto.Forms.Control.GetPreferredSize
+  - Eto.Forms.Control.GetPreferredSize(Eto.Drawing.SizeF)
+  - Eto.Forms.Control.FindParent(System.Type,System.String)
+  - Eto.Forms.Control.FindParent(System.String)
+  - Eto.Forms.Control.Detach
+  - Eto.Forms.Control.AttachNative
+  - Eto.Forms.Control.DetachNative
+  - Eto.Forms.Control.Focus
+  - Eto.Forms.Control.SuspendLayout
+  - Eto.Forms.Control.ResumeLayout
+  - Eto.Forms.Control.MapPlatformCommand(System.String,Eto.Forms.Command)
+  - Eto.Forms.Control.PointFromScreen(Eto.Drawing.PointF)
+  - Eto.Forms.Control.PointToScreen(Eto.Drawing.PointF)
+  - Eto.Forms.Control.RectangleToScreen(Eto.Drawing.RectangleF)
+  - Eto.Forms.Control.RectangleFromScreen(Eto.Drawing.RectangleF)
+  - Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects)
+  - Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects,Eto.Drawing.Image,Eto.Drawing.PointF)
+  - Eto.Forms.Control.OnApplyCascadingStyles
+  - Eto.Forms.Control.Print
+  - Eto.Forms.Control.Handler
+  - Eto.Forms.Control.Loaded
+  - Eto.Forms.Control.VisualControls
+  - Eto.Forms.Control.Tag
+  - Eto.Forms.Control.LogicalParent
+  - Eto.Forms.Control.IsVisualControl
+  - Eto.Forms.Control.Size
+  - Eto.Forms.Control.Width
+  - Eto.Forms.Control.Height
+  - Eto.Forms.Control.Enabled
+  - Eto.Forms.Control.Visible
+  - Eto.Forms.Control.Parent
+  - Eto.Forms.Control.VisualParent
+  - Eto.Forms.Control.IsAttached
+  - Eto.Forms.Control.BackgroundColor
+  - Eto.Forms.Control.HasFocus
+  - Eto.Forms.Control.IsSuspended
+  - Eto.Forms.Control.ParentWindow
+  - Eto.Forms.Control.SupportedPlatformCommands
+  - Eto.Forms.Control.Bounds
+  - Eto.Forms.Control.Location
+  - Eto.Forms.Control.Cursor
+  - Eto.Forms.Control.ToolTip
+  - Eto.Forms.Control.TabIndex
+  - Eto.Forms.Control.AllowDrop
+  - Eto.Forms.Control.SizeChanged
+  - Eto.Forms.Control.KeyDown
+  - Eto.Forms.Control.KeyUp
+  - Eto.Forms.Control.TextInput
+  - Eto.Forms.Control.MouseDown
+  - Eto.Forms.Control.MouseUp
+  - Eto.Forms.Control.MouseMove
+  - Eto.Forms.Control.MouseLeave
+  - Eto.Forms.Control.MouseEnter
+  - Eto.Forms.Control.MouseDoubleClick
+  - Eto.Forms.Control.MouseWheel
+  - Eto.Forms.Control.GotFocus
+  - Eto.Forms.Control.LostFocus
+  - Eto.Forms.Control.Shown
+  - Eto.Forms.Control.PreLoad
+  - Eto.Forms.Control.Load
+  - Eto.Forms.Control.LoadComplete
+  - Eto.Forms.Control.UnLoad
+  - Eto.Forms.Control.DragDrop
+  - Eto.Forms.Control.DragOver
+  - Eto.Forms.Control.DragEnter
+  - Eto.Forms.Control.DragLeave
+  - Eto.Forms.Control.EnabledChanged
+  - Eto.Forms.BindableWidget.OnDataContextChanged(System.EventArgs)
+  - Eto.Forms.BindableWidget.FindParent``1(System.String)
+  - Eto.Forms.BindableWidget.Unbind
+  - Eto.Forms.BindableWidget.UpdateBindings(Eto.Forms.BindingUpdateMode)
+  - Eto.Forms.BindableWidget.Parents
+  - Eto.Forms.BindableWidget.DataContext
+  - Eto.Forms.BindableWidget.Bindings
+  - Eto.Forms.BindableWidget.DataContextChanged
+  - Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{{T}}},System.String)
+  - Eto.Widget.Initialize
+  - Eto.Widget.Dispose
+  - Eto.Widget.ToString
+  - Eto.Widget.Platform
+  - Eto.Widget.NativeHandle
+  - Eto.Widget.Properties
+  - Eto.Widget.ID
+  - Eto.Widget.Style
+  - Eto.Widget.ControlObject
+  - Eto.Widget.IsDisposed
+  - Eto.Widget.StyleChanged
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.Eto.MapControl.#ctor
+  commentId: M:Mapsui.UI.Eto.MapControl.#ctor
+  id: '#ctor'
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MapControl()
+  nameWithType: MapControl.MapControl()
+  fullName: Mapsui.UI.Eto.MapControl.MapControl()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  syntax:
+    content: public MapControl()
+    content.vb: Public Sub New()
+  overload: Mapsui.UI.Eto.MapControl.#ctor*
+  nameWithType.vb: MapControl.New()
+  fullName.vb: Mapsui.UI.Eto.MapControl.New()
+  name.vb: New()
+- uid: Mapsui.UI.Eto.MapControl.MoveCursor
+  commentId: P:Mapsui.UI.Eto.MapControl.MoveCursor
+  id: MoveCursor
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MoveCursor
+  nameWithType: MapControl.MoveCursor
+  fullName: Mapsui.UI.Eto.MapControl.MoveCursor
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MoveCursor
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 23
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  syntax:
+    content: public Cursor MoveCursor { get; set; }
+    parameters: []
+    return:
+      type: Eto.Forms.Cursor
+    content.vb: Public Property MoveCursor As Cursor
+  overload: Mapsui.UI.Eto.MapControl.MoveCursor*
+- uid: Mapsui.UI.Eto.MapControl.MoveButton
+  commentId: P:Mapsui.UI.Eto.MapControl.MoveButton
+  id: MoveButton
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MoveButton
+  nameWithType: MapControl.MoveButton
+  fullName: Mapsui.UI.Eto.MapControl.MoveButton
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MoveButton
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 24
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  syntax:
+    content: public MouseButtons MoveButton { get; set; }
+    parameters: []
+    return:
+      type: Eto.Forms.MouseButtons
+    content.vb: Public Property MoveButton As MouseButtons
+  overload: Mapsui.UI.Eto.MapControl.MoveButton*
+- uid: Mapsui.UI.Eto.MapControl.MoveModifier
+  commentId: P:Mapsui.UI.Eto.MapControl.MoveModifier
+  id: MoveModifier
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MoveModifier
+  nameWithType: MapControl.MoveModifier
+  fullName: Mapsui.UI.Eto.MapControl.MoveModifier
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MoveModifier
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 25
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  syntax:
+    content: public Keys MoveModifier { get; set; }
+    parameters: []
+    return:
+      type: Eto.Forms.Keys
+    content.vb: Public Property MoveModifier As Keys
+  overload: Mapsui.UI.Eto.MapControl.MoveModifier*
+- uid: Mapsui.UI.Eto.MapControl.ZoomButton
+  commentId: P:Mapsui.UI.Eto.MapControl.ZoomButton
+  id: ZoomButton
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ZoomButton
+  nameWithType: MapControl.ZoomButton
+  fullName: Mapsui.UI.Eto.MapControl.ZoomButton
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomButton
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 26
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  syntax:
+    content: public MouseButtons ZoomButton { get; set; }
+    parameters: []
+    return:
+      type: Eto.Forms.MouseButtons
+    content.vb: Public Property ZoomButton As MouseButtons
+  overload: Mapsui.UI.Eto.MapControl.ZoomButton*
+- uid: Mapsui.UI.Eto.MapControl.ZoomModifier
+  commentId: P:Mapsui.UI.Eto.MapControl.ZoomModifier
+  id: ZoomModifier
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ZoomModifier
+  nameWithType: MapControl.ZoomModifier
+  fullName: Mapsui.UI.Eto.MapControl.ZoomModifier
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomModifier
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 27
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  syntax:
+    content: public Keys ZoomModifier { get; set; }
+    parameters: []
+    return:
+      type: Eto.Forms.Keys
+    content.vb: Public Property ZoomModifier As Keys
+  overload: Mapsui.UI.Eto.MapControl.ZoomModifier*
+- uid: Mapsui.UI.Eto.MapControl.OpenInBrowser(System.String)
+  commentId: M:Mapsui.UI.Eto.MapControl.OpenInBrowser(System.String)
+  id: OpenInBrowser(System.String)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OpenInBrowser(string)
+  nameWithType: MapControl.OpenInBrowser(string)
+  fullName: Mapsui.UI.Eto.MapControl.OpenInBrowser(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OpenInBrowser
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  example: []
+  syntax:
+    content: public void OpenInBrowser(string url)
+    parameters:
+    - id: url
+      type: System.String
+    content.vb: Public Sub OpenInBrowser(url As String)
+  overload: Mapsui.UI.Eto.MapControl.OpenInBrowser*
+  implements:
+  - Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+  nameWithType.vb: MapControl.OpenInBrowser(String)
+  fullName.vb: Mapsui.UI.Eto.MapControl.OpenInBrowser(String)
+  name.vb: OpenInBrowser(String)
+- uid: Mapsui.UI.Eto.MapControl.OnMouseDown(Eto.Forms.MouseEventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnMouseDown(Eto.Forms.MouseEventArgs)
+  id: OnMouseDown(Eto.Forms.MouseEventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMouseDown(MouseEventArgs)
+  nameWithType: MapControl.OnMouseDown(MouseEventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnMouseDown(Eto.Forms.MouseEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMouseDown
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 39
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Raises the <xref href="Eto.Forms.Control.MouseDown" data-throw-if-not-resolved="false"></xref> event.
+  remarks: To override default behaviour of the control, set <xref href="Eto.Forms.MouseEventArgs.Handled" data-throw-if-not-resolved="false"></xref> property to <code>true</code>.
+  example: []
+  syntax:
+    content: protected override void OnMouseDown(MouseEventArgs e)
+    parameters:
+    - id: e
+      type: Eto.Forms.MouseEventArgs
+      description: Event arguments
+    content.vb: Protected Overrides Sub OnMouseDown(e As MouseEventArgs)
+  overridden: Eto.Forms.Control.OnMouseDown(Eto.Forms.MouseEventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnMouseDown*
+- uid: Mapsui.UI.Eto.MapControl.OnMouseMove(Eto.Forms.MouseEventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnMouseMove(Eto.Forms.MouseEventArgs)
+  id: OnMouseMove(Eto.Forms.MouseEventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMouseMove(MouseEventArgs)
+  nameWithType: MapControl.OnMouseMove(MouseEventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnMouseMove(Eto.Forms.MouseEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMouseMove
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 52
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Raises the <xref href="Eto.Forms.Control.MouseMove" data-throw-if-not-resolved="false"></xref> event.
+  example: []
+  syntax:
+    content: protected override void OnMouseMove(MouseEventArgs e)
+    parameters:
+    - id: e
+      type: Eto.Forms.MouseEventArgs
+      description: Mouse event args
+    content.vb: Protected Overrides Sub OnMouseMove(e As MouseEventArgs)
+  overridden: Eto.Forms.Control.OnMouseMove(Eto.Forms.MouseEventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnMouseMove*
+- uid: Mapsui.UI.Eto.MapControl.OnMouseUp(Eto.Forms.MouseEventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnMouseUp(Eto.Forms.MouseEventArgs)
+  id: OnMouseUp(Eto.Forms.MouseEventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMouseUp(MouseEventArgs)
+  nameWithType: MapControl.OnMouseUp(MouseEventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnMouseUp(Eto.Forms.MouseEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMouseUp
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 66
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Raises the <xref href="Eto.Forms.Control.MouseUp" data-throw-if-not-resolved="false"></xref> event.
+  example: []
+  syntax:
+    content: protected override void OnMouseUp(MouseEventArgs e)
+    parameters:
+    - id: e
+      type: Eto.Forms.MouseEventArgs
+      description: Event arguments
+    content.vb: Protected Overrides Sub OnMouseUp(e As MouseEventArgs)
+  overridden: Eto.Forms.Control.OnMouseUp(Eto.Forms.MouseEventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnMouseUp*
+- uid: Mapsui.UI.Eto.MapControl.OnLoadComplete(System.EventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnLoadComplete(System.EventArgs)
+  id: OnLoadComplete(System.EventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnLoadComplete(EventArgs)
+  nameWithType: MapControl.OnLoadComplete(EventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnLoadComplete(System.EventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnLoadComplete
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 75
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Raises the <xref href="Eto.Forms.Control.LoadComplete" data-throw-if-not-resolved="false"></xref> event, and recurses to this container's children
+  example: []
+  syntax:
+    content: protected override void OnLoadComplete(EventArgs e)
+    parameters:
+    - id: e
+      type: System.EventArgs
+      description: Event arguments
+    content.vb: Protected Overrides Sub OnLoadComplete(e As EventArgs)
+  overridden: Eto.Forms.Container.OnLoadComplete(System.EventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnLoadComplete*
+- uid: Mapsui.UI.Eto.MapControl.OnMouseWheel(Eto.Forms.MouseEventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnMouseWheel(Eto.Forms.MouseEventArgs)
+  id: OnMouseWheel(Eto.Forms.MouseEventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMouseWheel(MouseEventArgs)
+  nameWithType: MapControl.OnMouseWheel(MouseEventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnMouseWheel(Eto.Forms.MouseEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMouseWheel
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 83
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Raises the <xref href="Eto.Forms.Control.MouseWheel" data-throw-if-not-resolved="false"></xref> event.
+  example: []
+  syntax:
+    content: protected override void OnMouseWheel(MouseEventArgs e)
+    parameters:
+    - id: e
+      type: Eto.Forms.MouseEventArgs
+      description: Event arguments
+    content.vb: Protected Overrides Sub OnMouseWheel(e As MouseEventArgs)
+  overridden: Eto.Forms.Control.OnMouseWheel(Eto.Forms.MouseEventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnMouseWheel*
+- uid: Mapsui.UI.Eto.MapControl.OnSizeChanged(System.EventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnSizeChanged(System.EventArgs)
+  id: OnSizeChanged(System.EventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnSizeChanged(EventArgs)
+  nameWithType: MapControl.OnSizeChanged(EventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnSizeChanged(System.EventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnSizeChanged
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 92
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Raises the <xref href="Eto.Forms.Control.SizeChanged" data-throw-if-not-resolved="false"></xref> event.
+  example: []
+  syntax:
+    content: protected override void OnSizeChanged(EventArgs e)
+    parameters:
+    - id: e
+      type: System.EventArgs
+      description: Event arguments
+    content.vb: Protected Overrides Sub OnSizeChanged(e As EventArgs)
+  overridden: Eto.Forms.Control.OnSizeChanged(System.EventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnSizeChanged*
+- uid: Mapsui.UI.Eto.MapControl.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+  id: OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnPaint(SKPaintEventArgs)
+  nameWithType: MapControl.OnPaint(SKPaintEventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPaint
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 99
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  example: []
+  syntax:
+    content: protected override void OnPaint(SKPaintEventArgs e)
+    parameters:
+    - id: e
+      type: Eto.SkiaDraw.SKPaintEventArgs
+    content.vb: Protected Overrides Sub OnPaint(e As SKPaintEventArgs)
+  overridden: Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnPaint*
+- uid: Mapsui.UI.Eto.MapControl.Dispose(System.Boolean)
+  commentId: M:Mapsui.UI.Eto.MapControl.Dispose(System.Boolean)
+  id: Dispose(System.Boolean)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Dispose(bool)
+  nameWithType: MapControl.Dispose(bool)
+  fullName: Mapsui.UI.Eto.MapControl.Dispose(bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 109
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Handles the disposal of this control
+  example: []
+  syntax:
+    content: protected override void Dispose(bool disposing)
+    parameters:
+    - id: disposing
+      type: System.Boolean
+      description: True if the caller called <xref href="Eto.Widget.Dispose" data-throw-if-not-resolved="false"></xref> manually, false if being called from a finalizer
+    content.vb: Protected Overrides Sub Dispose(disposing As Boolean)
+  overridden: Eto.Forms.Control.Dispose(System.Boolean)
+  overload: Mapsui.UI.Eto.MapControl.Dispose*
+  nameWithType.vb: MapControl.Dispose(Boolean)
+  fullName.vb: Mapsui.UI.Eto.MapControl.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+- uid: Mapsui.UI.Eto.MapControl.OnKeyDown(Eto.Forms.KeyEventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnKeyDown(Eto.Forms.KeyEventArgs)
+  id: OnKeyDown(Eto.Forms.KeyEventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnKeyDown(KeyEventArgs)
+  nameWithType: MapControl.OnKeyDown(KeyEventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnKeyDown(Eto.Forms.KeyEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnKeyDown
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 124
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Raises the <xref href="Eto.Forms.Control.KeyDown" data-throw-if-not-resolved="false"></xref> event.
+  example: []
+  syntax:
+    content: protected override void OnKeyDown(KeyEventArgs e)
+    parameters:
+    - id: e
+      type: Eto.Forms.KeyEventArgs
+      description: Key event arguments
+    content.vb: Protected Overrides Sub OnKeyDown(e As KeyEventArgs)
+  overridden: Eto.Forms.Control.OnKeyDown(Eto.Forms.KeyEventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnKeyDown*
+- uid: Mapsui.UI.Eto.MapControl.OnKeyUp(Eto.Forms.KeyEventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnKeyUp(Eto.Forms.KeyEventArgs)
+  id: OnKeyUp(Eto.Forms.KeyEventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnKeyUp(KeyEventArgs)
+  nameWithType: MapControl.OnKeyUp(KeyEventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnKeyUp(Eto.Forms.KeyEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Eto/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnKeyUp
+    path: ../../Mapsui.UI.Eto/MapControl.cs
+    startLine: 130
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Raises the <xref href="Eto.Forms.Control.KeyUp" data-throw-if-not-resolved="false"></xref> event.
+  example: []
+  syntax:
+    content: protected override void OnKeyUp(KeyEventArgs e)
+    parameters:
+    - id: e
+      type: Eto.Forms.KeyEventArgs
+      description: Key event arguments
+    content.vb: Protected Overrides Sub OnKeyUp(e As KeyEventArgs)
+  overridden: Eto.Forms.Control.OnKeyUp(Eto.Forms.KeyEventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnKeyUp*
+- uid: Mapsui.UI.Eto.MapControl.MaxTapGestureMovement
+  commentId: P:Mapsui.UI.Eto.MapControl.MaxTapGestureMovement
+  id: MaxTapGestureMovement
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MaxTapGestureMovement
+  nameWithType: MapControl.MaxTapGestureMovement
+  fullName: Mapsui.UI.Eto.MapControl.MaxTapGestureMovement
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MaxTapGestureMovement
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 69
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
+  example: []
+  syntax:
+    content: public int MaxTapGestureMovement { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property MaxTapGestureMovement As Integer
+  overload: Mapsui.UI.Eto.MapControl.MaxTapGestureMovement*
+- uid: Mapsui.UI.Eto.MapControl.UseFling
+  commentId: P:Mapsui.UI.Eto.MapControl.UseFling
+  id: UseFling
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: UseFling
+  nameWithType: MapControl.UseFling
+  fullName: Mapsui.UI.Eto.MapControl.UseFling
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UseFling
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 75
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: >-
+    Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a 
+
+    short time after the user has lifted the finger.
+  example: []
+  syntax:
+    content: public bool UseFling { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property UseFling As Boolean
+  overload: Mapsui.UI.Eto.MapControl.UseFling*
+- uid: Mapsui.UI.Eto.MapControl.StartUpdates(System.Boolean)
+  commentId: M:Mapsui.UI.Eto.MapControl.StartUpdates(System.Boolean)
+  id: StartUpdates(System.Boolean)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: StartUpdates(bool)
+  nameWithType: MapControl.StartUpdates(bool)
+  fullName: Mapsui.UI.Eto.MapControl.StartUpdates(bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StartUpdates
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 170
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Start updates for control
+  remarks: When this function is called, the control is redrawn if needed
+  example: []
+  syntax:
+    content: public void StartUpdates(bool refresh = true)
+    parameters:
+    - id: refresh
+      type: System.Boolean
+    content.vb: Public Sub StartUpdates(refresh As Boolean = True)
+  overload: Mapsui.UI.Eto.MapControl.StartUpdates*
+  nameWithType.vb: MapControl.StartUpdates(Boolean)
+  fullName.vb: Mapsui.UI.Eto.MapControl.StartUpdates(Boolean)
+  name.vb: StartUpdates(Boolean)
+- uid: Mapsui.UI.Eto.MapControl.StopUpdates
+  commentId: M:Mapsui.UI.Eto.MapControl.StopUpdates
+  id: StopUpdates
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: StopUpdates()
+  nameWithType: MapControl.StopUpdates()
+  fullName: Mapsui.UI.Eto.MapControl.StopUpdates()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StopUpdates
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 183
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Stop updates for control
+  remarks: >-
+    When this function is called, the control stops to redraw itself, 
+
+    even if it is needed
+  example: []
+  syntax:
+    content: public void StopUpdates()
+    content.vb: Public Sub StopUpdates()
+  overload: Mapsui.UI.Eto.MapControl.StopUpdates*
+- uid: Mapsui.UI.Eto.MapControl.ForceUpdate
+  commentId: M:Mapsui.UI.Eto.MapControl.ForceUpdate
+  id: ForceUpdate
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ForceUpdate()
+  nameWithType: MapControl.ForceUpdate()
+  fullName: Mapsui.UI.Eto.MapControl.ForceUpdate()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ForceUpdate
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 194
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Force a update of control
+  remarks: When this function is called, the control draws itself once
+  example: []
+  syntax:
+    content: public void ForceUpdate()
+    content.vb: Public Sub ForceUpdate()
+  overload: Mapsui.UI.Eto.MapControl.ForceUpdate*
+- uid: Mapsui.UI.Eto.MapControl.UpdateInterval
+  commentId: P:Mapsui.UI.Eto.MapControl.UpdateInterval
+  id: UpdateInterval
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: UpdateInterval
+  nameWithType: MapControl.UpdateInterval
+  fullName: Mapsui.UI.Eto.MapControl.UpdateInterval
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateInterval
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 203
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Interval between two redraws of the MapControl in ms
+  example: []
+  syntax:
+    content: public int UpdateInterval { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property UpdateInterval As Integer
+  overload: Mapsui.UI.Eto.MapControl.UpdateInterval*
+- uid: Mapsui.UI.Eto.MapControl.Performance
+  commentId: P:Mapsui.UI.Eto.MapControl.Performance
+  id: Performance
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Performance
+  nameWithType: MapControl.Performance
+  fullName: Mapsui.UI.Eto.MapControl.Performance
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Performance
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 227
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Object to save performance information about the drawing of the map
+  remarks: If this is null, no performance information is saved.
+  example: []
+  syntax:
+    content: public Performance? Performance { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Utilities.Performance
+    content.vb: Public Property Performance As Performance
+  overload: Mapsui.UI.Eto.MapControl.Performance*
+  implements:
+  - Mapsui.UI.IMapControl.Performance
+- uid: Mapsui.UI.Eto.MapControl.PixelDensity
+  commentId: P:Mapsui.UI.Eto.MapControl.PixelDensity
+  id: PixelDensity
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: PixelDensity
+  nameWithType: MapControl.PixelDensity
+  fullName: Mapsui.UI.Eto.MapControl.PixelDensity
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PixelDensity
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 240
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: The number of pixel per device independent unit
+  example: []
+  syntax:
+    content: public float PixelDensity { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public ReadOnly Property PixelDensity As Single
+  overload: Mapsui.UI.Eto.MapControl.PixelDensity*
+  implements:
+  - Mapsui.UI.IMapControl.PixelDensity
+- uid: Mapsui.UI.Eto.MapControl.Renderer
+  commentId: P:Mapsui.UI.Eto.MapControl.Renderer
+  id: Renderer
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Renderer
+  nameWithType: MapControl.Renderer
+  fullName: Mapsui.UI.Eto.MapControl.Renderer
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Renderer
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 245
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Renderer that is used from this MapControl
+  example: []
+  syntax:
+    content: public IRenderer Renderer { get; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.IRenderer
+    content.vb: Public ReadOnly Property Renderer As IRenderer
+  overload: Mapsui.UI.Eto.MapControl.Renderer*
+  implements:
+  - Mapsui.UI.IMapControl.Renderer
+- uid: Mapsui.UI.Eto.MapControl.Info
+  commentId: E:Mapsui.UI.Eto.MapControl.Info
+  id: Info
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Info
+  nameWithType: MapControl.Info
+  fullName: Mapsui.UI.Eto.MapControl.Info
+  type: Event
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Info
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 251
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: >-
+    Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+
+    the layers that have IsMapInfoLayer set to true.
+  example: []
+  syntax:
+    content: public event EventHandler<MapInfoEventArgs>? Info
+    return:
+      type: System.EventHandler{Mapsui.MapInfoEventArgs}
+    content.vb: Public Event Info As EventHandler(Of MapInfoEventArgs)
+  implements:
+  - Mapsui.UI.IMapControl.Info
+- uid: Mapsui.UI.Eto.MapControl.PropertyChanged
+  commentId: E:Mapsui.UI.Eto.MapControl.PropertyChanged
+  id: PropertyChanged
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: PropertyChanged
+  nameWithType: MapControl.PropertyChanged
+  fullName: Mapsui.UI.Eto.MapControl.PropertyChanged
+  type: Event
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PropertyChanged
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 259
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Called whenever a property is changed
+  example: []
+  syntax:
+    content: public event PropertyChangedEventHandler? PropertyChanged
+    return:
+      type: System.ComponentModel.PropertyChangedEventHandler
+    content.vb: Public Event PropertyChanged As PropertyChangedEventHandler
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: Mapsui.UI.Eto.MapControl.OnPropertyChanged(System.String)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnPropertyChanged(System.String)
+  id: OnPropertyChanged(System.String)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnPropertyChanged(string)
+  nameWithType: MapControl.OnPropertyChanged(string)
+  fullName: Mapsui.UI.Eto.MapControl.OnPropertyChanged(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPropertyChanged
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 268
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  syntax:
+    content: protected void OnPropertyChanged(string propertyName = "")
+    parameters:
+    - id: propertyName
+      type: System.String
+    content.vb: Protected Sub OnPropertyChanged(propertyName As String = "")
+  overload: Mapsui.UI.Eto.MapControl.OnPropertyChanged*
+  nameWithType.vb: MapControl.OnPropertyChanged(String)
+  fullName.vb: Mapsui.UI.Eto.MapControl.OnPropertyChanged(String)
+  name.vb: OnPropertyChanged(String)
+- uid: Mapsui.UI.Eto.MapControl.Unsubscribe
+  commentId: M:Mapsui.UI.Eto.MapControl.Unsubscribe
+  id: Unsubscribe
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Unsubscribe()
+  nameWithType: MapControl.Unsubscribe()
+  fullName: Mapsui.UI.Eto.MapControl.Unsubscribe()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Unsubscribe
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 277
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Unsubscribe from map events
+  example: []
+  syntax:
+    content: public void Unsubscribe()
+    content.vb: Public Sub Unsubscribe()
+  overload: Mapsui.UI.Eto.MapControl.Unsubscribe*
+  implements:
+  - Mapsui.UI.IMapControl.Unsubscribe
+- uid: Mapsui.UI.Eto.MapControl.Refresh(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.Eto.MapControl.Refresh(Mapsui.ChangeType)
+  id: Refresh(Mapsui.ChangeType)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Refresh(ChangeType)
+  nameWithType: MapControl.Refresh(ChangeType)
+  fullName: Mapsui.UI.Eto.MapControl.Refresh(Mapsui.ChangeType)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Refresh
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 312
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  example: []
+  syntax:
+    content: public void Refresh(ChangeType changeType = ChangeType.Discrete)
+    parameters:
+    - id: changeType
+      type: Mapsui.ChangeType
+    content.vb: Public Sub Refresh(changeType As ChangeType = ChangeType.Discrete)
+  overload: Mapsui.UI.Eto.MapControl.Refresh*
+  implements:
+  - Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+- uid: Mapsui.UI.Eto.MapControl.RefreshGraphics
+  commentId: M:Mapsui.UI.Eto.MapControl.RefreshGraphics
+  id: RefreshGraphics
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: RefreshGraphics()
+  nameWithType: MapControl.RefreshGraphics()
+  fullName: Mapsui.UI.Eto.MapControl.RefreshGraphics()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshGraphics
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 317
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  example: []
+  syntax:
+    content: public void RefreshGraphics()
+    content.vb: Public Sub RefreshGraphics()
+  overload: Mapsui.UI.Eto.MapControl.RefreshGraphics*
+  implements:
+  - Mapsui.UI.IMapControl.RefreshGraphics
+- uid: Mapsui.UI.Eto.MapControl.Map
+  commentId: P:Mapsui.UI.Eto.MapControl.Map
+  id: Map
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Map
+  nameWithType: MapControl.Map
+  fullName: Mapsui.UI.Eto.MapControl.Map
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Map
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 430
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Map holding data for which is shown in this MapControl
+  example: []
+  syntax:
+    content: public Map Map { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Map
+    content.vb: Public Property Map As Map
+  overload: Mapsui.UI.Eto.MapControl.Map*
+  implements:
+  - Mapsui.UI.IMapControl.Map
+- uid: Mapsui.UI.Eto.MapControl.ToPixels(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.Eto.MapControl.ToPixels(Mapsui.MPoint)
+  id: ToPixels(Mapsui.MPoint)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ToPixels(MPoint)
+  nameWithType: MapControl.ToPixels(MPoint)
+  fullName: Mapsui.UI.Eto.MapControl.ToPixels(Mapsui.MPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToPixels
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 467
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Converts coordinates in device independent units (or DIP or DP) to pixels.
+  example: []
+  syntax:
+    content: public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
+    parameters:
+    - id: coordinateInDeviceIndependentUnits
+      type: Mapsui.MPoint
+      description: Coordinate in device independent units (or DIP or DP)
+    return:
+      type: Mapsui.MPoint
+      description: Coordinate in pixels
+    content.vb: Public Function ToPixels(coordinateInDeviceIndependentUnits As MPoint) As MPoint
+  overload: Mapsui.UI.Eto.MapControl.ToPixels*
+  implements:
+  - Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+- uid: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  id: ToDeviceIndependentUnits(Mapsui.MPoint)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ToDeviceIndependentUnits(MPoint)
+  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
+  fullName: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToDeviceIndependentUnits
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 475
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Converts coordinates in pixels to device independent units (or DIP or DP).
+  example: []
+  syntax:
+    content: public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
+    parameters:
+    - id: coordinateInPixels
+      type: Mapsui.MPoint
+      description: Coordinate in pixels
+    return:
+      type: Mapsui.MPoint
+      description: Coordinate in device independent units (or DIP or DP)
+    content.vb: Public Function ToDeviceIndependentUnits(coordinateInPixels As MPoint) As MPoint
+  overload: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits*
+  implements:
+  - Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+- uid: Mapsui.UI.Eto.MapControl.RefreshData(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.Eto.MapControl.RefreshData(Mapsui.ChangeType)
+  id: RefreshData(Mapsui.ChangeType)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: RefreshData(ChangeType)
+  nameWithType: MapControl.RefreshData(ChangeType)
+  fullName: Mapsui.UI.Eto.MapControl.RefreshData(Mapsui.ChangeType)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshData
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 483
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Refresh data of Map, but don't paint it
+  example: []
+  syntax:
+    content: public void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    parameters:
+    - id: changeType
+      type: Mapsui.ChangeType
+    content.vb: Public Sub RefreshData(changeType As ChangeType = ChangeType.Discrete)
+  overload: Mapsui.UI.Eto.MapControl.RefreshData*
+  implements:
+  - Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+- uid: Mapsui.UI.Eto.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)
+  commentId: M:Mapsui.UI.Eto.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)
+  id: OnMapInfo(Mapsui.MapInfoEventArgs)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMapInfo(MapInfoEventArgs)
+  nameWithType: MapControl.OnMapInfo(MapInfoEventArgs)
+  fullName: Mapsui.UI.Eto.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMapInfo
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 488
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  syntax:
+    content: protected void OnMapInfo(MapInfoEventArgs mapInfoEventArgs)
+    parameters:
+    - id: mapInfoEventArgs
+      type: Mapsui.MapInfoEventArgs
+    content.vb: Protected Sub OnMapInfo(mapInfoEventArgs As MapInfoEventArgs)
+  overload: Mapsui.UI.Eto.MapControl.OnMapInfo*
+- uid: Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  commentId: M:Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  id: GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: GetMapInfo(ScreenPosition, int)
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
+  fullName: Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetMapInfo
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 495
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Check, if a feature at a given screen position is hit
+  example: []
+  syntax:
+    content: public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)
+    parameters:
+    - id: screenPosition
+      type: Mapsui.Manipulations.ScreenPosition
+      description: Screen position to check for widgets and features
+    - id: margin
+      type: System.Int32
+      description: An optional extra margin around the feature to enlarge the hit area.
+    return:
+      type: Mapsui.MapInfo
+    content.vb: Public Function GetMapInfo(screenPosition As ScreenPosition, margin As Integer = 0) As MapInfo
+  overload: Mapsui.UI.Eto.MapControl.GetMapInfo*
+  implements:
+  - Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+  fullName.vb: Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
+  name.vb: GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.Eto.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  commentId: M:Mapsui.UI.Eto.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  id: GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  parent: Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: GetSnapshot(IEnumerable<ILayer>?)
+  nameWithType: MapControl.GetSnapshot(IEnumerable<ILayer>?)
+  fullName: Mapsui.UI.Eto.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetSnapshot
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 501
+  assemblies:
+  - Mapsui.UI.Eto
+  namespace: Mapsui.UI.Eto
+  summary: Create a snapshot form map as PNG image
+  example: []
+  syntax:
+    content: public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
+    parameters:
+    - id: layers
+      type: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+      description: Layers that should be included in snapshot
+    return:
+      type: System.Byte[]
+      description: Byte array with snapshot in png format. If there are any problems than returns null.
+    content.vb: Public Function GetSnapshot(layers As IEnumerable(Of ILayer) = Nothing) As Byte()
+  overload: Mapsui.UI.Eto.MapControl.GetSnapshot*
+  implements:
+  - Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  nameWithType.vb: MapControl.GetSnapshot(IEnumerable(Of ILayer))
+  fullName.vb: Mapsui.UI.Eto.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  name.vb: GetSnapshot(IEnumerable(Of ILayer))
+references:
+- uid: Mapsui.UI.Eto
+  commentId: N:Mapsui.UI.Eto
+  href: Mapsui.html
+  name: Mapsui.UI.Eto
+  nameWithType: Mapsui.UI.Eto
+  fullName: Mapsui.UI.Eto
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Eto
+    name: Eto
+    href: Mapsui.UI.Eto.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Eto
+    name: Eto
+    href: Mapsui.UI.Eto.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Eto.Widget
+  commentId: T:Eto.Widget
+  parent: Eto
+  isExternal: true
+  name: Widget
+  nameWithType: Widget
+  fullName: Eto.Widget
+- uid: Eto.Forms.BindableWidget
+  commentId: T:Eto.Forms.BindableWidget
+  parent: Eto.Forms
+  isExternal: true
+  name: BindableWidget
+  nameWithType: BindableWidget
+  fullName: Eto.Forms.BindableWidget
+- uid: Eto.Forms.Control
+  commentId: T:Eto.Forms.Control
+  parent: Eto.Forms
+  isExternal: true
+  name: Control
+  nameWithType: Control
+  fullName: Eto.Forms.Control
+- uid: Eto.Forms.Container
+  commentId: T:Eto.Forms.Container
+  parent: Eto.Forms
+  isExternal: true
+  name: Container
+  nameWithType: Container
+  fullName: Eto.Forms.Container
+- uid: Eto.Forms.Panel
+  commentId: T:Eto.Forms.Panel
+  parent: Eto.Forms
+  isExternal: true
+  name: Panel
+  nameWithType: Panel
+  fullName: Eto.Forms.Panel
+- uid: Eto.Forms.Drawable
+  commentId: T:Eto.Forms.Drawable
+  parent: Eto.Forms
+  isExternal: true
+  name: Drawable
+  nameWithType: Drawable
+  fullName: Eto.Forms.Drawable
+- uid: Eto.SkiaDraw.SkiaDrawable
+  commentId: T:Eto.SkiaDraw.SkiaDrawable
+  parent: Eto.SkiaDraw
+  isExternal: true
+  name: SkiaDrawable
+  nameWithType: SkiaDrawable
+  fullName: Eto.SkiaDraw.SkiaDrawable
+- uid: Eto.IHandlerSource
+  commentId: T:Eto.IHandlerSource
+  parent: Eto
+  isExternal: true
+  name: IHandlerSource
+  nameWithType: IHandlerSource
+  fullName: Eto.IHandlerSource
+- uid: Eto.Forms.IBindable
+  commentId: T:Eto.Forms.IBindable
+  parent: Eto.Forms
+  isExternal: true
+  name: IBindable
+  nameWithType: IBindable
+  fullName: Eto.Forms.IBindable
+- uid: Eto.Forms.IMouseInputSource
+  commentId: T:Eto.Forms.IMouseInputSource
+  parent: Eto.Forms
+  isExternal: true
+  name: IMouseInputSource
+  nameWithType: IMouseInputSource
+  fullName: Eto.Forms.IMouseInputSource
+- uid: Eto.Forms.IKeyboardInputSource
+  commentId: T:Eto.Forms.IKeyboardInputSource
+  parent: Eto.Forms
+  isExternal: true
+  name: IKeyboardInputSource
+  nameWithType: IKeyboardInputSource
+  fullName: Eto.Forms.IKeyboardInputSource
+- uid: Eto.ICallbackSource
+  commentId: T:Eto.ICallbackSource
+  parent: Eto
+  isExternal: true
+  name: ICallbackSource
+  nameWithType: ICallbackSource
+  fullName: Eto.ICallbackSource
+- uid: Eto.Forms.IBindableWidgetContainer
+  commentId: T:Eto.Forms.IBindableWidgetContainer
+  parent: Eto.Forms
+  isExternal: true
+  name: IBindableWidgetContainer
+  nameWithType: IBindableWidgetContainer
+  fullName: Eto.Forms.IBindableWidgetContainer
+- uid: Mapsui.UI.IMapControl
+  commentId: T:Mapsui.UI.IMapControl
+  parent: Mapsui.UI
+  href: Mapsui.UI.IMapControl.html
+  name: IMapControl
+  nameWithType: IMapControl
+  fullName: Mapsui.UI.IMapControl
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.Forms.PaintEventArgs)
+  commentId: M:Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.Forms.PaintEventArgs)
+  parent: Eto.SkiaDraw.SkiaDrawable
+  isExternal: true
+  name: OnPaint(PaintEventArgs)
+  nameWithType: SkiaDrawable.OnPaint(PaintEventArgs)
+  fullName: Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.Forms.PaintEventArgs)
+  spec.csharp:
+  - uid: Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.Forms.PaintEventArgs)
+    name: OnPaint
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.PaintEventArgs
+    name: PaintEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.Forms.PaintEventArgs)
+    name: OnPaint
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.PaintEventArgs
+    name: PaintEventArgs
+    isExternal: true
+  - name: )
+- uid: Eto.SkiaDraw.SkiaDrawable.Paint
+  commentId: E:Eto.SkiaDraw.SkiaDrawable.Paint
+  parent: Eto.SkiaDraw.SkiaDrawable
+  isExternal: true
+  name: Paint
+  nameWithType: SkiaDrawable.Paint
+  fullName: Eto.SkiaDraw.SkiaDrawable.Paint
+- uid: Eto.Forms.Drawable.CreateGraphics
+  commentId: M:Eto.Forms.Drawable.CreateGraphics
+  parent: Eto.Forms.Drawable
+  isExternal: true
+  name: CreateGraphics()
+  nameWithType: Drawable.CreateGraphics()
+  fullName: Eto.Forms.Drawable.CreateGraphics()
+  spec.csharp:
+  - uid: Eto.Forms.Drawable.CreateGraphics
+    name: CreateGraphics
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Drawable.CreateGraphics
+    name: CreateGraphics
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Drawable.Update(Eto.Drawing.Rectangle)
+  commentId: M:Eto.Forms.Drawable.Update(Eto.Drawing.Rectangle)
+  parent: Eto.Forms.Drawable
+  isExternal: true
+  name: Update(Rectangle)
+  nameWithType: Drawable.Update(Rectangle)
+  fullName: Eto.Forms.Drawable.Update(Eto.Drawing.Rectangle)
+  spec.csharp:
+  - uid: Eto.Forms.Drawable.Update(Eto.Drawing.Rectangle)
+    name: Update
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.Rectangle
+    name: Rectangle
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Drawable.Update(Eto.Drawing.Rectangle)
+    name: Update
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.Rectangle
+    name: Rectangle
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Drawable.GetCallback
+  commentId: M:Eto.Forms.Drawable.GetCallback
+  parent: Eto.Forms.Drawable
+  isExternal: true
+  name: GetCallback()
+  nameWithType: Drawable.GetCallback()
+  fullName: Eto.Forms.Drawable.GetCallback()
+  spec.csharp:
+  - uid: Eto.Forms.Drawable.GetCallback
+    name: GetCallback
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Drawable.GetCallback
+    name: GetCallback
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Drawable.SupportsCreateGraphics
+  commentId: P:Eto.Forms.Drawable.SupportsCreateGraphics
+  parent: Eto.Forms.Drawable
+  isExternal: true
+  name: SupportsCreateGraphics
+  nameWithType: Drawable.SupportsCreateGraphics
+  fullName: Eto.Forms.Drawable.SupportsCreateGraphics
+- uid: Eto.Forms.Drawable.CanFocus
+  commentId: P:Eto.Forms.Drawable.CanFocus
+  parent: Eto.Forms.Drawable
+  isExternal: true
+  name: CanFocus
+  nameWithType: Drawable.CanFocus
+  fullName: Eto.Forms.Drawable.CanFocus
+- uid: Eto.Forms.Panel.Remove(Eto.Forms.Control)
+  commentId: M:Eto.Forms.Panel.Remove(Eto.Forms.Control)
+  parent: Eto.Forms.Panel
+  isExternal: true
+  name: Remove(Control)
+  nameWithType: Panel.Remove(Control)
+  fullName: Eto.Forms.Panel.Remove(Eto.Forms.Control)
+  spec.csharp:
+  - uid: Eto.Forms.Panel.Remove(Eto.Forms.Control)
+    name: Remove
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Panel.Remove(Eto.Forms.Control)
+    name: Remove
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Panel.Controls
+  commentId: P:Eto.Forms.Panel.Controls
+  parent: Eto.Forms.Panel
+  isExternal: true
+  name: Controls
+  nameWithType: Panel.Controls
+  fullName: Eto.Forms.Panel.Controls
+- uid: Eto.Forms.Panel.Padding
+  commentId: P:Eto.Forms.Panel.Padding
+  parent: Eto.Forms.Panel
+  isExternal: true
+  name: Padding
+  nameWithType: Panel.Padding
+  fullName: Eto.Forms.Panel.Padding
+- uid: Eto.Forms.Panel.MinimumSize
+  commentId: P:Eto.Forms.Panel.MinimumSize
+  parent: Eto.Forms.Panel
+  isExternal: true
+  name: MinimumSize
+  nameWithType: Panel.MinimumSize
+  fullName: Eto.Forms.Panel.MinimumSize
+- uid: Eto.Forms.Panel.ContextMenu
+  commentId: P:Eto.Forms.Panel.ContextMenu
+  parent: Eto.Forms.Panel
+  isExternal: true
+  name: ContextMenu
+  nameWithType: Panel.ContextMenu
+  fullName: Eto.Forms.Panel.ContextMenu
+- uid: Eto.Forms.Panel.Content
+  commentId: P:Eto.Forms.Panel.Content
+  parent: Eto.Forms.Panel
+  isExternal: true
+  name: Content
+  nameWithType: Panel.Content
+  fullName: Eto.Forms.Panel.Content
+- uid: Eto.Forms.Container.ApplyStyles(System.Object,System.String)
+  commentId: M:Eto.Forms.Container.ApplyStyles(System.Object,System.String)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: ApplyStyles(object, string)
+  nameWithType: Container.ApplyStyles(object, string)
+  fullName: Eto.Forms.Container.ApplyStyles(object, string)
+  nameWithType.vb: Container.ApplyStyles(Object, String)
+  fullName.vb: Eto.Forms.Container.ApplyStyles(Object, String)
+  name.vb: ApplyStyles(Object, String)
+  spec.csharp:
+  - uid: Eto.Forms.Container.ApplyStyles(System.Object,System.String)
+    name: ApplyStyles
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.ApplyStyles(System.Object,System.String)
+    name: ApplyStyles
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Eto.Forms.Container.OnStyleChanged(System.EventArgs)
+  commentId: M:Eto.Forms.Container.OnStyleChanged(System.EventArgs)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnStyleChanged(EventArgs)
+  nameWithType: Container.OnStyleChanged(EventArgs)
+  fullName: Eto.Forms.Container.OnStyleChanged(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Container.OnStyleChanged(System.EventArgs)
+    name: OnStyleChanged
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.OnStyleChanged(System.EventArgs)
+    name: OnStyleChanged
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Eto.Forms.Container.OnPreLoad(System.EventArgs)
+  commentId: M:Eto.Forms.Container.OnPreLoad(System.EventArgs)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnPreLoad(EventArgs)
+  nameWithType: Container.OnPreLoad(EventArgs)
+  fullName: Eto.Forms.Container.OnPreLoad(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Container.OnPreLoad(System.EventArgs)
+    name: OnPreLoad
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.OnPreLoad(System.EventArgs)
+    name: OnPreLoad
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Eto.Forms.Container.OnLoad(System.EventArgs)
+  commentId: M:Eto.Forms.Container.OnLoad(System.EventArgs)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnLoad(EventArgs)
+  nameWithType: Container.OnLoad(EventArgs)
+  fullName: Eto.Forms.Container.OnLoad(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Container.OnLoad(System.EventArgs)
+    name: OnLoad
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.OnLoad(System.EventArgs)
+    name: OnLoad
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Eto.Forms.Container.OnUnLoad(System.EventArgs)
+  commentId: M:Eto.Forms.Container.OnUnLoad(System.EventArgs)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnUnLoad(EventArgs)
+  nameWithType: Container.OnUnLoad(EventArgs)
+  fullName: Eto.Forms.Container.OnUnLoad(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Container.OnUnLoad(System.EventArgs)
+    name: OnUnLoad
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.OnUnLoad(System.EventArgs)
+    name: OnUnLoad
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Eto.Forms.Container.Remove(System.Collections.Generic.IEnumerable{Eto.Forms.Control})
+  commentId: M:Eto.Forms.Container.Remove(System.Collections.Generic.IEnumerable{Eto.Forms.Control})
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: Remove(IEnumerable<Control>)
+  nameWithType: Container.Remove(IEnumerable<Control>)
+  fullName: Eto.Forms.Container.Remove(System.Collections.Generic.IEnumerable<Eto.Forms.Control>)
+  nameWithType.vb: Container.Remove(IEnumerable(Of Control))
+  fullName.vb: Eto.Forms.Container.Remove(System.Collections.Generic.IEnumerable(Of Eto.Forms.Control))
+  name.vb: Remove(IEnumerable(Of Control))
+  spec.csharp:
+  - uid: Eto.Forms.Container.Remove(System.Collections.Generic.IEnumerable{Eto.Forms.Control})
+    name: Remove
+    isExternal: true
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.Remove(System.Collections.Generic.IEnumerable{Eto.Forms.Control})
+    name: Remove
+    isExternal: true
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+  - name: )
+- uid: Eto.Forms.Container.RemoveAll
+  commentId: M:Eto.Forms.Container.RemoveAll
+  parent: Eto.Forms.Container
+  isExternal: true
+  name: RemoveAll()
+  nameWithType: Container.RemoveAll()
+  fullName: Eto.Forms.Container.RemoveAll()
+  spec.csharp:
+  - uid: Eto.Forms.Container.RemoveAll
+    name: RemoveAll
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.RemoveAll
+    name: RemoveAll
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Container.RemoveParent(Eto.Forms.Control)
+  commentId: M:Eto.Forms.Container.RemoveParent(Eto.Forms.Control)
+  parent: Eto.Forms.Container
+  isExternal: true
+  name: RemoveParent(Control)
+  nameWithType: Container.RemoveParent(Control)
+  fullName: Eto.Forms.Container.RemoveParent(Eto.Forms.Control)
+  spec.csharp:
+  - uid: Eto.Forms.Container.RemoveParent(Eto.Forms.Control)
+    name: RemoveParent
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.RemoveParent(Eto.Forms.Control)
+    name: RemoveParent
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Container.SetLogicalParent(Eto.Forms.Control)
+  commentId: M:Eto.Forms.Container.SetLogicalParent(Eto.Forms.Control)
+  parent: Eto.Forms.Container
+  isExternal: true
+  name: SetLogicalParent(Control)
+  nameWithType: Container.SetLogicalParent(Control)
+  fullName: Eto.Forms.Container.SetLogicalParent(Eto.Forms.Control)
+  spec.csharp:
+  - uid: Eto.Forms.Container.SetLogicalParent(Eto.Forms.Control)
+    name: SetLogicalParent
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.SetLogicalParent(Eto.Forms.Control)
+    name: SetLogicalParent
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Container.RemoveLogicalParent(Eto.Forms.Control)
+  commentId: M:Eto.Forms.Container.RemoveLogicalParent(Eto.Forms.Control)
+  parent: Eto.Forms.Container
+  isExternal: true
+  name: RemoveLogicalParent(Control)
+  nameWithType: Container.RemoveLogicalParent(Control)
+  fullName: Eto.Forms.Container.RemoveLogicalParent(Eto.Forms.Control)
+  spec.csharp:
+  - uid: Eto.Forms.Container.RemoveLogicalParent(Eto.Forms.Control)
+    name: RemoveLogicalParent
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.RemoveLogicalParent(Eto.Forms.Control)
+    name: RemoveLogicalParent
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Container.SetParent(Eto.Forms.Control,System.Action,Eto.Forms.Control)
+  commentId: M:Eto.Forms.Container.SetParent(Eto.Forms.Control,System.Action,Eto.Forms.Control)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action
+  name: SetParent(Control, Action, Control)
+  nameWithType: Container.SetParent(Control, Action, Control)
+  fullName: Eto.Forms.Container.SetParent(Eto.Forms.Control, System.Action, Eto.Forms.Control)
+  spec.csharp:
+  - uid: Eto.Forms.Container.SetParent(Eto.Forms.Control,System.Action,Eto.Forms.Control)
+    name: SetParent
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: ','
+  - name: " "
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.SetParent(Eto.Forms.Control,System.Action,Eto.Forms.Control)
+    name: SetParent
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: ','
+  - name: " "
+  - uid: Eto.Forms.Control
+    name: Control
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Container.FindChild``1(System.String)
+  commentId: M:Eto.Forms.Container.FindChild``1(System.String)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: FindChild<T>(string)
+  nameWithType: Container.FindChild<T>(string)
+  fullName: Eto.Forms.Container.FindChild<T>(string)
+  nameWithType.vb: Container.FindChild(Of T)(String)
+  fullName.vb: Eto.Forms.Container.FindChild(Of T)(String)
+  name.vb: FindChild(Of T)(String)
+  spec.csharp:
+  - uid: Eto.Forms.Container.FindChild``1(System.String)
+    name: FindChild
+    isExternal: true
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.FindChild``1(System.String)
+    name: FindChild
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Eto.Forms.Container.FindChild(System.Type,System.String)
+  commentId: M:Eto.Forms.Container.FindChild(System.Type,System.String)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: FindChild(Type, string)
+  nameWithType: Container.FindChild(Type, string)
+  fullName: Eto.Forms.Container.FindChild(System.Type, string)
+  nameWithType.vb: Container.FindChild(Type, String)
+  fullName.vb: Eto.Forms.Container.FindChild(System.Type, String)
+  name.vb: FindChild(Type, String)
+  spec.csharp:
+  - uid: Eto.Forms.Container.FindChild(System.Type,System.String)
+    name: FindChild
+    isExternal: true
+  - name: (
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.FindChild(System.Type,System.String)
+    name: FindChild
+    isExternal: true
+  - name: (
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Eto.Forms.Container.FindChild(System.String)
+  commentId: M:Eto.Forms.Container.FindChild(System.String)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: FindChild(string)
+  nameWithType: Container.FindChild(string)
+  fullName: Eto.Forms.Container.FindChild(string)
+  nameWithType.vb: Container.FindChild(String)
+  fullName.vb: Eto.Forms.Container.FindChild(String)
+  name.vb: FindChild(String)
+  spec.csharp:
+  - uid: Eto.Forms.Container.FindChild(System.String)
+    name: FindChild
+    isExternal: true
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.FindChild(System.String)
+    name: FindChild
+    isExternal: true
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Eto.Forms.Container.ClientSize
+  commentId: P:Eto.Forms.Container.ClientSize
+  parent: Eto.Forms.Container
+  isExternal: true
+  name: ClientSize
+  nameWithType: Container.ClientSize
+  fullName: Eto.Forms.Container.ClientSize
+- uid: Eto.Forms.Container.Children
+  commentId: P:Eto.Forms.Container.Children
+  parent: Eto.Forms.Container
+  isExternal: true
+  name: Children
+  nameWithType: Container.Children
+  fullName: Eto.Forms.Container.Children
+- uid: Eto.Forms.Container.VisualChildren
+  commentId: P:Eto.Forms.Container.VisualChildren
+  parent: Eto.Forms.Container
+  isExternal: true
+  name: VisualChildren
+  nameWithType: Container.VisualChildren
+  fullName: Eto.Forms.Container.VisualChildren
+- uid: Eto.Forms.Container.StyleProvider
+  commentId: P:Eto.Forms.Container.StyleProvider
+  parent: Eto.Forms.Container
+  isExternal: true
+  name: StyleProvider
+  nameWithType: Container.StyleProvider
+  fullName: Eto.Forms.Container.StyleProvider
+- uid: Eto.Forms.Container.Styles
+  commentId: P:Eto.Forms.Container.Styles
+  parent: Eto.Forms.Container
+  isExternal: true
+  name: Styles
+  nameWithType: Container.Styles
+  fullName: Eto.Forms.Container.Styles
+- uid: Eto.Forms.Control.SizeChangedEvent
+  commentId: F:Eto.Forms.Control.SizeChangedEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: SizeChangedEvent
+  nameWithType: Control.SizeChangedEvent
+  fullName: Eto.Forms.Control.SizeChangedEvent
+- uid: Eto.Forms.Control.KeyDownEvent
+  commentId: F:Eto.Forms.Control.KeyDownEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: KeyDownEvent
+  nameWithType: Control.KeyDownEvent
+  fullName: Eto.Forms.Control.KeyDownEvent
+- uid: Eto.Forms.Control.KeyUpEvent
+  commentId: F:Eto.Forms.Control.KeyUpEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: KeyUpEvent
+  nameWithType: Control.KeyUpEvent
+  fullName: Eto.Forms.Control.KeyUpEvent
+- uid: Eto.Forms.Control.TextInputEvent
+  commentId: F:Eto.Forms.Control.TextInputEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: TextInputEvent
+  nameWithType: Control.TextInputEvent
+  fullName: Eto.Forms.Control.TextInputEvent
+- uid: Eto.Forms.Control.MouseDownEvent
+  commentId: F:Eto.Forms.Control.MouseDownEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseDownEvent
+  nameWithType: Control.MouseDownEvent
+  fullName: Eto.Forms.Control.MouseDownEvent
+- uid: Eto.Forms.Control.MouseUpEvent
+  commentId: F:Eto.Forms.Control.MouseUpEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseUpEvent
+  nameWithType: Control.MouseUpEvent
+  fullName: Eto.Forms.Control.MouseUpEvent
+- uid: Eto.Forms.Control.MouseMoveEvent
+  commentId: F:Eto.Forms.Control.MouseMoveEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseMoveEvent
+  nameWithType: Control.MouseMoveEvent
+  fullName: Eto.Forms.Control.MouseMoveEvent
+- uid: Eto.Forms.Control.MouseLeaveEvent
+  commentId: F:Eto.Forms.Control.MouseLeaveEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseLeaveEvent
+  nameWithType: Control.MouseLeaveEvent
+  fullName: Eto.Forms.Control.MouseLeaveEvent
+- uid: Eto.Forms.Control.MouseEnterEvent
+  commentId: F:Eto.Forms.Control.MouseEnterEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseEnterEvent
+  nameWithType: Control.MouseEnterEvent
+  fullName: Eto.Forms.Control.MouseEnterEvent
+- uid: Eto.Forms.Control.MouseDoubleClickEvent
+  commentId: F:Eto.Forms.Control.MouseDoubleClickEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseDoubleClickEvent
+  nameWithType: Control.MouseDoubleClickEvent
+  fullName: Eto.Forms.Control.MouseDoubleClickEvent
+- uid: Eto.Forms.Control.MouseWheelEvent
+  commentId: F:Eto.Forms.Control.MouseWheelEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseWheelEvent
+  nameWithType: Control.MouseWheelEvent
+  fullName: Eto.Forms.Control.MouseWheelEvent
+- uid: Eto.Forms.Control.GotFocusEvent
+  commentId: F:Eto.Forms.Control.GotFocusEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: GotFocusEvent
+  nameWithType: Control.GotFocusEvent
+  fullName: Eto.Forms.Control.GotFocusEvent
+- uid: Eto.Forms.Control.LostFocusEvent
+  commentId: F:Eto.Forms.Control.LostFocusEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: LostFocusEvent
+  nameWithType: Control.LostFocusEvent
+  fullName: Eto.Forms.Control.LostFocusEvent
+- uid: Eto.Forms.Control.ShownEvent
+  commentId: F:Eto.Forms.Control.ShownEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: ShownEvent
+  nameWithType: Control.ShownEvent
+  fullName: Eto.Forms.Control.ShownEvent
+- uid: Eto.Forms.Control.DragDropEvent
+  commentId: F:Eto.Forms.Control.DragDropEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DragDropEvent
+  nameWithType: Control.DragDropEvent
+  fullName: Eto.Forms.Control.DragDropEvent
+- uid: Eto.Forms.Control.DragOverEvent
+  commentId: F:Eto.Forms.Control.DragOverEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DragOverEvent
+  nameWithType: Control.DragOverEvent
+  fullName: Eto.Forms.Control.DragOverEvent
+- uid: Eto.Forms.Control.DragEnterEvent
+  commentId: F:Eto.Forms.Control.DragEnterEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DragEnterEvent
+  nameWithType: Control.DragEnterEvent
+  fullName: Eto.Forms.Control.DragEnterEvent
+- uid: Eto.Forms.Control.DragLeaveEvent
+  commentId: F:Eto.Forms.Control.DragLeaveEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DragLeaveEvent
+  nameWithType: Control.DragLeaveEvent
+  fullName: Eto.Forms.Control.DragLeaveEvent
+- uid: Eto.Forms.Control.EnabledChangedEvent
+  commentId: F:Eto.Forms.Control.EnabledChangedEvent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: EnabledChangedEvent
+  nameWithType: Control.EnabledChangedEvent
+  fullName: Eto.Forms.Control.EnabledChangedEvent
+- uid: Eto.Forms.Control.OnTextInput(Eto.Forms.TextInputEventArgs)
+  commentId: M:Eto.Forms.Control.OnTextInput(Eto.Forms.TextInputEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnTextInput(TextInputEventArgs)
+  nameWithType: Control.OnTextInput(TextInputEventArgs)
+  fullName: Eto.Forms.Control.OnTextInput(Eto.Forms.TextInputEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnTextInput(Eto.Forms.TextInputEventArgs)
+    name: OnTextInput
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.TextInputEventArgs
+    name: TextInputEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnTextInput(Eto.Forms.TextInputEventArgs)
+    name: OnTextInput
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.TextInputEventArgs
+    name: TextInputEventArgs
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.OnMouseLeave(Eto.Forms.MouseEventArgs)
+  commentId: M:Eto.Forms.Control.OnMouseLeave(Eto.Forms.MouseEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnMouseLeave(MouseEventArgs)
+  nameWithType: Control.OnMouseLeave(MouseEventArgs)
+  fullName: Eto.Forms.Control.OnMouseLeave(Eto.Forms.MouseEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnMouseLeave(Eto.Forms.MouseEventArgs)
+    name: OnMouseLeave
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnMouseLeave(Eto.Forms.MouseEventArgs)
+    name: OnMouseLeave
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.OnMouseEnter(Eto.Forms.MouseEventArgs)
+  commentId: M:Eto.Forms.Control.OnMouseEnter(Eto.Forms.MouseEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnMouseEnter(MouseEventArgs)
+  nameWithType: Control.OnMouseEnter(MouseEventArgs)
+  fullName: Eto.Forms.Control.OnMouseEnter(Eto.Forms.MouseEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnMouseEnter(Eto.Forms.MouseEventArgs)
+    name: OnMouseEnter
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnMouseEnter(Eto.Forms.MouseEventArgs)
+    name: OnMouseEnter
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.OnMouseDoubleClick(Eto.Forms.MouseEventArgs)
+  commentId: M:Eto.Forms.Control.OnMouseDoubleClick(Eto.Forms.MouseEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnMouseDoubleClick(MouseEventArgs)
+  nameWithType: Control.OnMouseDoubleClick(MouseEventArgs)
+  fullName: Eto.Forms.Control.OnMouseDoubleClick(Eto.Forms.MouseEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnMouseDoubleClick(Eto.Forms.MouseEventArgs)
+    name: OnMouseDoubleClick
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnMouseDoubleClick(Eto.Forms.MouseEventArgs)
+    name: OnMouseDoubleClick
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.OnGotFocus(System.EventArgs)
+  commentId: M:Eto.Forms.Control.OnGotFocus(System.EventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnGotFocus(EventArgs)
+  nameWithType: Control.OnGotFocus(EventArgs)
+  fullName: Eto.Forms.Control.OnGotFocus(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnGotFocus(System.EventArgs)
+    name: OnGotFocus
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnGotFocus(System.EventArgs)
+    name: OnGotFocus
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Eto.Forms.Control.OnLostFocus(System.EventArgs)
+  commentId: M:Eto.Forms.Control.OnLostFocus(System.EventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnLostFocus(EventArgs)
+  nameWithType: Control.OnLostFocus(EventArgs)
+  fullName: Eto.Forms.Control.OnLostFocus(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnLostFocus(System.EventArgs)
+    name: OnLostFocus
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnLostFocus(System.EventArgs)
+    name: OnLostFocus
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Eto.Forms.Control.OnShown(System.EventArgs)
+  commentId: M:Eto.Forms.Control.OnShown(System.EventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnShown(EventArgs)
+  nameWithType: Control.OnShown(EventArgs)
+  fullName: Eto.Forms.Control.OnShown(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnShown(System.EventArgs)
+    name: OnShown
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnShown(System.EventArgs)
+    name: OnShown
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Eto.Forms.Control.OnDragDrop(Eto.Forms.DragEventArgs)
+  commentId: M:Eto.Forms.Control.OnDragDrop(Eto.Forms.DragEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnDragDrop(DragEventArgs)
+  nameWithType: Control.OnDragDrop(DragEventArgs)
+  fullName: Eto.Forms.Control.OnDragDrop(Eto.Forms.DragEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnDragDrop(Eto.Forms.DragEventArgs)
+    name: OnDragDrop
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DragEventArgs
+    name: DragEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnDragDrop(Eto.Forms.DragEventArgs)
+    name: OnDragDrop
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DragEventArgs
+    name: DragEventArgs
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.OnDragOver(Eto.Forms.DragEventArgs)
+  commentId: M:Eto.Forms.Control.OnDragOver(Eto.Forms.DragEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnDragOver(DragEventArgs)
+  nameWithType: Control.OnDragOver(DragEventArgs)
+  fullName: Eto.Forms.Control.OnDragOver(Eto.Forms.DragEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnDragOver(Eto.Forms.DragEventArgs)
+    name: OnDragOver
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DragEventArgs
+    name: DragEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnDragOver(Eto.Forms.DragEventArgs)
+    name: OnDragOver
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DragEventArgs
+    name: DragEventArgs
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.OnDragEnter(Eto.Forms.DragEventArgs)
+  commentId: M:Eto.Forms.Control.OnDragEnter(Eto.Forms.DragEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnDragEnter(DragEventArgs)
+  nameWithType: Control.OnDragEnter(DragEventArgs)
+  fullName: Eto.Forms.Control.OnDragEnter(Eto.Forms.DragEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnDragEnter(Eto.Forms.DragEventArgs)
+    name: OnDragEnter
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DragEventArgs
+    name: DragEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnDragEnter(Eto.Forms.DragEventArgs)
+    name: OnDragEnter
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DragEventArgs
+    name: DragEventArgs
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.OnDragLeave(Eto.Forms.DragEventArgs)
+  commentId: M:Eto.Forms.Control.OnDragLeave(Eto.Forms.DragEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnDragLeave(DragEventArgs)
+  nameWithType: Control.OnDragLeave(DragEventArgs)
+  fullName: Eto.Forms.Control.OnDragLeave(Eto.Forms.DragEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnDragLeave(Eto.Forms.DragEventArgs)
+    name: OnDragLeave
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DragEventArgs
+    name: DragEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnDragLeave(Eto.Forms.DragEventArgs)
+    name: OnDragLeave
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DragEventArgs
+    name: DragEventArgs
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.OnEnabledChanged(System.EventArgs)
+  commentId: M:Eto.Forms.Control.OnEnabledChanged(System.EventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnEnabledChanged(EventArgs)
+  nameWithType: Control.OnEnabledChanged(EventArgs)
+  fullName: Eto.Forms.Control.OnEnabledChanged(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnEnabledChanged(System.EventArgs)
+    name: OnEnabledChanged
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnEnabledChanged(System.EventArgs)
+    name: OnEnabledChanged
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Eto.Forms.Control.Invalidate
+  commentId: M:Eto.Forms.Control.Invalidate
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Invalidate()
+  nameWithType: Control.Invalidate()
+  fullName: Eto.Forms.Control.Invalidate()
+  spec.csharp:
+  - uid: Eto.Forms.Control.Invalidate
+    name: Invalidate
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.Invalidate
+    name: Invalidate
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.Invalidate(System.Boolean)
+  commentId: M:Eto.Forms.Control.Invalidate(System.Boolean)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: Invalidate(bool)
+  nameWithType: Control.Invalidate(bool)
+  fullName: Eto.Forms.Control.Invalidate(bool)
+  nameWithType.vb: Control.Invalidate(Boolean)
+  fullName.vb: Eto.Forms.Control.Invalidate(Boolean)
+  name.vb: Invalidate(Boolean)
+  spec.csharp:
+  - uid: Eto.Forms.Control.Invalidate(System.Boolean)
+    name: Invalidate
+    isExternal: true
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.Invalidate(System.Boolean)
+    name: Invalidate
+    isExternal: true
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle)
+  commentId: M:Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Invalidate(Rectangle)
+  nameWithType: Control.Invalidate(Rectangle)
+  fullName: Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle)
+  spec.csharp:
+  - uid: Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle)
+    name: Invalidate
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.Rectangle
+    name: Rectangle
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle)
+    name: Invalidate
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.Rectangle
+    name: Rectangle
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle,System.Boolean)
+  commentId: M:Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle,System.Boolean)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: Invalidate(Rectangle, bool)
+  nameWithType: Control.Invalidate(Rectangle, bool)
+  fullName: Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle, bool)
+  nameWithType.vb: Control.Invalidate(Rectangle, Boolean)
+  fullName.vb: Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle, Boolean)
+  name.vb: Invalidate(Rectangle, Boolean)
+  spec.csharp:
+  - uid: Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle,System.Boolean)
+    name: Invalidate
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.Rectangle
+    name: Rectangle
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.Invalidate(Eto.Drawing.Rectangle,System.Boolean)
+    name: Invalidate
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.Rectangle
+    name: Rectangle
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Eto.Forms.Control.GetPreferredSize
+  commentId: M:Eto.Forms.Control.GetPreferredSize
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: GetPreferredSize()
+  nameWithType: Control.GetPreferredSize()
+  fullName: Eto.Forms.Control.GetPreferredSize()
+  spec.csharp:
+  - uid: Eto.Forms.Control.GetPreferredSize
+    name: GetPreferredSize
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.GetPreferredSize
+    name: GetPreferredSize
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.GetPreferredSize(Eto.Drawing.SizeF)
+  commentId: M:Eto.Forms.Control.GetPreferredSize(Eto.Drawing.SizeF)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: GetPreferredSize(SizeF)
+  nameWithType: Control.GetPreferredSize(SizeF)
+  fullName: Eto.Forms.Control.GetPreferredSize(Eto.Drawing.SizeF)
+  spec.csharp:
+  - uid: Eto.Forms.Control.GetPreferredSize(Eto.Drawing.SizeF)
+    name: GetPreferredSize
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.SizeF
+    name: SizeF
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.GetPreferredSize(Eto.Drawing.SizeF)
+    name: GetPreferredSize
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.SizeF
+    name: SizeF
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.FindParent(System.Type,System.String)
+  commentId: M:Eto.Forms.Control.FindParent(System.Type,System.String)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: FindParent(Type, string)
+  nameWithType: Control.FindParent(Type, string)
+  fullName: Eto.Forms.Control.FindParent(System.Type, string)
+  nameWithType.vb: Control.FindParent(Type, String)
+  fullName.vb: Eto.Forms.Control.FindParent(System.Type, String)
+  name.vb: FindParent(Type, String)
+  spec.csharp:
+  - uid: Eto.Forms.Control.FindParent(System.Type,System.String)
+    name: FindParent
+    isExternal: true
+  - name: (
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.FindParent(System.Type,System.String)
+    name: FindParent
+    isExternal: true
+  - name: (
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Eto.Forms.Control.FindParent(System.String)
+  commentId: M:Eto.Forms.Control.FindParent(System.String)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: FindParent(string)
+  nameWithType: Control.FindParent(string)
+  fullName: Eto.Forms.Control.FindParent(string)
+  nameWithType.vb: Control.FindParent(String)
+  fullName.vb: Eto.Forms.Control.FindParent(String)
+  name.vb: FindParent(String)
+  spec.csharp:
+  - uid: Eto.Forms.Control.FindParent(System.String)
+    name: FindParent
+    isExternal: true
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.FindParent(System.String)
+    name: FindParent
+    isExternal: true
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Eto.Forms.Control.Detach
+  commentId: M:Eto.Forms.Control.Detach
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Detach()
+  nameWithType: Control.Detach()
+  fullName: Eto.Forms.Control.Detach()
+  spec.csharp:
+  - uid: Eto.Forms.Control.Detach
+    name: Detach
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.Detach
+    name: Detach
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.AttachNative
+  commentId: M:Eto.Forms.Control.AttachNative
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: AttachNative()
+  nameWithType: Control.AttachNative()
+  fullName: Eto.Forms.Control.AttachNative()
+  spec.csharp:
+  - uid: Eto.Forms.Control.AttachNative
+    name: AttachNative
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.AttachNative
+    name: AttachNative
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.DetachNative
+  commentId: M:Eto.Forms.Control.DetachNative
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DetachNative()
+  nameWithType: Control.DetachNative()
+  fullName: Eto.Forms.Control.DetachNative()
+  spec.csharp:
+  - uid: Eto.Forms.Control.DetachNative
+    name: DetachNative
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.DetachNative
+    name: DetachNative
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.Focus
+  commentId: M:Eto.Forms.Control.Focus
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Focus()
+  nameWithType: Control.Focus()
+  fullName: Eto.Forms.Control.Focus()
+  spec.csharp:
+  - uid: Eto.Forms.Control.Focus
+    name: Focus
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.Focus
+    name: Focus
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.SuspendLayout
+  commentId: M:Eto.Forms.Control.SuspendLayout
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: SuspendLayout()
+  nameWithType: Control.SuspendLayout()
+  fullName: Eto.Forms.Control.SuspendLayout()
+  spec.csharp:
+  - uid: Eto.Forms.Control.SuspendLayout
+    name: SuspendLayout
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.SuspendLayout
+    name: SuspendLayout
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.ResumeLayout
+  commentId: M:Eto.Forms.Control.ResumeLayout
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: ResumeLayout()
+  nameWithType: Control.ResumeLayout()
+  fullName: Eto.Forms.Control.ResumeLayout()
+  spec.csharp:
+  - uid: Eto.Forms.Control.ResumeLayout
+    name: ResumeLayout
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.ResumeLayout
+    name: ResumeLayout
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.MapPlatformCommand(System.String,Eto.Forms.Command)
+  commentId: M:Eto.Forms.Control.MapPlatformCommand(System.String,Eto.Forms.Command)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: MapPlatformCommand(string, Command)
+  nameWithType: Control.MapPlatformCommand(string, Command)
+  fullName: Eto.Forms.Control.MapPlatformCommand(string, Eto.Forms.Command)
+  nameWithType.vb: Control.MapPlatformCommand(String, Command)
+  fullName.vb: Eto.Forms.Control.MapPlatformCommand(String, Eto.Forms.Command)
+  name.vb: MapPlatformCommand(String, Command)
+  spec.csharp:
+  - uid: Eto.Forms.Control.MapPlatformCommand(System.String,Eto.Forms.Command)
+    name: MapPlatformCommand
+    isExternal: true
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Eto.Forms.Command
+    name: Command
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.MapPlatformCommand(System.String,Eto.Forms.Command)
+    name: MapPlatformCommand
+    isExternal: true
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Eto.Forms.Command
+    name: Command
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.PointFromScreen(Eto.Drawing.PointF)
+  commentId: M:Eto.Forms.Control.PointFromScreen(Eto.Drawing.PointF)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: PointFromScreen(PointF)
+  nameWithType: Control.PointFromScreen(PointF)
+  fullName: Eto.Forms.Control.PointFromScreen(Eto.Drawing.PointF)
+  spec.csharp:
+  - uid: Eto.Forms.Control.PointFromScreen(Eto.Drawing.PointF)
+    name: PointFromScreen
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.PointF
+    name: PointF
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.PointFromScreen(Eto.Drawing.PointF)
+    name: PointFromScreen
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.PointF
+    name: PointF
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.PointToScreen(Eto.Drawing.PointF)
+  commentId: M:Eto.Forms.Control.PointToScreen(Eto.Drawing.PointF)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: PointToScreen(PointF)
+  nameWithType: Control.PointToScreen(PointF)
+  fullName: Eto.Forms.Control.PointToScreen(Eto.Drawing.PointF)
+  spec.csharp:
+  - uid: Eto.Forms.Control.PointToScreen(Eto.Drawing.PointF)
+    name: PointToScreen
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.PointF
+    name: PointF
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.PointToScreen(Eto.Drawing.PointF)
+    name: PointToScreen
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.PointF
+    name: PointF
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.RectangleToScreen(Eto.Drawing.RectangleF)
+  commentId: M:Eto.Forms.Control.RectangleToScreen(Eto.Drawing.RectangleF)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: RectangleToScreen(RectangleF)
+  nameWithType: Control.RectangleToScreen(RectangleF)
+  fullName: Eto.Forms.Control.RectangleToScreen(Eto.Drawing.RectangleF)
+  spec.csharp:
+  - uid: Eto.Forms.Control.RectangleToScreen(Eto.Drawing.RectangleF)
+    name: RectangleToScreen
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.RectangleF
+    name: RectangleF
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.RectangleToScreen(Eto.Drawing.RectangleF)
+    name: RectangleToScreen
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.RectangleF
+    name: RectangleF
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.RectangleFromScreen(Eto.Drawing.RectangleF)
+  commentId: M:Eto.Forms.Control.RectangleFromScreen(Eto.Drawing.RectangleF)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: RectangleFromScreen(RectangleF)
+  nameWithType: Control.RectangleFromScreen(RectangleF)
+  fullName: Eto.Forms.Control.RectangleFromScreen(Eto.Drawing.RectangleF)
+  spec.csharp:
+  - uid: Eto.Forms.Control.RectangleFromScreen(Eto.Drawing.RectangleF)
+    name: RectangleFromScreen
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.RectangleF
+    name: RectangleF
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.RectangleFromScreen(Eto.Drawing.RectangleF)
+    name: RectangleFromScreen
+    isExternal: true
+  - name: (
+  - uid: Eto.Drawing.RectangleF
+    name: RectangleF
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects)
+  commentId: M:Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DoDragDrop(DataObject, DragEffects)
+  nameWithType: Control.DoDragDrop(DataObject, DragEffects)
+  fullName: Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject, Eto.Forms.DragEffects)
+  spec.csharp:
+  - uid: Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects)
+    name: DoDragDrop
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DataObject
+    name: DataObject
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: Eto.Forms.DragEffects
+    name: DragEffects
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects)
+    name: DoDragDrop
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DataObject
+    name: DataObject
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: Eto.Forms.DragEffects
+    name: DragEffects
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects,Eto.Drawing.Image,Eto.Drawing.PointF)
+  commentId: M:Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects,Eto.Drawing.Image,Eto.Drawing.PointF)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DoDragDrop(DataObject, DragEffects, Image, PointF)
+  nameWithType: Control.DoDragDrop(DataObject, DragEffects, Image, PointF)
+  fullName: Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject, Eto.Forms.DragEffects, Eto.Drawing.Image, Eto.Drawing.PointF)
+  spec.csharp:
+  - uid: Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects,Eto.Drawing.Image,Eto.Drawing.PointF)
+    name: DoDragDrop
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DataObject
+    name: DataObject
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: Eto.Forms.DragEffects
+    name: DragEffects
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: Eto.Drawing.Image
+    name: Image
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: Eto.Drawing.PointF
+    name: PointF
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects,Eto.Drawing.Image,Eto.Drawing.PointF)
+    name: DoDragDrop
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.DataObject
+    name: DataObject
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: Eto.Forms.DragEffects
+    name: DragEffects
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: Eto.Drawing.Image
+    name: Image
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: Eto.Drawing.PointF
+    name: PointF
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.Control.OnApplyCascadingStyles
+  commentId: M:Eto.Forms.Control.OnApplyCascadingStyles
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnApplyCascadingStyles()
+  nameWithType: Control.OnApplyCascadingStyles()
+  fullName: Eto.Forms.Control.OnApplyCascadingStyles()
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnApplyCascadingStyles
+    name: OnApplyCascadingStyles
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnApplyCascadingStyles
+    name: OnApplyCascadingStyles
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.Print
+  commentId: M:Eto.Forms.Control.Print
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Print()
+  nameWithType: Control.Print()
+  fullName: Eto.Forms.Control.Print()
+  spec.csharp:
+  - uid: Eto.Forms.Control.Print
+    name: Print
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.Print
+    name: Print
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.Control.Handler
+  commentId: P:Eto.Forms.Control.Handler
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Handler
+  nameWithType: Control.Handler
+  fullName: Eto.Forms.Control.Handler
+- uid: Eto.Forms.Control.Loaded
+  commentId: P:Eto.Forms.Control.Loaded
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Loaded
+  nameWithType: Control.Loaded
+  fullName: Eto.Forms.Control.Loaded
+- uid: Eto.Forms.Control.VisualControls
+  commentId: P:Eto.Forms.Control.VisualControls
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: VisualControls
+  nameWithType: Control.VisualControls
+  fullName: Eto.Forms.Control.VisualControls
+- uid: Eto.Forms.Control.Tag
+  commentId: P:Eto.Forms.Control.Tag
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Tag
+  nameWithType: Control.Tag
+  fullName: Eto.Forms.Control.Tag
+- uid: Eto.Forms.Control.LogicalParent
+  commentId: P:Eto.Forms.Control.LogicalParent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: LogicalParent
+  nameWithType: Control.LogicalParent
+  fullName: Eto.Forms.Control.LogicalParent
+- uid: Eto.Forms.Control.IsVisualControl
+  commentId: P:Eto.Forms.Control.IsVisualControl
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: IsVisualControl
+  nameWithType: Control.IsVisualControl
+  fullName: Eto.Forms.Control.IsVisualControl
+- uid: Eto.Forms.Control.Size
+  commentId: P:Eto.Forms.Control.Size
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Size
+  nameWithType: Control.Size
+  fullName: Eto.Forms.Control.Size
+- uid: Eto.Forms.Control.Width
+  commentId: P:Eto.Forms.Control.Width
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Width
+  nameWithType: Control.Width
+  fullName: Eto.Forms.Control.Width
+- uid: Eto.Forms.Control.Height
+  commentId: P:Eto.Forms.Control.Height
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Height
+  nameWithType: Control.Height
+  fullName: Eto.Forms.Control.Height
+- uid: Eto.Forms.Control.Enabled
+  commentId: P:Eto.Forms.Control.Enabled
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Enabled
+  nameWithType: Control.Enabled
+  fullName: Eto.Forms.Control.Enabled
+- uid: Eto.Forms.Control.Visible
+  commentId: P:Eto.Forms.Control.Visible
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Visible
+  nameWithType: Control.Visible
+  fullName: Eto.Forms.Control.Visible
+- uid: Eto.Forms.Control.Parent
+  commentId: P:Eto.Forms.Control.Parent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Parent
+  nameWithType: Control.Parent
+  fullName: Eto.Forms.Control.Parent
+- uid: Eto.Forms.Control.VisualParent
+  commentId: P:Eto.Forms.Control.VisualParent
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: VisualParent
+  nameWithType: Control.VisualParent
+  fullName: Eto.Forms.Control.VisualParent
+- uid: Eto.Forms.Control.IsAttached
+  commentId: P:Eto.Forms.Control.IsAttached
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: IsAttached
+  nameWithType: Control.IsAttached
+  fullName: Eto.Forms.Control.IsAttached
+- uid: Eto.Forms.Control.BackgroundColor
+  commentId: P:Eto.Forms.Control.BackgroundColor
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: BackgroundColor
+  nameWithType: Control.BackgroundColor
+  fullName: Eto.Forms.Control.BackgroundColor
+- uid: Eto.Forms.Control.HasFocus
+  commentId: P:Eto.Forms.Control.HasFocus
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: HasFocus
+  nameWithType: Control.HasFocus
+  fullName: Eto.Forms.Control.HasFocus
+- uid: Eto.Forms.Control.IsSuspended
+  commentId: P:Eto.Forms.Control.IsSuspended
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: IsSuspended
+  nameWithType: Control.IsSuspended
+  fullName: Eto.Forms.Control.IsSuspended
+- uid: Eto.Forms.Control.ParentWindow
+  commentId: P:Eto.Forms.Control.ParentWindow
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: ParentWindow
+  nameWithType: Control.ParentWindow
+  fullName: Eto.Forms.Control.ParentWindow
+- uid: Eto.Forms.Control.SupportedPlatformCommands
+  commentId: P:Eto.Forms.Control.SupportedPlatformCommands
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: SupportedPlatformCommands
+  nameWithType: Control.SupportedPlatformCommands
+  fullName: Eto.Forms.Control.SupportedPlatformCommands
+- uid: Eto.Forms.Control.Bounds
+  commentId: P:Eto.Forms.Control.Bounds
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Bounds
+  nameWithType: Control.Bounds
+  fullName: Eto.Forms.Control.Bounds
+- uid: Eto.Forms.Control.Location
+  commentId: P:Eto.Forms.Control.Location
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Location
+  nameWithType: Control.Location
+  fullName: Eto.Forms.Control.Location
+- uid: Eto.Forms.Control.Cursor
+  commentId: P:Eto.Forms.Control.Cursor
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Cursor
+  nameWithType: Control.Cursor
+  fullName: Eto.Forms.Control.Cursor
+- uid: Eto.Forms.Control.ToolTip
+  commentId: P:Eto.Forms.Control.ToolTip
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: ToolTip
+  nameWithType: Control.ToolTip
+  fullName: Eto.Forms.Control.ToolTip
+- uid: Eto.Forms.Control.TabIndex
+  commentId: P:Eto.Forms.Control.TabIndex
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: TabIndex
+  nameWithType: Control.TabIndex
+  fullName: Eto.Forms.Control.TabIndex
+- uid: Eto.Forms.Control.AllowDrop
+  commentId: P:Eto.Forms.Control.AllowDrop
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: AllowDrop
+  nameWithType: Control.AllowDrop
+  fullName: Eto.Forms.Control.AllowDrop
+- uid: Eto.Forms.Control.SizeChanged
+  commentId: E:Eto.Forms.Control.SizeChanged
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: SizeChanged
+  nameWithType: Control.SizeChanged
+  fullName: Eto.Forms.Control.SizeChanged
+- uid: Eto.Forms.Control.KeyDown
+  commentId: E:Eto.Forms.Control.KeyDown
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: KeyDown
+  nameWithType: Control.KeyDown
+  fullName: Eto.Forms.Control.KeyDown
+- uid: Eto.Forms.Control.KeyUp
+  commentId: E:Eto.Forms.Control.KeyUp
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: KeyUp
+  nameWithType: Control.KeyUp
+  fullName: Eto.Forms.Control.KeyUp
+- uid: Eto.Forms.Control.TextInput
+  commentId: E:Eto.Forms.Control.TextInput
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: TextInput
+  nameWithType: Control.TextInput
+  fullName: Eto.Forms.Control.TextInput
+- uid: Eto.Forms.Control.MouseDown
+  commentId: E:Eto.Forms.Control.MouseDown
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseDown
+  nameWithType: Control.MouseDown
+  fullName: Eto.Forms.Control.MouseDown
+- uid: Eto.Forms.Control.MouseUp
+  commentId: E:Eto.Forms.Control.MouseUp
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseUp
+  nameWithType: Control.MouseUp
+  fullName: Eto.Forms.Control.MouseUp
+- uid: Eto.Forms.Control.MouseMove
+  commentId: E:Eto.Forms.Control.MouseMove
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseMove
+  nameWithType: Control.MouseMove
+  fullName: Eto.Forms.Control.MouseMove
+- uid: Eto.Forms.Control.MouseLeave
+  commentId: E:Eto.Forms.Control.MouseLeave
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseLeave
+  nameWithType: Control.MouseLeave
+  fullName: Eto.Forms.Control.MouseLeave
+- uid: Eto.Forms.Control.MouseEnter
+  commentId: E:Eto.Forms.Control.MouseEnter
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseEnter
+  nameWithType: Control.MouseEnter
+  fullName: Eto.Forms.Control.MouseEnter
+- uid: Eto.Forms.Control.MouseDoubleClick
+  commentId: E:Eto.Forms.Control.MouseDoubleClick
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseDoubleClick
+  nameWithType: Control.MouseDoubleClick
+  fullName: Eto.Forms.Control.MouseDoubleClick
+- uid: Eto.Forms.Control.MouseWheel
+  commentId: E:Eto.Forms.Control.MouseWheel
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: MouseWheel
+  nameWithType: Control.MouseWheel
+  fullName: Eto.Forms.Control.MouseWheel
+- uid: Eto.Forms.Control.GotFocus
+  commentId: E:Eto.Forms.Control.GotFocus
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: GotFocus
+  nameWithType: Control.GotFocus
+  fullName: Eto.Forms.Control.GotFocus
+- uid: Eto.Forms.Control.LostFocus
+  commentId: E:Eto.Forms.Control.LostFocus
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: LostFocus
+  nameWithType: Control.LostFocus
+  fullName: Eto.Forms.Control.LostFocus
+- uid: Eto.Forms.Control.Shown
+  commentId: E:Eto.Forms.Control.Shown
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Shown
+  nameWithType: Control.Shown
+  fullName: Eto.Forms.Control.Shown
+- uid: Eto.Forms.Control.PreLoad
+  commentId: E:Eto.Forms.Control.PreLoad
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: PreLoad
+  nameWithType: Control.PreLoad
+  fullName: Eto.Forms.Control.PreLoad
+- uid: Eto.Forms.Control.Load
+  commentId: E:Eto.Forms.Control.Load
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: Load
+  nameWithType: Control.Load
+  fullName: Eto.Forms.Control.Load
+- uid: Eto.Forms.Control.LoadComplete
+  commentId: E:Eto.Forms.Control.LoadComplete
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: LoadComplete
+  nameWithType: Control.LoadComplete
+  fullName: Eto.Forms.Control.LoadComplete
+- uid: Eto.Forms.Control.UnLoad
+  commentId: E:Eto.Forms.Control.UnLoad
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: UnLoad
+  nameWithType: Control.UnLoad
+  fullName: Eto.Forms.Control.UnLoad
+- uid: Eto.Forms.Control.DragDrop
+  commentId: E:Eto.Forms.Control.DragDrop
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DragDrop
+  nameWithType: Control.DragDrop
+  fullName: Eto.Forms.Control.DragDrop
+- uid: Eto.Forms.Control.DragOver
+  commentId: E:Eto.Forms.Control.DragOver
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DragOver
+  nameWithType: Control.DragOver
+  fullName: Eto.Forms.Control.DragOver
+- uid: Eto.Forms.Control.DragEnter
+  commentId: E:Eto.Forms.Control.DragEnter
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DragEnter
+  nameWithType: Control.DragEnter
+  fullName: Eto.Forms.Control.DragEnter
+- uid: Eto.Forms.Control.DragLeave
+  commentId: E:Eto.Forms.Control.DragLeave
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: DragLeave
+  nameWithType: Control.DragLeave
+  fullName: Eto.Forms.Control.DragLeave
+- uid: Eto.Forms.Control.EnabledChanged
+  commentId: E:Eto.Forms.Control.EnabledChanged
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: EnabledChanged
+  nameWithType: Control.EnabledChanged
+  fullName: Eto.Forms.Control.EnabledChanged
+- uid: Eto.Forms.BindableWidget.OnDataContextChanged(System.EventArgs)
+  commentId: M:Eto.Forms.BindableWidget.OnDataContextChanged(System.EventArgs)
+  parent: Eto.Forms.BindableWidget
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnDataContextChanged(EventArgs)
+  nameWithType: BindableWidget.OnDataContextChanged(EventArgs)
+  fullName: Eto.Forms.BindableWidget.OnDataContextChanged(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.BindableWidget.OnDataContextChanged(System.EventArgs)
+    name: OnDataContextChanged
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.BindableWidget.OnDataContextChanged(System.EventArgs)
+    name: OnDataContextChanged
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Eto.Forms.BindableWidget.FindParent``1(System.String)
+  commentId: M:Eto.Forms.BindableWidget.FindParent``1(System.String)
+  parent: Eto.Forms.BindableWidget
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: FindParent<T>(string)
+  nameWithType: BindableWidget.FindParent<T>(string)
+  fullName: Eto.Forms.BindableWidget.FindParent<T>(string)
+  nameWithType.vb: BindableWidget.FindParent(Of T)(String)
+  fullName.vb: Eto.Forms.BindableWidget.FindParent(Of T)(String)
+  name.vb: FindParent(Of T)(String)
+  spec.csharp:
+  - uid: Eto.Forms.BindableWidget.FindParent``1(System.String)
+    name: FindParent
+    isExternal: true
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.BindableWidget.FindParent``1(System.String)
+    name: FindParent
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Eto.Forms.BindableWidget.Unbind
+  commentId: M:Eto.Forms.BindableWidget.Unbind
+  parent: Eto.Forms.BindableWidget
+  isExternal: true
+  name: Unbind()
+  nameWithType: BindableWidget.Unbind()
+  fullName: Eto.Forms.BindableWidget.Unbind()
+  spec.csharp:
+  - uid: Eto.Forms.BindableWidget.Unbind
+    name: Unbind
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.BindableWidget.Unbind
+    name: Unbind
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Forms.BindableWidget.UpdateBindings(Eto.Forms.BindingUpdateMode)
+  commentId: M:Eto.Forms.BindableWidget.UpdateBindings(Eto.Forms.BindingUpdateMode)
+  parent: Eto.Forms.BindableWidget
+  isExternal: true
+  name: UpdateBindings(BindingUpdateMode)
+  nameWithType: BindableWidget.UpdateBindings(BindingUpdateMode)
+  fullName: Eto.Forms.BindableWidget.UpdateBindings(Eto.Forms.BindingUpdateMode)
+  spec.csharp:
+  - uid: Eto.Forms.BindableWidget.UpdateBindings(Eto.Forms.BindingUpdateMode)
+    name: UpdateBindings
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.BindingUpdateMode
+    name: BindingUpdateMode
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.BindableWidget.UpdateBindings(Eto.Forms.BindingUpdateMode)
+    name: UpdateBindings
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.BindingUpdateMode
+    name: BindingUpdateMode
+    isExternal: true
+  - name: )
+- uid: Eto.Forms.BindableWidget.Parents
+  commentId: P:Eto.Forms.BindableWidget.Parents
+  parent: Eto.Forms.BindableWidget
+  isExternal: true
+  name: Parents
+  nameWithType: BindableWidget.Parents
+  fullName: Eto.Forms.BindableWidget.Parents
+- uid: Eto.Forms.BindableWidget.DataContext
+  commentId: P:Eto.Forms.BindableWidget.DataContext
+  parent: Eto.Forms.BindableWidget
+  isExternal: true
+  name: DataContext
+  nameWithType: BindableWidget.DataContext
+  fullName: Eto.Forms.BindableWidget.DataContext
+- uid: Eto.Forms.BindableWidget.Bindings
+  commentId: P:Eto.Forms.BindableWidget.Bindings
+  parent: Eto.Forms.BindableWidget
+  isExternal: true
+  name: Bindings
+  nameWithType: BindableWidget.Bindings
+  fullName: Eto.Forms.BindableWidget.Bindings
+- uid: Eto.Forms.BindableWidget.DataContextChanged
+  commentId: E:Eto.Forms.BindableWidget.DataContextChanged
+  parent: Eto.Forms.BindableWidget
+  isExternal: true
+  name: DataContextChanged
+  nameWithType: BindableWidget.DataContextChanged
+  fullName: Eto.Forms.BindableWidget.DataContextChanged
+- uid: Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{{T}}},System.String)
+  commentId: M:Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{``0}},System.String)
+  parent: Eto.Widget
+  definition: Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{``0}},System.String)
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  name: RegisterEvent<T>(Expression<Action<T>>, string)
+  nameWithType: Widget.RegisterEvent<T>(Expression<Action<T>>, string)
+  fullName: Eto.Widget.RegisterEvent<T>(System.Linq.Expressions.Expression<System.Action<T>>, string)
+  nameWithType.vb: Widget.RegisterEvent(Of T)(Expression(Of Action(Of T)), String)
+  fullName.vb: Eto.Widget.RegisterEvent(Of T)(System.Linq.Expressions.Expression(Of System.Action(Of T)), String)
+  name.vb: RegisterEvent(Of T)(Expression(Of Action(Of T)), String)
+  spec.csharp:
+  - uid: Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{``0}},System.String)
+    name: RegisterEvent
+    isExternal: true
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{``0}},System.String)
+    name: RegisterEvent
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Eto.Widget.Initialize
+  commentId: M:Eto.Widget.Initialize
+  parent: Eto.Widget
+  isExternal: true
+  name: Initialize()
+  nameWithType: Widget.Initialize()
+  fullName: Eto.Widget.Initialize()
+  spec.csharp:
+  - uid: Eto.Widget.Initialize
+    name: Initialize
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Widget.Initialize
+    name: Initialize
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Widget.Dispose
+  commentId: M:Eto.Widget.Dispose
+  parent: Eto.Widget
+  isExternal: true
+  name: Dispose()
+  nameWithType: Widget.Dispose()
+  fullName: Eto.Widget.Dispose()
+  spec.csharp:
+  - uid: Eto.Widget.Dispose
+    name: Dispose
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Widget.Dispose
+    name: Dispose
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Widget.ToString
+  commentId: M:Eto.Widget.ToString
+  parent: Eto.Widget
+  isExternal: true
+  name: ToString()
+  nameWithType: Widget.ToString()
+  fullName: Eto.Widget.ToString()
+  spec.csharp:
+  - uid: Eto.Widget.ToString
+    name: ToString
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Eto.Widget.ToString
+    name: ToString
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Eto.Widget.Platform
+  commentId: P:Eto.Widget.Platform
+  parent: Eto.Widget
+  isExternal: true
+  name: Platform
+  nameWithType: Widget.Platform
+  fullName: Eto.Widget.Platform
+- uid: Eto.Widget.NativeHandle
+  commentId: P:Eto.Widget.NativeHandle
+  parent: Eto.Widget
+  isExternal: true
+  name: NativeHandle
+  nameWithType: Widget.NativeHandle
+  fullName: Eto.Widget.NativeHandle
+- uid: Eto.Widget.Properties
+  commentId: P:Eto.Widget.Properties
+  parent: Eto.Widget
+  isExternal: true
+  name: Properties
+  nameWithType: Widget.Properties
+  fullName: Eto.Widget.Properties
+- uid: Eto.Widget.ID
+  commentId: P:Eto.Widget.ID
+  parent: Eto.Widget
+  isExternal: true
+  name: ID
+  nameWithType: Widget.ID
+  fullName: Eto.Widget.ID
+- uid: Eto.Widget.Style
+  commentId: P:Eto.Widget.Style
+  parent: Eto.Widget
+  isExternal: true
+  name: Style
+  nameWithType: Widget.Style
+  fullName: Eto.Widget.Style
+- uid: Eto.Widget.ControlObject
+  commentId: P:Eto.Widget.ControlObject
+  parent: Eto.Widget
+  isExternal: true
+  name: ControlObject
+  nameWithType: Widget.ControlObject
+  fullName: Eto.Widget.ControlObject
+- uid: Eto.Widget.IsDisposed
+  commentId: P:Eto.Widget.IsDisposed
+  parent: Eto.Widget
+  isExternal: true
+  name: IsDisposed
+  nameWithType: Widget.IsDisposed
+  fullName: Eto.Widget.IsDisposed
+- uid: Eto.Widget.StyleChanged
+  commentId: E:Eto.Widget.StyleChanged
+  parent: Eto.Widget
+  isExternal: true
+  name: StyleChanged
+  nameWithType: Widget.StyleChanged
+  fullName: Eto.Widget.StyleChanged
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Eto
+  commentId: N:Eto
+  isExternal: true
+  name: Eto
+  nameWithType: Eto
+  fullName: Eto
+- uid: Eto.Forms
+  commentId: N:Eto.Forms
+  isExternal: true
+  name: Eto.Forms
+  nameWithType: Eto.Forms
+  fullName: Eto.Forms
+  spec.csharp:
+  - uid: Eto
+    name: Eto
+    isExternal: true
+  - name: .
+  - uid: Eto.Forms
+    name: Forms
+    isExternal: true
+  spec.vb:
+  - uid: Eto
+    name: Eto
+    isExternal: true
+  - name: .
+  - uid: Eto.Forms
+    name: Forms
+    isExternal: true
+- uid: Eto.SkiaDraw
+  commentId: N:Eto.SkiaDraw
+  isExternal: true
+  name: Eto.SkiaDraw
+  nameWithType: Eto.SkiaDraw
+  fullName: Eto.SkiaDraw
+  spec.csharp:
+  - uid: Eto
+    name: Eto
+    isExternal: true
+  - name: .
+  - uid: Eto.SkiaDraw
+    name: SkiaDraw
+    isExternal: true
+  spec.vb:
+  - uid: Eto
+    name: Eto
+    isExternal: true
+  - name: .
+  - uid: Eto.SkiaDraw
+    name: SkiaDraw
+    isExternal: true
+- uid: Mapsui.UI
+  commentId: N:Mapsui.UI
+  href: Mapsui.html
+  name: Mapsui.UI
+  nameWithType: Mapsui.UI
+  fullName: Mapsui.UI
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{``0}},System.String)
+  commentId: M:Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{``0}},System.String)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  name: RegisterEvent<T>(Expression<Action<T>>, string)
+  nameWithType: Widget.RegisterEvent<T>(Expression<Action<T>>, string)
+  fullName: Eto.Widget.RegisterEvent<T>(System.Linq.Expressions.Expression<System.Action<T>>, string)
+  nameWithType.vb: Widget.RegisterEvent(Of T)(Expression(Of Action(Of T)), String)
+  fullName.vb: Eto.Widget.RegisterEvent(Of T)(System.Linq.Expressions.Expression(Of System.Action(Of T)), String)
+  name.vb: RegisterEvent(Of T)(Expression(Of Action(Of T)), String)
+  spec.csharp:
+  - uid: Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{``0}},System.String)
+    name: RegisterEvent
+    isExternal: true
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: <
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Eto.Widget.RegisterEvent``1(System.Linq.Expressions.Expression{System.Action{``0}},System.String)
+    name: RegisterEvent
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.Linq.Expressions.Expression`1
+    name: Expression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.UI.Eto.MapControl.#ctor*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.#ctor
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl__ctor
+  name: MapControl
+  nameWithType: MapControl.MapControl
+  fullName: Mapsui.UI.Eto.MapControl.MapControl
+  nameWithType.vb: MapControl.New
+  fullName.vb: Mapsui.UI.Eto.MapControl.New
+  name.vb: New
+- uid: Mapsui.UI.Eto.MapControl.MoveCursor*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.MoveCursor
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_MoveCursor
+  name: MoveCursor
+  nameWithType: MapControl.MoveCursor
+  fullName: Mapsui.UI.Eto.MapControl.MoveCursor
+- uid: Eto.Forms.Cursor
+  commentId: T:Eto.Forms.Cursor
+  parent: Eto.Forms
+  isExternal: true
+  name: Cursor
+  nameWithType: Cursor
+  fullName: Eto.Forms.Cursor
+- uid: Mapsui.UI.Eto.MapControl.MoveButton*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.MoveButton
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_MoveButton
+  name: MoveButton
+  nameWithType: MapControl.MoveButton
+  fullName: Mapsui.UI.Eto.MapControl.MoveButton
+- uid: Eto.Forms.MouseButtons
+  commentId: T:Eto.Forms.MouseButtons
+  parent: Eto.Forms
+  isExternal: true
+  name: MouseButtons
+  nameWithType: MouseButtons
+  fullName: Eto.Forms.MouseButtons
+- uid: Mapsui.UI.Eto.MapControl.MoveModifier*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.MoveModifier
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_MoveModifier
+  name: MoveModifier
+  nameWithType: MapControl.MoveModifier
+  fullName: Mapsui.UI.Eto.MapControl.MoveModifier
+- uid: Eto.Forms.Keys
+  commentId: T:Eto.Forms.Keys
+  parent: Eto.Forms
+  isExternal: true
+  name: Keys
+  nameWithType: Keys
+  fullName: Eto.Forms.Keys
+- uid: Mapsui.UI.Eto.MapControl.ZoomButton*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.ZoomButton
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ZoomButton
+  name: ZoomButton
+  nameWithType: MapControl.ZoomButton
+  fullName: Mapsui.UI.Eto.MapControl.ZoomButton
+- uid: Mapsui.UI.Eto.MapControl.ZoomModifier*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.ZoomModifier
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ZoomModifier
+  name: ZoomModifier
+  nameWithType: MapControl.ZoomModifier
+  fullName: Mapsui.UI.Eto.MapControl.ZoomModifier
+- uid: Mapsui.UI.Eto.MapControl.OpenInBrowser*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OpenInBrowser
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OpenInBrowser_System_String_
+  name: OpenInBrowser
+  nameWithType: MapControl.OpenInBrowser
+  fullName: Mapsui.UI.Eto.MapControl.OpenInBrowser
+- uid: Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+  commentId: M:Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+  parent: Mapsui.UI.IMapControl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: OpenInBrowser(string)
+  nameWithType: IMapControl.OpenInBrowser(string)
+  fullName: Mapsui.UI.IMapControl.OpenInBrowser(string)
+  nameWithType.vb: IMapControl.OpenInBrowser(String)
+  fullName.vb: Mapsui.UI.IMapControl.OpenInBrowser(String)
+  name.vb: OpenInBrowser(String)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+    name: OpenInBrowser
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+    name: OpenInBrowser
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Eto.Forms.MouseEventArgs.Handled
+  commentId: P:Eto.Forms.MouseEventArgs.Handled
+  isExternal: true
+  name: Handled
+  nameWithType: MouseEventArgs.Handled
+  fullName: Eto.Forms.MouseEventArgs.Handled
+- uid: Eto.Forms.Control.OnMouseDown(Eto.Forms.MouseEventArgs)
+  commentId: M:Eto.Forms.Control.OnMouseDown(Eto.Forms.MouseEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnMouseDown(MouseEventArgs)
+  nameWithType: Control.OnMouseDown(MouseEventArgs)
+  fullName: Eto.Forms.Control.OnMouseDown(Eto.Forms.MouseEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnMouseDown(Eto.Forms.MouseEventArgs)
+    name: OnMouseDown
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnMouseDown(Eto.Forms.MouseEventArgs)
+    name: OnMouseDown
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnMouseDown*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnMouseDown
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMouseDown_Eto_Forms_MouseEventArgs_
+  name: OnMouseDown
+  nameWithType: MapControl.OnMouseDown
+  fullName: Mapsui.UI.Eto.MapControl.OnMouseDown
+- uid: Eto.Forms.MouseEventArgs
+  commentId: T:Eto.Forms.MouseEventArgs
+  parent: Eto.Forms
+  isExternal: true
+  name: MouseEventArgs
+  nameWithType: MouseEventArgs
+  fullName: Eto.Forms.MouseEventArgs
+- uid: Eto.Forms.Control.OnMouseMove(Eto.Forms.MouseEventArgs)
+  commentId: M:Eto.Forms.Control.OnMouseMove(Eto.Forms.MouseEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnMouseMove(MouseEventArgs)
+  nameWithType: Control.OnMouseMove(MouseEventArgs)
+  fullName: Eto.Forms.Control.OnMouseMove(Eto.Forms.MouseEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnMouseMove(Eto.Forms.MouseEventArgs)
+    name: OnMouseMove
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnMouseMove(Eto.Forms.MouseEventArgs)
+    name: OnMouseMove
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnMouseMove*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnMouseMove
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMouseMove_Eto_Forms_MouseEventArgs_
+  name: OnMouseMove
+  nameWithType: MapControl.OnMouseMove
+  fullName: Mapsui.UI.Eto.MapControl.OnMouseMove
+- uid: Eto.Forms.Control.OnMouseUp(Eto.Forms.MouseEventArgs)
+  commentId: M:Eto.Forms.Control.OnMouseUp(Eto.Forms.MouseEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnMouseUp(MouseEventArgs)
+  nameWithType: Control.OnMouseUp(MouseEventArgs)
+  fullName: Eto.Forms.Control.OnMouseUp(Eto.Forms.MouseEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnMouseUp(Eto.Forms.MouseEventArgs)
+    name: OnMouseUp
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnMouseUp(Eto.Forms.MouseEventArgs)
+    name: OnMouseUp
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnMouseUp*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnMouseUp
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMouseUp_Eto_Forms_MouseEventArgs_
+  name: OnMouseUp
+  nameWithType: MapControl.OnMouseUp
+  fullName: Mapsui.UI.Eto.MapControl.OnMouseUp
+- uid: Eto.Forms.Container.OnLoadComplete(System.EventArgs)
+  commentId: M:Eto.Forms.Container.OnLoadComplete(System.EventArgs)
+  parent: Eto.Forms.Container
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnLoadComplete(EventArgs)
+  nameWithType: Container.OnLoadComplete(EventArgs)
+  fullName: Eto.Forms.Container.OnLoadComplete(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Container.OnLoadComplete(System.EventArgs)
+    name: OnLoadComplete
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Container.OnLoadComplete(System.EventArgs)
+    name: OnLoadComplete
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnLoadComplete*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnLoadComplete
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnLoadComplete_System_EventArgs_
+  name: OnLoadComplete
+  nameWithType: MapControl.OnLoadComplete
+  fullName: Mapsui.UI.Eto.MapControl.OnLoadComplete
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: EventArgs
+  nameWithType: EventArgs
+  fullName: System.EventArgs
+- uid: Eto.Forms.Control.OnMouseWheel(Eto.Forms.MouseEventArgs)
+  commentId: M:Eto.Forms.Control.OnMouseWheel(Eto.Forms.MouseEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnMouseWheel(MouseEventArgs)
+  nameWithType: Control.OnMouseWheel(MouseEventArgs)
+  fullName: Eto.Forms.Control.OnMouseWheel(Eto.Forms.MouseEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnMouseWheel(Eto.Forms.MouseEventArgs)
+    name: OnMouseWheel
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnMouseWheel(Eto.Forms.MouseEventArgs)
+    name: OnMouseWheel
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.MouseEventArgs
+    name: MouseEventArgs
+    isExternal: true
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnMouseWheel*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnMouseWheel
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMouseWheel_Eto_Forms_MouseEventArgs_
+  name: OnMouseWheel
+  nameWithType: MapControl.OnMouseWheel
+  fullName: Mapsui.UI.Eto.MapControl.OnMouseWheel
+- uid: Eto.Forms.Control.OnSizeChanged(System.EventArgs)
+  commentId: M:Eto.Forms.Control.OnSizeChanged(System.EventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: OnSizeChanged(EventArgs)
+  nameWithType: Control.OnSizeChanged(EventArgs)
+  fullName: Eto.Forms.Control.OnSizeChanged(System.EventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnSizeChanged(System.EventArgs)
+    name: OnSizeChanged
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnSizeChanged(System.EventArgs)
+    name: OnSizeChanged
+    isExternal: true
+  - name: (
+  - uid: System.EventArgs
+    name: EventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnSizeChanged*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnSizeChanged
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnSizeChanged_System_EventArgs_
+  name: OnSizeChanged
+  nameWithType: MapControl.OnSizeChanged
+  fullName: Mapsui.UI.Eto.MapControl.OnSizeChanged
+- uid: Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+  commentId: M:Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+  parent: Eto.SkiaDraw.SkiaDrawable
+  isExternal: true
+  name: OnPaint(SKPaintEventArgs)
+  nameWithType: SkiaDrawable.OnPaint(SKPaintEventArgs)
+  fullName: Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+  spec.csharp:
+  - uid: Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+    name: OnPaint
+    isExternal: true
+  - name: (
+  - uid: Eto.SkiaDraw.SKPaintEventArgs
+    name: SKPaintEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.SkiaDraw.SkiaDrawable.OnPaint(Eto.SkiaDraw.SKPaintEventArgs)
+    name: OnPaint
+    isExternal: true
+  - name: (
+  - uid: Eto.SkiaDraw.SKPaintEventArgs
+    name: SKPaintEventArgs
+    isExternal: true
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnPaint*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnPaint
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnPaint_Eto_SkiaDraw_SKPaintEventArgs_
+  name: OnPaint
+  nameWithType: MapControl.OnPaint
+  fullName: Mapsui.UI.Eto.MapControl.OnPaint
+- uid: Eto.SkiaDraw.SKPaintEventArgs
+  commentId: T:Eto.SkiaDraw.SKPaintEventArgs
+  parent: Eto.SkiaDraw
+  isExternal: true
+  name: SKPaintEventArgs
+  nameWithType: SKPaintEventArgs
+  fullName: Eto.SkiaDraw.SKPaintEventArgs
+- uid: Eto.Forms.Control.Dispose(System.Boolean)
+  commentId: M:Eto.Forms.Control.Dispose(System.Boolean)
+  parent: Eto.Forms.Control
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: Dispose(bool)
+  nameWithType: Control.Dispose(bool)
+  fullName: Eto.Forms.Control.Dispose(bool)
+  nameWithType.vb: Control.Dispose(Boolean)
+  fullName.vb: Eto.Forms.Control.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+  spec.csharp:
+  - uid: Eto.Forms.Control.Dispose(System.Boolean)
+    name: Dispose
+    isExternal: true
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.Dispose(System.Boolean)
+    name: Dispose
+    isExternal: true
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.Dispose*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.Dispose
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Dispose_System_Boolean_
+  name: Dispose
+  nameWithType: MapControl.Dispose
+  fullName: Mapsui.UI.Eto.MapControl.Dispose
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Eto.Forms.Control.OnKeyDown(Eto.Forms.KeyEventArgs)
+  commentId: M:Eto.Forms.Control.OnKeyDown(Eto.Forms.KeyEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnKeyDown(KeyEventArgs)
+  nameWithType: Control.OnKeyDown(KeyEventArgs)
+  fullName: Eto.Forms.Control.OnKeyDown(Eto.Forms.KeyEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnKeyDown(Eto.Forms.KeyEventArgs)
+    name: OnKeyDown
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.KeyEventArgs
+    name: KeyEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnKeyDown(Eto.Forms.KeyEventArgs)
+    name: OnKeyDown
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.KeyEventArgs
+    name: KeyEventArgs
+    isExternal: true
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnKeyDown*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnKeyDown
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnKeyDown_Eto_Forms_KeyEventArgs_
+  name: OnKeyDown
+  nameWithType: MapControl.OnKeyDown
+  fullName: Mapsui.UI.Eto.MapControl.OnKeyDown
+- uid: Eto.Forms.KeyEventArgs
+  commentId: T:Eto.Forms.KeyEventArgs
+  parent: Eto.Forms
+  isExternal: true
+  name: KeyEventArgs
+  nameWithType: KeyEventArgs
+  fullName: Eto.Forms.KeyEventArgs
+- uid: Eto.Forms.Control.OnKeyUp(Eto.Forms.KeyEventArgs)
+  commentId: M:Eto.Forms.Control.OnKeyUp(Eto.Forms.KeyEventArgs)
+  parent: Eto.Forms.Control
+  isExternal: true
+  name: OnKeyUp(KeyEventArgs)
+  nameWithType: Control.OnKeyUp(KeyEventArgs)
+  fullName: Eto.Forms.Control.OnKeyUp(Eto.Forms.KeyEventArgs)
+  spec.csharp:
+  - uid: Eto.Forms.Control.OnKeyUp(Eto.Forms.KeyEventArgs)
+    name: OnKeyUp
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.KeyEventArgs
+    name: KeyEventArgs
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: Eto.Forms.Control.OnKeyUp(Eto.Forms.KeyEventArgs)
+    name: OnKeyUp
+    isExternal: true
+  - name: (
+  - uid: Eto.Forms.KeyEventArgs
+    name: KeyEventArgs
+    isExternal: true
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnKeyUp*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnKeyUp
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnKeyUp_Eto_Forms_KeyEventArgs_
+  name: OnKeyUp
+  nameWithType: MapControl.OnKeyUp
+  fullName: Mapsui.UI.Eto.MapControl.OnKeyUp
+- uid: Mapsui.UI.Eto.MapControl.MaxTapGestureMovement*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.MaxTapGestureMovement
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_MaxTapGestureMovement
+  name: MaxTapGestureMovement
+  nameWithType: MapControl.MaxTapGestureMovement
+  fullName: Mapsui.UI.Eto.MapControl.MaxTapGestureMovement
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.UI.Eto.MapControl.UseFling*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.UseFling
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_UseFling
+  name: UseFling
+  nameWithType: MapControl.UseFling
+  fullName: Mapsui.UI.Eto.MapControl.UseFling
+- uid: Mapsui.UI.Eto.MapControl.StartUpdates*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.StartUpdates
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_StartUpdates_System_Boolean_
+  name: StartUpdates
+  nameWithType: MapControl.StartUpdates
+  fullName: Mapsui.UI.Eto.MapControl.StartUpdates
+- uid: Mapsui.UI.Eto.MapControl.StopUpdates*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.StopUpdates
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_StopUpdates
+  name: StopUpdates
+  nameWithType: MapControl.StopUpdates
+  fullName: Mapsui.UI.Eto.MapControl.StopUpdates
+- uid: Mapsui.UI.Eto.MapControl.ForceUpdate*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.ForceUpdate
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ForceUpdate
+  name: ForceUpdate
+  nameWithType: MapControl.ForceUpdate
+  fullName: Mapsui.UI.Eto.MapControl.ForceUpdate
+- uid: Mapsui.UI.Eto.MapControl.UpdateInterval*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.UpdateInterval
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_UpdateInterval
+  name: UpdateInterval
+  nameWithType: MapControl.UpdateInterval
+  fullName: Mapsui.UI.Eto.MapControl.UpdateInterval
+- uid: Mapsui.UI.Eto.MapControl.Performance*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.Performance
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Performance
+  name: Performance
+  nameWithType: MapControl.Performance
+  fullName: Mapsui.UI.Eto.MapControl.Performance
+- uid: Mapsui.UI.IMapControl.Performance
+  commentId: P:Mapsui.UI.IMapControl.Performance
+  parent: Mapsui.UI.IMapControl
+  name: Performance
+  nameWithType: IMapControl.Performance
+  fullName: Mapsui.UI.IMapControl.Performance
+- uid: Mapsui.Utilities.Performance
+  commentId: T:Mapsui.Utilities.Performance
+  parent: Mapsui.Utilities
+  href: Mapsui.Utilities.Performance.html
+  name: Performance
+  nameWithType: Performance
+  fullName: Mapsui.Utilities.Performance
+- uid: Mapsui.Utilities
+  commentId: N:Mapsui.Utilities
+  href: Mapsui.html
+  name: Mapsui.Utilities
+  nameWithType: Mapsui.Utilities
+  fullName: Mapsui.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+- uid: Mapsui.UI.Eto.MapControl.PixelDensity*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.PixelDensity
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_PixelDensity
+  name: PixelDensity
+  nameWithType: MapControl.PixelDensity
+  fullName: Mapsui.UI.Eto.MapControl.PixelDensity
+- uid: Mapsui.UI.IMapControl.PixelDensity
+  commentId: P:Mapsui.UI.IMapControl.PixelDensity
+  parent: Mapsui.UI.IMapControl
+  name: PixelDensity
+  nameWithType: IMapControl.PixelDensity
+  fullName: Mapsui.UI.IMapControl.PixelDensity
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Mapsui.UI.Eto.MapControl.Renderer*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.Renderer
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Renderer
+  name: Renderer
+  nameWithType: MapControl.Renderer
+  fullName: Mapsui.UI.Eto.MapControl.Renderer
+- uid: Mapsui.UI.IMapControl.Renderer
+  commentId: P:Mapsui.UI.IMapControl.Renderer
+  parent: Mapsui.UI.IMapControl
+  name: Renderer
+  nameWithType: IMapControl.Renderer
+  fullName: Mapsui.UI.IMapControl.Renderer
+- uid: Mapsui.Rendering.IRenderer
+  commentId: T:Mapsui.Rendering.IRenderer
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderer.html
+  name: IRenderer
+  nameWithType: IRenderer
+  fullName: Mapsui.Rendering.IRenderer
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: Mapsui.UI.IMapControl.Info
+  commentId: E:Mapsui.UI.IMapControl.Info
+  parent: Mapsui.UI.IMapControl
+  name: Info
+  nameWithType: IMapControl.Info
+  fullName: Mapsui.UI.IMapControl.Info
+- uid: System.EventHandler{Mapsui.MapInfoEventArgs}
+  commentId: T:System.EventHandler{Mapsui.MapInfoEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<MapInfoEventArgs>
+  nameWithType: EventHandler<MapInfoEventArgs>
+  fullName: System.EventHandler<Mapsui.MapInfoEventArgs>
+  nameWithType.vb: EventHandler(Of MapInfoEventArgs)
+  fullName.vb: System.EventHandler(Of Mapsui.MapInfoEventArgs)
+  name.vb: EventHandler(Of MapInfoEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - uid: Mapsui.MapInfoEventArgs
+    name: MapInfoEventArgs
+    href: Mapsui.MapInfoEventArgs.html
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.MapInfoEventArgs
+    name: MapInfoEventArgs
+    href: Mapsui.MapInfoEventArgs.html
+  - name: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - name: TEventArgs
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEventArgs
+  - name: )
+- uid: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  commentId: E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  parent: System.ComponentModel.INotifyPropertyChanged
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged.propertychanged
+  name: PropertyChanged
+  nameWithType: INotifyPropertyChanged.PropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: System.ComponentModel.PropertyChangedEventHandler
+  commentId: T:System.ComponentModel.PropertyChangedEventHandler
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler
+  name: PropertyChangedEventHandler
+  nameWithType: PropertyChangedEventHandler
+  fullName: System.ComponentModel.PropertyChangedEventHandler
+- uid: Mapsui.UI.Eto.MapControl.OnPropertyChanged*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnPropertyChanged
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnPropertyChanged_System_String_
+  name: OnPropertyChanged
+  nameWithType: MapControl.OnPropertyChanged
+  fullName: Mapsui.UI.Eto.MapControl.OnPropertyChanged
+- uid: Mapsui.UI.Eto.MapControl.Unsubscribe*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.Unsubscribe
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Unsubscribe
+  name: Unsubscribe
+  nameWithType: MapControl.Unsubscribe
+  fullName: Mapsui.UI.Eto.MapControl.Unsubscribe
+- uid: Mapsui.UI.IMapControl.Unsubscribe
+  commentId: M:Mapsui.UI.IMapControl.Unsubscribe
+  parent: Mapsui.UI.IMapControl
+  name: Unsubscribe()
+  nameWithType: IMapControl.Unsubscribe()
+  fullName: Mapsui.UI.IMapControl.Unsubscribe()
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.Unsubscribe
+    name: Unsubscribe
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.Unsubscribe
+    name: Unsubscribe
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.Refresh*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.Refresh
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Refresh_Mapsui_ChangeType_
+  name: Refresh
+  nameWithType: MapControl.Refresh
+  fullName: Mapsui.UI.Eto.MapControl.Refresh
+- uid: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  parent: Mapsui.UI.IMapControl
+  name: Refresh(ChangeType)
+  nameWithType: IMapControl.Refresh(ChangeType)
+  fullName: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+    name: Refresh
+  - name: (
+  - uid: Mapsui.ChangeType
+    name: ChangeType
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+    name: Refresh
+  - name: (
+  - uid: Mapsui.ChangeType
+    name: ChangeType
+  - name: )
+- uid: Mapsui.ChangeType
+  commentId: T:Mapsui.ChangeType
+  parent: Mapsui
+  href: Mapsui.ChangeType.html
+  name: ChangeType
+  nameWithType: ChangeType
+  fullName: Mapsui.ChangeType
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.UI.Eto.MapControl.RefreshGraphics*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.RefreshGraphics
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_RefreshGraphics
+  name: RefreshGraphics
+  nameWithType: MapControl.RefreshGraphics
+  fullName: Mapsui.UI.Eto.MapControl.RefreshGraphics
+- uid: Mapsui.UI.IMapControl.RefreshGraphics
+  commentId: M:Mapsui.UI.IMapControl.RefreshGraphics
+  parent: Mapsui.UI.IMapControl
+  name: RefreshGraphics()
+  nameWithType: IMapControl.RefreshGraphics()
+  fullName: Mapsui.UI.IMapControl.RefreshGraphics()
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.RefreshGraphics
+    name: RefreshGraphics
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.RefreshGraphics
+    name: RefreshGraphics
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.Map*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.Map
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Map
+  name: Map
+  nameWithType: MapControl.Map
+  fullName: Mapsui.UI.Eto.MapControl.Map
+- uid: Mapsui.UI.IMapControl.Map
+  commentId: P:Mapsui.UI.IMapControl.Map
+  parent: Mapsui.UI.IMapControl
+  name: Map
+  nameWithType: IMapControl.Map
+  fullName: Mapsui.UI.IMapControl.Map
+- uid: Mapsui.Map
+  commentId: T:Mapsui.Map
+  parent: Mapsui
+  href: Mapsui.Map.html
+  name: Map
+  nameWithType: Map
+  fullName: Mapsui.Map
+- uid: Mapsui.UI.Eto.MapControl.ToPixels*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.ToPixels
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ToPixels_Mapsui_MPoint_
+  name: ToPixels
+  nameWithType: MapControl.ToPixels
+  fullName: Mapsui.UI.Eto.MapControl.ToPixels
+- uid: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  parent: Mapsui.UI.IMapControl
+  name: ToPixels(MPoint)
+  nameWithType: IMapControl.ToPixels(MPoint)
+  fullName: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+    name: ToPixels
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+    name: ToPixels
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+  - name: )
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
+  name: ToDeviceIndependentUnits
+  nameWithType: MapControl.ToDeviceIndependentUnits
+  fullName: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits
+- uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  parent: Mapsui.UI.IMapControl
+  name: ToDeviceIndependentUnits(MPoint)
+  nameWithType: IMapControl.ToDeviceIndependentUnits(MPoint)
+  fullName: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+    name: ToDeviceIndependentUnits
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+    name: ToDeviceIndependentUnits
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.RefreshData*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.RefreshData
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_RefreshData_Mapsui_ChangeType_
+  name: RefreshData
+  nameWithType: MapControl.RefreshData
+  fullName: Mapsui.UI.Eto.MapControl.RefreshData
+- uid: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  parent: Mapsui.UI.IMapControl
+  name: RefreshData(ChangeType)
+  nameWithType: IMapControl.RefreshData(ChangeType)
+  fullName: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+    name: RefreshData
+  - name: (
+  - uid: Mapsui.ChangeType
+    name: ChangeType
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+    name: RefreshData
+  - name: (
+  - uid: Mapsui.ChangeType
+    name: ChangeType
+  - name: )
+- uid: Mapsui.UI.Eto.MapControl.OnMapInfo*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnMapInfo
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_
+  name: OnMapInfo
+  nameWithType: MapControl.OnMapInfo
+  fullName: Mapsui.UI.Eto.MapControl.OnMapInfo
+- uid: Mapsui.MapInfoEventArgs
+  commentId: T:Mapsui.MapInfoEventArgs
+  parent: Mapsui
+  href: Mapsui.MapInfoEventArgs.html
+  name: MapInfoEventArgs
+  nameWithType: MapInfoEventArgs
+  fullName: Mapsui.MapInfoEventArgs
+- uid: Mapsui.UI.Eto.MapControl.GetMapInfo*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.GetMapInfo
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
+  name: GetMapInfo
+  nameWithType: MapControl.GetMapInfo
+  fullName: Mapsui.UI.Eto.MapControl.GetMapInfo
+- uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  commentId: M:Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  parent: Mapsui.UI.IMapControl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: GetMapInfo(ScreenPosition, int)
+  nameWithType: IMapControl.GetMapInfo(ScreenPosition, int)
+  fullName: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
+  nameWithType.vb: IMapControl.GetMapInfo(ScreenPosition, Integer)
+  fullName.vb: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
+  name.vb: GetMapInfo(ScreenPosition, Integer)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+    name: GetMapInfo
+  - name: (
+  - uid: Mapsui.Manipulations.ScreenPosition
+    name: ScreenPosition
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+    name: GetMapInfo
+  - name: (
+  - uid: Mapsui.Manipulations.ScreenPosition
+    name: ScreenPosition
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: Mapsui.MapInfo
+  commentId: T:Mapsui.MapInfo
+  parent: Mapsui
+  href: Mapsui.MapInfo.html
+  name: MapInfo
+  nameWithType: MapInfo
+  fullName: Mapsui.MapInfo
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: Mapsui.UI.Eto.MapControl.GetSnapshot*
+  commentId: Overload:Mapsui.UI.Eto.MapControl.GetSnapshot
+  href: Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  name: GetSnapshot
+  nameWithType: MapControl.GetSnapshot
+  fullName: Mapsui.UI.Eto.MapControl.GetSnapshot
+- uid: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  commentId: M:Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  parent: Mapsui.UI.IMapControl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: GetSnapshot(IEnumerable<ILayer>)
+  nameWithType: IMapControl.GetSnapshot(IEnumerable<ILayer>)
+  fullName: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  nameWithType.vb: IMapControl.GetSnapshot(IEnumerable(Of ILayer))
+  fullName.vb: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  name.vb: GetSnapshot(IEnumerable(Of ILayer))
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+    name: GetSnapshot
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+    name: GetSnapshot
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<ILayer>
+  nameWithType: IEnumerable<ILayer>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>
+  nameWithType.vb: IEnumerable(Of ILayer)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer)
+  name.vb: IEnumerable(Of ILayer)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic

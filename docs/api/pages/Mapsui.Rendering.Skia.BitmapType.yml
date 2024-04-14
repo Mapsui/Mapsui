@@ -1,0 +1,266 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.BitmapType
+  commentId: T:Mapsui.Rendering.Skia.BitmapType
+  id: BitmapType
+  parent: Mapsui.Rendering.Skia
+  children:
+  - Mapsui.Rendering.Skia.BitmapType.Bitmap
+  - Mapsui.Rendering.Skia.BitmapType.Picture
+  - Mapsui.Rendering.Skia.BitmapType.Sprite
+  - Mapsui.Rendering.Skia.BitmapType.Svg
+  langs:
+  - csharp
+  - vb
+  name: BitmapType
+  nameWithType: BitmapType
+  fullName: Mapsui.Rendering.Skia.BitmapType
+  type: Enum
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BitmapType
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public enum BitmapType
+    content.vb: Public Enum BitmapType
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.Skia.BitmapType.Bitmap
+  commentId: F:Mapsui.Rendering.Skia.BitmapType.Bitmap
+  id: Bitmap
+  parent: Mapsui.Rendering.Skia.BitmapType
+  langs:
+  - csharp
+  - vb
+  name: Bitmap
+  nameWithType: BitmapType.Bitmap
+  fullName: Mapsui.Rendering.Skia.BitmapType.Bitmap
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Bitmap
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: Bitmap = 0
+    return:
+      type: Mapsui.Rendering.Skia.BitmapType
+- uid: Mapsui.Rendering.Skia.BitmapType.Svg
+  commentId: F:Mapsui.Rendering.Skia.BitmapType.Svg
+  id: Svg
+  parent: Mapsui.Rendering.Skia.BitmapType
+  langs:
+  - csharp
+  - vb
+  name: Svg
+  nameWithType: BitmapType.Svg
+  fullName: Mapsui.Rendering.Skia.BitmapType.Svg
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Svg
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 10
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: Svg = 1
+    return:
+      type: Mapsui.Rendering.Skia.BitmapType
+- uid: Mapsui.Rendering.Skia.BitmapType.Sprite
+  commentId: F:Mapsui.Rendering.Skia.BitmapType.Sprite
+  id: Sprite
+  parent: Mapsui.Rendering.Skia.BitmapType
+  langs:
+  - csharp
+  - vb
+  name: Sprite
+  nameWithType: BitmapType.Sprite
+  fullName: Mapsui.Rendering.Skia.BitmapType.Sprite
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Sprite
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 11
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: Sprite = 2
+    return:
+      type: Mapsui.Rendering.Skia.BitmapType
+- uid: Mapsui.Rendering.Skia.BitmapType.Picture
+  commentId: F:Mapsui.Rendering.Skia.BitmapType.Picture
+  id: Picture
+  parent: Mapsui.Rendering.Skia.BitmapType
+  langs:
+  - csharp
+  - vb
+  name: Picture
+  nameWithType: BitmapType.Picture
+  fullName: Mapsui.Rendering.Skia.BitmapType.Picture
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Picture
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 12
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: Picture = 3
+    return:
+      type: Mapsui.Rendering.Skia.BitmapType
+references:
+- uid: Mapsui.Rendering.Skia
+  commentId: N:Mapsui.Rendering.Skia
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia
+  nameWithType: Mapsui.Rendering.Skia
+  fullName: Mapsui.Rendering.Skia
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.Skia.BitmapType
+  commentId: T:Mapsui.Rendering.Skia.BitmapType
+  parent: Mapsui.Rendering.Skia
+  href: Mapsui.Rendering.Skia.BitmapType.html
+  name: BitmapType
+  nameWithType: BitmapType
+  fullName: Mapsui.Rendering.Skia.BitmapType

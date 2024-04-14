@@ -1,0 +1,3465 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Utilities.ObservableRangeCollection`1
+  commentId: T:Mapsui.Utilities.ObservableRangeCollection`1
+  id: ObservableRangeCollection`1
+  parent: Mapsui.Utilities
+  children:
+  - Mapsui.Utilities.ObservableRangeCollection`1.#ctor
+  - Mapsui.Utilities.ObservableRangeCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.#ctor(System.Collections.Generic.List{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.ClearItems
+  - Mapsui.Utilities.ObservableRangeCollection`1.DeferEvents
+  - Mapsui.Utilities.ObservableRangeCollection`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  - Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll(System.Int32,System.Int32,System.Predicate{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll(System.Predicate{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange(System.Int32,System.Int32)
+  - Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  - Mapsui.Utilities.ObservableRangeCollection`1.SetItem(System.Int32,`0)
+  langs:
+  - csharp
+  - vb
+  name: ObservableRangeCollection<T>
+  nameWithType: ObservableRangeCollection<T>
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ObservableRangeCollection
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 15
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Implementation of a dynamic data collection based on generic Collection&lt;T&gt;,
+
+    implementing INotifyCollectionChanged to notify listeners
+
+    when items get added, removed or the whole list is refreshed.
+  example: []
+  syntax:
+    content: 'public class ObservableRangeCollection<T> : ObservableCollection<T>, IList<T>, ICollection<T>, IReadOnlyList<T>, IReadOnlyCollection<T>, IEnumerable<T>, IList, ICollection, IEnumerable, INotifyCollectionChanged, INotifyPropertyChanged'
+    typeParameters:
+    - id: T
+    content.vb: Public Class ObservableRangeCollection(Of T) Inherits ObservableCollection(Of T) Implements IList(Of T), ICollection(Of T), IReadOnlyList(Of T), IReadOnlyCollection(Of T), IEnumerable(Of T), IList, ICollection, IEnumerable, INotifyCollectionChanged, INotifyPropertyChanged
+  inheritance:
+  - System.Object
+  - System.Collections.ObjectModel.Collection{{T}}
+  - System.Collections.ObjectModel.ObservableCollection{{T}}
+  implements:
+  - System.Collections.Generic.IList{{T}}
+  - System.Collections.Generic.ICollection{{T}}
+  - System.Collections.Generic.IReadOnlyList{{T}}
+  - System.Collections.Generic.IReadOnlyCollection{{T}}
+  - System.Collections.Generic.IEnumerable{{T}}
+  - System.Collections.IList
+  - System.Collections.ICollection
+  - System.Collections.IEnumerable
+  - System.Collections.Specialized.INotifyCollectionChanged
+  - System.ComponentModel.INotifyPropertyChanged
+  inheritedMembers:
+  - System.Collections.ObjectModel.ObservableCollection{{T}}.BlockReentrancy
+  - System.Collections.ObjectModel.ObservableCollection{{T}}.CheckReentrancy
+  - System.Collections.ObjectModel.ObservableCollection{{T}}.InsertItem(System.Int32,{T})
+  - System.Collections.ObjectModel.ObservableCollection{{T}}.Move(System.Int32,System.Int32)
+  - System.Collections.ObjectModel.ObservableCollection{{T}}.MoveItem(System.Int32,System.Int32)
+  - System.Collections.ObjectModel.ObservableCollection{{T}}.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  - System.Collections.ObjectModel.ObservableCollection{{T}}.RemoveItem(System.Int32)
+  - System.Collections.ObjectModel.ObservableCollection{{T}}.CollectionChanged
+  - System.Collections.ObjectModel.ObservableCollection{{T}}.PropertyChanged
+  - System.Collections.ObjectModel.Collection{{T}}.Add({T})
+  - System.Collections.ObjectModel.Collection{{T}}.Clear
+  - System.Collections.ObjectModel.Collection{{T}}.Contains({T})
+  - System.Collections.ObjectModel.Collection{{T}}.CopyTo({T}[],System.Int32)
+  - System.Collections.ObjectModel.Collection{{T}}.GetEnumerator
+  - System.Collections.ObjectModel.Collection{{T}}.IndexOf({T})
+  - System.Collections.ObjectModel.Collection{{T}}.Insert(System.Int32,{T})
+  - System.Collections.ObjectModel.Collection{{T}}.Remove({T})
+  - System.Collections.ObjectModel.Collection{{T}}.RemoveAt(System.Int32)
+  - System.Collections.ObjectModel.Collection{{T}}.Count
+  - System.Collections.ObjectModel.Collection{{T}}.Item(System.Int32)
+  - System.Collections.ObjectModel.Collection{{T}}.Items
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  nameWithType.vb: ObservableRangeCollection(Of T)
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T)
+  name.vb: ObservableRangeCollection(Of T)
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.#ctor
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.#ctor
+  id: '#ctor'
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: ObservableRangeCollection()
+  nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection()
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ObservableRangeCollection()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 39
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Initializes a new instance of ObservableCollection that is empty and has default initial capacity.
+  example: []
+  syntax:
+    content: public ObservableRangeCollection()
+    content.vb: Public Sub New()
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.#ctor*
+  nameWithType.vb: ObservableRangeCollection(Of T).New()
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).New()
+  name.vb: New()
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})
+  id: '#ctor(System.Collections.Generic.IEnumerable{`0})'
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: ObservableRangeCollection(IEnumerable<T>)
+  nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection(IEnumerable<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ObservableRangeCollection(System.Collections.Generic.IEnumerable<T>)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 52
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Initializes a new instance of the ObservableCollection class that contains
+
+    elements copied from the specified collection and has sufficient capacity
+
+    to accommodate the number of elements copied.
+  remarks: >-
+    The elements are copied onto the ObservableCollection in the
+
+    same order they are read by the enumerator of the collection.
+  example: []
+  syntax:
+    content: public ObservableRangeCollection(IEnumerable<T> collection)
+    parameters:
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: The collection whose elements are copied to the new list.
+    content.vb: Public Sub New(collection As IEnumerable(Of T))
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: collection is a null reference
+  nameWithType.vb: ObservableRangeCollection(Of T).New(IEnumerable(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).New(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: New(IEnumerable(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.#ctor(System.Collections.Generic.List{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.#ctor(System.Collections.Generic.List{`0})
+  id: '#ctor(System.Collections.Generic.List{`0})'
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: ObservableRangeCollection(List<T>)
+  nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection(List<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ObservableRangeCollection(System.Collections.Generic.List<T>)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 64
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Initializes a new instance of the ObservableCollection class
+
+    that contains elements copied from the specified list
+  remarks: >-
+    The elements are copied onto the ObservableCollection in the
+
+    same order they are read by the enumerator of the list.
+  example: []
+  syntax:
+    content: public ObservableRangeCollection(List<T> list)
+    parameters:
+    - id: list
+      type: System.Collections.Generic.List{{T}}
+      description: The list whose elements are copied to the new list.
+    content.vb: Public Sub New(list As List(Of T))
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: list is a null reference
+  nameWithType.vb: ObservableRangeCollection(Of T).New(List(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).New(System.Collections.Generic.List(Of T))
+  name.vb: New(List(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})
+  id: AddRange(System.Collections.Generic.IEnumerable{`0})
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: AddRange(IEnumerable<T>)
+  nameWithType: ObservableRangeCollection<T>.AddRange(IEnumerable<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.AddRange(System.Collections.Generic.IEnumerable<T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddRange
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 84
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Adds the elements of the specified collection to the end of the <xref href="System.Collections.ObjectModel.ObservableCollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void AddRange(IEnumerable<T> collection)
+    parameters:
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: >-
+        The collection whose elements should be added to the end of the <xref href="System.Collections.ObjectModel.ObservableCollection%601" data-throw-if-not-resolved="false"></xref>.
+
+        The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.
+    content.vb: Public Sub AddRange(collection As IEnumerable(Of T))
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.AddRange*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">collection</code> is null.
+  nameWithType.vb: ObservableRangeCollection(Of T).AddRange(IEnumerable(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).AddRange(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: AddRange(IEnumerable(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})
+  id: InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: InsertRange(int, IEnumerable<T>)
+  nameWithType: ObservableRangeCollection<T>.InsertRange(int, IEnumerable<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.InsertRange(int, System.Collections.Generic.IEnumerable<T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: InsertRange
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 97
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Inserts the elements of a collection into the <xref href="System.Collections.ObjectModel.ObservableCollection%601" data-throw-if-not-resolved="false"></xref> at the specified index.
+  example: []
+  syntax:
+    content: public void InsertRange(int index, IEnumerable<T> collection)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The zero-based index at which the new elements should be inserted.
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: >-
+        The collection whose elements should be inserted into the List{T}.
+            The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.
+    content.vb: Public Sub InsertRange(index As Integer, collection As IEnumerable(Of T))
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.InsertRange*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">collection</code> is null.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">index</code> is not in the collection range.
+  nameWithType.vb: ObservableRangeCollection(Of T).InsertRange(Integer, IEnumerable(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).InsertRange(Integer, System.Collections.Generic.IEnumerable(Of T))
+  name.vb: InsertRange(Integer, IEnumerable(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})
+  id: RemoveRange(System.Collections.Generic.IEnumerable{`0})
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: RemoveRange(IEnumerable<T>)
+  nameWithType: ObservableRangeCollection<T>.RemoveRange(IEnumerable<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.RemoveRange(System.Collections.Generic.IEnumerable<T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RemoveRange
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 135
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Removes the first occurrence of each item in the specified collection from the <xref href="System.Collections.ObjectModel.ObservableCollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void RemoveRange(IEnumerable<T> collection)
+    parameters:
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: The items to remove.
+    content.vb: Public Sub RemoveRange(collection As IEnumerable(Of T))
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">collection</code> is null.
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveRange(IEnumerable(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).RemoveRange(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: RemoveRange(IEnumerable(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll(System.Predicate{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll(System.Predicate{`0})
+  id: RemoveAll(System.Predicate{`0})
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: RemoveAll(Predicate<T>)
+  nameWithType: ObservableRangeCollection<T>.RemoveAll(Predicate<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.RemoveAll(System.Predicate<T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RemoveAll
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 202
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Iterates over the collection and removes all items that satisfy the specified match.
+  remarks: The complexity is O(n).
+  example: []
+  syntax:
+    content: public int RemoveAll(Predicate<T> match)
+    parameters:
+    - id: match
+      type: System.Predicate{{T}}
+      description: ''
+    return:
+      type: System.Int32
+      description: Returns the number of elements that where
+    content.vb: Public Function RemoveAll(match As Predicate(Of T)) As Integer
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">match</code> is null.
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll(Predicate(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).RemoveAll(System.Predicate(Of T))
+  name.vb: RemoveAll(Predicate(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll(System.Int32,System.Int32,System.Predicate{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll(System.Int32,System.Int32,System.Predicate{`0})
+  id: RemoveAll(System.Int32,System.Int32,System.Predicate{`0})
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: RemoveAll(int, int, Predicate<T>)
+  nameWithType: ObservableRangeCollection<T>.RemoveAll(int, int, Predicate<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.RemoveAll(int, int, System.Predicate<T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RemoveAll
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 218
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Iterates over the specified range within the collection and removes all items that satisfy the specified match.
+  remarks: The complexity is O(n).
+  example: []
+  syntax:
+    content: public int RemoveAll(int index, int count, Predicate<T> match)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index of where to start performing the search.
+    - id: count
+      type: System.Int32
+      description: The number of items to iterate on.
+    - id: match
+      type: System.Predicate{{T}}
+      description: ''
+    return:
+      type: System.Int32
+      description: Returns the number of elements that where
+    content.vb: Public Function RemoveAll(index As Integer, count As Integer, match As Predicate(Of T)) As Integer
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">index</code> is out of range.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">count</code> is out of range.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">match</code> is null.
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll(Integer, Integer, Predicate(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).RemoveAll(Integer, Integer, System.Predicate(Of T))
+  name.vb: RemoveAll(Integer, Integer, Predicate(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange(System.Int32,System.Int32)
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange(System.Int32,System.Int32)
+  id: RemoveRange(System.Int32,System.Int32)
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: RemoveRange(int, int)
+  nameWithType: ObservableRangeCollection<T>.RemoveRange(int, int)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.RemoveRange(int, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RemoveRange
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 280
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Removes a range of elements from the <xref href="System.Collections.ObjectModel.ObservableCollection%601" data-throw-if-not-resolved="false"></xref>&gt;.
+  example: []
+  syntax:
+    content: public void RemoveRange(int index, int count)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The zero-based starting index of the range of elements to remove.
+    - id: count
+      type: System.Int32
+      description: The number of elements to remove.
+    content.vb: Public Sub RemoveRange(index As Integer, count As Integer)
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The specified range is exceeding the collection.
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveRange(Integer, Integer)
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).RemoveRange(Integer, Integer)
+  name.vb: RemoveRange(Integer, Integer)
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0})
+  id: ReplaceRange(System.Collections.Generic.IEnumerable{`0})
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: ReplaceRange(IEnumerable<T>)
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange(IEnumerable<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ReplaceRange(System.Collections.Generic.IEnumerable<T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ReplaceRange
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 320
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Clears the current collection and replaces it with the specified collection,
+
+    using the default <xref href="System.Collections.Generic.EqualityComparer%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void ReplaceRange(IEnumerable<T> collection)
+    parameters:
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: The items to fill the collection with, after clearing it.
+    content.vb: Public Sub ReplaceRange(collection As IEnumerable(Of T))
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">collection</code> is null.
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(IEnumerable(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).ReplaceRange(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: ReplaceRange(IEnumerable(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  id: ReplaceRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: ReplaceRange(IEnumerable<T>, IEqualityComparer<T>)
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange(IEnumerable<T>, IEqualityComparer<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ReplaceRange(System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IEqualityComparer<T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ReplaceRange
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 335
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Clears the current collection and replaces it with the specified collection,
+
+    using the specified comparer to skip equal items.
+  example: []
+  syntax:
+    content: public void ReplaceRange(IEnumerable<T> collection, IEqualityComparer<T> comparer)
+    parameters:
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: The items to fill the collection with, after clearing it.
+    - id: comparer
+      type: System.Collections.Generic.IEqualityComparer{{T}}
+      description: >-
+        An <xref href="System.Collections.Generic.IEqualityComparer%601" data-throw-if-not-resolved="false"></xref> to be used
+            to check whether an item in the same location already existed before,
+            which in case it would not be added to the collection, and no event will be raised for it.
+    content.vb: Public Sub ReplaceRange(collection As IEnumerable(Of T), comparer As IEqualityComparer(Of T))
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">collection</code> is null.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">comparer</code> is null.
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).ReplaceRange(System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IEqualityComparer(Of T))
+  name.vb: ReplaceRange(IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0})
+  id: ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0})
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: ReplaceRange(int, int, IEnumerable<T>)
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange(int, int, IEnumerable<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ReplaceRange(int, int, System.Collections.Generic.IEnumerable<T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ReplaceRange
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 350
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Removes the specified range and inserts the specified collection,
+
+    ignoring equal items (using <xref href="System.Collections.Generic.EqualityComparer%601.Default" data-throw-if-not-resolved="false"></xref>).
+  example: []
+  syntax:
+    content: public void ReplaceRange(int index, int count, IEnumerable<T> collection)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index of where to start the replacement.
+    - id: count
+      type: System.Int32
+      description: The number of items to be replaced.
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: The collection to insert in that location.
+    content.vb: Public Sub ReplaceRange(index As Integer, count As Integer, collection As IEnumerable(Of T))
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">index</code> is out of range.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">count</code> is out of range.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">collection</code> is null.
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(Integer, Integer, IEnumerable(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).ReplaceRange(Integer, Integer, System.Collections.Generic.IEnumerable(Of T))
+  name.vb: ReplaceRange(Integer, Integer, IEnumerable(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  id: ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: ReplaceRange(int, int, IEnumerable<T>, IEqualityComparer<T>)
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange(int, int, IEnumerable<T>, IEqualityComparer<T>)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ReplaceRange(int, int, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IEqualityComparer<T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ReplaceRange
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 366
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Removes the specified range and inserts the specified collection in its position, leaving equal items in equal positions intact.
+  example: []
+  syntax:
+    content: public void ReplaceRange(int index, int count, IEnumerable<T> collection, IEqualityComparer<T> comparer)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index of where to start the replacement.
+    - id: count
+      type: System.Int32
+      description: The number of items to be replaced.
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: The collection to insert in that location.
+    - id: comparer
+      type: System.Collections.Generic.IEqualityComparer{{T}}
+      description: The comparer to use when checking for equal items.
+    content.vb: Public Sub ReplaceRange(index As Integer, count As Integer, collection As IEnumerable(Of T), comparer As IEqualityComparer(Of T))
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">index</code> is out of range.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">count</code> is out of range.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">collection</code> is null.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">comparer</code> is null.
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(Integer, Integer, IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).ReplaceRange(Integer, Integer, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IEqualityComparer(Of T))
+  name.vb: ReplaceRange(Integer, Integer, IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.ClearItems
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.ClearItems
+  id: ClearItems
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: ClearItems()
+  nameWithType: ObservableRangeCollection<T>.ClearItems()
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ClearItems()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ClearItems
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 490
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Called by base class Collection&lt;T&gt; when the list is being cleared;
+
+    raises a CollectionChanged event to any listeners.
+  example: []
+  syntax:
+    content: protected override void ClearItems()
+    content.vb: Protected Overrides Sub ClearItems()
+  overridden: System.Collections.ObjectModel.ObservableCollection{{T}}.ClearItems
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.ClearItems*
+  nameWithType.vb: ObservableRangeCollection(Of T).ClearItems()
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).ClearItems()
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.SetItem(System.Int32,`0)
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.SetItem(System.Int32,`0)
+  id: SetItem(System.Int32,`0)
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: SetItem(int, T)
+  nameWithType: ObservableRangeCollection<T>.SetItem(int, T)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.SetItem(int, T)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetItem
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 505
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Called by base class Collection&lt;T&gt; when an item is set in list;
+
+    raises a CollectionChanged event to any listeners.
+  example: []
+  syntax:
+    content: protected override void SetItem(int index, T item)
+    parameters:
+    - id: index
+      type: System.Int32
+    - id: item
+      type: '{T}'
+    content.vb: Protected Overrides Sub SetItem(index As Integer, item As T)
+  overridden: System.Collections.ObjectModel.ObservableCollection{{T}}.SetItem(System.Int32,{T})
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.SetItem*
+  nameWithType.vb: ObservableRangeCollection(Of T).SetItem(Integer, T)
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).SetItem(Integer, T)
+  name.vb: SetItem(Integer, T)
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  id: OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  nameWithType: ObservableRangeCollection<T>.OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnCollectionChanged
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 527
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Raise CollectionChanged event to any listeners.
+
+    Properties/methods modifying this ObservableCollection will raise
+
+    a collection changed event through this virtual method.
+  remarks: >-
+    When overriding this method, either call its base implementation
+
+    or call <xref href="System.Collections.ObjectModel.ObservableCollection%601.BlockReentrancy" data-throw-if-not-resolved="false"></xref> to guard against reentrant collection changes.
+  example: []
+  syntax:
+    content: protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+    parameters:
+    - id: e
+      type: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    content.vb: Protected Overrides Sub OnCollectionChanged(e As NotifyCollectionChangedEventArgs)
+  overridden: System.Collections.ObjectModel.ObservableCollection{{T}}.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.OnCollectionChanged*
+  nameWithType.vb: ObservableRangeCollection(Of T).OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.DeferEvents
+  commentId: M:Mapsui.Utilities.ObservableRangeCollection`1.DeferEvents
+  id: DeferEvents
+  parent: Mapsui.Utilities.ObservableRangeCollection`1
+  langs:
+  - csharp
+  - vb
+  name: DeferEvents()
+  nameWithType: ObservableRangeCollection<T>.DeferEvents()
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.DeferEvents()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ObservableRangeCollection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DeferEvents
+    path: ../../Mapsui/Utilities/ObservableRangeCollection.cs
+    startLine: 537
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  syntax:
+    content: protected virtual IDisposable DeferEvents()
+    return:
+      type: System.IDisposable
+    content.vb: Protected Overridable Function DeferEvents() As IDisposable
+  overload: Mapsui.Utilities.ObservableRangeCollection`1.DeferEvents*
+  nameWithType.vb: ObservableRangeCollection(Of T).DeferEvents()
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).DeferEvents()
+references:
+- uid: Mapsui.Utilities
+  commentId: N:Mapsui.Utilities
+  href: Mapsui.html
+  name: Mapsui.Utilities
+  nameWithType: Mapsui.Utilities
+  fullName: Mapsui.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Collections.ObjectModel.Collection{{T}}
+  commentId: T:System.Collections.ObjectModel.Collection{`0}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}
+  commentId: T:System.Collections.ObjectModel.ObservableCollection{`0}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.ObservableCollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1
+  name: ObservableCollection<T>
+  nameWithType: ObservableCollection<T>
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>
+  nameWithType.vb: ObservableCollection(Of T)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T)
+  name.vb: ObservableCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
+    name: ObservableCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
+    name: ObservableCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IList{{T}}
+  commentId: T:System.Collections.Generic.IList{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.ICollection{{T}}
+  commentId: T:System.Collections.Generic.ICollection{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList{{T}}
+  commentId: T:System.Collections.Generic.IReadOnlyList{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyCollection{{T}}
+  commentId: T:System.Collections.Generic.IReadOnlyCollection{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyCollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<T>
+  nameWithType: IReadOnlyCollection<T>
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>
+  nameWithType.vb: IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  name.vb: IReadOnlyCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{{T}}
+  commentId: T:System.Collections.Generic.IEnumerable{``0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.IList
+  commentId: T:System.Collections.IList
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ilist
+  name: IList
+  nameWithType: IList
+  fullName: System.Collections.IList
+- uid: System.Collections.ICollection
+  commentId: T:System.Collections.ICollection
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.icollection
+  name: ICollection
+  nameWithType: ICollection
+  fullName: System.Collections.ICollection
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.Collections.Specialized.INotifyCollectionChanged
+  commentId: T:System.Collections.Specialized.INotifyCollectionChanged
+  parent: System.Collections.Specialized
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.inotifycollectionchanged
+  name: INotifyCollectionChanged
+  nameWithType: INotifyCollectionChanged
+  fullName: System.Collections.Specialized.INotifyCollectionChanged
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.BlockReentrancy
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.BlockReentrancy
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.BlockReentrancy
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.blockreentrancy
+  name: BlockReentrancy()
+  nameWithType: ObservableCollection<T>.BlockReentrancy()
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.BlockReentrancy()
+  nameWithType.vb: ObservableCollection(Of T).BlockReentrancy()
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).BlockReentrancy()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.BlockReentrancy
+    name: BlockReentrancy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.blockreentrancy
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.BlockReentrancy
+    name: BlockReentrancy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.blockreentrancy
+  - name: (
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.CheckReentrancy
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.CheckReentrancy
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.CheckReentrancy
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.checkreentrancy
+  name: CheckReentrancy()
+  nameWithType: ObservableCollection<T>.CheckReentrancy()
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.CheckReentrancy()
+  nameWithType.vb: ObservableCollection(Of T).CheckReentrancy()
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).CheckReentrancy()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.CheckReentrancy
+    name: CheckReentrancy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.checkreentrancy
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.CheckReentrancy
+    name: CheckReentrancy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.checkreentrancy
+  - name: (
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.InsertItem(System.Int32,{T})
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.InsertItem(System.Int32,`0)
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.InsertItem(System.Int32,`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.insertitem
+  name: InsertItem(int, T)
+  nameWithType: ObservableCollection<T>.InsertItem(int, T)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.InsertItem(int, T)
+  nameWithType.vb: ObservableCollection(Of T).InsertItem(Integer, T)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).InsertItem(Integer, T)
+  name.vb: InsertItem(Integer, T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.InsertItem(System.Int32,`0)
+    name: InsertItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.insertitem
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.InsertItem(System.Int32,`0)
+    name: InsertItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.insertitem
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.Move(System.Int32,System.Int32)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.Move(System.Int32,System.Int32)
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.Move(System.Int32,System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.move
+  name: Move(int, int)
+  nameWithType: ObservableCollection<T>.Move(int, int)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.Move(int, int)
+  nameWithType.vb: ObservableCollection(Of T).Move(Integer, Integer)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).Move(Integer, Integer)
+  name.vb: Move(Integer, Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.Move(System.Int32,System.Int32)
+    name: Move
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.move
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.Move(System.Int32,System.Int32)
+    name: Move
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.move
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.MoveItem(System.Int32,System.Int32)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.MoveItem(System.Int32,System.Int32)
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.MoveItem(System.Int32,System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.moveitem
+  name: MoveItem(int, int)
+  nameWithType: ObservableCollection<T>.MoveItem(int, int)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.MoveItem(int, int)
+  nameWithType.vb: ObservableCollection(Of T).MoveItem(Integer, Integer)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).MoveItem(Integer, Integer)
+  name.vb: MoveItem(Integer, Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.MoveItem(System.Int32,System.Int32)
+    name: MoveItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.moveitem
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.MoveItem(System.Int32,System.Int32)
+    name: MoveItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.moveitem
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.onpropertychanged
+  name: OnPropertyChanged(PropertyChangedEventArgs)
+  nameWithType: ObservableCollection<T>.OnPropertyChanged(PropertyChangedEventArgs)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  nameWithType.vb: ObservableCollection(Of T).OnPropertyChanged(PropertyChangedEventArgs)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+    name: OnPropertyChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.onpropertychanged
+  - name: (
+  - uid: System.ComponentModel.PropertyChangedEventArgs
+    name: PropertyChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventargs
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+    name: OnPropertyChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.onpropertychanged
+  - name: (
+  - uid: System.ComponentModel.PropertyChangedEventArgs
+    name: PropertyChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventargs
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.RemoveItem(System.Int32)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.RemoveItem(System.Int32)
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.RemoveItem(System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.removeitem
+  name: RemoveItem(int)
+  nameWithType: ObservableCollection<T>.RemoveItem(int)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.RemoveItem(int)
+  nameWithType.vb: ObservableCollection(Of T).RemoveItem(Integer)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).RemoveItem(Integer)
+  name.vb: RemoveItem(Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.RemoveItem(System.Int32)
+    name: RemoveItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.removeitem
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.RemoveItem(System.Int32)
+    name: RemoveItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.removeitem
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.CollectionChanged
+  commentId: E:System.Collections.ObjectModel.ObservableCollection{`0}.CollectionChanged
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.CollectionChanged
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.collectionchanged
+  name: CollectionChanged
+  nameWithType: ObservableCollection<T>.CollectionChanged
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.CollectionChanged
+  nameWithType.vb: ObservableCollection(Of T).CollectionChanged
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).CollectionChanged
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.PropertyChanged
+  commentId: E:System.Collections.ObjectModel.ObservableCollection{`0}.PropertyChanged
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.PropertyChanged
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.propertychanged
+  name: PropertyChanged
+  nameWithType: ObservableCollection<T>.PropertyChanged
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.PropertyChanged
+  nameWithType.vb: ObservableCollection(Of T).PropertyChanged
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).PropertyChanged
+- uid: System.Collections.ObjectModel.Collection{{T}}.Add({T})
+  commentId: M:System.Collections.ObjectModel.Collection{`0}.Add(`0)
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.Add(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.add
+  name: Add(T)
+  nameWithType: Collection<T>.Add(T)
+  fullName: System.Collections.ObjectModel.Collection<T>.Add(T)
+  nameWithType.vb: Collection(Of T).Add(T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Add(T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Add(`0)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.add
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Add(`0)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.add
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.Clear
+  commentId: M:System.Collections.ObjectModel.Collection{`0}.Clear
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.Clear
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.clear
+  name: Clear()
+  nameWithType: Collection<T>.Clear()
+  fullName: System.Collections.ObjectModel.Collection<T>.Clear()
+  nameWithType.vb: Collection(Of T).Clear()
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Clear()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.clear
+  - name: (
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.Contains({T})
+  commentId: M:System.Collections.ObjectModel.Collection{`0}.Contains(`0)
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.Contains(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.contains
+  name: Contains(T)
+  nameWithType: Collection<T>.Contains(T)
+  fullName: System.Collections.ObjectModel.Collection<T>.Contains(T)
+  nameWithType.vb: Collection(Of T).Contains(T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Contains(T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.contains
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.contains
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.CopyTo({T}[],System.Int32)
+  commentId: M:System.Collections.ObjectModel.Collection{`0}.CopyTo(`0[],System.Int32)
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.CopyTo(`0[],System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.copyto
+  name: CopyTo(T[], int)
+  nameWithType: Collection<T>.CopyTo(T[], int)
+  fullName: System.Collections.ObjectModel.Collection<T>.CopyTo(T[], int)
+  nameWithType.vb: Collection(Of T).CopyTo(T(), Integer)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).CopyTo(T(), Integer)
+  name.vb: CopyTo(T(), Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection{`0}.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.copyto
+  - name: (
+  - name: T
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.copyto
+  - name: (
+  - name: T
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.GetEnumerator
+  commentId: M:System.Collections.ObjectModel.Collection{`0}.GetEnumerator
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.GetEnumerator
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: Collection<T>.GetEnumerator()
+  fullName: System.Collections.ObjectModel.Collection<T>.GetEnumerator()
+  nameWithType.vb: Collection(Of T).GetEnumerator()
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection{`0}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.IndexOf({T})
+  commentId: M:System.Collections.ObjectModel.Collection{`0}.IndexOf(`0)
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.IndexOf(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.indexof
+  name: IndexOf(T)
+  nameWithType: Collection<T>.IndexOf(T)
+  fullName: System.Collections.ObjectModel.Collection<T>.IndexOf(T)
+  nameWithType.vb: Collection(Of T).IndexOf(T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).IndexOf(T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection{`0}.IndexOf(`0)
+    name: IndexOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.indexof
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.IndexOf(`0)
+    name: IndexOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.indexof
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.Insert(System.Int32,{T})
+  commentId: M:System.Collections.ObjectModel.Collection{`0}.Insert(System.Int32,`0)
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.Insert(System.Int32,`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.insert
+  name: Insert(int, T)
+  nameWithType: Collection<T>.Insert(int, T)
+  fullName: System.Collections.ObjectModel.Collection<T>.Insert(int, T)
+  nameWithType.vb: Collection(Of T).Insert(Integer, T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Insert(Integer, T)
+  name.vb: Insert(Integer, T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Insert(System.Int32,`0)
+    name: Insert
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.insert
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Insert(System.Int32,`0)
+    name: Insert
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.insert
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.Remove({T})
+  commentId: M:System.Collections.ObjectModel.Collection{`0}.Remove(`0)
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.Remove(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.remove
+  name: Remove(T)
+  nameWithType: Collection<T>.Remove(T)
+  fullName: System.Collections.ObjectModel.Collection<T>.Remove(T)
+  nameWithType.vb: Collection(Of T).Remove(T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Remove(T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Remove(`0)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.remove
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Remove(`0)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.remove
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.RemoveAt(System.Int32)
+  commentId: M:System.Collections.ObjectModel.Collection{`0}.RemoveAt(System.Int32)
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.RemoveAt(System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.removeat
+  name: RemoveAt(int)
+  nameWithType: Collection<T>.RemoveAt(int)
+  fullName: System.Collections.ObjectModel.Collection<T>.RemoveAt(int)
+  nameWithType.vb: Collection(Of T).RemoveAt(Integer)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).RemoveAt(Integer)
+  name.vb: RemoveAt(Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection{`0}.RemoveAt(System.Int32)
+    name: RemoveAt
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.removeat
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.RemoveAt(System.Int32)
+    name: RemoveAt
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.removeat
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.Count
+  commentId: P:System.Collections.ObjectModel.Collection{`0}.Count
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.Count
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.count
+  name: Count
+  nameWithType: Collection<T>.Count
+  fullName: System.Collections.ObjectModel.Collection<T>.Count
+  nameWithType.vb: Collection(Of T).Count
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Count
+- uid: System.Collections.ObjectModel.Collection{{T}}.Item(System.Int32)
+  commentId: P:System.Collections.ObjectModel.Collection{`0}.Item(System.Int32)
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.Item(System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: this[int]
+  nameWithType: Collection<T>.this[int]
+  fullName: System.Collections.ObjectModel.Collection<T>.this[int]
+  nameWithType.vb: Collection(Of T).this[](Integer)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).this[](Integer)
+  name.vb: this[](Integer)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ']'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection{`0}.Item(System.Int32)
+    name: this[]
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.item
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.Collection{{T}}.Items
+  commentId: P:System.Collections.ObjectModel.Collection{`0}.Items
+  parent: System.Collections.ObjectModel.Collection{{T}}
+  definition: System.Collections.ObjectModel.Collection`1.Items
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.items
+  name: Items
+  nameWithType: Collection<T>.Items
+  fullName: System.Collections.ObjectModel.Collection<T>.Items
+  nameWithType.vb: Collection(Of T).Items
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Items
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.ObjectModel
+    name: ObjectModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.ObjectModel
+    name: ObjectModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel
+- uid: System.Collections.ObjectModel.ObservableCollection`1
+  commentId: T:System.Collections.ObjectModel.ObservableCollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1
+  name: ObservableCollection<T>
+  nameWithType: ObservableCollection<T>
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>
+  nameWithType.vb: ObservableCollection(Of T)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T)
+  name.vb: ObservableCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
+    name: ObservableCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
+    name: ObservableCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections.Generic.ICollection`1
+  commentId: T:System.Collections.Generic.ICollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyCollection`1
+  commentId: T:System.Collections.Generic.IReadOnlyCollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<T>
+  nameWithType: IReadOnlyCollection<T>
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>
+  nameWithType.vb: IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  name.vb: IReadOnlyCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+- uid: System.Collections.Specialized
+  commentId: N:System.Collections.Specialized
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Specialized
+  nameWithType: System.Collections.Specialized
+  fullName: System.Collections.Specialized
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Specialized
+    name: Specialized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Specialized
+    name: Specialized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: System.Collections.ObjectModel.ObservableCollection`1.BlockReentrancy
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.BlockReentrancy
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.blockreentrancy
+  name: BlockReentrancy()
+  nameWithType: ObservableCollection<T>.BlockReentrancy()
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.BlockReentrancy()
+  nameWithType.vb: ObservableCollection(Of T).BlockReentrancy()
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).BlockReentrancy()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.BlockReentrancy
+    name: BlockReentrancy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.blockreentrancy
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.BlockReentrancy
+    name: BlockReentrancy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.blockreentrancy
+  - name: (
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection`1.CheckReentrancy
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.CheckReentrancy
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.checkreentrancy
+  name: CheckReentrancy()
+  nameWithType: ObservableCollection<T>.CheckReentrancy()
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.CheckReentrancy()
+  nameWithType.vb: ObservableCollection(Of T).CheckReentrancy()
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).CheckReentrancy()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.CheckReentrancy
+    name: CheckReentrancy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.checkreentrancy
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.CheckReentrancy
+    name: CheckReentrancy
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.checkreentrancy
+  - name: (
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection`1.InsertItem(System.Int32,`0)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.InsertItem(System.Int32,`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.insertitem
+  name: InsertItem(int, T)
+  nameWithType: ObservableCollection<T>.InsertItem(int, T)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.InsertItem(int, T)
+  nameWithType.vb: ObservableCollection(Of T).InsertItem(Integer, T)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).InsertItem(Integer, T)
+  name.vb: InsertItem(Integer, T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.InsertItem(System.Int32,`0)
+    name: InsertItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.insertitem
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.InsertItem(System.Int32,`0)
+    name: InsertItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.insertitem
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection`1.Move(System.Int32,System.Int32)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.Move(System.Int32,System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.move
+  name: Move(int, int)
+  nameWithType: ObservableCollection<T>.Move(int, int)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.Move(int, int)
+  nameWithType.vb: ObservableCollection(Of T).Move(Integer, Integer)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).Move(Integer, Integer)
+  name.vb: Move(Integer, Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.Move(System.Int32,System.Int32)
+    name: Move
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.move
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.Move(System.Int32,System.Int32)
+    name: Move
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.move
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection`1.MoveItem(System.Int32,System.Int32)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.MoveItem(System.Int32,System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.moveitem
+  name: MoveItem(int, int)
+  nameWithType: ObservableCollection<T>.MoveItem(int, int)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.MoveItem(int, int)
+  nameWithType.vb: ObservableCollection(Of T).MoveItem(Integer, Integer)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).MoveItem(Integer, Integer)
+  name.vb: MoveItem(Integer, Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.MoveItem(System.Int32,System.Int32)
+    name: MoveItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.moveitem
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.MoveItem(System.Int32,System.Int32)
+    name: MoveItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.moveitem
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection`1.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.onpropertychanged
+  name: OnPropertyChanged(PropertyChangedEventArgs)
+  nameWithType: ObservableCollection<T>.OnPropertyChanged(PropertyChangedEventArgs)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  nameWithType.vb: ObservableCollection(Of T).OnPropertyChanged(PropertyChangedEventArgs)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+    name: OnPropertyChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.onpropertychanged
+  - name: (
+  - uid: System.ComponentModel.PropertyChangedEventArgs
+    name: PropertyChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventargs
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+    name: OnPropertyChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.onpropertychanged
+  - name: (
+  - uid: System.ComponentModel.PropertyChangedEventArgs
+    name: PropertyChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventargs
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection`1.RemoveItem(System.Int32)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.RemoveItem(System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.removeitem
+  name: RemoveItem(int)
+  nameWithType: ObservableCollection<T>.RemoveItem(int)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.RemoveItem(int)
+  nameWithType.vb: ObservableCollection(Of T).RemoveItem(Integer)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).RemoveItem(Integer)
+  name.vb: RemoveItem(Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.RemoveItem(System.Int32)
+    name: RemoveItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.removeitem
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.RemoveItem(System.Int32)
+    name: RemoveItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.removeitem
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection`1.CollectionChanged
+  commentId: E:System.Collections.ObjectModel.ObservableCollection`1.CollectionChanged
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.collectionchanged
+  name: CollectionChanged
+  nameWithType: ObservableCollection<T>.CollectionChanged
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.CollectionChanged
+  nameWithType.vb: ObservableCollection(Of T).CollectionChanged
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).CollectionChanged
+- uid: System.Collections.ObjectModel.ObservableCollection`1.PropertyChanged
+  commentId: E:System.Collections.ObjectModel.ObservableCollection`1.PropertyChanged
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.propertychanged
+  name: PropertyChanged
+  nameWithType: ObservableCollection<T>.PropertyChanged
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.PropertyChanged
+  nameWithType.vb: ObservableCollection(Of T).PropertyChanged
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).PropertyChanged
+- uid: System.Collections.ObjectModel.Collection`1.Add(`0)
+  commentId: M:System.Collections.ObjectModel.Collection`1.Add(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.add
+  name: Add(T)
+  nameWithType: Collection<T>.Add(T)
+  fullName: System.Collections.ObjectModel.Collection<T>.Add(T)
+  nameWithType.vb: Collection(Of T).Add(T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Add(T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1.Add(`0)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.add
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.Add(`0)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.add
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.Clear
+  commentId: M:System.Collections.ObjectModel.Collection`1.Clear
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.clear
+  name: Clear()
+  nameWithType: Collection<T>.Clear()
+  fullName: System.Collections.ObjectModel.Collection<T>.Clear()
+  nameWithType.vb: Collection(Of T).Clear()
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Clear()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.clear
+  - name: (
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.Contains(`0)
+  commentId: M:System.Collections.ObjectModel.Collection`1.Contains(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.contains
+  name: Contains(T)
+  nameWithType: Collection<T>.Contains(T)
+  fullName: System.Collections.ObjectModel.Collection<T>.Contains(T)
+  nameWithType.vb: Collection(Of T).Contains(T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Contains(T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.contains
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.contains
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.CopyTo(`0[],System.Int32)
+  commentId: M:System.Collections.ObjectModel.Collection`1.CopyTo(`0[],System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.copyto
+  name: CopyTo(T[], int)
+  nameWithType: Collection<T>.CopyTo(T[], int)
+  fullName: System.Collections.ObjectModel.Collection<T>.CopyTo(T[], int)
+  nameWithType.vb: Collection(Of T).CopyTo(T(), Integer)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).CopyTo(T(), Integer)
+  name.vb: CopyTo(T(), Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.copyto
+  - name: (
+  - name: T
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.copyto
+  - name: (
+  - name: T
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.GetEnumerator
+  commentId: M:System.Collections.ObjectModel.Collection`1.GetEnumerator
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: Collection<T>.GetEnumerator()
+  fullName: System.Collections.ObjectModel.Collection<T>.GetEnumerator()
+  nameWithType.vb: Collection(Of T).GetEnumerator()
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.IndexOf(`0)
+  commentId: M:System.Collections.ObjectModel.Collection`1.IndexOf(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.indexof
+  name: IndexOf(T)
+  nameWithType: Collection<T>.IndexOf(T)
+  fullName: System.Collections.ObjectModel.Collection<T>.IndexOf(T)
+  nameWithType.vb: Collection(Of T).IndexOf(T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).IndexOf(T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1.IndexOf(`0)
+    name: IndexOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.indexof
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.IndexOf(`0)
+    name: IndexOf
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.indexof
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.Insert(System.Int32,`0)
+  commentId: M:System.Collections.ObjectModel.Collection`1.Insert(System.Int32,`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.insert
+  name: Insert(int, T)
+  nameWithType: Collection<T>.Insert(int, T)
+  fullName: System.Collections.ObjectModel.Collection<T>.Insert(int, T)
+  nameWithType.vb: Collection(Of T).Insert(Integer, T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Insert(Integer, T)
+  name.vb: Insert(Integer, T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1.Insert(System.Int32,`0)
+    name: Insert
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.insert
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.Insert(System.Int32,`0)
+    name: Insert
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.insert
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.Remove(`0)
+  commentId: M:System.Collections.ObjectModel.Collection`1.Remove(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.remove
+  name: Remove(T)
+  nameWithType: Collection<T>.Remove(T)
+  fullName: System.Collections.ObjectModel.Collection<T>.Remove(T)
+  nameWithType.vb: Collection(Of T).Remove(T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Remove(T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1.Remove(`0)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.remove
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.Remove(`0)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.remove
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.RemoveAt(System.Int32)
+  commentId: M:System.Collections.ObjectModel.Collection`1.RemoveAt(System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.removeat
+  name: RemoveAt(int)
+  nameWithType: Collection<T>.RemoveAt(int)
+  fullName: System.Collections.ObjectModel.Collection<T>.RemoveAt(int)
+  nameWithType.vb: Collection(Of T).RemoveAt(Integer)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).RemoveAt(Integer)
+  name.vb: RemoveAt(Integer)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1.RemoveAt(System.Int32)
+    name: RemoveAt
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.removeat
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.RemoveAt(System.Int32)
+    name: RemoveAt
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.removeat
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.Count
+  commentId: P:System.Collections.ObjectModel.Collection`1.Count
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.count
+  name: Count
+  nameWithType: Collection<T>.Count
+  fullName: System.Collections.ObjectModel.Collection<T>.Count
+  nameWithType.vb: Collection(Of T).Count
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Count
+- uid: System.Collections.ObjectModel.Collection`1.Item(System.Int32)
+  commentId: P:System.Collections.ObjectModel.Collection`1.Item(System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: this[int]
+  nameWithType: Collection<T>.this[int]
+  fullName: System.Collections.ObjectModel.Collection<T>.this[int]
+  nameWithType.vb: Collection(Of T).this[](Integer)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).this[](Integer)
+  name.vb: this[](Integer)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ']'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1.Item(System.Int32)
+    name: this[]
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.item
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1.Items
+  commentId: P:System.Collections.ObjectModel.Collection`1.Items
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.items
+  name: Items
+  nameWithType: Collection<T>.Items
+  fullName: System.Collections.ObjectModel.Collection<T>.Items
+  nameWithType.vb: Collection(Of T).Items
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T).Items
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.#ctor*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.#ctor
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1__ctor
+  name: ObservableRangeCollection
+  nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ObservableRangeCollection
+  nameWithType.vb: ObservableRangeCollection(Of T).New
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).New
+  name.vb: New
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+  name: ArgumentNullException
+  nameWithType: ArgumentNullException
+  fullName: System.ArgumentNullException
+- uid: System.Collections.Generic.List{{T}}
+  commentId: T:System.Collections.Generic.List{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.AddRange*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.AddRange
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1_AddRange_System_Collections_Generic_IEnumerable__0__
+  name: AddRange
+  nameWithType: ObservableRangeCollection<T>.AddRange
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.AddRange
+  nameWithType.vb: ObservableRangeCollection(Of T).AddRange
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).AddRange
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+  name: ArgumentOutOfRangeException
+  nameWithType: ArgumentOutOfRangeException
+  fullName: System.ArgumentOutOfRangeException
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.InsertRange*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.InsertRange
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1_InsertRange_System_Int32_System_Collections_Generic_IEnumerable__0__
+  name: InsertRange
+  nameWithType: ObservableRangeCollection<T>.InsertRange
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.InsertRange
+  nameWithType.vb: ObservableRangeCollection(Of T).InsertRange
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).InsertRange
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.RemoveRange
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1_RemoveRange_System_Collections_Generic_IEnumerable__0__
+  name: RemoveRange
+  nameWithType: ObservableRangeCollection<T>.RemoveRange
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.RemoveRange
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveRange
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).RemoveRange
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.RemoveAll
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1_RemoveAll_System_Predicate__0__
+  name: RemoveAll
+  nameWithType: ObservableRangeCollection<T>.RemoveAll
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.RemoveAll
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).RemoveAll
+- uid: System.Predicate{{T}}
+  commentId: T:System.Predicate{`0}
+  parent: System
+  definition: System.Predicate`1
+  href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  name: Predicate<T>
+  nameWithType: Predicate<T>
+  fullName: System.Predicate<T>
+  nameWithType.vb: Predicate(Of T)
+  fullName.vb: System.Predicate(Of T)
+  name.vb: Predicate(Of T)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Predicate`1
+  commentId: T:System.Predicate`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  name: Predicate<T>
+  nameWithType: Predicate<T>
+  fullName: System.Predicate<T>
+  nameWithType.vb: Predicate(Of T)
+  fullName.vb: System.Predicate(Of T)
+  name.vb: Predicate(Of T)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.EqualityComparer`1
+  commentId: T:System.Collections.Generic.EqualityComparer`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.equalitycomparer-1
+  name: EqualityComparer<T>
+  nameWithType: EqualityComparer<T>
+  fullName: System.Collections.Generic.EqualityComparer<T>
+  nameWithType.vb: EqualityComparer(Of T)
+  fullName.vb: System.Collections.Generic.EqualityComparer(Of T)
+  name.vb: EqualityComparer(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.EqualityComparer`1
+    name: EqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.equalitycomparer-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.EqualityComparer`1
+    name: EqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.equalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.ReplaceRange
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1_ReplaceRange_System_Collections_Generic_IEnumerable__0__
+  name: ReplaceRange
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ReplaceRange
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).ReplaceRange
+- uid: System.Collections.Generic.IEqualityComparer`1
+  commentId: T:System.Collections.Generic.IEqualityComparer`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  name: IEqualityComparer<T>
+  nameWithType: IEqualityComparer<T>
+  fullName: System.Collections.Generic.IEqualityComparer<T>
+  nameWithType.vb: IEqualityComparer(Of T)
+  fullName.vb: System.Collections.Generic.IEqualityComparer(Of T)
+  name.vb: IEqualityComparer(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEqualityComparer{{T}}
+  commentId: T:System.Collections.Generic.IEqualityComparer{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEqualityComparer`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  name: IEqualityComparer<T>
+  nameWithType: IEqualityComparer<T>
+  fullName: System.Collections.Generic.IEqualityComparer<T>
+  nameWithType.vb: IEqualityComparer(Of T)
+  fullName.vb: System.Collections.Generic.IEqualityComparer(Of T)
+  name.vb: IEqualityComparer(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.EqualityComparer`1.Default
+  commentId: P:System.Collections.Generic.EqualityComparer`1.Default
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.equalitycomparer-1.default
+  name: Default
+  nameWithType: EqualityComparer<T>.Default
+  fullName: System.Collections.Generic.EqualityComparer<T>.Default
+  nameWithType.vb: EqualityComparer(Of T).Default
+  fullName.vb: System.Collections.Generic.EqualityComparer(Of T).Default
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.ClearItems
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.ClearItems
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.ClearItems
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.clearitems
+  name: ClearItems()
+  nameWithType: ObservableCollection<T>.ClearItems()
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.ClearItems()
+  nameWithType.vb: ObservableCollection(Of T).ClearItems()
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).ClearItems()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.ClearItems
+    name: ClearItems
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.clearitems
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.ClearItems
+    name: ClearItems
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.clearitems
+  - name: (
+  - name: )
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.ClearItems*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.ClearItems
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1_ClearItems
+  name: ClearItems
+  nameWithType: ObservableRangeCollection<T>.ClearItems
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.ClearItems
+  nameWithType.vb: ObservableRangeCollection(Of T).ClearItems
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).ClearItems
+- uid: System.Collections.ObjectModel.ObservableCollection`1.ClearItems
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.ClearItems
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.clearitems
+  name: ClearItems()
+  nameWithType: ObservableCollection<T>.ClearItems()
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.ClearItems()
+  nameWithType.vb: ObservableCollection(Of T).ClearItems()
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).ClearItems()
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.ClearItems
+    name: ClearItems
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.clearitems
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.ClearItems
+    name: ClearItems
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.clearitems
+  - name: (
+  - name: )
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.SetItem(System.Int32,{T})
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.SetItem(System.Int32,`0)
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.SetItem(System.Int32,`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.setitem
+  name: SetItem(int, T)
+  nameWithType: ObservableCollection<T>.SetItem(int, T)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.SetItem(int, T)
+  nameWithType.vb: ObservableCollection(Of T).SetItem(Integer, T)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).SetItem(Integer, T)
+  name.vb: SetItem(Integer, T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.SetItem(System.Int32,`0)
+    name: SetItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.setitem
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.SetItem(System.Int32,`0)
+    name: SetItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.setitem
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.SetItem*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.SetItem
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1_SetItem_System_Int32__0_
+  name: SetItem
+  nameWithType: ObservableRangeCollection<T>.SetItem
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.SetItem
+  nameWithType.vb: ObservableRangeCollection(Of T).SetItem
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).SetItem
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.Collections.ObjectModel.ObservableCollection`1.SetItem(System.Int32,`0)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.SetItem(System.Int32,`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.setitem
+  name: SetItem(int, T)
+  nameWithType: ObservableCollection<T>.SetItem(int, T)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.SetItem(int, T)
+  nameWithType.vb: ObservableCollection(Of T).SetItem(Integer, T)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).SetItem(Integer, T)
+  name.vb: SetItem(Integer, T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.SetItem(System.Int32,`0)
+    name: SetItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.setitem
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.SetItem(System.Int32,`0)
+    name: SetItem
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.setitem
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.Collections.ObjectModel.ObservableCollection{{T}}.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection{`0}.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  parent: System.Collections.ObjectModel.ObservableCollection{{T}}
+  definition: System.Collections.ObjectModel.ObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.oncollectionchanged
+  name: OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  nameWithType: ObservableCollection<T>.OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  nameWithType.vb: ObservableCollection(Of T).OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+    name: OnCollectionChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.oncollectionchanged
+  - name: (
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    name: NotifyCollectionChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventargs
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection{`0}.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+    name: OnCollectionChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.oncollectionchanged
+  - name: (
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    name: NotifyCollectionChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventargs
+  - name: )
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.OnCollectionChanged*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.OnCollectionChanged
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1_OnCollectionChanged_System_Collections_Specialized_NotifyCollectionChangedEventArgs_
+  name: OnCollectionChanged
+  nameWithType: ObservableRangeCollection<T>.OnCollectionChanged
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.OnCollectionChanged
+  nameWithType.vb: ObservableRangeCollection(Of T).OnCollectionChanged
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).OnCollectionChanged
+- uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+  commentId: T:System.Collections.Specialized.NotifyCollectionChangedEventArgs
+  parent: System.Collections.Specialized
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventargs
+  name: NotifyCollectionChangedEventArgs
+  nameWithType: NotifyCollectionChangedEventArgs
+  fullName: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+- uid: System.Collections.ObjectModel.ObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  commentId: M:System.Collections.ObjectModel.ObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.oncollectionchanged
+  name: OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  nameWithType: ObservableCollection<T>.OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  nameWithType.vb: ObservableCollection(Of T).OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T).OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+    name: OnCollectionChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.oncollectionchanged
+  - name: (
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    name: NotifyCollectionChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventargs
+  - name: )
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+    name: OnCollectionChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.observablecollection-1.oncollectionchanged
+  - name: (
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    name: NotifyCollectionChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventargs
+  - name: )
+- uid: Mapsui.Utilities.ObservableRangeCollection`1.DeferEvents*
+  commentId: Overload:Mapsui.Utilities.ObservableRangeCollection`1.DeferEvents
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html#Mapsui_Utilities_ObservableRangeCollection_1_DeferEvents
+  name: DeferEvents
+  nameWithType: ObservableRangeCollection<T>.DeferEvents
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>.DeferEvents
+  nameWithType.vb: ObservableRangeCollection(Of T).DeferEvents
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T).DeferEvents
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable

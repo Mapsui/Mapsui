@@ -1,0 +1,1808 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class MapControl </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class MapControl ">
+    
+    <meta name="description" content="UI component that displays an interactive map">
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.UI.Maui.MapControl">
+
+
+
+  <h1 id="Mapsui_UI_Maui_MapControl" data-uid="Mapsui.UI.Maui.MapControl" class="text-break">Class MapControl</h1>
+  <div class="markdown level0 summary"><p>UI component that displays an interactive map</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject">BindableObject</a></div>
+    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element">Element</a></div>
+    <div class="level3"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.navigableelement">NavigableElement</a></div>
+    <div class="level4"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement">VisualElement</a></div>
+    <div class="level5"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view">View</a></div>
+    <div class="level6"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout">Layout</a></div>
+    <div class="level7"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview">TemplatedView</a></div>
+    <div class="level8"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.contentview">ContentView</a></div>
+    <div class="level9"><span class="xref">MapControl</span></div>
+      <div class="level10"><a class="xref" href="Mapsui.UI.Maui.MapView.html">MapView</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ieffectcontrolprovider">IEffectControlProvider</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.itooltipelement">IToolTipElement</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.icontextflyoutelement">IContextFlyoutElement</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ianimatable">IAnimatable</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ipropertymapperview">IPropertyMapperView</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.hotreload.ihotreloadableview">IHotReloadableView</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ireplaceableview">IReplaceableView</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.iviewcontroller">IViewController</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ivisualelementcontroller">IVisualElementController</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ielementcontroller">IElementController</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.internals.igesturecontroller">IGestureController</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.igesturerecognizers">IGestureRecognizers</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ilayout">ILayout</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ilayoutcontroller">ILayoutController</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ivisualtreeelement">IVisualTreeElement</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.icontentview">IContentView</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.iview">IView</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ielement">IElement</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.itransform">ITransform</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ipadding">IPadding</a></div>
+    <div><a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.contentview.contentproperty">ContentView.ContentProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.contentview.onbindingcontextchanged">ContentView.OnBindingContextChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.contentview.content">ContentView.Content</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.controltemplateproperty">TemplatedView.ControlTemplateProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.measureoverride">TemplatedView.MeasureOverride(double, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.arrangeoverride">TemplatedView.ArrangeOverride(Rect)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.layoutchildren">TemplatedView.LayoutChildren(double, double, double, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.onmeasure">TemplatedView.OnMeasure(double, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.onapplytemplate">TemplatedView.OnApplyTemplate()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.onchildremoved">TemplatedView.OnChildRemoved(Element, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.gettemplatechild">TemplatedView.GetTemplateChild(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.resolvecontroltemplate">TemplatedView.ResolveControlTemplate()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.templatedview.controltemplate">TemplatedView.ControlTemplate</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.isclippedtoboundsproperty">Layout.IsClippedToBoundsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.cascadeinputtransparentproperty">Layout.CascadeInputTransparentProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.paddingproperty">Layout.PaddingProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.forcelayout">Layout.ForceLayout()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.measure">Layout.Measure(double, double, MeasureFlags)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.layoutchildintoboundingregion">Layout.LayoutChildIntoBoundingRegion(VisualElement, Rect)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.lowerchild">Layout.LowerChild(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.raisechild">Layout.RaiseChild(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.invalidatelayout">Layout.InvalidateLayout()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.onchildmeasureinvalidated#microsoft-maui-controls-compatibility-layout-onchildmeasureinvalidated(system-object-system-eventargs)">Layout.OnChildMeasureInvalidated(object, EventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.onchildmeasureinvalidated#microsoft-maui-controls-compatibility-layout-onchildmeasureinvalidated">Layout.OnChildMeasureInvalidated()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.onsizeallocated">Layout.OnSizeAllocated(double, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.shouldinvalidateonchildadded">Layout.ShouldInvalidateOnChildAdded(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.shouldinvalidateonchildremoved">Layout.ShouldInvalidateOnChildRemoved(View)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.updatechildrenlayout">Layout.UpdateChildrenLayout()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.invalidatemeasureoverride">Layout.InvalidateMeasureOverride()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.crossplatformmeasure">Layout.CrossPlatformMeasure(double, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.crossplatformarrange">Layout.CrossPlatformArrange(Rect)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.isclippedtobounds">Layout.IsClippedToBounds</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.padding">Layout.Padding</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.cascadeinputtransparent">Layout.CascadeInputTransparent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.compatibility.layout.layoutchanged">Layout.LayoutChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.propertymapper">View.propertyMapper</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.verticaloptionsproperty">View.VerticalOptionsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.horizontaloptionsproperty">View.HorizontalOptionsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.marginproperty">View.MarginProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.getrendereroverrides">View.GetRendererOverrides&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.changevisualstate">View.ChangeVisualState()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.getchildelements">View.GetChildElements(Point)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.gesturecontroller">View.GestureController</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.gesturerecognizers">View.GestureRecognizers</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.horizontaloptions">View.HorizontalOptions</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.margin">View.Margin</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.view.verticaloptions">View.VerticalOptions</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.controlsvisualelementmapper">VisualElement.ControlsVisualElementMapper</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.shadowproperty">VisualElement.ShadowProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.zindexproperty">VisualElement.ZIndexProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.navigationproperty">VisualElement.NavigationProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.styleproperty">VisualElement.StyleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.inputtransparentproperty">VisualElement.InputTransparentProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.isenabledproperty">VisualElement.IsEnabledProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.xproperty">VisualElement.XProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.yproperty">VisualElement.YProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.anchorxproperty">VisualElement.AnchorXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.anchoryproperty">VisualElement.AnchorYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.translationxproperty">VisualElement.TranslationXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.translationyproperty">VisualElement.TranslationYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.widthproperty">VisualElement.WidthProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.heightproperty">VisualElement.HeightProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.rotationproperty">VisualElement.RotationProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.rotationxproperty">VisualElement.RotationXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.rotationyproperty">VisualElement.RotationYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.scaleproperty">VisualElement.ScaleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.scalexproperty">VisualElement.ScaleXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.scaleyproperty">VisualElement.ScaleYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.clipproperty">VisualElement.ClipProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.visualproperty">VisualElement.VisualProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.isvisibleproperty">VisualElement.IsVisibleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.opacityproperty">VisualElement.OpacityProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.backgroundcolorproperty">VisualElement.BackgroundColorProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.backgroundproperty">VisualElement.BackgroundProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.behaviorsproperty">VisualElement.BehaviorsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.triggersproperty">VisualElement.TriggersProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.widthrequestproperty">VisualElement.WidthRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.heightrequestproperty">VisualElement.HeightRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.minimumwidthrequestproperty">VisualElement.MinimumWidthRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.minimumheightrequestproperty">VisualElement.MinimumHeightRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.maximumwidthrequestproperty">VisualElement.MaximumWidthRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.maximumheightrequestproperty">VisualElement.MaximumHeightRequestProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.isfocusedproperty">VisualElement.IsFocusedProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.flowdirectionproperty">VisualElement.FlowDirectionProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.windowproperty">VisualElement.WindowProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.mapbackgroundcolor">VisualElement.MapBackgroundColor(IViewHandler, IView)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.mapbackgroundimagesource">VisualElement.MapBackgroundImageSource(IViewHandler, IView)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.arrange">VisualElement.Arrange(Rect)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.layout">VisualElement.Layout(Rect)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.batchbegin">VisualElement.BatchBegin()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.batchcommit">VisualElement.BatchCommit()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.focus">VisualElement.Focus()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.unfocus">VisualElement.Unfocus()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.invalidatemeasure">VisualElement.InvalidateMeasure()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.onchildadded">VisualElement.OnChildAdded(Element)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.onchildrenreordered">VisualElement.OnChildrenReordered()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.sizeallocated">VisualElement.SizeAllocated(double, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.frame">VisualElement.Frame</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.handler">VisualElement.Handler</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.shadow">VisualElement.Shadow</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.zindex">VisualElement.ZIndex</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.desiredsize">VisualElement.DesiredSize</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.isloaded">VisualElement.IsLoaded</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.visual">VisualElement.Visual</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.flowdirection">VisualElement.FlowDirection</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.window">VisualElement.Window</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.anchorx">VisualElement.AnchorX</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.anchory">VisualElement.AnchorY</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.backgroundcolor">VisualElement.BackgroundColor</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.background">VisualElement.Background</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.behaviors">VisualElement.Behaviors</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.bounds">VisualElement.Bounds</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.height">VisualElement.Height</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.heightrequest">VisualElement.HeightRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.inputtransparent">VisualElement.InputTransparent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.isenabled">VisualElement.IsEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.isfocused">VisualElement.IsFocused</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.isvisible">VisualElement.IsVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.minimumheightrequest">VisualElement.MinimumHeightRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.minimumwidthrequest">VisualElement.MinimumWidthRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.maximumheightrequest">VisualElement.MaximumHeightRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.maximumwidthrequest">VisualElement.MaximumWidthRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.opacity">VisualElement.Opacity</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.rotation">VisualElement.Rotation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.rotationx">VisualElement.RotationX</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.rotationy">VisualElement.RotationY</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.scale">VisualElement.Scale</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.scalex">VisualElement.ScaleX</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.scaley">VisualElement.ScaleY</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.translationx">VisualElement.TranslationX</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.translationy">VisualElement.TranslationY</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.triggers">VisualElement.Triggers</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.width">VisualElement.Width</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.widthrequest">VisualElement.WidthRequest</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.x">VisualElement.X</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.y">VisualElement.Y</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.clip">VisualElement.Clip</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.resources">VisualElement.Resources</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.loaded">VisualElement.Loaded</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.unloaded">VisualElement.Unloaded</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.childrenreordered">VisualElement.ChildrenReordered</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.focused">VisualElement.Focused</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.measureinvalidated">VisualElement.MeasureInvalidated</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.sizechanged">VisualElement.SizeChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.visualelement.unfocused">VisualElement.Unfocused</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.navigableelement.onparentset">NavigableElement.OnParentSet()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.navigableelement.navigation">NavigableElement.Navigation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.navigableelement.style">NavigableElement.Style</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.navigableelement.styleclass">NavigableElement.StyleClass</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.navigableelement.class">NavigableElement.class</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.automationidproperty">Element.AutomationIdProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.classidproperty">Element.ClassIdProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.controlselementmapper">Element.ControlsElementMapper</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.findbyname">Element.FindByName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.removedynamicresource">Element.RemoveDynamicResource(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.setdynamicresource">Element.SetDynamicResource(BindableProperty, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.onparentchanging">Element.OnParentChanging(ParentChangingEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.onparentchanged">Element.OnParentChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.onhandlerchanging">Element.OnHandlerChanging(HandlerChangingEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.onhandlerchanged">Element.OnHandlerChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.mapautomationpropertiesisinaccessibletree">Element.MapAutomationPropertiesIsInAccessibleTree(IElementHandler, Element)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.mapautomationpropertiesexcludedwithchildren">Element.MapAutomationPropertiesExcludedWithChildren(IElementHandler, Element)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.automationid">Element.AutomationId</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.classid">Element.ClassId</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.effects">Element.Effects</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.id">Element.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.styleid">Element.StyleId</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.parent">Element.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.childadded">Element.ChildAdded</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.childremoved">Element.ChildRemoved</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.descendantadded">Element.DescendantAdded</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.descendantremoved">Element.DescendantRemoved</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.parentchanging">Element.ParentChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.parentchanged">Element.ParentChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.handlerchanging">Element.HandlerChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.handlerchanged">Element.HandlerChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextproperty">BindableObject.BindingContextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindableproperty)">BindableObject.ClearValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.ClearValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.getvalue">BindableObject.GetValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.isset">BindableObject.IsSet(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.removebinding">BindableObject.RemoveBinding(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setbinding">BindableObject.SetBinding(BindableProperty, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.applybindings">BindableObject.ApplyBindings()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.onpropertychanging">BindableObject.OnPropertyChanging(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.unapplybindings">BindableObject.UnapplyBindings()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindableproperty-system-object)">BindableObject.SetValue(BindableProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindablepropertykey-system-object)">BindableObject.SetValue(BindablePropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindableproperty)">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.dispatcher">BindableObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontext">BindableObject.BindingContext</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanging">BindableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextchanged">BindableObject.BindingContextChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.UI.html">UI</a>.<a class="xref" href="Mapsui.UI.Maui.html">Maui</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.UI.Maui.dll</h6>
+  <h5 id="Mapsui_UI_Maui_MapControl_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MapControl : ContentView, IEffectControlProvider, IToolTipElement, IContextFlyoutElement, IAnimatable, IPropertyMapperView, IHotReloadableView, IReplaceableView, IViewController, IVisualElementController, IElementController, IGestureController, IGestureRecognizers, ILayout, ILayoutController, IVisualTreeElement, IContentView, IView, IElement, ITransform, IPadding, IMapControl, IDisposable, INotifyPropertyChanged</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl__ctor.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Maui/MapControl.cs/#L40">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl__ctor_" data-uid="Mapsui.UI.Maui.MapControl.#ctor*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl__ctor" data-uid="Mapsui.UI.Maui.MapControl.#ctor">MapControl()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapControl()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_MapProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.MapProperty%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L388">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Maui_MapControl_MapProperty" data-uid="Mapsui.UI.Maui.MapControl.MapProperty">MapProperty</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty MapProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_UseGPU.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.UseGPU%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Maui/MapControl.cs/#L27">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Maui_MapControl_UseGPU" data-uid="Mapsui.UI.Maui.MapControl.UseGPU">UseGPU</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool UseGPU</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.Map%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L407">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_Map_" data-uid="Mapsui.UI.Maui.MapControl.Map*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_Map" data-uid="Mapsui.UI.Maui.MapControl.Map">Map</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Map Map { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_MaxTapGestureMovement.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.MaxTapGestureMovement%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L70">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_MaxTapGestureMovement_" data-uid="Mapsui.UI.Maui.MapControl.MaxTapGestureMovement*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_MaxTapGestureMovement" data-uid="Mapsui.UI.Maui.MapControl.MaxTapGestureMovement">MaxTapGestureMovement</h4>
+  <div class="markdown level1 summary"><p>The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxTapGestureMovement { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_Performance.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.Performance%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L228">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_Performance_" data-uid="Mapsui.UI.Maui.MapControl.Performance*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_Performance" data-uid="Mapsui.UI.Maui.MapControl.Performance">Performance</h4>
+  <div class="markdown level1 summary"><p>Object to save performance information about the drawing of the map</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Performance? Performance { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Performance.html">Performance</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_UI_Maui_MapControl_Performance_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If this is null, no performance information is saved.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_PixelDensity.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.PixelDensity%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L241">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_PixelDensity_" data-uid="Mapsui.UI.Maui.MapControl.PixelDensity*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_PixelDensity" data-uid="Mapsui.UI.Maui.MapControl.PixelDensity">PixelDensity</h4>
+  <div class="markdown level1 summary"><p>The number of pixel per device independent unit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PixelDensity { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_Renderer.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.Renderer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L246">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_Renderer_" data-uid="Mapsui.UI.Maui.MapControl.Renderer*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_Renderer" data-uid="Mapsui.UI.Maui.MapControl.Renderer">Renderer</h4>
+  <div class="markdown level1 summary"><p>Renderer that is used from this MapControl</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRenderer Renderer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_UpdateInterval.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.UpdateInterval%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L204">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_UpdateInterval_" data-uid="Mapsui.UI.Maui.MapControl.UpdateInterval*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_UpdateInterval" data-uid="Mapsui.UI.Maui.MapControl.UpdateInterval">UpdateInterval</h4>
+  <div class="markdown level1 summary"><p>Interval between two redraws of the MapControl in ms</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int UpdateInterval { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_UseFling.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.UseFling%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L76">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_UseFling_" data-uid="Mapsui.UI.Maui.MapControl.UseFling*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_UseFling" data-uid="Mapsui.UI.Maui.MapControl.UseFling">UseFling</h4>
+  <div class="markdown level1 summary"><p>Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a
+short time after the user has lifted the finger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseFling { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_ClearTouchState.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.ClearTouchState%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Maui/MapControl.cs/#L286">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_ClearTouchState_" data-uid="Mapsui.UI.Maui.MapControl.ClearTouchState*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_ClearTouchState" data-uid="Mapsui.UI.Maui.MapControl.ClearTouchState">ClearTouchState()</h4>
+  <div class="markdown level1 summary"><p>Clears the Touch State</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearTouchState()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Maui/MapControl.cs/#L296">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_Dispose_" data-uid="Mapsui.UI.Maui.MapControl.Dispose*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_Dispose" data-uid="Mapsui.UI.Maui.MapControl.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.Dispose(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Maui/MapControl.cs/#L302">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_Dispose_" data-uid="Mapsui.UI.Maui.MapControl.Dispose*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_Dispose_System_Boolean_" data-uid="Mapsui.UI.Maui.MapControl.Dispose(System.Boolean)">Dispose(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_Finalize.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.Finalize%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Maui/MapControl.cs/#L317">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_Finalize_" data-uid="Mapsui.UI.Maui.MapControl.Finalize*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_Finalize" data-uid="Mapsui.UI.Maui.MapControl.Finalize">~MapControl()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ~MapControl()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_ForceUpdate.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.ForceUpdate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L195">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_ForceUpdate_" data-uid="Mapsui.UI.Maui.MapControl.ForceUpdate*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_ForceUpdate" data-uid="Mapsui.UI.Maui.MapControl.ForceUpdate">ForceUpdate()</h4>
+  <div class="markdown level1 summary"><p>Force a update of control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ForceUpdate()</code></pre>
+  </div>
+  <h5 id="Mapsui_UI_Maui_MapControl_ForceUpdate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control draws itself once</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L496">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_GetMapInfo_" data-uid="Mapsui.UI.Maui.MapControl.GetMapInfo*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_" data-uid="Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)">GetMapInfo(ScreenPosition, int)</h4>
+  <div class="markdown level1 summary"><p>Check, if a feature at a given screen position is hit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td><p>Screen position to check for widgets and features</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">margin</span></td>
+        <td><p>An optional extra margin around the feature to enlarge the hit area.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfo.html">MapInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L502">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_GetSnapshot_" data-uid="Mapsui.UI.Maui.MapControl.GetSnapshot*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.Maui.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Create a snapshot form map as PNG image</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] GetSnapshot(IEnumerable&lt;ILayer&gt;? layers = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td><p>Layers that should be included in snapshot</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><p>Byte array with snapshot in png format. If there are any problems than returns null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L489">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_OnMapInfo_" data-uid="Mapsui.UI.Maui.MapControl.OnMapInfo*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_" data-uid="Mapsui.UI.Maui.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)">OnMapInfo(MapInfoEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnMapInfo(MapInfoEventArgs mapInfoEventArgs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a></td>
+        <td><span class="parametername">mapInfoEventArgs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.OnPropertyChanged(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L264">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_OnPropertyChanged_" data-uid="Mapsui.UI.Maui.MapControl.OnPropertyChanged*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_OnPropertyChanged_System_String_" data-uid="Mapsui.UI.Maui.MapControl.OnPropertyChanged(System.String)">OnPropertyChanged(string)</h4>
+  <div class="markdown level1 summary"><p>Raises the <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanged">PropertyChanged</a> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnPropertyChanged(string propertyName = &quot;&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td><p>The name of the property that has changed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.element.onpropertychanged">Element.OnPropertyChanged(string)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_OpenInBrowser_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.OpenInBrowser(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Maui/MapControl.cs/#L278">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_OpenInBrowser_" data-uid="Mapsui.UI.Maui.MapControl.OpenInBrowser*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_OpenInBrowser_System_String_" data-uid="Mapsui.UI.Maui.MapControl.OpenInBrowser(System.String)">OpenInBrowser(string)</h4>
+  <div class="markdown level1 summary"><p>Public functions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OpenInBrowser(string url)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">url</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_Refresh_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.Refresh(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L313">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_Refresh_" data-uid="Mapsui.UI.Maui.MapControl.Refresh*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_Refresh_Mapsui_ChangeType_" data-uid="Mapsui.UI.Maui.MapControl.Refresh(Mapsui.ChangeType)">Refresh(ChangeType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Refresh(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_RefreshData_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.RefreshData(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L484">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_RefreshData_" data-uid="Mapsui.UI.Maui.MapControl.RefreshData*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_RefreshData_Mapsui_ChangeType_" data-uid="Mapsui.UI.Maui.MapControl.RefreshData(Mapsui.ChangeType)">RefreshData(ChangeType)</h4>
+  <div class="markdown level1 summary"><p>Refresh data of Map, but don't paint it</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshData(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_RefreshGraphics.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.RefreshGraphics%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L318">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_RefreshGraphics_" data-uid="Mapsui.UI.Maui.MapControl.RefreshGraphics*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_RefreshGraphics" data-uid="Mapsui.UI.Maui.MapControl.RefreshGraphics">RefreshGraphics()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshGraphics()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_RunOnUIThread_System_Action_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.RunOnUIThread(System.Action)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Maui/MapControl.cs/#L291">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_RunOnUIThread_" data-uid="Mapsui.UI.Maui.MapControl.RunOnUIThread*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_RunOnUIThread_System_Action_" data-uid="Mapsui.UI.Maui.MapControl.RunOnUIThread(System.Action)">RunOnUIThread(Action)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void RunOnUIThread(Action action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_StartUpdates_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.StartUpdates(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L171">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_StartUpdates_" data-uid="Mapsui.UI.Maui.MapControl.StartUpdates*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_StartUpdates_System_Boolean_" data-uid="Mapsui.UI.Maui.MapControl.StartUpdates(System.Boolean)">StartUpdates(bool)</h4>
+  <div class="markdown level1 summary"><p>Start updates for control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StartUpdates(bool refresh = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">refresh</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_UI_Maui_MapControl_StartUpdates_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control is redrawn if needed</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_StopUpdates.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.StopUpdates%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L184">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_StopUpdates_" data-uid="Mapsui.UI.Maui.MapControl.StopUpdates*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_StopUpdates" data-uid="Mapsui.UI.Maui.MapControl.StopUpdates">StopUpdates()</h4>
+  <div class="markdown level1 summary"><p>Stop updates for control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StopUpdates()</code></pre>
+  </div>
+  <h5 id="Mapsui_UI_Maui_MapControl_StopUpdates_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control stops to redraw itself,
+even if it is needed</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L476">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_ToDeviceIndependentUnits_" data-uid="Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_" data-uid="Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)">ToDeviceIndependentUnits(MPoint)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in pixels to device independent units (or DIP or DP).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">coordinateInPixels</span></td>
+        <td><p>Coordinate in pixels</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_ToPixels_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.ToPixels(Mapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L468">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_ToPixels_" data-uid="Mapsui.UI.Maui.MapControl.ToPixels*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_ToPixels_Mapsui_MPoint_" data-uid="Mapsui.UI.Maui.MapControl.ToPixels(Mapsui.MPoint)">ToPixels(MPoint)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in device independent units (or DIP or DP) to pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">coordinateInDeviceIndependentUnits</span></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><p>Coordinate in pixels</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.Unsubscribe%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L278">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Maui_MapControl_Unsubscribe_" data-uid="Mapsui.UI.Maui.MapControl.Unsubscribe*"></a>
+  <h4 id="Mapsui_UI_Maui_MapControl_Unsubscribe" data-uid="Mapsui.UI.Maui.MapControl.Unsubscribe">Unsubscribe()</h4>
+  <div class="markdown level1 summary"><p>Unsubscribe from map events</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Unsubscribe()</code></pre>
+  </div>
+  <h3 id="events">Events
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_Info.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.Info%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L252">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Maui_MapControl_Info" data-uid="Mapsui.UI.Maui.MapControl.Info">Info</h4>
+  <div class="markdown level1 summary"><p>Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+the layers that have IsMapInfoLayer set to true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapInfoEventArgs&gt;? Info</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl_PropertyChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl.PropertyChanged%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L258">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Maui_MapControl_PropertyChanged" data-uid="Mapsui.UI.Maui.MapControl.PropertyChanged">PropertyChanged</h4>
+  <div class="markdown level1 summary"><p>Called whenever a property is changed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler? PropertyChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler">PropertyChangedEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ieffectcontrolprovider">IEffectControlProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.itooltipelement">IToolTipElement</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.icontextflyoutelement">IContextFlyoutElement</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ianimatable">IAnimatable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ipropertymapperview">IPropertyMapperView</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.hotreload.ihotreloadableview">IHotReloadableView</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ireplaceableview">IReplaceableView</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.iviewcontroller">IViewController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ivisualelementcontroller">IVisualElementController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ielementcontroller">IElementController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.internals.igesturecontroller">IGestureController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.igesturerecognizers">IGestureRecognizers</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ilayout">ILayout</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.ilayoutcontroller">ILayoutController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ivisualtreeelement">IVisualTreeElement</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.icontentview">IContentView</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.iview">IView</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ielement">IElement</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.itransform">ITransform</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.ipadding">IPadding</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_Maui_MapControl.md&amp;value=---%0Auid%3A%20Mapsui.UI.Maui.MapControl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L47" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

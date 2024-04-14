@@ -1,0 +1,317 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.IFeatureSize
+  commentId: T:Mapsui.Styles.IFeatureSize
+  id: IFeatureSize
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.IFeatureSize.FeatureSize(Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,Mapsui.IFeature)
+  - Mapsui.Styles.IFeatureSize.NeedsFeature
+  langs:
+  - csharp
+  - vb
+  name: IFeatureSize
+  nameWithType: IFeatureSize
+  fullName: Mapsui.Styles.IFeatureSize
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Styles/IFeatureSize.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IFeatureSize
+    path: ../../Mapsui/Styles/IFeatureSize.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: For Detecting Feature Size is used in Rasterizing Tiling Rendering to determine how much more Features needs to be loaded
+  example: []
+  syntax:
+    content: public interface IFeatureSize
+    content.vb: Public Interface IFeatureSize
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.IFeatureSize.NeedsFeature
+  commentId: P:Mapsui.Styles.IFeatureSize.NeedsFeature
+  id: NeedsFeature
+  parent: Mapsui.Styles.IFeatureSize
+  langs:
+  - csharp
+  - vb
+  name: NeedsFeature
+  nameWithType: IFeatureSize.NeedsFeature
+  fullName: Mapsui.Styles.IFeatureSize.NeedsFeature
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/IFeatureSize.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NeedsFeature
+    path: ../../Mapsui/Styles/IFeatureSize.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: >-
+    True if it needs a feature to determine the Feature Size. For Example Symbols have always
+
+    the same Size and therefore don't need a Feature.
+
+    Labels have variable Size depending on the Text and therefore need a feature to determine the size
+  example: []
+  syntax:
+    content: bool NeedsFeature { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property NeedsFeature As Boolean
+  overload: Mapsui.Styles.IFeatureSize.NeedsFeature*
+- uid: Mapsui.Styles.IFeatureSize.FeatureSize(Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,Mapsui.IFeature)
+  commentId: M:Mapsui.Styles.IFeatureSize.FeatureSize(Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,Mapsui.IFeature)
+  id: FeatureSize(Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,Mapsui.IFeature)
+  parent: Mapsui.Styles.IFeatureSize
+  langs:
+  - csharp
+  - vb
+  name: FeatureSize(IStyle, IRenderCache, IFeature?)
+  nameWithType: IFeatureSize.FeatureSize(IStyle, IRenderCache, IFeature?)
+  fullName: Mapsui.Styles.IFeatureSize.FeatureSize(Mapsui.Styles.IStyle, Mapsui.Rendering.IRenderCache, Mapsui.IFeature?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/IFeatureSize.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FeatureSize
+    path: ../../Mapsui/Styles/IFeatureSize.cs
+    startLine: 19
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: The Feature Size is in points of the screen
+  example: []
+  syntax:
+    content: double FeatureSize(IStyle style, IRenderCache symbolCache, IFeature? feature = null)
+    parameters:
+    - id: style
+      type: Mapsui.Styles.IStyle
+      description: symbol style to detect size
+    - id: symbolCache
+      type: Mapsui.Rendering.IRenderCache
+      description: symbol Cache
+    - id: feature
+      type: Mapsui.IFeature
+      description: feature to detect size
+    return:
+      type: System.Double
+      description: size in points
+    content.vb: Function FeatureSize(style As IStyle, symbolCache As IRenderCache, feature As IFeature = Nothing) As Double
+  overload: Mapsui.Styles.IFeatureSize.FeatureSize*
+  nameWithType.vb: IFeatureSize.FeatureSize(IStyle, IRenderCache, IFeature)
+  fullName.vb: Mapsui.Styles.IFeatureSize.FeatureSize(Mapsui.Styles.IStyle, Mapsui.Rendering.IRenderCache, Mapsui.IFeature)
+  name.vb: FeatureSize(IStyle, IRenderCache, IFeature)
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.IFeatureSize.NeedsFeature*
+  commentId: Overload:Mapsui.Styles.IFeatureSize.NeedsFeature
+  href: Mapsui.Styles.IFeatureSize.html#Mapsui_Styles_IFeatureSize_NeedsFeature
+  name: NeedsFeature
+  nameWithType: IFeatureSize.NeedsFeature
+  fullName: Mapsui.Styles.IFeatureSize.NeedsFeature
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Styles.IFeatureSize.FeatureSize*
+  commentId: Overload:Mapsui.Styles.IFeatureSize.FeatureSize
+  href: Mapsui.Styles.IFeatureSize.html#Mapsui_Styles_IFeatureSize_FeatureSize_Mapsui_Styles_IStyle_Mapsui_Rendering_IRenderCache_Mapsui_IFeature_
+  name: FeatureSize
+  nameWithType: IFeatureSize.FeatureSize
+  fullName: Mapsui.Styles.IFeatureSize.FeatureSize
+- uid: Mapsui.Styles.IStyle
+  commentId: T:Mapsui.Styles.IStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyle.html
+  name: IStyle
+  nameWithType: IStyle
+  fullName: Mapsui.Styles.IStyle
+- uid: Mapsui.Rendering.IRenderCache
+  commentId: T:Mapsui.Rendering.IRenderCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderCache.html
+  name: IRenderCache
+  nameWithType: IRenderCache
+  fullName: Mapsui.Rendering.IRenderCache
+- uid: Mapsui.IFeature
+  commentId: T:Mapsui.IFeature
+  parent: Mapsui
+  href: Mapsui.IFeature.html
+  name: IFeature
+  nameWithType: IFeature
+  fullName: Mapsui.IFeature
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui

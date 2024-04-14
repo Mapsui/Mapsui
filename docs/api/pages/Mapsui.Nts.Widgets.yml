@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Widgets
+  commentId: N:Mapsui.Nts.Widgets
+  id: Mapsui.Nts.Widgets
+  children:
+  - Mapsui.Nts.Widgets.EditingWidget
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Nts.Widgets
+  nameWithType: Mapsui.Nts.Widgets
+  fullName: Mapsui.Nts.Widgets
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Nts.Widgets.EditingWidget
+  commentId: T:Mapsui.Nts.Widgets.EditingWidget
+  href: Mapsui.Nts.Widgets.EditingWidget.html
+  name: EditingWidget
+  nameWithType: EditingWidget
+  fullName: Mapsui.Nts.Widgets.EditingWidget

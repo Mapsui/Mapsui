@@ -1,0 +1,104 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Editing
+  commentId: N:Mapsui.Nts.Editing
+  id: Mapsui.Nts.Editing
+  children:
+  - Mapsui.Nts.Editing.AddInfo
+  - Mapsui.Nts.Editing.DragInfo
+  - Mapsui.Nts.Editing.EditHelper
+  - Mapsui.Nts.Editing.EditManager
+  - Mapsui.Nts.Editing.EditManipulation
+  - Mapsui.Nts.Editing.EditMode
+  - Mapsui.Nts.Editing.Geomorpher
+  - Mapsui.Nts.Editing.RotateInfo
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Nts.Editing
+  nameWithType: Mapsui.Nts.Editing
+  fullName: Mapsui.Nts.Editing
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Nts.Editing.AddInfo
+  commentId: T:Mapsui.Nts.Editing.AddInfo
+  href: Mapsui.Nts.Editing.AddInfo.html
+  name: AddInfo
+  nameWithType: AddInfo
+  fullName: Mapsui.Nts.Editing.AddInfo
+- uid: Mapsui.Nts.Editing.DragInfo
+  commentId: T:Mapsui.Nts.Editing.DragInfo
+  href: Mapsui.Nts.Editing.DragInfo.html
+  name: DragInfo
+  nameWithType: DragInfo
+  fullName: Mapsui.Nts.Editing.DragInfo
+- uid: Mapsui.Nts.Editing.EditHelper
+  commentId: T:Mapsui.Nts.Editing.EditHelper
+  href: Mapsui.Nts.Editing.EditHelper.html
+  name: EditHelper
+  nameWithType: EditHelper
+  fullName: Mapsui.Nts.Editing.EditHelper
+- uid: Mapsui.Nts.Editing.EditMode
+  commentId: T:Mapsui.Nts.Editing.EditMode
+  parent: Mapsui.Nts.Editing
+  href: Mapsui.Nts.Editing.EditMode.html
+  name: EditMode
+  nameWithType: EditMode
+  fullName: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditManager
+  commentId: T:Mapsui.Nts.Editing.EditManager
+  parent: Mapsui.Nts.Editing
+  href: Mapsui.Nts.Editing.EditManager.html
+  name: EditManager
+  nameWithType: EditManager
+  fullName: Mapsui.Nts.Editing.EditManager
+- uid: Mapsui.Nts.Editing.EditManipulation
+  commentId: T:Mapsui.Nts.Editing.EditManipulation
+  href: Mapsui.Nts.Editing.EditManipulation.html
+  name: EditManipulation
+  nameWithType: EditManipulation
+  fullName: Mapsui.Nts.Editing.EditManipulation
+- uid: Mapsui.Nts.Editing.Geomorpher
+  commentId: T:Mapsui.Nts.Editing.Geomorpher
+  href: Mapsui.Nts.Editing.Geomorpher.html
+  name: Geomorpher
+  nameWithType: Geomorpher
+  fullName: Mapsui.Nts.Editing.Geomorpher
+- uid: Mapsui.Nts.Editing.RotateInfo
+  commentId: T:Mapsui.Nts.Editing.RotateInfo
+  href: Mapsui.Nts.Editing.RotateInfo.html
+  name: RotateInfo
+  nameWithType: RotateInfo
+  fullName: Mapsui.Nts.Editing.RotateInfo
+- uid: Mapsui.Nts.Editing
+  commentId: N:Mapsui.Nts.Editing
+  href: Mapsui.html
+  name: Mapsui.Nts.Editing
+  nameWithType: Mapsui.Nts.Editing
+  fullName: Mapsui.Nts.Editing
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Editing
+    name: Editing
+    href: Mapsui.Nts.Editing.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Editing
+    name: Editing
+    href: Mapsui.Nts.Editing.html

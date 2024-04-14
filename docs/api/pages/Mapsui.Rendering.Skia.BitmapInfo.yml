@@ -1,0 +1,998 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.BitmapInfo
+  commentId: T:Mapsui.Rendering.Skia.BitmapInfo
+  id: BitmapInfo
+  parent: Mapsui.Rendering.Skia
+  children:
+  - Mapsui.Rendering.Skia.BitmapInfo.#ctor
+  - Mapsui.Rendering.Skia.BitmapInfo.#ctor(System.Boolean)
+  - Mapsui.Rendering.Skia.BitmapInfo.Bitmap
+  - Mapsui.Rendering.Skia.BitmapInfo.Dispose
+  - Mapsui.Rendering.Skia.BitmapInfo.Height
+  - Mapsui.Rendering.Skia.BitmapInfo.IsDisposed
+  - Mapsui.Rendering.Skia.BitmapInfo.IterationUsed
+  - Mapsui.Rendering.Skia.BitmapInfo.Picture
+  - Mapsui.Rendering.Skia.BitmapInfo.Sprite
+  - Mapsui.Rendering.Skia.BitmapInfo.Svg
+  - Mapsui.Rendering.Skia.BitmapInfo.Type
+  - Mapsui.Rendering.Skia.BitmapInfo.Width
+  langs:
+  - csharp
+  - vb
+  name: BitmapInfo
+  nameWithType: BitmapInfo
+  fullName: Mapsui.Rendering.Skia.BitmapInfo
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BitmapInfo
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 15
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: 'public sealed class BitmapInfo : IBitmapInfo, IDisposable'
+    content.vb: Public NotInheritable Class BitmapInfo Implements IBitmapInfo, IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Rendering.IBitmapInfo
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.Skia.BitmapInfo.#ctor
+  commentId: M:Mapsui.Rendering.Skia.BitmapInfo.#ctor
+  id: '#ctor'
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: BitmapInfo()
+  nameWithType: BitmapInfo.BitmapInfo()
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.BitmapInfo()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 20
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public BitmapInfo()
+    content.vb: Public Sub New()
+  overload: Mapsui.Rendering.Skia.BitmapInfo.#ctor*
+  nameWithType.vb: BitmapInfo.New()
+  fullName.vb: Mapsui.Rendering.Skia.BitmapInfo.New()
+  name.vb: New()
+- uid: Mapsui.Rendering.Skia.BitmapInfo.#ctor(System.Boolean)
+  commentId: M:Mapsui.Rendering.Skia.BitmapInfo.#ctor(System.Boolean)
+  id: '#ctor(System.Boolean)'
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: BitmapInfo(bool)
+  nameWithType: BitmapInfo.BitmapInfo(bool)
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.BitmapInfo(bool)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 25
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public BitmapInfo(bool ownedBitmap)
+    parameters:
+    - id: ownedBitmap
+      type: System.Boolean
+    content.vb: Public Sub New(ownedBitmap As Boolean)
+  overload: Mapsui.Rendering.Skia.BitmapInfo.#ctor*
+  nameWithType.vb: BitmapInfo.New(Boolean)
+  fullName.vb: Mapsui.Rendering.Skia.BitmapInfo.New(Boolean)
+  name.vb: New(Boolean)
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Type
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.Type
+  id: Type
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: Type
+  nameWithType: BitmapInfo.Type
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Type
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Type
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 30
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public BitmapType Type { get; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.Skia.BitmapType
+    content.vb: Public Property Type As BitmapType
+  overload: Mapsui.Rendering.Skia.BitmapInfo.Type*
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Bitmap
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.Bitmap
+  id: Bitmap
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: Bitmap
+  nameWithType: BitmapInfo.Bitmap
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Bitmap
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Bitmap
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 32
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public SKImage? Bitmap { get; set; }
+    parameters: []
+    return:
+      type: SkiaSharp.SKImage
+    content.vb: Public Property Bitmap As SKImage
+  overload: Mapsui.Rendering.Skia.BitmapInfo.Bitmap*
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Picture
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.Picture
+  id: Picture
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: Picture
+  nameWithType: BitmapInfo.Picture
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Picture
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Picture
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 48
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public SKPicture? Picture { get; set; }
+    parameters: []
+    return:
+      type: SkiaSharp.SKPicture
+    content.vb: Public Property Picture As SKPicture
+  overload: Mapsui.Rendering.Skia.BitmapInfo.Picture*
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Svg
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.Svg
+  id: Svg
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: Svg
+  nameWithType: BitmapInfo.Svg
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Svg
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Svg
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 64
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public SKSvg? Svg { get; set; }
+    parameters: []
+    return:
+      type: Svg.Skia.SKSvg
+    content.vb: Public Property Svg As SKSvg
+  overload: Mapsui.Rendering.Skia.BitmapInfo.Svg*
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Sprite
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.Sprite
+  id: Sprite
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: Sprite
+  nameWithType: BitmapInfo.Sprite
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Sprite
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Sprite
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 80
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public Sprite? Sprite { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Sprite
+    content.vb: Public Property Sprite As Sprite
+  overload: Mapsui.Rendering.Skia.BitmapInfo.Sprite*
+- uid: Mapsui.Rendering.Skia.BitmapInfo.IterationUsed
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.IterationUsed
+  id: IterationUsed
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: IterationUsed
+  nameWithType: BitmapInfo.IterationUsed
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.IterationUsed
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IterationUsed
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 96
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  example: []
+  syntax:
+    content: public long IterationUsed { get; set; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property IterationUsed As Long
+  overload: Mapsui.Rendering.Skia.BitmapInfo.IterationUsed*
+  implements:
+  - Mapsui.Rendering.IBitmapInfo.IterationUsed
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Width
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.Width
+  id: Width
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: Width
+  nameWithType: BitmapInfo.Width
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Width
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Width
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 98
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public float Width { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public ReadOnly Property Width As Single
+  overload: Mapsui.Rendering.Skia.BitmapInfo.Width*
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Height
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.Height
+  id: Height
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: Height
+  nameWithType: BitmapInfo.Height
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Height
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Height
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 118
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public float Height { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public ReadOnly Property Height As Single
+  overload: Mapsui.Rendering.Skia.BitmapInfo.Height*
+- uid: Mapsui.Rendering.Skia.BitmapInfo.IsDisposed
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.IsDisposed
+  id: IsDisposed
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: IsDisposed
+  nameWithType: BitmapInfo.IsDisposed
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.IsDisposed
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsDisposed
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 138
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public bool IsDisposed { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsDisposed As Boolean
+  overload: Mapsui.Rendering.Skia.BitmapInfo.IsDisposed*
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Dispose
+  commentId: M:Mapsui.Rendering.Skia.BitmapInfo.Dispose
+  id: Dispose
+  parent: Mapsui.Rendering.Skia.BitmapInfo
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: BitmapInfo.Dispose()
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/BitmapInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui.Rendering.Skia/BitmapInfo.cs
+    startLine: 140
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Mapsui.Rendering.Skia.BitmapInfo.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+references:
+- uid: Mapsui.Rendering.Skia
+  commentId: N:Mapsui.Rendering.Skia
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia
+  nameWithType: Mapsui.Rendering.Skia
+  fullName: Mapsui.Rendering.Skia
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Rendering.IBitmapInfo
+  commentId: T:Mapsui.Rendering.IBitmapInfo
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IBitmapInfo.html
+  name: IBitmapInfo
+  nameWithType: IBitmapInfo
+  fullName: Mapsui.Rendering.IBitmapInfo
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.Skia.BitmapInfo.#ctor*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.#ctor
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo__ctor
+  name: BitmapInfo
+  nameWithType: BitmapInfo.BitmapInfo
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.BitmapInfo
+  nameWithType.vb: BitmapInfo.New
+  fullName.vb: Mapsui.Rendering.Skia.BitmapInfo.New
+  name.vb: New
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Type*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.Type
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Type
+  name: Type
+  nameWithType: BitmapInfo.Type
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Type
+- uid: Mapsui.Rendering.Skia.BitmapType
+  commentId: T:Mapsui.Rendering.Skia.BitmapType
+  parent: Mapsui.Rendering.Skia
+  href: Mapsui.Rendering.Skia.BitmapType.html
+  name: BitmapType
+  nameWithType: BitmapType
+  fullName: Mapsui.Rendering.Skia.BitmapType
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Bitmap*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.Bitmap
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Bitmap
+  name: Bitmap
+  nameWithType: BitmapInfo.Bitmap
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Bitmap
+- uid: SkiaSharp.SKImage
+  commentId: T:SkiaSharp.SKImage
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skimage
+  name: SKImage
+  nameWithType: SKImage
+  fullName: SkiaSharp.SKImage
+- uid: SkiaSharp
+  commentId: N:SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp
+  name: SkiaSharp
+  nameWithType: SkiaSharp
+  fullName: SkiaSharp
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Picture*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.Picture
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Picture
+  name: Picture
+  nameWithType: BitmapInfo.Picture
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Picture
+- uid: SkiaSharp.SKPicture
+  commentId: T:SkiaSharp.SKPicture
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skpicture
+  name: SKPicture
+  nameWithType: SKPicture
+  fullName: SkiaSharp.SKPicture
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Svg*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.Svg
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Svg
+  name: Svg
+  nameWithType: BitmapInfo.Svg
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Svg
+- uid: Svg.Skia.SKSvg
+  commentId: T:Svg.Skia.SKSvg
+  parent: Svg.Skia
+  isExternal: true
+  name: SKSvg
+  nameWithType: SKSvg
+  fullName: Svg.Skia.SKSvg
+- uid: Svg.Skia
+  commentId: N:Svg.Skia
+  isExternal: true
+  name: Svg.Skia
+  nameWithType: Svg.Skia
+  fullName: Svg.Skia
+  spec.csharp:
+  - uid: Svg
+    name: Svg
+    isExternal: true
+  - name: .
+  - uid: Svg.Skia
+    name: Skia
+    isExternal: true
+  spec.vb:
+  - uid: Svg
+    name: Svg
+    isExternal: true
+  - name: .
+  - uid: Svg.Skia
+    name: Skia
+    isExternal: true
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Sprite*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.Sprite
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Sprite
+  name: Sprite
+  nameWithType: BitmapInfo.Sprite
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Sprite
+- uid: Mapsui.Styles.Sprite
+  commentId: T:Mapsui.Styles.Sprite
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Sprite.html
+  name: Sprite
+  nameWithType: Sprite
+  fullName: Mapsui.Styles.Sprite
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Rendering.Skia.BitmapInfo.IterationUsed*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.IterationUsed
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_IterationUsed
+  name: IterationUsed
+  nameWithType: BitmapInfo.IterationUsed
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.IterationUsed
+- uid: Mapsui.Rendering.IBitmapInfo.IterationUsed
+  commentId: P:Mapsui.Rendering.IBitmapInfo.IterationUsed
+  parent: Mapsui.Rendering.IBitmapInfo
+  name: IterationUsed
+  nameWithType: IBitmapInfo.IterationUsed
+  fullName: Mapsui.Rendering.IBitmapInfo.IterationUsed
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Width*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.Width
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Width
+  name: Width
+  nameWithType: BitmapInfo.Width
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Width
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Height*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.Height
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Height
+  name: Height
+  nameWithType: BitmapInfo.Height
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Height
+- uid: Mapsui.Rendering.Skia.BitmapInfo.IsDisposed*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.IsDisposed
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_IsDisposed
+  name: IsDisposed
+  nameWithType: BitmapInfo.IsDisposed
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.IsDisposed
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Dispose*
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.Dispose
+  href: Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Dispose
+  name: Dispose
+  nameWithType: BitmapInfo.Dispose
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

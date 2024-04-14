@@ -1,0 +1,125 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia
+  commentId: N:Mapsui.Rendering.Skia
+  id: Mapsui.Rendering.Skia
+  children:
+  - Mapsui.Rendering.Skia.BitmapHelper
+  - Mapsui.Rendering.Skia.BitmapInfo
+  - Mapsui.Rendering.Skia.BitmapType
+  - Mapsui.Rendering.Skia.CalloutStyleRenderer
+  - Mapsui.Rendering.Skia.LabelStyleRenderer
+  - Mapsui.Rendering.Skia.LineStringRenderer
+  - Mapsui.Rendering.Skia.MapRenderer
+  - Mapsui.Rendering.Skia.RasterStyleRenderer
+  - Mapsui.Rendering.Skia.SvgRenderer
+  - Mapsui.Rendering.Skia.SymbolStyleRenderer
+  - Mapsui.Rendering.Skia.VectorStyleRenderer
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Rendering.Skia
+  nameWithType: Mapsui.Rendering.Skia
+  fullName: Mapsui.Rendering.Skia
+  type: Namespace
+  assemblies:
+  - Mapsui.Rendering.Skia
+references:
+- uid: Mapsui.Rendering.Skia.BitmapHelper
+  commentId: T:Mapsui.Rendering.Skia.BitmapHelper
+  href: Mapsui.Rendering.Skia.BitmapHelper.html
+  name: BitmapHelper
+  nameWithType: BitmapHelper
+  fullName: Mapsui.Rendering.Skia.BitmapHelper
+- uid: Mapsui.Rendering.Skia.BitmapType
+  commentId: T:Mapsui.Rendering.Skia.BitmapType
+  parent: Mapsui.Rendering.Skia
+  href: Mapsui.Rendering.Skia.BitmapType.html
+  name: BitmapType
+  nameWithType: BitmapType
+  fullName: Mapsui.Rendering.Skia.BitmapType
+- uid: Mapsui.Rendering.Skia.BitmapInfo
+  commentId: T:Mapsui.Rendering.Skia.BitmapInfo
+  parent: Mapsui.Rendering.Skia
+  href: Mapsui.Rendering.Skia.BitmapInfo.html
+  name: BitmapInfo
+  nameWithType: BitmapInfo
+  fullName: Mapsui.Rendering.Skia.BitmapInfo
+- uid: Mapsui.Rendering.Skia.MapRenderer
+  commentId: T:Mapsui.Rendering.Skia.MapRenderer
+  href: Mapsui.Rendering.Skia.MapRenderer.html
+  name: MapRenderer
+  nameWithType: MapRenderer
+  fullName: Mapsui.Rendering.Skia.MapRenderer
+- uid: Mapsui.Rendering.Skia.CalloutStyleRenderer
+  commentId: T:Mapsui.Rendering.Skia.CalloutStyleRenderer
+  href: Mapsui.Rendering.Skia.CalloutStyleRenderer.html
+  name: CalloutStyleRenderer
+  nameWithType: CalloutStyleRenderer
+  fullName: Mapsui.Rendering.Skia.CalloutStyleRenderer
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer
+  commentId: T:Mapsui.Rendering.Skia.LabelStyleRenderer
+  href: Mapsui.Rendering.Skia.LabelStyleRenderer.html
+  name: LabelStyleRenderer
+  nameWithType: LabelStyleRenderer
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer
+- uid: Mapsui.Rendering.Skia.LineStringRenderer
+  commentId: T:Mapsui.Rendering.Skia.LineStringRenderer
+  href: Mapsui.Rendering.Skia.LineStringRenderer.html
+  name: LineStringRenderer
+  nameWithType: LineStringRenderer
+  fullName: Mapsui.Rendering.Skia.LineStringRenderer
+- uid: Mapsui.Rendering.Skia.RasterStyleRenderer
+  commentId: T:Mapsui.Rendering.Skia.RasterStyleRenderer
+  href: Mapsui.Rendering.Skia.RasterStyleRenderer.html
+  name: RasterStyleRenderer
+  nameWithType: RasterStyleRenderer
+  fullName: Mapsui.Rendering.Skia.RasterStyleRenderer
+- uid: Mapsui.Rendering.Skia.SvgRenderer
+  commentId: T:Mapsui.Rendering.Skia.SvgRenderer
+  href: Mapsui.Rendering.Skia.SvgRenderer.html
+  name: SvgRenderer
+  nameWithType: SvgRenderer
+  fullName: Mapsui.Rendering.Skia.SvgRenderer
+- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer
+  commentId: T:Mapsui.Rendering.Skia.SymbolStyleRenderer
+  href: Mapsui.Rendering.Skia.SymbolStyleRenderer.html
+  name: SymbolStyleRenderer
+  nameWithType: SymbolStyleRenderer
+  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer
+- uid: Mapsui.Rendering.Skia.VectorStyleRenderer
+  commentId: T:Mapsui.Rendering.Skia.VectorStyleRenderer
+  href: Mapsui.Rendering.Skia.VectorStyleRenderer.html
+  name: VectorStyleRenderer
+  nameWithType: VectorStyleRenderer
+  fullName: Mapsui.Rendering.Skia.VectorStyleRenderer
+- uid: Mapsui.Rendering.Skia
+  commentId: N:Mapsui.Rendering.Skia
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia
+  nameWithType: Mapsui.Rendering.Skia
+  fullName: Mapsui.Rendering.Skia
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html

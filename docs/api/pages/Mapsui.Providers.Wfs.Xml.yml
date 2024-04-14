@@ -1,0 +1,201 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wfs.Xml
+  commentId: N:Mapsui.Providers.Wfs.Xml
+  id: Mapsui.Providers.Wfs.Xml
+  children:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Providers.Wfs.Xml
+  nameWithType: Mapsui.Providers.Wfs.Xml
+  fullName: Mapsui.Providers.Wfs.Xml
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  commentId: T:Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  parent: Mapsui.Providers.Wfs.Xml
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html
+  name: IXPathQueryManager
+  nameWithType: IXPathQueryManager
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager
+  nameWithType: XPathQueryManager
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager.CustomQueryContext
+  nameWithType: XPathQueryManager.CustomQueryContext
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+    name: CustomQueryContext
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+    name: CustomQueryContext
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  parent: Mapsui.Providers.Wfs.Xml
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager.ParamBase
+  nameWithType: XPathQueryManager.ParamBase
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+    name: ParamBase
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+    name: ParamBase
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+  parent: Mapsui.Providers.Wfs.Xml
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager.ParamCompare
+  nameWithType: XPathQueryManager.ParamCompare
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+    name: ParamCompare
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+    name: ParamCompare
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager.ParamCompareWithTargetNs
+  nameWithType: XPathQueryManager.ParamCompareWithTargetNs
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+    name: ParamCompareWithTargetNs
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+    name: ParamCompareWithTargetNs
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager.ParamFunctionVar
+  nameWithType: XPathQueryManager.ParamFunctionVar
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar
+    name: ParamFunctionVar
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar
+    name: ParamFunctionVar
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator.html
+  name: XPathQueryManagerCompiledExpressionsDecorator
+  nameWithType: XPathQueryManagerCompiledExpressionsDecorator
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase
+  parent: Mapsui.Providers.Wfs.Xml
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.html
+  name: XPathQueryManagerDecoratorBase
+  nameWithType: XPathQueryManagerDecoratorBase
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase
+- uid: Mapsui.Providers.Wfs.Xml
+  commentId: N:Mapsui.Providers.Wfs.Xml
+  href: Mapsui.html
+  name: Mapsui.Providers.Wfs.Xml
+  nameWithType: Mapsui.Providers.Wfs.Xml
+  fullName: Mapsui.Providers.Wfs.Xml
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml
+    name: Xml
+    href: Mapsui.Providers.Wfs.Xml.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml
+    name: Xml
+    href: Mapsui.Providers.Wfs.Xml.html

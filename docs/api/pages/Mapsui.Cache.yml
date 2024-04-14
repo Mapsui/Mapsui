@@ -1,0 +1,78 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Cache
+  commentId: N:Mapsui.Cache
+  id: Mapsui.Cache
+  children:
+  - Mapsui.Cache.IUrlPersistentCache
+  - Mapsui.Cache.LruCache`2
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Cache
+  nameWithType: Mapsui.Cache
+  fullName: Mapsui.Cache
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Cache.IUrlPersistentCache
+  commentId: T:Mapsui.Cache.IUrlPersistentCache
+  parent: Mapsui.Cache
+  href: Mapsui.Cache.IUrlPersistentCache.html
+  name: IUrlPersistentCache
+  nameWithType: IUrlPersistentCache
+  fullName: Mapsui.Cache.IUrlPersistentCache
+- uid: Mapsui.Cache.LruCache`2
+  commentId: T:Mapsui.Cache.LruCache`2
+  href: Mapsui.Cache.LruCache-2.html
+  name: LruCache<TKey, TValue>
+  nameWithType: LruCache<TKey, TValue>
+  fullName: Mapsui.Cache.LruCache<TKey, TValue>
+  nameWithType.vb: LruCache(Of TKey, TValue)
+  fullName.vb: Mapsui.Cache.LruCache(Of TKey, TValue)
+  name.vb: LruCache(Of TKey, TValue)
+  spec.csharp:
+  - uid: Mapsui.Cache.LruCache`2
+    name: LruCache
+    href: Mapsui.Cache.LruCache-2.html
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Cache.LruCache`2
+    name: LruCache
+    href: Mapsui.Cache.LruCache-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Mapsui.Cache
+  commentId: N:Mapsui.Cache
+  href: Mapsui.html
+  name: Mapsui.Cache
+  nameWithType: Mapsui.Cache
+  fullName: Mapsui.Cache
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Cache
+    name: Cache
+    href: Mapsui.Cache.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Cache
+    name: Cache
+    href: Mapsui.Cache.html

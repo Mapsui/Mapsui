@@ -1,0 +1,67 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Limiting
+  commentId: N:Mapsui.Limiting
+  id: Mapsui.Limiting
+  children:
+  - Mapsui.Limiting.IViewportLimiter
+  - Mapsui.Limiting.ViewportLimiter
+  - Mapsui.Limiting.ViewportLimiterKeepWithinExtent
+  - Mapsui.Limiting.ViewportLimiterWithoutLimits
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Limiting
+  nameWithType: Mapsui.Limiting
+  fullName: Mapsui.Limiting
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Limiting.IViewportLimiter
+  commentId: T:Mapsui.Limiting.IViewportLimiter
+  parent: Mapsui.Limiting
+  href: Mapsui.Limiting.IViewportLimiter.html
+  name: IViewportLimiter
+  nameWithType: IViewportLimiter
+  fullName: Mapsui.Limiting.IViewportLimiter
+- uid: Mapsui.Limiting.ViewportLimiter
+  commentId: T:Mapsui.Limiting.ViewportLimiter
+  href: Mapsui.Limiting.ViewportLimiter.html
+  name: ViewportLimiter
+  nameWithType: ViewportLimiter
+  fullName: Mapsui.Limiting.ViewportLimiter
+- uid: Mapsui.Limiting.ViewportLimiterKeepWithinExtent
+  commentId: T:Mapsui.Limiting.ViewportLimiterKeepWithinExtent
+  href: Mapsui.Limiting.ViewportLimiterKeepWithinExtent.html
+  name: ViewportLimiterKeepWithinExtent
+  nameWithType: ViewportLimiterKeepWithinExtent
+  fullName: Mapsui.Limiting.ViewportLimiterKeepWithinExtent
+- uid: Mapsui.Limiting.ViewportLimiterWithoutLimits
+  commentId: T:Mapsui.Limiting.ViewportLimiterWithoutLimits
+  href: Mapsui.Limiting.ViewportLimiterWithoutLimits.html
+  name: ViewportLimiterWithoutLimits
+  nameWithType: ViewportLimiterWithoutLimits
+  fullName: Mapsui.Limiting.ViewportLimiterWithoutLimits
+- uid: Mapsui.Limiting
+  commentId: N:Mapsui.Limiting
+  href: Mapsui.html
+  name: Mapsui.Limiting
+  nameWithType: Mapsui.Limiting
+  fullName: Mapsui.Limiting
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Limiting
+    name: Limiting
+    href: Mapsui.Limiting.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Limiting
+    name: Limiting
+    href: Mapsui.Limiting.html

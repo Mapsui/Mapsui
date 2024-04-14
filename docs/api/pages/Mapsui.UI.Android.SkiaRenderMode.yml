@@ -1,0 +1,120 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Android.SkiaRenderMode
+  commentId: T:Mapsui.UI.Android.SkiaRenderMode
+  id: SkiaRenderMode
+  parent: Mapsui.UI.Android
+  children:
+  - Mapsui.UI.Android.SkiaRenderMode.Hardware
+  - Mapsui.UI.Android.SkiaRenderMode.Software
+  langs:
+  - csharp
+  - vb
+  name: SkiaRenderMode
+  nameWithType: SkiaRenderMode
+  fullName: Mapsui.UI.Android.SkiaRenderMode
+  type: Enum
+  source:
+    remote:
+      path: Mapsui.UI.Android/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SkiaRenderMode
+    path: ../../Mapsui.UI.Android/MapControl.cs
+    startLine: 13
+  assemblies:
+  - Mapsui.UI.Android
+  namespace: Mapsui.UI.Android
+  syntax:
+    content: public enum SkiaRenderMode
+    content.vb: Public Enum SkiaRenderMode
+- uid: Mapsui.UI.Android.SkiaRenderMode.Hardware
+  commentId: F:Mapsui.UI.Android.SkiaRenderMode.Hardware
+  id: Hardware
+  parent: Mapsui.UI.Android.SkiaRenderMode
+  langs:
+  - csharp
+  - vb
+  name: Hardware
+  nameWithType: SkiaRenderMode.Hardware
+  fullName: Mapsui.UI.Android.SkiaRenderMode.Hardware
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Android/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Hardware
+    path: ../../Mapsui.UI.Android/MapControl.cs
+    startLine: 15
+  assemblies:
+  - Mapsui.UI.Android
+  namespace: Mapsui.UI.Android
+  syntax:
+    content: Hardware = 0
+    return:
+      type: Mapsui.UI.Android.SkiaRenderMode
+- uid: Mapsui.UI.Android.SkiaRenderMode.Software
+  commentId: F:Mapsui.UI.Android.SkiaRenderMode.Software
+  id: Software
+  parent: Mapsui.UI.Android.SkiaRenderMode
+  langs:
+  - csharp
+  - vb
+  name: Software
+  nameWithType: SkiaRenderMode.Software
+  fullName: Mapsui.UI.Android.SkiaRenderMode.Software
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Android/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Software
+    path: ../../Mapsui.UI.Android/MapControl.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.UI.Android
+  namespace: Mapsui.UI.Android
+  syntax:
+    content: Software = 1
+    return:
+      type: Mapsui.UI.Android.SkiaRenderMode
+references:
+- uid: Mapsui.UI.Android
+  commentId: N:Mapsui.UI.Android
+  href: Mapsui.html
+  name: Mapsui.UI.Android
+  nameWithType: Mapsui.UI.Android
+  fullName: Mapsui.UI.Android
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Android
+    name: Android
+    href: Mapsui.UI.Android.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Android
+    name: Android
+    href: Mapsui.UI.Android.html
+- uid: Mapsui.UI.Android.SkiaRenderMode
+  commentId: T:Mapsui.UI.Android.SkiaRenderMode
+  parent: Mapsui.UI.Android
+  href: Mapsui.UI.Android.SkiaRenderMode.html
+  name: SkiaRenderMode
+  nameWithType: SkiaRenderMode
+  fullName: Mapsui.UI.Android.SkiaRenderMode

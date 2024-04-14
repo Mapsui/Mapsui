@@ -1,0 +1,1032 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.InfoWidgets.PerformanceWidget
+  commentId: T:Mapsui.Widgets.InfoWidgets.PerformanceWidget
+  id: PerformanceWidget
+  parent: Mapsui.Widgets.InfoWidgets
+  children:
+  - Mapsui.Widgets.InfoWidgets.PerformanceWidget.#ctor(Mapsui.Utilities.Performance)
+  - Mapsui.Widgets.InfoWidgets.PerformanceWidget.Performance
+  langs:
+  - csharp
+  - vb
+  name: PerformanceWidget
+  nameWithType: PerformanceWidget
+  fullName: Mapsui.Widgets.InfoWidgets.PerformanceWidget
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/PerformanceWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PerformanceWidget
+    path: ../../Mapsui/Widgets/InfoWidgets/PerformanceWidget.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  summary: Widget which shows the drawing performance
+  remarks: >-
+    With this, the user could see the drawing performance on the screen.
+
+    It shows always the values for the last draw before this draw.
+  example: []
+  syntax:
+    content: 'public class PerformanceWidget : ButtonWidget, IWidget'
+    content.vb: Public Class PerformanceWidget Inherits ButtonWidget Implements IWidget
+  inheritance:
+  - System.Object
+  - Mapsui.Widgets.BaseWidget
+  - Mapsui.Widgets.BoxWidgets.BoxWidget
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  - Mapsui.Widgets.ButtonWidgets.ButtonWidget
+  implements:
+  - Mapsui.Widgets.IWidget
+  inheritedMembers:
+  - Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
+  - Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget.Padding
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget.Text
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextSize
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextColor
+  - Mapsui.Widgets.BoxWidgets.BoxWidget.CornerRadius
+  - Mapsui.Widgets.BoxWidgets.BoxWidget.BackColor
+  - Mapsui.Widgets.BoxWidgets.BoxWidget.Opacity
+  - Mapsui.Widgets.BaseWidget.InputAreaType
+  - Mapsui.Widgets.BaseWidget.HorizontalAlignment
+  - Mapsui.Widgets.BaseWidget.VerticalAlignment
+  - Mapsui.Widgets.BaseWidget.Margin
+  - Mapsui.Widgets.BaseWidget.Position
+  - Mapsui.Widgets.BaseWidget.Width
+  - Mapsui.Widgets.BaseWidget.Height
+  - Mapsui.Widgets.BaseWidget.Envelope
+  - Mapsui.Widgets.BaseWidget.Enabled
+  - Mapsui.Widgets.BaseWidget.NeedsRedraw
+  - Mapsui.Widgets.BaseWidget.InputTransparent
+  - Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+  - Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+  - Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Widgets.InfoWidgets.PerformanceWidget.#ctor(Mapsui.Utilities.Performance)
+  commentId: M:Mapsui.Widgets.InfoWidgets.PerformanceWidget.#ctor(Mapsui.Utilities.Performance)
+  id: '#ctor(Mapsui.Utilities.Performance)'
+  parent: Mapsui.Widgets.InfoWidgets.PerformanceWidget
+  langs:
+  - csharp
+  - vb
+  name: PerformanceWidget(Performance)
+  nameWithType: PerformanceWidget.PerformanceWidget(Performance)
+  fullName: Mapsui.Widgets.InfoWidgets.PerformanceWidget.PerformanceWidget(Mapsui.Utilities.Performance)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/PerformanceWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Widgets/InfoWidgets/PerformanceWidget.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  syntax:
+    content: public PerformanceWidget(Performance performance)
+    parameters:
+    - id: performance
+      type: Mapsui.Utilities.Performance
+    content.vb: Public Sub New(performance As Performance)
+  overload: Mapsui.Widgets.InfoWidgets.PerformanceWidget.#ctor*
+  nameWithType.vb: PerformanceWidget.New(Performance)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.PerformanceWidget.New(Mapsui.Utilities.Performance)
+  name.vb: New(Performance)
+- uid: Mapsui.Widgets.InfoWidgets.PerformanceWidget.Performance
+  commentId: P:Mapsui.Widgets.InfoWidgets.PerformanceWidget.Performance
+  id: Performance
+  parent: Mapsui.Widgets.InfoWidgets.PerformanceWidget
+  langs:
+  - csharp
+  - vb
+  name: Performance
+  nameWithType: PerformanceWidget.Performance
+  fullName: Mapsui.Widgets.InfoWidgets.PerformanceWidget.Performance
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/PerformanceWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Performance
+    path: ../../Mapsui/Widgets/InfoWidgets/PerformanceWidget.cs
+    startLine: 21
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  summary: Performance object which holds the values
+  example: []
+  syntax:
+    content: public Performance Performance { get; }
+    parameters: []
+    return:
+      type: Mapsui.Utilities.Performance
+    content.vb: Public ReadOnly Property Performance As Performance
+  overload: Mapsui.Widgets.InfoWidgets.PerformanceWidget.Performance*
+references:
+- uid: Mapsui.Widgets.InfoWidgets
+  commentId: N:Mapsui.Widgets.InfoWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.InfoWidgets
+  nameWithType: Mapsui.Widgets.InfoWidgets
+  fullName: Mapsui.Widgets.InfoWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets
+    name: InfoWidgets
+    href: Mapsui.Widgets.InfoWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets
+    name: InfoWidgets
+    href: Mapsui.Widgets.InfoWidgets.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Widgets.BaseWidget
+  commentId: T:Mapsui.Widgets.BaseWidget
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.BaseWidget.html
+  name: BaseWidget
+  nameWithType: BaseWidget
+  fullName: Mapsui.Widgets.BaseWidget
+- uid: Mapsui.Widgets.BoxWidgets.BoxWidget
+  commentId: T:Mapsui.Widgets.BoxWidgets.BoxWidget
+  parent: Mapsui.Widgets.BoxWidgets
+  href: Mapsui.Widgets.BoxWidgets.BoxWidget.html
+  name: BoxWidget
+  nameWithType: BoxWidget
+  fullName: Mapsui.Widgets.BoxWidgets.BoxWidget
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  commentId: T:Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  parent: Mapsui.Widgets.BoxWidgets
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html
+  name: TextBoxWidget
+  nameWithType: TextBoxWidget
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+- uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget
+  commentId: T:Mapsui.Widgets.ButtonWidgets.ButtonWidget
+  parent: Mapsui.Widgets.ButtonWidgets
+  href: Mapsui.Widgets.ButtonWidgets.ButtonWidget.html
+  name: ButtonWidget
+  nameWithType: ButtonWidget
+  fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget
+- uid: Mapsui.Widgets.IWidget
+  commentId: T:Mapsui.Widgets.IWidget
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.IWidget.html
+  name: IWidget
+  nameWithType: IWidget
+  fullName: Mapsui.Widgets.IWidget
+- uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
+  commentId: F:Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
+  parent: Mapsui.Widgets.ButtonWidgets.ButtonWidget
+  href: Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_Tapped
+  name: Tapped
+  nameWithType: ButtonWidget.Tapped
+  fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
+- uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.ButtonWidgets.ButtonWidget
+  href: Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnTapped(Navigator, WidgetEventArgs)
+  nameWithType: ButtonWidget.OnTapped(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnTapped
+    href: Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnTapped
+    href: Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget.Padding
+  commentId: P:Mapsui.Widgets.BoxWidgets.TextBoxWidget.Padding
+  parent: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_Padding
+  name: Padding
+  nameWithType: TextBoxWidget.Padding
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget.Padding
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget.Text
+  commentId: P:Mapsui.Widgets.BoxWidgets.TextBoxWidget.Text
+  parent: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_Text
+  name: Text
+  nameWithType: TextBoxWidget.Text
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget.Text
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextSize
+  commentId: P:Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextSize
+  parent: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_TextSize
+  name: TextSize
+  nameWithType: TextBoxWidget.TextSize
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextSize
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextColor
+  commentId: P:Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextColor
+  parent: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_TextColor
+  name: TextColor
+  nameWithType: TextBoxWidget.TextColor
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget.TextColor
+- uid: Mapsui.Widgets.BoxWidgets.BoxWidget.CornerRadius
+  commentId: P:Mapsui.Widgets.BoxWidgets.BoxWidget.CornerRadius
+  parent: Mapsui.Widgets.BoxWidgets.BoxWidget
+  href: Mapsui.Widgets.BoxWidgets.BoxWidget.html#Mapsui_Widgets_BoxWidgets_BoxWidget_CornerRadius
+  name: CornerRadius
+  nameWithType: BoxWidget.CornerRadius
+  fullName: Mapsui.Widgets.BoxWidgets.BoxWidget.CornerRadius
+- uid: Mapsui.Widgets.BoxWidgets.BoxWidget.BackColor
+  commentId: P:Mapsui.Widgets.BoxWidgets.BoxWidget.BackColor
+  parent: Mapsui.Widgets.BoxWidgets.BoxWidget
+  href: Mapsui.Widgets.BoxWidgets.BoxWidget.html#Mapsui_Widgets_BoxWidgets_BoxWidget_BackColor
+  name: BackColor
+  nameWithType: BoxWidget.BackColor
+  fullName: Mapsui.Widgets.BoxWidgets.BoxWidget.BackColor
+- uid: Mapsui.Widgets.BoxWidgets.BoxWidget.Opacity
+  commentId: P:Mapsui.Widgets.BoxWidgets.BoxWidget.Opacity
+  parent: Mapsui.Widgets.BoxWidgets.BoxWidget
+  href: Mapsui.Widgets.BoxWidgets.BoxWidget.html#Mapsui_Widgets_BoxWidgets_BoxWidget_Opacity
+  name: Opacity
+  nameWithType: BoxWidget.Opacity
+  fullName: Mapsui.Widgets.BoxWidgets.BoxWidget.Opacity
+- uid: Mapsui.Widgets.BaseWidget.InputAreaType
+  commentId: P:Mapsui.Widgets.BaseWidget.InputAreaType
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_InputAreaType
+  name: InputAreaType
+  nameWithType: BaseWidget.InputAreaType
+  fullName: Mapsui.Widgets.BaseWidget.InputAreaType
+- uid: Mapsui.Widgets.BaseWidget.HorizontalAlignment
+  commentId: P:Mapsui.Widgets.BaseWidget.HorizontalAlignment
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_HorizontalAlignment
+  name: HorizontalAlignment
+  nameWithType: BaseWidget.HorizontalAlignment
+  fullName: Mapsui.Widgets.BaseWidget.HorizontalAlignment
+- uid: Mapsui.Widgets.BaseWidget.VerticalAlignment
+  commentId: P:Mapsui.Widgets.BaseWidget.VerticalAlignment
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_VerticalAlignment
+  name: VerticalAlignment
+  nameWithType: BaseWidget.VerticalAlignment
+  fullName: Mapsui.Widgets.BaseWidget.VerticalAlignment
+- uid: Mapsui.Widgets.BaseWidget.Margin
+  commentId: P:Mapsui.Widgets.BaseWidget.Margin
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Margin
+  name: Margin
+  nameWithType: BaseWidget.Margin
+  fullName: Mapsui.Widgets.BaseWidget.Margin
+- uid: Mapsui.Widgets.BaseWidget.Position
+  commentId: P:Mapsui.Widgets.BaseWidget.Position
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Position
+  name: Position
+  nameWithType: BaseWidget.Position
+  fullName: Mapsui.Widgets.BaseWidget.Position
+- uid: Mapsui.Widgets.BaseWidget.Width
+  commentId: P:Mapsui.Widgets.BaseWidget.Width
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Width
+  name: Width
+  nameWithType: BaseWidget.Width
+  fullName: Mapsui.Widgets.BaseWidget.Width
+- uid: Mapsui.Widgets.BaseWidget.Height
+  commentId: P:Mapsui.Widgets.BaseWidget.Height
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Height
+  name: Height
+  nameWithType: BaseWidget.Height
+  fullName: Mapsui.Widgets.BaseWidget.Height
+- uid: Mapsui.Widgets.BaseWidget.Envelope
+  commentId: P:Mapsui.Widgets.BaseWidget.Envelope
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Envelope
+  name: Envelope
+  nameWithType: BaseWidget.Envelope
+  fullName: Mapsui.Widgets.BaseWidget.Envelope
+- uid: Mapsui.Widgets.BaseWidget.Enabled
+  commentId: P:Mapsui.Widgets.BaseWidget.Enabled
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Enabled
+  name: Enabled
+  nameWithType: BaseWidget.Enabled
+  fullName: Mapsui.Widgets.BaseWidget.Enabled
+- uid: Mapsui.Widgets.BaseWidget.NeedsRedraw
+  commentId: P:Mapsui.Widgets.BaseWidget.NeedsRedraw
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_NeedsRedraw
+  name: NeedsRedraw
+  nameWithType: BaseWidget.NeedsRedraw
+  fullName: Mapsui.Widgets.BaseWidget.NeedsRedraw
+- uid: Mapsui.Widgets.BaseWidget.InputTransparent
+  commentId: P:Mapsui.Widgets.BaseWidget.InputTransparent
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_InputTransparent
+  name: InputTransparent
+  nameWithType: BaseWidget.InputTransparent
+  fullName: Mapsui.Widgets.BaseWidget.InputTransparent
+- uid: Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+  commentId: M:Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+  parent: Mapsui.Widgets.BaseWidget
+  isExternal: true
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_
+  name: UpdateEnvelope(double, double, double, double)
+  nameWithType: BaseWidget.UpdateEnvelope(double, double, double, double)
+  fullName: Mapsui.Widgets.BaseWidget.UpdateEnvelope(double, double, double, double)
+  nameWithType.vb: BaseWidget.UpdateEnvelope(Double, Double, Double, Double)
+  fullName.vb: Mapsui.Widgets.BaseWidget.UpdateEnvelope(Double, Double, Double, Double)
+  name.vb: UpdateEnvelope(Double, Double, Double, Double)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+    name: UpdateEnvelope
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
+    name: UpdateEnvelope
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+  commentId: M:Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+  parent: Mapsui.Widgets.BaseWidget
+  isExternal: true
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Invalidate_System_String_
+  name: Invalidate(string)
+  nameWithType: BaseWidget.Invalidate(string)
+  fullName: Mapsui.Widgets.BaseWidget.Invalidate(string)
+  nameWithType.vb: BaseWidget.Invalidate(String)
+  fullName.vb: Mapsui.Widgets.BaseWidget.Invalidate(String)
+  name.vb: Invalidate(String)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+    name: Invalidate
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Invalidate_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.Invalidate(System.String)
+    name: Invalidate
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Invalidate_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnPointerPressed(Navigator, WidgetEventArgs)
+  nameWithType: BaseWidget.OnPointerPressed(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerPressed
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerPressed
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+- uid: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnPointerMoved(Navigator, WidgetEventArgs)
+  nameWithType: BaseWidget.OnPointerMoved(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerMoved
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerMoved
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+- uid: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.BaseWidget
+  href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnPointerReleased(Navigator, WidgetEventArgs)
+  nameWithType: BaseWidget.OnPointerReleased(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerReleased
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+    name: OnPointerReleased
+    href: Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  - name: (
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+    href: Mapsui.Widgets.WidgetEventArgs.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  href: Mapsui.html
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+- uid: Mapsui.Widgets.BoxWidgets
+  commentId: N:Mapsui.Widgets.BoxWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.BoxWidgets
+  nameWithType: Mapsui.Widgets.BoxWidgets
+  fullName: Mapsui.Widgets.BoxWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.BoxWidgets
+    name: BoxWidgets
+    href: Mapsui.Widgets.BoxWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.BoxWidgets
+    name: BoxWidgets
+    href: Mapsui.Widgets.BoxWidgets.html
+- uid: Mapsui.Widgets.ButtonWidgets
+  commentId: N:Mapsui.Widgets.ButtonWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.ButtonWidgets
+  nameWithType: Mapsui.Widgets.ButtonWidgets
+  fullName: Mapsui.Widgets.ButtonWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.ButtonWidgets
+    name: ButtonWidgets
+    href: Mapsui.Widgets.ButtonWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.ButtonWidgets
+    name: ButtonWidgets
+    href: Mapsui.Widgets.ButtonWidgets.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Widgets.InfoWidgets.PerformanceWidget.#ctor*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.PerformanceWidget.#ctor
+  href: Mapsui.Widgets.InfoWidgets.PerformanceWidget.html#Mapsui_Widgets_InfoWidgets_PerformanceWidget__ctor_Mapsui_Utilities_Performance_
+  name: PerformanceWidget
+  nameWithType: PerformanceWidget.PerformanceWidget
+  fullName: Mapsui.Widgets.InfoWidgets.PerformanceWidget.PerformanceWidget
+  nameWithType.vb: PerformanceWidget.New
+  fullName.vb: Mapsui.Widgets.InfoWidgets.PerformanceWidget.New
+  name.vb: New
+- uid: Mapsui.Utilities.Performance
+  commentId: T:Mapsui.Utilities.Performance
+  parent: Mapsui.Utilities
+  href: Mapsui.Utilities.Performance.html
+  name: Performance
+  nameWithType: Performance
+  fullName: Mapsui.Utilities.Performance
+- uid: Mapsui.Utilities
+  commentId: N:Mapsui.Utilities
+  href: Mapsui.html
+  name: Mapsui.Utilities
+  nameWithType: Mapsui.Utilities
+  fullName: Mapsui.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+- uid: Mapsui.Widgets.InfoWidgets.PerformanceWidget.Performance*
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.PerformanceWidget.Performance
+  href: Mapsui.Widgets.InfoWidgets.PerformanceWidget.html#Mapsui_Widgets_InfoWidgets_PerformanceWidget_Performance
+  name: Performance
+  nameWithType: PerformanceWidget.Performance
+  fullName: Mapsui.Widgets.InfoWidgets.PerformanceWidget.Performance

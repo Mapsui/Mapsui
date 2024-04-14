@@ -1,0 +1,53 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Logging
+  commentId: N:Mapsui.Logging
+  id: Mapsui.Logging
+  children:
+  - Mapsui.Logging.LogLevel
+  - Mapsui.Logging.Logger
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Logging
+  nameWithType: Mapsui.Logging
+  fullName: Mapsui.Logging
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Logging.LogLevel
+  commentId: T:Mapsui.Logging.LogLevel
+  parent: Mapsui.Logging
+  href: Mapsui.Logging.LogLevel.html
+  name: LogLevel
+  nameWithType: LogLevel
+  fullName: Mapsui.Logging.LogLevel
+- uid: Mapsui.Logging.Logger
+  commentId: T:Mapsui.Logging.Logger
+  href: Mapsui.Logging.Logger.html
+  name: Logger
+  nameWithType: Logger
+  fullName: Mapsui.Logging.Logger
+- uid: Mapsui.Logging
+  commentId: N:Mapsui.Logging
+  href: Mapsui.html
+  name: Mapsui.Logging
+  nameWithType: Mapsui.Logging
+  fullName: Mapsui.Logging
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Logging
+    name: Logging
+    href: Mapsui.Logging.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Logging
+    name: Logging
+    href: Mapsui.Logging.html

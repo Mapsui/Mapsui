@@ -1,0 +1,1144 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.Thematics.GradientTheme
+  commentId: T:Mapsui.Styles.Thematics.GradientTheme
+  id: GradientTheme
+  parent: Mapsui.Styles.Thematics
+  children:
+  - Mapsui.Styles.Thematics.GradientTheme.#ctor(System.String,System.Double,System.Double,Mapsui.Styles.IStyle,Mapsui.Styles.IStyle)
+  - Mapsui.Styles.Thematics.GradientTheme.ColumnName
+  - Mapsui.Styles.Thematics.GradientTheme.FillColorBlend
+  - Mapsui.Styles.Thematics.GradientTheme.GetStyle(Mapsui.IFeature)
+  - Mapsui.Styles.Thematics.GradientTheme.LineColorBlend
+  - Mapsui.Styles.Thematics.GradientTheme.Max
+  - Mapsui.Styles.Thematics.GradientTheme.MaxStyle
+  - Mapsui.Styles.Thematics.GradientTheme.Min
+  - Mapsui.Styles.Thematics.GradientTheme.MinStyle
+  - Mapsui.Styles.Thematics.GradientTheme.TextColorBlend
+  langs:
+  - csharp
+  - vb
+  name: GradientTheme
+  nameWithType: GradientTheme
+  fullName: Mapsui.Styles.Thematics.GradientTheme
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GradientTheme
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: The GradientTheme class defines a gradient color thematic rendering of features based by a numeric attribute.
+  example: []
+  syntax:
+    content: 'public class GradientTheme : Style, IThemeStyle, IStyle'
+    content.vb: Public Class GradientTheme Inherits Style Implements IThemeStyle, IStyle
+  inheritance:
+  - System.Object
+  - Mapsui.Styles.Style
+  implements:
+  - Mapsui.Styles.Thematics.IThemeStyle
+  - Mapsui.Styles.IStyle
+  inheritedMembers:
+  - Mapsui.Styles.Style.MinVisible
+  - Mapsui.Styles.Style.MaxVisible
+  - Mapsui.Styles.Style.Enabled
+  - Mapsui.Styles.Style.Opacity
+  - Mapsui.Styles.Style.Equals(System.Object)
+  - Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  - Mapsui.Styles.Style.GetHashCode
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.GetStylesToApply(System.Double)
+  - Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.ShouldBeApplied(System.Double)
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.Thematics.GradientTheme.ColumnName
+  commentId: P:Mapsui.Styles.Thematics.GradientTheme.ColumnName
+  id: ColumnName
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: ColumnName
+  nameWithType: GradientTheme.ColumnName
+  fullName: Mapsui.Styles.Thematics.GradientTheme.ColumnName
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ColumnName
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets the column name from where to get the attribute value
+  example: []
+  syntax:
+    content: public string ColumnName { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ColumnName As String
+  overload: Mapsui.Styles.Thematics.GradientTheme.ColumnName*
+- uid: Mapsui.Styles.Thematics.GradientTheme.Min
+  commentId: P:Mapsui.Styles.Thematics.GradientTheme.Min
+  id: Min
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: Min
+  nameWithType: GradientTheme.Min
+  fullName: Mapsui.Styles.Thematics.GradientTheme.Min
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Min
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 23
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets the minimum value of the gradient
+  example: []
+  syntax:
+    content: public double Min { get; init; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Min As Double
+  overload: Mapsui.Styles.Thematics.GradientTheme.Min*
+- uid: Mapsui.Styles.Thematics.GradientTheme.Max
+  commentId: P:Mapsui.Styles.Thematics.GradientTheme.Max
+  id: Max
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: Max
+  nameWithType: GradientTheme.Max
+  fullName: Mapsui.Styles.Thematics.GradientTheme.Max
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Max
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 28
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets the maximum value of the gradient
+  example: []
+  syntax:
+    content: public double Max { get; init; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Max As Double
+  overload: Mapsui.Styles.Thematics.GradientTheme.Max*
+- uid: Mapsui.Styles.Thematics.GradientTheme.MinStyle
+  commentId: P:Mapsui.Styles.Thematics.GradientTheme.MinStyle
+  id: MinStyle
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: MinStyle
+  nameWithType: GradientTheme.MinStyle
+  fullName: Mapsui.Styles.Thematics.GradientTheme.MinStyle
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MinStyle
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 33
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets the <xref href="Mapsui.Styles.IStyle?text=style" data-throw-if-not-resolved="false"></xref> for the minimum value
+  example: []
+  syntax:
+    content: public IStyle MinStyle { get; init; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.IStyle
+    content.vb: Public Property MinStyle As IStyle
+  overload: Mapsui.Styles.Thematics.GradientTheme.MinStyle*
+- uid: Mapsui.Styles.Thematics.GradientTheme.MaxStyle
+  commentId: P:Mapsui.Styles.Thematics.GradientTheme.MaxStyle
+  id: MaxStyle
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: MaxStyle
+  nameWithType: GradientTheme.MaxStyle
+  fullName: Mapsui.Styles.Thematics.GradientTheme.MaxStyle
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MaxStyle
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 38
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets the <xref href="Mapsui.Styles.IStyle?text=style" data-throw-if-not-resolved="false"></xref> for the maximum value
+  example: []
+  syntax:
+    content: public IStyle MaxStyle { get; init; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.IStyle
+    content.vb: Public Property MaxStyle As IStyle
+  overload: Mapsui.Styles.Thematics.GradientTheme.MaxStyle*
+- uid: Mapsui.Styles.Thematics.GradientTheme.TextColorBlend
+  commentId: P:Mapsui.Styles.Thematics.GradientTheme.TextColorBlend
+  id: TextColorBlend
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: TextColorBlend
+  nameWithType: GradientTheme.TextColorBlend
+  fullName: Mapsui.Styles.Thematics.GradientTheme.TextColorBlend
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TextColorBlend
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 43
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets the <xref href="Mapsui.Styles.Thematics.ColorBlend" data-throw-if-not-resolved="false"></xref> used on labels
+  example: []
+  syntax:
+    content: public ColorBlend? TextColorBlend { get; init; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Property TextColorBlend As ColorBlend
+  overload: Mapsui.Styles.Thematics.GradientTheme.TextColorBlend*
+- uid: Mapsui.Styles.Thematics.GradientTheme.LineColorBlend
+  commentId: P:Mapsui.Styles.Thematics.GradientTheme.LineColorBlend
+  id: LineColorBlend
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: LineColorBlend
+  nameWithType: GradientTheme.LineColorBlend
+  fullName: Mapsui.Styles.Thematics.GradientTheme.LineColorBlend
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LineColorBlend
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 48
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets the <xref href="Mapsui.Styles.Thematics.ColorBlend" data-throw-if-not-resolved="false"></xref> used on lines
+  example: []
+  syntax:
+    content: public ColorBlend? LineColorBlend { get; init; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Property LineColorBlend As ColorBlend
+  overload: Mapsui.Styles.Thematics.GradientTheme.LineColorBlend*
+- uid: Mapsui.Styles.Thematics.GradientTheme.FillColorBlend
+  commentId: P:Mapsui.Styles.Thematics.GradientTheme.FillColorBlend
+  id: FillColorBlend
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: FillColorBlend
+  nameWithType: GradientTheme.FillColorBlend
+  fullName: Mapsui.Styles.Thematics.GradientTheme.FillColorBlend
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FillColorBlend
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 53
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets the <xref href="Mapsui.Styles.Thematics.ColorBlend" data-throw-if-not-resolved="false"></xref> used as Fill
+  example: []
+  syntax:
+    content: public ColorBlend? FillColorBlend { get; init; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Property FillColorBlend As ColorBlend
+  overload: Mapsui.Styles.Thematics.GradientTheme.FillColorBlend*
+- uid: Mapsui.Styles.Thematics.GradientTheme.#ctor(System.String,System.Double,System.Double,Mapsui.Styles.IStyle,Mapsui.Styles.IStyle)
+  commentId: M:Mapsui.Styles.Thematics.GradientTheme.#ctor(System.String,System.Double,System.Double,Mapsui.Styles.IStyle,Mapsui.Styles.IStyle)
+  id: '#ctor(System.String,System.Double,System.Double,Mapsui.Styles.IStyle,Mapsui.Styles.IStyle)'
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: GradientTheme(string, double, double, IStyle, IStyle)
+  nameWithType: GradientTheme.GradientTheme(string, double, double, IStyle, IStyle)
+  fullName: Mapsui.Styles.Thematics.GradientTheme.GradientTheme(string, double, double, Mapsui.Styles.IStyle, Mapsui.Styles.IStyle)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 63
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Initializes a new instance of the GradientTheme class
+  example: []
+  syntax:
+    content: public GradientTheme(string columnName, double minValue, double maxValue, IStyle minStyle, IStyle maxStyle)
+    parameters:
+    - id: columnName
+      type: System.String
+      description: Name of column to extract the attribute
+    - id: minValue
+      type: System.Double
+      description: Minimum value
+    - id: maxValue
+      type: System.Double
+      description: Maximum value
+    - id: minStyle
+      type: Mapsui.Styles.IStyle
+      description: Color for minimum value
+    - id: maxStyle
+      type: Mapsui.Styles.IStyle
+      description: Color for maximum value
+    content.vb: Public Sub New(columnName As String, minValue As Double, maxValue As Double, minStyle As IStyle, maxStyle As IStyle)
+  overload: Mapsui.Styles.Thematics.GradientTheme.#ctor*
+  nameWithType.vb: GradientTheme.New(String, Double, Double, IStyle, IStyle)
+  fullName.vb: Mapsui.Styles.Thematics.GradientTheme.New(String, Double, Double, Mapsui.Styles.IStyle, Mapsui.Styles.IStyle)
+  name.vb: New(String, Double, Double, IStyle, IStyle)
+- uid: Mapsui.Styles.Thematics.GradientTheme.GetStyle(Mapsui.IFeature)
+  commentId: M:Mapsui.Styles.Thematics.GradientTheme.GetStyle(Mapsui.IFeature)
+  id: GetStyle(Mapsui.IFeature)
+  parent: Mapsui.Styles.Thematics.GradientTheme
+  langs:
+  - csharp
+  - vb
+  name: GetStyle(IFeature)
+  nameWithType: GradientTheme.GetStyle(IFeature)
+  fullName: Mapsui.Styles.Thematics.GradientTheme.GetStyle(Mapsui.IFeature)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/GradientTheme.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetStyle
+    path: ../../Mapsui/Styles/Thematics/GradientTheme.cs
+    startLine: 78
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: >-
+    Returns the style based on a numeric DataColumn, where style
+
+    properties are linearly interpolated between max and min values.
+  example: []
+  syntax:
+    content: public IStyle? GetStyle(IFeature row)
+    parameters:
+    - id: row
+      type: Mapsui.IFeature
+      description: Feature
+    return:
+      type: Mapsui.Styles.IStyle
+      description: A <xref href="Mapsui.Styles.IStyle?text=Style" data-throw-if-not-resolved="false"></xref> calculated by a linear interpolation between the min/max styles
+    content.vb: Public Function GetStyle(row As IFeature) As IStyle
+  overload: Mapsui.Styles.Thematics.GradientTheme.GetStyle*
+  implements:
+  - Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+references:
+- uid: Mapsui.Styles.Thematics
+  commentId: N:Mapsui.Styles.Thematics
+  href: Mapsui.html
+  name: Mapsui.Styles.Thematics
+  nameWithType: Mapsui.Styles.Thematics
+  fullName: Mapsui.Styles.Thematics
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  - name: .
+  - uid: Mapsui.Styles.Thematics
+    name: Thematics
+    href: Mapsui.Styles.Thematics.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  - name: .
+  - uid: Mapsui.Styles.Thematics
+    name: Thematics
+    href: Mapsui.Styles.Thematics.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Styles.Style
+  commentId: T:Mapsui.Styles.Style
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Style.html
+  name: Style
+  nameWithType: Style
+  fullName: Mapsui.Styles.Style
+- uid: Mapsui.Styles.Thematics.IThemeStyle
+  commentId: T:Mapsui.Styles.Thematics.IThemeStyle
+  parent: Mapsui.Styles.Thematics
+  href: Mapsui.Styles.Thematics.IThemeStyle.html
+  name: IThemeStyle
+  nameWithType: IThemeStyle
+  fullName: Mapsui.Styles.Thematics.IThemeStyle
+- uid: Mapsui.Styles.IStyle
+  commentId: T:Mapsui.Styles.IStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyle.html
+  name: IStyle
+  nameWithType: IStyle
+  fullName: Mapsui.Styles.IStyle
+- uid: Mapsui.Styles.Style.MinVisible
+  commentId: P:Mapsui.Styles.Style.MinVisible
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_MinVisible
+  name: MinVisible
+  nameWithType: Style.MinVisible
+  fullName: Mapsui.Styles.Style.MinVisible
+- uid: Mapsui.Styles.Style.MaxVisible
+  commentId: P:Mapsui.Styles.Style.MaxVisible
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_MaxVisible
+  name: MaxVisible
+  nameWithType: Style.MaxVisible
+  fullName: Mapsui.Styles.Style.MaxVisible
+- uid: Mapsui.Styles.Style.Enabled
+  commentId: P:Mapsui.Styles.Style.Enabled
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Enabled
+  name: Enabled
+  nameWithType: Style.Enabled
+  fullName: Mapsui.Styles.Style.Enabled
+- uid: Mapsui.Styles.Style.Opacity
+  commentId: P:Mapsui.Styles.Style.Opacity
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Opacity
+  name: Opacity
+  nameWithType: Style.Opacity
+  fullName: Mapsui.Styles.Style.Opacity
+- uid: Mapsui.Styles.Style.Equals(System.Object)
+  commentId: M:Mapsui.Styles.Style.Equals(System.Object)
+  parent: Mapsui.Styles.Style
+  isExternal: true
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Object_
+  name: Equals(object)
+  nameWithType: Style.Equals(object)
+  fullName: Mapsui.Styles.Style.Equals(object)
+  nameWithType.vb: Style.Equals(Object)
+  fullName.vb: Mapsui.Styles.Style.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: Mapsui.Styles.Style.Equals(System.Object)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Style.Equals(System.Object)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  commentId: M:Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_
+  name: Equals(Style)
+  nameWithType: Style.Equals(Style)
+  fullName: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  spec.csharp:
+  - uid: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_
+  - name: (
+  - uid: Mapsui.Styles.Style
+    name: Style
+    href: Mapsui.Styles.Style.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_
+  - name: (
+  - uid: Mapsui.Styles.Style
+    name: Style
+    href: Mapsui.Styles.Style.html
+  - name: )
+- uid: Mapsui.Styles.Style.GetHashCode
+  commentId: M:Mapsui.Styles.Style.GetHashCode
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_GetHashCode
+  name: GetHashCode()
+  nameWithType: Style.GetHashCode()
+  fullName: Mapsui.Styles.Style.GetHashCode()
+  spec.csharp:
+  - uid: Mapsui.Styles.Style.GetHashCode
+    name: GetHashCode
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_GetHashCode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Style.GetHashCode
+    name: GetHashCode
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_GetHashCode
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.GetStylesToApply(System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  parent: Mapsui.Extensions.StyleExtensions
+  definition: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  name: GetStylesToApply(IStyle, double)
+  nameWithType: StyleExtensions.GetStylesToApply(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.GetStylesToApply(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, Double)
+  name.vb: GetStylesToApply(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.ShouldBeApplied(System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  parent: Mapsui.Extensions.StyleExtensions
+  definition: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  name: ShouldBeApplied(IStyle, double)
+  nameWithType: StyleExtensions.ShouldBeApplied(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.ShouldBeApplied(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, Double)
+  name.vb: ShouldBeApplied(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  isExternal: true
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  name: GetStylesToApply(IStyle, double)
+  nameWithType: StyleExtensions.GetStylesToApply(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.GetStylesToApply(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, Double)
+  name.vb: GetStylesToApply(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Extensions.StyleExtensions
+  commentId: T:Mapsui.Extensions.StyleExtensions
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.StyleExtensions.html
+  name: StyleExtensions
+  nameWithType: StyleExtensions
+  fullName: Mapsui.Extensions.StyleExtensions
+- uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  isExternal: true
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  name: ShouldBeApplied(IStyle, double)
+  nameWithType: StyleExtensions.ShouldBeApplied(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.ShouldBeApplied(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, Double)
+  name.vb: ShouldBeApplied(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.Thematics.GradientTheme.ColumnName*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.ColumnName
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_ColumnName
+  name: ColumnName
+  nameWithType: GradientTheme.ColumnName
+  fullName: Mapsui.Styles.Thematics.GradientTheme.ColumnName
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Styles.Thematics.GradientTheme.Min*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.Min
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_Min
+  name: Min
+  nameWithType: GradientTheme.Min
+  fullName: Mapsui.Styles.Thematics.GradientTheme.Min
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Styles.Thematics.GradientTheme.Max*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.Max
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_Max
+  name: Max
+  nameWithType: GradientTheme.Max
+  fullName: Mapsui.Styles.Thematics.GradientTheme.Max
+- uid: Mapsui.Styles.Thematics.GradientTheme.MinStyle*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.MinStyle
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_MinStyle
+  name: MinStyle
+  nameWithType: GradientTheme.MinStyle
+  fullName: Mapsui.Styles.Thematics.GradientTheme.MinStyle
+- uid: Mapsui.Styles.Thematics.GradientTheme.MaxStyle*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.MaxStyle
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_MaxStyle
+  name: MaxStyle
+  nameWithType: GradientTheme.MaxStyle
+  fullName: Mapsui.Styles.Thematics.GradientTheme.MaxStyle
+- uid: Mapsui.Styles.Thematics.ColorBlend
+  commentId: T:Mapsui.Styles.Thematics.ColorBlend
+  parent: Mapsui.Styles.Thematics
+  href: Mapsui.Styles.Thematics.ColorBlend.html
+  name: ColorBlend
+  nameWithType: ColorBlend
+  fullName: Mapsui.Styles.Thematics.ColorBlend
+- uid: Mapsui.Styles.Thematics.GradientTheme.TextColorBlend*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.TextColorBlend
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_TextColorBlend
+  name: TextColorBlend
+  nameWithType: GradientTheme.TextColorBlend
+  fullName: Mapsui.Styles.Thematics.GradientTheme.TextColorBlend
+- uid: Mapsui.Styles.Thematics.GradientTheme.LineColorBlend*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.LineColorBlend
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_LineColorBlend
+  name: LineColorBlend
+  nameWithType: GradientTheme.LineColorBlend
+  fullName: Mapsui.Styles.Thematics.GradientTheme.LineColorBlend
+- uid: Mapsui.Styles.Thematics.GradientTheme.FillColorBlend*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.FillColorBlend
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_FillColorBlend
+  name: FillColorBlend
+  nameWithType: GradientTheme.FillColorBlend
+  fullName: Mapsui.Styles.Thematics.GradientTheme.FillColorBlend
+- uid: Mapsui.Styles.Thematics.GradientTheme.#ctor*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.#ctor
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme__ctor_System_String_System_Double_System_Double_Mapsui_Styles_IStyle_Mapsui_Styles_IStyle_
+  name: GradientTheme
+  nameWithType: GradientTheme.GradientTheme
+  fullName: Mapsui.Styles.Thematics.GradientTheme.GradientTheme
+  nameWithType.vb: GradientTheme.New
+  fullName.vb: Mapsui.Styles.Thematics.GradientTheme.New
+  name.vb: New
+- uid: Mapsui.Styles.Thematics.GradientTheme.GetStyle*
+  commentId: Overload:Mapsui.Styles.Thematics.GradientTheme.GetStyle
+  href: Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_GetStyle_Mapsui_IFeature_
+  name: GetStyle
+  nameWithType: GradientTheme.GetStyle
+  fullName: Mapsui.Styles.Thematics.GradientTheme.GetStyle
+- uid: Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+  commentId: M:Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+  parent: Mapsui.Styles.Thematics.IThemeStyle
+  href: Mapsui.Styles.Thematics.IThemeStyle.html#Mapsui_Styles_Thematics_IThemeStyle_GetStyle_Mapsui_IFeature_
+  name: GetStyle(IFeature)
+  nameWithType: IThemeStyle.GetStyle(IFeature)
+  fullName: Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+  spec.csharp:
+  - uid: Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+    name: GetStyle
+    href: Mapsui.Styles.Thematics.IThemeStyle.html#Mapsui_Styles_Thematics_IThemeStyle_GetStyle_Mapsui_IFeature_
+  - name: (
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+    name: GetStyle
+    href: Mapsui.Styles.Thematics.IThemeStyle.html#Mapsui_Styles_Thematics_IThemeStyle_GetStyle_Mapsui_IFeature_
+  - name: (
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+- uid: Mapsui.IFeature
+  commentId: T:Mapsui.IFeature
+  parent: Mapsui
+  href: Mapsui.IFeature.html
+  name: IFeature
+  nameWithType: IFeature
+  fullName: Mapsui.IFeature
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui

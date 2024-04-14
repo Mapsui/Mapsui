@@ -1,0 +1,2627 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache
+  commentId: T:Mapsui.Rendering.Skia.Cache.RenderCache
+  id: RenderCache
+  parent: Mapsui.Rendering.Skia.Cache
+  children:
+  - Mapsui.Rendering.Skia.Cache.RenderCache.#ctor(System.Int32)
+  - Mapsui.Rendering.Skia.Cache.RenderCache.Dispose
+  - Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+  - Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(System.Int32)
+  - Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  - Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+  - Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+  - Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+  - Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  - Mapsui.Rendering.Skia.Cache.RenderCache.GetSize(System.Int32)
+  - Mapsui.Rendering.Skia.Cache.RenderCache.LabelCache
+  - Mapsui.Rendering.Skia.Cache.RenderCache.SymbolCache
+  - Mapsui.Rendering.Skia.Cache.RenderCache.TileCache
+  - Mapsui.Rendering.Skia.Cache.RenderCache.UpdateCache(System.Int64)
+  - Mapsui.Rendering.Skia.Cache.RenderCache.VectorCache
+  langs:
+  - csharp
+  - vb
+  name: RenderCache
+  nameWithType: RenderCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RenderCache
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  syntax:
+    content: 'public sealed class RenderCache : IRenderCache, ILabelCache, ISymbolCache, IVectorCache, ITileCache, IDisposable'
+    content.vb: Public NotInheritable Class RenderCache Implements IRenderCache, ILabelCache, ISymbolCache, IVectorCache, ITileCache, IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Rendering.IRenderCache
+  - Mapsui.Rendering.ILabelCache
+  - Mapsui.Rendering.ISymbolCache
+  - Mapsui.Rendering.IVectorCache
+  - Mapsui.Rendering.ITileCache
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.#ctor(System.Int32)
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.#ctor(System.Int32)
+  id: '#ctor(System.Int32)'
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: RenderCache(int)
+  nameWithType: RenderCache.RenderCache(int)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.RenderCache(int)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 11
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  syntax:
+    content: public RenderCache(int capacity = 10000)
+    parameters:
+    - id: capacity
+      type: System.Int32
+    content.vb: Public Sub New(capacity As Integer = 10000)
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.#ctor*
+  nameWithType.vb: RenderCache.New(Integer)
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.New(Integer)
+  name.vb: New(Integer)
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.LabelCache
+  commentId: P:Mapsui.Rendering.Skia.Cache.RenderCache.LabelCache
+  id: LabelCache
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: LabelCache
+  nameWithType: RenderCache.LabelCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.LabelCache
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LabelCache
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 19
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: public ILabelCache LabelCache { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.ILabelCache
+    content.vb: Public Property LabelCache As ILabelCache
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.LabelCache*
+  implements:
+  - Mapsui.Rendering.IRenderCache.LabelCache
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.SymbolCache
+  commentId: P:Mapsui.Rendering.Skia.Cache.RenderCache.SymbolCache
+  id: SymbolCache
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: SymbolCache
+  nameWithType: RenderCache.SymbolCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.SymbolCache
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SymbolCache
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 21
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: public ISymbolCache SymbolCache { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.ISymbolCache
+    content.vb: Public Property SymbolCache As ISymbolCache
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.SymbolCache*
+  implements:
+  - Mapsui.Rendering.IRenderCache.SymbolCache
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.VectorCache
+  commentId: P:Mapsui.Rendering.Skia.Cache.RenderCache.VectorCache
+  id: VectorCache
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: VectorCache
+  nameWithType: RenderCache.VectorCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.VectorCache
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: VectorCache
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 23
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: public IVectorCache VectorCache { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.IVectorCache
+    content.vb: Public Property VectorCache As IVectorCache
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.VectorCache*
+  implements:
+  - Mapsui.Rendering.IRenderCache.VectorCache
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.TileCache
+  commentId: P:Mapsui.Rendering.Skia.Cache.RenderCache.TileCache
+  id: TileCache
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: TileCache
+  nameWithType: RenderCache.TileCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.TileCache
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TileCache
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 29
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: public ITileCache TileCache { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.ITileCache
+    content.vb: Public Property TileCache As ITileCache
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.TileCache*
+  implements:
+  - Mapsui.Rendering.IRenderCache.TileCache
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetSize(System.Int32)
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.GetSize(System.Int32)
+  id: GetSize(System.Int32)
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: GetSize(int)
+  nameWithType: RenderCache.GetSize(int)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetSize(int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetSize
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: public Size? GetSize(int bitmapId)
+    parameters:
+    - id: bitmapId
+      type: System.Int32
+    return:
+      type: Mapsui.Styles.Size
+    content.vb: Public Function GetSize(bitmapId As Integer) As Size
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.GetSize*
+  implements:
+  - Mapsui.Rendering.ISymbolCache.GetSize(System.Int32)
+  nameWithType.vb: RenderCache.GetSize(Integer)
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.GetSize(Integer)
+  name.vb: GetSize(Integer)
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(System.Int32)
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(System.Int32)
+  id: GetOrCreate(System.Int32)
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreate(int)
+  nameWithType: RenderCache.GetOrCreate(int)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreate
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 36
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: public IBitmapInfo GetOrCreate(int bitmapID)
+    parameters:
+    - id: bitmapID
+      type: System.Int32
+    return:
+      type: Mapsui.Rendering.IBitmapInfo
+    content.vb: Public Function GetOrCreate(bitmapID As Integer) As IBitmapInfo
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate*
+  implements:
+  - Mapsui.Rendering.ISymbolCache.GetOrCreate(System.Int32)
+  nameWithType.vb: RenderCache.GetOrCreate(Integer)
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(Integer)
+  name.vb: GetOrCreate(Integer)
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  id: GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreateTypeface<T>(Font, Func<Font, T>)
+  nameWithType: RenderCache.GetOrCreateTypeface<T>(Font, Func<Font, T>)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateTypeface<T>(Mapsui.Styles.Font, System.Func<Mapsui.Styles.Font, T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreateTypeface
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 41
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: 'public T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace) where T : class'
+    parameters:
+    - id: font
+      type: Mapsui.Styles.Font
+    - id: createTypeFace
+      type: System.Func{Mapsui.Styles.Font,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: '{T}'
+    content.vb: Public Function GetOrCreateTypeface(Of T As Class)(font As Font, createTypeFace As Func(Of Font, T)) As T
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateTypeface*
+  implements:
+  - Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,{T}})
+  nameWithType.vb: RenderCache.GetOrCreateTypeface(Of T)(Font, Func(Of Font, T))
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateTypeface(Of T)(Mapsui.Styles.Font, System.Func(Of Mapsui.Styles.Font, T))
+  name.vb: GetOrCreateTypeface(Of T)(Font, Func(Of Font, T))
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  id: GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreateLabel<T>(string?, LabelStyle, float, Func<LabelStyle, string?, float, ILabelCache, T>)
+  nameWithType: RenderCache.GetOrCreateLabel<T>(string?, LabelStyle, float, Func<LabelStyle, string?, float, ILabelCache, T>)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateLabel<T>(string?, Mapsui.Styles.LabelStyle, float, System.Func<Mapsui.Styles.LabelStyle, string?, float, Mapsui.Rendering.ILabelCache, T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreateLabel
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 46
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: 'public T GetOrCreateLabel<T>(string? text, LabelStyle style, float opacity, Func<LabelStyle, string?, float, ILabelCache, T> createLabelAsBitmap) where T : IBitmapInfo'
+    parameters:
+    - id: text
+      type: System.String
+    - id: style
+      type: Mapsui.Styles.LabelStyle
+    - id: opacity
+      type: System.Single
+    - id: createLabelAsBitmap
+      type: System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: '{T}'
+    content.vb: Public Function GetOrCreateLabel(Of T As IBitmapInfo)(text As String, style As LabelStyle, opacity As Single, createLabelAsBitmap As Func(Of LabelStyle, String, Single, ILabelCache, T)) As T
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateLabel*
+  implements:
+  - Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,{T}})
+  nameWithType.vb: RenderCache.GetOrCreateLabel(Of T)(String, LabelStyle, Single, Func(Of LabelStyle, String, Single, ILabelCache, T))
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateLabel(Of T)(String, Mapsui.Styles.LabelStyle, Single, System.Func(Of Mapsui.Styles.LabelStyle, String, Single, Mapsui.Rendering.ILabelCache, T))
+  name.vb: GetOrCreateLabel(Of T)(String, LabelStyle, Single, Func(Of LabelStyle, String, Single, ILabelCache, T))
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+  id: GetOrCreatePaint``2(``0,System.Func{``0,``1})
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, TPaint>)
+  nameWithType: RenderCache.GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, TPaint>)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint<TParam, TPaint>(TParam, System.Func<TParam, TPaint>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreatePaint
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 51
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: 'public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, TPaint> toPaint) where TParam : notnull where TPaint : class'
+    parameters:
+    - id: param
+      type: '{TParam}'
+    - id: toPaint
+      type: System.Func{{TParam},{TPaint}}
+    typeParameters:
+    - id: TParam
+    - id: TPaint
+    return:
+      type: Mapsui.Rendering.CacheTracker{{TPaint}}
+    content.vb: Public Function GetOrCreatePaint(Of TParam, TPaint As Class)(param As TParam, toPaint As Func(Of TParam, TPaint)) As CacheTracker(Of TPaint)
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint*
+  implements:
+  - Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2({TParam},System.Func{{TParam},{TPaint}})
+  nameWithType.vb: RenderCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, TPaint))
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, System.Func(Of TParam, TPaint))
+  name.vb: GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, TPaint))
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+  id: GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, ISymbolCache, TPaint>)
+  nameWithType: RenderCache.GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, ISymbolCache, TPaint>)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint<TParam, TPaint>(TParam, System.Func<TParam, Mapsui.Rendering.ISymbolCache, TPaint>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreatePaint
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 58
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: 'public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, ISymbolCache, TPaint> toPaint) where TParam : notnull where TPaint : class'
+    parameters:
+    - id: param
+      type: '{TParam}'
+    - id: toPaint
+      type: System.Func{{TParam},Mapsui.Rendering.ISymbolCache,{TPaint}}
+    typeParameters:
+    - id: TParam
+    - id: TPaint
+    return:
+      type: Mapsui.Rendering.CacheTracker{{TPaint}}
+    content.vb: Public Function GetOrCreatePaint(Of TParam, TPaint As Class)(param As TParam, toPaint As Func(Of TParam, ISymbolCache, TPaint)) As CacheTracker(Of TPaint)
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint*
+  implements:
+  - Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2({TParam},System.Func{{TParam},Mapsui.Rendering.ISymbolCache,{TPaint}})
+  nameWithType.vb: RenderCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, ISymbolCache, TPaint))
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, System.Func(Of TParam, Mapsui.Rendering.ISymbolCache, TPaint))
+  name.vb: GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, ISymbolCache, TPaint))
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+  id: GetOrCreatePath``2(``0,System.Func{``0,``1})
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreatePath<TParam, TPath>(TParam, Func<TParam, TPath>)
+  nameWithType: RenderCache.GetOrCreatePath<TParam, TPath>(TParam, Func<TParam, TPath>)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePath<TParam, TPath>(TParam, System.Func<TParam, TPath>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreatePath
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 65
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: 'public CacheTracker<TPath> GetOrCreatePath<TParam, TPath>(TParam param, Func<TParam, TPath> toSkRect) where TParam : notnull where TPath : class'
+    parameters:
+    - id: param
+      type: '{TParam}'
+    - id: toSkRect
+      type: System.Func{{TParam},{TPath}}
+    typeParameters:
+    - id: TParam
+    - id: TPath
+    return:
+      type: Mapsui.Rendering.CacheTracker{{TPath}}
+    content.vb: Public Function GetOrCreatePath(Of TParam, TPath As Class)(param As TParam, toSkRect As Func(Of TParam, TPath)) As CacheTracker(Of TPath)
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePath*
+  implements:
+  - Mapsui.Rendering.IVectorCache.GetOrCreatePath``2({TParam},System.Func{{TParam},{TPath}})
+  nameWithType.vb: RenderCache.GetOrCreatePath(Of TParam, TPath)(TParam, Func(Of TParam, TPath))
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePath(Of TParam, TPath)(TParam, System.Func(Of TParam, TPath))
+  name.vb: GetOrCreatePath(Of TParam, TPath)(TParam, Func(Of TParam, TPath))
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+  id: GetOrCreate(Mapsui.MRaster,System.Int64)
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreate(MRaster, long)
+  nameWithType: RenderCache.GetOrCreate(MRaster, long)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(Mapsui.MRaster, long)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreate
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 72
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
+    parameters:
+    - id: raster
+      type: Mapsui.MRaster
+    - id: currentIteration
+      type: System.Int64
+    return:
+      type: Mapsui.Rendering.IBitmapInfo
+    content.vb: Public Function GetOrCreate(raster As MRaster, currentIteration As Long) As IBitmapInfo
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate*
+  implements:
+  - Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+  nameWithType.vb: RenderCache.GetOrCreate(MRaster, Long)
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate(Mapsui.MRaster, Long)
+  name.vb: GetOrCreate(MRaster, Long)
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.UpdateCache(System.Int64)
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.UpdateCache(System.Int64)
+  id: UpdateCache(System.Int64)
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: UpdateCache(long)
+  nameWithType: RenderCache.UpdateCache(long)
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.UpdateCache(long)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateCache
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 77
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  example: []
+  syntax:
+    content: public void UpdateCache(long iteration)
+    parameters:
+    - id: iteration
+      type: System.Int64
+    content.vb: Public Sub UpdateCache(iteration As Long)
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.UpdateCache*
+  implements:
+  - Mapsui.Rendering.ITileCache.UpdateCache(System.Int64)
+  nameWithType.vb: RenderCache.UpdateCache(Long)
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.UpdateCache(Long)
+  name.vb: UpdateCache(Long)
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.Dispose
+  commentId: M:Mapsui.Rendering.Skia.Cache.RenderCache.Dispose
+  id: Dispose
+  parent: Mapsui.Rendering.Skia.Cache.RenderCache
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: RenderCache.Dispose()
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Cache/RenderCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui.Rendering.Skia/Cache/RenderCache.cs
+    startLine: 82
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Cache
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Mapsui.Rendering.Skia.Cache.RenderCache.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+references:
+- uid: Mapsui.Rendering.Skia.Cache
+  commentId: N:Mapsui.Rendering.Skia.Cache
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia.Cache
+  nameWithType: Mapsui.Rendering.Skia.Cache
+  fullName: Mapsui.Rendering.Skia.Cache
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Cache
+    name: Cache
+    href: Mapsui.Rendering.Skia.Cache.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Cache
+    name: Cache
+    href: Mapsui.Rendering.Skia.Cache.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Rendering.IRenderCache
+  commentId: T:Mapsui.Rendering.IRenderCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderCache.html
+  name: IRenderCache
+  nameWithType: IRenderCache
+  fullName: Mapsui.Rendering.IRenderCache
+- uid: Mapsui.Rendering.ILabelCache
+  commentId: T:Mapsui.Rendering.ILabelCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.ILabelCache.html
+  name: ILabelCache
+  nameWithType: ILabelCache
+  fullName: Mapsui.Rendering.ILabelCache
+- uid: Mapsui.Rendering.ISymbolCache
+  commentId: T:Mapsui.Rendering.ISymbolCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.ISymbolCache.html
+  name: ISymbolCache
+  nameWithType: ISymbolCache
+  fullName: Mapsui.Rendering.ISymbolCache
+- uid: Mapsui.Rendering.IVectorCache
+  commentId: T:Mapsui.Rendering.IVectorCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IVectorCache.html
+  name: IVectorCache
+  nameWithType: IVectorCache
+  fullName: Mapsui.Rendering.IVectorCache
+- uid: Mapsui.Rendering.ITileCache
+  commentId: T:Mapsui.Rendering.ITileCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.ITileCache.html
+  name: ITileCache
+  nameWithType: ITileCache
+  fullName: Mapsui.Rendering.ITileCache
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.#ctor*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.#ctor
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache__ctor_System_Int32_
+  name: RenderCache
+  nameWithType: RenderCache.RenderCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.RenderCache
+  nameWithType.vb: RenderCache.New
+  fullName.vb: Mapsui.Rendering.Skia.Cache.RenderCache.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.LabelCache*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.LabelCache
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_LabelCache
+  name: LabelCache
+  nameWithType: RenderCache.LabelCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.LabelCache
+- uid: Mapsui.Rendering.IRenderCache.LabelCache
+  commentId: P:Mapsui.Rendering.IRenderCache.LabelCache
+  parent: Mapsui.Rendering.IRenderCache
+  name: LabelCache
+  nameWithType: IRenderCache.LabelCache
+  fullName: Mapsui.Rendering.IRenderCache.LabelCache
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.SymbolCache*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.SymbolCache
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_SymbolCache
+  name: SymbolCache
+  nameWithType: RenderCache.SymbolCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.SymbolCache
+- uid: Mapsui.Rendering.IRenderCache.SymbolCache
+  commentId: P:Mapsui.Rendering.IRenderCache.SymbolCache
+  parent: Mapsui.Rendering.IRenderCache
+  name: SymbolCache
+  nameWithType: IRenderCache.SymbolCache
+  fullName: Mapsui.Rendering.IRenderCache.SymbolCache
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.VectorCache*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.VectorCache
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_VectorCache
+  name: VectorCache
+  nameWithType: RenderCache.VectorCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.VectorCache
+- uid: Mapsui.Rendering.IRenderCache.VectorCache
+  commentId: P:Mapsui.Rendering.IRenderCache.VectorCache
+  parent: Mapsui.Rendering.IRenderCache
+  name: VectorCache
+  nameWithType: IRenderCache.VectorCache
+  fullName: Mapsui.Rendering.IRenderCache.VectorCache
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.TileCache*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.TileCache
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_TileCache
+  name: TileCache
+  nameWithType: RenderCache.TileCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.TileCache
+- uid: Mapsui.Rendering.IRenderCache.TileCache
+  commentId: P:Mapsui.Rendering.IRenderCache.TileCache
+  parent: Mapsui.Rendering.IRenderCache
+  name: TileCache
+  nameWithType: IRenderCache.TileCache
+  fullName: Mapsui.Rendering.IRenderCache.TileCache
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetSize*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.GetSize
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_GetSize_System_Int32_
+  name: GetSize
+  nameWithType: RenderCache.GetSize
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetSize
+- uid: Mapsui.Rendering.ISymbolCache.GetSize(System.Int32)
+  commentId: M:Mapsui.Rendering.ISymbolCache.GetSize(System.Int32)
+  parent: Mapsui.Rendering.ISymbolCache
+  isExternal: true
+  href: Mapsui.Rendering.ISymbolCache.html#Mapsui_Rendering_ISymbolCache_GetSize_System_Int32_
+  name: GetSize(int)
+  nameWithType: ISymbolCache.GetSize(int)
+  fullName: Mapsui.Rendering.ISymbolCache.GetSize(int)
+  nameWithType.vb: ISymbolCache.GetSize(Integer)
+  fullName.vb: Mapsui.Rendering.ISymbolCache.GetSize(Integer)
+  name.vb: GetSize(Integer)
+  spec.csharp:
+  - uid: Mapsui.Rendering.ISymbolCache.GetSize(System.Int32)
+    name: GetSize
+    href: Mapsui.Rendering.ISymbolCache.html#Mapsui_Rendering_ISymbolCache_GetSize_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.ISymbolCache.GetSize(System.Int32)
+    name: GetSize
+    href: Mapsui.Rendering.ISymbolCache.html#Mapsui_Rendering_ISymbolCache_GetSize_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Mapsui.Styles.Size
+  commentId: T:Mapsui.Styles.Size
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Size.html
+  name: Size
+  nameWithType: Size
+  fullName: Mapsui.Styles.Size
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_GetOrCreate_System_Int32_
+  name: GetOrCreate
+  nameWithType: RenderCache.GetOrCreate
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreate
+- uid: Mapsui.Rendering.ISymbolCache.GetOrCreate(System.Int32)
+  commentId: M:Mapsui.Rendering.ISymbolCache.GetOrCreate(System.Int32)
+  parent: Mapsui.Rendering.ISymbolCache
+  isExternal: true
+  href: Mapsui.Rendering.ISymbolCache.html#Mapsui_Rendering_ISymbolCache_GetOrCreate_System_Int32_
+  name: GetOrCreate(int)
+  nameWithType: ISymbolCache.GetOrCreate(int)
+  fullName: Mapsui.Rendering.ISymbolCache.GetOrCreate(int)
+  nameWithType.vb: ISymbolCache.GetOrCreate(Integer)
+  fullName.vb: Mapsui.Rendering.ISymbolCache.GetOrCreate(Integer)
+  name.vb: GetOrCreate(Integer)
+  spec.csharp:
+  - uid: Mapsui.Rendering.ISymbolCache.GetOrCreate(System.Int32)
+    name: GetOrCreate
+    href: Mapsui.Rendering.ISymbolCache.html#Mapsui_Rendering_ISymbolCache_GetOrCreate_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.ISymbolCache.GetOrCreate(System.Int32)
+    name: GetOrCreate
+    href: Mapsui.Rendering.ISymbolCache.html#Mapsui_Rendering_ISymbolCache_GetOrCreate_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Mapsui.Rendering.IBitmapInfo
+  commentId: T:Mapsui.Rendering.IBitmapInfo
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IBitmapInfo.html
+  name: IBitmapInfo
+  nameWithType: IBitmapInfo
+  fullName: Mapsui.Rendering.IBitmapInfo
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateTypeface*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateTypeface
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_GetOrCreateTypeface__1_Mapsui_Styles_Font_System_Func_Mapsui_Styles_Font___0__
+  name: GetOrCreateTypeface
+  nameWithType: RenderCache.GetOrCreateTypeface
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateTypeface
+- uid: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,{T}})
+  commentId: M:Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  parent: Mapsui.Rendering.ILabelCache
+  definition: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateTypeface__1_Mapsui_Styles_Font_System_Func_Mapsui_Styles_Font___0__
+  name: GetOrCreateTypeface<T>(Font, Func<Font, T>)
+  nameWithType: ILabelCache.GetOrCreateTypeface<T>(Font, Func<Font, T>)
+  fullName: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface<T>(Mapsui.Styles.Font, System.Func<Mapsui.Styles.Font, T>)
+  nameWithType.vb: ILabelCache.GetOrCreateTypeface(Of T)(Font, Func(Of Font, T))
+  fullName.vb: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface(Of T)(Mapsui.Styles.Font, System.Func(Of Mapsui.Styles.Font, T))
+  name.vb: GetOrCreateTypeface(Of T)(Font, Func(Of Font, T))
+  spec.csharp:
+  - uid: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+    name: GetOrCreateTypeface
+    href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateTypeface__1_Mapsui_Styles_Font_System_Func_Mapsui_Styles_Font___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+    name: GetOrCreateTypeface
+    href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateTypeface__1_Mapsui_Styles_Font_System_Func_Mapsui_Styles_Font___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: Mapsui.Styles.Font
+  commentId: T:Mapsui.Styles.Font
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Font.html
+  name: Font
+  nameWithType: Font
+  fullName: Mapsui.Styles.Font
+- uid: System.Func{Mapsui.Styles.Font,{T}}
+  commentId: T:System.Func{Mapsui.Styles.Font,``0}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<Font, T>
+  nameWithType: Func<Font, T>
+  fullName: System.Func<Mapsui.Styles.Font, T>
+  nameWithType.vb: Func(Of Font, T)
+  fullName.vb: System.Func(Of Mapsui.Styles.Font, T)
+  name.vb: Func(Of Font, T)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  commentId: M:Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  isExternal: true
+  href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateTypeface__1_Mapsui_Styles_Font_System_Func_Mapsui_Styles_Font___0__
+  name: GetOrCreateTypeface<T>(Font, Func<Font, T>)
+  nameWithType: ILabelCache.GetOrCreateTypeface<T>(Font, Func<Font, T>)
+  fullName: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface<T>(Mapsui.Styles.Font, System.Func<Mapsui.Styles.Font, T>)
+  nameWithType.vb: ILabelCache.GetOrCreateTypeface(Of T)(Font, Func(Of Font, T))
+  fullName.vb: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface(Of T)(Mapsui.Styles.Font, System.Func(Of Mapsui.Styles.Font, T))
+  name.vb: GetOrCreateTypeface(Of T)(Font, Func(Of Font, T))
+  spec.csharp:
+  - uid: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+    name: GetOrCreateTypeface
+    href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateTypeface__1_Mapsui_Styles_Font_System_Func_Mapsui_Styles_Font___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+    name: GetOrCreateTypeface
+    href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateTypeface__1_Mapsui_Styles_Font_System_Func_Mapsui_Styles_Font___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateLabel*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateLabel
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_GetOrCreateLabel__1_System_String_Mapsui_Styles_LabelStyle_System_Single_System_Func_Mapsui_Styles_LabelStyle_System_String_System_Single_Mapsui_Rendering_ILabelCache___0__
+  name: GetOrCreateLabel
+  nameWithType: RenderCache.GetOrCreateLabel
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreateLabel
+- uid: Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,{T}})
+  commentId: M:Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  parent: Mapsui.Rendering.ILabelCache
+  definition: Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateLabel__1_System_String_Mapsui_Styles_LabelStyle_System_Single_System_Func_Mapsui_Styles_LabelStyle_System_String_System_Single_Mapsui_Rendering_ILabelCache___0__
+  name: GetOrCreateLabel<T>(string, LabelStyle, float, Func<LabelStyle, string, float, ILabelCache, T>)
+  nameWithType: ILabelCache.GetOrCreateLabel<T>(string, LabelStyle, float, Func<LabelStyle, string, float, ILabelCache, T>)
+  fullName: Mapsui.Rendering.ILabelCache.GetOrCreateLabel<T>(string, Mapsui.Styles.LabelStyle, float, System.Func<Mapsui.Styles.LabelStyle, string, float, Mapsui.Rendering.ILabelCache, T>)
+  nameWithType.vb: ILabelCache.GetOrCreateLabel(Of T)(String, LabelStyle, Single, Func(Of LabelStyle, String, Single, ILabelCache, T))
+  fullName.vb: Mapsui.Rendering.ILabelCache.GetOrCreateLabel(Of T)(String, Mapsui.Styles.LabelStyle, Single, System.Func(Of Mapsui.Styles.LabelStyle, String, Single, Mapsui.Rendering.ILabelCache, T))
+  name.vb: GetOrCreateLabel(Of T)(String, LabelStyle, Single, Func(Of LabelStyle, String, Single, ILabelCache, T))
+  spec.csharp:
+  - uid: Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+    name: GetOrCreateLabel
+    href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateLabel__1_System_String_Mapsui_Styles_LabelStyle_System_Single_System_Func_Mapsui_Styles_LabelStyle_System_String_System_Single_Mapsui_Rendering_ILabelCache___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: <
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ILabelCache
+    name: ILabelCache
+    href: Mapsui.Rendering.ILabelCache.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+    name: GetOrCreateLabel
+    href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateLabel__1_System_String_Mapsui_Styles_LabelStyle_System_Single_System_Func_Mapsui_Styles_LabelStyle_System_String_System_Single_Mapsui_Rendering_ILabelCache___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ILabelCache
+    name: ILabelCache
+    href: Mapsui.Rendering.ILabelCache.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Styles.LabelStyle
+  commentId: T:Mapsui.Styles.LabelStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.LabelStyle.html
+  name: LabelStyle
+  nameWithType: LabelStyle
+  fullName: Mapsui.Styles.LabelStyle
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,{T}}
+  commentId: T:System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0}
+  parent: System
+  definition: System.Func`5
+  href: https://learn.microsoft.com/dotnet/api/system.func-5
+  name: Func<LabelStyle, string, float, ILabelCache, T>
+  nameWithType: Func<LabelStyle, string, float, ILabelCache, T>
+  fullName: System.Func<Mapsui.Styles.LabelStyle, string, float, Mapsui.Rendering.ILabelCache, T>
+  nameWithType.vb: Func(Of LabelStyle, String, Single, ILabelCache, T)
+  fullName.vb: System.Func(Of Mapsui.Styles.LabelStyle, String, Single, Mapsui.Rendering.ILabelCache, T)
+  name.vb: Func(Of LabelStyle, String, Single, ILabelCache, T)
+  spec.csharp:
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: <
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ILabelCache
+    name: ILabelCache
+    href: Mapsui.Rendering.ILabelCache.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ILabelCache
+    name: ILabelCache
+    href: Mapsui.Rendering.ILabelCache.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  commentId: M:Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  isExternal: true
+  href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateLabel__1_System_String_Mapsui_Styles_LabelStyle_System_Single_System_Func_Mapsui_Styles_LabelStyle_System_String_System_Single_Mapsui_Rendering_ILabelCache___0__
+  name: GetOrCreateLabel<T>(string, LabelStyle, float, Func<LabelStyle, string, float, ILabelCache, T>)
+  nameWithType: ILabelCache.GetOrCreateLabel<T>(string, LabelStyle, float, Func<LabelStyle, string, float, ILabelCache, T>)
+  fullName: Mapsui.Rendering.ILabelCache.GetOrCreateLabel<T>(string, Mapsui.Styles.LabelStyle, float, System.Func<Mapsui.Styles.LabelStyle, string, float, Mapsui.Rendering.ILabelCache, T>)
+  nameWithType.vb: ILabelCache.GetOrCreateLabel(Of T)(String, LabelStyle, Single, Func(Of LabelStyle, String, Single, ILabelCache, T))
+  fullName.vb: Mapsui.Rendering.ILabelCache.GetOrCreateLabel(Of T)(String, Mapsui.Styles.LabelStyle, Single, System.Func(Of Mapsui.Styles.LabelStyle, String, Single, Mapsui.Rendering.ILabelCache, T))
+  name.vb: GetOrCreateLabel(Of T)(String, LabelStyle, Single, Func(Of LabelStyle, String, Single, ILabelCache, T))
+  spec.csharp:
+  - uid: Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+    name: GetOrCreateLabel
+    href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateLabel__1_System_String_Mapsui_Styles_LabelStyle_System_Single_System_Func_Mapsui_Styles_LabelStyle_System_String_System_Single_Mapsui_Rendering_ILabelCache___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: <
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ILabelCache
+    name: ILabelCache
+    href: Mapsui.Rendering.ILabelCache.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+    name: GetOrCreateLabel
+    href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateLabel__1_System_String_Mapsui_Styles_LabelStyle_System_Single_System_Func_Mapsui_Styles_LabelStyle_System_String_System_Single_Mapsui_Rendering_ILabelCache___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ILabelCache
+    name: ILabelCache
+    href: Mapsui.Rendering.ILabelCache.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Func`5
+  commentId: T:System.Func`5
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-5
+  name: Func<T1, T2, T3, T4, TResult>
+  nameWithType: Func<T1, T2, T3, T4, TResult>
+  fullName: System.Func<T1, T2, T3, T4, TResult>
+  nameWithType.vb: Func(Of T1, T2, T3, T4, TResult)
+  fullName.vb: System.Func(Of T1, T2, T3, T4, TResult)
+  name.vb: Func(Of T1, T2, T3, T4, TResult)
+  spec.csharp:
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: T4
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: T4
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_GetOrCreatePaint__2___0_System_Func___0___1__
+  name: GetOrCreatePaint
+  nameWithType: RenderCache.GetOrCreatePaint
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePaint
+- uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2({TParam},System.Func{{TParam},{TPaint}})
+  commentId: M:Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+  parent: Mapsui.Rendering.IVectorCache
+  definition: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+  href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0___1__
+  name: GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, TPaint>)
+  nameWithType: IVectorCache.GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, TPaint>)
+  fullName: Mapsui.Rendering.IVectorCache.GetOrCreatePaint<TParam, TPaint>(TParam, System.Func<TParam, TPaint>)
+  nameWithType.vb: IVectorCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, TPaint))
+  fullName.vb: Mapsui.Rendering.IVectorCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, System.Func(Of TParam, TPaint))
+  name.vb: GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, TPaint))
+  spec.csharp:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+    name: GetOrCreatePaint
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0___1__
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+    name: GetOrCreatePaint
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+  - name: )
+- uid: '{TParam}'
+  commentId: '!:TParam'
+  definition: TParam
+  name: TParam
+  nameWithType: TParam
+  fullName: TParam
+- uid: System.Func{{TParam},{TPaint}}
+  commentId: T:System.Func{``0,``1}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<TParam, TPaint>
+  nameWithType: Func<TParam, TPaint>
+  fullName: System.Func<TParam, TPaint>
+  nameWithType.vb: Func(Of TParam, TPaint)
+  fullName.vb: System.Func(Of TParam, TPaint)
+  name.vb: Func(Of TParam, TPaint)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+- uid: Mapsui.Rendering.CacheTracker{{TPaint}}
+  commentId: T:Mapsui.Rendering.CacheTracker{``1}
+  parent: Mapsui.Rendering
+  definition: Mapsui.Rendering.CacheTracker`1
+  href: Mapsui.Rendering.CacheTracker-1.html
+  name: CacheTracker<TPaint>
+  nameWithType: CacheTracker<TPaint>
+  fullName: Mapsui.Rendering.CacheTracker<TPaint>
+  nameWithType.vb: CacheTracker(Of TPaint)
+  fullName.vb: Mapsui.Rendering.CacheTracker(Of TPaint)
+  name.vb: CacheTracker(Of TPaint)
+  spec.csharp:
+  - uid: Mapsui.Rendering.CacheTracker`1
+    name: CacheTracker
+    href: Mapsui.Rendering.CacheTracker-1.html
+  - name: <
+  - name: TPaint
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Rendering.CacheTracker`1
+    name: CacheTracker
+    href: Mapsui.Rendering.CacheTracker-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TPaint
+  - name: )
+- uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+  commentId: M:Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+  isExternal: true
+  href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0___1__
+  name: GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, TPaint>)
+  nameWithType: IVectorCache.GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, TPaint>)
+  fullName: Mapsui.Rendering.IVectorCache.GetOrCreatePaint<TParam, TPaint>(TParam, System.Func<TParam, TPaint>)
+  nameWithType.vb: IVectorCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, TPaint))
+  fullName.vb: Mapsui.Rendering.IVectorCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, System.Func(Of TParam, TPaint))
+  name.vb: GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, TPaint))
+  spec.csharp:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+    name: GetOrCreatePaint
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0___1__
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,``1})
+    name: GetOrCreatePaint
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+  - name: )
+- uid: TParam
+  name: TParam
+  nameWithType: TParam
+  fullName: TParam
+- uid: Mapsui.Rendering.CacheTracker`1
+  commentId: T:Mapsui.Rendering.CacheTracker`1
+  href: Mapsui.Rendering.CacheTracker-1.html
+  name: CacheTracker<T>
+  nameWithType: CacheTracker<T>
+  fullName: Mapsui.Rendering.CacheTracker<T>
+  nameWithType.vb: CacheTracker(Of T)
+  fullName.vb: Mapsui.Rendering.CacheTracker(Of T)
+  name.vb: CacheTracker(Of T)
+  spec.csharp:
+  - uid: Mapsui.Rendering.CacheTracker`1
+    name: CacheTracker
+    href: Mapsui.Rendering.CacheTracker-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Rendering.CacheTracker`1
+    name: CacheTracker
+    href: Mapsui.Rendering.CacheTracker-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2({TParam},System.Func{{TParam},Mapsui.Rendering.ISymbolCache,{TPaint}})
+  commentId: M:Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+  parent: Mapsui.Rendering.IVectorCache
+  definition: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+  href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0_Mapsui_Rendering_ISymbolCache___1__
+  name: GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, ISymbolCache, TPaint>)
+  nameWithType: IVectorCache.GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, ISymbolCache, TPaint>)
+  fullName: Mapsui.Rendering.IVectorCache.GetOrCreatePaint<TParam, TPaint>(TParam, System.Func<TParam, Mapsui.Rendering.ISymbolCache, TPaint>)
+  nameWithType.vb: IVectorCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, ISymbolCache, TPaint))
+  fullName.vb: Mapsui.Rendering.IVectorCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, System.Func(Of TParam, Mapsui.Rendering.ISymbolCache, TPaint))
+  name.vb: GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, ISymbolCache, TPaint))
+  spec.csharp:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+    name: GetOrCreatePaint
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0_Mapsui_Rendering_ISymbolCache___1__
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ISymbolCache
+    name: ISymbolCache
+    href: Mapsui.Rendering.ISymbolCache.html
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+    name: GetOrCreatePaint
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0_Mapsui_Rendering_ISymbolCache___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ISymbolCache
+    name: ISymbolCache
+    href: Mapsui.Rendering.ISymbolCache.html
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+  - name: )
+- uid: System.Func{{TParam},Mapsui.Rendering.ISymbolCache,{TPaint}}
+  commentId: T:System.Func{``0,Mapsui.Rendering.ISymbolCache,``1}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<TParam, ISymbolCache, TPaint>
+  nameWithType: Func<TParam, ISymbolCache, TPaint>
+  fullName: System.Func<TParam, Mapsui.Rendering.ISymbolCache, TPaint>
+  nameWithType.vb: Func(Of TParam, ISymbolCache, TPaint)
+  fullName.vb: System.Func(Of TParam, Mapsui.Rendering.ISymbolCache, TPaint)
+  name.vb: Func(Of TParam, ISymbolCache, TPaint)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ISymbolCache
+    name: ISymbolCache
+    href: Mapsui.Rendering.ISymbolCache.html
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ISymbolCache
+    name: ISymbolCache
+    href: Mapsui.Rendering.ISymbolCache.html
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+- uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+  commentId: M:Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+  isExternal: true
+  href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0_Mapsui_Rendering_ISymbolCache___1__
+  name: GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, ISymbolCache, TPaint>)
+  nameWithType: IVectorCache.GetOrCreatePaint<TParam, TPaint>(TParam, Func<TParam, ISymbolCache, TPaint>)
+  fullName: Mapsui.Rendering.IVectorCache.GetOrCreatePaint<TParam, TPaint>(TParam, System.Func<TParam, Mapsui.Rendering.ISymbolCache, TPaint>)
+  nameWithType.vb: IVectorCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, ISymbolCache, TPaint))
+  fullName.vb: Mapsui.Rendering.IVectorCache.GetOrCreatePaint(Of TParam, TPaint)(TParam, System.Func(Of TParam, Mapsui.Rendering.ISymbolCache, TPaint))
+  name.vb: GetOrCreatePaint(Of TParam, TPaint)(TParam, Func(Of TParam, ISymbolCache, TPaint))
+  spec.csharp:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+    name: GetOrCreatePaint
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0_Mapsui_Rendering_ISymbolCache___1__
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ISymbolCache
+    name: ISymbolCache
+    href: Mapsui.Rendering.ISymbolCache.html
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePaint``2(``0,System.Func{``0,Mapsui.Rendering.ISymbolCache,``1})
+    name: GetOrCreatePaint
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePaint__2___0_System_Func___0_Mapsui_Rendering_ISymbolCache___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ISymbolCache
+    name: ISymbolCache
+    href: Mapsui.Rendering.ISymbolCache.html
+  - name: ','
+  - name: " "
+  - name: TPaint
+  - name: )
+  - name: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePath*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePath
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_GetOrCreatePath__2___0_System_Func___0___1__
+  name: GetOrCreatePath
+  nameWithType: RenderCache.GetOrCreatePath
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.GetOrCreatePath
+- uid: Mapsui.Rendering.IVectorCache.GetOrCreatePath``2({TParam},System.Func{{TParam},{TPath}})
+  commentId: M:Mapsui.Rendering.IVectorCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+  parent: Mapsui.Rendering.IVectorCache
+  definition: Mapsui.Rendering.IVectorCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+  href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePath__2___0_System_Func___0___1__
+  name: GetOrCreatePath<TParam, TPath>(TParam, Func<TParam, TPath>)
+  nameWithType: IVectorCache.GetOrCreatePath<TParam, TPath>(TParam, Func<TParam, TPath>)
+  fullName: Mapsui.Rendering.IVectorCache.GetOrCreatePath<TParam, TPath>(TParam, System.Func<TParam, TPath>)
+  nameWithType.vb: IVectorCache.GetOrCreatePath(Of TParam, TPath)(TParam, Func(Of TParam, TPath))
+  fullName.vb: Mapsui.Rendering.IVectorCache.GetOrCreatePath(Of TParam, TPath)(TParam, System.Func(Of TParam, TPath))
+  name.vb: GetOrCreatePath(Of TParam, TPath)(TParam, Func(Of TParam, TPath))
+  spec.csharp:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+    name: GetOrCreatePath
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePath__2___0_System_Func___0___1__
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: '>'
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+    name: GetOrCreatePath
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePath__2___0_System_Func___0___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: )
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: )
+  - name: )
+- uid: System.Func{{TParam},{TPath}}
+  commentId: T:System.Func{``0,``1}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<TParam, TPath>
+  nameWithType: Func<TParam, TPath>
+  fullName: System.Func<TParam, TPath>
+  nameWithType.vb: Func(Of TParam, TPath)
+  fullName.vb: System.Func(Of TParam, TPath)
+  name.vb: Func(Of TParam, TPath)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: )
+- uid: Mapsui.Rendering.CacheTracker{{TPath}}
+  commentId: T:Mapsui.Rendering.CacheTracker{``1}
+  parent: Mapsui.Rendering
+  definition: Mapsui.Rendering.CacheTracker`1
+  href: Mapsui.Rendering.CacheTracker-1.html
+  name: CacheTracker<TPath>
+  nameWithType: CacheTracker<TPath>
+  fullName: Mapsui.Rendering.CacheTracker<TPath>
+  nameWithType.vb: CacheTracker(Of TPath)
+  fullName.vb: Mapsui.Rendering.CacheTracker(Of TPath)
+  name.vb: CacheTracker(Of TPath)
+  spec.csharp:
+  - uid: Mapsui.Rendering.CacheTracker`1
+    name: CacheTracker
+    href: Mapsui.Rendering.CacheTracker-1.html
+  - name: <
+  - name: TPath
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Rendering.CacheTracker`1
+    name: CacheTracker
+    href: Mapsui.Rendering.CacheTracker-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TPath
+  - name: )
+- uid: Mapsui.Rendering.IVectorCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+  commentId: M:Mapsui.Rendering.IVectorCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+  isExternal: true
+  href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePath__2___0_System_Func___0___1__
+  name: GetOrCreatePath<TParam, TPath>(TParam, Func<TParam, TPath>)
+  nameWithType: IVectorCache.GetOrCreatePath<TParam, TPath>(TParam, Func<TParam, TPath>)
+  fullName: Mapsui.Rendering.IVectorCache.GetOrCreatePath<TParam, TPath>(TParam, System.Func<TParam, TPath>)
+  nameWithType.vb: IVectorCache.GetOrCreatePath(Of TParam, TPath)(TParam, Func(Of TParam, TPath))
+  fullName.vb: Mapsui.Rendering.IVectorCache.GetOrCreatePath(Of TParam, TPath)(TParam, System.Func(Of TParam, TPath))
+  name.vb: GetOrCreatePath(Of TParam, TPath)(TParam, Func(Of TParam, TPath))
+  spec.csharp:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+    name: GetOrCreatePath
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePath__2___0_System_Func___0___1__
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: '>'
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.IVectorCache.GetOrCreatePath``2(``0,System.Func{``0,``1})
+    name: GetOrCreatePath
+    href: Mapsui.Rendering.IVectorCache.html#Mapsui_Rendering_IVectorCache_GetOrCreatePath__2___0_System_Func___0___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: )
+  - name: (
+  - name: TParam
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TParam
+  - name: ','
+  - name: " "
+  - name: TPath
+  - name: )
+  - name: )
+- uid: Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+  commentId: M:Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+  parent: Mapsui.Rendering.ITileCache
+  isExternal: true
+  href: Mapsui.Rendering.ITileCache.html#Mapsui_Rendering_ITileCache_GetOrCreate_Mapsui_MRaster_System_Int64_
+  name: GetOrCreate(MRaster, long)
+  nameWithType: ITileCache.GetOrCreate(MRaster, long)
+  fullName: Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster, long)
+  nameWithType.vb: ITileCache.GetOrCreate(MRaster, Long)
+  fullName.vb: Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster, Long)
+  name.vb: GetOrCreate(MRaster, Long)
+  spec.csharp:
+  - uid: Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+    name: GetOrCreate
+    href: Mapsui.Rendering.ITileCache.html#Mapsui_Rendering_ITileCache_GetOrCreate_Mapsui_MRaster_System_Int64_
+  - name: (
+  - uid: Mapsui.MRaster
+    name: MRaster
+    href: Mapsui.MRaster.html
+  - name: ','
+  - name: " "
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+    name: GetOrCreate
+    href: Mapsui.Rendering.ITileCache.html#Mapsui_Rendering_ITileCache_GetOrCreate_Mapsui_MRaster_System_Int64_
+  - name: (
+  - uid: Mapsui.MRaster
+    name: MRaster
+    href: Mapsui.MRaster.html
+  - name: ','
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+- uid: Mapsui.MRaster
+  commentId: T:Mapsui.MRaster
+  parent: Mapsui
+  href: Mapsui.MRaster.html
+  name: MRaster
+  nameWithType: MRaster
+  fullName: Mapsui.MRaster
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.UpdateCache*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.UpdateCache
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_UpdateCache_System_Int64_
+  name: UpdateCache
+  nameWithType: RenderCache.UpdateCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.UpdateCache
+- uid: Mapsui.Rendering.ITileCache.UpdateCache(System.Int64)
+  commentId: M:Mapsui.Rendering.ITileCache.UpdateCache(System.Int64)
+  parent: Mapsui.Rendering.ITileCache
+  isExternal: true
+  href: Mapsui.Rendering.ITileCache.html#Mapsui_Rendering_ITileCache_UpdateCache_System_Int64_
+  name: UpdateCache(long)
+  nameWithType: ITileCache.UpdateCache(long)
+  fullName: Mapsui.Rendering.ITileCache.UpdateCache(long)
+  nameWithType.vb: ITileCache.UpdateCache(Long)
+  fullName.vb: Mapsui.Rendering.ITileCache.UpdateCache(Long)
+  name.vb: UpdateCache(Long)
+  spec.csharp:
+  - uid: Mapsui.Rendering.ITileCache.UpdateCache(System.Int64)
+    name: UpdateCache
+    href: Mapsui.Rendering.ITileCache.html#Mapsui_Rendering_ITileCache_UpdateCache_System_Int64_
+  - name: (
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.ITileCache.UpdateCache(System.Int64)
+    name: UpdateCache
+    href: Mapsui.Rendering.ITileCache.html#Mapsui_Rendering_ITileCache_UpdateCache_System_Int64_
+  - name: (
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache.Dispose*
+  commentId: Overload:Mapsui.Rendering.Skia.Cache.RenderCache.Dispose
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html#Mapsui_Rendering_Skia_Cache_RenderCache_Dispose
+  name: Dispose
+  nameWithType: RenderCache.Dispose
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

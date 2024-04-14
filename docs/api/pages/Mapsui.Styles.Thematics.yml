@@ -1,0 +1,76 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.Thematics
+  commentId: N:Mapsui.Styles.Thematics
+  id: Mapsui.Styles.Thematics
+  children:
+  - Mapsui.Styles.Thematics.ColorBlend
+  - Mapsui.Styles.Thematics.GradientTheme
+  - Mapsui.Styles.Thematics.IThemeStyle
+  - Mapsui.Styles.Thematics.ThemeStyle
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Styles.Thematics
+  nameWithType: Mapsui.Styles.Thematics
+  fullName: Mapsui.Styles.Thematics
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Styles.Thematics.ColorBlend
+  commentId: T:Mapsui.Styles.Thematics.ColorBlend
+  parent: Mapsui.Styles.Thematics
+  href: Mapsui.Styles.Thematics.ColorBlend.html
+  name: ColorBlend
+  nameWithType: ColorBlend
+  fullName: Mapsui.Styles.Thematics.ColorBlend
+- uid: Mapsui.Styles.Thematics.GradientTheme
+  commentId: T:Mapsui.Styles.Thematics.GradientTheme
+  href: Mapsui.Styles.Thematics.GradientTheme.html
+  name: GradientTheme
+  nameWithType: GradientTheme
+  fullName: Mapsui.Styles.Thematics.GradientTheme
+- uid: Mapsui.Styles.Thematics.IThemeStyle
+  commentId: T:Mapsui.Styles.Thematics.IThemeStyle
+  parent: Mapsui.Styles.Thematics
+  href: Mapsui.Styles.Thematics.IThemeStyle.html
+  name: IThemeStyle
+  nameWithType: IThemeStyle
+  fullName: Mapsui.Styles.Thematics.IThemeStyle
+- uid: Mapsui.Styles.Thematics.ThemeStyle
+  commentId: T:Mapsui.Styles.Thematics.ThemeStyle
+  href: Mapsui.Styles.Thematics.ThemeStyle.html
+  name: ThemeStyle
+  nameWithType: ThemeStyle
+  fullName: Mapsui.Styles.Thematics.ThemeStyle
+- uid: Mapsui.Styles.Thematics
+  commentId: N:Mapsui.Styles.Thematics
+  href: Mapsui.html
+  name: Mapsui.Styles.Thematics
+  nameWithType: Mapsui.Styles.Thematics
+  fullName: Mapsui.Styles.Thematics
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  - name: .
+  - uid: Mapsui.Styles.Thematics
+    name: Thematics
+    href: Mapsui.Styles.Thematics.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  - name: .
+  - uid: Mapsui.Styles.Thematics
+    name: Thematics
+    href: Mapsui.Styles.Thematics.html

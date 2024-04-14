@@ -1,0 +1,823 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.IWidget
+  commentId: T:Mapsui.Widgets.IWidget
+  id: IWidget
+  parent: Mapsui.Widgets
+  children:
+  - Mapsui.Widgets.IWidget.Enabled
+  - Mapsui.Widgets.IWidget.Envelope
+  - Mapsui.Widgets.IWidget.Height
+  - Mapsui.Widgets.IWidget.HorizontalAlignment
+  - Mapsui.Widgets.IWidget.InputAreaType
+  - Mapsui.Widgets.IWidget.InputTransparent
+  - Mapsui.Widgets.IWidget.Margin
+  - Mapsui.Widgets.IWidget.NeedsRedraw
+  - Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.IWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  - Mapsui.Widgets.IWidget.Position
+  - Mapsui.Widgets.IWidget.VerticalAlignment
+  - Mapsui.Widgets.IWidget.Width
+  langs:
+  - csharp
+  - vb
+  name: IWidget
+  nameWithType: IWidget
+  fullName: Mapsui.Widgets.IWidget
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IWidget
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 2
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  syntax:
+    content: public interface IWidget
+    content.vb: Public Interface IWidget
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Widgets.IWidget.HorizontalAlignment
+  commentId: P:Mapsui.Widgets.IWidget.HorizontalAlignment
+  id: HorizontalAlignment
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: HorizontalAlignment
+  nameWithType: IWidget.HorizontalAlignment
+  fullName: Mapsui.Widgets.IWidget.HorizontalAlignment
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: HorizontalAlignment
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Horizontal alignment of Widget
+  example: []
+  syntax:
+    content: HorizontalAlignment HorizontalAlignment { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Widgets.HorizontalAlignment
+    content.vb: Property HorizontalAlignment As HorizontalAlignment
+  overload: Mapsui.Widgets.IWidget.HorizontalAlignment*
+- uid: Mapsui.Widgets.IWidget.VerticalAlignment
+  commentId: P:Mapsui.Widgets.IWidget.VerticalAlignment
+  id: VerticalAlignment
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: VerticalAlignment
+  nameWithType: IWidget.VerticalAlignment
+  fullName: Mapsui.Widgets.IWidget.VerticalAlignment
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: VerticalAlignment
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Vertical alignment of Widget
+  example: []
+  syntax:
+    content: VerticalAlignment VerticalAlignment { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Widgets.VerticalAlignment
+    content.vb: Property VerticalAlignment As VerticalAlignment
+  overload: Mapsui.Widgets.IWidget.VerticalAlignment*
+- uid: Mapsui.Widgets.IWidget.Margin
+  commentId: P:Mapsui.Widgets.IWidget.Margin
+  id: Margin
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: Margin
+  nameWithType: IWidget.Margin
+  fullName: Mapsui.Widgets.IWidget.Margin
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Margin
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 17
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Margin outside of the widget
+  example: []
+  syntax:
+    content: MRect Margin { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Property Margin As MRect
+  overload: Mapsui.Widgets.IWidget.Margin*
+- uid: Mapsui.Widgets.IWidget.Position
+  commentId: P:Mapsui.Widgets.IWidget.Position
+  id: Position
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: Position
+  nameWithType: IWidget.Position
+  fullName: Mapsui.Widgets.IWidget.Position
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Position
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 22
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Position for absolute alignment
+  example: []
+  syntax:
+    content: MPoint Position { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MPoint
+    content.vb: Property Position As MPoint
+  overload: Mapsui.Widgets.IWidget.Position*
+- uid: Mapsui.Widgets.IWidget.Width
+  commentId: P:Mapsui.Widgets.IWidget.Width
+  id: Width
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: Width
+  nameWithType: IWidget.Width
+  fullName: Mapsui.Widgets.IWidget.Width
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Width
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 27
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Width of Widget
+  example: []
+  syntax:
+    content: double Width { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Property Width As Double
+  overload: Mapsui.Widgets.IWidget.Width*
+- uid: Mapsui.Widgets.IWidget.Height
+  commentId: P:Mapsui.Widgets.IWidget.Height
+  id: Height
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: Height
+  nameWithType: IWidget.Height
+  fullName: Mapsui.Widgets.IWidget.Height
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Height
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 32
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Height of Widget
+  example: []
+  syntax:
+    content: double Height { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Property Height As Double
+  overload: Mapsui.Widgets.IWidget.Height*
+- uid: Mapsui.Widgets.IWidget.Envelope
+  commentId: P:Mapsui.Widgets.IWidget.Envelope
+  id: Envelope
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: Envelope
+  nameWithType: IWidget.Envelope
+  fullName: Mapsui.Widgets.IWidget.Envelope
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Envelope
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 37
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: The hit box of the widget. This needs to be updated from the widget renderer.
+  example: []
+  syntax:
+    content: MRect? Envelope { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Property Envelope As MRect
+  overload: Mapsui.Widgets.IWidget.Envelope*
+- uid: Mapsui.Widgets.IWidget.Enabled
+  commentId: P:Mapsui.Widgets.IWidget.Enabled
+  id: Enabled
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: Enabled
+  nameWithType: IWidget.Enabled
+  fullName: Mapsui.Widgets.IWidget.Enabled
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Enabled
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 42
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Is Widget visible on screen
+  example: []
+  syntax:
+    content: bool Enabled { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Property Enabled As Boolean
+  overload: Mapsui.Widgets.IWidget.Enabled*
+- uid: Mapsui.Widgets.IWidget.NeedsRedraw
+  commentId: P:Mapsui.Widgets.IWidget.NeedsRedraw
+  id: NeedsRedraw
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: NeedsRedraw
+  nameWithType: IWidget.NeedsRedraw
+  fullName: Mapsui.Widgets.IWidget.NeedsRedraw
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NeedsRedraw
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 47
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Flag for redrawing widget in the next drawing cycle
+  example: []
+  syntax:
+    content: bool NeedsRedraw { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Property NeedsRedraw As Boolean
+  overload: Mapsui.Widgets.IWidget.NeedsRedraw*
+- uid: Mapsui.Widgets.IWidget.InputAreaType
+  commentId: P:Mapsui.Widgets.IWidget.InputAreaType
+  id: InputAreaType
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: InputAreaType
+  nameWithType: IWidget.InputAreaType
+  fullName: Mapsui.Widgets.IWidget.InputAreaType
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: InputAreaType
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 52
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Type of area used for  manipulation (e.g. touch, mouse) input events.
+  example: []
+  syntax:
+    content: InputAreaType InputAreaType { get; }
+    parameters: []
+    return:
+      type: Mapsui.Widgets.InputAreaType
+    content.vb: ReadOnly Property InputAreaType As InputAreaType
+  overload: Mapsui.Widgets.IWidget.InputAreaType*
+- uid: Mapsui.Widgets.IWidget.InputTransparent
+  commentId: P:Mapsui.Widgets.IWidget.InputTransparent
+  id: InputTransparent
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: InputTransparent
+  nameWithType: IWidget.InputTransparent
+  fullName: Mapsui.Widgets.IWidget.InputTransparent
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: InputTransparent
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 54
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  syntax:
+    content: bool InputTransparent { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Property InputTransparent As Boolean
+  overload: Mapsui.Widgets.IWidget.InputTransparent*
+- uid: Mapsui.Widgets.IWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.IWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  id: OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: OnTapped(Navigator, WidgetEventArgs)
+  nameWithType: IWidget.OnTapped(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.IWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnTapped
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 62
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Function, which handles the widget tapped event
+  example: []
+  syntax:
+    content: bool OnTapped(Navigator navigator, WidgetEventArgs e)
+    parameters:
+    - id: navigator
+      type: Mapsui.Navigator
+      description: Navigator of MapControl
+    - id: e
+      type: Mapsui.Widgets.WidgetEventArgs
+      description: Arguments for this widget touch
+    return:
+      type: System.Boolean
+      description: True, if the Widget had handled the touch event
+    content.vb: Function OnTapped(navigator As Navigator, e As WidgetEventArgs) As Boolean
+  overload: Mapsui.Widgets.IWidget.OnTapped*
+- uid: Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  id: OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: OnPointerPressed(Navigator, WidgetEventArgs)
+  nameWithType: IWidget.OnPointerPressed(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPointerPressed
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 70
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Function, which handles the widget pointer pressed event
+  example: []
+  syntax:
+    content: bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
+    parameters:
+    - id: navigator
+      type: Mapsui.Navigator
+      description: Navigator of MapControl
+    - id: e
+      type: Mapsui.Widgets.WidgetEventArgs
+      description: Arguments for this widget touch
+    return:
+      type: System.Boolean
+      description: True, if the Widget had handled the touch event
+    content.vb: Function OnPointerPressed(navigator As Navigator, e As WidgetEventArgs) As Boolean
+  overload: Mapsui.Widgets.IWidget.OnPointerPressed*
+- uid: Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  id: OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: OnPointerMoved(Navigator, WidgetEventArgs)
+  nameWithType: IWidget.OnPointerMoved(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPointerMoved
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 78
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Function, which handles the widget pointer moved event
+  example: []
+  syntax:
+    content: bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
+    parameters:
+    - id: navigator
+      type: Mapsui.Navigator
+      description: Navigator of MapControl
+    - id: e
+      type: Mapsui.Widgets.WidgetEventArgs
+      description: Arguments for this widget touch
+    return:
+      type: System.Boolean
+      description: True, if the Widget had handled the touch event
+    content.vb: Function OnPointerMoved(navigator As Navigator, e As WidgetEventArgs) As Boolean
+  overload: Mapsui.Widgets.IWidget.OnPointerMoved*
+- uid: Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  commentId: M:Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  id: OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  parent: Mapsui.Widgets.IWidget
+  langs:
+  - csharp
+  - vb
+  name: OnPointerReleased(Navigator, WidgetEventArgs)
+  nameWithType: IWidget.OnPointerReleased(Navigator, WidgetEventArgs)
+  fullName: Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Widgets/IWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPointerReleased
+    path: ../../Mapsui/Widgets/IWidget.cs
+    startLine: 86
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Function, which handles the widget pointer released event
+  example: []
+  syntax:
+    content: bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
+    parameters:
+    - id: navigator
+      type: Mapsui.Navigator
+      description: Navigator of MapControl
+    - id: e
+      type: Mapsui.Widgets.WidgetEventArgs
+      description: Arguments for this widget touch
+    return:
+      type: System.Boolean
+      description: True, if the Widget had handled the touch event
+    content.vb: Function OnPointerReleased(navigator As Navigator, e As WidgetEventArgs) As Boolean
+  overload: Mapsui.Widgets.IWidget.OnPointerReleased*
+references:
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  href: Mapsui.html
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Widgets.IWidget.HorizontalAlignment*
+  commentId: Overload:Mapsui.Widgets.IWidget.HorizontalAlignment
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_HorizontalAlignment
+  name: HorizontalAlignment
+  nameWithType: IWidget.HorizontalAlignment
+  fullName: Mapsui.Widgets.IWidget.HorizontalAlignment
+- uid: Mapsui.Widgets.HorizontalAlignment
+  commentId: T:Mapsui.Widgets.HorizontalAlignment
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.HorizontalAlignment.html
+  name: HorizontalAlignment
+  nameWithType: HorizontalAlignment
+  fullName: Mapsui.Widgets.HorizontalAlignment
+- uid: Mapsui.Widgets.IWidget.VerticalAlignment*
+  commentId: Overload:Mapsui.Widgets.IWidget.VerticalAlignment
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_VerticalAlignment
+  name: VerticalAlignment
+  nameWithType: IWidget.VerticalAlignment
+  fullName: Mapsui.Widgets.IWidget.VerticalAlignment
+- uid: Mapsui.Widgets.VerticalAlignment
+  commentId: T:Mapsui.Widgets.VerticalAlignment
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.VerticalAlignment.html
+  name: VerticalAlignment
+  nameWithType: VerticalAlignment
+  fullName: Mapsui.Widgets.VerticalAlignment
+- uid: Mapsui.Widgets.IWidget.Margin*
+  commentId: Overload:Mapsui.Widgets.IWidget.Margin
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Margin
+  name: Margin
+  nameWithType: IWidget.Margin
+  fullName: Mapsui.Widgets.IWidget.Margin
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Widgets.IWidget.Position*
+  commentId: Overload:Mapsui.Widgets.IWidget.Position
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Position
+  name: Position
+  nameWithType: IWidget.Position
+  fullName: Mapsui.Widgets.IWidget.Position
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui.Widgets.IWidget.Width*
+  commentId: Overload:Mapsui.Widgets.IWidget.Width
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Width
+  name: Width
+  nameWithType: IWidget.Width
+  fullName: Mapsui.Widgets.IWidget.Width
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Widgets.IWidget.Height*
+  commentId: Overload:Mapsui.Widgets.IWidget.Height
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Height
+  name: Height
+  nameWithType: IWidget.Height
+  fullName: Mapsui.Widgets.IWidget.Height
+- uid: Mapsui.Widgets.IWidget.Envelope*
+  commentId: Overload:Mapsui.Widgets.IWidget.Envelope
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Envelope
+  name: Envelope
+  nameWithType: IWidget.Envelope
+  fullName: Mapsui.Widgets.IWidget.Envelope
+- uid: Mapsui.Widgets.IWidget.Enabled*
+  commentId: Overload:Mapsui.Widgets.IWidget.Enabled
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Enabled
+  name: Enabled
+  nameWithType: IWidget.Enabled
+  fullName: Mapsui.Widgets.IWidget.Enabled
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Widgets.IWidget.NeedsRedraw*
+  commentId: Overload:Mapsui.Widgets.IWidget.NeedsRedraw
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_NeedsRedraw
+  name: NeedsRedraw
+  nameWithType: IWidget.NeedsRedraw
+  fullName: Mapsui.Widgets.IWidget.NeedsRedraw
+- uid: Mapsui.Widgets.IWidget.InputAreaType*
+  commentId: Overload:Mapsui.Widgets.IWidget.InputAreaType
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_InputAreaType
+  name: InputAreaType
+  nameWithType: IWidget.InputAreaType
+  fullName: Mapsui.Widgets.IWidget.InputAreaType
+- uid: Mapsui.Widgets.InputAreaType
+  commentId: T:Mapsui.Widgets.InputAreaType
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.InputAreaType.html
+  name: InputAreaType
+  nameWithType: InputAreaType
+  fullName: Mapsui.Widgets.InputAreaType
+- uid: Mapsui.Widgets.IWidget.InputTransparent*
+  commentId: Overload:Mapsui.Widgets.IWidget.InputTransparent
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_InputTransparent
+  name: InputTransparent
+  nameWithType: IWidget.InputTransparent
+  fullName: Mapsui.Widgets.IWidget.InputTransparent
+- uid: Mapsui.Widgets.IWidget.OnTapped*
+  commentId: Overload:Mapsui.Widgets.IWidget.OnTapped
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnTapped
+  nameWithType: IWidget.OnTapped
+  fullName: Mapsui.Widgets.IWidget.OnTapped
+- uid: Mapsui.Navigator
+  commentId: T:Mapsui.Navigator
+  parent: Mapsui
+  href: Mapsui.Navigator.html
+  name: Navigator
+  nameWithType: Navigator
+  fullName: Mapsui.Navigator
+- uid: Mapsui.Widgets.WidgetEventArgs
+  commentId: T:Mapsui.Widgets.WidgetEventArgs
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.WidgetEventArgs.html
+  name: WidgetEventArgs
+  nameWithType: WidgetEventArgs
+  fullName: Mapsui.Widgets.WidgetEventArgs
+- uid: Mapsui.Widgets.IWidget.OnPointerPressed*
+  commentId: Overload:Mapsui.Widgets.IWidget.OnPointerPressed
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnPointerPressed
+  nameWithType: IWidget.OnPointerPressed
+  fullName: Mapsui.Widgets.IWidget.OnPointerPressed
+- uid: Mapsui.Widgets.IWidget.OnPointerMoved*
+  commentId: Overload:Mapsui.Widgets.IWidget.OnPointerMoved
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnPointerMoved
+  nameWithType: IWidget.OnPointerMoved
+  fullName: Mapsui.Widgets.IWidget.OnPointerMoved
+- uid: Mapsui.Widgets.IWidget.OnPointerReleased*
+  commentId: Overload:Mapsui.Widgets.IWidget.OnPointerReleased
+  href: Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  name: OnPointerReleased
+  nameWithType: IWidget.OnPointerReleased
+  fullName: Mapsui.Widgets.IWidget.OnPointerReleased

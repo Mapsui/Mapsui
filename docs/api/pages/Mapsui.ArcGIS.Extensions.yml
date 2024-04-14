@@ -1,0 +1,54 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ArcGIS.Extensions
+  commentId: N:Mapsui.ArcGIS.Extensions
+  id: Mapsui.ArcGIS.Extensions
+  children:
+  - Mapsui.ArcGIS.Extensions.ExtentExtensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.ArcGIS.Extensions
+  nameWithType: Mapsui.ArcGIS.Extensions
+  fullName: Mapsui.ArcGIS.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.ArcGIS
+references:
+- uid: Mapsui.ArcGIS.Extensions.ExtentExtensions
+  commentId: T:Mapsui.ArcGIS.Extensions.ExtentExtensions
+  parent: Mapsui.ArcGIS.Extensions
+  href: Mapsui.ArcGIS.Extensions.ExtentExtensions.html
+  name: ExtentExtensions
+  nameWithType: ExtentExtensions
+  fullName: Mapsui.ArcGIS.Extensions.ExtentExtensions
+- uid: Mapsui.ArcGIS.Extensions
+  commentId: N:Mapsui.ArcGIS.Extensions
+  href: Mapsui.html
+  name: Mapsui.ArcGIS.Extensions
+  nameWithType: Mapsui.ArcGIS.Extensions
+  fullName: Mapsui.ArcGIS.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.Extensions
+    name: Extensions
+    href: Mapsui.ArcGIS.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.Extensions
+    name: Extensions
+    href: Mapsui.ArcGIS.Extensions.html

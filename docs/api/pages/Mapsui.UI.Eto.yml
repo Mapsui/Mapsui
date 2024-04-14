@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Eto
+  commentId: N:Mapsui.UI.Eto
+  id: Mapsui.UI.Eto
+  children:
+  - Mapsui.UI.Eto.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Eto
+  nameWithType: Mapsui.UI.Eto
+  fullName: Mapsui.UI.Eto
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Eto
+references:
+- uid: Mapsui.UI.Eto.MapControl
+  commentId: T:Mapsui.UI.Eto.MapControl
+  href: Mapsui.UI.Eto.MapControl.html
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.Eto.MapControl

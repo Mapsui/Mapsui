@@ -1,0 +1,255 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  commentId: T:Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  id: LabelStyle.VerticalAlignmentEnum
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Bottom
+  - Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Center
+  - Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Top
+  langs:
+  - csharp
+  - vb
+  name: LabelStyle.VerticalAlignmentEnum
+  nameWithType: LabelStyle.VerticalAlignmentEnum
+  fullName: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: VerticalAlignmentEnum
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 37
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Label text alignment
+  example: []
+  syntax:
+    content: 'public enum LabelStyle.VerticalAlignmentEnum : short'
+    content.vb: Public Enum LabelStyle.VerticalAlignmentEnum As Short
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Bottom
+  commentId: F:Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Bottom
+  id: Bottom
+  parent: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  langs:
+  - csharp
+  - vb
+  name: Bottom
+  nameWithType: LabelStyle.VerticalAlignmentEnum.Bottom
+  fullName: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Bottom
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Bottom
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 42
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Left oriented
+  example: []
+  syntax:
+    content: Bottom = 2
+    return:
+      type: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+- uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Top
+  commentId: F:Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Top
+  id: Top
+  parent: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  langs:
+  - csharp
+  - vb
+  name: Top
+  nameWithType: LabelStyle.VerticalAlignmentEnum.Top
+  fullName: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Top
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Top
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 46
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Right oriented
+  example: []
+  syntax:
+    content: Top = 0
+    return:
+      type: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+- uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Center
+  commentId: F:Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Center
+  id: Center
+  parent: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  langs:
+  - csharp
+  - vb
+  name: Center
+  nameWithType: LabelStyle.VerticalAlignmentEnum.Center
+  fullName: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.Center
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Center
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 50
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Centered
+  example: []
+  syntax:
+    content: Center = 1
+    return:
+      type: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  commentId: T:Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.LabelStyle.html
+  name: LabelStyle.VerticalAlignmentEnum
+  nameWithType: LabelStyle.VerticalAlignmentEnum
+  fullName: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  spec.csharp:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+    name: VerticalAlignmentEnum
+    href: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.html
+  spec.vb:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+    name: VerticalAlignmentEnum
+    href: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.html

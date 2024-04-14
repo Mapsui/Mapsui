@@ -1,0 +1,82 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Tiling.Rendering
+  commentId: N:Mapsui.Tiling.Rendering
+  id: Mapsui.Tiling.Rendering
+  children:
+  - Mapsui.Tiling.Rendering.IRenderFetchStrategy
+  - Mapsui.Tiling.Rendering.MinimalRenderFetchStrategy
+  - Mapsui.Tiling.Rendering.RenderException
+  - Mapsui.Tiling.Rendering.RenderFetchStrategy
+  - Mapsui.Tiling.Rendering.TilingRenderFetchStrategy
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Tiling.Rendering
+  nameWithType: Mapsui.Tiling.Rendering
+  fullName: Mapsui.Tiling.Rendering
+  type: Namespace
+  assemblies:
+  - Mapsui.Tiling
+references:
+- uid: Mapsui.Tiling.Rendering.IRenderFetchStrategy
+  commentId: T:Mapsui.Tiling.Rendering.IRenderFetchStrategy
+  parent: Mapsui.Tiling.Rendering
+  href: Mapsui.Tiling.Rendering.IRenderFetchStrategy.html
+  name: IRenderFetchStrategy
+  nameWithType: IRenderFetchStrategy
+  fullName: Mapsui.Tiling.Rendering.IRenderFetchStrategy
+- uid: Mapsui.Tiling.Rendering.MinimalRenderFetchStrategy
+  commentId: T:Mapsui.Tiling.Rendering.MinimalRenderFetchStrategy
+  href: Mapsui.Tiling.Rendering.MinimalRenderFetchStrategy.html
+  name: MinimalRenderFetchStrategy
+  nameWithType: MinimalRenderFetchStrategy
+  fullName: Mapsui.Tiling.Rendering.MinimalRenderFetchStrategy
+- uid: Mapsui.Tiling.Rendering.RenderException
+  commentId: T:Mapsui.Tiling.Rendering.RenderException
+  href: Mapsui.Tiling.Rendering.RenderException.html
+  name: RenderException
+  nameWithType: RenderException
+  fullName: Mapsui.Tiling.Rendering.RenderException
+- uid: Mapsui.Tiling.Rendering.RenderFetchStrategy
+  commentId: T:Mapsui.Tiling.Rendering.RenderFetchStrategy
+  href: Mapsui.Tiling.Rendering.RenderFetchStrategy.html
+  name: RenderFetchStrategy
+  nameWithType: RenderFetchStrategy
+  fullName: Mapsui.Tiling.Rendering.RenderFetchStrategy
+- uid: Mapsui.Tiling.Rendering.TilingRenderFetchStrategy
+  commentId: T:Mapsui.Tiling.Rendering.TilingRenderFetchStrategy
+  href: Mapsui.Tiling.Rendering.TilingRenderFetchStrategy.html
+  name: TilingRenderFetchStrategy
+  nameWithType: TilingRenderFetchStrategy
+  fullName: Mapsui.Tiling.Rendering.TilingRenderFetchStrategy
+- uid: Mapsui.Tiling.Rendering
+  commentId: N:Mapsui.Tiling.Rendering
+  href: Mapsui.html
+  name: Mapsui.Tiling.Rendering
+  nameWithType: Mapsui.Tiling.Rendering
+  fullName: Mapsui.Tiling.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Rendering
+    name: Rendering
+    href: Mapsui.Tiling.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Rendering
+    name: Rendering
+    href: Mapsui.Tiling.Rendering.html

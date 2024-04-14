@@ -1,0 +1,720 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.RelativeOffset
+  commentId: T:Mapsui.Styles.RelativeOffset
+  id: RelativeOffset
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.RelativeOffset.#ctor
+  - Mapsui.Styles.RelativeOffset.#ctor(Mapsui.MPoint)
+  - Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.Offset)
+  - Mapsui.Styles.RelativeOffset.#ctor(System.Double,System.Double)
+  - Mapsui.Styles.RelativeOffset.CalcOffset(System.Double,System.Double)
+  langs:
+  - csharp
+  - vb
+  name: RelativeOffset
+  nameWithType: RelativeOffset
+  fullName: Mapsui.Styles.RelativeOffset
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Styles/RelativeOffset.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RelativeOffset
+    path: ../../Mapsui/Styles/RelativeOffset.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: >-
+    Relative offset of an image to the center of the source. The unit of measure
+
+    is the width or height of an image. So in case of an an offset of (0.5, 0.5) 
+
+    the symbol will be moved half the width of the image to the right and half the 
+
+    height of the image to the top. So the bottom left point of the image will be on
+
+    the location.
+  example: []
+  syntax:
+    content: 'public class RelativeOffset : Offset'
+    content.vb: Public Class RelativeOffset Inherits Offset
+  inheritance:
+  - System.Object
+  - Mapsui.Styles.Offset
+  inheritedMembers:
+  - Mapsui.Styles.Offset.X
+  - Mapsui.Styles.Offset.Y
+  - Mapsui.Styles.Offset.ToPoint
+  - Mapsui.Styles.Offset.Equals(System.Object)
+  - Mapsui.Styles.Offset.Equals(Mapsui.Styles.Offset)
+  - Mapsui.Styles.Offset.GetHashCode
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.RelativeOffset.#ctor
+  commentId: M:Mapsui.Styles.RelativeOffset.#ctor
+  id: '#ctor'
+  parent: Mapsui.Styles.RelativeOffset
+  langs:
+  - csharp
+  - vb
+  name: RelativeOffset()
+  nameWithType: RelativeOffset.RelativeOffset()
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/RelativeOffset.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/RelativeOffset.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public RelativeOffset()
+    content.vb: Public Sub New()
+  overload: Mapsui.Styles.RelativeOffset.#ctor*
+  nameWithType.vb: RelativeOffset.New()
+  fullName.vb: Mapsui.Styles.RelativeOffset.New()
+  name.vb: New()
+- uid: Mapsui.Styles.RelativeOffset.#ctor(System.Double,System.Double)
+  commentId: M:Mapsui.Styles.RelativeOffset.#ctor(System.Double,System.Double)
+  id: '#ctor(System.Double,System.Double)'
+  parent: Mapsui.Styles.RelativeOffset
+  langs:
+  - csharp
+  - vb
+  name: RelativeOffset(double, double)
+  nameWithType: RelativeOffset.RelativeOffset(double, double)
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset(double, double)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/RelativeOffset.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/RelativeOffset.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public RelativeOffset(double x, double y)
+    parameters:
+    - id: x
+      type: System.Double
+    - id: y
+      type: System.Double
+    content.vb: Public Sub New(x As Double, y As Double)
+  overload: Mapsui.Styles.RelativeOffset.#ctor*
+  nameWithType.vb: RelativeOffset.New(Double, Double)
+  fullName.vb: Mapsui.Styles.RelativeOffset.New(Double, Double)
+  name.vb: New(Double, Double)
+- uid: Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.Offset)
+  commentId: M:Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.Offset)
+  id: '#ctor(Mapsui.Styles.Offset)'
+  parent: Mapsui.Styles.RelativeOffset
+  langs:
+  - csharp
+  - vb
+  name: RelativeOffset(Offset)
+  nameWithType: RelativeOffset.RelativeOffset(Offset)
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset(Mapsui.Styles.Offset)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/RelativeOffset.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/RelativeOffset.cs
+    startLine: 15
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public RelativeOffset(Offset offset)
+    parameters:
+    - id: offset
+      type: Mapsui.Styles.Offset
+    content.vb: Public Sub New(offset As Offset)
+  overload: Mapsui.Styles.RelativeOffset.#ctor*
+  nameWithType.vb: RelativeOffset.New(Offset)
+  fullName.vb: Mapsui.Styles.RelativeOffset.New(Mapsui.Styles.Offset)
+  name.vb: New(Offset)
+- uid: Mapsui.Styles.RelativeOffset.#ctor(Mapsui.MPoint)
+  commentId: M:Mapsui.Styles.RelativeOffset.#ctor(Mapsui.MPoint)
+  id: '#ctor(Mapsui.MPoint)'
+  parent: Mapsui.Styles.RelativeOffset
+  langs:
+  - csharp
+  - vb
+  name: RelativeOffset(MPoint)
+  nameWithType: RelativeOffset.RelativeOffset(MPoint)
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset(Mapsui.MPoint)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/RelativeOffset.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/RelativeOffset.cs
+    startLine: 17
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public RelativeOffset(MPoint point)
+    parameters:
+    - id: point
+      type: Mapsui.MPoint
+    content.vb: Public Sub New(point As MPoint)
+  overload: Mapsui.Styles.RelativeOffset.#ctor*
+  nameWithType.vb: RelativeOffset.New(MPoint)
+  fullName.vb: Mapsui.Styles.RelativeOffset.New(Mapsui.MPoint)
+  name.vb: New(MPoint)
+- uid: Mapsui.Styles.RelativeOffset.CalcOffset(System.Double,System.Double)
+  commentId: M:Mapsui.Styles.RelativeOffset.CalcOffset(System.Double,System.Double)
+  id: CalcOffset(System.Double,System.Double)
+  parent: Mapsui.Styles.RelativeOffset
+  langs:
+  - csharp
+  - vb
+  name: CalcOffset(double, double)
+  nameWithType: RelativeOffset.CalcOffset(double, double)
+  fullName: Mapsui.Styles.RelativeOffset.CalcOffset(double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/RelativeOffset.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CalcOffset
+    path: ../../Mapsui/Styles/RelativeOffset.cs
+    startLine: 25
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Calculate the real offset respecting width and height
+  example: []
+  syntax:
+    content: public override Offset CalcOffset(double width, double height)
+    parameters:
+    - id: width
+      type: System.Double
+      description: Width of the symbol
+    - id: height
+      type: System.Double
+      description: Height of the symbol
+    return:
+      type: Mapsui.Styles.Offset
+      description: Calculated offset
+    content.vb: Public Overrides Function CalcOffset(width As Double, height As Double) As Offset
+  overridden: Mapsui.Styles.Offset.CalcOffset(System.Double,System.Double)
+  overload: Mapsui.Styles.RelativeOffset.CalcOffset*
+  nameWithType.vb: RelativeOffset.CalcOffset(Double, Double)
+  fullName.vb: Mapsui.Styles.RelativeOffset.CalcOffset(Double, Double)
+  name.vb: CalcOffset(Double, Double)
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Styles.Offset
+  commentId: T:Mapsui.Styles.Offset
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Offset.html
+  name: Offset
+  nameWithType: Offset
+  fullName: Mapsui.Styles.Offset
+- uid: Mapsui.Styles.Offset.X
+  commentId: P:Mapsui.Styles.Offset.X
+  parent: Mapsui.Styles.Offset
+  href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_X
+  name: X
+  nameWithType: Offset.X
+  fullName: Mapsui.Styles.Offset.X
+- uid: Mapsui.Styles.Offset.Y
+  commentId: P:Mapsui.Styles.Offset.Y
+  parent: Mapsui.Styles.Offset
+  href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Y
+  name: Y
+  nameWithType: Offset.Y
+  fullName: Mapsui.Styles.Offset.Y
+- uid: Mapsui.Styles.Offset.ToPoint
+  commentId: M:Mapsui.Styles.Offset.ToPoint
+  parent: Mapsui.Styles.Offset
+  href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_ToPoint
+  name: ToPoint()
+  nameWithType: Offset.ToPoint()
+  fullName: Mapsui.Styles.Offset.ToPoint()
+  spec.csharp:
+  - uid: Mapsui.Styles.Offset.ToPoint
+    name: ToPoint
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_ToPoint
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Offset.ToPoint
+    name: ToPoint
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_ToPoint
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.Offset.Equals(System.Object)
+  commentId: M:Mapsui.Styles.Offset.Equals(System.Object)
+  parent: Mapsui.Styles.Offset
+  isExternal: true
+  href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_System_Object_
+  name: Equals(object)
+  nameWithType: Offset.Equals(object)
+  fullName: Mapsui.Styles.Offset.Equals(object)
+  nameWithType.vb: Offset.Equals(Object)
+  fullName.vb: Mapsui.Styles.Offset.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: Mapsui.Styles.Offset.Equals(System.Object)
+    name: Equals
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Offset.Equals(System.Object)
+    name: Equals
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Styles.Offset.Equals(Mapsui.Styles.Offset)
+  commentId: M:Mapsui.Styles.Offset.Equals(Mapsui.Styles.Offset)
+  parent: Mapsui.Styles.Offset
+  href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_Mapsui_Styles_Offset_
+  name: Equals(Offset)
+  nameWithType: Offset.Equals(Offset)
+  fullName: Mapsui.Styles.Offset.Equals(Mapsui.Styles.Offset)
+  spec.csharp:
+  - uid: Mapsui.Styles.Offset.Equals(Mapsui.Styles.Offset)
+    name: Equals
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_Mapsui_Styles_Offset_
+  - name: (
+  - uid: Mapsui.Styles.Offset
+    name: Offset
+    href: Mapsui.Styles.Offset.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Offset.Equals(Mapsui.Styles.Offset)
+    name: Equals
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_Mapsui_Styles_Offset_
+  - name: (
+  - uid: Mapsui.Styles.Offset
+    name: Offset
+    href: Mapsui.Styles.Offset.html
+  - name: )
+- uid: Mapsui.Styles.Offset.GetHashCode
+  commentId: M:Mapsui.Styles.Offset.GetHashCode
+  parent: Mapsui.Styles.Offset
+  href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_GetHashCode
+  name: GetHashCode()
+  nameWithType: Offset.GetHashCode()
+  fullName: Mapsui.Styles.Offset.GetHashCode()
+  spec.csharp:
+  - uid: Mapsui.Styles.Offset.GetHashCode
+    name: GetHashCode
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_GetHashCode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Offset.GetHashCode
+    name: GetHashCode
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_GetHashCode
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.RelativeOffset.#ctor*
+  commentId: Overload:Mapsui.Styles.RelativeOffset.#ctor
+  href: Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset__ctor
+  name: RelativeOffset
+  nameWithType: RelativeOffset.RelativeOffset
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset
+  nameWithType.vb: RelativeOffset.New
+  fullName.vb: Mapsui.Styles.RelativeOffset.New
+  name.vb: New
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Styles.Offset.CalcOffset(System.Double,System.Double)
+  commentId: M:Mapsui.Styles.Offset.CalcOffset(System.Double,System.Double)
+  parent: Mapsui.Styles.Offset
+  isExternal: true
+  href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_CalcOffset_System_Double_System_Double_
+  name: CalcOffset(double, double)
+  nameWithType: Offset.CalcOffset(double, double)
+  fullName: Mapsui.Styles.Offset.CalcOffset(double, double)
+  nameWithType.vb: Offset.CalcOffset(Double, Double)
+  fullName.vb: Mapsui.Styles.Offset.CalcOffset(Double, Double)
+  name.vb: CalcOffset(Double, Double)
+  spec.csharp:
+  - uid: Mapsui.Styles.Offset.CalcOffset(System.Double,System.Double)
+    name: CalcOffset
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_CalcOffset_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Offset.CalcOffset(System.Double,System.Double)
+    name: CalcOffset
+    href: Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_CalcOffset_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Styles.RelativeOffset.CalcOffset*
+  commentId: Overload:Mapsui.Styles.RelativeOffset.CalcOffset
+  href: Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset_CalcOffset_System_Double_System_Double_
+  name: CalcOffset
+  nameWithType: RelativeOffset.CalcOffset
+  fullName: Mapsui.Styles.RelativeOffset.CalcOffset

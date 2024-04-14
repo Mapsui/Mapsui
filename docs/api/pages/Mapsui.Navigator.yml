@@ -1,0 +1,2391 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Navigator
+  commentId: T:Mapsui.Navigator
+  id: Navigator
+  parent: Mapsui
+  children:
+  - Mapsui.Navigator.CenterOn(Mapsui.MPoint,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.CenterOnAndZoomTo(Mapsui.MPoint,System.Double,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.Fling(System.Double,System.Double,System.Int64)
+  - Mapsui.Navigator.FlyTo(Mapsui.MPoint,System.Double,System.Int64)
+  - Mapsui.Navigator.Initialize
+  - Mapsui.Navigator.IsInitialized
+  - Mapsui.Navigator.Limiter
+  - Mapsui.Navigator.Manipulate(Mapsui.Manipulations.Manipulation)
+  - Mapsui.Navigator.MouseWheelAnimation
+  - Mapsui.Navigator.MouseWheelZoom(System.Int32,Mapsui.Manipulations.ScreenPosition)
+  - Mapsui.Navigator.OverridePanBounds
+  - Mapsui.Navigator.OverrideResolutions
+  - Mapsui.Navigator.OverrideZoomBounds
+  - Mapsui.Navigator.PanBounds
+  - Mapsui.Navigator.PanLock
+  - Mapsui.Navigator.ReSnapRotation
+  - Mapsui.Navigator.RefreshDataRequest
+  - Mapsui.Navigator.Resolutions
+  - Mapsui.Navigator.RotateTo(System.Double,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.RotationLock
+  - Mapsui.Navigator.SetSize(System.Double,System.Double)
+  - Mapsui.Navigator.SetViewport(Mapsui.Viewport,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.SetViewportAnimations(System.Collections.Generic.List{Mapsui.Animations.AnimationEntry{Mapsui.Viewport}})
+  - Mapsui.Navigator.UnSnapRotation
+  - Mapsui.Navigator.UpdateAnimations
+  - Mapsui.Navigator.Viewport
+  - Mapsui.Navigator.ViewportChanged
+  - Mapsui.Navigator.ZoomBounds
+  - Mapsui.Navigator.ZoomIn(Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.ZoomIn(System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.ZoomLock
+  - Mapsui.Navigator.ZoomOut(Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.ZoomOut(System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.ZoomTo(System.Double,Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.ZoomTo(System.Double,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.ZoomToBox(Mapsui.MRect,Mapsui.MBoxFit,System.Int64,Mapsui.Animations.Easing)
+  - Mapsui.Navigator.ZoomToLevel(System.Int32)
+  - Mapsui.Navigator.ZoomToPanBounds(Mapsui.MBoxFit,System.Int64,Mapsui.Animations.Easing)
+  langs:
+  - csharp
+  - vb
+  name: Navigator
+  nameWithType: Navigator
+  fullName: Mapsui.Navigator
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Navigator
+    path: ../../Mapsui/Navigator.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public class Navigator
+    content.vb: Public Class Navigator
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Navigator.RefreshDataRequest
+  commentId: E:Mapsui.Navigator.RefreshDataRequest
+  id: RefreshDataRequest
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: RefreshDataRequest
+  nameWithType: Navigator.RefreshDataRequest
+  fullName: Mapsui.Navigator.RefreshDataRequest
+  type: Event
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshDataRequest
+    path: ../../Mapsui/Navigator.cs
+    startLine: 28
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    Called when a data refresh is needed. This directly after a non-animated viewport change
+
+    is made and after an animation has completed.
+  example: []
+  syntax:
+    content: public event EventHandler? RefreshDataRequest
+    return:
+      type: System.EventHandler
+    content.vb: Public Event RefreshDataRequest As EventHandler
+- uid: Mapsui.Navigator.ViewportChanged
+  commentId: E:Mapsui.Navigator.ViewportChanged
+  id: ViewportChanged
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ViewportChanged
+  nameWithType: Navigator.ViewportChanged
+  fullName: Mapsui.Navigator.ViewportChanged
+  type: Event
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ViewportChanged
+    path: ../../Mapsui/Navigator.cs
+    startLine: 29
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public event Navigator.ViewportChangedEventHandler? ViewportChanged
+    return:
+      type: Mapsui.Navigator.ViewportChangedEventHandler
+    content.vb: Public Event ViewportChanged As Navigator.ViewportChangedEventHandler
+- uid: Mapsui.Navigator.PanLock
+  commentId: P:Mapsui.Navigator.PanLock
+  id: PanLock
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: PanLock
+  nameWithType: Navigator.PanLock
+  fullName: Mapsui.Navigator.PanLock
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PanLock
+    path: ../../Mapsui/Navigator.cs
+    startLine: 34
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: When true the user can not pan (move) the map.
+  example: []
+  syntax:
+    content: public bool PanLock { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property PanLock As Boolean
+  overload: Mapsui.Navigator.PanLock*
+- uid: Mapsui.Navigator.ZoomLock
+  commentId: P:Mapsui.Navigator.ZoomLock
+  id: ZoomLock
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomLock
+  nameWithType: Navigator.ZoomLock
+  fullName: Mapsui.Navigator.ZoomLock
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomLock
+    path: ../../Mapsui/Navigator.cs
+    startLine: 39
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: When true the user can not zoom the map
+  example: []
+  syntax:
+    content: public bool ZoomLock { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property ZoomLock As Boolean
+  overload: Mapsui.Navigator.ZoomLock*
+- uid: Mapsui.Navigator.RotationLock
+  commentId: P:Mapsui.Navigator.RotationLock
+  id: RotationLock
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: RotationLock
+  nameWithType: Navigator.RotationLock
+  fullName: Mapsui.Navigator.RotationLock
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RotationLock
+    path: ../../Mapsui/Navigator.cs
+    startLine: 44
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: When true the user can not rotate the map
+  example: []
+  syntax:
+    content: public bool RotationLock { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property RotationLock As Boolean
+  overload: Mapsui.Navigator.RotationLock*
+- uid: Mapsui.Navigator.PanBounds
+  commentId: P:Mapsui.Navigator.PanBounds
+  id: PanBounds
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: PanBounds
+  nameWithType: Navigator.PanBounds
+  fullName: Mapsui.Navigator.PanBounds
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PanBounds
+    path: ../../Mapsui/Navigator.cs
+    startLine: 50
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    The bounds to restrict panning. Exactly how these bounds affects panning
+
+    depends on the implementation of the IViewportLimiter.
+  example: []
+  syntax:
+    content: public MRect? PanBounds { get; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Public ReadOnly Property PanBounds As MRect
+  overload: Mapsui.Navigator.PanBounds*
+- uid: Mapsui.Navigator.ZoomBounds
+  commentId: P:Mapsui.Navigator.ZoomBounds
+  id: ZoomBounds
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomBounds
+  nameWithType: Navigator.ZoomBounds
+  fullName: Mapsui.Navigator.ZoomBounds
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomBounds
+    path: ../../Mapsui/Navigator.cs
+    startLine: 57
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    The bounds of zooming, i.e. the smallest and biggest resolutions. 
+
+    How these bounds affect zooming depends on the implementation of the 
+
+    IViewportLimiter.
+  example: []
+  syntax:
+    content: public MMinMax? ZoomBounds { get; }
+    parameters: []
+    return:
+      type: Mapsui.MMinMax
+    content.vb: Public ReadOnly Property ZoomBounds As MMinMax
+  overload: Mapsui.Navigator.ZoomBounds*
+- uid: Mapsui.Navigator.UnSnapRotation
+  commentId: P:Mapsui.Navigator.UnSnapRotation
+  id: UnSnapRotation
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: UnSnapRotation
+  nameWithType: Navigator.UnSnapRotation
+  fullName: Mapsui.Navigator.UnSnapRotation
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UnSnapRotation
+    path: ../../Mapsui/Navigator.cs
+    startLine: 66
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Overrides the default zoom bounds which are derived from the Map resolutions.
+  example: []
+  syntax:
+    content: public double UnSnapRotation { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property UnSnapRotation As Double
+  overload: Mapsui.Navigator.UnSnapRotation*
+- uid: Mapsui.Navigator.ReSnapRotation
+  commentId: P:Mapsui.Navigator.ReSnapRotation
+  id: ReSnapRotation
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ReSnapRotation
+  nameWithType: Navigator.ReSnapRotation
+  fullName: Mapsui.Navigator.ReSnapRotation
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ReSnapRotation
+    path: ../../Mapsui/Navigator.cs
+    startLine: 71
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: With how many degrees from 0 should map snap to 0 degrees
+  example: []
+  syntax:
+    content: public double ReSnapRotation { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property ReSnapRotation As Double
+  overload: Mapsui.Navigator.ReSnapRotation*
+- uid: Mapsui.Navigator.OverrideZoomBounds
+  commentId: P:Mapsui.Navigator.OverrideZoomBounds
+  id: OverrideZoomBounds
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: OverrideZoomBounds
+  nameWithType: Navigator.OverrideZoomBounds
+  fullName: Mapsui.Navigator.OverrideZoomBounds
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OverrideZoomBounds
+    path: ../../Mapsui/Navigator.cs
+    startLine: 73
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MMinMax? OverrideZoomBounds { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MMinMax
+    content.vb: Public Property OverrideZoomBounds As MMinMax
+  overload: Mapsui.Navigator.OverrideZoomBounds*
+- uid: Mapsui.Navigator.OverridePanBounds
+  commentId: P:Mapsui.Navigator.OverridePanBounds
+  id: OverridePanBounds
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: OverridePanBounds
+  nameWithType: Navigator.OverridePanBounds
+  fullName: Mapsui.Navigator.OverridePanBounds
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OverridePanBounds
+    path: ../../Mapsui/Navigator.cs
+    startLine: 86
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Overrides the default pan bounds which come from the Map extent.
+  example: []
+  syntax:
+    content: public MRect? OverridePanBounds { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Public Property OverridePanBounds As MRect
+  overload: Mapsui.Navigator.OverridePanBounds*
+- uid: Mapsui.Navigator.OverrideResolutions
+  commentId: P:Mapsui.Navigator.OverrideResolutions
+  id: OverrideResolutions
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: OverrideResolutions
+  nameWithType: Navigator.OverrideResolutions
+  fullName: Mapsui.Navigator.OverrideResolutions
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OverrideResolutions
+    path: ../../Mapsui/Navigator.cs
+    startLine: 99
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Overrides the default resolutions which are derived from the Map.Layers resolutions.
+  example: []
+  syntax:
+    content: public IReadOnlyList<double>? OverrideResolutions { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{System.Double}
+    content.vb: Public Property OverrideResolutions As IReadOnlyList(Of Double)
+  overload: Mapsui.Navigator.OverrideResolutions*
+- uid: Mapsui.Navigator.Limiter
+  commentId: P:Mapsui.Navigator.Limiter
+  id: Limiter
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: Limiter
+  nameWithType: Navigator.Limiter
+  fullName: Mapsui.Navigator.Limiter
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Limiter
+    path: ../../Mapsui/Navigator.cs
+    startLine: 101
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public IViewportLimiter Limiter { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Limiting.IViewportLimiter
+    content.vb: Public Property Limiter As IViewportLimiter
+  overload: Mapsui.Navigator.Limiter*
+- uid: Mapsui.Navigator.Viewport
+  commentId: P:Mapsui.Navigator.Viewport
+  id: Viewport
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: Viewport
+  nameWithType: Navigator.Viewport
+  fullName: Mapsui.Navigator.Viewport
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Viewport
+    path: ../../Mapsui/Navigator.cs
+    startLine: 103
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public Viewport Viewport { get; }
+    parameters: []
+    return:
+      type: Mapsui.Viewport
+    content.vb: Public Property Viewport As Viewport
+  overload: Mapsui.Navigator.Viewport*
+- uid: Mapsui.Navigator.IsInitialized
+  commentId: P:Mapsui.Navigator.IsInitialized
+  id: IsInitialized
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: IsInitialized
+  nameWithType: Navigator.IsInitialized
+  fullName: Mapsui.Navigator.IsInitialized
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsInitialized
+    path: ../../Mapsui/Navigator.cs
+    startLine: 115
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public bool IsInitialized { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsInitialized As Boolean
+  overload: Mapsui.Navigator.IsInitialized*
+- uid: Mapsui.Navigator.Initialize
+  commentId: M:Mapsui.Navigator.Initialize
+  id: Initialize
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: Initialize()
+  nameWithType: Navigator.Initialize()
+  fullName: Mapsui.Navigator.Initialize()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Initialize
+    path: ../../Mapsui/Navigator.cs
+    startLine: 117
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public void Initialize()
+    content.vb: Public Sub Initialize()
+  overload: Mapsui.Navigator.Initialize*
+- uid: Mapsui.Navigator.Resolutions
+  commentId: P:Mapsui.Navigator.Resolutions
+  id: Resolutions
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: Resolutions
+  nameWithType: Navigator.Resolutions
+  fullName: Mapsui.Navigator.Resolutions
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Resolutions
+    path: ../../Mapsui/Navigator.cs
+    startLine: 146
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    List of resolutions that can be used when going to a new zoom level. In the most common
+
+    case these resolutions correspond to the resolutions of the background layer of the map. 
+
+    In the Mapsui samples this is usually the openstreetmap layer, but there are also situations
+
+    where this is no background layer with resolutions. Or where one app switches between different 
+
+    background layers with different resolutions. Also note that when pinch zooming these resolutions 
+
+    are not used.
+  example: []
+  syntax:
+    content: public IReadOnlyList<double> Resolutions { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{System.Double}
+    content.vb: Public ReadOnly Property Resolutions As IReadOnlyList(Of Double)
+  overload: Mapsui.Navigator.Resolutions*
+- uid: Mapsui.Navigator.MouseWheelAnimation
+  commentId: P:Mapsui.Navigator.MouseWheelAnimation
+  id: MouseWheelAnimation
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: MouseWheelAnimation
+  nameWithType: Navigator.MouseWheelAnimation
+  fullName: Mapsui.Navigator.MouseWheelAnimation
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MouseWheelAnimation
+    path: ../../Mapsui/Navigator.cs
+    startLine: 148
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MouseWheelAnimation MouseWheelAnimation { get; }
+    parameters: []
+    return:
+      type: Mapsui.Animations.MouseWheelAnimation
+    content.vb: Public ReadOnly Property MouseWheelAnimation As MouseWheelAnimation
+  overload: Mapsui.Navigator.MouseWheelAnimation*
+- uid: Mapsui.Navigator.MouseWheelZoom(System.Int32,Mapsui.Manipulations.ScreenPosition)
+  commentId: M:Mapsui.Navigator.MouseWheelZoom(System.Int32,Mapsui.Manipulations.ScreenPosition)
+  id: MouseWheelZoom(System.Int32,Mapsui.Manipulations.ScreenPosition)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: MouseWheelZoom(int, ScreenPosition)
+  nameWithType: Navigator.MouseWheelZoom(int, ScreenPosition)
+  fullName: Mapsui.Navigator.MouseWheelZoom(int, Mapsui.Manipulations.ScreenPosition)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MouseWheelZoom
+    path: ../../Mapsui/Navigator.cs
+    startLine: 150
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public void MouseWheelZoom(int mouseWheelDelta, ScreenPosition centerOfZoom)
+    parameters:
+    - id: mouseWheelDelta
+      type: System.Int32
+    - id: centerOfZoom
+      type: Mapsui.Manipulations.ScreenPosition
+    content.vb: Public Sub MouseWheelZoom(mouseWheelDelta As Integer, centerOfZoom As ScreenPosition)
+  overload: Mapsui.Navigator.MouseWheelZoom*
+  nameWithType.vb: Navigator.MouseWheelZoom(Integer, ScreenPosition)
+  fullName.vb: Mapsui.Navigator.MouseWheelZoom(Integer, Mapsui.Manipulations.ScreenPosition)
+  name.vb: MouseWheelZoom(Integer, ScreenPosition)
+- uid: Mapsui.Navigator.ZoomToBox(Mapsui.MRect,Mapsui.MBoxFit,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.ZoomToBox(Mapsui.MRect,Mapsui.MBoxFit,System.Int64,Mapsui.Animations.Easing)
+  id: ZoomToBox(Mapsui.MRect,Mapsui.MBoxFit,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomToBox(MRect?, MBoxFit, long, Easing?)
+  nameWithType: Navigator.ZoomToBox(MRect?, MBoxFit, long, Easing?)
+  fullName: Mapsui.Navigator.ZoomToBox(Mapsui.MRect?, Mapsui.MBoxFit, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomToBox
+    path: ../../Mapsui/Navigator.cs
+    startLine: 170
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    Zooms the viewport to show the box. The boxFit parameter can be used to deal with a difference in 
+
+    the width/height ratio between the viewport and the box. The center and resolution will change accordingly.
+  example: []
+  syntax:
+    content: public void ZoomToBox(MRect? box, MBoxFit boxFit = MBoxFit.Fit, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: box
+      type: Mapsui.MRect
+      description: The box to show in the viewport.
+    - id: boxFit
+      type: Mapsui.MBoxFit
+      description: The way the box should be fit into the view.
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The type of easing function used to transform from begin tot end state
+    content.vb: Public Sub ZoomToBox(box As MRect, boxFit As MBoxFit = MBoxFit.Fit, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.ZoomToBox*
+  nameWithType.vb: Navigator.ZoomToBox(MRect, MBoxFit, Long, Easing)
+  fullName.vb: Mapsui.Navigator.ZoomToBox(Mapsui.MRect, Mapsui.MBoxFit, Long, Mapsui.Animations.Easing)
+  name.vb: ZoomToBox(MRect, MBoxFit, Long, Easing)
+- uid: Mapsui.Navigator.ZoomToPanBounds(Mapsui.MBoxFit,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.ZoomToPanBounds(Mapsui.MBoxFit,System.Int64,Mapsui.Animations.Easing)
+  id: ZoomToPanBounds(Mapsui.MBoxFit,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomToPanBounds(MBoxFit, long, Easing?)
+  nameWithType: Navigator.ZoomToPanBounds(MBoxFit, long, Easing?)
+  fullName: Mapsui.Navigator.ZoomToPanBounds(Mapsui.MBoxFit, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomToPanBounds
+    path: ../../Mapsui/Navigator.cs
+    startLine: 193
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Navigate to the <xref href="Mapsui.Navigator.PanBounds" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void ZoomToPanBounds(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: boxFit
+      type: Mapsui.MBoxFit
+      description: Scale method to use to determine resolution
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The type of easing function used to transform from begin tot end state
+    content.vb: Public Sub ZoomToPanBounds(boxFit As MBoxFit = MBoxFit.Fill, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.ZoomToPanBounds*
+  nameWithType.vb: Navigator.ZoomToPanBounds(MBoxFit, Long, Easing)
+  fullName.vb: Mapsui.Navigator.ZoomToPanBounds(Mapsui.MBoxFit, Long, Mapsui.Animations.Easing)
+  name.vb: ZoomToPanBounds(MBoxFit, Long, Easing)
+- uid: Mapsui.Navigator.CenterOnAndZoomTo(Mapsui.MPoint,System.Double,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.CenterOnAndZoomTo(Mapsui.MPoint,System.Double,System.Int64,Mapsui.Animations.Easing)
+  id: CenterOnAndZoomTo(Mapsui.MPoint,System.Double,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: CenterOnAndZoomTo(MPoint, double, long, Easing?)
+  nameWithType: Navigator.CenterOnAndZoomTo(MPoint, double, long, Easing?)
+  fullName: Mapsui.Navigator.CenterOnAndZoomTo(Mapsui.MPoint, double, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CenterOnAndZoomTo
+    path: ../../Mapsui/Navigator.cs
+    startLine: 211
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Navigate to center and change resolution with animation
+  example: []
+  syntax:
+    content: public void CenterOnAndZoomTo(MPoint center, double resolution, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: center
+      type: Mapsui.MPoint
+      description: New center to move to
+    - id: resolution
+      type: System.Double
+      description: New resolution to use
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The type of easing function used to transform from begin tot end state
+    content.vb: Public Sub CenterOnAndZoomTo(center As MPoint, resolution As Double, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.CenterOnAndZoomTo*
+  nameWithType.vb: Navigator.CenterOnAndZoomTo(MPoint, Double, Long, Easing)
+  fullName.vb: Mapsui.Navigator.CenterOnAndZoomTo(Mapsui.MPoint, Double, Long, Mapsui.Animations.Easing)
+  name.vb: CenterOnAndZoomTo(MPoint, Double, Long, Easing)
+- uid: Mapsui.Navigator.ZoomTo(System.Double,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.ZoomTo(System.Double,System.Int64,Mapsui.Animations.Easing)
+  id: ZoomTo(System.Double,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomTo(double, long, Easing?)
+  nameWithType: Navigator.ZoomTo(double, long, Easing?)
+  fullName: Mapsui.Navigator.ZoomTo(double, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomTo
+    path: ../../Mapsui/Navigator.cs
+    startLine: 232
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Change resolution of the viewport
+  example: []
+  syntax:
+    content: public void ZoomTo(double resolution, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: resolution
+      type: System.Double
+      description: New resolution to use
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The type of easing function used to transform from begin tot end state
+    content.vb: Public Sub ZoomTo(resolution As Double, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.ZoomTo*
+  nameWithType.vb: Navigator.ZoomTo(Double, Long, Easing)
+  fullName.vb: Mapsui.Navigator.ZoomTo(Double, Long, Mapsui.Animations.Easing)
+  name.vb: ZoomTo(Double, Long, Easing)
+- uid: Mapsui.Navigator.ZoomTo(System.Double,Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.ZoomTo(System.Double,Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  id: ZoomTo(System.Double,Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomTo(double, ScreenPosition, long, Easing?)
+  nameWithType: Navigator.ZoomTo(double, ScreenPosition, long, Easing?)
+  fullName: Mapsui.Navigator.ZoomTo(double, Mapsui.Manipulations.ScreenPosition, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomTo
+    path: ../../Mapsui/Navigator.cs
+    startLine: 258
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Zoom to a given resolution with a given point as center
+  example: []
+  syntax:
+    content: public void ZoomTo(double resolution, ScreenPosition centerOfZoomScreen, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: resolution
+      type: System.Double
+      description: Resolution to zoom
+    - id: centerOfZoomScreen
+      type: Mapsui.Manipulations.ScreenPosition
+      description: >-
+        Center of zoom in screen coordinates. This is the one point in the map that 
+            stays on the same location while zooming in. 
+            For instance, in mouse wheel zoom animation the position 
+            of the mouse pointer can be the center of zoom. Note, that the centerOfZoom is in screen coordinates not 
+            world coordinates, this is because this is most convenient for the main use case, zoom with the mouse 
+            position as center.
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The easing of the animation when duration is &gt; 0
+    content.vb: Public Sub ZoomTo(resolution As Double, centerOfZoomScreen As ScreenPosition, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.ZoomTo*
+  nameWithType.vb: Navigator.ZoomTo(Double, ScreenPosition, Long, Easing)
+  fullName.vb: Mapsui.Navigator.ZoomTo(Double, Mapsui.Manipulations.ScreenPosition, Long, Mapsui.Animations.Easing)
+  name.vb: ZoomTo(Double, ScreenPosition, Long, Easing)
+- uid: Mapsui.Navigator.ZoomIn(System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.ZoomIn(System.Int64,Mapsui.Animations.Easing)
+  id: ZoomIn(System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomIn(long, Easing?)
+  nameWithType: Navigator.ZoomIn(long, Easing?)
+  fullName: Mapsui.Navigator.ZoomIn(long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomIn
+    path: ../../Mapsui/Navigator.cs
+    startLine: 290
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Zoom in to the next resolution in the Navigator.Resolutions list.
+  example: []
+  syntax:
+    content: public void ZoomIn(long duration = -1, Easing? easing = null)
+    parameters:
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The type of easing function used to transform from begin tot end state
+    content.vb: Public Sub ZoomIn(duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.ZoomIn*
+  nameWithType.vb: Navigator.ZoomIn(Long, Easing)
+  fullName.vb: Mapsui.Navigator.ZoomIn(Long, Mapsui.Animations.Easing)
+  name.vb: ZoomIn(Long, Easing)
+- uid: Mapsui.Navigator.ZoomOut(System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.ZoomOut(System.Int64,Mapsui.Animations.Easing)
+  id: ZoomOut(System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomOut(long, Easing?)
+  nameWithType: Navigator.ZoomOut(long, Easing?)
+  fullName: Mapsui.Navigator.ZoomOut(long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomOut
+    path: ../../Mapsui/Navigator.cs
+    startLine: 301
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Zoom out to the next resolution in the Navigator.Resolutions list.
+  example: []
+  syntax:
+    content: public void ZoomOut(long duration = -1, Easing? easing = null)
+    parameters:
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The type of easing function used to transform from begin tot end state
+    content.vb: Public Sub ZoomOut(duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.ZoomOut*
+  nameWithType.vb: Navigator.ZoomOut(Long, Easing)
+  fullName.vb: Mapsui.Navigator.ZoomOut(Long, Mapsui.Animations.Easing)
+  name.vb: ZoomOut(Long, Easing)
+- uid: Mapsui.Navigator.ZoomIn(Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.ZoomIn(Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  id: ZoomIn(Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomIn(ScreenPosition, long, Easing?)
+  nameWithType: Navigator.ZoomIn(ScreenPosition, long, Easing?)
+  fullName: Mapsui.Navigator.ZoomIn(Mapsui.Manipulations.ScreenPosition, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomIn
+    path: ../../Mapsui/Navigator.cs
+    startLine: 315
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Zoom in to a given point
+  example: []
+  syntax:
+    content: public void ZoomIn(ScreenPosition centerOfZoom, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: centerOfZoom
+      type: Mapsui.Manipulations.ScreenPosition
+      description: >-
+        Center of zoom. This is the one point in the map that stays on the same location 
+            while zooming in.For instance, in mouse wheel zoom animation the position of the mouse pointer can be the 
+            center of zoom.
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The type of easing function used to transform from begin tot end state
+    content.vb: Public Sub ZoomIn(centerOfZoom As ScreenPosition, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.ZoomIn*
+  nameWithType.vb: Navigator.ZoomIn(ScreenPosition, Long, Easing)
+  fullName.vb: Mapsui.Navigator.ZoomIn(Mapsui.Manipulations.ScreenPosition, Long, Mapsui.Animations.Easing)
+  name.vb: ZoomIn(ScreenPosition, Long, Easing)
+- uid: Mapsui.Navigator.ZoomOut(Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.ZoomOut(Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  id: ZoomOut(Mapsui.Manipulations.ScreenPosition,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomOut(ScreenPosition, long, Easing?)
+  nameWithType: Navigator.ZoomOut(ScreenPosition, long, Easing?)
+  fullName: Mapsui.Navigator.ZoomOut(Mapsui.Manipulations.ScreenPosition, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomOut
+    path: ../../Mapsui/Navigator.cs
+    startLine: 329
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Zoom out to a given point
+  example: []
+  syntax:
+    content: public void ZoomOut(ScreenPosition centerOfZoom, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: centerOfZoom
+      type: Mapsui.Manipulations.ScreenPosition
+      description: >-
+        Center of zoom. This is the one point in the map that stays on the same location 
+            while zooming in. For instance, in mouse wheel zoom animation the position of the mouse pointer can be the 
+            center of zoom.
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The type of easing function used to transform from begin tot end state
+    content.vb: Public Sub ZoomOut(centerOfZoom As ScreenPosition, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.ZoomOut*
+  nameWithType.vb: Navigator.ZoomOut(ScreenPosition, Long, Easing)
+  fullName.vb: Mapsui.Navigator.ZoomOut(Mapsui.Manipulations.ScreenPosition, Long, Mapsui.Animations.Easing)
+  name.vb: ZoomOut(ScreenPosition, Long, Easing)
+- uid: Mapsui.Navigator.ZoomToLevel(System.Int32)
+  commentId: M:Mapsui.Navigator.ZoomToLevel(System.Int32)
+  id: ZoomToLevel(System.Int32)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: ZoomToLevel(int)
+  nameWithType: Navigator.ZoomToLevel(int)
+  fullName: Mapsui.Navigator.ZoomToLevel(int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomToLevel
+    path: ../../Mapsui/Navigator.cs
+    startLine: 339
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Zooms to the level indicated. The level is the index of the resolution in the Navigator.Resolutions list.
+  example: []
+  syntax:
+    content: public void ZoomToLevel(int level)
+    parameters:
+    - id: level
+      type: System.Int32
+      description: The index of the Navigator.Resolutions list.
+    content.vb: Public Sub ZoomToLevel(level As Integer)
+  overload: Mapsui.Navigator.ZoomToLevel*
+  nameWithType.vb: Navigator.ZoomToLevel(Integer)
+  fullName.vb: Mapsui.Navigator.ZoomToLevel(Integer)
+  name.vb: ZoomToLevel(Integer)
+- uid: Mapsui.Navigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Animations.Easing)
+  id: CenterOn(System.Double,System.Double,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: CenterOn(double, double, long, Easing?)
+  nameWithType: Navigator.CenterOn(double, double, long, Easing?)
+  fullName: Mapsui.Navigator.CenterOn(double, double, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CenterOn
+    path: ../../Mapsui/Navigator.cs
+    startLine: 357
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Change center of the viewport to X/Y coordinates
+  example: []
+  syntax:
+    content: public void CenterOn(double x, double y, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: x
+      type: System.Double
+      description: X value of the new center
+    - id: y
+      type: System.Double
+      description: Y value of the new center
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: Function for easing
+    content.vb: Public Sub CenterOn(x As Double, y As Double, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.CenterOn*
+  nameWithType.vb: Navigator.CenterOn(Double, Double, Long, Easing)
+  fullName.vb: Mapsui.Navigator.CenterOn(Double, Double, Long, Mapsui.Animations.Easing)
+  name.vb: CenterOn(Double, Double, Long, Easing)
+- uid: Mapsui.Navigator.CenterOn(Mapsui.MPoint,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.CenterOn(Mapsui.MPoint,System.Int64,Mapsui.Animations.Easing)
+  id: CenterOn(Mapsui.MPoint,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: CenterOn(MPoint, long, Easing?)
+  nameWithType: Navigator.CenterOn(MPoint, long, Easing?)
+  fullName: Mapsui.Navigator.CenterOn(Mapsui.MPoint, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CenterOn
+    path: ../../Mapsui/Navigator.cs
+    startLine: 368
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Change center of the viewport
+  example: []
+  syntax:
+    content: public void CenterOn(MPoint center, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: center
+      type: Mapsui.MPoint
+      description: New center point of the viewport
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: Function for easing
+    content.vb: Public Sub CenterOn(center As MPoint, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.CenterOn*
+  nameWithType.vb: Navigator.CenterOn(MPoint, Long, Easing)
+  fullName.vb: Mapsui.Navigator.CenterOn(Mapsui.MPoint, Long, Mapsui.Animations.Easing)
+  name.vb: CenterOn(MPoint, Long, Easing)
+- uid: Mapsui.Navigator.FlyTo(Mapsui.MPoint,System.Double,System.Int64)
+  commentId: M:Mapsui.Navigator.FlyTo(Mapsui.MPoint,System.Double,System.Int64)
+  id: FlyTo(Mapsui.MPoint,System.Double,System.Int64)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: FlyTo(MPoint, double, long)
+  nameWithType: Navigator.FlyTo(MPoint, double, long)
+  fullName: Mapsui.Navigator.FlyTo(Mapsui.MPoint, double, long)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FlyTo
+    path: ../../Mapsui/Navigator.cs
+    startLine: 388
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Fly to the given center with zooming out to given resolution and in again
+  example: []
+  syntax:
+    content: public void FlyTo(MPoint center, double maxResolution, long duration = 500)
+    parameters:
+    - id: center
+      type: Mapsui.MPoint
+      description: MPoint to fly to
+    - id: maxResolution
+      type: System.Double
+      description: Maximum resolution to zoom out
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    content.vb: Public Sub FlyTo(center As MPoint, maxResolution As Double, duration As Long = 500)
+  overload: Mapsui.Navigator.FlyTo*
+  nameWithType.vb: Navigator.FlyTo(MPoint, Double, Long)
+  fullName.vb: Mapsui.Navigator.FlyTo(Mapsui.MPoint, Double, Long)
+  name.vb: FlyTo(MPoint, Double, Long)
+- uid: Mapsui.Navigator.RotateTo(System.Double,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.RotateTo(System.Double,System.Int64,Mapsui.Animations.Easing)
+  id: RotateTo(System.Double,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: RotateTo(double, long, Easing?)
+  nameWithType: Navigator.RotateTo(double, long, Easing?)
+  fullName: Mapsui.Navigator.RotateTo(double, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RotateTo
+    path: ../../Mapsui/Navigator.cs
+    startLine: 399
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Change rotation of the viewport
+  example: []
+  syntax:
+    content: public void RotateTo(double rotation, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: rotation
+      type: System.Double
+      description: New rotation in degrees of the viewport&gt;
+    - id: duration
+      type: System.Int64
+      description: Duration for animation in milliseconds.
+    - id: easing
+      type: Mapsui.Animations.Easing
+      description: The type of easing function used to transform from begin tot end state
+    content.vb: Public Sub RotateTo(rotation As Double, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.RotateTo*
+  nameWithType.vb: Navigator.RotateTo(Double, Long, Easing)
+  fullName.vb: Mapsui.Navigator.RotateTo(Double, Long, Mapsui.Animations.Easing)
+  name.vb: RotateTo(Double, Long, Easing)
+- uid: Mapsui.Navigator.Fling(System.Double,System.Double,System.Int64)
+  commentId: M:Mapsui.Navigator.Fling(System.Double,System.Double,System.Int64)
+  id: Fling(System.Double,System.Double,System.Int64)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: Fling(double, double, long)
+  nameWithType: Navigator.Fling(double, double, long)
+  fullName: Mapsui.Navigator.Fling(double, double, long)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Fling
+    path: ../../Mapsui/Navigator.cs
+    startLine: 421
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    Animate Fling of the viewport. This method is called from
+
+    the MapControl and is usually not called from user code. This method does not call
+
+    Navigated.
+  example: []
+  syntax:
+    content: public void Fling(double velocityX, double velocityY, long maxDuration)
+    parameters:
+    - id: velocityX
+      type: System.Double
+      description: VelocityX from SwipedEventArgs&gt;
+    - id: velocityY
+      type: System.Double
+      description: VelocityX from SwipedEventArgs&gt;
+    - id: maxDuration
+      type: System.Int64
+      description: Maximum duration of fling deceleration&gt;
+    content.vb: Public Sub Fling(velocityX As Double, velocityY As Double, maxDuration As Long)
+  overload: Mapsui.Navigator.Fling*
+  nameWithType.vb: Navigator.Fling(Double, Double, Long)
+  fullName.vb: Mapsui.Navigator.Fling(Double, Double, Long)
+  name.vb: Fling(Double, Double, Long)
+- uid: Mapsui.Navigator.Manipulate(Mapsui.Manipulations.Manipulation)
+  commentId: M:Mapsui.Navigator.Manipulate(Mapsui.Manipulations.Manipulation)
+  id: Manipulate(Mapsui.Manipulations.Manipulation)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: Manipulate(Manipulation?)
+  nameWithType: Navigator.Manipulate(Manipulation?)
+  fullName: Mapsui.Navigator.Manipulate(Mapsui.Manipulations.Manipulation?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Manipulate
+    path: ../../Mapsui/Navigator.cs
+    startLine: 428
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public void Manipulate(Manipulation? manipulation)
+    parameters:
+    - id: manipulation
+      type: Mapsui.Manipulations.Manipulation
+    content.vb: Public Sub Manipulate(manipulation As Manipulation)
+  overload: Mapsui.Navigator.Manipulate*
+  nameWithType.vb: Navigator.Manipulate(Manipulation)
+  fullName.vb: Mapsui.Navigator.Manipulate(Mapsui.Manipulations.Manipulation)
+  name.vb: Manipulate(Manipulation)
+- uid: Mapsui.Navigator.SetSize(System.Double,System.Double)
+  commentId: M:Mapsui.Navigator.SetSize(System.Double,System.Double)
+  id: SetSize(System.Double,System.Double)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: SetSize(double, double)
+  nameWithType: Navigator.SetSize(double, double)
+  fullName: Mapsui.Navigator.SetSize(double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetSize
+    path: ../../Mapsui/Navigator.cs
+    startLine: 496
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public void SetSize(double width, double height)
+    parameters:
+    - id: width
+      type: System.Double
+    - id: height
+      type: System.Double
+    content.vb: Public Sub SetSize(width As Double, height As Double)
+  overload: Mapsui.Navigator.SetSize*
+  nameWithType.vb: Navigator.SetSize(Double, Double)
+  fullName.vb: Mapsui.Navigator.SetSize(Double, Double)
+  name.vb: SetSize(Double, Double)
+- uid: Mapsui.Navigator.UpdateAnimations
+  commentId: M:Mapsui.Navigator.UpdateAnimations
+  id: UpdateAnimations
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: UpdateAnimations()
+  nameWithType: Navigator.UpdateAnimations()
+  fullName: Mapsui.Navigator.UpdateAnimations()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateAnimations
+    path: ../../Mapsui/Navigator.cs
+    startLine: 532
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public bool UpdateAnimations()
+    return:
+      type: System.Boolean
+    content.vb: Public Function UpdateAnimations() As Boolean
+  overload: Mapsui.Navigator.UpdateAnimations*
+- uid: Mapsui.Navigator.SetViewportAnimations(System.Collections.Generic.List{Mapsui.Animations.AnimationEntry{Mapsui.Viewport}})
+  commentId: M:Mapsui.Navigator.SetViewportAnimations(System.Collections.Generic.List{Mapsui.Animations.AnimationEntry{Mapsui.Viewport}})
+  id: SetViewportAnimations(System.Collections.Generic.List{Mapsui.Animations.AnimationEntry{Mapsui.Viewport}})
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: SetViewportAnimations(List<AnimationEntry<Viewport>>)
+  nameWithType: Navigator.SetViewportAnimations(List<AnimationEntry<Viewport>>)
+  fullName: Mapsui.Navigator.SetViewportAnimations(System.Collections.Generic.List<Mapsui.Animations.AnimationEntry<Mapsui.Viewport>>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetViewportAnimations
+    path: ../../Mapsui/Navigator.cs
+    startLine: 554
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public void SetViewportAnimations(List<AnimationEntry<Viewport>> animations)
+    parameters:
+    - id: animations
+      type: System.Collections.Generic.List{Mapsui.Animations.AnimationEntry{Mapsui.Viewport}}
+    content.vb: Public Sub SetViewportAnimations(animations As List(Of AnimationEntry(Of Viewport)))
+  overload: Mapsui.Navigator.SetViewportAnimations*
+  nameWithType.vb: Navigator.SetViewportAnimations(List(Of AnimationEntry(Of Viewport)))
+  fullName.vb: Mapsui.Navigator.SetViewportAnimations(System.Collections.Generic.List(Of Mapsui.Animations.AnimationEntry(Of Mapsui.Viewport)))
+  name.vb: SetViewportAnimations(List(Of AnimationEntry(Of Viewport)))
+- uid: Mapsui.Navigator.SetViewport(Mapsui.Viewport,System.Int64,Mapsui.Animations.Easing)
+  commentId: M:Mapsui.Navigator.SetViewport(Mapsui.Viewport,System.Int64,Mapsui.Animations.Easing)
+  id: SetViewport(Mapsui.Viewport,System.Int64,Mapsui.Animations.Easing)
+  parent: Mapsui.Navigator
+  langs:
+  - csharp
+  - vb
+  name: SetViewport(Viewport, long, Easing?)
+  nameWithType: Navigator.SetViewport(Viewport, long, Easing?)
+  fullName: Mapsui.Navigator.SetViewport(Mapsui.Viewport, long, Mapsui.Animations.Easing?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Navigator.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetViewport
+    path: ../../Mapsui/Navigator.cs
+    startLine: 636
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public void SetViewport(Viewport viewport, long duration = -1, Easing? easing = null)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: duration
+      type: System.Int64
+    - id: easing
+      type: Mapsui.Animations.Easing
+    content.vb: Public Sub SetViewport(viewport As Viewport, duration As Long = -1, easing As Easing = Nothing)
+  overload: Mapsui.Navigator.SetViewport*
+  nameWithType.vb: Navigator.SetViewport(Viewport, Long, Easing)
+  fullName.vb: Mapsui.Navigator.SetViewport(Mapsui.Viewport, Long, Mapsui.Animations.Easing)
+  name.vb: SetViewport(Viewport, Long, Easing)
+references:
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: System.EventHandler
+  commentId: T:System.EventHandler
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler
+  name: EventHandler
+  nameWithType: EventHandler
+  fullName: System.EventHandler
+- uid: Mapsui.Navigator.ViewportChangedEventHandler
+  commentId: T:Mapsui.Navigator.ViewportChangedEventHandler
+  parent: Mapsui
+  href: Mapsui.Navigator.html
+  name: Navigator.ViewportChangedEventHandler
+  nameWithType: Navigator.ViewportChangedEventHandler
+  fullName: Mapsui.Navigator.ViewportChangedEventHandler
+  spec.csharp:
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: .
+  - uid: Mapsui.Navigator.ViewportChangedEventHandler
+    name: ViewportChangedEventHandler
+    href: Mapsui.Navigator.ViewportChangedEventHandler.html
+  spec.vb:
+  - uid: Mapsui.Navigator
+    name: Navigator
+    href: Mapsui.Navigator.html
+  - name: .
+  - uid: Mapsui.Navigator.ViewportChangedEventHandler
+    name: ViewportChangedEventHandler
+    href: Mapsui.Navigator.ViewportChangedEventHandler.html
+- uid: Mapsui.Navigator.PanLock*
+  commentId: Overload:Mapsui.Navigator.PanLock
+  href: Mapsui.Navigator.html#Mapsui_Navigator_PanLock
+  name: PanLock
+  nameWithType: Navigator.PanLock
+  fullName: Mapsui.Navigator.PanLock
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Navigator.ZoomLock*
+  commentId: Overload:Mapsui.Navigator.ZoomLock
+  href: Mapsui.Navigator.html#Mapsui_Navigator_ZoomLock
+  name: ZoomLock
+  nameWithType: Navigator.ZoomLock
+  fullName: Mapsui.Navigator.ZoomLock
+- uid: Mapsui.Navigator.RotationLock*
+  commentId: Overload:Mapsui.Navigator.RotationLock
+  href: Mapsui.Navigator.html#Mapsui_Navigator_RotationLock
+  name: RotationLock
+  nameWithType: Navigator.RotationLock
+  fullName: Mapsui.Navigator.RotationLock
+- uid: Mapsui.Navigator.PanBounds*
+  commentId: Overload:Mapsui.Navigator.PanBounds
+  href: Mapsui.Navigator.html#Mapsui_Navigator_PanBounds
+  name: PanBounds
+  nameWithType: Navigator.PanBounds
+  fullName: Mapsui.Navigator.PanBounds
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui.Navigator.ZoomBounds*
+  commentId: Overload:Mapsui.Navigator.ZoomBounds
+  href: Mapsui.Navigator.html#Mapsui_Navigator_ZoomBounds
+  name: ZoomBounds
+  nameWithType: Navigator.ZoomBounds
+  fullName: Mapsui.Navigator.ZoomBounds
+- uid: Mapsui.MMinMax
+  commentId: T:Mapsui.MMinMax
+  parent: Mapsui
+  href: Mapsui.MMinMax.html
+  name: MMinMax
+  nameWithType: MMinMax
+  fullName: Mapsui.MMinMax
+- uid: Mapsui.Navigator.UnSnapRotation*
+  commentId: Overload:Mapsui.Navigator.UnSnapRotation
+  href: Mapsui.Navigator.html#Mapsui_Navigator_UnSnapRotation
+  name: UnSnapRotation
+  nameWithType: Navigator.UnSnapRotation
+  fullName: Mapsui.Navigator.UnSnapRotation
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Navigator.ReSnapRotation*
+  commentId: Overload:Mapsui.Navigator.ReSnapRotation
+  href: Mapsui.Navigator.html#Mapsui_Navigator_ReSnapRotation
+  name: ReSnapRotation
+  nameWithType: Navigator.ReSnapRotation
+  fullName: Mapsui.Navigator.ReSnapRotation
+- uid: Mapsui.Navigator.OverrideZoomBounds*
+  commentId: Overload:Mapsui.Navigator.OverrideZoomBounds
+  href: Mapsui.Navigator.html#Mapsui_Navigator_OverrideZoomBounds
+  name: OverrideZoomBounds
+  nameWithType: Navigator.OverrideZoomBounds
+  fullName: Mapsui.Navigator.OverrideZoomBounds
+- uid: Mapsui.Navigator.OverridePanBounds*
+  commentId: Overload:Mapsui.Navigator.OverridePanBounds
+  href: Mapsui.Navigator.html#Mapsui_Navigator_OverridePanBounds
+  name: OverridePanBounds
+  nameWithType: Navigator.OverridePanBounds
+  fullName: Mapsui.Navigator.OverridePanBounds
+- uid: Mapsui.Navigator.OverrideResolutions*
+  commentId: Overload:Mapsui.Navigator.OverrideResolutions
+  href: Mapsui.Navigator.html#Mapsui_Navigator_OverrideResolutions
+  name: OverrideResolutions
+  nameWithType: Navigator.OverrideResolutions
+  fullName: Mapsui.Navigator.OverrideResolutions
+- uid: System.Collections.Generic.IReadOnlyList{System.Double}
+  commentId: T:System.Collections.Generic.IReadOnlyList{System.Double}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<double>
+  nameWithType: IReadOnlyList<double>
+  fullName: System.Collections.Generic.IReadOnlyList<double>
+  nameWithType.vb: IReadOnlyList(Of Double)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of Double)
+  name.vb: IReadOnlyList(Of Double)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Navigator.Limiter*
+  commentId: Overload:Mapsui.Navigator.Limiter
+  href: Mapsui.Navigator.html#Mapsui_Navigator_Limiter
+  name: Limiter
+  nameWithType: Navigator.Limiter
+  fullName: Mapsui.Navigator.Limiter
+- uid: Mapsui.Limiting.IViewportLimiter
+  commentId: T:Mapsui.Limiting.IViewportLimiter
+  parent: Mapsui.Limiting
+  href: Mapsui.Limiting.IViewportLimiter.html
+  name: IViewportLimiter
+  nameWithType: IViewportLimiter
+  fullName: Mapsui.Limiting.IViewportLimiter
+- uid: Mapsui.Limiting
+  commentId: N:Mapsui.Limiting
+  href: Mapsui.html
+  name: Mapsui.Limiting
+  nameWithType: Mapsui.Limiting
+  fullName: Mapsui.Limiting
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Limiting
+    name: Limiting
+    href: Mapsui.Limiting.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Limiting
+    name: Limiting
+    href: Mapsui.Limiting.html
+- uid: Mapsui.Navigator.Viewport*
+  commentId: Overload:Mapsui.Navigator.Viewport
+  href: Mapsui.Navigator.html#Mapsui_Navigator_Viewport
+  name: Viewport
+  nameWithType: Navigator.Viewport
+  fullName: Mapsui.Navigator.Viewport
+- uid: Mapsui.Viewport
+  commentId: T:Mapsui.Viewport
+  parent: Mapsui
+  href: Mapsui.Viewport.html
+  name: Viewport
+  nameWithType: Viewport
+  fullName: Mapsui.Viewport
+- uid: Mapsui.Navigator.IsInitialized*
+  commentId: Overload:Mapsui.Navigator.IsInitialized
+  href: Mapsui.Navigator.html#Mapsui_Navigator_IsInitialized
+  name: IsInitialized
+  nameWithType: Navigator.IsInitialized
+  fullName: Mapsui.Navigator.IsInitialized
+- uid: Mapsui.Navigator.Initialize*
+  commentId: Overload:Mapsui.Navigator.Initialize
+  href: Mapsui.Navigator.html#Mapsui_Navigator_Initialize
+  name: Initialize
+  nameWithType: Navigator.Initialize
+  fullName: Mapsui.Navigator.Initialize
+- uid: Mapsui.Navigator.Resolutions*
+  commentId: Overload:Mapsui.Navigator.Resolutions
+  href: Mapsui.Navigator.html#Mapsui_Navigator_Resolutions
+  name: Resolutions
+  nameWithType: Navigator.Resolutions
+  fullName: Mapsui.Navigator.Resolutions
+- uid: Mapsui.Navigator.MouseWheelAnimation*
+  commentId: Overload:Mapsui.Navigator.MouseWheelAnimation
+  href: Mapsui.Navigator.html#Mapsui_Navigator_MouseWheelAnimation
+  name: MouseWheelAnimation
+  nameWithType: Navigator.MouseWheelAnimation
+  fullName: Mapsui.Navigator.MouseWheelAnimation
+- uid: Mapsui.Animations.MouseWheelAnimation
+  commentId: T:Mapsui.Animations.MouseWheelAnimation
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.MouseWheelAnimation.html
+  name: MouseWheelAnimation
+  nameWithType: MouseWheelAnimation
+  fullName: Mapsui.Animations.MouseWheelAnimation
+- uid: Mapsui.Animations
+  commentId: N:Mapsui.Animations
+  href: Mapsui.html
+  name: Mapsui.Animations
+  nameWithType: Mapsui.Animations
+  fullName: Mapsui.Animations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+- uid: Mapsui.Navigator.MouseWheelZoom*
+  commentId: Overload:Mapsui.Navigator.MouseWheelZoom
+  href: Mapsui.Navigator.html#Mapsui_Navigator_MouseWheelZoom_System_Int32_Mapsui_Manipulations_ScreenPosition_
+  name: MouseWheelZoom
+  nameWithType: Navigator.MouseWheelZoom
+  fullName: Mapsui.Navigator.MouseWheelZoom
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: Mapsui.Navigator.ZoomToBox*
+  commentId: Overload:Mapsui.Navigator.ZoomToBox
+  href: Mapsui.Navigator.html#Mapsui_Navigator_ZoomToBox_Mapsui_MRect_Mapsui_MBoxFit_System_Int64_Mapsui_Animations_Easing_
+  name: ZoomToBox
+  nameWithType: Navigator.ZoomToBox
+  fullName: Mapsui.Navigator.ZoomToBox
+- uid: Mapsui.MBoxFit
+  commentId: T:Mapsui.MBoxFit
+  parent: Mapsui
+  href: Mapsui.MBoxFit.html
+  name: MBoxFit
+  nameWithType: MBoxFit
+  fullName: Mapsui.MBoxFit
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Mapsui.Animations.Easing
+  commentId: T:Mapsui.Animations.Easing
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.Easing.html
+  name: Easing
+  nameWithType: Easing
+  fullName: Mapsui.Animations.Easing
+- uid: Mapsui.Navigator.PanBounds
+  commentId: P:Mapsui.Navigator.PanBounds
+  href: Mapsui.Navigator.html#Mapsui_Navigator_PanBounds
+  name: PanBounds
+  nameWithType: Navigator.PanBounds
+  fullName: Mapsui.Navigator.PanBounds
+- uid: Mapsui.Navigator.ZoomToPanBounds*
+  commentId: Overload:Mapsui.Navigator.ZoomToPanBounds
+  href: Mapsui.Navigator.html#Mapsui_Navigator_ZoomToPanBounds_Mapsui_MBoxFit_System_Int64_Mapsui_Animations_Easing_
+  name: ZoomToPanBounds
+  nameWithType: Navigator.ZoomToPanBounds
+  fullName: Mapsui.Navigator.ZoomToPanBounds
+- uid: Mapsui.Navigator.CenterOnAndZoomTo*
+  commentId: Overload:Mapsui.Navigator.CenterOnAndZoomTo
+  href: Mapsui.Navigator.html#Mapsui_Navigator_CenterOnAndZoomTo_Mapsui_MPoint_System_Double_System_Int64_Mapsui_Animations_Easing_
+  name: CenterOnAndZoomTo
+  nameWithType: Navigator.CenterOnAndZoomTo
+  fullName: Mapsui.Navigator.CenterOnAndZoomTo
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui.Navigator.ZoomTo*
+  commentId: Overload:Mapsui.Navigator.ZoomTo
+  href: Mapsui.Navigator.html#Mapsui_Navigator_ZoomTo_System_Double_System_Int64_Mapsui_Animations_Easing_
+  name: ZoomTo
+  nameWithType: Navigator.ZoomTo
+  fullName: Mapsui.Navigator.ZoomTo
+- uid: Mapsui.Navigator.ZoomIn*
+  commentId: Overload:Mapsui.Navigator.ZoomIn
+  href: Mapsui.Navigator.html#Mapsui_Navigator_ZoomIn_System_Int64_Mapsui_Animations_Easing_
+  name: ZoomIn
+  nameWithType: Navigator.ZoomIn
+  fullName: Mapsui.Navigator.ZoomIn
+- uid: Mapsui.Navigator.ZoomOut*
+  commentId: Overload:Mapsui.Navigator.ZoomOut
+  href: Mapsui.Navigator.html#Mapsui_Navigator_ZoomOut_System_Int64_Mapsui_Animations_Easing_
+  name: ZoomOut
+  nameWithType: Navigator.ZoomOut
+  fullName: Mapsui.Navigator.ZoomOut
+- uid: Mapsui.Navigator.ZoomToLevel*
+  commentId: Overload:Mapsui.Navigator.ZoomToLevel
+  href: Mapsui.Navigator.html#Mapsui_Navigator_ZoomToLevel_System_Int32_
+  name: ZoomToLevel
+  nameWithType: Navigator.ZoomToLevel
+  fullName: Mapsui.Navigator.ZoomToLevel
+- uid: Mapsui.Navigator.CenterOn*
+  commentId: Overload:Mapsui.Navigator.CenterOn
+  href: Mapsui.Navigator.html#Mapsui_Navigator_CenterOn_System_Double_System_Double_System_Int64_Mapsui_Animations_Easing_
+  name: CenterOn
+  nameWithType: Navigator.CenterOn
+  fullName: Mapsui.Navigator.CenterOn
+- uid: Mapsui.Navigator.FlyTo*
+  commentId: Overload:Mapsui.Navigator.FlyTo
+  href: Mapsui.Navigator.html#Mapsui_Navigator_FlyTo_Mapsui_MPoint_System_Double_System_Int64_
+  name: FlyTo
+  nameWithType: Navigator.FlyTo
+  fullName: Mapsui.Navigator.FlyTo
+- uid: Mapsui.Navigator.RotateTo*
+  commentId: Overload:Mapsui.Navigator.RotateTo
+  href: Mapsui.Navigator.html#Mapsui_Navigator_RotateTo_System_Double_System_Int64_Mapsui_Animations_Easing_
+  name: RotateTo
+  nameWithType: Navigator.RotateTo
+  fullName: Mapsui.Navigator.RotateTo
+- uid: Mapsui.Navigator.Fling*
+  commentId: Overload:Mapsui.Navigator.Fling
+  href: Mapsui.Navigator.html#Mapsui_Navigator_Fling_System_Double_System_Double_System_Int64_
+  name: Fling
+  nameWithType: Navigator.Fling
+  fullName: Mapsui.Navigator.Fling
+- uid: Mapsui.Navigator.Manipulate*
+  commentId: Overload:Mapsui.Navigator.Manipulate
+  href: Mapsui.Navigator.html#Mapsui_Navigator_Manipulate_Mapsui_Manipulations_Manipulation_
+  name: Manipulate
+  nameWithType: Navigator.Manipulate
+  fullName: Mapsui.Navigator.Manipulate
+- uid: Mapsui.Manipulations.Manipulation
+  commentId: T:Mapsui.Manipulations.Manipulation
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.Manipulation.html
+  name: Manipulation
+  nameWithType: Manipulation
+  fullName: Mapsui.Manipulations.Manipulation
+- uid: Mapsui.Navigator.SetSize*
+  commentId: Overload:Mapsui.Navigator.SetSize
+  href: Mapsui.Navigator.html#Mapsui_Navigator_SetSize_System_Double_System_Double_
+  name: SetSize
+  nameWithType: Navigator.SetSize
+  fullName: Mapsui.Navigator.SetSize
+- uid: Mapsui.Navigator.UpdateAnimations*
+  commentId: Overload:Mapsui.Navigator.UpdateAnimations
+  href: Mapsui.Navigator.html#Mapsui_Navigator_UpdateAnimations
+  name: UpdateAnimations
+  nameWithType: Navigator.UpdateAnimations
+  fullName: Mapsui.Navigator.UpdateAnimations
+- uid: Mapsui.Navigator.SetViewportAnimations*
+  commentId: Overload:Mapsui.Navigator.SetViewportAnimations
+  href: Mapsui.Navigator.html#Mapsui_Navigator_SetViewportAnimations_System_Collections_Generic_List_Mapsui_Animations_AnimationEntry_Mapsui_Viewport___
+  name: SetViewportAnimations
+  nameWithType: Navigator.SetViewportAnimations
+  fullName: Mapsui.Navigator.SetViewportAnimations
+- uid: System.Collections.Generic.List{Mapsui.Animations.AnimationEntry{Mapsui.Viewport}}
+  commentId: T:System.Collections.Generic.List{Mapsui.Animations.AnimationEntry{Mapsui.Viewport}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<AnimationEntry<Viewport>>
+  nameWithType: List<AnimationEntry<Viewport>>
+  fullName: System.Collections.Generic.List<Mapsui.Animations.AnimationEntry<Mapsui.Viewport>>
+  nameWithType.vb: List(Of AnimationEntry(Of Viewport))
+  fullName.vb: System.Collections.Generic.List(Of Mapsui.Animations.AnimationEntry(Of Mapsui.Viewport))
+  name.vb: List(Of AnimationEntry(Of Viewport))
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Mapsui.Animations.AnimationEntry`1
+    name: AnimationEntry
+    href: Mapsui.Animations.AnimationEntry-1.html
+  - name: <
+  - uid: Mapsui.Viewport
+    name: Viewport
+    href: Mapsui.Viewport.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Animations.AnimationEntry`1
+    name: AnimationEntry
+    href: Mapsui.Animations.AnimationEntry-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Viewport
+    name: Viewport
+    href: Mapsui.Viewport.html
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Navigator.SetViewport*
+  commentId: Overload:Mapsui.Navigator.SetViewport
+  href: Mapsui.Navigator.html#Mapsui_Navigator_SetViewport_Mapsui_Viewport_System_Int64_Mapsui_Animations_Easing_
+  name: SetViewport
+  nameWithType: Navigator.SetViewport
+  fullName: Mapsui.Navigator.SetViewport

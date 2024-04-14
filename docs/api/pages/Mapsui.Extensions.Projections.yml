@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Extensions.Projections
+  commentId: N:Mapsui.Extensions.Projections
+  id: Mapsui.Extensions.Projections
+  children:
+  - Mapsui.Extensions.Projections.DotSpatialProjection
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Extensions.Projections
+  nameWithType: Mapsui.Extensions.Projections
+  fullName: Mapsui.Extensions.Projections
+  type: Namespace
+  assemblies:
+  - Mapsui.Extensions
+references:
+- uid: Mapsui.Extensions.Projections.DotSpatialProjection
+  commentId: T:Mapsui.Extensions.Projections.DotSpatialProjection
+  href: Mapsui.Extensions.Projections.DotSpatialProjection.html
+  name: DotSpatialProjection
+  nameWithType: DotSpatialProjection
+  fullName: Mapsui.Extensions.Projections.DotSpatialProjection

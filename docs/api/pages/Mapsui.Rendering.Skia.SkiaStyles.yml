@@ -1,0 +1,69 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.SkiaStyles
+  commentId: N:Mapsui.Rendering.Skia.SkiaStyles
+  id: Mapsui.Rendering.Skia.SkiaStyles
+  children:
+  - Mapsui.Rendering.Skia.SkiaStyles.GeometryCollectionRenderer
+  - Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Rendering.Skia.SkiaStyles
+  nameWithType: Mapsui.Rendering.Skia.SkiaStyles
+  fullName: Mapsui.Rendering.Skia.SkiaStyles
+  type: Namespace
+  assemblies:
+  - Mapsui.Rendering.Skia
+references:
+- uid: Mapsui.Rendering.Skia.SkiaStyles.GeometryCollectionRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaStyles.GeometryCollectionRenderer
+  href: Mapsui.Rendering.Skia.SkiaStyles.GeometryCollectionRenderer.html
+  name: GeometryCollectionRenderer
+  nameWithType: GeometryCollectionRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaStyles.GeometryCollectionRenderer
+- uid: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  parent: Mapsui.Rendering.Skia.SkiaStyles
+  href: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html
+  name: ISkiaStyleRenderer
+  nameWithType: ISkiaStyleRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+- uid: Mapsui.Rendering.Skia.SkiaStyles
+  commentId: N:Mapsui.Rendering.Skia.SkiaStyles
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia.SkiaStyles
+  nameWithType: Mapsui.Rendering.Skia.SkiaStyles
+  fullName: Mapsui.Rendering.Skia.SkiaStyles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.SkiaStyles
+    name: SkiaStyles
+    href: Mapsui.Rendering.Skia.SkiaStyles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.SkiaStyles
+    name: SkiaStyles
+    href: Mapsui.Rendering.Skia.SkiaStyles.html

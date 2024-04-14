@@ -1,0 +1,1049 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.VectorStyle
+  commentId: T:Mapsui.Styles.VectorStyle
+  id: VectorStyle
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.VectorStyle.#ctor
+  - Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+  - Mapsui.Styles.VectorStyle.Equals(System.Object)
+  - Mapsui.Styles.VectorStyle.Fill
+  - Mapsui.Styles.VectorStyle.GetHashCode
+  - Mapsui.Styles.VectorStyle.Line
+  - Mapsui.Styles.VectorStyle.Outline
+  - Mapsui.Styles.VectorStyle.op_Equality(Mapsui.Styles.VectorStyle,Mapsui.Styles.VectorStyle)
+  - Mapsui.Styles.VectorStyle.op_Inequality(Mapsui.Styles.VectorStyle,Mapsui.Styles.VectorStyle)
+  langs:
+  - csharp
+  - vb
+  name: VectorStyle
+  nameWithType: VectorStyle
+  fullName: Mapsui.Styles.VectorStyle
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: VectorStyle
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 3
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: 'public class VectorStyle : Style, IStyle'
+    content.vb: Public Class VectorStyle Inherits Style Implements IStyle
+  inheritance:
+  - System.Object
+  - Mapsui.Styles.Style
+  derivedClasses:
+  - Mapsui.Styles.SymbolStyle
+  implements:
+  - Mapsui.Styles.IStyle
+  inheritedMembers:
+  - Mapsui.Styles.Style.MinVisible
+  - Mapsui.Styles.Style.MaxVisible
+  - Mapsui.Styles.Style.Enabled
+  - Mapsui.Styles.Style.Opacity
+  - Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.GetStylesToApply(System.Double)
+  - Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.ShouldBeApplied(System.Double)
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.VectorStyle.#ctor
+  commentId: M:Mapsui.Styles.VectorStyle.#ctor
+  id: '#ctor'
+  parent: Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: VectorStyle()
+  nameWithType: VectorStyle.VectorStyle()
+  fullName: Mapsui.Styles.VectorStyle.VectorStyle()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public VectorStyle()
+    content.vb: Public Sub New()
+  overload: Mapsui.Styles.VectorStyle.#ctor*
+  nameWithType.vb: VectorStyle.New()
+  fullName.vb: Mapsui.Styles.VectorStyle.New()
+  name.vb: New()
+- uid: Mapsui.Styles.VectorStyle.Line
+  commentId: P:Mapsui.Styles.VectorStyle.Line
+  id: Line
+  parent: Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: Line
+  nameWithType: VectorStyle.Line
+  fullName: Mapsui.Styles.VectorStyle.Line
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Line
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 14
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Line style for line geometries
+  example: []
+  syntax:
+    content: public Pen? Line { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Pen
+    content.vb: Public Property Line As Pen
+  overload: Mapsui.Styles.VectorStyle.Line*
+- uid: Mapsui.Styles.VectorStyle.Outline
+  commentId: P:Mapsui.Styles.VectorStyle.Outline
+  id: Outline
+  parent: Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: Outline
+  nameWithType: VectorStyle.Outline
+  fullName: Mapsui.Styles.VectorStyle.Outline
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Outline
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 19
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Outline style for line and polygon geometries
+  example: []
+  syntax:
+    content: public Pen? Outline { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Pen
+    content.vb: Public Property Outline As Pen
+  overload: Mapsui.Styles.VectorStyle.Outline*
+- uid: Mapsui.Styles.VectorStyle.Fill
+  commentId: P:Mapsui.Styles.VectorStyle.Fill
+  id: Fill
+  parent: Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: Fill
+  nameWithType: VectorStyle.Fill
+  fullName: Mapsui.Styles.VectorStyle.Fill
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Fill
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 24
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Fill style for Polygon geometries
+  example: []
+  syntax:
+    content: public Brush? Fill { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Brush
+    content.vb: Public Property Fill As Brush
+  overload: Mapsui.Styles.VectorStyle.Fill*
+- uid: Mapsui.Styles.VectorStyle.Equals(System.Object)
+  commentId: M:Mapsui.Styles.VectorStyle.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: VectorStyle.Equals(object?)
+  fullName: Mapsui.Styles.VectorStyle.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 26
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Determines whether the specified object is equal to the current object.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current object.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the specified object  is equal to the current object; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: Mapsui.Styles.Style.Equals(System.Object)
+  overload: Mapsui.Styles.VectorStyle.Equals*
+  nameWithType.vb: VectorStyle.Equals(Object)
+  fullName.vb: Mapsui.Styles.VectorStyle.Equals(Object)
+  name.vb: Equals(Object)
+- uid: Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+  commentId: M:Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+  id: Equals(Mapsui.Styles.VectorStyle)
+  parent: Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: Equals(VectorStyle?)
+  nameWithType: VectorStyle.Equals(VectorStyle?)
+  fullName: Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 35
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public bool Equals(VectorStyle? vectorStyle)
+    parameters:
+    - id: vectorStyle
+      type: Mapsui.Styles.VectorStyle
+    return:
+      type: System.Boolean
+    content.vb: Public Function Equals(vectorStyle As VectorStyle) As Boolean
+  overload: Mapsui.Styles.VectorStyle.Equals*
+  nameWithType.vb: VectorStyle.Equals(VectorStyle)
+  fullName.vb: Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+  name.vb: Equals(VectorStyle)
+- uid: Mapsui.Styles.VectorStyle.GetHashCode
+  commentId: M:Mapsui.Styles.VectorStyle.GetHashCode
+  id: GetHashCode
+  parent: Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: VectorStyle.GetHashCode()
+  fullName: Mapsui.Styles.VectorStyle.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetHashCode
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 55
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Serves as the default hash function.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A hash code for the current object.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: Mapsui.Styles.Style.GetHashCode
+  overload: Mapsui.Styles.VectorStyle.GetHashCode*
+- uid: Mapsui.Styles.VectorStyle.op_Equality(Mapsui.Styles.VectorStyle,Mapsui.Styles.VectorStyle)
+  commentId: M:Mapsui.Styles.VectorStyle.op_Equality(Mapsui.Styles.VectorStyle,Mapsui.Styles.VectorStyle)
+  id: op_Equality(Mapsui.Styles.VectorStyle,Mapsui.Styles.VectorStyle)
+  parent: Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: operator ==(VectorStyle?, VectorStyle?)
+  nameWithType: VectorStyle.operator ==(VectorStyle?, VectorStyle?)
+  fullName: Mapsui.Styles.VectorStyle.operator ==(Mapsui.Styles.VectorStyle?, Mapsui.Styles.VectorStyle?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Equality
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 63
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static bool operator ==(VectorStyle? vectorStyle1, VectorStyle? vectorStyle2)
+    parameters:
+    - id: vectorStyle1
+      type: Mapsui.Styles.VectorStyle
+    - id: vectorStyle2
+      type: Mapsui.Styles.VectorStyle
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(vectorStyle1 As VectorStyle, vectorStyle2 As VectorStyle) As Boolean
+  overload: Mapsui.Styles.VectorStyle.op_Equality*
+  nameWithType.vb: VectorStyle.=(VectorStyle, VectorStyle)
+  fullName.vb: Mapsui.Styles.VectorStyle.=(Mapsui.Styles.VectorStyle, Mapsui.Styles.VectorStyle)
+  name.vb: =(VectorStyle, VectorStyle)
+- uid: Mapsui.Styles.VectorStyle.op_Inequality(Mapsui.Styles.VectorStyle,Mapsui.Styles.VectorStyle)
+  commentId: M:Mapsui.Styles.VectorStyle.op_Inequality(Mapsui.Styles.VectorStyle,Mapsui.Styles.VectorStyle)
+  id: op_Inequality(Mapsui.Styles.VectorStyle,Mapsui.Styles.VectorStyle)
+  parent: Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: operator !=(VectorStyle?, VectorStyle?)
+  nameWithType: VectorStyle.operator !=(VectorStyle?, VectorStyle?)
+  fullName: Mapsui.Styles.VectorStyle.operator !=(Mapsui.Styles.VectorStyle?, Mapsui.Styles.VectorStyle?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/Styles/VectorStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Inequality
+    path: ../../Mapsui/Styles/VectorStyle.cs
+    startLine: 68
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static bool operator !=(VectorStyle? vectorStyle1, VectorStyle? vectorStyle2)
+    parameters:
+    - id: vectorStyle1
+      type: Mapsui.Styles.VectorStyle
+    - id: vectorStyle2
+      type: Mapsui.Styles.VectorStyle
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(vectorStyle1 As VectorStyle, vectorStyle2 As VectorStyle) As Boolean
+  overload: Mapsui.Styles.VectorStyle.op_Inequality*
+  nameWithType.vb: VectorStyle.<>(VectorStyle, VectorStyle)
+  fullName.vb: Mapsui.Styles.VectorStyle.<>(Mapsui.Styles.VectorStyle, Mapsui.Styles.VectorStyle)
+  name.vb: <>(VectorStyle, VectorStyle)
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Styles.Style
+  commentId: T:Mapsui.Styles.Style
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Style.html
+  name: Style
+  nameWithType: Style
+  fullName: Mapsui.Styles.Style
+- uid: Mapsui.Styles.IStyle
+  commentId: T:Mapsui.Styles.IStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyle.html
+  name: IStyle
+  nameWithType: IStyle
+  fullName: Mapsui.Styles.IStyle
+- uid: Mapsui.Styles.Style.MinVisible
+  commentId: P:Mapsui.Styles.Style.MinVisible
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_MinVisible
+  name: MinVisible
+  nameWithType: Style.MinVisible
+  fullName: Mapsui.Styles.Style.MinVisible
+- uid: Mapsui.Styles.Style.MaxVisible
+  commentId: P:Mapsui.Styles.Style.MaxVisible
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_MaxVisible
+  name: MaxVisible
+  nameWithType: Style.MaxVisible
+  fullName: Mapsui.Styles.Style.MaxVisible
+- uid: Mapsui.Styles.Style.Enabled
+  commentId: P:Mapsui.Styles.Style.Enabled
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Enabled
+  name: Enabled
+  nameWithType: Style.Enabled
+  fullName: Mapsui.Styles.Style.Enabled
+- uid: Mapsui.Styles.Style.Opacity
+  commentId: P:Mapsui.Styles.Style.Opacity
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Opacity
+  name: Opacity
+  nameWithType: Style.Opacity
+  fullName: Mapsui.Styles.Style.Opacity
+- uid: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  commentId: M:Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_
+  name: Equals(Style)
+  nameWithType: Style.Equals(Style)
+  fullName: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  spec.csharp:
+  - uid: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_
+  - name: (
+  - uid: Mapsui.Styles.Style
+    name: Style
+    href: Mapsui.Styles.Style.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_
+  - name: (
+  - uid: Mapsui.Styles.Style
+    name: Style
+    href: Mapsui.Styles.Style.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.GetStylesToApply(System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  parent: Mapsui.Extensions.StyleExtensions
+  definition: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  name: GetStylesToApply(IStyle, double)
+  nameWithType: StyleExtensions.GetStylesToApply(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.GetStylesToApply(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, Double)
+  name.vb: GetStylesToApply(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.ShouldBeApplied(System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  parent: Mapsui.Extensions.StyleExtensions
+  definition: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  name: ShouldBeApplied(IStyle, double)
+  nameWithType: StyleExtensions.ShouldBeApplied(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.ShouldBeApplied(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, Double)
+  name.vb: ShouldBeApplied(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  isExternal: true
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  name: GetStylesToApply(IStyle, double)
+  nameWithType: StyleExtensions.GetStylesToApply(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.GetStylesToApply(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, Double)
+  name.vb: GetStylesToApply(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Extensions.StyleExtensions
+  commentId: T:Mapsui.Extensions.StyleExtensions
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.StyleExtensions.html
+  name: StyleExtensions
+  nameWithType: StyleExtensions
+  fullName: Mapsui.Extensions.StyleExtensions
+- uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  isExternal: true
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  name: ShouldBeApplied(IStyle, double)
+  nameWithType: StyleExtensions.ShouldBeApplied(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.ShouldBeApplied(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, Double)
+  name.vb: ShouldBeApplied(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.VectorStyle.#ctor*
+  commentId: Overload:Mapsui.Styles.VectorStyle.#ctor
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle__ctor
+  name: VectorStyle
+  nameWithType: VectorStyle.VectorStyle
+  fullName: Mapsui.Styles.VectorStyle.VectorStyle
+  nameWithType.vb: VectorStyle.New
+  fullName.vb: Mapsui.Styles.VectorStyle.New
+  name.vb: New
+- uid: Mapsui.Styles.VectorStyle.Line*
+  commentId: Overload:Mapsui.Styles.VectorStyle.Line
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Line
+  name: Line
+  nameWithType: VectorStyle.Line
+  fullName: Mapsui.Styles.VectorStyle.Line
+- uid: Mapsui.Styles.Pen
+  commentId: T:Mapsui.Styles.Pen
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Pen.html
+  name: Pen
+  nameWithType: Pen
+  fullName: Mapsui.Styles.Pen
+- uid: Mapsui.Styles.VectorStyle.Outline*
+  commentId: Overload:Mapsui.Styles.VectorStyle.Outline
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Outline
+  name: Outline
+  nameWithType: VectorStyle.Outline
+  fullName: Mapsui.Styles.VectorStyle.Outline
+- uid: Mapsui.Styles.VectorStyle.Fill*
+  commentId: Overload:Mapsui.Styles.VectorStyle.Fill
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Fill
+  name: Fill
+  nameWithType: VectorStyle.Fill
+  fullName: Mapsui.Styles.VectorStyle.Fill
+- uid: Mapsui.Styles.Brush
+  commentId: T:Mapsui.Styles.Brush
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Brush.html
+  name: Brush
+  nameWithType: Brush
+  fullName: Mapsui.Styles.Brush
+- uid: Mapsui.Styles.Style.Equals(System.Object)
+  commentId: M:Mapsui.Styles.Style.Equals(System.Object)
+  parent: Mapsui.Styles.Style
+  isExternal: true
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Object_
+  name: Equals(object)
+  nameWithType: Style.Equals(object)
+  fullName: Mapsui.Styles.Style.Equals(object)
+  nameWithType.vb: Style.Equals(Object)
+  fullName.vb: Mapsui.Styles.Style.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: Mapsui.Styles.Style.Equals(System.Object)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Style.Equals(System.Object)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Styles.VectorStyle.Equals*
+  commentId: Overload:Mapsui.Styles.VectorStyle.Equals
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Equals_System_Object_
+  name: Equals
+  nameWithType: VectorStyle.Equals
+  fullName: Mapsui.Styles.VectorStyle.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Styles.VectorStyle
+  commentId: T:Mapsui.Styles.VectorStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.VectorStyle.html
+  name: VectorStyle
+  nameWithType: VectorStyle
+  fullName: Mapsui.Styles.VectorStyle
+- uid: Mapsui.Styles.Style.GetHashCode
+  commentId: M:Mapsui.Styles.Style.GetHashCode
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_GetHashCode
+  name: GetHashCode()
+  nameWithType: Style.GetHashCode()
+  fullName: Mapsui.Styles.Style.GetHashCode()
+  spec.csharp:
+  - uid: Mapsui.Styles.Style.GetHashCode
+    name: GetHashCode
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_GetHashCode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Style.GetHashCode
+    name: GetHashCode
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_GetHashCode
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.VectorStyle.GetHashCode*
+  commentId: Overload:Mapsui.Styles.VectorStyle.GetHashCode
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_GetHashCode
+  name: GetHashCode
+  nameWithType: VectorStyle.GetHashCode
+  fullName: Mapsui.Styles.VectorStyle.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Styles.VectorStyle.op_Equality*
+  commentId: Overload:Mapsui.Styles.VectorStyle.op_Equality
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_op_Equality_Mapsui_Styles_VectorStyle_Mapsui_Styles_VectorStyle_
+  name: operator ==
+  nameWithType: VectorStyle.operator ==
+  fullName: Mapsui.Styles.VectorStyle.operator ==
+  nameWithType.vb: VectorStyle.=
+  fullName.vb: Mapsui.Styles.VectorStyle.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.Styles.VectorStyle.op_Equality*
+    name: ==
+    href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_op_Equality_Mapsui_Styles_VectorStyle_Mapsui_Styles_VectorStyle_
+- uid: Mapsui.Styles.VectorStyle.op_Inequality*
+  commentId: Overload:Mapsui.Styles.VectorStyle.op_Inequality
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_op_Inequality_Mapsui_Styles_VectorStyle_Mapsui_Styles_VectorStyle_
+  name: operator !=
+  nameWithType: VectorStyle.operator !=
+  fullName: Mapsui.Styles.VectorStyle.operator !=
+  nameWithType.vb: VectorStyle.<>
+  fullName.vb: Mapsui.Styles.VectorStyle.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.Styles.VectorStyle.op_Inequality*
+    name: '!='
+    href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_op_Inequality_Mapsui_Styles_VectorStyle_Mapsui_Styles_VectorStyle_

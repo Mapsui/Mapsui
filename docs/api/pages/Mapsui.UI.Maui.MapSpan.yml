@@ -1,0 +1,1134 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui.MapSpan
+  commentId: T:Mapsui.UI.Maui.MapSpan
+  id: MapSpan
+  parent: Mapsui.UI.Maui
+  children:
+  - Mapsui.UI.Maui.MapSpan.#ctor(Mapsui.UI.Maui.Position,System.Double,System.Double)
+  - Mapsui.UI.Maui.MapSpan.Center
+  - Mapsui.UI.Maui.MapSpan.ClampLatitude(System.Double,System.Double)
+  - Mapsui.UI.Maui.MapSpan.Equals(System.Object)
+  - Mapsui.UI.Maui.MapSpan.FromCenterAndRadius(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Distance)
+  - Mapsui.UI.Maui.MapSpan.FromPositions(System.Collections.Generic.IEnumerable{Mapsui.UI.Maui.Position})
+  - Mapsui.UI.Maui.MapSpan.GetHashCode
+  - Mapsui.UI.Maui.MapSpan.LatitudeDegrees
+  - Mapsui.UI.Maui.MapSpan.LongitudeDegrees
+  - Mapsui.UI.Maui.MapSpan.Radius
+  - Mapsui.UI.Maui.MapSpan.WithZoom(System.Double)
+  - Mapsui.UI.Maui.MapSpan.op_Equality(Mapsui.UI.Maui.MapSpan,Mapsui.UI.Maui.MapSpan)
+  - Mapsui.UI.Maui.MapSpan.op_Inequality(Mapsui.UI.Maui.MapSpan,Mapsui.UI.Maui.MapSpan)
+  langs:
+  - csharp
+  - vb
+  name: MapSpan
+  nameWithType: MapSpan
+  fullName: Mapsui.UI.Maui.MapSpan
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MapSpan
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 8
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: MapSpan represents an area of the earth
+  example: []
+  syntax:
+    content: public class MapSpan
+    content.vb: Public Class MapSpan
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.Maui.MapSpan.#ctor(Mapsui.UI.Maui.Position,System.Double,System.Double)
+  commentId: M:Mapsui.UI.Maui.MapSpan.#ctor(Mapsui.UI.Maui.Position,System.Double,System.Double)
+  id: '#ctor(Mapsui.UI.Maui.Position,System.Double,System.Double)'
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: MapSpan(Position, double, double)
+  nameWithType: MapSpan.MapSpan(Position, double, double)
+  fullName: Mapsui.UI.Maui.MapSpan.MapSpan(Mapsui.UI.Maui.Position, double, double)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Initializes a new instance of the <xref href="Mapsui.UI.Forms.MapSpan" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public MapSpan(Position center, double latitudeDegrees, double longitudeDegrees)
+    parameters:
+    - id: center
+      type: Mapsui.UI.Maui.Position
+      description: Center of the MapSpan
+    - id: latitudeDegrees
+      type: System.Double
+      description: Extend of MapSpan in latitude direction in degrees
+    - id: longitudeDegrees
+      type: System.Double
+      description: Extend of MapSpan in longitude direction in degrees
+    content.vb: Public Sub New(center As Position, latitudeDegrees As Double, longitudeDegrees As Double)
+  overload: Mapsui.UI.Maui.MapSpan.#ctor*
+  nameWithType.vb: MapSpan.New(Position, Double, Double)
+  fullName.vb: Mapsui.UI.Maui.MapSpan.New(Mapsui.UI.Maui.Position, Double, Double)
+  name.vb: New(Position, Double, Double)
+- uid: Mapsui.UI.Maui.MapSpan.Center
+  commentId: P:Mapsui.UI.Maui.MapSpan.Center
+  id: Center
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: Center
+  nameWithType: MapSpan.Center
+  fullName: Mapsui.UI.Maui.MapSpan.Center
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Center
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 42
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Center of MapSpan
+  example: []
+  syntax:
+    content: public Position Center { get; }
+    parameters: []
+    return:
+      type: Mapsui.UI.Maui.Position
+      description: Center of MapSpan
+    content.vb: Public ReadOnly Property Center As Position
+  overload: Mapsui.UI.Maui.MapSpan.Center*
+- uid: Mapsui.UI.Maui.MapSpan.LatitudeDegrees
+  commentId: P:Mapsui.UI.Maui.MapSpan.LatitudeDegrees
+  id: LatitudeDegrees
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: LatitudeDegrees
+  nameWithType: MapSpan.LatitudeDegrees
+  fullName: Mapsui.UI.Maui.MapSpan.LatitudeDegrees
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LatitudeDegrees
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 48
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Extend of MapSpan in latitude degrees
+  example: []
+  syntax:
+    content: public double LatitudeDegrees { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: Extend in latitude degrees
+    content.vb: Public ReadOnly Property LatitudeDegrees As Double
+  overload: Mapsui.UI.Maui.MapSpan.LatitudeDegrees*
+- uid: Mapsui.UI.Maui.MapSpan.LongitudeDegrees
+  commentId: P:Mapsui.UI.Maui.MapSpan.LongitudeDegrees
+  id: LongitudeDegrees
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: LongitudeDegrees
+  nameWithType: MapSpan.LongitudeDegrees
+  fullName: Mapsui.UI.Maui.MapSpan.LongitudeDegrees
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LongitudeDegrees
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 54
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Extend of MapSpan in longitude degrees
+  example: []
+  syntax:
+    content: public double LongitudeDegrees { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: Extend in longitude degrees
+    content.vb: Public ReadOnly Property LongitudeDegrees As Double
+  overload: Mapsui.UI.Maui.MapSpan.LongitudeDegrees*
+- uid: Mapsui.UI.Maui.MapSpan.Radius
+  commentId: P:Mapsui.UI.Maui.MapSpan.Radius
+  id: Radius
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: Radius
+  nameWithType: MapSpan.Radius
+  fullName: Mapsui.UI.Maui.MapSpan.Radius
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Radius
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 60
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Radius of smallest circle thats fit into MapSpan
+  example: []
+  syntax:
+    content: public Distance Radius { get; }
+    parameters: []
+    return:
+      type: Mapsui.UI.Maui.Distance
+      description: The radius.
+    content.vb: Public ReadOnly Property Radius As Distance
+  overload: Mapsui.UI.Maui.MapSpan.Radius*
+- uid: Mapsui.UI.Maui.MapSpan.ClampLatitude(System.Double,System.Double)
+  commentId: M:Mapsui.UI.Maui.MapSpan.ClampLatitude(System.Double,System.Double)
+  id: ClampLatitude(System.Double,System.Double)
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: ClampLatitude(double, double)
+  nameWithType: MapSpan.ClampLatitude(double, double)
+  fullName: Mapsui.UI.Maui.MapSpan.ClampLatitude(double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ClampLatitude
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 76
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Clamp latitude between north and south
+  example: []
+  syntax:
+    content: public MapSpan ClampLatitude(double north, double south)
+    parameters:
+    - id: north
+      type: System.Double
+      description: Maximal latitude degrees for north
+    - id: south
+      type: System.Double
+      description: Maximal latitude degrees for south
+    return:
+      type: Mapsui.UI.Maui.MapSpan
+      description: MapSpan with center clamped between north and south
+    content.vb: Public Function ClampLatitude(north As Double, south As Double) As MapSpan
+  overload: Mapsui.UI.Maui.MapSpan.ClampLatitude*
+  nameWithType.vb: MapSpan.ClampLatitude(Double, Double)
+  fullName.vb: Mapsui.UI.Maui.MapSpan.ClampLatitude(Double, Double)
+  name.vb: ClampLatitude(Double, Double)
+- uid: Mapsui.UI.Maui.MapSpan.Equals(System.Object)
+  commentId: M:Mapsui.UI.Maui.MapSpan.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: MapSpan.Equals(object?)
+  fullName: Mapsui.UI.Maui.MapSpan.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 91
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Determines whether the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current <xref href="Mapsui.UI.Forms.MapSpan" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with current <xref href="Mapsui.UI.Forms.MapSpan" data-throw-if-not-resolved="false"></xref>
+    return:
+      type: System.Boolean
+      description: >-
+        <code>true</code> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current
+            <xref href="Mapsui.UI.Forms.MapSpan" data-throw-if-not-resolved="false"></xref>; otherwise, <code>false</code>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Mapsui.UI.Maui.MapSpan.Equals*
+  nameWithType.vb: MapSpan.Equals(Object)
+  fullName.vb: Mapsui.UI.Maui.MapSpan.Equals(Object)
+  name.vb: Equals(Object)
+- uid: Mapsui.UI.Maui.MapSpan.FromCenterAndRadius(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Distance)
+  commentId: M:Mapsui.UI.Maui.MapSpan.FromCenterAndRadius(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Distance)
+  id: FromCenterAndRadius(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Distance)
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: FromCenterAndRadius(Position, Distance)
+  nameWithType: MapSpan.FromCenterAndRadius(Position, Distance)
+  fullName: Mapsui.UI.Maui.MapSpan.FromCenterAndRadius(Mapsui.UI.Maui.Position, Mapsui.UI.Maui.Distance)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromCenterAndRadius
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 106
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Create a new MapSpan from center and radius
+  example: []
+  syntax:
+    content: public static MapSpan FromCenterAndRadius(Position center, Distance radius)
+    parameters:
+    - id: center
+      type: Mapsui.UI.Maui.Position
+      description: Center for new MapSpan
+    - id: radius
+      type: Mapsui.UI.Maui.Distance
+      description: Radius for new MapSpan
+    return:
+      type: Mapsui.UI.Maui.MapSpan
+      description: New MapSpan
+    content.vb: Public Shared Function FromCenterAndRadius(center As Position, radius As Distance) As MapSpan
+  overload: Mapsui.UI.Maui.MapSpan.FromCenterAndRadius*
+- uid: Mapsui.UI.Maui.MapSpan.FromPositions(System.Collections.Generic.IEnumerable{Mapsui.UI.Maui.Position})
+  commentId: M:Mapsui.UI.Maui.MapSpan.FromPositions(System.Collections.Generic.IEnumerable{Mapsui.UI.Maui.Position})
+  id: FromPositions(System.Collections.Generic.IEnumerable{Mapsui.UI.Maui.Position})
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: FromPositions(IEnumerable<Position>)
+  nameWithType: MapSpan.FromPositions(IEnumerable<Position>)
+  fullName: Mapsui.UI.Maui.MapSpan.FromPositions(System.Collections.Generic.IEnumerable<Mapsui.UI.Maui.Position>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromPositions
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 116
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Create a new MapSpan from multiple positions
+  example: []
+  syntax:
+    content: public static MapSpan FromPositions(IEnumerable<Position> positions)
+    parameters:
+    - id: positions
+      type: System.Collections.Generic.IEnumerable{Mapsui.UI.Maui.Position}
+      description: List of positions to get the new MapSpan
+    return:
+      type: Mapsui.UI.Maui.MapSpan
+      description: New MapSpan
+    content.vb: Public Shared Function FromPositions(positions As IEnumerable(Of Position)) As MapSpan
+  overload: Mapsui.UI.Maui.MapSpan.FromPositions*
+  nameWithType.vb: MapSpan.FromPositions(IEnumerable(Of Position))
+  fullName.vb: Mapsui.UI.Maui.MapSpan.FromPositions(System.Collections.Generic.IEnumerable(Of Mapsui.UI.Maui.Position))
+  name.vb: FromPositions(IEnumerable(Of Position))
+- uid: Mapsui.UI.Maui.MapSpan.GetHashCode
+  commentId: M:Mapsui.UI.Maui.MapSpan.GetHashCode
+  id: GetHashCode
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: MapSpan.GetHashCode()
+  fullName: Mapsui.UI.Maui.MapSpan.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetHashCode
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 133
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Serves as the default hash function.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A hash code for the current object.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.Object.GetHashCode
+  overload: Mapsui.UI.Maui.MapSpan.GetHashCode*
+- uid: Mapsui.UI.Maui.MapSpan.op_Equality(Mapsui.UI.Maui.MapSpan,Mapsui.UI.Maui.MapSpan)
+  commentId: M:Mapsui.UI.Maui.MapSpan.op_Equality(Mapsui.UI.Maui.MapSpan,Mapsui.UI.Maui.MapSpan)
+  id: op_Equality(Mapsui.UI.Maui.MapSpan,Mapsui.UI.Maui.MapSpan)
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: operator ==(MapSpan, MapSpan)
+  nameWithType: MapSpan.operator ==(MapSpan, MapSpan)
+  fullName: Mapsui.UI.Maui.MapSpan.operator ==(Mapsui.UI.Maui.MapSpan, Mapsui.UI.Maui.MapSpan)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Equality
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 144
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static bool operator ==(MapSpan left, MapSpan right)
+    parameters:
+    - id: left
+      type: Mapsui.UI.Maui.MapSpan
+    - id: right
+      type: Mapsui.UI.Maui.MapSpan
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(left As MapSpan, right As MapSpan) As Boolean
+  overload: Mapsui.UI.Maui.MapSpan.op_Equality*
+  nameWithType.vb: MapSpan.=(MapSpan, MapSpan)
+  fullName.vb: Mapsui.UI.Maui.MapSpan.=(Mapsui.UI.Maui.MapSpan, Mapsui.UI.Maui.MapSpan)
+  name.vb: =(MapSpan, MapSpan)
+- uid: Mapsui.UI.Maui.MapSpan.op_Inequality(Mapsui.UI.Maui.MapSpan,Mapsui.UI.Maui.MapSpan)
+  commentId: M:Mapsui.UI.Maui.MapSpan.op_Inequality(Mapsui.UI.Maui.MapSpan,Mapsui.UI.Maui.MapSpan)
+  id: op_Inequality(Mapsui.UI.Maui.MapSpan,Mapsui.UI.Maui.MapSpan)
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: operator !=(MapSpan, MapSpan)
+  nameWithType: MapSpan.operator !=(MapSpan, MapSpan)
+  fullName: Mapsui.UI.Maui.MapSpan.operator !=(Mapsui.UI.Maui.MapSpan, Mapsui.UI.Maui.MapSpan)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Inequality
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 149
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static bool operator !=(MapSpan left, MapSpan right)
+    parameters:
+    - id: left
+      type: Mapsui.UI.Maui.MapSpan
+    - id: right
+      type: Mapsui.UI.Maui.MapSpan
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(left As MapSpan, right As MapSpan) As Boolean
+  overload: Mapsui.UI.Maui.MapSpan.op_Inequality*
+  nameWithType.vb: MapSpan.<>(MapSpan, MapSpan)
+  fullName.vb: Mapsui.UI.Maui.MapSpan.<>(Mapsui.UI.Maui.MapSpan, Mapsui.UI.Maui.MapSpan)
+  name.vb: <>(MapSpan, MapSpan)
+- uid: Mapsui.UI.Maui.MapSpan.WithZoom(System.Double)
+  commentId: M:Mapsui.UI.Maui.MapSpan.WithZoom(System.Double)
+  id: WithZoom(System.Double)
+  parent: Mapsui.UI.Maui.MapSpan
+  langs:
+  - csharp
+  - vb
+  name: WithZoom(double)
+  nameWithType: MapSpan.WithZoom(double)
+  fullName: Mapsui.UI.Maui.MapSpan.WithZoom(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MapSpan.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WithZoom
+    path: ../../Mapsui.UI.MapView/Objects/MapSpan.cs
+    startLine: 159
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Create a new MapSPan with given zoom factor
+  example: []
+  syntax:
+    content: public MapSpan WithZoom(double zoomFactor)
+    parameters:
+    - id: zoomFactor
+      type: System.Double
+      description: Zoom factor
+    return:
+      type: Mapsui.UI.Maui.MapSpan
+      description: New MapSpan
+    content.vb: Public Function WithZoom(zoomFactor As Double) As MapSpan
+  overload: Mapsui.UI.Maui.MapSpan.WithZoom*
+  nameWithType.vb: MapSpan.WithZoom(Double)
+  fullName.vb: Mapsui.UI.Maui.MapSpan.WithZoom(Double)
+  name.vb: WithZoom(Double)
+references:
+- uid: Mapsui.UI.Maui
+  commentId: N:Mapsui.UI.Maui
+  href: Mapsui.html
+  name: Mapsui.UI.Maui
+  nameWithType: Mapsui.UI.Maui
+  fullName: Mapsui.UI.Maui
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.UI.Forms.MapSpan
+  commentId: T:Mapsui.UI.Forms.MapSpan
+  isExternal: true
+- uid: Mapsui.UI.Maui.MapSpan.#ctor*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.#ctor
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan__ctor_Mapsui_UI_Maui_Position_System_Double_System_Double_
+  name: MapSpan
+  nameWithType: MapSpan.MapSpan
+  fullName: Mapsui.UI.Maui.MapSpan.MapSpan
+  nameWithType.vb: MapSpan.New
+  fullName.vb: Mapsui.UI.Maui.MapSpan.New
+  name.vb: New
+- uid: Mapsui.UI.Maui.Position
+  commentId: T:Mapsui.UI.Maui.Position
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Position.html
+  name: Position
+  nameWithType: Position
+  fullName: Mapsui.UI.Maui.Position
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.UI.Maui.MapSpan.Center*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.Center
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_Center
+  name: Center
+  nameWithType: MapSpan.Center
+  fullName: Mapsui.UI.Maui.MapSpan.Center
+- uid: Mapsui.UI.Maui.MapSpan.LatitudeDegrees*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.LatitudeDegrees
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_LatitudeDegrees
+  name: LatitudeDegrees
+  nameWithType: MapSpan.LatitudeDegrees
+  fullName: Mapsui.UI.Maui.MapSpan.LatitudeDegrees
+- uid: Mapsui.UI.Maui.MapSpan.LongitudeDegrees*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.LongitudeDegrees
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_LongitudeDegrees
+  name: LongitudeDegrees
+  nameWithType: MapSpan.LongitudeDegrees
+  fullName: Mapsui.UI.Maui.MapSpan.LongitudeDegrees
+- uid: Mapsui.UI.Maui.MapSpan.Radius*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.Radius
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_Radius
+  name: Radius
+  nameWithType: MapSpan.Radius
+  fullName: Mapsui.UI.Maui.MapSpan.Radius
+- uid: Mapsui.UI.Maui.Distance
+  commentId: T:Mapsui.UI.Maui.Distance
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Distance.html
+  name: Distance
+  nameWithType: Distance
+  fullName: Mapsui.UI.Maui.Distance
+- uid: Mapsui.UI.Maui.MapSpan.ClampLatitude*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.ClampLatitude
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_ClampLatitude_System_Double_System_Double_
+  name: ClampLatitude
+  nameWithType: MapSpan.ClampLatitude
+  fullName: Mapsui.UI.Maui.MapSpan.ClampLatitude
+- uid: Mapsui.UI.Maui.MapSpan
+  commentId: T:Mapsui.UI.Maui.MapSpan
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.MapSpan.html
+  name: MapSpan
+  nameWithType: MapSpan
+  fullName: Mapsui.UI.Maui.MapSpan
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.UI.Maui.MapSpan.Equals*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.Equals
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_Equals_System_Object_
+  name: Equals
+  nameWithType: MapSpan.Equals
+  fullName: Mapsui.UI.Maui.MapSpan.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.UI.Maui.MapSpan.FromCenterAndRadius*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.FromCenterAndRadius
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_FromCenterAndRadius_Mapsui_UI_Maui_Position_Mapsui_UI_Maui_Distance_
+  name: FromCenterAndRadius
+  nameWithType: MapSpan.FromCenterAndRadius
+  fullName: Mapsui.UI.Maui.MapSpan.FromCenterAndRadius
+- uid: Mapsui.UI.Maui.MapSpan.FromPositions*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.FromPositions
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_FromPositions_System_Collections_Generic_IEnumerable_Mapsui_UI_Maui_Position__
+  name: FromPositions
+  nameWithType: MapSpan.FromPositions
+  fullName: Mapsui.UI.Maui.MapSpan.FromPositions
+- uid: System.Collections.Generic.IEnumerable{Mapsui.UI.Maui.Position}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.UI.Maui.Position}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<Position>
+  nameWithType: IEnumerable<Position>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.UI.Maui.Position>
+  nameWithType.vb: IEnumerable(Of Position)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.UI.Maui.Position)
+  name.vb: IEnumerable(Of Position)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.UI.Maui.Position
+    name: Position
+    href: Mapsui.UI.Maui.Position.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.UI.Maui.Position
+    name: Position
+    href: Mapsui.UI.Maui.Position.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Maui.MapSpan.GetHashCode*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.GetHashCode
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_GetHashCode
+  name: GetHashCode
+  nameWithType: MapSpan.GetHashCode
+  fullName: Mapsui.UI.Maui.MapSpan.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.UI.Maui.MapSpan.op_Equality*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.op_Equality
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_op_Equality_Mapsui_UI_Maui_MapSpan_Mapsui_UI_Maui_MapSpan_
+  name: operator ==
+  nameWithType: MapSpan.operator ==
+  fullName: Mapsui.UI.Maui.MapSpan.operator ==
+  nameWithType.vb: MapSpan.=
+  fullName.vb: Mapsui.UI.Maui.MapSpan.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.UI.Maui.MapSpan.op_Equality*
+    name: ==
+    href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_op_Equality_Mapsui_UI_Maui_MapSpan_Mapsui_UI_Maui_MapSpan_
+- uid: Mapsui.UI.Maui.MapSpan.op_Inequality*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.op_Inequality
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_op_Inequality_Mapsui_UI_Maui_MapSpan_Mapsui_UI_Maui_MapSpan_
+  name: operator !=
+  nameWithType: MapSpan.operator !=
+  fullName: Mapsui.UI.Maui.MapSpan.operator !=
+  nameWithType.vb: MapSpan.<>
+  fullName.vb: Mapsui.UI.Maui.MapSpan.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.UI.Maui.MapSpan.op_Inequality*
+    name: '!='
+    href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_op_Inequality_Mapsui_UI_Maui_MapSpan_Mapsui_UI_Maui_MapSpan_
+- uid: Mapsui.UI.Maui.MapSpan.WithZoom*
+  commentId: Overload:Mapsui.UI.Maui.MapSpan.WithZoom
+  href: Mapsui.UI.Maui.MapSpan.html#Mapsui_UI_Maui_MapSpan_WithZoom_System_Double_
+  name: WithZoom
+  nameWithType: MapSpan.WithZoom
+  fullName: Mapsui.UI.Maui.MapSpan.WithZoom

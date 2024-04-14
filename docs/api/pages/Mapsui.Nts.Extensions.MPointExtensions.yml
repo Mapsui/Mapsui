@@ -1,0 +1,439 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Extensions.MPointExtensions
+  commentId: T:Mapsui.Nts.Extensions.MPointExtensions
+  id: MPointExtensions
+  parent: Mapsui.Nts.Extensions
+  children:
+  - Mapsui.Nts.Extensions.MPointExtensions.ToCoordinate(Mapsui.MPoint)
+  - Mapsui.Nts.Extensions.MPointExtensions.ToPoint(Mapsui.MPoint)
+  langs:
+  - csharp
+  - vb
+  name: MPointExtensions
+  nameWithType: MPointExtensions
+  fullName: Mapsui.Nts.Extensions.MPointExtensions
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Extensions/MPointExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MPointExtensions
+    path: ../../Mapsui.Nts/Extensions/MPointExtensions.cs
+    startLine: 5
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Extensions
+  syntax:
+    content: public static class MPointExtensions
+    content.vb: Public Module MPointExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Nts.Extensions.MPointExtensions.ToPoint(Mapsui.MPoint)
+  commentId: M:Mapsui.Nts.Extensions.MPointExtensions.ToPoint(Mapsui.MPoint)
+  id: ToPoint(Mapsui.MPoint)
+  isExtensionMethod: true
+  parent: Mapsui.Nts.Extensions.MPointExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToPoint(MPoint?)
+  nameWithType: MPointExtensions.ToPoint(MPoint?)
+  fullName: Mapsui.Nts.Extensions.MPointExtensions.ToPoint(Mapsui.MPoint?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Extensions/MPointExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToPoint
+    path: ../../Mapsui.Nts/Extensions/MPointExtensions.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Extensions
+  syntax:
+    content: public static Point? ToPoint(this MPoint? point)
+    parameters:
+    - id: point
+      type: Mapsui.MPoint
+    return:
+      type: NetTopologySuite.Geometries.Point
+    content.vb: Public Shared Function ToPoint(point As MPoint) As Point
+  overload: Mapsui.Nts.Extensions.MPointExtensions.ToPoint*
+  nameWithType.vb: MPointExtensions.ToPoint(MPoint)
+  fullName.vb: Mapsui.Nts.Extensions.MPointExtensions.ToPoint(Mapsui.MPoint)
+  name.vb: ToPoint(MPoint)
+- uid: Mapsui.Nts.Extensions.MPointExtensions.ToCoordinate(Mapsui.MPoint)
+  commentId: M:Mapsui.Nts.Extensions.MPointExtensions.ToCoordinate(Mapsui.MPoint)
+  id: ToCoordinate(Mapsui.MPoint)
+  isExtensionMethod: true
+  parent: Mapsui.Nts.Extensions.MPointExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToCoordinate(MPoint?)
+  nameWithType: MPointExtensions.ToCoordinate(MPoint?)
+  fullName: Mapsui.Nts.Extensions.MPointExtensions.ToCoordinate(Mapsui.MPoint?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Extensions/MPointExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToCoordinate
+    path: ../../Mapsui.Nts/Extensions/MPointExtensions.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Extensions
+  syntax:
+    content: public static Coordinate? ToCoordinate(this MPoint? point)
+    parameters:
+    - id: point
+      type: Mapsui.MPoint
+    return:
+      type: NetTopologySuite.Geometries.Coordinate
+    content.vb: Public Shared Function ToCoordinate(point As MPoint) As Coordinate
+  overload: Mapsui.Nts.Extensions.MPointExtensions.ToCoordinate*
+  nameWithType.vb: MPointExtensions.ToCoordinate(MPoint)
+  fullName.vb: Mapsui.Nts.Extensions.MPointExtensions.ToCoordinate(Mapsui.MPoint)
+  name.vb: ToCoordinate(MPoint)
+references:
+- uid: Mapsui.Nts.Extensions
+  commentId: N:Mapsui.Nts.Extensions
+  href: Mapsui.html
+  name: Mapsui.Nts.Extensions
+  nameWithType: Mapsui.Nts.Extensions
+  fullName: Mapsui.Nts.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Extensions
+    name: Extensions
+    href: Mapsui.Nts.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Extensions
+    name: Extensions
+    href: Mapsui.Nts.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Nts.Extensions.MPointExtensions.ToPoint*
+  commentId: Overload:Mapsui.Nts.Extensions.MPointExtensions.ToPoint
+  href: Mapsui.Nts.Extensions.MPointExtensions.html#Mapsui_Nts_Extensions_MPointExtensions_ToPoint_Mapsui_MPoint_
+  name: ToPoint
+  nameWithType: MPointExtensions.ToPoint
+  fullName: Mapsui.Nts.Extensions.MPointExtensions.ToPoint
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: NetTopologySuite.Geometries.Point
+  commentId: T:NetTopologySuite.Geometries.Point
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: Point
+  nameWithType: Point
+  fullName: NetTopologySuite.Geometries.Point
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: NetTopologySuite.Geometries
+  commentId: N:NetTopologySuite.Geometries
+  isExternal: true
+  name: NetTopologySuite.Geometries
+  nameWithType: NetTopologySuite.Geometries
+  fullName: NetTopologySuite.Geometries
+  spec.csharp:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+  spec.vb:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+- uid: Mapsui.Nts.Extensions.MPointExtensions.ToCoordinate*
+  commentId: Overload:Mapsui.Nts.Extensions.MPointExtensions.ToCoordinate
+  href: Mapsui.Nts.Extensions.MPointExtensions.html#Mapsui_Nts_Extensions_MPointExtensions_ToCoordinate_Mapsui_MPoint_
+  name: ToCoordinate
+  nameWithType: MPointExtensions.ToCoordinate
+  fullName: Mapsui.Nts.Extensions.MPointExtensions.ToCoordinate
+- uid: NetTopologySuite.Geometries.Coordinate
+  commentId: T:NetTopologySuite.Geometries.Coordinate
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: Coordinate
+  nameWithType: Coordinate
+  fullName: NetTopologySuite.Geometries.Coordinate

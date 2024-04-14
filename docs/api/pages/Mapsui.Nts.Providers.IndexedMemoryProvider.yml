@@ -1,0 +1,1209 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider
+  commentId: T:Mapsui.Nts.Providers.IndexedMemoryProvider
+  id: IndexedMemoryProvider
+  parent: Mapsui.Nts.Providers
+  children:
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor(Mapsui.IFeature)
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor(System.Collections.Generic.IEnumerable{Mapsui.IFeature})
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.CRS
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.Clear
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.Features
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.Find(System.Object,System.String)
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.GetExtent
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  - Mapsui.Nts.Providers.IndexedMemoryProvider.SymbolSize
+  langs:
+  - csharp
+  - vb
+  name: IndexedMemoryProvider
+  nameWithType: IndexedMemoryProvider
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IndexedMemoryProvider
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 12
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  syntax:
+    content: 'public class IndexedMemoryProvider : IProvider'
+    content.vb: Public Class IndexedMemoryProvider Implements IProvider
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Providers.IProvider
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor
+  commentId: M:Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor
+  id: '#ctor'
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: IndexedMemoryProvider()
+  nameWithType: IndexedMemoryProvider.IndexedMemoryProvider()
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.IndexedMemoryProvider()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 29
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  summary: Gets or sets the geometries this data source contains
+  example: []
+  syntax:
+    content: public IndexedMemoryProvider()
+    content.vb: Public Sub New()
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor*
+  nameWithType.vb: IndexedMemoryProvider.New()
+  fullName.vb: Mapsui.Nts.Providers.IndexedMemoryProvider.New()
+  name.vb: New()
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor(Mapsui.IFeature)
+  commentId: M:Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor(Mapsui.IFeature)
+  id: '#ctor(Mapsui.IFeature)'
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: IndexedMemoryProvider(IFeature)
+  nameWithType: IndexedMemoryProvider.IndexedMemoryProvider(IFeature)
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.IndexedMemoryProvider(Mapsui.IFeature)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 68
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  summary: Initializes a new instance of the IndxedMemoryProvider
+  example: []
+  syntax:
+    content: public IndexedMemoryProvider(IFeature feature)
+    parameters:
+    - id: feature
+      type: Mapsui.IFeature
+      description: Feature to be in this dataSource
+    content.vb: Public Sub New(feature As IFeature)
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor*
+  nameWithType.vb: IndexedMemoryProvider.New(IFeature)
+  fullName.vb: Mapsui.Nts.Providers.IndexedMemoryProvider.New(Mapsui.IFeature)
+  name.vb: New(IFeature)
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.Features
+  commentId: P:Mapsui.Nts.Providers.IndexedMemoryProvider.Features
+  id: Features
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: Features
+  nameWithType: IndexedMemoryProvider.Features
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.Features
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Features
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 74
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  syntax:
+    content: public IReadOnlyList<IFeature> Features { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{Mapsui.IFeature}
+    content.vb: Public Property Features As IReadOnlyList(Of IFeature)
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.Features*
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.SymbolSize
+  commentId: P:Mapsui.Nts.Providers.IndexedMemoryProvider.SymbolSize
+  id: SymbolSize
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: SymbolSize
+  nameWithType: IndexedMemoryProvider.SymbolSize
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.SymbolSize
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SymbolSize
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 75
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  syntax:
+    content: public double SymbolSize { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property SymbolSize As Double
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.SymbolSize*
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.CRS
+  commentId: P:Mapsui.Nts.Providers.IndexedMemoryProvider.CRS
+  id: CRS
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: CRS
+  nameWithType: IndexedMemoryProvider.CRS
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.CRS
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CRS
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 80
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  summary: The spatial reference ID (CRS)
+  example: []
+  syntax:
+    content: public string? CRS { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CRS As String
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.CRS*
+  implements:
+  - Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor(System.Collections.Generic.IEnumerable{Mapsui.IFeature})
+  commentId: M:Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor(System.Collections.Generic.IEnumerable{Mapsui.IFeature})
+  id: '#ctor(System.Collections.Generic.IEnumerable{Mapsui.IFeature})'
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: IndexedMemoryProvider(IEnumerable<IFeature>)
+  nameWithType: IndexedMemoryProvider.IndexedMemoryProvider(IEnumerable<IFeature>)
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.IndexedMemoryProvider(System.Collections.Generic.IEnumerable<Mapsui.IFeature>)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 87
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  summary: Initializes a new instance of the IndxedMemoryProvider
+  example: []
+  syntax:
+    content: public IndexedMemoryProvider(IEnumerable<IFeature> features)
+    parameters:
+    - id: features
+      type: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+      description: Features to be included in this dataSource
+    content.vb: Public Sub New(features As IEnumerable(Of IFeature))
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor*
+  nameWithType.vb: IndexedMemoryProvider.New(IEnumerable(Of IFeature))
+  fullName.vb: Mapsui.Nts.Providers.IndexedMemoryProvider.New(System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))
+  name.vb: New(IEnumerable(Of IFeature))
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Nts.Providers.IndexedMemoryProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  id: GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: IndexedMemoryProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeaturesAsync
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 93
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  example: []
+  syntax:
+    content: public virtual Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    parameters:
+    - id: fetchInfo
+      type: Mapsui.Layers.FetchInfo
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+    content.vb: Public Overridable Function GetFeaturesAsync(fetchInfo As FetchInfo) As Task(Of IEnumerable(Of IFeature))
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.GetFeaturesAsync*
+  implements:
+  - Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.Find(System.Object,System.String)
+  commentId: M:Mapsui.Nts.Providers.IndexedMemoryProvider.Find(System.Object,System.String)
+  id: Find(System.Object,System.String)
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: Find(object?, string)
+  nameWithType: IndexedMemoryProvider.Find(object?, string)
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.Find(object?, string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Find
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 115
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  summary: Search for a feature
+  example: []
+  syntax:
+    content: public IFeature? Find(object? value, string fieldName)
+    parameters:
+    - id: value
+      type: System.Object
+      description: Value to search for
+    - id: fieldName
+      type: System.String
+      description: Name of the field to search in. This is the key of the T dictionary
+    return:
+      type: Mapsui.IFeature
+      description: ''
+    content.vb: Public Function Find(value As Object, fieldName As String) As IFeature
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.Find*
+  nameWithType.vb: IndexedMemoryProvider.Find(Object, String)
+  fullName.vb: Mapsui.Nts.Providers.IndexedMemoryProvider.Find(Object, String)
+  name.vb: Find(Object, String)
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.GetExtent
+  commentId: M:Mapsui.Nts.Providers.IndexedMemoryProvider.GetExtent
+  id: GetExtent
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: GetExtent()
+  nameWithType: IndexedMemoryProvider.GetExtent()
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.GetExtent()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetExtent
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 156
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  summary: BoundingBox of data set
+  example: []
+  syntax:
+    content: public MRect? GetExtent()
+    return:
+      type: Mapsui.MRect
+      description: BoundingBox
+    content.vb: Public Function GetExtent() As MRect
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.GetExtent*
+  implements:
+  - Mapsui.Providers.IProvider.GetExtent
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.Clear
+  commentId: M:Mapsui.Nts.Providers.IndexedMemoryProvider.Clear
+  id: Clear
+  parent: Mapsui.Nts.Providers.IndexedMemoryProvider
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: IndexedMemoryProvider.Clear()
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.Clear()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Clear
+    path: ../../Mapsui.Nts/Providers/IndexedMemoryProvider.cs
+    startLine: 161
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers
+  syntax:
+    content: public void Clear()
+    content.vb: Public Sub Clear()
+  overload: Mapsui.Nts.Providers.IndexedMemoryProvider.Clear*
+references:
+- uid: Mapsui.Nts.Providers
+  commentId: N:Mapsui.Nts.Providers
+  href: Mapsui.html
+  name: Mapsui.Nts.Providers
+  nameWithType: Mapsui.Nts.Providers
+  fullName: Mapsui.Nts.Providers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Providers.IProvider
+  commentId: T:Mapsui.Providers.IProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProvider.html
+  name: IProvider
+  nameWithType: IProvider
+  fullName: Mapsui.Providers.IProvider
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Providers
+  commentId: N:Mapsui.Providers
+  href: Mapsui.html
+  name: Mapsui.Providers
+  nameWithType: Mapsui.Providers
+  fullName: Mapsui.Providers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor*
+  commentId: Overload:Mapsui.Nts.Providers.IndexedMemoryProvider.#ctor
+  href: Mapsui.Nts.Providers.IndexedMemoryProvider.html#Mapsui_Nts_Providers_IndexedMemoryProvider__ctor
+  name: IndexedMemoryProvider
+  nameWithType: IndexedMemoryProvider.IndexedMemoryProvider
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.IndexedMemoryProvider
+  nameWithType.vb: IndexedMemoryProvider.New
+  fullName.vb: Mapsui.Nts.Providers.IndexedMemoryProvider.New
+  name.vb: New
+- uid: Mapsui.IFeature
+  commentId: T:Mapsui.IFeature
+  parent: Mapsui
+  href: Mapsui.IFeature.html
+  name: IFeature
+  nameWithType: IFeature
+  fullName: Mapsui.IFeature
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.Features*
+  commentId: Overload:Mapsui.Nts.Providers.IndexedMemoryProvider.Features
+  href: Mapsui.Nts.Providers.IndexedMemoryProvider.html#Mapsui_Nts_Providers_IndexedMemoryProvider_Features
+  name: Features
+  nameWithType: IndexedMemoryProvider.Features
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.Features
+- uid: System.Collections.Generic.IReadOnlyList{Mapsui.IFeature}
+  commentId: T:System.Collections.Generic.IReadOnlyList{Mapsui.IFeature}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<IFeature>
+  nameWithType: IReadOnlyList<IFeature>
+  fullName: System.Collections.Generic.IReadOnlyList<Mapsui.IFeature>
+  nameWithType.vb: IReadOnlyList(Of IFeature)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of Mapsui.IFeature)
+  name.vb: IReadOnlyList(Of IFeature)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.SymbolSize*
+  commentId: Overload:Mapsui.Nts.Providers.IndexedMemoryProvider.SymbolSize
+  href: Mapsui.Nts.Providers.IndexedMemoryProvider.html#Mapsui_Nts_Providers_IndexedMemoryProvider_SymbolSize
+  name: SymbolSize
+  nameWithType: IndexedMemoryProvider.SymbolSize
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.SymbolSize
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.CRS*
+  commentId: Overload:Mapsui.Nts.Providers.IndexedMemoryProvider.CRS
+  href: Mapsui.Nts.Providers.IndexedMemoryProvider.html#Mapsui_Nts_Providers_IndexedMemoryProvider_CRS
+  name: CRS
+  nameWithType: IndexedMemoryProvider.CRS
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.CRS
+- uid: Mapsui.Providers.IProvider.CRS
+  commentId: P:Mapsui.Providers.IProvider.CRS
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_CRS
+  name: CRS
+  nameWithType: IProvider.CRS
+  fullName: Mapsui.Providers.IProvider.CRS
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<IFeature>
+  nameWithType: IEnumerable<IFeature>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.IFeature>
+  nameWithType.vb: IEnumerable(Of IFeature)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.IFeature)
+  name.vb: IEnumerable(Of IFeature)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.GetFeaturesAsync*
+  commentId: Overload:Mapsui.Nts.Providers.IndexedMemoryProvider.GetFeaturesAsync
+  href: Mapsui.Nts.Providers.IndexedMemoryProvider.html#Mapsui_Nts_Providers_IndexedMemoryProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync
+  nameWithType: IndexedMemoryProvider.GetFeaturesAsync
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.GetFeaturesAsync
+- uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: IProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IEnumerable<IFeature>>
+  nameWithType: Task<IEnumerable<IFeature>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Mapsui.IFeature>>
+  nameWithType.vb: Task(Of IEnumerable(Of IFeature))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))
+  name.vb: Task(Of IEnumerable(Of IFeature))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: )
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.Find*
+  commentId: Overload:Mapsui.Nts.Providers.IndexedMemoryProvider.Find
+  href: Mapsui.Nts.Providers.IndexedMemoryProvider.html#Mapsui_Nts_Providers_IndexedMemoryProvider_Find_System_Object_System_String_
+  name: Find
+  nameWithType: IndexedMemoryProvider.Find
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.Find
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.GetExtent*
+  commentId: Overload:Mapsui.Nts.Providers.IndexedMemoryProvider.GetExtent
+  href: Mapsui.Nts.Providers.IndexedMemoryProvider.html#Mapsui_Nts_Providers_IndexedMemoryProvider_GetExtent
+  name: GetExtent
+  nameWithType: IndexedMemoryProvider.GetExtent
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.GetExtent
+- uid: Mapsui.Providers.IProvider.GetExtent
+  commentId: M:Mapsui.Providers.IProvider.GetExtent
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  name: GetExtent()
+  nameWithType: IProvider.GetExtent()
+  fullName: Mapsui.Providers.IProvider.GetExtent()
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui.Nts.Providers.IndexedMemoryProvider.Clear*
+  commentId: Overload:Mapsui.Nts.Providers.IndexedMemoryProvider.Clear
+  href: Mapsui.Nts.Providers.IndexedMemoryProvider.html#Mapsui_Nts_Providers_IndexedMemoryProvider_Clear
+  name: Clear
+  nameWithType: IndexedMemoryProvider.Clear
+  fullName: Mapsui.Nts.Providers.IndexedMemoryProvider.Clear

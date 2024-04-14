@@ -1,0 +1,92 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Fetcher
+  commentId: N:Mapsui.Fetcher
+  id: Mapsui.Fetcher
+  children:
+  - Mapsui.Fetcher.DataChangedEventArgs
+  - Mapsui.Fetcher.DataChangedEventHandler
+  - Mapsui.Fetcher.Delayer
+  - Mapsui.Fetcher.FetchMachine
+  - Mapsui.Fetcher.FetchWorker
+  - Mapsui.Fetcher.IAsyncDataFetcher
+  - Mapsui.Fetcher.IFetchDispatcher
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Fetcher
+  nameWithType: Mapsui.Fetcher
+  fullName: Mapsui.Fetcher
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Fetcher.Delayer
+  commentId: T:Mapsui.Fetcher.Delayer
+  parent: Mapsui.Fetcher
+  href: Mapsui.Fetcher.Delayer.html
+  name: Delayer
+  nameWithType: Delayer
+  fullName: Mapsui.Fetcher.Delayer
+- uid: Mapsui.Fetcher.FetchMachine
+  commentId: T:Mapsui.Fetcher.FetchMachine
+  href: Mapsui.Fetcher.FetchMachine.html
+  name: FetchMachine
+  nameWithType: FetchMachine
+  fullName: Mapsui.Fetcher.FetchMachine
+- uid: Mapsui.Fetcher.FetchWorker
+  commentId: T:Mapsui.Fetcher.FetchWorker
+  href: Mapsui.Fetcher.FetchWorker.html
+  name: FetchWorker
+  nameWithType: FetchWorker
+  fullName: Mapsui.Fetcher.FetchWorker
+- uid: Mapsui.Fetcher.IAsyncDataFetcher
+  commentId: T:Mapsui.Fetcher.IAsyncDataFetcher
+  parent: Mapsui.Fetcher
+  href: Mapsui.Fetcher.IAsyncDataFetcher.html
+  name: IAsyncDataFetcher
+  nameWithType: IAsyncDataFetcher
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher
+- uid: Mapsui.Fetcher.DataChangedEventHandler
+  commentId: T:Mapsui.Fetcher.DataChangedEventHandler
+  parent: Mapsui.Fetcher
+  href: Mapsui.Fetcher.DataChangedEventHandler.html
+  name: DataChangedEventHandler
+  nameWithType: DataChangedEventHandler
+  fullName: Mapsui.Fetcher.DataChangedEventHandler
+- uid: Mapsui.Fetcher.DataChangedEventArgs
+  commentId: T:Mapsui.Fetcher.DataChangedEventArgs
+  parent: Mapsui.Fetcher
+  href: Mapsui.Fetcher.DataChangedEventArgs.html
+  name: DataChangedEventArgs
+  nameWithType: DataChangedEventArgs
+  fullName: Mapsui.Fetcher.DataChangedEventArgs
+- uid: Mapsui.Fetcher.IFetchDispatcher
+  commentId: T:Mapsui.Fetcher.IFetchDispatcher
+  parent: Mapsui.Fetcher
+  href: Mapsui.Fetcher.IFetchDispatcher.html
+  name: IFetchDispatcher
+  nameWithType: IFetchDispatcher
+  fullName: Mapsui.Fetcher.IFetchDispatcher
+- uid: Mapsui.Fetcher
+  commentId: N:Mapsui.Fetcher
+  href: Mapsui.html
+  name: Mapsui.Fetcher
+  nameWithType: Mapsui.Fetcher
+  fullName: Mapsui.Fetcher
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html

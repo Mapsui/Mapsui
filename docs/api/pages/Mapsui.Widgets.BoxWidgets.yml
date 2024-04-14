@@ -1,0 +1,62 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.BoxWidgets
+  commentId: N:Mapsui.Widgets.BoxWidgets
+  id: Mapsui.Widgets.BoxWidgets
+  children:
+  - Mapsui.Widgets.BoxWidgets.BoxWidget
+  - Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Widgets.BoxWidgets
+  nameWithType: Mapsui.Widgets.BoxWidgets
+  fullName: Mapsui.Widgets.BoxWidgets
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Widgets.BoxWidgets.BoxWidget
+  commentId: T:Mapsui.Widgets.BoxWidgets.BoxWidget
+  parent: Mapsui.Widgets.BoxWidgets
+  href: Mapsui.Widgets.BoxWidgets.BoxWidget.html
+  name: BoxWidget
+  nameWithType: BoxWidget
+  fullName: Mapsui.Widgets.BoxWidgets.BoxWidget
+- uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  commentId: T:Mapsui.Widgets.BoxWidgets.TextBoxWidget
+  parent: Mapsui.Widgets.BoxWidgets
+  href: Mapsui.Widgets.BoxWidgets.TextBoxWidget.html
+  name: TextBoxWidget
+  nameWithType: TextBoxWidget
+  fullName: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+- uid: Mapsui.Widgets.BoxWidgets
+  commentId: N:Mapsui.Widgets.BoxWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.BoxWidgets
+  nameWithType: Mapsui.Widgets.BoxWidgets
+  fullName: Mapsui.Widgets.BoxWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.BoxWidgets
+    name: BoxWidgets
+    href: Mapsui.Widgets.BoxWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.BoxWidgets
+    name: BoxWidgets
+    href: Mapsui.Widgets.BoxWidgets.html

@@ -1,0 +1,4059 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ArcGIS.ArcGISContext
+  commentId: T:Mapsui.ArcGIS.ArcGISContext
+  id: ArcGISContext
+  parent: Mapsui.ArcGIS
+  children:
+  - Mapsui.ArcGIS.ArcGISContext.#ctor
+  - Mapsui.ArcGIS.ArcGISContext.#ctor(System.Text.Json.JsonSerializerOptions)
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISLayer
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend
+  - Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray
+  - Mapsui.ArcGIS.ArcGISContext.Boolean
+  - Mapsui.ArcGIS.ArcGISContext.DateTime
+  - Mapsui.ArcGIS.ArcGISContext.Default
+  - Mapsui.ArcGIS.ArcGISContext.DictionaryStringString
+  - Mapsui.ArcGIS.ArcGISContext.Domain
+  - Mapsui.ArcGIS.ArcGISContext.Double
+  - Mapsui.ArcGIS.ArcGISContext.DoubleArray
+  - Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo
+  - Mapsui.ArcGIS.ArcGISContext.Extent
+  - Mapsui.ArcGIS.ArcGISContext.Field
+  - Mapsui.ArcGIS.ArcGISContext.FieldArray
+  - Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions
+  - Mapsui.ArcGIS.ArcGISContext.GetTypeInfo(System.Type)
+  - Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString
+  - Mapsui.ArcGIS.ArcGISContext.Int32
+  - Mapsui.ArcGIS.ArcGISContext.Int32Array
+  - Mapsui.ArcGIS.ArcGISContext.Int64
+  - Mapsui.ArcGIS.ArcGISContext.Int64Array
+  - Mapsui.ArcGIS.ArcGISContext.InterpolationType
+  - Mapsui.ArcGIS.ArcGISContext.Lod
+  - Mapsui.ArcGIS.ArcGISContext.LodArray
+  - Mapsui.ArcGIS.ArcGISContext.NullableDateTime
+  - Mapsui.ArcGIS.ArcGISContext.NullableDouble
+  - Mapsui.ArcGIS.ArcGISContext.Origin
+  - Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters
+  - Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo
+  - Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray
+  - Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo
+  - Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray
+  - Mapsui.ArcGIS.ArcGISContext.Result
+  - Mapsui.ArcGIS.ArcGISContext.ResultArray
+  - Mapsui.ArcGIS.ArcGISContext.SpatialReference
+  - Mapsui.ArcGIS.ArcGISContext.String
+  - Mapsui.ArcGIS.ArcGISContext.Table
+  - Mapsui.ArcGIS.ArcGISContext.TableArray
+  - Mapsui.ArcGIS.ArcGISContext.TileInfo
+  - Mapsui.ArcGIS.ArcGISContext.TimeInfo
+  - Mapsui.ArcGIS.ArcGISContext.TimeReference
+  langs:
+  - csharp
+  - vb
+  name: ArcGISContext
+  nameWithType: ArcGISContext
+  fullName: Mapsui.ArcGIS.ArcGISContext
+  type: Class
+  source:
+    id: ArcGISContext
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.IDictionaryStringString.g.cs
+    startLine: 10
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  syntax:
+    content: >-
+      [JsonSourceGenerationOptions(PropertyNameCaseInsensitive = true, UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip, NumberHandling = JsonNumberHandling.AllowReadingFromString|JsonNumberHandling.AllowNamedFloatingPointLiterals, ReadCommentHandling = JsonCommentHandling.Skip, AllowTrailingCommas = true)]
+
+      [JsonSerializable(typeof(ArcGISFeatureInfo))]
+
+      [JsonSerializable(typeof(ArcGISLegendResponse))]
+
+      [JsonSerializable(typeof(ArcGISDynamicCapabilities))]
+
+      [JsonSerializable(typeof(ArcGISImageCapabilities))]
+
+      public class ArcGISContext : JsonSerializerContext, IJsonTypeInfoResolver
+    content.vb: >-
+      <JsonSourceGenerationOptions(PropertyNameCaseInsensitive:=True, UnmappedMemberHandling:=JsonUnmappedMemberHandling.Skip, NumberHandling:=JsonNumberHandling.AllowReadingFromStringOrJsonNumberHandling.AllowNamedFloatingPointLiterals, ReadCommentHandling:=JsonCommentHandling.Skip, AllowTrailingCommas:=True)>
+
+      <JsonSerializable(GetType(ArcGISFeatureInfo))>
+
+      <JsonSerializable(GetType(ArcGISLegendResponse))>
+
+      <JsonSerializable(GetType(ArcGISDynamicCapabilities))>
+
+      <JsonSerializable(GetType(ArcGISImageCapabilities))>
+
+      Public Class ArcGISContext Inherits JsonSerializerContext Implements IJsonTypeInfoResolver
+  inheritance:
+  - System.Object
+  - System.Text.Json.Serialization.JsonSerializerContext
+  implements:
+  - System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver
+  inheritedMembers:
+  - System.Text.Json.Serialization.JsonSerializerContext.Options
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  attributes:
+  - type: System.Text.Json.Serialization.JsonSourceGenerationOptionsAttribute
+    ctor: System.Text.Json.Serialization.JsonSourceGenerationOptionsAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: PropertyNameCaseInsensitive
+      type: System.Boolean
+      value: true
+    - name: UnmappedMemberHandling
+      type: System.Text.Json.Serialization.JsonUnmappedMemberHandling
+      value: 0
+    - name: NumberHandling
+      type: System.Text.Json.Serialization.JsonNumberHandling
+      value: 5
+    - name: ReadCommentHandling
+      type: System.Text.Json.JsonCommentHandling
+      value: 1
+    - name: AllowTrailingCommas
+      type: System.Boolean
+      value: true
+  - type: System.Text.Json.Serialization.JsonSerializableAttribute
+    ctor: System.Text.Json.Serialization.JsonSerializableAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo
+  - type: System.Text.Json.Serialization.JsonSerializableAttribute
+    ctor: System.Text.Json.Serialization.JsonSerializableAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse
+  - type: System.Text.Json.Serialization.JsonSerializableAttribute
+    ctor: System.Text.Json.Serialization.JsonSerializableAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+  - type: System.Text.Json.Serialization.JsonSerializableAttribute
+    ctor: System.Text.Json.Serialization.JsonSerializableAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+- uid: Mapsui.ArcGIS.ArcGISContext.Boolean
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Boolean
+  id: Boolean
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Boolean
+  nameWithType: ArcGISContext.Boolean
+  fullName: Mapsui.ArcGIS.ArcGISContext.Boolean
+  type: Property
+  source:
+    id: Boolean
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Boolean.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<bool> Boolean { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Boolean}
+    content.vb: Public ReadOnly Property [Boolean] As JsonTypeInfo(Of Boolean)
+  overload: Mapsui.ArcGIS.ArcGISContext.Boolean*
+- uid: Mapsui.ArcGIS.ArcGISContext.DictionaryStringString
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.DictionaryStringString
+  id: DictionaryStringString
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: DictionaryStringString
+  nameWithType: ArcGISContext.DictionaryStringString
+  fullName: Mapsui.ArcGIS.ArcGISContext.DictionaryStringString
+  type: Property
+  source:
+    id: DictionaryStringString
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.DictionaryStringString.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<Dictionary<string, string>> DictionaryStringString { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Collections.Generic.Dictionary{System.String,System.String}}
+    content.vb: Public ReadOnly Property DictionaryStringString As JsonTypeInfo(Of Dictionary(Of String, String))
+  overload: Mapsui.ArcGIS.ArcGISContext.DictionaryStringString*
+- uid: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray
+  id: RasterFunctionInfoArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: RasterFunctionInfoArray
+  nameWithType: ArcGISContext.RasterFunctionInfoArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray
+  type: Property
+  source:
+    id: RasterFunctionInfoArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.RasterFunctionInfoArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<RasterFunctionInfo[]> RasterFunctionInfoArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo[]}
+    content.vb: Public ReadOnly Property RasterFunctionInfoArray As JsonTypeInfo(Of RasterFunctionInfo())
+  overload: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.Double
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Double
+  id: Double
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Double
+  nameWithType: ArcGISContext.Double
+  fullName: Mapsui.ArcGIS.ArcGISContext.Double
+  type: Property
+  source:
+    id: Double
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Double.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<double> Double { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Double}
+    content.vb: Public ReadOnly Property [Double] As JsonTypeInfo(Of Double)
+  overload: Mapsui.ArcGIS.ArcGISContext.Double*
+- uid: Mapsui.ArcGIS.ArcGISContext.NullableDouble
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.NullableDouble
+  id: NullableDouble
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: NullableDouble
+  nameWithType: ArcGISContext.NullableDouble
+  fullName: Mapsui.ArcGIS.ArcGISContext.NullableDouble
+  type: Property
+  source:
+    id: NullableDouble
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.NullableDouble.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<double?> NullableDouble { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Nullable{System.Double}}
+    content.vb: Public ReadOnly Property NullableDouble As JsonTypeInfo(Of Double?)
+  overload: Mapsui.ArcGIS.ArcGISContext.NullableDouble*
+- uid: Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo
+  id: EditFieldsInfo
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: EditFieldsInfo
+  nameWithType: ArcGISContext.EditFieldsInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo
+  type: Property
+  source:
+    id: EditFieldsInfo
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.EditFieldsInfo.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<EditFieldsInfo> EditFieldsInfo { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo}
+    content.vb: Public ReadOnly Property EditFieldsInfo As JsonTypeInfo(Of EditFieldsInfo)
+  overload: Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo*
+- uid: Mapsui.ArcGIS.ArcGISContext.FieldArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.FieldArray
+  id: FieldArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: FieldArray
+  nameWithType: ArcGISContext.FieldArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.FieldArray
+  type: Property
+  source:
+    id: FieldArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.FieldArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<Field[]> FieldArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.Field[]}
+    content.vb: Public ReadOnly Property FieldArray As JsonTypeInfo(Of Field())
+  overload: Mapsui.ArcGIS.ArcGISContext.FieldArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.Lod
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Lod
+  id: Lod
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Lod
+  nameWithType: ArcGISContext.Lod
+  fullName: Mapsui.ArcGIS.ArcGISContext.Lod
+  type: Property
+  source:
+    id: Lod
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Lod.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<TileInfo.Lod> Lod { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo.Lod}
+    content.vb: Public ReadOnly Property Lod As JsonTypeInfo(Of TileInfo.Lod)
+  overload: Mapsui.ArcGIS.ArcGISContext.Lod*
+- uid: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray
+  id: RasterTypeInfoArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: RasterTypeInfoArray
+  nameWithType: ArcGISContext.RasterTypeInfoArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray
+  type: Property
+  source:
+    id: RasterTypeInfoArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.RasterTypeInfoArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<RasterTypeInfo[]> RasterTypeInfoArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo[]}
+    content.vb: Public ReadOnly Property RasterTypeInfoArray As JsonTypeInfo(Of RasterTypeInfo())
+  overload: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters
+  id: OwnershipBasedAccessControlForRasters
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: OwnershipBasedAccessControlForRasters
+  nameWithType: ArcGISContext.OwnershipBasedAccessControlForRasters
+  fullName: Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters
+  type: Property
+  source:
+    id: OwnershipBasedAccessControlForRasters
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.OwnershipBasedAccessControlForRasters.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<OwnershipBasedAccessControlForRasters> OwnershipBasedAccessControlForRasters { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters}
+    content.vb: Public ReadOnly Property OwnershipBasedAccessControlForRasters As JsonTypeInfo(Of OwnershipBasedAccessControlForRasters)
+  overload: Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters*
+- uid: Mapsui.ArcGIS.ArcGISContext.SpatialReference
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.SpatialReference
+  id: SpatialReference
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: SpatialReference
+  nameWithType: ArcGISContext.SpatialReference
+  fullName: Mapsui.ArcGIS.ArcGISContext.SpatialReference
+  type: Property
+  source:
+    id: SpatialReference
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.SpatialReference.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<SpatialReference> SpatialReference { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.SpatialReference}
+    content.vb: Public ReadOnly Property SpatialReference As JsonTypeInfo(Of SpatialReference)
+  overload: Mapsui.ArcGIS.ArcGISContext.SpatialReference*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray
+  id: ArcGISLayerArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISLayerArray
+  nameWithType: ArcGISContext.ArcGISLayerArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray
+  type: Property
+  source:
+    id: ArcGISLayerArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISLayerArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISLayer[]> ArcGISLayerArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLayer[]}
+    content.vb: Public ReadOnly Property ArcGISLayerArray As JsonTypeInfo(Of ArcGISLayer())
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.TimeInfo
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.TimeInfo
+  id: TimeInfo
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: TimeInfo
+  nameWithType: ArcGISContext.TimeInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.TimeInfo
+  type: Property
+  source:
+    id: TimeInfo
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.TimeInfo.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<TimeInfo> TimeInfo { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.TimeInfo}
+    content.vb: Public ReadOnly Property TimeInfo As JsonTypeInfo(Of TimeInfo)
+  overload: Mapsui.ArcGIS.ArcGISContext.TimeInfo*
+- uid: Mapsui.ArcGIS.ArcGISContext.DoubleArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.DoubleArray
+  id: DoubleArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: DoubleArray
+  nameWithType: ArcGISContext.DoubleArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.DoubleArray
+  type: Property
+  source:
+    id: DoubleArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.DoubleArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<double[]> DoubleArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Double[]}
+    content.vb: Public ReadOnly Property DoubleArray As JsonTypeInfo(Of Double())
+  overload: Mapsui.ArcGIS.ArcGISContext.DoubleArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.Int32Array
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Int32Array
+  id: Int32Array
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Int32Array
+  nameWithType: ArcGISContext.Int32Array
+  fullName: Mapsui.ArcGIS.ArcGISContext.Int32Array
+  type: Property
+  source:
+    id: Int32Array
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Int32Array.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<int[]> Int32Array { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int32[]}
+    content.vb: Public ReadOnly Property Int32Array As JsonTypeInfo(Of Integer())
+  overload: Mapsui.ArcGIS.ArcGISContext.Int32Array*
+- uid: Mapsui.ArcGIS.ArcGISContext.TileInfo
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.TileInfo
+  id: TileInfo
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: TileInfo
+  nameWithType: ArcGISContext.TileInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.TileInfo
+  type: Property
+  source:
+    id: TileInfo
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.TileInfo.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<TileInfo> TileInfo { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo}
+    content.vb: Public ReadOnly Property TileInfo As JsonTypeInfo(Of TileInfo)
+  overload: Mapsui.ArcGIS.ArcGISContext.TileInfo*
+- uid: Mapsui.ArcGIS.ArcGISContext.Default
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Default
+  id: Default
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Default
+  nameWithType: ArcGISContext.Default
+  fullName: Mapsui.ArcGIS.ArcGISContext.Default
+  type: Property
+  source:
+    id: Default
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.g.cs
+    startLine: 25
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: The default <xref href="System.Text.Json.Serialization.JsonSerializerContext" data-throw-if-not-resolved="false"></xref> associated with a default <xref href="System.Text.Json.JsonSerializerOptions" data-throw-if-not-resolved="false"></xref> instance.
+  example: []
+  syntax:
+    content: public static ArcGISContext Default { get; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.ArcGISContext
+    content.vb: Public Shared ReadOnly Property [Default] As ArcGISContext
+  overload: Mapsui.ArcGIS.ArcGISContext.Default*
+- uid: Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions
+  id: GeneratedSerializerOptions
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: GeneratedSerializerOptions
+  nameWithType: ArcGISContext.GeneratedSerializerOptions
+  fullName: Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions
+  type: Property
+  source:
+    id: GeneratedSerializerOptions
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.g.cs
+    startLine: 30
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: The source-generated options associated with this context.
+  example: []
+  syntax:
+    content: protected override JsonSerializerOptions? GeneratedSerializerOptions { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.JsonSerializerOptions
+    content.vb: Protected Overrides ReadOnly Property GeneratedSerializerOptions As JsonSerializerOptions
+  overridden: System.Text.Json.Serialization.JsonSerializerContext.GeneratedSerializerOptions
+  overload: Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions*
+- uid: Mapsui.ArcGIS.ArcGISContext.#ctor
+  commentId: M:Mapsui.ArcGIS.ArcGISContext.#ctor
+  id: '#ctor'
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISContext()
+  nameWithType: ArcGISContext.ArcGISContext()
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISContext()
+  type: Constructor
+  source:
+    id: .ctor
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.g.cs
+    startLine: 33
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  example: []
+  syntax:
+    content: public ArcGISContext()
+    content.vb: Public Sub New()
+  overload: Mapsui.ArcGIS.ArcGISContext.#ctor*
+  nameWithType.vb: ArcGISContext.New()
+  fullName.vb: Mapsui.ArcGIS.ArcGISContext.New()
+  name.vb: New()
+- uid: Mapsui.ArcGIS.ArcGISContext.#ctor(System.Text.Json.JsonSerializerOptions)
+  commentId: M:Mapsui.ArcGIS.ArcGISContext.#ctor(System.Text.Json.JsonSerializerOptions)
+  id: '#ctor(System.Text.Json.JsonSerializerOptions)'
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISContext(JsonSerializerOptions)
+  nameWithType: ArcGISContext.ArcGISContext(JsonSerializerOptions)
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISContext(System.Text.Json.JsonSerializerOptions)
+  type: Constructor
+  source:
+    id: .ctor
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.g.cs
+    startLine: 38
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Creates an instance of <xref href="System.Text.Json.Serialization.JsonSerializerContext" data-throw-if-not-resolved="false"></xref> and binds it with the indicated <xref href="System.Text.Json.JsonSerializerOptions" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public ArcGISContext(JsonSerializerOptions options)
+    parameters:
+    - id: options
+      type: System.Text.Json.JsonSerializerOptions
+      description: The run time provided options for the context instance.
+    content.vb: Public Sub New(options As JsonSerializerOptions)
+  overload: Mapsui.ArcGIS.ArcGISContext.#ctor*
+  nameWithType.vb: ArcGISContext.New(JsonSerializerOptions)
+  fullName.vb: Mapsui.ArcGIS.ArcGISContext.New(System.Text.Json.JsonSerializerOptions)
+  name.vb: New(JsonSerializerOptions)
+- uid: Mapsui.ArcGIS.ArcGISContext.Field
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Field
+  id: Field
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Field
+  nameWithType: ArcGISContext.Field
+  fullName: Mapsui.ArcGIS.ArcGISContext.Field
+  type: Property
+  source:
+    id: Field
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Field.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<Field> Field { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.Field}
+    content.vb: Public ReadOnly Property Field As JsonTypeInfo(Of Field)
+  overload: Mapsui.ArcGIS.ArcGISContext.Field*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend
+  id: ArcGISLegendResponseLegend
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISLegendResponseLegend
+  nameWithType: ArcGISContext.ArcGISLegendResponseLegend
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend
+  type: Property
+  source:
+    id: ArcGISLegendResponseLegend
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISLegendResponseLegend.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISLegendResponseLegend> ArcGISLegendResponseLegend { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend}
+    content.vb: Public ReadOnly Property ArcGISLegendResponseLegend As JsonTypeInfo(Of ArcGISLegendResponseLegend)
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend*
+- uid: Mapsui.ArcGIS.ArcGISContext.Table
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Table
+  id: Table
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Table
+  nameWithType: ArcGISContext.Table
+  fullName: Mapsui.ArcGIS.ArcGISContext.Table
+  type: Property
+  source:
+    id: Table
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Table.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<Table> Table { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.Table}
+    content.vb: Public ReadOnly Property Table As JsonTypeInfo(Of Table)
+  overload: Mapsui.ArcGIS.ArcGISContext.Table*
+- uid: Mapsui.ArcGIS.ArcGISContext.ResultArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ResultArray
+  id: ResultArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ResultArray
+  nameWithType: ArcGISContext.ResultArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.ResultArray
+  type: Property
+  source:
+    id: ResultArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ResultArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<Result[]> ResultArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.Result[]}
+    content.vb: Public ReadOnly Property ResultArray As JsonTypeInfo(Of Result())
+  overload: Mapsui.ArcGIS.ArcGISContext.ResultArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.Int32
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Int32
+  id: Int32
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Int32
+  nameWithType: ArcGISContext.Int32
+  fullName: Mapsui.ArcGIS.ArcGISContext.Int32
+  type: Property
+  source:
+    id: Int32
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Int32.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<int> Int32 { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int32}
+    content.vb: Public ReadOnly Property Int32 As JsonTypeInfo(Of Integer)
+  overload: Mapsui.ArcGIS.ArcGISContext.Int32*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo
+  id: ArcGISFeatureInfo
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISFeatureInfo
+  nameWithType: ArcGISContext.ArcGISFeatureInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo
+  type: Property
+  source:
+    id: ArcGISFeatureInfo
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISFeatureInfo.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISFeatureInfo> ArcGISFeatureInfo { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo}
+    content.vb: Public ReadOnly Property ArcGISFeatureInfo As JsonTypeInfo(Of ArcGISFeatureInfo)
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo*
+- uid: Mapsui.ArcGIS.ArcGISContext.TimeReference
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.TimeReference
+  id: TimeReference
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: TimeReference
+  nameWithType: ArcGISContext.TimeReference
+  fullName: Mapsui.ArcGIS.ArcGISContext.TimeReference
+  type: Property
+  source:
+    id: TimeReference
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.TimeReference.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<TimeReference> TimeReference { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.TimeReference}
+    content.vb: Public ReadOnly Property TimeReference As JsonTypeInfo(Of TimeReference)
+  overload: Mapsui.ArcGIS.ArcGISContext.TimeReference*
+- uid: Mapsui.ArcGIS.ArcGISContext.InterpolationType
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.InterpolationType
+  id: InterpolationType
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: InterpolationType
+  nameWithType: ArcGISContext.InterpolationType
+  fullName: Mapsui.ArcGIS.ArcGISContext.InterpolationType
+  type: Property
+  source:
+    id: InterpolationType
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.InterpolationType.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<InterpolationType> InterpolationType { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.InterpolationType}
+    content.vb: Public ReadOnly Property InterpolationType As JsonTypeInfo(Of InterpolationType)
+  overload: Mapsui.ArcGIS.ArcGISContext.InterpolationType*
+- uid: Mapsui.ArcGIS.ArcGISContext.Int64Array
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Int64Array
+  id: Int64Array
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Int64Array
+  nameWithType: ArcGISContext.Int64Array
+  fullName: Mapsui.ArcGIS.ArcGISContext.Int64Array
+  type: Property
+  source:
+    id: Int64Array
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Int64Array.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<long[]> Int64Array { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int64[]}
+    content.vb: Public ReadOnly Property Int64Array As JsonTypeInfo(Of Long())
+  overload: Mapsui.ArcGIS.ArcGISContext.Int64Array*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse
+  id: ArcGISLegendResponse
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISLegendResponse
+  nameWithType: ArcGISContext.ArcGISLegendResponse
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse
+  type: Property
+  source:
+    id: ArcGISLegendResponse
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISLegendResponse.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISLegendResponse> ArcGISLegendResponse { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse}
+    content.vb: Public ReadOnly Property ArcGISLegendResponse As JsonTypeInfo(Of ArcGISLegendResponse)
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray
+  id: ArcGISLegendResponseLegendArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISLegendResponseLegendArray
+  nameWithType: ArcGISContext.ArcGISLegendResponseLegendArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray
+  type: Property
+  source:
+    id: ArcGISLegendResponseLegendArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISLegendResponseLegendArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISLegendResponseLegend[]> ArcGISLegendResponseLegendArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend[]}
+    content.vb: Public ReadOnly Property ArcGISLegendResponseLegendArray As JsonTypeInfo(Of ArcGISLegendResponseLegend())
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.TableArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.TableArray
+  id: TableArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: TableArray
+  nameWithType: ArcGISContext.TableArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.TableArray
+  type: Property
+  source:
+    id: TableArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.TableArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<Table[]> TableArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.Table[]}
+    content.vb: Public ReadOnly Property TableArray As JsonTypeInfo(Of Table())
+  overload: Mapsui.ArcGIS.ArcGISContext.TableArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo
+  id: RasterFunctionInfo
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: RasterFunctionInfo
+  nameWithType: ArcGISContext.RasterFunctionInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo
+  type: Property
+  source:
+    id: RasterFunctionInfo
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.RasterFunctionInfo.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<RasterFunctionInfo> RasterFunctionInfo { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo}
+    content.vb: Public ReadOnly Property RasterFunctionInfo As JsonTypeInfo(Of RasterFunctionInfo)
+  overload: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo*
+- uid: Mapsui.ArcGIS.ArcGISContext.Origin
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Origin
+  id: Origin
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Origin
+  nameWithType: ArcGISContext.Origin
+  fullName: Mapsui.ArcGIS.ArcGISContext.Origin
+  type: Property
+  source:
+    id: Origin
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Origin.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<TileInfo.Origin> Origin { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo.Origin}
+    content.vb: Public ReadOnly Property Origin As JsonTypeInfo(Of TileInfo.Origin)
+  overload: Mapsui.ArcGIS.ArcGISContext.Origin*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities
+  id: ArcGISImageCapabilities
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISImageCapabilities
+  nameWithType: ArcGISContext.ArcGISImageCapabilities
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities
+  type: Property
+  source:
+    id: ArcGISImageCapabilities
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISImageCapabilities.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISImageCapabilities> ArcGISImageCapabilities { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities}
+    content.vb: Public ReadOnly Property ArcGISImageCapabilities As JsonTypeInfo(Of ArcGISImageCapabilities)
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities*
+- uid: Mapsui.ArcGIS.ArcGISContext.LodArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.LodArray
+  id: LodArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: LodArray
+  nameWithType: ArcGISContext.LodArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.LodArray
+  type: Property
+  source:
+    id: LodArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.LodArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<TileInfo.Lod[]> LodArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo.Lod[]}
+    content.vb: Public ReadOnly Property LodArray As JsonTypeInfo(Of TileInfo.Lod())
+  overload: Mapsui.ArcGIS.ArcGISContext.LodArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer
+  id: ArcGISLegendResponseLayer
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISLegendResponseLayer
+  nameWithType: ArcGISContext.ArcGISLegendResponseLayer
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer
+  type: Property
+  source:
+    id: ArcGISLegendResponseLayer
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISLegendResponseLayer.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISLegendResponseLayer> ArcGISLegendResponseLayer { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer}
+    content.vb: Public ReadOnly Property ArcGISLegendResponseLayer As JsonTypeInfo(Of ArcGISLegendResponseLayer)
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities
+  id: ArcGISDynamicCapabilities
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISDynamicCapabilities
+  nameWithType: ArcGISContext.ArcGISDynamicCapabilities
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities
+  type: Property
+  source:
+    id: ArcGISDynamicCapabilities
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISDynamicCapabilities.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISDynamicCapabilities> ArcGISDynamicCapabilities { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities}
+    content.vb: Public ReadOnly Property ArcGISDynamicCapabilities As JsonTypeInfo(Of ArcGISDynamicCapabilities)
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities*
+- uid: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo
+  id: RasterTypeInfo
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: RasterTypeInfo
+  nameWithType: ArcGISContext.RasterTypeInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo
+  type: Property
+  source:
+    id: RasterTypeInfo
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.RasterTypeInfo.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<RasterTypeInfo> RasterTypeInfo { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo}
+    content.vb: Public ReadOnly Property RasterTypeInfo As JsonTypeInfo(Of RasterTypeInfo)
+  overload: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo*
+- uid: Mapsui.ArcGIS.ArcGISContext.Extent
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Extent
+  id: Extent
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Extent
+  nameWithType: ArcGISContext.Extent
+  fullName: Mapsui.ArcGIS.ArcGISContext.Extent
+  type: Property
+  source:
+    id: Extent
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Extent.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<Extent> Extent { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.Extent}
+    content.vb: Public ReadOnly Property Extent As JsonTypeInfo(Of Extent)
+  overload: Mapsui.ArcGIS.ArcGISContext.Extent*
+- uid: Mapsui.ArcGIS.ArcGISContext.Result
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Result
+  id: Result
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Result
+  nameWithType: ArcGISContext.Result
+  fullName: Mapsui.ArcGIS.ArcGISContext.Result
+  type: Property
+  source:
+    id: Result
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Result.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<Result> Result { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.Result}
+    content.vb: Public ReadOnly Property Result As JsonTypeInfo(Of Result)
+  overload: Mapsui.ArcGIS.ArcGISContext.Result*
+- uid: Mapsui.ArcGIS.ArcGISContext.String
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.String
+  id: String
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: String
+  nameWithType: ArcGISContext.String
+  fullName: Mapsui.ArcGIS.ArcGISContext.String
+  type: Property
+  source:
+    id: String
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.String.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<string> String { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.String}
+    content.vb: Public ReadOnly Property [String] As JsonTypeInfo(Of String)
+  overload: Mapsui.ArcGIS.ArcGISContext.String*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray
+  id: ArcGISLegendResponseLayerArray
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISLegendResponseLayerArray
+  nameWithType: ArcGISContext.ArcGISLegendResponseLayerArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray
+  type: Property
+  source:
+    id: ArcGISLegendResponseLayerArray
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISLegendResponseLayerArray.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISLegendResponseLayer[]> ArcGISLegendResponseLayerArray { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer[]}
+    content.vb: Public ReadOnly Property ArcGISLegendResponseLayerArray As JsonTypeInfo(Of ArcGISLegendResponseLayer())
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray*
+- uid: Mapsui.ArcGIS.ArcGISContext.Int64
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Int64
+  id: Int64
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Int64
+  nameWithType: ArcGISContext.Int64
+  fullName: Mapsui.ArcGIS.ArcGISContext.Int64
+  type: Property
+  source:
+    id: Int64
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Int64.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<long> Int64 { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int64}
+    content.vb: Public ReadOnly Property Int64 As JsonTypeInfo(Of Long)
+  overload: Mapsui.ArcGIS.ArcGISContext.Int64*
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLayer
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.ArcGISLayer
+  id: ArcGISLayer
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: ArcGISLayer
+  nameWithType: ArcGISContext.ArcGISLayer
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLayer
+  type: Property
+  source:
+    id: ArcGISLayer
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.ArcGISLayer.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<ArcGISLayer> ArcGISLayer { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLayer}
+    content.vb: Public ReadOnly Property ArcGISLayer As JsonTypeInfo(Of ArcGISLayer)
+  overload: Mapsui.ArcGIS.ArcGISContext.ArcGISLayer*
+- uid: Mapsui.ArcGIS.ArcGISContext.NullableDateTime
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.NullableDateTime
+  id: NullableDateTime
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: NullableDateTime
+  nameWithType: ArcGISContext.NullableDateTime
+  fullName: Mapsui.ArcGIS.ArcGISContext.NullableDateTime
+  type: Property
+  source:
+    id: NullableDateTime
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.NullableDateTime.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<DateTime?> NullableDateTime { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Nullable{System.DateTime}}
+    content.vb: Public ReadOnly Property NullableDateTime As JsonTypeInfo(Of Date?)
+  overload: Mapsui.ArcGIS.ArcGISContext.NullableDateTime*
+- uid: Mapsui.ArcGIS.ArcGISContext.Domain
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.Domain
+  id: Domain
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: Domain
+  nameWithType: ArcGISContext.Domain
+  fullName: Mapsui.ArcGIS.ArcGISContext.Domain
+  type: Property
+  source:
+    id: Domain
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.Domain.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<Domain> Domain { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.Domain}
+    content.vb: Public ReadOnly Property Domain As JsonTypeInfo(Of Domain)
+  overload: Mapsui.ArcGIS.ArcGISContext.Domain*
+- uid: Mapsui.ArcGIS.ArcGISContext.DateTime
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.DateTime
+  id: DateTime
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: DateTime
+  nameWithType: ArcGISContext.DateTime
+  fullName: Mapsui.ArcGIS.ArcGISContext.DateTime
+  type: Property
+  source:
+    id: DateTime
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.DateTime.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<DateTime> DateTime { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.DateTime}
+    content.vb: Public ReadOnly Property DateTime As JsonTypeInfo(Of Date)
+  overload: Mapsui.ArcGIS.ArcGISContext.DateTime*
+- uid: Mapsui.ArcGIS.ArcGISContext.GetTypeInfo(System.Type)
+  commentId: M:Mapsui.ArcGIS.ArcGISContext.GetTypeInfo(System.Type)
+  id: GetTypeInfo(System.Type)
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: GetTypeInfo(Type)
+  nameWithType: ArcGISContext.GetTypeInfo(Type)
+  fullName: Mapsui.ArcGIS.ArcGISContext.GetTypeInfo(System.Type)
+  type: Method
+  source:
+    id: GetTypeInfo
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.GetJsonTypeInfo.g.cs
+    startLine: 13
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Gets metadata for the specified type.
+  example: []
+  syntax:
+    content: public override JsonTypeInfo? GetTypeInfo(Type type)
+    parameters:
+    - id: type
+      type: System.Type
+      description: The type to fetch metadata for.
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo
+      description: The metadata for the specified type, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if the context has no metadata for the type.
+    content.vb: Public Overrides Function GetTypeInfo(type As Type) As JsonTypeInfo
+  overridden: System.Text.Json.Serialization.JsonSerializerContext.GetTypeInfo(System.Type)
+  overload: Mapsui.ArcGIS.ArcGISContext.GetTypeInfo*
+- uid: Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString
+  commentId: P:Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString
+  id: IDictionaryStringString
+  parent: Mapsui.ArcGIS.ArcGISContext
+  langs:
+  - csharp
+  - vb
+  name: IDictionaryStringString
+  nameWithType: ArcGISContext.IDictionaryStringString
+  fullName: Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString
+  type: Property
+  source:
+    id: IDictionaryStringString
+    path: System.Text.Json.SourceGeneration\System.Text.Json.SourceGeneration.JsonSourceGenerator\ArcGISContext.IDictionaryStringString.g.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS
+  summary: Defines the source generated JSON serialization contract metadata for a given type.
+  example: []
+  syntax:
+    content: public JsonTypeInfo<IDictionary<string, string>> IDictionaryStringString { get; }
+    parameters: []
+    return:
+      type: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Collections.Generic.IDictionary{System.String,System.String}}
+    content.vb: Public ReadOnly Property IDictionaryStringString As JsonTypeInfo(Of IDictionary(Of String, String))
+  overload: Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString*
+references:
+- uid: Mapsui.ArcGIS
+  commentId: N:Mapsui.ArcGIS
+  href: Mapsui.html
+  name: Mapsui.ArcGIS
+  nameWithType: Mapsui.ArcGIS
+  fullName: Mapsui.ArcGIS
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Text.Json.Serialization.JsonSerializerContext
+  commentId: T:System.Text.Json.Serialization.JsonSerializerContext
+  parent: System.Text.Json.Serialization
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext
+  name: JsonSerializerContext
+  nameWithType: JsonSerializerContext
+  fullName: System.Text.Json.Serialization.JsonSerializerContext
+- uid: System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver
+  commentId: T:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver
+  parent: System.Text.Json.Serialization.Metadata
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.ijsontypeinforesolver
+  name: IJsonTypeInfoResolver
+  nameWithType: IJsonTypeInfoResolver
+  fullName: System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver
+- uid: System.Text.Json.Serialization.JsonSerializerContext.Options
+  commentId: P:System.Text.Json.Serialization.JsonSerializerContext.Options
+  parent: System.Text.Json.Serialization.JsonSerializerContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext.options
+  name: Options
+  nameWithType: JsonSerializerContext.Options
+  fullName: System.Text.Json.Serialization.JsonSerializerContext.Options
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Text.Json.Serialization
+  commentId: N:System.Text.Json.Serialization
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Text.Json.Serialization
+  nameWithType: System.Text.Json.Serialization
+  fullName: System.Text.Json.Serialization
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  - name: .
+  - uid: System.Text.Json
+    name: Json
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json
+  - name: .
+  - uid: System.Text.Json.Serialization
+    name: Serialization
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  - name: .
+  - uid: System.Text.Json
+    name: Json
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json
+  - name: .
+  - uid: System.Text.Json.Serialization
+    name: Serialization
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization
+- uid: System.Text.Json.Serialization.Metadata
+  commentId: N:System.Text.Json.Serialization.Metadata
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Text.Json.Serialization.Metadata
+  nameWithType: System.Text.Json.Serialization.Metadata
+  fullName: System.Text.Json.Serialization.Metadata
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  - name: .
+  - uid: System.Text.Json
+    name: Json
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json
+  - name: .
+  - uid: System.Text.Json.Serialization
+    name: Serialization
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization
+  - name: .
+  - uid: System.Text.Json.Serialization.Metadata
+    name: Metadata
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  - name: .
+  - uid: System.Text.Json
+    name: Json
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json
+  - name: .
+  - uid: System.Text.Json.Serialization
+    name: Serialization
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization
+  - name: .
+  - uid: System.Text.Json.Serialization.Metadata
+    name: Metadata
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.ArcGIS.ArcGISContext.Boolean*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Boolean
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Boolean
+  name: Boolean
+  nameWithType: ArcGISContext.Boolean
+  fullName: Mapsui.ArcGIS.ArcGISContext.Boolean
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Boolean}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Boolean}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<bool>
+  nameWithType: JsonTypeInfo<bool>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<bool>
+  nameWithType.vb: JsonTypeInfo(Of Boolean)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Boolean)
+  name.vb: JsonTypeInfo(Of Boolean)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<T>
+  nameWithType: JsonTypeInfo<T>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<T>
+  nameWithType.vb: JsonTypeInfo(Of T)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of T)
+  name.vb: JsonTypeInfo(Of T)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.DictionaryStringString*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.DictionaryStringString
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_DictionaryStringString
+  name: DictionaryStringString
+  nameWithType: ArcGISContext.DictionaryStringString
+  fullName: Mapsui.ArcGIS.ArcGISContext.DictionaryStringString
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Collections.Generic.Dictionary{System.String,System.String}}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Collections.Generic.Dictionary{System.String,System.String}}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<Dictionary<string, string>>
+  nameWithType: JsonTypeInfo<Dictionary<string, string>>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Collections.Generic.Dictionary<string, string>>
+  nameWithType.vb: JsonTypeInfo(Of Dictionary(Of String, String))
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of System.Collections.Generic.Dictionary(Of String, String))
+  name.vb: JsonTypeInfo(Of Dictionary(Of String, String))
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_RasterFunctionInfoArray
+  name: RasterFunctionInfoArray
+  nameWithType: ArcGISContext.RasterFunctionInfoArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfoArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<RasterFunctionInfo[]>
+  nameWithType: JsonTypeInfo<RasterFunctionInfo[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo[]>
+  nameWithType.vb: JsonTypeInfo(Of RasterFunctionInfo())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo())
+  name.vb: JsonTypeInfo(Of RasterFunctionInfo())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+    name: RasterFunctionInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+    name: RasterFunctionInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Double*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Double
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Double
+  name: Double
+  nameWithType: ArcGISContext.Double
+  fullName: Mapsui.ArcGIS.ArcGISContext.Double
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Double}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Double}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<double>
+  nameWithType: JsonTypeInfo<double>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<double>
+  nameWithType.vb: JsonTypeInfo(Of Double)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Double)
+  name.vb: JsonTypeInfo(Of Double)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.NullableDouble*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.NullableDouble
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_NullableDouble
+  name: NullableDouble
+  nameWithType: ArcGISContext.NullableDouble
+  fullName: Mapsui.ArcGIS.ArcGISContext.NullableDouble
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Nullable{System.Double}}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Nullable{System.Double}}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<double?>
+  nameWithType: JsonTypeInfo<double?>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<double?>
+  nameWithType.vb: JsonTypeInfo(Of Double?)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Double?)
+  name.vb: JsonTypeInfo(Of Double?)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '?'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '?'
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_EditFieldsInfo
+  name: EditFieldsInfo
+  nameWithType: ArcGISContext.EditFieldsInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.EditFieldsInfo
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<EditFieldsInfo>
+  nameWithType: JsonTypeInfo<EditFieldsInfo>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo>
+  nameWithType.vb: JsonTypeInfo(Of EditFieldsInfo)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo)
+  name.vb: JsonTypeInfo(Of EditFieldsInfo)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+    name: EditFieldsInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+    name: EditFieldsInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.FieldArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.FieldArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_FieldArray
+  name: FieldArray
+  nameWithType: ArcGISContext.FieldArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.FieldArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.Field[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.Field[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<Field[]>
+  nameWithType: JsonTypeInfo<Field[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.Field[]>
+  nameWithType.vb: JsonTypeInfo(Of Field())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.Field())
+  name.vb: JsonTypeInfo(Of Field())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Field
+    name: Field
+    href: Mapsui.ArcGIS.ImageServiceProvider.Field.html
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Field
+    name: Field
+    href: Mapsui.ArcGIS.ImageServiceProvider.Field.html
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Lod*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Lod
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Lod
+  name: Lod
+  nameWithType: ArcGISContext.Lod
+  fullName: Mapsui.ArcGIS.ArcGISContext.Lod
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo.Lod}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo.Lod}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<TileInfo.Lod>
+  nameWithType: JsonTypeInfo<TileInfo.Lod>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.TileInfo.Lod>
+  nameWithType.vb: JsonTypeInfo(Of TileInfo.Lod)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.TileInfo.Lod)
+  name.vb: JsonTypeInfo(Of TileInfo.Lod)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Lod
+    name: Lod
+    href: Mapsui.ArcGIS.TileInfo.Lod.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Lod
+    name: Lod
+    href: Mapsui.ArcGIS.TileInfo.Lod.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_RasterTypeInfoArray
+  name: RasterTypeInfoArray
+  nameWithType: ArcGISContext.RasterTypeInfoArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfoArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<RasterTypeInfo[]>
+  nameWithType: JsonTypeInfo<RasterTypeInfo[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo[]>
+  nameWithType.vb: JsonTypeInfo(Of RasterTypeInfo())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo())
+  name.vb: JsonTypeInfo(Of RasterTypeInfo())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+    name: RasterTypeInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+    name: RasterTypeInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_OwnershipBasedAccessControlForRasters
+  name: OwnershipBasedAccessControlForRasters
+  nameWithType: ArcGISContext.OwnershipBasedAccessControlForRasters
+  fullName: Mapsui.ArcGIS.ArcGISContext.OwnershipBasedAccessControlForRasters
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<OwnershipBasedAccessControlForRasters>
+  nameWithType: JsonTypeInfo<OwnershipBasedAccessControlForRasters>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters>
+  nameWithType.vb: JsonTypeInfo(Of OwnershipBasedAccessControlForRasters)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters)
+  name.vb: JsonTypeInfo(Of OwnershipBasedAccessControlForRasters)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+    name: OwnershipBasedAccessControlForRasters
+    href: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+    name: OwnershipBasedAccessControlForRasters
+    href: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.SpatialReference*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.SpatialReference
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_SpatialReference
+  name: SpatialReference
+  nameWithType: ArcGISContext.SpatialReference
+  fullName: Mapsui.ArcGIS.ArcGISContext.SpatialReference
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.SpatialReference}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.SpatialReference}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<SpatialReference>
+  nameWithType: JsonTypeInfo<SpatialReference>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.SpatialReference>
+  nameWithType.vb: JsonTypeInfo(Of SpatialReference)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.SpatialReference)
+  name.vb: JsonTypeInfo(Of SpatialReference)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.SpatialReference
+    name: SpatialReference
+    href: Mapsui.ArcGIS.SpatialReference.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.SpatialReference
+    name: SpatialReference
+    href: Mapsui.ArcGIS.SpatialReference.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISLayerArray
+  name: ArcGISLayerArray
+  nameWithType: ArcGISContext.ArcGISLayerArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLayerArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLayer[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLayer[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISLayer[]>
+  nameWithType: JsonTypeInfo<ArcGISLayer[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.ArcGISLayer[]>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISLayer())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.ArcGISLayer())
+  name.vb: JsonTypeInfo(Of ArcGISLayer())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer
+    name: ArcGISLayer
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer.html
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer
+    name: ArcGISLayer
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer.html
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.TimeInfo*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.TimeInfo
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_TimeInfo
+  name: TimeInfo
+  nameWithType: ArcGISContext.TimeInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.TimeInfo
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.TimeInfo}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.TimeInfo}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<TimeInfo>
+  nameWithType: JsonTypeInfo<TimeInfo>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.TimeInfo>
+  nameWithType.vb: JsonTypeInfo(Of TimeInfo)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.TimeInfo)
+  name.vb: JsonTypeInfo(Of TimeInfo)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+    name: TimeInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+    name: TimeInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.DoubleArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.DoubleArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_DoubleArray
+  name: DoubleArray
+  nameWithType: ArcGISContext.DoubleArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.DoubleArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Double[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Double[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<double[]>
+  nameWithType: JsonTypeInfo<double[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<double[]>
+  nameWithType.vb: JsonTypeInfo(Of Double())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Double())
+  name.vb: JsonTypeInfo(Of Double())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Int32Array*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Int32Array
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Int32Array
+  name: Int32Array
+  nameWithType: ArcGISContext.Int32Array
+  fullName: Mapsui.ArcGIS.ArcGISContext.Int32Array
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int32[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int32[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<int[]>
+  nameWithType: JsonTypeInfo<int[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<int[]>
+  nameWithType.vb: JsonTypeInfo(Of Integer())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Integer())
+  name.vb: JsonTypeInfo(Of Integer())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.TileInfo*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.TileInfo
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_TileInfo
+  name: TileInfo
+  nameWithType: ArcGISContext.TileInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.TileInfo
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<TileInfo>
+  nameWithType: JsonTypeInfo<TileInfo>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.TileInfo>
+  nameWithType.vb: JsonTypeInfo(Of TileInfo)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.TileInfo)
+  name.vb: JsonTypeInfo(Of TileInfo)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: )
+- uid: System.Text.Json.JsonSerializerOptions
+  commentId: T:System.Text.Json.JsonSerializerOptions
+  parent: System.Text.Json
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions
+  name: JsonSerializerOptions
+  nameWithType: JsonSerializerOptions
+  fullName: System.Text.Json.JsonSerializerOptions
+- uid: Mapsui.ArcGIS.ArcGISContext.Default*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Default
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Default
+  name: Default
+  nameWithType: ArcGISContext.Default
+  fullName: Mapsui.ArcGIS.ArcGISContext.Default
+- uid: Mapsui.ArcGIS.ArcGISContext
+  commentId: T:Mapsui.ArcGIS.ArcGISContext
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.ArcGISContext.html
+  name: ArcGISContext
+  nameWithType: ArcGISContext
+  fullName: Mapsui.ArcGIS.ArcGISContext
+- uid: System.Text.Json
+  commentId: N:System.Text.Json
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Text.Json
+  nameWithType: System.Text.Json
+  fullName: System.Text.Json
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  - name: .
+  - uid: System.Text.Json
+    name: Json
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  - name: .
+  - uid: System.Text.Json
+    name: Json
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json
+- uid: System.Text.Json.Serialization.JsonSerializerContext.GeneratedSerializerOptions
+  commentId: P:System.Text.Json.Serialization.JsonSerializerContext.GeneratedSerializerOptions
+  parent: System.Text.Json.Serialization.JsonSerializerContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext.generatedserializeroptions
+  name: GeneratedSerializerOptions
+  nameWithType: JsonSerializerContext.GeneratedSerializerOptions
+  fullName: System.Text.Json.Serialization.JsonSerializerContext.GeneratedSerializerOptions
+- uid: Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_GeneratedSerializerOptions
+  name: GeneratedSerializerOptions
+  nameWithType: ArcGISContext.GeneratedSerializerOptions
+  fullName: Mapsui.ArcGIS.ArcGISContext.GeneratedSerializerOptions
+- uid: Mapsui.ArcGIS.ArcGISContext.#ctor*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.#ctor
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext__ctor
+  name: ArcGISContext
+  nameWithType: ArcGISContext.ArcGISContext
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISContext
+  nameWithType.vb: ArcGISContext.New
+  fullName.vb: Mapsui.ArcGIS.ArcGISContext.New
+  name.vb: New
+- uid: Mapsui.ArcGIS.ArcGISContext.Field*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Field
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Field
+  name: Field
+  nameWithType: ArcGISContext.Field
+  fullName: Mapsui.ArcGIS.ArcGISContext.Field
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.Field}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.Field}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<Field>
+  nameWithType: JsonTypeInfo<Field>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.Field>
+  nameWithType.vb: JsonTypeInfo(Of Field)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.Field)
+  name.vb: JsonTypeInfo(Of Field)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Field
+    name: Field
+    href: Mapsui.ArcGIS.ImageServiceProvider.Field.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Field
+    name: Field
+    href: Mapsui.ArcGIS.ImageServiceProvider.Field.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLegend
+  name: ArcGISLegendResponseLegend
+  nameWithType: ArcGISContext.ArcGISLegendResponseLegend
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegend
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISLegendResponseLegend>
+  nameWithType: JsonTypeInfo<ArcGISLegendResponseLegend>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISLegendResponseLegend)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend)
+  name.vb: JsonTypeInfo(Of ArcGISLegendResponseLegend)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend
+    name: ArcGISLegendResponseLegend
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend
+    name: ArcGISLegendResponseLegend
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Table*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Table
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Table
+  name: Table
+  nameWithType: ArcGISContext.Table
+  fullName: Mapsui.ArcGIS.ArcGISContext.Table
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.Table}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.Table}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<Table>
+  nameWithType: JsonTypeInfo<Table>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.Table>
+  nameWithType.vb: JsonTypeInfo(Of Table)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.Table)
+  name.vb: JsonTypeInfo(Of Table)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.Table
+    name: Table
+    href: Mapsui.ArcGIS.Table.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.Table
+    name: Table
+    href: Mapsui.ArcGIS.Table.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ResultArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ResultArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ResultArray
+  name: ResultArray
+  nameWithType: ArcGISContext.ResultArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.ResultArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.Result[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.Result[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<Result[]>
+  nameWithType: JsonTypeInfo<Result[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.Result[]>
+  nameWithType.vb: JsonTypeInfo(Of Result())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.Result())
+  name.vb: JsonTypeInfo(Of Result())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.Result
+    name: Result
+    href: Mapsui.ArcGIS.DynamicProvider.Result.html
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.Result
+    name: Result
+    href: Mapsui.ArcGIS.DynamicProvider.Result.html
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Int32*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Int32
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Int32
+  name: Int32
+  nameWithType: ArcGISContext.Int32
+  fullName: Mapsui.ArcGIS.ArcGISContext.Int32
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int32}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int32}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<int>
+  nameWithType: JsonTypeInfo<int>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<int>
+  nameWithType.vb: JsonTypeInfo(Of Integer)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Integer)
+  name.vb: JsonTypeInfo(Of Integer)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISFeatureInfo
+  name: ArcGISFeatureInfo
+  nameWithType: ArcGISContext.ArcGISFeatureInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISFeatureInfo
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISFeatureInfo>
+  nameWithType: JsonTypeInfo<ArcGISFeatureInfo>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISFeatureInfo)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo)
+  name.vb: JsonTypeInfo(Of ArcGISFeatureInfo)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo
+    name: ArcGISFeatureInfo
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo
+    name: ArcGISFeatureInfo
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.TimeReference*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.TimeReference
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_TimeReference
+  name: TimeReference
+  nameWithType: ArcGISContext.TimeReference
+  fullName: Mapsui.ArcGIS.ArcGISContext.TimeReference
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.TimeReference}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.TimeReference}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<TimeReference>
+  nameWithType: JsonTypeInfo<TimeReference>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.TimeReference>
+  nameWithType.vb: JsonTypeInfo(Of TimeReference)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.TimeReference)
+  name.vb: JsonTypeInfo(Of TimeReference)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.TimeReference
+    name: TimeReference
+    href: Mapsui.ArcGIS.ImageServiceProvider.TimeReference.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.TimeReference
+    name: TimeReference
+    href: Mapsui.ArcGIS.ImageServiceProvider.TimeReference.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.InterpolationType*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.InterpolationType
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_InterpolationType
+  name: InterpolationType
+  nameWithType: ArcGISContext.InterpolationType
+  fullName: Mapsui.ArcGIS.ArcGISContext.InterpolationType
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.InterpolationType}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.InterpolationType}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<InterpolationType>
+  nameWithType: JsonTypeInfo<InterpolationType>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.InterpolationType>
+  nameWithType.vb: JsonTypeInfo(Of InterpolationType)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.InterpolationType)
+  name.vb: JsonTypeInfo(Of InterpolationType)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+    name: InterpolationType
+    href: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+    name: InterpolationType
+    href: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Int64Array*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Int64Array
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Int64Array
+  name: Int64Array
+  nameWithType: ArcGISContext.Int64Array
+  fullName: Mapsui.ArcGIS.ArcGISContext.Int64Array
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int64[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int64[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<long[]>
+  nameWithType: JsonTypeInfo<long[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<long[]>
+  nameWithType.vb: JsonTypeInfo(Of Long())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Long())
+  name.vb: JsonTypeInfo(Of Long())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponse
+  name: ArcGISLegendResponse
+  nameWithType: ArcGISContext.ArcGISLegendResponse
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponse
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISLegendResponse>
+  nameWithType: JsonTypeInfo<ArcGISLegendResponse>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISLegendResponse)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse)
+  name.vb: JsonTypeInfo(Of ArcGISLegendResponse)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse
+    name: ArcGISLegendResponse
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse
+    name: ArcGISLegendResponse
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLegendArray
+  name: ArcGISLegendResponseLegendArray
+  nameWithType: ArcGISContext.ArcGISLegendResponseLegendArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLegendArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISLegendResponseLegend[]>
+  nameWithType: JsonTypeInfo<ArcGISLegendResponseLegend[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend[]>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISLegendResponseLegend())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend())
+  name.vb: JsonTypeInfo(Of ArcGISLegendResponseLegend())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend
+    name: ArcGISLegendResponseLegend
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend.html
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend
+    name: ArcGISLegendResponseLegend
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend.html
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.TableArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.TableArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_TableArray
+  name: TableArray
+  nameWithType: ArcGISContext.TableArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.TableArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.Table[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.Table[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<Table[]>
+  nameWithType: JsonTypeInfo<Table[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.Table[]>
+  nameWithType.vb: JsonTypeInfo(Of Table())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.Table())
+  name.vb: JsonTypeInfo(Of Table())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.Table
+    name: Table
+    href: Mapsui.ArcGIS.Table.html
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.Table
+    name: Table
+    href: Mapsui.ArcGIS.Table.html
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_RasterFunctionInfo
+  name: RasterFunctionInfo
+  nameWithType: ArcGISContext.RasterFunctionInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.RasterFunctionInfo
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<RasterFunctionInfo>
+  nameWithType: JsonTypeInfo<RasterFunctionInfo>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo>
+  nameWithType.vb: JsonTypeInfo(Of RasterFunctionInfo)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo)
+  name.vb: JsonTypeInfo(Of RasterFunctionInfo)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+    name: RasterFunctionInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+    name: RasterFunctionInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Origin*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Origin
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Origin
+  name: Origin
+  nameWithType: ArcGISContext.Origin
+  fullName: Mapsui.ArcGIS.ArcGISContext.Origin
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo.Origin}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo.Origin}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<TileInfo.Origin>
+  nameWithType: JsonTypeInfo<TileInfo.Origin>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.TileInfo.Origin>
+  nameWithType.vb: JsonTypeInfo(Of TileInfo.Origin)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.TileInfo.Origin)
+  name.vb: JsonTypeInfo(Of TileInfo.Origin)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Origin
+    name: Origin
+    href: Mapsui.ArcGIS.TileInfo.Origin.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Origin
+    name: Origin
+    href: Mapsui.ArcGIS.TileInfo.Origin.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISImageCapabilities
+  name: ArcGISImageCapabilities
+  nameWithType: ArcGISContext.ArcGISImageCapabilities
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISImageCapabilities
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISImageCapabilities>
+  nameWithType: JsonTypeInfo<ArcGISImageCapabilities>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISImageCapabilities)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities)
+  name.vb: JsonTypeInfo(Of ArcGISImageCapabilities)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+    name: ArcGISImageCapabilities
+    href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+    name: ArcGISImageCapabilities
+    href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.LodArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.LodArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_LodArray
+  name: LodArray
+  nameWithType: ArcGISContext.LodArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.LodArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo.Lod[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.TileInfo.Lod[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<TileInfo.Lod[]>
+  nameWithType: JsonTypeInfo<TileInfo.Lod[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.TileInfo.Lod[]>
+  nameWithType.vb: JsonTypeInfo(Of TileInfo.Lod())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.TileInfo.Lod())
+  name.vb: JsonTypeInfo(Of TileInfo.Lod())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Lod
+    name: Lod
+    href: Mapsui.ArcGIS.TileInfo.Lod.html
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Lod
+    name: Lod
+    href: Mapsui.ArcGIS.TileInfo.Lod.html
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLayer
+  name: ArcGISLegendResponseLayer
+  nameWithType: ArcGISContext.ArcGISLegendResponseLayer
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayer
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISLegendResponseLayer>
+  nameWithType: JsonTypeInfo<ArcGISLegendResponseLayer>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISLegendResponseLayer)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer)
+  name.vb: JsonTypeInfo(Of ArcGISLegendResponseLayer)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer
+    name: ArcGISLegendResponseLayer
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer
+    name: ArcGISLegendResponseLayer
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISDynamicCapabilities
+  name: ArcGISDynamicCapabilities
+  nameWithType: ArcGISContext.ArcGISDynamicCapabilities
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISDynamicCapabilities
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISDynamicCapabilities>
+  nameWithType: JsonTypeInfo<ArcGISDynamicCapabilities>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISDynamicCapabilities)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities)
+  name.vb: JsonTypeInfo(Of ArcGISDynamicCapabilities)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+    name: ArcGISDynamicCapabilities
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+    name: ArcGISDynamicCapabilities
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_RasterTypeInfo
+  name: RasterTypeInfo
+  nameWithType: ArcGISContext.RasterTypeInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.RasterTypeInfo
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<RasterTypeInfo>
+  nameWithType: JsonTypeInfo<RasterTypeInfo>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo>
+  nameWithType.vb: JsonTypeInfo(Of RasterTypeInfo)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo)
+  name.vb: JsonTypeInfo(Of RasterTypeInfo)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+    name: RasterTypeInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+    name: RasterTypeInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Extent*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Extent
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Extent
+  name: Extent
+  nameWithType: ArcGISContext.Extent
+  fullName: Mapsui.ArcGIS.ArcGISContext.Extent
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.Extent}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.Extent}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<Extent>
+  nameWithType: JsonTypeInfo<Extent>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.Extent>
+  nameWithType.vb: JsonTypeInfo(Of Extent)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.Extent)
+  name.vb: JsonTypeInfo(Of Extent)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.Extent
+    name: Extent
+    href: Mapsui.ArcGIS.Extent.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.Extent
+    name: Extent
+    href: Mapsui.ArcGIS.Extent.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Result*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Result
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Result
+  name: Result
+  nameWithType: ArcGISContext.Result
+  fullName: Mapsui.ArcGIS.ArcGISContext.Result
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.Result}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.Result}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<Result>
+  nameWithType: JsonTypeInfo<Result>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.Result>
+  nameWithType.vb: JsonTypeInfo(Of Result)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.Result)
+  name.vb: JsonTypeInfo(Of Result)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.Result
+    name: Result
+    href: Mapsui.ArcGIS.DynamicProvider.Result.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.Result
+    name: Result
+    href: Mapsui.ArcGIS.DynamicProvider.Result.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.String*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.String
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_String
+  name: String
+  nameWithType: ArcGISContext.String
+  fullName: Mapsui.ArcGIS.ArcGISContext.String
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.String}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.String}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<string>
+  nameWithType: JsonTypeInfo<string>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<string>
+  nameWithType.vb: JsonTypeInfo(Of String)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of String)
+  name.vb: JsonTypeInfo(Of String)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISLegendResponseLayerArray
+  name: ArcGISLegendResponseLayerArray
+  nameWithType: ArcGISContext.ArcGISLegendResponseLayerArray
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLegendResponseLayerArray
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer[]}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer[]}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISLegendResponseLayer[]>
+  nameWithType: JsonTypeInfo<ArcGISLegendResponseLayer[]>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer[]>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISLegendResponseLayer())
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer())
+  name.vb: JsonTypeInfo(Of ArcGISLegendResponseLayer())
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer
+    name: ArcGISLegendResponseLayer
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer.html
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer
+    name: ArcGISLegendResponseLayer
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer.html
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Int64*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Int64
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Int64
+  name: Int64
+  nameWithType: ArcGISContext.Int64
+  fullName: Mapsui.ArcGIS.ArcGISContext.Int64
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int64}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Int64}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<long>
+  nameWithType: JsonTypeInfo<long>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<long>
+  nameWithType.vb: JsonTypeInfo(Of Long)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Long)
+  name.vb: JsonTypeInfo(Of Long)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.ArcGISLayer*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.ArcGISLayer
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_ArcGISLayer
+  name: ArcGISLayer
+  nameWithType: ArcGISContext.ArcGISLayer
+  fullName: Mapsui.ArcGIS.ArcGISContext.ArcGISLayer
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLayer}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.DynamicProvider.ArcGISLayer}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<ArcGISLayer>
+  nameWithType: JsonTypeInfo<ArcGISLayer>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.DynamicProvider.ArcGISLayer>
+  nameWithType.vb: JsonTypeInfo(Of ArcGISLayer)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.DynamicProvider.ArcGISLayer)
+  name.vb: JsonTypeInfo(Of ArcGISLayer)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer
+    name: ArcGISLayer
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer
+    name: ArcGISLayer
+    href: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.NullableDateTime*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.NullableDateTime
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_NullableDateTime
+  name: NullableDateTime
+  nameWithType: ArcGISContext.NullableDateTime
+  fullName: Mapsui.ArcGIS.ArcGISContext.NullableDateTime
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Nullable{System.DateTime}}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Nullable{System.DateTime}}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<DateTime?>
+  nameWithType: JsonTypeInfo<DateTime?>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.DateTime?>
+  nameWithType.vb: JsonTypeInfo(Of Date?)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Date?)
+  name.vb: JsonTypeInfo(Of Date?)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.DateTime
+    name: DateTime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '?'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.DateTime
+    name: Date
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '?'
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.Domain*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.Domain
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_Domain
+  name: Domain
+  nameWithType: ArcGISContext.Domain
+  fullName: Mapsui.ArcGIS.ArcGISContext.Domain
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.Domain}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{Mapsui.ArcGIS.ImageServiceProvider.Domain}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<Domain>
+  nameWithType: JsonTypeInfo<Domain>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<Mapsui.ArcGIS.ImageServiceProvider.Domain>
+  nameWithType.vb: JsonTypeInfo(Of Domain)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Mapsui.ArcGIS.ImageServiceProvider.Domain)
+  name.vb: JsonTypeInfo(Of Domain)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Domain
+    name: Domain
+    href: Mapsui.ArcGIS.ImageServiceProvider.Domain.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Domain
+    name: Domain
+    href: Mapsui.ArcGIS.ImageServiceProvider.Domain.html
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.DateTime*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.DateTime
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_DateTime
+  name: DateTime
+  nameWithType: ArcGISContext.DateTime
+  fullName: Mapsui.ArcGIS.ArcGISContext.DateTime
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.DateTime}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.DateTime}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<DateTime>
+  nameWithType: JsonTypeInfo<DateTime>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.DateTime>
+  nameWithType.vb: JsonTypeInfo(Of Date)
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of Date)
+  name.vb: JsonTypeInfo(Of Date)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.DateTime
+    name: DateTime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.DateTime
+    name: Date
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: )
+- uid: System.Text.Json.Serialization.JsonSerializerContext.GetTypeInfo(System.Type)
+  commentId: M:System.Text.Json.Serialization.JsonSerializerContext.GetTypeInfo(System.Type)
+  parent: System.Text.Json.Serialization.JsonSerializerContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext.gettypeinfo
+  name: GetTypeInfo(Type)
+  nameWithType: JsonSerializerContext.GetTypeInfo(Type)
+  fullName: System.Text.Json.Serialization.JsonSerializerContext.GetTypeInfo(System.Type)
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.JsonSerializerContext.GetTypeInfo(System.Type)
+    name: GetTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext.gettypeinfo
+  - name: (
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: )
+  spec.vb:
+  - uid: System.Text.Json.Serialization.JsonSerializerContext.GetTypeInfo(System.Type)
+    name: GetTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonserializercontext.gettypeinfo
+  - name: (
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: )
+- uid: Mapsui.ArcGIS.ArcGISContext.GetTypeInfo*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.GetTypeInfo
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_GetTypeInfo_System_Type_
+  name: GetTypeInfo
+  nameWithType: ArcGISContext.GetTypeInfo
+  fullName: Mapsui.ArcGIS.ArcGISContext.GetTypeInfo
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo
+  parent: System.Text.Json.Serialization.Metadata
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo
+  name: JsonTypeInfo
+  nameWithType: JsonTypeInfo
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo
+- uid: Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString*
+  commentId: Overload:Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString
+  href: Mapsui.ArcGIS.ArcGISContext.html#Mapsui_ArcGIS_ArcGISContext_IDictionaryStringString
+  name: IDictionaryStringString
+  nameWithType: ArcGISContext.IDictionaryStringString
+  fullName: Mapsui.ArcGIS.ArcGISContext.IDictionaryStringString
+- uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Collections.Generic.IDictionary{System.String,System.String}}
+  commentId: T:System.Text.Json.Serialization.Metadata.JsonTypeInfo{System.Collections.Generic.IDictionary{System.String,System.String}}
+  parent: System.Text.Json.Serialization.Metadata
+  definition: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+  href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  name: JsonTypeInfo<IDictionary<string, string>>
+  nameWithType: JsonTypeInfo<IDictionary<string, string>>
+  fullName: System.Text.Json.Serialization.Metadata.JsonTypeInfo<System.Collections.Generic.IDictionary<string, string>>
+  nameWithType.vb: JsonTypeInfo(Of IDictionary(Of String, String))
+  fullName.vb: System.Text.Json.Serialization.Metadata.JsonTypeInfo(Of System.Collections.Generic.IDictionary(Of String, String))
+  name.vb: JsonTypeInfo(Of IDictionary(Of String, String))
+  spec.csharp:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: <
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Text.Json.Serialization.Metadata.JsonTypeInfo`1
+    name: JsonTypeInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  - name: )

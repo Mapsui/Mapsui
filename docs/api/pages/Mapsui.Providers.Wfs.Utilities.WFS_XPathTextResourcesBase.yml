@@ -1,0 +1,1240 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  id: WFS_XPathTextResourcesBase
+  parent: Mapsui.Providers.Wfs.Utilities
+  children:
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGML
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGMLPREFIX
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGC
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGCPREFIX
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWS
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWSPREFIX
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMA
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMAPREFIX
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFS
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFSPREFIX
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINK
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINKPREFIX
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TARGETNS
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY
+  langs:
+  - csharp
+  - vb
+  name: WFS_XPathTextResourcesBase
+  nameWithType: WFS_XPathTextResourcesBase
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WFS_XPathTextResourcesBase
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  syntax:
+    content: public class WFS_XPathTextResourcesBase
+    content.vb: Public Class WFS_XPathTextResourcesBase
+  inheritance:
+  - System.Object
+  derivedClasses:
+  - Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_XPathTextResources
+  - Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_XPathTextResources
+  - Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_XPathTextResources
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGCPREFIX
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGCPREFIX
+  id: NSOGCPREFIX
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSOGCPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSOGCPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGCPREFIX
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSOGCPREFIX
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 54
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Prefix used for OGC namespace
+  example: []
+  syntax:
+    content: public string NSOGCPREFIX { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSOGCPREFIX As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGCPREFIX*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGC
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGC
+  id: NSOGC
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSOGC
+  nameWithType: WFS_XPathTextResourcesBase.NSOGC
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGC
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSOGC
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 59
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: OGC namespace URI
+  example: []
+  syntax:
+    content: public string NSOGC { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSOGC As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGC*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINKPREFIX
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINKPREFIX
+  id: NSXLINKPREFIX
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSXLINKPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSXLINKPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINKPREFIX
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSXLINKPREFIX
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 64
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Prefix used for XLink namespace
+  example: []
+  syntax:
+    content: public string NSXLINKPREFIX { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSXLINKPREFIX As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINKPREFIX*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINK
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINK
+  id: NSXLINK
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSXLINK
+  nameWithType: WFS_XPathTextResourcesBase.NSXLINK
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINK
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSXLINK
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 69
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: XLink namespace URI
+  example: []
+  syntax:
+    content: public string NSXLINK { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSXLINK As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINK*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX
+  id: NSFEATURETYPEPREFIX
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSFEATURETYPEPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSFEATURETYPEPREFIX
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 74
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Prefix used for feature namespace
+  example: []
+  syntax:
+    content: public string NSFEATURETYPEPREFIX { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSFEATURETYPEPREFIX As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFSPREFIX
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFSPREFIX
+  id: NSWFSPREFIX
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSWFSPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSWFSPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFSPREFIX
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSWFSPREFIX
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 79
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Prefix used for WFS namespace
+  example: []
+  syntax:
+    content: public string NSWFSPREFIX { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSWFSPREFIX As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFSPREFIX*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFS
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFS
+  id: NSWFS
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSWFS
+  nameWithType: WFS_XPathTextResourcesBase.NSWFS
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFS
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSWFS
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 84
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: WFS namespace URI
+  example: []
+  syntax:
+    content: public virtual string NSWFS { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overridable ReadOnly Property NSWFS As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFS*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGMLPREFIX
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGMLPREFIX
+  id: NSGMLPREFIX
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSGMLPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSGMLPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGMLPREFIX
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSGMLPREFIX
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 89
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Prefix used for GML namespace
+  example: []
+  syntax:
+    content: public string NSGMLPREFIX { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSGMLPREFIX As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGMLPREFIX*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGML
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGML
+  id: NSGML
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSGML
+  nameWithType: WFS_XPathTextResourcesBase.NSGML
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGML
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSGML
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 94
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: GML namespace URI
+  example: []
+  syntax:
+    content: public virtual string NSGML { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overridable ReadOnly Property NSGML As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGML*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWSPREFIX
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWSPREFIX
+  id: NSOWSPREFIX
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSOWSPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSOWSPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWSPREFIX
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSOWSPREFIX
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 99
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Prefix used for OWS namespace
+  example: []
+  syntax:
+    content: public string NSOWSPREFIX { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSOWSPREFIX As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWSPREFIX*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWS
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWS
+  id: NSOWS
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSOWS
+  nameWithType: WFS_XPathTextResourcesBase.NSOWS
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWS
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSOWS
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 104
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: OWS namespace URI
+  example: []
+  syntax:
+    content: public virtual string NSOWS { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overridable ReadOnly Property NSOWS As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWS*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMAPREFIX
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMAPREFIX
+  id: NSSCHEMAPREFIX
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSSCHEMAPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSSCHEMAPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMAPREFIX
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSSCHEMAPREFIX
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 109
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Prefix used for XML schema namespace
+  example: []
+  syntax:
+    content: public string NSSCHEMAPREFIX { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSSCHEMAPREFIX As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMAPREFIX*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMA
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMA
+  id: NSSCHEMA
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: NSSCHEMA
+  nameWithType: WFS_XPathTextResourcesBase.NSSCHEMA
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMA
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NSSCHEMA
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 114
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: XML schema namespace URI
+  example: []
+  syntax:
+    content: public string NSSCHEMA { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NSSCHEMA As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMA*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TARGETNS
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TARGETNS
+  id: XPATH_TARGETNS
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: XPATH_TARGETNS
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_TARGETNS
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TARGETNS
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: XPATH_TARGETNS
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 124
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Gets an XPath string addressing the target namespace in 'DescribeFeatureType'.
+  example: []
+  syntax:
+    content: public string XPATH_TARGETNS { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property XPATH_TARGETNS As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TARGETNS*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  id: XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 130
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: >-
+    Gets an XPath string addressing an element with a 'gml'-prefixed type-attribute in 'DescribeFeatureType'.
+
+    This for querying the geometry element of a featuretype in the most simple manner.
+  example: []
+  syntax:
+    content: public string XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY
+  id: XPATH_NAMEATTRIBUTEQUERY
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: XPATH_NAMEATTRIBUTEQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: XPATH_NAMEATTRIBUTEQUERY
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 135
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Gets an XPath string addressing a name-attribute.
+  example: []
+  syntax:
+    content: public string XPATH_NAMEATTRIBUTEQUERY { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property XPATH_NAMEATTRIBUTEQUERY As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY
+  id: XPATH_TYPEATTRIBUTEQUERY
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: XPATH_TYPEATTRIBUTEQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: XPATH_TYPEATTRIBUTEQUERY
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 140
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: Gets an XPath string addressing a type-attribute.
+  example: []
+  syntax:
+    content: public string XPATH_TYPEATTRIBUTEQUERY { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property XPATH_TYPEATTRIBUTEQUERY As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  id: XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 147
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: >-
+    Gets an XPath string addressing a complex type hosting an element with a 'gml'-prefixed ref-attribute in 'DescribeFeatureType'.
+
+    This for querying the geometry element of a featuretype. 
+
+    Step1: Finding the complex type with a geometry element from GML specification.
+  example: []
+  syntax:
+    content: public string XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  id: XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 154
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: >-
+    Gets an XPath string addressing the name of an element having a type-attribute referencing 
+
+    a complex type hosting an element with a 'gml'-prefixed ref-attribute in 'DescribeFeatureType'.
+
+    Step2: Finding the name of the featuretype's element with a named complex type hosting the GML geometry.
+  example: []
+  syntax:
+    content: public string XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  id: XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 161
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: >-
+    Gets an XPath string addressing the name of an element described by an anonymous complex type 
+
+    hosting an element with a 'gml'-prefixed ref-attribute in 'DescribeFeatureType'.
+
+    Step2Alt: Finding the name of the featuretype's element with an anonymous complex type hosting the GML geometry.
+  example: []
+  syntax:
+    content: public string XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE*
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  commentId: P:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  id: XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  parent: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  langs:
+  - csharp
+  - vb
+  name: XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+    path: ../../Mapsui.Nts/Providers/Wfs/Utilities/WFS_XPathTextResourcesBase.cs
+    startLine: 167
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Utilities
+  summary: >-
+    Gets an XPath string addressing the 'gml'-prefixed  ref-attribute of an element.
+
+    This is for querying the name of the GML geometry element.
+  example: []
+  syntax:
+    content: public string XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY As String
+  overload: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY*
+references:
+- uid: Mapsui.Providers.Wfs.Utilities
+  commentId: N:Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.html
+  name: Mapsui.Providers.Wfs.Utilities
+  nameWithType: Mapsui.Providers.Wfs.Utilities
+  fullName: Mapsui.Providers.Wfs.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities
+    name: Utilities
+    href: Mapsui.Providers.Wfs.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities
+    name: Utilities
+    href: Mapsui.Providers.Wfs.Utilities.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGCPREFIX*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGCPREFIX
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSOGCPREFIX
+  name: NSOGCPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSOGCPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGCPREFIX
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGC*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGC
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSOGC
+  name: NSOGC
+  nameWithType: WFS_XPathTextResourcesBase.NSOGC
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOGC
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINKPREFIX*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINKPREFIX
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSXLINKPREFIX
+  name: NSXLINKPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSXLINKPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINKPREFIX
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINK*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINK
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSXLINK
+  name: NSXLINK
+  nameWithType: WFS_XPathTextResourcesBase.NSXLINK
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSXLINK
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSFEATURETYPEPREFIX
+  name: NSFEATURETYPEPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSFEATURETYPEPREFIX
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFSPREFIX*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFSPREFIX
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSWFSPREFIX
+  name: NSWFSPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSWFSPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFSPREFIX
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFS*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFS
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSWFS
+  name: NSWFS
+  nameWithType: WFS_XPathTextResourcesBase.NSWFS
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSWFS
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGMLPREFIX*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGMLPREFIX
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSGMLPREFIX
+  name: NSGMLPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSGMLPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGMLPREFIX
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGML*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGML
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSGML
+  name: NSGML
+  nameWithType: WFS_XPathTextResourcesBase.NSGML
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSGML
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWSPREFIX*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWSPREFIX
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSOWSPREFIX
+  name: NSOWSPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSOWSPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWSPREFIX
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWS*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWS
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSOWS
+  name: NSOWS
+  nameWithType: WFS_XPathTextResourcesBase.NSOWS
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSOWS
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMAPREFIX*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMAPREFIX
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSSCHEMAPREFIX
+  name: NSSCHEMAPREFIX
+  nameWithType: WFS_XPathTextResourcesBase.NSSCHEMAPREFIX
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMAPREFIX
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMA*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMA
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_NSSCHEMA
+  name: NSSCHEMA
+  nameWithType: WFS_XPathTextResourcesBase.NSSCHEMA
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.NSSCHEMA
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TARGETNS*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TARGETNS
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_XPATH_TARGETNS
+  name: XPATH_TARGETNS
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_TARGETNS
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TARGETNS
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  name: XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_XPATH_NAMEATTRIBUTEQUERY
+  name: XPATH_NAMEATTRIBUTEQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_NAMEATTRIBUTEQUERY
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_XPATH_TYPEATTRIBUTEQUERY
+  name: XPATH_TYPEATTRIBUTEQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_TYPEATTRIBUTEQUERY
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  name: XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRYELEMENTCOMPLEXTYPE_BYELEMREFQUERY
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  name: XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  name: XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GEOMNAMEQUERY_ANONYMOUSTYPE
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY*
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html#Mapsui_Providers_Wfs_Utilities_WFS_XPathTextResourcesBase_XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  name: XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  nameWithType: WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY

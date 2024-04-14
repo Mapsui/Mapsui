@@ -1,0 +1,105 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.InfoWidgets
+  commentId: N:Mapsui.Widgets.InfoWidgets
+  id: Mapsui.Widgets.InfoWidgets
+  children:
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget
+  - Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
+  - Mapsui.Widgets.InfoWidgets.MapInfoWidget
+  - Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget
+  - Mapsui.Widgets.InfoWidgets.PerformanceWidget
+  - Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Widgets.InfoWidgets
+  nameWithType: Mapsui.Widgets.InfoWidgets
+  fullName: Mapsui.Widgets.InfoWidgets
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  commentId: T:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  parent: Mapsui.Widgets.InfoWidgets
+  href: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html
+  name: ShowLoggingInMap
+  nameWithType: ShowLoggingInMap
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget
+  commentId: T:Mapsui.Widgets.InfoWidgets.LoggingWidget
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html
+  name: LoggingWidget
+  nameWithType: LoggingWidget
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
+  commentId: T:Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
+  href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html
+  name: LoggingWidget.LogEntry
+  nameWithType: LoggingWidget.LogEntry
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
+  spec.csharp:
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget
+    name: LoggingWidget
+    href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
+    name: LogEntry
+    href: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html
+  spec.vb:
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget
+    name: LoggingWidget
+    href: Mapsui.Widgets.InfoWidgets.LoggingWidget.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
+    name: LogEntry
+    href: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html
+- uid: Mapsui.Widgets.InfoWidgets.MapInfoWidget
+  commentId: T:Mapsui.Widgets.InfoWidgets.MapInfoWidget
+  href: Mapsui.Widgets.InfoWidgets.MapInfoWidget.html
+  name: MapInfoWidget
+  nameWithType: MapInfoWidget
+  fullName: Mapsui.Widgets.InfoWidgets.MapInfoWidget
+- uid: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget
+  commentId: T:Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget
+  href: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.html
+  name: MouseCoordinatesWidget
+  nameWithType: MouseCoordinatesWidget
+  fullName: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget
+- uid: Mapsui.Widgets.InfoWidgets.PerformanceWidget
+  commentId: T:Mapsui.Widgets.InfoWidgets.PerformanceWidget
+  href: Mapsui.Widgets.InfoWidgets.PerformanceWidget.html
+  name: PerformanceWidget
+  nameWithType: PerformanceWidget
+  fullName: Mapsui.Widgets.InfoWidgets.PerformanceWidget
+- uid: Mapsui.Widgets.InfoWidgets
+  commentId: N:Mapsui.Widgets.InfoWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.InfoWidgets
+  nameWithType: Mapsui.Widgets.InfoWidgets
+  fullName: Mapsui.Widgets.InfoWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets
+    name: InfoWidgets
+    href: Mapsui.Widgets.InfoWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets
+    name: InfoWidgets
+    href: Mapsui.Widgets.InfoWidgets.html

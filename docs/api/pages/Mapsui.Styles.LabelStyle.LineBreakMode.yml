@@ -1,0 +1,340 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.LabelStyle.LineBreakMode
+  commentId: T:Mapsui.Styles.LabelStyle.LineBreakMode
+  id: LabelStyle.LineBreakMode
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.LabelStyle.LineBreakMode.CharacterWrap
+  - Mapsui.Styles.LabelStyle.LineBreakMode.HeadTruncation
+  - Mapsui.Styles.LabelStyle.LineBreakMode.MiddleTruncation
+  - Mapsui.Styles.LabelStyle.LineBreakMode.NoWrap
+  - Mapsui.Styles.LabelStyle.LineBreakMode.TailTruncation
+  - Mapsui.Styles.LabelStyle.LineBreakMode.WordWrap
+  langs:
+  - csharp
+  - vb
+  name: LabelStyle.LineBreakMode
+  nameWithType: LabelStyle.LineBreakMode
+  fullName: Mapsui.Styles.LabelStyle.LineBreakMode
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LineBreakMode
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 53
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: 'public enum LabelStyle.LineBreakMode : short'
+    content.vb: Public Enum LabelStyle.LineBreakMode As Short
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.LabelStyle.LineBreakMode.NoWrap
+  commentId: F:Mapsui.Styles.LabelStyle.LineBreakMode.NoWrap
+  id: NoWrap
+  parent: Mapsui.Styles.LabelStyle.LineBreakMode
+  langs:
+  - csharp
+  - vb
+  name: NoWrap
+  nameWithType: LabelStyle.LineBreakMode.NoWrap
+  fullName: Mapsui.Styles.LabelStyle.LineBreakMode.NoWrap
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NoWrap
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 58
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Do not wrap text
+  example: []
+  syntax:
+    content: NoWrap = 0
+    return:
+      type: Mapsui.Styles.LabelStyle.LineBreakMode
+- uid: Mapsui.Styles.LabelStyle.LineBreakMode.CharacterWrap
+  commentId: F:Mapsui.Styles.LabelStyle.LineBreakMode.CharacterWrap
+  id: CharacterWrap
+  parent: Mapsui.Styles.LabelStyle.LineBreakMode
+  langs:
+  - csharp
+  - vb
+  name: CharacterWrap
+  nameWithType: LabelStyle.LineBreakMode.CharacterWrap
+  fullName: Mapsui.Styles.LabelStyle.LineBreakMode.CharacterWrap
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CharacterWrap
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 62
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Wrap at character boundaries
+  example: []
+  syntax:
+    content: CharacterWrap = 1
+    return:
+      type: Mapsui.Styles.LabelStyle.LineBreakMode
+- uid: Mapsui.Styles.LabelStyle.LineBreakMode.HeadTruncation
+  commentId: F:Mapsui.Styles.LabelStyle.LineBreakMode.HeadTruncation
+  id: HeadTruncation
+  parent: Mapsui.Styles.LabelStyle.LineBreakMode
+  langs:
+  - csharp
+  - vb
+  name: HeadTruncation
+  nameWithType: LabelStyle.LineBreakMode.HeadTruncation
+  fullName: Mapsui.Styles.LabelStyle.LineBreakMode.HeadTruncation
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: HeadTruncation
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 66
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Truncate the head of text
+  example: []
+  syntax:
+    content: HeadTruncation = 2
+    return:
+      type: Mapsui.Styles.LabelStyle.LineBreakMode
+- uid: Mapsui.Styles.LabelStyle.LineBreakMode.MiddleTruncation
+  commentId: F:Mapsui.Styles.LabelStyle.LineBreakMode.MiddleTruncation
+  id: MiddleTruncation
+  parent: Mapsui.Styles.LabelStyle.LineBreakMode
+  langs:
+  - csharp
+  - vb
+  name: MiddleTruncation
+  nameWithType: LabelStyle.LineBreakMode.MiddleTruncation
+  fullName: Mapsui.Styles.LabelStyle.LineBreakMode.MiddleTruncation
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MiddleTruncation
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 70
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Truncate the middle of text. This may be done, for example, by replacing it with an ellipsis
+  example: []
+  syntax:
+    content: MiddleTruncation = 3
+    return:
+      type: Mapsui.Styles.LabelStyle.LineBreakMode
+- uid: Mapsui.Styles.LabelStyle.LineBreakMode.TailTruncation
+  commentId: F:Mapsui.Styles.LabelStyle.LineBreakMode.TailTruncation
+  id: TailTruncation
+  parent: Mapsui.Styles.LabelStyle.LineBreakMode
+  langs:
+  - csharp
+  - vb
+  name: TailTruncation
+  nameWithType: LabelStyle.LineBreakMode.TailTruncation
+  fullName: Mapsui.Styles.LabelStyle.LineBreakMode.TailTruncation
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TailTruncation
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 74
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Truncate the tail of text
+  example: []
+  syntax:
+    content: TailTruncation = 4
+    return:
+      type: Mapsui.Styles.LabelStyle.LineBreakMode
+- uid: Mapsui.Styles.LabelStyle.LineBreakMode.WordWrap
+  commentId: F:Mapsui.Styles.LabelStyle.LineBreakMode.WordWrap
+  id: WordWrap
+  parent: Mapsui.Styles.LabelStyle.LineBreakMode
+  langs:
+  - csharp
+  - vb
+  name: WordWrap
+  nameWithType: LabelStyle.LineBreakMode.WordWrap
+  fullName: Mapsui.Styles.LabelStyle.LineBreakMode.WordWrap
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/LabelStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WordWrap
+    path: ../../Mapsui/Styles/LabelStyle.cs
+    startLine: 78
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Wrap at word boundaries
+  example: []
+  syntax:
+    content: WordWrap = 5
+    return:
+      type: Mapsui.Styles.LabelStyle.LineBreakMode
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.LabelStyle.LineBreakMode
+  commentId: T:Mapsui.Styles.LabelStyle.LineBreakMode
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.LabelStyle.html
+  name: LabelStyle.LineBreakMode
+  nameWithType: LabelStyle.LineBreakMode
+  fullName: Mapsui.Styles.LabelStyle.LineBreakMode
+  spec.csharp:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.LineBreakMode
+    name: LineBreakMode
+    href: Mapsui.Styles.LabelStyle.LineBreakMode.html
+  spec.vb:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.LineBreakMode
+    name: LineBreakMode
+    href: Mapsui.Styles.LabelStyle.LineBreakMode.html

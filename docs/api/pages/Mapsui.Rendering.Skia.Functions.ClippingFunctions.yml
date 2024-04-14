@@ -1,0 +1,650 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions
+  commentId: T:Mapsui.Rendering.Skia.Functions.ClippingFunctions
+  id: ClippingFunctions
+  parent: Mapsui.Rendering.Skia.Functions
+  children:
+  - Mapsui.Rendering.Skia.Functions.ClippingFunctions.LiangBarskyClip(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKRect,SkiaSharp.SKPoint@,SkiaSharp.SKPoint@)
+  - Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect(System.Collections.Generic.IEnumerable{NetTopologySuite.Geometries.Coordinate},Mapsui.Viewport,SkiaSharp.SKRect)
+  langs:
+  - csharp
+  - vb
+  name: ClippingFunctions
+  nameWithType: ClippingFunctions
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ClippingFunctions
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  syntax:
+    content: public static class ClippingFunctions
+    content.vb: Public Module ClippingFunctions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect(System.Collections.Generic.IEnumerable{NetTopologySuite.Geometries.Coordinate},Mapsui.Viewport,SkiaSharp.SKRect)
+  commentId: M:Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect(System.Collections.Generic.IEnumerable{NetTopologySuite.Geometries.Coordinate},Mapsui.Viewport,SkiaSharp.SKRect)
+  id: ReducePointsToClipRect(System.Collections.Generic.IEnumerable{NetTopologySuite.Geometries.Coordinate},Mapsui.Viewport,SkiaSharp.SKRect)
+  parent: Mapsui.Rendering.Skia.Functions.ClippingFunctions
+  langs:
+  - csharp
+  - vb
+  name: ReducePointsToClipRect(IEnumerable<Coordinate>?, Viewport, SKRect)
+  nameWithType: ClippingFunctions.ReducePointsToClipRect(IEnumerable<Coordinate>?, Viewport, SKRect)
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect(System.Collections.Generic.IEnumerable<NetTopologySuite.Geometries.Coordinate>?, Mapsui.Viewport, SkiaSharp.SKRect)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ReducePointsToClipRect
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 19
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  summary: >-
+    Reduce list of points, so that all are inside of cliptRect
+
+    See https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm
+  example: []
+  syntax:
+    content: public static List<SKPoint> ReducePointsToClipRect(IEnumerable<Coordinate>? points, Viewport viewport, SKRect clipRect)
+    parameters:
+    - id: points
+      type: System.Collections.Generic.IEnumerable{NetTopologySuite.Geometries.Coordinate}
+      description: List of points to reduce.
+    - id: viewport
+      type: Mapsui.Viewport
+      description: The Viewport that is used for the conversions.
+    - id: clipRect
+      type: SkiaSharp.SKRect
+      description: Rectangle to clip to. All points outside aren't drawn.
+    return:
+      type: System.Collections.Generic.List{SkiaSharp.SKPoint}
+      description: ''
+    content.vb: Public Shared Function ReducePointsToClipRect(points As IEnumerable(Of Coordinate), viewport As Viewport, clipRect As SKRect) As List(Of SKPoint)
+  overload: Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect*
+  nameWithType.vb: ClippingFunctions.ReducePointsToClipRect(IEnumerable(Of Coordinate), Viewport, SKRect)
+  fullName.vb: Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect(System.Collections.Generic.IEnumerable(Of NetTopologySuite.Geometries.Coordinate), Mapsui.Viewport, SkiaSharp.SKRect)
+  name.vb: ReducePointsToClipRect(IEnumerable(Of Coordinate), Viewport, SKRect)
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.LiangBarskyClip(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKRect,SkiaSharp.SKPoint@,SkiaSharp.SKPoint@)
+  commentId: M:Mapsui.Rendering.Skia.Functions.ClippingFunctions.LiangBarskyClip(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKRect,SkiaSharp.SKPoint@,SkiaSharp.SKPoint@)
+  id: LiangBarskyClip(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKRect,SkiaSharp.SKPoint@,SkiaSharp.SKPoint@)
+  parent: Mapsui.Rendering.Skia.Functions.ClippingFunctions
+  langs:
+  - csharp
+  - vb
+  name: LiangBarskyClip(SKPoint, SKPoint, SKRect, out SKPoint, out SKPoint)
+  nameWithType: ClippingFunctions.LiangBarskyClip(SKPoint, SKPoint, SKRect, out SKPoint, out SKPoint)
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.LiangBarskyClip(SkiaSharp.SKPoint, SkiaSharp.SKPoint, SkiaSharp.SKRect, out SkiaSharp.SKPoint, out SkiaSharp.SKPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LiangBarskyClip
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 111
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  summary: >-
+    A Liang-Barsky implementation to detect the intersection between a line and a rect.
+
+    With this, all lines, that aren't visible on screen could be sorted out.
+
+    Found at https://gist.github.com/ChickenProp/3194723
+  example: []
+  syntax:
+    content: public static ClippingFunctions.Intersection LiangBarskyClip(SKPoint point1, SKPoint point2, SKRect clipRect, out SKPoint intersectionPoint1, out SKPoint intersectionPoint2)
+    parameters:
+    - id: point1
+      type: SkiaSharp.SKPoint
+      description: First point of line
+    - id: point2
+      type: SkiaSharp.SKPoint
+      description: Second point of line
+    - id: clipRect
+      type: SkiaSharp.SKRect
+      description: ''
+    - id: intersectionPoint1
+      type: SkiaSharp.SKPoint
+      description: First intersection point
+    - id: intersectionPoint2
+      type: SkiaSharp.SKPoint
+      description: Second intersection point
+    return:
+      type: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+      description: ''
+    content.vb: Public Shared Function LiangBarskyClip(point1 As SKPoint, point2 As SKPoint, clipRect As SKRect, intersectionPoint1 As SKPoint, intersectionPoint2 As SKPoint) As ClippingFunctions.Intersection
+  overload: Mapsui.Rendering.Skia.Functions.ClippingFunctions.LiangBarskyClip*
+  nameWithType.vb: ClippingFunctions.LiangBarskyClip(SKPoint, SKPoint, SKRect, SKPoint, SKPoint)
+  fullName.vb: Mapsui.Rendering.Skia.Functions.ClippingFunctions.LiangBarskyClip(SkiaSharp.SKPoint, SkiaSharp.SKPoint, SkiaSharp.SKRect, SkiaSharp.SKPoint, SkiaSharp.SKPoint)
+  name.vb: LiangBarskyClip(SKPoint, SKPoint, SKRect, SKPoint, SKPoint)
+references:
+- uid: Mapsui.Rendering.Skia.Functions
+  commentId: N:Mapsui.Rendering.Skia.Functions
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia.Functions
+  nameWithType: Mapsui.Rendering.Skia.Functions
+  fullName: Mapsui.Rendering.Skia.Functions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Functions
+    name: Functions
+    href: Mapsui.Rendering.Skia.Functions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Functions
+    name: Functions
+    href: Mapsui.Rendering.Skia.Functions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect*
+  commentId: Overload:Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect
+  href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.html#Mapsui_Rendering_Skia_Functions_ClippingFunctions_ReducePointsToClipRect_System_Collections_Generic_IEnumerable_NetTopologySuite_Geometries_Coordinate__Mapsui_Viewport_SkiaSharp_SKRect_
+  name: ReducePointsToClipRect
+  nameWithType: ClippingFunctions.ReducePointsToClipRect
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect
+- uid: System.Collections.Generic.IEnumerable{NetTopologySuite.Geometries.Coordinate}
+  commentId: T:System.Collections.Generic.IEnumerable{NetTopologySuite.Geometries.Coordinate}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<Coordinate>
+  nameWithType: IEnumerable<Coordinate>
+  fullName: System.Collections.Generic.IEnumerable<NetTopologySuite.Geometries.Coordinate>
+  nameWithType.vb: IEnumerable(Of Coordinate)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of NetTopologySuite.Geometries.Coordinate)
+  name.vb: IEnumerable(Of Coordinate)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: NetTopologySuite.Geometries.Coordinate
+    name: Coordinate
+    isExternal: true
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NetTopologySuite.Geometries.Coordinate
+    name: Coordinate
+    isExternal: true
+  - name: )
+- uid: Mapsui.Viewport
+  commentId: T:Mapsui.Viewport
+  parent: Mapsui
+  href: Mapsui.Viewport.html
+  name: Viewport
+  nameWithType: Viewport
+  fullName: Mapsui.Viewport
+- uid: SkiaSharp.SKRect
+  commentId: T:SkiaSharp.SKRect
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skrect
+  name: SKRect
+  nameWithType: SKRect
+  fullName: SkiaSharp.SKRect
+- uid: System.Collections.Generic.List{SkiaSharp.SKPoint}
+  commentId: T:System.Collections.Generic.List{SkiaSharp.SKPoint}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<SKPoint>
+  nameWithType: List<SKPoint>
+  fullName: System.Collections.Generic.List<SkiaSharp.SKPoint>
+  nameWithType.vb: List(Of SKPoint)
+  fullName.vb: System.Collections.Generic.List(Of SkiaSharp.SKPoint)
+  name.vb: List(Of SKPoint)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: SkiaSharp.SKPoint
+    name: SKPoint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.skpoint
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: SkiaSharp.SKPoint
+    name: SKPoint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.skpoint
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: SkiaSharp
+  commentId: N:SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp
+  name: SkiaSharp
+  nameWithType: SkiaSharp
+  fullName: SkiaSharp
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.LiangBarskyClip*
+  commentId: Overload:Mapsui.Rendering.Skia.Functions.ClippingFunctions.LiangBarskyClip
+  href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.html#Mapsui_Rendering_Skia_Functions_ClippingFunctions_LiangBarskyClip_SkiaSharp_SKPoint_SkiaSharp_SKPoint_SkiaSharp_SKRect_SkiaSharp_SKPoint__SkiaSharp_SKPoint__
+  name: LiangBarskyClip
+  nameWithType: ClippingFunctions.LiangBarskyClip
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.LiangBarskyClip
+- uid: SkiaSharp.SKPoint
+  commentId: T:SkiaSharp.SKPoint
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skpoint
+  name: SKPoint
+  nameWithType: SKPoint
+  fullName: SkiaSharp.SKPoint
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  commentId: T:Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  parent: Mapsui.Rendering.Skia.Functions
+  href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.html
+  name: ClippingFunctions.Intersection
+  nameWithType: ClippingFunctions.Intersection
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  spec.csharp:
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions
+    name: ClippingFunctions
+    href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+    name: Intersection
+    href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.html
+  spec.vb:
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions
+    name: ClippingFunctions
+    href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+    name: Intersection
+    href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.html

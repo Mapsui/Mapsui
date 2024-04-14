@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class HttpClientUtil </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class HttpClientUtil ">
+    
+    <meta name="description" content="This class provides an easy to use interface for HTTP-GET and HTTP-POST requests.">
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil">
+
+
+
+  <h1 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil" class="text-break">Class HttpClientUtil</h1>
+  <div class="markdown level0 summary"><p>This class provides an easy to use interface for HTTP-GET and HTTP-POST requests.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">HttpClientUtil</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.Providers.html">Providers</a>.<a class="xref" href="Mapsui.Providers.Wfs.html">Wfs</a>.<a class="xref" href="Mapsui.Providers.Wfs.Utilities.html">Utilities</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.Nts.dll</h6>
+  <h5 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class HttpClientUtil : IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil__ctor_Mapsui_Cache_IUrlPersistentCache_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil.%23ctor(Mapsui.Cache.IUrlPersistentCache)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L24">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil__ctor_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.#ctor*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil__ctor_Mapsui_Cache_IUrlPersistentCache_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.#ctor(Mapsui.Cache.IUrlPersistentCache)">HttpClientUtil(IUrlPersistentCache?)</h4>
+  <div class="markdown level1 summary"><p>This class provides an easy to use interface for HTTP-GET and HTTP-POST requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpClientUtil(IUrlPersistentCache? persistentCache = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></td>
+        <td><span class="parametername">persistentCache</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Credentials.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Credentials%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L63">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Credentials_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Credentials*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Credentials" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Credentials">Credentials</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the network credentials used for authenticating the request with the Internet resource</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICredentials? Credentials { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.icredentials">ICredentials</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil_PostData.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil.PostData%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L55">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_PostData_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.PostData*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_PostData" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.PostData">PostData</h4>
+  <div class="markdown level1 summary"><p>Sets the data of a HTTP POST request as byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] PostData { set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil_ProxyUrl.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil.ProxyUrl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L46">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_ProxyUrl_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.ProxyUrl*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_ProxyUrl" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.ProxyUrl">ProxyUrl</h4>
+  <div class="markdown level1 summary"><p>Gets and sets the proxy Url of the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? ProxyUrl { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Url.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Url%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L37">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Url_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Url*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Url" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Url">Url</h4>
+  <div class="markdown level1 summary"><p>Gets ans sets the Url of the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Url { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil_AddHeader_System_String_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil.AddHeader(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L76">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_AddHeader_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.AddHeader*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_AddHeader_System_String_System_String_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.AddHeader(System.String,System.String)">AddHeader(string, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a HTTP header.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddHeader(string name, string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the header</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value of the header</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L190">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Dispose_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Dispose" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil_GetDataStreamAsync.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L84">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_GetDataStreamAsync_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_GetDataStreamAsync" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync">GetDataStreamAsync()</h4>
+  <div class="markdown level1 summary"><p>Performs a HTTP-GET or HTTP-POST request and returns a data stream for reading.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;Stream?&gt; GetDataStreamAsync()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Reset.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Reset%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L183">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Reset_" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Reset*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Reset" data-uid="Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Reset">Reset()</h4>
+  <div class="markdown level1 summary"><p>This method resets all configurations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reset()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Utilities_HttpClientUtil.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Utilities.HttpClientUtil%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Utilities/HttpClientUtil.cs/#L24" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

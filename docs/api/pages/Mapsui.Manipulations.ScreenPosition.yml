@@ -1,0 +1,645 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  id: ScreenPosition
+  parent: Mapsui.Manipulations
+  children:
+  - Mapsui.Manipulations.ScreenPosition.#ctor(System.Double,System.Double)
+  - Mapsui.Manipulations.ScreenPosition.Distance(Mapsui.Manipulations.ScreenPosition)
+  - Mapsui.Manipulations.ScreenPosition.Offset(System.Double,System.Double)
+  - Mapsui.Manipulations.ScreenPosition.X
+  - Mapsui.Manipulations.ScreenPosition.Y
+  langs:
+  - csharp
+  - vb
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+  type: Struct
+  source:
+    remote:
+      path: Mapsui/Manipulations/ScreenPosition.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ScreenPosition
+    path: ../../Mapsui/Manipulations/ScreenPosition.cs
+    startLine: 3
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: 'public record struct ScreenPosition : IEquatable<ScreenPosition>'
+    content.vb: Public Structure ScreenPosition Implements IEquatable(Of ScreenPosition)
+  implements:
+  - System.IEquatable{Mapsui.Manipulations.ScreenPosition}
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Manipulations.ScreenPosition.#ctor(System.Double,System.Double)
+  commentId: M:Mapsui.Manipulations.ScreenPosition.#ctor(System.Double,System.Double)
+  id: '#ctor(System.Double,System.Double)'
+  parent: Mapsui.Manipulations.ScreenPosition
+  langs:
+  - csharp
+  - vb
+  name: ScreenPosition(double, double)
+  nameWithType: ScreenPosition.ScreenPosition(double, double)
+  fullName: Mapsui.Manipulations.ScreenPosition.ScreenPosition(double, double)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Manipulations/ScreenPosition.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Manipulations/ScreenPosition.cs
+    startLine: 3
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public ScreenPosition(double X, double Y)
+    parameters:
+    - id: X
+      type: System.Double
+    - id: Y
+      type: System.Double
+    content.vb: Public Sub New(X As Double, Y As Double)
+  overload: Mapsui.Manipulations.ScreenPosition.#ctor*
+  nameWithType.vb: ScreenPosition.New(Double, Double)
+  fullName.vb: Mapsui.Manipulations.ScreenPosition.New(Double, Double)
+  name.vb: New(Double, Double)
+- uid: Mapsui.Manipulations.ScreenPosition.X
+  commentId: P:Mapsui.Manipulations.ScreenPosition.X
+  id: X
+  parent: Mapsui.Manipulations.ScreenPosition
+  langs:
+  - csharp
+  - vb
+  name: X
+  nameWithType: ScreenPosition.X
+  fullName: Mapsui.Manipulations.ScreenPosition.X
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Manipulations/ScreenPosition.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: X
+    path: ../../Mapsui/Manipulations/ScreenPosition.cs
+    startLine: 3
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public double X { readonly get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property X As Double
+  overload: Mapsui.Manipulations.ScreenPosition.X*
+- uid: Mapsui.Manipulations.ScreenPosition.Y
+  commentId: P:Mapsui.Manipulations.ScreenPosition.Y
+  id: Y
+  parent: Mapsui.Manipulations.ScreenPosition
+  langs:
+  - csharp
+  - vb
+  name: Y
+  nameWithType: ScreenPosition.Y
+  fullName: Mapsui.Manipulations.ScreenPosition.Y
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Manipulations/ScreenPosition.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Y
+    path: ../../Mapsui/Manipulations/ScreenPosition.cs
+    startLine: 3
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public double Y { readonly get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Y As Double
+  overload: Mapsui.Manipulations.ScreenPosition.Y*
+- uid: Mapsui.Manipulations.ScreenPosition.Offset(System.Double,System.Double)
+  commentId: M:Mapsui.Manipulations.ScreenPosition.Offset(System.Double,System.Double)
+  id: Offset(System.Double,System.Double)
+  parent: Mapsui.Manipulations.ScreenPosition
+  langs:
+  - csharp
+  - vb
+  name: Offset(double, double)
+  nameWithType: ScreenPosition.Offset(double, double)
+  fullName: Mapsui.Manipulations.ScreenPosition.Offset(double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Manipulations/ScreenPosition.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Offset
+    path: ../../Mapsui/Manipulations/ScreenPosition.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public readonly ScreenPosition Offset(double offsetX, double offsetY)
+    parameters:
+    - id: offsetX
+      type: System.Double
+    - id: offsetY
+      type: System.Double
+    return:
+      type: Mapsui.Manipulations.ScreenPosition
+    content.vb: Public Function Offset(offsetX As Double, offsetY As Double) As ScreenPosition
+  overload: Mapsui.Manipulations.ScreenPosition.Offset*
+  nameWithType.vb: ScreenPosition.Offset(Double, Double)
+  fullName.vb: Mapsui.Manipulations.ScreenPosition.Offset(Double, Double)
+  name.vb: Offset(Double, Double)
+- uid: Mapsui.Manipulations.ScreenPosition.Distance(Mapsui.Manipulations.ScreenPosition)
+  commentId: M:Mapsui.Manipulations.ScreenPosition.Distance(Mapsui.Manipulations.ScreenPosition)
+  id: Distance(Mapsui.Manipulations.ScreenPosition)
+  parent: Mapsui.Manipulations.ScreenPosition
+  langs:
+  - csharp
+  - vb
+  name: Distance(ScreenPosition)
+  nameWithType: ScreenPosition.Distance(ScreenPosition)
+  fullName: Mapsui.Manipulations.ScreenPosition.Distance(Mapsui.Manipulations.ScreenPosition)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Manipulations/ScreenPosition.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Distance
+    path: ../../Mapsui/Manipulations/ScreenPosition.cs
+    startLine: 6
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public readonly double Distance(ScreenPosition position)
+    parameters:
+    - id: position
+      type: Mapsui.Manipulations.ScreenPosition
+    return:
+      type: System.Double
+    content.vb: Public Function Distance(position As ScreenPosition) As Double
+  overload: Mapsui.Manipulations.ScreenPosition.Distance*
+references:
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: System.IEquatable{Mapsui.Manipulations.ScreenPosition}
+  commentId: T:System.IEquatable{Mapsui.Manipulations.ScreenPosition}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<ScreenPosition>
+  nameWithType: IEquatable<ScreenPosition>
+  fullName: System.IEquatable<Mapsui.Manipulations.ScreenPosition>
+  nameWithType.vb: IEquatable(Of ScreenPosition)
+  fullName.vb: System.IEquatable(Of Mapsui.Manipulations.ScreenPosition)
+  name.vb: IEquatable(Of ScreenPosition)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: Mapsui.Manipulations.ScreenPosition
+    name: ScreenPosition
+    href: Mapsui.Manipulations.ScreenPosition.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Manipulations.ScreenPosition
+    name: ScreenPosition
+    href: Mapsui.Manipulations.ScreenPosition.html
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Manipulations.ScreenPosition.#ctor*
+  commentId: Overload:Mapsui.Manipulations.ScreenPosition.#ctor
+  href: Mapsui.Manipulations.ScreenPosition.html#Mapsui_Manipulations_ScreenPosition__ctor_System_Double_System_Double_
+  name: ScreenPosition
+  nameWithType: ScreenPosition.ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition.ScreenPosition
+  nameWithType.vb: ScreenPosition.New
+  fullName.vb: Mapsui.Manipulations.ScreenPosition.New
+  name.vb: New
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Manipulations.ScreenPosition.X*
+  commentId: Overload:Mapsui.Manipulations.ScreenPosition.X
+  href: Mapsui.Manipulations.ScreenPosition.html#Mapsui_Manipulations_ScreenPosition_X
+  name: X
+  nameWithType: ScreenPosition.X
+  fullName: Mapsui.Manipulations.ScreenPosition.X
+- uid: Mapsui.Manipulations.ScreenPosition.Y*
+  commentId: Overload:Mapsui.Manipulations.ScreenPosition.Y
+  href: Mapsui.Manipulations.ScreenPosition.html#Mapsui_Manipulations_ScreenPosition_Y
+  name: Y
+  nameWithType: ScreenPosition.Y
+  fullName: Mapsui.Manipulations.ScreenPosition.Y
+- uid: Mapsui.Manipulations.ScreenPosition.Offset*
+  commentId: Overload:Mapsui.Manipulations.ScreenPosition.Offset
+  href: Mapsui.Manipulations.ScreenPosition.html#Mapsui_Manipulations_ScreenPosition_Offset_System_Double_System_Double_
+  name: Offset
+  nameWithType: ScreenPosition.Offset
+  fullName: Mapsui.Manipulations.ScreenPosition.Offset
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: Mapsui.Manipulations.ScreenPosition.Distance*
+  commentId: Overload:Mapsui.Manipulations.ScreenPosition.Distance
+  href: Mapsui.Manipulations.ScreenPosition.html#Mapsui_Manipulations_ScreenPosition_Distance_Mapsui_Manipulations_ScreenPosition_
+  name: Distance
+  nameWithType: ScreenPosition.Distance
+  fullName: Mapsui.Manipulations.ScreenPosition.Distance

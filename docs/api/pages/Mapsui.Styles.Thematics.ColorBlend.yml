@@ -1,0 +1,1153 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.Thematics.ColorBlend
+  commentId: T:Mapsui.Styles.Thematics.ColorBlend
+  id: ColorBlend
+  parent: Mapsui.Styles.Thematics
+  children:
+  - Mapsui.Styles.Thematics.ColorBlend.#ctor(Mapsui.Styles.Color[],System.Double[])
+  - Mapsui.Styles.Thematics.ColorBlend.BlackToWhite
+  - Mapsui.Styles.Thematics.ColorBlend.BlueToGreen
+  - Mapsui.Styles.Thematics.ColorBlend.BlueToRed
+  - Mapsui.Styles.Thematics.ColorBlend.Colors
+  - Mapsui.Styles.Thematics.ColorBlend.GetColor(System.Double)
+  - Mapsui.Styles.Thematics.ColorBlend.GreenToBlue
+  - Mapsui.Styles.Thematics.ColorBlend.GreenToRed
+  - Mapsui.Styles.Thematics.ColorBlend.Positions
+  - Mapsui.Styles.Thematics.ColorBlend.Rainbow5
+  - Mapsui.Styles.Thematics.ColorBlend.Rainbow7
+  - Mapsui.Styles.Thematics.ColorBlend.RedToBlue
+  - Mapsui.Styles.Thematics.ColorBlend.RedToGreen
+  - Mapsui.Styles.Thematics.ColorBlend.ThreeColors(Mapsui.Styles.Color,Mapsui.Styles.Color,Mapsui.Styles.Color)
+  - Mapsui.Styles.Thematics.ColorBlend.TwoColors(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  - Mapsui.Styles.Thematics.ColorBlend.WhiteToBlack
+  langs:
+  - csharp
+  - vb
+  name: ColorBlend
+  nameWithType: ColorBlend
+  fullName: Mapsui.Styles.Thematics.ColorBlend
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ColorBlend
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Defines arrays of colors and positions used for interpolating color blending in a multicolor gradient.
+  example: []
+  syntax:
+    content: public class ColorBlend
+    content.vb: Public Class ColorBlend
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.Thematics.ColorBlend.Colors
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.Colors
+  id: Colors
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: Colors
+  nameWithType: ColorBlend.Colors
+  fullName: Mapsui.Styles.Thematics.ColorBlend.Colors
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Colors
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets an array of colors that represents the colors to use at corresponding positions along a gradient.
+  example: []
+  syntax:
+    content: public Color[]? Colors { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color[]
+    content.vb: Public Property Colors As Color()
+  overload: Mapsui.Styles.Thematics.ColorBlend.Colors*
+- uid: Mapsui.Styles.Thematics.ColorBlend.Positions
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.Positions
+  id: Positions
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: Positions
+  nameWithType: ColorBlend.Positions
+  fullName: Mapsui.Styles.Thematics.ColorBlend.Positions
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Positions
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 32
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets or sets the positions along a gradient line.
+  remarks: >-
+    <p>The elements of this array specify percentages of distance along the gradient line.
+
+    For example, an element value of 0.2f specifies that this point is 20 percent of the total
+
+    distance from the starting point. The elements in this array are represented by float
+
+    values between 0.0f and 1.0f, and the first element of the array must be 0.0f and the
+
+    last element must be 1.0f.</p>
+
+    <pre>Along with the Colors property, this property defines a multicolor gradient.</pre>
+  example: []
+  syntax:
+    content: public double[]? Positions { get; set; }
+    parameters: []
+    return:
+      type: System.Double[]
+      description: An array of values that specify percentages of distance along the gradient line.
+    content.vb: Public Property Positions As Double()
+  overload: Mapsui.Styles.Thematics.ColorBlend.Positions*
+- uid: Mapsui.Styles.Thematics.ColorBlend.#ctor(Mapsui.Styles.Color[],System.Double[])
+  commentId: M:Mapsui.Styles.Thematics.ColorBlend.#ctor(Mapsui.Styles.Color[],System.Double[])
+  id: '#ctor(Mapsui.Styles.Color[],System.Double[])'
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: ColorBlend(Color[], double[])
+  nameWithType: ColorBlend.ColorBlend(Color[], double[])
+  fullName: Mapsui.Styles.Thematics.ColorBlend.ColorBlend(Mapsui.Styles.Color[], double[])
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 41
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Initializes a new instance of the ColorBlend class.
+  example: []
+  syntax:
+    content: public ColorBlend(Color[] colors, double[] positions)
+    parameters:
+    - id: colors
+      type: Mapsui.Styles.Color[]
+      description: An array of Color structures that represents the colors to use at corresponding positions along a gradient.
+    - id: positions
+      type: System.Double[]
+      description: An array of values that specify percentages of distance along the gradient line.
+    content.vb: Public Sub New(colors As Color(), positions As Double())
+  overload: Mapsui.Styles.Thematics.ColorBlend.#ctor*
+  nameWithType.vb: ColorBlend.New(Color(), Double())
+  fullName.vb: Mapsui.Styles.Thematics.ColorBlend.New(Mapsui.Styles.Color(), Double())
+  name.vb: New(Color(), Double())
+- uid: Mapsui.Styles.Thematics.ColorBlend.GetColor(System.Double)
+  commentId: M:Mapsui.Styles.Thematics.ColorBlend.GetColor(System.Double)
+  id: GetColor(System.Double)
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: GetColor(double)
+  nameWithType: ColorBlend.GetColor(double)
+  fullName: Mapsui.Styles.Thematics.ColorBlend.GetColor(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetColor
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 54
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets the color from the scale at position 'pos'.
+  remarks: >-
+    If the position is outside the scale [0..1] only the fractional part
+        is used (in other words the scale restarts for each integer-part).
+  example: []
+  syntax:
+    content: public Color GetColor(double pos)
+    parameters:
+    - id: pos
+      type: System.Double
+      description: Position on scale between 0.0f and 1.0f
+    return:
+      type: Mapsui.Styles.Color
+      description: Color on scale
+    content.vb: Public Function GetColor(pos As Double) As Color
+  overload: Mapsui.Styles.Thematics.ColorBlend.GetColor*
+  nameWithType.vb: ColorBlend.GetColor(Double)
+  fullName.vb: Mapsui.Styles.Thematics.ColorBlend.GetColor(Double)
+  name.vb: GetColor(Double)
+- uid: Mapsui.Styles.Thematics.ColorBlend.Rainbow7
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.Rainbow7
+  id: Rainbow7
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: Rainbow7
+  nameWithType: ColorBlend.Rainbow7
+  fullName: Mapsui.Styles.Thematics.ColorBlend.Rainbow7
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rainbow7
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 108
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale with seven colors making a rainbow from red to violet.
+  remarks: >-
+    Colors span the following with an interval of 1/6:
+
+    { Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet }
+  example: []
+  syntax:
+    content: public static ColorBlend Rainbow7 { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property Rainbow7 As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.Rainbow7*
+- uid: Mapsui.Styles.Thematics.ColorBlend.Rainbow5
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.Rainbow5
+  id: Rainbow5
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: Rainbow5
+  nameWithType: ColorBlend.Rainbow5
+  fullName: Mapsui.Styles.Thematics.ColorBlend.Rainbow5
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rainbow5
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 135
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale with five colors making a rainbow from red to blue.
+  remarks: >-
+    Colors span the following with an interval of 0.25:
+
+    { Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue }
+  example: []
+  syntax:
+    content: public static ColorBlend Rainbow5 { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property Rainbow5 As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.Rainbow5*
+- uid: Mapsui.Styles.Thematics.ColorBlend.BlackToWhite
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.BlackToWhite
+  id: BlackToWhite
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: BlackToWhite
+  nameWithType: ColorBlend.BlackToWhite
+  fullName: Mapsui.Styles.Thematics.ColorBlend.BlackToWhite
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BlackToWhite
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 141
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale from black to white
+  example: []
+  syntax:
+    content: public static ColorBlend BlackToWhite { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property BlackToWhite As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.BlackToWhite*
+- uid: Mapsui.Styles.Thematics.ColorBlend.WhiteToBlack
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.WhiteToBlack
+  id: WhiteToBlack
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: WhiteToBlack
+  nameWithType: ColorBlend.WhiteToBlack
+  fullName: Mapsui.Styles.Thematics.ColorBlend.WhiteToBlack
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WhiteToBlack
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 146
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale from white to black
+  example: []
+  syntax:
+    content: public static ColorBlend WhiteToBlack { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property WhiteToBlack As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.WhiteToBlack*
+- uid: Mapsui.Styles.Thematics.ColorBlend.RedToGreen
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.RedToGreen
+  id: RedToGreen
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: RedToGreen
+  nameWithType: ColorBlend.RedToGreen
+  fullName: Mapsui.Styles.Thematics.ColorBlend.RedToGreen
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RedToGreen
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 151
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale from red to green
+  example: []
+  syntax:
+    content: public static ColorBlend RedToGreen { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property RedToGreen As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.RedToGreen*
+- uid: Mapsui.Styles.Thematics.ColorBlend.GreenToRed
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.GreenToRed
+  id: GreenToRed
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: GreenToRed
+  nameWithType: ColorBlend.GreenToRed
+  fullName: Mapsui.Styles.Thematics.ColorBlend.GreenToRed
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GreenToRed
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 156
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale from green to red
+  example: []
+  syntax:
+    content: public static ColorBlend GreenToRed { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property GreenToRed As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.GreenToRed*
+- uid: Mapsui.Styles.Thematics.ColorBlend.BlueToGreen
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.BlueToGreen
+  id: BlueToGreen
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: BlueToGreen
+  nameWithType: ColorBlend.BlueToGreen
+  fullName: Mapsui.Styles.Thematics.ColorBlend.BlueToGreen
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BlueToGreen
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 161
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale from blue to green
+  example: []
+  syntax:
+    content: public static ColorBlend BlueToGreen { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property BlueToGreen As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.BlueToGreen*
+- uid: Mapsui.Styles.Thematics.ColorBlend.GreenToBlue
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.GreenToBlue
+  id: GreenToBlue
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: GreenToBlue
+  nameWithType: ColorBlend.GreenToBlue
+  fullName: Mapsui.Styles.Thematics.ColorBlend.GreenToBlue
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GreenToBlue
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 166
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale from green to blue
+  example: []
+  syntax:
+    content: public static ColorBlend GreenToBlue { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property GreenToBlue As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.GreenToBlue*
+- uid: Mapsui.Styles.Thematics.ColorBlend.RedToBlue
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.RedToBlue
+  id: RedToBlue
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: RedToBlue
+  nameWithType: ColorBlend.RedToBlue
+  fullName: Mapsui.Styles.Thematics.ColorBlend.RedToBlue
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RedToBlue
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 171
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale from red to blue
+  example: []
+  syntax:
+    content: public static ColorBlend RedToBlue { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property RedToBlue As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.RedToBlue*
+- uid: Mapsui.Styles.Thematics.ColorBlend.BlueToRed
+  commentId: P:Mapsui.Styles.Thematics.ColorBlend.BlueToRed
+  id: BlueToRed
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: BlueToRed
+  nameWithType: ColorBlend.BlueToRed
+  fullName: Mapsui.Styles.Thematics.ColorBlend.BlueToRed
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BlueToRed
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 176
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Gets a linear gradient scale from blue to red
+  example: []
+  syntax:
+    content: public static ColorBlend BlueToRed { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared ReadOnly Property BlueToRed As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.BlueToRed*
+- uid: Mapsui.Styles.Thematics.ColorBlend.TwoColors(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  commentId: M:Mapsui.Styles.Thematics.ColorBlend.TwoColors(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  id: TwoColors(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: TwoColors(Color, Color)
+  nameWithType: ColorBlend.TwoColors(Color, Color)
+  fullName: Mapsui.Styles.Thematics.ColorBlend.TwoColors(Mapsui.Styles.Color, Mapsui.Styles.Color)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TwoColors
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 186
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Creates a linear gradient scale from two colors
+  example: []
+  syntax:
+    content: public static ColorBlend TwoColors(Color fromColor, Color toColor)
+    parameters:
+    - id: fromColor
+      type: Mapsui.Styles.Color
+      description: ''
+    - id: toColor
+      type: Mapsui.Styles.Color
+      description: ''
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+      description: ''
+    content.vb: Public Shared Function TwoColors(fromColor As Color, toColor As Color) As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.TwoColors*
+- uid: Mapsui.Styles.Thematics.ColorBlend.ThreeColors(Mapsui.Styles.Color,Mapsui.Styles.Color,Mapsui.Styles.Color)
+  commentId: M:Mapsui.Styles.Thematics.ColorBlend.ThreeColors(Mapsui.Styles.Color,Mapsui.Styles.Color,Mapsui.Styles.Color)
+  id: ThreeColors(Mapsui.Styles.Color,Mapsui.Styles.Color,Mapsui.Styles.Color)
+  parent: Mapsui.Styles.Thematics.ColorBlend
+  langs:
+  - csharp
+  - vb
+  name: ThreeColors(Color, Color, Color)
+  nameWithType: ColorBlend.ThreeColors(Color, Color, Color)
+  fullName: Mapsui.Styles.Thematics.ColorBlend.ThreeColors(Mapsui.Styles.Color, Mapsui.Styles.Color, Mapsui.Styles.Color)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/ColorBlend.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ThreeColors
+    path: ../../Mapsui/Styles/Thematics/ColorBlend.cs
+    startLine: 194
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Creates a linear gradient scale from three colors
+  example: []
+  syntax:
+    content: public static ColorBlend ThreeColors(Color fromColor, Color middleColor, Color toColor)
+    parameters:
+    - id: fromColor
+      type: Mapsui.Styles.Color
+    - id: middleColor
+      type: Mapsui.Styles.Color
+    - id: toColor
+      type: Mapsui.Styles.Color
+    return:
+      type: Mapsui.Styles.Thematics.ColorBlend
+    content.vb: Public Shared Function ThreeColors(fromColor As Color, middleColor As Color, toColor As Color) As ColorBlend
+  overload: Mapsui.Styles.Thematics.ColorBlend.ThreeColors*
+references:
+- uid: Mapsui.Styles.Thematics
+  commentId: N:Mapsui.Styles.Thematics
+  href: Mapsui.html
+  name: Mapsui.Styles.Thematics
+  nameWithType: Mapsui.Styles.Thematics
+  fullName: Mapsui.Styles.Thematics
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  - name: .
+  - uid: Mapsui.Styles.Thematics
+    name: Thematics
+    href: Mapsui.Styles.Thematics.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  - name: .
+  - uid: Mapsui.Styles.Thematics
+    name: Thematics
+    href: Mapsui.Styles.Thematics.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.Thematics.ColorBlend.Colors*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.Colors
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_Colors
+  name: Colors
+  nameWithType: ColorBlend.Colors
+  fullName: Mapsui.Styles.Thematics.ColorBlend.Colors
+- uid: Mapsui.Styles.Color[]
+  isExternal: true
+  href: Mapsui.Styles.Color.html
+  name: Color[]
+  nameWithType: Color[]
+  fullName: Mapsui.Styles.Color[]
+  nameWithType.vb: Color()
+  fullName.vb: Mapsui.Styles.Color()
+  name.vb: Color()
+  spec.csharp:
+  - uid: Mapsui.Styles.Color
+    name: Color
+    href: Mapsui.Styles.Color.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: Mapsui.Styles.Color
+    name: Color
+    href: Mapsui.Styles.Color.html
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.Thematics.ColorBlend.Positions*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.Positions
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_Positions
+  name: Positions
+  nameWithType: ColorBlend.Positions
+  fullName: Mapsui.Styles.Thematics.ColorBlend.Positions
+- uid: System.Double[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double[]
+  nameWithType: double[]
+  fullName: double[]
+  nameWithType.vb: Double()
+  fullName.vb: Double()
+  name.vb: Double()
+  spec.csharp:
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.Thematics.ColorBlend.#ctor*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.#ctor
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend__ctor_Mapsui_Styles_Color___System_Double___
+  name: ColorBlend
+  nameWithType: ColorBlend.ColorBlend
+  fullName: Mapsui.Styles.Thematics.ColorBlend.ColorBlend
+  nameWithType.vb: ColorBlend.New
+  fullName.vb: Mapsui.Styles.Thematics.ColorBlend.New
+  name.vb: New
+- uid: Mapsui.Styles.Thematics.ColorBlend.GetColor*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.GetColor
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_GetColor_System_Double_
+  name: GetColor
+  nameWithType: ColorBlend.GetColor
+  fullName: Mapsui.Styles.Thematics.ColorBlend.GetColor
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Color.html
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Styles.Thematics.ColorBlend.Rainbow7*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.Rainbow7
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_Rainbow7
+  name: Rainbow7
+  nameWithType: ColorBlend.Rainbow7
+  fullName: Mapsui.Styles.Thematics.ColorBlend.Rainbow7
+- uid: Mapsui.Styles.Thematics.ColorBlend
+  commentId: T:Mapsui.Styles.Thematics.ColorBlend
+  parent: Mapsui.Styles.Thematics
+  href: Mapsui.Styles.Thematics.ColorBlend.html
+  name: ColorBlend
+  nameWithType: ColorBlend
+  fullName: Mapsui.Styles.Thematics.ColorBlend
+- uid: Mapsui.Styles.Thematics.ColorBlend.Rainbow5*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.Rainbow5
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_Rainbow5
+  name: Rainbow5
+  nameWithType: ColorBlend.Rainbow5
+  fullName: Mapsui.Styles.Thematics.ColorBlend.Rainbow5
+- uid: Mapsui.Styles.Thematics.ColorBlend.BlackToWhite*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.BlackToWhite
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_BlackToWhite
+  name: BlackToWhite
+  nameWithType: ColorBlend.BlackToWhite
+  fullName: Mapsui.Styles.Thematics.ColorBlend.BlackToWhite
+- uid: Mapsui.Styles.Thematics.ColorBlend.WhiteToBlack*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.WhiteToBlack
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_WhiteToBlack
+  name: WhiteToBlack
+  nameWithType: ColorBlend.WhiteToBlack
+  fullName: Mapsui.Styles.Thematics.ColorBlend.WhiteToBlack
+- uid: Mapsui.Styles.Thematics.ColorBlend.RedToGreen*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.RedToGreen
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_RedToGreen
+  name: RedToGreen
+  nameWithType: ColorBlend.RedToGreen
+  fullName: Mapsui.Styles.Thematics.ColorBlend.RedToGreen
+- uid: Mapsui.Styles.Thematics.ColorBlend.GreenToRed*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.GreenToRed
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_GreenToRed
+  name: GreenToRed
+  nameWithType: ColorBlend.GreenToRed
+  fullName: Mapsui.Styles.Thematics.ColorBlend.GreenToRed
+- uid: Mapsui.Styles.Thematics.ColorBlend.BlueToGreen*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.BlueToGreen
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_BlueToGreen
+  name: BlueToGreen
+  nameWithType: ColorBlend.BlueToGreen
+  fullName: Mapsui.Styles.Thematics.ColorBlend.BlueToGreen
+- uid: Mapsui.Styles.Thematics.ColorBlend.GreenToBlue*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.GreenToBlue
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_GreenToBlue
+  name: GreenToBlue
+  nameWithType: ColorBlend.GreenToBlue
+  fullName: Mapsui.Styles.Thematics.ColorBlend.GreenToBlue
+- uid: Mapsui.Styles.Thematics.ColorBlend.RedToBlue*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.RedToBlue
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_RedToBlue
+  name: RedToBlue
+  nameWithType: ColorBlend.RedToBlue
+  fullName: Mapsui.Styles.Thematics.ColorBlend.RedToBlue
+- uid: Mapsui.Styles.Thematics.ColorBlend.BlueToRed*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.BlueToRed
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_BlueToRed
+  name: BlueToRed
+  nameWithType: ColorBlend.BlueToRed
+  fullName: Mapsui.Styles.Thematics.ColorBlend.BlueToRed
+- uid: Mapsui.Styles.Thematics.ColorBlend.TwoColors*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.TwoColors
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_TwoColors_Mapsui_Styles_Color_Mapsui_Styles_Color_
+  name: TwoColors
+  nameWithType: ColorBlend.TwoColors
+  fullName: Mapsui.Styles.Thematics.ColorBlend.TwoColors
+- uid: Mapsui.Styles.Thematics.ColorBlend.ThreeColors*
+  commentId: Overload:Mapsui.Styles.Thematics.ColorBlend.ThreeColors
+  href: Mapsui.Styles.Thematics.ColorBlend.html#Mapsui_Styles_Thematics_ColorBlend_ThreeColors_Mapsui_Styles_Color_Mapsui_Styles_Color_Mapsui_Styles_Color_
+  name: ThreeColors
+  nameWithType: ColorBlend.ThreeColors
+  fullName: Mapsui.Styles.Thematics.ColorBlend.ThreeColors

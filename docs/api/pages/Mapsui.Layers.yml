@@ -1,0 +1,350 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  id: Mapsui.Layers
+  children:
+  - Mapsui.Layers.BaseFeature
+  - Mapsui.Layers.BaseLayer
+  - Mapsui.Layers.FetchInfo
+  - Mapsui.Layers.GenericCollectionLayer`1
+  - Mapsui.Layers.IDynamic
+  - Mapsui.Layers.IFeatureInfo
+  - Mapsui.Layers.ILayer
+  - Mapsui.Layers.ILayerDataSource`1
+  - Mapsui.Layers.ILayerFeatureInfo
+  - Mapsui.Layers.ISourceLayer
+  - Mapsui.Layers.ImageLayer
+  - Mapsui.Layers.Layer
+  - Mapsui.Layers.LayerCollection
+  - Mapsui.Layers.LayerCollection.LayerAddedEventHandler
+  - Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler
+  - Mapsui.Layers.LayerCollection.LayerMovedEventHandler
+  - Mapsui.Layers.LayerCollection.LayerRemovedEventHandler
+  - Mapsui.Layers.LayerCollectionChangedEventArgs
+  - Mapsui.Layers.MemoryLayer
+  - Mapsui.Layers.MyLocationLayer
+  - Mapsui.Layers.ObservableMemoryLayer`1
+  - Mapsui.Layers.PointFeature
+  - Mapsui.Layers.RasterFeature
+  - Mapsui.Layers.RasterizingLayer
+  - Mapsui.Layers.WritableLayer
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Layers.BaseFeature
+  commentId: T:Mapsui.Layers.BaseFeature
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.BaseFeature.html
+  name: BaseFeature
+  nameWithType: BaseFeature
+  fullName: Mapsui.Layers.BaseFeature
+- uid: Mapsui.Layers.PointFeature
+  commentId: T:Mapsui.Layers.PointFeature
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.PointFeature.html
+  name: PointFeature
+  nameWithType: PointFeature
+  fullName: Mapsui.Layers.PointFeature
+- uid: Mapsui.Layers.RasterFeature
+  commentId: T:Mapsui.Layers.RasterFeature
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.RasterFeature.html
+  name: RasterFeature
+  nameWithType: RasterFeature
+  fullName: Mapsui.Layers.RasterFeature
+- uid: Mapsui.Layers.BaseLayer
+  commentId: T:Mapsui.Layers.BaseLayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.BaseLayer.html
+  name: BaseLayer
+  nameWithType: BaseLayer
+  fullName: Mapsui.Layers.BaseLayer
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: Mapsui.Layers.GenericCollectionLayer`1
+  commentId: T:Mapsui.Layers.GenericCollectionLayer`1
+  href: Mapsui.Layers.GenericCollectionLayer-1.html
+  name: GenericCollectionLayer<T>
+  nameWithType: GenericCollectionLayer<T>
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>
+  nameWithType.vb: GenericCollectionLayer(Of T)
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T)
+  name.vb: GenericCollectionLayer(Of T)
+  spec.csharp:
+  - uid: Mapsui.Layers.GenericCollectionLayer`1
+    name: GenericCollectionLayer
+    href: Mapsui.Layers.GenericCollectionLayer-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Layers.GenericCollectionLayer`1
+    name: GenericCollectionLayer
+    href: Mapsui.Layers.GenericCollectionLayer-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Layers.ILayerDataSource`1
+  commentId: T:Mapsui.Layers.ILayerDataSource`1
+  href: Mapsui.Layers.ILayerDataSource-1.html
+  name: ILayerDataSource<T>
+  nameWithType: ILayerDataSource<T>
+  fullName: Mapsui.Layers.ILayerDataSource<T>
+  nameWithType.vb: ILayerDataSource(Of T)
+  fullName.vb: Mapsui.Layers.ILayerDataSource(Of T)
+  name.vb: ILayerDataSource(Of T)
+  spec.csharp:
+  - uid: Mapsui.Layers.ILayerDataSource`1
+    name: ILayerDataSource
+    href: Mapsui.Layers.ILayerDataSource-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Layers.ILayerDataSource`1
+    name: ILayerDataSource
+    href: Mapsui.Layers.ILayerDataSource-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Layers.IDynamic
+  commentId: T:Mapsui.Layers.IDynamic
+  href: Mapsui.Layers.IDynamic.html
+  name: IDynamic
+  nameWithType: IDynamic
+  fullName: Mapsui.Layers.IDynamic
+- uid: Mapsui.Layers.IFeatureInfo
+  commentId: T:Mapsui.Layers.IFeatureInfo
+  href: Mapsui.Layers.IFeatureInfo.html
+  name: IFeatureInfo
+  nameWithType: IFeatureInfo
+  fullName: Mapsui.Layers.IFeatureInfo
+- uid: Mapsui.Layers.ILayer
+  commentId: T:Mapsui.Layers.ILayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.ILayer.html
+  name: ILayer
+  nameWithType: ILayer
+  fullName: Mapsui.Layers.ILayer
+- uid: Mapsui.Layers.ILayerFeatureInfo
+  commentId: T:Mapsui.Layers.ILayerFeatureInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.ILayerFeatureInfo.html
+  name: ILayerFeatureInfo
+  nameWithType: ILayerFeatureInfo
+  fullName: Mapsui.Layers.ILayerFeatureInfo
+- uid: Mapsui.Layers.ImageLayer
+  commentId: T:Mapsui.Layers.ImageLayer
+  href: Mapsui.Layers.ImageLayer.html
+  name: ImageLayer
+  nameWithType: ImageLayer
+  fullName: Mapsui.Layers.ImageLayer
+- uid: Mapsui.Layers.ISourceLayer
+  commentId: T:Mapsui.Layers.ISourceLayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.ISourceLayer.html
+  name: ISourceLayer
+  nameWithType: ISourceLayer
+  fullName: Mapsui.Layers.ISourceLayer
+- uid: Mapsui.Layers.Layer
+  commentId: T:Mapsui.Layers.Layer
+  href: Mapsui.Layers.Layer.html
+  name: Layer
+  nameWithType: Layer
+  fullName: Mapsui.Layers.Layer
+- uid: Mapsui.Layers.LayerCollection
+  commentId: T:Mapsui.Layers.LayerCollection
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.LayerCollection.html
+  name: LayerCollection
+  nameWithType: LayerCollection
+  fullName: Mapsui.Layers.LayerCollection
+- uid: Mapsui.Layers.LayerCollection.LayerRemovedEventHandler
+  commentId: T:Mapsui.Layers.LayerCollection.LayerRemovedEventHandler
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.LayerCollection.html
+  name: LayerCollection.LayerRemovedEventHandler
+  nameWithType: LayerCollection.LayerRemovedEventHandler
+  fullName: Mapsui.Layers.LayerCollection.LayerRemovedEventHandler
+  spec.csharp:
+  - uid: Mapsui.Layers.LayerCollection
+    name: LayerCollection
+    href: Mapsui.Layers.LayerCollection.html
+  - name: .
+  - uid: Mapsui.Layers.LayerCollection.LayerRemovedEventHandler
+    name: LayerRemovedEventHandler
+    href: Mapsui.Layers.LayerCollection.LayerRemovedEventHandler.html
+  spec.vb:
+  - uid: Mapsui.Layers.LayerCollection
+    name: LayerCollection
+    href: Mapsui.Layers.LayerCollection.html
+  - name: .
+  - uid: Mapsui.Layers.LayerCollection.LayerRemovedEventHandler
+    name: LayerRemovedEventHandler
+    href: Mapsui.Layers.LayerCollection.LayerRemovedEventHandler.html
+- uid: Mapsui.Layers.LayerCollection.LayerAddedEventHandler
+  commentId: T:Mapsui.Layers.LayerCollection.LayerAddedEventHandler
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.LayerCollection.html
+  name: LayerCollection.LayerAddedEventHandler
+  nameWithType: LayerCollection.LayerAddedEventHandler
+  fullName: Mapsui.Layers.LayerCollection.LayerAddedEventHandler
+  spec.csharp:
+  - uid: Mapsui.Layers.LayerCollection
+    name: LayerCollection
+    href: Mapsui.Layers.LayerCollection.html
+  - name: .
+  - uid: Mapsui.Layers.LayerCollection.LayerAddedEventHandler
+    name: LayerAddedEventHandler
+    href: Mapsui.Layers.LayerCollection.LayerAddedEventHandler.html
+  spec.vb:
+  - uid: Mapsui.Layers.LayerCollection
+    name: LayerCollection
+    href: Mapsui.Layers.LayerCollection.html
+  - name: .
+  - uid: Mapsui.Layers.LayerCollection.LayerAddedEventHandler
+    name: LayerAddedEventHandler
+    href: Mapsui.Layers.LayerCollection.LayerAddedEventHandler.html
+- uid: Mapsui.Layers.LayerCollection.LayerMovedEventHandler
+  commentId: T:Mapsui.Layers.LayerCollection.LayerMovedEventHandler
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.LayerCollection.html
+  name: LayerCollection.LayerMovedEventHandler
+  nameWithType: LayerCollection.LayerMovedEventHandler
+  fullName: Mapsui.Layers.LayerCollection.LayerMovedEventHandler
+  spec.csharp:
+  - uid: Mapsui.Layers.LayerCollection
+    name: LayerCollection
+    href: Mapsui.Layers.LayerCollection.html
+  - name: .
+  - uid: Mapsui.Layers.LayerCollection.LayerMovedEventHandler
+    name: LayerMovedEventHandler
+    href: Mapsui.Layers.LayerCollection.LayerMovedEventHandler.html
+  spec.vb:
+  - uid: Mapsui.Layers.LayerCollection
+    name: LayerCollection
+    href: Mapsui.Layers.LayerCollection.html
+  - name: .
+  - uid: Mapsui.Layers.LayerCollection.LayerMovedEventHandler
+    name: LayerMovedEventHandler
+    href: Mapsui.Layers.LayerCollection.LayerMovedEventHandler.html
+- uid: Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler
+  commentId: T:Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.LayerCollection.html
+  name: LayerCollection.LayerCollectionChangedEventHandler
+  nameWithType: LayerCollection.LayerCollectionChangedEventHandler
+  fullName: Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler
+  spec.csharp:
+  - uid: Mapsui.Layers.LayerCollection
+    name: LayerCollection
+    href: Mapsui.Layers.LayerCollection.html
+  - name: .
+  - uid: Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler
+    name: LayerCollectionChangedEventHandler
+    href: Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler.html
+  spec.vb:
+  - uid: Mapsui.Layers.LayerCollection
+    name: LayerCollection
+    href: Mapsui.Layers.LayerCollection.html
+  - name: .
+  - uid: Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler
+    name: LayerCollectionChangedEventHandler
+    href: Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler.html
+- uid: Mapsui.Layers.LayerCollectionChangedEventArgs
+  commentId: T:Mapsui.Layers.LayerCollectionChangedEventArgs
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.LayerCollectionChangedEventArgs.html
+  name: LayerCollectionChangedEventArgs
+  nameWithType: LayerCollectionChangedEventArgs
+  fullName: Mapsui.Layers.LayerCollectionChangedEventArgs
+- uid: Mapsui.Layers.MemoryLayer
+  commentId: T:Mapsui.Layers.MemoryLayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.MemoryLayer.html
+  name: MemoryLayer
+  nameWithType: MemoryLayer
+  fullName: Mapsui.Layers.MemoryLayer
+- uid: Mapsui.Layers.MyLocationLayer
+  commentId: T:Mapsui.Layers.MyLocationLayer
+  href: Mapsui.Layers.MyLocationLayer.html
+  name: MyLocationLayer
+  nameWithType: MyLocationLayer
+  fullName: Mapsui.Layers.MyLocationLayer
+- uid: Mapsui.Layers.ObservableMemoryLayer`1
+  commentId: T:Mapsui.Layers.ObservableMemoryLayer`1
+  href: Mapsui.Layers.ObservableMemoryLayer-1.html
+  name: ObservableMemoryLayer<T>
+  nameWithType: ObservableMemoryLayer<T>
+  fullName: Mapsui.Layers.ObservableMemoryLayer<T>
+  nameWithType.vb: ObservableMemoryLayer(Of T)
+  fullName.vb: Mapsui.Layers.ObservableMemoryLayer(Of T)
+  name.vb: ObservableMemoryLayer(Of T)
+  spec.csharp:
+  - uid: Mapsui.Layers.ObservableMemoryLayer`1
+    name: ObservableMemoryLayer
+    href: Mapsui.Layers.ObservableMemoryLayer-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Layers.ObservableMemoryLayer`1
+    name: ObservableMemoryLayer
+    href: Mapsui.Layers.ObservableMemoryLayer-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Layers.RasterizingLayer
+  commentId: T:Mapsui.Layers.RasterizingLayer
+  href: Mapsui.Layers.RasterizingLayer.html
+  name: RasterizingLayer
+  nameWithType: RasterizingLayer
+  fullName: Mapsui.Layers.RasterizingLayer
+- uid: Mapsui.Layers.WritableLayer
+  commentId: T:Mapsui.Layers.WritableLayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.WritableLayer.html
+  name: WritableLayer
+  nameWithType: WritableLayer
+  fullName: Mapsui.Layers.WritableLayer
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html

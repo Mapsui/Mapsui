@@ -1,0 +1,1417 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Layers.ILayer
+  commentId: T:Mapsui.Layers.ILayer
+  id: ILayer
+  parent: Mapsui.Layers
+  children:
+  - Mapsui.Layers.ILayer.Attribution
+  - Mapsui.Layers.ILayer.Busy
+  - Mapsui.Layers.ILayer.DataChanged
+  - Mapsui.Layers.ILayer.DataHasChanged
+  - Mapsui.Layers.ILayer.Enabled
+  - Mapsui.Layers.ILayer.Extent
+  - Mapsui.Layers.ILayer.GetFeatures(Mapsui.MRect,System.Double)
+  - Mapsui.Layers.ILayer.Id
+  - Mapsui.Layers.ILayer.IsMapInfoLayer
+  - Mapsui.Layers.ILayer.MaxVisible
+  - Mapsui.Layers.ILayer.MinVisible
+  - Mapsui.Layers.ILayer.Name
+  - Mapsui.Layers.ILayer.Opacity
+  - Mapsui.Layers.ILayer.Resolutions
+  - Mapsui.Layers.ILayer.SortFeatures
+  - Mapsui.Layers.ILayer.Style
+  - Mapsui.Layers.ILayer.Tag
+  langs:
+  - csharp
+  - vb
+  name: ILayer
+  nameWithType: ILayer
+  fullName: Mapsui.Layers.ILayer
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ILayer
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 19
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Interface for map layers
+  example: []
+  syntax:
+    content: 'public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable'
+    content.vb: Public Interface ILayer Inherits IAnimatable, INotifyPropertyChanged, IDisposable
+  inheritedMembers:
+  - Mapsui.Animations.IAnimatable.UpdateAnimations
+  - System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  - System.IDisposable.Dispose
+  extensionMethods:
+  - Mapsui.Layers.ILayer.Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Layers.ILayer.Id
+  commentId: P:Mapsui.Layers.ILayer.Id
+  id: Id
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: ILayer.Id
+  fullName: Mapsui.Layers.ILayer.Id
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Id
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 24
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Numerical Id of layer
+  example: []
+  syntax:
+    content: int Id { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: ReadOnly Property Id As Integer
+  overload: Mapsui.Layers.ILayer.Id*
+- uid: Mapsui.Layers.ILayer.Tag
+  commentId: P:Mapsui.Layers.ILayer.Tag
+  id: Tag
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Tag
+  nameWithType: ILayer.Tag
+  fullName: Mapsui.Layers.ILayer.Tag
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Tag
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 29
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Gets or sets an arbitrary object value that can be used to store custom information about this element
+  example: []
+  syntax:
+    content: object? Tag { get; set; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: Property Tag As Object
+  overload: Mapsui.Layers.ILayer.Tag*
+- uid: Mapsui.Layers.ILayer.MinVisible
+  commentId: P:Mapsui.Layers.ILayer.MinVisible
+  id: MinVisible
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: MinVisible
+  nameWithType: ILayer.MinVisible
+  fullName: Mapsui.Layers.ILayer.MinVisible
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MinVisible
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 34
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Minimum visible zoom level
+  example: []
+  syntax:
+    content: double MinVisible { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: ReadOnly Property MinVisible As Double
+  overload: Mapsui.Layers.ILayer.MinVisible*
+- uid: Mapsui.Layers.ILayer.MaxVisible
+  commentId: P:Mapsui.Layers.ILayer.MaxVisible
+  id: MaxVisible
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: MaxVisible
+  nameWithType: ILayer.MaxVisible
+  fullName: Mapsui.Layers.ILayer.MaxVisible
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MaxVisible
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 39
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Minimum visible zoom level
+  example: []
+  syntax:
+    content: double MaxVisible { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: ReadOnly Property MaxVisible As Double
+  overload: Mapsui.Layers.ILayer.MaxVisible*
+- uid: Mapsui.Layers.ILayer.Enabled
+  commentId: P:Mapsui.Layers.ILayer.Enabled
+  id: Enabled
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Enabled
+  nameWithType: ILayer.Enabled
+  fullName: Mapsui.Layers.ILayer.Enabled
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Enabled
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 44
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Specifies whether this layer should be rendered or not
+  example: []
+  syntax:
+    content: bool Enabled { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Property Enabled As Boolean
+  overload: Mapsui.Layers.ILayer.Enabled*
+- uid: Mapsui.Layers.ILayer.Name
+  commentId: P:Mapsui.Layers.ILayer.Name
+  id: Name
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: ILayer.Name
+  fullName: Mapsui.Layers.ILayer.Name
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Name
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 49
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Name of layer
+  example: []
+  syntax:
+    content: string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Property Name As String
+  overload: Mapsui.Layers.ILayer.Name*
+- uid: Mapsui.Layers.ILayer.Extent
+  commentId: P:Mapsui.Layers.ILayer.Extent
+  id: Extent
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Extent
+  nameWithType: ILayer.Extent
+  fullName: Mapsui.Layers.ILayer.Extent
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Extent
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 54
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Gets the MRect of the entire layer. Can be null if there are no features in the layer.
+  example: []
+  syntax:
+    content: MRect? Extent { get; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: ReadOnly Property Extent As MRect
+  overload: Mapsui.Layers.ILayer.Extent*
+- uid: Mapsui.Layers.ILayer.Style
+  commentId: P:Mapsui.Layers.ILayer.Style
+  id: Style
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Style
+  nameWithType: ILayer.Style
+  fullName: Mapsui.Layers.ILayer.Style
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Style
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 59
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Gets or sets rendering style of layer
+  example: []
+  syntax:
+    content: IStyle? Style { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.IStyle
+    content.vb: Property Style As IStyle
+  overload: Mapsui.Layers.ILayer.Style*
+- uid: Mapsui.Layers.ILayer.Opacity
+  commentId: P:Mapsui.Layers.ILayer.Opacity
+  id: Opacity
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Opacity
+  nameWithType: ILayer.Opacity
+  fullName: Mapsui.Layers.ILayer.Opacity
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Opacity
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 64
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Opacity of layer
+  example: []
+  syntax:
+    content: double Opacity { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Property Opacity As Double
+  overload: Mapsui.Layers.ILayer.Opacity*
+- uid: Mapsui.Layers.ILayer.Busy
+  commentId: P:Mapsui.Layers.ILayer.Busy
+  id: Busy
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Busy
+  nameWithType: ILayer.Busy
+  fullName: Mapsui.Layers.ILayer.Busy
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Busy
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 69
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Flag, if layer is busy
+  example: []
+  syntax:
+    content: bool Busy { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Property Busy As Boolean
+  overload: Mapsui.Layers.ILayer.Busy*
+- uid: Mapsui.Layers.ILayer.GetFeatures(Mapsui.MRect,System.Double)
+  commentId: M:Mapsui.Layers.ILayer.GetFeatures(Mapsui.MRect,System.Double)
+  id: GetFeatures(Mapsui.MRect,System.Double)
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: GetFeatures(MRect, double)
+  nameWithType: ILayer.GetFeatures(MRect, double)
+  fullName: Mapsui.Layers.ILayer.GetFeatures(Mapsui.MRect, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeatures
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 77
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Get all features in a given MRect for a given resolution
+  example: []
+  syntax:
+    content: IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
+    parameters:
+    - id: extent
+      type: Mapsui.MRect
+      description: Bounding box
+    - id: resolution
+      type: System.Double
+      description: Resolution of viewport
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+      description: ''
+    content.vb: Function GetFeatures(extent As MRect, resolution As Double) As IEnumerable(Of IFeature)
+  overload: Mapsui.Layers.ILayer.GetFeatures*
+  nameWithType.vb: ILayer.GetFeatures(MRect, Double)
+  fullName.vb: Mapsui.Layers.ILayer.GetFeatures(Mapsui.MRect, Double)
+  name.vb: GetFeatures(MRect, Double)
+- uid: Mapsui.Layers.ILayer.SortFeatures
+  commentId: P:Mapsui.Layers.ILayer.SortFeatures
+  id: SortFeatures
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: SortFeatures
+  nameWithType: ILayer.SortFeatures
+  fullName: Mapsui.Layers.ILayer.SortFeatures
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SortFeatures
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 82
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Function to sort order of features for drawing
+  example: []
+  syntax:
+    content: Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; }
+    parameters: []
+    return:
+      type: System.Func{System.Collections.Generic.IEnumerable{Mapsui.IFeature},System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+    content.vb: ReadOnly Property SortFeatures As Func(Of IEnumerable(Of IFeature), IEnumerable(Of IFeature))
+  overload: Mapsui.Layers.ILayer.SortFeatures*
+- uid: Mapsui.Layers.ILayer.Attribution
+  commentId: P:Mapsui.Layers.ILayer.Attribution
+  id: Attribution
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Attribution
+  nameWithType: ILayer.Attribution
+  fullName: Mapsui.Layers.ILayer.Attribution
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Attribution
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 87
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Attribution for layer
+  example: []
+  syntax:
+    content: HyperlinkWidget Attribution { get; }
+    parameters: []
+    return:
+      type: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
+    content.vb: ReadOnly Property Attribution As HyperlinkWidget
+  overload: Mapsui.Layers.ILayer.Attribution*
+- uid: Mapsui.Layers.ILayer.Resolutions
+  commentId: P:Mapsui.Layers.ILayer.Resolutions
+  id: Resolutions
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: Resolutions
+  nameWithType: ILayer.Resolutions
+  fullName: Mapsui.Layers.ILayer.Resolutions
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Resolutions
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 92
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: List of native resolutions
+  example: []
+  syntax:
+    content: IReadOnlyList<double> Resolutions { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{System.Double}
+    content.vb: ReadOnly Property Resolutions As IReadOnlyList(Of Double)
+  overload: Mapsui.Layers.ILayer.Resolutions*
+- uid: Mapsui.Layers.ILayer.IsMapInfoLayer
+  commentId: P:Mapsui.Layers.ILayer.IsMapInfoLayer
+  id: IsMapInfoLayer
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: IsMapInfoLayer
+  nameWithType: ILayer.IsMapInfoLayer
+  fullName: Mapsui.Layers.ILayer.IsMapInfoLayer
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsMapInfoLayer
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 97
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Indicates if the layer should be taken into account for the GetMapInfo request
+  example: []
+  syntax:
+    content: bool IsMapInfoLayer { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Property IsMapInfoLayer As Boolean
+  overload: Mapsui.Layers.ILayer.IsMapInfoLayer*
+- uid: Mapsui.Layers.ILayer.DataChanged
+  commentId: E:Mapsui.Layers.ILayer.DataChanged
+  id: DataChanged
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: DataChanged
+  nameWithType: ILayer.DataChanged
+  fullName: Mapsui.Layers.ILayer.DataChanged
+  type: Event
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DataChanged
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 103
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: >-
+    Event called when the data within the layer has changed allowing
+
+    listeners to react to this.
+  example: []
+  syntax:
+    content: event DataChangedEventHandler DataChanged
+    return:
+      type: Mapsui.Fetcher.DataChangedEventHandler
+    content.vb: Event DataChanged As DataChangedEventHandler
+- uid: Mapsui.Layers.ILayer.DataHasChanged
+  commentId: M:Mapsui.Layers.ILayer.DataHasChanged
+  id: DataHasChanged
+  parent: Mapsui.Layers.ILayer
+  langs:
+  - csharp
+  - vb
+  name: DataHasChanged()
+  nameWithType: ILayer.DataHasChanged()
+  fullName: Mapsui.Layers.ILayer.DataHasChanged()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/ILayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DataHasChanged
+    path: ../../Mapsui/Layers/ILayer.cs
+    startLine: 110
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: >-
+    To indicate the data withing the layer has changed. This triggers a DataChanged event.
+
+    This is necessary for situations where the layer can not know about changes to it's data
+
+    as in the case of editing of a geometry.
+  example: []
+  syntax:
+    content: void DataHasChanged()
+    content.vb: Sub DataHasChanged()
+  overload: Mapsui.Layers.ILayer.DataHasChanged*
+references:
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: Mapsui.Animations.IAnimatable.UpdateAnimations
+  commentId: M:Mapsui.Animations.IAnimatable.UpdateAnimations
+  parent: Mapsui.Animations.IAnimatable
+  href: Mapsui.Animations.IAnimatable.html#Mapsui_Animations_IAnimatable_UpdateAnimations
+  name: UpdateAnimations()
+  nameWithType: IAnimatable.UpdateAnimations()
+  fullName: Mapsui.Animations.IAnimatable.UpdateAnimations()
+  spec.csharp:
+  - uid: Mapsui.Animations.IAnimatable.UpdateAnimations
+    name: UpdateAnimations
+    href: Mapsui.Animations.IAnimatable.html#Mapsui_Animations_IAnimatable_UpdateAnimations
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Animations.IAnimatable.UpdateAnimations
+    name: UpdateAnimations
+    href: Mapsui.Animations.IAnimatable.html#Mapsui_Animations_IAnimatable_UpdateAnimations
+  - name: (
+  - name: )
+- uid: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  commentId: E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  parent: System.ComponentModel.INotifyPropertyChanged
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged.propertychanged
+  name: PropertyChanged
+  nameWithType: INotifyPropertyChanged.PropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: Mapsui.Layers.ILayer.Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync
+  commentId: M:Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  parent: Mapsui.Extensions.LayerExtensions
+  definition: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  name: WaitForLoadingAsync(ILayer)
+  nameWithType: LayerExtensions.WaitForLoadingAsync(ILayer)
+  fullName: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  spec.csharp:
+  - uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  - name: (
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  - name: (
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Animations.IAnimatable
+  commentId: T:Mapsui.Animations.IAnimatable
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.IAnimatable.html
+  name: IAnimatable
+  nameWithType: IAnimatable
+  fullName: Mapsui.Animations.IAnimatable
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  commentId: M:Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  name: WaitForLoadingAsync(ILayer)
+  nameWithType: LayerExtensions.WaitForLoadingAsync(ILayer)
+  fullName: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  spec.csharp:
+  - uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  - name: (
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  - name: (
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+- uid: Mapsui.Extensions.LayerExtensions
+  commentId: T:Mapsui.Extensions.LayerExtensions
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.LayerExtensions.html
+  name: LayerExtensions
+  nameWithType: LayerExtensions
+  fullName: Mapsui.Extensions.LayerExtensions
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Animations
+  commentId: N:Mapsui.Animations
+  href: Mapsui.html
+  name: Mapsui.Animations
+  nameWithType: Mapsui.Animations
+  fullName: Mapsui.Animations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Layers.ILayer.Id*
+  commentId: Overload:Mapsui.Layers.ILayer.Id
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Id
+  name: Id
+  nameWithType: ILayer.Id
+  fullName: Mapsui.Layers.ILayer.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Layers.ILayer.Tag*
+  commentId: Overload:Mapsui.Layers.ILayer.Tag
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Tag
+  name: Tag
+  nameWithType: ILayer.Tag
+  fullName: Mapsui.Layers.ILayer.Tag
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Layers.ILayer.MinVisible*
+  commentId: Overload:Mapsui.Layers.ILayer.MinVisible
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_MinVisible
+  name: MinVisible
+  nameWithType: ILayer.MinVisible
+  fullName: Mapsui.Layers.ILayer.MinVisible
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Layers.ILayer.MaxVisible*
+  commentId: Overload:Mapsui.Layers.ILayer.MaxVisible
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_MaxVisible
+  name: MaxVisible
+  nameWithType: ILayer.MaxVisible
+  fullName: Mapsui.Layers.ILayer.MaxVisible
+- uid: Mapsui.Layers.ILayer.Enabled*
+  commentId: Overload:Mapsui.Layers.ILayer.Enabled
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Enabled
+  name: Enabled
+  nameWithType: ILayer.Enabled
+  fullName: Mapsui.Layers.ILayer.Enabled
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Layers.ILayer.Name*
+  commentId: Overload:Mapsui.Layers.ILayer.Name
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Name
+  name: Name
+  nameWithType: ILayer.Name
+  fullName: Mapsui.Layers.ILayer.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Layers.ILayer.Extent*
+  commentId: Overload:Mapsui.Layers.ILayer.Extent
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Extent
+  name: Extent
+  nameWithType: ILayer.Extent
+  fullName: Mapsui.Layers.ILayer.Extent
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Layers.ILayer.Style*
+  commentId: Overload:Mapsui.Layers.ILayer.Style
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Style
+  name: Style
+  nameWithType: ILayer.Style
+  fullName: Mapsui.Layers.ILayer.Style
+- uid: Mapsui.Styles.IStyle
+  commentId: T:Mapsui.Styles.IStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyle.html
+  name: IStyle
+  nameWithType: IStyle
+  fullName: Mapsui.Styles.IStyle
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Layers.ILayer.Opacity*
+  commentId: Overload:Mapsui.Layers.ILayer.Opacity
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Opacity
+  name: Opacity
+  nameWithType: ILayer.Opacity
+  fullName: Mapsui.Layers.ILayer.Opacity
+- uid: Mapsui.Layers.ILayer.Busy*
+  commentId: Overload:Mapsui.Layers.ILayer.Busy
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Busy
+  name: Busy
+  nameWithType: ILayer.Busy
+  fullName: Mapsui.Layers.ILayer.Busy
+- uid: Mapsui.Layers.ILayer.GetFeatures*
+  commentId: Overload:Mapsui.Layers.ILayer.GetFeatures
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_GetFeatures_Mapsui_MRect_System_Double_
+  name: GetFeatures
+  nameWithType: ILayer.GetFeatures
+  fullName: Mapsui.Layers.ILayer.GetFeatures
+- uid: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<IFeature>
+  nameWithType: IEnumerable<IFeature>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.IFeature>
+  nameWithType.vb: IEnumerable(Of IFeature)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.IFeature)
+  name.vb: IEnumerable(Of IFeature)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Layers.ILayer.SortFeatures*
+  commentId: Overload:Mapsui.Layers.ILayer.SortFeatures
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_SortFeatures
+  name: SortFeatures
+  nameWithType: ILayer.SortFeatures
+  fullName: Mapsui.Layers.ILayer.SortFeatures
+- uid: System.Func{System.Collections.Generic.IEnumerable{Mapsui.IFeature},System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  commentId: T:System.Func{System.Collections.Generic.IEnumerable{Mapsui.IFeature},System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<IEnumerable<IFeature>, IEnumerable<IFeature>>
+  nameWithType: Func<IEnumerable<IFeature>, IEnumerable<IFeature>>
+  fullName: System.Func<System.Collections.Generic.IEnumerable<Mapsui.IFeature>, System.Collections.Generic.IEnumerable<Mapsui.IFeature>>
+  nameWithType.vb: Func(Of IEnumerable(Of IFeature), IEnumerable(Of IFeature))
+  fullName.vb: System.Func(Of System.Collections.Generic.IEnumerable(Of Mapsui.IFeature), System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))
+  name.vb: Func(Of IEnumerable(Of IFeature), IEnumerable(Of IFeature))
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Mapsui.Layers.ILayer.Attribution*
+  commentId: Overload:Mapsui.Layers.ILayer.Attribution
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Attribution
+  name: Attribution
+  nameWithType: ILayer.Attribution
+  fullName: Mapsui.Layers.ILayer.Attribution
+- uid: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
+  commentId: T:Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
+  parent: Mapsui.Widgets.ButtonWidgets
+  href: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.html
+  name: HyperlinkWidget
+  nameWithType: HyperlinkWidget
+  fullName: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
+- uid: Mapsui.Widgets.ButtonWidgets
+  commentId: N:Mapsui.Widgets.ButtonWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.ButtonWidgets
+  nameWithType: Mapsui.Widgets.ButtonWidgets
+  fullName: Mapsui.Widgets.ButtonWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.ButtonWidgets
+    name: ButtonWidgets
+    href: Mapsui.Widgets.ButtonWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.ButtonWidgets
+    name: ButtonWidgets
+    href: Mapsui.Widgets.ButtonWidgets.html
+- uid: Mapsui.Layers.ILayer.Resolutions*
+  commentId: Overload:Mapsui.Layers.ILayer.Resolutions
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Resolutions
+  name: Resolutions
+  nameWithType: ILayer.Resolutions
+  fullName: Mapsui.Layers.ILayer.Resolutions
+- uid: System.Collections.Generic.IReadOnlyList{System.Double}
+  commentId: T:System.Collections.Generic.IReadOnlyList{System.Double}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<double>
+  nameWithType: IReadOnlyList<double>
+  fullName: System.Collections.Generic.IReadOnlyList<double>
+  nameWithType.vb: IReadOnlyList(Of Double)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of Double)
+  name.vb: IReadOnlyList(Of Double)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Layers.ILayer.IsMapInfoLayer*
+  commentId: Overload:Mapsui.Layers.ILayer.IsMapInfoLayer
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_IsMapInfoLayer
+  name: IsMapInfoLayer
+  nameWithType: ILayer.IsMapInfoLayer
+  fullName: Mapsui.Layers.ILayer.IsMapInfoLayer
+- uid: Mapsui.Fetcher.DataChangedEventHandler
+  commentId: T:Mapsui.Fetcher.DataChangedEventHandler
+  parent: Mapsui.Fetcher
+  href: Mapsui.Fetcher.DataChangedEventHandler.html
+  name: DataChangedEventHandler
+  nameWithType: DataChangedEventHandler
+  fullName: Mapsui.Fetcher.DataChangedEventHandler
+- uid: Mapsui.Fetcher
+  commentId: N:Mapsui.Fetcher
+  href: Mapsui.html
+  name: Mapsui.Fetcher
+  nameWithType: Mapsui.Fetcher
+  fullName: Mapsui.Fetcher
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+- uid: Mapsui.Layers.ILayer.DataHasChanged*
+  commentId: Overload:Mapsui.Layers.ILayer.DataHasChanged
+  href: Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_DataHasChanged
+  name: DataHasChanged
+  nameWithType: ILayer.DataHasChanged
+  fullName: Mapsui.Layers.ILayer.DataHasChanged

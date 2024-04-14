@@ -1,0 +1,75 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI
+  commentId: N:Mapsui.UI
+  id: Mapsui.UI
+  children:
+  - Mapsui.UI.DataChangedWeakEventManager
+  - Mapsui.UI.IMapControl
+  - Mapsui.UI.MWeakEventManager
+  - Mapsui.UI.PropertyChangedWeakEventManager
+  - Mapsui.UI.TappedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI
+  nameWithType: Mapsui.UI
+  fullName: Mapsui.UI
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.UI.DataChangedWeakEventManager
+  commentId: T:Mapsui.UI.DataChangedWeakEventManager
+  href: Mapsui.UI.DataChangedWeakEventManager.html
+  name: DataChangedWeakEventManager
+  nameWithType: DataChangedWeakEventManager
+  fullName: Mapsui.UI.DataChangedWeakEventManager
+- uid: Mapsui.UI.IMapControl
+  commentId: T:Mapsui.UI.IMapControl
+  parent: Mapsui.UI
+  href: Mapsui.UI.IMapControl.html
+  name: IMapControl
+  nameWithType: IMapControl
+  fullName: Mapsui.UI.IMapControl
+- uid: Mapsui.UI.MWeakEventManager
+  commentId: T:Mapsui.UI.MWeakEventManager
+  parent: Mapsui.UI
+  href: Mapsui.UI.MWeakEventManager.html
+  name: MWeakEventManager
+  nameWithType: MWeakEventManager
+  fullName: Mapsui.UI.MWeakEventManager
+- uid: Mapsui.UI.PropertyChangedWeakEventManager
+  commentId: T:Mapsui.UI.PropertyChangedWeakEventManager
+  href: Mapsui.UI.PropertyChangedWeakEventManager.html
+  name: PropertyChangedWeakEventManager
+  nameWithType: PropertyChangedWeakEventManager
+  fullName: Mapsui.UI.PropertyChangedWeakEventManager
+- uid: Mapsui.UI.TappedEventArgs
+  commentId: T:Mapsui.UI.TappedEventArgs
+  href: Mapsui.UI.TappedEventArgs.html
+  name: TappedEventArgs
+  nameWithType: TappedEventArgs
+  fullName: Mapsui.UI.TappedEventArgs
+- uid: Mapsui.UI
+  commentId: N:Mapsui.UI
+  href: Mapsui.html
+  name: Mapsui.UI
+  nameWithType: Mapsui.UI
+  fullName: Mapsui.UI
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html

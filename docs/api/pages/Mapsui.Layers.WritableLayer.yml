@@ -1,0 +1,1400 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Layers.WritableLayer
+  commentId: T:Mapsui.Layers.WritableLayer
+  id: WritableLayer
+  parent: Mapsui.Layers
+  children:
+  - Mapsui.Layers.WritableLayer.Add(Mapsui.IFeature)
+  - Mapsui.Layers.WritableLayer.AddRange(System.Collections.Generic.IEnumerable{Mapsui.IFeature})
+  - Mapsui.Layers.WritableLayer.Clear
+  - Mapsui.Layers.WritableLayer.Extent
+  - Mapsui.Layers.WritableLayer.Find(Mapsui.IFeature)
+  - Mapsui.Layers.WritableLayer.GetFeatures
+  - Mapsui.Layers.WritableLayer.GetFeatures(Mapsui.MRect,System.Double)
+  - Mapsui.Layers.WritableLayer.TryRemove(Mapsui.IFeature,System.Func{Mapsui.IFeature,Mapsui.IFeature,System.Boolean})
+  langs:
+  - csharp
+  - vb
+  name: WritableLayer
+  nameWithType: WritableLayer
+  fullName: Mapsui.Layers.WritableLayer
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Layers/WritableLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WritableLayer
+    path: ../../Mapsui/Layers/WritableLayer.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: 'public class WritableLayer : BaseLayer, ILayer, IAnimatable, INotifyPropertyChanged, IDisposable'
+    content.vb: Public Class WritableLayer Inherits BaseLayer Implements ILayer, IAnimatable, INotifyPropertyChanged, IDisposable
+  inheritance:
+  - System.Object
+  - Mapsui.Layers.BaseLayer
+  implements:
+  - Mapsui.Layers.ILayer
+  - Mapsui.Animations.IAnimatable
+  - System.ComponentModel.INotifyPropertyChanged
+  - System.IDisposable
+  inheritedMembers:
+  - Mapsui.Layers.BaseLayer.PropertyChanged
+  - Mapsui.Layers.BaseLayer.DataChanged
+  - Mapsui.Layers.BaseLayer.Id
+  - Mapsui.Layers.BaseLayer.Tag
+  - Mapsui.Layers.BaseLayer.MinVisible
+  - Mapsui.Layers.BaseLayer.MaxVisible
+  - Mapsui.Layers.BaseLayer.Enabled
+  - Mapsui.Layers.BaseLayer.Name
+  - Mapsui.Layers.BaseLayer.Opacity
+  - Mapsui.Layers.BaseLayer.Busy
+  - Mapsui.Layers.BaseLayer.Style
+  - Mapsui.Layers.BaseLayer.Attribution
+  - Mapsui.Layers.BaseLayer.Resolutions
+  - Mapsui.Layers.BaseLayer.IsMapInfoLayer
+  - Mapsui.Layers.BaseLayer.SortFeatures
+  - Mapsui.Layers.BaseLayer.DataHasChanged
+  - Mapsui.Layers.BaseLayer.ToString
+  - Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+  - Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+  - Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+  - Mapsui.Layers.BaseLayer.Dispose
+  - Mapsui.Layers.BaseLayer.UpdateAnimations
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Mapsui.Layers.ILayer.Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Layers.WritableLayer.GetFeatures(Mapsui.MRect,System.Double)
+  commentId: M:Mapsui.Layers.WritableLayer.GetFeatures(Mapsui.MRect,System.Double)
+  id: GetFeatures(Mapsui.MRect,System.Double)
+  parent: Mapsui.Layers.WritableLayer
+  langs:
+  - csharp
+  - vb
+  name: GetFeatures(MRect?, double)
+  nameWithType: WritableLayer.GetFeatures(MRect?, double)
+  fullName: Mapsui.Layers.WritableLayer.GetFeatures(Mapsui.MRect?, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/WritableLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeatures
+    path: ../../Mapsui/Layers/WritableLayer.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Get all features in a given MRect for a given resolution
+  example: []
+  syntax:
+    content: public override IEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
+    parameters:
+    - id: box
+      type: Mapsui.MRect
+    - id: resolution
+      type: System.Double
+      description: Resolution of viewport
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+      description: ''
+    content.vb: Public Overrides Function GetFeatures(box As MRect, resolution As Double) As IEnumerable(Of IFeature)
+  overridden: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+  overload: Mapsui.Layers.WritableLayer.GetFeatures*
+  nameWithType.vb: WritableLayer.GetFeatures(MRect, Double)
+  fullName.vb: Mapsui.Layers.WritableLayer.GetFeatures(Mapsui.MRect, Double)
+  name.vb: GetFeatures(MRect, Double)
+- uid: Mapsui.Layers.WritableLayer.Extent
+  commentId: P:Mapsui.Layers.WritableLayer.Extent
+  id: Extent
+  parent: Mapsui.Layers.WritableLayer
+  langs:
+  - csharp
+  - vb
+  name: Extent
+  nameWithType: WritableLayer.Extent
+  fullName: Mapsui.Layers.WritableLayer.Extent
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/WritableLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Extent
+    path: ../../Mapsui/Layers/WritableLayer.cs
+    startLine: 41
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Returns the envelope of all available data in the layer
+  example: []
+  syntax:
+    content: public override MRect? Extent { get; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Public Overrides Property Extent As MRect
+  overridden: Mapsui.Layers.BaseLayer.Extent
+  overload: Mapsui.Layers.WritableLayer.Extent*
+- uid: Mapsui.Layers.WritableLayer.GetFeatures
+  commentId: M:Mapsui.Layers.WritableLayer.GetFeatures
+  id: GetFeatures
+  parent: Mapsui.Layers.WritableLayer
+  langs:
+  - csharp
+  - vb
+  name: GetFeatures()
+  nameWithType: WritableLayer.GetFeatures()
+  fullName: Mapsui.Layers.WritableLayer.GetFeatures()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/WritableLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeatures
+    path: ../../Mapsui/Layers/WritableLayer.cs
+    startLine: 43
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public IEnumerable<IFeature> GetFeatures()
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+    content.vb: Public Function GetFeatures() As IEnumerable(Of IFeature)
+  overload: Mapsui.Layers.WritableLayer.GetFeatures*
+- uid: Mapsui.Layers.WritableLayer.Clear
+  commentId: M:Mapsui.Layers.WritableLayer.Clear
+  id: Clear
+  parent: Mapsui.Layers.WritableLayer
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: WritableLayer.Clear()
+  fullName: Mapsui.Layers.WritableLayer.Clear()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/WritableLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Clear
+    path: ../../Mapsui/Layers/WritableLayer.cs
+    startLine: 48
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public void Clear()
+    content.vb: Public Sub Clear()
+  overload: Mapsui.Layers.WritableLayer.Clear*
+- uid: Mapsui.Layers.WritableLayer.Add(Mapsui.IFeature)
+  commentId: M:Mapsui.Layers.WritableLayer.Add(Mapsui.IFeature)
+  id: Add(Mapsui.IFeature)
+  parent: Mapsui.Layers.WritableLayer
+  langs:
+  - csharp
+  - vb
+  name: Add(IFeature)
+  nameWithType: WritableLayer.Add(IFeature)
+  fullName: Mapsui.Layers.WritableLayer.Add(Mapsui.IFeature)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/WritableLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Add
+    path: ../../Mapsui/Layers/WritableLayer.cs
+    startLine: 53
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public void Add(IFeature feature)
+    parameters:
+    - id: feature
+      type: Mapsui.IFeature
+    content.vb: Public Sub Add(feature As IFeature)
+  overload: Mapsui.Layers.WritableLayer.Add*
+- uid: Mapsui.Layers.WritableLayer.AddRange(System.Collections.Generic.IEnumerable{Mapsui.IFeature})
+  commentId: M:Mapsui.Layers.WritableLayer.AddRange(System.Collections.Generic.IEnumerable{Mapsui.IFeature})
+  id: AddRange(System.Collections.Generic.IEnumerable{Mapsui.IFeature})
+  parent: Mapsui.Layers.WritableLayer
+  langs:
+  - csharp
+  - vb
+  name: AddRange(IEnumerable<IFeature>)
+  nameWithType: WritableLayer.AddRange(IEnumerable<IFeature>)
+  fullName: Mapsui.Layers.WritableLayer.AddRange(System.Collections.Generic.IEnumerable<Mapsui.IFeature>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/WritableLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddRange
+    path: ../../Mapsui/Layers/WritableLayer.cs
+    startLine: 58
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public void AddRange(IEnumerable<IFeature> features)
+    parameters:
+    - id: features
+      type: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+    content.vb: Public Sub AddRange(features As IEnumerable(Of IFeature))
+  overload: Mapsui.Layers.WritableLayer.AddRange*
+  nameWithType.vb: WritableLayer.AddRange(IEnumerable(Of IFeature))
+  fullName.vb: Mapsui.Layers.WritableLayer.AddRange(System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))
+  name.vb: AddRange(IEnumerable(Of IFeature))
+- uid: Mapsui.Layers.WritableLayer.Find(Mapsui.IFeature)
+  commentId: M:Mapsui.Layers.WritableLayer.Find(Mapsui.IFeature)
+  id: Find(Mapsui.IFeature)
+  parent: Mapsui.Layers.WritableLayer
+  langs:
+  - csharp
+  - vb
+  name: Find(IFeature)
+  nameWithType: WritableLayer.Find(IFeature)
+  fullName: Mapsui.Layers.WritableLayer.Find(Mapsui.IFeature)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/WritableLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Find
+    path: ../../Mapsui/Layers/WritableLayer.cs
+    startLine: 66
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public IFeature? Find(IFeature feature)
+    parameters:
+    - id: feature
+      type: Mapsui.IFeature
+    return:
+      type: Mapsui.IFeature
+    content.vb: Public Function Find(feature As IFeature) As IFeature
+  overload: Mapsui.Layers.WritableLayer.Find*
+- uid: Mapsui.Layers.WritableLayer.TryRemove(Mapsui.IFeature,System.Func{Mapsui.IFeature,Mapsui.IFeature,System.Boolean})
+  commentId: M:Mapsui.Layers.WritableLayer.TryRemove(Mapsui.IFeature,System.Func{Mapsui.IFeature,Mapsui.IFeature,System.Boolean})
+  id: TryRemove(Mapsui.IFeature,System.Func{Mapsui.IFeature,Mapsui.IFeature,System.Boolean})
+  parent: Mapsui.Layers.WritableLayer
+  langs:
+  - csharp
+  - vb
+  name: TryRemove(IFeature, Func<IFeature, IFeature, bool>?)
+  nameWithType: WritableLayer.TryRemove(IFeature, Func<IFeature, IFeature, bool>?)
+  fullName: Mapsui.Layers.WritableLayer.TryRemove(Mapsui.IFeature, System.Func<Mapsui.IFeature, Mapsui.IFeature, bool>?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/WritableLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TryRemove
+    path: ../../Mapsui/Layers/WritableLayer.cs
+    startLine: 78
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: Tries to remove a feature.
+  example: []
+  syntax:
+    content: public bool TryRemove(IFeature feature, Func<IFeature, IFeature, bool>? compare = null)
+    parameters:
+    - id: feature
+      type: Mapsui.IFeature
+      description: Feature to remove
+    - id: compare
+      type: System.Func{Mapsui.IFeature,Mapsui.IFeature,System.Boolean}
+      description: >-
+        Optional method to compare the feature with any of the other 
+            features in the list. If omitted a reference compare is done.
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Function TryRemove(feature As IFeature, compare As Func(Of IFeature, IFeature, Boolean) = Nothing) As Boolean
+  overload: Mapsui.Layers.WritableLayer.TryRemove*
+  nameWithType.vb: WritableLayer.TryRemove(IFeature, Func(Of IFeature, IFeature, Boolean))
+  fullName.vb: Mapsui.Layers.WritableLayer.TryRemove(Mapsui.IFeature, System.Func(Of Mapsui.IFeature, Mapsui.IFeature, Boolean))
+  name.vb: TryRemove(IFeature, Func(Of IFeature, IFeature, Boolean))
+references:
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Layers.BaseLayer
+  commentId: T:Mapsui.Layers.BaseLayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.BaseLayer.html
+  name: BaseLayer
+  nameWithType: BaseLayer
+  fullName: Mapsui.Layers.BaseLayer
+- uid: Mapsui.Layers.ILayer
+  commentId: T:Mapsui.Layers.ILayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.ILayer.html
+  name: ILayer
+  nameWithType: ILayer
+  fullName: Mapsui.Layers.ILayer
+- uid: Mapsui.Animations.IAnimatable
+  commentId: T:Mapsui.Animations.IAnimatable
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.IAnimatable.html
+  name: IAnimatable
+  nameWithType: IAnimatable
+  fullName: Mapsui.Animations.IAnimatable
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Mapsui.Layers.BaseLayer.PropertyChanged
+  commentId: E:Mapsui.Layers.BaseLayer.PropertyChanged
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_PropertyChanged
+  name: PropertyChanged
+  nameWithType: BaseLayer.PropertyChanged
+  fullName: Mapsui.Layers.BaseLayer.PropertyChanged
+- uid: Mapsui.Layers.BaseLayer.DataChanged
+  commentId: E:Mapsui.Layers.BaseLayer.DataChanged
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataChanged
+  name: DataChanged
+  nameWithType: BaseLayer.DataChanged
+  fullName: Mapsui.Layers.BaseLayer.DataChanged
+- uid: Mapsui.Layers.BaseLayer.Id
+  commentId: P:Mapsui.Layers.BaseLayer.Id
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Id
+  name: Id
+  nameWithType: BaseLayer.Id
+  fullName: Mapsui.Layers.BaseLayer.Id
+- uid: Mapsui.Layers.BaseLayer.Tag
+  commentId: P:Mapsui.Layers.BaseLayer.Tag
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Tag
+  name: Tag
+  nameWithType: BaseLayer.Tag
+  fullName: Mapsui.Layers.BaseLayer.Tag
+- uid: Mapsui.Layers.BaseLayer.MinVisible
+  commentId: P:Mapsui.Layers.BaseLayer.MinVisible
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MinVisible
+  name: MinVisible
+  nameWithType: BaseLayer.MinVisible
+  fullName: Mapsui.Layers.BaseLayer.MinVisible
+- uid: Mapsui.Layers.BaseLayer.MaxVisible
+  commentId: P:Mapsui.Layers.BaseLayer.MaxVisible
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MaxVisible
+  name: MaxVisible
+  nameWithType: BaseLayer.MaxVisible
+  fullName: Mapsui.Layers.BaseLayer.MaxVisible
+- uid: Mapsui.Layers.BaseLayer.Enabled
+  commentId: P:Mapsui.Layers.BaseLayer.Enabled
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Enabled
+  name: Enabled
+  nameWithType: BaseLayer.Enabled
+  fullName: Mapsui.Layers.BaseLayer.Enabled
+- uid: Mapsui.Layers.BaseLayer.Name
+  commentId: P:Mapsui.Layers.BaseLayer.Name
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Name
+  name: Name
+  nameWithType: BaseLayer.Name
+  fullName: Mapsui.Layers.BaseLayer.Name
+- uid: Mapsui.Layers.BaseLayer.Opacity
+  commentId: P:Mapsui.Layers.BaseLayer.Opacity
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Opacity
+  name: Opacity
+  nameWithType: BaseLayer.Opacity
+  fullName: Mapsui.Layers.BaseLayer.Opacity
+- uid: Mapsui.Layers.BaseLayer.Busy
+  commentId: P:Mapsui.Layers.BaseLayer.Busy
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Busy
+  name: Busy
+  nameWithType: BaseLayer.Busy
+  fullName: Mapsui.Layers.BaseLayer.Busy
+- uid: Mapsui.Layers.BaseLayer.Style
+  commentId: P:Mapsui.Layers.BaseLayer.Style
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Style
+  name: Style
+  nameWithType: BaseLayer.Style
+  fullName: Mapsui.Layers.BaseLayer.Style
+- uid: Mapsui.Layers.BaseLayer.Attribution
+  commentId: P:Mapsui.Layers.BaseLayer.Attribution
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Attribution
+  name: Attribution
+  nameWithType: BaseLayer.Attribution
+  fullName: Mapsui.Layers.BaseLayer.Attribution
+- uid: Mapsui.Layers.BaseLayer.Resolutions
+  commentId: P:Mapsui.Layers.BaseLayer.Resolutions
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Resolutions
+  name: Resolutions
+  nameWithType: BaseLayer.Resolutions
+  fullName: Mapsui.Layers.BaseLayer.Resolutions
+- uid: Mapsui.Layers.BaseLayer.IsMapInfoLayer
+  commentId: P:Mapsui.Layers.BaseLayer.IsMapInfoLayer
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsMapInfoLayer
+  name: IsMapInfoLayer
+  nameWithType: BaseLayer.IsMapInfoLayer
+  fullName: Mapsui.Layers.BaseLayer.IsMapInfoLayer
+- uid: Mapsui.Layers.BaseLayer.SortFeatures
+  commentId: P:Mapsui.Layers.BaseLayer.SortFeatures
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_SortFeatures
+  name: SortFeatures
+  nameWithType: BaseLayer.SortFeatures
+  fullName: Mapsui.Layers.BaseLayer.SortFeatures
+- uid: Mapsui.Layers.BaseLayer.DataHasChanged
+  commentId: M:Mapsui.Layers.BaseLayer.DataHasChanged
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged
+  name: DataHasChanged()
+  nameWithType: BaseLayer.DataHasChanged()
+  fullName: Mapsui.Layers.BaseLayer.DataHasChanged()
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.DataHasChanged
+    name: DataHasChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.DataHasChanged
+    name: DataHasChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged
+  - name: (
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.ToString
+  commentId: M:Mapsui.Layers.BaseLayer.ToString
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ToString
+  name: ToString()
+  nameWithType: BaseLayer.ToString()
+  fullName: Mapsui.Layers.BaseLayer.ToString()
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.ToString
+    name: ToString
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ToString
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.ToString
+    name: ToString
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ToString
+  - name: (
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+  commentId: M:Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+  parent: Mapsui.Layers.BaseLayer
+  isExternal: true
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnPropertyChanged_System_String_
+  name: OnPropertyChanged(string)
+  nameWithType: BaseLayer.OnPropertyChanged(string)
+  fullName: Mapsui.Layers.BaseLayer.OnPropertyChanged(string)
+  nameWithType.vb: BaseLayer.OnPropertyChanged(String)
+  fullName.vb: Mapsui.Layers.BaseLayer.OnPropertyChanged(String)
+  name.vb: OnPropertyChanged(String)
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+  commentId: M:Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnDataChanged_Mapsui_Fetcher_DataChangedEventArgs_
+  name: OnDataChanged(DataChangedEventArgs)
+  nameWithType: BaseLayer.OnDataChanged(DataChangedEventArgs)
+  fullName: Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+    name: OnDataChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnDataChanged_Mapsui_Fetcher_DataChangedEventArgs_
+  - name: (
+  - uid: Mapsui.Fetcher.DataChangedEventArgs
+    name: DataChangedEventArgs
+    href: Mapsui.Fetcher.DataChangedEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+    name: OnDataChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnDataChanged_Mapsui_Fetcher_DataChangedEventArgs_
+  - name: (
+  - uid: Mapsui.Fetcher.DataChangedEventArgs
+    name: DataChangedEventArgs
+    href: Mapsui.Fetcher.DataChangedEventArgs.html
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+  commentId: M:Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+  parent: Mapsui.Layers.BaseLayer
+  isExternal: true
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose_System_Boolean_
+  name: Dispose(bool)
+  nameWithType: BaseLayer.Dispose(bool)
+  fullName: Mapsui.Layers.BaseLayer.Dispose(bool)
+  nameWithType.vb: BaseLayer.Dispose(Boolean)
+  fullName.vb: Mapsui.Layers.BaseLayer.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+    name: Dispose
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+    name: Dispose
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.Dispose
+  commentId: M:Mapsui.Layers.BaseLayer.Dispose
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose
+  name: Dispose()
+  nameWithType: BaseLayer.Dispose()
+  fullName: Mapsui.Layers.BaseLayer.Dispose()
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.Dispose
+    name: Dispose
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.Dispose
+    name: Dispose
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose
+  - name: (
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.UpdateAnimations
+  commentId: M:Mapsui.Layers.BaseLayer.UpdateAnimations
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_UpdateAnimations
+  name: UpdateAnimations()
+  nameWithType: BaseLayer.UpdateAnimations()
+  fullName: Mapsui.Layers.BaseLayer.UpdateAnimations()
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.UpdateAnimations
+    name: UpdateAnimations
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_UpdateAnimations
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.UpdateAnimations
+    name: UpdateAnimations
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_UpdateAnimations
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Layers.ILayer.Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync
+  commentId: M:Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  parent: Mapsui.Extensions.LayerExtensions
+  definition: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  name: WaitForLoadingAsync(ILayer)
+  nameWithType: LayerExtensions.WaitForLoadingAsync(ILayer)
+  fullName: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  spec.csharp:
+  - uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  - name: (
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  - name: (
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Animations
+  commentId: N:Mapsui.Animations
+  href: Mapsui.html
+  name: Mapsui.Animations
+  nameWithType: Mapsui.Animations
+  fullName: Mapsui.Animations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  commentId: M:Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  name: WaitForLoadingAsync(ILayer)
+  nameWithType: LayerExtensions.WaitForLoadingAsync(ILayer)
+  fullName: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+  spec.csharp:
+  - uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  - name: (
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.LayerExtensions.WaitForLoadingAsync(Mapsui.Layers.ILayer)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_
+  - name: (
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+- uid: Mapsui.Extensions.LayerExtensions
+  commentId: T:Mapsui.Extensions.LayerExtensions
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.LayerExtensions.html
+  name: LayerExtensions
+  nameWithType: LayerExtensions
+  fullName: Mapsui.Extensions.LayerExtensions
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+  commentId: M:Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+  parent: Mapsui.Layers.BaseLayer
+  isExternal: true
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeatures_Mapsui_MRect_System_Double_
+  name: GetFeatures(MRect, double)
+  nameWithType: BaseLayer.GetFeatures(MRect, double)
+  fullName: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect, double)
+  nameWithType.vb: BaseLayer.GetFeatures(MRect, Double)
+  fullName.vb: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect, Double)
+  name.vb: GetFeatures(MRect, Double)
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+    name: GetFeatures
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeatures_Mapsui_MRect_System_Double_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+    name: GetFeatures
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeatures_Mapsui_MRect_System_Double_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Layers.WritableLayer.GetFeatures*
+  commentId: Overload:Mapsui.Layers.WritableLayer.GetFeatures
+  href: Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_GetFeatures_Mapsui_MRect_System_Double_
+  name: GetFeatures
+  nameWithType: WritableLayer.GetFeatures
+  fullName: Mapsui.Layers.WritableLayer.GetFeatures
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<IFeature>
+  nameWithType: IEnumerable<IFeature>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.IFeature>
+  nameWithType.vb: IEnumerable(Of IFeature)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.IFeature)
+  name.vb: IEnumerable(Of IFeature)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Layers.BaseLayer.Extent
+  commentId: P:Mapsui.Layers.BaseLayer.Extent
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Extent
+  name: Extent
+  nameWithType: BaseLayer.Extent
+  fullName: Mapsui.Layers.BaseLayer.Extent
+- uid: Mapsui.Layers.WritableLayer.Extent*
+  commentId: Overload:Mapsui.Layers.WritableLayer.Extent
+  href: Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_Extent
+  name: Extent
+  nameWithType: WritableLayer.Extent
+  fullName: Mapsui.Layers.WritableLayer.Extent
+- uid: Mapsui.Layers.WritableLayer.Clear*
+  commentId: Overload:Mapsui.Layers.WritableLayer.Clear
+  href: Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_Clear
+  name: Clear
+  nameWithType: WritableLayer.Clear
+  fullName: Mapsui.Layers.WritableLayer.Clear
+- uid: Mapsui.Layers.WritableLayer.Add*
+  commentId: Overload:Mapsui.Layers.WritableLayer.Add
+  href: Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_Add_Mapsui_IFeature_
+  name: Add
+  nameWithType: WritableLayer.Add
+  fullName: Mapsui.Layers.WritableLayer.Add
+- uid: Mapsui.IFeature
+  commentId: T:Mapsui.IFeature
+  parent: Mapsui
+  href: Mapsui.IFeature.html
+  name: IFeature
+  nameWithType: IFeature
+  fullName: Mapsui.IFeature
+- uid: Mapsui.Layers.WritableLayer.AddRange*
+  commentId: Overload:Mapsui.Layers.WritableLayer.AddRange
+  href: Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_AddRange_System_Collections_Generic_IEnumerable_Mapsui_IFeature__
+  name: AddRange
+  nameWithType: WritableLayer.AddRange
+  fullName: Mapsui.Layers.WritableLayer.AddRange
+- uid: Mapsui.Layers.WritableLayer.Find*
+  commentId: Overload:Mapsui.Layers.WritableLayer.Find
+  href: Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_Find_Mapsui_IFeature_
+  name: Find
+  nameWithType: WritableLayer.Find
+  fullName: Mapsui.Layers.WritableLayer.Find
+- uid: Mapsui.Layers.WritableLayer.TryRemove*
+  commentId: Overload:Mapsui.Layers.WritableLayer.TryRemove
+  href: Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_TryRemove_Mapsui_IFeature_System_Func_Mapsui_IFeature_Mapsui_IFeature_System_Boolean__
+  name: TryRemove
+  nameWithType: WritableLayer.TryRemove
+  fullName: Mapsui.Layers.WritableLayer.TryRemove
+- uid: System.Func{Mapsui.IFeature,Mapsui.IFeature,System.Boolean}
+  commentId: T:System.Func{Mapsui.IFeature,Mapsui.IFeature,System.Boolean}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<IFeature, IFeature, bool>
+  nameWithType: Func<IFeature, IFeature, bool>
+  fullName: System.Func<Mapsui.IFeature, Mapsui.IFeature, bool>
+  nameWithType.vb: Func(Of IFeature, IFeature, Boolean)
+  fullName.vb: System.Func(Of Mapsui.IFeature, Mapsui.IFeature, Boolean)
+  name.vb: Func(Of IFeature, IFeature, Boolean)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: ','
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )

@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Avalonia
+  commentId: N:Mapsui.UI.Avalonia
+  id: Mapsui.UI.Avalonia
+  children:
+  - Mapsui.UI.Avalonia.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Avalonia
+  nameWithType: Mapsui.UI.Avalonia
+  fullName: Mapsui.UI.Avalonia
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Avalonia
+references:
+- uid: Mapsui.UI.Avalonia.MapControl
+  commentId: T:Mapsui.UI.Avalonia.MapControl
+  href: Mapsui.UI.Avalonia.MapControl.html
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.Avalonia.MapControl

@@ -1,0 +1,1209 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.MRaster
+  commentId: T:Mapsui.MRaster
+  id: MRaster
+  parent: Mapsui
+  children:
+  - Mapsui.MRaster.#ctor(Mapsui.MRaster)
+  - Mapsui.MRaster.#ctor(System.Byte[],Mapsui.MRect)
+  - Mapsui.MRaster.Data
+  - Mapsui.MRaster.TickFetched
+  langs:
+  - csharp
+  - vb
+  name: MRaster
+  nameWithType: MRaster
+  fullName: Mapsui.MRaster
+  type: Class
+  source:
+    remote:
+      path: Mapsui/MRaster.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MRaster
+    path: ../../Mapsui/MRaster.cs
+    startLine: 4
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: 'public class MRaster : MRect, IEquatable<MRect>'
+    content.vb: Public Class MRaster Inherits MRect Implements IEquatable(Of MRect)
+  inheritance:
+  - System.Object
+  - Mapsui.MRect
+  implements:
+  - System.IEquatable{Mapsui.MRect}
+  inheritedMembers:
+  - Mapsui.MRect.Max
+  - Mapsui.MRect.Min
+  - Mapsui.MRect.MaxX
+  - Mapsui.MRect.MaxY
+  - Mapsui.MRect.MinX
+  - Mapsui.MRect.MinY
+  - Mapsui.MRect.Centroid
+  - Mapsui.MRect.Width
+  - Mapsui.MRect.Height
+  - Mapsui.MRect.Bottom
+  - Mapsui.MRect.Left
+  - Mapsui.MRect.Top
+  - Mapsui.MRect.Right
+  - Mapsui.MRect.TopLeft
+  - Mapsui.MRect.TopRight
+  - Mapsui.MRect.BottomLeft
+  - Mapsui.MRect.BottomRight
+  - Mapsui.MRect.Vertices
+  - Mapsui.MRect.Copy
+  - Mapsui.MRect.Contains(System.Double,System.Double)
+  - Mapsui.MRect.Contains(Mapsui.MPoint)
+  - Mapsui.MRect.Contains(Mapsui.MRect)
+  - Mapsui.MRect.Equals(Mapsui.MRect)
+  - Mapsui.MRect.GetArea
+  - Mapsui.MRect.Grow(System.Double)
+  - Mapsui.MRect.Grow(System.Double,System.Double)
+  - Mapsui.MRect.Intersects(Mapsui.MRect)
+  - Mapsui.MRect.Join(Mapsui.MRect)
+  - Mapsui.MRect.Multiply(System.Double)
+  - Mapsui.MRect.Rotate(System.Double)
+  - Mapsui.MRect.ToString
+  - Mapsui.MRect.Equals(System.Object)
+  - Mapsui.MRect.GetHashCode
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - Mapsui.MRect.Mapsui.Tiling.Extensions.MRectExtensions.ToExtent
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.MRaster.#ctor(Mapsui.MRaster)
+  commentId: M:Mapsui.MRaster.#ctor(Mapsui.MRaster)
+  id: '#ctor(Mapsui.MRaster)'
+  parent: Mapsui.MRaster
+  langs:
+  - csharp
+  - vb
+  name: MRaster(MRaster)
+  nameWithType: MRaster.MRaster(MRaster)
+  fullName: Mapsui.MRaster.MRaster(Mapsui.MRaster)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MRaster.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MRaster.cs
+    startLine: 6
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MRaster(MRaster raster)
+    parameters:
+    - id: raster
+      type: Mapsui.MRaster
+    content.vb: Public Sub New(raster As MRaster)
+  overload: Mapsui.MRaster.#ctor*
+  nameWithType.vb: MRaster.New(MRaster)
+  fullName.vb: Mapsui.MRaster.New(Mapsui.MRaster)
+  name.vb: New(MRaster)
+- uid: Mapsui.MRaster.#ctor(System.Byte[],Mapsui.MRect)
+  commentId: M:Mapsui.MRaster.#ctor(System.Byte[],Mapsui.MRect)
+  id: '#ctor(System.Byte[],Mapsui.MRect)'
+  parent: Mapsui.MRaster
+  langs:
+  - csharp
+  - vb
+  name: MRaster(byte[], MRect)
+  nameWithType: MRaster.MRaster(byte[], MRect)
+  fullName: Mapsui.MRaster.MRaster(byte[], Mapsui.MRect)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MRaster.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MRaster.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MRaster(byte[] data, MRect rect)
+    parameters:
+    - id: data
+      type: System.Byte[]
+    - id: rect
+      type: Mapsui.MRect
+    content.vb: Public Sub New(data As Byte(), rect As MRect)
+  overload: Mapsui.MRaster.#ctor*
+  nameWithType.vb: MRaster.New(Byte(), MRect)
+  fullName.vb: Mapsui.MRaster.New(Byte(), Mapsui.MRect)
+  name.vb: New(Byte(), MRect)
+- uid: Mapsui.MRaster.Data
+  commentId: P:Mapsui.MRaster.Data
+  id: Data
+  parent: Mapsui.MRaster
+  langs:
+  - csharp
+  - vb
+  name: Data
+  nameWithType: MRaster.Data
+  fullName: Mapsui.MRaster.Data
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MRaster.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Data
+    path: ../../Mapsui/MRaster.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public byte[] Data { get; }
+    parameters: []
+    return:
+      type: System.Byte[]
+    content.vb: Public ReadOnly Property Data As Byte()
+  overload: Mapsui.MRaster.Data*
+- uid: Mapsui.MRaster.TickFetched
+  commentId: P:Mapsui.MRaster.TickFetched
+  id: TickFetched
+  parent: Mapsui.MRaster
+  langs:
+  - csharp
+  - vb
+  name: TickFetched
+  nameWithType: MRaster.TickFetched
+  fullName: Mapsui.MRaster.TickFetched
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MRaster.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TickFetched
+    path: ../../Mapsui/MRaster.cs
+    startLine: 19
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public long TickFetched { get; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public ReadOnly Property TickFetched As Long
+  overload: Mapsui.MRaster.TickFetched*
+references:
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: System.IEquatable{Mapsui.MRect}
+  commentId: T:System.IEquatable{Mapsui.MRect}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<MRect>
+  nameWithType: IEquatable<MRect>
+  fullName: System.IEquatable<Mapsui.MRect>
+  nameWithType.vb: IEquatable(Of MRect)
+  fullName.vb: System.IEquatable(Of Mapsui.MRect)
+  name.vb: IEquatable(Of MRect)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+- uid: Mapsui.MRect.Max
+  commentId: P:Mapsui.MRect.Max
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Max
+  name: Max
+  nameWithType: MRect.Max
+  fullName: Mapsui.MRect.Max
+- uid: Mapsui.MRect.Min
+  commentId: P:Mapsui.MRect.Min
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Min
+  name: Min
+  nameWithType: MRect.Min
+  fullName: Mapsui.MRect.Min
+- uid: Mapsui.MRect.MaxX
+  commentId: P:Mapsui.MRect.MaxX
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_MaxX
+  name: MaxX
+  nameWithType: MRect.MaxX
+  fullName: Mapsui.MRect.MaxX
+- uid: Mapsui.MRect.MaxY
+  commentId: P:Mapsui.MRect.MaxY
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_MaxY
+  name: MaxY
+  nameWithType: MRect.MaxY
+  fullName: Mapsui.MRect.MaxY
+- uid: Mapsui.MRect.MinX
+  commentId: P:Mapsui.MRect.MinX
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_MinX
+  name: MinX
+  nameWithType: MRect.MinX
+  fullName: Mapsui.MRect.MinX
+- uid: Mapsui.MRect.MinY
+  commentId: P:Mapsui.MRect.MinY
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_MinY
+  name: MinY
+  nameWithType: MRect.MinY
+  fullName: Mapsui.MRect.MinY
+- uid: Mapsui.MRect.Centroid
+  commentId: P:Mapsui.MRect.Centroid
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Centroid
+  name: Centroid
+  nameWithType: MRect.Centroid
+  fullName: Mapsui.MRect.Centroid
+- uid: Mapsui.MRect.Width
+  commentId: P:Mapsui.MRect.Width
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Width
+  name: Width
+  nameWithType: MRect.Width
+  fullName: Mapsui.MRect.Width
+- uid: Mapsui.MRect.Height
+  commentId: P:Mapsui.MRect.Height
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Height
+  name: Height
+  nameWithType: MRect.Height
+  fullName: Mapsui.MRect.Height
+- uid: Mapsui.MRect.Bottom
+  commentId: P:Mapsui.MRect.Bottom
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Bottom
+  name: Bottom
+  nameWithType: MRect.Bottom
+  fullName: Mapsui.MRect.Bottom
+- uid: Mapsui.MRect.Left
+  commentId: P:Mapsui.MRect.Left
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Left
+  name: Left
+  nameWithType: MRect.Left
+  fullName: Mapsui.MRect.Left
+- uid: Mapsui.MRect.Top
+  commentId: P:Mapsui.MRect.Top
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Top
+  name: Top
+  nameWithType: MRect.Top
+  fullName: Mapsui.MRect.Top
+- uid: Mapsui.MRect.Right
+  commentId: P:Mapsui.MRect.Right
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Right
+  name: Right
+  nameWithType: MRect.Right
+  fullName: Mapsui.MRect.Right
+- uid: Mapsui.MRect.TopLeft
+  commentId: P:Mapsui.MRect.TopLeft
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_TopLeft
+  name: TopLeft
+  nameWithType: MRect.TopLeft
+  fullName: Mapsui.MRect.TopLeft
+- uid: Mapsui.MRect.TopRight
+  commentId: P:Mapsui.MRect.TopRight
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_TopRight
+  name: TopRight
+  nameWithType: MRect.TopRight
+  fullName: Mapsui.MRect.TopRight
+- uid: Mapsui.MRect.BottomLeft
+  commentId: P:Mapsui.MRect.BottomLeft
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_BottomLeft
+  name: BottomLeft
+  nameWithType: MRect.BottomLeft
+  fullName: Mapsui.MRect.BottomLeft
+- uid: Mapsui.MRect.BottomRight
+  commentId: P:Mapsui.MRect.BottomRight
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_BottomRight
+  name: BottomRight
+  nameWithType: MRect.BottomRight
+  fullName: Mapsui.MRect.BottomRight
+- uid: Mapsui.MRect.Vertices
+  commentId: P:Mapsui.MRect.Vertices
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Vertices
+  name: Vertices
+  nameWithType: MRect.Vertices
+  fullName: Mapsui.MRect.Vertices
+- uid: Mapsui.MRect.Copy
+  commentId: M:Mapsui.MRect.Copy
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Copy
+  name: Copy()
+  nameWithType: MRect.Copy()
+  fullName: Mapsui.MRect.Copy()
+  spec.csharp:
+  - uid: Mapsui.MRect.Copy
+    name: Copy
+    href: Mapsui.MRect.html#Mapsui_MRect_Copy
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Copy
+    name: Copy
+    href: Mapsui.MRect.html#Mapsui_MRect_Copy
+  - name: (
+  - name: )
+- uid: Mapsui.MRect.Contains(System.Double,System.Double)
+  commentId: M:Mapsui.MRect.Contains(System.Double,System.Double)
+  parent: Mapsui.MRect
+  isExternal: true
+  href: Mapsui.MRect.html#Mapsui_MRect_Contains_System_Double_System_Double_
+  name: Contains(double, double)
+  nameWithType: MRect.Contains(double, double)
+  fullName: Mapsui.MRect.Contains(double, double)
+  nameWithType.vb: MRect.Contains(Double, Double)
+  fullName.vb: Mapsui.MRect.Contains(Double, Double)
+  name.vb: Contains(Double, Double)
+  spec.csharp:
+  - uid: Mapsui.MRect.Contains(System.Double,System.Double)
+    name: Contains
+    href: Mapsui.MRect.html#Mapsui_MRect_Contains_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Contains(System.Double,System.Double)
+    name: Contains
+    href: Mapsui.MRect.html#Mapsui_MRect_Contains_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.MRect.Contains(Mapsui.MPoint)
+  commentId: M:Mapsui.MRect.Contains(Mapsui.MPoint)
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Contains_Mapsui_MPoint_
+  name: Contains(MPoint)
+  nameWithType: MRect.Contains(MPoint)
+  fullName: Mapsui.MRect.Contains(Mapsui.MPoint)
+  spec.csharp:
+  - uid: Mapsui.MRect.Contains(Mapsui.MPoint)
+    name: Contains
+    href: Mapsui.MRect.html#Mapsui_MRect_Contains_Mapsui_MPoint_
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+    href: Mapsui.MPoint.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Contains(Mapsui.MPoint)
+    name: Contains
+    href: Mapsui.MRect.html#Mapsui_MRect_Contains_Mapsui_MPoint_
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+    href: Mapsui.MPoint.html
+  - name: )
+- uid: Mapsui.MRect.Contains(Mapsui.MRect)
+  commentId: M:Mapsui.MRect.Contains(Mapsui.MRect)
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Contains_Mapsui_MRect_
+  name: Contains(MRect)
+  nameWithType: MRect.Contains(MRect)
+  fullName: Mapsui.MRect.Contains(Mapsui.MRect)
+  spec.csharp:
+  - uid: Mapsui.MRect.Contains(Mapsui.MRect)
+    name: Contains
+    href: Mapsui.MRect.html#Mapsui_MRect_Contains_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Contains(Mapsui.MRect)
+    name: Contains
+    href: Mapsui.MRect.html#Mapsui_MRect_Contains_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+- uid: Mapsui.MRect.Equals(Mapsui.MRect)
+  commentId: M:Mapsui.MRect.Equals(Mapsui.MRect)
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Equals_Mapsui_MRect_
+  name: Equals(MRect)
+  nameWithType: MRect.Equals(MRect)
+  fullName: Mapsui.MRect.Equals(Mapsui.MRect)
+  spec.csharp:
+  - uid: Mapsui.MRect.Equals(Mapsui.MRect)
+    name: Equals
+    href: Mapsui.MRect.html#Mapsui_MRect_Equals_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Equals(Mapsui.MRect)
+    name: Equals
+    href: Mapsui.MRect.html#Mapsui_MRect_Equals_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+- uid: Mapsui.MRect.GetArea
+  commentId: M:Mapsui.MRect.GetArea
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_GetArea
+  name: GetArea()
+  nameWithType: MRect.GetArea()
+  fullName: Mapsui.MRect.GetArea()
+  spec.csharp:
+  - uid: Mapsui.MRect.GetArea
+    name: GetArea
+    href: Mapsui.MRect.html#Mapsui_MRect_GetArea
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.GetArea
+    name: GetArea
+    href: Mapsui.MRect.html#Mapsui_MRect_GetArea
+  - name: (
+  - name: )
+- uid: Mapsui.MRect.Grow(System.Double)
+  commentId: M:Mapsui.MRect.Grow(System.Double)
+  parent: Mapsui.MRect
+  isExternal: true
+  href: Mapsui.MRect.html#Mapsui_MRect_Grow_System_Double_
+  name: Grow(double)
+  nameWithType: MRect.Grow(double)
+  fullName: Mapsui.MRect.Grow(double)
+  nameWithType.vb: MRect.Grow(Double)
+  fullName.vb: Mapsui.MRect.Grow(Double)
+  name.vb: Grow(Double)
+  spec.csharp:
+  - uid: Mapsui.MRect.Grow(System.Double)
+    name: Grow
+    href: Mapsui.MRect.html#Mapsui_MRect_Grow_System_Double_
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Grow(System.Double)
+    name: Grow
+    href: Mapsui.MRect.html#Mapsui_MRect_Grow_System_Double_
+  - name: (
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.MRect.Grow(System.Double,System.Double)
+  commentId: M:Mapsui.MRect.Grow(System.Double,System.Double)
+  parent: Mapsui.MRect
+  isExternal: true
+  href: Mapsui.MRect.html#Mapsui_MRect_Grow_System_Double_System_Double_
+  name: Grow(double, double)
+  nameWithType: MRect.Grow(double, double)
+  fullName: Mapsui.MRect.Grow(double, double)
+  nameWithType.vb: MRect.Grow(Double, Double)
+  fullName.vb: Mapsui.MRect.Grow(Double, Double)
+  name.vb: Grow(Double, Double)
+  spec.csharp:
+  - uid: Mapsui.MRect.Grow(System.Double,System.Double)
+    name: Grow
+    href: Mapsui.MRect.html#Mapsui_MRect_Grow_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Grow(System.Double,System.Double)
+    name: Grow
+    href: Mapsui.MRect.html#Mapsui_MRect_Grow_System_Double_System_Double_
+  - name: (
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.MRect.Intersects(Mapsui.MRect)
+  commentId: M:Mapsui.MRect.Intersects(Mapsui.MRect)
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Intersects_Mapsui_MRect_
+  name: Intersects(MRect)
+  nameWithType: MRect.Intersects(MRect)
+  fullName: Mapsui.MRect.Intersects(Mapsui.MRect)
+  spec.csharp:
+  - uid: Mapsui.MRect.Intersects(Mapsui.MRect)
+    name: Intersects
+    href: Mapsui.MRect.html#Mapsui_MRect_Intersects_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Intersects(Mapsui.MRect)
+    name: Intersects
+    href: Mapsui.MRect.html#Mapsui_MRect_Intersects_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+- uid: Mapsui.MRect.Join(Mapsui.MRect)
+  commentId: M:Mapsui.MRect.Join(Mapsui.MRect)
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_Join_Mapsui_MRect_
+  name: Join(MRect)
+  nameWithType: MRect.Join(MRect)
+  fullName: Mapsui.MRect.Join(Mapsui.MRect)
+  spec.csharp:
+  - uid: Mapsui.MRect.Join(Mapsui.MRect)
+    name: Join
+    href: Mapsui.MRect.html#Mapsui_MRect_Join_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Join(Mapsui.MRect)
+    name: Join
+    href: Mapsui.MRect.html#Mapsui_MRect_Join_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+- uid: Mapsui.MRect.Multiply(System.Double)
+  commentId: M:Mapsui.MRect.Multiply(System.Double)
+  parent: Mapsui.MRect
+  isExternal: true
+  href: Mapsui.MRect.html#Mapsui_MRect_Multiply_System_Double_
+  name: Multiply(double)
+  nameWithType: MRect.Multiply(double)
+  fullName: Mapsui.MRect.Multiply(double)
+  nameWithType.vb: MRect.Multiply(Double)
+  fullName.vb: Mapsui.MRect.Multiply(Double)
+  name.vb: Multiply(Double)
+  spec.csharp:
+  - uid: Mapsui.MRect.Multiply(System.Double)
+    name: Multiply
+    href: Mapsui.MRect.html#Mapsui_MRect_Multiply_System_Double_
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Multiply(System.Double)
+    name: Multiply
+    href: Mapsui.MRect.html#Mapsui_MRect_Multiply_System_Double_
+  - name: (
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.MRect.Rotate(System.Double)
+  commentId: M:Mapsui.MRect.Rotate(System.Double)
+  parent: Mapsui.MRect
+  isExternal: true
+  href: Mapsui.MRect.html#Mapsui_MRect_Rotate_System_Double_
+  name: Rotate(double)
+  nameWithType: MRect.Rotate(double)
+  fullName: Mapsui.MRect.Rotate(double)
+  nameWithType.vb: MRect.Rotate(Double)
+  fullName.vb: Mapsui.MRect.Rotate(Double)
+  name.vb: Rotate(Double)
+  spec.csharp:
+  - uid: Mapsui.MRect.Rotate(System.Double)
+    name: Rotate
+    href: Mapsui.MRect.html#Mapsui_MRect_Rotate_System_Double_
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Rotate(System.Double)
+    name: Rotate
+    href: Mapsui.MRect.html#Mapsui_MRect_Rotate_System_Double_
+  - name: (
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.MRect.ToString
+  commentId: M:Mapsui.MRect.ToString
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_ToString
+  name: ToString()
+  nameWithType: MRect.ToString()
+  fullName: Mapsui.MRect.ToString()
+  spec.csharp:
+  - uid: Mapsui.MRect.ToString
+    name: ToString
+    href: Mapsui.MRect.html#Mapsui_MRect_ToString
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.ToString
+    name: ToString
+    href: Mapsui.MRect.html#Mapsui_MRect_ToString
+  - name: (
+  - name: )
+- uid: Mapsui.MRect.Equals(System.Object)
+  commentId: M:Mapsui.MRect.Equals(System.Object)
+  parent: Mapsui.MRect
+  isExternal: true
+  href: Mapsui.MRect.html#Mapsui_MRect_Equals_System_Object_
+  name: Equals(object)
+  nameWithType: MRect.Equals(object)
+  fullName: Mapsui.MRect.Equals(object)
+  nameWithType.vb: MRect.Equals(Object)
+  fullName.vb: Mapsui.MRect.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: Mapsui.MRect.Equals(System.Object)
+    name: Equals
+    href: Mapsui.MRect.html#Mapsui_MRect_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.Equals(System.Object)
+    name: Equals
+    href: Mapsui.MRect.html#Mapsui_MRect_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.MRect.GetHashCode
+  commentId: M:Mapsui.MRect.GetHashCode
+  parent: Mapsui.MRect
+  href: Mapsui.MRect.html#Mapsui_MRect_GetHashCode
+  name: GetHashCode()
+  nameWithType: MRect.GetHashCode()
+  fullName: Mapsui.MRect.GetHashCode()
+  spec.csharp:
+  - uid: Mapsui.MRect.GetHashCode
+    name: GetHashCode
+    href: Mapsui.MRect.html#Mapsui_MRect_GetHashCode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.MRect.GetHashCode
+    name: GetHashCode
+    href: Mapsui.MRect.html#Mapsui_MRect_GetHashCode
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.MRect.Mapsui.Tiling.Extensions.MRectExtensions.ToExtent
+  commentId: M:Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+  parent: Mapsui.Tiling.Extensions.MRectExtensions
+  definition: Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+  href: Mapsui.Tiling.Extensions.MRectExtensions.html#Mapsui_Tiling_Extensions_MRectExtensions_ToExtent_Mapsui_MRect_
+  name: ToExtent(MRect)
+  nameWithType: MRectExtensions.ToExtent(MRect)
+  fullName: Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+  spec.csharp:
+  - uid: Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+    name: ToExtent
+    href: Mapsui.Tiling.Extensions.MRectExtensions.html#Mapsui_Tiling_Extensions_MRectExtensions_ToExtent_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+    name: ToExtent
+    href: Mapsui.Tiling.Extensions.MRectExtensions.html#Mapsui_Tiling_Extensions_MRectExtensions_ToExtent_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+  commentId: M:Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+  href: Mapsui.Tiling.Extensions.MRectExtensions.html#Mapsui_Tiling_Extensions_MRectExtensions_ToExtent_Mapsui_MRect_
+  name: ToExtent(MRect)
+  nameWithType: MRectExtensions.ToExtent(MRect)
+  fullName: Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+  spec.csharp:
+  - uid: Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+    name: ToExtent
+    href: Mapsui.Tiling.Extensions.MRectExtensions.html#Mapsui_Tiling_Extensions_MRectExtensions_ToExtent_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Tiling.Extensions.MRectExtensions.ToExtent(Mapsui.MRect)
+    name: ToExtent
+    href: Mapsui.Tiling.Extensions.MRectExtensions.html#Mapsui_Tiling_Extensions_MRectExtensions_ToExtent_Mapsui_MRect_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: )
+- uid: Mapsui.Tiling.Extensions.MRectExtensions
+  commentId: T:Mapsui.Tiling.Extensions.MRectExtensions
+  parent: Mapsui.Tiling.Extensions
+  href: Mapsui.Tiling.Extensions.MRectExtensions.html
+  name: MRectExtensions
+  nameWithType: MRectExtensions
+  fullName: Mapsui.Tiling.Extensions.MRectExtensions
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Tiling.Extensions
+  commentId: N:Mapsui.Tiling.Extensions
+  href: Mapsui.html
+  name: Mapsui.Tiling.Extensions
+  nameWithType: Mapsui.Tiling.Extensions
+  fullName: Mapsui.Tiling.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Extensions
+    name: Extensions
+    href: Mapsui.Tiling.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Extensions
+    name: Extensions
+    href: Mapsui.Tiling.Extensions.html
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.MRaster.#ctor*
+  commentId: Overload:Mapsui.MRaster.#ctor
+  href: Mapsui.MRaster.html#Mapsui_MRaster__ctor_Mapsui_MRaster_
+  name: MRaster
+  nameWithType: MRaster.MRaster
+  fullName: Mapsui.MRaster.MRaster
+  nameWithType.vb: MRaster.New
+  fullName.vb: Mapsui.MRaster.New
+  name.vb: New
+- uid: Mapsui.MRaster
+  commentId: T:Mapsui.MRaster
+  parent: Mapsui
+  href: Mapsui.MRaster.html
+  name: MRaster
+  nameWithType: MRaster
+  fullName: Mapsui.MRaster
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: Mapsui.MRaster.Data*
+  commentId: Overload:Mapsui.MRaster.Data
+  href: Mapsui.MRaster.html#Mapsui_MRaster_Data
+  name: Data
+  nameWithType: MRaster.Data
+  fullName: Mapsui.MRaster.Data
+- uid: Mapsui.MRaster.TickFetched*
+  commentId: Overload:Mapsui.MRaster.TickFetched
+  href: Mapsui.MRaster.html#Mapsui_MRaster_TickFetched
+  name: TickFetched
+  nameWithType: MRaster.TickFetched
+  fullName: Mapsui.MRaster.TickFetched
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long

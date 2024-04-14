@@ -1,0 +1,846 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.Font
+  commentId: T:Mapsui.Styles.Font
+  id: Font
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.Font.#ctor
+  - Mapsui.Styles.Font.#ctor(Mapsui.Styles.Font)
+  - Mapsui.Styles.Font.Bold
+  - Mapsui.Styles.Font.Equals(Mapsui.Styles.Font)
+  - Mapsui.Styles.Font.Equals(System.Object)
+  - Mapsui.Styles.Font.FontFamily
+  - Mapsui.Styles.Font.GetHashCode
+  - Mapsui.Styles.Font.Invalidated
+  - Mapsui.Styles.Font.Italic
+  - Mapsui.Styles.Font.Size
+  - Mapsui.Styles.Font.ToString
+  langs:
+  - csharp
+  - vb
+  name: Font
+  nameWithType: Font
+  fullName: Mapsui.Styles.Font
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Font
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 2
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public class Font
+    content.vb: Public Class Font
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.Font.#ctor
+  commentId: M:Mapsui.Styles.Font.#ctor
+  id: '#ctor'
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: Font()
+  nameWithType: Font.Font()
+  fullName: Mapsui.Styles.Font.Font()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public Font()
+    content.vb: Public Sub New()
+  overload: Mapsui.Styles.Font.#ctor*
+  nameWithType.vb: Font.New()
+  fullName.vb: Mapsui.Styles.Font.New()
+  name.vb: New()
+- uid: Mapsui.Styles.Font.#ctor(Mapsui.Styles.Font)
+  commentId: M:Mapsui.Styles.Font.#ctor(Mapsui.Styles.Font)
+  id: '#ctor(Mapsui.Styles.Font)'
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: Font(Font)
+  nameWithType: Font.Font(Font)
+  fullName: Mapsui.Styles.Font.Font(Mapsui.Styles.Font)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 14
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public Font(Font font)
+    parameters:
+    - id: font
+      type: Mapsui.Styles.Font
+    content.vb: Public Sub New(font As Font)
+  overload: Mapsui.Styles.Font.#ctor*
+  nameWithType.vb: Font.New(Font)
+  fullName.vb: Mapsui.Styles.Font.New(Mapsui.Styles.Font)
+  name.vb: New(Font)
+- uid: Mapsui.Styles.Font.FontFamily
+  commentId: P:Mapsui.Styles.Font.FontFamily
+  id: FontFamily
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: FontFamily
+  nameWithType: Font.FontFamily
+  fullName: Mapsui.Styles.Font.FontFamily
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FontFamily
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 20
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public string? FontFamily { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property FontFamily As String
+  overload: Mapsui.Styles.Font.FontFamily*
+- uid: Mapsui.Styles.Font.Size
+  commentId: P:Mapsui.Styles.Font.Size
+  id: Size
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: Size
+  nameWithType: Font.Size
+  fullName: Mapsui.Styles.Font.Size
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Size
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 34
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public double Size { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Size As Double
+  overload: Mapsui.Styles.Font.Size*
+- uid: Mapsui.Styles.Font.Italic
+  commentId: P:Mapsui.Styles.Font.Italic
+  id: Italic
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: Italic
+  nameWithType: Font.Italic
+  fullName: Mapsui.Styles.Font.Italic
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Italic
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 48
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public bool Italic { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property Italic As Boolean
+  overload: Mapsui.Styles.Font.Italic*
+- uid: Mapsui.Styles.Font.Bold
+  commentId: P:Mapsui.Styles.Font.Bold
+  id: Bold
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: Bold
+  nameWithType: Font.Bold
+  fullName: Mapsui.Styles.Font.Bold
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Bold
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 61
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public bool Bold { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property Bold As Boolean
+  overload: Mapsui.Styles.Font.Bold*
+- uid: Mapsui.Styles.Font.Invalidated
+  commentId: P:Mapsui.Styles.Font.Invalidated
+  id: Invalidated
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: Invalidated
+  nameWithType: Font.Invalidated
+  fullName: Mapsui.Styles.Font.Invalidated
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Invalidated
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 75
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public bool Invalidated { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property Invalidated As Boolean
+  overload: Mapsui.Styles.Font.Invalidated*
+- uid: Mapsui.Styles.Font.ToString
+  commentId: M:Mapsui.Styles.Font.ToString
+  id: ToString
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: Font.ToString()
+  fullName: Mapsui.Styles.Font.ToString()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToString
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 77
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Returns a string that represents the current object.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A string that represents the current object.
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.Object.ToString
+  overload: Mapsui.Styles.Font.ToString*
+- uid: Mapsui.Styles.Font.Equals(Mapsui.Styles.Font)
+  commentId: M:Mapsui.Styles.Font.Equals(Mapsui.Styles.Font)
+  id: Equals(Mapsui.Styles.Font)
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: Equals(Font)
+  nameWithType: Font.Equals(Font)
+  fullName: Mapsui.Styles.Font.Equals(Mapsui.Styles.Font)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 82
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: protected bool Equals(Font other)
+    parameters:
+    - id: other
+      type: Mapsui.Styles.Font
+    return:
+      type: System.Boolean
+    content.vb: Protected Function Equals(other As Font) As Boolean
+  overload: Mapsui.Styles.Font.Equals*
+- uid: Mapsui.Styles.Font.Equals(System.Object)
+  commentId: M:Mapsui.Styles.Font.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: Font.Equals(object?)
+  fullName: Mapsui.Styles.Font.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 87
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Determines whether the specified object is equal to the current object.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current object.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the specified object  is equal to the current object; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Mapsui.Styles.Font.Equals*
+  nameWithType.vb: Font.Equals(Object)
+  fullName.vb: Mapsui.Styles.Font.Equals(Object)
+  name.vb: Equals(Object)
+- uid: Mapsui.Styles.Font.GetHashCode
+  commentId: M:Mapsui.Styles.Font.GetHashCode
+  id: GetHashCode
+  parent: Mapsui.Styles.Font
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: Font.GetHashCode()
+  fullName: Mapsui.Styles.Font.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Font.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetHashCode
+    path: ../../Mapsui/Styles/Font.cs
+    startLine: 107
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Serves as the default hash function.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A hash code for the current object.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.Object.GetHashCode
+  overload: Mapsui.Styles.Font.GetHashCode*
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.Font.#ctor*
+  commentId: Overload:Mapsui.Styles.Font.#ctor
+  href: Mapsui.Styles.Font.html#Mapsui_Styles_Font__ctor
+  name: Font
+  nameWithType: Font.Font
+  fullName: Mapsui.Styles.Font.Font
+  nameWithType.vb: Font.New
+  fullName.vb: Mapsui.Styles.Font.New
+  name.vb: New
+- uid: Mapsui.Styles.Font
+  commentId: T:Mapsui.Styles.Font
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Font.html
+  name: Font
+  nameWithType: Font
+  fullName: Mapsui.Styles.Font
+- uid: Mapsui.Styles.Font.FontFamily*
+  commentId: Overload:Mapsui.Styles.Font.FontFamily
+  href: Mapsui.Styles.Font.html#Mapsui_Styles_Font_FontFamily
+  name: FontFamily
+  nameWithType: Font.FontFamily
+  fullName: Mapsui.Styles.Font.FontFamily
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Styles.Font.Size*
+  commentId: Overload:Mapsui.Styles.Font.Size
+  href: Mapsui.Styles.Font.html#Mapsui_Styles_Font_Size
+  name: Size
+  nameWithType: Font.Size
+  fullName: Mapsui.Styles.Font.Size
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Styles.Font.Italic*
+  commentId: Overload:Mapsui.Styles.Font.Italic
+  href: Mapsui.Styles.Font.html#Mapsui_Styles_Font_Italic
+  name: Italic
+  nameWithType: Font.Italic
+  fullName: Mapsui.Styles.Font.Italic
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Styles.Font.Bold*
+  commentId: Overload:Mapsui.Styles.Font.Bold
+  href: Mapsui.Styles.Font.html#Mapsui_Styles_Font_Bold
+  name: Bold
+  nameWithType: Font.Bold
+  fullName: Mapsui.Styles.Font.Bold
+- uid: Mapsui.Styles.Font.Invalidated*
+  commentId: Overload:Mapsui.Styles.Font.Invalidated
+  href: Mapsui.Styles.Font.html#Mapsui_Styles_Font_Invalidated
+  name: Invalidated
+  nameWithType: Font.Invalidated
+  fullName: Mapsui.Styles.Font.Invalidated
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.Font.ToString*
+  commentId: Overload:Mapsui.Styles.Font.ToString
+  href: Mapsui.Styles.Font.html#Mapsui_Styles_Font_ToString
+  name: ToString
+  nameWithType: Font.ToString
+  fullName: Mapsui.Styles.Font.ToString
+- uid: Mapsui.Styles.Font.Equals*
+  commentId: Overload:Mapsui.Styles.Font.Equals
+  href: Mapsui.Styles.Font.html#Mapsui_Styles_Font_Equals_Mapsui_Styles_Font_
+  name: Equals
+  nameWithType: Font.Equals
+  fullName: Mapsui.Styles.Font.Equals
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.Font.GetHashCode*
+  commentId: Overload:Mapsui.Styles.Font.GetHashCode
+  href: Mapsui.Styles.Font.html#Mapsui_Styles_Font_GetHashCode
+  name: GetHashCode
+  nameWithType: Font.GetHashCode
+  fullName: Mapsui.Styles.Font.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer

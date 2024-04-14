@@ -1,0 +1,591 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TileLayer </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TileLayer ">
+    
+    <meta name="description" content="Layer, which displays a map consisting of individual tiles">
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Tiling.Layers.TileLayer">
+
+
+
+  <h1 id="Mapsui_Tiling_Layers_TileLayer" data-uid="Mapsui.Tiling.Layers.TileLayer" class="text-break">Class TileLayer</h1>
+  <div class="markdown level0 summary"><p>Layer, which displays a map consisting of individual tiles</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Mapsui.Layers.BaseLayer.html">BaseLayer</a></div>
+    <div class="level2"><span class="xref">TileLayer</span></div>
+      <div class="level3"><a class="xref" href="Mapsui.Tiling.Layers.RasterizingTileLayer.html">RasterizingTileLayer</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></div>
+    <div><a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    <div><a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_PropertyChanged">BaseLayer.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataChanged">BaseLayer.DataChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Id">BaseLayer.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Tag">BaseLayer.Tag</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MinVisible">BaseLayer.MinVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MaxVisible">BaseLayer.MaxVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Enabled">BaseLayer.Enabled</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Name">BaseLayer.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Opacity">BaseLayer.Opacity</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Busy">BaseLayer.Busy</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Style">BaseLayer.Style</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Attribution">BaseLayer.Attribution</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsMapInfoLayer">BaseLayer.IsMapInfoLayer</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_SortFeatures">BaseLayer.SortFeatures</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged">BaseLayer.DataHasChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ToString">BaseLayer.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnPropertyChanged_System_String_">BaseLayer.OnPropertyChanged(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnDataChanged_Mapsui_Fetcher_DataChangedEventArgs_">BaseLayer.OnDataChanged(DataChangedEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose">BaseLayer.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_UpdateAnimations">BaseLayer.UpdateAnimations()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.Tiling.html">Tiling</a>.<a class="xref" href="Mapsui.Tiling.Layers.html">Layers</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.Tiling.dll</h6>
+  <h5 id="Mapsui_Tiling_Layers_TileLayer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TileLayer : BaseLayer, ILayer, IAnimatable, INotifyPropertyChanged, IAsyncDataFetcher, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_Mapsui_Tiling_Fetcher_IDataFetchStrategy_Mapsui_Tiling_Rendering_IRenderFetchStrategy_System_Int32_System_Int32_System_Func_BruTile_TileInfo_System_Threading_Tasks_Task_Mapsui_IFeature___.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer.%23ctor(BruTile.ITileSource%2CSystem.Int32%2CSystem.Int32%2CMapsui.Tiling.Fetcher.IDataFetchStrategy%2CMapsui.Tiling.Rendering.IRenderFetchStrategy%2CSystem.Int32%2CSystem.Int32%2CSystem.Func%7BBruTile.TileInfo%2CSystem.Threading.Tasks.Task%7BMapsui.IFeature%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L48">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Layers_TileLayer__ctor_" data-uid="Mapsui.Tiling.Layers.TileLayer.#ctor*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_Mapsui_Tiling_Fetcher_IDataFetchStrategy_Mapsui_Tiling_Rendering_IRenderFetchStrategy_System_Int32_System_Int32_System_Func_BruTile_TileInfo_System_Threading_Tasks_Task_Mapsui_IFeature___" data-uid="Mapsui.Tiling.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,Mapsui.Tiling.Fetcher.IDataFetchStrategy,Mapsui.Tiling.Rendering.IRenderFetchStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,System.Threading.Tasks.Task{Mapsui.IFeature}})">TileLayer(ITileSource, int, int, IDataFetchStrategy?, IRenderFetchStrategy?, int, int, Func&lt;TileInfo, Task&lt;IFeature?&gt;&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Create tile layer for given tile source</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300, IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1, Func&lt;TileInfo, Task&lt;IFeature?&gt;&gt;? fetchTileAsFeature = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ITileSource</span></td>
+        <td><span class="parametername">tileSource</span></td>
+        <td><p>Tile source to use for this layer</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">minTiles</span></td>
+        <td><p>Minimum number of tiles to cache</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">maxTiles</span></td>
+        <td><p>Maximum number of tiles to cache</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Tiling.Fetcher.IDataFetchStrategy.html">IDataFetchStrategy</a></td>
+        <td><span class="parametername">dataFetchStrategy</span></td>
+        <td><p>Strategy to get list of tiles for given extent</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Tiling.Rendering.IRenderFetchStrategy.html">IRenderFetchStrategy</a></td>
+        <td><span class="parametername">renderFetchStrategy</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">minExtraTiles</span></td>
+        <td><p>Number of minimum extra tiles for memory cache</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">maxExtraTiles</span></td>
+        <td><p>Number of maximum extra tiles for memory cache</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<span class="xref">TileInfo</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
+        <td><span class="parametername">fetchTileAsFeature</span></td>
+        <td><p>Fetch tile as feature</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer_Extent.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer.Extent%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L80">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Layers_TileLayer_Extent_" data-uid="Mapsui.Tiling.Layers.TileLayer.Extent*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TileLayer_Extent" data-uid="Mapsui.Tiling.Layers.TileLayer.Extent">Extent</h4>
+  <div class="markdown level1 summary"><p>Returns the envelope of all available data in the layer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override MRect? Extent { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Extent">BaseLayer.Extent</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer_Resolutions.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer.Resolutions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L77">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Layers_TileLayer_Resolutions_" data-uid="Mapsui.Tiling.Layers.TileLayer.Resolutions*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TileLayer_Resolutions" data-uid="Mapsui.Tiling.Layers.TileLayer.Resolutions">Resolutions</h4>
+  <div class="markdown level1 summary"><p>List of native resolutions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IReadOnlyList&lt;double&gt; Resolutions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Resolutions">BaseLayer.Resolutions</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer_TileSource.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer.TileSource%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L69">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Layers_TileLayer_TileSource_" data-uid="Mapsui.Tiling.Layers.TileLayer.TileSource*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TileLayer_TileSource" data-uid="Mapsui.Tiling.Layers.TileLayer.TileSource">TileSource</h4>
+  <div class="markdown level1 summary"><p>TileSource</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITileSource TileSource { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ITileSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer_AbortFetch.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer.AbortFetch%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L91">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Layers_TileLayer_AbortFetch_" data-uid="Mapsui.Tiling.Layers.TileLayer.AbortFetch*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TileLayer_AbortFetch" data-uid="Mapsui.Tiling.Layers.TileLayer.AbortFetch">AbortFetch()</h4>
+  <div class="markdown level1 summary"><p>Aborts the tile fetches that are in progress. If this method is not called
+the threads will terminate naturally. It will just take a little longer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AbortFetch()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer_ClearCache.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer.ClearCache%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L97">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Layers_TileLayer_ClearCache_" data-uid="Mapsui.Tiling.Layers.TileLayer.ClearCache*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TileLayer_ClearCache" data-uid="Mapsui.Tiling.Layers.TileLayer.ClearCache">ClearCache()</h4>
+  <div class="markdown level1 summary"><p>Clear cache of layer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearCache()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer.Dispose(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L115">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Layers_TileLayer_Dispose_" data-uid="Mapsui.Tiling.Layers.TileLayer.Dispose*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TileLayer_Dispose_System_Boolean_" data-uid="Mapsui.Tiling.Layers.TileLayer.Dispose(System.Boolean)">Dispose(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose_System_Boolean_">BaseLayer.Dispose(bool)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer_GetFeatures_Mapsui_MRect_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer.GetFeatures(Mapsui.MRect%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L83">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Layers_TileLayer_GetFeatures_" data-uid="Mapsui.Tiling.Layers.TileLayer.GetFeatures*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TileLayer_GetFeatures_Mapsui_MRect_System_Double_" data-uid="Mapsui.Tiling.Layers.TileLayer.GetFeatures(Mapsui.MRect,System.Double)">GetFeatures(MRect, double)</h4>
+  <div class="markdown level1 summary"><p>Get all features in a given MRect for a given resolution</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IEnumerable&lt;IFeature&gt; GetFeatures(MRect extent, double resolution)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
+        <td><span class="parametername">extent</span></td>
+        <td><p>Bounding box</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">resolution</span></td>
+        <td><p>Resolution of viewport</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeatures_Mapsui_MRect_System_Double_">BaseLayer.GetFeatures(MRect, double)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer_RefreshData_Mapsui_Layers_FetchInfo_.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer.RefreshData(Mapsui.Layers.FetchInfo)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L103">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Layers_TileLayer_RefreshData_" data-uid="Mapsui.Tiling.Layers.TileLayer.RefreshData*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TileLayer_RefreshData_Mapsui_Layers_FetchInfo_" data-uid="Mapsui.Tiling.Layers.TileLayer.RefreshData(Mapsui.Layers.FetchInfo)">RefreshData(FetchInfo)</h4>
+  <div class="markdown level1 summary"><p>Indicates that there has been a change in the view of the map</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshData(FetchInfo fetchInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Layers.FetchInfo.html">FetchInfo</a></td>
+        <td><span class="parametername">fetchInfo</span></td>
+        <td><p>FetchInfo</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.LayerExtensions.html#Mapsui_Extensions_LayerExtensions_WaitForLoadingAsync_Mapsui_Layers_ILayer_">LayerExtensions.WaitForLoadingAsync(ILayer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Layers_TileLayer.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TileLayer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Layers/TileLayer.cs/#L26" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,5511 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  id: Color
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.Color.#ctor
+  - Mapsui.Styles.Color.#ctor(Mapsui.Styles.Color)
+  - Mapsui.Styles.Color.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)
+  - Mapsui.Styles.Color.A
+  - Mapsui.Styles.Color.AliceBlue
+  - Mapsui.Styles.Color.AntiqueWhite
+  - Mapsui.Styles.Color.Aqua
+  - Mapsui.Styles.Color.Aquamarine
+  - Mapsui.Styles.Color.Azure
+  - Mapsui.Styles.Color.B
+  - Mapsui.Styles.Color.Beige
+  - Mapsui.Styles.Color.Bisque
+  - Mapsui.Styles.Color.Black
+  - Mapsui.Styles.Color.BlanchedAlmond
+  - Mapsui.Styles.Color.Blue
+  - Mapsui.Styles.Color.BlueViolet
+  - Mapsui.Styles.Color.Brown
+  - Mapsui.Styles.Color.BurlyWood
+  - Mapsui.Styles.Color.CadetBlue
+  - Mapsui.Styles.Color.Chartreuse
+  - Mapsui.Styles.Color.Chocolate
+  - Mapsui.Styles.Color.Coral
+  - Mapsui.Styles.Color.CornflowerBlue
+  - Mapsui.Styles.Color.Cornsilk
+  - Mapsui.Styles.Color.Crimson
+  - Mapsui.Styles.Color.Cyan
+  - Mapsui.Styles.Color.DarkBlue
+  - Mapsui.Styles.Color.DarkCyan
+  - Mapsui.Styles.Color.DarkGoldenRod
+  - Mapsui.Styles.Color.DarkGray
+  - Mapsui.Styles.Color.DarkGreen
+  - Mapsui.Styles.Color.DarkGrey
+  - Mapsui.Styles.Color.DarkKhaki
+  - Mapsui.Styles.Color.DarkMagenta
+  - Mapsui.Styles.Color.DarkOliveGreen
+  - Mapsui.Styles.Color.DarkOrange
+  - Mapsui.Styles.Color.DarkOrchid
+  - Mapsui.Styles.Color.DarkRed
+  - Mapsui.Styles.Color.DarkSalmon
+  - Mapsui.Styles.Color.DarkSeaGreen
+  - Mapsui.Styles.Color.DarkSlateBlue
+  - Mapsui.Styles.Color.DarkSlateGray
+  - Mapsui.Styles.Color.DarkSlateGrey
+  - Mapsui.Styles.Color.DarkTurquoise
+  - Mapsui.Styles.Color.DarkViolet
+  - Mapsui.Styles.Color.DeepPink
+  - Mapsui.Styles.Color.DeepSkyBlue
+  - Mapsui.Styles.Color.DimGray
+  - Mapsui.Styles.Color.DimGrey
+  - Mapsui.Styles.Color.DodgerBlue
+  - Mapsui.Styles.Color.Equals(Mapsui.Styles.Color)
+  - Mapsui.Styles.Color.Equals(System.Object)
+  - Mapsui.Styles.Color.FireBrick
+  - Mapsui.Styles.Color.FloralWhite
+  - Mapsui.Styles.Color.ForestGreen
+  - Mapsui.Styles.Color.FromArgb(System.Int32,System.Int32,System.Int32,System.Int32)
+  - Mapsui.Styles.Color.FromHsl(System.Single,System.Single,System.Single,System.Int32)
+  - Mapsui.Styles.Color.FromString(System.String)
+  - Mapsui.Styles.Color.Fuchsia
+  - Mapsui.Styles.Color.G
+  - Mapsui.Styles.Color.Gainsboro
+  - Mapsui.Styles.Color.GetHashCode
+  - Mapsui.Styles.Color.GhostWhite
+  - Mapsui.Styles.Color.Gold
+  - Mapsui.Styles.Color.GoldenRod
+  - Mapsui.Styles.Color.Gray
+  - Mapsui.Styles.Color.Green
+  - Mapsui.Styles.Color.GreenYellow
+  - Mapsui.Styles.Color.Grey
+  - Mapsui.Styles.Color.HoneyDew
+  - Mapsui.Styles.Color.HotPink
+  - Mapsui.Styles.Color.IndianRed
+  - Mapsui.Styles.Color.Indigo
+  - Mapsui.Styles.Color.Ivory
+  - Mapsui.Styles.Color.Khaki
+  - Mapsui.Styles.Color.KnownColors
+  - Mapsui.Styles.Color.Lavender
+  - Mapsui.Styles.Color.LavenderBlush
+  - Mapsui.Styles.Color.LawnGreen
+  - Mapsui.Styles.Color.LemonChiffon
+  - Mapsui.Styles.Color.LightBlue
+  - Mapsui.Styles.Color.LightCoral
+  - Mapsui.Styles.Color.LightCyan
+  - Mapsui.Styles.Color.LightGoldenRodYellow
+  - Mapsui.Styles.Color.LightGray
+  - Mapsui.Styles.Color.LightGreen
+  - Mapsui.Styles.Color.LightGrey
+  - Mapsui.Styles.Color.LightPink
+  - Mapsui.Styles.Color.LightSalmon
+  - Mapsui.Styles.Color.LightSeaGreen
+  - Mapsui.Styles.Color.LightSkyBlue
+  - Mapsui.Styles.Color.LightSlateGray
+  - Mapsui.Styles.Color.LightSlateGrey
+  - Mapsui.Styles.Color.LightSteelBlue
+  - Mapsui.Styles.Color.LightYellow
+  - Mapsui.Styles.Color.Lime
+  - Mapsui.Styles.Color.LimeGreen
+  - Mapsui.Styles.Color.Linen
+  - Mapsui.Styles.Color.Magenta
+  - Mapsui.Styles.Color.Maroon
+  - Mapsui.Styles.Color.MediumAquaMarine
+  - Mapsui.Styles.Color.MediumBlue
+  - Mapsui.Styles.Color.MediumOrchid
+  - Mapsui.Styles.Color.MediumPurple
+  - Mapsui.Styles.Color.MediumSeaGreen
+  - Mapsui.Styles.Color.MediumSlateBlue
+  - Mapsui.Styles.Color.MediumSpringGreen
+  - Mapsui.Styles.Color.MediumTurquoise
+  - Mapsui.Styles.Color.MediumVioletRed
+  - Mapsui.Styles.Color.MidnightBlue
+  - Mapsui.Styles.Color.MintCream
+  - Mapsui.Styles.Color.MistyRose
+  - Mapsui.Styles.Color.Moccasin
+  - Mapsui.Styles.Color.NavajoWhite
+  - Mapsui.Styles.Color.Navy
+  - Mapsui.Styles.Color.OldLace
+  - Mapsui.Styles.Color.Olive
+  - Mapsui.Styles.Color.OliveDrab
+  - Mapsui.Styles.Color.Opacity(Mapsui.Styles.Color,System.Nullable{System.Single})
+  - Mapsui.Styles.Color.Orange
+  - Mapsui.Styles.Color.OrangeRed
+  - Mapsui.Styles.Color.Orchid
+  - Mapsui.Styles.Color.PaleGoldenRod
+  - Mapsui.Styles.Color.PaleGreen
+  - Mapsui.Styles.Color.PaleTurquoise
+  - Mapsui.Styles.Color.PaleVioletRed
+  - Mapsui.Styles.Color.PapayaWhip
+  - Mapsui.Styles.Color.PeachPuff
+  - Mapsui.Styles.Color.Peru
+  - Mapsui.Styles.Color.Pink
+  - Mapsui.Styles.Color.Plum
+  - Mapsui.Styles.Color.PowderBlue
+  - Mapsui.Styles.Color.Purple
+  - Mapsui.Styles.Color.R
+  - Mapsui.Styles.Color.RebeccaPurple
+  - Mapsui.Styles.Color.Red
+  - Mapsui.Styles.Color.RosyBrown
+  - Mapsui.Styles.Color.RoyalBlue
+  - Mapsui.Styles.Color.SaddleBrown
+  - Mapsui.Styles.Color.Salmon
+  - Mapsui.Styles.Color.SandyBrown
+  - Mapsui.Styles.Color.SeaGreen
+  - Mapsui.Styles.Color.SeaShell
+  - Mapsui.Styles.Color.Sienna
+  - Mapsui.Styles.Color.Silver
+  - Mapsui.Styles.Color.SkyBlue
+  - Mapsui.Styles.Color.SlateBlue
+  - Mapsui.Styles.Color.SlateGray
+  - Mapsui.Styles.Color.SlateGrey
+  - Mapsui.Styles.Color.Snow
+  - Mapsui.Styles.Color.SpringGreen
+  - Mapsui.Styles.Color.SteelBlue
+  - Mapsui.Styles.Color.Tan
+  - Mapsui.Styles.Color.Teal
+  - Mapsui.Styles.Color.Thistle
+  - Mapsui.Styles.Color.Tomato
+  - Mapsui.Styles.Color.Transparent
+  - Mapsui.Styles.Color.Turquoise
+  - Mapsui.Styles.Color.Violet
+  - Mapsui.Styles.Color.Wheat
+  - Mapsui.Styles.Color.White
+  - Mapsui.Styles.Color.WhiteSmoke
+  - Mapsui.Styles.Color.Yellow
+  - Mapsui.Styles.Color.YellowGreen
+  - Mapsui.Styles.Color.op_Equality(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  - Mapsui.Styles.Color.op_Inequality(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  langs:
+  - csharp
+  - vb
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Color
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public class Color
+    content.vb: Public Class Color
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.Color.#ctor
+  commentId: M:Mapsui.Styles.Color.#ctor
+  id: '#ctor'
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Color()
+  nameWithType: Color.Color()
+  fullName: Mapsui.Styles.Color.Color()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public Color()
+    content.vb: Public Sub New()
+  overload: Mapsui.Styles.Color.#ctor*
+  nameWithType.vb: Color.New()
+  fullName.vb: Mapsui.Styles.Color.New()
+  name.vb: New()
+- uid: Mapsui.Styles.Color.#ctor(Mapsui.Styles.Color)
+  commentId: M:Mapsui.Styles.Color.#ctor(Mapsui.Styles.Color)
+  id: '#ctor(Mapsui.Styles.Color)'
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Color(Color)
+  nameWithType: Color.Color(Color)
+  fullName: Mapsui.Styles.Color.Color(Mapsui.Styles.Color)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 15
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public Color(Color color)
+    parameters:
+    - id: color
+      type: Mapsui.Styles.Color
+    content.vb: Public Sub New(color As Color)
+  overload: Mapsui.Styles.Color.#ctor*
+  nameWithType.vb: Color.New(Color)
+  fullName.vb: Mapsui.Styles.Color.New(Mapsui.Styles.Color)
+  name.vb: New(Color)
+- uid: Mapsui.Styles.Color.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)
+  commentId: M:Mapsui.Styles.Color.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32,System.Int32,System.Int32)'
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Color(int, int, int, int)
+  nameWithType: Color.Color(int, int, int, int)
+  fullName: Mapsui.Styles.Color.Color(int, int, int, int)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 23
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public Color(int red, int green, int blue, int alpha = 255)
+    parameters:
+    - id: red
+      type: System.Int32
+    - id: green
+      type: System.Int32
+    - id: blue
+      type: System.Int32
+    - id: alpha
+      type: System.Int32
+    content.vb: Public Sub New(red As Integer, green As Integer, blue As Integer, alpha As Integer = 255)
+  overload: Mapsui.Styles.Color.#ctor*
+  nameWithType.vb: Color.New(Integer, Integer, Integer, Integer)
+  fullName.vb: Mapsui.Styles.Color.New(Integer, Integer, Integer, Integer)
+  name.vb: New(Integer, Integer, Integer, Integer)
+- uid: Mapsui.Styles.Color.R
+  commentId: P:Mapsui.Styles.Color.R
+  id: R
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: R
+  nameWithType: Color.R
+  fullName: Mapsui.Styles.Color.R
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: R
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 31
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public int R { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property R As Integer
+  overload: Mapsui.Styles.Color.R*
+- uid: Mapsui.Styles.Color.G
+  commentId: P:Mapsui.Styles.Color.G
+  id: G
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: G
+  nameWithType: Color.G
+  fullName: Mapsui.Styles.Color.G
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: G
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 32
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public int G { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property G As Integer
+  overload: Mapsui.Styles.Color.G*
+- uid: Mapsui.Styles.Color.B
+  commentId: P:Mapsui.Styles.Color.B
+  id: B
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: B
+  nameWithType: Color.B
+  fullName: Mapsui.Styles.Color.B
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: B
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 33
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public int B { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property B As Integer
+  overload: Mapsui.Styles.Color.B*
+- uid: Mapsui.Styles.Color.A
+  commentId: P:Mapsui.Styles.Color.A
+  id: A
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: A
+  nameWithType: Color.A
+  fullName: Mapsui.Styles.Color.A
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: A
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 34
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public int A { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property A As Integer
+  overload: Mapsui.Styles.Color.A*
+- uid: Mapsui.Styles.Color.KnownColors
+  commentId: F:Mapsui.Styles.Color.KnownColors
+  id: KnownColors
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: KnownColors
+  nameWithType: Color.KnownColors
+  fullName: Mapsui.Styles.Color.KnownColors
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: KnownColors
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 39
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Known HTML color names and hex code for RGB color
+  example: []
+  syntax:
+    content: public static readonly Dictionary<string, string> KnownColors
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+    content.vb: Public Shared ReadOnly KnownColors As Dictionary(Of String, String)
+- uid: Mapsui.Styles.Color.Transparent
+  commentId: P:Mapsui.Styles.Color.Transparent
+  id: Transparent
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Transparent
+  nameWithType: Color.Transparent
+  fullName: Mapsui.Styles.Color.Transparent
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Transparent
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 191
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static Color Transparent { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Property Transparent As Color
+  overload: Mapsui.Styles.Color.Transparent*
+- uid: Mapsui.Styles.Color.AliceBlue
+  commentId: F:Mapsui.Styles.Color.AliceBlue
+  id: AliceBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: AliceBlue
+  nameWithType: Color.AliceBlue
+  fullName: Mapsui.Styles.Color.AliceBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AliceBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 193
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color AliceBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly AliceBlue As Color
+- uid: Mapsui.Styles.Color.AntiqueWhite
+  commentId: F:Mapsui.Styles.Color.AntiqueWhite
+  id: AntiqueWhite
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: AntiqueWhite
+  nameWithType: Color.AntiqueWhite
+  fullName: Mapsui.Styles.Color.AntiqueWhite
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AntiqueWhite
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 194
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color AntiqueWhite
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly AntiqueWhite As Color
+- uid: Mapsui.Styles.Color.Aqua
+  commentId: F:Mapsui.Styles.Color.Aqua
+  id: Aqua
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Aqua
+  nameWithType: Color.Aqua
+  fullName: Mapsui.Styles.Color.Aqua
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Aqua
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 195
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Aqua
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Aqua As Color
+- uid: Mapsui.Styles.Color.Aquamarine
+  commentId: F:Mapsui.Styles.Color.Aquamarine
+  id: Aquamarine
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Aquamarine
+  nameWithType: Color.Aquamarine
+  fullName: Mapsui.Styles.Color.Aquamarine
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Aquamarine
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 196
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Aquamarine
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Aquamarine As Color
+- uid: Mapsui.Styles.Color.Azure
+  commentId: F:Mapsui.Styles.Color.Azure
+  id: Azure
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Azure
+  nameWithType: Color.Azure
+  fullName: Mapsui.Styles.Color.Azure
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Azure
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 197
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Azure
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Azure As Color
+- uid: Mapsui.Styles.Color.Beige
+  commentId: F:Mapsui.Styles.Color.Beige
+  id: Beige
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Beige
+  nameWithType: Color.Beige
+  fullName: Mapsui.Styles.Color.Beige
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Beige
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 198
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Beige
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Beige As Color
+- uid: Mapsui.Styles.Color.Bisque
+  commentId: F:Mapsui.Styles.Color.Bisque
+  id: Bisque
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Bisque
+  nameWithType: Color.Bisque
+  fullName: Mapsui.Styles.Color.Bisque
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Bisque
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 199
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Bisque
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Bisque As Color
+- uid: Mapsui.Styles.Color.Black
+  commentId: F:Mapsui.Styles.Color.Black
+  id: Black
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Black
+  nameWithType: Color.Black
+  fullName: Mapsui.Styles.Color.Black
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Black
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 200
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Black
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Black As Color
+- uid: Mapsui.Styles.Color.BlanchedAlmond
+  commentId: F:Mapsui.Styles.Color.BlanchedAlmond
+  id: BlanchedAlmond
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: BlanchedAlmond
+  nameWithType: Color.BlanchedAlmond
+  fullName: Mapsui.Styles.Color.BlanchedAlmond
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BlanchedAlmond
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 201
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color BlanchedAlmond
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly BlanchedAlmond As Color
+- uid: Mapsui.Styles.Color.Blue
+  commentId: F:Mapsui.Styles.Color.Blue
+  id: Blue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Blue
+  nameWithType: Color.Blue
+  fullName: Mapsui.Styles.Color.Blue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Blue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 202
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Blue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Blue As Color
+- uid: Mapsui.Styles.Color.BlueViolet
+  commentId: F:Mapsui.Styles.Color.BlueViolet
+  id: BlueViolet
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: BlueViolet
+  nameWithType: Color.BlueViolet
+  fullName: Mapsui.Styles.Color.BlueViolet
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BlueViolet
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 203
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color BlueViolet
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly BlueViolet As Color
+- uid: Mapsui.Styles.Color.Brown
+  commentId: F:Mapsui.Styles.Color.Brown
+  id: Brown
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Brown
+  nameWithType: Color.Brown
+  fullName: Mapsui.Styles.Color.Brown
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Brown
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 204
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Brown
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Brown As Color
+- uid: Mapsui.Styles.Color.BurlyWood
+  commentId: F:Mapsui.Styles.Color.BurlyWood
+  id: BurlyWood
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: BurlyWood
+  nameWithType: Color.BurlyWood
+  fullName: Mapsui.Styles.Color.BurlyWood
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BurlyWood
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 205
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color BurlyWood
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly BurlyWood As Color
+- uid: Mapsui.Styles.Color.CadetBlue
+  commentId: F:Mapsui.Styles.Color.CadetBlue
+  id: CadetBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: CadetBlue
+  nameWithType: Color.CadetBlue
+  fullName: Mapsui.Styles.Color.CadetBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CadetBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 206
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color CadetBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly CadetBlue As Color
+- uid: Mapsui.Styles.Color.Chartreuse
+  commentId: F:Mapsui.Styles.Color.Chartreuse
+  id: Chartreuse
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Chartreuse
+  nameWithType: Color.Chartreuse
+  fullName: Mapsui.Styles.Color.Chartreuse
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Chartreuse
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 207
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Chartreuse
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Chartreuse As Color
+- uid: Mapsui.Styles.Color.Chocolate
+  commentId: F:Mapsui.Styles.Color.Chocolate
+  id: Chocolate
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Chocolate
+  nameWithType: Color.Chocolate
+  fullName: Mapsui.Styles.Color.Chocolate
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Chocolate
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 208
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Chocolate
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Chocolate As Color
+- uid: Mapsui.Styles.Color.Coral
+  commentId: F:Mapsui.Styles.Color.Coral
+  id: Coral
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Coral
+  nameWithType: Color.Coral
+  fullName: Mapsui.Styles.Color.Coral
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Coral
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 209
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Coral
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Coral As Color
+- uid: Mapsui.Styles.Color.CornflowerBlue
+  commentId: F:Mapsui.Styles.Color.CornflowerBlue
+  id: CornflowerBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: CornflowerBlue
+  nameWithType: Color.CornflowerBlue
+  fullName: Mapsui.Styles.Color.CornflowerBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CornflowerBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 210
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color CornflowerBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly CornflowerBlue As Color
+- uid: Mapsui.Styles.Color.Cornsilk
+  commentId: F:Mapsui.Styles.Color.Cornsilk
+  id: Cornsilk
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Cornsilk
+  nameWithType: Color.Cornsilk
+  fullName: Mapsui.Styles.Color.Cornsilk
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Cornsilk
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 211
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Cornsilk
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Cornsilk As Color
+- uid: Mapsui.Styles.Color.Crimson
+  commentId: F:Mapsui.Styles.Color.Crimson
+  id: Crimson
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Crimson
+  nameWithType: Color.Crimson
+  fullName: Mapsui.Styles.Color.Crimson
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Crimson
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 212
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Crimson
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Crimson As Color
+- uid: Mapsui.Styles.Color.Cyan
+  commentId: F:Mapsui.Styles.Color.Cyan
+  id: Cyan
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Cyan
+  nameWithType: Color.Cyan
+  fullName: Mapsui.Styles.Color.Cyan
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Cyan
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 213
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Cyan
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Cyan As Color
+- uid: Mapsui.Styles.Color.DarkBlue
+  commentId: F:Mapsui.Styles.Color.DarkBlue
+  id: DarkBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkBlue
+  nameWithType: Color.DarkBlue
+  fullName: Mapsui.Styles.Color.DarkBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 214
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkBlue As Color
+- uid: Mapsui.Styles.Color.DarkCyan
+  commentId: F:Mapsui.Styles.Color.DarkCyan
+  id: DarkCyan
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkCyan
+  nameWithType: Color.DarkCyan
+  fullName: Mapsui.Styles.Color.DarkCyan
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkCyan
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 215
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkCyan
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkCyan As Color
+- uid: Mapsui.Styles.Color.DarkGoldenRod
+  commentId: F:Mapsui.Styles.Color.DarkGoldenRod
+  id: DarkGoldenRod
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkGoldenRod
+  nameWithType: Color.DarkGoldenRod
+  fullName: Mapsui.Styles.Color.DarkGoldenRod
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkGoldenRod
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 216
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkGoldenRod
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkGoldenRod As Color
+- uid: Mapsui.Styles.Color.DarkGray
+  commentId: F:Mapsui.Styles.Color.DarkGray
+  id: DarkGray
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkGray
+  nameWithType: Color.DarkGray
+  fullName: Mapsui.Styles.Color.DarkGray
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkGray
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 217
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkGray
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkGray As Color
+- uid: Mapsui.Styles.Color.DarkGrey
+  commentId: F:Mapsui.Styles.Color.DarkGrey
+  id: DarkGrey
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkGrey
+  nameWithType: Color.DarkGrey
+  fullName: Mapsui.Styles.Color.DarkGrey
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkGrey
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 218
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkGrey
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkGrey As Color
+- uid: Mapsui.Styles.Color.DarkGreen
+  commentId: F:Mapsui.Styles.Color.DarkGreen
+  id: DarkGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkGreen
+  nameWithType: Color.DarkGreen
+  fullName: Mapsui.Styles.Color.DarkGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 219
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkGreen As Color
+- uid: Mapsui.Styles.Color.DarkKhaki
+  commentId: F:Mapsui.Styles.Color.DarkKhaki
+  id: DarkKhaki
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkKhaki
+  nameWithType: Color.DarkKhaki
+  fullName: Mapsui.Styles.Color.DarkKhaki
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkKhaki
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 220
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkKhaki
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkKhaki As Color
+- uid: Mapsui.Styles.Color.DarkMagenta
+  commentId: F:Mapsui.Styles.Color.DarkMagenta
+  id: DarkMagenta
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkMagenta
+  nameWithType: Color.DarkMagenta
+  fullName: Mapsui.Styles.Color.DarkMagenta
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkMagenta
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 221
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkMagenta
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkMagenta As Color
+- uid: Mapsui.Styles.Color.DarkOliveGreen
+  commentId: F:Mapsui.Styles.Color.DarkOliveGreen
+  id: DarkOliveGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkOliveGreen
+  nameWithType: Color.DarkOliveGreen
+  fullName: Mapsui.Styles.Color.DarkOliveGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkOliveGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 222
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkOliveGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkOliveGreen As Color
+- uid: Mapsui.Styles.Color.DarkOrange
+  commentId: F:Mapsui.Styles.Color.DarkOrange
+  id: DarkOrange
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkOrange
+  nameWithType: Color.DarkOrange
+  fullName: Mapsui.Styles.Color.DarkOrange
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkOrange
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 223
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkOrange
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkOrange As Color
+- uid: Mapsui.Styles.Color.DarkOrchid
+  commentId: F:Mapsui.Styles.Color.DarkOrchid
+  id: DarkOrchid
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkOrchid
+  nameWithType: Color.DarkOrchid
+  fullName: Mapsui.Styles.Color.DarkOrchid
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkOrchid
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 224
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkOrchid
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkOrchid As Color
+- uid: Mapsui.Styles.Color.DarkRed
+  commentId: F:Mapsui.Styles.Color.DarkRed
+  id: DarkRed
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkRed
+  nameWithType: Color.DarkRed
+  fullName: Mapsui.Styles.Color.DarkRed
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkRed
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 225
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkRed
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkRed As Color
+- uid: Mapsui.Styles.Color.DarkSalmon
+  commentId: F:Mapsui.Styles.Color.DarkSalmon
+  id: DarkSalmon
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkSalmon
+  nameWithType: Color.DarkSalmon
+  fullName: Mapsui.Styles.Color.DarkSalmon
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkSalmon
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 226
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkSalmon
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkSalmon As Color
+- uid: Mapsui.Styles.Color.DarkSeaGreen
+  commentId: F:Mapsui.Styles.Color.DarkSeaGreen
+  id: DarkSeaGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkSeaGreen
+  nameWithType: Color.DarkSeaGreen
+  fullName: Mapsui.Styles.Color.DarkSeaGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkSeaGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 227
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkSeaGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkSeaGreen As Color
+- uid: Mapsui.Styles.Color.DarkSlateBlue
+  commentId: F:Mapsui.Styles.Color.DarkSlateBlue
+  id: DarkSlateBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkSlateBlue
+  nameWithType: Color.DarkSlateBlue
+  fullName: Mapsui.Styles.Color.DarkSlateBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkSlateBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 228
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkSlateBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkSlateBlue As Color
+- uid: Mapsui.Styles.Color.DarkSlateGray
+  commentId: F:Mapsui.Styles.Color.DarkSlateGray
+  id: DarkSlateGray
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkSlateGray
+  nameWithType: Color.DarkSlateGray
+  fullName: Mapsui.Styles.Color.DarkSlateGray
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkSlateGray
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 229
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkSlateGray
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkSlateGray As Color
+- uid: Mapsui.Styles.Color.DarkSlateGrey
+  commentId: F:Mapsui.Styles.Color.DarkSlateGrey
+  id: DarkSlateGrey
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkSlateGrey
+  nameWithType: Color.DarkSlateGrey
+  fullName: Mapsui.Styles.Color.DarkSlateGrey
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkSlateGrey
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 230
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkSlateGrey
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkSlateGrey As Color
+- uid: Mapsui.Styles.Color.DarkTurquoise
+  commentId: F:Mapsui.Styles.Color.DarkTurquoise
+  id: DarkTurquoise
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkTurquoise
+  nameWithType: Color.DarkTurquoise
+  fullName: Mapsui.Styles.Color.DarkTurquoise
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkTurquoise
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 231
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkTurquoise
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkTurquoise As Color
+- uid: Mapsui.Styles.Color.DarkViolet
+  commentId: F:Mapsui.Styles.Color.DarkViolet
+  id: DarkViolet
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DarkViolet
+  nameWithType: Color.DarkViolet
+  fullName: Mapsui.Styles.Color.DarkViolet
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DarkViolet
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 232
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DarkViolet
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DarkViolet As Color
+- uid: Mapsui.Styles.Color.DeepPink
+  commentId: F:Mapsui.Styles.Color.DeepPink
+  id: DeepPink
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DeepPink
+  nameWithType: Color.DeepPink
+  fullName: Mapsui.Styles.Color.DeepPink
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DeepPink
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 233
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DeepPink
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DeepPink As Color
+- uid: Mapsui.Styles.Color.DeepSkyBlue
+  commentId: F:Mapsui.Styles.Color.DeepSkyBlue
+  id: DeepSkyBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DeepSkyBlue
+  nameWithType: Color.DeepSkyBlue
+  fullName: Mapsui.Styles.Color.DeepSkyBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DeepSkyBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 234
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DeepSkyBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DeepSkyBlue As Color
+- uid: Mapsui.Styles.Color.DimGray
+  commentId: F:Mapsui.Styles.Color.DimGray
+  id: DimGray
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DimGray
+  nameWithType: Color.DimGray
+  fullName: Mapsui.Styles.Color.DimGray
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DimGray
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 235
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DimGray
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DimGray As Color
+- uid: Mapsui.Styles.Color.DimGrey
+  commentId: F:Mapsui.Styles.Color.DimGrey
+  id: DimGrey
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DimGrey
+  nameWithType: Color.DimGrey
+  fullName: Mapsui.Styles.Color.DimGrey
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DimGrey
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 236
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DimGrey
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DimGrey As Color
+- uid: Mapsui.Styles.Color.DodgerBlue
+  commentId: F:Mapsui.Styles.Color.DodgerBlue
+  id: DodgerBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: DodgerBlue
+  nameWithType: Color.DodgerBlue
+  fullName: Mapsui.Styles.Color.DodgerBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DodgerBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 237
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color DodgerBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly DodgerBlue As Color
+- uid: Mapsui.Styles.Color.FireBrick
+  commentId: F:Mapsui.Styles.Color.FireBrick
+  id: FireBrick
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: FireBrick
+  nameWithType: Color.FireBrick
+  fullName: Mapsui.Styles.Color.FireBrick
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FireBrick
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 238
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color FireBrick
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly FireBrick As Color
+- uid: Mapsui.Styles.Color.FloralWhite
+  commentId: F:Mapsui.Styles.Color.FloralWhite
+  id: FloralWhite
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: FloralWhite
+  nameWithType: Color.FloralWhite
+  fullName: Mapsui.Styles.Color.FloralWhite
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FloralWhite
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 239
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color FloralWhite
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly FloralWhite As Color
+- uid: Mapsui.Styles.Color.ForestGreen
+  commentId: F:Mapsui.Styles.Color.ForestGreen
+  id: ForestGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: ForestGreen
+  nameWithType: Color.ForestGreen
+  fullName: Mapsui.Styles.Color.ForestGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ForestGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 240
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color ForestGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly ForestGreen As Color
+- uid: Mapsui.Styles.Color.Fuchsia
+  commentId: F:Mapsui.Styles.Color.Fuchsia
+  id: Fuchsia
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Fuchsia
+  nameWithType: Color.Fuchsia
+  fullName: Mapsui.Styles.Color.Fuchsia
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Fuchsia
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 241
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Fuchsia
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Fuchsia As Color
+- uid: Mapsui.Styles.Color.Gainsboro
+  commentId: F:Mapsui.Styles.Color.Gainsboro
+  id: Gainsboro
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Gainsboro
+  nameWithType: Color.Gainsboro
+  fullName: Mapsui.Styles.Color.Gainsboro
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Gainsboro
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 242
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Gainsboro
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Gainsboro As Color
+- uid: Mapsui.Styles.Color.GhostWhite
+  commentId: F:Mapsui.Styles.Color.GhostWhite
+  id: GhostWhite
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: GhostWhite
+  nameWithType: Color.GhostWhite
+  fullName: Mapsui.Styles.Color.GhostWhite
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GhostWhite
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 243
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color GhostWhite
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly GhostWhite As Color
+- uid: Mapsui.Styles.Color.Gold
+  commentId: F:Mapsui.Styles.Color.Gold
+  id: Gold
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Gold
+  nameWithType: Color.Gold
+  fullName: Mapsui.Styles.Color.Gold
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Gold
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 244
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Gold
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Gold As Color
+- uid: Mapsui.Styles.Color.GoldenRod
+  commentId: F:Mapsui.Styles.Color.GoldenRod
+  id: GoldenRod
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: GoldenRod
+  nameWithType: Color.GoldenRod
+  fullName: Mapsui.Styles.Color.GoldenRod
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GoldenRod
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 245
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color GoldenRod
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly GoldenRod As Color
+- uid: Mapsui.Styles.Color.Gray
+  commentId: F:Mapsui.Styles.Color.Gray
+  id: Gray
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Gray
+  nameWithType: Color.Gray
+  fullName: Mapsui.Styles.Color.Gray
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Gray
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 246
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Gray
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Gray As Color
+- uid: Mapsui.Styles.Color.Grey
+  commentId: F:Mapsui.Styles.Color.Grey
+  id: Grey
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Grey
+  nameWithType: Color.Grey
+  fullName: Mapsui.Styles.Color.Grey
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Grey
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 247
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Grey
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Grey As Color
+- uid: Mapsui.Styles.Color.Green
+  commentId: F:Mapsui.Styles.Color.Green
+  id: Green
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Green
+  nameWithType: Color.Green
+  fullName: Mapsui.Styles.Color.Green
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Green
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 248
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Green
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Green As Color
+- uid: Mapsui.Styles.Color.GreenYellow
+  commentId: F:Mapsui.Styles.Color.GreenYellow
+  id: GreenYellow
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: GreenYellow
+  nameWithType: Color.GreenYellow
+  fullName: Mapsui.Styles.Color.GreenYellow
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GreenYellow
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 249
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color GreenYellow
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly GreenYellow As Color
+- uid: Mapsui.Styles.Color.HoneyDew
+  commentId: F:Mapsui.Styles.Color.HoneyDew
+  id: HoneyDew
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: HoneyDew
+  nameWithType: Color.HoneyDew
+  fullName: Mapsui.Styles.Color.HoneyDew
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: HoneyDew
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 250
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color HoneyDew
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly HoneyDew As Color
+- uid: Mapsui.Styles.Color.HotPink
+  commentId: F:Mapsui.Styles.Color.HotPink
+  id: HotPink
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: HotPink
+  nameWithType: Color.HotPink
+  fullName: Mapsui.Styles.Color.HotPink
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: HotPink
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 251
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color HotPink
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly HotPink As Color
+- uid: Mapsui.Styles.Color.IndianRed
+  commentId: F:Mapsui.Styles.Color.IndianRed
+  id: IndianRed
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: IndianRed
+  nameWithType: Color.IndianRed
+  fullName: Mapsui.Styles.Color.IndianRed
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IndianRed
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 252
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color IndianRed
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly IndianRed As Color
+- uid: Mapsui.Styles.Color.Indigo
+  commentId: F:Mapsui.Styles.Color.Indigo
+  id: Indigo
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Indigo
+  nameWithType: Color.Indigo
+  fullName: Mapsui.Styles.Color.Indigo
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Indigo
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 253
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Indigo
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Indigo As Color
+- uid: Mapsui.Styles.Color.Ivory
+  commentId: F:Mapsui.Styles.Color.Ivory
+  id: Ivory
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Ivory
+  nameWithType: Color.Ivory
+  fullName: Mapsui.Styles.Color.Ivory
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Ivory
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 254
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Ivory
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Ivory As Color
+- uid: Mapsui.Styles.Color.Khaki
+  commentId: F:Mapsui.Styles.Color.Khaki
+  id: Khaki
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Khaki
+  nameWithType: Color.Khaki
+  fullName: Mapsui.Styles.Color.Khaki
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Khaki
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 255
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Khaki
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Khaki As Color
+- uid: Mapsui.Styles.Color.Lavender
+  commentId: F:Mapsui.Styles.Color.Lavender
+  id: Lavender
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Lavender
+  nameWithType: Color.Lavender
+  fullName: Mapsui.Styles.Color.Lavender
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Lavender
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 256
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Lavender
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Lavender As Color
+- uid: Mapsui.Styles.Color.LavenderBlush
+  commentId: F:Mapsui.Styles.Color.LavenderBlush
+  id: LavenderBlush
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LavenderBlush
+  nameWithType: Color.LavenderBlush
+  fullName: Mapsui.Styles.Color.LavenderBlush
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LavenderBlush
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 257
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LavenderBlush
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LavenderBlush As Color
+- uid: Mapsui.Styles.Color.LawnGreen
+  commentId: F:Mapsui.Styles.Color.LawnGreen
+  id: LawnGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LawnGreen
+  nameWithType: Color.LawnGreen
+  fullName: Mapsui.Styles.Color.LawnGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LawnGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 258
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LawnGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LawnGreen As Color
+- uid: Mapsui.Styles.Color.LemonChiffon
+  commentId: F:Mapsui.Styles.Color.LemonChiffon
+  id: LemonChiffon
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LemonChiffon
+  nameWithType: Color.LemonChiffon
+  fullName: Mapsui.Styles.Color.LemonChiffon
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LemonChiffon
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 259
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LemonChiffon
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LemonChiffon As Color
+- uid: Mapsui.Styles.Color.LightBlue
+  commentId: F:Mapsui.Styles.Color.LightBlue
+  id: LightBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightBlue
+  nameWithType: Color.LightBlue
+  fullName: Mapsui.Styles.Color.LightBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 260
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightBlue As Color
+- uid: Mapsui.Styles.Color.LightCoral
+  commentId: F:Mapsui.Styles.Color.LightCoral
+  id: LightCoral
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightCoral
+  nameWithType: Color.LightCoral
+  fullName: Mapsui.Styles.Color.LightCoral
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightCoral
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 261
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightCoral
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightCoral As Color
+- uid: Mapsui.Styles.Color.LightCyan
+  commentId: F:Mapsui.Styles.Color.LightCyan
+  id: LightCyan
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightCyan
+  nameWithType: Color.LightCyan
+  fullName: Mapsui.Styles.Color.LightCyan
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightCyan
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 262
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightCyan
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightCyan As Color
+- uid: Mapsui.Styles.Color.LightGoldenRodYellow
+  commentId: F:Mapsui.Styles.Color.LightGoldenRodYellow
+  id: LightGoldenRodYellow
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightGoldenRodYellow
+  nameWithType: Color.LightGoldenRodYellow
+  fullName: Mapsui.Styles.Color.LightGoldenRodYellow
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightGoldenRodYellow
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 263
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightGoldenRodYellow
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightGoldenRodYellow As Color
+- uid: Mapsui.Styles.Color.LightGray
+  commentId: F:Mapsui.Styles.Color.LightGray
+  id: LightGray
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightGray
+  nameWithType: Color.LightGray
+  fullName: Mapsui.Styles.Color.LightGray
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightGray
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 264
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightGray
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightGray As Color
+- uid: Mapsui.Styles.Color.LightGrey
+  commentId: F:Mapsui.Styles.Color.LightGrey
+  id: LightGrey
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightGrey
+  nameWithType: Color.LightGrey
+  fullName: Mapsui.Styles.Color.LightGrey
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightGrey
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 265
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightGrey
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightGrey As Color
+- uid: Mapsui.Styles.Color.LightGreen
+  commentId: F:Mapsui.Styles.Color.LightGreen
+  id: LightGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightGreen
+  nameWithType: Color.LightGreen
+  fullName: Mapsui.Styles.Color.LightGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 266
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightGreen As Color
+- uid: Mapsui.Styles.Color.LightPink
+  commentId: F:Mapsui.Styles.Color.LightPink
+  id: LightPink
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightPink
+  nameWithType: Color.LightPink
+  fullName: Mapsui.Styles.Color.LightPink
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightPink
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 267
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightPink
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightPink As Color
+- uid: Mapsui.Styles.Color.LightSalmon
+  commentId: F:Mapsui.Styles.Color.LightSalmon
+  id: LightSalmon
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightSalmon
+  nameWithType: Color.LightSalmon
+  fullName: Mapsui.Styles.Color.LightSalmon
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightSalmon
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 268
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightSalmon
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightSalmon As Color
+- uid: Mapsui.Styles.Color.LightSeaGreen
+  commentId: F:Mapsui.Styles.Color.LightSeaGreen
+  id: LightSeaGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightSeaGreen
+  nameWithType: Color.LightSeaGreen
+  fullName: Mapsui.Styles.Color.LightSeaGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightSeaGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 269
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightSeaGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightSeaGreen As Color
+- uid: Mapsui.Styles.Color.LightSkyBlue
+  commentId: F:Mapsui.Styles.Color.LightSkyBlue
+  id: LightSkyBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightSkyBlue
+  nameWithType: Color.LightSkyBlue
+  fullName: Mapsui.Styles.Color.LightSkyBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightSkyBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 270
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightSkyBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightSkyBlue As Color
+- uid: Mapsui.Styles.Color.LightSlateGray
+  commentId: F:Mapsui.Styles.Color.LightSlateGray
+  id: LightSlateGray
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightSlateGray
+  nameWithType: Color.LightSlateGray
+  fullName: Mapsui.Styles.Color.LightSlateGray
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightSlateGray
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 271
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightSlateGray
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightSlateGray As Color
+- uid: Mapsui.Styles.Color.LightSlateGrey
+  commentId: F:Mapsui.Styles.Color.LightSlateGrey
+  id: LightSlateGrey
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightSlateGrey
+  nameWithType: Color.LightSlateGrey
+  fullName: Mapsui.Styles.Color.LightSlateGrey
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightSlateGrey
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 272
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightSlateGrey
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightSlateGrey As Color
+- uid: Mapsui.Styles.Color.LightSteelBlue
+  commentId: F:Mapsui.Styles.Color.LightSteelBlue
+  id: LightSteelBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightSteelBlue
+  nameWithType: Color.LightSteelBlue
+  fullName: Mapsui.Styles.Color.LightSteelBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightSteelBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 273
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightSteelBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightSteelBlue As Color
+- uid: Mapsui.Styles.Color.LightYellow
+  commentId: F:Mapsui.Styles.Color.LightYellow
+  id: LightYellow
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LightYellow
+  nameWithType: Color.LightYellow
+  fullName: Mapsui.Styles.Color.LightYellow
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LightYellow
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 274
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LightYellow
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LightYellow As Color
+- uid: Mapsui.Styles.Color.Lime
+  commentId: F:Mapsui.Styles.Color.Lime
+  id: Lime
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Lime
+  nameWithType: Color.Lime
+  fullName: Mapsui.Styles.Color.Lime
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Lime
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 275
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Lime
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Lime As Color
+- uid: Mapsui.Styles.Color.LimeGreen
+  commentId: F:Mapsui.Styles.Color.LimeGreen
+  id: LimeGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: LimeGreen
+  nameWithType: Color.LimeGreen
+  fullName: Mapsui.Styles.Color.LimeGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LimeGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 276
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color LimeGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly LimeGreen As Color
+- uid: Mapsui.Styles.Color.Linen
+  commentId: F:Mapsui.Styles.Color.Linen
+  id: Linen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Linen
+  nameWithType: Color.Linen
+  fullName: Mapsui.Styles.Color.Linen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Linen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 277
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Linen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Linen As Color
+- uid: Mapsui.Styles.Color.Magenta
+  commentId: F:Mapsui.Styles.Color.Magenta
+  id: Magenta
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Magenta
+  nameWithType: Color.Magenta
+  fullName: Mapsui.Styles.Color.Magenta
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Magenta
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 278
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Magenta
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Magenta As Color
+- uid: Mapsui.Styles.Color.Maroon
+  commentId: F:Mapsui.Styles.Color.Maroon
+  id: Maroon
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Maroon
+  nameWithType: Color.Maroon
+  fullName: Mapsui.Styles.Color.Maroon
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Maroon
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 279
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Maroon
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Maroon As Color
+- uid: Mapsui.Styles.Color.MediumAquaMarine
+  commentId: F:Mapsui.Styles.Color.MediumAquaMarine
+  id: MediumAquaMarine
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MediumAquaMarine
+  nameWithType: Color.MediumAquaMarine
+  fullName: Mapsui.Styles.Color.MediumAquaMarine
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MediumAquaMarine
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 280
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MediumAquaMarine
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MediumAquaMarine As Color
+- uid: Mapsui.Styles.Color.MediumBlue
+  commentId: F:Mapsui.Styles.Color.MediumBlue
+  id: MediumBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MediumBlue
+  nameWithType: Color.MediumBlue
+  fullName: Mapsui.Styles.Color.MediumBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MediumBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 281
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MediumBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MediumBlue As Color
+- uid: Mapsui.Styles.Color.MediumOrchid
+  commentId: F:Mapsui.Styles.Color.MediumOrchid
+  id: MediumOrchid
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MediumOrchid
+  nameWithType: Color.MediumOrchid
+  fullName: Mapsui.Styles.Color.MediumOrchid
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MediumOrchid
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 282
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MediumOrchid
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MediumOrchid As Color
+- uid: Mapsui.Styles.Color.MediumPurple
+  commentId: F:Mapsui.Styles.Color.MediumPurple
+  id: MediumPurple
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MediumPurple
+  nameWithType: Color.MediumPurple
+  fullName: Mapsui.Styles.Color.MediumPurple
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MediumPurple
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 283
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MediumPurple
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MediumPurple As Color
+- uid: Mapsui.Styles.Color.MediumSeaGreen
+  commentId: F:Mapsui.Styles.Color.MediumSeaGreen
+  id: MediumSeaGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MediumSeaGreen
+  nameWithType: Color.MediumSeaGreen
+  fullName: Mapsui.Styles.Color.MediumSeaGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MediumSeaGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 284
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MediumSeaGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MediumSeaGreen As Color
+- uid: Mapsui.Styles.Color.MediumSlateBlue
+  commentId: F:Mapsui.Styles.Color.MediumSlateBlue
+  id: MediumSlateBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MediumSlateBlue
+  nameWithType: Color.MediumSlateBlue
+  fullName: Mapsui.Styles.Color.MediumSlateBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MediumSlateBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 285
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MediumSlateBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MediumSlateBlue As Color
+- uid: Mapsui.Styles.Color.MediumSpringGreen
+  commentId: F:Mapsui.Styles.Color.MediumSpringGreen
+  id: MediumSpringGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MediumSpringGreen
+  nameWithType: Color.MediumSpringGreen
+  fullName: Mapsui.Styles.Color.MediumSpringGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MediumSpringGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 286
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MediumSpringGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MediumSpringGreen As Color
+- uid: Mapsui.Styles.Color.MediumTurquoise
+  commentId: F:Mapsui.Styles.Color.MediumTurquoise
+  id: MediumTurquoise
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MediumTurquoise
+  nameWithType: Color.MediumTurquoise
+  fullName: Mapsui.Styles.Color.MediumTurquoise
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MediumTurquoise
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 287
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MediumTurquoise
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MediumTurquoise As Color
+- uid: Mapsui.Styles.Color.MediumVioletRed
+  commentId: F:Mapsui.Styles.Color.MediumVioletRed
+  id: MediumVioletRed
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MediumVioletRed
+  nameWithType: Color.MediumVioletRed
+  fullName: Mapsui.Styles.Color.MediumVioletRed
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MediumVioletRed
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 288
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MediumVioletRed
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MediumVioletRed As Color
+- uid: Mapsui.Styles.Color.MidnightBlue
+  commentId: F:Mapsui.Styles.Color.MidnightBlue
+  id: MidnightBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MidnightBlue
+  nameWithType: Color.MidnightBlue
+  fullName: Mapsui.Styles.Color.MidnightBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MidnightBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 289
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MidnightBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MidnightBlue As Color
+- uid: Mapsui.Styles.Color.MintCream
+  commentId: F:Mapsui.Styles.Color.MintCream
+  id: MintCream
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MintCream
+  nameWithType: Color.MintCream
+  fullName: Mapsui.Styles.Color.MintCream
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MintCream
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 290
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MintCream
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MintCream As Color
+- uid: Mapsui.Styles.Color.MistyRose
+  commentId: F:Mapsui.Styles.Color.MistyRose
+  id: MistyRose
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: MistyRose
+  nameWithType: Color.MistyRose
+  fullName: Mapsui.Styles.Color.MistyRose
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MistyRose
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 291
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color MistyRose
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly MistyRose As Color
+- uid: Mapsui.Styles.Color.Moccasin
+  commentId: F:Mapsui.Styles.Color.Moccasin
+  id: Moccasin
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Moccasin
+  nameWithType: Color.Moccasin
+  fullName: Mapsui.Styles.Color.Moccasin
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Moccasin
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 292
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Moccasin
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Moccasin As Color
+- uid: Mapsui.Styles.Color.NavajoWhite
+  commentId: F:Mapsui.Styles.Color.NavajoWhite
+  id: NavajoWhite
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: NavajoWhite
+  nameWithType: Color.NavajoWhite
+  fullName: Mapsui.Styles.Color.NavajoWhite
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NavajoWhite
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 293
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color NavajoWhite
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly NavajoWhite As Color
+- uid: Mapsui.Styles.Color.Navy
+  commentId: F:Mapsui.Styles.Color.Navy
+  id: Navy
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Navy
+  nameWithType: Color.Navy
+  fullName: Mapsui.Styles.Color.Navy
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Navy
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 294
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Navy
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Navy As Color
+- uid: Mapsui.Styles.Color.OldLace
+  commentId: F:Mapsui.Styles.Color.OldLace
+  id: OldLace
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: OldLace
+  nameWithType: Color.OldLace
+  fullName: Mapsui.Styles.Color.OldLace
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OldLace
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 295
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color OldLace
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly OldLace As Color
+- uid: Mapsui.Styles.Color.Olive
+  commentId: F:Mapsui.Styles.Color.Olive
+  id: Olive
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Olive
+  nameWithType: Color.Olive
+  fullName: Mapsui.Styles.Color.Olive
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Olive
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 296
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Olive
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Olive As Color
+- uid: Mapsui.Styles.Color.OliveDrab
+  commentId: F:Mapsui.Styles.Color.OliveDrab
+  id: OliveDrab
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: OliveDrab
+  nameWithType: Color.OliveDrab
+  fullName: Mapsui.Styles.Color.OliveDrab
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OliveDrab
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 297
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color OliveDrab
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly OliveDrab As Color
+- uid: Mapsui.Styles.Color.Orange
+  commentId: F:Mapsui.Styles.Color.Orange
+  id: Orange
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Orange
+  nameWithType: Color.Orange
+  fullName: Mapsui.Styles.Color.Orange
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Orange
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 298
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Orange
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Orange As Color
+- uid: Mapsui.Styles.Color.OrangeRed
+  commentId: F:Mapsui.Styles.Color.OrangeRed
+  id: OrangeRed
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: OrangeRed
+  nameWithType: Color.OrangeRed
+  fullName: Mapsui.Styles.Color.OrangeRed
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OrangeRed
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 299
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color OrangeRed
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly OrangeRed As Color
+- uid: Mapsui.Styles.Color.Orchid
+  commentId: F:Mapsui.Styles.Color.Orchid
+  id: Orchid
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Orchid
+  nameWithType: Color.Orchid
+  fullName: Mapsui.Styles.Color.Orchid
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Orchid
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 300
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Orchid
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Orchid As Color
+- uid: Mapsui.Styles.Color.PaleGoldenRod
+  commentId: F:Mapsui.Styles.Color.PaleGoldenRod
+  id: PaleGoldenRod
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: PaleGoldenRod
+  nameWithType: Color.PaleGoldenRod
+  fullName: Mapsui.Styles.Color.PaleGoldenRod
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PaleGoldenRod
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 301
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color PaleGoldenRod
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly PaleGoldenRod As Color
+- uid: Mapsui.Styles.Color.PaleGreen
+  commentId: F:Mapsui.Styles.Color.PaleGreen
+  id: PaleGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: PaleGreen
+  nameWithType: Color.PaleGreen
+  fullName: Mapsui.Styles.Color.PaleGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PaleGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 302
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color PaleGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly PaleGreen As Color
+- uid: Mapsui.Styles.Color.PaleTurquoise
+  commentId: F:Mapsui.Styles.Color.PaleTurquoise
+  id: PaleTurquoise
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: PaleTurquoise
+  nameWithType: Color.PaleTurquoise
+  fullName: Mapsui.Styles.Color.PaleTurquoise
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PaleTurquoise
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 303
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color PaleTurquoise
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly PaleTurquoise As Color
+- uid: Mapsui.Styles.Color.PaleVioletRed
+  commentId: F:Mapsui.Styles.Color.PaleVioletRed
+  id: PaleVioletRed
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: PaleVioletRed
+  nameWithType: Color.PaleVioletRed
+  fullName: Mapsui.Styles.Color.PaleVioletRed
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PaleVioletRed
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 304
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color PaleVioletRed
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly PaleVioletRed As Color
+- uid: Mapsui.Styles.Color.PapayaWhip
+  commentId: F:Mapsui.Styles.Color.PapayaWhip
+  id: PapayaWhip
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: PapayaWhip
+  nameWithType: Color.PapayaWhip
+  fullName: Mapsui.Styles.Color.PapayaWhip
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PapayaWhip
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 305
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color PapayaWhip
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly PapayaWhip As Color
+- uid: Mapsui.Styles.Color.PeachPuff
+  commentId: F:Mapsui.Styles.Color.PeachPuff
+  id: PeachPuff
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: PeachPuff
+  nameWithType: Color.PeachPuff
+  fullName: Mapsui.Styles.Color.PeachPuff
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PeachPuff
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 306
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color PeachPuff
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly PeachPuff As Color
+- uid: Mapsui.Styles.Color.Peru
+  commentId: F:Mapsui.Styles.Color.Peru
+  id: Peru
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Peru
+  nameWithType: Color.Peru
+  fullName: Mapsui.Styles.Color.Peru
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Peru
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 307
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Peru
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Peru As Color
+- uid: Mapsui.Styles.Color.Pink
+  commentId: F:Mapsui.Styles.Color.Pink
+  id: Pink
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Pink
+  nameWithType: Color.Pink
+  fullName: Mapsui.Styles.Color.Pink
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Pink
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 308
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Pink
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Pink As Color
+- uid: Mapsui.Styles.Color.Plum
+  commentId: F:Mapsui.Styles.Color.Plum
+  id: Plum
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Plum
+  nameWithType: Color.Plum
+  fullName: Mapsui.Styles.Color.Plum
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Plum
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 309
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Plum
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Plum As Color
+- uid: Mapsui.Styles.Color.PowderBlue
+  commentId: F:Mapsui.Styles.Color.PowderBlue
+  id: PowderBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: PowderBlue
+  nameWithType: Color.PowderBlue
+  fullName: Mapsui.Styles.Color.PowderBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PowderBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 310
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color PowderBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly PowderBlue As Color
+- uid: Mapsui.Styles.Color.Purple
+  commentId: F:Mapsui.Styles.Color.Purple
+  id: Purple
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Purple
+  nameWithType: Color.Purple
+  fullName: Mapsui.Styles.Color.Purple
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Purple
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 311
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Purple
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Purple As Color
+- uid: Mapsui.Styles.Color.RebeccaPurple
+  commentId: F:Mapsui.Styles.Color.RebeccaPurple
+  id: RebeccaPurple
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: RebeccaPurple
+  nameWithType: Color.RebeccaPurple
+  fullName: Mapsui.Styles.Color.RebeccaPurple
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RebeccaPurple
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 312
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color RebeccaPurple
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly RebeccaPurple As Color
+- uid: Mapsui.Styles.Color.Red
+  commentId: F:Mapsui.Styles.Color.Red
+  id: Red
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Red
+  nameWithType: Color.Red
+  fullName: Mapsui.Styles.Color.Red
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Red
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 313
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Red
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Red As Color
+- uid: Mapsui.Styles.Color.RosyBrown
+  commentId: F:Mapsui.Styles.Color.RosyBrown
+  id: RosyBrown
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: RosyBrown
+  nameWithType: Color.RosyBrown
+  fullName: Mapsui.Styles.Color.RosyBrown
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RosyBrown
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 314
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color RosyBrown
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly RosyBrown As Color
+- uid: Mapsui.Styles.Color.RoyalBlue
+  commentId: F:Mapsui.Styles.Color.RoyalBlue
+  id: RoyalBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: RoyalBlue
+  nameWithType: Color.RoyalBlue
+  fullName: Mapsui.Styles.Color.RoyalBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RoyalBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 315
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color RoyalBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly RoyalBlue As Color
+- uid: Mapsui.Styles.Color.SaddleBrown
+  commentId: F:Mapsui.Styles.Color.SaddleBrown
+  id: SaddleBrown
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SaddleBrown
+  nameWithType: Color.SaddleBrown
+  fullName: Mapsui.Styles.Color.SaddleBrown
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SaddleBrown
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 316
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SaddleBrown
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SaddleBrown As Color
+- uid: Mapsui.Styles.Color.Salmon
+  commentId: F:Mapsui.Styles.Color.Salmon
+  id: Salmon
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Salmon
+  nameWithType: Color.Salmon
+  fullName: Mapsui.Styles.Color.Salmon
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Salmon
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 317
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Salmon
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Salmon As Color
+- uid: Mapsui.Styles.Color.SandyBrown
+  commentId: F:Mapsui.Styles.Color.SandyBrown
+  id: SandyBrown
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SandyBrown
+  nameWithType: Color.SandyBrown
+  fullName: Mapsui.Styles.Color.SandyBrown
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SandyBrown
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 318
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SandyBrown
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SandyBrown As Color
+- uid: Mapsui.Styles.Color.SeaGreen
+  commentId: F:Mapsui.Styles.Color.SeaGreen
+  id: SeaGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SeaGreen
+  nameWithType: Color.SeaGreen
+  fullName: Mapsui.Styles.Color.SeaGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SeaGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 319
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SeaGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SeaGreen As Color
+- uid: Mapsui.Styles.Color.SeaShell
+  commentId: F:Mapsui.Styles.Color.SeaShell
+  id: SeaShell
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SeaShell
+  nameWithType: Color.SeaShell
+  fullName: Mapsui.Styles.Color.SeaShell
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SeaShell
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 320
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SeaShell
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SeaShell As Color
+- uid: Mapsui.Styles.Color.Sienna
+  commentId: F:Mapsui.Styles.Color.Sienna
+  id: Sienna
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Sienna
+  nameWithType: Color.Sienna
+  fullName: Mapsui.Styles.Color.Sienna
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Sienna
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 321
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Sienna
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Sienna As Color
+- uid: Mapsui.Styles.Color.Silver
+  commentId: F:Mapsui.Styles.Color.Silver
+  id: Silver
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Silver
+  nameWithType: Color.Silver
+  fullName: Mapsui.Styles.Color.Silver
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Silver
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 322
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Silver
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Silver As Color
+- uid: Mapsui.Styles.Color.SkyBlue
+  commentId: F:Mapsui.Styles.Color.SkyBlue
+  id: SkyBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SkyBlue
+  nameWithType: Color.SkyBlue
+  fullName: Mapsui.Styles.Color.SkyBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SkyBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 323
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SkyBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SkyBlue As Color
+- uid: Mapsui.Styles.Color.SlateBlue
+  commentId: F:Mapsui.Styles.Color.SlateBlue
+  id: SlateBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SlateBlue
+  nameWithType: Color.SlateBlue
+  fullName: Mapsui.Styles.Color.SlateBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SlateBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 324
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SlateBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SlateBlue As Color
+- uid: Mapsui.Styles.Color.SlateGray
+  commentId: F:Mapsui.Styles.Color.SlateGray
+  id: SlateGray
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SlateGray
+  nameWithType: Color.SlateGray
+  fullName: Mapsui.Styles.Color.SlateGray
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SlateGray
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 325
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SlateGray
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SlateGray As Color
+- uid: Mapsui.Styles.Color.SlateGrey
+  commentId: F:Mapsui.Styles.Color.SlateGrey
+  id: SlateGrey
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SlateGrey
+  nameWithType: Color.SlateGrey
+  fullName: Mapsui.Styles.Color.SlateGrey
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SlateGrey
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 326
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SlateGrey
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SlateGrey As Color
+- uid: Mapsui.Styles.Color.Snow
+  commentId: F:Mapsui.Styles.Color.Snow
+  id: Snow
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Snow
+  nameWithType: Color.Snow
+  fullName: Mapsui.Styles.Color.Snow
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Snow
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 327
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Snow
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Snow As Color
+- uid: Mapsui.Styles.Color.SpringGreen
+  commentId: F:Mapsui.Styles.Color.SpringGreen
+  id: SpringGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SpringGreen
+  nameWithType: Color.SpringGreen
+  fullName: Mapsui.Styles.Color.SpringGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SpringGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 328
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SpringGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SpringGreen As Color
+- uid: Mapsui.Styles.Color.SteelBlue
+  commentId: F:Mapsui.Styles.Color.SteelBlue
+  id: SteelBlue
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: SteelBlue
+  nameWithType: Color.SteelBlue
+  fullName: Mapsui.Styles.Color.SteelBlue
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SteelBlue
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 329
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color SteelBlue
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly SteelBlue As Color
+- uid: Mapsui.Styles.Color.Tan
+  commentId: F:Mapsui.Styles.Color.Tan
+  id: Tan
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Tan
+  nameWithType: Color.Tan
+  fullName: Mapsui.Styles.Color.Tan
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Tan
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 330
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Tan
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Tan As Color
+- uid: Mapsui.Styles.Color.Teal
+  commentId: F:Mapsui.Styles.Color.Teal
+  id: Teal
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Teal
+  nameWithType: Color.Teal
+  fullName: Mapsui.Styles.Color.Teal
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Teal
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 331
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Teal
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Teal As Color
+- uid: Mapsui.Styles.Color.Thistle
+  commentId: F:Mapsui.Styles.Color.Thistle
+  id: Thistle
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Thistle
+  nameWithType: Color.Thistle
+  fullName: Mapsui.Styles.Color.Thistle
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Thistle
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 332
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Thistle
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Thistle As Color
+- uid: Mapsui.Styles.Color.Tomato
+  commentId: F:Mapsui.Styles.Color.Tomato
+  id: Tomato
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Tomato
+  nameWithType: Color.Tomato
+  fullName: Mapsui.Styles.Color.Tomato
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Tomato
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 333
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Tomato
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Tomato As Color
+- uid: Mapsui.Styles.Color.Turquoise
+  commentId: F:Mapsui.Styles.Color.Turquoise
+  id: Turquoise
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Turquoise
+  nameWithType: Color.Turquoise
+  fullName: Mapsui.Styles.Color.Turquoise
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Turquoise
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 334
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Turquoise
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Turquoise As Color
+- uid: Mapsui.Styles.Color.Violet
+  commentId: F:Mapsui.Styles.Color.Violet
+  id: Violet
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Violet
+  nameWithType: Color.Violet
+  fullName: Mapsui.Styles.Color.Violet
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Violet
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 335
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Violet
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Violet As Color
+- uid: Mapsui.Styles.Color.Wheat
+  commentId: F:Mapsui.Styles.Color.Wheat
+  id: Wheat
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Wheat
+  nameWithType: Color.Wheat
+  fullName: Mapsui.Styles.Color.Wheat
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Wheat
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 336
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Wheat
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Wheat As Color
+- uid: Mapsui.Styles.Color.White
+  commentId: F:Mapsui.Styles.Color.White
+  id: White
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: White
+  nameWithType: Color.White
+  fullName: Mapsui.Styles.Color.White
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: White
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 337
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color White
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly White As Color
+- uid: Mapsui.Styles.Color.WhiteSmoke
+  commentId: F:Mapsui.Styles.Color.WhiteSmoke
+  id: WhiteSmoke
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: WhiteSmoke
+  nameWithType: Color.WhiteSmoke
+  fullName: Mapsui.Styles.Color.WhiteSmoke
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WhiteSmoke
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 338
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color WhiteSmoke
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly WhiteSmoke As Color
+- uid: Mapsui.Styles.Color.Yellow
+  commentId: F:Mapsui.Styles.Color.Yellow
+  id: Yellow
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Yellow
+  nameWithType: Color.Yellow
+  fullName: Mapsui.Styles.Color.Yellow
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Yellow
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 339
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color Yellow
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly Yellow As Color
+- uid: Mapsui.Styles.Color.YellowGreen
+  commentId: F:Mapsui.Styles.Color.YellowGreen
+  id: YellowGreen
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: YellowGreen
+  nameWithType: Color.YellowGreen
+  fullName: Mapsui.Styles.Color.YellowGreen
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: YellowGreen
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 340
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static readonly Color YellowGreen
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared ReadOnly YellowGreen As Color
+- uid: Mapsui.Styles.Color.FromArgb(System.Int32,System.Int32,System.Int32,System.Int32)
+  commentId: M:Mapsui.Styles.Color.FromArgb(System.Int32,System.Int32,System.Int32,System.Int32)
+  id: FromArgb(System.Int32,System.Int32,System.Int32,System.Int32)
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: FromArgb(int, int, int, int)
+  nameWithType: Color.FromArgb(int, int, int, int)
+  fullName: Mapsui.Styles.Color.FromArgb(int, int, int, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromArgb
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 342
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static Color FromArgb(int a, int r, int g, int b)
+    parameters:
+    - id: a
+      type: System.Int32
+    - id: r
+      type: System.Int32
+    - id: g
+      type: System.Int32
+    - id: b
+      type: System.Int32
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Shared Function FromArgb(a As Integer, r As Integer, g As Integer, b As Integer) As Color
+  overload: Mapsui.Styles.Color.FromArgb*
+  nameWithType.vb: Color.FromArgb(Integer, Integer, Integer, Integer)
+  fullName.vb: Mapsui.Styles.Color.FromArgb(Integer, Integer, Integer, Integer)
+  name.vb: FromArgb(Integer, Integer, Integer, Integer)
+- uid: Mapsui.Styles.Color.Equals(System.Object)
+  commentId: M:Mapsui.Styles.Color.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: Color.Equals(object?)
+  fullName: Mapsui.Styles.Color.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 347
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Determines whether the specified object is equal to the current object.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current object.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the specified object  is equal to the current object; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Mapsui.Styles.Color.Equals*
+  nameWithType.vb: Color.Equals(Object)
+  fullName.vb: Mapsui.Styles.Color.Equals(Object)
+  name.vb: Equals(Object)
+- uid: Mapsui.Styles.Color.Equals(Mapsui.Styles.Color)
+  commentId: M:Mapsui.Styles.Color.Equals(Mapsui.Styles.Color)
+  id: Equals(Mapsui.Styles.Color)
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Equals(Color?)
+  nameWithType: Color.Equals(Color?)
+  fullName: Mapsui.Styles.Color.Equals(Mapsui.Styles.Color?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 354
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public bool Equals(Color? color)
+    parameters:
+    - id: color
+      type: Mapsui.Styles.Color
+    return:
+      type: System.Boolean
+    content.vb: Public Function Equals(color As Color) As Boolean
+  overload: Mapsui.Styles.Color.Equals*
+  nameWithType.vb: Color.Equals(Color)
+  fullName.vb: Mapsui.Styles.Color.Equals(Mapsui.Styles.Color)
+  name.vb: Equals(Color)
+- uid: Mapsui.Styles.Color.GetHashCode
+  commentId: M:Mapsui.Styles.Color.GetHashCode
+  id: GetHashCode
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: Color.GetHashCode()
+  fullName: Mapsui.Styles.Color.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetHashCode
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 366
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Serves as the default hash function.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A hash code for the current object.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.Object.GetHashCode
+  overload: Mapsui.Styles.Color.GetHashCode*
+- uid: Mapsui.Styles.Color.op_Equality(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  commentId: M:Mapsui.Styles.Color.op_Equality(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  id: op_Equality(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: operator ==(Color?, Color?)
+  nameWithType: Color.operator ==(Color?, Color?)
+  fullName: Mapsui.Styles.Color.operator ==(Mapsui.Styles.Color?, Mapsui.Styles.Color?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Equality
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 371
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static bool operator ==(Color? color1, Color? color2)
+    parameters:
+    - id: color1
+      type: Mapsui.Styles.Color
+    - id: color2
+      type: Mapsui.Styles.Color
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(color1 As Color, color2 As Color) As Boolean
+  overload: Mapsui.Styles.Color.op_Equality*
+  nameWithType.vb: Color.=(Color, Color)
+  fullName.vb: Mapsui.Styles.Color.=(Mapsui.Styles.Color, Mapsui.Styles.Color)
+  name.vb: =(Color, Color)
+- uid: Mapsui.Styles.Color.op_Inequality(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  commentId: M:Mapsui.Styles.Color.op_Inequality(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  id: op_Inequality(Mapsui.Styles.Color,Mapsui.Styles.Color)
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: operator !=(Color?, Color?)
+  nameWithType: Color.operator !=(Color?, Color?)
+  fullName: Mapsui.Styles.Color.operator !=(Mapsui.Styles.Color?, Mapsui.Styles.Color?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Inequality
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 376
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static bool operator !=(Color? color1, Color? color2)
+    parameters:
+    - id: color1
+      type: Mapsui.Styles.Color
+    - id: color2
+      type: Mapsui.Styles.Color
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(color1 As Color, color2 As Color) As Boolean
+  overload: Mapsui.Styles.Color.op_Inequality*
+  nameWithType.vb: Color.<>(Color, Color)
+  fullName.vb: Mapsui.Styles.Color.<>(Mapsui.Styles.Color, Mapsui.Styles.Color)
+  name.vb: <>(Color, Color)
+- uid: Mapsui.Styles.Color.FromString(System.String)
+  commentId: M:Mapsui.Styles.Color.FromString(System.String)
+  id: FromString(System.String)
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: FromString(string)
+  nameWithType: Color.FromString(string)
+  fullName: Mapsui.Styles.Color.FromString(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromString
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 396
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: >-
+    Converts a string in Mapbox GL format to a Mapsui Color
+
+
+    This function assumes, that alpha is a float in range from 0.0 to 1.0.
+
+    It converts this float in Mapsui Color alpha without rounding.
+
+    The following colors could be converted:
+
+    - Named colors with known Html names 
+
+    - Colors as Html color values with leading '#' and 6 or 3 numbers
+
+    - Function rgb(r,g,b) with values for red, green and blue
+
+    - Function rgba(r,g,b,a) with values for red, green, blue and alpha. Here alpha is between 0.0 and 1.0 like opacity.
+
+    - Function hsl(h,s,l) with values hue (0.0 to 360.0), saturation (0.0% - 100.0%) and lightness (0.0% - 100.0%)
+
+    - Function hsla(h,s,l,a) with values hue (0.0 to 360.0), saturation (0.0% - 100.0%), lightness (0.0% - 100.0%) and alpha. Here alpha is between 0.0 and 1.0 like opacity.
+  example: []
+  syntax:
+    content: public static Color FromString(string from)
+    parameters:
+    - id: from
+      type: System.String
+      description: String with HTML color representation or function like rgb() or hsl()
+    return:
+      type: Mapsui.Styles.Color
+      description: Converted Mapsui Color
+    content.vb: Public Shared Function FromString(from As String) As Color
+  overload: Mapsui.Styles.Color.FromString*
+  nameWithType.vb: Color.FromString(String)
+  fullName.vb: Mapsui.Styles.Color.FromString(String)
+  name.vb: FromString(String)
+- uid: Mapsui.Styles.Color.FromHsl(System.Single,System.Single,System.Single,System.Int32)
+  commentId: M:Mapsui.Styles.Color.FromHsl(System.Single,System.Single,System.Single,System.Int32)
+  id: FromHsl(System.Single,System.Single,System.Single,System.Int32)
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: FromHsl(float, float, float, int)
+  nameWithType: Color.FromHsl(float, float, float, int)
+  fullName: Mapsui.Styles.Color.FromHsl(float, float, float, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromHsl
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 494
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Found at http://james-ramsden.com/convert-from-hsl-to-rgb-colour-codes-in-c/
+  example: []
+  syntax:
+    content: public static Color FromHsl(float h, float s, float l, int a = 255)
+    parameters:
+    - id: h
+      type: System.Single
+      description: ''
+    - id: s
+      type: System.Single
+      description: ''
+    - id: l
+      type: System.Single
+      description: ''
+    - id: a
+      type: System.Int32
+      description: ''
+    return:
+      type: Mapsui.Styles.Color
+      description: ''
+    content.vb: Public Shared Function FromHsl(h As Single, s As Single, l As Single, a As Integer = 255) As Color
+  overload: Mapsui.Styles.Color.FromHsl*
+  nameWithType.vb: Color.FromHsl(Single, Single, Single, Integer)
+  fullName.vb: Mapsui.Styles.Color.FromHsl(Single, Single, Single, Integer)
+  name.vb: FromHsl(Single, Single, Single, Integer)
+- uid: Mapsui.Styles.Color.Opacity(Mapsui.Styles.Color,System.Nullable{System.Single})
+  commentId: M:Mapsui.Styles.Color.Opacity(Mapsui.Styles.Color,System.Nullable{System.Single})
+  id: Opacity(Mapsui.Styles.Color,System.Nullable{System.Single})
+  parent: Mapsui.Styles.Color
+  langs:
+  - csharp
+  - vb
+  name: Opacity(Color, float?)
+  nameWithType: Color.Opacity(Color, float?)
+  fullName: Mapsui.Styles.Color.Opacity(Mapsui.Styles.Color, float?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Color.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Opacity
+    path: ../../Mapsui/Styles/Color.cs
+    startLine: 556
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Change alpha channel from given color to respect opacity
+  example: []
+  syntax:
+    content: public static Color Opacity(Color color, float? opacity)
+    parameters:
+    - id: color
+      type: Mapsui.Styles.Color
+      description: Mapsui Color to change
+    - id: opacity
+      type: System.Nullable{System.Single}
+      description: Opacity of the new color
+    return:
+      type: Mapsui.Styles.Color
+      description: New color respecting old alpha and new opacity
+    content.vb: Public Shared Function Opacity(color As Color, opacity As Single?) As Color
+  overload: Mapsui.Styles.Color.Opacity*
+  nameWithType.vb: Color.Opacity(Color, Single?)
+  fullName.vb: Mapsui.Styles.Color.Opacity(Mapsui.Styles.Color, Single?)
+  name.vb: Opacity(Color, Single?)
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.Color.#ctor*
+  commentId: Overload:Mapsui.Styles.Color.#ctor
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color__ctor
+  name: Color
+  nameWithType: Color.Color
+  fullName: Mapsui.Styles.Color.Color
+  nameWithType.vb: Color.New
+  fullName.vb: Mapsui.Styles.Color.New
+  name.vb: New
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Color.html
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Styles.Color.R*
+  commentId: Overload:Mapsui.Styles.Color.R
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_R
+  name: R
+  nameWithType: Color.R
+  fullName: Mapsui.Styles.Color.R
+- uid: Mapsui.Styles.Color.G*
+  commentId: Overload:Mapsui.Styles.Color.G
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_G
+  name: G
+  nameWithType: Color.G
+  fullName: Mapsui.Styles.Color.G
+- uid: Mapsui.Styles.Color.B*
+  commentId: Overload:Mapsui.Styles.Color.B
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_B
+  name: B
+  nameWithType: Color.B
+  fullName: Mapsui.Styles.Color.B
+- uid: Mapsui.Styles.Color.A*
+  commentId: Overload:Mapsui.Styles.Color.A
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_A
+  name: A
+  nameWithType: Color.A
+  fullName: Mapsui.Styles.Color.A
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  name: Dictionary<string, string>
+  nameWithType: Dictionary<string, string>
+  fullName: System.Collections.Generic.Dictionary<string, string>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of String, String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Styles.Color.Transparent*
+  commentId: Overload:Mapsui.Styles.Color.Transparent
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_Transparent
+  name: Transparent
+  nameWithType: Color.Transparent
+  fullName: Mapsui.Styles.Color.Transparent
+- uid: Mapsui.Styles.Color.FromArgb*
+  commentId: Overload:Mapsui.Styles.Color.FromArgb
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_FromArgb_System_Int32_System_Int32_System_Int32_System_Int32_
+  name: FromArgb
+  nameWithType: Color.FromArgb
+  fullName: Mapsui.Styles.Color.FromArgb
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Styles.Color.Equals*
+  commentId: Overload:Mapsui.Styles.Color.Equals
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_Equals_System_Object_
+  name: Equals
+  nameWithType: Color.Equals
+  fullName: Mapsui.Styles.Color.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.Color.GetHashCode*
+  commentId: Overload:Mapsui.Styles.Color.GetHashCode
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_GetHashCode
+  name: GetHashCode
+  nameWithType: Color.GetHashCode
+  fullName: Mapsui.Styles.Color.GetHashCode
+- uid: Mapsui.Styles.Color.op_Equality*
+  commentId: Overload:Mapsui.Styles.Color.op_Equality
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_op_Equality_Mapsui_Styles_Color_Mapsui_Styles_Color_
+  name: operator ==
+  nameWithType: Color.operator ==
+  fullName: Mapsui.Styles.Color.operator ==
+  nameWithType.vb: Color.=
+  fullName.vb: Mapsui.Styles.Color.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.Styles.Color.op_Equality*
+    name: ==
+    href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_op_Equality_Mapsui_Styles_Color_Mapsui_Styles_Color_
+- uid: Mapsui.Styles.Color.op_Inequality*
+  commentId: Overload:Mapsui.Styles.Color.op_Inequality
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_op_Inequality_Mapsui_Styles_Color_Mapsui_Styles_Color_
+  name: operator !=
+  nameWithType: Color.operator !=
+  fullName: Mapsui.Styles.Color.operator !=
+  nameWithType.vb: Color.<>
+  fullName.vb: Mapsui.Styles.Color.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.Styles.Color.op_Inequality*
+    name: '!='
+    href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_op_Inequality_Mapsui_Styles_Color_Mapsui_Styles_Color_
+- uid: Mapsui.Styles.Color.FromString*
+  commentId: Overload:Mapsui.Styles.Color.FromString
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_FromString_System_String_
+  name: FromString
+  nameWithType: Color.FromString
+  fullName: Mapsui.Styles.Color.FromString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Styles.Color.FromHsl*
+  commentId: Overload:Mapsui.Styles.Color.FromHsl
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_FromHsl_System_Single_System_Single_System_Single_System_Int32_
+  name: FromHsl
+  nameWithType: Color.FromHsl
+  fullName: Mapsui.Styles.Color.FromHsl
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Mapsui.Styles.Color.Opacity*
+  commentId: Overload:Mapsui.Styles.Color.Opacity
+  href: Mapsui.Styles.Color.html#Mapsui_Styles_Color_Opacity_Mapsui_Styles_Color_System_Nullable_System_Single__
+  name: Opacity
+  nameWithType: Color.Opacity
+  fullName: Mapsui.Styles.Color.Opacity
+- uid: System.Nullable{System.Single}
+  commentId: T:System.Nullable{System.Single}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float?
+  nameWithType: float?
+  fullName: float?
+  nameWithType.vb: Single?
+  fullName.vb: Single?
+  name.vb: Single?
+  spec.csharp:
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: '?'
+  spec.vb:
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

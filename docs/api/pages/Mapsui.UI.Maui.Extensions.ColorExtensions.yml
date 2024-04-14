@@ -1,0 +1,513 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui.Extensions.ColorExtensions
+  commentId: T:Mapsui.UI.Maui.Extensions.ColorExtensions
+  id: ColorExtensions
+  parent: Mapsui.UI.Maui.Extensions
+  children:
+  - Mapsui.UI.Maui.Extensions.ColorExtensions.ToMapsui(Microsoft.Maui.Graphics.Color)
+  - Mapsui.UI.Maui.Extensions.ColorExtensions.ToMaui(Mapsui.Styles.Color)
+  - Mapsui.UI.Maui.Extensions.ColorExtensions.ToNative(Mapsui.Styles.Color)
+  langs:
+  - csharp
+  - vb
+  name: ColorExtensions
+  nameWithType: ColorExtensions
+  fullName: Mapsui.UI.Maui.Extensions.ColorExtensions
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Extensions/ColorExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ColorExtensions
+    path: ../../Mapsui.UI.MapView/Extensions/ColorExtensions.cs
+    startLine: 2
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui.Extensions
+  syntax:
+    content: public static class ColorExtensions
+    content.vb: Public Module ColorExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMaui(Mapsui.Styles.Color)
+  commentId: M:Mapsui.UI.Maui.Extensions.ColorExtensions.ToMaui(Mapsui.Styles.Color)
+  id: ToMaui(Mapsui.Styles.Color)
+  isExtensionMethod: true
+  parent: Mapsui.UI.Maui.Extensions.ColorExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToMaui(Color)
+  nameWithType: ColorExtensions.ToMaui(Color)
+  fullName: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMaui(Mapsui.Styles.Color)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Extensions/ColorExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToMaui
+    path: ../../Mapsui.UI.MapView/Extensions/ColorExtensions.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui.Extensions
+  summary: Convert Mapsui.Styles.Color to Microsoft.Maui.Graphics.Color
+  example: []
+  syntax:
+    content: public static Color ToMaui(this Color color)
+    parameters:
+    - id: color
+      type: Mapsui.Styles.Color
+      description: Color in Mapsui format
+    return:
+      type: Microsoft.Maui.Graphics.Color
+      description: Color in Microsoft.Maui.Graphics format
+    content.vb: Public Shared Function ToMaui(color As Color) As Color
+  overload: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMaui*
+- uid: Mapsui.UI.Maui.Extensions.ColorExtensions.ToNative(Mapsui.Styles.Color)
+  commentId: M:Mapsui.UI.Maui.Extensions.ColorExtensions.ToNative(Mapsui.Styles.Color)
+  id: ToNative(Mapsui.Styles.Color)
+  isExtensionMethod: true
+  parent: Mapsui.UI.Maui.Extensions.ColorExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToNative(Color)
+  nameWithType: ColorExtensions.ToNative(Color)
+  fullName: Mapsui.UI.Maui.Extensions.ColorExtensions.ToNative(Mapsui.Styles.Color)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Extensions/ColorExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToNative
+    path: ../../Mapsui.UI.MapView/Extensions/ColorExtensions.cs
+    startLine: 14
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui.Extensions
+  syntax:
+    content: public static Color ToNative(this Color color)
+    parameters:
+    - id: color
+      type: Mapsui.Styles.Color
+    return:
+      type: Microsoft.Maui.Graphics.Color
+    content.vb: Public Shared Function ToNative(color As Color) As Color
+  overload: Mapsui.UI.Maui.Extensions.ColorExtensions.ToNative*
+- uid: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMapsui(Microsoft.Maui.Graphics.Color)
+  commentId: M:Mapsui.UI.Maui.Extensions.ColorExtensions.ToMapsui(Microsoft.Maui.Graphics.Color)
+  id: ToMapsui(Microsoft.Maui.Graphics.Color)
+  isExtensionMethod: true
+  parent: Mapsui.UI.Maui.Extensions.ColorExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToMapsui(Color)
+  nameWithType: ColorExtensions.ToMapsui(Color)
+  fullName: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMapsui(Microsoft.Maui.Graphics.Color)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Extensions/ColorExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToMapsui
+    path: ../../Mapsui.UI.MapView/Extensions/ColorExtensions.cs
+    startLine: 24
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui.Extensions
+  summary: Convert Microsoft.Maui.Graphics.Color to Mapsui.Style.Color
+  example: []
+  syntax:
+    content: public static Color ToMapsui(this Color color)
+    parameters:
+    - id: color
+      type: Microsoft.Maui.Graphics.Color
+      description: Color in Microsoft.Maui.Graphics.Color format
+    return:
+      type: Mapsui.Styles.Color
+      description: Color in Mapsui.Styles.Color format
+    content.vb: Public Shared Function ToMapsui(color As Color) As Color
+  overload: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMapsui*
+references:
+- uid: Mapsui.UI.Maui.Extensions
+  commentId: N:Mapsui.UI.Maui.Extensions
+  href: Mapsui.html
+  name: Mapsui.UI.Maui.Extensions
+  nameWithType: Mapsui.UI.Maui.Extensions
+  fullName: Mapsui.UI.Maui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  - name: .
+  - uid: Mapsui.UI.Maui.Extensions
+    name: Extensions
+    href: Mapsui.UI.Maui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  - name: .
+  - uid: Mapsui.UI.Maui.Extensions
+    name: Extensions
+    href: Mapsui.UI.Maui.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMaui*
+  commentId: Overload:Mapsui.UI.Maui.Extensions.ColorExtensions.ToMaui
+  href: Mapsui.UI.Maui.Extensions.ColorExtensions.html#Mapsui_UI_Maui_Extensions_ColorExtensions_ToMaui_Mapsui_Styles_Color_
+  name: ToMaui
+  nameWithType: ColorExtensions.ToMaui
+  fullName: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMaui
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Color.html
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+- uid: Microsoft.Maui.Graphics.Color
+  commentId: T:Microsoft.Maui.Graphics.Color
+  parent: Microsoft.Maui.Graphics
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.maui.graphics.color
+  name: Color
+  nameWithType: Color
+  fullName: Microsoft.Maui.Graphics.Color
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Microsoft.Maui.Graphics
+  commentId: N:Microsoft.Maui.Graphics
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Maui.Graphics
+  nameWithType: Microsoft.Maui.Graphics
+  fullName: Microsoft.Maui.Graphics
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Maui
+    name: Maui
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui
+  - name: .
+  - uid: Microsoft.Maui.Graphics
+    name: Graphics
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui.graphics
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Maui
+    name: Maui
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui
+  - name: .
+  - uid: Microsoft.Maui.Graphics
+    name: Graphics
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui.graphics
+- uid: Mapsui.UI.Maui.Extensions.ColorExtensions.ToNative*
+  commentId: Overload:Mapsui.UI.Maui.Extensions.ColorExtensions.ToNative
+  href: Mapsui.UI.Maui.Extensions.ColorExtensions.html#Mapsui_UI_Maui_Extensions_ColorExtensions_ToNative_Mapsui_Styles_Color_
+  name: ToNative
+  nameWithType: ColorExtensions.ToNative
+  fullName: Mapsui.UI.Maui.Extensions.ColorExtensions.ToNative
+- uid: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMapsui*
+  commentId: Overload:Mapsui.UI.Maui.Extensions.ColorExtensions.ToMapsui
+  href: Mapsui.UI.Maui.Extensions.ColorExtensions.html#Mapsui_UI_Maui_Extensions_ColorExtensions_ToMapsui_Microsoft_Maui_Graphics_Color_
+  name: ToMapsui
+  nameWithType: ColorExtensions.ToMapsui
+  fullName: Mapsui.UI.Maui.Extensions.ColorExtensions.ToMapsui

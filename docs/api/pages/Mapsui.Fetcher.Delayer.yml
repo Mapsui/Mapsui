@@ -1,0 +1,686 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Fetcher.Delayer
+  commentId: T:Mapsui.Fetcher.Delayer
+  id: Delayer
+  parent: Mapsui.Fetcher
+  children:
+  - Mapsui.Fetcher.Delayer.#ctor
+  - Mapsui.Fetcher.Delayer.Dispose
+  - Mapsui.Fetcher.Delayer.Dispose(System.Boolean)
+  - Mapsui.Fetcher.Delayer.ExecuteDelayed(System.Action)
+  - Mapsui.Fetcher.Delayer.MillisecondsToWait
+  - Mapsui.Fetcher.Delayer.StartWithDelay
+  langs:
+  - csharp
+  - vb
+  name: Delayer
+  nameWithType: Delayer
+  fullName: Mapsui.Fetcher.Delayer
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Fetcher/Delayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Delayer
+    path: ../../Mapsui/Fetcher/Delayer.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  summary: Makes sure a method is always called 'MillisecondsToDelay' after the previous call.
+  example: []
+  syntax:
+    content: 'public class Delayer : IDisposable'
+    content.vb: Public Class Delayer Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Fetcher.Delayer.MillisecondsToWait
+  commentId: P:Mapsui.Fetcher.Delayer.MillisecondsToWait
+  id: MillisecondsToWait
+  parent: Mapsui.Fetcher.Delayer
+  langs:
+  - csharp
+  - vb
+  name: MillisecondsToWait
+  nameWithType: Delayer.MillisecondsToWait
+  fullName: Mapsui.Fetcher.Delayer.MillisecondsToWait
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Fetcher/Delayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MillisecondsToWait
+    path: ../../Mapsui/Fetcher/Delayer.cs
+    startLine: 17
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  summary: The delay between two calls.
+  example: []
+  syntax:
+    content: public int MillisecondsToWait { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property MillisecondsToWait As Integer
+  overload: Mapsui.Fetcher.Delayer.MillisecondsToWait*
+- uid: Mapsui.Fetcher.Delayer.StartWithDelay
+  commentId: P:Mapsui.Fetcher.Delayer.StartWithDelay
+  id: StartWithDelay
+  parent: Mapsui.Fetcher.Delayer
+  langs:
+  - csharp
+  - vb
+  name: StartWithDelay
+  nameWithType: Delayer.StartWithDelay
+  fullName: Mapsui.Fetcher.Delayer.StartWithDelay
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Fetcher/Delayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StartWithDelay
+    path: ../../Mapsui/Fetcher/Delayer.cs
+    startLine: 19
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  syntax:
+    content: public bool StartWithDelay { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property StartWithDelay As Boolean
+  overload: Mapsui.Fetcher.Delayer.StartWithDelay*
+- uid: Mapsui.Fetcher.Delayer.#ctor
+  commentId: M:Mapsui.Fetcher.Delayer.#ctor
+  id: '#ctor'
+  parent: Mapsui.Fetcher.Delayer
+  langs:
+  - csharp
+  - vb
+  name: Delayer()
+  nameWithType: Delayer.Delayer()
+  fullName: Mapsui.Fetcher.Delayer.Delayer()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Fetcher/Delayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Fetcher/Delayer.cs
+    startLine: 21
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  syntax:
+    content: public Delayer()
+    content.vb: Public Sub New()
+  overload: Mapsui.Fetcher.Delayer.#ctor*
+  nameWithType.vb: Delayer.New()
+  fullName.vb: Mapsui.Fetcher.Delayer.New()
+  name.vb: New()
+- uid: Mapsui.Fetcher.Delayer.ExecuteDelayed(System.Action)
+  commentId: M:Mapsui.Fetcher.Delayer.ExecuteDelayed(System.Action)
+  id: ExecuteDelayed(System.Action)
+  parent: Mapsui.Fetcher.Delayer
+  langs:
+  - csharp
+  - vb
+  name: ExecuteDelayed(Action)
+  nameWithType: Delayer.ExecuteDelayed(Action)
+  fullName: Mapsui.Fetcher.Delayer.ExecuteDelayed(System.Action)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Fetcher/Delayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ExecuteDelayed
+    path: ../../Mapsui/Fetcher/Delayer.cs
+    startLine: 35
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  summary: >-
+    Executes the method passed as argument with a possible delay. After a previous
+
+    call the next call is delayed until 'MillisecondsToWait' has passed.
+
+    When ExecuteRequest is called before the previous delayed action was executed 
+
+    the previous one will be cancelled.
+  remarks: >-
+    When the previous call was more than 'MillisecondsToWait' ago there will
+        be no delay.
+  example: []
+  syntax:
+    content: public void ExecuteDelayed(Action action)
+    parameters:
+    - id: action
+      type: System.Action
+      description: The action to be executed after the possible delay
+    content.vb: Public Sub ExecuteDelayed(action As Action)
+  overload: Mapsui.Fetcher.Delayer.ExecuteDelayed*
+- uid: Mapsui.Fetcher.Delayer.Dispose
+  commentId: M:Mapsui.Fetcher.Delayer.Dispose
+  id: Dispose
+  parent: Mapsui.Fetcher.Delayer
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: Delayer.Dispose()
+  fullName: Mapsui.Fetcher.Delayer.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Fetcher/Delayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui/Fetcher/Delayer.cs
+    startLine: 54
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Mapsui.Fetcher.Delayer.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+- uid: Mapsui.Fetcher.Delayer.Dispose(System.Boolean)
+  commentId: M:Mapsui.Fetcher.Delayer.Dispose(System.Boolean)
+  id: Dispose(System.Boolean)
+  parent: Mapsui.Fetcher.Delayer
+  langs:
+  - csharp
+  - vb
+  name: Dispose(bool)
+  nameWithType: Delayer.Dispose(bool)
+  fullName: Mapsui.Fetcher.Delayer.Dispose(bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Fetcher/Delayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui/Fetcher/Delayer.cs
+    startLine: 60
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  syntax:
+    content: protected virtual void Dispose(bool disposing)
+    parameters:
+    - id: disposing
+      type: System.Boolean
+    content.vb: Protected Overridable Sub Dispose(disposing As Boolean)
+  overload: Mapsui.Fetcher.Delayer.Dispose*
+  nameWithType.vb: Delayer.Dispose(Boolean)
+  fullName.vb: Mapsui.Fetcher.Delayer.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+references:
+- uid: Mapsui.Fetcher
+  commentId: N:Mapsui.Fetcher
+  href: Mapsui.html
+  name: Mapsui.Fetcher
+  nameWithType: Mapsui.Fetcher
+  fullName: Mapsui.Fetcher
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Fetcher.Delayer.MillisecondsToWait*
+  commentId: Overload:Mapsui.Fetcher.Delayer.MillisecondsToWait
+  href: Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_MillisecondsToWait
+  name: MillisecondsToWait
+  nameWithType: Delayer.MillisecondsToWait
+  fullName: Mapsui.Fetcher.Delayer.MillisecondsToWait
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Fetcher.Delayer.StartWithDelay*
+  commentId: Overload:Mapsui.Fetcher.Delayer.StartWithDelay
+  href: Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_StartWithDelay
+  name: StartWithDelay
+  nameWithType: Delayer.StartWithDelay
+  fullName: Mapsui.Fetcher.Delayer.StartWithDelay
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Fetcher.Delayer.#ctor*
+  commentId: Overload:Mapsui.Fetcher.Delayer.#ctor
+  href: Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer__ctor
+  name: Delayer
+  nameWithType: Delayer.Delayer
+  fullName: Mapsui.Fetcher.Delayer.Delayer
+  nameWithType.vb: Delayer.New
+  fullName.vb: Mapsui.Fetcher.Delayer.New
+  name.vb: New
+- uid: Mapsui.Fetcher.Delayer.ExecuteDelayed*
+  commentId: Overload:Mapsui.Fetcher.Delayer.ExecuteDelayed
+  href: Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_ExecuteDelayed_System_Action_
+  name: ExecuteDelayed
+  nameWithType: Delayer.ExecuteDelayed
+  fullName: Mapsui.Fetcher.Delayer.ExecuteDelayed
+- uid: System.Action
+  commentId: T:System.Action
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action
+  name: Action
+  nameWithType: Action
+  fullName: System.Action
+- uid: Mapsui.Fetcher.Delayer.Dispose*
+  commentId: Overload:Mapsui.Fetcher.Delayer.Dispose
+  href: Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_Dispose
+  name: Dispose
+  nameWithType: Delayer.Dispose
+  fullName: Mapsui.Fetcher.Delayer.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

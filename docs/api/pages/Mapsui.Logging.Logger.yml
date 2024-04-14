@@ -1,0 +1,500 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Logging.Logger
+  commentId: T:Mapsui.Logging.Logger
+  id: Logger
+  parent: Mapsui.Logging
+  children:
+  - Mapsui.Logging.Logger.Log(Mapsui.Logging.LogLevel,System.String,System.Exception)
+  - Mapsui.Logging.Logger.LogDelegate
+  langs:
+  - csharp
+  - vb
+  name: Logger
+  nameWithType: Logger
+  fullName: Mapsui.Logging.Logger
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Logging/Logger.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Logger
+    path: ../../Mapsui/Logging/Logger.cs
+    startLine: 14
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Logging
+  syntax:
+    content: public static class Logger
+    content.vb: Public Module Logger
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Logging.Logger.LogDelegate
+  commentId: P:Mapsui.Logging.Logger.LogDelegate
+  id: LogDelegate
+  parent: Mapsui.Logging.Logger
+  langs:
+  - csharp
+  - vb
+  name: LogDelegate
+  nameWithType: Logger.LogDelegate
+  fullName: Mapsui.Logging.Logger.LogDelegate
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Logging/Logger.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LogDelegate
+    path: ../../Mapsui/Logging/Logger.cs
+    startLine: 16
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Logging
+  syntax:
+    content: public static Action<LogLevel, string, Exception?>? LogDelegate { get; set; }
+    parameters: []
+    return:
+      type: System.Action{Mapsui.Logging.LogLevel,System.String,System.Exception}
+    content.vb: Public Shared Property LogDelegate As Action(Of LogLevel, String, Exception)
+  overload: Mapsui.Logging.Logger.LogDelegate*
+- uid: Mapsui.Logging.Logger.Log(Mapsui.Logging.LogLevel,System.String,System.Exception)
+  commentId: M:Mapsui.Logging.Logger.Log(Mapsui.Logging.LogLevel,System.String,System.Exception)
+  id: Log(Mapsui.Logging.LogLevel,System.String,System.Exception)
+  parent: Mapsui.Logging.Logger
+  langs:
+  - csharp
+  - vb
+  name: Log(LogLevel, string, Exception?)
+  nameWithType: Logger.Log(LogLevel, string, Exception?)
+  fullName: Mapsui.Logging.Logger.Log(Mapsui.Logging.LogLevel, string, System.Exception?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Logging/Logger.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Log
+    path: ../../Mapsui/Logging/Logger.cs
+    startLine: 22
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Logging
+  syntax:
+    content: public static void Log(LogLevel level, string message, Exception? exception = null)
+    parameters:
+    - id: level
+      type: Mapsui.Logging.LogLevel
+    - id: message
+      type: System.String
+    - id: exception
+      type: System.Exception
+    content.vb: Public Shared Sub Log(level As LogLevel, message As String, exception As Exception = Nothing)
+  overload: Mapsui.Logging.Logger.Log*
+  nameWithType.vb: Logger.Log(LogLevel, String, Exception)
+  fullName.vb: Mapsui.Logging.Logger.Log(Mapsui.Logging.LogLevel, String, System.Exception)
+  name.vb: Log(LogLevel, String, Exception)
+references:
+- uid: Mapsui.Logging
+  commentId: N:Mapsui.Logging
+  href: Mapsui.html
+  name: Mapsui.Logging
+  nameWithType: Mapsui.Logging
+  fullName: Mapsui.Logging
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Logging
+    name: Logging
+    href: Mapsui.Logging.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Logging
+    name: Logging
+    href: Mapsui.Logging.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Logging.Logger.LogDelegate*
+  commentId: Overload:Mapsui.Logging.Logger.LogDelegate
+  href: Mapsui.Logging.Logger.html#Mapsui_Logging_Logger_LogDelegate
+  name: LogDelegate
+  nameWithType: Logger.LogDelegate
+  fullName: Mapsui.Logging.Logger.LogDelegate
+- uid: System.Action{Mapsui.Logging.LogLevel,System.String,System.Exception}
+  commentId: T:System.Action{Mapsui.Logging.LogLevel,System.String,System.Exception}
+  parent: System
+  definition: System.Action`3
+  href: https://learn.microsoft.com/dotnet/api/system.action-3
+  name: Action<LogLevel, string, Exception>
+  nameWithType: Action<LogLevel, string, Exception>
+  fullName: System.Action<Mapsui.Logging.LogLevel, string, System.Exception>
+  nameWithType.vb: Action(Of LogLevel, String, Exception)
+  fullName.vb: System.Action(Of Mapsui.Logging.LogLevel, String, System.Exception)
+  name.vb: Action(Of LogLevel, String, Exception)
+  spec.csharp:
+  - uid: System.Action`3
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-3
+  - name: <
+  - uid: Mapsui.Logging.LogLevel
+    name: LogLevel
+    href: Mapsui.Logging.LogLevel.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Exception
+    name: Exception
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`3
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Logging.LogLevel
+    name: LogLevel
+    href: Mapsui.Logging.LogLevel.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Exception
+    name: Exception
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception
+  - name: )
+- uid: System.Action`3
+  commentId: T:System.Action`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-3
+  name: Action<T1, T2, T3>
+  nameWithType: Action<T1, T2, T3>
+  fullName: System.Action<T1, T2, T3>
+  nameWithType.vb: Action(Of T1, T2, T3)
+  fullName.vb: System.Action(Of T1, T2, T3)
+  name.vb: Action(Of T1, T2, T3)
+  spec.csharp:
+  - uid: System.Action`3
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`3
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: )
+- uid: Mapsui.Logging.Logger.Log*
+  commentId: Overload:Mapsui.Logging.Logger.Log
+  href: Mapsui.Logging.Logger.html#Mapsui_Logging_Logger_Log_Mapsui_Logging_LogLevel_System_String_System_Exception_
+  name: Log
+  nameWithType: Logger.Log
+  fullName: Mapsui.Logging.Logger.Log
+- uid: Mapsui.Logging.LogLevel
+  commentId: T:Mapsui.Logging.LogLevel
+  parent: Mapsui.Logging
+  href: Mapsui.Logging.LogLevel.html
+  name: LogLevel
+  nameWithType: LogLevel
+  fullName: Mapsui.Logging.LogLevel
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception

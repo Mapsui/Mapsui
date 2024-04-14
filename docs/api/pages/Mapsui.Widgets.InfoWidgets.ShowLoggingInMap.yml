@@ -1,0 +1,239 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  commentId: T:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  id: ShowLoggingInMap
+  parent: Mapsui.Widgets.InfoWidgets
+  children:
+  - Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Never
+  - Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabled
+  - Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
+  langs:
+  - csharp
+  - vb
+  name: ShowLoggingInMap
+  nameWithType: ShowLoggingInMap
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShowLoggingInMap
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  syntax:
+    content: public enum ShowLoggingInMap
+    content.vb: Public Enum ShowLoggingInMap
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabled
+  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabled
+  id: WhenLoggingWidgetIsEnabled
+  parent: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  langs:
+  - csharp
+  - vb
+  name: WhenLoggingWidgetIsEnabled
+  nameWithType: ShowLoggingInMap.WhenLoggingWidgetIsEnabled
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabled
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WhenLoggingWidgetIsEnabled
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  syntax:
+    content: WhenLoggingWidgetIsEnabled = 0
+    return:
+      type: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
+  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
+  id: WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
+  parent: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  langs:
+  - csharp
+  - vb
+  name: WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
+  nameWithType: ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  syntax:
+    content: WhenLoggingWidgetIsEnabledAndDebuggerIsAttached = 1
+    return:
+      type: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Never
+  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Never
+  id: Never
+  parent: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  langs:
+  - csharp
+  - vb
+  name: Never
+  nameWithType: ShowLoggingInMap.Never
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Never
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Never
+    path: ../../Mapsui/Widgets/InfoWidgets/LoggingWidget.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets.InfoWidgets
+  syntax:
+    content: Never = 2
+    return:
+      type: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+references:
+- uid: Mapsui.Widgets.InfoWidgets
+  commentId: N:Mapsui.Widgets.InfoWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.InfoWidgets
+  nameWithType: Mapsui.Widgets.InfoWidgets
+  fullName: Mapsui.Widgets.InfoWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets
+    name: InfoWidgets
+    href: Mapsui.Widgets.InfoWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.InfoWidgets
+    name: InfoWidgets
+    href: Mapsui.Widgets.InfoWidgets.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  commentId: T:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+  parent: Mapsui.Widgets.InfoWidgets
+  href: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html
+  name: ShowLoggingInMap
+  nameWithType: ShowLoggingInMap
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap

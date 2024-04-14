@@ -1,0 +1,46 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts
+  commentId: N:Mapsui.Nts
+  id: Mapsui.Nts
+  children:
+  - Mapsui.Nts.GeometryFeature
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Nts
+  nameWithType: Mapsui.Nts
+  fullName: Mapsui.Nts
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Nts.GeometryFeature
+  commentId: T:Mapsui.Nts.GeometryFeature
+  parent: Mapsui.Nts
+  href: Mapsui.Nts.GeometryFeature.html
+  name: GeometryFeature
+  nameWithType: GeometryFeature
+  fullName: Mapsui.Nts.GeometryFeature
+- uid: Mapsui.Nts
+  commentId: N:Mapsui.Nts
+  href: Mapsui.html
+  name: Mapsui.Nts
+  nameWithType: Mapsui.Nts
+  fullName: Mapsui.Nts
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html

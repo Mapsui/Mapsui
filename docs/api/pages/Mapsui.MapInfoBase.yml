@@ -1,0 +1,1068 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.MapInfoBase
+  commentId: T:Mapsui.MapInfoBase
+  id: MapInfoBase
+  parent: Mapsui
+  children:
+  - Mapsui.MapInfoBase.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord})
+  - Mapsui.MapInfoBase.ClearResults
+  - Mapsui.MapInfoBase.Feature
+  - Mapsui.MapInfoBase.Layer
+  - Mapsui.MapInfoBase.MapInfoRecord
+  - Mapsui.MapInfoBase.MapInfoRecords
+  - Mapsui.MapInfoBase.Resolution
+  - Mapsui.MapInfoBase.ScreenPosition
+  - Mapsui.MapInfoBase.Style
+  - Mapsui.MapInfoBase.WorldPosition
+  langs:
+  - csharp
+  - vb
+  name: MapInfoBase
+  nameWithType: MapInfoBase
+  fullName: Mapsui.MapInfoBase
+  type: Class
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MapInfoBase
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public class MapInfoBase
+    content.vb: Public Class MapInfoBase
+  inheritance:
+  - System.Object
+  derivedClasses:
+  - Mapsui.MapInfo
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.MapInfoBase.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord})
+  commentId: M:Mapsui.MapInfoBase.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord})
+  id: '#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord})'
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: MapInfoBase(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>)
+  nameWithType: MapInfoBase.MapInfoBase(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>)
+  fullName: Mapsui.MapInfoBase.MapInfoBase(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, double, System.Collections.Generic.IEnumerable<Mapsui.Rendering.MapInfoRecord>)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 14
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: protected MapInfoBase(ScreenPosition screenPosition, MPoint worldPosition, double resolution, IEnumerable<MapInfoRecord> records)
+    parameters:
+    - id: screenPosition
+      type: Mapsui.Manipulations.ScreenPosition
+    - id: worldPosition
+      type: Mapsui.MPoint
+    - id: resolution
+      type: System.Double
+    - id: records
+      type: System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord}
+    content.vb: Protected Sub New(screenPosition As ScreenPosition, worldPosition As MPoint, resolution As Double, records As IEnumerable(Of MapInfoRecord))
+  overload: Mapsui.MapInfoBase.#ctor*
+  nameWithType.vb: MapInfoBase.New(ScreenPosition, MPoint, Double, IEnumerable(Of MapInfoRecord))
+  fullName.vb: Mapsui.MapInfoBase.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Double, System.Collections.Generic.IEnumerable(Of Mapsui.Rendering.MapInfoRecord))
+  name.vb: New(ScreenPosition, MPoint, Double, IEnumerable(Of MapInfoRecord))
+- uid: Mapsui.MapInfoBase.Layer
+  commentId: P:Mapsui.MapInfoBase.Layer
+  id: Layer
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: Layer
+  nameWithType: MapInfoBase.Layer
+  fullName: Mapsui.MapInfoBase.Layer
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Layer
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 28
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: The layer to which the touched feature belongs
+  example: []
+  syntax:
+    content: public ILayer? Layer { get; }
+    parameters: []
+    return:
+      type: Mapsui.Layers.ILayer
+    content.vb: Public ReadOnly Property Layer As ILayer
+  overload: Mapsui.MapInfoBase.Layer*
+- uid: Mapsui.MapInfoBase.Feature
+  commentId: P:Mapsui.MapInfoBase.Feature
+  id: Feature
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: Feature
+  nameWithType: MapInfoBase.Feature
+  fullName: Mapsui.MapInfoBase.Feature
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Feature
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 32
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: The feature touched by the user
+  example: []
+  syntax:
+    content: public IFeature? Feature { get; }
+    parameters: []
+    return:
+      type: Mapsui.IFeature
+    content.vb: Public ReadOnly Property Feature As IFeature
+  overload: Mapsui.MapInfoBase.Feature*
+- uid: Mapsui.MapInfoBase.MapInfoRecord
+  commentId: P:Mapsui.MapInfoBase.MapInfoRecord
+  id: MapInfoRecord
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: MapInfoRecord
+  nameWithType: MapInfoBase.MapInfoRecord
+  fullName: Mapsui.MapInfoBase.MapInfoRecord
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MapInfoRecord
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 37
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Current Map Info Record
+  example: []
+  syntax:
+    content: public MapInfoRecord? MapInfoRecord { get; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.MapInfoRecord
+    content.vb: Public ReadOnly Property MapInfoRecord As MapInfoRecord
+  overload: Mapsui.MapInfoBase.MapInfoRecord*
+- uid: Mapsui.MapInfoBase.Style
+  commentId: P:Mapsui.MapInfoBase.Style
+  id: Style
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: Style
+  nameWithType: MapInfoBase.Style
+  fullName: Mapsui.MapInfoBase.Style
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Style
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 42
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: The style of feature touched by the user
+  example: []
+  syntax:
+    content: public IStyle? Style { get; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.IStyle
+    content.vb: Public ReadOnly Property Style As IStyle
+  overload: Mapsui.MapInfoBase.Style*
+- uid: Mapsui.MapInfoBase.WorldPosition
+  commentId: P:Mapsui.MapInfoBase.WorldPosition
+  id: WorldPosition
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: WorldPosition
+  nameWithType: MapInfoBase.WorldPosition
+  fullName: Mapsui.MapInfoBase.WorldPosition
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WorldPosition
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 47
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: World position of the place the user touched
+  example: []
+  syntax:
+    content: public MPoint WorldPosition { get; }
+    parameters: []
+    return:
+      type: Mapsui.MPoint
+    content.vb: Public ReadOnly Property WorldPosition As MPoint
+  overload: Mapsui.MapInfoBase.WorldPosition*
+- uid: Mapsui.MapInfoBase.ScreenPosition
+  commentId: P:Mapsui.MapInfoBase.ScreenPosition
+  id: ScreenPosition
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: ScreenPosition
+  nameWithType: MapInfoBase.ScreenPosition
+  fullName: Mapsui.MapInfoBase.ScreenPosition
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ScreenPosition
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 51
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Screen position of the place the user touched
+  example: []
+  syntax:
+    content: public ScreenPosition ScreenPosition { get; }
+    parameters: []
+    return:
+      type: Mapsui.Manipulations.ScreenPosition
+    content.vb: Public ReadOnly Property ScreenPosition As ScreenPosition
+  overload: Mapsui.MapInfoBase.ScreenPosition*
+- uid: Mapsui.MapInfoBase.Resolution
+  commentId: P:Mapsui.MapInfoBase.Resolution
+  id: Resolution
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: Resolution
+  nameWithType: MapInfoBase.Resolution
+  fullName: Mapsui.MapInfoBase.Resolution
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Resolution
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 58
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    The resolution at which the info was retrieved. This can
+
+    be useful to calculate screen distances, which are needed
+
+    for editing functionality.
+  example: []
+  syntax:
+    content: public double Resolution { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property Resolution As Double
+  overload: Mapsui.MapInfoBase.Resolution*
+- uid: Mapsui.MapInfoBase.MapInfoRecords
+  commentId: P:Mapsui.MapInfoBase.MapInfoRecords
+  id: MapInfoRecords
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: MapInfoRecords
+  nameWithType: MapInfoBase.MapInfoRecords
+  fullName: Mapsui.MapInfoBase.MapInfoRecords
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MapInfoRecords
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 61
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: List of MapInfo Records
+  example: []
+  syntax:
+    content: public List<MapInfoRecord> MapInfoRecords { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Mapsui.Rendering.MapInfoRecord}
+    content.vb: Public ReadOnly Property MapInfoRecords As List(Of MapInfoRecord)
+  overload: Mapsui.MapInfoBase.MapInfoRecords*
+- uid: Mapsui.MapInfoBase.ClearResults
+  commentId: M:Mapsui.MapInfoBase.ClearResults
+  id: ClearResults
+  parent: Mapsui.MapInfoBase
+  langs:
+  - csharp
+  - vb
+  name: ClearResults()
+  nameWithType: MapInfoBase.ClearResults()
+  fullName: Mapsui.MapInfoBase.ClearResults()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MapInfoBase.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ClearResults
+    path: ../../Mapsui/MapInfoBase.cs
+    startLine: 64
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Clears the Calculated Results
+  example: []
+  syntax:
+    content: protected void ClearResults()
+    content.vb: Protected Sub ClearResults()
+  overload: Mapsui.MapInfoBase.ClearResults*
+references:
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.MapInfoBase.#ctor*
+  commentId: Overload:Mapsui.MapInfoBase.#ctor
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_System_Double_System_Collections_Generic_IEnumerable_Mapsui_Rendering_MapInfoRecord__
+  name: MapInfoBase
+  nameWithType: MapInfoBase.MapInfoBase
+  fullName: Mapsui.MapInfoBase.MapInfoBase
+  nameWithType.vb: MapInfoBase.New
+  fullName.vb: Mapsui.MapInfoBase.New
+  name.vb: New
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<MapInfoRecord>
+  nameWithType: IEnumerable<MapInfoRecord>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.Rendering.MapInfoRecord>
+  nameWithType.vb: IEnumerable(Of MapInfoRecord)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.Rendering.MapInfoRecord)
+  name.vb: IEnumerable(Of MapInfoRecord)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Rendering.MapInfoRecord
+    name: MapInfoRecord
+    href: Mapsui.Rendering.MapInfoRecord.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Rendering.MapInfoRecord
+    name: MapInfoRecord
+    href: Mapsui.Rendering.MapInfoRecord.html
+  - name: )
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.MapInfoBase.Layer*
+  commentId: Overload:Mapsui.MapInfoBase.Layer
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Layer
+  name: Layer
+  nameWithType: MapInfoBase.Layer
+  fullName: Mapsui.MapInfoBase.Layer
+- uid: Mapsui.Layers.ILayer
+  commentId: T:Mapsui.Layers.ILayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.ILayer.html
+  name: ILayer
+  nameWithType: ILayer
+  fullName: Mapsui.Layers.ILayer
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: Mapsui.MapInfoBase.Feature*
+  commentId: Overload:Mapsui.MapInfoBase.Feature
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Feature
+  name: Feature
+  nameWithType: MapInfoBase.Feature
+  fullName: Mapsui.MapInfoBase.Feature
+- uid: Mapsui.IFeature
+  commentId: T:Mapsui.IFeature
+  parent: Mapsui
+  href: Mapsui.IFeature.html
+  name: IFeature
+  nameWithType: IFeature
+  fullName: Mapsui.IFeature
+- uid: Mapsui.MapInfoBase.MapInfoRecord*
+  commentId: Overload:Mapsui.MapInfoBase.MapInfoRecord
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_MapInfoRecord
+  name: MapInfoRecord
+  nameWithType: MapInfoBase.MapInfoRecord
+  fullName: Mapsui.MapInfoBase.MapInfoRecord
+- uid: Mapsui.Rendering.MapInfoRecord
+  commentId: T:Mapsui.Rendering.MapInfoRecord
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.MapInfoRecord.html
+  name: MapInfoRecord
+  nameWithType: MapInfoRecord
+  fullName: Mapsui.Rendering.MapInfoRecord
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: Mapsui.MapInfoBase.Style*
+  commentId: Overload:Mapsui.MapInfoBase.Style
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Style
+  name: Style
+  nameWithType: MapInfoBase.Style
+  fullName: Mapsui.MapInfoBase.Style
+- uid: Mapsui.Styles.IStyle
+  commentId: T:Mapsui.Styles.IStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyle.html
+  name: IStyle
+  nameWithType: IStyle
+  fullName: Mapsui.Styles.IStyle
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.MapInfoBase.WorldPosition*
+  commentId: Overload:Mapsui.MapInfoBase.WorldPosition
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_WorldPosition
+  name: WorldPosition
+  nameWithType: MapInfoBase.WorldPosition
+  fullName: Mapsui.MapInfoBase.WorldPosition
+- uid: Mapsui.MapInfoBase.ScreenPosition*
+  commentId: Overload:Mapsui.MapInfoBase.ScreenPosition
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_ScreenPosition
+  name: ScreenPosition
+  nameWithType: MapInfoBase.ScreenPosition
+  fullName: Mapsui.MapInfoBase.ScreenPosition
+- uid: Mapsui.MapInfoBase.Resolution*
+  commentId: Overload:Mapsui.MapInfoBase.Resolution
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Resolution
+  name: Resolution
+  nameWithType: MapInfoBase.Resolution
+  fullName: Mapsui.MapInfoBase.Resolution
+- uid: Mapsui.MapInfoBase.MapInfoRecords*
+  commentId: Overload:Mapsui.MapInfoBase.MapInfoRecords
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_MapInfoRecords
+  name: MapInfoRecords
+  nameWithType: MapInfoBase.MapInfoRecords
+  fullName: Mapsui.MapInfoBase.MapInfoRecords
+- uid: System.Collections.Generic.List{Mapsui.Rendering.MapInfoRecord}
+  commentId: T:System.Collections.Generic.List{Mapsui.Rendering.MapInfoRecord}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<MapInfoRecord>
+  nameWithType: List<MapInfoRecord>
+  fullName: System.Collections.Generic.List<Mapsui.Rendering.MapInfoRecord>
+  nameWithType.vb: List(Of MapInfoRecord)
+  fullName.vb: System.Collections.Generic.List(Of Mapsui.Rendering.MapInfoRecord)
+  name.vb: List(Of MapInfoRecord)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Mapsui.Rendering.MapInfoRecord
+    name: MapInfoRecord
+    href: Mapsui.Rendering.MapInfoRecord.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Rendering.MapInfoRecord
+    name: MapInfoRecord
+    href: Mapsui.Rendering.MapInfoRecord.html
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.MapInfoBase.ClearResults*
+  commentId: Overload:Mapsui.MapInfoBase.ClearResults
+  href: Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_ClearResults
+  name: ClearResults
+  nameWithType: MapInfoBase.ClearResults
+  fullName: Mapsui.MapInfoBase.ClearResults

@@ -1,0 +1,61 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Tiling.Extensions
+  commentId: N:Mapsui.Tiling.Extensions
+  id: Mapsui.Tiling.Extensions
+  children:
+  - Mapsui.Tiling.Extensions.ExtentExtensions
+  - Mapsui.Tiling.Extensions.MRectExtensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Tiling.Extensions
+  nameWithType: Mapsui.Tiling.Extensions
+  fullName: Mapsui.Tiling.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.Tiling
+references:
+- uid: Mapsui.Tiling.Extensions.ExtentExtensions
+  commentId: T:Mapsui.Tiling.Extensions.ExtentExtensions
+  href: Mapsui.Tiling.Extensions.ExtentExtensions.html
+  name: ExtentExtensions
+  nameWithType: ExtentExtensions
+  fullName: Mapsui.Tiling.Extensions.ExtentExtensions
+- uid: Mapsui.Tiling.Extensions.MRectExtensions
+  commentId: T:Mapsui.Tiling.Extensions.MRectExtensions
+  parent: Mapsui.Tiling.Extensions
+  href: Mapsui.Tiling.Extensions.MRectExtensions.html
+  name: MRectExtensions
+  nameWithType: MRectExtensions
+  fullName: Mapsui.Tiling.Extensions.MRectExtensions
+- uid: Mapsui.Tiling.Extensions
+  commentId: N:Mapsui.Tiling.Extensions
+  href: Mapsui.html
+  name: Mapsui.Tiling.Extensions
+  nameWithType: Mapsui.Tiling.Extensions
+  fullName: Mapsui.Tiling.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Extensions
+    name: Extensions
+    href: Mapsui.Tiling.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Extensions
+    name: Extensions
+    href: Mapsui.Tiling.Extensions.html

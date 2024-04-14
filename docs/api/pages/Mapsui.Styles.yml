@@ -1,0 +1,330 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  id: Mapsui.Styles
+  children:
+  - Mapsui.Styles.ArrowAlignment
+  - Mapsui.Styles.BitmapRegistry
+  - Mapsui.Styles.Brush
+  - Mapsui.Styles.CalloutStyle
+  - Mapsui.Styles.CalloutType
+  - Mapsui.Styles.Color
+  - Mapsui.Styles.FillStyle
+  - Mapsui.Styles.Font
+  - Mapsui.Styles.IFeatureSize
+  - Mapsui.Styles.IStyle
+  - Mapsui.Styles.IStyleRenderer
+  - Mapsui.Styles.LabelStyle
+  - Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum
+  - Mapsui.Styles.LabelStyle.LineBreakMode
+  - Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  - Mapsui.Styles.Offset
+  - Mapsui.Styles.Pen
+  - Mapsui.Styles.PenStrokeCap
+  - Mapsui.Styles.PenStyle
+  - Mapsui.Styles.RasterStyle
+  - Mapsui.Styles.RelativeOffset
+  - Mapsui.Styles.Size
+  - Mapsui.Styles.Sprite
+  - Mapsui.Styles.StrokeJoin
+  - Mapsui.Styles.Style
+  - Mapsui.Styles.StyleCollection
+  - Mapsui.Styles.SymbolStyle
+  - Mapsui.Styles.SymbolStyles
+  - Mapsui.Styles.SymbolType
+  - Mapsui.Styles.UnitType
+  - Mapsui.Styles.VectorStyle
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Styles.BitmapRegistry
+  commentId: T:Mapsui.Styles.BitmapRegistry
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.BitmapRegistry.html
+  name: BitmapRegistry
+  nameWithType: BitmapRegistry
+  fullName: Mapsui.Styles.BitmapRegistry
+- uid: Mapsui.Styles.Brush
+  commentId: T:Mapsui.Styles.Brush
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Brush.html
+  name: Brush
+  nameWithType: Brush
+  fullName: Mapsui.Styles.Brush
+- uid: Mapsui.Styles.CalloutType
+  commentId: T:Mapsui.Styles.CalloutType
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.CalloutType.html
+  name: CalloutType
+  nameWithType: CalloutType
+  fullName: Mapsui.Styles.CalloutType
+- uid: Mapsui.Styles.ArrowAlignment
+  commentId: T:Mapsui.Styles.ArrowAlignment
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.ArrowAlignment.html
+  name: ArrowAlignment
+  nameWithType: ArrowAlignment
+  fullName: Mapsui.Styles.ArrowAlignment
+- uid: Mapsui.Styles.CalloutStyle
+  commentId: T:Mapsui.Styles.CalloutStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.CalloutStyle.html
+  name: CalloutStyle
+  nameWithType: CalloutStyle
+  fullName: Mapsui.Styles.CalloutStyle
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Color.html
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+- uid: Mapsui.Styles.FillStyle
+  commentId: T:Mapsui.Styles.FillStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.FillStyle.html
+  name: FillStyle
+  nameWithType: FillStyle
+  fullName: Mapsui.Styles.FillStyle
+- uid: Mapsui.Styles.Font
+  commentId: T:Mapsui.Styles.Font
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Font.html
+  name: Font
+  nameWithType: Font
+  fullName: Mapsui.Styles.Font
+- uid: Mapsui.Styles.IFeatureSize
+  commentId: T:Mapsui.Styles.IFeatureSize
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IFeatureSize.html
+  name: IFeatureSize
+  nameWithType: IFeatureSize
+  fullName: Mapsui.Styles.IFeatureSize
+- uid: Mapsui.Styles.IStyle
+  commentId: T:Mapsui.Styles.IStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyle.html
+  name: IStyle
+  nameWithType: IStyle
+  fullName: Mapsui.Styles.IStyle
+- uid: Mapsui.Styles.IStyleRenderer
+  commentId: T:Mapsui.Styles.IStyleRenderer
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyleRenderer.html
+  name: IStyleRenderer
+  nameWithType: IStyleRenderer
+  fullName: Mapsui.Styles.IStyleRenderer
+- uid: Mapsui.Styles.LabelStyle
+  commentId: T:Mapsui.Styles.LabelStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.LabelStyle.html
+  name: LabelStyle
+  nameWithType: LabelStyle
+  fullName: Mapsui.Styles.LabelStyle
+- uid: Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum
+  commentId: T:Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.LabelStyle.html
+  name: LabelStyle.HorizontalAlignmentEnum
+  nameWithType: LabelStyle.HorizontalAlignmentEnum
+  fullName: Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum
+  spec.csharp:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum
+    name: HorizontalAlignmentEnum
+    href: Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum.html
+  spec.vb:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum
+    name: HorizontalAlignmentEnum
+    href: Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum.html
+- uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  commentId: T:Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.LabelStyle.html
+  name: LabelStyle.VerticalAlignmentEnum
+  nameWithType: LabelStyle.VerticalAlignmentEnum
+  fullName: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+  spec.csharp:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+    name: VerticalAlignmentEnum
+    href: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.html
+  spec.vb:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+    name: VerticalAlignmentEnum
+    href: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.html
+- uid: Mapsui.Styles.LabelStyle.LineBreakMode
+  commentId: T:Mapsui.Styles.LabelStyle.LineBreakMode
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.LabelStyle.html
+  name: LabelStyle.LineBreakMode
+  nameWithType: LabelStyle.LineBreakMode
+  fullName: Mapsui.Styles.LabelStyle.LineBreakMode
+  spec.csharp:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.LineBreakMode
+    name: LineBreakMode
+    href: Mapsui.Styles.LabelStyle.LineBreakMode.html
+  spec.vb:
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: .
+  - uid: Mapsui.Styles.LabelStyle.LineBreakMode
+    name: LineBreakMode
+    href: Mapsui.Styles.LabelStyle.LineBreakMode.html
+- uid: Mapsui.Styles.Offset
+  commentId: T:Mapsui.Styles.Offset
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Offset.html
+  name: Offset
+  nameWithType: Offset
+  fullName: Mapsui.Styles.Offset
+- uid: Mapsui.Styles.Pen
+  commentId: T:Mapsui.Styles.Pen
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Pen.html
+  name: Pen
+  nameWithType: Pen
+  fullName: Mapsui.Styles.Pen
+- uid: Mapsui.Styles.PenStrokeCap
+  commentId: T:Mapsui.Styles.PenStrokeCap
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.PenStrokeCap.html
+  name: PenStrokeCap
+  nameWithType: PenStrokeCap
+  fullName: Mapsui.Styles.PenStrokeCap
+- uid: Mapsui.Styles.PenStyle
+  commentId: T:Mapsui.Styles.PenStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.PenStyle.html
+  name: PenStyle
+  nameWithType: PenStyle
+  fullName: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.RasterStyle
+  commentId: T:Mapsui.Styles.RasterStyle
+  href: Mapsui.Styles.RasterStyle.html
+  name: RasterStyle
+  nameWithType: RasterStyle
+  fullName: Mapsui.Styles.RasterStyle
+- uid: Mapsui.Styles.RelativeOffset
+  commentId: T:Mapsui.Styles.RelativeOffset
+  href: Mapsui.Styles.RelativeOffset.html
+  name: RelativeOffset
+  nameWithType: RelativeOffset
+  fullName: Mapsui.Styles.RelativeOffset
+- uid: Mapsui.Styles.Size
+  commentId: T:Mapsui.Styles.Size
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Size.html
+  name: Size
+  nameWithType: Size
+  fullName: Mapsui.Styles.Size
+- uid: Mapsui.Styles.Sprite
+  commentId: T:Mapsui.Styles.Sprite
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Sprite.html
+  name: Sprite
+  nameWithType: Sprite
+  fullName: Mapsui.Styles.Sprite
+- uid: Mapsui.Styles.StrokeJoin
+  commentId: T:Mapsui.Styles.StrokeJoin
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.StrokeJoin.html
+  name: StrokeJoin
+  nameWithType: StrokeJoin
+  fullName: Mapsui.Styles.StrokeJoin
+- uid: Mapsui.Styles.Style
+  commentId: T:Mapsui.Styles.Style
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Style.html
+  name: Style
+  nameWithType: Style
+  fullName: Mapsui.Styles.Style
+- uid: Mapsui.Styles.StyleCollection
+  commentId: T:Mapsui.Styles.StyleCollection
+  href: Mapsui.Styles.StyleCollection.html
+  name: StyleCollection
+  nameWithType: StyleCollection
+  fullName: Mapsui.Styles.StyleCollection
+- uid: Mapsui.Styles.SymbolType
+  commentId: T:Mapsui.Styles.SymbolType
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.SymbolType.html
+  name: SymbolType
+  nameWithType: SymbolType
+  fullName: Mapsui.Styles.SymbolType
+- uid: Mapsui.Styles.UnitType
+  commentId: T:Mapsui.Styles.UnitType
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.UnitType.html
+  name: UnitType
+  nameWithType: UnitType
+  fullName: Mapsui.Styles.UnitType
+- uid: Mapsui.Styles.SymbolStyle
+  commentId: T:Mapsui.Styles.SymbolStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.SymbolStyle.html
+  name: SymbolStyle
+  nameWithType: SymbolStyle
+  fullName: Mapsui.Styles.SymbolStyle
+- uid: Mapsui.Styles.VectorStyle
+  commentId: T:Mapsui.Styles.VectorStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.VectorStyle.html
+  name: VectorStyle
+  nameWithType: VectorStyle
+  fullName: Mapsui.Styles.VectorStyle
+- uid: Mapsui.Styles.SymbolStyles
+  commentId: T:Mapsui.Styles.SymbolStyles
+  href: Mapsui.Styles.SymbolStyles.html
+  name: SymbolStyles
+  nameWithType: SymbolStyles
+  fullName: Mapsui.Styles.SymbolStyles
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html

@@ -1,0 +1,1312 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.MQuad
+  commentId: T:Mapsui.MQuad
+  id: MQuad
+  parent: Mapsui
+  children:
+  - Mapsui.MQuad.#ctor
+  - Mapsui.MQuad.#ctor(Mapsui.MPoint,Mapsui.MPoint,Mapsui.MPoint,Mapsui.MPoint)
+  - Mapsui.MQuad.#ctor(Mapsui.MQuad)
+  - Mapsui.MQuad.BottomLeft
+  - Mapsui.MQuad.BottomRight
+  - Mapsui.MQuad.Equals(Mapsui.MQuad)
+  - Mapsui.MQuad.Equals(System.Object)
+  - Mapsui.MQuad.GetHashCode
+  - Mapsui.MQuad.Rotate(System.Double,System.Double,System.Double)
+  - Mapsui.MQuad.ToBoundingBox
+  - Mapsui.MQuad.ToString
+  - Mapsui.MQuad.TopLeft
+  - Mapsui.MQuad.TopRight
+  - Mapsui.MQuad.Vertices
+  - Mapsui.MQuad.op_Equality(Mapsui.MQuad,Mapsui.MQuad)
+  - Mapsui.MQuad.op_Inequality(Mapsui.MQuad,Mapsui.MQuad)
+  langs:
+  - csharp
+  - vb
+  name: MQuad
+  nameWithType: MQuad
+  fullName: Mapsui.MQuad
+  type: Class
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MQuad
+    path: ../../Mapsui/MQuad.cs
+    startLine: 21
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    Double precision polygon with 4 explicit vertices. This is useful to represent
+
+    a MRect that has been rotated.
+  remarks: >-
+    The sides do not have to be parallel to the two axes of the coordinate system.
+
+    If this has been rotated, the 'BottomLeft' vertex may not actually be the min point in x/y.
+  example: []
+  syntax:
+    content: 'public class MQuad : IEquatable<MQuad>'
+    content.vb: Public Class MQuad Implements IEquatable(Of MQuad)
+  inheritance:
+  - System.Object
+  implements:
+  - System.IEquatable{Mapsui.MQuad}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.MQuad.#ctor
+  commentId: M:Mapsui.MQuad.#ctor
+  id: '#ctor'
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: MQuad()
+  nameWithType: MQuad.MQuad()
+  fullName: Mapsui.MQuad.MQuad()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MQuad.cs
+    startLine: 23
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MQuad()
+    content.vb: Public Sub New()
+  overload: Mapsui.MQuad.#ctor*
+  nameWithType.vb: MQuad.New()
+  fullName.vb: Mapsui.MQuad.New()
+  name.vb: New()
+- uid: Mapsui.MQuad.#ctor(Mapsui.MQuad)
+  commentId: M:Mapsui.MQuad.#ctor(Mapsui.MQuad)
+  id: '#ctor(Mapsui.MQuad)'
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: MQuad(MQuad)
+  nameWithType: MQuad.MQuad(MQuad)
+  fullName: Mapsui.MQuad.MQuad(Mapsui.MQuad)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MQuad.cs
+    startLine: 31
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MQuad(MQuad quad)
+    parameters:
+    - id: quad
+      type: Mapsui.MQuad
+    content.vb: Public Sub New(quad As MQuad)
+  overload: Mapsui.MQuad.#ctor*
+  nameWithType.vb: MQuad.New(MQuad)
+  fullName.vb: Mapsui.MQuad.New(Mapsui.MQuad)
+  name.vb: New(MQuad)
+- uid: Mapsui.MQuad.#ctor(Mapsui.MPoint,Mapsui.MPoint,Mapsui.MPoint,Mapsui.MPoint)
+  commentId: M:Mapsui.MQuad.#ctor(Mapsui.MPoint,Mapsui.MPoint,Mapsui.MPoint,Mapsui.MPoint)
+  id: '#ctor(Mapsui.MPoint,Mapsui.MPoint,Mapsui.MPoint,Mapsui.MPoint)'
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: MQuad(MPoint, MPoint, MPoint, MPoint)
+  nameWithType: MQuad.MQuad(MPoint, MPoint, MPoint, MPoint)
+  fullName: Mapsui.MQuad.MQuad(Mapsui.MPoint, Mapsui.MPoint, Mapsui.MPoint, Mapsui.MPoint)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MQuad.cs
+    startLine: 39
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MQuad(MPoint bottomLeft, MPoint topLeft, MPoint topRight, MPoint bottomRight)
+    parameters:
+    - id: bottomLeft
+      type: Mapsui.MPoint
+    - id: topLeft
+      type: Mapsui.MPoint
+    - id: topRight
+      type: Mapsui.MPoint
+    - id: bottomRight
+      type: Mapsui.MPoint
+    content.vb: Public Sub New(bottomLeft As MPoint, topLeft As MPoint, topRight As MPoint, bottomRight As MPoint)
+  overload: Mapsui.MQuad.#ctor*
+  nameWithType.vb: MQuad.New(MPoint, MPoint, MPoint, MPoint)
+  fullName.vb: Mapsui.MQuad.New(Mapsui.MPoint, Mapsui.MPoint, Mapsui.MPoint, Mapsui.MPoint)
+  name.vb: New(MPoint, MPoint, MPoint, MPoint)
+- uid: Mapsui.MQuad.BottomLeft
+  commentId: P:Mapsui.MQuad.BottomLeft
+  id: BottomLeft
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: BottomLeft
+  nameWithType: MQuad.BottomLeft
+  fullName: Mapsui.MQuad.BottomLeft
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BottomLeft
+    path: ../../Mapsui/MQuad.cs
+    startLine: 47
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MPoint BottomLeft { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MPoint
+    content.vb: Public Property BottomLeft As MPoint
+  overload: Mapsui.MQuad.BottomLeft*
+- uid: Mapsui.MQuad.TopLeft
+  commentId: P:Mapsui.MQuad.TopLeft
+  id: TopLeft
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: TopLeft
+  nameWithType: MQuad.TopLeft
+  fullName: Mapsui.MQuad.TopLeft
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TopLeft
+    path: ../../Mapsui/MQuad.cs
+    startLine: 48
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MPoint TopLeft { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MPoint
+    content.vb: Public Property TopLeft As MPoint
+  overload: Mapsui.MQuad.TopLeft*
+- uid: Mapsui.MQuad.TopRight
+  commentId: P:Mapsui.MQuad.TopRight
+  id: TopRight
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: TopRight
+  nameWithType: MQuad.TopRight
+  fullName: Mapsui.MQuad.TopRight
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TopRight
+    path: ../../Mapsui/MQuad.cs
+    startLine: 49
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MPoint TopRight { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MPoint
+    content.vb: Public Property TopRight As MPoint
+  overload: Mapsui.MQuad.TopRight*
+- uid: Mapsui.MQuad.BottomRight
+  commentId: P:Mapsui.MQuad.BottomRight
+  id: BottomRight
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: BottomRight
+  nameWithType: MQuad.BottomRight
+  fullName: Mapsui.MQuad.BottomRight
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BottomRight
+    path: ../../Mapsui/MQuad.cs
+    startLine: 50
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MPoint BottomRight { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MPoint
+    content.vb: Public Property BottomRight As MPoint
+  overload: Mapsui.MQuad.BottomRight*
+- uid: Mapsui.MQuad.Vertices
+  commentId: P:Mapsui.MQuad.Vertices
+  id: Vertices
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: Vertices
+  nameWithType: MQuad.Vertices
+  fullName: Mapsui.MQuad.Vertices
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Vertices
+    path: ../../Mapsui/MQuad.cs
+    startLine: 55
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Returns the vertices in clockwise order from bottom left around to bottom right
+  example: []
+  syntax:
+    content: public IEnumerable<MPoint> Vertices { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.MPoint}
+    content.vb: Public ReadOnly Property Vertices As IEnumerable(Of MPoint)
+  overload: Mapsui.MQuad.Vertices*
+- uid: Mapsui.MQuad.Equals(Mapsui.MQuad)
+  commentId: M:Mapsui.MQuad.Equals(Mapsui.MQuad)
+  id: Equals(Mapsui.MQuad)
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: Equals(MQuad?)
+  nameWithType: MQuad.Equals(MQuad?)
+  fullName: Mapsui.MQuad.Equals(Mapsui.MQuad?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/MQuad.cs
+    startLine: 71
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Indicates whether the current object is equal to another object of the same type.
+  example: []
+  syntax:
+    content: public bool Equals(MQuad? other)
+    parameters:
+    - id: other
+      type: Mapsui.MQuad
+      description: Other object to compare
+    return:
+      type: System.Boolean
+      description: Returns true if they are equal
+    content.vb: Public Function Equals(other As MQuad) As Boolean
+  overload: Mapsui.MQuad.Equals*
+  implements:
+  - System.IEquatable{Mapsui.MQuad}.Equals(Mapsui.MQuad)
+  nameWithType.vb: MQuad.Equals(MQuad)
+  fullName.vb: Mapsui.MQuad.Equals(Mapsui.MQuad)
+  name.vb: Equals(MQuad)
+- uid: Mapsui.MQuad.Rotate(System.Double,System.Double,System.Double)
+  commentId: M:Mapsui.MQuad.Rotate(System.Double,System.Double,System.Double)
+  id: Rotate(System.Double,System.Double,System.Double)
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: Rotate(double, double, double)
+  nameWithType: MQuad.Rotate(double, double, double)
+  fullName: Mapsui.MQuad.Rotate(double, double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rotate
+    path: ../../Mapsui/MQuad.cs
+    startLine: 90
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Creates a new quad by rotate all 4 vertices clockwise about the specified center point
+  example: []
+  syntax:
+    content: public MQuad Rotate(double degrees, double centerX, double centerY)
+    parameters:
+    - id: degrees
+      type: System.Double
+      description: Angle to rotate clockwise (degrees)
+    - id: centerX
+      type: System.Double
+      description: X coordinate of point about which to rotate
+    - id: centerY
+      type: System.Double
+      description: Y coordinate of point about which to rotate
+    return:
+      type: Mapsui.MQuad
+      description: Returns the rotate quad
+    content.vb: Public Function Rotate(degrees As Double, centerX As Double, centerY As Double) As MQuad
+  overload: Mapsui.MQuad.Rotate*
+  nameWithType.vb: MQuad.Rotate(Double, Double, Double)
+  fullName.vb: Mapsui.MQuad.Rotate(Double, Double, Double)
+  name.vb: Rotate(Double, Double, Double)
+- uid: Mapsui.MQuad.ToBoundingBox
+  commentId: M:Mapsui.MQuad.ToBoundingBox
+  id: ToBoundingBox
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: ToBoundingBox()
+  nameWithType: MQuad.ToBoundingBox()
+  fullName: Mapsui.MQuad.ToBoundingBox()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToBoundingBox
+    path: ../../Mapsui/MQuad.cs
+    startLine: 104
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Calculates a new bounding box that encompasses all 4 vertices.
+  example: []
+  syntax:
+    content: public MRect ToBoundingBox()
+    return:
+      type: Mapsui.MRect
+      description: Returns the calculate bounding box
+    content.vb: Public Function ToBoundingBox() As MRect
+  overload: Mapsui.MQuad.ToBoundingBox*
+- uid: Mapsui.MQuad.Equals(System.Object)
+  commentId: M:Mapsui.MQuad.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: MQuad.Equals(object?)
+  fullName: Mapsui.MQuad.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/MQuad.cs
+    startLine: 119
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Indicates whether the current object is equal to another object of the same type.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: Other object to compare
+    return:
+      type: System.Boolean
+      description: Returns true if they are equal
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Mapsui.MQuad.Equals*
+  nameWithType.vb: MQuad.Equals(Object)
+  fullName.vb: Mapsui.MQuad.Equals(Object)
+  name.vb: Equals(Object)
+- uid: Mapsui.MQuad.GetHashCode
+  commentId: M:Mapsui.MQuad.GetHashCode
+  id: GetHashCode
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: MQuad.GetHashCode()
+  fullName: Mapsui.MQuad.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetHashCode
+    path: ../../Mapsui/MQuad.cs
+    startLine: 128
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Returns a hash code for the specified object
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A hash code for the specified object
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.Object.GetHashCode
+  overload: Mapsui.MQuad.GetHashCode*
+- uid: Mapsui.MQuad.ToString
+  commentId: M:Mapsui.MQuad.ToString
+  id: ToString
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: MQuad.ToString()
+  fullName: Mapsui.MQuad.ToString()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToString
+    path: ../../Mapsui/MQuad.cs
+    startLine: 144
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Returns a string representation of the vertices from bottom-left clockwise to bottom-right
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: Returns the string
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.Object.ToString
+  overload: Mapsui.MQuad.ToString*
+- uid: Mapsui.MQuad.op_Equality(Mapsui.MQuad,Mapsui.MQuad)
+  commentId: M:Mapsui.MQuad.op_Equality(Mapsui.MQuad,Mapsui.MQuad)
+  id: op_Equality(Mapsui.MQuad,Mapsui.MQuad)
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: operator ==(MQuad?, MQuad?)
+  nameWithType: MQuad.operator ==(MQuad?, MQuad?)
+  fullName: Mapsui.MQuad.operator ==(Mapsui.MQuad?, Mapsui.MQuad?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Equality
+    path: ../../Mapsui/MQuad.cs
+    startLine: 150
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public static bool operator ==(MQuad? left, MQuad? right)
+    parameters:
+    - id: left
+      type: Mapsui.MQuad
+    - id: right
+      type: Mapsui.MQuad
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(left As MQuad, right As MQuad) As Boolean
+  overload: Mapsui.MQuad.op_Equality*
+  nameWithType.vb: MQuad.=(MQuad, MQuad)
+  fullName.vb: Mapsui.MQuad.=(Mapsui.MQuad, Mapsui.MQuad)
+  name.vb: =(MQuad, MQuad)
+- uid: Mapsui.MQuad.op_Inequality(Mapsui.MQuad,Mapsui.MQuad)
+  commentId: M:Mapsui.MQuad.op_Inequality(Mapsui.MQuad,Mapsui.MQuad)
+  id: op_Inequality(Mapsui.MQuad,Mapsui.MQuad)
+  parent: Mapsui.MQuad
+  langs:
+  - csharp
+  - vb
+  name: operator !=(MQuad?, MQuad?)
+  nameWithType: MQuad.operator !=(MQuad?, MQuad?)
+  fullName: Mapsui.MQuad.operator !=(Mapsui.MQuad?, Mapsui.MQuad?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/MQuad.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Inequality
+    path: ../../Mapsui/MQuad.cs
+    startLine: 155
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public static bool operator !=(MQuad? left, MQuad? right)
+    parameters:
+    - id: left
+      type: Mapsui.MQuad
+    - id: right
+      type: Mapsui.MQuad
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(left As MQuad, right As MQuad) As Boolean
+  overload: Mapsui.MQuad.op_Inequality*
+  nameWithType.vb: MQuad.<>(MQuad, MQuad)
+  fullName.vb: Mapsui.MQuad.<>(Mapsui.MQuad, Mapsui.MQuad)
+  name.vb: <>(MQuad, MQuad)
+references:
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IEquatable{Mapsui.MQuad}
+  commentId: T:System.IEquatable{Mapsui.MQuad}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<MQuad>
+  nameWithType: IEquatable<MQuad>
+  fullName: System.IEquatable<Mapsui.MQuad>
+  nameWithType.vb: IEquatable(Of MQuad)
+  fullName.vb: System.IEquatable(Of Mapsui.MQuad)
+  name.vb: IEquatable(Of MQuad)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: Mapsui.MQuad
+    name: MQuad
+    href: Mapsui.MQuad.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.MQuad
+    name: MQuad
+    href: Mapsui.MQuad.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.MQuad.#ctor*
+  commentId: Overload:Mapsui.MQuad.#ctor
+  href: Mapsui.MQuad.html#Mapsui_MQuad__ctor
+  name: MQuad
+  nameWithType: MQuad.MQuad
+  fullName: Mapsui.MQuad.MQuad
+  nameWithType.vb: MQuad.New
+  fullName.vb: Mapsui.MQuad.New
+  name.vb: New
+- uid: Mapsui.MQuad
+  commentId: T:Mapsui.MQuad
+  parent: Mapsui
+  href: Mapsui.MQuad.html
+  name: MQuad
+  nameWithType: MQuad
+  fullName: Mapsui.MQuad
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui.MQuad.BottomLeft*
+  commentId: Overload:Mapsui.MQuad.BottomLeft
+  href: Mapsui.MQuad.html#Mapsui_MQuad_BottomLeft
+  name: BottomLeft
+  nameWithType: MQuad.BottomLeft
+  fullName: Mapsui.MQuad.BottomLeft
+- uid: Mapsui.MQuad.TopLeft*
+  commentId: Overload:Mapsui.MQuad.TopLeft
+  href: Mapsui.MQuad.html#Mapsui_MQuad_TopLeft
+  name: TopLeft
+  nameWithType: MQuad.TopLeft
+  fullName: Mapsui.MQuad.TopLeft
+- uid: Mapsui.MQuad.TopRight*
+  commentId: Overload:Mapsui.MQuad.TopRight
+  href: Mapsui.MQuad.html#Mapsui_MQuad_TopRight
+  name: TopRight
+  nameWithType: MQuad.TopRight
+  fullName: Mapsui.MQuad.TopRight
+- uid: Mapsui.MQuad.BottomRight*
+  commentId: Overload:Mapsui.MQuad.BottomRight
+  href: Mapsui.MQuad.html#Mapsui_MQuad_BottomRight
+  name: BottomRight
+  nameWithType: MQuad.BottomRight
+  fullName: Mapsui.MQuad.BottomRight
+- uid: Mapsui.MQuad.Vertices*
+  commentId: Overload:Mapsui.MQuad.Vertices
+  href: Mapsui.MQuad.html#Mapsui_MQuad_Vertices
+  name: Vertices
+  nameWithType: MQuad.Vertices
+  fullName: Mapsui.MQuad.Vertices
+- uid: System.Collections.Generic.IEnumerable{Mapsui.MPoint}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.MPoint}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<MPoint>
+  nameWithType: IEnumerable<MPoint>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.MPoint>
+  nameWithType.vb: IEnumerable(Of MPoint)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.MPoint)
+  name.vb: IEnumerable(Of MPoint)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.MPoint
+    name: MPoint
+    href: Mapsui.MPoint.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.MPoint
+    name: MPoint
+    href: Mapsui.MPoint.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.MQuad.Equals*
+  commentId: Overload:Mapsui.MQuad.Equals
+  href: Mapsui.MQuad.html#Mapsui_MQuad_Equals_Mapsui_MQuad_
+  name: Equals
+  nameWithType: MQuad.Equals
+  fullName: Mapsui.MQuad.Equals
+- uid: System.IEquatable{Mapsui.MQuad}.Equals(Mapsui.MQuad)
+  commentId: M:System.IEquatable{Mapsui.MQuad}.Equals(Mapsui.MQuad)
+  parent: System.IEquatable{Mapsui.MQuad}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(MQuad)
+  nameWithType: IEquatable<MQuad>.Equals(MQuad)
+  fullName: System.IEquatable<Mapsui.MQuad>.Equals(Mapsui.MQuad)
+  nameWithType.vb: IEquatable(Of MQuad).Equals(MQuad)
+  fullName.vb: System.IEquatable(Of Mapsui.MQuad).Equals(Mapsui.MQuad)
+  spec.csharp:
+  - uid: System.IEquatable{Mapsui.MQuad}.Equals(Mapsui.MQuad)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: Mapsui.MQuad
+    name: MQuad
+    href: Mapsui.MQuad.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{Mapsui.MQuad}.Equals(Mapsui.MQuad)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: Mapsui.MQuad
+    name: MQuad
+    href: Mapsui.MQuad.html
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: Mapsui.MQuad.Rotate*
+  commentId: Overload:Mapsui.MQuad.Rotate
+  href: Mapsui.MQuad.html#Mapsui_MQuad_Rotate_System_Double_System_Double_System_Double_
+  name: Rotate
+  nameWithType: MQuad.Rotate
+  fullName: Mapsui.MQuad.Rotate
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.MQuad.ToBoundingBox*
+  commentId: Overload:Mapsui.MQuad.ToBoundingBox
+  href: Mapsui.MQuad.html#Mapsui_MQuad_ToBoundingBox
+  name: ToBoundingBox
+  nameWithType: MQuad.ToBoundingBox
+  fullName: Mapsui.MQuad.ToBoundingBox
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: Mapsui.MQuad.GetHashCode*
+  commentId: Overload:Mapsui.MQuad.GetHashCode
+  href: Mapsui.MQuad.html#Mapsui_MQuad_GetHashCode
+  name: GetHashCode
+  nameWithType: MQuad.GetHashCode
+  fullName: Mapsui.MQuad.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Mapsui.MQuad.ToString*
+  commentId: Overload:Mapsui.MQuad.ToString
+  href: Mapsui.MQuad.html#Mapsui_MQuad_ToString
+  name: ToString
+  nameWithType: MQuad.ToString
+  fullName: Mapsui.MQuad.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.MQuad.op_Equality*
+  commentId: Overload:Mapsui.MQuad.op_Equality
+  href: Mapsui.MQuad.html#Mapsui_MQuad_op_Equality_Mapsui_MQuad_Mapsui_MQuad_
+  name: operator ==
+  nameWithType: MQuad.operator ==
+  fullName: Mapsui.MQuad.operator ==
+  nameWithType.vb: MQuad.=
+  fullName.vb: Mapsui.MQuad.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.MQuad.op_Equality*
+    name: ==
+    href: Mapsui.MQuad.html#Mapsui_MQuad_op_Equality_Mapsui_MQuad_Mapsui_MQuad_
+- uid: Mapsui.MQuad.op_Inequality*
+  commentId: Overload:Mapsui.MQuad.op_Inequality
+  href: Mapsui.MQuad.html#Mapsui_MQuad_op_Inequality_Mapsui_MQuad_Mapsui_MQuad_
+  name: operator !=
+  nameWithType: MQuad.operator !=
+  fullName: Mapsui.MQuad.operator !=
+  nameWithType.vb: MQuad.<>
+  fullName.vb: Mapsui.MQuad.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.MQuad.op_Inequality*
+    name: '!='
+    href: Mapsui.MQuad.html#Mapsui_MQuad_op_Inequality_Mapsui_MQuad_Mapsui_MQuad_

@@ -1,0 +1,2554 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui.Callout
+  commentId: T:Mapsui.UI.Maui.Callout
+  id: Callout
+  parent: Mapsui.UI.Maui
+  children:
+  - Mapsui.UI.Maui.Callout.#ctor(Mapsui.UI.Maui.Pin)
+  - Mapsui.UI.Maui.Callout.Anchor
+  - Mapsui.UI.Maui.Callout.ArrowAlignment
+  - Mapsui.UI.Maui.Callout.ArrowHeight
+  - Mapsui.UI.Maui.Callout.ArrowPosition
+  - Mapsui.UI.Maui.Callout.ArrowWidth
+  - Mapsui.UI.Maui.Callout.BackgroundColor
+  - Mapsui.UI.Maui.Callout.CalloutClicked
+  - Mapsui.UI.Maui.Callout.Color
+  - Mapsui.UI.Maui.Callout.Content
+  - Mapsui.UI.Maui.Callout.DefaultSubtitleFontAttributes
+  - Mapsui.UI.Maui.Callout.DefaultSubtitleFontColor
+  - Mapsui.UI.Maui.Callout.DefaultSubtitleFontName
+  - Mapsui.UI.Maui.Callout.DefaultSubtitleFontSize
+  - Mapsui.UI.Maui.Callout.DefaultSubtitleTextAlignment
+  - Mapsui.UI.Maui.Callout.DefaultTitleFontAttributes
+  - Mapsui.UI.Maui.Callout.DefaultTitleFontColor
+  - Mapsui.UI.Maui.Callout.DefaultTitleFontName
+  - Mapsui.UI.Maui.Callout.DefaultTitleFontSize
+  - Mapsui.UI.Maui.Callout.DefaultTitleTextAlignment
+  - Mapsui.UI.Maui.Callout.Feature
+  - Mapsui.UI.Maui.Callout.IsClosableByClick
+  - Mapsui.UI.Maui.Callout.IsVisible
+  - Mapsui.UI.Maui.Callout.MaxWidth
+  - Mapsui.UI.Maui.Callout.OnPropertyChanged(System.String)
+  - Mapsui.UI.Maui.Callout.Padding
+  - Mapsui.UI.Maui.Callout.Pin
+  - Mapsui.UI.Maui.Callout.PropertyChanged
+  - Mapsui.UI.Maui.Callout.RectRadius
+  - Mapsui.UI.Maui.Callout.RotateWithMap
+  - Mapsui.UI.Maui.Callout.Rotation
+  - Mapsui.UI.Maui.Callout.SetField``1(``0@,``0,System.String)
+  - Mapsui.UI.Maui.Callout.ShadowWidth
+  - Mapsui.UI.Maui.Callout.Spacing
+  - Mapsui.UI.Maui.Callout.StrokeWidth
+  - Mapsui.UI.Maui.Callout.Subtitle
+  - Mapsui.UI.Maui.Callout.SubtitleFontAttributes
+  - Mapsui.UI.Maui.Callout.SubtitleFontColor
+  - Mapsui.UI.Maui.Callout.SubtitleFontName
+  - Mapsui.UI.Maui.Callout.SubtitleFontSize
+  - Mapsui.UI.Maui.Callout.SubtitleTextAlignment
+  - Mapsui.UI.Maui.Callout.Title
+  - Mapsui.UI.Maui.Callout.TitleFontAttributes
+  - Mapsui.UI.Maui.Callout.TitleFontColor
+  - Mapsui.UI.Maui.Callout.TitleFontName
+  - Mapsui.UI.Maui.Callout.TitleFontSize
+  - Mapsui.UI.Maui.Callout.TitleTextAlignment
+  - Mapsui.UI.Maui.Callout.Type
+  langs:
+  - csharp
+  - vb
+  name: Callout
+  nameWithType: Callout
+  fullName: Mapsui.UI.Maui.Callout
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Callout
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: 'public class Callout : IFeatureProvider, INotifyPropertyChanged'
+    content.vb: Public Class Callout Implements IFeatureProvider, INotifyPropertyChanged
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.UI.Objects.IFeatureProvider
+  - System.ComponentModel.INotifyPropertyChanged
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.Maui.Callout.CalloutClicked
+  commentId: E:Mapsui.UI.Maui.Callout.CalloutClicked
+  id: CalloutClicked
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: CalloutClicked
+  nameWithType: Callout.CalloutClicked
+  fullName: Mapsui.UI.Maui.Callout.CalloutClicked
+  type: Event
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CalloutClicked
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 21
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public event EventHandler<CalloutClickedEventArgs>? CalloutClicked
+    return:
+      type: System.EventHandler{Mapsui.UI.Maui.CalloutClickedEventArgs}
+    content.vb: Public Event CalloutClicked As EventHandler(Of CalloutClickedEventArgs)
+- uid: Mapsui.UI.Maui.Callout.DefaultTitleFontSize
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultTitleFontSize
+  id: DefaultTitleFontSize
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultTitleFontSize
+  nameWithType: Callout.DefaultTitleFontSize
+  fullName: Mapsui.UI.Maui.Callout.DefaultTitleFontSize
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultTitleFontSize
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 23
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static double DefaultTitleFontSize
+    return:
+      type: System.Double
+    content.vb: Public Shared DefaultTitleFontSize As Double
+- uid: Mapsui.UI.Maui.Callout.DefaultTitleFontAttributes
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultTitleFontAttributes
+  id: DefaultTitleFontAttributes
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultTitleFontAttributes
+  nameWithType: Callout.DefaultTitleFontAttributes
+  fullName: Mapsui.UI.Maui.Callout.DefaultTitleFontAttributes
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultTitleFontAttributes
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 24
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static FontAttributes DefaultTitleFontAttributes
+    return:
+      type: Microsoft.Maui.Controls.FontAttributes
+    content.vb: Public Shared DefaultTitleFontAttributes As FontAttributes
+- uid: Mapsui.UI.Maui.Callout.DefaultTitleTextAlignment
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultTitleTextAlignment
+  id: DefaultTitleTextAlignment
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultTitleTextAlignment
+  nameWithType: Callout.DefaultTitleTextAlignment
+  fullName: Mapsui.UI.Maui.Callout.DefaultTitleTextAlignment
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultTitleTextAlignment
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 25
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static TextAlignment DefaultTitleTextAlignment
+    return:
+      type: Microsoft.Maui.TextAlignment
+    content.vb: Public Shared DefaultTitleTextAlignment As TextAlignment
+- uid: Mapsui.UI.Maui.Callout.DefaultTitleFontColor
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultTitleFontColor
+  id: DefaultTitleFontColor
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultTitleFontColor
+  nameWithType: Callout.DefaultTitleFontColor
+  fullName: Mapsui.UI.Maui.Callout.DefaultTitleFontColor
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultTitleFontColor
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 26
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static Color DefaultTitleFontColor
+    return:
+      type: Microsoft.Maui.Graphics.Color
+    content.vb: Public Shared DefaultTitleFontColor As Color
+- uid: Mapsui.UI.Maui.Callout.DefaultSubtitleFontSize
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultSubtitleFontSize
+  id: DefaultSubtitleFontSize
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultSubtitleFontSize
+  nameWithType: Callout.DefaultSubtitleFontSize
+  fullName: Mapsui.UI.Maui.Callout.DefaultSubtitleFontSize
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultSubtitleFontSize
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 27
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static double DefaultSubtitleFontSize
+    return:
+      type: System.Double
+    content.vb: Public Shared DefaultSubtitleFontSize As Double
+- uid: Mapsui.UI.Maui.Callout.DefaultSubtitleFontAttributes
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultSubtitleFontAttributes
+  id: DefaultSubtitleFontAttributes
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultSubtitleFontAttributes
+  nameWithType: Callout.DefaultSubtitleFontAttributes
+  fullName: Mapsui.UI.Maui.Callout.DefaultSubtitleFontAttributes
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultSubtitleFontAttributes
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 28
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static FontAttributes DefaultSubtitleFontAttributes
+    return:
+      type: Microsoft.Maui.Controls.FontAttributes
+    content.vb: Public Shared DefaultSubtitleFontAttributes As FontAttributes
+- uid: Mapsui.UI.Maui.Callout.DefaultSubtitleFontColor
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultSubtitleFontColor
+  id: DefaultSubtitleFontColor
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultSubtitleFontColor
+  nameWithType: Callout.DefaultSubtitleFontColor
+  fullName: Mapsui.UI.Maui.Callout.DefaultSubtitleFontColor
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultSubtitleFontColor
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 29
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static Color DefaultSubtitleFontColor
+    return:
+      type: Microsoft.Maui.Graphics.Color
+    content.vb: Public Shared DefaultSubtitleFontColor As Color
+- uid: Mapsui.UI.Maui.Callout.DefaultSubtitleTextAlignment
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultSubtitleTextAlignment
+  id: DefaultSubtitleTextAlignment
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultSubtitleTextAlignment
+  nameWithType: Callout.DefaultSubtitleTextAlignment
+  fullName: Mapsui.UI.Maui.Callout.DefaultSubtitleTextAlignment
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultSubtitleTextAlignment
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 30
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static TextAlignment DefaultSubtitleTextAlignment
+    return:
+      type: Microsoft.Maui.TextAlignment
+    content.vb: Public Shared DefaultSubtitleTextAlignment As TextAlignment
+- uid: Mapsui.UI.Maui.Callout.DefaultTitleFontName
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultTitleFontName
+  id: DefaultTitleFontName
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultTitleFontName
+  nameWithType: Callout.DefaultTitleFontName
+  fullName: Mapsui.UI.Maui.Callout.DefaultTitleFontName
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultTitleFontName
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static string? DefaultTitleFontName
+    return:
+      type: System.String
+    content.vb: Public Shared DefaultTitleFontName As String
+- uid: Mapsui.UI.Maui.Callout.DefaultSubtitleFontName
+  commentId: F:Mapsui.UI.Maui.Callout.DefaultSubtitleFontName
+  id: DefaultSubtitleFontName
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: DefaultSubtitleFontName
+  nameWithType: Callout.DefaultSubtitleFontName
+  fullName: Mapsui.UI.Maui.Callout.DefaultSubtitleFontName
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultSubtitleFontName
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 32
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static string? DefaultSubtitleFontName
+    return:
+      type: System.String
+    content.vb: Public Shared DefaultSubtitleFontName As String
+- uid: Mapsui.UI.Maui.Callout.#ctor(Mapsui.UI.Maui.Pin)
+  commentId: M:Mapsui.UI.Maui.Callout.#ctor(Mapsui.UI.Maui.Pin)
+  id: '#ctor(Mapsui.UI.Maui.Pin)'
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Callout(Pin)
+  nameWithType: Callout.Callout(Pin)
+  fullName: Mapsui.UI.Maui.Callout.Callout(Mapsui.UI.Maui.Pin)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 65
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public Callout(Pin pin)
+    parameters:
+    - id: pin
+      type: Mapsui.UI.Maui.Pin
+    content.vb: Public Sub New(pin As Pin)
+  overload: Mapsui.UI.Maui.Callout.#ctor*
+  nameWithType.vb: Callout.New(Pin)
+  fullName.vb: Mapsui.UI.Maui.Callout.New(Mapsui.UI.Maui.Pin)
+  name.vb: New(Pin)
+- uid: Mapsui.UI.Maui.Callout.Pin
+  commentId: P:Mapsui.UI.Maui.Callout.Pin
+  id: Pin
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Pin
+  nameWithType: Callout.Pin
+  fullName: Mapsui.UI.Maui.Callout.Pin
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Pin
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 78
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Pin to which this callout belongs
+  example: []
+  syntax:
+    content: public Pin Pin { get; }
+    parameters: []
+    return:
+      type: Mapsui.UI.Maui.Pin
+    content.vb: Public ReadOnly Property Pin As Pin
+  overload: Mapsui.UI.Maui.Callout.Pin*
+- uid: Mapsui.UI.Maui.Callout.Type
+  commentId: P:Mapsui.UI.Maui.Callout.Type
+  id: Type
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Type
+  nameWithType: Callout.Type
+  fullName: Mapsui.UI.Maui.Callout.Type
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Type
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 86
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Type of Callout
+  remarks: Could be single, detail or custom. The last is a bitmap id for an owner drawn image.
+  example: []
+  syntax:
+    content: public CalloutType Type { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.CalloutType
+    content.vb: Public Property Type As CalloutType
+  overload: Mapsui.UI.Maui.Callout.Type*
+- uid: Mapsui.UI.Maui.Callout.Anchor
+  commentId: P:Mapsui.UI.Maui.Callout.Anchor
+  id: Anchor
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Anchor
+  nameWithType: Callout.Anchor
+  fullName: Mapsui.UI.Maui.Callout.Anchor
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Anchor
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 100
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Anchor position of Callout
+  example: []
+  syntax:
+    content: public Point Anchor { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.Graphics.Point
+    content.vb: Public Property Anchor As Point
+  overload: Mapsui.UI.Maui.Callout.Anchor*
+- uid: Mapsui.UI.Maui.Callout.ArrowAlignment
+  commentId: P:Mapsui.UI.Maui.Callout.ArrowAlignment
+  id: ArrowAlignment
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: ArrowAlignment
+  nameWithType: Callout.ArrowAlignment
+  fullName: Mapsui.UI.Maui.Callout.ArrowAlignment
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowAlignment
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 114
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Arrow alignment of Callout
+  example: []
+  syntax:
+    content: public ArrowAlignment ArrowAlignment { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.ArrowAlignment
+    content.vb: Public Property ArrowAlignment As ArrowAlignment
+  overload: Mapsui.UI.Maui.Callout.ArrowAlignment*
+- uid: Mapsui.UI.Maui.Callout.ArrowWidth
+  commentId: P:Mapsui.UI.Maui.Callout.ArrowWidth
+  id: ArrowWidth
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: ArrowWidth
+  nameWithType: Callout.ArrowWidth
+  fullName: Mapsui.UI.Maui.Callout.ArrowWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowWidth
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 128
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Width from arrow of Callout
+  example: []
+  syntax:
+    content: public double ArrowWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property ArrowWidth As Double
+  overload: Mapsui.UI.Maui.Callout.ArrowWidth*
+- uid: Mapsui.UI.Maui.Callout.ArrowHeight
+  commentId: P:Mapsui.UI.Maui.Callout.ArrowHeight
+  id: ArrowHeight
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: ArrowHeight
+  nameWithType: Callout.ArrowHeight
+  fullName: Mapsui.UI.Maui.Callout.ArrowHeight
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowHeight
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 142
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Height from arrow of Callout
+  example: []
+  syntax:
+    content: public double ArrowHeight { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property ArrowHeight As Double
+  overload: Mapsui.UI.Maui.Callout.ArrowHeight*
+- uid: Mapsui.UI.Maui.Callout.ArrowPosition
+  commentId: P:Mapsui.UI.Maui.Callout.ArrowPosition
+  id: ArrowPosition
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: ArrowPosition
+  nameWithType: Callout.ArrowPosition
+  fullName: Mapsui.UI.Maui.Callout.ArrowPosition
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowPosition
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 156
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Relative position of anchor of Callout on the side given by <xref href="Mapsui.UI.Maui.Callout.ArrowAlignment" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public double ArrowPosition { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property ArrowPosition As Double
+  overload: Mapsui.UI.Maui.Callout.ArrowPosition*
+- uid: Mapsui.UI.Maui.Callout.Color
+  commentId: P:Mapsui.UI.Maui.Callout.Color
+  id: Color
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Color
+  nameWithType: Callout.Color
+  fullName: Mapsui.UI.Maui.Callout.Color
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Color
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 170
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Color of stroke around Callout
+  example: []
+  syntax:
+    content: public Color Color { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.Graphics.Color
+    content.vb: Public Property Color As Color
+  overload: Mapsui.UI.Maui.Callout.Color*
+- uid: Mapsui.UI.Maui.Callout.BackgroundColor
+  commentId: P:Mapsui.UI.Maui.Callout.BackgroundColor
+  id: BackgroundColor
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: BackgroundColor
+  nameWithType: Callout.BackgroundColor
+  fullName: Mapsui.UI.Maui.Callout.BackgroundColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BackgroundColor
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 184
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: BackgroundColor of Callout
+  example: []
+  syntax:
+    content: public Color BackgroundColor { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.Graphics.Color
+    content.vb: Public Property BackgroundColor As Color
+  overload: Mapsui.UI.Maui.Callout.BackgroundColor*
+- uid: Mapsui.UI.Maui.Callout.ShadowWidth
+  commentId: P:Mapsui.UI.Maui.Callout.ShadowWidth
+  id: ShadowWidth
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: ShadowWidth
+  nameWithType: Callout.ShadowWidth
+  fullName: Mapsui.UI.Maui.Callout.ShadowWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShadowWidth
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 198
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Shadow width around Callout
+  example: []
+  syntax:
+    content: public double ShadowWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property ShadowWidth As Double
+  overload: Mapsui.UI.Maui.Callout.ShadowWidth*
+- uid: Mapsui.UI.Maui.Callout.StrokeWidth
+  commentId: P:Mapsui.UI.Maui.Callout.StrokeWidth
+  id: StrokeWidth
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: StrokeWidth
+  nameWithType: Callout.StrokeWidth
+  fullName: Mapsui.UI.Maui.Callout.StrokeWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StrokeWidth
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 212
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Stroke width of frame around Callout
+  example: []
+  syntax:
+    content: public double StrokeWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property StrokeWidth As Double
+  overload: Mapsui.UI.Maui.Callout.StrokeWidth*
+- uid: Mapsui.UI.Maui.Callout.Rotation
+  commentId: P:Mapsui.UI.Maui.Callout.Rotation
+  id: Rotation
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Rotation
+  nameWithType: Callout.Rotation
+  fullName: Mapsui.UI.Maui.Callout.Rotation
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rotation
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 226
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Rotation of Callout around the anchor
+  example: []
+  syntax:
+    content: public double Rotation { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Rotation As Double
+  overload: Mapsui.UI.Maui.Callout.Rotation*
+- uid: Mapsui.UI.Maui.Callout.RotateWithMap
+  commentId: P:Mapsui.UI.Maui.Callout.RotateWithMap
+  id: RotateWithMap
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: RotateWithMap
+  nameWithType: Callout.RotateWithMap
+  fullName: Mapsui.UI.Maui.Callout.RotateWithMap
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RotateWithMap
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 240
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Rotate Callout with map
+  example: []
+  syntax:
+    content: public bool RotateWithMap { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property RotateWithMap As Boolean
+  overload: Mapsui.UI.Maui.Callout.RotateWithMap*
+- uid: Mapsui.UI.Maui.Callout.RectRadius
+  commentId: P:Mapsui.UI.Maui.Callout.RectRadius
+  id: RectRadius
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: RectRadius
+  nameWithType: Callout.RectRadius
+  fullName: Mapsui.UI.Maui.Callout.RectRadius
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RectRadius
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 254
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Radius of rounded corners of Callout
+  example: []
+  syntax:
+    content: public double RectRadius { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property RectRadius As Double
+  overload: Mapsui.UI.Maui.Callout.RectRadius*
+- uid: Mapsui.UI.Maui.Callout.Padding
+  commentId: P:Mapsui.UI.Maui.Callout.Padding
+  id: Padding
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Padding
+  nameWithType: Callout.Padding
+  fullName: Mapsui.UI.Maui.Callout.Padding
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Padding
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 268
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Padding around content of Callout
+  example: []
+  syntax:
+    content: public Thickness Padding { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.Thickness
+    content.vb: Public Property Padding As Thickness
+  overload: Mapsui.UI.Maui.Callout.Padding*
+- uid: Mapsui.UI.Maui.Callout.Spacing
+  commentId: P:Mapsui.UI.Maui.Callout.Spacing
+  id: Spacing
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Spacing
+  nameWithType: Callout.Spacing
+  fullName: Mapsui.UI.Maui.Callout.Spacing
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Spacing
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 282
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Space between Title and Subtitle of Callout
+  example: []
+  syntax:
+    content: public double Spacing { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Spacing As Double
+  overload: Mapsui.UI.Maui.Callout.Spacing*
+- uid: Mapsui.UI.Maui.Callout.MaxWidth
+  commentId: P:Mapsui.UI.Maui.Callout.MaxWidth
+  id: MaxWidth
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: MaxWidth
+  nameWithType: Callout.MaxWidth
+  fullName: Mapsui.UI.Maui.Callout.MaxWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MaxWidth
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 296
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: MaxWidth for Title and Subtitle of Callout
+  example: []
+  syntax:
+    content: public double MaxWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property MaxWidth As Double
+  overload: Mapsui.UI.Maui.Callout.MaxWidth*
+- uid: Mapsui.UI.Maui.Callout.IsVisible
+  commentId: P:Mapsui.UI.Maui.Callout.IsVisible
+  id: IsVisible
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: IsVisible
+  nameWithType: Callout.IsVisible
+  fullName: Mapsui.UI.Maui.Callout.IsVisible
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsVisible
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 310
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Is Callout visible on map
+  example: []
+  syntax:
+    content: public bool IsVisible { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsVisible As Boolean
+  overload: Mapsui.UI.Maui.Callout.IsVisible*
+- uid: Mapsui.UI.Maui.Callout.IsClosableByClick
+  commentId: P:Mapsui.UI.Maui.Callout.IsClosableByClick
+  id: IsClosableByClick
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: IsClosableByClick
+  nameWithType: Callout.IsClosableByClick
+  fullName: Mapsui.UI.Maui.Callout.IsClosableByClick
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsClosableByClick
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 315
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Is Callout closable by a click on the callout
+  example: []
+  syntax:
+    content: public bool IsClosableByClick { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsClosableByClick As Boolean
+  overload: Mapsui.UI.Maui.Callout.IsClosableByClick*
+- uid: Mapsui.UI.Maui.Callout.Content
+  commentId: P:Mapsui.UI.Maui.Callout.Content
+  id: Content
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Content
+  nameWithType: Callout.Content
+  fullName: Mapsui.UI.Maui.Callout.Content
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Content
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 329
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Content of Callout
+  example: []
+  syntax:
+    content: public int Content { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Content As Integer
+  overload: Mapsui.UI.Maui.Callout.Content*
+- uid: Mapsui.UI.Maui.Callout.Title
+  commentId: P:Mapsui.UI.Maui.Callout.Title
+  id: Title
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: Callout.Title
+  fullName: Mapsui.UI.Maui.Callout.Title
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Title
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 343
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Content of Callout title label
+  example: []
+  syntax:
+    content: public string? Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Title As String
+  overload: Mapsui.UI.Maui.Callout.Title*
+- uid: Mapsui.UI.Maui.Callout.TitleFontName
+  commentId: P:Mapsui.UI.Maui.Callout.TitleFontName
+  id: TitleFontName
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: TitleFontName
+  nameWithType: Callout.TitleFontName
+  fullName: Mapsui.UI.Maui.Callout.TitleFontName
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TitleFontName
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 357
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Font name to use rendering title
+  example: []
+  syntax:
+    content: public string? TitleFontName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property TitleFontName As String
+  overload: Mapsui.UI.Maui.Callout.TitleFontName*
+- uid: Mapsui.UI.Maui.Callout.TitleFontSize
+  commentId: P:Mapsui.UI.Maui.Callout.TitleFontSize
+  id: TitleFontSize
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: TitleFontSize
+  nameWithType: Callout.TitleFontSize
+  fullName: Mapsui.UI.Maui.Callout.TitleFontSize
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TitleFontSize
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 371
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Font size to rendering title
+  example: []
+  syntax:
+    content: public double TitleFontSize { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property TitleFontSize As Double
+  overload: Mapsui.UI.Maui.Callout.TitleFontSize*
+- uid: Mapsui.UI.Maui.Callout.TitleFontAttributes
+  commentId: P:Mapsui.UI.Maui.Callout.TitleFontAttributes
+  id: TitleFontAttributes
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: TitleFontAttributes
+  nameWithType: Callout.TitleFontAttributes
+  fullName: Mapsui.UI.Maui.Callout.TitleFontAttributes
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TitleFontAttributes
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 385
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Font attributes to render title
+  example: []
+  syntax:
+    content: public FontAttributes TitleFontAttributes { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.Controls.FontAttributes
+    content.vb: Public Property TitleFontAttributes As FontAttributes
+  overload: Mapsui.UI.Maui.Callout.TitleFontAttributes*
+- uid: Mapsui.UI.Maui.Callout.TitleFontColor
+  commentId: P:Mapsui.UI.Maui.Callout.TitleFontColor
+  id: TitleFontColor
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: TitleFontColor
+  nameWithType: Callout.TitleFontColor
+  fullName: Mapsui.UI.Maui.Callout.TitleFontColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TitleFontColor
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 399
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Font color to render title
+  example: []
+  syntax:
+    content: public Color TitleFontColor { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.Graphics.Color
+    content.vb: Public Property TitleFontColor As Color
+  overload: Mapsui.UI.Maui.Callout.TitleFontColor*
+- uid: Mapsui.UI.Maui.Callout.TitleTextAlignment
+  commentId: P:Mapsui.UI.Maui.Callout.TitleTextAlignment
+  id: TitleTextAlignment
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: TitleTextAlignment
+  nameWithType: Callout.TitleTextAlignment
+  fullName: Mapsui.UI.Maui.Callout.TitleTextAlignment
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TitleTextAlignment
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 413
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Text alignment of title
+  example: []
+  syntax:
+    content: public TextAlignment TitleTextAlignment { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.TextAlignment
+    content.vb: Public Property TitleTextAlignment As TextAlignment
+  overload: Mapsui.UI.Maui.Callout.TitleTextAlignment*
+- uid: Mapsui.UI.Maui.Callout.Subtitle
+  commentId: P:Mapsui.UI.Maui.Callout.Subtitle
+  id: Subtitle
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Subtitle
+  nameWithType: Callout.Subtitle
+  fullName: Mapsui.UI.Maui.Callout.Subtitle
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Subtitle
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 427
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Content of Callout detail label
+  example: []
+  syntax:
+    content: public string? Subtitle { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Subtitle As String
+  overload: Mapsui.UI.Maui.Callout.Subtitle*
+- uid: Mapsui.UI.Maui.Callout.SubtitleFontName
+  commentId: P:Mapsui.UI.Maui.Callout.SubtitleFontName
+  id: SubtitleFontName
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: SubtitleFontName
+  nameWithType: Callout.SubtitleFontName
+  fullName: Mapsui.UI.Maui.Callout.SubtitleFontName
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SubtitleFontName
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 441
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Font name to use rendering subtitle
+  example: []
+  syntax:
+    content: public string? SubtitleFontName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SubtitleFontName As String
+  overload: Mapsui.UI.Maui.Callout.SubtitleFontName*
+- uid: Mapsui.UI.Maui.Callout.SubtitleFontSize
+  commentId: P:Mapsui.UI.Maui.Callout.SubtitleFontSize
+  id: SubtitleFontSize
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: SubtitleFontSize
+  nameWithType: Callout.SubtitleFontSize
+  fullName: Mapsui.UI.Maui.Callout.SubtitleFontSize
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SubtitleFontSize
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 455
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Font size to rendering subtitle
+  example: []
+  syntax:
+    content: public double SubtitleFontSize { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property SubtitleFontSize As Double
+  overload: Mapsui.UI.Maui.Callout.SubtitleFontSize*
+- uid: Mapsui.UI.Maui.Callout.SubtitleFontAttributes
+  commentId: P:Mapsui.UI.Maui.Callout.SubtitleFontAttributes
+  id: SubtitleFontAttributes
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: SubtitleFontAttributes
+  nameWithType: Callout.SubtitleFontAttributes
+  fullName: Mapsui.UI.Maui.Callout.SubtitleFontAttributes
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SubtitleFontAttributes
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 469
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Font attributes to render subtitle
+  example: []
+  syntax:
+    content: public FontAttributes SubtitleFontAttributes { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.Controls.FontAttributes
+    content.vb: Public Property SubtitleFontAttributes As FontAttributes
+  overload: Mapsui.UI.Maui.Callout.SubtitleFontAttributes*
+- uid: Mapsui.UI.Maui.Callout.SubtitleFontColor
+  commentId: P:Mapsui.UI.Maui.Callout.SubtitleFontColor
+  id: SubtitleFontColor
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: SubtitleFontColor
+  nameWithType: Callout.SubtitleFontColor
+  fullName: Mapsui.UI.Maui.Callout.SubtitleFontColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SubtitleFontColor
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 483
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Font color to render subtitle
+  example: []
+  syntax:
+    content: public Color SubtitleFontColor { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.Graphics.Color
+    content.vb: Public Property SubtitleFontColor As Color
+  overload: Mapsui.UI.Maui.Callout.SubtitleFontColor*
+- uid: Mapsui.UI.Maui.Callout.SubtitleTextAlignment
+  commentId: P:Mapsui.UI.Maui.Callout.SubtitleTextAlignment
+  id: SubtitleTextAlignment
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: SubtitleTextAlignment
+  nameWithType: Callout.SubtitleTextAlignment
+  fullName: Mapsui.UI.Maui.Callout.SubtitleTextAlignment
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SubtitleTextAlignment
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 497
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Text alignment of title
+  example: []
+  syntax:
+    content: public TextAlignment SubtitleTextAlignment { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Maui.TextAlignment
+    content.vb: Public Property SubtitleTextAlignment As TextAlignment
+  overload: Mapsui.UI.Maui.Callout.SubtitleTextAlignment*
+- uid: Mapsui.UI.Maui.Callout.Feature
+  commentId: P:Mapsui.UI.Maui.Callout.Feature
+  id: Feature
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: Feature
+  nameWithType: Callout.Feature
+  fullName: Mapsui.UI.Maui.Callout.Feature
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Feature
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 511
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Feature, which belongs to callout. Should be the same as for the pin to which this callout belongs.
+  example: []
+  syntax:
+    content: public GeometryFeature Feature { get; }
+    parameters: []
+    return:
+      type: Mapsui.Nts.GeometryFeature
+    content.vb: Public ReadOnly Property Feature As GeometryFeature
+  overload: Mapsui.UI.Maui.Callout.Feature*
+  implements:
+  - Mapsui.UI.Objects.IFeatureProvider.Feature
+- uid: Mapsui.UI.Maui.Callout.PropertyChanged
+  commentId: E:Mapsui.UI.Maui.Callout.PropertyChanged
+  id: PropertyChanged
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: PropertyChanged
+  nameWithType: Callout.PropertyChanged
+  fullName: Mapsui.UI.Maui.Callout.PropertyChanged
+  type: Event
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PropertyChanged
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 604
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Occurs when a property value changes.
+  example: []
+  syntax:
+    content: public event PropertyChangedEventHandler? PropertyChanged
+    return:
+      type: System.ComponentModel.PropertyChangedEventHandler
+    content.vb: Public Event PropertyChanged As PropertyChangedEventHandler
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: Mapsui.UI.Maui.Callout.OnPropertyChanged(System.String)
+  commentId: M:Mapsui.UI.Maui.Callout.OnPropertyChanged(System.String)
+  id: OnPropertyChanged(System.String)
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: OnPropertyChanged(string?)
+  nameWithType: Callout.OnPropertyChanged(string?)
+  fullName: Mapsui.UI.Maui.Callout.OnPropertyChanged(string?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPropertyChanged
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 606
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: protected virtual void OnPropertyChanged(string? propertyName = null)
+    parameters:
+    - id: propertyName
+      type: System.String
+    content.vb: Protected Overridable Sub OnPropertyChanged(propertyName As String = Nothing)
+  overload: Mapsui.UI.Maui.Callout.OnPropertyChanged*
+  nameWithType.vb: Callout.OnPropertyChanged(String)
+  fullName.vb: Mapsui.UI.Maui.Callout.OnPropertyChanged(String)
+  name.vb: OnPropertyChanged(String)
+- uid: Mapsui.UI.Maui.Callout.SetField``1(``0@,``0,System.String)
+  commentId: M:Mapsui.UI.Maui.Callout.SetField``1(``0@,``0,System.String)
+  id: SetField``1(``0@,``0,System.String)
+  parent: Mapsui.UI.Maui.Callout
+  langs:
+  - csharp
+  - vb
+  name: SetField<T>(ref T, T, string?)
+  nameWithType: Callout.SetField<T>(ref T, T, string?)
+  fullName: Mapsui.UI.Maui.Callout.SetField<T>(ref T, T, string?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Callout.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetField
+    path: ../../Mapsui.UI.MapView/Objects/Callout.cs
+    startLine: 649
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: protected bool SetField<T>(ref T field, T value, string? propertyName = null)
+    parameters:
+    - id: field
+      type: '{T}'
+    - id: value
+      type: '{T}'
+    - id: propertyName
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: System.Boolean
+    content.vb: Protected Function SetField(Of T)(field As T, value As T, propertyName As String = Nothing) As Boolean
+  overload: Mapsui.UI.Maui.Callout.SetField*
+  nameWithType.vb: Callout.SetField(Of T)(T, T, String)
+  fullName.vb: Mapsui.UI.Maui.Callout.SetField(Of T)(T, T, String)
+  name.vb: SetField(Of T)(T, T, String)
+references:
+- uid: Mapsui.UI.Maui
+  commentId: N:Mapsui.UI.Maui
+  href: Mapsui.html
+  name: Mapsui.UI.Maui
+  nameWithType: Mapsui.UI.Maui
+  fullName: Mapsui.UI.Maui
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.UI.Objects.IFeatureProvider
+  commentId: T:Mapsui.UI.Objects.IFeatureProvider
+  parent: Mapsui.UI.Objects
+  href: Mapsui.UI.Objects.IFeatureProvider.html
+  name: IFeatureProvider
+  nameWithType: IFeatureProvider
+  fullName: Mapsui.UI.Objects.IFeatureProvider
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.UI.Objects
+  commentId: N:Mapsui.UI.Objects
+  href: Mapsui.html
+  name: Mapsui.UI.Objects
+  nameWithType: Mapsui.UI.Objects
+  fullName: Mapsui.UI.Objects
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: System.EventHandler{Mapsui.UI.Maui.CalloutClickedEventArgs}
+  commentId: T:System.EventHandler{Mapsui.UI.Maui.CalloutClickedEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<CalloutClickedEventArgs>
+  nameWithType: EventHandler<CalloutClickedEventArgs>
+  fullName: System.EventHandler<Mapsui.UI.Maui.CalloutClickedEventArgs>
+  nameWithType.vb: EventHandler(Of CalloutClickedEventArgs)
+  fullName.vb: System.EventHandler(Of Mapsui.UI.Maui.CalloutClickedEventArgs)
+  name.vb: EventHandler(Of CalloutClickedEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - uid: Mapsui.UI.Maui.CalloutClickedEventArgs
+    name: CalloutClickedEventArgs
+    href: Mapsui.UI.Maui.CalloutClickedEventArgs.html
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.UI.Maui.CalloutClickedEventArgs
+    name: CalloutClickedEventArgs
+    href: Mapsui.UI.Maui.CalloutClickedEventArgs.html
+  - name: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - name: TEventArgs
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEventArgs
+  - name: )
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Microsoft.Maui.Controls.FontAttributes
+  commentId: T:Microsoft.Maui.Controls.FontAttributes
+  parent: Microsoft.Maui.Controls
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.fontattributes
+  name: FontAttributes
+  nameWithType: FontAttributes
+  fullName: Microsoft.Maui.Controls.FontAttributes
+- uid: Microsoft.Maui.Controls
+  commentId: N:Microsoft.Maui.Controls
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Maui.Controls
+  nameWithType: Microsoft.Maui.Controls
+  fullName: Microsoft.Maui.Controls
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Maui
+    name: Maui
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui
+  - name: .
+  - uid: Microsoft.Maui.Controls
+    name: Controls
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui.controls
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Maui
+    name: Maui
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui
+  - name: .
+  - uid: Microsoft.Maui.Controls
+    name: Controls
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui.controls
+- uid: Microsoft.Maui.TextAlignment
+  commentId: T:Microsoft.Maui.TextAlignment
+  parent: Microsoft.Maui
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.maui.textalignment
+  name: TextAlignment
+  nameWithType: TextAlignment
+  fullName: Microsoft.Maui.TextAlignment
+- uid: Microsoft.Maui
+  commentId: N:Microsoft.Maui
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Maui
+  nameWithType: Microsoft.Maui
+  fullName: Microsoft.Maui
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Maui
+    name: Maui
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Maui
+    name: Maui
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui
+- uid: Microsoft.Maui.Graphics.Color
+  commentId: T:Microsoft.Maui.Graphics.Color
+  parent: Microsoft.Maui.Graphics
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.maui.graphics.color
+  name: Color
+  nameWithType: Color
+  fullName: Microsoft.Maui.Graphics.Color
+- uid: Microsoft.Maui.Graphics
+  commentId: N:Microsoft.Maui.Graphics
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Maui.Graphics
+  nameWithType: Microsoft.Maui.Graphics
+  fullName: Microsoft.Maui.Graphics
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Maui
+    name: Maui
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui
+  - name: .
+  - uid: Microsoft.Maui.Graphics
+    name: Graphics
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui.graphics
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Maui
+    name: Maui
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui
+  - name: .
+  - uid: Microsoft.Maui.Graphics
+    name: Graphics
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.maui.graphics
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.UI.Maui.Callout.#ctor*
+  commentId: Overload:Mapsui.UI.Maui.Callout.#ctor
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout__ctor_Mapsui_UI_Maui_Pin_
+  name: Callout
+  nameWithType: Callout.Callout
+  fullName: Mapsui.UI.Maui.Callout.Callout
+  nameWithType.vb: Callout.New
+  fullName.vb: Mapsui.UI.Maui.Callout.New
+  name.vb: New
+- uid: Mapsui.UI.Maui.Pin
+  commentId: T:Mapsui.UI.Maui.Pin
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Pin.html
+  name: Pin
+  nameWithType: Pin
+  fullName: Mapsui.UI.Maui.Pin
+- uid: Mapsui.UI.Maui.Callout.Pin*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Pin
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Pin
+  name: Pin
+  nameWithType: Callout.Pin
+  fullName: Mapsui.UI.Maui.Callout.Pin
+- uid: Mapsui.UI.Maui.Callout.Type*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Type
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Type
+  name: Type
+  nameWithType: Callout.Type
+  fullName: Mapsui.UI.Maui.Callout.Type
+- uid: Mapsui.Styles.CalloutType
+  commentId: T:Mapsui.Styles.CalloutType
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.CalloutType.html
+  name: CalloutType
+  nameWithType: CalloutType
+  fullName: Mapsui.Styles.CalloutType
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.UI.Maui.Callout.Anchor*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Anchor
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Anchor
+  name: Anchor
+  nameWithType: Callout.Anchor
+  fullName: Mapsui.UI.Maui.Callout.Anchor
+- uid: Microsoft.Maui.Graphics.Point
+  commentId: T:Microsoft.Maui.Graphics.Point
+  parent: Microsoft.Maui.Graphics
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.maui.graphics.point
+  name: Point
+  nameWithType: Point
+  fullName: Microsoft.Maui.Graphics.Point
+- uid: Mapsui.UI.Maui.Callout.ArrowAlignment*
+  commentId: Overload:Mapsui.UI.Maui.Callout.ArrowAlignment
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_ArrowAlignment
+  name: ArrowAlignment
+  nameWithType: Callout.ArrowAlignment
+  fullName: Mapsui.UI.Maui.Callout.ArrowAlignment
+- uid: Mapsui.Styles.ArrowAlignment
+  commentId: T:Mapsui.Styles.ArrowAlignment
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.ArrowAlignment.html
+  name: ArrowAlignment
+  nameWithType: ArrowAlignment
+  fullName: Mapsui.Styles.ArrowAlignment
+- uid: Mapsui.UI.Maui.Callout.ArrowWidth*
+  commentId: Overload:Mapsui.UI.Maui.Callout.ArrowWidth
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_ArrowWidth
+  name: ArrowWidth
+  nameWithType: Callout.ArrowWidth
+  fullName: Mapsui.UI.Maui.Callout.ArrowWidth
+- uid: Mapsui.UI.Maui.Callout.ArrowHeight*
+  commentId: Overload:Mapsui.UI.Maui.Callout.ArrowHeight
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_ArrowHeight
+  name: ArrowHeight
+  nameWithType: Callout.ArrowHeight
+  fullName: Mapsui.UI.Maui.Callout.ArrowHeight
+- uid: Mapsui.UI.Maui.Callout.ArrowAlignment
+  commentId: P:Mapsui.UI.Maui.Callout.ArrowAlignment
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_ArrowAlignment
+  name: ArrowAlignment
+  nameWithType: Callout.ArrowAlignment
+  fullName: Mapsui.UI.Maui.Callout.ArrowAlignment
+- uid: Mapsui.UI.Maui.Callout.ArrowPosition*
+  commentId: Overload:Mapsui.UI.Maui.Callout.ArrowPosition
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_ArrowPosition
+  name: ArrowPosition
+  nameWithType: Callout.ArrowPosition
+  fullName: Mapsui.UI.Maui.Callout.ArrowPosition
+- uid: Mapsui.UI.Maui.Callout.Color*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Color
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Color
+  name: Color
+  nameWithType: Callout.Color
+  fullName: Mapsui.UI.Maui.Callout.Color
+- uid: Mapsui.UI.Maui.Callout.BackgroundColor*
+  commentId: Overload:Mapsui.UI.Maui.Callout.BackgroundColor
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_BackgroundColor
+  name: BackgroundColor
+  nameWithType: Callout.BackgroundColor
+  fullName: Mapsui.UI.Maui.Callout.BackgroundColor
+- uid: Mapsui.UI.Maui.Callout.ShadowWidth*
+  commentId: Overload:Mapsui.UI.Maui.Callout.ShadowWidth
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_ShadowWidth
+  name: ShadowWidth
+  nameWithType: Callout.ShadowWidth
+  fullName: Mapsui.UI.Maui.Callout.ShadowWidth
+- uid: Mapsui.UI.Maui.Callout.StrokeWidth*
+  commentId: Overload:Mapsui.UI.Maui.Callout.StrokeWidth
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_StrokeWidth
+  name: StrokeWidth
+  nameWithType: Callout.StrokeWidth
+  fullName: Mapsui.UI.Maui.Callout.StrokeWidth
+- uid: Mapsui.UI.Maui.Callout.Rotation*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Rotation
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Rotation
+  name: Rotation
+  nameWithType: Callout.Rotation
+  fullName: Mapsui.UI.Maui.Callout.Rotation
+- uid: Mapsui.UI.Maui.Callout.RotateWithMap*
+  commentId: Overload:Mapsui.UI.Maui.Callout.RotateWithMap
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_RotateWithMap
+  name: RotateWithMap
+  nameWithType: Callout.RotateWithMap
+  fullName: Mapsui.UI.Maui.Callout.RotateWithMap
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.UI.Maui.Callout.RectRadius*
+  commentId: Overload:Mapsui.UI.Maui.Callout.RectRadius
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_RectRadius
+  name: RectRadius
+  nameWithType: Callout.RectRadius
+  fullName: Mapsui.UI.Maui.Callout.RectRadius
+- uid: Mapsui.UI.Maui.Callout.Padding*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Padding
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Padding
+  name: Padding
+  nameWithType: Callout.Padding
+  fullName: Mapsui.UI.Maui.Callout.Padding
+- uid: Microsoft.Maui.Thickness
+  commentId: T:Microsoft.Maui.Thickness
+  parent: Microsoft.Maui
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.maui.thickness
+  name: Thickness
+  nameWithType: Thickness
+  fullName: Microsoft.Maui.Thickness
+- uid: Mapsui.UI.Maui.Callout.Spacing*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Spacing
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Spacing
+  name: Spacing
+  nameWithType: Callout.Spacing
+  fullName: Mapsui.UI.Maui.Callout.Spacing
+- uid: Mapsui.UI.Maui.Callout.MaxWidth*
+  commentId: Overload:Mapsui.UI.Maui.Callout.MaxWidth
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_MaxWidth
+  name: MaxWidth
+  nameWithType: Callout.MaxWidth
+  fullName: Mapsui.UI.Maui.Callout.MaxWidth
+- uid: Mapsui.UI.Maui.Callout.IsVisible*
+  commentId: Overload:Mapsui.UI.Maui.Callout.IsVisible
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_IsVisible
+  name: IsVisible
+  nameWithType: Callout.IsVisible
+  fullName: Mapsui.UI.Maui.Callout.IsVisible
+- uid: Mapsui.UI.Maui.Callout.IsClosableByClick*
+  commentId: Overload:Mapsui.UI.Maui.Callout.IsClosableByClick
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_IsClosableByClick
+  name: IsClosableByClick
+  nameWithType: Callout.IsClosableByClick
+  fullName: Mapsui.UI.Maui.Callout.IsClosableByClick
+- uid: Mapsui.UI.Maui.Callout.Content*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Content
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Content
+  name: Content
+  nameWithType: Callout.Content
+  fullName: Mapsui.UI.Maui.Callout.Content
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.UI.Maui.Callout.Title*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Title
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Title
+  name: Title
+  nameWithType: Callout.Title
+  fullName: Mapsui.UI.Maui.Callout.Title
+- uid: Mapsui.UI.Maui.Callout.TitleFontName*
+  commentId: Overload:Mapsui.UI.Maui.Callout.TitleFontName
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_TitleFontName
+  name: TitleFontName
+  nameWithType: Callout.TitleFontName
+  fullName: Mapsui.UI.Maui.Callout.TitleFontName
+- uid: Mapsui.UI.Maui.Callout.TitleFontSize*
+  commentId: Overload:Mapsui.UI.Maui.Callout.TitleFontSize
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_TitleFontSize
+  name: TitleFontSize
+  nameWithType: Callout.TitleFontSize
+  fullName: Mapsui.UI.Maui.Callout.TitleFontSize
+- uid: Mapsui.UI.Maui.Callout.TitleFontAttributes*
+  commentId: Overload:Mapsui.UI.Maui.Callout.TitleFontAttributes
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_TitleFontAttributes
+  name: TitleFontAttributes
+  nameWithType: Callout.TitleFontAttributes
+  fullName: Mapsui.UI.Maui.Callout.TitleFontAttributes
+- uid: Mapsui.UI.Maui.Callout.TitleFontColor*
+  commentId: Overload:Mapsui.UI.Maui.Callout.TitleFontColor
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_TitleFontColor
+  name: TitleFontColor
+  nameWithType: Callout.TitleFontColor
+  fullName: Mapsui.UI.Maui.Callout.TitleFontColor
+- uid: Mapsui.UI.Maui.Callout.TitleTextAlignment*
+  commentId: Overload:Mapsui.UI.Maui.Callout.TitleTextAlignment
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_TitleTextAlignment
+  name: TitleTextAlignment
+  nameWithType: Callout.TitleTextAlignment
+  fullName: Mapsui.UI.Maui.Callout.TitleTextAlignment
+- uid: Mapsui.UI.Maui.Callout.Subtitle*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Subtitle
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Subtitle
+  name: Subtitle
+  nameWithType: Callout.Subtitle
+  fullName: Mapsui.UI.Maui.Callout.Subtitle
+- uid: Mapsui.UI.Maui.Callout.SubtitleFontName*
+  commentId: Overload:Mapsui.UI.Maui.Callout.SubtitleFontName
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_SubtitleFontName
+  name: SubtitleFontName
+  nameWithType: Callout.SubtitleFontName
+  fullName: Mapsui.UI.Maui.Callout.SubtitleFontName
+- uid: Mapsui.UI.Maui.Callout.SubtitleFontSize*
+  commentId: Overload:Mapsui.UI.Maui.Callout.SubtitleFontSize
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_SubtitleFontSize
+  name: SubtitleFontSize
+  nameWithType: Callout.SubtitleFontSize
+  fullName: Mapsui.UI.Maui.Callout.SubtitleFontSize
+- uid: Mapsui.UI.Maui.Callout.SubtitleFontAttributes*
+  commentId: Overload:Mapsui.UI.Maui.Callout.SubtitleFontAttributes
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_SubtitleFontAttributes
+  name: SubtitleFontAttributes
+  nameWithType: Callout.SubtitleFontAttributes
+  fullName: Mapsui.UI.Maui.Callout.SubtitleFontAttributes
+- uid: Mapsui.UI.Maui.Callout.SubtitleFontColor*
+  commentId: Overload:Mapsui.UI.Maui.Callout.SubtitleFontColor
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_SubtitleFontColor
+  name: SubtitleFontColor
+  nameWithType: Callout.SubtitleFontColor
+  fullName: Mapsui.UI.Maui.Callout.SubtitleFontColor
+- uid: Mapsui.UI.Maui.Callout.SubtitleTextAlignment*
+  commentId: Overload:Mapsui.UI.Maui.Callout.SubtitleTextAlignment
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_SubtitleTextAlignment
+  name: SubtitleTextAlignment
+  nameWithType: Callout.SubtitleTextAlignment
+  fullName: Mapsui.UI.Maui.Callout.SubtitleTextAlignment
+- uid: Mapsui.UI.Maui.Callout.Feature*
+  commentId: Overload:Mapsui.UI.Maui.Callout.Feature
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_Feature
+  name: Feature
+  nameWithType: Callout.Feature
+  fullName: Mapsui.UI.Maui.Callout.Feature
+- uid: Mapsui.UI.Objects.IFeatureProvider.Feature
+  commentId: P:Mapsui.UI.Objects.IFeatureProvider.Feature
+  parent: Mapsui.UI.Objects.IFeatureProvider
+  name: Feature
+  nameWithType: IFeatureProvider.Feature
+  fullName: Mapsui.UI.Objects.IFeatureProvider.Feature
+- uid: Mapsui.Nts.GeometryFeature
+  commentId: T:Mapsui.Nts.GeometryFeature
+  parent: Mapsui.Nts
+  href: Mapsui.Nts.GeometryFeature.html
+  name: GeometryFeature
+  nameWithType: GeometryFeature
+  fullName: Mapsui.Nts.GeometryFeature
+- uid: Mapsui.Nts
+  commentId: N:Mapsui.Nts
+  href: Mapsui.html
+  name: Mapsui.Nts
+  nameWithType: Mapsui.Nts
+  fullName: Mapsui.Nts
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+- uid: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  commentId: E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  parent: System.ComponentModel.INotifyPropertyChanged
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged.propertychanged
+  name: PropertyChanged
+  nameWithType: INotifyPropertyChanged.PropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: System.ComponentModel.PropertyChangedEventHandler
+  commentId: T:System.ComponentModel.PropertyChangedEventHandler
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler
+  name: PropertyChangedEventHandler
+  nameWithType: PropertyChangedEventHandler
+  fullName: System.ComponentModel.PropertyChangedEventHandler
+- uid: Mapsui.UI.Maui.Callout.OnPropertyChanged*
+  commentId: Overload:Mapsui.UI.Maui.Callout.OnPropertyChanged
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_OnPropertyChanged_System_String_
+  name: OnPropertyChanged
+  nameWithType: Callout.OnPropertyChanged
+  fullName: Mapsui.UI.Maui.Callout.OnPropertyChanged
+- uid: Mapsui.UI.Maui.Callout.SetField*
+  commentId: Overload:Mapsui.UI.Maui.Callout.SetField
+  href: Mapsui.UI.Maui.Callout.html#Mapsui_UI_Maui_Callout_SetField__1___0____0_System_String_
+  name: SetField
+  nameWithType: Callout.SetField
+  fullName: Mapsui.UI.Maui.Callout.SetField
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T

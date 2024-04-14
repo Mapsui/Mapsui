@@ -1,0 +1,44 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui.Extensions
+  commentId: N:Mapsui.UI.Maui.Extensions
+  id: Mapsui.UI.Maui.Extensions
+  children:
+  - Mapsui.UI.Maui.Extensions.ColorExtensions
+  - Mapsui.UI.Maui.Extensions.PositionExtensions
+  - Mapsui.UI.Maui.Extensions.TextAlignmentExtensions
+  - Mapsui.UI.Maui.Extensions.ZoomLevelExtensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Maui.Extensions
+  nameWithType: Mapsui.UI.Maui.Extensions
+  fullName: Mapsui.UI.Maui.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Maui
+references:
+- uid: Mapsui.UI.Maui.Extensions.ColorExtensions
+  commentId: T:Mapsui.UI.Maui.Extensions.ColorExtensions
+  href: Mapsui.UI.Maui.Extensions.ColorExtensions.html
+  name: ColorExtensions
+  nameWithType: ColorExtensions
+  fullName: Mapsui.UI.Maui.Extensions.ColorExtensions
+- uid: Mapsui.UI.Maui.Extensions.PositionExtensions
+  commentId: T:Mapsui.UI.Maui.Extensions.PositionExtensions
+  href: Mapsui.UI.Maui.Extensions.PositionExtensions.html
+  name: PositionExtensions
+  nameWithType: PositionExtensions
+  fullName: Mapsui.UI.Maui.Extensions.PositionExtensions
+- uid: Mapsui.UI.Maui.Extensions.TextAlignmentExtensions
+  commentId: T:Mapsui.UI.Maui.Extensions.TextAlignmentExtensions
+  href: Mapsui.UI.Maui.Extensions.TextAlignmentExtensions.html
+  name: TextAlignmentExtensions
+  nameWithType: TextAlignmentExtensions
+  fullName: Mapsui.UI.Maui.Extensions.TextAlignmentExtensions
+- uid: Mapsui.UI.Maui.Extensions.ZoomLevelExtensions
+  commentId: T:Mapsui.UI.Maui.Extensions.ZoomLevelExtensions
+  href: Mapsui.UI.Maui.Extensions.ZoomLevelExtensions.html
+  name: ZoomLevelExtensions
+  nameWithType: ZoomLevelExtensions
+  fullName: Mapsui.UI.Maui.Extensions.ZoomLevelExtensions

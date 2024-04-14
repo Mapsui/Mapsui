@@ -1,0 +1,153 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui.PinType
+  commentId: T:Mapsui.UI.Maui.PinType
+  id: PinType
+  parent: Mapsui.UI.Maui
+  children:
+  - Mapsui.UI.Maui.PinType.Icon
+  - Mapsui.UI.Maui.PinType.Pin
+  - Mapsui.UI.Maui.PinType.Svg
+  langs:
+  - csharp
+  - vb
+  name: PinType
+  nameWithType: PinType
+  fullName: Mapsui.UI.Maui.PinType
+  type: Enum
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/PinType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PinType
+    path: ../../Mapsui.UI.MapView/Objects/PinType.cs
+    startLine: 2
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public enum PinType
+    content.vb: Public Enum PinType
+- uid: Mapsui.UI.Maui.PinType.Pin
+  commentId: F:Mapsui.UI.Maui.PinType.Pin
+  id: Pin
+  parent: Mapsui.UI.Maui.PinType
+  langs:
+  - csharp
+  - vb
+  name: Pin
+  nameWithType: PinType.Pin
+  fullName: Mapsui.UI.Maui.PinType.Pin
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/PinType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Pin
+    path: ../../Mapsui.UI.MapView/Objects/PinType.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Pin with image, which could change color
+  example: []
+  syntax:
+    content: Pin = 0
+    return:
+      type: Mapsui.UI.Maui.PinType
+- uid: Mapsui.UI.Maui.PinType.Icon
+  commentId: F:Mapsui.UI.Maui.PinType.Icon
+  id: Icon
+  parent: Mapsui.UI.Maui.PinType
+  langs:
+  - csharp
+  - vb
+  name: Icon
+  nameWithType: PinType.Icon
+  fullName: Mapsui.UI.Maui.PinType.Icon
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/PinType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Icon
+    path: ../../Mapsui.UI.MapView/Objects/PinType.cs
+    startLine: 12
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Pin as icon image
+  example: []
+  syntax:
+    content: Icon = 1
+    return:
+      type: Mapsui.UI.Maui.PinType
+- uid: Mapsui.UI.Maui.PinType.Svg
+  commentId: F:Mapsui.UI.Maui.PinType.Svg
+  id: Svg
+  parent: Mapsui.UI.Maui.PinType
+  langs:
+  - csharp
+  - vb
+  name: Svg
+  nameWithType: PinType.Svg
+  fullName: Mapsui.UI.Maui.PinType.Svg
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/PinType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Svg
+    path: ../../Mapsui.UI.MapView/Objects/PinType.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Pin as Svg image
+  example: []
+  syntax:
+    content: Svg = 2
+    return:
+      type: Mapsui.UI.Maui.PinType
+references:
+- uid: Mapsui.UI.Maui
+  commentId: N:Mapsui.UI.Maui
+  href: Mapsui.html
+  name: Mapsui.UI.Maui
+  nameWithType: Mapsui.UI.Maui
+  fullName: Mapsui.UI.Maui
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+- uid: Mapsui.UI.Maui.PinType
+  commentId: T:Mapsui.UI.Maui.PinType
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.PinType.html
+  name: PinType
+  nameWithType: PinType
+  fullName: Mapsui.UI.Maui.PinType

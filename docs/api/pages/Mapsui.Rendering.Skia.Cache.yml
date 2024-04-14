@@ -1,0 +1,77 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.Cache
+  commentId: N:Mapsui.Rendering.Skia.Cache
+  id: Mapsui.Rendering.Skia.Cache
+  children:
+  - Mapsui.Rendering.Skia.Cache.IdentityComparer`1
+  - Mapsui.Rendering.Skia.Cache.LabelCache
+  - Mapsui.Rendering.Skia.Cache.RenderCache
+  - Mapsui.Rendering.Skia.Cache.SymbolCache
+  - Mapsui.Rendering.Skia.Cache.TileCache
+  - Mapsui.Rendering.Skia.Cache.VectorCache
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Rendering.Skia.Cache
+  nameWithType: Mapsui.Rendering.Skia.Cache
+  fullName: Mapsui.Rendering.Skia.Cache
+  type: Namespace
+  assemblies:
+  - Mapsui.Rendering.Skia
+references:
+- uid: Mapsui.Rendering.Skia.Cache.LabelCache
+  commentId: T:Mapsui.Rendering.Skia.Cache.LabelCache
+  href: Mapsui.Rendering.Skia.Cache.LabelCache.html
+  name: LabelCache
+  nameWithType: LabelCache
+  fullName: Mapsui.Rendering.Skia.Cache.LabelCache
+- uid: Mapsui.Rendering.Skia.Cache.RenderCache
+  commentId: T:Mapsui.Rendering.Skia.Cache.RenderCache
+  href: Mapsui.Rendering.Skia.Cache.RenderCache.html
+  name: RenderCache
+  nameWithType: RenderCache
+  fullName: Mapsui.Rendering.Skia.Cache.RenderCache
+- uid: Mapsui.Rendering.Skia.Cache.SymbolCache
+  commentId: T:Mapsui.Rendering.Skia.Cache.SymbolCache
+  href: Mapsui.Rendering.Skia.Cache.SymbolCache.html
+  name: SymbolCache
+  nameWithType: SymbolCache
+  fullName: Mapsui.Rendering.Skia.Cache.SymbolCache
+- uid: Mapsui.Rendering.Skia.Cache.TileCache
+  commentId: T:Mapsui.Rendering.Skia.Cache.TileCache
+  href: Mapsui.Rendering.Skia.Cache.TileCache.html
+  name: TileCache
+  nameWithType: TileCache
+  fullName: Mapsui.Rendering.Skia.Cache.TileCache
+- uid: Mapsui.Rendering.Skia.Cache.IdentityComparer`1
+  commentId: T:Mapsui.Rendering.Skia.Cache.IdentityComparer`1
+  href: Mapsui.Rendering.Skia.Cache.IdentityComparer-1.html
+  name: IdentityComparer<T>
+  nameWithType: IdentityComparer<T>
+  fullName: Mapsui.Rendering.Skia.Cache.IdentityComparer<T>
+  nameWithType.vb: IdentityComparer(Of T)
+  fullName.vb: Mapsui.Rendering.Skia.Cache.IdentityComparer(Of T)
+  name.vb: IdentityComparer(Of T)
+  spec.csharp:
+  - uid: Mapsui.Rendering.Skia.Cache.IdentityComparer`1
+    name: IdentityComparer
+    href: Mapsui.Rendering.Skia.Cache.IdentityComparer-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Rendering.Skia.Cache.IdentityComparer`1
+    name: IdentityComparer
+    href: Mapsui.Rendering.Skia.Cache.IdentityComparer-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Rendering.Skia.Cache.VectorCache
+  commentId: T:Mapsui.Rendering.Skia.Cache.VectorCache
+  href: Mapsui.Rendering.Skia.Cache.VectorCache.html
+  name: VectorCache
+  nameWithType: VectorCache
+  fullName: Mapsui.Rendering.Skia.Cache.VectorCache

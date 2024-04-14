@@ -1,0 +1,142 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Animations
+  commentId: N:Mapsui.Animations
+  id: Mapsui.Animations
+  children:
+  - Mapsui.Animations.Animation
+  - Mapsui.Animations.AnimationEntry`1
+  - Mapsui.Animations.AnimationEventArgs
+  - Mapsui.Animations.AnimationResult`1
+  - Mapsui.Animations.Easing
+  - Mapsui.Animations.FlingAnimation
+  - Mapsui.Animations.FlyToAnimation
+  - Mapsui.Animations.IAnimatable
+  - Mapsui.Animations.MouseWheelAnimation
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Animations
+  nameWithType: Mapsui.Animations
+  fullName: Mapsui.Animations
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Animations.Animation
+  commentId: T:Mapsui.Animations.Animation
+  href: Mapsui.Animations.Animation.html
+  name: Animation
+  nameWithType: Animation
+  fullName: Mapsui.Animations.Animation
+- uid: Mapsui.Animations.AnimationEntry`1
+  commentId: T:Mapsui.Animations.AnimationEntry`1
+  href: Mapsui.Animations.AnimationEntry-1.html
+  name: AnimationEntry<T>
+  nameWithType: AnimationEntry<T>
+  fullName: Mapsui.Animations.AnimationEntry<T>
+  nameWithType.vb: AnimationEntry(Of T)
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T)
+  name.vb: AnimationEntry(Of T)
+  spec.csharp:
+  - uid: Mapsui.Animations.AnimationEntry`1
+    name: AnimationEntry
+    href: Mapsui.Animations.AnimationEntry-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Animations.AnimationEntry`1
+    name: AnimationEntry
+    href: Mapsui.Animations.AnimationEntry-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Animations.AnimationEventArgs
+  commentId: T:Mapsui.Animations.AnimationEventArgs
+  href: Mapsui.Animations.AnimationEventArgs.html
+  name: AnimationEventArgs
+  nameWithType: AnimationEventArgs
+  fullName: Mapsui.Animations.AnimationEventArgs
+- uid: Mapsui.Animations.AnimationResult`1
+  commentId: T:Mapsui.Animations.AnimationResult`1
+  href: Mapsui.Animations.AnimationResult-1.html
+  name: AnimationResult<T>
+  nameWithType: AnimationResult<T>
+  fullName: Mapsui.Animations.AnimationResult<T>
+  nameWithType.vb: AnimationResult(Of T)
+  fullName.vb: Mapsui.Animations.AnimationResult(Of T)
+  name.vb: AnimationResult(Of T)
+  spec.csharp:
+  - uid: Mapsui.Animations.AnimationResult`1
+    name: AnimationResult
+    href: Mapsui.Animations.AnimationResult-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Animations.AnimationResult`1
+    name: AnimationResult
+    href: Mapsui.Animations.AnimationResult-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Animations.Easing
+  commentId: T:Mapsui.Animations.Easing
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.Easing.html
+  name: Easing
+  nameWithType: Easing
+  fullName: Mapsui.Animations.Easing
+- uid: Mapsui.Animations.FlingAnimation
+  commentId: T:Mapsui.Animations.FlingAnimation
+  href: Mapsui.Animations.FlingAnimation.html
+  name: FlingAnimation
+  nameWithType: FlingAnimation
+  fullName: Mapsui.Animations.FlingAnimation
+- uid: Mapsui.Animations.FlyToAnimation
+  commentId: T:Mapsui.Animations.FlyToAnimation
+  href: Mapsui.Animations.FlyToAnimation.html
+  name: FlyToAnimation
+  nameWithType: FlyToAnimation
+  fullName: Mapsui.Animations.FlyToAnimation
+- uid: Mapsui.Animations.IAnimatable
+  commentId: T:Mapsui.Animations.IAnimatable
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.IAnimatable.html
+  name: IAnimatable
+  nameWithType: IAnimatable
+  fullName: Mapsui.Animations.IAnimatable
+- uid: Mapsui.Animations.MouseWheelAnimation
+  commentId: T:Mapsui.Animations.MouseWheelAnimation
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.MouseWheelAnimation.html
+  name: MouseWheelAnimation
+  nameWithType: MouseWheelAnimation
+  fullName: Mapsui.Animations.MouseWheelAnimation
+- uid: Mapsui.Animations
+  commentId: N:Mapsui.Animations
+  href: Mapsui.html
+  name: Mapsui.Animations
+  nameWithType: Mapsui.Animations
+  fullName: Mapsui.Animations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html

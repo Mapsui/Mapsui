@@ -1,0 +1,552 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class LoggingWidget </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class LoggingWidget ">
+    
+    <meta name="description" content="Widget which shows log entries">
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget">
+
+
+
+  <h1 id="Mapsui_Widgets_InfoWidgets_LoggingWidget" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget" class="text-break">Class LoggingWidget</h1>
+  <div class="markdown level0 summary"><p>Widget which shows log entries</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Mapsui.Widgets.BaseWidget.html">BaseWidget</a></div>
+    <div class="level2"><a class="xref" href="Mapsui.Widgets.BoxWidgets.BoxWidget.html">BoxWidget</a></div>
+    <div class="level3"><a class="xref" href="Mapsui.Widgets.BoxWidgets.TextBoxWidget.html">TextBoxWidget</a></div>
+    <div class="level4"><span class="xref">LoggingWidget</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_Padding">TextBoxWidget.Padding</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_Text">TextBoxWidget.Text</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_TextSize">TextBoxWidget.TextSize</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BoxWidgets.TextBoxWidget.html#Mapsui_Widgets_BoxWidgets_TextBoxWidget_TextColor">TextBoxWidget.TextColor</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BoxWidgets.BoxWidget.html#Mapsui_Widgets_BoxWidgets_BoxWidget_CornerRadius">BoxWidget.CornerRadius</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BoxWidgets.BoxWidget.html#Mapsui_Widgets_BoxWidgets_BoxWidget_BackColor">BoxWidget.BackColor</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BoxWidgets.BoxWidget.html#Mapsui_Widgets_BoxWidgets_BoxWidget_Opacity">BoxWidget.Opacity</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_InputAreaType">BaseWidget.InputAreaType</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_HorizontalAlignment">BaseWidget.HorizontalAlignment</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_VerticalAlignment">BaseWidget.VerticalAlignment</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Margin">BaseWidget.Margin</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Position">BaseWidget.Position</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Width">BaseWidget.Width</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Height">BaseWidget.Height</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Envelope">BaseWidget.Envelope</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Enabled">BaseWidget.Enabled</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_NeedsRedraw">BaseWidget.NeedsRedraw</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_InputTransparent">BaseWidget.InputTransparent</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_">BaseWidget.UpdateEnvelope(double, double, double, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Invalidate_System_String_">BaseWidget.Invalidate(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_">BaseWidget.OnTapped(Navigator, WidgetEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_">BaseWidget.OnPointerPressed(Navigator, WidgetEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_">BaseWidget.OnPointerMoved(Navigator, WidgetEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_">BaseWidget.OnPointerReleased(Navigator, WidgetEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.Widgets.html">Widgets</a>.<a class="xref" href="Mapsui.Widgets.InfoWidgets.html">InfoWidgets</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.dll</h6>
+  <h5 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class LoggingWidget : TextBoxWidget, IWidget</code></pre>
+  </div>
+  <h5 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>With this, the user could see the log entries on the screen.
+without saving them to a file or somewhere else.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget__ctor.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L32">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget__ctor_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget__ctor" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor">LoggingWidget()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LoggingWidget()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget_ErrorTextColor.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L122">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget_ErrorTextColor_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_ErrorTextColor" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.ErrorTextColor">ErrorTextColor</h4>
+  <div class="markdown level1 summary"><p>Color for errors</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color ErrorTextColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget_InformationTextColor.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L156">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget_InformationTextColor_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_InformationTextColor" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.InformationTextColor">InformationTextColor</h4>
+  <div class="markdown level1 summary"><p>Color for information text</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color InformationTextColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget_ListOfLogEntries.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L83">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget_ListOfLogEntries_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_ListOfLogEntries" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.ListOfLogEntries">ListOfLogEntries</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConcurrentQueue&lt;LoggingWidget.LogEntry&gt; ListOfLogEntries { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1">ConcurrentQueue</a>&lt;<a class="xref" href="Mapsui.Widgets.InfoWidgets.LoggingWidget.html">LoggingWidget</a>.<a class="xref" href="Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html">LogEntry</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget_LogLevelFilter.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L91">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget_LogLevelFilter_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_LogLevelFilter" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.LogLevelFilter">LogLevelFilter</h4>
+  <div class="markdown level1 summary"><p>Filter for LogLevel
+Only this or higher levels are printed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LogLevel LogLevelFilter { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Logging.LogLevel.html">LogLevel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget_MaxNumberOfLogEntriesToKeep.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L105">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget_MaxNumberOfLogEntriesToKeep_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_MaxNumberOfLogEntriesToKeep" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.MaxNumberOfLogEntriesToKeep">MaxNumberOfLogEntriesToKeep</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxNumberOfLogEntriesToKeep { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget_ShowLoggingInMap.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L48">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget_ShowLoggingInMap_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_ShowLoggingInMap" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.ShowLoggingInMap">ShowLoggingInMap</h4>
+  <div class="markdown level1 summary"><p>Global setting to control logging in the map. Note, that there will never be logging in the map if the
+Enabled field of the logging widget is false.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ShowLoggingInMap ShowLoggingInMap { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html">ShowLoggingInMap</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget_WarningTextColor.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L139">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget_WarningTextColor_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_WarningTextColor" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.WarningTextColor">WarningTextColor</h4>
+  <div class="markdown level1 summary"><p>Color for warnings</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color WarningTextColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget_Clear.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L71">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget_Clear_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_Clear" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.Clear">Clear()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget_Log_Mapsui_Logging_LogLevel_System_String_System_Exception_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget.Log(Mapsui.Logging.LogLevel%2CSystem.String%2CSystem.Exception)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L54">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_InfoWidgets_LoggingWidget_Log_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.Log*"></a>
+  <h4 id="Mapsui_Widgets_InfoWidgets_LoggingWidget_Log_Mapsui_Logging_LogLevel_System_String_System_Exception_" data-uid="Mapsui.Widgets.InfoWidgets.LoggingWidget.Log(Mapsui.Logging.LogLevel,System.String,System.Exception)">Log(LogLevel, string, Exception?)</h4>
+  <div class="markdown level1 summary"><p>Event handler for logging</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Log(LogLevel level, string description, Exception? exception)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Logging.LogLevel.html">LogLevel</a></td>
+        <td><span class="parametername">level</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">description</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
+        <td><span class="parametername">exception</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_LoggingWidget.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.LoggingWidget%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/LoggingWidget.cs/#L23" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

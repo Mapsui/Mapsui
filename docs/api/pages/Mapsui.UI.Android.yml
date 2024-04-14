@@ -1,0 +1,137 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Android
+  commentId: N:Mapsui.UI.Android
+  id: Mapsui.UI.Android
+  children:
+  - Mapsui.UI.Android.MapControl
+  - Mapsui.UI.Android.Resource
+  - Mapsui.UI.Android.Resource.Attribute
+  - Mapsui.UI.Android.Resource.String
+  - Mapsui.UI.Android.Resource.Styleable
+  - Mapsui.UI.Android.SkiaRenderMode
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Android
+  nameWithType: Mapsui.UI.Android
+  fullName: Mapsui.UI.Android
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Android
+references:
+- uid: Mapsui.UI.Android.SkiaRenderMode
+  commentId: T:Mapsui.UI.Android.SkiaRenderMode
+  parent: Mapsui.UI.Android
+  href: Mapsui.UI.Android.SkiaRenderMode.html
+  name: SkiaRenderMode
+  nameWithType: SkiaRenderMode
+  fullName: Mapsui.UI.Android.SkiaRenderMode
+- uid: Mapsui.UI.Android.MapControl
+  commentId: T:Mapsui.UI.Android.MapControl
+  href: Mapsui.UI.Android.MapControl.html
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.Android.MapControl
+- uid: Mapsui.UI.Android.Resource
+  commentId: T:Mapsui.UI.Android.Resource
+  href: Mapsui.UI.Android.Resource.html
+  name: Resource
+  nameWithType: Resource
+  fullName: Mapsui.UI.Android.Resource
+- uid: Mapsui.UI.Android.Resource.Attribute
+  commentId: T:Mapsui.UI.Android.Resource.Attribute
+  href: Mapsui.UI.Android.Resource.html
+  name: Resource.Attribute
+  nameWithType: Resource.Attribute
+  fullName: Mapsui.UI.Android.Resource.Attribute
+  spec.csharp:
+  - uid: Mapsui.UI.Android.Resource
+    name: Resource
+    href: Mapsui.UI.Android.Resource.html
+  - name: .
+  - uid: Mapsui.UI.Android.Resource.Attribute
+    name: Attribute
+    href: Mapsui.UI.Android.Resource.Attribute.html
+  spec.vb:
+  - uid: Mapsui.UI.Android.Resource
+    name: Resource
+    href: Mapsui.UI.Android.Resource.html
+  - name: .
+  - uid: Mapsui.UI.Android.Resource.Attribute
+    name: Attribute
+    href: Mapsui.UI.Android.Resource.Attribute.html
+- uid: Mapsui.UI.Android.Resource.String
+  commentId: T:Mapsui.UI.Android.Resource.String
+  href: Mapsui.UI.Android.Resource.html
+  name: Resource.String
+  nameWithType: Resource.String
+  fullName: Mapsui.UI.Android.Resource.String
+  spec.csharp:
+  - uid: Mapsui.UI.Android.Resource
+    name: Resource
+    href: Mapsui.UI.Android.Resource.html
+  - name: .
+  - uid: Mapsui.UI.Android.Resource.String
+    name: String
+    href: Mapsui.UI.Android.Resource.String.html
+  spec.vb:
+  - uid: Mapsui.UI.Android.Resource
+    name: Resource
+    href: Mapsui.UI.Android.Resource.html
+  - name: .
+  - uid: Mapsui.UI.Android.Resource.String
+    name: String
+    href: Mapsui.UI.Android.Resource.String.html
+- uid: Mapsui.UI.Android.Resource.Styleable
+  commentId: T:Mapsui.UI.Android.Resource.Styleable
+  href: Mapsui.UI.Android.Resource.html
+  name: Resource.Styleable
+  nameWithType: Resource.Styleable
+  fullName: Mapsui.UI.Android.Resource.Styleable
+  spec.csharp:
+  - uid: Mapsui.UI.Android.Resource
+    name: Resource
+    href: Mapsui.UI.Android.Resource.html
+  - name: .
+  - uid: Mapsui.UI.Android.Resource.Styleable
+    name: Styleable
+    href: Mapsui.UI.Android.Resource.Styleable.html
+  spec.vb:
+  - uid: Mapsui.UI.Android.Resource
+    name: Resource
+    href: Mapsui.UI.Android.Resource.html
+  - name: .
+  - uid: Mapsui.UI.Android.Resource.Styleable
+    name: Styleable
+    href: Mapsui.UI.Android.Resource.Styleable.html
+- uid: Mapsui.UI.Android
+  commentId: N:Mapsui.UI.Android
+  href: Mapsui.html
+  name: Mapsui.UI.Android
+  nameWithType: Mapsui.UI.Android
+  fullName: Mapsui.UI.Android
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Android
+    name: Android
+    href: Mapsui.UI.Android.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Android
+    name: Android
+    href: Mapsui.UI.Android.html

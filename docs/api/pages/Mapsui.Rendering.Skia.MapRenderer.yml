@@ -1,0 +1,1505 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.MapRenderer
+  commentId: T:Mapsui.Rendering.Skia.MapRenderer
+  id: MapRenderer
+  parent: Mapsui.Rendering.Skia
+  children:
+  - Mapsui.Rendering.Skia.MapRenderer.#ctor
+  - Mapsui.Rendering.Skia.MapRenderer.#ctor(Mapsui.Rendering.IRenderCache)
+  - Mapsui.Rendering.Skia.MapRenderer.Dispose
+  - Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  - Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  - Mapsui.Rendering.Skia.MapRenderer.RenderCache
+  - Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat)
+  - Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  - Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
+  langs:
+  - csharp
+  - vb
+  name: MapRenderer
+  nameWithType: MapRenderer
+  fullName: Mapsui.Rendering.Skia.MapRenderer
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MapRenderer
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 24
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: 'public sealed class MapRenderer : IRenderer, IRenderInfo, IDisposable'
+    content.vb: Public NotInheritable Class MapRenderer Implements IRenderer, IRenderInfo, IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Rendering.IRenderer
+  - Mapsui.Rendering.IRenderInfo
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.Skia.MapRenderer.RenderCache
+  commentId: P:Mapsui.Rendering.Skia.MapRenderer.RenderCache
+  id: RenderCache
+  parent: Mapsui.Rendering.Skia.MapRenderer
+  langs:
+  - csharp
+  - vb
+  name: RenderCache
+  nameWithType: MapRenderer.RenderCache
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RenderCache
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RenderCache
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 29
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  example: []
+  syntax:
+    content: public IRenderCache RenderCache { get; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.IRenderCache
+    content.vb: Public ReadOnly Property RenderCache As IRenderCache
+  overload: Mapsui.Rendering.Skia.MapRenderer.RenderCache*
+  implements:
+  - Mapsui.Rendering.IRenderer.RenderCache
+- uid: Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
+  commentId: P:Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
+  id: WidgetRenders
+  parent: Mapsui.Rendering.Skia.MapRenderer
+  langs:
+  - csharp
+  - vb
+  name: WidgetRenders
+  nameWithType: MapRenderer.WidgetRenders
+  fullName: Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WidgetRenders
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  example: []
+  syntax:
+    content: public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IDictionary{System.Type,Mapsui.Widgets.IWidgetRenderer}
+    content.vb: Public ReadOnly Property WidgetRenders As IDictionary(Of Type, IWidgetRenderer)
+  overload: Mapsui.Rendering.Skia.MapRenderer.WidgetRenders*
+  implements:
+  - Mapsui.Rendering.IRenderer.WidgetRenders
+- uid: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  commentId: P:Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  id: StyleRenderers
+  parent: Mapsui.Rendering.Skia.MapRenderer
+  langs:
+  - csharp
+  - vb
+  name: StyleRenderers
+  nameWithType: MapRenderer.StyleRenderers
+  fullName: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StyleRenderers
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 36
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  summary: Dictionary holding all special renderers for styles
+  example: []
+  syntax:
+    content: public IDictionary<Type, IStyleRenderer> StyleRenderers { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IDictionary{System.Type,Mapsui.Styles.IStyleRenderer}
+    content.vb: Public ReadOnly Property StyleRenderers As IDictionary(Of Type, IStyleRenderer)
+  overload: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers*
+  implements:
+  - Mapsui.Rendering.IRenderer.StyleRenderers
+- uid: Mapsui.Rendering.Skia.MapRenderer.#ctor(Mapsui.Rendering.IRenderCache)
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.#ctor(Mapsui.Rendering.IRenderCache)
+  id: '#ctor(Mapsui.Rendering.IRenderCache)'
+  parent: Mapsui.Rendering.Skia.MapRenderer
+  langs:
+  - csharp
+  - vb
+  name: MapRenderer(IRenderCache)
+  nameWithType: MapRenderer.MapRenderer(IRenderCache)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.MapRenderer(Mapsui.Rendering.IRenderCache)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 44
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public MapRenderer(IRenderCache renderer)
+    parameters:
+    - id: renderer
+      type: Mapsui.Rendering.IRenderCache
+    content.vb: Public Sub New(renderer As IRenderCache)
+  overload: Mapsui.Rendering.Skia.MapRenderer.#ctor*
+  nameWithType.vb: MapRenderer.New(IRenderCache)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.New(Mapsui.Rendering.IRenderCache)
+  name.vb: New(IRenderCache)
+- uid: Mapsui.Rendering.Skia.MapRenderer.#ctor
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.#ctor
+  id: '#ctor'
+  parent: Mapsui.Rendering.Skia.MapRenderer
+  langs:
+  - csharp
+  - vb
+  name: MapRenderer()
+  nameWithType: MapRenderer.MapRenderer()
+  fullName: Mapsui.Rendering.Skia.MapRenderer.MapRenderer()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 67
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public MapRenderer()
+    content.vb: Public Sub New()
+  overload: Mapsui.Rendering.Skia.MapRenderer.#ctor*
+  nameWithType.vb: MapRenderer.New()
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.New()
+  name.vb: New()
+- uid: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  id: Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  parent: Mapsui.Rendering.Skia.MapRenderer
+  langs:
+  - csharp
+  - vb
+  name: Render(object, Viewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color?)
+  nameWithType: MapRenderer.Render(object, Viewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color?)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.Render(object, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Render
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 73
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  example: []
+  syntax:
+    content: public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Color? background = null)
+    parameters:
+    - id: target
+      type: System.Object
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: layers
+      type: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+    - id: widgets
+      type: System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget}
+    - id: background
+      type: Mapsui.Styles.Color
+    content.vb: Public Sub Render(target As Object, viewport As Viewport, layers As IEnumerable(Of ILayer), widgets As IEnumerable(Of IWidget), background As Color = Nothing)
+  overload: Mapsui.Rendering.Skia.MapRenderer.Render*
+  implements:
+  - Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  nameWithType.vb: MapRenderer.Render(Object, Viewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.Render(Object, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
+  name.vb: Render(Object, Viewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+- uid: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat)
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat)
+  id: RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat)
+  parent: Mapsui.Rendering.Skia.MapRenderer
+  langs:
+  - csharp
+  - vb
+  name: RenderToBitmapStream(Viewport, IEnumerable<ILayer>, Color?, float, IEnumerable<IWidget>?, RenderFormat)
+  nameWithType: MapRenderer.RenderToBitmapStream(Viewport, IEnumerable<ILayer>, Color?, float, IEnumerable<IWidget>?, RenderFormat)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color?, float, System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>?, Mapsui.Rendering.RenderFormat)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RenderToBitmapStream
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 93
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  example: []
+  syntax:
+    content: public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: layers
+      type: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+    - id: background
+      type: Mapsui.Styles.Color
+    - id: pixelDensity
+      type: System.Single
+    - id: widgets
+      type: System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget}
+    - id: renderFormat
+      type: Mapsui.Rendering.RenderFormat
+    return:
+      type: System.IO.MemoryStream
+    content.vb: Public Function RenderToBitmapStream(viewport As Viewport, layers As IEnumerable(Of ILayer), background As Color = Nothing, pixelDensity As Single = 1, widgets As IEnumerable(Of IWidget) = Nothing, renderFormat As RenderFormat = RenderFormat.Png) As MemoryStream
+  overload: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream*
+  implements:
+  - Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat)
+  nameWithType.vb: MapRenderer.RenderToBitmapStream(Viewport, IEnumerable(Of ILayer), Color, Single, IEnumerable(Of IWidget), RenderFormat)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color, Single, System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Rendering.RenderFormat)
+  name.vb: RenderToBitmapStream(Viewport, IEnumerable(Of ILayer), Color, Single, IEnumerable(Of IWidget), RenderFormat)
+- uid: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  id: GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  parent: Mapsui.Rendering.Skia.MapRenderer
+  langs:
+  - csharp
+  - vb
+  name: GetMapInfo(double, double, Viewport, IEnumerable<ILayer>, int)
+  nameWithType: MapRenderer.GetMapInfo(double, double, Viewport, IEnumerable<ILayer>, int)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(double, double, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetMapInfo
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 205
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  example: []
+  syntax:
+    content: public MapInfo GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    parameters:
+    - id: x
+      type: System.Double
+    - id: y
+      type: System.Double
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: layers
+      type: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+    - id: margin
+      type: System.Int32
+    return:
+      type: Mapsui.MapInfo
+    content.vb: Public Function GetMapInfo(x As Double, y As Double, viewport As Viewport, layers As IEnumerable(Of ILayer), margin As Integer = 0) As MapInfo
+  overload: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo*
+  implements:
+  - Mapsui.Rendering.IRenderInfo.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  nameWithType.vb: MapRenderer.GetMapInfo(Double, Double, Viewport, IEnumerable(Of ILayer), Integer)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Double, Double, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Integer)
+  name.vb: GetMapInfo(Double, Double, Viewport, IEnumerable(Of ILayer), Integer)
+- uid: Mapsui.Rendering.Skia.MapRenderer.Dispose
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.Dispose
+  id: Dispose
+  parent: Mapsui.Rendering.Skia.MapRenderer
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: MapRenderer.Dispose()
+  fullName: Mapsui.Rendering.Skia.MapRenderer.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/MapRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui.Rendering.Skia/MapRenderer.cs
+    startLine: 326
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Mapsui.Rendering.Skia.MapRenderer.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+references:
+- uid: Mapsui.Rendering.Skia
+  commentId: N:Mapsui.Rendering.Skia
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia
+  nameWithType: Mapsui.Rendering.Skia
+  fullName: Mapsui.Rendering.Skia
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Rendering.IRenderer
+  commentId: T:Mapsui.Rendering.IRenderer
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderer.html
+  name: IRenderer
+  nameWithType: IRenderer
+  fullName: Mapsui.Rendering.IRenderer
+- uid: Mapsui.Rendering.IRenderInfo
+  commentId: T:Mapsui.Rendering.IRenderInfo
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderInfo.html
+  name: IRenderInfo
+  nameWithType: IRenderInfo
+  fullName: Mapsui.Rendering.IRenderInfo
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.Skia.MapRenderer.RenderCache*
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.RenderCache
+  href: Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RenderCache
+  name: RenderCache
+  nameWithType: MapRenderer.RenderCache
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RenderCache
+- uid: Mapsui.Rendering.IRenderer.RenderCache
+  commentId: P:Mapsui.Rendering.IRenderer.RenderCache
+  parent: Mapsui.Rendering.IRenderer
+  name: RenderCache
+  nameWithType: IRenderer.RenderCache
+  fullName: Mapsui.Rendering.IRenderer.RenderCache
+- uid: Mapsui.Rendering.IRenderCache
+  commentId: T:Mapsui.Rendering.IRenderCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderCache.html
+  name: IRenderCache
+  nameWithType: IRenderCache
+  fullName: Mapsui.Rendering.IRenderCache
+- uid: Mapsui.Rendering.Skia.MapRenderer.WidgetRenders*
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
+  href: Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_WidgetRenders
+  name: WidgetRenders
+  nameWithType: MapRenderer.WidgetRenders
+  fullName: Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
+- uid: Mapsui.Rendering.IRenderer.WidgetRenders
+  commentId: P:Mapsui.Rendering.IRenderer.WidgetRenders
+  parent: Mapsui.Rendering.IRenderer
+  name: WidgetRenders
+  nameWithType: IRenderer.WidgetRenders
+  fullName: Mapsui.Rendering.IRenderer.WidgetRenders
+- uid: System.Collections.Generic.IDictionary{System.Type,Mapsui.Widgets.IWidgetRenderer}
+  commentId: T:System.Collections.Generic.IDictionary{System.Type,Mapsui.Widgets.IWidgetRenderer}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<Type, IWidgetRenderer>
+  nameWithType: IDictionary<Type, IWidgetRenderer>
+  fullName: System.Collections.Generic.IDictionary<System.Type, Mapsui.Widgets.IWidgetRenderer>
+  nameWithType.vb: IDictionary(Of Type, IWidgetRenderer)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Type, Mapsui.Widgets.IWidgetRenderer)
+  name.vb: IDictionary(Of Type, IWidgetRenderer)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.IWidgetRenderer
+    name: IWidgetRenderer
+    href: Mapsui.Widgets.IWidgetRenderer.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.IWidgetRenderer
+    name: IWidgetRenderer
+    href: Mapsui.Widgets.IWidgetRenderer.html
+  - name: )
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers*
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  href: Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_StyleRenderers
+  name: StyleRenderers
+  nameWithType: MapRenderer.StyleRenderers
+  fullName: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+- uid: Mapsui.Rendering.IRenderer.StyleRenderers
+  commentId: P:Mapsui.Rendering.IRenderer.StyleRenderers
+  parent: Mapsui.Rendering.IRenderer
+  name: StyleRenderers
+  nameWithType: IRenderer.StyleRenderers
+  fullName: Mapsui.Rendering.IRenderer.StyleRenderers
+- uid: System.Collections.Generic.IDictionary{System.Type,Mapsui.Styles.IStyleRenderer}
+  commentId: T:System.Collections.Generic.IDictionary{System.Type,Mapsui.Styles.IStyleRenderer}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<Type, IStyleRenderer>
+  nameWithType: IDictionary<Type, IStyleRenderer>
+  fullName: System.Collections.Generic.IDictionary<System.Type, Mapsui.Styles.IStyleRenderer>
+  nameWithType.vb: IDictionary(Of Type, IStyleRenderer)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Type, Mapsui.Styles.IStyleRenderer)
+  name.vb: IDictionary(Of Type, IStyleRenderer)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.IStyleRenderer
+    name: IStyleRenderer
+    href: Mapsui.Styles.IStyleRenderer.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.IStyleRenderer
+    name: IStyleRenderer
+    href: Mapsui.Styles.IStyleRenderer.html
+  - name: )
+- uid: Mapsui.Rendering.Skia.MapRenderer.#ctor*
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.#ctor
+  href: Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer__ctor_Mapsui_Rendering_IRenderCache_
+  name: MapRenderer
+  nameWithType: MapRenderer.MapRenderer
+  fullName: Mapsui.Rendering.Skia.MapRenderer.MapRenderer
+  nameWithType.vb: MapRenderer.New
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.New
+  name.vb: New
+- uid: Mapsui.Rendering.Skia.MapRenderer.Render*
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.Render
+  href: Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_Render_System_Object_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
+  name: Render
+  nameWithType: MapRenderer.Render
+  fullName: Mapsui.Rendering.Skia.MapRenderer.Render
+- uid: Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  commentId: M:Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  parent: Mapsui.Rendering.IRenderer
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: Render(object, Viewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  nameWithType: IRenderer.Render(object, Viewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  fullName: Mapsui.Rendering.IRenderer.Render(object, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
+  nameWithType.vb: IRenderer.Render(Object, Viewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+  fullName.vb: Mapsui.Rendering.IRenderer.Render(Object, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
+  name.vb: Render(Object, Viewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+  spec.csharp:
+  - uid: Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+    name: Render
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Viewport
+    name: Viewport
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.Color
+    name: Color
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+    name: Render
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Viewport
+    name: Viewport
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.Color
+    name: Color
+  - name: )
+- uid: Mapsui.Viewport
+  commentId: T:Mapsui.Viewport
+  parent: Mapsui
+  href: Mapsui.Viewport.html
+  name: Viewport
+  nameWithType: Viewport
+  fullName: Mapsui.Viewport
+- uid: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<ILayer>
+  nameWithType: IEnumerable<ILayer>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>
+  nameWithType.vb: IEnumerable(Of ILayer)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer)
+  name.vb: IEnumerable(Of ILayer)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<IWidget>
+  nameWithType: IEnumerable<IWidget>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>
+  nameWithType.vb: IEnumerable(Of IWidget)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget)
+  name.vb: IEnumerable(Of IWidget)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+    href: Mapsui.Widgets.IWidget.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+    href: Mapsui.Widgets.IWidget.html
+  - name: )
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Color.html
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream*
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream
+  href: Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Rendering_RenderFormat_
+  name: RenderToBitmapStream
+  nameWithType: MapRenderer.RenderToBitmapStream
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream
+- uid: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat)
+  commentId: M:Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat)
+  parent: Mapsui.Rendering.IRenderer
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: RenderToBitmapStream(Viewport, IEnumerable<ILayer>, Color, float, IEnumerable<IWidget>, RenderFormat)
+  nameWithType: IRenderer.RenderToBitmapStream(Viewport, IEnumerable<ILayer>, Color, float, IEnumerable<IWidget>, RenderFormat)
+  fullName: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color, float, System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Rendering.RenderFormat)
+  nameWithType.vb: IRenderer.RenderToBitmapStream(Viewport, IEnumerable(Of ILayer), Color, Single, IEnumerable(Of IWidget), RenderFormat)
+  fullName.vb: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color, Single, System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Rendering.RenderFormat)
+  name.vb: RenderToBitmapStream(Viewport, IEnumerable(Of ILayer), Color, Single, IEnumerable(Of IWidget), RenderFormat)
+  spec.csharp:
+  - uid: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat)
+    name: RenderToBitmapStream
+  - name: (
+  - uid: Mapsui.Viewport
+    name: Viewport
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.Color
+    name: Color
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.RenderFormat
+    name: RenderFormat
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat)
+    name: RenderToBitmapStream
+  - name: (
+  - uid: Mapsui.Viewport
+    name: Viewport
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.Color
+    name: Color
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.RenderFormat
+    name: RenderFormat
+  - name: )
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Mapsui.Rendering.RenderFormat
+  commentId: T:Mapsui.Rendering.RenderFormat
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.RenderFormat.html
+  name: RenderFormat
+  nameWithType: RenderFormat
+  fullName: Mapsui.Rendering.RenderFormat
+- uid: System.IO.MemoryStream
+  commentId: T:System.IO.MemoryStream
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  name: MemoryStream
+  nameWithType: MemoryStream
+  fullName: System.IO.MemoryStream
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+- uid: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo*
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.GetMapInfo
+  href: Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
+  name: GetMapInfo
+  nameWithType: MapRenderer.GetMapInfo
+  fullName: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo
+- uid: Mapsui.Rendering.IRenderInfo.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  commentId: M:Mapsui.Rendering.IRenderInfo.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  parent: Mapsui.Rendering.IRenderInfo
+  isExternal: true
+  href: Mapsui.Rendering.IRenderInfo.html#Mapsui_Rendering_IRenderInfo_GetMapInfo_System_Double_System_Double_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
+  name: GetMapInfo(double, double, Viewport, IEnumerable<ILayer>, int)
+  nameWithType: IRenderInfo.GetMapInfo(double, double, Viewport, IEnumerable<ILayer>, int)
+  fullName: Mapsui.Rendering.IRenderInfo.GetMapInfo(double, double, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, int)
+  nameWithType.vb: IRenderInfo.GetMapInfo(Double, Double, Viewport, IEnumerable(Of ILayer), Integer)
+  fullName.vb: Mapsui.Rendering.IRenderInfo.GetMapInfo(Double, Double, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Integer)
+  name.vb: GetMapInfo(Double, Double, Viewport, IEnumerable(Of ILayer), Integer)
+  spec.csharp:
+  - uid: Mapsui.Rendering.IRenderInfo.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+    name: GetMapInfo
+    href: Mapsui.Rendering.IRenderInfo.html#Mapsui_Rendering_IRenderInfo_GetMapInfo_System_Double_System_Double_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Viewport
+    name: Viewport
+    href: Mapsui.Viewport.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.IRenderInfo.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+    name: GetMapInfo
+    href: Mapsui.Rendering.IRenderInfo.html#Mapsui_Rendering_IRenderInfo_GetMapInfo_System_Double_System_Double_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
+  - name: (
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Viewport
+    name: Viewport
+    href: Mapsui.Viewport.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.MapInfo
+  commentId: T:Mapsui.MapInfo
+  parent: Mapsui
+  href: Mapsui.MapInfo.html
+  name: MapInfo
+  nameWithType: MapInfo
+  fullName: Mapsui.MapInfo
+- uid: Mapsui.Rendering.Skia.MapRenderer.Dispose*
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.Dispose
+  href: Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_Dispose
+  name: Dispose
+  nameWithType: MapRenderer.Dispose
+  fullName: Mapsui.Rendering.Skia.MapRenderer.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

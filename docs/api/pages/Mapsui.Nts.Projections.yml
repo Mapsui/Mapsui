@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Projections
+  commentId: N:Mapsui.Nts.Projections
+  id: Mapsui.Nts.Projections
+  children:
+  - Mapsui.Nts.Projections.GeometryTransform
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Nts.Projections
+  nameWithType: Mapsui.Nts.Projections
+  fullName: Mapsui.Nts.Projections
+  type: Namespace
+  assemblies:
+  - Mapsui.Extensions
+references:
+- uid: Mapsui.Nts.Projections.GeometryTransform
+  commentId: T:Mapsui.Nts.Projections.GeometryTransform
+  href: Mapsui.Nts.Projections.GeometryTransform.html
+  name: GeometryTransform
+  nameWithType: GeometryTransform
+  fullName: Mapsui.Nts.Projections.GeometryTransform

@@ -1,0 +1,641 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Manipulations.FlingTracker
+  commentId: T:Mapsui.Manipulations.FlingTracker
+  id: FlingTracker
+  parent: Mapsui.Manipulations
+  children:
+  - Mapsui.Manipulations.FlingTracker.#ctor
+  - Mapsui.Manipulations.FlingTracker.AddEvent(Mapsui.Manipulations.ScreenPosition,System.Int64)
+  - Mapsui.Manipulations.FlingTracker.FlingIfNeeded(System.Action{System.Double,System.Double})
+  - Mapsui.Manipulations.FlingTracker.Restart
+  langs:
+  - csharp
+  - vb
+  name: FlingTracker
+  nameWithType: FlingTracker
+  fullName: Mapsui.Manipulations.FlingTracker
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Manipulations/FlingTracker.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FlingTracker
+    path: ../../Mapsui/Manipulations/FlingTracker.cs
+    startLine: 6
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public class FlingTracker
+    content.vb: Public Class FlingTracker
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Manipulations.FlingTracker.#ctor
+  commentId: M:Mapsui.Manipulations.FlingTracker.#ctor
+  id: '#ctor'
+  parent: Mapsui.Manipulations.FlingTracker
+  langs:
+  - csharp
+  - vb
+  name: FlingTracker()
+  nameWithType: FlingTracker.FlingTracker()
+  fullName: Mapsui.Manipulations.FlingTracker.FlingTracker()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Manipulations/FlingTracker.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Manipulations/FlingTracker.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public FlingTracker()
+    content.vb: Public Sub New()
+  overload: Mapsui.Manipulations.FlingTracker.#ctor*
+  nameWithType.vb: FlingTracker.New()
+  fullName.vb: Mapsui.Manipulations.FlingTracker.New()
+  name.vb: New()
+- uid: Mapsui.Manipulations.FlingTracker.AddEvent(Mapsui.Manipulations.ScreenPosition,System.Int64)
+  commentId: M:Mapsui.Manipulations.FlingTracker.AddEvent(Mapsui.Manipulations.ScreenPosition,System.Int64)
+  id: AddEvent(Mapsui.Manipulations.ScreenPosition,System.Int64)
+  parent: Mapsui.Manipulations.FlingTracker
+  langs:
+  - csharp
+  - vb
+  name: AddEvent(ScreenPosition, long)
+  nameWithType: FlingTracker.AddEvent(ScreenPosition, long)
+  fullName: Mapsui.Manipulations.FlingTracker.AddEvent(Mapsui.Manipulations.ScreenPosition, long)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Manipulations/FlingTracker.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddEvent
+    path: ../../Mapsui/Manipulations/FlingTracker.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public void AddEvent(ScreenPosition position, long ticks)
+    parameters:
+    - id: position
+      type: Mapsui.Manipulations.ScreenPosition
+    - id: ticks
+      type: System.Int64
+    content.vb: Public Sub AddEvent(position As ScreenPosition, ticks As Long)
+  overload: Mapsui.Manipulations.FlingTracker.AddEvent*
+  nameWithType.vb: FlingTracker.AddEvent(ScreenPosition, Long)
+  fullName.vb: Mapsui.Manipulations.FlingTracker.AddEvent(Mapsui.Manipulations.ScreenPosition, Long)
+  name.vb: AddEvent(ScreenPosition, Long)
+- uid: Mapsui.Manipulations.FlingTracker.Restart
+  commentId: M:Mapsui.Manipulations.FlingTracker.Restart
+  id: Restart
+  parent: Mapsui.Manipulations.FlingTracker
+  langs:
+  - csharp
+  - vb
+  name: Restart()
+  nameWithType: FlingTracker.Restart()
+  fullName: Mapsui.Manipulations.FlingTracker.Restart()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Manipulations/FlingTracker.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Restart
+    path: ../../Mapsui/Manipulations/FlingTracker.cs
+    startLine: 30
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public void Restart()
+    content.vb: Public Sub Restart()
+  overload: Mapsui.Manipulations.FlingTracker.Restart*
+- uid: Mapsui.Manipulations.FlingTracker.FlingIfNeeded(System.Action{System.Double,System.Double})
+  commentId: M:Mapsui.Manipulations.FlingTracker.FlingIfNeeded(System.Action{System.Double,System.Double})
+  id: FlingIfNeeded(System.Action{System.Double,System.Double})
+  parent: Mapsui.Manipulations.FlingTracker
+  langs:
+  - csharp
+  - vb
+  name: FlingIfNeeded(Action<double, double>)
+  nameWithType: FlingTracker.FlingIfNeeded(Action<double, double>)
+  fullName: Mapsui.Manipulations.FlingTracker.FlingIfNeeded(System.Action<double, double>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Manipulations/FlingTracker.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FlingIfNeeded
+    path: ../../Mapsui/Manipulations/FlingTracker.cs
+    startLine: 71
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public void FlingIfNeeded(Action<double, double> onFling)
+    parameters:
+    - id: onFling
+      type: System.Action{System.Double,System.Double}
+    content.vb: Public Sub FlingIfNeeded(onFling As Action(Of Double, Double))
+  overload: Mapsui.Manipulations.FlingTracker.FlingIfNeeded*
+  nameWithType.vb: FlingTracker.FlingIfNeeded(Action(Of Double, Double))
+  fullName.vb: Mapsui.Manipulations.FlingTracker.FlingIfNeeded(System.Action(Of Double, Double))
+  name.vb: FlingIfNeeded(Action(Of Double, Double))
+references:
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Manipulations.FlingTracker.#ctor*
+  commentId: Overload:Mapsui.Manipulations.FlingTracker.#ctor
+  href: Mapsui.Manipulations.FlingTracker.html#Mapsui_Manipulations_FlingTracker__ctor
+  name: FlingTracker
+  nameWithType: FlingTracker.FlingTracker
+  fullName: Mapsui.Manipulations.FlingTracker.FlingTracker
+  nameWithType.vb: FlingTracker.New
+  fullName.vb: Mapsui.Manipulations.FlingTracker.New
+  name.vb: New
+- uid: Mapsui.Manipulations.FlingTracker.AddEvent*
+  commentId: Overload:Mapsui.Manipulations.FlingTracker.AddEvent
+  href: Mapsui.Manipulations.FlingTracker.html#Mapsui_Manipulations_FlingTracker_AddEvent_Mapsui_Manipulations_ScreenPosition_System_Int64_
+  name: AddEvent
+  nameWithType: FlingTracker.AddEvent
+  fullName: Mapsui.Manipulations.FlingTracker.AddEvent
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Mapsui.Manipulations.FlingTracker.Restart*
+  commentId: Overload:Mapsui.Manipulations.FlingTracker.Restart
+  href: Mapsui.Manipulations.FlingTracker.html#Mapsui_Manipulations_FlingTracker_Restart
+  name: Restart
+  nameWithType: FlingTracker.Restart
+  fullName: Mapsui.Manipulations.FlingTracker.Restart
+- uid: Mapsui.Manipulations.FlingTracker.FlingIfNeeded*
+  commentId: Overload:Mapsui.Manipulations.FlingTracker.FlingIfNeeded
+  href: Mapsui.Manipulations.FlingTracker.html#Mapsui_Manipulations_FlingTracker_FlingIfNeeded_System_Action_System_Double_System_Double__
+  name: FlingIfNeeded
+  nameWithType: FlingTracker.FlingIfNeeded
+  fullName: Mapsui.Manipulations.FlingTracker.FlingIfNeeded
+- uid: System.Action{System.Double,System.Double}
+  commentId: T:System.Action{System.Double,System.Double}
+  parent: System
+  definition: System.Action`2
+  href: https://learn.microsoft.com/dotnet/api/system.action-2
+  name: Action<double, double>
+  nameWithType: Action<double, double>
+  fullName: System.Action<double, double>
+  nameWithType.vb: Action(Of Double, Double)
+  fullName.vb: System.Action(Of Double, Double)
+  name.vb: Action(Of Double, Double)
+  spec.csharp:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: <
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.Action`2
+  commentId: T:System.Action`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-2
+  name: Action<T1, T2>
+  nameWithType: Action<T1, T2>
+  fullName: System.Action<T1, T2>
+  nameWithType.vb: Action(Of T1, T2)
+  fullName.vb: System.Action(Of T1, T2)
+  name.vb: Action(Of T1, T2)
+  spec.csharp:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )

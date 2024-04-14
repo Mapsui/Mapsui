@@ -1,0 +1,250 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.MBoxFit
+  commentId: T:Mapsui.MBoxFit
+  id: MBoxFit
+  parent: Mapsui
+  children:
+  - Mapsui.MBoxFit.Fill
+  - Mapsui.MBoxFit.Fit
+  - Mapsui.MBoxFit.FitHeight
+  - Mapsui.MBoxFit.FitWidth
+  langs:
+  - csharp
+  - vb
+  name: MBoxFit
+  nameWithType: MBoxFit
+  fullName: Mapsui.MBoxFit
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/MBoxFit.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MBoxFit
+    path: ../../Mapsui/MBoxFit.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public enum MBoxFit
+    content.vb: Public Enum MBoxFit
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.MBoxFit.Fit
+  commentId: F:Mapsui.MBoxFit.Fit
+  id: Fit
+  parent: Mapsui.MBoxFit
+  langs:
+  - csharp
+  - vb
+  name: Fit
+  nameWithType: MBoxFit.Fit
+  fullName: Mapsui.MBoxFit.Fit
+  type: Field
+  source:
+    remote:
+      path: Mapsui/MBoxFit.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Fit
+    path: ../../Mapsui/MBoxFit.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Fit within the view port of the screen
+  example: []
+  syntax:
+    content: Fit = 0
+    return:
+      type: Mapsui.MBoxFit
+- uid: Mapsui.MBoxFit.Fill
+  commentId: F:Mapsui.MBoxFit.Fill
+  id: Fill
+  parent: Mapsui.MBoxFit
+  langs:
+  - csharp
+  - vb
+  name: Fill
+  nameWithType: MBoxFit.Fill
+  fullName: Mapsui.MBoxFit.Fill
+  type: Field
+  source:
+    remote:
+      path: Mapsui/MBoxFit.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Fill
+    path: ../../Mapsui/MBoxFit.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Fill up the entire view port of the screen
+  example: []
+  syntax:
+    content: Fill = 1
+    return:
+      type: Mapsui.MBoxFit
+- uid: Mapsui.MBoxFit.FitWidth
+  commentId: F:Mapsui.MBoxFit.FitWidth
+  id: FitWidth
+  parent: Mapsui.MBoxFit
+  langs:
+  - csharp
+  - vb
+  name: FitWidth
+  nameWithType: MBoxFit.FitWidth
+  fullName: Mapsui.MBoxFit.FitWidth
+  type: Field
+  source:
+    remote:
+      path: Mapsui/MBoxFit.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FitWidth
+    path: ../../Mapsui/MBoxFit.cs
+    startLine: 23
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Fill the width of the screen
+  example: []
+  syntax:
+    content: FitWidth = 2
+    return:
+      type: Mapsui.MBoxFit
+- uid: Mapsui.MBoxFit.FitHeight
+  commentId: F:Mapsui.MBoxFit.FitHeight
+  id: FitHeight
+  parent: Mapsui.MBoxFit
+  langs:
+  - csharp
+  - vb
+  name: FitHeight
+  nameWithType: MBoxFit.FitHeight
+  fullName: Mapsui.MBoxFit.FitHeight
+  type: Field
+  source:
+    remote:
+      path: Mapsui/MBoxFit.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FitHeight
+    path: ../../Mapsui/MBoxFit.cs
+    startLine: 28
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Fill the height of the screen
+  example: []
+  syntax:
+    content: FitHeight = 3
+    return:
+      type: Mapsui.MBoxFit
+references:
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.MBoxFit
+  commentId: T:Mapsui.MBoxFit
+  parent: Mapsui
+  href: Mapsui.MBoxFit.html
+  name: MBoxFit
+  nameWithType: MBoxFit
+  fullName: Mapsui.MBoxFit

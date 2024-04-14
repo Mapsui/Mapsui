@@ -1,0 +1,206 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  id: Mapsui.Rendering
+  children:
+  - Mapsui.Rendering.CacheHolder`1
+  - Mapsui.Rendering.CacheTracker`1
+  - Mapsui.Rendering.DefaultRendererFactory
+  - Mapsui.Rendering.IBitmapInfo
+  - Mapsui.Rendering.ICacheHolder
+  - Mapsui.Rendering.ILabelCache
+  - Mapsui.Rendering.IRenderCache
+  - Mapsui.Rendering.IRenderInfo
+  - Mapsui.Rendering.IRenderer
+  - Mapsui.Rendering.ISymbolCache
+  - Mapsui.Rendering.ITileCache
+  - Mapsui.Rendering.IVectorCache
+  - Mapsui.Rendering.MapInfoRecord
+  - Mapsui.Rendering.NonCachingVectorCache
+  - Mapsui.Rendering.RenderException
+  - Mapsui.Rendering.RenderFormat
+  - Mapsui.Rendering.VisibleFeatureIterator
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Rendering.CacheHolder`1
+  commentId: T:Mapsui.Rendering.CacheHolder`1
+  href: Mapsui.Rendering.CacheHolder-1.html
+  name: CacheHolder<T>
+  nameWithType: CacheHolder<T>
+  fullName: Mapsui.Rendering.CacheHolder<T>
+  nameWithType.vb: CacheHolder(Of T)
+  fullName.vb: Mapsui.Rendering.CacheHolder(Of T)
+  name.vb: CacheHolder(Of T)
+  spec.csharp:
+  - uid: Mapsui.Rendering.CacheHolder`1
+    name: CacheHolder
+    href: Mapsui.Rendering.CacheHolder-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Rendering.CacheHolder`1
+    name: CacheHolder
+    href: Mapsui.Rendering.CacheHolder-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Rendering.CacheTracker`1
+  commentId: T:Mapsui.Rendering.CacheTracker`1
+  href: Mapsui.Rendering.CacheTracker-1.html
+  name: CacheTracker<T>
+  nameWithType: CacheTracker<T>
+  fullName: Mapsui.Rendering.CacheTracker<T>
+  nameWithType.vb: CacheTracker(Of T)
+  fullName.vb: Mapsui.Rendering.CacheTracker(Of T)
+  name.vb: CacheTracker(Of T)
+  spec.csharp:
+  - uid: Mapsui.Rendering.CacheTracker`1
+    name: CacheTracker
+    href: Mapsui.Rendering.CacheTracker-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Rendering.CacheTracker`1
+    name: CacheTracker
+    href: Mapsui.Rendering.CacheTracker-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Rendering.DefaultRendererFactory
+  commentId: T:Mapsui.Rendering.DefaultRendererFactory
+  href: Mapsui.Rendering.DefaultRendererFactory.html
+  name: DefaultRendererFactory
+  nameWithType: DefaultRendererFactory
+  fullName: Mapsui.Rendering.DefaultRendererFactory
+- uid: Mapsui.Rendering.IBitmapInfo
+  commentId: T:Mapsui.Rendering.IBitmapInfo
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IBitmapInfo.html
+  name: IBitmapInfo
+  nameWithType: IBitmapInfo
+  fullName: Mapsui.Rendering.IBitmapInfo
+- uid: Mapsui.Rendering.ICacheHolder
+  commentId: T:Mapsui.Rendering.ICacheHolder
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.ICacheHolder.html
+  name: ICacheHolder
+  nameWithType: ICacheHolder
+  fullName: Mapsui.Rendering.ICacheHolder
+- uid: Mapsui.Rendering.ILabelCache
+  commentId: T:Mapsui.Rendering.ILabelCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.ILabelCache.html
+  name: ILabelCache
+  nameWithType: ILabelCache
+  fullName: Mapsui.Rendering.ILabelCache
+- uid: Mapsui.Rendering.IRenderCache
+  commentId: T:Mapsui.Rendering.IRenderCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderCache.html
+  name: IRenderCache
+  nameWithType: IRenderCache
+  fullName: Mapsui.Rendering.IRenderCache
+- uid: Mapsui.Rendering.IRenderer
+  commentId: T:Mapsui.Rendering.IRenderer
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderer.html
+  name: IRenderer
+  nameWithType: IRenderer
+  fullName: Mapsui.Rendering.IRenderer
+- uid: Mapsui.Rendering.IRenderInfo
+  commentId: T:Mapsui.Rendering.IRenderInfo
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderInfo.html
+  name: IRenderInfo
+  nameWithType: IRenderInfo
+  fullName: Mapsui.Rendering.IRenderInfo
+- uid: Mapsui.Rendering.ISymbolCache
+  commentId: T:Mapsui.Rendering.ISymbolCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.ISymbolCache.html
+  name: ISymbolCache
+  nameWithType: ISymbolCache
+  fullName: Mapsui.Rendering.ISymbolCache
+- uid: Mapsui.Rendering.ITileCache
+  commentId: T:Mapsui.Rendering.ITileCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.ITileCache.html
+  name: ITileCache
+  nameWithType: ITileCache
+  fullName: Mapsui.Rendering.ITileCache
+- uid: Mapsui.Rendering.IVectorCache
+  commentId: T:Mapsui.Rendering.IVectorCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IVectorCache.html
+  name: IVectorCache
+  nameWithType: IVectorCache
+  fullName: Mapsui.Rendering.IVectorCache
+- uid: Mapsui.Rendering.MapInfoRecord
+  commentId: T:Mapsui.Rendering.MapInfoRecord
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.MapInfoRecord.html
+  name: MapInfoRecord
+  nameWithType: MapInfoRecord
+  fullName: Mapsui.Rendering.MapInfoRecord
+- uid: Mapsui.Rendering.NonCachingVectorCache
+  commentId: T:Mapsui.Rendering.NonCachingVectorCache
+  href: Mapsui.Rendering.NonCachingVectorCache.html
+  name: NonCachingVectorCache
+  nameWithType: NonCachingVectorCache
+  fullName: Mapsui.Rendering.NonCachingVectorCache
+- uid: Mapsui.Rendering.RenderException
+  commentId: T:Mapsui.Rendering.RenderException
+  href: Mapsui.Rendering.RenderException.html
+  name: RenderException
+  nameWithType: RenderException
+  fullName: Mapsui.Rendering.RenderException
+- uid: Mapsui.Rendering.RenderFormat
+  commentId: T:Mapsui.Rendering.RenderFormat
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.RenderFormat.html
+  name: RenderFormat
+  nameWithType: RenderFormat
+  fullName: Mapsui.Rendering.RenderFormat
+- uid: Mapsui.Rendering.VisibleFeatureIterator
+  commentId: T:Mapsui.Rendering.VisibleFeatureIterator
+  href: Mapsui.Rendering.VisibleFeatureIterator.html
+  name: VisibleFeatureIterator
+  nameWithType: VisibleFeatureIterator
+  fullName: Mapsui.Rendering.VisibleFeatureIterator
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html

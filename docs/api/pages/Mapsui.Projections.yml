@@ -1,0 +1,112 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Projections
+  commentId: N:Mapsui.Projections
+  id: Mapsui.Projections
+  children:
+  - Mapsui.Projections.CrsAxisOrderRegistry
+  - Mapsui.Projections.CrsHelper
+  - Mapsui.Projections.CrsIdentifier
+  - Mapsui.Projections.CrsType
+  - Mapsui.Projections.IProjection
+  - Mapsui.Projections.IProjectionCrs
+  - Mapsui.Projections.Mercator
+  - Mapsui.Projections.Projection
+  - Mapsui.Projections.ProjectionDefaults
+  - Mapsui.Projections.SphericalMercator
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Projections
+  nameWithType: Mapsui.Projections
+  fullName: Mapsui.Projections
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Projections.CrsAxisOrderRegistry
+  commentId: T:Mapsui.Projections.CrsAxisOrderRegistry
+  href: Mapsui.Projections.CrsAxisOrderRegistry.html
+  name: CrsAxisOrderRegistry
+  nameWithType: CrsAxisOrderRegistry
+  fullName: Mapsui.Projections.CrsAxisOrderRegistry
+- uid: Mapsui.Projections.CrsType
+  commentId: T:Mapsui.Projections.CrsType
+  parent: Mapsui.Projections
+  href: Mapsui.Projections.CrsType.html
+  name: CrsType
+  nameWithType: CrsType
+  fullName: Mapsui.Projections.CrsType
+- uid: Mapsui.Projections.CrsHelper
+  commentId: T:Mapsui.Projections.CrsHelper
+  href: Mapsui.Projections.CrsHelper.html
+  name: CrsHelper
+  nameWithType: CrsHelper
+  fullName: Mapsui.Projections.CrsHelper
+- uid: Mapsui.Projections.CrsIdentifier
+  commentId: T:Mapsui.Projections.CrsIdentifier
+  parent: Mapsui.Projections
+  href: Mapsui.Projections.CrsIdentifier.html
+  name: CrsIdentifier
+  nameWithType: CrsIdentifier
+  fullName: Mapsui.Projections.CrsIdentifier
+- uid: Mapsui.Projections.IProjection
+  commentId: T:Mapsui.Projections.IProjection
+  parent: Mapsui.Projections
+  href: Mapsui.Projections.IProjection.html
+  name: IProjection
+  nameWithType: IProjection
+  fullName: Mapsui.Projections.IProjection
+- uid: Mapsui.Projections.IProjectionCrs
+  commentId: T:Mapsui.Projections.IProjectionCrs
+  parent: Mapsui.Projections
+  href: Mapsui.Projections.IProjectionCrs.html
+  name: IProjectionCrs
+  nameWithType: IProjectionCrs
+  fullName: Mapsui.Projections.IProjectionCrs
+- uid: Mapsui.Projections.Mercator
+  commentId: T:Mapsui.Projections.Mercator
+  href: Mapsui.Projections.Mercator.html
+  name: Mercator
+  nameWithType: Mercator
+  fullName: Mapsui.Projections.Mercator
+- uid: Mapsui.Projections.Projection
+  commentId: T:Mapsui.Projections.Projection
+  href: Mapsui.Projections.Projection.html
+  name: Projection
+  nameWithType: Projection
+  fullName: Mapsui.Projections.Projection
+- uid: Mapsui.Projections.ProjectionDefaults
+  commentId: T:Mapsui.Projections.ProjectionDefaults
+  href: Mapsui.Projections.ProjectionDefaults.html
+  name: ProjectionDefaults
+  nameWithType: ProjectionDefaults
+  fullName: Mapsui.Projections.ProjectionDefaults
+- uid: Mapsui.Projections.SphericalMercator
+  commentId: T:Mapsui.Projections.SphericalMercator
+  href: Mapsui.Projections.SphericalMercator.html
+  name: SphericalMercator
+  nameWithType: SphericalMercator
+  fullName: Mapsui.Projections.SphericalMercator
+- uid: Mapsui.Projections
+  commentId: N:Mapsui.Projections
+  href: Mapsui.html
+  name: Mapsui.Projections
+  nameWithType: Mapsui.Projections
+  fullName: Mapsui.Projections
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html

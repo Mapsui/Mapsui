@@ -1,0 +1,77 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wfs
+  commentId: N:Mapsui.Providers.Wfs
+  id: Mapsui.Providers.Wfs
+  children:
+  - Mapsui.Providers.Wfs.WFSProvider
+  - Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Providers.Wfs
+  nameWithType: Mapsui.Providers.Wfs
+  fullName: Mapsui.Providers.Wfs
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Providers.Wfs.WFSProvider
+  commentId: T:Mapsui.Providers.Wfs.WFSProvider
+  href: Mapsui.Providers.Wfs.WFSProvider.html
+  name: WFSProvider
+  nameWithType: WFSProvider
+  fullName: Mapsui.Providers.Wfs.WFSProvider
+- uid: Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum
+  commentId: T:Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum
+  parent: Mapsui.Providers.Wfs
+  href: Mapsui.Providers.Wfs.WFSProvider.html
+  name: WFSProvider.WFSVersionEnum
+  nameWithType: WFSProvider.WFSVersionEnum
+  fullName: Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.WFSProvider
+    name: WFSProvider
+    href: Mapsui.Providers.Wfs.WFSProvider.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum
+    name: WFSVersionEnum
+    href: Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.WFSProvider
+    name: WFSProvider
+    href: Mapsui.Providers.Wfs.WFSProvider.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum
+    name: WFSVersionEnum
+    href: Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html
+- uid: Mapsui.Providers.Wfs
+  commentId: N:Mapsui.Providers.Wfs
+  href: Mapsui.html
+  name: Mapsui.Providers.Wfs
+  nameWithType: Mapsui.Providers.Wfs
+  fullName: Mapsui.Providers.Wfs
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html

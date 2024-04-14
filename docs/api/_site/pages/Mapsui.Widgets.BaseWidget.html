@@ -1,0 +1,828 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class BaseWidget </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class BaseWidget ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Widgets.BaseWidget">
+
+
+
+  <h1 id="Mapsui_Widgets_BaseWidget" data-uid="Mapsui.Widgets.BaseWidget" class="text-break">Class BaseWidget</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">BaseWidget</span></div>
+      <div class="level2"><a class="xref" href="Mapsui.Widgets.BoxWidgets.BoxWidget.html">BoxWidget</a></div>
+      <div class="level2"><a class="xref" href="Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.html">ZoomInOutWidget</a></div>
+      <div class="level2"><a class="xref" href="Mapsui.Widgets.InputOnlyWidget.html">InputOnlyWidget</a></div>
+      <div class="level2"><a class="xref" href="Mapsui.Widgets.ScaleBar.ScaleBarWidget.html">ScaleBarWidget</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.Widgets.html">Widgets</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.dll</h6>
+  <h5 id="Mapsui_Widgets_BaseWidget_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class BaseWidget : IWidget</code></pre>
+  </div>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_Enabled.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.Enabled%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L138">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_Enabled_" data-uid="Mapsui.Widgets.BaseWidget.Enabled*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_Enabled" data-uid="Mapsui.Widgets.BaseWidget.Enabled">Enabled</h4>
+  <div class="markdown level1 summary"><p>Is Widget visible on screen</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Enabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_Envelope.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.Envelope%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L121">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_Envelope_" data-uid="Mapsui.Widgets.BaseWidget.Envelope*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_Envelope" data-uid="Mapsui.Widgets.BaseWidget.Envelope">Envelope</h4>
+  <div class="markdown level1 summary"><p>Envelope of Widget</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MRect? Envelope { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_Height.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.Height%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L104">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_Height_" data-uid="Mapsui.Widgets.BaseWidget.Height*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_Height" data-uid="Mapsui.Widgets.BaseWidget.Height">Height</h4>
+  <div class="markdown level1 summary"><p>Height of Widget</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Height { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_HorizontalAlignment.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.HorizontalAlignment%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L19">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_HorizontalAlignment_" data-uid="Mapsui.Widgets.BaseWidget.HorizontalAlignment*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_HorizontalAlignment" data-uid="Mapsui.Widgets.BaseWidget.HorizontalAlignment">HorizontalAlignment</h4>
+  <div class="markdown level1 summary"><p>Horizontal alignment of Widget</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HorizontalAlignment HorizontalAlignment { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.HorizontalAlignment.html">HorizontalAlignment</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_InputAreaType.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.InputAreaType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L14">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_InputAreaType_" data-uid="Mapsui.Widgets.BaseWidget.InputAreaType*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_InputAreaType" data-uid="Mapsui.Widgets.BaseWidget.InputAreaType">InputAreaType</h4>
+  <div class="markdown level1 summary"><p>Type of area to use for touch events. The default is WidgetArea. This needs to be set to
+'Map' in the constructor if widget want to receive manipulation events from all over the map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InputAreaType InputAreaType { get; init; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.InputAreaType.html">InputAreaType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_InputTransparent.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.InputTransparent%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L155">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_InputTransparent_" data-uid="Mapsui.Widgets.BaseWidget.InputTransparent*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_InputTransparent" data-uid="Mapsui.Widgets.BaseWidget.InputTransparent">InputTransparent</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool InputTransparent { get; init; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_Margin.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.Margin%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L53">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_Margin_" data-uid="Mapsui.Widgets.BaseWidget.Margin*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_Margin" data-uid="Mapsui.Widgets.BaseWidget.Margin">Margin</h4>
+  <div class="markdown level1 summary"><p>Margin outside of the widget</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MRect Margin { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_NeedsRedraw.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.NeedsRedraw%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L153">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_NeedsRedraw_" data-uid="Mapsui.Widgets.BaseWidget.NeedsRedraw*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_NeedsRedraw" data-uid="Mapsui.Widgets.BaseWidget.NeedsRedraw">NeedsRedraw</h4>
+  <div class="markdown level1 summary"><p>Flag for redrawing widget in the next drawing cycle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool NeedsRedraw { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_Position.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.Position%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L70">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_Position_" data-uid="Mapsui.Widgets.BaseWidget.Position*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_Position" data-uid="Mapsui.Widgets.BaseWidget.Position">Position</h4>
+  <div class="markdown level1 summary"><p>Position for absolute alignment</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MPoint Position { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_VerticalAlignment.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.VerticalAlignment%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L36">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_VerticalAlignment_" data-uid="Mapsui.Widgets.BaseWidget.VerticalAlignment*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_VerticalAlignment" data-uid="Mapsui.Widgets.BaseWidget.VerticalAlignment">VerticalAlignment</h4>
+  <div class="markdown level1 summary"><p>Vertical alignment of Widget</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public VerticalAlignment VerticalAlignment { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.VerticalAlignment.html">VerticalAlignment</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_Width.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.Width%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L87">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_Width_" data-uid="Mapsui.Widgets.BaseWidget.Width*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_Width" data-uid="Mapsui.Widgets.BaseWidget.Width">Width</h4>
+  <div class="markdown level1 summary"><p>Width of Widget</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Width { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_Invalidate_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.Invalidate(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L167">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_Invalidate_" data-uid="Mapsui.Widgets.BaseWidget.Invalidate*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_Invalidate_System_String_" data-uid="Mapsui.Widgets.BaseWidget.Invalidate(System.String)">Invalidate(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Invalidate(string name = &quot;&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator%2CMapsui.Widgets.WidgetEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L185">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_OnPointerMoved_" data-uid="Mapsui.Widgets.BaseWidget.OnPointerMoved*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_" data-uid="Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)">OnPointerMoved(Navigator, WidgetEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Function, which handles the widget pointer moved event</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Navigator.html">Navigator</a></td>
+        <td><span class="parametername">navigator</span></td>
+        <td><p>Navigator of MapControl</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Arguments for this widget touch</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True, if the Widget had handled the touch event</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator%2CMapsui.Widgets.WidgetEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L179">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_OnPointerPressed_" data-uid="Mapsui.Widgets.BaseWidget.OnPointerPressed*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_" data-uid="Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)">OnPointerPressed(Navigator, WidgetEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Function, which handles the widget pointer pressed event</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Navigator.html">Navigator</a></td>
+        <td><span class="parametername">navigator</span></td>
+        <td><p>Navigator of MapControl</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Arguments for this widget touch</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True, if the Widget had handled the touch event</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator%2CMapsui.Widgets.WidgetEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L191">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_OnPointerReleased_" data-uid="Mapsui.Widgets.BaseWidget.OnPointerReleased*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_" data-uid="Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)">OnPointerReleased(Navigator, WidgetEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Function, which handles the widget pointer released event</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Navigator.html">Navigator</a></td>
+        <td><span class="parametername">navigator</span></td>
+        <td><p>Navigator of MapControl</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Arguments for this widget touch</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True, if the Widget had handled the touch event</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator%2CMapsui.Widgets.WidgetEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L173">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_OnTapped_" data-uid="Mapsui.Widgets.BaseWidget.OnTapped*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_" data-uid="Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)">OnTapped(Navigator, WidgetEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Function, which handles the widget tapped event</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual bool OnTapped(Navigator navigator, WidgetEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Navigator.html">Navigator</a></td>
+        <td><span class="parametername">navigator</span></td>
+        <td><p>Navigator of MapControl</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>Arguments for this widget touch</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p>True, if the Widget had handled the touch event</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L157">View Source</a>
+  </span>
+  <a id="Mapsui_Widgets_BaseWidget_UpdateEnvelope_" data-uid="Mapsui.Widgets.BaseWidget.UpdateEnvelope*"></a>
+  <h4 id="Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_" data-uid="Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)">UpdateEnvelope(double, double, double, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateEnvelope(double maxWidth, double maxHeight, double screenWidth, double screenHeight)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">maxWidth</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">maxHeight</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">screenWidth</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">screenHeight</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_BaseWidget.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.BaseWidget%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/BaseWidget.cs/#L6" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

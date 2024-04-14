@@ -1,0 +1,631 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Projections.CrsHelper
+  commentId: T:Mapsui.Projections.CrsHelper
+  id: CrsHelper
+  parent: Mapsui.Projections
+  children:
+  - Mapsui.Projections.CrsHelper.EpsgPrefix
+  - Mapsui.Projections.CrsHelper.EsriStringPrefix
+  - Mapsui.Projections.CrsHelper.GetCrsType(System.String)
+  - Mapsui.Projections.CrsHelper.IsCrsProvided(System.String,System.String)
+  - Mapsui.Projections.CrsHelper.IsProjectionNeeded(System.String,System.String)
+  - Mapsui.Projections.CrsHelper.Proj4StringPrefix
+  - Mapsui.Projections.CrsHelper.ToEpsgCode(System.String)
+  - Mapsui.Projections.CrsHelper.ToStandardizedCRS(System.String)
+  langs:
+  - csharp
+  - vb
+  name: CrsHelper
+  nameWithType: CrsHelper
+  fullName: Mapsui.Projections.CrsHelper
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Projections/CrsHelper.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CrsHelper
+    path: ../../Mapsui/Projections/CrsHelper.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public static class CrsHelper
+    content.vb: Public Module CrsHelper
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Projections.CrsHelper.EpsgPrefix
+  commentId: F:Mapsui.Projections.CrsHelper.EpsgPrefix
+  id: EpsgPrefix
+  parent: Mapsui.Projections.CrsHelper
+  langs:
+  - csharp
+  - vb
+  name: EpsgPrefix
+  nameWithType: CrsHelper.EpsgPrefix
+  fullName: Mapsui.Projections.CrsHelper.EpsgPrefix
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Projections/CrsHelper.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: EpsgPrefix
+    path: ../../Mapsui/Projections/CrsHelper.cs
+    startLine: 14
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public const string EpsgPrefix = "EPSG:"
+    return:
+      type: System.String
+    content.vb: Public Const EpsgPrefix As String = "EPSG:"
+- uid: Mapsui.Projections.CrsHelper.EsriStringPrefix
+  commentId: F:Mapsui.Projections.CrsHelper.EsriStringPrefix
+  id: EsriStringPrefix
+  parent: Mapsui.Projections.CrsHelper
+  langs:
+  - csharp
+  - vb
+  name: EsriStringPrefix
+  nameWithType: CrsHelper.EsriStringPrefix
+  fullName: Mapsui.Projections.CrsHelper.EsriStringPrefix
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Projections/CrsHelper.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: EsriStringPrefix
+    path: ../../Mapsui/Projections/CrsHelper.cs
+    startLine: 15
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public const string EsriStringPrefix = "ESRISTRING:"
+    return:
+      type: System.String
+    content.vb: Public Const EsriStringPrefix As String = "ESRISTRING:"
+- uid: Mapsui.Projections.CrsHelper.Proj4StringPrefix
+  commentId: F:Mapsui.Projections.CrsHelper.Proj4StringPrefix
+  id: Proj4StringPrefix
+  parent: Mapsui.Projections.CrsHelper
+  langs:
+  - csharp
+  - vb
+  name: Proj4StringPrefix
+  nameWithType: CrsHelper.Proj4StringPrefix
+  fullName: Mapsui.Projections.CrsHelper.Proj4StringPrefix
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Projections/CrsHelper.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Proj4StringPrefix
+    path: ../../Mapsui/Projections/CrsHelper.cs
+    startLine: 16
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public const string Proj4StringPrefix = "PROJ4STRING:"
+    return:
+      type: System.String
+    content.vb: Public Const Proj4StringPrefix As String = "PROJ4STRING:"
+- uid: Mapsui.Projections.CrsHelper.ToStandardizedCRS(System.String)
+  commentId: M:Mapsui.Projections.CrsHelper.ToStandardizedCRS(System.String)
+  id: ToStandardizedCRS(System.String)
+  parent: Mapsui.Projections.CrsHelper
+  langs:
+  - csharp
+  - vb
+  name: ToStandardizedCRS(string?)
+  nameWithType: CrsHelper.ToStandardizedCRS(string?)
+  fullName: Mapsui.Projections.CrsHelper.ToStandardizedCRS(string?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Projections/CrsHelper.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToStandardizedCRS
+    path: ../../Mapsui/Projections/CrsHelper.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public static string? ToStandardizedCRS(string? crs)
+    parameters:
+    - id: crs
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Public Shared Function ToStandardizedCRS(crs As String) As String
+  overload: Mapsui.Projections.CrsHelper.ToStandardizedCRS*
+  nameWithType.vb: CrsHelper.ToStandardizedCRS(String)
+  fullName.vb: Mapsui.Projections.CrsHelper.ToStandardizedCRS(String)
+  name.vb: ToStandardizedCRS(String)
+- uid: Mapsui.Projections.CrsHelper.ToEpsgCode(System.String)
+  commentId: M:Mapsui.Projections.CrsHelper.ToEpsgCode(System.String)
+  id: ToEpsgCode(System.String)
+  parent: Mapsui.Projections.CrsHelper
+  langs:
+  - csharp
+  - vb
+  name: ToEpsgCode(string)
+  nameWithType: CrsHelper.ToEpsgCode(string)
+  fullName: Mapsui.Projections.CrsHelper.ToEpsgCode(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Projections/CrsHelper.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToEpsgCode
+    path: ../../Mapsui/Projections/CrsHelper.cs
+    startLine: 32
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public static int ToEpsgCode(string crs)
+    parameters:
+    - id: crs
+      type: System.String
+    return:
+      type: System.Int32
+    content.vb: Public Shared Function ToEpsgCode(crs As String) As Integer
+  overload: Mapsui.Projections.CrsHelper.ToEpsgCode*
+  nameWithType.vb: CrsHelper.ToEpsgCode(String)
+  fullName.vb: Mapsui.Projections.CrsHelper.ToEpsgCode(String)
+  name.vb: ToEpsgCode(String)
+- uid: Mapsui.Projections.CrsHelper.GetCrsType(System.String)
+  commentId: M:Mapsui.Projections.CrsHelper.GetCrsType(System.String)
+  id: GetCrsType(System.String)
+  parent: Mapsui.Projections.CrsHelper
+  langs:
+  - csharp
+  - vb
+  name: GetCrsType(string)
+  nameWithType: CrsHelper.GetCrsType(string)
+  fullName: Mapsui.Projections.CrsHelper.GetCrsType(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Projections/CrsHelper.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetCrsType
+    path: ../../Mapsui/Projections/CrsHelper.cs
+    startLine: 37
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public static CrsType GetCrsType(string crs)
+    parameters:
+    - id: crs
+      type: System.String
+    return:
+      type: Mapsui.Projections.CrsType
+    content.vb: Public Shared Function GetCrsType(crs As String) As CrsType
+  overload: Mapsui.Projections.CrsHelper.GetCrsType*
+  nameWithType.vb: CrsHelper.GetCrsType(String)
+  fullName.vb: Mapsui.Projections.CrsHelper.GetCrsType(String)
+  name.vb: GetCrsType(String)
+- uid: Mapsui.Projections.CrsHelper.IsCrsProvided(System.String,System.String)
+  commentId: M:Mapsui.Projections.CrsHelper.IsCrsProvided(System.String,System.String)
+  id: IsCrsProvided(System.String,System.String)
+  parent: Mapsui.Projections.CrsHelper
+  langs:
+  - csharp
+  - vb
+  name: IsCrsProvided(string?, string?)
+  nameWithType: CrsHelper.IsCrsProvided(string?, string?)
+  fullName: Mapsui.Projections.CrsHelper.IsCrsProvided(string?, string?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Projections/CrsHelper.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsCrsProvided
+    path: ../../Mapsui/Projections/CrsHelper.cs
+    startLine: 47
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public static bool IsCrsProvided(string? fromCRS, string? toCRS)
+    parameters:
+    - id: fromCRS
+      type: System.String
+    - id: toCRS
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function IsCrsProvided(fromCRS As String, toCRS As String) As Boolean
+  overload: Mapsui.Projections.CrsHelper.IsCrsProvided*
+  nameWithType.vb: CrsHelper.IsCrsProvided(String, String)
+  fullName.vb: Mapsui.Projections.CrsHelper.IsCrsProvided(String, String)
+  name.vb: IsCrsProvided(String, String)
+- uid: Mapsui.Projections.CrsHelper.IsProjectionNeeded(System.String,System.String)
+  commentId: M:Mapsui.Projections.CrsHelper.IsProjectionNeeded(System.String,System.String)
+  id: IsProjectionNeeded(System.String,System.String)
+  parent: Mapsui.Projections.CrsHelper
+  langs:
+  - csharp
+  - vb
+  name: IsProjectionNeeded(string?, string?)
+  nameWithType: CrsHelper.IsProjectionNeeded(string?, string?)
+  fullName: Mapsui.Projections.CrsHelper.IsProjectionNeeded(string?, string?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Projections/CrsHelper.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsProjectionNeeded
+    path: ../../Mapsui/Projections/CrsHelper.cs
+    startLine: 52
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public static bool IsProjectionNeeded(string? fromCRS, string? toCRS)
+    parameters:
+    - id: fromCRS
+      type: System.String
+    - id: toCRS
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function IsProjectionNeeded(fromCRS As String, toCRS As String) As Boolean
+  overload: Mapsui.Projections.CrsHelper.IsProjectionNeeded*
+  nameWithType.vb: CrsHelper.IsProjectionNeeded(String, String)
+  fullName.vb: Mapsui.Projections.CrsHelper.IsProjectionNeeded(String, String)
+  name.vb: IsProjectionNeeded(String, String)
+references:
+- uid: Mapsui.Projections
+  commentId: N:Mapsui.Projections
+  href: Mapsui.html
+  name: Mapsui.Projections
+  nameWithType: Mapsui.Projections
+  fullName: Mapsui.Projections
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Projections.CrsHelper.ToStandardizedCRS*
+  commentId: Overload:Mapsui.Projections.CrsHelper.ToStandardizedCRS
+  href: Mapsui.Projections.CrsHelper.html#Mapsui_Projections_CrsHelper_ToStandardizedCRS_System_String_
+  name: ToStandardizedCRS
+  nameWithType: CrsHelper.ToStandardizedCRS
+  fullName: Mapsui.Projections.CrsHelper.ToStandardizedCRS
+- uid: Mapsui.Projections.CrsHelper.ToEpsgCode*
+  commentId: Overload:Mapsui.Projections.CrsHelper.ToEpsgCode
+  href: Mapsui.Projections.CrsHelper.html#Mapsui_Projections_CrsHelper_ToEpsgCode_System_String_
+  name: ToEpsgCode
+  nameWithType: CrsHelper.ToEpsgCode
+  fullName: Mapsui.Projections.CrsHelper.ToEpsgCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Projections.CrsHelper.GetCrsType*
+  commentId: Overload:Mapsui.Projections.CrsHelper.GetCrsType
+  href: Mapsui.Projections.CrsHelper.html#Mapsui_Projections_CrsHelper_GetCrsType_System_String_
+  name: GetCrsType
+  nameWithType: CrsHelper.GetCrsType
+  fullName: Mapsui.Projections.CrsHelper.GetCrsType
+- uid: Mapsui.Projections.CrsType
+  commentId: T:Mapsui.Projections.CrsType
+  parent: Mapsui.Projections
+  href: Mapsui.Projections.CrsType.html
+  name: CrsType
+  nameWithType: CrsType
+  fullName: Mapsui.Projections.CrsType
+- uid: Mapsui.Projections.CrsHelper.IsCrsProvided*
+  commentId: Overload:Mapsui.Projections.CrsHelper.IsCrsProvided
+  href: Mapsui.Projections.CrsHelper.html#Mapsui_Projections_CrsHelper_IsCrsProvided_System_String_System_String_
+  name: IsCrsProvided
+  nameWithType: CrsHelper.IsCrsProvided
+  fullName: Mapsui.Projections.CrsHelper.IsCrsProvided
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Projections.CrsHelper.IsProjectionNeeded*
+  commentId: Overload:Mapsui.Projections.CrsHelper.IsProjectionNeeded
+  href: Mapsui.Projections.CrsHelper.html#Mapsui_Projections_CrsHelper_IsProjectionNeeded_System_String_System_String_
+  name: IsProjectionNeeded
+  nameWithType: CrsHelper.IsProjectionNeeded
+  fullName: Mapsui.Projections.CrsHelper.IsProjectionNeeded

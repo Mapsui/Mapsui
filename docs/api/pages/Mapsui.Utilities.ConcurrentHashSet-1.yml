@@ -1,0 +1,1768 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Utilities.ConcurrentHashSet`1
+  commentId: T:Mapsui.Utilities.ConcurrentHashSet`1
+  id: ConcurrentHashSet`1
+  parent: Mapsui.Utilities
+  children:
+  - Mapsui.Utilities.ConcurrentHashSet`1.#ctor
+  - Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Collections.Generic.IEnumerable{`0})
+  - Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  - Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Collections.Generic.IEqualityComparer{`0})
+  - Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  - Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32)
+  - Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32,System.Collections.Generic.IEqualityComparer{`0})
+  - Mapsui.Utilities.ConcurrentHashSet`1.Add(`0)
+  - Mapsui.Utilities.ConcurrentHashSet`1.Clear
+  - Mapsui.Utilities.ConcurrentHashSet`1.Contains(`0)
+  - Mapsui.Utilities.ConcurrentHashSet`1.Count
+  - Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator
+  - Mapsui.Utilities.ConcurrentHashSet`1.IsEmpty
+  - Mapsui.Utilities.ConcurrentHashSet`1.TryRemove(`0)
+  langs:
+  - csharp
+  - vb
+  name: ConcurrentHashSet<T>
+  nameWithType: ConcurrentHashSet<T>
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ConcurrentHashSet
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 23
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Represents a thread-safe hash-based unique collection.
+  remarks: >-
+    All public members of <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref> are thread-safe and may be used
+
+    concurrently from multiple threads.
+  example: []
+  syntax:
+    content: 'public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>, IEnumerable<T>, IEnumerable'
+    typeParameters:
+    - id: T
+      description: The type of the items in the collection.
+    content.vb: Public Class ConcurrentHashSet(Of T) Implements IReadOnlyCollection(Of T), ICollection(Of T), IEnumerable(Of T), IEnumerable
+  inheritance:
+  - System.Object
+  implements:
+  - System.Collections.Generic.IReadOnlyCollection{{T}}
+  - System.Collections.Generic.ICollection{{T}}
+  - System.Collections.Generic.IEnumerable{{T}}
+  - System.Collections.IEnumerable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  nameWithType.vb: ConcurrentHashSet(Of T)
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T)
+  name.vb: ConcurrentHashSet(Of T)
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.Count
+  commentId: P:Mapsui.Utilities.ConcurrentHashSet`1.Count
+  id: Count
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: ConcurrentHashSet<T>.Count
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.Count
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Count
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 46
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Gets the number of items contained in the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+  remarks: >-
+    Count has snapshot semantics and represents the number of items in the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+        at the moment when Count was accessed.
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The number of items contained in the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.Count*
+  implements:
+  - System.Collections.Generic.IReadOnlyCollection{{T}}.Count
+  - System.Collections.Generic.ICollection{{T}}.Count
+  nameWithType.vb: ConcurrentHashSet(Of T).Count
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).Count
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.IsEmpty
+  commentId: P:Mapsui.Utilities.ConcurrentHashSet`1.IsEmpty
+  id: IsEmpty
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: ConcurrentHashSet<T>.IsEmpty
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsEmpty
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 75
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Gets a value that indicates whether the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref> is empty.
+  example: []
+  syntax:
+    content: public bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: >-
+        true if the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref> is empty; otherwise,
+            false.
+    content.vb: Public ReadOnly Property IsEmpty As Boolean
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.IsEmpty*
+  nameWithType.vb: ConcurrentHashSet(Of T).IsEmpty
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).IsEmpty
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.#ctor
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.#ctor
+  id: '#ctor'
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: ConcurrentHashSet()
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet()
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.ConcurrentHashSet()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 107
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Initializes a new instance of the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+
+    class that is empty, has the default concurrency level, has the default initial capacity, and
+
+    uses the default comparer for the item type.
+  example: []
+  syntax:
+    content: public ConcurrentHashSet()
+    content.vb: Public Sub New()
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.#ctor*
+  nameWithType.vb: ConcurrentHashSet(Of T).New()
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).New()
+  name.vb: New()
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32)
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32)'
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: ConcurrentHashSet(int, int)
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(int, int)
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.ConcurrentHashSet(int, int)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 127
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Initializes a new instance of the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+
+    class that is empty, has the specified concurrency level and capacity, and uses the default
+
+    comparer for the item type.
+  example: []
+  syntax:
+    content: public ConcurrentHashSet(int concurrencyLevel, int capacity)
+    parameters:
+    - id: concurrencyLevel
+      type: System.Int32
+      description: >-
+        The estimated number of threads that will update the
+            <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref> concurrently.
+    - id: capacity
+      type: System.Int32
+      description: >-
+        The initial number of elements that the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+            can contain.
+    content.vb: Public Sub New(concurrencyLevel As Integer, capacity As Integer)
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.#ctor*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: >-
+      <code class="paramref">concurrencyLevel</code> is
+          less than 1.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: >-
+      <code class="paramref">capacity</code> is less than
+         0.
+  nameWithType.vb: ConcurrentHashSet(Of T).New(Integer, Integer)
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).New(Integer, Integer)
+  name.vb: New(Integer, Integer)
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Collections.Generic.IEnumerable{`0})
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Collections.Generic.IEnumerable{`0})
+  id: '#ctor(System.Collections.Generic.IEnumerable{`0})'
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: ConcurrentHashSet(IEnumerable<T>)
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>)
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.ConcurrentHashSet(System.Collections.Generic.IEnumerable<T>)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 143
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Initializes a new instance of the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+
+    class that contains elements copied from the specified <xref href="System.Collections.IEnumerable%7bT%7d" data-throw-if-not-resolved="false"></xref>, has the default concurrency
+
+    level, has the default initial capacity, and uses the default comparer for the item type.
+  example: []
+  syntax:
+    content: public ConcurrentHashSet(IEnumerable<T> collection)
+    parameters:
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: >-
+        The <xref href="System.Collections.IEnumerable%7bT%7d" data-throw-if-not-resolved="false"></xref> whose elements are copied to
+            the new
+            <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub New(collection As IEnumerable(Of T))
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">collection</code> is a null reference.
+  nameWithType.vb: ConcurrentHashSet(Of T).New(IEnumerable(Of T))
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).New(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: New(IEnumerable(Of T))
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Collections.Generic.IEqualityComparer{`0})
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Collections.Generic.IEqualityComparer{`0})
+  id: '#ctor(System.Collections.Generic.IEqualityComparer{`0})'
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: ConcurrentHashSet(IEqualityComparer<T>?)
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(IEqualityComparer<T>?)
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.ConcurrentHashSet(System.Collections.Generic.IEqualityComparer<T>?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 155
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Initializes a new instance of the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+
+    class that is empty, has the specified concurrency level and capacity, and uses the specified
+
+    <xref href="System.Collections.Generic.IEqualityComparer%7bT%7d" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public ConcurrentHashSet(IEqualityComparer<T>? comparer)
+    parameters:
+    - id: comparer
+      type: System.Collections.Generic.IEqualityComparer{{T}}
+      description: >-
+        The <xref href="System.Collections.Generic.IEqualityComparer%7bT%7d" data-throw-if-not-resolved="false"></xref>
+            implementation to use when comparing items.
+    content.vb: Public Sub New(comparer As IEqualityComparer(Of T))
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.#ctor*
+  nameWithType.vb: ConcurrentHashSet(Of T).New(IEqualityComparer(Of T))
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).New(System.Collections.Generic.IEqualityComparer(Of T))
+  name.vb: New(IEqualityComparer(Of T))
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  id: '#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})'
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: ConcurrentHashSet(IEnumerable<T>, IEqualityComparer<T>?)
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>, IEqualityComparer<T>?)
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.ConcurrentHashSet(System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IEqualityComparer<T>?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 176
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Initializes a new instance of the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+
+    class that contains elements copied from the specified <xref href="System.Collections.IEnumerable" data-throw-if-not-resolved="false"></xref>, has the default concurrency level, has the default
+
+    initial capacity, and uses the specified
+
+    <xref href="System.Collections.Generic.IEqualityComparer%7bT%7d" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public ConcurrentHashSet(IEnumerable<T> collection, IEqualityComparer<T>? comparer)
+    parameters:
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: >-
+        The <xref href="System.Collections.IEnumerable%7bT%7d" data-throw-if-not-resolved="false"></xref> whose elements are copied to
+            the new
+            <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+    - id: comparer
+      type: System.Collections.Generic.IEqualityComparer{{T}}
+      description: >-
+        The <xref href="System.Collections.Generic.IEqualityComparer%7bT%7d" data-throw-if-not-resolved="false"></xref>
+            implementation to use when comparing items.
+    content.vb: Public Sub New(collection As IEnumerable(Of T), comparer As IEqualityComparer(Of T))
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: >-
+      <code class="paramref">collection</code> is a null reference
+          (Nothing in Visual Basic).
+  nameWithType.vb: ConcurrentHashSet(Of T).New(IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).New(System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IEqualityComparer(Of T))
+  name.vb: New(IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  id: '#ctor(System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})'
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: ConcurrentHashSet(int, IEnumerable<T>, IEqualityComparer<T>)
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(int, IEnumerable<T>, IEqualityComparer<T>)
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.ConcurrentHashSet(int, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IEqualityComparer<T>)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 203
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Initializes a new instance of the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref> 
+
+    class that contains elements copied from the specified <xref href="System.Collections.IEnumerable" data-throw-if-not-resolved="false"></xref>, 
+
+    has the specified concurrency level, has the specified initial capacity, and uses the specified 
+
+    <xref href="System.Collections.Generic.IEqualityComparer%7bT%7d" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public ConcurrentHashSet(int concurrencyLevel, IEnumerable<T> collection, IEqualityComparer<T> comparer)
+    parameters:
+    - id: concurrencyLevel
+      type: System.Int32
+      description: >-
+        The estimated number of threads that will update the 
+            <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref> concurrently.
+    - id: collection
+      type: System.Collections.Generic.IEnumerable{{T}}
+      description: >-
+        The <xref href="System.Collections.IEnumerable%7bT%7d" data-throw-if-not-resolved="false"></xref> whose elements are copied to the new 
+            <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+    - id: comparer
+      type: System.Collections.Generic.IEqualityComparer{{T}}
+      description: >-
+        The <xref href="System.Collections.Generic.IEqualityComparer%7bT%7d" data-throw-if-not-resolved="false"></xref> implementation to use 
+            when comparing items.
+    content.vb: Public Sub New(concurrencyLevel As Integer, collection As IEnumerable(Of T), comparer As IEqualityComparer(Of T))
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">collection</code> is a null reference.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">concurrencyLevel</code> is less than 1.
+  nameWithType.vb: ConcurrentHashSet(Of T).New(Integer, IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).New(Integer, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IEqualityComparer(Of T))
+  name.vb: New(Integer, IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32,System.Collections.Generic.IEqualityComparer{`0})
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32,System.Collections.Generic.IEqualityComparer{`0})
+  id: '#ctor(System.Int32,System.Int32,System.Collections.Generic.IEqualityComparer{`0})'
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: ConcurrentHashSet(int, int, IEqualityComparer<T>)
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(int, int, IEqualityComparer<T>)
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.ConcurrentHashSet(int, int, System.Collections.Generic.IEqualityComparer<T>)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 227
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Initializes a new instance of the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+
+    class that is empty, has the specified concurrency level, has the specified initial capacity, and
+
+    uses the specified <xref href="System.Collections.Generic.IEqualityComparer%7bT%7d" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public ConcurrentHashSet(int concurrencyLevel, int capacity, IEqualityComparer<T> comparer)
+    parameters:
+    - id: concurrencyLevel
+      type: System.Int32
+      description: >-
+        The estimated number of threads that will update the
+            <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref> concurrently.
+    - id: capacity
+      type: System.Int32
+      description: >-
+        The initial number of elements that the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+            can contain.
+    - id: comparer
+      type: System.Collections.Generic.IEqualityComparer{{T}}
+      description: >-
+        The <xref href="System.Collections.Generic.IEqualityComparer%7bT%7d" data-throw-if-not-resolved="false"></xref>
+            implementation to use when comparing items.
+    content.vb: Public Sub New(concurrencyLevel As Integer, capacity As Integer, comparer As IEqualityComparer(Of T))
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.#ctor*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: >-
+      <code class="paramref">concurrencyLevel</code> is less than 1. -or-
+
+      <code class="paramref">capacity</code> is less than 0.
+  nameWithType.vb: ConcurrentHashSet(Of T).New(Integer, Integer, IEqualityComparer(Of T))
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).New(Integer, Integer, System.Collections.Generic.IEqualityComparer(Of T))
+  name.vb: New(Integer, Integer, IEqualityComparer(Of T))
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.Add(`0)
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.Add(`0)
+  id: Add(`0)
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Add(T)
+  nameWithType: ConcurrentHashSet<T>.Add(T)
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.Add(T)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Add
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 267
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Adds the specified item to the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public bool Add(T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: The item to add.
+    return:
+      type: System.Boolean
+      description: >-
+        true if the items was added to the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+            successfully; false if it already exists.
+    content.vb: Public Function Add(item As T) As Boolean
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.Add*
+  exceptions:
+  - type: System.OverflowException
+    commentId: T:System.OverflowException
+    description: >-
+      The <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>
+          contains too many items.
+  nameWithType.vb: ConcurrentHashSet(Of T).Add(T)
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).Add(T)
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.Clear
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.Clear
+  id: Clear
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: ConcurrentHashSet<T>.Clear()
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.Clear()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Clear
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 278
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Removes all items from the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void Clear()
+    content.vb: Public Sub Clear()
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.Clear*
+  implements:
+  - System.Collections.Generic.ICollection{{T}}.Clear
+  nameWithType.vb: ConcurrentHashSet(Of T).Clear()
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).Clear()
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.Contains(`0)
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.Contains(`0)
+  id: Contains(`0)
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: Contains(T)
+  nameWithType: ConcurrentHashSet<T>.Contains(T)
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.Contains(T)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Contains
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 301
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: >-
+    Determines whether the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref> contains the specified
+
+    item.
+  example: []
+  syntax:
+    content: public bool Contains(T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: The item to locate in the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: true if the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref> contains the item; otherwise, false.
+    content.vb: Public Function Contains(item As T) As Boolean
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.Contains*
+  implements:
+  - System.Collections.Generic.ICollection{{T}}.Contains({T})
+  nameWithType.vb: ConcurrentHashSet(Of T).Contains(T)
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).Contains(T)
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.TryRemove(`0)
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.TryRemove(`0)
+  id: TryRemove(`0)
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: TryRemove(T)
+  nameWithType: ConcurrentHashSet<T>.TryRemove(T)
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.TryRemove(T)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TryRemove
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 334
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Attempts to remove the item from the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public bool TryRemove(T item)
+    parameters:
+    - id: item
+      type: '{T}'
+      description: The item to remove.
+    return:
+      type: System.Boolean
+      description: true if an item was removed successfully; otherwise, false.
+    content.vb: Public Function TryRemove(item As T) As Boolean
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.TryRemove*
+  nameWithType.vb: ConcurrentHashSet(Of T).TryRemove(T)
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).TryRemove(T)
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator
+  id: GetEnumerator
+  parent: Mapsui.Utilities.ConcurrentHashSet`1
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: ConcurrentHashSet<T>.GetEnumerator()
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Utilities/ConcurrentHashSet.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetEnumerator
+    path: ../../Mapsui/Utilities/ConcurrentHashSet.cs
+    startLine: 396
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Utilities
+  summary: Returns an enumerator that iterates through the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+  remarks: >-
+    The enumerator returned from the collection is safe to use concurrently with
+
+    reads and writes to the collection, however it does not represent a moment-in-time snapshot
+
+    of the collection.  The contents exposed through the enumerator may contain modifications
+
+    made to the collection after <xref href="Mapsui.Utilities.ConcurrentHashSet%601.GetEnumerator" data-throw-if-not-resolved="false"></xref> was called.
+  example: []
+  syntax:
+    content: public IEnumerator<T> GetEnumerator()
+    return:
+      type: System.Collections.Generic.IEnumerator{{T}}
+      description: An enumerator for the <xref href="Mapsui.Utilities.ConcurrentHashSet%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function GetEnumerator() As IEnumerator(Of T)
+  overload: Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator*
+  implements:
+  - System.Collections.Generic.IEnumerable{{T}}.GetEnumerator
+  nameWithType.vb: ConcurrentHashSet(Of T).GetEnumerator()
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).GetEnumerator()
+references:
+- uid: Mapsui.Utilities.ConcurrentHashSet`1
+  commentId: T:Mapsui.Utilities.ConcurrentHashSet`1
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html
+  name: ConcurrentHashSet<T>
+  nameWithType: ConcurrentHashSet<T>
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>
+  nameWithType.vb: ConcurrentHashSet(Of T)
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T)
+  name.vb: ConcurrentHashSet(Of T)
+  spec.csharp:
+  - uid: Mapsui.Utilities.ConcurrentHashSet`1
+    name: ConcurrentHashSet
+    href: Mapsui.Utilities.ConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Utilities.ConcurrentHashSet`1
+    name: ConcurrentHashSet
+    href: Mapsui.Utilities.ConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Utilities
+  commentId: N:Mapsui.Utilities
+  href: Mapsui.html
+  name: Mapsui.Utilities
+  nameWithType: Mapsui.Utilities
+  fullName: Mapsui.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Collections.Generic.IReadOnlyCollection{{T}}
+  commentId: T:System.Collections.Generic.IReadOnlyCollection{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyCollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<T>
+  nameWithType: IReadOnlyCollection<T>
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>
+  nameWithType.vb: IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  name.vb: IReadOnlyCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.ICollection{{T}}
+  commentId: T:System.Collections.Generic.ICollection{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{{T}}
+  commentId: T:System.Collections.Generic.IEnumerable{``0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Generic.IReadOnlyCollection`1
+  commentId: T:System.Collections.Generic.IReadOnlyCollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<T>
+  nameWithType: IReadOnlyCollection<T>
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>
+  nameWithType.vb: IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  name.vb: IReadOnlyCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections.Generic.ICollection`1
+  commentId: T:System.Collections.Generic.ICollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.Count*
+  commentId: Overload:Mapsui.Utilities.ConcurrentHashSet`1.Count
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_Count
+  name: Count
+  nameWithType: ConcurrentHashSet<T>.Count
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.Count
+  nameWithType.vb: ConcurrentHashSet(Of T).Count
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).Count
+- uid: System.Collections.Generic.IReadOnlyCollection{{T}}.Count
+  commentId: P:System.Collections.Generic.IReadOnlyCollection{`0}.Count
+  parent: System.Collections.Generic.IReadOnlyCollection{{T}}
+  definition: System.Collections.Generic.IReadOnlyCollection`1.Count
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1.count
+  name: Count
+  nameWithType: IReadOnlyCollection<T>.Count
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>.Count
+  nameWithType.vb: IReadOnlyCollection(Of T).Count
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T).Count
+- uid: System.Collections.Generic.ICollection{{T}}.Count
+  commentId: P:System.Collections.Generic.ICollection{`0}.Count
+  parent: System.Collections.Generic.ICollection{{T}}
+  definition: System.Collections.Generic.ICollection`1.Count
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.count
+  name: Count
+  nameWithType: ICollection<T>.Count
+  fullName: System.Collections.Generic.ICollection<T>.Count
+  nameWithType.vb: ICollection(Of T).Count
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Count
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Collections.Generic.IReadOnlyCollection`1.Count
+  commentId: P:System.Collections.Generic.IReadOnlyCollection`1.Count
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1.count
+  name: Count
+  nameWithType: IReadOnlyCollection<T>.Count
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>.Count
+  nameWithType.vb: IReadOnlyCollection(Of T).Count
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T).Count
+- uid: System.Collections.Generic.ICollection`1.Count
+  commentId: P:System.Collections.Generic.ICollection`1.Count
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.count
+  name: Count
+  nameWithType: ICollection<T>.Count
+  fullName: System.Collections.Generic.ICollection<T>.Count
+  nameWithType.vb: ICollection(Of T).Count
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Count
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.IsEmpty*
+  commentId: Overload:Mapsui.Utilities.ConcurrentHashSet`1.IsEmpty
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_IsEmpty
+  name: IsEmpty
+  nameWithType: ConcurrentHashSet<T>.IsEmpty
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.IsEmpty
+  nameWithType.vb: ConcurrentHashSet(Of T).IsEmpty
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).IsEmpty
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.#ctor*
+  commentId: Overload:Mapsui.Utilities.ConcurrentHashSet`1.#ctor
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1__ctor
+  name: ConcurrentHashSet
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.ConcurrentHashSet
+  nameWithType.vb: ConcurrentHashSet(Of T).New
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).New
+  name.vb: New
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+  name: ArgumentOutOfRangeException
+  nameWithType: ArgumentOutOfRangeException
+  fullName: System.ArgumentOutOfRangeException
+- uid: System.Collections.IEnumerable{T}
+  commentId: T:System.Collections.IEnumerable{T}
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+  name: ArgumentNullException
+  nameWithType: ArgumentNullException
+  fullName: System.ArgumentNullException
+- uid: System.Collections.Generic.IEqualityComparer{T}
+  commentId: T:System.Collections.Generic.IEqualityComparer{T}
+  isExternal: true
+- uid: System.Collections.Generic.IEqualityComparer{{T}}
+  commentId: T:System.Collections.Generic.IEqualityComparer{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEqualityComparer`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  name: IEqualityComparer<T>
+  nameWithType: IEqualityComparer<T>
+  fullName: System.Collections.Generic.IEqualityComparer<T>
+  nameWithType.vb: IEqualityComparer(Of T)
+  fullName.vb: System.Collections.Generic.IEqualityComparer(Of T)
+  name.vb: IEqualityComparer(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEqualityComparer`1
+  commentId: T:System.Collections.Generic.IEqualityComparer`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  name: IEqualityComparer<T>
+  nameWithType: IEqualityComparer<T>
+  fullName: System.Collections.Generic.IEqualityComparer<T>
+  nameWithType.vb: IEqualityComparer(Of T)
+  fullName.vb: System.Collections.Generic.IEqualityComparer(Of T)
+  name.vb: IEqualityComparer(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.OverflowException
+  commentId: T:System.OverflowException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.overflowexception
+  name: OverflowException
+  nameWithType: OverflowException
+  fullName: System.OverflowException
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.Add*
+  commentId: Overload:Mapsui.Utilities.ConcurrentHashSet`1.Add
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_Add__0_
+  name: Add
+  nameWithType: ConcurrentHashSet<T>.Add
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.Add
+  nameWithType.vb: ConcurrentHashSet(Of T).Add
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).Add
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.Clear*
+  commentId: Overload:Mapsui.Utilities.ConcurrentHashSet`1.Clear
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_Clear
+  name: Clear
+  nameWithType: ConcurrentHashSet<T>.Clear
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.Clear
+  nameWithType.vb: ConcurrentHashSet(Of T).Clear
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).Clear
+- uid: System.Collections.Generic.ICollection{{T}}.Clear
+  commentId: M:System.Collections.Generic.ICollection{`0}.Clear
+  parent: System.Collections.Generic.ICollection{{T}}
+  definition: System.Collections.Generic.ICollection`1.Clear
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  name: Clear()
+  nameWithType: ICollection<T>.Clear()
+  fullName: System.Collections.Generic.ICollection<T>.Clear()
+  nameWithType.vb: ICollection(Of T).Clear()
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Clear()
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{`0}.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{`0}.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.Clear
+  commentId: M:System.Collections.Generic.ICollection`1.Clear
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  name: Clear()
+  nameWithType: ICollection<T>.Clear()
+  fullName: System.Collections.Generic.ICollection<T>.Clear()
+  nameWithType.vb: ICollection(Of T).Clear()
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Clear()
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.Contains*
+  commentId: Overload:Mapsui.Utilities.ConcurrentHashSet`1.Contains
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_Contains__0_
+  name: Contains
+  nameWithType: ConcurrentHashSet<T>.Contains
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.Contains
+  nameWithType.vb: ConcurrentHashSet(Of T).Contains
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).Contains
+- uid: System.Collections.Generic.ICollection{{T}}.Contains({T})
+  commentId: M:System.Collections.Generic.ICollection{`0}.Contains(`0)
+  parent: System.Collections.Generic.ICollection{{T}}
+  definition: System.Collections.Generic.ICollection`1.Contains(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  name: Contains(T)
+  nameWithType: ICollection<T>.Contains(T)
+  fullName: System.Collections.Generic.ICollection<T>.Contains(T)
+  nameWithType.vb: ICollection(Of T).Contains(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Contains(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{`0}.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{`0}.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.Contains(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Contains(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  name: Contains(T)
+  nameWithType: ICollection<T>.Contains(T)
+  fullName: System.Collections.Generic.ICollection<T>.Contains(T)
+  nameWithType.vb: ICollection(Of T).Contains(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Contains(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - name: T
+  - name: )
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.TryRemove*
+  commentId: Overload:Mapsui.Utilities.ConcurrentHashSet`1.TryRemove
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_TryRemove__0_
+  name: TryRemove
+  nameWithType: ConcurrentHashSet<T>.TryRemove
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.TryRemove
+  nameWithType.vb: ConcurrentHashSet(Of T).TryRemove
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).TryRemove
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator
+  commentId: M:Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_GetEnumerator
+  name: GetEnumerator()
+  nameWithType: ConcurrentHashSet<T>.GetEnumerator()
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.GetEnumerator()
+  nameWithType.vb: ConcurrentHashSet(Of T).GetEnumerator()
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator
+    name: GetEnumerator
+    href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_GetEnumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator
+    name: GetEnumerator
+    href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_GetEnumerator
+  - name: (
+  - name: )
+- uid: Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator*
+  commentId: Overload:Mapsui.Utilities.ConcurrentHashSet`1.GetEnumerator
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html#Mapsui_Utilities_ConcurrentHashSet_1_GetEnumerator
+  name: GetEnumerator
+  nameWithType: ConcurrentHashSet<T>.GetEnumerator
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>.GetEnumerator
+  nameWithType.vb: ConcurrentHashSet(Of T).GetEnumerator
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T).GetEnumerator
+- uid: System.Collections.Generic.IEnumerable{{T}}.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable{`0}.GetEnumerator
+  parent: System.Collections.Generic.IEnumerable{{T}}
+  definition: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<T>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of T).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable{`0}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable{`0}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator{{T}}
+  commentId: T:System.Collections.Generic.IEnumerator{`0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerator`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<T>
+  nameWithType: IEnumerator<T>
+  fullName: System.Collections.Generic.IEnumerator<T>
+  nameWithType.vb: IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
+  name.vb: IEnumerator(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable`1.GetEnumerator
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<T>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of T).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator`1
+  commentId: T:System.Collections.Generic.IEnumerator`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<T>
+  nameWithType: IEnumerator<T>
+  fullName: System.Collections.Generic.IEnumerator<T>
+  nameWithType.vb: IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
+  name.vb: IEnumerator(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

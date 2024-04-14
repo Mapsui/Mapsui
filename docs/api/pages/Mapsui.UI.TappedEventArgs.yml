@@ -1,0 +1,607 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.TappedEventArgs
+  commentId: T:Mapsui.UI.TappedEventArgs
+  id: TappedEventArgs
+  parent: Mapsui.UI
+  children:
+  - Mapsui.UI.TappedEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType)
+  - Mapsui.UI.TappedEventArgs.Handled
+  - Mapsui.UI.TappedEventArgs.ScreenPosition
+  - Mapsui.UI.TappedEventArgs.TapType
+  langs:
+  - csharp
+  - vb
+  name: TappedEventArgs
+  nameWithType: TappedEventArgs
+  fullName: Mapsui.UI.TappedEventArgs
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TappedEventArgs
+    path: ../../Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+    startLine: 5
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI
+  syntax:
+    content: 'public class TappedEventArgs : EventArgs'
+    content.vb: Public Class TappedEventArgs Inherits EventArgs
+  inheritance:
+  - System.Object
+  - System.EventArgs
+  inheritedMembers:
+  - System.EventArgs.Empty
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.TappedEventArgs.ScreenPosition
+  commentId: P:Mapsui.UI.TappedEventArgs.ScreenPosition
+  id: ScreenPosition
+  parent: Mapsui.UI.TappedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: ScreenPosition
+  nameWithType: TappedEventArgs.ScreenPosition
+  fullName: Mapsui.UI.TappedEventArgs.ScreenPosition
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ScreenPosition
+    path: ../../Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI
+  syntax:
+    content: public ScreenPosition ScreenPosition { get; }
+    parameters: []
+    return:
+      type: Mapsui.Manipulations.ScreenPosition
+    content.vb: Public ReadOnly Property ScreenPosition As ScreenPosition
+  overload: Mapsui.UI.TappedEventArgs.ScreenPosition*
+- uid: Mapsui.UI.TappedEventArgs.TapType
+  commentId: P:Mapsui.UI.TappedEventArgs.TapType
+  id: TapType
+  parent: Mapsui.UI.TappedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: TapType
+  nameWithType: TappedEventArgs.TapType
+  fullName: Mapsui.UI.TappedEventArgs.TapType
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TapType
+    path: ../../Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+    startLine: 8
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI
+  syntax:
+    content: public TapType TapType { get; }
+    parameters: []
+    return:
+      type: Mapsui.Manipulations.TapType
+    content.vb: Public ReadOnly Property TapType As TapType
+  overload: Mapsui.UI.TappedEventArgs.TapType*
+- uid: Mapsui.UI.TappedEventArgs.Handled
+  commentId: P:Mapsui.UI.TappedEventArgs.Handled
+  id: Handled
+  parent: Mapsui.UI.TappedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Handled
+  nameWithType: TappedEventArgs.Handled
+  fullName: Mapsui.UI.TappedEventArgs.Handled
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Handled
+    path: ../../Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI
+  syntax:
+    content: public bool Handled { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property Handled As Boolean
+  overload: Mapsui.UI.TappedEventArgs.Handled*
+- uid: Mapsui.UI.TappedEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType)
+  commentId: M:Mapsui.UI.TappedEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType)
+  id: '#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType)'
+  parent: Mapsui.UI.TappedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: TappedEventArgs(ScreenPosition, TapType)
+  nameWithType: TappedEventArgs.TappedEventArgs(ScreenPosition, TapType)
+  fullName: Mapsui.UI.TappedEventArgs.TappedEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.TapType)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/EventArgs/TappedEventArgs.cs
+    startLine: 11
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI
+  syntax:
+    content: public TappedEventArgs(ScreenPosition screenPosition, TapType tapType)
+    parameters:
+    - id: screenPosition
+      type: Mapsui.Manipulations.ScreenPosition
+    - id: tapType
+      type: Mapsui.Manipulations.TapType
+    content.vb: Public Sub New(screenPosition As ScreenPosition, tapType As TapType)
+  overload: Mapsui.UI.TappedEventArgs.#ctor*
+  nameWithType.vb: TappedEventArgs.New(ScreenPosition, TapType)
+  fullName.vb: Mapsui.UI.TappedEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.TapType)
+  name.vb: New(ScreenPosition, TapType)
+references:
+- uid: Mapsui.UI
+  commentId: N:Mapsui.UI
+  href: Mapsui.html
+  name: Mapsui.UI
+  nameWithType: Mapsui.UI
+  fullName: Mapsui.UI
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs
+  name: EventArgs
+  nameWithType: EventArgs
+  fullName: System.EventArgs
+- uid: System.EventArgs.Empty
+  commentId: F:System.EventArgs.Empty
+  parent: System.EventArgs
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventargs.empty
+  name: Empty
+  nameWithType: EventArgs.Empty
+  fullName: System.EventArgs.Empty
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.UI.TappedEventArgs.ScreenPosition*
+  commentId: Overload:Mapsui.UI.TappedEventArgs.ScreenPosition
+  href: Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs_ScreenPosition
+  name: ScreenPosition
+  nameWithType: TappedEventArgs.ScreenPosition
+  fullName: Mapsui.UI.TappedEventArgs.ScreenPosition
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: Mapsui.UI.TappedEventArgs.TapType*
+  commentId: Overload:Mapsui.UI.TappedEventArgs.TapType
+  href: Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs_TapType
+  name: TapType
+  nameWithType: TappedEventArgs.TapType
+  fullName: Mapsui.UI.TappedEventArgs.TapType
+- uid: Mapsui.Manipulations.TapType
+  commentId: T:Mapsui.Manipulations.TapType
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.TapType.html
+  name: TapType
+  nameWithType: TapType
+  fullName: Mapsui.Manipulations.TapType
+- uid: Mapsui.UI.TappedEventArgs.Handled*
+  commentId: Overload:Mapsui.UI.TappedEventArgs.Handled
+  href: Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs_Handled
+  name: Handled
+  nameWithType: TappedEventArgs.Handled
+  fullName: Mapsui.UI.TappedEventArgs.Handled
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.UI.TappedEventArgs.#ctor*
+  commentId: Overload:Mapsui.UI.TappedEventArgs.#ctor
+  href: Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_Manipulations_TapType_
+  name: TappedEventArgs
+  nameWithType: TappedEventArgs.TappedEventArgs
+  fullName: Mapsui.UI.TappedEventArgs.TappedEventArgs
+  nameWithType.vb: TappedEventArgs.New
+  fullName.vb: Mapsui.UI.TappedEventArgs.New
+  name.vb: New

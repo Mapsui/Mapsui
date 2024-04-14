@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.WinUI.Extensions
+  commentId: N:Mapsui.UI.WinUI.Extensions
+  id: Mapsui.UI.WinUI.Extensions
+  children:
+  - Mapsui.UI.WinUI.Extensions.PointExtensions
+  - Mapsui.UI.WinUI.Extensions.PointerPointExtensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.WinUI.Extensions
+  nameWithType: Mapsui.UI.WinUI.Extensions
+  fullName: Mapsui.UI.WinUI.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Uno.WinUI
+references:
+- uid: Mapsui.UI.WinUI.Extensions.PointExtensions
+  commentId: T:Mapsui.UI.WinUI.Extensions.PointExtensions
+  href: Mapsui.UI.WinUI.Extensions.PointExtensions.html
+  name: PointExtensions
+  nameWithType: PointExtensions
+  fullName: Mapsui.UI.WinUI.Extensions.PointExtensions
+- uid: Mapsui.UI.WinUI.Extensions.PointerPointExtensions
+  commentId: T:Mapsui.UI.WinUI.Extensions.PointerPointExtensions
+  href: Mapsui.UI.WinUI.Extensions.PointerPointExtensions.html
+  name: PointerPointExtensions
+  nameWithType: PointerPointExtensions
+  fullName: Mapsui.UI.WinUI.Extensions.PointerPointExtensions

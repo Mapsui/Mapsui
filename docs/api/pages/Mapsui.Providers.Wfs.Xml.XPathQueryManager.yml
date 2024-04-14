@@ -1,0 +1,1966 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  id: XPathQueryManager
+  parent: Mapsui.Providers.Wfs.Xml
+  children:
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.Byte[])
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.IO.Stream)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.String)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.Xml.XPath.XPathDocument)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.AddNamespace(System.String,System.String)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.Clone
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.Compile(System.String)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes(System.Xml.XPath.XPathExpression)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ResetNamespaces
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.Byte[])
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.IO.Stream)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.String)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  langs:
+  - csharp
+  - vb
+  name: XPathQueryManager
+  nameWithType: XPathQueryManager
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: XPathQueryManager
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 22
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This class provides an easy-to-use interface for complex (parameterized) XPath queries.
+  example: []
+  syntax:
+    content: 'public class XPathQueryManager : IXPathQueryManager'
+    content.vb: Public Class XPathQueryManager Implements IXPathQueryManager
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor
+  id: '#ctor'
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: XPathQueryManager()
+  nameWithType: XPathQueryManager.XPathQueryManager()
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.XPathQueryManager()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 37
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Initializes a new instance of the <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public XPathQueryManager()
+    content.vb: Public Sub New()
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor*
+  nameWithType.vb: XPathQueryManager.New()
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.New()
+  name.vb: New()
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.IO.Stream)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.IO.Stream)
+  id: '#ctor(System.IO.Stream)'
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: XPathQueryManager(Stream)
+  nameWithType: XPathQueryManager.XPathQueryManager(Stream)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.XPathQueryManager(System.IO.Stream)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 45
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Initializes a new instance of the <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public XPathQueryManager(Stream documentStream)
+    parameters:
+    - id: documentStream
+      type: System.IO.Stream
+      description: A Stream with XML data
+    content.vb: Public Sub New(documentStream As Stream)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor*
+  nameWithType.vb: XPathQueryManager.New(Stream)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.New(System.IO.Stream)
+  name.vb: New(Stream)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.Byte[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.Byte[])
+  id: '#ctor(System.Byte[])'
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: XPathQueryManager(byte[])
+  nameWithType: XPathQueryManager.XPathQueryManager(byte[])
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.XPathQueryManager(byte[])
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 54
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Initializes a new instance of the <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public XPathQueryManager(byte[] document)
+    parameters:
+    - id: document
+      type: System.Byte[]
+      description: A byte array with XML data
+    content.vb: Public Sub New(document As Byte())
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor*
+  nameWithType.vb: XPathQueryManager.New(Byte())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.New(Byte())
+  name.vb: New(Byte())
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.Xml.XPath.XPathDocument)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.Xml.XPath.XPathDocument)
+  id: '#ctor(System.Xml.XPath.XPathDocument)'
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: XPathQueryManager(XPathDocument?)
+  nameWithType: XPathQueryManager.XPathQueryManager(XPathDocument?)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.XPathQueryManager(System.Xml.XPath.XPathDocument?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 63
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Initializes a new instance of the <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public XPathQueryManager(XPathDocument? xPathDoc)
+    parameters:
+    - id: xPathDoc
+      type: System.Xml.XPath.XPathDocument
+      description: An XmlDocument instance
+    content.vb: Public Sub New(xPathDoc As XPathDocument)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor*
+  nameWithType.vb: XPathQueryManager.New(XPathDocument)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.New(System.Xml.XPath.XPathDocument)
+  name.vb: New(XPathDocument)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  id: '#ctor(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)'
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: XPathQueryManager(HttpClientUtil)
+  nameWithType: XPathQueryManager.XPathQueryManager(HttpClientUtil)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.XPathQueryManager(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 73
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Initializes a new instance of the <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public XPathQueryManager(HttpClientUtil httpClientUtil)
+    parameters:
+    - id: httpClientUtil
+      type: Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+      description: A configured <xref href="Mapsui.Providers.Wfs.Utilities.HttpClientUtil" data-throw-if-not-resolved="false"></xref> instance for performing web requests
+    content.vb: Public Sub New(httpClientUtil As HttpClientUtil)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor*
+  nameWithType.vb: XPathQueryManager.New(HttpClientUtil)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.New(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  name.vb: New(HttpClientUtil)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync
+  id: InitAsync
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: InitAsync()
+  nameWithType: XPathQueryManager.InitAsync()
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: InitAsync
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 80
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Init Async
+  example: []
+  syntax:
+    content: public Task InitAsync()
+    return:
+      type: System.Threading.Tasks.Task
+      description: Task
+    content.vb: Public Function InitAsync() As Task
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync*
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: XPathQueryManager(string)
+  nameWithType: XPathQueryManager.XPathQueryManager(string)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.XPathQueryManager(string)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 94
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Initializes a new instance of the <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public XPathQueryManager(string fileName)
+    parameters:
+    - id: fileName
+      type: System.String
+      description: ''
+    content.vb: Public Sub New(fileName As String)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor*
+  nameWithType.vb: XPathQueryManager.New(String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.New(String)
+  name.vb: New(String)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.AddNamespace(System.String,System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.AddNamespace(System.String,System.String)
+  id: AddNamespace(System.String,System.String)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: AddNamespace(string, string)
+  nameWithType: XPathQueryManager.AddNamespace(string, string)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.AddNamespace(string, string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddNamespace
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 133
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method adds a namespace for XPath queries.
+  example: []
+  syntax:
+    content: public void AddNamespace(string prefix, string ns)
+    parameters:
+    - id: prefix
+      type: System.String
+      description: The namespace prefix
+    - id: ns
+      type: System.String
+      description: The namespace URI
+    content.vb: Public Sub AddNamespace(prefix As String, ns As String)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.AddNamespace*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.AddNamespace(System.String,System.String)
+  nameWithType.vb: XPathQueryManager.AddNamespace(String, String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.AddNamespace(String, String)
+  name.vb: AddNamespace(String, String)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Compile(System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.Compile(System.String)
+  id: Compile(System.String)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: Compile(string)
+  nameWithType: XPathQueryManager.Compile(string)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Compile(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Compile
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 143
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method compiles an XPath string.
+  example: []
+  syntax:
+    content: public XPathExpression? Compile(string xPath)
+    parameters:
+    - id: xPath
+      type: System.String
+      description: The XPath string
+    return:
+      type: System.Xml.XPath.XPathExpression
+      description: A compiled XPath expression
+    content.vb: Public Function Compile(xPath As String) As XPathExpression
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Compile*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Compile(System.String)
+  nameWithType.vb: XPathQueryManager.Compile(String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Compile(String)
+  name.vb: Compile(String)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Clone
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.Clone
+  id: Clone
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: Clone()
+  nameWithType: XPathQueryManager.Clone()
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Clone()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Clone
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 152
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: >-
+    This method returns a clone of the current instance.
+
+    The cloned instance operates on the same (read-only) XmlDocument instance.
+  example: []
+  syntax:
+    content: public IXPathQueryManager Clone()
+    return:
+      type: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+    content.vb: Public Function Clone() As IXPathQueryManager
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Clone*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Clone
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+  id: GetIterator(System.Xml.XPath.XPathExpression)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: GetIterator(XPathExpression?)
+  nameWithType: XPathQueryManager.GetIterator(XPathExpression?)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetIterator
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 162
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: >-
+    This method returns an XPathNodeIterator instance positioned at the nodes 
+
+    the XPath expression addresses.
+  example: []
+  syntax:
+    content: public XPathNodeIterator? GetIterator(XPathExpression? xPath)
+    parameters:
+    - id: xPath
+      type: System.Xml.XPath.XPathExpression
+      description: The compiled XPath expression
+    return:
+      type: System.Xml.XPath.XPathNodeIterator
+    content.vb: Public Function GetIterator(xPath As XPathExpression) As XPathNodeIterator
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+  nameWithType.vb: XPathQueryManager.GetIterator(XPathExpression)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+  name.vb: GetIterator(XPathExpression)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  id: GetIterator(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: GetIterator(XPathExpression, DictionaryEntry[])
+  nameWithType: XPathQueryManager.GetIterator(XPathExpression, DictionaryEntry[])
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry[])
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetIterator
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 174
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: >-
+    This method returns an XPathNodeIterator instance positioned at the nodes 
+
+    the XPath expression addresses.
+  example: []
+  syntax:
+    content: public XPathNodeIterator? GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters)
+    parameters:
+    - id: xPath
+      type: System.Xml.XPath.XPathExpression
+      description: The compiled XPath expression
+    - id: queryParameters
+      type: System.Collections.DictionaryEntry[]
+      description: Parameters for the compiled XPath expression
+    return:
+      type: System.Xml.XPath.XPathNodeIterator
+    content.vb: Public Function GetIterator(xPath As XPathExpression, queryParameters As DictionaryEntry()) As XPathNodeIterator
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  nameWithType.vb: XPathQueryManager.GetIterator(XPathExpression, DictionaryEntry())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry())
+  name.vb: GetIterator(XPathExpression, DictionaryEntry())
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  id: GetValueFromNode(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: GetValueFromNode(XPathExpression?, DictionaryEntry[]?)
+  nameWithType: XPathQueryManager.GetValueFromNode(XPathExpression?, DictionaryEntry[]?)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression?, System.Collections.DictionaryEntry[]?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetValueFromNode
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 185
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method returns the value of the first node the XPath expression addresses.
+  example: []
+  syntax:
+    content: public string? GetValueFromNode(XPathExpression? xPath, DictionaryEntry[]? queryParameters = null)
+    parameters:
+    - id: xPath
+      type: System.Xml.XPath.XPathExpression
+      description: The compiled XPath expression
+    - id: queryParameters
+      type: System.Collections.DictionaryEntry[]
+      description: Parameters for the compiled XPath expression
+    return:
+      type: System.String
+    content.vb: Public Function GetValueFromNode(xPath As XPathExpression, queryParameters As DictionaryEntry() = Nothing) As String
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValueFromNode*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  nameWithType.vb: XPathQueryManager.GetValueFromNode(XPathExpression, DictionaryEntry())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry())
+  name.vb: GetValueFromNode(XPathExpression, DictionaryEntry())
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes(System.Xml.XPath.XPathExpression)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes(System.Xml.XPath.XPathExpression)
+  id: GetValuesFromNodes(System.Xml.XPath.XPathExpression)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: GetValuesFromNodes(XPathExpression)
+  nameWithType: XPathQueryManager.GetValuesFromNodes(XPathExpression)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes(System.Xml.XPath.XPathExpression)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetValuesFromNodes
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 201
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method returns a collection of the values of all nodes the XPath expression addresses.
+  example: []
+  syntax:
+    content: public List<string> GetValuesFromNodes(XPathExpression xPath)
+    parameters:
+    - id: xPath
+      type: System.Xml.XPath.XPathExpression
+      description: The compiled XPath expression
+    return:
+      type: System.Collections.Generic.List{System.String}
+    content.vb: Public Function GetValuesFromNodes(xPath As XPathExpression) As List(Of String)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes*
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  id: GetValuesFromNodes(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: GetValuesFromNodes(XPathExpression, DictionaryEntry[])
+  nameWithType: XPathQueryManager.GetValuesFromNodes(XPathExpression, DictionaryEntry[])
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry[])
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetValuesFromNodes
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 216
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method returns a collection of the values of all nodes the XPath expression addresses.
+  example: []
+  syntax:
+    content: public List<string> GetValuesFromNodes(XPathExpression xPath, DictionaryEntry[] queryParameters)
+    parameters:
+    - id: xPath
+      type: System.Xml.XPath.XPathExpression
+      description: The compiled XPath expression
+    - id: queryParameters
+      type: System.Collections.DictionaryEntry[]
+      description: Parameters for the compiled XPath expression
+    return:
+      type: System.Collections.Generic.List{System.String}
+    content.vb: Public Function GetValuesFromNodes(xPath As XPathExpression, queryParameters As DictionaryEntry()) As List(Of String)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes*
+  nameWithType.vb: XPathQueryManager.GetValuesFromNodes(XPathExpression, DictionaryEntry())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry())
+  name.vb: GetValuesFromNodes(XPathExpression, DictionaryEntry())
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  id: GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: GetXPathQueryManagerInContext(XPathExpression?, DictionaryEntry[]?)
+  nameWithType: XPathQueryManager.GetXPathQueryManagerInContext(XPathExpression?, DictionaryEntry[]?)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression?, System.Collections.DictionaryEntry[]?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetXPathQueryManagerInContext
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 228
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: >-
+    This method returns an instance of <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager" data-throw-if-not-resolved="false"></xref> 
+
+    in the context of the first node the XPath expression addresses.
+  example: []
+  syntax:
+    content: public IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression? xPath, DictionaryEntry[]? queryParameters = null)
+    parameters:
+    - id: xPath
+      type: System.Xml.XPath.XPathExpression
+      description: The compiled XPath expression
+    - id: queryParameters
+      type: System.Collections.DictionaryEntry[]
+      description: Parameters for the compiled XPath expression
+    return:
+      type: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+    content.vb: Public Function GetXPathQueryManagerInContext(xPath As XPathExpression, queryParameters As DictionaryEntry() = Nothing) As IXPathQueryManager
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  nameWithType.vb: XPathQueryManager.GetXPathQueryManagerInContext(XPathExpression, DictionaryEntry())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry())
+  name.vb: GetXPathQueryManagerInContext(XPathExpression, DictionaryEntry())
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ResetNamespaces
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ResetNamespaces
+  id: ResetNamespaces
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: ResetNamespaces()
+  nameWithType: XPathQueryManager.ResetNamespaces()
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ResetNamespaces()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ResetNamespaces
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 240
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method deletes the current namespace context.
+  example: []
+  syntax:
+    content: public void ResetNamespaces()
+    content.vb: Public Sub ResetNamespaces()
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ResetNamespaces*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.ResetNamespaces
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.IO.Stream)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.IO.Stream)
+  id: SetDocumentToParse(System.IO.Stream)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: SetDocumentToParse(Stream)
+  nameWithType: XPathQueryManager.SetDocumentToParse(Stream)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetDocumentToParse
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 249
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Sets a new XML document.
+  example: []
+  syntax:
+    content: public void SetDocumentToParse(Stream documentStream)
+    parameters:
+    - id: documentStream
+      type: System.IO.Stream
+      description: A Stream with XML data
+    content.vb: Public Sub SetDocumentToParse(documentStream As Stream)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(System.IO.Stream)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.Byte[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.Byte[])
+  id: SetDocumentToParse(System.Byte[])
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: SetDocumentToParse(byte[])
+  nameWithType: XPathQueryManager.SetDocumentToParse(byte[])
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(byte[])
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetDocumentToParse
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 258
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Sets a new XML document.
+  example: []
+  syntax:
+    content: public void SetDocumentToParse(byte[] document)
+    parameters:
+    - id: document
+      type: System.Byte[]
+      description: A byte array with XML data
+    content.vb: Public Sub SetDocumentToParse(document As Byte())
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse*
+  nameWithType.vb: XPathQueryManager.SetDocumentToParse(Byte())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(Byte())
+  name.vb: SetDocumentToParse(Byte())
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  id: SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: SetDocumentToParseAsync(HttpClientUtil)
+  nameWithType: XPathQueryManager.SetDocumentToParseAsync(HttpClientUtil)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetDocumentToParseAsync
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 267
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Sets a new XML document.
+  example: []
+  syntax:
+    content: public Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil)
+    parameters:
+    - id: httpClientUtil
+      type: Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+      description: A configured <xref href="Mapsui.Providers.Wfs.Utilities.HttpClientUtil" data-throw-if-not-resolved="false"></xref> instance for performing web requests
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Function SetDocumentToParseAsync(httpClientUtil As HttpClientUtil) As Task
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync*
+  implements:
+  - Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(System.String)
+  id: SetDocumentToParse(System.String)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  langs:
+  - csharp
+  - vb
+  name: SetDocumentToParse(string)
+  nameWithType: XPathQueryManager.SetDocumentToParse(string)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetDocumentToParse
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 283
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Sets a new XmlDocument
+  example: []
+  syntax:
+    content: public void SetDocumentToParse(string fileName)
+    parameters:
+    - id: fileName
+      type: System.String
+      description: ''
+    content.vb: Public Sub SetDocumentToParse(fileName As String)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse*
+  nameWithType.vb: XPathQueryManager.SetDocumentToParse(String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(String)
+  name.vb: SetDocumentToParse(String)
+references:
+- uid: Mapsui.Providers.Wfs.Xml
+  commentId: N:Mapsui.Providers.Wfs.Xml
+  href: Mapsui.html
+  name: Mapsui.Providers.Wfs.Xml
+  nameWithType: Mapsui.Providers.Wfs.Xml
+  fullName: Mapsui.Providers.Wfs.Xml
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml
+    name: Xml
+    href: Mapsui.Providers.Wfs.Xml.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml
+    name: Xml
+    href: Mapsui.Providers.Wfs.Xml.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  commentId: T:Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  parent: Mapsui.Providers.Wfs.Xml
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html
+  name: IXPathQueryManager
+  nameWithType: IXPathQueryManager
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager
+  nameWithType: XPathQueryManager
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.#ctor
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager__ctor
+  name: XPathQueryManager
+  nameWithType: XPathQueryManager.XPathQueryManager
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.XPathQueryManager
+  nameWithType.vb: XPathQueryManager.New
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.New
+  name.vb: New
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System.Xml.XPath.XPathDocument
+  commentId: T:System.Xml.XPath.XPathDocument
+  parent: System.Xml.XPath
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathdocument
+  name: XPathDocument
+  nameWithType: XPathDocument
+  fullName: System.Xml.XPath.XPathDocument
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+  - name: .
+  - uid: System.Xml.XPath
+    name: XPath
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+  - name: .
+  - uid: System.Xml.XPath
+    name: XPath
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath
+- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+  commentId: T:Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html
+  name: HttpClientUtil
+  nameWithType: HttpClientUtil
+  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+- uid: Mapsui.Providers.Wfs.Utilities
+  commentId: N:Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.html
+  name: Mapsui.Providers.Wfs.Utilities
+  nameWithType: Mapsui.Providers.Wfs.Utilities
+  fullName: Mapsui.Providers.Wfs.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities
+    name: Utilities
+    href: Mapsui.Providers.Wfs.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities
+    name: Utilities
+    href: Mapsui.Providers.Wfs.Utilities.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_InitAsync
+  name: InitAsync
+  nameWithType: XPathQueryManager.InitAsync
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.AddNamespace*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.AddNamespace
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_AddNamespace_System_String_System_String_
+  name: AddNamespace
+  nameWithType: XPathQueryManager.AddNamespace
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.AddNamespace
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.AddNamespace(System.String,System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.AddNamespace(System.String,System.String)
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  isExternal: true
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_AddNamespace_System_String_System_String_
+  name: AddNamespace(string, string)
+  nameWithType: IXPathQueryManager.AddNamespace(string, string)
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.AddNamespace(string, string)
+  nameWithType.vb: IXPathQueryManager.AddNamespace(String, String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.AddNamespace(String, String)
+  name.vb: AddNamespace(String, String)
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.AddNamespace(System.String,System.String)
+    name: AddNamespace
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_AddNamespace_System_String_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.AddNamespace(System.String,System.String)
+    name: AddNamespace
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_AddNamespace_System_String_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Compile*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.Compile
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_Compile_System_String_
+  name: Compile
+  nameWithType: XPathQueryManager.Compile
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Compile
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Compile(System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Compile(System.String)
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  isExternal: true
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_Compile_System_String_
+  name: Compile(string)
+  nameWithType: IXPathQueryManager.Compile(string)
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Compile(string)
+  nameWithType.vb: IXPathQueryManager.Compile(String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Compile(String)
+  name.vb: Compile(String)
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Compile(System.String)
+    name: Compile
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_Compile_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Compile(System.String)
+    name: Compile
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_Compile_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Xml.XPath.XPathExpression
+  commentId: T:System.Xml.XPath.XPathExpression
+  parent: System.Xml.XPath
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathexpression
+  name: XPathExpression
+  nameWithType: XPathExpression
+  fullName: System.Xml.XPath.XPathExpression
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Clone*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.Clone
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_Clone
+  name: Clone
+  nameWithType: XPathQueryManager.Clone
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.Clone
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Clone
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Clone
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_Clone
+  name: Clone()
+  nameWithType: IXPathQueryManager.Clone()
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Clone()
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Clone
+    name: Clone
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_Clone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.Clone
+    name: Clone
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_Clone
+  - name: (
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_GetIterator_System_Xml_XPath_XPathExpression_
+  name: GetIterator
+  nameWithType: XPathQueryManager.GetIterator
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetIterator
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  isExternal: true
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetIterator_System_Xml_XPath_XPathExpression_
+  name: GetIterator(XPathExpression)
+  nameWithType: IXPathQueryManager.GetIterator(XPathExpression)
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+    name: GetIterator
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetIterator_System_Xml_XPath_XPathExpression_
+  - name: (
+  - uid: System.Xml.XPath.XPathExpression
+    name: XPathExpression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathexpression
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression)
+    name: GetIterator
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetIterator_System_Xml_XPath_XPathExpression_
+  - name: (
+  - uid: System.Xml.XPath.XPathExpression
+    name: XPathExpression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathexpression
+  - name: )
+- uid: System.Xml.XPath.XPathNodeIterator
+  commentId: T:System.Xml.XPath.XPathNodeIterator
+  parent: System.Xml.XPath
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathnodeiterator
+  name: XPathNodeIterator
+  nameWithType: XPathNodeIterator
+  fullName: System.Xml.XPath.XPathNodeIterator
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  isExternal: true
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetIterator_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  name: GetIterator(XPathExpression, DictionaryEntry[])
+  nameWithType: IXPathQueryManager.GetIterator(XPathExpression, DictionaryEntry[])
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry[])
+  nameWithType.vb: IXPathQueryManager.GetIterator(XPathExpression, DictionaryEntry())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry())
+  name.vb: GetIterator(XPathExpression, DictionaryEntry())
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+    name: GetIterator
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetIterator_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  - name: (
+  - uid: System.Xml.XPath.XPathExpression
+    name: XPathExpression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathexpression
+  - name: ','
+  - name: " "
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetIterator(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+    name: GetIterator
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetIterator_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  - name: (
+  - uid: System.Xml.XPath.XPathExpression
+    name: XPathExpression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathexpression
+  - name: ','
+  - name: " "
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: (
+  - name: )
+  - name: )
+- uid: System.Collections.DictionaryEntry[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  name: DictionaryEntry[]
+  nameWithType: DictionaryEntry[]
+  fullName: System.Collections.DictionaryEntry[]
+  nameWithType.vb: DictionaryEntry()
+  fullName.vb: System.Collections.DictionaryEntry()
+  name.vb: DictionaryEntry()
+  spec.csharp:
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: (
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValueFromNode*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValueFromNode
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_GetValueFromNode_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  name: GetValueFromNode
+  nameWithType: XPathQueryManager.GetValueFromNode
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValueFromNode
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  isExternal: true
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetValueFromNode_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  name: GetValueFromNode(XPathExpression, DictionaryEntry[])
+  nameWithType: IXPathQueryManager.GetValueFromNode(XPathExpression, DictionaryEntry[])
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry[])
+  nameWithType.vb: IXPathQueryManager.GetValueFromNode(XPathExpression, DictionaryEntry())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry())
+  name.vb: GetValueFromNode(XPathExpression, DictionaryEntry())
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+    name: GetValueFromNode
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetValueFromNode_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  - name: (
+  - uid: System.Xml.XPath.XPathExpression
+    name: XPathExpression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathexpression
+  - name: ','
+  - name: " "
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetValueFromNode(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+    name: GetValueFromNode
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetValueFromNode_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  - name: (
+  - uid: System.Xml.XPath.XPathExpression
+    name: XPathExpression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathexpression
+  - name: ','
+  - name: " "
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_GetValuesFromNodes_System_Xml_XPath_XPathExpression_
+  name: GetValuesFromNodes
+  nameWithType: XPathQueryManager.GetValuesFromNodes
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetValuesFromNodes
+- uid: System.Collections.Generic.List{System.String}
+  commentId: T:System.Collections.Generic.List{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<string>
+  nameWithType: List<string>
+  fullName: System.Collections.Generic.List<string>
+  nameWithType.vb: List(Of String)
+  fullName.vb: System.Collections.Generic.List(Of String)
+  name.vb: List(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_GetXPathQueryManagerInContext_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  name: GetXPathQueryManagerInContext
+  nameWithType: XPathQueryManager.GetXPathQueryManagerInContext
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  isExternal: true
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetXPathQueryManagerInContext_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  name: GetXPathQueryManagerInContext(XPathExpression, DictionaryEntry[])
+  nameWithType: IXPathQueryManager.GetXPathQueryManagerInContext(XPathExpression, DictionaryEntry[])
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry[])
+  nameWithType.vb: IXPathQueryManager.GetXPathQueryManagerInContext(XPathExpression, DictionaryEntry())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression, System.Collections.DictionaryEntry())
+  name.vb: GetXPathQueryManagerInContext(XPathExpression, DictionaryEntry())
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+    name: GetXPathQueryManagerInContext
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetXPathQueryManagerInContext_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  - name: (
+  - uid: System.Xml.XPath.XPathExpression
+    name: XPathExpression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathexpression
+  - name: ','
+  - name: " "
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.GetXPathQueryManagerInContext(System.Xml.XPath.XPathExpression,System.Collections.DictionaryEntry[])
+    name: GetXPathQueryManagerInContext
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_GetXPathQueryManagerInContext_System_Xml_XPath_XPathExpression_System_Collections_DictionaryEntry___
+  - name: (
+  - uid: System.Xml.XPath.XPathExpression
+    name: XPathExpression
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathexpression
+  - name: ','
+  - name: " "
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ResetNamespaces*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ResetNamespaces
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_ResetNamespaces
+  name: ResetNamespaces
+  nameWithType: XPathQueryManager.ResetNamespaces
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ResetNamespaces
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.ResetNamespaces
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.ResetNamespaces
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_ResetNamespaces
+  name: ResetNamespaces()
+  nameWithType: IXPathQueryManager.ResetNamespaces()
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.ResetNamespaces()
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.ResetNamespaces
+    name: ResetNamespaces
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_ResetNamespaces
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.ResetNamespaces
+    name: ResetNamespaces
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_ResetNamespaces
+  - name: (
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_SetDocumentToParse_System_IO_Stream_
+  name: SetDocumentToParse
+  nameWithType: XPathQueryManager.SetDocumentToParse
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(System.IO.Stream)
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(System.IO.Stream)
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  isExternal: true
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParse_System_IO_Stream_
+  name: SetDocumentToParse(Stream)
+  nameWithType: IXPathQueryManager.SetDocumentToParse(Stream)
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(System.IO.Stream)
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(System.IO.Stream)
+    name: SetDocumentToParse
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParse_System_IO_Stream_
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(System.IO.Stream)
+    name: SetDocumentToParse
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParse_System_IO_Stream_
+  - name: (
+  - uid: System.IO.Stream
+    name: Stream
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_SetDocumentToParseAsync_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
+  name: SetDocumentToParseAsync
+  nameWithType: XPathQueryManager.SetDocumentToParseAsync
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  parent: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+  href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParseAsync_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
+  name: SetDocumentToParseAsync(HttpClientUtil)
+  nameWithType: IXPathQueryManager.SetDocumentToParseAsync(HttpClientUtil)
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+    name: SetDocumentToParseAsync
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParseAsync_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
+  - name: (
+  - uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+    name: HttpClientUtil
+    href: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+    name: SetDocumentToParseAsync
+    href: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParseAsync_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
+  - name: (
+  - uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+    name: HttpClientUtil
+    href: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html
+  - name: )

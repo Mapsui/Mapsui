@@ -1,0 +1,72 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Extensions
+  commentId: N:Mapsui.Nts.Extensions
+  id: Mapsui.Nts.Extensions
+  children:
+  - Mapsui.Nts.Extensions.CoordinateExtensions
+  - Mapsui.Nts.Extensions.EnvelopeExtensions
+  - Mapsui.Nts.Extensions.GeometryExtensions
+  - Mapsui.Nts.Extensions.LineStringExtensions
+  - Mapsui.Nts.Extensions.MPointExtensions
+  - Mapsui.Nts.Extensions.MRectExtensions
+  - Mapsui.Nts.Extensions.PointExtensions
+  - Mapsui.Nts.Extensions.TupleExtensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Nts.Extensions
+  nameWithType: Mapsui.Nts.Extensions
+  fullName: Mapsui.Nts.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Nts.Extensions.CoordinateExtensions
+  commentId: T:Mapsui.Nts.Extensions.CoordinateExtensions
+  href: Mapsui.Nts.Extensions.CoordinateExtensions.html
+  name: CoordinateExtensions
+  nameWithType: CoordinateExtensions
+  fullName: Mapsui.Nts.Extensions.CoordinateExtensions
+- uid: Mapsui.Nts.Extensions.EnvelopeExtensions
+  commentId: T:Mapsui.Nts.Extensions.EnvelopeExtensions
+  href: Mapsui.Nts.Extensions.EnvelopeExtensions.html
+  name: EnvelopeExtensions
+  nameWithType: EnvelopeExtensions
+  fullName: Mapsui.Nts.Extensions.EnvelopeExtensions
+- uid: Mapsui.Nts.Extensions.GeometryExtensions
+  commentId: T:Mapsui.Nts.Extensions.GeometryExtensions
+  href: Mapsui.Nts.Extensions.GeometryExtensions.html
+  name: GeometryExtensions
+  nameWithType: GeometryExtensions
+  fullName: Mapsui.Nts.Extensions.GeometryExtensions
+- uid: Mapsui.Nts.Extensions.LineStringExtensions
+  commentId: T:Mapsui.Nts.Extensions.LineStringExtensions
+  href: Mapsui.Nts.Extensions.LineStringExtensions.html
+  name: LineStringExtensions
+  nameWithType: LineStringExtensions
+  fullName: Mapsui.Nts.Extensions.LineStringExtensions
+- uid: Mapsui.Nts.Extensions.MPointExtensions
+  commentId: T:Mapsui.Nts.Extensions.MPointExtensions
+  href: Mapsui.Nts.Extensions.MPointExtensions.html
+  name: MPointExtensions
+  nameWithType: MPointExtensions
+  fullName: Mapsui.Nts.Extensions.MPointExtensions
+- uid: Mapsui.Nts.Extensions.MRectExtensions
+  commentId: T:Mapsui.Nts.Extensions.MRectExtensions
+  href: Mapsui.Nts.Extensions.MRectExtensions.html
+  name: MRectExtensions
+  nameWithType: MRectExtensions
+  fullName: Mapsui.Nts.Extensions.MRectExtensions
+- uid: Mapsui.Nts.Extensions.PointExtensions
+  commentId: T:Mapsui.Nts.Extensions.PointExtensions
+  href: Mapsui.Nts.Extensions.PointExtensions.html
+  name: PointExtensions
+  nameWithType: PointExtensions
+  fullName: Mapsui.Nts.Extensions.PointExtensions
+- uid: Mapsui.Nts.Extensions.TupleExtensions
+  commentId: T:Mapsui.Nts.Extensions.TupleExtensions
+  href: Mapsui.Nts.Extensions.TupleExtensions.html
+  name: TupleExtensions
+  nameWithType: TupleExtensions
+  fullName: Mapsui.Nts.Extensions.TupleExtensions

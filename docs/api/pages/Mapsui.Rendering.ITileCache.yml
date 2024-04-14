@@ -1,0 +1,295 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.ITileCache
+  commentId: T:Mapsui.Rendering.ITileCache
+  id: ITileCache
+  parent: Mapsui.Rendering
+  children:
+  - Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+  - Mapsui.Rendering.ITileCache.UpdateCache(System.Int64)
+  langs:
+  - csharp
+  - vb
+  name: ITileCache
+  nameWithType: ITileCache
+  fullName: Mapsui.Rendering.ITileCache
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Rendering/ITileCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ITileCache
+    path: ../../Mapsui/Rendering/ITileCache.cs
+    startLine: 4
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  syntax:
+    content: 'public interface ITileCache : IDisposable'
+    content.vb: Public Interface ITileCache Inherits IDisposable
+  inheritedMembers:
+  - System.IDisposable.Dispose
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+  commentId: M:Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster,System.Int64)
+  id: GetOrCreate(Mapsui.MRaster,System.Int64)
+  parent: Mapsui.Rendering.ITileCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreate(MRaster, long)
+  nameWithType: ITileCache.GetOrCreate(MRaster, long)
+  fullName: Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster, long)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Rendering/ITileCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreate
+    path: ../../Mapsui/Rendering/ITileCache.cs
+    startLine: 6
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  syntax:
+    content: IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
+    parameters:
+    - id: raster
+      type: Mapsui.MRaster
+    - id: currentIteration
+      type: System.Int64
+    return:
+      type: Mapsui.Rendering.IBitmapInfo
+    content.vb: Function GetOrCreate(raster As MRaster, currentIteration As Long) As IBitmapInfo
+  overload: Mapsui.Rendering.ITileCache.GetOrCreate*
+  nameWithType.vb: ITileCache.GetOrCreate(MRaster, Long)
+  fullName.vb: Mapsui.Rendering.ITileCache.GetOrCreate(Mapsui.MRaster, Long)
+  name.vb: GetOrCreate(MRaster, Long)
+- uid: Mapsui.Rendering.ITileCache.UpdateCache(System.Int64)
+  commentId: M:Mapsui.Rendering.ITileCache.UpdateCache(System.Int64)
+  id: UpdateCache(System.Int64)
+  parent: Mapsui.Rendering.ITileCache
+  langs:
+  - csharp
+  - vb
+  name: UpdateCache(long)
+  nameWithType: ITileCache.UpdateCache(long)
+  fullName: Mapsui.Rendering.ITileCache.UpdateCache(long)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Rendering/ITileCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateCache
+    path: ../../Mapsui/Rendering/ITileCache.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  syntax:
+    content: void UpdateCache(long iteration)
+    parameters:
+    - id: iteration
+      type: System.Int64
+    content.vb: Sub UpdateCache(iteration As Long)
+  overload: Mapsui.Rendering.ITileCache.UpdateCache*
+  nameWithType.vb: ITileCache.UpdateCache(Long)
+  fullName.vb: Mapsui.Rendering.ITileCache.UpdateCache(Long)
+  name.vb: UpdateCache(Long)
+references:
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.ITileCache.GetOrCreate*
+  commentId: Overload:Mapsui.Rendering.ITileCache.GetOrCreate
+  href: Mapsui.Rendering.ITileCache.html#Mapsui_Rendering_ITileCache_GetOrCreate_Mapsui_MRaster_System_Int64_
+  name: GetOrCreate
+  nameWithType: ITileCache.GetOrCreate
+  fullName: Mapsui.Rendering.ITileCache.GetOrCreate
+- uid: Mapsui.MRaster
+  commentId: T:Mapsui.MRaster
+  parent: Mapsui
+  href: Mapsui.MRaster.html
+  name: MRaster
+  nameWithType: MRaster
+  fullName: Mapsui.MRaster
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Mapsui.Rendering.IBitmapInfo
+  commentId: T:Mapsui.Rendering.IBitmapInfo
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IBitmapInfo.html
+  name: IBitmapInfo
+  nameWithType: IBitmapInfo
+  fullName: Mapsui.Rendering.IBitmapInfo
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Rendering.ITileCache.UpdateCache*
+  commentId: Overload:Mapsui.Rendering.ITileCache.UpdateCache
+  href: Mapsui.Rendering.ITileCache.html#Mapsui_Rendering_ITileCache_UpdateCache_System_Int64_
+  name: UpdateCache
+  nameWithType: ITileCache.UpdateCache
+  fullName: Mapsui.Rendering.ITileCache.UpdateCache

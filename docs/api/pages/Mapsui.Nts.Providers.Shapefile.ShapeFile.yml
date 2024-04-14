@@ -1,0 +1,1762 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  commentId: T:Mapsui.Nts.Providers.Shapefile.ShapeFile
+  id: ShapeFile
+  parent: Mapsui.Nts.Providers.Shapefile
+  children:
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.#ctor(System.String,System.Boolean,System.Boolean,Mapsui.Projections.IProjectionCrs)
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.CRS
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.Dispose
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.Encoding
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.Filename
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterDelegate
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.Finalize
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.GetExtent
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature(System.UInt32)
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeatureCount
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView(Mapsui.MRect)
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometry(System.UInt32)
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView(Mapsui.MRect)
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.Id
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.RebuildSpatialIndex
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: ShapeFile
+  nameWithType: ShapeFile
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShapeFile
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 131
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Shapefile data provider
+  remarks: >-
+    <p>The ShapeFile provider is used for accessing ESRI ShapeFiles. The ShapeFile should at least contain the
+
+    [filename].shp, [filename].idx, and if feature-data is to be used, also [filename].dbf file.</p>
+
+    <p>The first time the ShapeFile is accessed, Mapsui will automatically create a spatial index
+
+    of the shp-file, and save it as [filename].shp.sidx. If you change or update the contents of the .shp file,
+
+    delete the .sidx file to force Mapsui to rebuilt it. In web applications, the index will automatically
+
+    be cached to memory for faster access, so to reload the index, you will need to restart the web application
+
+    as well.</p>
+
+    <p>
+
+    M and Z values in a shapefile is ignored by Mapsui.
+
+    </p>
+  example: []
+  syntax:
+    content: 'public class ShapeFile : IDisposable, IProviderExtended, IProvider'
+    content.vb: Public Class ShapeFile Implements IDisposable, IProviderExtended, IProvider
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  - Mapsui.Providers.IProviderExtended
+  - Mapsui.Providers.IProvider
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.#ctor(System.String,System.Boolean,System.Boolean,Mapsui.Projections.IProjectionCrs)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.#ctor(System.String,System.Boolean,System.Boolean,Mapsui.Projections.IProjectionCrs)
+  id: '#ctor(System.String,System.Boolean,System.Boolean,Mapsui.Projections.IProjectionCrs)'
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: ShapeFile(string, bool, bool, IProjectionCrs?)
+  nameWithType: ShapeFile.ShapeFile(string, bool, bool, IProjectionCrs?)
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeFile(string, bool, bool, Mapsui.Projections.IProjectionCrs?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 194
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Initializes a ShapeFile DataProvider.
+  remarks: >-
+    <p>If FileBasedIndex is true, the spatial index will be read from a local copy. If it doesn't exist,
+
+    it will be generated and saved to [filename] + '.sidx'.</p>
+
+    <p>Using a file-based index is especially recommended for ASP.NET applications which will speed up
+
+    start-up time when the cache has been emptied.
+
+    </p>
+  example: []
+  syntax:
+    content: public ShapeFile(string filename, bool fileBasedIndex = false, bool readPrjFile = false, IProjectionCrs? projectionCrs = null)
+    parameters:
+    - id: filename
+      type: System.String
+      description: Path to shape file
+    - id: fileBasedIndex
+      type: System.Boolean
+      description: Use file-based spatial index
+    - id: readPrjFile
+      type: System.Boolean
+      description: Read the proj File and set the correct CRS
+    - id: projectionCrs
+      type: Mapsui.Projections.IProjectionCrs
+      description: Projection Crs
+    content.vb: Public Sub New(filename As String, fileBasedIndex As Boolean = False, readPrjFile As Boolean = False, projectionCrs As IProjectionCrs = Nothing)
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.#ctor*
+  nameWithType.vb: ShapeFile.New(String, Boolean, Boolean, IProjectionCrs)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.ShapeFile.New(String, Boolean, Boolean, Mapsui.Projections.IProjectionCrs)
+  name.vb: New(String, Boolean, Boolean, IProjectionCrs)
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Id
+  commentId: P:Mapsui.Nts.Providers.Shapefile.ShapeFile.Id
+  id: Id
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: ShapeFile.Id
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.Id
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Id
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 213
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  example: []
+  syntax:
+    content: public int Id { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Id As Integer
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.Id*
+  implements:
+  - Mapsui.Providers.IProviderExtended.Id
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeType
+  commentId: P:Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeType
+  id: ShapeType
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: ShapeType
+  nameWithType: ShapeFile.ShapeType
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeType
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShapeType
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 224
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Gets the <xref href="Mapsui.Nts.Providers.Shapefile.ShapeType?text=shape+geometry+type" data-throw-if-not-resolved="false"></xref> in this shapefile.
+  remarks: >-
+    The property isn't set until the first time the data source has been opened,
+
+    and will throw an exception if this property has been called since initialization. 
+
+    <p>All the non-Null shapes in a shapefile are required to be of the same shape
+
+    type.</p>
+  example: []
+  syntax:
+    content: public ShapeType ShapeType { get; }
+    parameters: []
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+    content.vb: Public ReadOnly Property ShapeType As ShapeType
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeType*
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Filename
+  commentId: P:Mapsui.Nts.Providers.Shapefile.ShapeFile.Filename
+  id: Filename
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: Filename
+  nameWithType: ShapeFile.Filename
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.Filename
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Filename
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 230
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Gets or sets the filename of the shapefile
+  remarks: If the filename changes, indexes will be rebuilt
+  example: []
+  syntax:
+    content: public string Filename { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Filename As String
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.Filename*
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Encoding
+  commentId: P:Mapsui.Nts.Providers.Shapefile.ShapeFile.Encoding
+  id: Encoding
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: Encoding
+  nameWithType: ShapeFile.Encoding
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.Encoding
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Encoding
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 256
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Gets or sets the encoding used for parsing strings from the DBase DBF file.
+  remarks: The DBase default encoding is UTF7"/&gt;.
+  example: []
+  syntax:
+    content: public Encoding? Encoding { get; set; }
+    parameters: []
+    return:
+      type: System.Text.Encoding
+    content.vb: Public Property Encoding As Encoding
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.Encoding*
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterDelegate
+  commentId: P:Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterDelegate
+  id: FilterDelegate
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: FilterDelegate
+  nameWithType: ShapeFile.FilterDelegate
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterDelegate
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FilterDelegate
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 269
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Filter Delegate Method for limiting the data source
+  example: []
+  syntax:
+    content: public ShapeFile.FilterMethod? FilterDelegate { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+    content.vb: Public Property FilterDelegate As ShapeFile.FilterMethod
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterDelegate*
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Dispose
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.Dispose
+  id: Dispose
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: ShapeFile.Dispose()
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 278
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Disposes the object
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Finalize
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.Finalize
+  id: Finalize
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: ~ShapeFile()
+  nameWithType: ShapeFile.~ShapeFile()
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.~ShapeFile()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Finalize
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 302
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Finalizes the object
+  example: []
+  syntax:
+    content: protected ~ShapeFile()
+    content.vb: 'Protected '
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.Finalize*
+  nameWithType.vb: ''
+  fullName.vb: ''
+  name.vb: ''
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView(Mapsui.MRect)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView(Mapsui.MRect)
+  id: GetGeometriesInView(Mapsui.MRect)
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: GetGeometriesInView(MRect)
+  nameWithType: ShapeFile.GetGeometriesInView(MRect)
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView(Mapsui.MRect)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetGeometriesInView
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 362
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Returns geometries whose bounding box intersects 'bbox'
+  remarks: >-
+    <p>Please note that this method doesn't guarantee that the geometries returned actually intersect 'bbox', but only
+
+    that their BoundingBox intersects 'bbox'.</p>
+
+    <p>This method is much faster than the QueryFeatures method, because intersection tests
+
+    are performed on objects simplified by their BoundingBox, and using the Spatial Index.</p>
+  example: []
+  syntax:
+    content: public Collection<Geometry> GetGeometriesInView(MRect bbox)
+    parameters:
+    - id: bbox
+      type: Mapsui.MRect
+      description: ''
+    return:
+      type: System.Collections.ObjectModel.Collection{NetTopologySuite.Geometries.Geometry}
+      description: ''
+    content.vb: Public Function GetGeometriesInView(bbox As MRect) As Collection(Of Geometry)
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView*
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView(Mapsui.MRect)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView(Mapsui.MRect)
+  id: GetObjectIDsInView(Mapsui.MRect)
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: GetObjectIDsInView(MRect)
+  nameWithType: ShapeFile.GetObjectIDsInView(MRect)
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView(Mapsui.MRect)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetObjectIDsInView
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 398
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Returns geometry Object IDs whose bounding box intersects 'bbox'
+  example: []
+  syntax:
+    content: public Collection<uint> GetObjectIDsInView(MRect bbox)
+    parameters:
+    - id: bbox
+      type: Mapsui.MRect
+      description: ''
+    return:
+      type: System.Collections.ObjectModel.Collection{System.UInt32}
+      description: ''
+    content.vb: Public Function GetObjectIDsInView(bbox As MRect) As Collection(Of UInteger)
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView*
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometry(System.UInt32)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometry(System.UInt32)
+  id: GetGeometry(System.UInt32)
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: GetGeometry(uint)
+  nameWithType: ShapeFile.GetGeometry(uint)
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometry(uint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetGeometry
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 431
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Returns the geometry corresponding to the Object ID
+  example: []
+  syntax:
+    content: public Geometry? GetGeometry(uint oid)
+    parameters:
+    - id: oid
+      type: System.UInt32
+      description: Object ID
+    return:
+      type: NetTopologySuite.Geometries.Geometry
+      description: geometry
+    content.vb: Public Function GetGeometry(oid As UInteger) As Geometry
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometry*
+  nameWithType.vb: ShapeFile.GetGeometry(UInteger)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometry(UInteger)
+  name.vb: GetGeometry(UInteger)
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeatureCount
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeatureCount
+  id: GetFeatureCount
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: GetFeatureCount()
+  nameWithType: ShapeFile.GetFeatureCount()
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeatureCount()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeatureCount
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 462
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Returns the total number of features in the data source (without any filter applied)
+  example: []
+  syntax:
+    content: public int GetFeatureCount()
+    return:
+      type: System.Int32
+      description: ''
+    content.vb: Public Function GetFeatureCount() As Integer
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeatureCount*
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetExtent
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetExtent
+  id: GetExtent
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: GetExtent()
+  nameWithType: ShapeFile.GetExtent()
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetExtent()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetExtent
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 471
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Returns the extent of the data source
+  example: []
+  syntax:
+    content: public MRect? GetExtent()
+    return:
+      type: Mapsui.MRect
+      description: ''
+    content.vb: Public Function GetExtent() As MRect
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetExtent*
+  implements:
+  - Mapsui.Providers.IProvider.GetExtent
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.CRS
+  commentId: P:Mapsui.Nts.Providers.Shapefile.ShapeFile.CRS
+  id: CRS
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: CRS
+  nameWithType: ShapeFile.CRS
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.CRS
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CRS
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 493
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Gets or sets the spatial reference ID (CRS)
+  example: []
+  syntax:
+    content: public string? CRS { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CRS As String
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.CRS*
+  implements:
+  - Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.RebuildSpatialIndex
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.RebuildSpatialIndex
+  id: RebuildSpatialIndex
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: RebuildSpatialIndex()
+  nameWithType: ShapeFile.RebuildSpatialIndex()
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.RebuildSpatialIndex()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RebuildSpatialIndex
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 677
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    Forces a rebuild of the spatial index. If the instance of the ShapeFile provider
+
+    uses a file-based index the file is rewritten to disk.
+  example: []
+  syntax:
+    content: public void RebuildSpatialIndex()
+    content.vb: Public Sub RebuildSpatialIndex()
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.RebuildSpatialIndex*
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature(System.UInt32)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature(System.UInt32)
+  id: GetFeature(System.UInt32)
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: GetFeature(uint)
+  nameWithType: ShapeFile.GetFeature(uint)
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature(uint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeature
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 869
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Gets a data row from the data source at the specified index belonging to the specified data table
+  example: []
+  syntax:
+    content: public GeometryFeature? GetFeature(uint rowId)
+    parameters:
+    - id: rowId
+      type: System.UInt32
+      description: ''
+    return:
+      type: Mapsui.Nts.GeometryFeature
+      description: ''
+    content.vb: Public Function GetFeature(rowId As UInteger) As GeometryFeature
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature*
+  nameWithType.vb: ShapeFile.GetFeature(UInteger)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature(UInteger)
+  name.vb: GetFeature(UInteger)
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  id: GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  langs:
+  - csharp
+  - vb
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: ShapeFile.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeaturesAsync
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 903
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  example: []
+  syntax:
+    content: public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    parameters:
+    - id: fetchInfo
+      type: Mapsui.Layers.FetchInfo
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+    content.vb: Public Function GetFeaturesAsync(fetchInfo As FetchInfo) As Task(Of IEnumerable(Of IFeature))
+  overload: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeaturesAsync*
+  implements:
+  - Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+references:
+- uid: Mapsui.Nts.Providers.Shapefile
+  commentId: N:Mapsui.Nts.Providers.Shapefile
+  href: Mapsui.html
+  name: Mapsui.Nts.Providers.Shapefile
+  nameWithType: Mapsui.Nts.Providers.Shapefile
+  fullName: Mapsui.Nts.Providers.Shapefile
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Mapsui.Providers.IProviderExtended
+  commentId: T:Mapsui.Providers.IProviderExtended
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProviderExtended.html
+  name: IProviderExtended
+  nameWithType: IProviderExtended
+  fullName: Mapsui.Providers.IProviderExtended
+- uid: Mapsui.Providers.IProvider
+  commentId: T:Mapsui.Providers.IProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProvider.html
+  name: IProvider
+  nameWithType: IProvider
+  fullName: Mapsui.Providers.IProvider
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Providers
+  commentId: N:Mapsui.Providers
+  href: Mapsui.html
+  name: Mapsui.Providers
+  nameWithType: Mapsui.Providers
+  fullName: Mapsui.Providers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.#ctor*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.#ctor
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile__ctor_System_String_System_Boolean_System_Boolean_Mapsui_Projections_IProjectionCrs_
+  name: ShapeFile
+  nameWithType: ShapeFile.ShapeFile
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeFile
+  nameWithType.vb: ShapeFile.New
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.ShapeFile.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Projections.IProjectionCrs
+  commentId: T:Mapsui.Projections.IProjectionCrs
+  parent: Mapsui.Projections
+  href: Mapsui.Projections.IProjectionCrs.html
+  name: IProjectionCrs
+  nameWithType: IProjectionCrs
+  fullName: Mapsui.Projections.IProjectionCrs
+- uid: Mapsui.Projections
+  commentId: N:Mapsui.Projections
+  href: Mapsui.html
+  name: Mapsui.Projections
+  nameWithType: Mapsui.Projections
+  fullName: Mapsui.Projections
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Id*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.Id
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_Id
+  name: Id
+  nameWithType: ShapeFile.Id
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.Id
+- uid: Mapsui.Providers.IProviderExtended.Id
+  commentId: P:Mapsui.Providers.IProviderExtended.Id
+  parent: Mapsui.Providers.IProviderExtended
+  name: Id
+  nameWithType: IProviderExtended.Id
+  fullName: Mapsui.Providers.IProviderExtended.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType
+  commentId: T:Mapsui.Nts.Providers.Shapefile.ShapeType
+  parent: Mapsui.Nts.Providers.Shapefile
+  href: Mapsui.Nts.Providers.Shapefile.ShapeType.html
+  name: ShapeType
+  nameWithType: ShapeType
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeType*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeType
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_ShapeType
+  name: ShapeType
+  nameWithType: ShapeFile.ShapeType
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Filename*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.Filename
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_Filename
+  name: Filename
+  nameWithType: ShapeFile.Filename
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.Filename
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Encoding*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.Encoding
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_Encoding
+  name: Encoding
+  nameWithType: ShapeFile.Encoding
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.Encoding
+- uid: System.Text.Encoding
+  commentId: T:System.Text.Encoding
+  parent: System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.encoding
+  name: Encoding
+  nameWithType: Encoding
+  fullName: System.Text.Encoding
+- uid: System.Text
+  commentId: N:System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Text
+  nameWithType: System.Text
+  fullName: System.Text
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterDelegate*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterDelegate
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_FilterDelegate
+  name: FilterDelegate
+  nameWithType: ShapeFile.FilterDelegate
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterDelegate
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+  commentId: T:Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+  parent: Mapsui.Nts.Providers.Shapefile
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html
+  name: ShapeFile.FilterMethod
+  nameWithType: ShapeFile.FilterMethod
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+  spec.csharp:
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile
+    name: ShapeFile
+    href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+    name: FilterMethod
+    href: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod.html
+  spec.vb:
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile
+    name: ShapeFile
+    href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+    name: FilterMethod
+    href: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod.html
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Dispose*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.Dispose
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_Dispose
+  name: Dispose
+  nameWithType: ShapeFile.Dispose
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Finalize*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.Finalize
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_Finalize
+  name: ~ShapeFile
+  nameWithType: ShapeFile.~ShapeFile
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.~ShapeFile
+  spec.csharp:
+  - name: "~"
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.Finalize*
+    name: ShapeFile
+    href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_Finalize
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_GetGeometriesInView_Mapsui_MRect_
+  name: GetGeometriesInView
+  nameWithType: ShapeFile.GetGeometriesInView
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: System.Collections.ObjectModel.Collection{NetTopologySuite.Geometries.Geometry}
+  commentId: T:System.Collections.ObjectModel.Collection{NetTopologySuite.Geometries.Geometry}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  name: Collection<Geometry>
+  nameWithType: Collection<Geometry>
+  fullName: System.Collections.ObjectModel.Collection<NetTopologySuite.Geometries.Geometry>
+  nameWithType.vb: Collection(Of Geometry)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of NetTopologySuite.Geometries.Geometry)
+  name.vb: Collection(Of Geometry)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: <
+  - uid: NetTopologySuite.Geometries.Geometry
+    name: Geometry
+    isExternal: true
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: NetTopologySuite.Geometries.Geometry
+    name: Geometry
+    isExternal: true
+  - name: )
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.ObjectModel
+    name: ObjectModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.ObjectModel
+    name: ObjectModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_GetObjectIDsInView_Mapsui_MRect_
+  name: GetObjectIDsInView
+  nameWithType: ShapeFile.GetObjectIDsInView
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView
+- uid: System.Collections.ObjectModel.Collection{System.UInt32}
+  commentId: T:System.Collections.ObjectModel.Collection{System.UInt32}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  name: Collection<uint>
+  nameWithType: Collection<uint>
+  fullName: System.Collections.ObjectModel.Collection<uint>
+  nameWithType.vb: Collection(Of UInteger)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of UInteger)
+  name.vb: Collection(Of UInteger)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: <
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: )
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometry*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometry
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_GetGeometry_System_UInt32_
+  name: GetGeometry
+  nameWithType: ShapeFile.GetGeometry
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometry
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: NetTopologySuite.Geometries.Geometry
+  commentId: T:NetTopologySuite.Geometries.Geometry
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: Geometry
+  nameWithType: Geometry
+  fullName: NetTopologySuite.Geometries.Geometry
+- uid: NetTopologySuite.Geometries
+  commentId: N:NetTopologySuite.Geometries
+  isExternal: true
+  name: NetTopologySuite.Geometries
+  nameWithType: NetTopologySuite.Geometries
+  fullName: NetTopologySuite.Geometries
+  spec.csharp:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+  spec.vb:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeatureCount*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeatureCount
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_GetFeatureCount
+  name: GetFeatureCount
+  nameWithType: ShapeFile.GetFeatureCount
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeatureCount
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetExtent*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetExtent
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_GetExtent
+  name: GetExtent
+  nameWithType: ShapeFile.GetExtent
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetExtent
+- uid: Mapsui.Providers.IProvider.GetExtent
+  commentId: M:Mapsui.Providers.IProvider.GetExtent
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  name: GetExtent()
+  nameWithType: IProvider.GetExtent()
+  fullName: Mapsui.Providers.IProvider.GetExtent()
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.CRS*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.CRS
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_CRS
+  name: CRS
+  nameWithType: ShapeFile.CRS
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.CRS
+- uid: Mapsui.Providers.IProvider.CRS
+  commentId: P:Mapsui.Providers.IProvider.CRS
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_CRS
+  name: CRS
+  nameWithType: IProvider.CRS
+  fullName: Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.RebuildSpatialIndex*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.RebuildSpatialIndex
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_RebuildSpatialIndex
+  name: RebuildSpatialIndex
+  nameWithType: ShapeFile.RebuildSpatialIndex
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.RebuildSpatialIndex
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_GetFeature_System_UInt32_
+  name: GetFeature
+  nameWithType: ShapeFile.GetFeature
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature
+- uid: Mapsui.Nts.GeometryFeature
+  commentId: T:Mapsui.Nts.GeometryFeature
+  parent: Mapsui.Nts
+  href: Mapsui.Nts.GeometryFeature.html
+  name: GeometryFeature
+  nameWithType: GeometryFeature
+  fullName: Mapsui.Nts.GeometryFeature
+- uid: Mapsui.Nts
+  commentId: N:Mapsui.Nts
+  href: Mapsui.html
+  name: Mapsui.Nts
+  nameWithType: Mapsui.Nts
+  fullName: Mapsui.Nts
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeaturesAsync*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeaturesAsync
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html#Mapsui_Nts_Providers_Shapefile_ShapeFile_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync
+  nameWithType: ShapeFile.GetFeaturesAsync
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeaturesAsync
+- uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: IProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IEnumerable<IFeature>>
+  nameWithType: Task<IEnumerable<IFeature>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Mapsui.IFeature>>
+  nameWithType.vb: Task(Of IEnumerable(Of IFeature))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))
+  name.vb: Task(Of IEnumerable(Of IFeature))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: )
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

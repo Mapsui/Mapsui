@@ -1,0 +1,180 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui
+  commentId: N:Mapsui.UI.Maui
+  id: Mapsui.UI.Maui
+  children:
+  - Mapsui.UI.Maui.Callout
+  - Mapsui.UI.Maui.CalloutClickedEventArgs
+  - Mapsui.UI.Maui.Circle
+  - Mapsui.UI.Maui.Distance
+  - Mapsui.UI.Maui.DrawableClickedEventArgs
+  - Mapsui.UI.Maui.KnownColor
+  - Mapsui.UI.Maui.MapClickedEventArgs
+  - Mapsui.UI.Maui.MapControl
+  - Mapsui.UI.Maui.MapLongClickedEventArgs
+  - Mapsui.UI.Maui.MapSpan
+  - Mapsui.UI.Maui.MapView
+  - Mapsui.UI.Maui.Pin
+  - Mapsui.UI.Maui.PinClickedEventArgs
+  - Mapsui.UI.Maui.PinType
+  - Mapsui.UI.Maui.Polygon
+  - Mapsui.UI.Maui.Polyline
+  - Mapsui.UI.Maui.Position
+  - Mapsui.UI.Maui.SelectedPinChangedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Maui
+  nameWithType: Mapsui.UI.Maui
+  fullName: Mapsui.UI.Maui
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Maui
+references:
+- uid: Mapsui.UI.Maui.MapControl
+  commentId: T:Mapsui.UI.Maui.MapControl
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.MapControl.html
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.Maui.MapControl
+- uid: Mapsui.UI.Maui.KnownColor
+  commentId: T:Mapsui.UI.Maui.KnownColor
+  href: Mapsui.UI.Maui.KnownColor.html
+  name: KnownColor
+  nameWithType: KnownColor
+  fullName: Mapsui.UI.Maui.KnownColor
+- uid: Mapsui.UI.Maui.CalloutClickedEventArgs
+  commentId: T:Mapsui.UI.Maui.CalloutClickedEventArgs
+  href: Mapsui.UI.Maui.CalloutClickedEventArgs.html
+  name: CalloutClickedEventArgs
+  nameWithType: CalloutClickedEventArgs
+  fullName: Mapsui.UI.Maui.CalloutClickedEventArgs
+- uid: Mapsui.UI.Maui.DrawableClickedEventArgs
+  commentId: T:Mapsui.UI.Maui.DrawableClickedEventArgs
+  href: Mapsui.UI.Maui.DrawableClickedEventArgs.html
+  name: DrawableClickedEventArgs
+  nameWithType: DrawableClickedEventArgs
+  fullName: Mapsui.UI.Maui.DrawableClickedEventArgs
+- uid: Mapsui.UI.Maui.MapClickedEventArgs
+  commentId: T:Mapsui.UI.Maui.MapClickedEventArgs
+  href: Mapsui.UI.Maui.MapClickedEventArgs.html
+  name: MapClickedEventArgs
+  nameWithType: MapClickedEventArgs
+  fullName: Mapsui.UI.Maui.MapClickedEventArgs
+- uid: Mapsui.UI.Maui.MapLongClickedEventArgs
+  commentId: T:Mapsui.UI.Maui.MapLongClickedEventArgs
+  href: Mapsui.UI.Maui.MapLongClickedEventArgs.html
+  name: MapLongClickedEventArgs
+  nameWithType: MapLongClickedEventArgs
+  fullName: Mapsui.UI.Maui.MapLongClickedEventArgs
+- uid: Mapsui.UI.Maui.PinClickedEventArgs
+  commentId: T:Mapsui.UI.Maui.PinClickedEventArgs
+  href: Mapsui.UI.Maui.PinClickedEventArgs.html
+  name: PinClickedEventArgs
+  nameWithType: PinClickedEventArgs
+  fullName: Mapsui.UI.Maui.PinClickedEventArgs
+- uid: Mapsui.UI.Maui.SelectedPinChangedEventArgs
+  commentId: T:Mapsui.UI.Maui.SelectedPinChangedEventArgs
+  href: Mapsui.UI.Maui.SelectedPinChangedEventArgs.html
+  name: SelectedPinChangedEventArgs
+  nameWithType: SelectedPinChangedEventArgs
+  fullName: Mapsui.UI.Maui.SelectedPinChangedEventArgs
+- uid: Mapsui.UI.Maui.MapView
+  commentId: T:Mapsui.UI.Maui.MapView
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.MapView.html
+  name: MapView
+  nameWithType: MapView
+  fullName: Mapsui.UI.Maui.MapView
+- uid: Mapsui.UI.Maui.Callout
+  commentId: T:Mapsui.UI.Maui.Callout
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Callout.html
+  name: Callout
+  nameWithType: Callout
+  fullName: Mapsui.UI.Maui.Callout
+- uid: Mapsui.UI.Maui.Circle
+  commentId: T:Mapsui.UI.Maui.Circle
+  href: Mapsui.UI.Maui.Circle.html
+  name: Circle
+  nameWithType: Circle
+  fullName: Mapsui.UI.Maui.Circle
+- uid: Mapsui.UI.Maui.Distance
+  commentId: T:Mapsui.UI.Maui.Distance
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Distance.html
+  name: Distance
+  nameWithType: Distance
+  fullName: Mapsui.UI.Maui.Distance
+- uid: Mapsui.UI.Maui.MapSpan
+  commentId: T:Mapsui.UI.Maui.MapSpan
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.MapSpan.html
+  name: MapSpan
+  nameWithType: MapSpan
+  fullName: Mapsui.UI.Maui.MapSpan
+- uid: Mapsui.UI.Maui.Pin
+  commentId: T:Mapsui.UI.Maui.Pin
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Pin.html
+  name: Pin
+  nameWithType: Pin
+  fullName: Mapsui.UI.Maui.Pin
+- uid: Mapsui.UI.Maui.PinType
+  commentId: T:Mapsui.UI.Maui.PinType
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.PinType.html
+  name: PinType
+  nameWithType: PinType
+  fullName: Mapsui.UI.Maui.PinType
+- uid: Mapsui.UI.Maui.Polygon
+  commentId: T:Mapsui.UI.Maui.Polygon
+  href: Mapsui.UI.Maui.Polygon.html
+  name: Polygon
+  nameWithType: Polygon
+  fullName: Mapsui.UI.Maui.Polygon
+- uid: Mapsui.UI.Maui.Polyline
+  commentId: T:Mapsui.UI.Maui.Polyline
+  href: Mapsui.UI.Maui.Polyline.html
+  name: Polyline
+  nameWithType: Polyline
+  fullName: Mapsui.UI.Maui.Polyline
+- uid: Mapsui.UI.Maui.Position
+  commentId: T:Mapsui.UI.Maui.Position
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Position.html
+  name: Position
+  nameWithType: Position
+  fullName: Mapsui.UI.Maui.Position
+- uid: Mapsui.UI.Maui
+  commentId: N:Mapsui.UI.Maui
+  href: Mapsui.html
+  name: Mapsui.UI.Maui
+  nameWithType: Mapsui.UI.Maui
+  fullName: Mapsui.UI.Maui
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html

@@ -1,0 +1,1227 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider
+  commentId: T:Mapsui.Extensions.Provider.GeoTiffProvider
+  id: GeoTiffProvider
+  parent: Mapsui.Extensions.Provider
+  children:
+  - Mapsui.Extensions.Provider.GeoTiffProvider.#ctor(System.String,System.Collections.Generic.List{Mapsui.Styles.Color})
+  - Mapsui.Extensions.Provider.GeoTiffProvider.CRS
+  - Mapsui.Extensions.Provider.GeoTiffProvider.ConvertTiffToSKBitmap(System.IO.MemoryStream)
+  - Mapsui.Extensions.Provider.GeoTiffProvider.Dispose
+  - Mapsui.Extensions.Provider.GeoTiffProvider.GetExtent
+  - Mapsui.Extensions.Provider.GeoTiffProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  - Mapsui.Extensions.Provider.GeoTiffProvider.IsCrsSupported(System.String)
+  - Mapsui.Extensions.Provider.GeoTiffProvider.TagExtender(BitMiracle.LibTiff.Classic.Tiff)
+  langs:
+  - csharp
+  - vb
+  name: GeoTiffProvider
+  nameWithType: GeoTiffProvider
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Extensions/Provider/GeoTiffProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GeoTiffProvider
+    path: ../../Mapsui.Extensions/Provider/GeoTiffProvider.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Extensions.Provider
+  syntax:
+    content: 'public class GeoTiffProvider : IProvider, IDisposable'
+    content.vb: Public Class GeoTiffProvider Implements IProvider, IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Providers.IProvider
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.#ctor(System.String,System.Collections.Generic.List{Mapsui.Styles.Color})
+  commentId: M:Mapsui.Extensions.Provider.GeoTiffProvider.#ctor(System.String,System.Collections.Generic.List{Mapsui.Styles.Color})
+  id: '#ctor(System.String,System.Collections.Generic.List{Mapsui.Styles.Color})'
+  parent: Mapsui.Extensions.Provider.GeoTiffProvider
+  langs:
+  - csharp
+  - vb
+  name: GeoTiffProvider(string, List<Color>?)
+  nameWithType: GeoTiffProvider.GeoTiffProvider(string, List<Color>?)
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.GeoTiffProvider(string, System.Collections.Generic.List<Mapsui.Styles.Color>?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Extensions/Provider/GeoTiffProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Extensions/Provider/GeoTiffProvider.cs
+    startLine: 45
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Extensions.Provider
+  syntax:
+    content: public GeoTiffProvider(string tiffPath, List<Color>? noDataColors = null)
+    parameters:
+    - id: tiffPath
+      type: System.String
+    - id: noDataColors
+      type: System.Collections.Generic.List{Mapsui.Styles.Color}
+    content.vb: Public Sub New(tiffPath As String, noDataColors As List(Of Color) = Nothing)
+  overload: Mapsui.Extensions.Provider.GeoTiffProvider.#ctor*
+  nameWithType.vb: GeoTiffProvider.New(String, List(Of Color))
+  fullName.vb: Mapsui.Extensions.Provider.GeoTiffProvider.New(String, System.Collections.Generic.List(Of Mapsui.Styles.Color))
+  name.vb: New(String, List(Of Color))
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.TagExtender(BitMiracle.LibTiff.Classic.Tiff)
+  commentId: M:Mapsui.Extensions.Provider.GeoTiffProvider.TagExtender(BitMiracle.LibTiff.Classic.Tiff)
+  id: TagExtender(BitMiracle.LibTiff.Classic.Tiff)
+  parent: Mapsui.Extensions.Provider.GeoTiffProvider
+  langs:
+  - csharp
+  - vb
+  name: TagExtender(Tiff)
+  nameWithType: GeoTiffProvider.TagExtender(Tiff)
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.TagExtender(BitMiracle.LibTiff.Classic.Tiff)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Extensions/Provider/GeoTiffProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TagExtender
+    path: ../../Mapsui.Extensions/Provider/GeoTiffProvider.cs
+    startLine: 112
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Extensions.Provider
+  syntax:
+    content: public static void TagExtender(Tiff tif)
+    parameters:
+    - id: tif
+      type: BitMiracle.LibTiff.Classic.Tiff
+    content.vb: Public Shared Sub TagExtender(tif As Tiff)
+  overload: Mapsui.Extensions.Provider.GeoTiffProvider.TagExtender*
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.ConvertTiffToSKBitmap(System.IO.MemoryStream)
+  commentId: M:Mapsui.Extensions.Provider.GeoTiffProvider.ConvertTiffToSKBitmap(System.IO.MemoryStream)
+  id: ConvertTiffToSKBitmap(System.IO.MemoryStream)
+  parent: Mapsui.Extensions.Provider.GeoTiffProvider
+  langs:
+  - csharp
+  - vb
+  name: ConvertTiffToSKBitmap(MemoryStream)
+  nameWithType: GeoTiffProvider.ConvertTiffToSKBitmap(MemoryStream)
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.ConvertTiffToSKBitmap(System.IO.MemoryStream)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Extensions/Provider/GeoTiffProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ConvertTiffToSKBitmap
+    path: ../../Mapsui.Extensions/Provider/GeoTiffProvider.cs
+    startLine: 165
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Extensions.Provider
+  syntax:
+    content: public static SKBitmap? ConvertTiffToSKBitmap(MemoryStream tifImage)
+    parameters:
+    - id: tifImage
+      type: System.IO.MemoryStream
+    return:
+      type: SkiaSharp.SKBitmap
+    content.vb: Public Shared Function ConvertTiffToSKBitmap(tifImage As MemoryStream) As SKBitmap
+  overload: Mapsui.Extensions.Provider.GeoTiffProvider.ConvertTiffToSKBitmap*
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.CRS
+  commentId: P:Mapsui.Extensions.Provider.GeoTiffProvider.CRS
+  id: CRS
+  parent: Mapsui.Extensions.Provider.GeoTiffProvider
+  langs:
+  - csharp
+  - vb
+  name: CRS
+  nameWithType: GeoTiffProvider.CRS
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.CRS
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Extensions/Provider/GeoTiffProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CRS
+    path: ../../Mapsui.Extensions/Provider/GeoTiffProvider.cs
+    startLine: 252
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Extensions.Provider
+  summary: The spatial reference ID (CRS)
+  example: []
+  syntax:
+    content: public string? CRS { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CRS As String
+  overload: Mapsui.Extensions.Provider.GeoTiffProvider.CRS*
+  implements:
+  - Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Extensions.Provider.GeoTiffProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  id: GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Extensions.Provider.GeoTiffProvider
+  langs:
+  - csharp
+  - vb
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: GeoTiffProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Extensions/Provider/GeoTiffProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeaturesAsync
+    path: ../../Mapsui.Extensions/Provider/GeoTiffProvider.cs
+    startLine: 254
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Extensions.Provider
+  example: []
+  syntax:
+    content: public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    parameters:
+    - id: fetchInfo
+      type: Mapsui.Layers.FetchInfo
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+    content.vb: Public Function GetFeaturesAsync(fetchInfo As FetchInfo) As Task(Of IEnumerable(Of IFeature))
+  overload: Mapsui.Extensions.Provider.GeoTiffProvider.GetFeaturesAsync*
+  implements:
+  - Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.GetExtent
+  commentId: M:Mapsui.Extensions.Provider.GeoTiffProvider.GetExtent
+  id: GetExtent
+  parent: Mapsui.Extensions.Provider.GeoTiffProvider
+  langs:
+  - csharp
+  - vb
+  name: GetExtent()
+  nameWithType: GeoTiffProvider.GetExtent()
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.GetExtent()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Extensions/Provider/GeoTiffProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetExtent
+    path: ../../Mapsui.Extensions/Provider/GeoTiffProvider.cs
+    startLine: 263
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Extensions.Provider
+  summary: <xref href="Mapsui.MRect" data-throw-if-not-resolved="false"></xref> of data set
+  example: []
+  syntax:
+    content: public MRect? GetExtent()
+    return:
+      type: Mapsui.MRect
+      description: BoundingBox
+    content.vb: Public Function GetExtent() As MRect
+  overload: Mapsui.Extensions.Provider.GeoTiffProvider.GetExtent*
+  implements:
+  - Mapsui.Providers.IProvider.GetExtent
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.IsCrsSupported(System.String)
+  commentId: M:Mapsui.Extensions.Provider.GeoTiffProvider.IsCrsSupported(System.String)
+  id: IsCrsSupported(System.String)
+  parent: Mapsui.Extensions.Provider.GeoTiffProvider
+  langs:
+  - csharp
+  - vb
+  name: IsCrsSupported(string?)
+  nameWithType: GeoTiffProvider.IsCrsSupported(string?)
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.IsCrsSupported(string?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Extensions/Provider/GeoTiffProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsCrsSupported
+    path: ../../Mapsui.Extensions/Provider/GeoTiffProvider.cs
+    startLine: 276
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Extensions.Provider
+  syntax:
+    content: public bool? IsCrsSupported(string? crs)
+    parameters:
+    - id: crs
+      type: System.String
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Function IsCrsSupported(crs As String) As Boolean?
+  overload: Mapsui.Extensions.Provider.GeoTiffProvider.IsCrsSupported*
+  nameWithType.vb: GeoTiffProvider.IsCrsSupported(String)
+  fullName.vb: Mapsui.Extensions.Provider.GeoTiffProvider.IsCrsSupported(String)
+  name.vb: IsCrsSupported(String)
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.Dispose
+  commentId: M:Mapsui.Extensions.Provider.GeoTiffProvider.Dispose
+  id: Dispose
+  parent: Mapsui.Extensions.Provider.GeoTiffProvider
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: GeoTiffProvider.Dispose()
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Extensions/Provider/GeoTiffProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui.Extensions/Provider/GeoTiffProvider.cs
+    startLine: 281
+  assemblies:
+  - Mapsui.Extensions
+  namespace: Mapsui.Extensions.Provider
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public virtual void Dispose()
+    content.vb: Public Overridable Sub Dispose()
+  overload: Mapsui.Extensions.Provider.GeoTiffProvider.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+references:
+- uid: Mapsui.Extensions.Provider
+  commentId: N:Mapsui.Extensions.Provider
+  href: Mapsui.html
+  name: Mapsui.Extensions.Provider
+  nameWithType: Mapsui.Extensions.Provider
+  fullName: Mapsui.Extensions.Provider
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  - name: .
+  - uid: Mapsui.Extensions.Provider
+    name: Provider
+    href: Mapsui.Extensions.Provider.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  - name: .
+  - uid: Mapsui.Extensions.Provider
+    name: Provider
+    href: Mapsui.Extensions.Provider.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Providers.IProvider
+  commentId: T:Mapsui.Providers.IProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProvider.html
+  name: IProvider
+  nameWithType: IProvider
+  fullName: Mapsui.Providers.IProvider
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Providers
+  commentId: N:Mapsui.Providers
+  href: Mapsui.html
+  name: Mapsui.Providers
+  nameWithType: Mapsui.Providers
+  fullName: Mapsui.Providers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.#ctor*
+  commentId: Overload:Mapsui.Extensions.Provider.GeoTiffProvider.#ctor
+  href: Mapsui.Extensions.Provider.GeoTiffProvider.html#Mapsui_Extensions_Provider_GeoTiffProvider__ctor_System_String_System_Collections_Generic_List_Mapsui_Styles_Color__
+  name: GeoTiffProvider
+  nameWithType: GeoTiffProvider.GeoTiffProvider
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.GeoTiffProvider
+  nameWithType.vb: GeoTiffProvider.New
+  fullName.vb: Mapsui.Extensions.Provider.GeoTiffProvider.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Collections.Generic.List{Mapsui.Styles.Color}
+  commentId: T:System.Collections.Generic.List{Mapsui.Styles.Color}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Color>
+  nameWithType: List<Color>
+  fullName: System.Collections.Generic.List<Mapsui.Styles.Color>
+  nameWithType.vb: List(Of Color)
+  fullName.vb: System.Collections.Generic.List(Of Mapsui.Styles.Color)
+  name.vb: List(Of Color)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Mapsui.Styles.Color
+    name: Color
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Styles.Color
+    name: Color
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.TagExtender*
+  commentId: Overload:Mapsui.Extensions.Provider.GeoTiffProvider.TagExtender
+  href: Mapsui.Extensions.Provider.GeoTiffProvider.html#Mapsui_Extensions_Provider_GeoTiffProvider_TagExtender_BitMiracle_LibTiff_Classic_Tiff_
+  name: TagExtender
+  nameWithType: GeoTiffProvider.TagExtender
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.TagExtender
+- uid: BitMiracle.LibTiff.Classic.Tiff
+  commentId: T:BitMiracle.LibTiff.Classic.Tiff
+  parent: BitMiracle.LibTiff.Classic
+  isExternal: true
+  name: Tiff
+  nameWithType: Tiff
+  fullName: BitMiracle.LibTiff.Classic.Tiff
+- uid: BitMiracle.LibTiff.Classic
+  commentId: N:BitMiracle.LibTiff.Classic
+  isExternal: true
+  name: BitMiracle.LibTiff.Classic
+  nameWithType: BitMiracle.LibTiff.Classic
+  fullName: BitMiracle.LibTiff.Classic
+  spec.csharp:
+  - uid: BitMiracle
+    name: BitMiracle
+    isExternal: true
+  - name: .
+  - uid: BitMiracle.LibTiff
+    name: LibTiff
+    isExternal: true
+  - name: .
+  - uid: BitMiracle.LibTiff.Classic
+    name: Classic
+    isExternal: true
+  spec.vb:
+  - uid: BitMiracle
+    name: BitMiracle
+    isExternal: true
+  - name: .
+  - uid: BitMiracle.LibTiff
+    name: LibTiff
+    isExternal: true
+  - name: .
+  - uid: BitMiracle.LibTiff.Classic
+    name: Classic
+    isExternal: true
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.ConvertTiffToSKBitmap*
+  commentId: Overload:Mapsui.Extensions.Provider.GeoTiffProvider.ConvertTiffToSKBitmap
+  href: Mapsui.Extensions.Provider.GeoTiffProvider.html#Mapsui_Extensions_Provider_GeoTiffProvider_ConvertTiffToSKBitmap_System_IO_MemoryStream_
+  name: ConvertTiffToSKBitmap
+  nameWithType: GeoTiffProvider.ConvertTiffToSKBitmap
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.ConvertTiffToSKBitmap
+- uid: System.IO.MemoryStream
+  commentId: T:System.IO.MemoryStream
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.memorystream
+  name: MemoryStream
+  nameWithType: MemoryStream
+  fullName: System.IO.MemoryStream
+- uid: SkiaSharp.SKBitmap
+  commentId: T:SkiaSharp.SKBitmap
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skbitmap
+  name: SKBitmap
+  nameWithType: SKBitmap
+  fullName: SkiaSharp.SKBitmap
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+- uid: SkiaSharp
+  commentId: N:SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp
+  name: SkiaSharp
+  nameWithType: SkiaSharp
+  fullName: SkiaSharp
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.CRS*
+  commentId: Overload:Mapsui.Extensions.Provider.GeoTiffProvider.CRS
+  href: Mapsui.Extensions.Provider.GeoTiffProvider.html#Mapsui_Extensions_Provider_GeoTiffProvider_CRS
+  name: CRS
+  nameWithType: GeoTiffProvider.CRS
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.CRS
+- uid: Mapsui.Providers.IProvider.CRS
+  commentId: P:Mapsui.Providers.IProvider.CRS
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_CRS
+  name: CRS
+  nameWithType: IProvider.CRS
+  fullName: Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.GetFeaturesAsync*
+  commentId: Overload:Mapsui.Extensions.Provider.GeoTiffProvider.GetFeaturesAsync
+  href: Mapsui.Extensions.Provider.GeoTiffProvider.html#Mapsui_Extensions_Provider_GeoTiffProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync
+  nameWithType: GeoTiffProvider.GetFeaturesAsync
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.GetFeaturesAsync
+- uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: IProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IEnumerable<IFeature>>
+  nameWithType: Task<IEnumerable<IFeature>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Mapsui.IFeature>>
+  nameWithType.vb: Task(Of IEnumerable(Of IFeature))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))
+  name.vb: Task(Of IEnumerable(Of IFeature))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: )
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.GetExtent*
+  commentId: Overload:Mapsui.Extensions.Provider.GeoTiffProvider.GetExtent
+  href: Mapsui.Extensions.Provider.GeoTiffProvider.html#Mapsui_Extensions_Provider_GeoTiffProvider_GetExtent
+  name: GetExtent
+  nameWithType: GeoTiffProvider.GetExtent
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.GetExtent
+- uid: Mapsui.Providers.IProvider.GetExtent
+  commentId: M:Mapsui.Providers.IProvider.GetExtent
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  name: GetExtent()
+  nameWithType: IProvider.GetExtent()
+  fullName: Mapsui.Providers.IProvider.GetExtent()
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.IsCrsSupported*
+  commentId: Overload:Mapsui.Extensions.Provider.GeoTiffProvider.IsCrsSupported
+  href: Mapsui.Extensions.Provider.GeoTiffProvider.html#Mapsui_Extensions_Provider_GeoTiffProvider_IsCrsSupported_System_String_
+  name: IsCrsSupported
+  nameWithType: GeoTiffProvider.IsCrsSupported
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.IsCrsSupported
+- uid: System.Nullable{System.Boolean}
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool?
+  nameWithType: bool?
+  fullName: bool?
+  nameWithType.vb: Boolean?
+  fullName.vb: Boolean?
+  name.vb: Boolean?
+  spec.csharp:
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '?'
+  spec.vb:
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider.Dispose*
+  commentId: Overload:Mapsui.Extensions.Provider.GeoTiffProvider.Dispose
+  href: Mapsui.Extensions.Provider.GeoTiffProvider.html#Mapsui_Extensions_Provider_GeoTiffProvider_Dispose
+  name: Dispose
+  nameWithType: GeoTiffProvider.Dispose
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

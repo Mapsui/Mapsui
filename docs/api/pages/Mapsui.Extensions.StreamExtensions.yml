@@ -1,0 +1,601 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Extensions.StreamExtensions
+  commentId: T:Mapsui.Extensions.StreamExtensions
+  id: StreamExtensions
+  parent: Mapsui.Extensions
+  children:
+  - Mapsui.Extensions.StreamExtensions.IsSvg(System.IO.Stream)
+  - Mapsui.Extensions.StreamExtensions.IsXml(System.IO.Stream)
+  - Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream,System.Byte[])
+  - Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream,System.String)
+  - Mapsui.Extensions.StreamExtensions.ToBytes(System.IO.Stream)
+  langs:
+  - csharp
+  - vb
+  name: StreamExtensions
+  nameWithType: StreamExtensions
+  fullName: Mapsui.Extensions.StreamExtensions
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Extensions/StreamExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StreamExtensions
+    path: ../../Mapsui/Extensions/StreamExtensions.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  syntax:
+    content: public static class StreamExtensions
+    content.vb: Public Module StreamExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Extensions.StreamExtensions.ToBytes(System.IO.Stream)
+  commentId: M:Mapsui.Extensions.StreamExtensions.ToBytes(System.IO.Stream)
+  id: ToBytes(System.IO.Stream)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.StreamExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToBytes(Stream)
+  nameWithType: StreamExtensions.ToBytes(Stream)
+  fullName: Mapsui.Extensions.StreamExtensions.ToBytes(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/StreamExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToBytes
+    path: ../../Mapsui/Extensions/StreamExtensions.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  syntax:
+    content: public static byte[] ToBytes(this Stream input)
+    parameters:
+    - id: input
+      type: System.IO.Stream
+    return:
+      type: System.Byte[]
+    content.vb: Public Shared Function ToBytes(input As Stream) As Byte()
+  overload: Mapsui.Extensions.StreamExtensions.ToBytes*
+- uid: Mapsui.Extensions.StreamExtensions.IsSvg(System.IO.Stream)
+  commentId: M:Mapsui.Extensions.StreamExtensions.IsSvg(System.IO.Stream)
+  id: IsSvg(System.IO.Stream)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.StreamExtensions
+  langs:
+  - csharp
+  - vb
+  name: IsSvg(Stream)
+  nameWithType: StreamExtensions.IsSvg(Stream)
+  fullName: Mapsui.Extensions.StreamExtensions.IsSvg(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/StreamExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsSvg
+    path: ../../Mapsui/Extensions/StreamExtensions.cs
+    startLine: 45
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: Detects if stream is svg stream
+  example: []
+  syntax:
+    content: public static bool IsSvg(this Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: stream
+    return:
+      type: System.Boolean
+      description: true if is svg stream
+    content.vb: Public Shared Function IsSvg(stream As Stream) As Boolean
+  overload: Mapsui.Extensions.StreamExtensions.IsSvg*
+- uid: Mapsui.Extensions.StreamExtensions.IsXml(System.IO.Stream)
+  commentId: M:Mapsui.Extensions.StreamExtensions.IsXml(System.IO.Stream)
+  id: IsXml(System.IO.Stream)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.StreamExtensions
+  langs:
+  - csharp
+  - vb
+  name: IsXml(Stream)
+  nameWithType: StreamExtensions.IsXml(Stream)
+  fullName: Mapsui.Extensions.StreamExtensions.IsXml(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/StreamExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsXml
+    path: ../../Mapsui/Extensions/StreamExtensions.cs
+    startLine: 77
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: Is Xml
+  example: []
+  syntax:
+    content: public static bool IsXml(this Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: stream
+    return:
+      type: System.Boolean
+      description: true if is xml
+    content.vb: Public Shared Function IsXml(stream As Stream) As Boolean
+  overload: Mapsui.Extensions.StreamExtensions.IsXml*
+- uid: Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream,System.String)
+  commentId: M:Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream,System.String)
+  id: ReadOneSearch(System.IO.Stream,System.String)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.StreamExtensions
+  langs:
+  - csharp
+  - vb
+  name: ReadOneSearch(Stream, string)
+  nameWithType: StreamExtensions.ReadOneSearch(Stream, string)
+  fullName: Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream, string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/StreamExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ReadOneSearch
+    path: ../../Mapsui/Extensions/StreamExtensions.cs
+    startLine: 88
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  syntax:
+    content: public static long ReadOneSearch(this Stream haystack, string needle)
+    parameters:
+    - id: haystack
+      type: System.IO.Stream
+    - id: needle
+      type: System.String
+    return:
+      type: System.Int64
+    content.vb: Public Shared Function ReadOneSearch(haystack As Stream, needle As String) As Long
+  overload: Mapsui.Extensions.StreamExtensions.ReadOneSearch*
+  nameWithType.vb: StreamExtensions.ReadOneSearch(Stream, String)
+  fullName.vb: Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream, String)
+  name.vb: ReadOneSearch(Stream, String)
+- uid: Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream,System.Byte[])
+  commentId: M:Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream,System.Byte[])
+  id: ReadOneSearch(System.IO.Stream,System.Byte[])
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.StreamExtensions
+  langs:
+  - csharp
+  - vb
+  name: ReadOneSearch(Stream, byte[])
+  nameWithType: StreamExtensions.ReadOneSearch(Stream, byte[])
+  fullName: Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream, byte[])
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/StreamExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ReadOneSearch
+    path: ../../Mapsui/Extensions/StreamExtensions.cs
+    startLine: 100
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: https://stackoverflow.com/questions/1471975/best-way-to-find-position-in-the-stream-where-given-byte-sequence-starts
+  example: []
+  syntax:
+    content: public static long ReadOneSearch(this Stream haystack, byte[] needle)
+    parameters:
+    - id: haystack
+      type: System.IO.Stream
+      description: stream to search
+    - id: needle
+      type: System.Byte[]
+      description: pattern to find
+    return:
+      type: System.Int64
+      description: position
+    content.vb: Public Shared Function ReadOneSearch(haystack As Stream, needle As Byte()) As Long
+  overload: Mapsui.Extensions.StreamExtensions.ReadOneSearch*
+  nameWithType.vb: StreamExtensions.ReadOneSearch(Stream, Byte())
+  fullName.vb: Mapsui.Extensions.StreamExtensions.ReadOneSearch(System.IO.Stream, Byte())
+  name.vb: ReadOneSearch(Stream, Byte())
+references:
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.StreamExtensions.ToBytes*
+  commentId: Overload:Mapsui.Extensions.StreamExtensions.ToBytes
+  href: Mapsui.Extensions.StreamExtensions.html#Mapsui_Extensions_StreamExtensions_ToBytes_System_IO_Stream_
+  name: ToBytes
+  nameWithType: StreamExtensions.ToBytes
+  fullName: Mapsui.Extensions.StreamExtensions.ToBytes
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+- uid: Mapsui.Extensions.StreamExtensions.IsSvg*
+  commentId: Overload:Mapsui.Extensions.StreamExtensions.IsSvg
+  href: Mapsui.Extensions.StreamExtensions.html#Mapsui_Extensions_StreamExtensions_IsSvg_System_IO_Stream_
+  name: IsSvg
+  nameWithType: StreamExtensions.IsSvg
+  fullName: Mapsui.Extensions.StreamExtensions.IsSvg
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Extensions.StreamExtensions.IsXml*
+  commentId: Overload:Mapsui.Extensions.StreamExtensions.IsXml
+  href: Mapsui.Extensions.StreamExtensions.html#Mapsui_Extensions_StreamExtensions_IsXml_System_IO_Stream_
+  name: IsXml
+  nameWithType: StreamExtensions.IsXml
+  fullName: Mapsui.Extensions.StreamExtensions.IsXml
+- uid: Mapsui.Extensions.StreamExtensions.ReadOneSearch*
+  commentId: Overload:Mapsui.Extensions.StreamExtensions.ReadOneSearch
+  href: Mapsui.Extensions.StreamExtensions.html#Mapsui_Extensions_StreamExtensions_ReadOneSearch_System_IO_Stream_System_String_
+  name: ReadOneSearch
+  nameWithType: StreamExtensions.ReadOneSearch
+  fullName: Mapsui.Extensions.StreamExtensions.ReadOneSearch
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long

@@ -1,0 +1,70 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Objects
+  commentId: N:Mapsui.UI.Objects
+  id: Mapsui.UI.Objects
+  children:
+  - Mapsui.UI.Objects.Drawable
+  - Mapsui.UI.Objects.IFeatureProvider
+  - Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Objects
+  nameWithType: Mapsui.UI.Objects
+  fullName: Mapsui.UI.Objects
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.UI.Objects.IFeatureProvider
+  commentId: T:Mapsui.UI.Objects.IFeatureProvider
+  parent: Mapsui.UI.Objects
+  href: Mapsui.UI.Objects.IFeatureProvider.html
+  name: IFeatureProvider
+  nameWithType: IFeatureProvider
+  fullName: Mapsui.UI.Objects.IFeatureProvider
+- uid: Mapsui.UI.Objects.Drawable
+  commentId: T:Mapsui.UI.Objects.Drawable
+  parent: Mapsui.UI.Objects
+  href: Mapsui.UI.Objects.Drawable.html
+  name: Drawable
+  nameWithType: Drawable
+  fullName: Mapsui.UI.Objects.Drawable
+- uid: Mapsui.UI.Objects.MyLocationLayer
+  commentId: T:Mapsui.UI.Objects.MyLocationLayer
+  parent: Mapsui.UI.Objects
+  href: Mapsui.UI.Objects.MyLocationLayer.html
+  name: MyLocationLayer
+  nameWithType: MyLocationLayer
+  fullName: Mapsui.UI.Objects.MyLocationLayer
+- uid: Mapsui.UI.Objects
+  commentId: N:Mapsui.UI.Objects
+  href: Mapsui.html
+  name: Mapsui.UI.Objects
+  nameWithType: Mapsui.UI.Objects
+  fullName: Mapsui.UI.Objects
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html

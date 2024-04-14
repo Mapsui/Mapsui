@@ -1,0 +1,934 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui.Distance
+  commentId: T:Mapsui.UI.Maui.Distance
+  id: Distance
+  parent: Mapsui.UI.Maui
+  children:
+  - Mapsui.UI.Maui.Distance.#ctor(System.Double)
+  - Mapsui.UI.Maui.Distance.Equals(Mapsui.UI.Maui.Distance)
+  - Mapsui.UI.Maui.Distance.Equals(System.Object)
+  - Mapsui.UI.Maui.Distance.FromKilometers(System.Double)
+  - Mapsui.UI.Maui.Distance.FromMeters(System.Double)
+  - Mapsui.UI.Maui.Distance.FromMiles(System.Double)
+  - Mapsui.UI.Maui.Distance.FromNauticalMiles(System.Double)
+  - Mapsui.UI.Maui.Distance.GetHashCode
+  - Mapsui.UI.Maui.Distance.Kilometers
+  - Mapsui.UI.Maui.Distance.Meters
+  - Mapsui.UI.Maui.Distance.Miles
+  - Mapsui.UI.Maui.Distance.NauticalMiles
+  - Mapsui.UI.Maui.Distance.op_Equality(Mapsui.UI.Maui.Distance,Mapsui.UI.Maui.Distance)
+  - Mapsui.UI.Maui.Distance.op_Inequality(Mapsui.UI.Maui.Distance,Mapsui.UI.Maui.Distance)
+  langs:
+  - csharp
+  - vb
+  name: Distance
+  nameWithType: Distance
+  fullName: Mapsui.UI.Maui.Distance
+  type: Struct
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Distance
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Distance between to positions
+  example: []
+  syntax:
+    content: public struct Distance
+    content.vb: Public Structure Distance
+  inheritedMembers:
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: Mapsui.UI.Maui.Distance.#ctor(System.Double)
+  commentId: M:Mapsui.UI.Maui.Distance.#ctor(System.Double)
+  id: '#ctor(System.Double)'
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: Distance(double)
+  nameWithType: Distance.Distance(double)
+  fullName: Mapsui.UI.Maui.Distance.Distance(double)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 28
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Constructor for <xref href="Mapsui.UI.Forms.Distance" data-throw-if-not-resolved="false"></xref> object.
+  example: []
+  syntax:
+    content: public Distance(double meters)
+    parameters:
+    - id: meters
+      type: System.Double
+      description: Meters.
+    content.vb: Public Sub New(meters As Double)
+  overload: Mapsui.UI.Maui.Distance.#ctor*
+  nameWithType.vb: Distance.New(Double)
+  fullName.vb: Mapsui.UI.Maui.Distance.New(Double)
+  name.vb: New(Double)
+- uid: Mapsui.UI.Maui.Distance.Meters
+  commentId: P:Mapsui.UI.Maui.Distance.Meters
+  id: Meters
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: Meters
+  nameWithType: Distance.Meters
+  fullName: Mapsui.UI.Maui.Distance.Meters
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Meters
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 37
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Distance in meters
+  example: []
+  syntax:
+    content: public readonly double Meters { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: Distance in meters
+    content.vb: Public ReadOnly Property Meters As Double
+  overload: Mapsui.UI.Maui.Distance.Meters*
+- uid: Mapsui.UI.Maui.Distance.Miles
+  commentId: P:Mapsui.UI.Maui.Distance.Miles
+  id: Miles
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: Miles
+  nameWithType: Distance.Miles
+  fullName: Mapsui.UI.Maui.Distance.Miles
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Miles
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 43
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Distance in miles
+  example: []
+  syntax:
+    content: public double Miles { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: Distance im miles
+    content.vb: Public ReadOnly Property Miles As Double
+  overload: Mapsui.UI.Maui.Distance.Miles*
+- uid: Mapsui.UI.Maui.Distance.Kilometers
+  commentId: P:Mapsui.UI.Maui.Distance.Kilometers
+  id: Kilometers
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: Kilometers
+  nameWithType: Distance.Kilometers
+  fullName: Mapsui.UI.Maui.Distance.Kilometers
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Kilometers
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 49
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Distance in kilometers
+  example: []
+  syntax:
+    content: public double Kilometers { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: Distance in kilometers
+    content.vb: Public ReadOnly Property Kilometers As Double
+  overload: Mapsui.UI.Maui.Distance.Kilometers*
+- uid: Mapsui.UI.Maui.Distance.NauticalMiles
+  commentId: P:Mapsui.UI.Maui.Distance.NauticalMiles
+  id: NauticalMiles
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: NauticalMiles
+  nameWithType: Distance.NauticalMiles
+  fullName: Mapsui.UI.Maui.Distance.NauticalMiles
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: NauticalMiles
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 55
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Distance in nautic miles
+  example: []
+  syntax:
+    content: public double NauticalMiles { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: Distance in nautical miles
+    content.vb: Public ReadOnly Property NauticalMiles As Double
+  overload: Mapsui.UI.Maui.Distance.NauticalMiles*
+- uid: Mapsui.UI.Maui.Distance.FromMiles(System.Double)
+  commentId: M:Mapsui.UI.Maui.Distance.FromMiles(System.Double)
+  id: FromMiles(System.Double)
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: FromMiles(double)
+  nameWithType: Distance.FromMiles(double)
+  fullName: Mapsui.UI.Maui.Distance.FromMiles(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromMiles
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 62
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Create distance object for distance in miles
+  example: []
+  syntax:
+    content: public static Distance FromMiles(double miles)
+    parameters:
+    - id: miles
+      type: System.Double
+      description: Distance in miles
+    return:
+      type: Mapsui.UI.Maui.Distance
+      description: Distance object
+    content.vb: Public Shared Function FromMiles(miles As Double) As Distance
+  overload: Mapsui.UI.Maui.Distance.FromMiles*
+  nameWithType.vb: Distance.FromMiles(Double)
+  fullName.vb: Mapsui.UI.Maui.Distance.FromMiles(Double)
+  name.vb: FromMiles(Double)
+- uid: Mapsui.UI.Maui.Distance.FromMeters(System.Double)
+  commentId: M:Mapsui.UI.Maui.Distance.FromMeters(System.Double)
+  id: FromMeters(System.Double)
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: FromMeters(double)
+  nameWithType: Distance.FromMeters(double)
+  fullName: Mapsui.UI.Maui.Distance.FromMeters(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromMeters
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 77
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Create distance object for distance in meters
+  example: []
+  syntax:
+    content: public static Distance FromMeters(double meters)
+    parameters:
+    - id: meters
+      type: System.Double
+      description: Distance in meters
+    return:
+      type: Mapsui.UI.Maui.Distance
+      description: Distance object
+    content.vb: Public Shared Function FromMeters(meters As Double) As Distance
+  overload: Mapsui.UI.Maui.Distance.FromMeters*
+  nameWithType.vb: Distance.FromMeters(Double)
+  fullName.vb: Mapsui.UI.Maui.Distance.FromMeters(Double)
+  name.vb: FromMeters(Double)
+- uid: Mapsui.UI.Maui.Distance.FromKilometers(System.Double)
+  commentId: M:Mapsui.UI.Maui.Distance.FromKilometers(System.Double)
+  id: FromKilometers(System.Double)
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: FromKilometers(double)
+  nameWithType: Distance.FromKilometers(double)
+  fullName: Mapsui.UI.Maui.Distance.FromKilometers(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromKilometers
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 92
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Create distance object for distance in kilometers
+  example: []
+  syntax:
+    content: public static Distance FromKilometers(double kilometers)
+    parameters:
+    - id: kilometers
+      type: System.Double
+      description: Distance in kilometers
+    return:
+      type: Mapsui.UI.Maui.Distance
+      description: Distance object
+    content.vb: Public Shared Function FromKilometers(kilometers As Double) As Distance
+  overload: Mapsui.UI.Maui.Distance.FromKilometers*
+  nameWithType.vb: Distance.FromKilometers(Double)
+  fullName.vb: Mapsui.UI.Maui.Distance.FromKilometers(Double)
+  name.vb: FromKilometers(Double)
+- uid: Mapsui.UI.Maui.Distance.FromNauticalMiles(System.Double)
+  commentId: M:Mapsui.UI.Maui.Distance.FromNauticalMiles(System.Double)
+  id: FromNauticalMiles(System.Double)
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: FromNauticalMiles(double)
+  nameWithType: Distance.FromNauticalMiles(double)
+  fullName: Mapsui.UI.Maui.Distance.FromNauticalMiles(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromNauticalMiles
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 107
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Create distance object for distance in nautic miles
+  example: []
+  syntax:
+    content: public static Distance FromNauticalMiles(double nauticMiles)
+    parameters:
+    - id: nauticMiles
+      type: System.Double
+      description: Distance in nautic miles
+    return:
+      type: Mapsui.UI.Maui.Distance
+      description: Distance object
+    content.vb: Public Shared Function FromNauticalMiles(nauticMiles As Double) As Distance
+  overload: Mapsui.UI.Maui.Distance.FromNauticalMiles*
+  nameWithType.vb: Distance.FromNauticalMiles(Double)
+  fullName.vb: Mapsui.UI.Maui.Distance.FromNauticalMiles(Double)
+  name.vb: FromNauticalMiles(Double)
+- uid: Mapsui.UI.Maui.Distance.Equals(Mapsui.UI.Maui.Distance)
+  commentId: M:Mapsui.UI.Maui.Distance.Equals(Mapsui.UI.Maui.Distance)
+  id: Equals(Mapsui.UI.Maui.Distance)
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: Equals(Distance)
+  nameWithType: Distance.Equals(Distance)
+  fullName: Mapsui.UI.Maui.Distance.Equals(Mapsui.UI.Maui.Distance)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 123
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Determines whether the specified <xref href="Mapsui.UI.Maui.Distance" data-throw-if-not-resolved="false"></xref> is equal to the current <xref href="Mapsui.UI.Forms.Distance" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public bool Equals(Distance other)
+    parameters:
+    - id: other
+      type: Mapsui.UI.Maui.Distance
+      description: The <xref href="Mapsui.UI.Maui.Distance" data-throw-if-not-resolved="false"></xref> to compare with the current <xref href="Mapsui.UI.Forms.Distance" data-throw-if-not-resolved="false"></xref>
+    return:
+      type: System.Boolean
+      description: >-
+        <code>True</code> if the specified <xref href="Mapsui.UI.Maui.Distance" data-throw-if-not-resolved="false"></xref> is equal to the current
+            <xref href="Mapsui.UI.Forms.Distance" data-throw-if-not-resolved="false"></xref>; otherwise, <code>false</code>.
+    content.vb: Public Function Equals(other As Distance) As Boolean
+  overload: Mapsui.UI.Maui.Distance.Equals*
+- uid: Mapsui.UI.Maui.Distance.Equals(System.Object)
+  commentId: M:Mapsui.UI.Maui.Distance.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: Distance.Equals(object?)
+  fullName: Mapsui.UI.Maui.Distance.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 128
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Indicates whether this instance and a specified object are equal.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">obj</code> and this instance are the same type and represent the same value; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: Mapsui.UI.Maui.Distance.Equals*
+  nameWithType.vb: Distance.Equals(Object)
+  fullName.vb: Mapsui.UI.Maui.Distance.Equals(Object)
+  name.vb: Equals(Object)
+- uid: Mapsui.UI.Maui.Distance.GetHashCode
+  commentId: M:Mapsui.UI.Maui.Distance.GetHashCode
+  id: GetHashCode
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: Distance.GetHashCode()
+  fullName: Mapsui.UI.Maui.Distance.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetHashCode
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 135
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Returns the hash code for this instance.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that is the hash code for this instance.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: Mapsui.UI.Maui.Distance.GetHashCode*
+- uid: Mapsui.UI.Maui.Distance.op_Equality(Mapsui.UI.Maui.Distance,Mapsui.UI.Maui.Distance)
+  commentId: M:Mapsui.UI.Maui.Distance.op_Equality(Mapsui.UI.Maui.Distance,Mapsui.UI.Maui.Distance)
+  id: op_Equality(Mapsui.UI.Maui.Distance,Mapsui.UI.Maui.Distance)
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: operator ==(Distance, Distance)
+  nameWithType: Distance.operator ==(Distance, Distance)
+  fullName: Mapsui.UI.Maui.Distance.operator ==(Mapsui.UI.Maui.Distance, Mapsui.UI.Maui.Distance)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Equality
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 140
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static bool operator ==(Distance left, Distance right)
+    parameters:
+    - id: left
+      type: Mapsui.UI.Maui.Distance
+    - id: right
+      type: Mapsui.UI.Maui.Distance
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(left As Distance, right As Distance) As Boolean
+  overload: Mapsui.UI.Maui.Distance.op_Equality*
+  nameWithType.vb: Distance.=(Distance, Distance)
+  fullName.vb: Mapsui.UI.Maui.Distance.=(Mapsui.UI.Maui.Distance, Mapsui.UI.Maui.Distance)
+  name.vb: =(Distance, Distance)
+- uid: Mapsui.UI.Maui.Distance.op_Inequality(Mapsui.UI.Maui.Distance,Mapsui.UI.Maui.Distance)
+  commentId: M:Mapsui.UI.Maui.Distance.op_Inequality(Mapsui.UI.Maui.Distance,Mapsui.UI.Maui.Distance)
+  id: op_Inequality(Mapsui.UI.Maui.Distance,Mapsui.UI.Maui.Distance)
+  parent: Mapsui.UI.Maui.Distance
+  langs:
+  - csharp
+  - vb
+  name: operator !=(Distance, Distance)
+  nameWithType: Distance.operator !=(Distance, Distance)
+  fullName: Mapsui.UI.Maui.Distance.operator !=(Mapsui.UI.Maui.Distance, Mapsui.UI.Maui.Distance)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Distance.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Inequality
+    path: ../../Mapsui.UI.MapView/Objects/Distance.cs
+    startLine: 145
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static bool operator !=(Distance left, Distance right)
+    parameters:
+    - id: left
+      type: Mapsui.UI.Maui.Distance
+    - id: right
+      type: Mapsui.UI.Maui.Distance
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(left As Distance, right As Distance) As Boolean
+  overload: Mapsui.UI.Maui.Distance.op_Inequality*
+  nameWithType.vb: Distance.<>(Distance, Distance)
+  fullName.vb: Mapsui.UI.Maui.Distance.<>(Mapsui.UI.Maui.Distance, Mapsui.UI.Maui.Distance)
+  name.vb: <>(Distance, Distance)
+references:
+- uid: Mapsui.UI.Maui
+  commentId: N:Mapsui.UI.Maui
+  href: Mapsui.html
+  name: Mapsui.UI.Maui
+  nameWithType: Mapsui.UI.Maui
+  fullName: Mapsui.UI.Maui
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.UI.Forms.Distance
+  commentId: T:Mapsui.UI.Forms.Distance
+  isExternal: true
+- uid: Mapsui.UI.Maui.Distance.#ctor*
+  commentId: Overload:Mapsui.UI.Maui.Distance.#ctor
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance__ctor_System_Double_
+  name: Distance
+  nameWithType: Distance.Distance
+  fullName: Mapsui.UI.Maui.Distance.Distance
+  nameWithType.vb: Distance.New
+  fullName.vb: Mapsui.UI.Maui.Distance.New
+  name.vb: New
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.UI.Maui.Distance.Meters*
+  commentId: Overload:Mapsui.UI.Maui.Distance.Meters
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_Meters
+  name: Meters
+  nameWithType: Distance.Meters
+  fullName: Mapsui.UI.Maui.Distance.Meters
+- uid: Mapsui.UI.Maui.Distance.Miles*
+  commentId: Overload:Mapsui.UI.Maui.Distance.Miles
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_Miles
+  name: Miles
+  nameWithType: Distance.Miles
+  fullName: Mapsui.UI.Maui.Distance.Miles
+- uid: Mapsui.UI.Maui.Distance.Kilometers*
+  commentId: Overload:Mapsui.UI.Maui.Distance.Kilometers
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_Kilometers
+  name: Kilometers
+  nameWithType: Distance.Kilometers
+  fullName: Mapsui.UI.Maui.Distance.Kilometers
+- uid: Mapsui.UI.Maui.Distance.NauticalMiles*
+  commentId: Overload:Mapsui.UI.Maui.Distance.NauticalMiles
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_NauticalMiles
+  name: NauticalMiles
+  nameWithType: Distance.NauticalMiles
+  fullName: Mapsui.UI.Maui.Distance.NauticalMiles
+- uid: Mapsui.UI.Maui.Distance.FromMiles*
+  commentId: Overload:Mapsui.UI.Maui.Distance.FromMiles
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_FromMiles_System_Double_
+  name: FromMiles
+  nameWithType: Distance.FromMiles
+  fullName: Mapsui.UI.Maui.Distance.FromMiles
+- uid: Mapsui.UI.Maui.Distance
+  commentId: T:Mapsui.UI.Maui.Distance
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Distance.html
+  name: Distance
+  nameWithType: Distance
+  fullName: Mapsui.UI.Maui.Distance
+- uid: Mapsui.UI.Maui.Distance.FromMeters*
+  commentId: Overload:Mapsui.UI.Maui.Distance.FromMeters
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_FromMeters_System_Double_
+  name: FromMeters
+  nameWithType: Distance.FromMeters
+  fullName: Mapsui.UI.Maui.Distance.FromMeters
+- uid: Mapsui.UI.Maui.Distance.FromKilometers*
+  commentId: Overload:Mapsui.UI.Maui.Distance.FromKilometers
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_FromKilometers_System_Double_
+  name: FromKilometers
+  nameWithType: Distance.FromKilometers
+  fullName: Mapsui.UI.Maui.Distance.FromKilometers
+- uid: Mapsui.UI.Maui.Distance.FromNauticalMiles*
+  commentId: Overload:Mapsui.UI.Maui.Distance.FromNauticalMiles
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_FromNauticalMiles_System_Double_
+  name: FromNauticalMiles
+  nameWithType: Distance.FromNauticalMiles
+  fullName: Mapsui.UI.Maui.Distance.FromNauticalMiles
+- uid: Mapsui.UI.Maui.Distance.Equals*
+  commentId: Overload:Mapsui.UI.Maui.Distance.Equals
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_Equals_Mapsui_UI_Maui_Distance_
+  name: Equals
+  nameWithType: Distance.Equals
+  fullName: Mapsui.UI.Maui.Distance.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Maui.Distance.GetHashCode*
+  commentId: Overload:Mapsui.UI.Maui.Distance.GetHashCode
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_GetHashCode
+  name: GetHashCode
+  nameWithType: Distance.GetHashCode
+  fullName: Mapsui.UI.Maui.Distance.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.UI.Maui.Distance.op_Equality*
+  commentId: Overload:Mapsui.UI.Maui.Distance.op_Equality
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_op_Equality_Mapsui_UI_Maui_Distance_Mapsui_UI_Maui_Distance_
+  name: operator ==
+  nameWithType: Distance.operator ==
+  fullName: Mapsui.UI.Maui.Distance.operator ==
+  nameWithType.vb: Distance.=
+  fullName.vb: Mapsui.UI.Maui.Distance.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.UI.Maui.Distance.op_Equality*
+    name: ==
+    href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_op_Equality_Mapsui_UI_Maui_Distance_Mapsui_UI_Maui_Distance_
+- uid: Mapsui.UI.Maui.Distance.op_Inequality*
+  commentId: Overload:Mapsui.UI.Maui.Distance.op_Inequality
+  href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_op_Inequality_Mapsui_UI_Maui_Distance_Mapsui_UI_Maui_Distance_
+  name: operator !=
+  nameWithType: Distance.operator !=
+  fullName: Mapsui.UI.Maui.Distance.operator !=
+  nameWithType.vb: Distance.<>
+  fullName.vb: Mapsui.UI.Maui.Distance.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.UI.Maui.Distance.op_Inequality*
+    name: '!='
+    href: Mapsui.UI.Maui.Distance.html#Mapsui_UI_Maui_Distance_op_Inequality_Mapsui_UI_Maui_Distance_Mapsui_UI_Maui_Distance_

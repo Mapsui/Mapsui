@@ -1,0 +1,743 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ArcGIS.DynamicProvider.Result
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.Result
+  id: Result
+  parent: Mapsui.ArcGIS.DynamicProvider
+  children:
+  - Mapsui.ArcGIS.DynamicProvider.Result.attributes
+  - Mapsui.ArcGIS.DynamicProvider.Result.displayFieldName
+  - Mapsui.ArcGIS.DynamicProvider.Result.geometryType
+  - Mapsui.ArcGIS.DynamicProvider.Result.layerId
+  - Mapsui.ArcGIS.DynamicProvider.Result.layerName
+  - Mapsui.ArcGIS.DynamicProvider.Result.value
+  langs:
+  - csharp
+  - vb
+  name: Result
+  nameWithType: Result
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result
+  type: Class
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Result
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public class Result
+    content.vb: Public Class Result
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.layerId
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.Result.layerId
+  id: layerId
+  parent: Mapsui.ArcGIS.DynamicProvider.Result
+  langs:
+  - csharp
+  - vb
+  name: layerId
+  nameWithType: Result.layerId
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.layerId
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: layerId
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+    startLine: 11
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public string? layerId { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property layerId As String
+  overload: Mapsui.ArcGIS.DynamicProvider.Result.layerId*
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.layerName
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.Result.layerName
+  id: layerName
+  parent: Mapsui.ArcGIS.DynamicProvider.Result
+  langs:
+  - csharp
+  - vb
+  name: layerName
+  nameWithType: Result.layerName
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.layerName
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: layerName
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+    startLine: 12
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public string? layerName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property layerName As String
+  overload: Mapsui.ArcGIS.DynamicProvider.Result.layerName*
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.value
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.Result.value
+  id: value
+  parent: Mapsui.ArcGIS.DynamicProvider.Result
+  langs:
+  - csharp
+  - vb
+  name: value
+  nameWithType: Result.value
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.value
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: value
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+    startLine: 13
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public string? value { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property value As String
+  overload: Mapsui.ArcGIS.DynamicProvider.Result.value*
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.displayFieldName
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.Result.displayFieldName
+  id: displayFieldName
+  parent: Mapsui.ArcGIS.DynamicProvider.Result
+  langs:
+  - csharp
+  - vb
+  name: displayFieldName
+  nameWithType: Result.displayFieldName
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.displayFieldName
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: displayFieldName
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+    startLine: 14
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public string? displayFieldName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property displayFieldName As String
+  overload: Mapsui.ArcGIS.DynamicProvider.Result.displayFieldName*
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.geometryType
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.Result.geometryType
+  id: geometryType
+  parent: Mapsui.ArcGIS.DynamicProvider.Result
+  langs:
+  - csharp
+  - vb
+  name: geometryType
+  nameWithType: Result.geometryType
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.geometryType
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: geometryType
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+    startLine: 15
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public string? geometryType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property geometryType As String
+  overload: Mapsui.ArcGIS.DynamicProvider.Result.geometryType*
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.attributes
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.Result.attributes
+  id: attributes
+  parent: Mapsui.ArcGIS.DynamicProvider.Result
+  langs:
+  - csharp
+  - vb
+  name: attributes
+  nameWithType: Result.attributes
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.attributes
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: attributes
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISFeatureInfo.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public Dictionary<string, string>? attributes { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+    content.vb: Public Property attributes As Dictionary(Of String, String)
+  overload: Mapsui.ArcGIS.DynamicProvider.Result.attributes*
+references:
+- uid: Mapsui.ArcGIS.DynamicProvider
+  commentId: N:Mapsui.ArcGIS.DynamicProvider
+  href: Mapsui.html
+  name: Mapsui.ArcGIS.DynamicProvider
+  nameWithType: Mapsui.ArcGIS.DynamicProvider
+  fullName: Mapsui.ArcGIS.DynamicProvider
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.DynamicProvider
+    name: DynamicProvider
+    href: Mapsui.ArcGIS.DynamicProvider.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.DynamicProvider
+    name: DynamicProvider
+    href: Mapsui.ArcGIS.DynamicProvider.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.layerId*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.Result.layerId
+  href: Mapsui.ArcGIS.DynamicProvider.Result.html#Mapsui_ArcGIS_DynamicProvider_Result_layerId
+  name: layerId
+  nameWithType: Result.layerId
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.layerId
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.layerName*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.Result.layerName
+  href: Mapsui.ArcGIS.DynamicProvider.Result.html#Mapsui_ArcGIS_DynamicProvider_Result_layerName
+  name: layerName
+  nameWithType: Result.layerName
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.layerName
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.value*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.Result.value
+  href: Mapsui.ArcGIS.DynamicProvider.Result.html#Mapsui_ArcGIS_DynamicProvider_Result_value
+  name: value
+  nameWithType: Result.value
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.value
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.displayFieldName*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.Result.displayFieldName
+  href: Mapsui.ArcGIS.DynamicProvider.Result.html#Mapsui_ArcGIS_DynamicProvider_Result_displayFieldName
+  name: displayFieldName
+  nameWithType: Result.displayFieldName
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.displayFieldName
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.geometryType*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.Result.geometryType
+  href: Mapsui.ArcGIS.DynamicProvider.Result.html#Mapsui_ArcGIS_DynamicProvider_Result_geometryType
+  name: geometryType
+  nameWithType: Result.geometryType
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.geometryType
+- uid: Mapsui.ArcGIS.DynamicProvider.Result.attributes*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.Result.attributes
+  href: Mapsui.ArcGIS.DynamicProvider.Result.html#Mapsui_ArcGIS_DynamicProvider_Result_attributes
+  name: attributes
+  nameWithType: Result.attributes
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result.attributes
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  name: Dictionary<string, string>
+  nameWithType: Dictionary<string, string>
+  fullName: System.Collections.Generic.Dictionary<string, string>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of String, String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic

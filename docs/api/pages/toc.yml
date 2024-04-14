@@ -1,0 +1,1139 @@
+### YamlMime:TableOfContent
+items:
+- uid: Mapsui
+  name: Mapsui
+  items:
+  - uid: Mapsui.ChangeType
+    name: ChangeType
+  - uid: Mapsui.CoordinateSetter
+    name: CoordinateSetter
+  - uid: Mapsui.FeatureInfoEventArgs
+    name: FeatureInfoEventArgs
+  - uid: Mapsui.IFeature
+    name: IFeature
+  - uid: Mapsui.MBoxFit
+    name: MBoxFit
+  - uid: Mapsui.MMinMax
+    name: MMinMax
+  - uid: Mapsui.MPoint
+    name: MPoint
+  - uid: Mapsui.MQuad
+    name: MQuad
+  - uid: Mapsui.MRaster
+    name: MRaster
+  - uid: Mapsui.MRect
+    name: MRect
+  - uid: Mapsui.MSection
+    name: MSection
+  - uid: Mapsui.Map
+    name: Map
+  - uid: Mapsui.MapInfo
+    name: MapInfo
+  - uid: Mapsui.MapInfoBase
+    name: MapInfoBase
+  - uid: Mapsui.MapInfoEventArgs
+    name: MapInfoEventArgs
+  - uid: Mapsui.Navigator
+    name: Navigator
+  - uid: Mapsui.Navigator.ViewportChangedEventHandler
+    name: Navigator.ViewportChangedEventHandler
+  - uid: Mapsui.RotationSnapper
+    name: RotationSnapper
+  - uid: Mapsui.Viewport
+    name: Viewport
+  - uid: Mapsui.ViewportChangedEventArgs
+    name: ViewportChangedEventArgs
+- uid: Mapsui.Animations
+  name: Mapsui.Animations
+  items:
+  - uid: Mapsui.Animations.Animation
+    name: Animation
+  - uid: Mapsui.Animations.AnimationEntry`1
+    name: AnimationEntry<T>
+  - uid: Mapsui.Animations.AnimationEventArgs
+    name: AnimationEventArgs
+  - uid: Mapsui.Animations.AnimationResult`1
+    name: AnimationResult<T>
+  - uid: Mapsui.Animations.Easing
+    name: Easing
+  - uid: Mapsui.Animations.FlingAnimation
+    name: FlingAnimation
+  - uid: Mapsui.Animations.FlyToAnimation
+    name: FlyToAnimation
+  - uid: Mapsui.Animations.IAnimatable
+    name: IAnimatable
+  - uid: Mapsui.Animations.MouseWheelAnimation
+    name: MouseWheelAnimation
+- uid: Mapsui.ArcGIS
+  name: Mapsui.ArcGIS
+  items:
+  - uid: Mapsui.ArcGIS.ArcGISContext
+    name: ArcGISContext
+  - uid: Mapsui.ArcGIS.CapabilitiesHelper
+    name: CapabilitiesHelper
+  - uid: Mapsui.ArcGIS.CapabilitiesHelper.StatusEventHandler
+    name: CapabilitiesHelper.StatusEventHandler
+  - uid: Mapsui.ArcGIS.CapabilitiesType
+    name: CapabilitiesType
+  - uid: Mapsui.ArcGIS.Extent
+    name: Extent
+  - uid: Mapsui.ArcGIS.IArcGISCapabilities
+    name: IArcGISCapabilities
+  - uid: Mapsui.ArcGIS.SpatialReference
+    name: SpatialReference
+  - uid: Mapsui.ArcGIS.Table
+    name: Table
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+  - uid: Mapsui.ArcGIS.TileInfo.Lod
+    name: TileInfo.Lod
+  - uid: Mapsui.ArcGIS.TileInfo.Origin
+    name: TileInfo.Origin
+- uid: Mapsui.ArcGIS.DynamicProvider
+  name: Mapsui.ArcGIS.DynamicProvider
+  items:
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+    name: ArcGISDynamicCapabilities
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+    name: ArcGISDynamicProvider
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo
+    name: ArcGISFeatureInfo
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISIdentify
+    name: ArcGISIdentify
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer
+    name: ArcGISLayer
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendEventHandler
+    name: ArcGISLegendEventHandler
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse
+    name: ArcGISLegendResponse
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer
+    name: ArcGISLegendResponseLayer
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend
+    name: ArcGISLegendResponseLegend
+  - uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend
+    name: ArcGisLegend
+  - uid: Mapsui.ArcGIS.DynamicProvider.Result
+    name: Result
+  - uid: Mapsui.ArcGIS.DynamicProvider.StatusEventHandler
+    name: StatusEventHandler
+- uid: Mapsui.ArcGIS.Extensions
+  name: Mapsui.ArcGIS.Extensions
+  items:
+  - uid: Mapsui.ArcGIS.Extensions.ExtentExtensions
+    name: ExtentExtensions
+- uid: Mapsui.ArcGIS.ImageServiceProvider
+  name: Mapsui.ArcGIS.ImageServiceProvider
+  items:
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+    name: ArcGISImageCapabilities
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+    name: ArcGISImageServiceProvider
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Domain
+    name: Domain
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+    name: EditFieldsInfo
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Field
+    name: Field
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+    name: InterpolationType
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+    name: OwnershipBasedAccessControlForRasters
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+    name: RasterFunctionInfo
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+    name: RasterTypeInfo
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+    name: TimeInfo
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.TimeReference
+    name: TimeReference
+- uid: Mapsui.Cache
+  name: Mapsui.Cache
+  items:
+  - uid: Mapsui.Cache.IUrlPersistentCache
+    name: IUrlPersistentCache
+  - uid: Mapsui.Cache.LruCache`2
+    name: LruCache<TKey, TValue>
+- uid: Mapsui.Disposing
+  name: Mapsui.Disposing
+  items:
+  - uid: Mapsui.Disposing.DisposableWrapper`1
+    name: DisposableWrapper<T>
+- uid: Mapsui.Extensions
+  name: Mapsui.Extensions
+  items:
+  - uid: Mapsui.Extensions.AssemblyExtensions
+    name: AssemblyExtensions
+  - uid: Mapsui.Extensions.BrushExtensions
+    name: BrushExtensions
+  - uid: Mapsui.Extensions.ByteArrayExtensions
+    name: ByteArrayExtensions
+  - uid: Mapsui.Extensions.CacheExtensions
+    name: CacheExtensions
+  - uid: Mapsui.Extensions.CancellationTokenSourceExtensions
+    name: CancellationTokenSourceExtensions
+  - uid: Mapsui.Extensions.Catch
+    name: Catch
+  - uid: Mapsui.Extensions.ConcurrentQueueExtensions
+    name: ConcurrentQueueExtensions
+  - uid: Mapsui.Extensions.DisposableExtension
+    name: DisposableExtension
+  - uid: Mapsui.Extensions.DoubleExtensions
+    name: DoubleExtensions
+  - uid: Mapsui.Extensions.EnumerableLayerExtensions
+    name: EnumerableLayerExtensions
+  - uid: Mapsui.Extensions.FeatureExtensions
+    name: FeatureExtensions
+  - uid: Mapsui.Extensions.HttpClientHandlerExtensions
+    name: HttpClientHandlerExtensions
+  - uid: Mapsui.Extensions.IntArrayExtension
+    name: IntArrayExtension
+  - uid: Mapsui.Extensions.LayerExtensions
+    name: LayerExtensions
+  - uid: Mapsui.Extensions.MPointExtensions
+    name: MPointExtensions
+  - uid: Mapsui.Extensions.MapControlExtensions
+    name: MapControlExtensions
+  - uid: Mapsui.Extensions.PenExtensions
+    name: PenExtensions
+  - uid: Mapsui.Extensions.StreamExtensions
+    name: StreamExtensions
+  - uid: Mapsui.Extensions.StyleExtensions
+    name: StyleExtensions
+  - uid: Mapsui.Extensions.TupleExtensions
+    name: TupleExtensions
+  - uid: Mapsui.Extensions.TypeExtensions
+    name: TypeExtensions
+  - uid: Mapsui.Extensions.ViewportExtensions
+    name: ViewportExtensions
+- uid: Mapsui.Extensions.Cache
+  name: Mapsui.Extensions.Cache
+  items:
+  - uid: Mapsui.Extensions.Cache.SqlitePersistentCache
+    name: SqlitePersistentCache
+  - uid: Mapsui.Extensions.Cache.Tile
+    name: Tile
+  - uid: Mapsui.Extensions.Cache.UrlCache
+    name: UrlCache
+- uid: Mapsui.Extensions.Projections
+  name: Mapsui.Extensions.Projections
+  items:
+  - uid: Mapsui.Extensions.Projections.DotSpatialProjection
+    name: DotSpatialProjection
+- uid: Mapsui.Extensions.Provider
+  name: Mapsui.Extensions.Provider
+  items:
+  - uid: Mapsui.Extensions.Provider.GeoTiffProvider
+    name: GeoTiffProvider
+- uid: Mapsui.Features
+  name: Mapsui.Features
+  items:
+  - uid: Mapsui.Features.FeatureId
+    name: FeatureId
+  - uid: Mapsui.Features.FeatureKeyCreator`1
+    name: FeatureKeyCreator<T>
+- uid: Mapsui.Fetcher
+  name: Mapsui.Fetcher
+  items:
+  - uid: Mapsui.Fetcher.DataChangedEventArgs
+    name: DataChangedEventArgs
+  - uid: Mapsui.Fetcher.DataChangedEventHandler
+    name: DataChangedEventHandler
+  - uid: Mapsui.Fetcher.Delayer
+    name: Delayer
+  - uid: Mapsui.Fetcher.FetchMachine
+    name: FetchMachine
+  - uid: Mapsui.Fetcher.FetchWorker
+    name: FetchWorker
+  - uid: Mapsui.Fetcher.IAsyncDataFetcher
+    name: IAsyncDataFetcher
+  - uid: Mapsui.Fetcher.IFetchDispatcher
+    name: IFetchDispatcher
+- uid: Mapsui.Layers
+  name: Mapsui.Layers
+  items:
+  - uid: Mapsui.Layers.BaseFeature
+    name: BaseFeature
+  - uid: Mapsui.Layers.BaseLayer
+    name: BaseLayer
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+  - uid: Mapsui.Layers.GenericCollectionLayer`1
+    name: GenericCollectionLayer<T>
+  - uid: Mapsui.Layers.IDynamic
+    name: IDynamic
+  - uid: Mapsui.Layers.IFeatureInfo
+    name: IFeatureInfo
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - uid: Mapsui.Layers.ILayerDataSource`1
+    name: ILayerDataSource<T>
+  - uid: Mapsui.Layers.ILayerFeatureInfo
+    name: ILayerFeatureInfo
+  - uid: Mapsui.Layers.ISourceLayer
+    name: ISourceLayer
+  - uid: Mapsui.Layers.ImageLayer
+    name: ImageLayer
+  - uid: Mapsui.Layers.Layer
+    name: Layer
+  - uid: Mapsui.Layers.LayerCollection
+    name: LayerCollection
+  - uid: Mapsui.Layers.LayerCollection.LayerAddedEventHandler
+    name: LayerCollection.LayerAddedEventHandler
+  - uid: Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler
+    name: LayerCollection.LayerCollectionChangedEventHandler
+  - uid: Mapsui.Layers.LayerCollection.LayerMovedEventHandler
+    name: LayerCollection.LayerMovedEventHandler
+  - uid: Mapsui.Layers.LayerCollection.LayerRemovedEventHandler
+    name: LayerCollection.LayerRemovedEventHandler
+  - uid: Mapsui.Layers.LayerCollectionChangedEventArgs
+    name: LayerCollectionChangedEventArgs
+  - uid: Mapsui.Layers.MemoryLayer
+    name: MemoryLayer
+  - uid: Mapsui.Layers.MyLocationLayer
+    name: MyLocationLayer
+  - uid: Mapsui.Layers.ObservableMemoryLayer`1
+    name: ObservableMemoryLayer<T>
+  - uid: Mapsui.Layers.PointFeature
+    name: PointFeature
+  - uid: Mapsui.Layers.RasterFeature
+    name: RasterFeature
+  - uid: Mapsui.Layers.RasterizingLayer
+    name: RasterizingLayer
+  - uid: Mapsui.Layers.WritableLayer
+    name: WritableLayer
+- uid: Mapsui.Layers.AnimatedLayers
+  name: Mapsui.Layers.AnimatedLayers
+  items:
+  - uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer
+    name: AnimatedPointLayer
+- uid: Mapsui.Limiting
+  name: Mapsui.Limiting
+  items:
+  - uid: Mapsui.Limiting.IViewportLimiter
+    name: IViewportLimiter
+  - uid: Mapsui.Limiting.ViewportLimiter
+    name: ViewportLimiter
+  - uid: Mapsui.Limiting.ViewportLimiterKeepWithinExtent
+    name: ViewportLimiterKeepWithinExtent
+  - uid: Mapsui.Limiting.ViewportLimiterWithoutLimits
+    name: ViewportLimiterWithoutLimits
+- uid: Mapsui.Logging
+  name: Mapsui.Logging
+  items:
+  - uid: Mapsui.Logging.LogLevel
+    name: LogLevel
+  - uid: Mapsui.Logging.Logger
+    name: Logger
+- uid: Mapsui.Manipulations
+  name: Mapsui.Manipulations
+  items:
+  - uid: Mapsui.Manipulations.FlingTracker
+    name: FlingTracker
+  - uid: Mapsui.Manipulations.Manipulation
+    name: Manipulation
+  - uid: Mapsui.Manipulations.ManipulationTracker
+    name: ManipulationTracker
+  - uid: Mapsui.Manipulations.ScreenPosition
+    name: ScreenPosition
+  - uid: Mapsui.Manipulations.TapGestureTracker
+    name: TapGestureTracker
+  - uid: Mapsui.Manipulations.TapType
+    name: TapType
+- uid: Mapsui.Nts
+  name: Mapsui.Nts
+  items:
+  - uid: Mapsui.Nts.GeometryFeature
+    name: GeometryFeature
+- uid: Mapsui.Nts.Editing
+  name: Mapsui.Nts.Editing
+  items:
+  - uid: Mapsui.Nts.Editing.AddInfo
+    name: AddInfo
+  - uid: Mapsui.Nts.Editing.DragInfo
+    name: DragInfo
+  - uid: Mapsui.Nts.Editing.EditHelper
+    name: EditHelper
+  - uid: Mapsui.Nts.Editing.EditManager
+    name: EditManager
+  - uid: Mapsui.Nts.Editing.EditManipulation
+    name: EditManipulation
+  - uid: Mapsui.Nts.Editing.EditMode
+    name: EditMode
+  - uid: Mapsui.Nts.Editing.Geomorpher
+    name: Geomorpher
+  - uid: Mapsui.Nts.Editing.RotateInfo
+    name: RotateInfo
+- uid: Mapsui.Nts.Extensions
+  name: Mapsui.Nts.Extensions
+  items:
+  - uid: Mapsui.Nts.Extensions.CoordinateExtensions
+    name: CoordinateExtensions
+  - uid: Mapsui.Nts.Extensions.EnvelopeExtensions
+    name: EnvelopeExtensions
+  - uid: Mapsui.Nts.Extensions.GeometryExtensions
+    name: GeometryExtensions
+  - uid: Mapsui.Nts.Extensions.LineStringExtensions
+    name: LineStringExtensions
+  - uid: Mapsui.Nts.Extensions.MPointExtensions
+    name: MPointExtensions
+  - uid: Mapsui.Nts.Extensions.MRectExtensions
+    name: MRectExtensions
+  - uid: Mapsui.Nts.Extensions.PointExtensions
+    name: PointExtensions
+  - uid: Mapsui.Nts.Extensions.TupleExtensions
+    name: TupleExtensions
+- uid: Mapsui.Nts.Projections
+  name: Mapsui.Nts.Projections
+  items:
+  - uid: Mapsui.Nts.Projections.GeometryTransform
+    name: GeometryTransform
+- uid: Mapsui.Nts.Providers
+  name: Mapsui.Nts.Providers
+  items:
+  - uid: Mapsui.Nts.Providers.GeoJsonProvider
+    name: GeoJsonProvider
+  - uid: Mapsui.Nts.Providers.GeometryIntersectionProvider
+    name: GeometryIntersectionProvider
+  - uid: Mapsui.Nts.Providers.GeometrySimplifyProvider
+    name: GeometrySimplifyProvider
+  - uid: Mapsui.Nts.Providers.IndexedMemoryProvider
+    name: IndexedMemoryProvider
+  - uid: Mapsui.Nts.Providers.ObservableCollectionProvider`1
+    name: ObservableCollectionProvider<T>
+- uid: Mapsui.Nts.Providers.Shapefile
+  name: Mapsui.Nts.Providers.Shapefile
+  items:
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile
+    name: ShapeFile
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+    name: ShapeFile.FilterMethod
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeType
+    name: ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing
+  name: Mapsui.Nts.Providers.Shapefile.Indexing
+  items:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+    name: BinaryTree<T, TU>
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+    name: BinaryTree<T, TU>.ItemValue
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+    name: Heuristic
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+    name: QuadTree
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects
+    name: QuadTree.BoxObjects
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException
+    name: QuadTree.ObsoleteFileFormatException
+- uid: Mapsui.Nts.Widgets
+  name: Mapsui.Nts.Widgets
+  items:
+  - uid: Mapsui.Nts.Widgets.EditingWidget
+    name: EditingWidget
+- uid: Mapsui.Projections
+  name: Mapsui.Projections
+  items:
+  - uid: Mapsui.Projections.CrsAxisOrderRegistry
+    name: CrsAxisOrderRegistry
+  - uid: Mapsui.Projections.CrsHelper
+    name: CrsHelper
+  - uid: Mapsui.Projections.CrsIdentifier
+    name: CrsIdentifier
+  - uid: Mapsui.Projections.CrsType
+    name: CrsType
+  - uid: Mapsui.Projections.IProjection
+    name: IProjection
+  - uid: Mapsui.Projections.IProjectionCrs
+    name: IProjectionCrs
+  - uid: Mapsui.Projections.Mercator
+    name: Mercator
+  - uid: Mapsui.Projections.Projection
+    name: Projection
+  - uid: Mapsui.Projections.ProjectionDefaults
+    name: ProjectionDefaults
+  - uid: Mapsui.Projections.SphericalMercator
+    name: SphericalMercator
+- uid: Mapsui.Providers
+  name: Mapsui.Providers
+  items:
+  - uid: Mapsui.Providers.FilteringProvider
+    name: FilteringProvider
+  - uid: Mapsui.Providers.IProjectingProvider
+    name: IProjectingProvider
+  - uid: Mapsui.Providers.IProvider
+    name: IProvider
+  - uid: Mapsui.Providers.IProviderExtended
+    name: IProviderExtended
+  - uid: Mapsui.Providers.MemoryProvider
+    name: MemoryProvider
+  - uid: Mapsui.Providers.ProjectingProvider
+    name: ProjectingProvider
+  - uid: Mapsui.Providers.StackedLabelProvider
+    name: StackedLabelProvider
+- uid: Mapsui.Providers.Wfs
+  name: Mapsui.Providers.Wfs
+  items:
+  - uid: Mapsui.Providers.Wfs.WFSProvider
+    name: WFSProvider
+  - uid: Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum
+    name: WFSProvider.WFSVersionEnum
+- uid: Mapsui.Providers.Wfs.Utilities
+  name: Mapsui.Providers.Wfs.Utilities
+  items:
+  - uid: Mapsui.Providers.Wfs.Utilities.FeatureIdFilter_FE1_1_0
+    name: FeatureIdFilter_FE1_1_0
+  - uid: Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum
+    name: GeometryTypeEnum
+  - uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+    name: HttpClientUtil
+  - uid: Mapsui.Providers.Wfs.Utilities.IFilter
+    name: IFilter
+  - uid: Mapsui.Providers.Wfs.Utilities.IWFS_TextResources
+    name: IWFS_TextResources
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection
+    name: OGCFilterCollection
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+    name: OGCFilterCollection.JunctorEnum
+  - uid: Mapsui.Providers.Wfs.Utilities.OgcFilterBase
+    name: OgcFilterBase
+  - uid: Mapsui.Providers.Wfs.Utilities.PropertyIsBetweenFilter_FE1_1_0
+    name: PropertyIsBetweenFilter_FE1_1_0
+  - uid: Mapsui.Providers.Wfs.Utilities.PropertyIsEqualToFilter_FE1_1_0
+    name: PropertyIsEqualToFilter_FE1_1_0
+  - uid: Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanFilter_FE1_1_0
+    name: PropertyIsGreaterThanFilter_FE1_1_0
+  - uid: Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanOrEqualToFilter_FE1_1_0
+    name: PropertyIsGreaterThanOrEqualToFilter_FE1_1_0
+  - uid: Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanFilter_FE1_1_0
+    name: PropertyIsLessThanFilter_FE1_1_0
+  - uid: Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanOrEqualToFilter_FE1_1_0
+    name: PropertyIsLessThanOrEqualToFilter_FE1_1_0
+  - uid: Mapsui.Providers.Wfs.Utilities.PropertyIsLikeFilter_FE1_1_0
+    name: PropertyIsLikeFilter_FE1_1_0
+  - uid: Mapsui.Providers.Wfs.Utilities.PropertyIsNotEqualToFilter_FE1_1_0
+    name: PropertyIsNotEqualToFilter_FE1_1_0
+  - uid: Mapsui.Providers.Wfs.Utilities.UrlQueryHelper
+    name: UrlQueryHelper
+  - uid: Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_TextResources
+    name: WFS_1_0_0_TextResources
+  - uid: Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_XPathTextResources
+    name: WFS_1_0_0_XPathTextResources
+  - uid: Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_TextResources
+    name: WFS_1_1_0_TextResources
+  - uid: Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_XPathTextResources
+    name: WFS_1_1_0_XPathTextResources
+  - uid: Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_TextResources
+    name: WFS_2_0_0_TextResources
+  - uid: Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_XPathTextResources
+    name: WFS_2_0_0_XPathTextResources
+  - uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+    name: WFS_XPathTextResourcesBase
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+    name: WfsFeatureTypeInfo
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox
+    name: WfsFeatureTypeInfo.BoundingBox
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo
+    name: WfsFeatureTypeInfo.ElementInfo
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo
+    name: WfsFeatureTypeInfo.GeometryInfo
+- uid: Mapsui.Providers.Wfs.Xml
+  name: Mapsui.Providers.Wfs.Xml
+  items:
+  - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager
+    name: IXPathQueryManager
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+    name: XPathQueryManager.CustomQueryContext
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+    name: XPathQueryManager.ParamBase
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+    name: XPathQueryManager.ParamCompare
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+    name: XPathQueryManager.ParamCompareWithTargetNs
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar
+    name: XPathQueryManager.ParamFunctionVar
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator
+    name: XPathQueryManagerCompiledExpressionsDecorator
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase
+    name: XPathQueryManagerDecoratorBase
+- uid: Mapsui.Providers.Wms
+  name: Mapsui.Providers.Wms
+  items:
+  - uid: Mapsui.Providers.Wms.Capabilities
+    name: Capabilities
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+    name: Capabilities.WmsContactInformation
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactAddress
+    name: Capabilities.WmsContactInformation.ContactAddress
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactPerson
+    name: Capabilities.WmsContactInformation.ContactPerson
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsServiceDescription
+    name: Capabilities.WmsServiceDescription
+  - uid: Mapsui.Providers.Wms.Client
+    name: Client
+  - uid: Mapsui.Providers.Wms.Client.WmsLayerStyle
+    name: Client.WmsLayerStyle
+  - uid: Mapsui.Providers.Wms.Client.WmsOnlineResource
+    name: Client.WmsOnlineResource
+  - uid: Mapsui.Providers.Wms.Client.WmsServerLayer
+    name: Client.WmsServerLayer
+  - uid: Mapsui.Providers.Wms.Client.WmsStyleLegend
+    name: Client.WmsStyleLegend
+  - uid: Mapsui.Providers.Wms.FeatureInfo
+    name: FeatureInfo
+  - uid: Mapsui.Providers.Wms.GetFeatureInfo
+    name: GetFeatureInfo
+  - uid: Mapsui.Providers.Wms.GmlGetFeatureInfoParser
+    name: GmlGetFeatureInfoParser
+  - uid: Mapsui.Providers.Wms.IGetFeatureInfoParser
+    name: IGetFeatureInfoParser
+  - uid: Mapsui.Providers.Wms.StatusEventHandler
+    name: StatusEventHandler
+  - uid: Mapsui.Providers.Wms.WmsProvider
+    name: WmsProvider
+  - uid: Mapsui.Providers.Wms.XmlGetFeatureInfoParser
+    name: XmlGetFeatureInfoParser
+- uid: Mapsui.Rendering
+  name: Mapsui.Rendering
+  items:
+  - uid: Mapsui.Rendering.CacheHolder`1
+    name: CacheHolder<T>
+  - uid: Mapsui.Rendering.CacheTracker`1
+    name: CacheTracker<T>
+  - uid: Mapsui.Rendering.DefaultRendererFactory
+    name: DefaultRendererFactory
+  - uid: Mapsui.Rendering.IBitmapInfo
+    name: IBitmapInfo
+  - uid: Mapsui.Rendering.ICacheHolder
+    name: ICacheHolder
+  - uid: Mapsui.Rendering.ILabelCache
+    name: ILabelCache
+  - uid: Mapsui.Rendering.IRenderCache
+    name: IRenderCache
+  - uid: Mapsui.Rendering.IRenderInfo
+    name: IRenderInfo
+  - uid: Mapsui.Rendering.IRenderer
+    name: IRenderer
+  - uid: Mapsui.Rendering.ISymbolCache
+    name: ISymbolCache
+  - uid: Mapsui.Rendering.ITileCache
+    name: ITileCache
+  - uid: Mapsui.Rendering.IVectorCache
+    name: IVectorCache
+  - uid: Mapsui.Rendering.MapInfoRecord
+    name: MapInfoRecord
+  - uid: Mapsui.Rendering.NonCachingVectorCache
+    name: NonCachingVectorCache
+  - uid: Mapsui.Rendering.RenderException
+    name: RenderException
+  - uid: Mapsui.Rendering.RenderFormat
+    name: RenderFormat
+  - uid: Mapsui.Rendering.VisibleFeatureIterator
+    name: VisibleFeatureIterator
+- uid: Mapsui.Rendering.Skia
+  name: Mapsui.Rendering.Skia
+  items:
+  - uid: Mapsui.Rendering.Skia.BitmapHelper
+    name: BitmapHelper
+  - uid: Mapsui.Rendering.Skia.BitmapInfo
+    name: BitmapInfo
+  - uid: Mapsui.Rendering.Skia.BitmapType
+    name: BitmapType
+  - uid: Mapsui.Rendering.Skia.CalloutStyleRenderer
+    name: CalloutStyleRenderer
+  - uid: Mapsui.Rendering.Skia.LabelStyleRenderer
+    name: LabelStyleRenderer
+  - uid: Mapsui.Rendering.Skia.LineStringRenderer
+    name: LineStringRenderer
+  - uid: Mapsui.Rendering.Skia.MapRenderer
+    name: MapRenderer
+  - uid: Mapsui.Rendering.Skia.RasterStyleRenderer
+    name: RasterStyleRenderer
+  - uid: Mapsui.Rendering.Skia.SvgRenderer
+    name: SvgRenderer
+  - uid: Mapsui.Rendering.Skia.SymbolStyleRenderer
+    name: SymbolStyleRenderer
+  - uid: Mapsui.Rendering.Skia.VectorStyleRenderer
+    name: VectorStyleRenderer
+- uid: Mapsui.Rendering.Skia.Cache
+  name: Mapsui.Rendering.Skia.Cache
+  items:
+  - uid: Mapsui.Rendering.Skia.Cache.IdentityComparer`1
+    name: IdentityComparer<T>
+  - uid: Mapsui.Rendering.Skia.Cache.LabelCache
+    name: LabelCache
+  - uid: Mapsui.Rendering.Skia.Cache.RenderCache
+    name: RenderCache
+  - uid: Mapsui.Rendering.Skia.Cache.SymbolCache
+    name: SymbolCache
+  - uid: Mapsui.Rendering.Skia.Cache.TileCache
+    name: TileCache
+  - uid: Mapsui.Rendering.Skia.Cache.VectorCache
+    name: VectorCache
+- uid: Mapsui.Rendering.Skia.Extensions
+  name: Mapsui.Rendering.Skia.Extensions
+  items:
+  - uid: Mapsui.Rendering.Skia.Extensions.AlignmentExtensions
+    name: AlignmentExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.ColorExtensions
+    name: ColorExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.CoordinateExtensions
+    name: CoordinateExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.GeometryCollectionExtensions
+    name: GeometryCollectionExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.MRectExtensions
+    name: MRectExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.PenStrokeCapExtensions
+    name: PenStrokeCapExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.PenStrokeJoinExtensions
+    name: PenStrokeJoinExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.PenStyleExtension
+    name: PenStyleExtension
+  - uid: Mapsui.Rendering.Skia.Extensions.PointExtensions
+    name: PointExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.SKColorExtensions
+    name: SKColorExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.SKNativeObjectExtensions
+    name: SKNativeObjectExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.SkCanvasExtensions
+    name: SkCanvasExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.SkPaintExtensions
+    name: SkPaintExtensions
+  - uid: Mapsui.Rendering.Skia.Extensions.ViewportExtensions
+    name: ViewportExtensions
+- uid: Mapsui.Rendering.Skia.Functions
+  name: Mapsui.Rendering.Skia.Functions
+  items:
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions
+    name: ClippingFunctions
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+    name: ClippingFunctions.Intersection
+- uid: Mapsui.Rendering.Skia.SkiaStyles
+  name: Mapsui.Rendering.Skia.SkiaStyles
+  items:
+  - uid: Mapsui.Rendering.Skia.SkiaStyles.GeometryCollectionRenderer
+    name: GeometryCollectionRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+    name: ISkiaStyleRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets
+  name: Mapsui.Rendering.Skia.SkiaWidgets
+  items:
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer
+    name: BoxWidgetRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+    name: ISkiaWidgetRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.IconButtonWidgetRenderer
+    name: IconButtonWidgetRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.InputOnlyWidgetRenderer
+    name: InputOnlyWidgetRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.LoggingWidgetRenderer
+    name: LoggingWidgetRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer
+    name: PerformanceWidgetRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
+    name: ScaleBarWidgetRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.TextBoxWidgetRenderer
+    name: TextBoxWidgetRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer
+    name: WidgetRenderer
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer
+    name: ZoomInOutWidgetRenderer
+- uid: Mapsui.Styles
+  name: Mapsui.Styles
+  items:
+  - uid: Mapsui.Styles.ArrowAlignment
+    name: ArrowAlignment
+  - uid: Mapsui.Styles.BitmapRegistry
+    name: BitmapRegistry
+  - uid: Mapsui.Styles.Brush
+    name: Brush
+  - uid: Mapsui.Styles.CalloutStyle
+    name: CalloutStyle
+  - uid: Mapsui.Styles.CalloutType
+    name: CalloutType
+  - uid: Mapsui.Styles.Color
+    name: Color
+  - uid: Mapsui.Styles.FillStyle
+    name: FillStyle
+  - uid: Mapsui.Styles.Font
+    name: Font
+  - uid: Mapsui.Styles.IFeatureSize
+    name: IFeatureSize
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+  - uid: Mapsui.Styles.IStyleRenderer
+    name: IStyleRenderer
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+  - uid: Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum
+    name: LabelStyle.HorizontalAlignmentEnum
+  - uid: Mapsui.Styles.LabelStyle.LineBreakMode
+    name: LabelStyle.LineBreakMode
+  - uid: Mapsui.Styles.LabelStyle.VerticalAlignmentEnum
+    name: LabelStyle.VerticalAlignmentEnum
+  - uid: Mapsui.Styles.Offset
+    name: Offset
+  - uid: Mapsui.Styles.Pen
+    name: Pen
+  - uid: Mapsui.Styles.PenStrokeCap
+    name: PenStrokeCap
+  - uid: Mapsui.Styles.PenStyle
+    name: PenStyle
+  - uid: Mapsui.Styles.RasterStyle
+    name: RasterStyle
+  - uid: Mapsui.Styles.RelativeOffset
+    name: RelativeOffset
+  - uid: Mapsui.Styles.Size
+    name: Size
+  - uid: Mapsui.Styles.Sprite
+    name: Sprite
+  - uid: Mapsui.Styles.StrokeJoin
+    name: StrokeJoin
+  - uid: Mapsui.Styles.Style
+    name: Style
+  - uid: Mapsui.Styles.StyleCollection
+    name: StyleCollection
+  - uid: Mapsui.Styles.SymbolStyle
+    name: SymbolStyle
+  - uid: Mapsui.Styles.SymbolStyles
+    name: SymbolStyles
+  - uid: Mapsui.Styles.SymbolType
+    name: SymbolType
+  - uid: Mapsui.Styles.UnitType
+    name: UnitType
+  - uid: Mapsui.Styles.VectorStyle
+    name: VectorStyle
+- uid: Mapsui.Styles.Thematics
+  name: Mapsui.Styles.Thematics
+  items:
+  - uid: Mapsui.Styles.Thematics.ColorBlend
+    name: ColorBlend
+  - uid: Mapsui.Styles.Thematics.GradientTheme
+    name: GradientTheme
+  - uid: Mapsui.Styles.Thematics.IThemeStyle
+    name: IThemeStyle
+  - uid: Mapsui.Styles.Thematics.ThemeStyle
+    name: ThemeStyle
+- uid: Mapsui.Tiling
+  name: Mapsui.Tiling
+  items:
+  - uid: Mapsui.Tiling.OpenStreetMap
+    name: OpenStreetMap
+- uid: Mapsui.Tiling.Extensions
+  name: Mapsui.Tiling.Extensions
+  items:
+  - uid: Mapsui.Tiling.Extensions.ExtentExtensions
+    name: ExtentExtensions
+  - uid: Mapsui.Tiling.Extensions.MRectExtensions
+    name: MRectExtensions
+- uid: Mapsui.Tiling.Fetcher
+  name: Mapsui.Tiling.Fetcher
+  items:
+  - uid: Mapsui.Tiling.Fetcher.DataFetchStrategy
+    name: DataFetchStrategy
+  - uid: Mapsui.Tiling.Fetcher.IDataFetchStrategy
+    name: IDataFetchStrategy
+  - uid: Mapsui.Tiling.Fetcher.MinimalDataFetchStrategy
+    name: MinimalDataFetchStrategy
+  - uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher
+    name: TileFetchDispatcher
+- uid: Mapsui.Tiling.Layers
+  name: Mapsui.Tiling.Layers
+  items:
+  - uid: Mapsui.Tiling.Layers.RasterizingTileLayer
+    name: RasterizingTileLayer
+  - uid: Mapsui.Tiling.Layers.TileLayer
+    name: TileLayer
+  - uid: Mapsui.Tiling.Layers.TmsTileSourceBuilder
+    name: TmsTileSourceBuilder
+- uid: Mapsui.Tiling.Provider
+  name: Mapsui.Tiling.Provider
+  items:
+  - uid: Mapsui.Tiling.Provider.RasterizingTileProvider
+    name: RasterizingTileProvider
+  - uid: Mapsui.Tiling.Provider.TileProvider
+    name: TileProvider
+- uid: Mapsui.Tiling.Rendering
+  name: Mapsui.Tiling.Rendering
+  items:
+  - uid: Mapsui.Tiling.Rendering.IRenderFetchStrategy
+    name: IRenderFetchStrategy
+  - uid: Mapsui.Tiling.Rendering.MinimalRenderFetchStrategy
+    name: MinimalRenderFetchStrategy
+  - uid: Mapsui.Tiling.Rendering.RenderException
+    name: RenderException
+  - uid: Mapsui.Tiling.Rendering.RenderFetchStrategy
+    name: RenderFetchStrategy
+  - uid: Mapsui.Tiling.Rendering.TilingRenderFetchStrategy
+    name: TilingRenderFetchStrategy
+- uid: Mapsui.UI
+  name: Mapsui.UI
+  items:
+  - uid: Mapsui.UI.DataChangedWeakEventManager
+    name: DataChangedWeakEventManager
+  - uid: Mapsui.UI.IMapControl
+    name: IMapControl
+  - uid: Mapsui.UI.MWeakEventManager
+    name: MWeakEventManager
+  - uid: Mapsui.UI.PropertyChangedWeakEventManager
+    name: PropertyChangedWeakEventManager
+  - uid: Mapsui.UI.TappedEventArgs
+    name: TappedEventArgs
+- uid: Mapsui.UI.Android
+  name: Mapsui.UI.Android
+  items:
+  - uid: Mapsui.UI.Android.MapControl
+    name: MapControl
+  - uid: Mapsui.UI.Android.Resource
+    name: Resource
+  - uid: Mapsui.UI.Android.Resource.Attribute
+    name: Resource.Attribute
+  - uid: Mapsui.UI.Android.Resource.String
+    name: Resource.String
+  - uid: Mapsui.UI.Android.Resource.Styleable
+    name: Resource.Styleable
+  - uid: Mapsui.UI.Android.SkiaRenderMode
+    name: SkiaRenderMode
+- uid: Mapsui.UI.Android.Extensions
+  name: Mapsui.UI.Android.Extensions
+  items:
+  - uid: Mapsui.UI.Android.Extensions.PointExtensions
+    name: PointExtensions
+- uid: Mapsui.UI.Avalonia
+  name: Mapsui.UI.Avalonia
+  items:
+  - uid: Mapsui.UI.Avalonia.MapControl
+    name: MapControl
+- uid: Mapsui.UI.Avalonia.Extensions
+  name: Mapsui.UI.Avalonia.Extensions
+  items:
+  - uid: Mapsui.UI.Avalonia.Extensions.PointExtensions
+    name: PointExtensions
+- uid: Mapsui.UI.Blazor
+  name: Mapsui.UI.Blazor
+  items:
+  - uid: Mapsui.UI.Blazor.MapControl
+    name: MapControl
+- uid: Mapsui.UI.Blazor.Extensions
+  name: Mapsui.UI.Blazor.Extensions
+  items:
+  - uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+    name: BoundingClientRect
+  - uid: Mapsui.UI.Blazor.Extensions.Cursors
+    name: Cursors
+  - uid: Mapsui.UI.Blazor.Extensions.Keys
+    name: Keys
+  - uid: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop
+    name: MapsuiJsInterop
+  - uid: Mapsui.UI.Blazor.Extensions.MouseButtons
+    name: MouseButtons
+  - uid: Mapsui.UI.Blazor.Extensions.TouchPointExtensions
+    name: TouchPointExtensions
+- uid: Mapsui.UI.Eto
+  name: Mapsui.UI.Eto
+  items:
+  - uid: Mapsui.UI.Eto.MapControl
+    name: MapControl
+- uid: Mapsui.UI.Eto.Extensions
+  name: Mapsui.UI.Eto.Extensions
+  items:
+  - uid: Mapsui.UI.Eto.Extensions.Extensions
+    name: Extensions
+- uid: Mapsui.UI.Maui
+  name: Mapsui.UI.Maui
+  items:
+  - uid: Mapsui.UI.Maui.Callout
+    name: Callout
+  - uid: Mapsui.UI.Maui.CalloutClickedEventArgs
+    name: CalloutClickedEventArgs
+  - uid: Mapsui.UI.Maui.Circle
+    name: Circle
+  - uid: Mapsui.UI.Maui.Distance
+    name: Distance
+  - uid: Mapsui.UI.Maui.DrawableClickedEventArgs
+    name: DrawableClickedEventArgs
+  - uid: Mapsui.UI.Maui.KnownColor
+    name: KnownColor
+  - uid: Mapsui.UI.Maui.MapClickedEventArgs
+    name: MapClickedEventArgs
+  - uid: Mapsui.UI.Maui.MapControl
+    name: MapControl
+  - uid: Mapsui.UI.Maui.MapLongClickedEventArgs
+    name: MapLongClickedEventArgs
+  - uid: Mapsui.UI.Maui.MapSpan
+    name: MapSpan
+  - uid: Mapsui.UI.Maui.MapView
+    name: MapView
+  - uid: Mapsui.UI.Maui.Pin
+    name: Pin
+  - uid: Mapsui.UI.Maui.PinClickedEventArgs
+    name: PinClickedEventArgs
+  - uid: Mapsui.UI.Maui.PinType
+    name: PinType
+  - uid: Mapsui.UI.Maui.Polygon
+    name: Polygon
+  - uid: Mapsui.UI.Maui.Polyline
+    name: Polyline
+  - uid: Mapsui.UI.Maui.Position
+    name: Position
+  - uid: Mapsui.UI.Maui.SelectedPinChangedEventArgs
+    name: SelectedPinChangedEventArgs
+- uid: Mapsui.UI.Maui.Extensions
+  name: Mapsui.UI.Maui.Extensions
+  items:
+  - uid: Mapsui.UI.Maui.Extensions.ColorExtensions
+    name: ColorExtensions
+  - uid: Mapsui.UI.Maui.Extensions.PositionExtensions
+    name: PositionExtensions
+  - uid: Mapsui.UI.Maui.Extensions.TextAlignmentExtensions
+    name: TextAlignmentExtensions
+  - uid: Mapsui.UI.Maui.Extensions.ZoomLevelExtensions
+    name: ZoomLevelExtensions
+- uid: Mapsui.UI.Maui.Utils
+  name: Mapsui.UI.Maui.Utils
+  items:
+  - uid: Mapsui.UI.Maui.Utils.PolylineConverter
+    name: PolylineConverter
+- uid: Mapsui.UI.Objects
+  name: Mapsui.UI.Objects
+  items:
+  - uid: Mapsui.UI.Objects.Drawable
+    name: Drawable
+  - uid: Mapsui.UI.Objects.IFeatureProvider
+    name: IFeatureProvider
+  - uid: Mapsui.UI.Objects.MyLocationLayer
+    name: MyLocationLayer
+- uid: Mapsui.UI.WinUI
+  name: Mapsui.UI.WinUI
+  items:
+  - uid: Mapsui.UI.WinUI.GlobalStaticResources
+    name: GlobalStaticResources
+  - uid: Mapsui.UI.WinUI.MapControl
+    name: MapControl
+- uid: Mapsui.UI.WinUI.Extensions
+  name: Mapsui.UI.WinUI.Extensions
+  items:
+  - uid: Mapsui.UI.WinUI.Extensions.PointExtensions
+    name: PointExtensions
+  - uid: Mapsui.UI.WinUI.Extensions.PointerPointExtensions
+    name: PointerPointExtensions
+- uid: Mapsui.UI.Wpf
+  name: Mapsui.UI.Wpf
+  items:
+  - uid: Mapsui.UI.Wpf.MapControl
+    name: MapControl
+- uid: Mapsui.UI.Wpf.Extensions
+  name: Mapsui.UI.Wpf.Extensions
+  items:
+  - uid: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions
+    name: WindowsPointExtensions
+- uid: Mapsui.UI.iOS
+  name: Mapsui.UI.iOS
+  items:
+  - uid: Mapsui.UI.iOS.MapControl
+    name: MapControl
+- uid: Mapsui.Utilities
+  name: Mapsui.Utilities
+  items:
+  - uid: Mapsui.Utilities.Algorithms
+    name: Algorithms
+  - uid: Mapsui.Utilities.ConcurrentHashSet`1
+    name: ConcurrentHashSet<T>
+  - uid: Mapsui.Utilities.Constants
+    name: Constants
+  - uid: Mapsui.Utilities.EmbeddedResourceLoader
+    name: EmbeddedResourceLoader
+  - uid: Mapsui.Utilities.Haversine
+    name: Haversine
+  - uid: Mapsui.Utilities.ObservableRangeCollection`1
+    name: ObservableRangeCollection<T>
+  - uid: Mapsui.Utilities.Performance
+    name: Performance
+  - uid: Mapsui.Utilities.PlatformUtilities
+    name: PlatformUtilities
+  - uid: Mapsui.Utilities.Runtime
+    name: Runtime
+  - uid: Mapsui.Utilities.StreamHelper
+    name: StreamHelper
+  - uid: Mapsui.Utilities.SvgHelper
+    name: SvgHelper
+  - uid: Mapsui.Utilities.TransformationAlgorithms
+    name: TransformationAlgorithms
+  - uid: Mapsui.Utilities.Version
+    name: Version
+  - uid: Mapsui.Utilities.ZoomHelper
+    name: ZoomHelper
+- uid: Mapsui.Widgets
+  name: Mapsui.Widgets
+  items:
+  - uid: Mapsui.Widgets.Alignment
+    name: Alignment
+  - uid: Mapsui.Widgets.BaseWidget
+    name: BaseWidget
+  - uid: Mapsui.Widgets.HorizontalAlignment
+    name: HorizontalAlignment
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+  - uid: Mapsui.Widgets.IWidgetRenderer
+    name: IWidgetRenderer
+  - uid: Mapsui.Widgets.InputAreaType
+    name: InputAreaType
+  - uid: Mapsui.Widgets.InputOnlyWidget
+    name: InputOnlyWidget
+  - uid: Mapsui.Widgets.Orientation
+    name: Orientation
+  - uid: Mapsui.Widgets.VerticalAlignment
+    name: VerticalAlignment
+  - uid: Mapsui.Widgets.WidgetEventArgs
+    name: WidgetEventArgs
+  - uid: Mapsui.Widgets.WidgetInput
+    name: WidgetInput
+- uid: Mapsui.Widgets.BoxWidgets
+  name: Mapsui.Widgets.BoxWidgets
+  items:
+  - uid: Mapsui.Widgets.BoxWidgets.BoxWidget
+    name: BoxWidget
+  - uid: Mapsui.Widgets.BoxWidgets.TextBoxWidget
+    name: TextBoxWidget
+- uid: Mapsui.Widgets.ButtonWidgets
+  name: Mapsui.Widgets.ButtonWidgets
+  items:
+  - uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget
+    name: ButtonWidget
+  - uid: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
+    name: HyperlinkWidget
+  - uid: Mapsui.Widgets.ButtonWidgets.IconButtonWidget
+    name: IconButtonWidget
+  - uid: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget
+    name: ZoomInOutWidget
+- uid: Mapsui.Widgets.InfoWidgets
+  name: Mapsui.Widgets.InfoWidgets
+  items:
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget
+    name: LoggingWidget
+  - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
+    name: LoggingWidget.LogEntry
+  - uid: Mapsui.Widgets.InfoWidgets.MapInfoWidget
+    name: MapInfoWidget
+  - uid: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget
+    name: MouseCoordinatesWidget
+  - uid: Mapsui.Widgets.InfoWidgets.PerformanceWidget
+    name: PerformanceWidget
+  - uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
+    name: ShowLoggingInMap
+- uid: Mapsui.Widgets.ScaleBar
+  name: Mapsui.Widgets.ScaleBar
+  items:
+  - uid: Mapsui.Widgets.ScaleBar.IUnitConverter
+    name: IUnitConverter
+  - uid: Mapsui.Widgets.ScaleBar.ImperialUnitConverter
+    name: ImperialUnitConverter
+  - uid: Mapsui.Widgets.ScaleBar.MetricUnitConverter
+    name: MetricUnitConverter
+  - uid: Mapsui.Widgets.ScaleBar.NauticalUnitConverter
+    name: NauticalUnitConverter
+  - uid: Mapsui.Widgets.ScaleBar.ScaleBarMode
+    name: ScaleBarMode
+  - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget
+    name: ScaleBarWidget
+memberLayout: SamePage

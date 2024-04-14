@@ -1,0 +1,318 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wms
+  commentId: N:Mapsui.Providers.Wms
+  id: Mapsui.Providers.Wms
+  children:
+  - Mapsui.Providers.Wms.Capabilities
+  - Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+  - Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactAddress
+  - Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactPerson
+  - Mapsui.Providers.Wms.Capabilities.WmsServiceDescription
+  - Mapsui.Providers.Wms.Client
+  - Mapsui.Providers.Wms.Client.WmsLayerStyle
+  - Mapsui.Providers.Wms.Client.WmsOnlineResource
+  - Mapsui.Providers.Wms.Client.WmsServerLayer
+  - Mapsui.Providers.Wms.Client.WmsStyleLegend
+  - Mapsui.Providers.Wms.FeatureInfo
+  - Mapsui.Providers.Wms.GetFeatureInfo
+  - Mapsui.Providers.Wms.GmlGetFeatureInfoParser
+  - Mapsui.Providers.Wms.IGetFeatureInfoParser
+  - Mapsui.Providers.Wms.StatusEventHandler
+  - Mapsui.Providers.Wms.WmsProvider
+  - Mapsui.Providers.Wms.XmlGetFeatureInfoParser
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Providers.Wms
+  nameWithType: Mapsui.Providers.Wms
+  fullName: Mapsui.Providers.Wms
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Providers.Wms.Capabilities
+  commentId: T:Mapsui.Providers.Wms.Capabilities
+  href: Mapsui.Providers.Wms.Capabilities.html
+  name: Capabilities
+  nameWithType: Capabilities
+  fullName: Mapsui.Providers.Wms.Capabilities
+- uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+  commentId: T:Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+  parent: Mapsui.Providers.Wms
+  href: Mapsui.Providers.Wms.Capabilities.html
+  name: Capabilities.WmsContactInformation
+  nameWithType: Capabilities.WmsContactInformation
+  fullName: Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Capabilities
+    name: Capabilities
+    href: Mapsui.Providers.Wms.Capabilities.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+    name: WmsContactInformation
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Capabilities
+    name: Capabilities
+    href: Mapsui.Providers.Wms.Capabilities.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+    name: WmsContactInformation
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.html
+- uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactAddress
+  commentId: T:Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactAddress
+  parent: Mapsui.Providers.Wms
+  href: Mapsui.Providers.Wms.Capabilities.html
+  name: Capabilities.WmsContactInformation.ContactAddress
+  nameWithType: Capabilities.WmsContactInformation.ContactAddress
+  fullName: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactAddress
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Capabilities
+    name: Capabilities
+    href: Mapsui.Providers.Wms.Capabilities.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+    name: WmsContactInformation
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactAddress
+    name: ContactAddress
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactAddress.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Capabilities
+    name: Capabilities
+    href: Mapsui.Providers.Wms.Capabilities.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+    name: WmsContactInformation
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactAddress
+    name: ContactAddress
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactAddress.html
+- uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactPerson
+  commentId: T:Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactPerson
+  parent: Mapsui.Providers.Wms
+  href: Mapsui.Providers.Wms.Capabilities.html
+  name: Capabilities.WmsContactInformation.ContactPerson
+  nameWithType: Capabilities.WmsContactInformation.ContactPerson
+  fullName: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactPerson
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Capabilities
+    name: Capabilities
+    href: Mapsui.Providers.Wms.Capabilities.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+    name: WmsContactInformation
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactPerson
+    name: ContactPerson
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactPerson.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Capabilities
+    name: Capabilities
+    href: Mapsui.Providers.Wms.Capabilities.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation
+    name: WmsContactInformation
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactPerson
+    name: ContactPerson
+    href: Mapsui.Providers.Wms.Capabilities.WmsContactInformation.ContactPerson.html
+- uid: Mapsui.Providers.Wms.Capabilities.WmsServiceDescription
+  commentId: T:Mapsui.Providers.Wms.Capabilities.WmsServiceDescription
+  parent: Mapsui.Providers.Wms
+  href: Mapsui.Providers.Wms.Capabilities.html
+  name: Capabilities.WmsServiceDescription
+  nameWithType: Capabilities.WmsServiceDescription
+  fullName: Mapsui.Providers.Wms.Capabilities.WmsServiceDescription
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Capabilities
+    name: Capabilities
+    href: Mapsui.Providers.Wms.Capabilities.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsServiceDescription
+    name: WmsServiceDescription
+    href: Mapsui.Providers.Wms.Capabilities.WmsServiceDescription.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Capabilities
+    name: Capabilities
+    href: Mapsui.Providers.Wms.Capabilities.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Capabilities.WmsServiceDescription
+    name: WmsServiceDescription
+    href: Mapsui.Providers.Wms.Capabilities.WmsServiceDescription.html
+- uid: Mapsui.Providers.Wms.Client
+  commentId: T:Mapsui.Providers.Wms.Client
+  href: Mapsui.Providers.Wms.Client.html
+  name: Client
+  nameWithType: Client
+  fullName: Mapsui.Providers.Wms.Client
+- uid: Mapsui.Providers.Wms.Client.WmsLayerStyle
+  commentId: T:Mapsui.Providers.Wms.Client.WmsLayerStyle
+  href: Mapsui.Providers.Wms.Client.html
+  name: Client.WmsLayerStyle
+  nameWithType: Client.WmsLayerStyle
+  fullName: Mapsui.Providers.Wms.Client.WmsLayerStyle
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Client
+    name: Client
+    href: Mapsui.Providers.Wms.Client.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Client.WmsLayerStyle
+    name: WmsLayerStyle
+    href: Mapsui.Providers.Wms.Client.WmsLayerStyle.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Client
+    name: Client
+    href: Mapsui.Providers.Wms.Client.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Client.WmsLayerStyle
+    name: WmsLayerStyle
+    href: Mapsui.Providers.Wms.Client.WmsLayerStyle.html
+- uid: Mapsui.Providers.Wms.Client.WmsOnlineResource
+  commentId: T:Mapsui.Providers.Wms.Client.WmsOnlineResource
+  parent: Mapsui.Providers.Wms
+  href: Mapsui.Providers.Wms.Client.html
+  name: Client.WmsOnlineResource
+  nameWithType: Client.WmsOnlineResource
+  fullName: Mapsui.Providers.Wms.Client.WmsOnlineResource
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Client
+    name: Client
+    href: Mapsui.Providers.Wms.Client.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Client.WmsOnlineResource
+    name: WmsOnlineResource
+    href: Mapsui.Providers.Wms.Client.WmsOnlineResource.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Client
+    name: Client
+    href: Mapsui.Providers.Wms.Client.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Client.WmsOnlineResource
+    name: WmsOnlineResource
+    href: Mapsui.Providers.Wms.Client.WmsOnlineResource.html
+- uid: Mapsui.Providers.Wms.Client.WmsServerLayer
+  commentId: T:Mapsui.Providers.Wms.Client.WmsServerLayer
+  parent: Mapsui.Providers.Wms
+  href: Mapsui.Providers.Wms.Client.html
+  name: Client.WmsServerLayer
+  nameWithType: Client.WmsServerLayer
+  fullName: Mapsui.Providers.Wms.Client.WmsServerLayer
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Client
+    name: Client
+    href: Mapsui.Providers.Wms.Client.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Client.WmsServerLayer
+    name: WmsServerLayer
+    href: Mapsui.Providers.Wms.Client.WmsServerLayer.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Client
+    name: Client
+    href: Mapsui.Providers.Wms.Client.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Client.WmsServerLayer
+    name: WmsServerLayer
+    href: Mapsui.Providers.Wms.Client.WmsServerLayer.html
+- uid: Mapsui.Providers.Wms.Client.WmsStyleLegend
+  commentId: T:Mapsui.Providers.Wms.Client.WmsStyleLegend
+  parent: Mapsui.Providers.Wms
+  href: Mapsui.Providers.Wms.Client.html
+  name: Client.WmsStyleLegend
+  nameWithType: Client.WmsStyleLegend
+  fullName: Mapsui.Providers.Wms.Client.WmsStyleLegend
+  spec.csharp:
+  - uid: Mapsui.Providers.Wms.Client
+    name: Client
+    href: Mapsui.Providers.Wms.Client.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Client.WmsStyleLegend
+    name: WmsStyleLegend
+    href: Mapsui.Providers.Wms.Client.WmsStyleLegend.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wms.Client
+    name: Client
+    href: Mapsui.Providers.Wms.Client.html
+  - name: .
+  - uid: Mapsui.Providers.Wms.Client.WmsStyleLegend
+    name: WmsStyleLegend
+    href: Mapsui.Providers.Wms.Client.WmsStyleLegend.html
+- uid: Mapsui.Providers.Wms.FeatureInfo
+  commentId: T:Mapsui.Providers.Wms.FeatureInfo
+  parent: Mapsui.Providers.Wms
+  href: Mapsui.Providers.Wms.FeatureInfo.html
+  name: FeatureInfo
+  nameWithType: FeatureInfo
+  fullName: Mapsui.Providers.Wms.FeatureInfo
+- uid: Mapsui.Providers.Wms.StatusEventHandler
+  commentId: T:Mapsui.Providers.Wms.StatusEventHandler
+  href: Mapsui.Providers.Wms.StatusEventHandler.html
+  name: StatusEventHandler
+  nameWithType: StatusEventHandler
+  fullName: Mapsui.Providers.Wms.StatusEventHandler
+- uid: Mapsui.Providers.Wms.GetFeatureInfo
+  commentId: T:Mapsui.Providers.Wms.GetFeatureInfo
+  href: Mapsui.Providers.Wms.GetFeatureInfo.html
+  name: GetFeatureInfo
+  nameWithType: GetFeatureInfo
+  fullName: Mapsui.Providers.Wms.GetFeatureInfo
+- uid: Mapsui.Providers.Wms.GmlGetFeatureInfoParser
+  commentId: T:Mapsui.Providers.Wms.GmlGetFeatureInfoParser
+  href: Mapsui.Providers.Wms.GmlGetFeatureInfoParser.html
+  name: GmlGetFeatureInfoParser
+  nameWithType: GmlGetFeatureInfoParser
+  fullName: Mapsui.Providers.Wms.GmlGetFeatureInfoParser
+- uid: Mapsui.Providers.Wms.IGetFeatureInfoParser
+  commentId: T:Mapsui.Providers.Wms.IGetFeatureInfoParser
+  parent: Mapsui.Providers.Wms
+  href: Mapsui.Providers.Wms.IGetFeatureInfoParser.html
+  name: IGetFeatureInfoParser
+  nameWithType: IGetFeatureInfoParser
+  fullName: Mapsui.Providers.Wms.IGetFeatureInfoParser
+- uid: Mapsui.Providers.Wms.WmsProvider
+  commentId: T:Mapsui.Providers.Wms.WmsProvider
+  href: Mapsui.Providers.Wms.WmsProvider.html
+  name: WmsProvider
+  nameWithType: WmsProvider
+  fullName: Mapsui.Providers.Wms.WmsProvider
+- uid: Mapsui.Providers.Wms.XmlGetFeatureInfoParser
+  commentId: T:Mapsui.Providers.Wms.XmlGetFeatureInfoParser
+  href: Mapsui.Providers.Wms.XmlGetFeatureInfoParser.html
+  name: XmlGetFeatureInfoParser
+  nameWithType: XmlGetFeatureInfoParser
+  fullName: Mapsui.Providers.Wms.XmlGetFeatureInfoParser
+- uid: Mapsui.Providers.Wms
+  commentId: N:Mapsui.Providers.Wms
+  href: Mapsui.html
+  name: Mapsui.Providers.Wms
+  nameWithType: Mapsui.Providers.Wms
+  fullName: Mapsui.Providers.Wms
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wms
+    name: Wms
+    href: Mapsui.Providers.Wms.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wms
+    name: Wms
+    href: Mapsui.Providers.Wms.html

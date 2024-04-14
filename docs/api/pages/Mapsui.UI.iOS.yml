@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.iOS
+  commentId: N:Mapsui.UI.iOS
+  id: Mapsui.UI.iOS
+  children:
+  - Mapsui.UI.iOS.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.iOS
+  nameWithType: Mapsui.UI.iOS
+  fullName: Mapsui.UI.iOS
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.iOS
+references:
+- uid: Mapsui.UI.iOS.MapControl
+  commentId: T:Mapsui.UI.iOS.MapControl
+  href: Mapsui.UI.iOS.MapControl.html
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.iOS.MapControl

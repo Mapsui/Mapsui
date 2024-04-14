@@ -1,0 +1,328 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wfs.Utilities
+  commentId: N:Mapsui.Providers.Wfs.Utilities
+  id: Mapsui.Providers.Wfs.Utilities
+  children:
+  - Mapsui.Providers.Wfs.Utilities.FeatureIdFilter_FE1_1_0
+  - Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum
+  - Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+  - Mapsui.Providers.Wfs.Utilities.IFilter
+  - Mapsui.Providers.Wfs.Utilities.IWFS_TextResources
+  - Mapsui.Providers.Wfs.Utilities.OGCFilterCollection
+  - Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  - Mapsui.Providers.Wfs.Utilities.OgcFilterBase
+  - Mapsui.Providers.Wfs.Utilities.PropertyIsBetweenFilter_FE1_1_0
+  - Mapsui.Providers.Wfs.Utilities.PropertyIsEqualToFilter_FE1_1_0
+  - Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanFilter_FE1_1_0
+  - Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanOrEqualToFilter_FE1_1_0
+  - Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanFilter_FE1_1_0
+  - Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanOrEqualToFilter_FE1_1_0
+  - Mapsui.Providers.Wfs.Utilities.PropertyIsLikeFilter_FE1_1_0
+  - Mapsui.Providers.Wfs.Utilities.PropertyIsNotEqualToFilter_FE1_1_0
+  - Mapsui.Providers.Wfs.Utilities.UrlQueryHelper
+  - Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_TextResources
+  - Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_XPathTextResources
+  - Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_TextResources
+  - Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_XPathTextResources
+  - Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_TextResources
+  - Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_XPathTextResources
+  - Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  - Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+  - Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox
+  - Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo
+  - Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Providers.Wfs.Utilities
+  nameWithType: Mapsui.Providers.Wfs.Utilities
+  fullName: Mapsui.Providers.Wfs.Utilities
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum
+  commentId: T:Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum.html
+  name: GeometryTypeEnum
+  nameWithType: GeometryTypeEnum
+  fullName: Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum
+- uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  name: WfsFeatureTypeInfo
+  nameWithType: WfsFeatureTypeInfo
+  fullName: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+- uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  name: WfsFeatureTypeInfo.BoundingBox
+  nameWithType: WfsFeatureTypeInfo.BoundingBox
+  fullName: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+    name: WfsFeatureTypeInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox
+    name: BoundingBox
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+    name: WfsFeatureTypeInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox
+    name: BoundingBox
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox.html
+- uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  name: WfsFeatureTypeInfo.GeometryInfo
+  nameWithType: WfsFeatureTypeInfo.GeometryInfo
+  fullName: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+    name: WfsFeatureTypeInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo
+    name: GeometryInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+    name: WfsFeatureTypeInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo
+    name: GeometryInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo.html
+- uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo
+  href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  name: WfsFeatureTypeInfo.ElementInfo
+  nameWithType: WfsFeatureTypeInfo.ElementInfo
+  fullName: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+    name: WfsFeatureTypeInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo
+    name: ElementInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo
+    name: WfsFeatureTypeInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo
+    name: ElementInfo
+    href: Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo.html
+- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+  commentId: T:Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html
+  name: HttpClientUtil
+  nameWithType: HttpClientUtil
+  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil
+- uid: Mapsui.Providers.Wfs.Utilities.IWFS_TextResources
+  commentId: T:Mapsui.Providers.Wfs.Utilities.IWFS_TextResources
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.IWFS_TextResources.html
+  name: IWFS_TextResources
+  nameWithType: IWFS_TextResources
+  fullName: Mapsui.Providers.Wfs.Utilities.IWFS_TextResources
+- uid: Mapsui.Providers.Wfs.Utilities.IFilter
+  commentId: T:Mapsui.Providers.Wfs.Utilities.IFilter
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.IFilter.html
+  name: IFilter
+  nameWithType: IFilter
+  fullName: Mapsui.Providers.Wfs.Utilities.IFilter
+- uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection
+  commentId: T:Mapsui.Providers.Wfs.Utilities.OGCFilterCollection
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.html
+  name: OGCFilterCollection
+  nameWithType: OGCFilterCollection
+  fullName: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection
+- uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  commentId: T:Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.html
+  name: OGCFilterCollection.JunctorEnum
+  nameWithType: OGCFilterCollection.JunctorEnum
+  fullName: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection
+    name: OGCFilterCollection
+    href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+    name: JunctorEnum
+    href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection
+    name: OGCFilterCollection
+    href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum
+    name: JunctorEnum
+    href: Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.html
+- uid: Mapsui.Providers.Wfs.Utilities.OgcFilterBase
+  commentId: T:Mapsui.Providers.Wfs.Utilities.OgcFilterBase
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.OgcFilterBase.html
+  name: OgcFilterBase
+  nameWithType: OgcFilterBase
+  fullName: Mapsui.Providers.Wfs.Utilities.OgcFilterBase
+- uid: Mapsui.Providers.Wfs.Utilities.PropertyIsEqualToFilter_FE1_1_0
+  commentId: T:Mapsui.Providers.Wfs.Utilities.PropertyIsEqualToFilter_FE1_1_0
+  href: Mapsui.Providers.Wfs.Utilities.PropertyIsEqualToFilter_FE1_1_0.html
+  name: PropertyIsEqualToFilter_FE1_1_0
+  nameWithType: PropertyIsEqualToFilter_FE1_1_0
+  fullName: Mapsui.Providers.Wfs.Utilities.PropertyIsEqualToFilter_FE1_1_0
+- uid: Mapsui.Providers.Wfs.Utilities.PropertyIsNotEqualToFilter_FE1_1_0
+  commentId: T:Mapsui.Providers.Wfs.Utilities.PropertyIsNotEqualToFilter_FE1_1_0
+  href: Mapsui.Providers.Wfs.Utilities.PropertyIsNotEqualToFilter_FE1_1_0.html
+  name: PropertyIsNotEqualToFilter_FE1_1_0
+  nameWithType: PropertyIsNotEqualToFilter_FE1_1_0
+  fullName: Mapsui.Providers.Wfs.Utilities.PropertyIsNotEqualToFilter_FE1_1_0
+- uid: Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanFilter_FE1_1_0
+  commentId: T:Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanFilter_FE1_1_0
+  href: Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanFilter_FE1_1_0.html
+  name: PropertyIsLessThanFilter_FE1_1_0
+  nameWithType: PropertyIsLessThanFilter_FE1_1_0
+  fullName: Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanFilter_FE1_1_0
+- uid: Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanFilter_FE1_1_0
+  commentId: T:Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanFilter_FE1_1_0
+  href: Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanFilter_FE1_1_0.html
+  name: PropertyIsGreaterThanFilter_FE1_1_0
+  nameWithType: PropertyIsGreaterThanFilter_FE1_1_0
+  fullName: Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanFilter_FE1_1_0
+- uid: Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanOrEqualToFilter_FE1_1_0
+  commentId: T:Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanOrEqualToFilter_FE1_1_0
+  href: Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanOrEqualToFilter_FE1_1_0.html
+  name: PropertyIsLessThanOrEqualToFilter_FE1_1_0
+  nameWithType: PropertyIsLessThanOrEqualToFilter_FE1_1_0
+  fullName: Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanOrEqualToFilter_FE1_1_0
+- uid: Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanOrEqualToFilter_FE1_1_0
+  commentId: T:Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanOrEqualToFilter_FE1_1_0
+  href: Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanOrEqualToFilter_FE1_1_0.html
+  name: PropertyIsGreaterThanOrEqualToFilter_FE1_1_0
+  nameWithType: PropertyIsGreaterThanOrEqualToFilter_FE1_1_0
+  fullName: Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanOrEqualToFilter_FE1_1_0
+- uid: Mapsui.Providers.Wfs.Utilities.PropertyIsBetweenFilter_FE1_1_0
+  commentId: T:Mapsui.Providers.Wfs.Utilities.PropertyIsBetweenFilter_FE1_1_0
+  href: Mapsui.Providers.Wfs.Utilities.PropertyIsBetweenFilter_FE1_1_0.html
+  name: PropertyIsBetweenFilter_FE1_1_0
+  nameWithType: PropertyIsBetweenFilter_FE1_1_0
+  fullName: Mapsui.Providers.Wfs.Utilities.PropertyIsBetweenFilter_FE1_1_0
+- uid: Mapsui.Providers.Wfs.Utilities.PropertyIsLikeFilter_FE1_1_0
+  commentId: T:Mapsui.Providers.Wfs.Utilities.PropertyIsLikeFilter_FE1_1_0
+  href: Mapsui.Providers.Wfs.Utilities.PropertyIsLikeFilter_FE1_1_0.html
+  name: PropertyIsLikeFilter_FE1_1_0
+  nameWithType: PropertyIsLikeFilter_FE1_1_0
+  fullName: Mapsui.Providers.Wfs.Utilities.PropertyIsLikeFilter_FE1_1_0
+- uid: Mapsui.Providers.Wfs.Utilities.FeatureIdFilter_FE1_1_0
+  commentId: T:Mapsui.Providers.Wfs.Utilities.FeatureIdFilter_FE1_1_0
+  href: Mapsui.Providers.Wfs.Utilities.FeatureIdFilter_FE1_1_0.html
+  name: FeatureIdFilter_FE1_1_0
+  nameWithType: FeatureIdFilter_FE1_1_0
+  fullName: Mapsui.Providers.Wfs.Utilities.FeatureIdFilter_FE1_1_0
+- uid: Mapsui.Providers.Wfs.Utilities.UrlQueryHelper
+  commentId: T:Mapsui.Providers.Wfs.Utilities.UrlQueryHelper
+  href: Mapsui.Providers.Wfs.Utilities.UrlQueryHelper.html
+  name: UrlQueryHelper
+  nameWithType: UrlQueryHelper
+  fullName: Mapsui.Providers.Wfs.Utilities.UrlQueryHelper
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_XPathTextResources
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_XPathTextResources
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_XPathTextResources.html
+  name: WFS_1_0_0_XPathTextResources
+  nameWithType: WFS_1_0_0_XPathTextResources
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_XPathTextResources
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_XPathTextResources
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_XPathTextResources
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_XPathTextResources.html
+  name: WFS_1_1_0_XPathTextResources
+  nameWithType: WFS_1_1_0_XPathTextResources
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_XPathTextResources
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_XPathTextResources
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_XPathTextResources
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_XPathTextResources.html
+  name: WFS_2_0_0_XPathTextResources
+  nameWithType: WFS_2_0_0_XPathTextResources
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_XPathTextResources
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_TextResources
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_TextResources
+  href: Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_TextResources.html
+  name: WFS_1_0_0_TextResources
+  nameWithType: WFS_1_0_0_TextResources
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_TextResources
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_TextResources
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_TextResources
+  href: Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_TextResources.html
+  name: WFS_1_1_0_TextResources
+  nameWithType: WFS_1_1_0_TextResources
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_TextResources
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_TextResources
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_TextResources
+  href: Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_TextResources.html
+  name: WFS_2_0_0_TextResources
+  nameWithType: WFS_2_0_0_TextResources
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_2_0_0_TextResources
+- uid: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  commentId: T:Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+  parent: Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html
+  name: WFS_XPathTextResourcesBase
+  nameWithType: WFS_XPathTextResourcesBase
+  fullName: Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase
+- uid: Mapsui.Providers.Wfs.Utilities
+  commentId: N:Mapsui.Providers.Wfs.Utilities
+  href: Mapsui.html
+  name: Mapsui.Providers.Wfs.Utilities
+  nameWithType: Mapsui.Providers.Wfs.Utilities
+  fullName: Mapsui.Providers.Wfs.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities
+    name: Utilities
+    href: Mapsui.Providers.Wfs.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Utilities
+    name: Utilities
+    href: Mapsui.Providers.Wfs.Utilities.html

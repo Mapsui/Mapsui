@@ -1,0 +1,328 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Fetcher.IFetchDispatcher
+  commentId: T:Mapsui.Fetcher.IFetchDispatcher
+  id: IFetchDispatcher
+  parent: Mapsui.Fetcher
+  children:
+  - Mapsui.Fetcher.IFetchDispatcher.PropertyChanged
+  - Mapsui.Fetcher.IFetchDispatcher.TryTake(System.Func{System.Threading.Tasks.Task}@)
+  langs:
+  - csharp
+  - vb
+  name: IFetchDispatcher
+  nameWithType: IFetchDispatcher
+  fullName: Mapsui.Fetcher.IFetchDispatcher
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Fetcher/IFetchDispatcher.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IFetchDispatcher
+    path: ../../Mapsui/Fetcher/IFetchDispatcher.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  syntax:
+    content: public interface IFetchDispatcher
+    content.vb: Public Interface IFetchDispatcher
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Fetcher.IFetchDispatcher.TryTake(System.Func{System.Threading.Tasks.Task}@)
+  commentId: M:Mapsui.Fetcher.IFetchDispatcher.TryTake(System.Func{System.Threading.Tasks.Task}@)
+  id: TryTake(System.Func{System.Threading.Tasks.Task}@)
+  parent: Mapsui.Fetcher.IFetchDispatcher
+  langs:
+  - csharp
+  - vb
+  name: TryTake(out Func<Task>?)
+  nameWithType: IFetchDispatcher.TryTake(out Func<Task>?)
+  fullName: Mapsui.Fetcher.IFetchDispatcher.TryTake(out System.Func<System.Threading.Tasks.Task>?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Fetcher/IFetchDispatcher.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TryTake
+    path: ../../Mapsui/Fetcher/IFetchDispatcher.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  syntax:
+    content: bool TryTake(out Func<Task>? method)
+    parameters:
+    - id: method
+      type: System.Func{System.Threading.Tasks.Task}
+    return:
+      type: System.Boolean
+    content.vb: Function TryTake(method As Func(Of Task)) As Boolean
+  overload: Mapsui.Fetcher.IFetchDispatcher.TryTake*
+  nameWithType.vb: IFetchDispatcher.TryTake(Func(Of Task))
+  fullName.vb: Mapsui.Fetcher.IFetchDispatcher.TryTake(System.Func(Of System.Threading.Tasks.Task))
+  name.vb: TryTake(Func(Of Task))
+- uid: Mapsui.Fetcher.IFetchDispatcher.PropertyChanged
+  commentId: E:Mapsui.Fetcher.IFetchDispatcher.PropertyChanged
+  id: PropertyChanged
+  parent: Mapsui.Fetcher.IFetchDispatcher
+  langs:
+  - csharp
+  - vb
+  name: PropertyChanged
+  nameWithType: IFetchDispatcher.PropertyChanged
+  fullName: Mapsui.Fetcher.IFetchDispatcher.PropertyChanged
+  type: Event
+  source:
+    remote:
+      path: Mapsui/Fetcher/IFetchDispatcher.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PropertyChanged
+    path: ../../Mapsui/Fetcher/IFetchDispatcher.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  syntax:
+    content: event PropertyChangedEventHandler PropertyChanged
+    return:
+      type: System.ComponentModel.PropertyChangedEventHandler
+    content.vb: Event PropertyChanged As PropertyChangedEventHandler
+references:
+- uid: Mapsui.Fetcher
+  commentId: N:Mapsui.Fetcher
+  href: Mapsui.html
+  name: Mapsui.Fetcher
+  nameWithType: Mapsui.Fetcher
+  fullName: Mapsui.Fetcher
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Fetcher.IFetchDispatcher.TryTake*
+  commentId: Overload:Mapsui.Fetcher.IFetchDispatcher.TryTake
+  href: Mapsui.Fetcher.IFetchDispatcher.html#Mapsui_Fetcher_IFetchDispatcher_TryTake_System_Func_System_Threading_Tasks_Task___
+  name: TryTake
+  nameWithType: IFetchDispatcher.TryTake
+  fullName: Mapsui.Fetcher.IFetchDispatcher.TryTake
+- uid: System.Func{System.Threading.Tasks.Task}
+  commentId: T:System.Func{System.Threading.Tasks.Task}
+  parent: System
+  definition: System.Func`1
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
+  name: Func<Task>
+  nameWithType: Func<Task>
+  fullName: System.Func<System.Threading.Tasks.Task>
+  nameWithType.vb: Func(Of Task)
+  fullName.vb: System.Func(Of System.Threading.Tasks.Task)
+  name.vb: Func(Of Task)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - uid: System.Threading.Tasks.Task
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Threading.Tasks.Task
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Func`1
+  commentId: T:System.Func`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-1
+  name: Func<TResult>
+  nameWithType: Func<TResult>
+  fullName: System.Func<TResult>
+  nameWithType.vb: Func(Of TResult)
+  fullName.vb: System.Func(Of TResult)
+  name.vb: Func(Of TResult)
+  spec.csharp:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ComponentModel.PropertyChangedEventHandler
+  commentId: T:System.ComponentModel.PropertyChangedEventHandler
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler
+  name: PropertyChangedEventHandler
+  nameWithType: PropertyChangedEventHandler
+  fullName: System.ComponentModel.PropertyChangedEventHandler
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel

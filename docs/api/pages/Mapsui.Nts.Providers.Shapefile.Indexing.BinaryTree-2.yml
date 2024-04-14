@@ -1,0 +1,979 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  id: BinaryTree`2
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing
+  children:
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.#ctor
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree{`0,`1}.ItemValue)
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree{`0,`1}.ItemValue[])
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Between(`0,`0)
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Find(`0)
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.InOrder
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.StartsWith(System.String)
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.TraceTree
+  langs:
+  - csharp
+  - vb
+  name: BinaryTree<T, TU>
+  nameWithType: BinaryTree<T, TU>
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BinaryTree
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+    startLine: 60
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: The BinaryTree class are used for indexing values to enhance the speed of queries
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class BinaryTree<T, TU> where T : IComparable<T?>
+    typeParameters:
+    - id: T
+      description: Value type to be indexed
+    - id: TU
+      description: Value ID type
+    content.vb: >-
+      <Serializable>
+
+      Public Class BinaryTree(Of T As IComparable(Of T), TU)
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  nameWithType.vb: BinaryTree(Of T, TU)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU)
+  name.vb: BinaryTree(Of T, TU)
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.#ctor
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.#ctor
+  id: '#ctor'
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  langs:
+  - csharp
+  - vb
+  name: BinaryTree()
+  nameWithType: BinaryTree<T, TU>.BinaryTree()
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.BinaryTree()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+    startLine: 68
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Initializes a new instance of the generic binary tree.
+  example: []
+  syntax:
+    content: public BinaryTree()
+    content.vb: Public Sub New()
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.#ctor*
+  nameWithType.vb: BinaryTree(Of T, TU).New()
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).New()
+  name.vb: New()
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree{`0,`1}.ItemValue[])
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree{`0,`1}.ItemValue[])
+  id: Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree{`0,`1}.ItemValue[])
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  langs:
+  - csharp
+  - vb
+  name: Add(params ItemValue[])
+  nameWithType: BinaryTree<T, TU>.Add(params BinaryTree<T, TU>.ItemValue[])
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.Add(params Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.ItemValue[])
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Add
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+    startLine: 77
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Inserts a value into the tree
+  example: []
+  syntax:
+    content: public void Add(params BinaryTree<T, TU>.ItemValue[] items)
+    parameters:
+    - id: items
+      type: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue[]
+      description: ''
+    content.vb: Public Sub Add(ParamArray items As BinaryTree(Of T, TU).ItemValue())
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add*
+  nameWithType.vb: BinaryTree(Of T, TU).Add(ParamArray BinaryTree(Of T, TU).ItemValue())
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).Add(ParamArray Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).ItemValue())
+  name.vb: Add(ParamArray ItemValue())
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree{`0,`1}.ItemValue)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree{`0,`1}.ItemValue)
+  id: Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree{`0,`1}.ItemValue)
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  langs:
+  - csharp
+  - vb
+  name: Add(ItemValue)
+  nameWithType: BinaryTree<T, TU>.Add(BinaryTree<T, TU>.ItemValue)
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.ItemValue)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Add
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+    startLine: 86
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Inserts a value into the tree
+  example: []
+  syntax:
+    content: public void Add(BinaryTree<T, TU>.ItemValue item)
+    parameters:
+    - id: item
+      type: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+      description: ''
+    content.vb: Public Sub Add(item As BinaryTree(Of T, TU).ItemValue)
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add*
+  nameWithType.vb: BinaryTree(Of T, TU).Add(BinaryTree(Of T, TU).ItemValue)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).Add(Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).ItemValue)
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.TraceTree
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.TraceTree
+  id: TraceTree
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  langs:
+  - csharp
+  - vb
+  name: TraceTree()
+  nameWithType: BinaryTree<T, TU>.TraceTree()
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.TraceTree()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TraceTree
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+    startLine: 122
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: This is the classic computer science binary tree iteration
+  example: []
+  syntax:
+    content: public void TraceTree()
+    content.vb: Public Sub TraceTree()
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.TraceTree*
+  nameWithType.vb: BinaryTree(Of T, TU).TraceTree()
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).TraceTree()
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.InOrder
+  commentId: P:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.InOrder
+  id: InOrder
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  langs:
+  - csharp
+  - vb
+  name: InOrder
+  nameWithType: BinaryTree<T, TU>.InOrder
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.InOrder
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: InOrder
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+    startLine: 144
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Gets an enumerator for all the values in the tree in ascending order
+  example: []
+  syntax:
+    content: public IEnumerable<BinaryTree<T, TU>.ItemValue> InOrder { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue}
+    content.vb: Public ReadOnly Property InOrder As IEnumerable(Of BinaryTree(Of T, TU).ItemValue)
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.InOrder*
+  nameWithType.vb: BinaryTree(Of T, TU).InOrder
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).InOrder
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Between(`0,`0)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Between(`0,`0)
+  id: Between(`0,`0)
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  langs:
+  - csharp
+  - vb
+  name: Between(T, T)
+  nameWithType: BinaryTree<T, TU>.Between(T, T)
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.Between(T, T)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Between
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+    startLine: 152
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Gets and enumerator for the values between min and max in ascending order
+  example: []
+  syntax:
+    content: public IEnumerable<BinaryTree<T, TU>.ItemValue> Between(T min, T max)
+    parameters:
+    - id: min
+      type: '{T}'
+      description: ''
+    - id: max
+      type: '{T}'
+      description: ''
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue}
+      description: Enumerator
+    content.vb: Public Function Between(min As T, max As T) As IEnumerable(Of BinaryTree(Of T, TU).ItemValue)
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Between*
+  nameWithType.vb: BinaryTree(Of T, TU).Between(T, T)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).Between(T, T)
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.StartsWith(System.String)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.StartsWith(System.String)
+  id: StartsWith(System.String)
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  langs:
+  - csharp
+  - vb
+  name: StartsWith(string)
+  nameWithType: BinaryTree<T, TU>.StartsWith(string)
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.StartsWith(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StartsWith
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+    startLine: 162
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Enumerates the objects whose string-representation starts with 'str'
+  example: []
+  syntax:
+    content: public IEnumerable<BinaryTree<T, TU>.ItemValue> StartsWith(string str)
+    parameters:
+    - id: str
+      type: System.String
+      description: ''
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue}
+      description: Enumerator
+    content.vb: Public Function StartsWith(str As String) As IEnumerable(Of BinaryTree(Of T, TU).ItemValue)
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.StartsWith*
+  nameWithType.vb: BinaryTree(Of T, TU).StartsWith(String)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).StartsWith(String)
+  name.vb: StartsWith(String)
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Find(`0)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Find(`0)
+  id: Find(`0)
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  langs:
+  - csharp
+  - vb
+  name: Find(T)
+  nameWithType: BinaryTree<T, TU>.Find(T)
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.Find(T)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Find
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/BinaryTree.cs
+    startLine: 172
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Enumerates all objects with the specified value
+  example: []
+  syntax:
+    content: public IEnumerable<BinaryTree<T, TU>.ItemValue> Find(T value)
+    parameters:
+    - id: value
+      type: '{T}'
+      description: Value to search for
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue}
+      description: Enumerator
+    content.vb: Public Function Find(value As T) As IEnumerable(Of BinaryTree(Of T, TU).ItemValue)
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Find*
+  nameWithType.vb: BinaryTree(Of T, TU).Find(T)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).Find(T)
+references:
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing
+  commentId: N:Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.html
+  name: Mapsui.Nts.Providers.Shapefile.Indexing
+  nameWithType: Mapsui.Nts.Providers.Shapefile.Indexing
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing
+    name: Indexing
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing
+    name: Indexing
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.#ctor*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.#ctor
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html#Mapsui_Nts_Providers_Shapefile_Indexing_BinaryTree_2__ctor
+  name: BinaryTree
+  nameWithType: BinaryTree<T, TU>.BinaryTree
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.BinaryTree
+  nameWithType.vb: BinaryTree(Of T, TU).New
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).New
+  name.vb: New
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Add
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html#Mapsui_Nts_Providers_Shapefile_Indexing_BinaryTree_2_Add_Mapsui_Nts_Providers_Shapefile_Indexing_BinaryTree__0__1__ItemValue___
+  name: Add
+  nameWithType: BinaryTree<T, TU>.Add
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.Add
+  nameWithType.vb: BinaryTree(Of T, TU).Add
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).Add
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue[]
+  isExternal: true
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html
+  name: ItemValue[]
+  nameWithType: BinaryTree<T, TU>.ItemValue[]
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.ItemValue[]
+  nameWithType.vb: BinaryTree(Of T, TU).ItemValue()
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).ItemValue()
+  name.vb: ItemValue()
+  spec.csharp:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+    name: ItemValue
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+    name: ItemValue
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html
+  - name: (
+  - name: )
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  name: BinaryTree<T, TU>.ItemValue
+  nameWithType: BinaryTree<T, TU>.ItemValue
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.ItemValue
+  nameWithType.vb: BinaryTree(Of T, TU).ItemValue
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).ItemValue
+  name.vb: BinaryTree(Of T, TU).ItemValue
+  spec.csharp:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+    name: BinaryTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TU
+  - name: '>'
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+    name: ItemValue
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html
+  spec.vb:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+    name: BinaryTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TU
+  - name: )
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+    name: ItemValue
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.TraceTree*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.TraceTree
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html#Mapsui_Nts_Providers_Shapefile_Indexing_BinaryTree_2_TraceTree
+  name: TraceTree
+  nameWithType: BinaryTree<T, TU>.TraceTree
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.TraceTree
+  nameWithType.vb: BinaryTree(Of T, TU).TraceTree
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).TraceTree
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.InOrder*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.InOrder
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html#Mapsui_Nts_Providers_Shapefile_Indexing_BinaryTree_2_InOrder
+  name: InOrder
+  nameWithType: BinaryTree<T, TU>.InOrder
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.InOrder
+  nameWithType.vb: BinaryTree(Of T, TU).InOrder
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).InOrder
+- uid: System.Collections.Generic.IEnumerable{Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<BinaryTree<T, TU>.ItemValue>
+  nameWithType: IEnumerable<BinaryTree<T, TU>.ItemValue>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.ItemValue>
+  nameWithType.vb: IEnumerable(Of BinaryTree(Of T, TU).ItemValue)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).ItemValue)
+  name.vb: IEnumerable(Of BinaryTree(Of T, TU).ItemValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+    name: BinaryTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TU
+  - name: '>'
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+    name: ItemValue
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+    name: BinaryTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TU
+  - name: )
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+    name: ItemValue
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Between*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Between
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html#Mapsui_Nts_Providers_Shapefile_Indexing_BinaryTree_2_Between__0__0_
+  name: Between
+  nameWithType: BinaryTree<T, TU>.Between
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.Between
+  nameWithType.vb: BinaryTree(Of T, TU).Between
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).Between
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.StartsWith*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.StartsWith
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html#Mapsui_Nts_Providers_Shapefile_Indexing_BinaryTree_2_StartsWith_System_String_
+  name: StartsWith
+  nameWithType: BinaryTree<T, TU>.StartsWith
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.StartsWith
+  nameWithType.vb: BinaryTree(Of T, TU).StartsWith
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).StartsWith
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Find*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.Find
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html#Mapsui_Nts_Providers_Shapefile_Indexing_BinaryTree_2_Find__0_
+  name: Find
+  nameWithType: BinaryTree<T, TU>.Find
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.Find
+  nameWithType.vb: BinaryTree(Of T, TU).Find
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).Find

@@ -1,0 +1,42 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Disposing
+  commentId: N:Mapsui.Disposing
+  id: Mapsui.Disposing
+  children:
+  - Mapsui.Disposing.DisposableWrapper`1
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Disposing
+  nameWithType: Mapsui.Disposing
+  fullName: Mapsui.Disposing
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Disposing.DisposableWrapper`1
+  commentId: T:Mapsui.Disposing.DisposableWrapper`1
+  href: Mapsui.Disposing.DisposableWrapper-1.html
+  name: DisposableWrapper<T>
+  nameWithType: DisposableWrapper<T>
+  fullName: Mapsui.Disposing.DisposableWrapper<T>
+  nameWithType.vb: DisposableWrapper(Of T)
+  fullName.vb: Mapsui.Disposing.DisposableWrapper(Of T)
+  name.vb: DisposableWrapper(Of T)
+  spec.csharp:
+  - uid: Mapsui.Disposing.DisposableWrapper`1
+    name: DisposableWrapper
+    href: Mapsui.Disposing.DisposableWrapper-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Disposing.DisposableWrapper`1
+    name: DisposableWrapper
+    href: Mapsui.Disposing.DisposableWrapper-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

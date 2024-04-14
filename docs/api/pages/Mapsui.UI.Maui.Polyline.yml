@@ -1,0 +1,977 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui.Polyline
+  commentId: T:Mapsui.UI.Maui.Polyline
+  id: Polyline
+  parent: Mapsui.UI.Maui
+  children:
+  - Mapsui.UI.Maui.Polyline.#ctor
+  - Mapsui.UI.Maui.Polyline.#ctor(System.String)
+  - Mapsui.UI.Maui.Polyline.OnPropertyChanged(System.String)
+  - Mapsui.UI.Maui.Polyline.Positions
+  langs:
+  - csharp
+  - vb
+  name: Polyline
+  nameWithType: Polyline
+  fullName: Mapsui.UI.Maui.Polyline
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Polyline.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Polyline
+    path: ../../Mapsui.UI.MapView/Objects/Polyline.cs
+    startLine: 15
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: 'public class Polyline : Drawable, IFeatureProvider, INotifyPropertyChanged'
+    content.vb: Public Class Polyline Inherits Drawable Implements IFeatureProvider, INotifyPropertyChanged
+  inheritance:
+  - System.Object
+  - Mapsui.UI.Objects.Drawable
+  implements:
+  - Mapsui.UI.Objects.IFeatureProvider
+  - System.ComponentModel.INotifyPropertyChanged
+  inheritedMembers:
+  - Mapsui.UI.Objects.Drawable.Label
+  - Mapsui.UI.Objects.Drawable.StrokeWidth
+  - Mapsui.UI.Objects.Drawable.StrokeColor
+  - Mapsui.UI.Objects.Drawable.MinVisible
+  - Mapsui.UI.Objects.Drawable.MaxVisible
+  - Mapsui.UI.Objects.Drawable.ZIndex
+  - Mapsui.UI.Objects.Drawable.IsClickable
+  - Mapsui.UI.Objects.Drawable.Tag
+  - Mapsui.UI.Objects.Drawable.Feature
+  - Mapsui.UI.Objects.Drawable.Clicked
+  - Mapsui.UI.Objects.Drawable.PropertyChanged
+  - Mapsui.UI.Objects.Drawable.SetField``1({T}@,{T},System.String)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.Maui.Polyline.#ctor
+  commentId: M:Mapsui.UI.Maui.Polyline.#ctor
+  id: '#ctor'
+  parent: Mapsui.UI.Maui.Polyline
+  langs:
+  - csharp
+  - vb
+  name: Polyline()
+  nameWithType: Polyline.Polyline()
+  fullName: Mapsui.UI.Maui.Polyline.Polyline()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Polyline.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/Objects/Polyline.cs
+    startLine: 24
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Initializes a new instance of the <xref href="Mapsui.UI.Forms.Polyline" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public Polyline()
+    content.vb: Public Sub New()
+  overload: Mapsui.UI.Maui.Polyline.#ctor*
+  nameWithType.vb: Polyline.New()
+  fullName.vb: Mapsui.UI.Maui.Polyline.New()
+  name.vb: New()
+- uid: Mapsui.UI.Maui.Polyline.#ctor(System.String)
+  commentId: M:Mapsui.UI.Maui.Polyline.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Mapsui.UI.Maui.Polyline
+  langs:
+  - csharp
+  - vb
+  name: Polyline(string)
+  nameWithType: Polyline.Polyline(string)
+  fullName: Mapsui.UI.Maui.Polyline.Polyline(string)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Polyline.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/Objects/Polyline.cs
+    startLine: 36
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: >-
+    Initializes a new instance of the <xref href="Mapsui.UI.Forms.Polyline" data-throw-if-not-resolved="false"></xref> class from encoded string as described here
+
+    https://developers.google.com/maps/documentation/utilities/polylinealgorithm
+  example: []
+  syntax:
+    content: public Polyline(string encodedPolyline)
+    parameters:
+    - id: encodedPolyline
+      type: System.String
+      description: Encoded polyline
+    content.vb: Public Sub New(encodedPolyline As String)
+  overload: Mapsui.UI.Maui.Polyline.#ctor*
+  nameWithType.vb: Polyline.New(String)
+  fullName.vb: Mapsui.UI.Maui.Polyline.New(String)
+  name.vb: New(String)
+- uid: Mapsui.UI.Maui.Polyline.Positions
+  commentId: P:Mapsui.UI.Maui.Polyline.Positions
+  id: Positions
+  parent: Mapsui.UI.Maui.Polyline
+  langs:
+  - csharp
+  - vb
+  name: Positions
+  nameWithType: Polyline.Positions
+  fullName: Mapsui.UI.Maui.Polyline.Positions
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Polyline.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Positions
+    path: ../../Mapsui.UI.MapView/Objects/Polyline.cs
+    startLine: 47
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Positions of line
+  example: []
+  syntax:
+    content: public IList<Position> Positions { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IList{Mapsui.UI.Maui.Position}
+    content.vb: Public ReadOnly Property Positions As IList(Of Position)
+  overload: Mapsui.UI.Maui.Polyline.Positions*
+- uid: Mapsui.UI.Maui.Polyline.OnPropertyChanged(System.String)
+  commentId: M:Mapsui.UI.Maui.Polyline.OnPropertyChanged(System.String)
+  id: OnPropertyChanged(System.String)
+  parent: Mapsui.UI.Maui.Polyline
+  langs:
+  - csharp
+  - vb
+  name: OnPropertyChanged(string?)
+  nameWithType: Polyline.OnPropertyChanged(string?)
+  fullName: Mapsui.UI.Maui.Polyline.OnPropertyChanged(string?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Polyline.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPropertyChanged
+    path: ../../Mapsui.UI.MapView/Objects/Polyline.cs
+    startLine: 49
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  example: []
+  syntax:
+    content: protected override void OnPropertyChanged(string? propertyName = null)
+    parameters:
+    - id: propertyName
+      type: System.String
+    content.vb: Protected Overrides Sub OnPropertyChanged(propertyName As String = Nothing)
+  overridden: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.String)
+  overload: Mapsui.UI.Maui.Polyline.OnPropertyChanged*
+  nameWithType.vb: Polyline.OnPropertyChanged(String)
+  fullName.vb: Mapsui.UI.Maui.Polyline.OnPropertyChanged(String)
+  name.vb: OnPropertyChanged(String)
+references:
+- uid: Mapsui.UI.Maui
+  commentId: N:Mapsui.UI.Maui
+  href: Mapsui.html
+  name: Mapsui.UI.Maui
+  nameWithType: Mapsui.UI.Maui
+  fullName: Mapsui.UI.Maui
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.UI.Objects.Drawable
+  commentId: T:Mapsui.UI.Objects.Drawable
+  parent: Mapsui.UI.Objects
+  href: Mapsui.UI.Objects.Drawable.html
+  name: Drawable
+  nameWithType: Drawable
+  fullName: Mapsui.UI.Objects.Drawable
+- uid: Mapsui.UI.Objects.IFeatureProvider
+  commentId: T:Mapsui.UI.Objects.IFeatureProvider
+  parent: Mapsui.UI.Objects
+  href: Mapsui.UI.Objects.IFeatureProvider.html
+  name: IFeatureProvider
+  nameWithType: IFeatureProvider
+  fullName: Mapsui.UI.Objects.IFeatureProvider
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: Mapsui.UI.Objects.Drawable.Label
+  commentId: P:Mapsui.UI.Objects.Drawable.Label
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_Label
+  name: Label
+  nameWithType: Drawable.Label
+  fullName: Mapsui.UI.Objects.Drawable.Label
+- uid: Mapsui.UI.Objects.Drawable.StrokeWidth
+  commentId: P:Mapsui.UI.Objects.Drawable.StrokeWidth
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_StrokeWidth
+  name: StrokeWidth
+  nameWithType: Drawable.StrokeWidth
+  fullName: Mapsui.UI.Objects.Drawable.StrokeWidth
+- uid: Mapsui.UI.Objects.Drawable.StrokeColor
+  commentId: P:Mapsui.UI.Objects.Drawable.StrokeColor
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_StrokeColor
+  name: StrokeColor
+  nameWithType: Drawable.StrokeColor
+  fullName: Mapsui.UI.Objects.Drawable.StrokeColor
+- uid: Mapsui.UI.Objects.Drawable.MinVisible
+  commentId: P:Mapsui.UI.Objects.Drawable.MinVisible
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_MinVisible
+  name: MinVisible
+  nameWithType: Drawable.MinVisible
+  fullName: Mapsui.UI.Objects.Drawable.MinVisible
+- uid: Mapsui.UI.Objects.Drawable.MaxVisible
+  commentId: P:Mapsui.UI.Objects.Drawable.MaxVisible
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_MaxVisible
+  name: MaxVisible
+  nameWithType: Drawable.MaxVisible
+  fullName: Mapsui.UI.Objects.Drawable.MaxVisible
+- uid: Mapsui.UI.Objects.Drawable.ZIndex
+  commentId: P:Mapsui.UI.Objects.Drawable.ZIndex
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_ZIndex
+  name: ZIndex
+  nameWithType: Drawable.ZIndex
+  fullName: Mapsui.UI.Objects.Drawable.ZIndex
+- uid: Mapsui.UI.Objects.Drawable.IsClickable
+  commentId: P:Mapsui.UI.Objects.Drawable.IsClickable
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_IsClickable
+  name: IsClickable
+  nameWithType: Drawable.IsClickable
+  fullName: Mapsui.UI.Objects.Drawable.IsClickable
+- uid: Mapsui.UI.Objects.Drawable.Tag
+  commentId: P:Mapsui.UI.Objects.Drawable.Tag
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_Tag
+  name: Tag
+  nameWithType: Drawable.Tag
+  fullName: Mapsui.UI.Objects.Drawable.Tag
+- uid: Mapsui.UI.Objects.Drawable.Feature
+  commentId: P:Mapsui.UI.Objects.Drawable.Feature
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_Feature
+  name: Feature
+  nameWithType: Drawable.Feature
+  fullName: Mapsui.UI.Objects.Drawable.Feature
+- uid: Mapsui.UI.Objects.Drawable.Clicked
+  commentId: E:Mapsui.UI.Objects.Drawable.Clicked
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_Clicked
+  name: Clicked
+  nameWithType: Drawable.Clicked
+  fullName: Mapsui.UI.Objects.Drawable.Clicked
+- uid: Mapsui.UI.Objects.Drawable.PropertyChanged
+  commentId: E:Mapsui.UI.Objects.Drawable.PropertyChanged
+  parent: Mapsui.UI.Objects.Drawable
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_PropertyChanged
+  name: PropertyChanged
+  nameWithType: Drawable.PropertyChanged
+  fullName: Mapsui.UI.Objects.Drawable.PropertyChanged
+- uid: Mapsui.UI.Objects.Drawable.SetField``1({T}@,{T},System.String)
+  commentId: M:Mapsui.UI.Objects.Drawable.SetField``1(``0@,``0,System.String)
+  parent: Mapsui.UI.Objects.Drawable
+  definition: Mapsui.UI.Objects.Drawable.SetField``1(``0@,``0,System.String)
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_SetField__1___0____0_System_String_
+  name: SetField<T>(ref T, T, string)
+  nameWithType: Drawable.SetField<T>(ref T, T, string)
+  fullName: Mapsui.UI.Objects.Drawable.SetField<T>(ref T, T, string)
+  nameWithType.vb: Drawable.SetField(Of T)(T, T, String)
+  fullName.vb: Mapsui.UI.Objects.Drawable.SetField(Of T)(T, T, String)
+  name.vb: SetField(Of T)(T, T, String)
+  spec.csharp:
+  - uid: Mapsui.UI.Objects.Drawable.SetField``1(``0@,``0,System.String)
+    name: SetField
+    href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_SetField__1___0____0_System_String_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: ref
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.Objects.Drawable.SetField``1(``0@,``0,System.String)
+    name: SetField
+    href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_SetField__1___0____0_System_String_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.UI.Objects
+  commentId: N:Mapsui.UI.Objects
+  href: Mapsui.html
+  name: Mapsui.UI.Objects
+  nameWithType: Mapsui.UI.Objects
+  fullName: Mapsui.UI.Objects
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: Mapsui.UI.Objects.Drawable.SetField``1(``0@,``0,System.String)
+  commentId: M:Mapsui.UI.Objects.Drawable.SetField``1(``0@,``0,System.String)
+  isExternal: true
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_SetField__1___0____0_System_String_
+  name: SetField<T>(ref T, T, string)
+  nameWithType: Drawable.SetField<T>(ref T, T, string)
+  fullName: Mapsui.UI.Objects.Drawable.SetField<T>(ref T, T, string)
+  nameWithType.vb: Drawable.SetField(Of T)(T, T, String)
+  fullName.vb: Mapsui.UI.Objects.Drawable.SetField(Of T)(T, T, String)
+  name.vb: SetField(Of T)(T, T, String)
+  spec.csharp:
+  - uid: Mapsui.UI.Objects.Drawable.SetField``1(``0@,``0,System.String)
+    name: SetField
+    href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_SetField__1___0____0_System_String_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: ref
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.Objects.Drawable.SetField``1(``0@,``0,System.String)
+    name: SetField
+    href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_SetField__1___0____0_System_String_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.UI.Forms.Polyline
+  commentId: T:Mapsui.UI.Forms.Polyline
+  isExternal: true
+- uid: Mapsui.UI.Maui.Polyline.#ctor*
+  commentId: Overload:Mapsui.UI.Maui.Polyline.#ctor
+  href: Mapsui.UI.Maui.Polyline.html#Mapsui_UI_Maui_Polyline__ctor
+  name: Polyline
+  nameWithType: Polyline.Polyline
+  fullName: Mapsui.UI.Maui.Polyline.Polyline
+  nameWithType.vb: Polyline.New
+  fullName.vb: Mapsui.UI.Maui.Polyline.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.UI.Maui.Polyline.Positions*
+  commentId: Overload:Mapsui.UI.Maui.Polyline.Positions
+  href: Mapsui.UI.Maui.Polyline.html#Mapsui_UI_Maui_Polyline_Positions
+  name: Positions
+  nameWithType: Polyline.Positions
+  fullName: Mapsui.UI.Maui.Polyline.Positions
+- uid: System.Collections.Generic.IList{Mapsui.UI.Maui.Position}
+  commentId: T:System.Collections.Generic.IList{Mapsui.UI.Maui.Position}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<Position>
+  nameWithType: IList<Position>
+  fullName: System.Collections.Generic.IList<Mapsui.UI.Maui.Position>
+  nameWithType.vb: IList(Of Position)
+  fullName.vb: System.Collections.Generic.IList(Of Mapsui.UI.Maui.Position)
+  name.vb: IList(Of Position)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: Mapsui.UI.Maui.Position
+    name: Position
+    href: Mapsui.UI.Maui.Position.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.UI.Maui.Position
+    name: Position
+    href: Mapsui.UI.Maui.Position.html
+  - name: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.String)
+  commentId: M:Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.String)
+  parent: Mapsui.UI.Objects.Drawable
+  isExternal: true
+  href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_OnPropertyChanged_System_String_
+  name: OnPropertyChanged(string)
+  nameWithType: Drawable.OnPropertyChanged(string)
+  fullName: Mapsui.UI.Objects.Drawable.OnPropertyChanged(string)
+  nameWithType.vb: Drawable.OnPropertyChanged(String)
+  fullName.vb: Mapsui.UI.Objects.Drawable.OnPropertyChanged(String)
+  name.vb: OnPropertyChanged(String)
+  spec.csharp:
+  - uid: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.UI.Maui.Polyline.OnPropertyChanged*
+  commentId: Overload:Mapsui.UI.Maui.Polyline.OnPropertyChanged
+  href: Mapsui.UI.Maui.Polyline.html#Mapsui_UI_Maui_Polyline_OnPropertyChanged_System_String_
+  name: OnPropertyChanged
+  nameWithType: Polyline.OnPropertyChanged
+  fullName: Mapsui.UI.Maui.Polyline.OnPropertyChanged

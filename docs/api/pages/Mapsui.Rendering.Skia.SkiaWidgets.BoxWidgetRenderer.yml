@@ -1,0 +1,598 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer
+  id: BoxWidgetRenderer
+  parent: Mapsui.Rendering.Skia.SkiaWidgets
+  children:
+  - Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,System.Single)
+  langs:
+  - csharp
+  - vb
+  name: BoxWidgetRenderer
+  nameWithType: BoxWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/SkiaWidgets/BoxWidgetRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BoxWidgetRenderer
+    path: ../../Mapsui.Rendering.Skia/SkiaWidgets/BoxWidgetRenderer.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.SkiaWidgets
+  syntax:
+    content: 'public class BoxWidgetRenderer : ISkiaWidgetRenderer, IWidgetRenderer'
+    content.vb: Public Class BoxWidgetRenderer Implements ISkiaWidgetRenderer, IWidgetRenderer
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+  - Mapsui.Widgets.IWidgetRenderer
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,System.Single)
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,System.Single)
+  id: Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,System.Single)
+  parent: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer
+  langs:
+  - csharp
+  - vb
+  name: Draw(SKCanvas, Viewport, IWidget, float)
+  nameWithType: BoxWidgetRenderer.Draw(SKCanvas, Viewport, IWidget, float)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Widgets.IWidget, float)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/SkiaWidgets/BoxWidgetRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Draw
+    path: ../../Mapsui.Rendering.Skia/SkiaWidgets/BoxWidgetRenderer.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.SkiaWidgets
+  example: []
+  syntax:
+    content: public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
+    parameters:
+    - id: canvas
+      type: SkiaSharp.SKCanvas
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: widget
+      type: Mapsui.Widgets.IWidget
+    - id: layerOpacity
+      type: System.Single
+    content.vb: Public Sub Draw(canvas As SKCanvas, viewport As Viewport, widget As IWidget, layerOpacity As Single)
+  overload: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.Draw*
+  implements:
+  - Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,System.Single)
+  nameWithType.vb: BoxWidgetRenderer.Draw(SKCanvas, Viewport, IWidget, Single)
+  fullName.vb: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Widgets.IWidget, Single)
+  name.vb: Draw(SKCanvas, Viewport, IWidget, Single)
+references:
+- uid: Mapsui.Rendering.Skia.SkiaWidgets
+  commentId: N:Mapsui.Rendering.Skia.SkiaWidgets
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia.SkiaWidgets
+  nameWithType: Mapsui.Rendering.Skia.SkiaWidgets
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets
+    name: SkiaWidgets
+    href: Mapsui.Rendering.Skia.SkiaWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets
+    name: SkiaWidgets
+    href: Mapsui.Rendering.Skia.SkiaWidgets.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+  parent: Mapsui.Rendering.Skia.SkiaWidgets
+  href: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html
+  name: ISkiaWidgetRenderer
+  nameWithType: ISkiaWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+- uid: Mapsui.Widgets.IWidgetRenderer
+  commentId: T:Mapsui.Widgets.IWidgetRenderer
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.IWidgetRenderer.html
+  name: IWidgetRenderer
+  nameWithType: IWidgetRenderer
+  fullName: Mapsui.Widgets.IWidgetRenderer
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  href: Mapsui.html
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.Draw*
+  commentId: Overload:Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.Draw
+  href: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_BoxWidgetRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Widgets_IWidget_System_Single_
+  name: Draw
+  nameWithType: BoxWidgetRenderer.Draw
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.BoxWidgetRenderer.Draw
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,System.Single)
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,System.Single)
+  parent: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
+  isExternal: true
+  href: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ISkiaWidgetRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Widgets_IWidget_System_Single_
+  name: Draw(SKCanvas, Viewport, IWidget, float)
+  nameWithType: ISkiaWidgetRenderer.Draw(SKCanvas, Viewport, IWidget, float)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Widgets.IWidget, float)
+  nameWithType.vb: ISkiaWidgetRenderer.Draw(SKCanvas, Viewport, IWidget, Single)
+  fullName.vb: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Widgets.IWidget, Single)
+  name.vb: Draw(SKCanvas, Viewport, IWidget, Single)
+  spec.csharp:
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,System.Single)
+    name: Draw
+    href: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ISkiaWidgetRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Widgets_IWidget_System_Single_
+  - name: (
+  - uid: SkiaSharp.SKCanvas
+    name: SKCanvas
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.skcanvas
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Viewport
+    name: Viewport
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,System.Single)
+    name: Draw
+    href: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ISkiaWidgetRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Widgets_IWidget_System_Single_
+  - name: (
+  - uid: SkiaSharp.SKCanvas
+    name: SKCanvas
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.skcanvas
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Viewport
+    name: Viewport
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: )
+- uid: SkiaSharp.SKCanvas
+  commentId: T:SkiaSharp.SKCanvas
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skcanvas
+  name: SKCanvas
+  nameWithType: SKCanvas
+  fullName: SkiaSharp.SKCanvas
+- uid: Mapsui.Viewport
+  commentId: T:Mapsui.Viewport
+  parent: Mapsui
+  href: Mapsui.Viewport.html
+  name: Viewport
+  nameWithType: Viewport
+  fullName: Mapsui.Viewport
+- uid: Mapsui.Widgets.IWidget
+  commentId: T:Mapsui.Widgets.IWidget
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.IWidget.html
+  name: IWidget
+  nameWithType: IWidget
+  fullName: Mapsui.Widgets.IWidget
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: SkiaSharp
+  commentId: N:SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp
+  name: SkiaSharp
+  nameWithType: SkiaSharp
+  fullName: SkiaSharp
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui

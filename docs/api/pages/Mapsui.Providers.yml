@@ -1,0 +1,90 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers
+  commentId: N:Mapsui.Providers
+  id: Mapsui.Providers
+  children:
+  - Mapsui.Providers.FilteringProvider
+  - Mapsui.Providers.IProjectingProvider
+  - Mapsui.Providers.IProvider
+  - Mapsui.Providers.IProviderExtended
+  - Mapsui.Providers.MemoryProvider
+  - Mapsui.Providers.ProjectingProvider
+  - Mapsui.Providers.StackedLabelProvider
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Providers
+  nameWithType: Mapsui.Providers
+  fullName: Mapsui.Providers
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Providers.FilteringProvider
+  commentId: T:Mapsui.Providers.FilteringProvider
+  href: Mapsui.Providers.FilteringProvider.html
+  name: FilteringProvider
+  nameWithType: FilteringProvider
+  fullName: Mapsui.Providers.FilteringProvider
+- uid: Mapsui.Providers.IProjectingProvider
+  commentId: T:Mapsui.Providers.IProjectingProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProjectingProvider.html
+  name: IProjectingProvider
+  nameWithType: IProjectingProvider
+  fullName: Mapsui.Providers.IProjectingProvider
+- uid: Mapsui.Providers.IProvider
+  commentId: T:Mapsui.Providers.IProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProvider.html
+  name: IProvider
+  nameWithType: IProvider
+  fullName: Mapsui.Providers.IProvider
+- uid: Mapsui.Providers.IProviderExtended
+  commentId: T:Mapsui.Providers.IProviderExtended
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProviderExtended.html
+  name: IProviderExtended
+  nameWithType: IProviderExtended
+  fullName: Mapsui.Providers.IProviderExtended
+- uid: Mapsui.Providers.MemoryProvider
+  commentId: T:Mapsui.Providers.MemoryProvider
+  href: Mapsui.Providers.MemoryProvider.html
+  name: MemoryProvider
+  nameWithType: MemoryProvider
+  fullName: Mapsui.Providers.MemoryProvider
+- uid: Mapsui.Providers.ProjectingProvider
+  commentId: T:Mapsui.Providers.ProjectingProvider
+  href: Mapsui.Providers.ProjectingProvider.html
+  name: ProjectingProvider
+  nameWithType: ProjectingProvider
+  fullName: Mapsui.Providers.ProjectingProvider
+- uid: Mapsui.Providers.StackedLabelProvider
+  commentId: T:Mapsui.Providers.StackedLabelProvider
+  href: Mapsui.Providers.StackedLabelProvider.html
+  name: StackedLabelProvider
+  nameWithType: StackedLabelProvider
+  fullName: Mapsui.Providers.StackedLabelProvider
+- uid: Mapsui.Providers
+  commentId: N:Mapsui.Providers
+  href: Mapsui.html
+  name: Mapsui.Providers
+  nameWithType: Mapsui.Providers
+  fullName: Mapsui.Providers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html

@@ -1,0 +1,2177 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class MapControl </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class MapControl ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.UI.WinUI.MapControl">
+
+
+
+  <h1 id="Mapsui_UI_WinUI_MapControl" data-uid="Mapsui.UI.WinUI.MapControl" class="text-break">Class MapControl</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement">UIElement</a></div>
+    <div class="level2"><a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement">FrameworkElement</a></div>
+    <div class="level3"><a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.panel">Panel</a></div>
+    <div class="level4"><a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid">Grid</a></div>
+    <div class="level5"><span class="xref">MapControl</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.composition.ianimationobject">IAnimationObject</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.composition.ivisualelement">IVisualElement</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.composition.ivisualelement2">IVisualElement2</a></div>
+    <div><span class="xref">IDependencyObjectStoreProvider</span></div>
+    <div><span class="xref">IWeakReferenceProvider</span></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+    <div><span class="xref">IDataContextProvider</span></div>
+    <div><a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.dependencyobject">DependencyObject</a></div>
+    <div><span class="xref">ILayoutConstraints</span></div>
+    <div><a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">Grid.MeasureOverride(Size)</span>
+    </div>
+    <div>
+      <span class="xref">Grid.ArrangeOverride(Size)</span>
+    </div>
+    <div>
+      <span class="xref">Grid.GetRow(UIElement)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Grid.SetRow(UIElement, int)</a>
+    </div>
+    <div>
+      <span class="xref">Grid.GetColumn(UIElement)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Grid.SetColumn(UIElement, int)</a>
+    </div>
+    <div>
+      <span class="xref">Grid.GetRowSpan(UIElement)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Grid.SetRowSpan(UIElement, int)</a>
+    </div>
+    <div>
+      <span class="xref">Grid.GetColumnSpan(UIElement)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">Grid.SetColumnSpan(UIElement, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.rowdefinitions">Grid.RowDefinitions</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.columndefinitions">Grid.ColumnDefinitions</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.backgroundsizingproperty">Grid.BackgroundSizingProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.backgroundsizing">Grid.BackgroundSizing</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.borderbrush">Grid.BorderBrush</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.borderbrushproperty">Grid.BorderBrushProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.borderthickness">Grid.BorderThickness</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.borderthicknessproperty">Grid.BorderThicknessProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.padding">Grid.Padding</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.paddingproperty">Grid.PaddingProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.cornerradius">Grid.CornerRadius</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.cornerradiusproperty">Grid.CornerRadiusProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.rowproperty">Grid.RowProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.columnproperty">Grid.ColumnProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.rowspanproperty">Grid.RowSpanProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.columnspanproperty">Grid.ColumnSpanProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.rowspacing">Grid.RowSpacing</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.rowspacingproperty">Grid.RowSpacingProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.columnspacing">Grid.ColumnSpacing</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.grid.columnspacingproperty">Grid.ColumnSpacingProperty</a>
+    </div>
+    <div>
+      <span class="xref">Panel.OnChildrenChanged()</span>
+    </div>
+    <div>
+      <span class="xref">Panel.OnBackgroundChanged(DependencyPropertyChangedEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">Panel.Add(UIElement)</span>
+    </div>
+    <div>
+      <span class="xref">Panel.OnCornerRadiusChanged(CornerRadius, CornerRadius)</span>
+    </div>
+    <div>
+      <span class="xref">Panel.OnPaddingChanged(Thickness, Thickness)</span>
+    </div>
+    <div>
+      <span class="xref">Panel.OnBorderThicknessChanged(Thickness, Thickness)</span>
+    </div>
+    <div>
+      <span class="xref">Panel.OnBorderBrushChanged(Brush, Brush)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.panel.backgroundtransition">Panel.BackgroundTransition</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.panel.children">Panel.Children</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.panel.childrentransitions">Panel.ChildrenTransitions</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.panel.childrentransitionsproperty">Panel.ChildrenTransitionsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.panel.isitemshostproperty">Panel.IsItemsHostProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.panel.isitemshost">Panel.IsItemsHost</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.defertree">FrameworkElement.DeferTree(DependencyObject)</a>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.MeasureElement(UIElement, Size)</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.ArrangeElement(UIElement, Rect)</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.GetElementDesiredSize(UIElement)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.onapplytemplate">FrameworkElement.OnApplyTemplate()</a>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.IsWidthConstrainedInner(UIElement)</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.IsHeightConstrainedInner(UIElement)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.gotoelementstatecore">FrameworkElement.GoToElementStateCore(string, bool)</a>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.OnCreateAutomationPeer()</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.GetAccessibilityInnerText()</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.GetAutomationPeer()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.invalidateviewport">FrameworkElement.InvalidateViewport()</a>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.FindFirstParent&lt;T&gt;()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">FrameworkElement.FindFirstParent&lt;T&gt;(bool)</a>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.AdjustArrange(Size)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.findname">FrameworkElement.FindName(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">FrameworkElement.ApplyBindingPhase(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">FrameworkElement.GetStringFromObject(object)</a>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.GetEnumerator()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.width">FrameworkElement.Width</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.verticalalignment">FrameworkElement.VerticalAlignment</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.minwidth">FrameworkElement.MinWidth</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.minheight">FrameworkElement.MinHeight</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.maxwidth">FrameworkElement.MaxWidth</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.maxheight">FrameworkElement.MaxHeight</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.margin">FrameworkElement.Margin</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.language">FrameworkElement.Language</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.horizontalalignment">FrameworkElement.HorizontalAlignment</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.height">FrameworkElement.Height</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.triggers">FrameworkElement.Triggers</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.actualheightproperty">FrameworkElement.ActualHeightProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.actualthemeproperty">FrameworkElement.ActualThemeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.actualwidthproperty">FrameworkElement.ActualWidthProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.heightproperty">FrameworkElement.HeightProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.horizontalalignmentproperty">FrameworkElement.HorizontalAlignmentProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.languageproperty">FrameworkElement.LanguageProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.marginproperty">FrameworkElement.MarginProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.maxheightproperty">FrameworkElement.MaxHeightProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.maxwidthproperty">FrameworkElement.MaxWidthProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.minheightproperty">FrameworkElement.MinHeightProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.minwidthproperty">FrameworkElement.MinWidthProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.nameproperty">FrameworkElement.NameProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.verticalalignmentproperty">FrameworkElement.VerticalAlignmentProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.widthproperty">FrameworkElement.WidthProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.isloaded">FrameworkElement.IsLoaded</a>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.UseConstraintOptimizations</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.AreDimensionsConstrained</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.IsSimpleLayout</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.tag">FrameworkElement.Tag</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.tagproperty">FrameworkElement.TagProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.flowdirection">FrameworkElement.FlowDirection</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.flowdirectionproperty">FrameworkElement.FlowDirectionProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.resources">FrameworkElement.Resources</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.parent">FrameworkElement.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.baseuri">FrameworkElement.BaseUri</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.style">FrameworkElement.Style</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.styleproperty">FrameworkElement.StyleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.requestedtheme">FrameworkElement.RequestedTheme</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.requestedthemeproperty">FrameworkElement.RequestedThemeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.actualtheme">FrameworkElement.ActualTheme</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualsecondarythicknessproperty">FrameworkElement.FocusVisualSecondaryThicknessProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualsecondarythickness">FrameworkElement.FocusVisualSecondaryThickness</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualsecondarybrushproperty">FrameworkElement.FocusVisualSecondaryBrushProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualsecondarybrush">FrameworkElement.FocusVisualSecondaryBrush</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualprimarythicknessproperty">FrameworkElement.FocusVisualPrimaryThicknessProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualprimarythickness">FrameworkElement.FocusVisualPrimaryThickness</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualprimarybrush">FrameworkElement.FocusVisualPrimaryBrush</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualprimarybrushproperty">FrameworkElement.FocusVisualPrimaryBrushProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualmargin">FrameworkElement.FocusVisualMargin</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.focusvisualmarginproperty">FrameworkElement.FocusVisualMarginProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.allowfocuswhendisabled">FrameworkElement.AllowFocusWhenDisabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.allowfocuswhendisabledproperty">FrameworkElement.AllowFocusWhenDisabledProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.allowfocusoninteraction">FrameworkElement.AllowFocusOnInteraction</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.allowfocusoninteractionproperty">FrameworkElement.AllowFocusOnInteractionProperty</a>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.TransitionsProperty</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.Transitions</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.Background</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.BackgroundProperty</span>
+    </div>
+    <div>
+      <span class="xref">FrameworkElement.RenderPhase</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.name">FrameworkElement.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.actualwidth">FrameworkElement.ActualWidth</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.actualheight">FrameworkElement.ActualHeight</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.sizechanged">FrameworkElement.SizeChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.actualthemechanged">FrameworkElement.ActualThemeChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.layoutupdated">FrameworkElement.LayoutUpdated</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.effectiveviewportchanged">FrameworkElement.EffectiveViewportChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.loading">FrameworkElement.Loading</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.loaded">FrameworkElement.Loaded</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.frameworkelement.unloaded">FrameworkElement.Unloaded</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.measure">UIElement.Measure(Size)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.arrange">UIElement.Arrange(Rect)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.invalidatemeasure">UIElement.InvalidateMeasure()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.invalidatearrange">UIElement.InvalidateArrange()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.canceldirectmanipulations">UIElement.CancelDirectManipulations()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.tryinvokekeyboardaccelerator">UIElement.TryInvokeKeyboardAccelerator(ProcessKeyboardAcceleratorEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.startanimation">UIElement.StartAnimation(ICompositionAnimationBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.stopanimation">UIElement.StopAnimation(ICompositionAnimationBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.ondisconnectvisualchildren">UIElement.OnDisconnectVisualChildren()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.findsubelementsfortouchtargeting">UIElement.FindSubElementsForTouchTargeting(Point, Rect)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.onkeyboardacceleratorinvoked">UIElement.OnKeyboardAcceleratorInvoked(KeyboardAcceleratorInvokedEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.onprocesskeyboardaccelerators">UIElement.OnProcessKeyboardAccelerators(ProcessKeyboardAcceleratorEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.populatepropertyinfooverride">UIElement.PopulatePropertyInfoOverride(string, AnimationPropertyInfo)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.populatepropertyinfo">UIElement.PopulatePropertyInfo(string, AnimationPropertyInfo)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.getvisualinternal">UIElement.GetVisualInternal()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.trystartdirectmanipulation">UIElement.TryStartDirectManipulation(Pointer)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.onbringintoviewrequested">UIElement.OnBringIntoViewRequested(BringIntoViewRequestedEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.startbringintoview#microsoft-ui-xaml-uielement-startbringintoview">UIElement.StartBringIntoView()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.startbringintoview#microsoft-ui-xaml-uielement-startbringintoview(microsoft-ui-xaml-bringintoviewoptions)">UIElement.StartBringIntoView(BringIntoViewOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.registerasscrollport">UIElement.RegisterAsScrollPort(UIElement)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.focus">UIElement.Focus(FocusState)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.transformtovisual">UIElement.TransformToVisual(UIElement)</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.OnVisibilityChanged(Visibility, Visibility)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">UIElement.OnIsHitTestVisibleChanged(bool, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.updatelayout">UIElement.UpdateLayout()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.getchildrenintabfocusorder">UIElement.GetChildrenInTabFocusOrder()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.startdragasync">UIElement.StartDragAsync(PointerPoint)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.capturepointer">UIElement.CapturePointer(Pointer)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.releasepointercapture">UIElement.ReleasePointerCapture(Pointer)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.releasepointercaptures">UIElement.ReleasePointerCaptures()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.addhandler">UIElement.AddHandler(RoutedEvent, object, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.removehandler">UIElement.RemoveHandler(RoutedEvent, object)</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.GetValue(DependencyProperty)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">UIElement.SetValue(DependencyProperty, object)</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.ClearValue(DependencyProperty)</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.ReadLocalValue(DependencyProperty)</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.GetAnimationBaseValue(DependencyProperty)</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.RegisterPropertyChangedCallback(DependencyProperty, DependencyPropertyChangedCallback)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">UIElement.UnregisterPropertyChangedCallback(DependencyProperty, long)</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.OnDataContextChanged(DependencyPropertyChangedEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.OnTemplatedParentChanged(DependencyPropertyChangedEventArgs)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">UIElement.SetBinding(object, string, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">UIElement.SetBinding(string, BindingBase)</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.SetBinding(DependencyProperty, BindingBase)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">UIElement.SetBindingValue(object, string)</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.GetBindingExpression(DependencyProperty)</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.ResumeBindings()</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.SuspendBindings()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keyboardacceleratorplacementmode">UIElement.KeyboardAcceleratorPlacementMode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.rotationtransition">UIElement.RotationTransition</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keytiptarget">UIElement.KeyTipTarget</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keytipplacementmode">UIElement.KeyTipPlacementMode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keytiphorizontaloffset">UIElement.KeyTipHorizontalOffset</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.istapenabled">UIElement.IsTapEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.isrighttapenabled">UIElement.IsRightTapEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.isholdingenabled">UIElement.IsHoldingEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.isdoubletapenabled">UIElement.IsDoubleTapEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.accesskey">UIElement.AccessKey</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.highcontrastadjustment">UIElement.HighContrastAdjustment</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.exitdisplaymodeonaccesskeyinvoked">UIElement.ExitDisplayModeOnAccessKeyInvoked</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.opacitytransition">UIElement.OpacityTransition</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.compositemode">UIElement.CompositeMode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.canbescrollanchor">UIElement.CanBeScrollAnchor</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.cachemode">UIElement.CacheMode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keyboardacceleratorplacementtarget">UIElement.KeyboardAcceleratorPlacementTarget</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.accesskeyscopeowner">UIElement.AccessKeyScopeOwner</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.isaccesskeyscope">UIElement.IsAccessKeyScope</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keytipverticaloffset">UIElement.KeyTipVerticalOffset</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.centerpoint">UIElement.CenterPoint</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.uselayoutrounding">UIElement.UseLayoutRounding</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.translationtransition">UIElement.TranslationTransition</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.transformmatrix">UIElement.TransformMatrix</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.rotation">UIElement.Rotation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.rasterizationscale">UIElement.RasterizationScale</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.projection">UIElement.Projection</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.scaletransition">UIElement.ScaleTransition</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.scale">UIElement.Scale</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.rotationaxis">UIElement.RotationAxis</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.transform3d">UIElement.Transform3D</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.desiredsize">UIElement.DesiredSize</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.lights">UIElement.Lights</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.accesskeyproperty">UIElement.AccessKeyProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.accesskeyscopeownerproperty">UIElement.AccessKeyScopeOwnerProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.cachemodeproperty">UIElement.CacheModeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.canbescrollanchorproperty">UIElement.CanBeScrollAnchorProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.characterreceivedevent">UIElement.CharacterReceivedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.compositemodeproperty">UIElement.CompositeModeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.contextrequestedevent">UIElement.ContextRequestedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.exitdisplaymodeonaccesskeyinvokedproperty">UIElement.ExitDisplayModeOnAccessKeyInvokedProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.highcontrastadjustmentproperty">UIElement.HighContrastAdjustmentProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.isaccesskeyscopeproperty">UIElement.IsAccessKeyScopeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.isdoubletapenabledproperty">UIElement.IsDoubleTapEnabledProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.isholdingenabledproperty">UIElement.IsHoldingEnabledProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.isrighttapenabledproperty">UIElement.IsRightTapEnabledProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.istapenabledproperty">UIElement.IsTapEnabledProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keytiphorizontaloffsetproperty">UIElement.KeyTipHorizontalOffsetProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keytipplacementmodeproperty">UIElement.KeyTipPlacementModeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keytiptargetproperty">UIElement.KeyTipTargetProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keytipverticaloffsetproperty">UIElement.KeyTipVerticalOffsetProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keyboardacceleratorplacementmodeproperty">UIElement.KeyboardAcceleratorPlacementModeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keyboardacceleratorplacementtargetproperty">UIElement.KeyboardAcceleratorPlacementTargetProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.lightsproperty">UIElement.LightsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.previewkeydownevent">UIElement.PreviewKeyDownEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.previewkeyupevent">UIElement.PreviewKeyUpEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.projectionproperty">UIElement.ProjectionProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.transform3dproperty">UIElement.Transform3DProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.uselayoutroundingproperty">UIElement.UseLayoutRoundingProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.actualsize">UIElement.ActualSize</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.actualoffset">UIElement.ActualOffset</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.translation">UIElement.Translation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.shadow">UIElement.Shadow</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.shadowproperty">UIElement.ShadowProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.clip">UIElement.Clip</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.clipproperty">UIElement.ClipProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.rendertransform">UIElement.RenderTransform</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.rendertransformproperty">UIElement.RenderTransformProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.rendertransformorigin">UIElement.RenderTransformOrigin</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.rendertransformoriginproperty">UIElement.RenderTransformOriginProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.rendersize">UIElement.RenderSize</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocuskeyboardnavigation">UIElement.XYFocusKeyboardNavigation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocuskeyboardnavigationproperty">UIElement.XYFocusKeyboardNavigationProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusdownnavigationstrategy">UIElement.XYFocusDownNavigationStrategy</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusdownnavigationstrategyproperty">UIElement.XYFocusDownNavigationStrategyProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusleftnavigationstrategy">UIElement.XYFocusLeftNavigationStrategy</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusleftnavigationstrategyproperty">UIElement.XYFocusLeftNavigationStrategyProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusrightnavigationstrategy">UIElement.XYFocusRightNavigationStrategy</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusrightnavigationstrategyproperty">UIElement.XYFocusRightNavigationStrategyProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusupnavigationstrategy">UIElement.XYFocusUpNavigationStrategy</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusupnavigationstrategyproperty">UIElement.XYFocusUpNavigationStrategyProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.tabfocusnavigation">UIElement.TabFocusNavigation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.tabfocusnavigationproperty">UIElement.TabFocusNavigationProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.protectedcursor">UIElement.ProtectedCursor</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.focusstate">UIElement.FocusState</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.focusstateproperty">UIElement.FocusStateProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.istabstop">UIElement.IsTabStop</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.istabstopproperty">UIElement.IsTabStopProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.tabindex">UIElement.TabIndex</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.tabindexproperty">UIElement.TabIndexProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusup">UIElement.XYFocusUp</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusupproperty">UIElement.XYFocusUpProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusdown">UIElement.XYFocusDown</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusdownproperty">UIElement.XYFocusDownProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusleft">UIElement.XYFocusLeft</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusleftproperty">UIElement.XYFocusLeftProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusright">UIElement.XYFocusRight</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xyfocusrightproperty">UIElement.XYFocusRightProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.usesystemfocusvisuals">UIElement.UseSystemFocusVisuals</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.usesystemfocusvisualsproperty">UIElement.UseSystemFocusVisualsProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationmodeproperty">UIElement.ManipulationModeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationmode">UIElement.ManipulationMode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.candragproperty">UIElement.CanDragProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.candrag">UIElement.CanDrag</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.allowdropproperty">UIElement.AllowDropProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.allowdrop">UIElement.AllowDrop</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointercapturesproperty">UIElement.PointerCapturesProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointercaptures">UIElement.PointerCaptures</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.ishittestvisibleproperty">UIElement.IsHitTestVisibleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.ishittestvisible">UIElement.IsHitTestVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.opacityproperty">UIElement.OpacityProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.opacity">UIElement.Opacity</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.visibilityproperty">UIElement.VisibilityProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.visibility">UIElement.Visibility</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.contextflyoutproperty">UIElement.ContextFlyoutProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.contextflyout">UIElement.ContextFlyout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keyboardaccelerators">UIElement.KeyboardAccelerators</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.Handle</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerpressedevent">UIElement.PointerPressedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerreleasedevent">UIElement.PointerReleasedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerenteredevent">UIElement.PointerEnteredEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerexitedevent">UIElement.PointerExitedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointermovedevent">UIElement.PointerMovedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointercanceledevent">UIElement.PointerCanceledEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointercapturelostevent">UIElement.PointerCaptureLostEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerwheelchangedevent">UIElement.PointerWheelChangedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationstartingevent">UIElement.ManipulationStartingEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationstartedevent">UIElement.ManipulationStartedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationdeltaevent">UIElement.ManipulationDeltaEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationinertiastartingevent">UIElement.ManipulationInertiaStartingEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationcompletedevent">UIElement.ManipulationCompletedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.tappedevent">UIElement.TappedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.doubletappedevent">UIElement.DoubleTappedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.righttappedevent">UIElement.RightTappedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.holdingevent">UIElement.HoldingEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.dragenterevent">UIElement.DragEnterEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.dragoverevent">UIElement.DragOverEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.dragleaveevent">UIElement.DragLeaveEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.dropevent">UIElement.DropEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keydownevent">UIElement.KeyDownEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keyupevent">UIElement.KeyUpEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.gettingfocusevent">UIElement.GettingFocusEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.losingfocusevent">UIElement.LosingFocusEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.nofocuscandidatefoundevent">UIElement.NoFocusCandidateFoundEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.bringintoviewrequestedevent">UIElement.BringIntoViewRequestedEvent</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.EventsBubblingInManagedCodeProperty</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.EventsBubblingInManagedCode</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.xamlroot">UIElement.XamlRoot</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.Dispatcher</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.DispatcherQueue</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.IsStoreInitialized</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.DataContext</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.DataContextProperty</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.TemplatedParent</span>
+    </div>
+    <div>
+      <span class="xref">UIElement.TemplatedParentProperty</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.accesskeydisplaydismissed">UIElement.AccessKeyDisplayDismissed</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.accesskeydisplayrequested">UIElement.AccessKeyDisplayRequested</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.characterreceived">UIElement.CharacterReceived</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.contextcanceled">UIElement.ContextCanceled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.contextrequested">UIElement.ContextRequested</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.previewkeydown">UIElement.PreviewKeyDown</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.previewkeyup">UIElement.PreviewKeyUp</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.processkeyboardaccelerators">UIElement.ProcessKeyboardAccelerators</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.accesskeyinvoked">UIElement.AccessKeyInvoked</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.lostfocus">UIElement.LostFocus</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.gotfocus">UIElement.GotFocus</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.losingfocus">UIElement.LosingFocus</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.gettingfocus">UIElement.GettingFocus</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.nofocuscandidatefound">UIElement.NoFocusCandidateFound</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.bringintoviewrequested">UIElement.BringIntoViewRequested</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointercanceled">UIElement.PointerCanceled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointercapturelost">UIElement.PointerCaptureLost</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerentered">UIElement.PointerEntered</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerexited">UIElement.PointerExited</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointermoved">UIElement.PointerMoved</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerpressed">UIElement.PointerPressed</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerreleased">UIElement.PointerReleased</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.pointerwheelchanged">UIElement.PointerWheelChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationstarting">UIElement.ManipulationStarting</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationstarted">UIElement.ManipulationStarted</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationdelta">UIElement.ManipulationDelta</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationinertiastarting">UIElement.ManipulationInertiaStarting</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.manipulationcompleted">UIElement.ManipulationCompleted</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.tapped">UIElement.Tapped</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.doubletapped">UIElement.DoubleTapped</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.righttapped">UIElement.RightTapped</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.holding">UIElement.Holding</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.dragstarting">UIElement.DragStarting</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.dragenter">UIElement.DragEnter</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.dragleave">UIElement.DragLeave</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.dragover">UIElement.DragOver</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.drop">UIElement.Drop</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.dropcompleted">UIElement.DropCompleted</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keydown">UIElement.KeyDown</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.uielement.keyup">UIElement.KeyUp</a>
+    </div>
+    <div>
+      <span class="xref">UIElement.DataContextChanged</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.UI.html">UI</a>.<a class="xref" href="Mapsui.UI.WinUI.html">WinUI</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.UI.Uno.WinUI.dll</h6>
+  <h5 id="Mapsui_UI_WinUI_MapControl_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MapControl : Grid, IAnimationObject, IVisualElement, IVisualElement2, IDependencyObjectStoreProvider, IWeakReferenceProvider, IEnumerable, IDataContextProvider, DependencyObject, ILayoutConstraints, IMapControl, IDisposable, INotifyPropertyChanged</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl__ctor.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.WinUI/MapControl.cs/#L32">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl__ctor_" data-uid="Mapsui.UI.WinUI.MapControl.#ctor*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl__ctor" data-uid="Mapsui.UI.WinUI.MapControl.#ctor">MapControl()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapControl()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.Map%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L431">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_Map_" data-uid="Mapsui.UI.WinUI.MapControl.Map*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_Map" data-uid="Mapsui.UI.WinUI.MapControl.Map">Map</h4>
+  <div class="markdown level1 summary"><p>Map holding data for which is shown in this MapControl</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Map Map { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_MaxTapGestureMovement.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.MaxTapGestureMovement%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L70">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_MaxTapGestureMovement_" data-uid="Mapsui.UI.WinUI.MapControl.MaxTapGestureMovement*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_MaxTapGestureMovement" data-uid="Mapsui.UI.WinUI.MapControl.MaxTapGestureMovement">MaxTapGestureMovement</h4>
+  <div class="markdown level1 summary"><p>The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxTapGestureMovement { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_Performance.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.Performance%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L228">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_Performance_" data-uid="Mapsui.UI.WinUI.MapControl.Performance*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_Performance" data-uid="Mapsui.UI.WinUI.MapControl.Performance">Performance</h4>
+  <div class="markdown level1 summary"><p>Object to save performance information about the drawing of the map</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Performance? Performance { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Performance.html">Performance</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_UI_WinUI_MapControl_Performance_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If this is null, no performance information is saved.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_PixelDensity.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.PixelDensity%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L241">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_PixelDensity_" data-uid="Mapsui.UI.WinUI.MapControl.PixelDensity*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_PixelDensity" data-uid="Mapsui.UI.WinUI.MapControl.PixelDensity">PixelDensity</h4>
+  <div class="markdown level1 summary"><p>The number of pixel per device independent unit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PixelDensity { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_Renderer.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.Renderer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L246">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_Renderer_" data-uid="Mapsui.UI.WinUI.MapControl.Renderer*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_Renderer" data-uid="Mapsui.UI.WinUI.MapControl.Renderer">Renderer</h4>
+  <div class="markdown level1 summary"><p>Renderer that is used from this MapControl</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRenderer Renderer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_UpdateInterval.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.UpdateInterval%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L204">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_UpdateInterval_" data-uid="Mapsui.UI.WinUI.MapControl.UpdateInterval*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_UpdateInterval" data-uid="Mapsui.UI.WinUI.MapControl.UpdateInterval">UpdateInterval</h4>
+  <div class="markdown level1 summary"><p>Interval between two redraws of the MapControl in ms</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int UpdateInterval { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_UseFling.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.UseFling%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L76">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_UseFling_" data-uid="Mapsui.UI.WinUI.MapControl.UseFling*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_UseFling" data-uid="Mapsui.UI.WinUI.MapControl.UseFling">UseFling</h4>
+  <div class="markdown level1 summary"><p>Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a
+short time after the user has lifted the finger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseFling { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.WinUI/MapControl.cs/#L275">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_Dispose_" data-uid="Mapsui.UI.WinUI.MapControl.Dispose*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_Dispose" data-uid="Mapsui.UI.WinUI.MapControl.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.Dispose(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.WinUI/MapControl.cs/#L247">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_Dispose_" data-uid="Mapsui.UI.WinUI.MapControl.Dispose*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_Dispose_System_Boolean_" data-uid="Mapsui.UI.WinUI.MapControl.Dispose(System.Boolean)">Dispose(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_ForceUpdate.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.ForceUpdate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L195">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_ForceUpdate_" data-uid="Mapsui.UI.WinUI.MapControl.ForceUpdate*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_ForceUpdate" data-uid="Mapsui.UI.WinUI.MapControl.ForceUpdate">ForceUpdate()</h4>
+  <div class="markdown level1 summary"><p>Force a update of control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ForceUpdate()</code></pre>
+  </div>
+  <h5 id="Mapsui_UI_WinUI_MapControl_ForceUpdate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control draws itself once</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L496">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_GetMapInfo_" data-uid="Mapsui.UI.WinUI.MapControl.GetMapInfo*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_" data-uid="Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)">GetMapInfo(ScreenPosition, int)</h4>
+  <div class="markdown level1 summary"><p>Check, if a feature at a given screen position is hit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td><p>Screen position to check for widgets and features</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">margin</span></td>
+        <td><p>An optional extra margin around the feature to enlarge the hit area.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfo.html">MapInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L502">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_GetSnapshot_" data-uid="Mapsui.UI.WinUI.MapControl.GetSnapshot*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.WinUI.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Create a snapshot form map as PNG image</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] GetSnapshot(IEnumerable&lt;ILayer&gt;? layers = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td><p>Layers that should be included in snapshot</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><p>Byte array with snapshot in png format. If there are any problems than returns null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L489">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_OnMapInfo_" data-uid="Mapsui.UI.WinUI.MapControl.OnMapInfo*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_" data-uid="Mapsui.UI.WinUI.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)">OnMapInfo(MapInfoEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnMapInfo(MapInfoEventArgs mapInfoEventArgs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a></td>
+        <td><span class="parametername">mapInfoEventArgs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.OnPropertyChanged(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L269">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_OnPropertyChanged_" data-uid="Mapsui.UI.WinUI.MapControl.OnPropertyChanged*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_OnPropertyChanged_System_String_" data-uid="Mapsui.UI.WinUI.MapControl.OnPropertyChanged(System.String)">OnPropertyChanged(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnPropertyChanged(string propertyName = &quot;&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_OpenInBrowser_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.OpenInBrowser(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.WinUI/MapControl.cs/#L230">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_OpenInBrowser_" data-uid="Mapsui.UI.WinUI.MapControl.OpenInBrowser*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_OpenInBrowser_System_String_" data-uid="Mapsui.UI.WinUI.MapControl.OpenInBrowser(System.String)">OpenInBrowser(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OpenInBrowser(string url)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">url</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_Refresh_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.Refresh(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L313">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_Refresh_" data-uid="Mapsui.UI.WinUI.MapControl.Refresh*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_Refresh_Mapsui_ChangeType_" data-uid="Mapsui.UI.WinUI.MapControl.Refresh(Mapsui.ChangeType)">Refresh(ChangeType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Refresh(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_RefreshData_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.RefreshData(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L484">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_RefreshData_" data-uid="Mapsui.UI.WinUI.MapControl.RefreshData*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_RefreshData_Mapsui_ChangeType_" data-uid="Mapsui.UI.WinUI.MapControl.RefreshData(Mapsui.ChangeType)">RefreshData(ChangeType)</h4>
+  <div class="markdown level1 summary"><p>Refresh data of Map, but don't paint it</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshData(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_RefreshGraphics.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.RefreshGraphics%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L318">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_RefreshGraphics_" data-uid="Mapsui.UI.WinUI.MapControl.RefreshGraphics*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_RefreshGraphics" data-uid="Mapsui.UI.WinUI.MapControl.RefreshGraphics">RefreshGraphics()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshGraphics()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_StartUpdates_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.StartUpdates(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L171">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_StartUpdates_" data-uid="Mapsui.UI.WinUI.MapControl.StartUpdates*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_StartUpdates_System_Boolean_" data-uid="Mapsui.UI.WinUI.MapControl.StartUpdates(System.Boolean)">StartUpdates(bool)</h4>
+  <div class="markdown level1 summary"><p>Start updates for control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StartUpdates(bool refresh = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">refresh</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_UI_WinUI_MapControl_StartUpdates_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control is redrawn if needed</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_StopUpdates.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.StopUpdates%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L184">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_StopUpdates_" data-uid="Mapsui.UI.WinUI.MapControl.StopUpdates*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_StopUpdates" data-uid="Mapsui.UI.WinUI.MapControl.StopUpdates">StopUpdates()</h4>
+  <div class="markdown level1 summary"><p>Stop updates for control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StopUpdates()</code></pre>
+  </div>
+  <h5 id="Mapsui_UI_WinUI_MapControl_StopUpdates_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control stops to redraw itself,
+even if it is needed</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L476">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_ToDeviceIndependentUnits_" data-uid="Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_" data-uid="Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)">ToDeviceIndependentUnits(MPoint)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in pixels to device independent units (or DIP or DP).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">coordinateInPixels</span></td>
+        <td><p>Coordinate in pixels</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_ToPixels_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.ToPixels(Mapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L468">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_ToPixels_" data-uid="Mapsui.UI.WinUI.MapControl.ToPixels*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_ToPixels_Mapsui_MPoint_" data-uid="Mapsui.UI.WinUI.MapControl.ToPixels(Mapsui.MPoint)">ToPixels(MPoint)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in device independent units (or DIP or DP) to pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">coordinateInDeviceIndependentUnits</span></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><p>Coordinate in pixels</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.Unsubscribe%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L278">View Source</a>
+  </span>
+  <a id="Mapsui_UI_WinUI_MapControl_Unsubscribe_" data-uid="Mapsui.UI.WinUI.MapControl.Unsubscribe*"></a>
+  <h4 id="Mapsui_UI_WinUI_MapControl_Unsubscribe" data-uid="Mapsui.UI.WinUI.MapControl.Unsubscribe">Unsubscribe()</h4>
+  <div class="markdown level1 summary"><p>Unsubscribe from map events</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Unsubscribe()</code></pre>
+  </div>
+  <h3 id="events">Events
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_Info.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.Info%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L252">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_WinUI_MapControl_Info" data-uid="Mapsui.UI.WinUI.MapControl.Info">Info</h4>
+  <div class="markdown level1 summary"><p>Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+the layers that have IsMapInfoLayer set to true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapInfoEventArgs&gt;? Info</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl_PropertyChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl.PropertyChanged%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L260">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_WinUI_MapControl_PropertyChanged" data-uid="Mapsui.UI.WinUI.MapControl.PropertyChanged">PropertyChanged</h4>
+  <div class="markdown level1 summary"><p>Called whenever a property is changed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler? PropertyChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler">PropertyChangedEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.composition.ianimationobject">IAnimationObject</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.composition.ivisualelement">IVisualElement</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.composition.ivisualelement2">IVisualElement2</a>
+  </div>
+  <div>
+      <span class="xref">Microsoft.UI.Xaml.IDependencyObjectStoreProvider</span>
+  </div>
+  <div>
+      <span class="xref">Uno.UI.DataBinding.IWeakReferenceProvider</span>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a>
+  </div>
+  <div>
+      <span class="xref">Microsoft.UI.Xaml.IDataContextProvider</span>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.dependencyobject">DependencyObject</a>
+  </div>
+  <div>
+      <span class="xref">Microsoft.UI.Xaml.ILayoutConstraints</span>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_WinUI_MapControl.md&amp;value=---%0Auid%3A%20Mapsui.UI.WinUI.MapControl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L47" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Eto.Extensions
+  commentId: N:Mapsui.UI.Eto.Extensions
+  id: Mapsui.UI.Eto.Extensions
+  children:
+  - Mapsui.UI.Eto.Extensions.Extensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Eto.Extensions
+  nameWithType: Mapsui.UI.Eto.Extensions
+  fullName: Mapsui.UI.Eto.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Eto
+references:
+- uid: Mapsui.UI.Eto.Extensions.Extensions
+  commentId: T:Mapsui.UI.Eto.Extensions.Extensions
+  href: Mapsui.UI.Eto.Extensions.Extensions.html
+  name: Extensions
+  nameWithType: Extensions
+  fullName: Mapsui.UI.Eto.Extensions.Extensions

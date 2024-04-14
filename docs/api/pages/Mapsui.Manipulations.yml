@@ -1,0 +1,83 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  id: Mapsui.Manipulations
+  children:
+  - Mapsui.Manipulations.FlingTracker
+  - Mapsui.Manipulations.Manipulation
+  - Mapsui.Manipulations.ManipulationTracker
+  - Mapsui.Manipulations.ScreenPosition
+  - Mapsui.Manipulations.TapGestureTracker
+  - Mapsui.Manipulations.TapType
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Manipulations.FlingTracker
+  commentId: T:Mapsui.Manipulations.FlingTracker
+  href: Mapsui.Manipulations.FlingTracker.html
+  name: FlingTracker
+  nameWithType: FlingTracker
+  fullName: Mapsui.Manipulations.FlingTracker
+- uid: Mapsui.Manipulations.ManipulationTracker
+  commentId: T:Mapsui.Manipulations.ManipulationTracker
+  href: Mapsui.Manipulations.ManipulationTracker.html
+  name: ManipulationTracker
+  nameWithType: ManipulationTracker
+  fullName: Mapsui.Manipulations.ManipulationTracker
+- uid: Mapsui.Manipulations.Manipulation
+  commentId: T:Mapsui.Manipulations.Manipulation
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.Manipulation.html
+  name: Manipulation
+  nameWithType: Manipulation
+  fullName: Mapsui.Manipulations.Manipulation
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: Mapsui.Manipulations.TapType
+  commentId: T:Mapsui.Manipulations.TapType
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.TapType.html
+  name: TapType
+  nameWithType: TapType
+  fullName: Mapsui.Manipulations.TapType
+- uid: Mapsui.Manipulations.TapGestureTracker
+  commentId: T:Mapsui.Manipulations.TapGestureTracker
+  href: Mapsui.Manipulations.TapGestureTracker.html
+  name: TapGestureTracker
+  nameWithType: TapGestureTracker
+  fullName: Mapsui.Manipulations.TapGestureTracker
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html

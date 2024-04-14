@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Providers.Shapefile
+  commentId: N:Mapsui.Nts.Providers.Shapefile
+  id: Mapsui.Nts.Providers.Shapefile
+  children:
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile
+  - Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+  - Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Nts.Providers.Shapefile
+  nameWithType: Mapsui.Nts.Providers.Shapefile
+  fullName: Mapsui.Nts.Providers.Shapefile
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType
+  commentId: T:Mapsui.Nts.Providers.Shapefile.ShapeType
+  parent: Mapsui.Nts.Providers.Shapefile
+  href: Mapsui.Nts.Providers.Shapefile.ShapeType.html
+  name: ShapeType
+  nameWithType: ShapeType
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile
+  commentId: T:Mapsui.Nts.Providers.Shapefile.ShapeFile
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html
+  name: ShapeFile
+  nameWithType: ShapeFile
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+  commentId: T:Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+  parent: Mapsui.Nts.Providers.Shapefile
+  href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html
+  name: ShapeFile.FilterMethod
+  nameWithType: ShapeFile.FilterMethod
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+  spec.csharp:
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile
+    name: ShapeFile
+    href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+    name: FilterMethod
+    href: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod.html
+  spec.vb:
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile
+    name: ShapeFile
+    href: Mapsui.Nts.Providers.Shapefile.ShapeFile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod
+    name: FilterMethod
+    href: Mapsui.Nts.Providers.Shapefile.ShapeFile.FilterMethod.html
+- uid: Mapsui.Nts.Providers.Shapefile
+  commentId: N:Mapsui.Nts.Providers.Shapefile
+  href: Mapsui.html
+  name: Mapsui.Nts.Providers.Shapefile
+  nameWithType: Mapsui.Nts.Providers.Shapefile
+  fullName: Mapsui.Nts.Providers.Shapefile
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html

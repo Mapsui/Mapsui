@@ -1,0 +1,753 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class XPathQueryManager.CustomQueryContext </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class XPathQueryManager.CustomQueryContext ">
+    
+    <meta name="description" content="This class represents a custom context for XPath queries. It is derived from XsltContext.">
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext">
+
+
+
+  <h1 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext" class="text-break">Class XPathQueryManager.CustomQueryContext</h1>
+  <div class="markdown level0 summary"><p>This class represents a custom context for XPath queries.
+It is derived from XsltContext.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager">XmlNamespaceManager</a></div>
+    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext">XsltContext</a></div>
+    <div class="level3"><span class="xref">XPathQueryManager.CustomQueryContext</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.addnamespace">XmlNamespaceManager.AddNamespace(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.getenumerator">XmlNamespaceManager.GetEnumerator()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.getnamespacesinscope">XmlNamespaceManager.GetNamespacesInScope(XmlNamespaceScope)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.hasnamespace">XmlNamespaceManager.HasNamespace(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.lookupnamespace">XmlNamespaceManager.LookupNamespace(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.lookupprefix">XmlNamespaceManager.LookupPrefix(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.popscope">XmlNamespaceManager.PopScope()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.pushscope">XmlNamespaceManager.PushScope()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.removenamespace">XmlNamespaceManager.RemoveNamespace(string, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.defaultnamespace">XmlNamespaceManager.DefaultNamespace</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.nametable">XmlNamespaceManager.NameTable</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.Providers.html">Providers</a>.<a class="xref" href="Mapsui.Providers.Wfs.html">Wfs</a>.<a class="xref" href="Mapsui.Providers.Wfs.Xml.html">Xml</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.Nts.dll</h6>
+  <h5 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class XPathQueryManager.CustomQueryContext : XsltContext, IEnumerable, IXmlNamespaceResolver</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L382">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor">CustomQueryContext()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html">XPathQueryManager.CustomQueryContext</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CustomQueryContext()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor_System_Xml_NameTable_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.%23ctor(System.Xml.NameTable)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L390">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor_System_Xml_NameTable_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor(System.Xml.NameTable)">CustomQueryContext(NameTable)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html">XPathQueryManager.CustomQueryContext</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CustomQueryContext(NameTable table)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.nametable">NameTable</a></td>
+        <td><span class="parametername">table</span></td>
+        <td><p>A NameTable instance</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_Whitespace.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L400">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_Whitespace_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_Whitespace" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace">Whitespace</h4>
+  <div class="markdown level1 summary"><p>Method from XsltContext.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Whitespace { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.whitespace">XsltContext.Whitespace</a></div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddNamespace_System_Collections_Generic_IDictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L406">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddNamespace_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddNamespace_System_Collections_Generic_IDictionary_System_String_System_String__" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(System.Collections.Generic.IDictionary{System.String,System.String})">AddNamespace(IDictionary&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>This method adds a list of namespaces to use in the custom context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddNamespace(IDictionary&lt;string, string&gt; namespaces)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">namespaces</span></td>
+        <td><p>A list of namespaces</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_System_Collections_DictionaryEntry___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.Collections.DictionaryEntry%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L473">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_System_Collections_DictionaryEntry___" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.Collections.DictionaryEntry[])">AddParam(DictionaryEntry[])</h4>
+  <div class="markdown level1 summary"><p>This method adds a list of parameters to the custom context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddParam(DictionaryEntry[] parameters)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry">DictionaryEntry</a>[]</td>
+        <td><span class="parametername">parameters</span></td>
+        <td><p>A list of parameters</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_System_String_System_Object_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.String%2CSystem.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L464">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_System_String_System_Object_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.String,System.Object)">AddParam(string, object)</h4>
+  <div class="markdown level1 summary"><p>This method adds a parameter to the custom context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddParam(string name, object parameter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">parameter</span></td>
+        <td><p>The value of the parameter</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_CompareDocument_System_String_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L415">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_CompareDocument_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_CompareDocument_System_String_System_String_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument(System.String,System.String)">CompareDocument(string, string)</h4>
+  <div class="markdown level1 summary"><p>Method from XsltContext.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int CompareDocument(string baseUri, string nextbaseUri)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">baseUri</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">nextbaseUri</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.comparedocument">XsltContext.CompareDocument(string, string)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_GetParam_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L499">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_GetParam_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_GetParam_System_String_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam(System.String)">GetParam(string)</h4>
+  <div class="markdown level1 summary"><p>This method gets a parameter by name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object? GetParam(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the parameter</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_PreserveWhitespace_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L423">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_PreserveWhitespace_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_PreserveWhitespace_System_Xml_XPath_XPathNavigator_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)">PreserveWhitespace(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Method from XsltContext.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool PreserveWhitespace(XPathNavigator node)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathnavigator">XPathNavigator</a></td>
+        <td><span class="parametername">node</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.preservewhitespace">XsltContext.PreserveWhitespace(XPathNavigator)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_RemoveParam_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L508">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_RemoveParam_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_RemoveParam_System_String_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam(System.String)">RemoveParam(string)</h4>
+  <div class="markdown level1 summary"><p>This method removes a parameter from the inherent parameter list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object? RemoveParam(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the parameter</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResetParams.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L516">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResetParams_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResetParams" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams">ResetParams()</h4>
+  <div class="markdown level1 summary"><p>This methods clears the inherent parameter list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ResetParams()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveFunction_System_String_System_String_System_Xml_XPath_XPathResultType___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(System.String%2CSystem.String%2CSystem.Xml.XPath.XPathResultType%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L434">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveFunction_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveFunction_System_String_System_String_System_Xml_XPath_XPathResultType___" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])">ResolveFunction(string, string, XPathResultType[])</h4>
+  <div class="markdown level1 summary"><p>This method resolves a function appearing in an XPath expression.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">prefix</span></td>
+        <td><p>The prefix of the function</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the function</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype">XPathResultType</a>[]</td>
+        <td><span class="parametername">argTypes</span></td>
+        <td><p>A list of argument types of the function</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xsl.ixsltcontextfunction">IXsltContextFunction</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.resolvefunction">XsltContext.ResolveFunction(string, string, XPathResultType[])</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveVariable_System_String_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L449">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveVariable_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable*"></a>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveVariable_System_String_System_String_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable(System.String,System.String)">ResolveVariable(string, string)</h4>
+  <div class="markdown level1 summary"><p>This method resolves a variable appearing in an XPath expression.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override IXsltContextVariable ResolveVariable(string prefix, string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">prefix</span></td>
+        <td><p>The prefix of the variable</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the variable</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xsl.ixsltcontextvariable">IXsltContextVariable</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.resolvevariable">XsltContext.ResolveVariable(string, string)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver">IXmlNamespaceResolver</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs/#L372" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,337 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Layers.IFeatureInfo
+  commentId: T:Mapsui.Layers.IFeatureInfo
+  id: IFeatureInfo
+  parent: Mapsui.Layers
+  children:
+  - Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.Viewport,System.Double,System.Double,System.Action{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}})
+  langs:
+  - csharp
+  - vb
+  name: IFeatureInfo
+  nameWithType: IFeatureInfo
+  fullName: Mapsui.Layers.IFeatureInfo
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Layers/IFeatureInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IFeatureInfo
+    path: ../../Mapsui/Layers/IFeatureInfo.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  summary: >-
+    Some data source like WMS allow request for feature info. 
+
+    This is information not available in the primary response such as the WMS image.
+  example: []
+  syntax:
+    content: >-
+      [Obsolete("Use ILayerFeatureInfo")]
+
+      public interface IFeatureInfo
+    content.vb: >-
+      <Obsolete("Use ILayerFeatureInfo")>
+
+      Public Interface IFeatureInfo
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use ILayerFeatureInfo
+- uid: Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.Viewport,System.Double,System.Double,System.Action{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}})
+  commentId: M:Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.Viewport,System.Double,System.Double,System.Action{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}})
+  id: GetFeatureInfo(Mapsui.Viewport,System.Double,System.Double,System.Action{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}})
+  parent: Mapsui.Layers.IFeatureInfo
+  langs:
+  - csharp
+  - vb
+  name: GetFeatureInfo(Viewport, double, double, Action<IDictionary<string, IEnumerable<IFeature>>>)
+  nameWithType: IFeatureInfo.GetFeatureInfo(Viewport, double, double, Action<IDictionary<string, IEnumerable<IFeature>>>)
+  fullName: Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.Viewport, double, double, System.Action<System.Collections.Generic.IDictionary<string, System.Collections.Generic.IEnumerable<Mapsui.IFeature>>>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/IFeatureInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeatureInfo
+    path: ../../Mapsui/Layers/IFeatureInfo.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: void GetFeatureInfo(Viewport viewport, double x, double y, Action<IDictionary<string, IEnumerable<IFeature>>> callback)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: x
+      type: System.Double
+    - id: y
+      type: System.Double
+    - id: callback
+      type: System.Action{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}}
+    content.vb: Sub GetFeatureInfo(viewport As Viewport, x As Double, y As Double, callback As Action(Of IDictionary(Of String, IEnumerable(Of IFeature))))
+  overload: Mapsui.Layers.IFeatureInfo.GetFeatureInfo*
+  nameWithType.vb: IFeatureInfo.GetFeatureInfo(Viewport, Double, Double, Action(Of IDictionary(Of String, IEnumerable(Of IFeature))))
+  fullName.vb: Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.Viewport, Double, Double, System.Action(Of System.Collections.Generic.IDictionary(Of String, System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))))
+  name.vb: GetFeatureInfo(Viewport, Double, Double, Action(Of IDictionary(Of String, IEnumerable(Of IFeature))))
+references:
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Layers.IFeatureInfo.GetFeatureInfo*
+  commentId: Overload:Mapsui.Layers.IFeatureInfo.GetFeatureInfo
+  href: Mapsui.Layers.IFeatureInfo.html#Mapsui_Layers_IFeatureInfo_GetFeatureInfo_Mapsui_Viewport_System_Double_System_Double_System_Action_System_Collections_Generic_IDictionary_System_String_System_Collections_Generic_IEnumerable_Mapsui_IFeature____
+  name: GetFeatureInfo
+  nameWithType: IFeatureInfo.GetFeatureInfo
+  fullName: Mapsui.Layers.IFeatureInfo.GetFeatureInfo
+- uid: Mapsui.Viewport
+  commentId: T:Mapsui.Viewport
+  parent: Mapsui
+  href: Mapsui.Viewport.html
+  name: Viewport
+  nameWithType: Viewport
+  fullName: Mapsui.Viewport
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: System.Action{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}}
+  commentId: T:System.Action{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}}
+  parent: System
+  definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<IDictionary<string, IEnumerable<IFeature>>>
+  nameWithType: Action<IDictionary<string, IEnumerable<IFeature>>>
+  fullName: System.Action<System.Collections.Generic.IDictionary<string, System.Collections.Generic.IEnumerable<Mapsui.IFeature>>>
+  nameWithType.vb: Action(Of IDictionary(Of String, IEnumerable(Of IFeature)))
+  fullName.vb: System.Action(Of System.Collections.Generic.IDictionary(Of String, System.Collections.Generic.IEnumerable(Of Mapsui.IFeature)))
+  name.vb: Action(Of IDictionary(Of String, IEnumerable(Of IFeature)))
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: )
+  - name: )
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

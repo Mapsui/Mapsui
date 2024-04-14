@@ -1,0 +1,742 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  id: XPathQueryManager.ParamBase
+  parent: Mapsui.Providers.Wfs.Xml
+  children:
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.#ctor(System.Xml.XPath.XPathResultType[],System.Xml.XPath.XPathResultType,System.Int32,System.Int32)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ArgTypes
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Maxargs
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Minargs
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ReturnType
+  langs:
+  - csharp
+  - vb
+  name: XPathQueryManager.ParamBase
+  nameWithType: XPathQueryManager.ParamBase
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ParamBase
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 534
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This class is the base class of <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare" data-throw-if-not-resolved="false"></xref> and <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs" data-throw-if-not-resolved="false"></xref>.
+  remarks: Protected constructor for the abstract class.
+  example: []
+  syntax:
+    content: public abstract class XPathQueryManager.ParamBase
+    content.vb: Public MustInherit Class XPathQueryManager.ParamBase
+  inheritance:
+  - System.Object
+  derivedClasses:
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.#ctor(System.Xml.XPath.XPathResultType[],System.Xml.XPath.XPathResultType,System.Int32,System.Int32)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.#ctor(System.Xml.XPath.XPathResultType[],System.Xml.XPath.XPathResultType,System.Int32,System.Int32)
+  id: '#ctor(System.Xml.XPath.XPathResultType[],System.Xml.XPath.XPathResultType,System.Int32,System.Int32)'
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  langs:
+  - csharp
+  - vb
+  name: ParamBase(XPathResultType[], XPathResultType, int, int)
+  nameWithType: XPathQueryManager.ParamBase.ParamBase(XPathResultType[], XPathResultType, int, int)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ParamBase(System.Xml.XPath.XPathResultType[], System.Xml.XPath.XPathResultType, int, int)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 534
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This class is the base class of <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare" data-throw-if-not-resolved="false"></xref> and <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs" data-throw-if-not-resolved="false"></xref>.
+  remarks: Protected constructor for the abstract class.
+  example: []
+  syntax:
+    content: protected ParamBase(XPathResultType[] argTypes, XPathResultType returnType, int minArgs, int maxArgs)
+    parameters:
+    - id: argTypes
+      type: System.Xml.XPath.XPathResultType[]
+      description: The argument types of the function
+    - id: returnType
+      type: System.Xml.XPath.XPathResultType
+      description: The return type of the function
+    - id: minArgs
+      type: System.Int32
+      description: The minimum number of arguments allowed
+    - id: maxArgs
+      type: System.Int32
+      description: The maximum number of arguments allowed
+    content.vb: Protected Sub New(argTypes As XPathResultType(), returnType As XPathResultType, minArgs As Integer, maxArgs As Integer)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.#ctor*
+  nameWithType.vb: XPathQueryManager.ParamBase.New(XPathResultType(), XPathResultType, Integer, Integer)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.New(System.Xml.XPath.XPathResultType(), System.Xml.XPath.XPathResultType, Integer, Integer)
+  name.vb: New(XPathResultType(), XPathResultType, Integer, Integer)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ArgTypes
+  commentId: P:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ArgTypes
+  id: ArgTypes
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  langs:
+  - csharp
+  - vb
+  name: ArgTypes
+  nameWithType: XPathQueryManager.ParamBase.ArgTypes
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ArgTypes
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArgTypes
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 548
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Gets the argument types.
+  example: []
+  syntax:
+    content: public XPathResultType[] ArgTypes { get; }
+    parameters: []
+    return:
+      type: System.Xml.XPath.XPathResultType[]
+    content.vb: Public ReadOnly Property ArgTypes As XPathResultType()
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ArgTypes*
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ReturnType
+  commentId: P:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ReturnType
+  id: ReturnType
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  langs:
+  - csharp
+  - vb
+  name: ReturnType
+  nameWithType: XPathQueryManager.ParamBase.ReturnType
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ReturnType
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ReturnType
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 553
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Gets the return type.
+  example: []
+  syntax:
+    content: public XPathResultType ReturnType { get; }
+    parameters: []
+    return:
+      type: System.Xml.XPath.XPathResultType
+    content.vb: Public ReadOnly Property ReturnType As XPathResultType
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ReturnType*
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Minargs
+  commentId: P:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Minargs
+  id: Minargs
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  langs:
+  - csharp
+  - vb
+  name: Minargs
+  nameWithType: XPathQueryManager.ParamBase.Minargs
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Minargs
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Minargs
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 558
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Gets the minimum number of arguments allowed.
+  example: []
+  syntax:
+    content: public int Minargs { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Minargs As Integer
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Minargs*
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Maxargs
+  commentId: P:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Maxargs
+  id: Maxargs
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
+  langs:
+  - csharp
+  - vb
+  name: Maxargs
+  nameWithType: XPathQueryManager.ParamBase.Maxargs
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Maxargs
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Maxargs
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 563
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Gets the maximum number of arguments allowed.
+  example: []
+  syntax:
+    content: public int Maxargs { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Maxargs As Integer
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Maxargs*
+references:
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+  parent: Mapsui.Providers.Wfs.Xml
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager.ParamCompare
+  nameWithType: XPathQueryManager.ParamCompare
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+    name: ParamCompare
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare
+    name: ParamCompare
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager.ParamCompareWithTargetNs
+  nameWithType: XPathQueryManager.ParamCompareWithTargetNs
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+    name: ParamCompareWithTargetNs
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs
+    name: ParamCompareWithTargetNs
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs.html
+- uid: Mapsui.Providers.Wfs.Xml
+  commentId: N:Mapsui.Providers.Wfs.Xml
+  href: Mapsui.html
+  name: Mapsui.Providers.Wfs.Xml
+  nameWithType: Mapsui.Providers.Wfs.Xml
+  fullName: Mapsui.Providers.Wfs.Xml
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml
+    name: Xml
+    href: Mapsui.Providers.Wfs.Xml.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml
+    name: Xml
+    href: Mapsui.Providers.Wfs.Xml.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.#ctor*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.#ctor
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_ParamBase__ctor_System_Xml_XPath_XPathResultType___System_Xml_XPath_XPathResultType_System_Int32_System_Int32_
+  name: ParamBase
+  nameWithType: XPathQueryManager.ParamBase.ParamBase
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ParamBase
+  nameWithType.vb: XPathQueryManager.ParamBase.New
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.New
+  name.vb: New
+- uid: System.Xml.XPath.XPathResultType[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype
+  name: XPathResultType[]
+  nameWithType: XPathResultType[]
+  fullName: System.Xml.XPath.XPathResultType[]
+  nameWithType.vb: XPathResultType()
+  fullName.vb: System.Xml.XPath.XPathResultType()
+  name.vb: XPathResultType()
+  spec.csharp:
+  - uid: System.Xml.XPath.XPathResultType
+    name: XPathResultType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Xml.XPath.XPathResultType
+    name: XPathResultType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype
+  - name: (
+  - name: )
+- uid: System.Xml.XPath.XPathResultType
+  commentId: T:System.Xml.XPath.XPathResultType
+  parent: System.Xml.XPath
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype
+  name: XPathResultType
+  nameWithType: XPathResultType
+  fullName: System.Xml.XPath.XPathResultType
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+  - name: .
+  - uid: System.Xml.XPath
+    name: XPath
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+  - name: .
+  - uid: System.Xml.XPath
+    name: XPath
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ArgTypes*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ArgTypes
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_ParamBase_ArgTypes
+  name: ArgTypes
+  nameWithType: XPathQueryManager.ParamBase.ArgTypes
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ArgTypes
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ReturnType*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ReturnType
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_ParamBase_ReturnType
+  name: ReturnType
+  nameWithType: XPathQueryManager.ParamBase.ReturnType
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.ReturnType
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Minargs*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Minargs
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_ParamBase_Minargs
+  name: Minargs
+  nameWithType: XPathQueryManager.ParamBase.Minargs
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Minargs
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Maxargs*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Maxargs
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_ParamBase_Maxargs
+  name: Maxargs
+  nameWithType: XPathQueryManager.ParamBase.Maxargs
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.Maxargs

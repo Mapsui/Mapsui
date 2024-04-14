@@ -1,0 +1,718 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType
+  commentId: T:Mapsui.Nts.Providers.Shapefile.ShapeType
+  id: ShapeType
+  parent: Mapsui.Nts.Providers.Shapefile
+  children:
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPatch
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPointM
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPointZ
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.Multipoint
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.Null
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.Point
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.PointM
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.PointZ
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLine
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLineM
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLineZ
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.PolygonM
+  - Mapsui.Nts.Providers.Shapefile.ShapeType.PolygonZ
+  langs:
+  - csharp
+  - vb
+  name: ShapeType
+  nameWithType: ShapeType
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType
+  type: Enum
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShapeType
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 26
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Shapefile geometry type.
+  example: []
+  syntax:
+    content: public enum ShapeType
+    content.vb: Public Enum ShapeType
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.Null
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.Null
+  id: "Null"
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: "Null"
+  nameWithType: ShapeType.Null
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.Null
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: "Null"
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: Null shape with no geometric data
+  example: []
+  syntax:
+    content: Null = 0
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.Point
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.Point
+  id: Point
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: Point
+  nameWithType: ShapeType.Point
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.Point
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Point
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 36
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A point consists of a pair of double-precision coordinates.
+
+    Mapsui interprets this as <xref href="Mapsui.Nts.Providers.Shapefile.ShapeType.Point" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: Point = 1
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLine
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLine
+  id: PolyLine
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: PolyLine
+  nameWithType: ShapeType.PolyLine
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLine
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PolyLine
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 43
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    PolyLine is an ordered set of coordinates that consists of one or more parts. A part is a
+
+    connected sequence of two or more points. Parts may or may not be connected to one
+
+    another. Parts may or may not intersect one another.
+
+    Mapsui interprets this as either <xref href="NetTopologySuite.Geometries.LineString" data-throw-if-not-resolved="false"></xref> or <xref href="NetTopologySuite.Geometries.MultiLineString" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: PolyLine = 3
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon
+  id: Polygon
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: Polygon
+  nameWithType: ShapeType.Polygon
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Polygon
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 55
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A polygon consists of one or more rings. A ring is a connected sequence of four or more
+
+    points that form a closed, non-self-intersecting loop. A polygon may contain multiple
+
+    outer rings. The order of coordinates or orientation for a ring indicates which side of the ring
+
+    is the interior of the polygon. The neighborhood to the right of an observer walking along
+
+    the ring in vertex order is the neighborhood inside the polygon. Coordinates of rings defining
+
+    holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
+
+    polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
+
+    as its parts.
+
+    Mapsui interprets this as either <xref href="Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon" data-throw-if-not-resolved="false"></xref> or <xref href="NetTopologySuite.Geometries.MultiPolygon" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: Polygon = 5
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.Multipoint
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.Multipoint
+  id: Multipoint
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: Multipoint
+  nameWithType: ShapeType.Multipoint
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.Multipoint
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Multipoint
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 60
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A MultiPoint represents a set of points.
+
+    Mapsui interprets this as <xref href="NetTopologySuite.Geometries.MultiPoint" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: Multipoint = 8
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.PointZ
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.PointZ
+  id: PointZ
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: PointZ
+  nameWithType: ShapeType.PointZ
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.PointZ
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PointZ
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 65
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A PointZ consists of a triplet of double-precision coordinates plus a measure.
+
+    Mapsui interprets this as <xref href="Mapsui.Nts.Providers.Shapefile.ShapeType.Point" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: PointZ = 11
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLineZ
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLineZ
+  id: PolyLineZ
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: PolyLineZ
+  nameWithType: ShapeType.PolyLineZ
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLineZ
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PolyLineZ
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 72
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A PolyLineZ consists of one or more parts. A part is a connected sequence of two or
+
+    more points. Parts may or may not be connected to one another. Parts may or may not
+
+    intersect one another.
+
+    Mapsui interprets this as <xref href="NetTopologySuite.Geometries.LineString" data-throw-if-not-resolved="false"></xref> or <xref href="NetTopologySuite.Geometries.MultiLineString" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: PolyLineZ = 13
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.PolygonZ
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.PolygonZ
+  id: PolygonZ
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: PolygonZ
+  nameWithType: ShapeType.PolygonZ
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.PolygonZ
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PolygonZ
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 79
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A PolygonZ consists of a number of rings. A ring is a closed, non-self-intersecting loop.
+
+    A PolygonZ may contain multiple outer rings. The rings of a PolygonZ are referred to as
+
+    its parts.
+
+    Mapsui interprets this as either <xref href="Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon" data-throw-if-not-resolved="false"></xref> or <xref href="NetTopologySuite.Geometries.MultiPolygon" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: PolygonZ = 15
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPointZ
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPointZ
+  id: MultiPointZ
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: MultiPointZ
+  nameWithType: ShapeType.MultiPointZ
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPointZ
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MultiPointZ
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 84
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A MultiPointZ represents a set of <xref href="Mapsui.Nts.Providers.Shapefile.ShapeType.PointZ" data-throw-if-not-resolved="false"></xref>s.
+
+    Mapsui interprets this as <xref href="NetTopologySuite.Geometries.MultiPoint" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: MultiPointZ = 18
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.PointM
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.PointM
+  id: PointM
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: PointM
+  nameWithType: ShapeType.PointM
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.PointM
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PointM
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 89
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A PointM consists of a pair of double-precision coordinates in the order X, Y, plus a measure M.
+
+    Mapsui interprets this as <xref href="Mapsui.Nts.Providers.Shapefile.ShapeType.Point" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: PointM = 21
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLineM
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLineM
+  id: PolyLineM
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: PolyLineM
+  nameWithType: ShapeType.PolyLineM
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.PolyLineM
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PolyLineM
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 96
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A shapefile PolyLineM consists of one or more parts. A part is a connected sequence of
+
+    two or more points. Parts may or may not be connected to one another. Parts may or may
+
+    not intersect one another.
+
+    Mapsui interprets this as <xref href="NetTopologySuite.Geometries.LineString" data-throw-if-not-resolved="false"></xref> or <xref href="NetTopologySuite.Geometries.MultiLineString" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: PolyLineM = 23
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.PolygonM
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.PolygonM
+  id: PolygonM
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: PolygonM
+  nameWithType: ShapeType.PolygonM
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.PolygonM
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PolygonM
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 101
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A PolygonM consists of a number of rings. A ring is a closed, non-self-intersecting loop.
+
+    Mapsui interprets this as either <xref href="Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon" data-throw-if-not-resolved="false"></xref> or <xref href="NetTopologySuite.Geometries.MultiPolygon" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: PolygonM = 25
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPointM
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPointM
+  id: MultiPointM
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: MultiPointM
+  nameWithType: ShapeType.MultiPointM
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPointM
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MultiPointM
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 106
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A MultiPointM represents a set of <xref href="Mapsui.Nts.Providers.Shapefile.ShapeType.PointM" data-throw-if-not-resolved="false"></xref>s.
+
+    Mapsui interprets this as <xref href="NetTopologySuite.Geometries.MultiPoint" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: MultiPointM = 28
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPatch
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPatch
+  id: MultiPatch
+  parent: Mapsui.Nts.Providers.Shapefile.ShapeType
+  langs:
+  - csharp
+  - vb
+  name: MultiPatch
+  nameWithType: ShapeType.MultiPatch
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.MultiPatch
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MultiPatch
+    path: ../../Mapsui.Nts/Providers/Shapefile/ShapeFile.cs
+    startLine: 113
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile
+  summary: >-
+    A MultiPatch consists of a number of surface patches. Each surface patch describes a
+
+    surface. The surface patches of a MultiPatch are referred to as its parts, and the type of
+
+    part controls how the order of coordinates of an MultiPatch part is interpreted.
+
+    Mapsui doesn't support this feature type.
+  example: []
+  syntax:
+    content: MultiPatch = 31
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.ShapeType
+references:
+- uid: Mapsui.Nts.Providers.Shapefile
+  commentId: N:Mapsui.Nts.Providers.Shapefile
+  href: Mapsui.html
+  name: Mapsui.Nts.Providers.Shapefile
+  nameWithType: Mapsui.Nts.Providers.Shapefile
+  fullName: Mapsui.Nts.Providers.Shapefile
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType
+  commentId: T:Mapsui.Nts.Providers.Shapefile.ShapeType
+  parent: Mapsui.Nts.Providers.Shapefile
+  href: Mapsui.Nts.Providers.Shapefile.ShapeType.html
+  name: ShapeType
+  nameWithType: ShapeType
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.Point
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.Point
+  href: Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_Point
+  name: Point
+  nameWithType: ShapeType.Point
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.Point
+- uid: NetTopologySuite.Geometries.LineString
+  commentId: T:NetTopologySuite.Geometries.LineString
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: LineString
+  nameWithType: LineString
+  fullName: NetTopologySuite.Geometries.LineString
+- uid: NetTopologySuite.Geometries.MultiLineString
+  commentId: T:NetTopologySuite.Geometries.MultiLineString
+  isExternal: true
+  name: MultiLineString
+  nameWithType: MultiLineString
+  fullName: NetTopologySuite.Geometries.MultiLineString
+- uid: NetTopologySuite.Geometries
+  commentId: N:NetTopologySuite.Geometries
+  isExternal: true
+  name: NetTopologySuite.Geometries
+  nameWithType: NetTopologySuite.Geometries
+  fullName: NetTopologySuite.Geometries
+  spec.csharp:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+  spec.vb:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon
+  href: Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_Polygon
+  name: Polygon
+  nameWithType: ShapeType.Polygon
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.Polygon
+- uid: NetTopologySuite.Geometries.MultiPolygon
+  commentId: T:NetTopologySuite.Geometries.MultiPolygon
+  isExternal: true
+  name: MultiPolygon
+  nameWithType: MultiPolygon
+  fullName: NetTopologySuite.Geometries.MultiPolygon
+- uid: NetTopologySuite.Geometries.MultiPoint
+  commentId: T:NetTopologySuite.Geometries.MultiPoint
+  isExternal: true
+  name: MultiPoint
+  nameWithType: MultiPoint
+  fullName: NetTopologySuite.Geometries.MultiPoint
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.PointZ
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.PointZ
+  href: Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_PointZ
+  name: PointZ
+  nameWithType: ShapeType.PointZ
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.PointZ
+- uid: Mapsui.Nts.Providers.Shapefile.ShapeType.PointM
+  commentId: F:Mapsui.Nts.Providers.Shapefile.ShapeType.PointM
+  href: Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_PointM
+  name: PointM
+  nameWithType: ShapeType.PointM
+  fullName: Mapsui.Nts.Providers.Shapefile.ShapeType.PointM

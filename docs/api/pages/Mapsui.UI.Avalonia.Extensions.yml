@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Avalonia.Extensions
+  commentId: N:Mapsui.UI.Avalonia.Extensions
+  id: Mapsui.UI.Avalonia.Extensions
+  children:
+  - Mapsui.UI.Avalonia.Extensions.PointExtensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Avalonia.Extensions
+  nameWithType: Mapsui.UI.Avalonia.Extensions
+  fullName: Mapsui.UI.Avalonia.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Avalonia
+references:
+- uid: Mapsui.UI.Avalonia.Extensions.PointExtensions
+  commentId: T:Mapsui.UI.Avalonia.Extensions.PointExtensions
+  href: Mapsui.UI.Avalonia.Extensions.PointExtensions.html
+  name: PointExtensions
+  nameWithType: PointExtensions
+  fullName: Mapsui.UI.Avalonia.Extensions.PointExtensions

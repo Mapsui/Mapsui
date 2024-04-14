@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Extensions.Provider
+  commentId: N:Mapsui.Extensions.Provider
+  id: Mapsui.Extensions.Provider
+  children:
+  - Mapsui.Extensions.Provider.GeoTiffProvider
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Extensions.Provider
+  nameWithType: Mapsui.Extensions.Provider
+  fullName: Mapsui.Extensions.Provider
+  type: Namespace
+  assemblies:
+  - Mapsui.Extensions
+references:
+- uid: Mapsui.Extensions.Provider.GeoTiffProvider
+  commentId: T:Mapsui.Extensions.Provider.GeoTiffProvider
+  href: Mapsui.Extensions.Provider.GeoTiffProvider.html
+  name: GeoTiffProvider
+  nameWithType: GeoTiffProvider
+  fullName: Mapsui.Extensions.Provider.GeoTiffProvider

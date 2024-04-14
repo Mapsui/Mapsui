@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Wpf
+  commentId: N:Mapsui.UI.Wpf
+  id: Mapsui.UI.Wpf
+  children:
+  - Mapsui.UI.Wpf.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Wpf
+  nameWithType: Mapsui.UI.Wpf
+  fullName: Mapsui.UI.Wpf
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Wpf
+references:
+- uid: Mapsui.UI.Wpf.MapControl
+  commentId: T:Mapsui.UI.Wpf.MapControl
+  href: Mapsui.UI.Wpf.MapControl.html
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.Wpf.MapControl

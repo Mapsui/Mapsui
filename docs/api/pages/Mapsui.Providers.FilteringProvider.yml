@@ -1,0 +1,859 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.FilteringProvider
+  commentId: T:Mapsui.Providers.FilteringProvider
+  id: FilteringProvider
+  parent: Mapsui.Providers
+  children:
+  - Mapsui.Providers.FilteringProvider.#ctor(Mapsui.Providers.IProvider,System.Func{Mapsui.IFeature,System.Boolean})
+  - Mapsui.Providers.FilteringProvider.CRS
+  - Mapsui.Providers.FilteringProvider.GetExtent
+  - Mapsui.Providers.FilteringProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  langs:
+  - csharp
+  - vb
+  name: FilteringProvider
+  nameWithType: FilteringProvider
+  fullName: Mapsui.Providers.FilteringProvider
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Providers/FilteringProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FilteringProvider
+    path: ../../Mapsui/Providers/FilteringProvider.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers
+  syntax:
+    content: 'public class FilteringProvider : IProvider'
+    content.vb: Public Class FilteringProvider Implements IProvider
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Providers.IProvider
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Providers.FilteringProvider.#ctor(Mapsui.Providers.IProvider,System.Func{Mapsui.IFeature,System.Boolean})
+  commentId: M:Mapsui.Providers.FilteringProvider.#ctor(Mapsui.Providers.IProvider,System.Func{Mapsui.IFeature,System.Boolean})
+  id: '#ctor(Mapsui.Providers.IProvider,System.Func{Mapsui.IFeature,System.Boolean})'
+  parent: Mapsui.Providers.FilteringProvider
+  langs:
+  - csharp
+  - vb
+  name: FilteringProvider(IProvider, Func<IFeature, bool>)
+  nameWithType: FilteringProvider.FilteringProvider(IProvider, Func<IFeature, bool>)
+  fullName: Mapsui.Providers.FilteringProvider.FilteringProvider(Mapsui.Providers.IProvider, System.Func<Mapsui.IFeature, bool>)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Providers/FilteringProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Providers/FilteringProvider.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers
+  syntax:
+    content: public FilteringProvider(IProvider provider, Func<IFeature, bool> filter)
+    parameters:
+    - id: provider
+      type: Mapsui.Providers.IProvider
+    - id: filter
+      type: System.Func{Mapsui.IFeature,System.Boolean}
+    content.vb: Public Sub New(provider As IProvider, filter As Func(Of IFeature, Boolean))
+  overload: Mapsui.Providers.FilteringProvider.#ctor*
+  nameWithType.vb: FilteringProvider.New(IProvider, Func(Of IFeature, Boolean))
+  fullName.vb: Mapsui.Providers.FilteringProvider.New(Mapsui.Providers.IProvider, System.Func(Of Mapsui.IFeature, Boolean))
+  name.vb: New(IProvider, Func(Of IFeature, Boolean))
+- uid: Mapsui.Providers.FilteringProvider.CRS
+  commentId: P:Mapsui.Providers.FilteringProvider.CRS
+  id: CRS
+  parent: Mapsui.Providers.FilteringProvider
+  langs:
+  - csharp
+  - vb
+  name: CRS
+  nameWithType: FilteringProvider.CRS
+  fullName: Mapsui.Providers.FilteringProvider.CRS
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Providers/FilteringProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CRS
+    path: ../../Mapsui/Providers/FilteringProvider.cs
+    startLine: 19
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers
+  summary: The spatial reference ID (CRS)
+  example: []
+  syntax:
+    content: public string? CRS { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CRS As String
+  overload: Mapsui.Providers.FilteringProvider.CRS*
+  implements:
+  - Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.Providers.FilteringProvider.GetExtent
+  commentId: M:Mapsui.Providers.FilteringProvider.GetExtent
+  id: GetExtent
+  parent: Mapsui.Providers.FilteringProvider
+  langs:
+  - csharp
+  - vb
+  name: GetExtent()
+  nameWithType: FilteringProvider.GetExtent()
+  fullName: Mapsui.Providers.FilteringProvider.GetExtent()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Providers/FilteringProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetExtent
+    path: ../../Mapsui/Providers/FilteringProvider.cs
+    startLine: 25
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers
+  summary: <xref href="Mapsui.MRect" data-throw-if-not-resolved="false"></xref> of data set
+  example: []
+  syntax:
+    content: public MRect? GetExtent()
+    return:
+      type: Mapsui.MRect
+      description: BoundingBox
+    content.vb: Public Function GetExtent() As MRect
+  overload: Mapsui.Providers.FilteringProvider.GetExtent*
+  implements:
+  - Mapsui.Providers.IProvider.GetExtent
+- uid: Mapsui.Providers.FilteringProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Providers.FilteringProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  id: GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Providers.FilteringProvider
+  langs:
+  - csharp
+  - vb
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: FilteringProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Providers.FilteringProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Providers/FilteringProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeaturesAsync
+    path: ../../Mapsui/Providers/FilteringProvider.cs
+    startLine: 30
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Providers
+  example: []
+  syntax:
+    content: public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    parameters:
+    - id: fetchInfo
+      type: Mapsui.Layers.FetchInfo
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+    content.vb: Public Function GetFeaturesAsync(fetchInfo As FetchInfo) As Task(Of IEnumerable(Of IFeature))
+  overload: Mapsui.Providers.FilteringProvider.GetFeaturesAsync*
+  implements:
+  - Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+references:
+- uid: Mapsui.Providers
+  commentId: N:Mapsui.Providers
+  href: Mapsui.html
+  name: Mapsui.Providers
+  nameWithType: Mapsui.Providers
+  fullName: Mapsui.Providers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Providers.IProvider
+  commentId: T:Mapsui.Providers.IProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProvider.html
+  name: IProvider
+  nameWithType: IProvider
+  fullName: Mapsui.Providers.IProvider
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Providers.FilteringProvider.#ctor*
+  commentId: Overload:Mapsui.Providers.FilteringProvider.#ctor
+  href: Mapsui.Providers.FilteringProvider.html#Mapsui_Providers_FilteringProvider__ctor_Mapsui_Providers_IProvider_System_Func_Mapsui_IFeature_System_Boolean__
+  name: FilteringProvider
+  nameWithType: FilteringProvider.FilteringProvider
+  fullName: Mapsui.Providers.FilteringProvider.FilteringProvider
+  nameWithType.vb: FilteringProvider.New
+  fullName.vb: Mapsui.Providers.FilteringProvider.New
+  name.vb: New
+- uid: System.Func{Mapsui.IFeature,System.Boolean}
+  commentId: T:System.Func{Mapsui.IFeature,System.Boolean}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<IFeature, bool>
+  nameWithType: Func<IFeature, bool>
+  fullName: System.Func<Mapsui.IFeature, bool>
+  nameWithType.vb: Func(Of IFeature, Boolean)
+  fullName.vb: System.Func(Of Mapsui.IFeature, Boolean)
+  name.vb: Func(Of IFeature, Boolean)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Mapsui.Providers.FilteringProvider.CRS*
+  commentId: Overload:Mapsui.Providers.FilteringProvider.CRS
+  href: Mapsui.Providers.FilteringProvider.html#Mapsui_Providers_FilteringProvider_CRS
+  name: CRS
+  nameWithType: FilteringProvider.CRS
+  fullName: Mapsui.Providers.FilteringProvider.CRS
+- uid: Mapsui.Providers.IProvider.CRS
+  commentId: P:Mapsui.Providers.IProvider.CRS
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_CRS
+  name: CRS
+  nameWithType: IProvider.CRS
+  fullName: Mapsui.Providers.IProvider.CRS
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui.Providers.FilteringProvider.GetExtent*
+  commentId: Overload:Mapsui.Providers.FilteringProvider.GetExtent
+  href: Mapsui.Providers.FilteringProvider.html#Mapsui_Providers_FilteringProvider_GetExtent
+  name: GetExtent
+  nameWithType: FilteringProvider.GetExtent
+  fullName: Mapsui.Providers.FilteringProvider.GetExtent
+- uid: Mapsui.Providers.IProvider.GetExtent
+  commentId: M:Mapsui.Providers.IProvider.GetExtent
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  name: GetExtent()
+  nameWithType: IProvider.GetExtent()
+  fullName: Mapsui.Providers.IProvider.GetExtent()
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Providers.FilteringProvider.GetFeaturesAsync*
+  commentId: Overload:Mapsui.Providers.FilteringProvider.GetFeaturesAsync
+  href: Mapsui.Providers.FilteringProvider.html#Mapsui_Providers_FilteringProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync
+  nameWithType: FilteringProvider.GetFeaturesAsync
+  fullName: Mapsui.Providers.FilteringProvider.GetFeaturesAsync
+- uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: IProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IEnumerable<IFeature>>
+  nameWithType: Task<IEnumerable<IFeature>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Mapsui.IFeature>>
+  nameWithType.vb: Task(Of IEnumerable(Of IFeature))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))
+  name.vb: Task(Of IEnumerable(Of IFeature))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: )
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

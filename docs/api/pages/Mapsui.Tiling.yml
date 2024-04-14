@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Tiling
+  commentId: N:Mapsui.Tiling
+  id: Mapsui.Tiling
+  children:
+  - Mapsui.Tiling.OpenStreetMap
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Tiling
+  nameWithType: Mapsui.Tiling
+  fullName: Mapsui.Tiling
+  type: Namespace
+  assemblies:
+  - Mapsui.Tiling
+references:
+- uid: Mapsui.Tiling.OpenStreetMap
+  commentId: T:Mapsui.Tiling.OpenStreetMap
+  href: Mapsui.Tiling.OpenStreetMap.html
+  name: OpenStreetMap
+  nameWithType: OpenStreetMap
+  fullName: Mapsui.Tiling.OpenStreetMap

@@ -1,0 +1,49 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Features
+  commentId: N:Mapsui.Features
+  id: Mapsui.Features
+  children:
+  - Mapsui.Features.FeatureId
+  - Mapsui.Features.FeatureKeyCreator`1
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Features
+  nameWithType: Mapsui.Features
+  fullName: Mapsui.Features
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Features.FeatureId
+  commentId: T:Mapsui.Features.FeatureId
+  href: Mapsui.Features.FeatureId.html
+  name: FeatureId
+  nameWithType: FeatureId
+  fullName: Mapsui.Features.FeatureId
+- uid: Mapsui.Features.FeatureKeyCreator`1
+  commentId: T:Mapsui.Features.FeatureKeyCreator`1
+  href: Mapsui.Features.FeatureKeyCreator-1.html
+  name: FeatureKeyCreator<T>
+  nameWithType: FeatureKeyCreator<T>
+  fullName: Mapsui.Features.FeatureKeyCreator<T>
+  nameWithType.vb: FeatureKeyCreator(Of T)
+  fullName.vb: Mapsui.Features.FeatureKeyCreator(Of T)
+  name.vb: FeatureKeyCreator(Of T)
+  spec.csharp:
+  - uid: Mapsui.Features.FeatureKeyCreator`1
+    name: FeatureKeyCreator
+    href: Mapsui.Features.FeatureKeyCreator-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Features.FeatureKeyCreator`1
+    name: FeatureKeyCreator
+    href: Mapsui.Features.FeatureKeyCreator-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

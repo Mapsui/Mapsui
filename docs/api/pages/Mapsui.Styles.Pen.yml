@@ -1,0 +1,1153 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.Pen
+  commentId: T:Mapsui.Styles.Pen
+  id: Pen
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.Pen.#ctor
+  - Mapsui.Styles.Pen.#ctor(Mapsui.Styles.Color,System.Double)
+  - Mapsui.Styles.Pen.Color
+  - Mapsui.Styles.Pen.DashArray
+  - Mapsui.Styles.Pen.DashOffset
+  - Mapsui.Styles.Pen.Equals(Mapsui.Styles.Pen)
+  - Mapsui.Styles.Pen.Equals(System.Object)
+  - Mapsui.Styles.Pen.GetHashCode
+  - Mapsui.Styles.Pen.PenStrokeCap
+  - Mapsui.Styles.Pen.PenStyle
+  - Mapsui.Styles.Pen.StrokeJoin
+  - Mapsui.Styles.Pen.StrokeMiterLimit
+  - Mapsui.Styles.Pen.Width
+  - Mapsui.Styles.Pen.op_Equality(Mapsui.Styles.Pen,Mapsui.Styles.Pen)
+  - Mapsui.Styles.Pen.op_Inequality(Mapsui.Styles.Pen,Mapsui.Styles.Pen)
+  langs:
+  - csharp
+  - vb
+  name: Pen
+  nameWithType: Pen
+  fullName: Mapsui.Styles.Pen
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Pen
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 3
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public class Pen
+    content.vb: Public Class Pen
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Mapsui.Styles.Pen.Mapsui.Extensions.PenExtensions.IsVisible
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.Pen.#ctor
+  commentId: M:Mapsui.Styles.Pen.#ctor
+  id: '#ctor'
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: Pen()
+  nameWithType: Pen.Pen()
+  fullName: Mapsui.Styles.Pen.Pen()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public Pen()
+    content.vb: Public Sub New()
+  overload: Mapsui.Styles.Pen.#ctor*
+  nameWithType.vb: Pen.New()
+  fullName.vb: Mapsui.Styles.Pen.New()
+  name.vb: New()
+- uid: Mapsui.Styles.Pen.#ctor(Mapsui.Styles.Color,System.Double)
+  commentId: M:Mapsui.Styles.Pen.#ctor(Mapsui.Styles.Color,System.Double)
+  id: '#ctor(Mapsui.Styles.Color,System.Double)'
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: Pen(Color, double)
+  nameWithType: Pen.Pen(Color, double)
+  fullName: Mapsui.Styles.Pen.Pen(Mapsui.Styles.Color, double)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public Pen(Color color, double width = 1)
+    parameters:
+    - id: color
+      type: Mapsui.Styles.Color
+    - id: width
+      type: System.Double
+    content.vb: Public Sub New(color As Color, width As Double = 1)
+  overload: Mapsui.Styles.Pen.#ctor*
+  nameWithType.vb: Pen.New(Color, Double)
+  fullName.vb: Mapsui.Styles.Pen.New(Mapsui.Styles.Color, Double)
+  name.vb: New(Color, Double)
+- uid: Mapsui.Styles.Pen.Width
+  commentId: P:Mapsui.Styles.Pen.Width
+  id: Width
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: Width
+  nameWithType: Pen.Width
+  fullName: Mapsui.Styles.Pen.Width
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Width
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 16
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Width of line
+  example: []
+  syntax:
+    content: public double Width { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Width As Double
+  overload: Mapsui.Styles.Pen.Width*
+- uid: Mapsui.Styles.Pen.Color
+  commentId: P:Mapsui.Styles.Pen.Color
+  id: Color
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: Color
+  nameWithType: Pen.Color
+  fullName: Mapsui.Styles.Pen.Color
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Color
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 21
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Color of line
+  example: []
+  syntax:
+    content: public Color Color { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Property Color As Color
+  overload: Mapsui.Styles.Pen.Color*
+- uid: Mapsui.Styles.Pen.PenStyle
+  commentId: P:Mapsui.Styles.Pen.PenStyle
+  id: PenStyle
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: PenStyle
+  nameWithType: Pen.PenStyle
+  fullName: Mapsui.Styles.Pen.PenStyle
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PenStyle
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 26
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Style of the line (solid/dashed), which is drawn
+  example: []
+  syntax:
+    content: public PenStyle PenStyle { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.PenStyle
+    content.vb: Public Property PenStyle As PenStyle
+  overload: Mapsui.Styles.Pen.PenStyle*
+- uid: Mapsui.Styles.Pen.DashArray
+  commentId: P:Mapsui.Styles.Pen.DashArray
+  id: DashArray
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: DashArray
+  nameWithType: Pen.DashArray
+  fullName: Mapsui.Styles.Pen.DashArray
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DashArray
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 32
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: >-
+    Array for drawing user defined dashes. Should be even and values are 
+
+    multiplied by line width before drawing.
+  example: []
+  syntax:
+    content: public float[]? DashArray { get; set; }
+    parameters: []
+    return:
+      type: System.Single[]
+    content.vb: Public Property DashArray As Single()
+  overload: Mapsui.Styles.Pen.DashArray*
+- uid: Mapsui.Styles.Pen.DashOffset
+  commentId: P:Mapsui.Styles.Pen.DashOffset
+  id: DashOffset
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: DashOffset
+  nameWithType: Pen.DashOffset
+  fullName: Mapsui.Styles.Pen.DashOffset
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DashOffset
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 37
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Offset for drawing user defined dashes
+  example: []
+  syntax:
+    content: public float DashOffset { get; set; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public Property DashOffset As Single
+  overload: Mapsui.Styles.Pen.DashOffset*
+- uid: Mapsui.Styles.Pen.PenStrokeCap
+  commentId: P:Mapsui.Styles.Pen.PenStrokeCap
+  id: PenStrokeCap
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: PenStrokeCap
+  nameWithType: Pen.PenStrokeCap
+  fullName: Mapsui.Styles.Pen.PenStrokeCap
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PenStrokeCap
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 42
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Defines the end of a line
+  example: []
+  syntax:
+    content: public PenStrokeCap PenStrokeCap { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.PenStrokeCap
+    content.vb: Public Property PenStrokeCap As PenStrokeCap
+  overload: Mapsui.Styles.Pen.PenStrokeCap*
+- uid: Mapsui.Styles.Pen.StrokeJoin
+  commentId: P:Mapsui.Styles.Pen.StrokeJoin
+  id: StrokeJoin
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: StrokeJoin
+  nameWithType: Pen.StrokeJoin
+  fullName: Mapsui.Styles.Pen.StrokeJoin
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StrokeJoin
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 47
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Defines how line parts are join together
+  example: []
+  syntax:
+    content: public StrokeJoin StrokeJoin { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.StrokeJoin
+    content.vb: Public Property StrokeJoin As StrokeJoin
+  overload: Mapsui.Styles.Pen.StrokeJoin*
+- uid: Mapsui.Styles.Pen.StrokeMiterLimit
+  commentId: P:Mapsui.Styles.Pen.StrokeMiterLimit
+  id: StrokeMiterLimit
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: StrokeMiterLimit
+  nameWithType: Pen.StrokeMiterLimit
+  fullName: Mapsui.Styles.Pen.StrokeMiterLimit
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StrokeMiterLimit
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 52
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Defines up to which width of line StrokeJoin is used
+  example: []
+  syntax:
+    content: public float StrokeMiterLimit { get; set; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public Property StrokeMiterLimit As Single
+  overload: Mapsui.Styles.Pen.StrokeMiterLimit*
+- uid: Mapsui.Styles.Pen.Equals(System.Object)
+  commentId: M:Mapsui.Styles.Pen.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: Pen.Equals(object?)
+  fullName: Mapsui.Styles.Pen.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 54
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Determines whether the specified object is equal to the current object.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current object.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the specified object  is equal to the current object; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Mapsui.Styles.Pen.Equals*
+  nameWithType.vb: Pen.Equals(Object)
+  fullName.vb: Mapsui.Styles.Pen.Equals(Object)
+  name.vb: Equals(Object)
+- uid: Mapsui.Styles.Pen.Equals(Mapsui.Styles.Pen)
+  commentId: M:Mapsui.Styles.Pen.Equals(Mapsui.Styles.Pen)
+  id: Equals(Mapsui.Styles.Pen)
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: Equals(Pen?)
+  nameWithType: Pen.Equals(Pen?)
+  fullName: Mapsui.Styles.Pen.Equals(Mapsui.Styles.Pen?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 74
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: protected bool Equals(Pen? pen)
+    parameters:
+    - id: pen
+      type: Mapsui.Styles.Pen
+    return:
+      type: System.Boolean
+    content.vb: Protected Function Equals(pen As Pen) As Boolean
+  overload: Mapsui.Styles.Pen.Equals*
+  nameWithType.vb: Pen.Equals(Pen)
+  fullName.vb: Mapsui.Styles.Pen.Equals(Mapsui.Styles.Pen)
+  name.vb: Equals(Pen)
+- uid: Mapsui.Styles.Pen.GetHashCode
+  commentId: M:Mapsui.Styles.Pen.GetHashCode
+  id: GetHashCode
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: Pen.GetHashCode()
+  fullName: Mapsui.Styles.Pen.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetHashCode
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 82
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Serves as the default hash function.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A hash code for the current object.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.Object.GetHashCode
+  overload: Mapsui.Styles.Pen.GetHashCode*
+- uid: Mapsui.Styles.Pen.op_Equality(Mapsui.Styles.Pen,Mapsui.Styles.Pen)
+  commentId: M:Mapsui.Styles.Pen.op_Equality(Mapsui.Styles.Pen,Mapsui.Styles.Pen)
+  id: op_Equality(Mapsui.Styles.Pen,Mapsui.Styles.Pen)
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: operator ==(Pen?, Pen?)
+  nameWithType: Pen.operator ==(Pen?, Pen?)
+  fullName: Mapsui.Styles.Pen.operator ==(Mapsui.Styles.Pen?, Mapsui.Styles.Pen?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Equality
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 98
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static bool operator ==(Pen? pen1, Pen? pen2)
+    parameters:
+    - id: pen1
+      type: Mapsui.Styles.Pen
+    - id: pen2
+      type: Mapsui.Styles.Pen
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(pen1 As Pen, pen2 As Pen) As Boolean
+  overload: Mapsui.Styles.Pen.op_Equality*
+  nameWithType.vb: Pen.=(Pen, Pen)
+  fullName.vb: Mapsui.Styles.Pen.=(Mapsui.Styles.Pen, Mapsui.Styles.Pen)
+  name.vb: =(Pen, Pen)
+- uid: Mapsui.Styles.Pen.op_Inequality(Mapsui.Styles.Pen,Mapsui.Styles.Pen)
+  commentId: M:Mapsui.Styles.Pen.op_Inequality(Mapsui.Styles.Pen,Mapsui.Styles.Pen)
+  id: op_Inequality(Mapsui.Styles.Pen,Mapsui.Styles.Pen)
+  parent: Mapsui.Styles.Pen
+  langs:
+  - csharp
+  - vb
+  name: operator !=(Pen?, Pen?)
+  nameWithType: Pen.operator !=(Pen?, Pen?)
+  fullName: Mapsui.Styles.Pen.operator !=(Mapsui.Styles.Pen?, Mapsui.Styles.Pen?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/Styles/Pen.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Inequality
+    path: ../../Mapsui/Styles/Pen.cs
+    startLine: 103
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static bool operator !=(Pen? pen1, Pen? pen2)
+    parameters:
+    - id: pen1
+      type: Mapsui.Styles.Pen
+    - id: pen2
+      type: Mapsui.Styles.Pen
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(pen1 As Pen, pen2 As Pen) As Boolean
+  overload: Mapsui.Styles.Pen.op_Inequality*
+  nameWithType.vb: Pen.<>(Pen, Pen)
+  fullName.vb: Mapsui.Styles.Pen.<>(Mapsui.Styles.Pen, Mapsui.Styles.Pen)
+  name.vb: <>(Pen, Pen)
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.Pen.Mapsui.Extensions.PenExtensions.IsVisible
+  commentId: M:Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+  parent: Mapsui.Extensions.PenExtensions
+  definition: Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+  href: Mapsui.Extensions.PenExtensions.html#Mapsui_Extensions_PenExtensions_IsVisible_Mapsui_Styles_Pen_
+  name: IsVisible(Pen)
+  nameWithType: PenExtensions.IsVisible(Pen)
+  fullName: Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+  spec.csharp:
+  - uid: Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+    name: IsVisible
+    href: Mapsui.Extensions.PenExtensions.html#Mapsui_Extensions_PenExtensions_IsVisible_Mapsui_Styles_Pen_
+  - name: (
+  - uid: Mapsui.Styles.Pen
+    name: Pen
+    href: Mapsui.Styles.Pen.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+    name: IsVisible
+    href: Mapsui.Extensions.PenExtensions.html#Mapsui_Extensions_PenExtensions_IsVisible_Mapsui_Styles_Pen_
+  - name: (
+  - uid: Mapsui.Styles.Pen
+    name: Pen
+    href: Mapsui.Styles.Pen.html
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+  commentId: M:Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+  href: Mapsui.Extensions.PenExtensions.html#Mapsui_Extensions_PenExtensions_IsVisible_Mapsui_Styles_Pen_
+  name: IsVisible(Pen)
+  nameWithType: PenExtensions.IsVisible(Pen)
+  fullName: Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+  spec.csharp:
+  - uid: Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+    name: IsVisible
+    href: Mapsui.Extensions.PenExtensions.html#Mapsui_Extensions_PenExtensions_IsVisible_Mapsui_Styles_Pen_
+  - name: (
+  - uid: Mapsui.Styles.Pen
+    name: Pen
+    href: Mapsui.Styles.Pen.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.PenExtensions.IsVisible(Mapsui.Styles.Pen)
+    name: IsVisible
+    href: Mapsui.Extensions.PenExtensions.html#Mapsui_Extensions_PenExtensions_IsVisible_Mapsui_Styles_Pen_
+  - name: (
+  - uid: Mapsui.Styles.Pen
+    name: Pen
+    href: Mapsui.Styles.Pen.html
+  - name: )
+- uid: Mapsui.Extensions.PenExtensions
+  commentId: T:Mapsui.Extensions.PenExtensions
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.PenExtensions.html
+  name: PenExtensions
+  nameWithType: PenExtensions
+  fullName: Mapsui.Extensions.PenExtensions
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.Pen.#ctor*
+  commentId: Overload:Mapsui.Styles.Pen.#ctor
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen__ctor
+  name: Pen
+  nameWithType: Pen.Pen
+  fullName: Mapsui.Styles.Pen.Pen
+  nameWithType.vb: Pen.New
+  fullName.vb: Mapsui.Styles.Pen.New
+  name.vb: New
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Color.html
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Styles.Pen.Width*
+  commentId: Overload:Mapsui.Styles.Pen.Width
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_Width
+  name: Width
+  nameWithType: Pen.Width
+  fullName: Mapsui.Styles.Pen.Width
+- uid: Mapsui.Styles.Pen.Color*
+  commentId: Overload:Mapsui.Styles.Pen.Color
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_Color
+  name: Color
+  nameWithType: Pen.Color
+  fullName: Mapsui.Styles.Pen.Color
+- uid: Mapsui.Styles.Pen.PenStyle*
+  commentId: Overload:Mapsui.Styles.Pen.PenStyle
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_PenStyle
+  name: PenStyle
+  nameWithType: Pen.PenStyle
+  fullName: Mapsui.Styles.Pen.PenStyle
+- uid: Mapsui.Styles.PenStyle
+  commentId: T:Mapsui.Styles.PenStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.PenStyle.html
+  name: PenStyle
+  nameWithType: PenStyle
+  fullName: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.Pen.DashArray*
+  commentId: Overload:Mapsui.Styles.Pen.DashArray
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_DashArray
+  name: DashArray
+  nameWithType: Pen.DashArray
+  fullName: Mapsui.Styles.Pen.DashArray
+- uid: System.Single[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float[]
+  nameWithType: float[]
+  fullName: float[]
+  nameWithType.vb: Single()
+  fullName.vb: Single()
+  name.vb: Single()
+  spec.csharp:
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.Pen.DashOffset*
+  commentId: Overload:Mapsui.Styles.Pen.DashOffset
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_DashOffset
+  name: DashOffset
+  nameWithType: Pen.DashOffset
+  fullName: Mapsui.Styles.Pen.DashOffset
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Mapsui.Styles.Pen.PenStrokeCap*
+  commentId: Overload:Mapsui.Styles.Pen.PenStrokeCap
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_PenStrokeCap
+  name: PenStrokeCap
+  nameWithType: Pen.PenStrokeCap
+  fullName: Mapsui.Styles.Pen.PenStrokeCap
+- uid: Mapsui.Styles.PenStrokeCap
+  commentId: T:Mapsui.Styles.PenStrokeCap
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.PenStrokeCap.html
+  name: PenStrokeCap
+  nameWithType: PenStrokeCap
+  fullName: Mapsui.Styles.PenStrokeCap
+- uid: Mapsui.Styles.Pen.StrokeJoin*
+  commentId: Overload:Mapsui.Styles.Pen.StrokeJoin
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_StrokeJoin
+  name: StrokeJoin
+  nameWithType: Pen.StrokeJoin
+  fullName: Mapsui.Styles.Pen.StrokeJoin
+- uid: Mapsui.Styles.StrokeJoin
+  commentId: T:Mapsui.Styles.StrokeJoin
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.StrokeJoin.html
+  name: StrokeJoin
+  nameWithType: StrokeJoin
+  fullName: Mapsui.Styles.StrokeJoin
+- uid: Mapsui.Styles.Pen.StrokeMiterLimit*
+  commentId: Overload:Mapsui.Styles.Pen.StrokeMiterLimit
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_StrokeMiterLimit
+  name: StrokeMiterLimit
+  nameWithType: Pen.StrokeMiterLimit
+  fullName: Mapsui.Styles.Pen.StrokeMiterLimit
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Styles.Pen.Equals*
+  commentId: Overload:Mapsui.Styles.Pen.Equals
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_Equals_System_Object_
+  name: Equals
+  nameWithType: Pen.Equals
+  fullName: Mapsui.Styles.Pen.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Styles.Pen
+  commentId: T:Mapsui.Styles.Pen
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Pen.html
+  name: Pen
+  nameWithType: Pen
+  fullName: Mapsui.Styles.Pen
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.Pen.GetHashCode*
+  commentId: Overload:Mapsui.Styles.Pen.GetHashCode
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_GetHashCode
+  name: GetHashCode
+  nameWithType: Pen.GetHashCode
+  fullName: Mapsui.Styles.Pen.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Styles.Pen.op_Equality*
+  commentId: Overload:Mapsui.Styles.Pen.op_Equality
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_op_Equality_Mapsui_Styles_Pen_Mapsui_Styles_Pen_
+  name: operator ==
+  nameWithType: Pen.operator ==
+  fullName: Mapsui.Styles.Pen.operator ==
+  nameWithType.vb: Pen.=
+  fullName.vb: Mapsui.Styles.Pen.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.Styles.Pen.op_Equality*
+    name: ==
+    href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_op_Equality_Mapsui_Styles_Pen_Mapsui_Styles_Pen_
+- uid: Mapsui.Styles.Pen.op_Inequality*
+  commentId: Overload:Mapsui.Styles.Pen.op_Inequality
+  href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_op_Inequality_Mapsui_Styles_Pen_Mapsui_Styles_Pen_
+  name: operator !=
+  nameWithType: Pen.operator !=
+  fullName: Mapsui.Styles.Pen.operator !=
+  nameWithType.vb: Pen.<>
+  fullName.vb: Mapsui.Styles.Pen.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.Styles.Pen.op_Inequality*
+    name: '!='
+    href: Mapsui.Styles.Pen.html#Mapsui_Styles_Pen_op_Inequality_Mapsui_Styles_Pen_Mapsui_Styles_Pen_

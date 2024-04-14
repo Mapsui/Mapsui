@@ -1,0 +1,197 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing
+  commentId: N:Mapsui.Nts.Providers.Shapefile.Indexing
+  id: Mapsui.Nts.Providers.Shapefile.Indexing
+  children:
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  - Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+  - Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Nts.Providers.Shapefile.Indexing
+  nameWithType: Mapsui.Nts.Providers.Shapefile.Indexing
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing
+  type: Namespace
+  assemblies:
+  - Mapsui.Nts
+references:
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  name: BinaryTree<T, TU>
+  nameWithType: BinaryTree<T, TU>
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>
+  nameWithType.vb: BinaryTree(Of T, TU)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU)
+  name.vb: BinaryTree(Of T, TU)
+  spec.csharp:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+    name: BinaryTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TU
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+    name: BinaryTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TU
+  - name: )
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  name: BinaryTree<T, TU>.ItemValue
+  nameWithType: BinaryTree<T, TU>.ItemValue
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree<T, TU>.ItemValue
+  nameWithType.vb: BinaryTree(Of T, TU).ItemValue
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree(Of T, TU).ItemValue
+  name.vb: BinaryTree(Of T, TU).ItemValue
+  spec.csharp:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+    name: BinaryTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TU
+  - name: '>'
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+    name: ItemValue
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html
+  spec.vb:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2
+    name: BinaryTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TU
+  - name: )
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree`2.ItemValue
+    name: ItemValue
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.html
+  name: Heuristic
+  nameWithType: Heuristic
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  name: QuadTree
+  nameWithType: QuadTree
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  name: QuadTree.ObsoleteFileFormatException
+  nameWithType: QuadTree.ObsoleteFileFormatException
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException
+  spec.csharp:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+    name: QuadTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException
+    name: ObsoleteFileFormatException
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException.html
+  spec.vb:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+    name: QuadTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException
+    name: ObsoleteFileFormatException
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException.html
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  name: QuadTree.BoxObjects
+  nameWithType: QuadTree.BoxObjects
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects
+  spec.csharp:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+    name: QuadTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects
+    name: BoxObjects
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects.html
+  spec.vb:
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+    name: QuadTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects
+    name: BoxObjects
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects.html
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing
+  commentId: N:Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.html
+  name: Mapsui.Nts.Providers.Shapefile.Indexing
+  nameWithType: Mapsui.Nts.Providers.Shapefile.Indexing
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing
+    name: Indexing
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing
+    name: Indexing
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.html

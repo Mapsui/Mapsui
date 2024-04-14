@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class RasterizingTileProvider </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class RasterizingTileProvider ">
+    
+    <meta name="description" content="The rasterizing tile provider. Tiles the Layer for faster Rasterizing on Zoom and Move.">
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider">
+
+
+
+  <h1 id="Mapsui_Tiling_Provider_RasterizingTileProvider" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider" class="text-break">Class RasterizingTileProvider</h1>
+  <div class="markdown level0 summary"><p>The rasterizing tile provider. Tiles the Layer for faster Rasterizing on Zoom and Move.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">RasterizingTileProvider</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">ITileSource</span></div>
+    <div><span class="xref">ITileProvider</span></div>
+    <div><a class="xref" href="Mapsui.Layers.ILayerFeatureInfo.html">ILayerFeatureInfo</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.Tiling.html">Tiling</a>.<a class="xref" href="Mapsui.Tiling.Provider.html">Provider</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.Tiling.dll</h6>
+  <h5 id="Mapsui_Tiling_Provider_RasterizingTileProvider_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class RasterizingTileProvider : ITileSource, ITileProvider, ILayerFeatureInfo</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Provider_RasterizingTileProvider__ctor_Mapsui_Layers_ILayer_Mapsui_Rendering_IRenderer_System_Single_BruTile_Cache_IPersistentCache_System_Byte____Mapsui_Projections_IProjection_Mapsui_Rendering_RenderFormat_.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Provider.RasterizingTileProvider.%23ctor(Mapsui.Layers.ILayer%2CMapsui.Rendering.IRenderer%2CSystem.Single%2CBruTile.Cache.IPersistentCache%7BSystem.Byte%5B%5D%7D%2CMapsui.Projections.IProjection%2CMapsui.Rendering.RenderFormat)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Provider/RasterizingTileProvider.cs/#L34">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Provider_RasterizingTileProvider__ctor_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.#ctor*"></a>
+  <h4 id="Mapsui_Tiling_Provider_RasterizingTileProvider__ctor_Mapsui_Layers_ILayer_Mapsui_Rendering_IRenderer_System_Single_BruTile_Cache_IPersistentCache_System_Byte____Mapsui_Projections_IProjection_Mapsui_Rendering_RenderFormat_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.#ctor(Mapsui.Layers.ILayer,Mapsui.Rendering.IRenderer,System.Single,BruTile.Cache.IPersistentCache{System.Byte[]},Mapsui.Projections.IProjection,Mapsui.Rendering.RenderFormat)">RasterizingTileProvider(ILayer, IRenderer?, float, IPersistentCache&lt;byte[]&gt;?, IProjection?, RenderFormat)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RasterizingTileProvider(ILayer layer, IRenderer? rasterizer = null, float pixelDensity = 1, IPersistentCache&lt;byte[]&gt;? persistentCache = null, IProjection? projection = null, RenderFormat renderFormat = RenderFormat.Png)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></td>
+        <td><span class="parametername">rasterizer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td><span class="parametername">pixelDensity</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IPersistentCache</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]&gt;</td>
+        <td><span class="parametername">persistentCache</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Projections.IProjection.html">IProjection</a></td>
+        <td><span class="parametername">projection</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.RenderFormat.html">RenderFormat</a></td>
+        <td><span class="parametername">renderFormat</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Provider_RasterizingTileProvider_Attribution.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Provider/RasterizingTileProvider.cs/#L230">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Provider_RasterizingTileProvider_Attribution_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution*"></a>
+  <h4 id="Mapsui_Tiling_Provider_RasterizingTileProvider_Attribution" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution">Attribution</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Attribution Attribution { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Attribution</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Provider_RasterizingTileProvider_Name.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Provider.RasterizingTileProvider.Name%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Provider/RasterizingTileProvider.cs/#L229">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Provider_RasterizingTileProvider_Name_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.Name*"></a>
+  <h4 id="Mapsui_Tiling_Provider_RasterizingTileProvider_Name" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.Name">Name</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Provider_RasterizingTileProvider_PersistentCache.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Provider/RasterizingTileProvider.cs/#L62">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Provider_RasterizingTileProvider_PersistentCache_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache*"></a>
+  <h4 id="Mapsui_Tiling_Provider_RasterizingTileProvider_PersistentCache" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache">PersistentCache</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IPersistentCache&lt;byte[]&gt; PersistentCache { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IPersistentCache</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Provider_RasterizingTileProvider_Schema.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Provider.RasterizingTileProvider.Schema%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Provider/RasterizingTileProvider.cs/#L228">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Provider_RasterizingTileProvider_Schema_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.Schema*"></a>
+  <h4 id="Mapsui_Tiling_Provider_RasterizingTileProvider_Schema" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.Schema">Schema</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITileSchema Schema { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ITileSchema</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Provider_RasterizingTileProvider_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync(Mapsui.Viewport%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Provider/RasterizingTileProvider.cs/#L243">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Provider_RasterizingTileProvider_GetFeatureInfoAsync_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync*"></a>
+  <h4 id="Mapsui_Tiling_Provider_RasterizingTileProvider_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)">GetFeatureInfoAsync(Viewport, double, double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;IDictionary&lt;string, IEnumerable&lt;IFeature&gt;&gt;&gt; GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Viewport.html">Viewport</a></td>
+        <td><span class="parametername">viewport</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">screenX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">screenY</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Provider_RasterizingTileProvider_GetTileAsync_BruTile_TileInfo_.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync(BruTile.TileInfo)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Provider/RasterizingTileProvider.cs/#L64">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Provider_RasterizingTileProvider_GetTileAsync_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync*"></a>
+  <h4 id="Mapsui_Tiling_Provider_RasterizingTileProvider_GetTileAsync_BruTile_TileInfo_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync(BruTile.TileInfo)">GetTileAsync(TileInfo)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;byte[]?&gt; GetTileAsync(TileInfo tileInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TileInfo</span></td>
+        <td><span class="parametername">tileInfo</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Provider_RasterizingTileProvider_ToViewport_Mapsui_MSection_.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport(Mapsui.MSection)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Provider/RasterizingTileProvider.cs/#L232">View Source</a>
+  </span>
+  <a id="Mapsui_Tiling_Provider_RasterizingTileProvider_ToViewport_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport*"></a>
+  <h4 id="Mapsui_Tiling_Provider_RasterizingTileProvider_ToViewport_Mapsui_MSection_" data-uid="Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport(Mapsui.MSection)">ToViewport(MSection)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Viewport ToViewport(MSection section)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MSection.html">MSection</a></td>
+        <td><span class="parametername">section</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Viewport.html">Viewport</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">BruTile.ITileSource</span>
+  </div>
+  <div>
+      <span class="xref">BruTile.ITileProvider</span>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Layers.ILayerFeatureInfo.html">ILayerFeatureInfo</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Tiling_Provider_RasterizingTileProvider.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Provider.RasterizingTileProvider%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Tiling/Provider/RasterizingTileProvider.cs/#L21" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

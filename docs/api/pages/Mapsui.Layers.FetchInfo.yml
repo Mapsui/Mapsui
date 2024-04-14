@@ -1,0 +1,746 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  id: FetchInfo
+  parent: Mapsui.Layers
+  children:
+  - Mapsui.Layers.FetchInfo.#ctor(Mapsui.Layers.FetchInfo)
+  - Mapsui.Layers.FetchInfo.#ctor(Mapsui.MSection,System.String,Mapsui.ChangeType)
+  - Mapsui.Layers.FetchInfo.CRS
+  - Mapsui.Layers.FetchInfo.ChangeType
+  - Mapsui.Layers.FetchInfo.Extent
+  - Mapsui.Layers.FetchInfo.Grow(System.Double)
+  - Mapsui.Layers.FetchInfo.Resolution
+  - Mapsui.Layers.FetchInfo.Section
+  langs:
+  - csharp
+  - vb
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Layers/FetchInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FetchInfo
+    path: ../../Mapsui/Layers/FetchInfo.cs
+    startLine: 2
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public class FetchInfo
+    content.vb: Public Class FetchInfo
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Layers.FetchInfo.#ctor(Mapsui.MSection,System.String,Mapsui.ChangeType)
+  commentId: M:Mapsui.Layers.FetchInfo.#ctor(Mapsui.MSection,System.String,Mapsui.ChangeType)
+  id: '#ctor(Mapsui.MSection,System.String,Mapsui.ChangeType)'
+  parent: Mapsui.Layers.FetchInfo
+  langs:
+  - csharp
+  - vb
+  name: FetchInfo(MSection, string?, ChangeType)
+  nameWithType: FetchInfo.FetchInfo(MSection, string?, ChangeType)
+  fullName: Mapsui.Layers.FetchInfo.FetchInfo(Mapsui.MSection, string?, Mapsui.ChangeType)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Layers/FetchInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Layers/FetchInfo.cs
+    startLine: 4
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public FetchInfo(MSection section, string? crs = null, ChangeType changeType = ChangeType.Discrete)
+    parameters:
+    - id: section
+      type: Mapsui.MSection
+    - id: crs
+      type: System.String
+    - id: changeType
+      type: Mapsui.ChangeType
+    content.vb: Public Sub New(section As MSection, crs As String = Nothing, changeType As ChangeType = ChangeType.Discrete)
+  overload: Mapsui.Layers.FetchInfo.#ctor*
+  nameWithType.vb: FetchInfo.New(MSection, String, ChangeType)
+  fullName.vb: Mapsui.Layers.FetchInfo.New(Mapsui.MSection, String, Mapsui.ChangeType)
+  name.vb: New(MSection, String, ChangeType)
+- uid: Mapsui.Layers.FetchInfo.#ctor(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Layers.FetchInfo.#ctor(Mapsui.Layers.FetchInfo)
+  id: '#ctor(Mapsui.Layers.FetchInfo)'
+  parent: Mapsui.Layers.FetchInfo
+  langs:
+  - csharp
+  - vb
+  name: FetchInfo(FetchInfo)
+  nameWithType: FetchInfo.FetchInfo(FetchInfo)
+  fullName: Mapsui.Layers.FetchInfo.FetchInfo(Mapsui.Layers.FetchInfo)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Layers/FetchInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Layers/FetchInfo.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public FetchInfo(FetchInfo fetchInfo)
+    parameters:
+    - id: fetchInfo
+      type: Mapsui.Layers.FetchInfo
+    content.vb: Public Sub New(fetchInfo As FetchInfo)
+  overload: Mapsui.Layers.FetchInfo.#ctor*
+  nameWithType.vb: FetchInfo.New(FetchInfo)
+  fullName.vb: Mapsui.Layers.FetchInfo.New(Mapsui.Layers.FetchInfo)
+  name.vb: New(FetchInfo)
+- uid: Mapsui.Layers.FetchInfo.Section
+  commentId: P:Mapsui.Layers.FetchInfo.Section
+  id: Section
+  parent: Mapsui.Layers.FetchInfo
+  langs:
+  - csharp
+  - vb
+  name: Section
+  nameWithType: FetchInfo.Section
+  fullName: Mapsui.Layers.FetchInfo.Section
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/FetchInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Section
+    path: ../../Mapsui/Layers/FetchInfo.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public MSection Section { get; }
+    parameters: []
+    return:
+      type: Mapsui.MSection
+    content.vb: Public ReadOnly Property Section As MSection
+  overload: Mapsui.Layers.FetchInfo.Section*
+- uid: Mapsui.Layers.FetchInfo.Extent
+  commentId: P:Mapsui.Layers.FetchInfo.Extent
+  id: Extent
+  parent: Mapsui.Layers.FetchInfo
+  langs:
+  - csharp
+  - vb
+  name: Extent
+  nameWithType: FetchInfo.Extent
+  fullName: Mapsui.Layers.FetchInfo.Extent
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/FetchInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Extent
+    path: ../../Mapsui/Layers/FetchInfo.cs
+    startLine: 20
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public MRect Extent { get; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Public ReadOnly Property Extent As MRect
+  overload: Mapsui.Layers.FetchInfo.Extent*
+- uid: Mapsui.Layers.FetchInfo.Resolution
+  commentId: P:Mapsui.Layers.FetchInfo.Resolution
+  id: Resolution
+  parent: Mapsui.Layers.FetchInfo
+  langs:
+  - csharp
+  - vb
+  name: Resolution
+  nameWithType: FetchInfo.Resolution
+  fullName: Mapsui.Layers.FetchInfo.Resolution
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/FetchInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Resolution
+    path: ../../Mapsui/Layers/FetchInfo.cs
+    startLine: 21
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public double Resolution { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property Resolution As Double
+  overload: Mapsui.Layers.FetchInfo.Resolution*
+- uid: Mapsui.Layers.FetchInfo.CRS
+  commentId: P:Mapsui.Layers.FetchInfo.CRS
+  id: CRS
+  parent: Mapsui.Layers.FetchInfo
+  langs:
+  - csharp
+  - vb
+  name: CRS
+  nameWithType: FetchInfo.CRS
+  fullName: Mapsui.Layers.FetchInfo.CRS
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/FetchInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CRS
+    path: ../../Mapsui/Layers/FetchInfo.cs
+    startLine: 22
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public string? CRS { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property CRS As String
+  overload: Mapsui.Layers.FetchInfo.CRS*
+- uid: Mapsui.Layers.FetchInfo.ChangeType
+  commentId: P:Mapsui.Layers.FetchInfo.ChangeType
+  id: ChangeType
+  parent: Mapsui.Layers.FetchInfo
+  langs:
+  - csharp
+  - vb
+  name: ChangeType
+  nameWithType: FetchInfo.ChangeType
+  fullName: Mapsui.Layers.FetchInfo.ChangeType
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/FetchInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ChangeType
+    path: ../../Mapsui/Layers/FetchInfo.cs
+    startLine: 23
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public ChangeType ChangeType { get; }
+    parameters: []
+    return:
+      type: Mapsui.ChangeType
+    content.vb: Public ReadOnly Property ChangeType As ChangeType
+  overload: Mapsui.Layers.FetchInfo.ChangeType*
+- uid: Mapsui.Layers.FetchInfo.Grow(System.Double)
+  commentId: M:Mapsui.Layers.FetchInfo.Grow(System.Double)
+  id: Grow(System.Double)
+  parent: Mapsui.Layers.FetchInfo
+  langs:
+  - csharp
+  - vb
+  name: Grow(double)
+  nameWithType: FetchInfo.Grow(double)
+  fullName: Mapsui.Layers.FetchInfo.Grow(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Layers/FetchInfo.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Grow
+    path: ../../Mapsui/Layers/FetchInfo.cs
+    startLine: 25
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: public FetchInfo Grow(double amountInScreenUnits)
+    parameters:
+    - id: amountInScreenUnits
+      type: System.Double
+    return:
+      type: Mapsui.Layers.FetchInfo
+    content.vb: Public Function Grow(amountInScreenUnits As Double) As FetchInfo
+  overload: Mapsui.Layers.FetchInfo.Grow*
+  nameWithType.vb: FetchInfo.Grow(Double)
+  fullName.vb: Mapsui.Layers.FetchInfo.Grow(Double)
+  name.vb: Grow(Double)
+references:
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Layers.FetchInfo.#ctor*
+  commentId: Overload:Mapsui.Layers.FetchInfo.#ctor
+  href: Mapsui.Layers.FetchInfo.html#Mapsui_Layers_FetchInfo__ctor_Mapsui_MSection_System_String_Mapsui_ChangeType_
+  name: FetchInfo
+  nameWithType: FetchInfo.FetchInfo
+  fullName: Mapsui.Layers.FetchInfo.FetchInfo
+  nameWithType.vb: FetchInfo.New
+  fullName.vb: Mapsui.Layers.FetchInfo.New
+  name.vb: New
+- uid: Mapsui.MSection
+  commentId: T:Mapsui.MSection
+  parent: Mapsui
+  href: Mapsui.MSection.html
+  name: MSection
+  nameWithType: MSection
+  fullName: Mapsui.MSection
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.ChangeType
+  commentId: T:Mapsui.ChangeType
+  parent: Mapsui
+  href: Mapsui.ChangeType.html
+  name: ChangeType
+  nameWithType: ChangeType
+  fullName: Mapsui.ChangeType
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: Mapsui.Layers.FetchInfo.Section*
+  commentId: Overload:Mapsui.Layers.FetchInfo.Section
+  href: Mapsui.Layers.FetchInfo.html#Mapsui_Layers_FetchInfo_Section
+  name: Section
+  nameWithType: FetchInfo.Section
+  fullName: Mapsui.Layers.FetchInfo.Section
+- uid: Mapsui.Layers.FetchInfo.Extent*
+  commentId: Overload:Mapsui.Layers.FetchInfo.Extent
+  href: Mapsui.Layers.FetchInfo.html#Mapsui_Layers_FetchInfo_Extent
+  name: Extent
+  nameWithType: FetchInfo.Extent
+  fullName: Mapsui.Layers.FetchInfo.Extent
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui.Layers.FetchInfo.Resolution*
+  commentId: Overload:Mapsui.Layers.FetchInfo.Resolution
+  href: Mapsui.Layers.FetchInfo.html#Mapsui_Layers_FetchInfo_Resolution
+  name: Resolution
+  nameWithType: FetchInfo.Resolution
+  fullName: Mapsui.Layers.FetchInfo.Resolution
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Layers.FetchInfo.CRS*
+  commentId: Overload:Mapsui.Layers.FetchInfo.CRS
+  href: Mapsui.Layers.FetchInfo.html#Mapsui_Layers_FetchInfo_CRS
+  name: CRS
+  nameWithType: FetchInfo.CRS
+  fullName: Mapsui.Layers.FetchInfo.CRS
+- uid: Mapsui.Layers.FetchInfo.ChangeType*
+  commentId: Overload:Mapsui.Layers.FetchInfo.ChangeType
+  href: Mapsui.Layers.FetchInfo.html#Mapsui_Layers_FetchInfo_ChangeType
+  name: ChangeType
+  nameWithType: FetchInfo.ChangeType
+  fullName: Mapsui.Layers.FetchInfo.ChangeType
+- uid: Mapsui.Layers.FetchInfo.Grow*
+  commentId: Overload:Mapsui.Layers.FetchInfo.Grow
+  href: Mapsui.Layers.FetchInfo.html#Mapsui_Layers_FetchInfo_Grow_System_Double_
+  name: Grow
+  nameWithType: FetchInfo.Grow
+  fullName: Mapsui.Layers.FetchInfo.Grow

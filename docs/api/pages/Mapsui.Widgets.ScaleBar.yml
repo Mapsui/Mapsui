@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.ScaleBar
+  commentId: N:Mapsui.Widgets.ScaleBar
+  id: Mapsui.Widgets.ScaleBar
+  children:
+  - Mapsui.Widgets.ScaleBar.IUnitConverter
+  - Mapsui.Widgets.ScaleBar.ImperialUnitConverter
+  - Mapsui.Widgets.ScaleBar.MetricUnitConverter
+  - Mapsui.Widgets.ScaleBar.NauticalUnitConverter
+  - Mapsui.Widgets.ScaleBar.ScaleBarMode
+  - Mapsui.Widgets.ScaleBar.ScaleBarWidget
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Widgets.ScaleBar
+  nameWithType: Mapsui.Widgets.ScaleBar
+  fullName: Mapsui.Widgets.ScaleBar
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Widgets.ScaleBar.ImperialUnitConverter
+  commentId: T:Mapsui.Widgets.ScaleBar.ImperialUnitConverter
+  parent: Mapsui.Widgets.ScaleBar
+  href: Mapsui.Widgets.ScaleBar.ImperialUnitConverter.html
+  name: ImperialUnitConverter
+  nameWithType: ImperialUnitConverter
+  fullName: Mapsui.Widgets.ScaleBar.ImperialUnitConverter
+- uid: Mapsui.Widgets.ScaleBar.IUnitConverter
+  commentId: T:Mapsui.Widgets.ScaleBar.IUnitConverter
+  parent: Mapsui.Widgets.ScaleBar
+  href: Mapsui.Widgets.ScaleBar.IUnitConverter.html
+  name: IUnitConverter
+  nameWithType: IUnitConverter
+  fullName: Mapsui.Widgets.ScaleBar.IUnitConverter
+- uid: Mapsui.Widgets.ScaleBar.MetricUnitConverter
+  commentId: T:Mapsui.Widgets.ScaleBar.MetricUnitConverter
+  parent: Mapsui.Widgets.ScaleBar
+  href: Mapsui.Widgets.ScaleBar.MetricUnitConverter.html
+  name: MetricUnitConverter
+  nameWithType: MetricUnitConverter
+  fullName: Mapsui.Widgets.ScaleBar.MetricUnitConverter
+- uid: Mapsui.Widgets.ScaleBar.NauticalUnitConverter
+  commentId: T:Mapsui.Widgets.ScaleBar.NauticalUnitConverter
+  parent: Mapsui.Widgets.ScaleBar
+  href: Mapsui.Widgets.ScaleBar.NauticalUnitConverter.html
+  name: NauticalUnitConverter
+  nameWithType: NauticalUnitConverter
+  fullName: Mapsui.Widgets.ScaleBar.NauticalUnitConverter
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarMode
+  commentId: T:Mapsui.Widgets.ScaleBar.ScaleBarMode
+  parent: Mapsui.Widgets.ScaleBar
+  href: Mapsui.Widgets.ScaleBar.ScaleBarMode.html
+  name: ScaleBarMode
+  nameWithType: ScaleBarMode
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarMode
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget
+  commentId: T:Mapsui.Widgets.ScaleBar.ScaleBarWidget
+  href: Mapsui.Widgets.ScaleBar.ScaleBarWidget.html
+  name: ScaleBarWidget
+  nameWithType: ScaleBarWidget
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget
+- uid: Mapsui.Widgets.ScaleBar
+  commentId: N:Mapsui.Widgets.ScaleBar
+  href: Mapsui.html
+  name: Mapsui.Widgets.ScaleBar
+  nameWithType: Mapsui.Widgets.ScaleBar
+  fullName: Mapsui.Widgets.ScaleBar
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.ScaleBar
+    name: ScaleBar
+    href: Mapsui.Widgets.ScaleBar.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.ScaleBar
+    name: ScaleBar
+    href: Mapsui.Widgets.ScaleBar.html

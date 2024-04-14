@@ -1,0 +1,1419 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  id: ArcGISDynamicProvider
+  parent: Mapsui.ArcGIS.DynamicProvider
+  children:
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.String,Mapsui.Cache.IUrlPersistentCache)
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,System.String,Mapsui.Cache.IUrlPersistentCache)
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGisDynamicCapabilities
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.CRS
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Credentials
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetExtent
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetRequestUrl(Mapsui.MRect,System.Int32,System.Int32)
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.IsCrsSupported(System.String)
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TimeOut
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Token
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TryGetMapAsync(Mapsui.MSection)
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Url
+  langs:
+  - csharp
+  - vb
+  name: ArcGISDynamicProvider
+  nameWithType: ArcGISDynamicProvider
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  type: Class
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArcGISDynamicProvider
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 18
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: 'public class ArcGISDynamicProvider : IProjectingProvider, IProvider'
+    content.vb: Public Class ArcGISDynamicProvider Implements IProjectingProvider, IProvider
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Providers.IProjectingProvider
+  - Mapsui.Providers.IProvider
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Token
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Token
+  id: Token
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: Token
+  nameWithType: ArcGISDynamicProvider.Token
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Token
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Token
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 23
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public string? Token { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Token As String
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Token*
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.String,Mapsui.Cache.IUrlPersistentCache)
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.String,Mapsui.Cache.IUrlPersistentCache)
+  id: '#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.String,Mapsui.Cache.IUrlPersistentCache)'
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: ArcGISDynamicProvider(string, ArcGISDynamicCapabilities, string?, IUrlPersistentCache?)
+  nameWithType: ArcGISDynamicProvider.ArcGISDynamicProvider(string, ArcGISDynamicCapabilities, string?, IUrlPersistentCache?)
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(string, Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities, string?, Mapsui.Cache.IUrlPersistentCache?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 33
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  summary: Create ArcGisDynamicProvider based on a given capabilities file
+  example: []
+  syntax:
+    content: public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string? token = null, IUrlPersistentCache? persistentCache = null)
+    parameters:
+    - id: url
+      type: System.String
+      description: 'url to map service example: http://url/arcgis/rest/services/test/MapServer'
+    - id: arcGisDynamicCapabilities
+      type: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+      description: ''
+    - id: token
+      type: System.String
+      description: token to request service
+    - id: persistentCache
+      type: Mapsui.Cache.IUrlPersistentCache
+    content.vb: Public Sub New(url As String, arcGisDynamicCapabilities As ArcGISDynamicCapabilities, token As String = Nothing, persistentCache As IUrlPersistentCache = Nothing)
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor*
+  nameWithType.vb: ArcGISDynamicProvider.New(String, ArcGISDynamicCapabilities, String, IUrlPersistentCache)
+  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.New(String, Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities, String, Mapsui.Cache.IUrlPersistentCache)
+  name.vb: New(String, ArcGISDynamicCapabilities, String, IUrlPersistentCache)
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,System.String,Mapsui.Cache.IUrlPersistentCache)
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,System.String,Mapsui.Cache.IUrlPersistentCache)
+  id: '#ctor(System.String,System.String,Mapsui.Cache.IUrlPersistentCache)'
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: ArcGISDynamicProvider(string, string?, IUrlPersistentCache?)
+  nameWithType: ArcGISDynamicProvider.ArcGISDynamicProvider(string, string?, IUrlPersistentCache?)
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(string, string?, Mapsui.Cache.IUrlPersistentCache?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 49
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  summary: Create ArcGisDynamicProvider, capabilities will be parsed automatically
+  example: []
+  syntax:
+    content: public ArcGISDynamicProvider(string url, string? token = null, IUrlPersistentCache? persistentCache = null)
+    parameters:
+    - id: url
+      type: System.String
+      description: 'url to map service example: http://url/arcgis/rest/services/test/MapServer'
+    - id: token
+      type: System.String
+      description: token to request service
+    - id: persistentCache
+      type: Mapsui.Cache.IUrlPersistentCache
+      description: persistent cache
+    content.vb: Public Sub New(url As String, token As String = Nothing, persistentCache As IUrlPersistentCache = Nothing)
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor*
+  nameWithType.vb: ArcGISDynamicProvider.New(String, String, IUrlPersistentCache)
+  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.New(String, String, Mapsui.Cache.IUrlPersistentCache)
+  name.vb: New(String, String, IUrlPersistentCache)
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGisDynamicCapabilities
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGisDynamicCapabilities
+  id: ArcGisDynamicCapabilities
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: ArcGisDynamicCapabilities
+  nameWithType: ArcGISDynamicProvider.ArcGisDynamicCapabilities
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGisDynamicCapabilities
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArcGisDynamicCapabilities
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 68
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public ArcGISDynamicCapabilities ArcGisDynamicCapabilities { get; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+    content.vb: Public Property ArcGisDynamicCapabilities As ArcGISDynamicCapabilities
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGisDynamicCapabilities*
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Credentials
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Credentials
+  id: Credentials
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: Credentials
+  nameWithType: ArcGISDynamicProvider.Credentials
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Credentials
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Credentials
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 69
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public ICredentials? Credentials { get; set; }
+    parameters: []
+    return:
+      type: System.Net.ICredentials
+    content.vb: Public Property Credentials As ICredentials
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Credentials*
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Url
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Url
+  id: Url
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: Url
+  nameWithType: ArcGISDynamicProvider.Url
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Url
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Url
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 71
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  syntax:
+    content: public string Url { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Url As String
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Url*
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TimeOut
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TimeOut
+  id: TimeOut
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: TimeOut
+  nameWithType: ArcGISDynamicProvider.TimeOut
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TimeOut
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TimeOut
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 85
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  summary: Timeout of web request in milliseconds. Default is 10 seconds
+  example: []
+  syntax:
+    content: public int TimeOut { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property TimeOut As Integer
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TimeOut*
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.CRS
+  commentId: P:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.CRS
+  id: CRS
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: CRS
+  nameWithType: ArcGISDynamicProvider.CRS
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.CRS
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CRS
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 91
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  summary: The spatial reference ID (CRS)
+  example: []
+  syntax:
+    content: public string? CRS { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CRS As String
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.CRS*
+  implements:
+  - Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  id: GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: ArcGISDynamicProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeaturesAsync
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 97
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  example: []
+  syntax:
+    content: public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    parameters:
+    - id: fetchInfo
+      type: Mapsui.Layers.FetchInfo
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+    content.vb: Public Function GetFeaturesAsync(fetchInfo As FetchInfo) As Task(Of IEnumerable(Of IFeature))
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetFeaturesAsync*
+  implements:
+  - Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetExtent
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetExtent
+  id: GetExtent
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: GetExtent()
+  nameWithType: ArcGISDynamicProvider.GetExtent()
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetExtent()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetExtent
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 111
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  summary: <xref href="Mapsui.MRect" data-throw-if-not-resolved="false"></xref> of data set
+  example: []
+  syntax:
+    content: public MRect? GetExtent()
+    return:
+      type: Mapsui.MRect
+      description: BoundingBox
+    content.vb: Public Function GetExtent() As MRect
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetExtent*
+  implements:
+  - Mapsui.Providers.IProvider.GetExtent
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TryGetMapAsync(Mapsui.MSection)
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TryGetMapAsync(Mapsui.MSection)
+  id: TryGetMapAsync(Mapsui.MSection)
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: TryGetMapAsync(MSection)
+  nameWithType: ArcGISDynamicProvider.TryGetMapAsync(MSection)
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TryGetMapAsync(Mapsui.MSection)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TryGetMapAsync
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 143
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  summary: Retrieves the bitmap from ArcGIS Dynamic service
+  example: []
+  syntax:
+    content: public Task<(bool Success, MRaster? Raster)> TryGetMapAsync(MSection section)
+    parameters:
+    - id: section
+      type: Mapsui.MSection
+    return:
+      type: System.Threading.Tasks.Task{System.ValueTuple{System.Boolean,Mapsui.MRaster}}
+    content.vb: Public Function TryGetMapAsync(section As MSection) As Task(Of (Success As Boolean, Raster As MRaster))
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TryGetMapAsync*
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetRequestUrl(Mapsui.MRect,System.Int32,System.Int32)
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetRequestUrl(Mapsui.MRect,System.Int32,System.Int32)
+  id: GetRequestUrl(Mapsui.MRect,System.Int32,System.Int32)
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: GetRequestUrl(MRect?, int, int)
+  nameWithType: ArcGISDynamicProvider.GetRequestUrl(MRect?, int, int)
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetRequestUrl(Mapsui.MRect?, int, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetRequestUrl
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 196
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  summary: Gets the URL for a map export request base on current settings, the image size and boundingBox
+  example: []
+  syntax:
+    content: public string GetRequestUrl(MRect? box, int width, int height)
+    parameters:
+    - id: box
+      type: Mapsui.MRect
+      description: Area the request should cover
+    - id: width
+      type: System.Int32
+      description: ''
+    - id: height
+      type: System.Int32
+      description: ''
+    return:
+      type: System.String
+      description: URL for ArcGIS Dynamic request
+    content.vb: Public Function GetRequestUrl(box As MRect, width As Integer, height As Integer) As String
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetRequestUrl*
+  nameWithType.vb: ArcGISDynamicProvider.GetRequestUrl(MRect, Integer, Integer)
+  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetRequestUrl(Mapsui.MRect, Integer, Integer)
+  name.vb: GetRequestUrl(MRect, Integer, Integer)
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.IsCrsSupported(System.String)
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.IsCrsSupported(System.String)
+  id: IsCrsSupported(System.String)
+  parent: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  langs:
+  - csharp
+  - vb
+  name: IsCrsSupported(string)
+  nameWithType: ArcGISDynamicProvider.IsCrsSupported(string)
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.IsCrsSupported(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsCrsSupported
+    path: ../../Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs
+    startLine: 268
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.DynamicProvider
+  summary: Queries whether a provider supports projection to a certain CRS.
+  example: []
+  syntax:
+    content: public bool? IsCrsSupported(string crs)
+    parameters:
+    - id: crs
+      type: System.String
+      description: The crs to project to
+    return:
+      type: System.Nullable{System.Boolean}
+      description: True if is does, false if it does not, null if it is unknown
+    content.vb: Public Function IsCrsSupported(crs As String) As Boolean?
+  overload: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.IsCrsSupported*
+  implements:
+  - Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+  nameWithType.vb: ArcGISDynamicProvider.IsCrsSupported(String)
+  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.IsCrsSupported(String)
+  name.vb: IsCrsSupported(String)
+references:
+- uid: Mapsui.ArcGIS.DynamicProvider
+  commentId: N:Mapsui.ArcGIS.DynamicProvider
+  href: Mapsui.html
+  name: Mapsui.ArcGIS.DynamicProvider
+  nameWithType: Mapsui.ArcGIS.DynamicProvider
+  fullName: Mapsui.ArcGIS.DynamicProvider
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.DynamicProvider
+    name: DynamicProvider
+    href: Mapsui.ArcGIS.DynamicProvider.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.DynamicProvider
+    name: DynamicProvider
+    href: Mapsui.ArcGIS.DynamicProvider.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Providers.IProjectingProvider
+  commentId: T:Mapsui.Providers.IProjectingProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProjectingProvider.html
+  name: IProjectingProvider
+  nameWithType: IProjectingProvider
+  fullName: Mapsui.Providers.IProjectingProvider
+- uid: Mapsui.Providers.IProvider
+  commentId: T:Mapsui.Providers.IProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProvider.html
+  name: IProvider
+  nameWithType: IProvider
+  fullName: Mapsui.Providers.IProvider
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Providers
+  commentId: N:Mapsui.Providers
+  href: Mapsui.html
+  name: Mapsui.Providers
+  nameWithType: Mapsui.Providers
+  fullName: Mapsui.Providers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Token*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Token
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_Token
+  name: Token
+  nameWithType: ArcGISDynamicProvider.Token
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Token
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicCapabilities_System_String_Mapsui_Cache_IUrlPersistentCache_
+  name: ArcGISDynamicProvider
+  nameWithType: ArcGISDynamicProvider.ArcGISDynamicProvider
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider
+  nameWithType.vb: ArcGISDynamicProvider.New
+  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.New
+  name.vb: New
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+  parent: Mapsui.ArcGIS.DynamicProvider
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities.html
+  name: ArcGISDynamicCapabilities
+  nameWithType: ArcGISDynamicCapabilities
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+- uid: Mapsui.Cache.IUrlPersistentCache
+  commentId: T:Mapsui.Cache.IUrlPersistentCache
+  parent: Mapsui.Cache
+  href: Mapsui.Cache.IUrlPersistentCache.html
+  name: IUrlPersistentCache
+  nameWithType: IUrlPersistentCache
+  fullName: Mapsui.Cache.IUrlPersistentCache
+- uid: Mapsui.Cache
+  commentId: N:Mapsui.Cache
+  href: Mapsui.html
+  name: Mapsui.Cache
+  nameWithType: Mapsui.Cache
+  fullName: Mapsui.Cache
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Cache
+    name: Cache
+    href: Mapsui.Cache.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Cache
+    name: Cache
+    href: Mapsui.Cache.html
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGisDynamicCapabilities*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGisDynamicCapabilities
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_ArcGisDynamicCapabilities
+  name: ArcGisDynamicCapabilities
+  nameWithType: ArcGISDynamicProvider.ArcGisDynamicCapabilities
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGisDynamicCapabilities
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Credentials*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Credentials
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_Credentials
+  name: Credentials
+  nameWithType: ArcGISDynamicProvider.Credentials
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Credentials
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.icredentials
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Url*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Url
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_Url
+  name: Url
+  nameWithType: ArcGISDynamicProvider.Url
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.Url
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TimeOut*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TimeOut
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_TimeOut
+  name: TimeOut
+  nameWithType: ArcGISDynamicProvider.TimeOut
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TimeOut
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.CRS*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.CRS
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_CRS
+  name: CRS
+  nameWithType: ArcGISDynamicProvider.CRS
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.CRS
+- uid: Mapsui.Providers.IProvider.CRS
+  commentId: P:Mapsui.Providers.IProvider.CRS
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_CRS
+  name: CRS
+  nameWithType: IProvider.CRS
+  fullName: Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetFeaturesAsync*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetFeaturesAsync
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync
+  nameWithType: ArcGISDynamicProvider.GetFeaturesAsync
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetFeaturesAsync
+- uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: IProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IEnumerable<IFeature>>
+  nameWithType: Task<IEnumerable<IFeature>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Mapsui.IFeature>>
+  nameWithType.vb: Task(Of IEnumerable(Of IFeature))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))
+  name.vb: Task(Of IEnumerable(Of IFeature))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: )
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetExtent*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetExtent
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_GetExtent
+  name: GetExtent
+  nameWithType: ArcGISDynamicProvider.GetExtent
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetExtent
+- uid: Mapsui.Providers.IProvider.GetExtent
+  commentId: M:Mapsui.Providers.IProvider.GetExtent
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  name: GetExtent()
+  nameWithType: IProvider.GetExtent()
+  fullName: Mapsui.Providers.IProvider.GetExtent()
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TryGetMapAsync*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TryGetMapAsync
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_TryGetMapAsync_Mapsui_MSection_
+  name: TryGetMapAsync
+  nameWithType: ArcGISDynamicProvider.TryGetMapAsync
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.TryGetMapAsync
+- uid: Mapsui.MSection
+  commentId: T:Mapsui.MSection
+  parent: Mapsui
+  href: Mapsui.MSection.html
+  name: MSection
+  nameWithType: MSection
+  fullName: Mapsui.MSection
+- uid: System.Threading.Tasks.Task{System.ValueTuple{System.Boolean,Mapsui.MRaster}}
+  commentId: T:System.Threading.Tasks.Task{System.ValueTuple{System.Boolean,Mapsui.MRaster}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<(bool Success, MRaster)>
+  nameWithType: Task<(bool Success, MRaster)>
+  fullName: System.Threading.Tasks.Task<(bool Success, Mapsui.MRaster)>
+  nameWithType.vb: Task(Of (Success As Boolean, MRaster))
+  fullName.vb: System.Threading.Tasks.Task(Of (Success As Boolean, Mapsui.MRaster))
+  name.vb: Task(Of (Success As Boolean, MRaster))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: " "
+  - uid: System.ValueTuple{System.Boolean,Mapsui.MRaster}.Success
+    name: Success
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,mapsui.mraster-.success
+  - name: ','
+  - name: " "
+  - uid: Mapsui.MRaster
+    name: MRaster
+    href: Mapsui.MRaster.html
+  - name: )
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: (
+  - uid: System.ValueTuple{System.Boolean,Mapsui.MRaster}.Success
+    name: Success
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,mapsui.mraster-.success
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
+  - uid: Mapsui.MRaster
+    name: MRaster
+    href: Mapsui.MRaster.html
+  - name: )
+  - name: )
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetRequestUrl*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetRequestUrl
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_GetRequestUrl_Mapsui_MRect_System_Int32_System_Int32_
+  name: GetRequestUrl
+  nameWithType: ArcGISDynamicProvider.GetRequestUrl
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.GetRequestUrl
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.IsCrsSupported*
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.IsCrsSupported
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_IsCrsSupported_System_String_
+  name: IsCrsSupported
+  nameWithType: ArcGISDynamicProvider.IsCrsSupported
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.IsCrsSupported
+- uid: Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+  commentId: M:Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+  parent: Mapsui.Providers.IProjectingProvider
+  isExternal: true
+  href: Mapsui.Providers.IProjectingProvider.html#Mapsui_Providers_IProjectingProvider_IsCrsSupported_System_String_
+  name: IsCrsSupported(string)
+  nameWithType: IProjectingProvider.IsCrsSupported(string)
+  fullName: Mapsui.Providers.IProjectingProvider.IsCrsSupported(string)
+  nameWithType.vb: IProjectingProvider.IsCrsSupported(String)
+  fullName.vb: Mapsui.Providers.IProjectingProvider.IsCrsSupported(String)
+  name.vb: IsCrsSupported(String)
+  spec.csharp:
+  - uid: Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+    name: IsCrsSupported
+    href: Mapsui.Providers.IProjectingProvider.html#Mapsui_Providers_IProjectingProvider_IsCrsSupported_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+    name: IsCrsSupported
+    href: Mapsui.Providers.IProjectingProvider.html#Mapsui_Providers_IProjectingProvider_IsCrsSupported_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Nullable{System.Boolean}
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool?
+  nameWithType: bool?
+  fullName: bool?
+  nameWithType.vb: Boolean?
+  fullName.vb: Boolean?
+  name.vb: Boolean?
+  spec.csharp:
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '?'
+  spec.vb:
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

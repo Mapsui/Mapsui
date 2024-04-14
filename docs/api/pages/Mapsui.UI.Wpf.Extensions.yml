@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Wpf.Extensions
+  commentId: N:Mapsui.UI.Wpf.Extensions
+  id: Mapsui.UI.Wpf.Extensions
+  children:
+  - Mapsui.UI.Wpf.Extensions.WindowsPointExtensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Wpf.Extensions
+  nameWithType: Mapsui.UI.Wpf.Extensions
+  fullName: Mapsui.UI.Wpf.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Wpf
+references:
+- uid: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions
+  commentId: T:Mapsui.UI.Wpf.Extensions.WindowsPointExtensions
+  href: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.html
+  name: WindowsPointExtensions
+  nameWithType: WindowsPointExtensions
+  fullName: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions

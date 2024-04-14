@@ -1,0 +1,75 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Tiling.Fetcher
+  commentId: N:Mapsui.Tiling.Fetcher
+  id: Mapsui.Tiling.Fetcher
+  children:
+  - Mapsui.Tiling.Fetcher.DataFetchStrategy
+  - Mapsui.Tiling.Fetcher.IDataFetchStrategy
+  - Mapsui.Tiling.Fetcher.MinimalDataFetchStrategy
+  - Mapsui.Tiling.Fetcher.TileFetchDispatcher
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Tiling.Fetcher
+  nameWithType: Mapsui.Tiling.Fetcher
+  fullName: Mapsui.Tiling.Fetcher
+  type: Namespace
+  assemblies:
+  - Mapsui.Tiling
+references:
+- uid: Mapsui.Tiling.Fetcher.DataFetchStrategy
+  commentId: T:Mapsui.Tiling.Fetcher.DataFetchStrategy
+  href: Mapsui.Tiling.Fetcher.DataFetchStrategy.html
+  name: DataFetchStrategy
+  nameWithType: DataFetchStrategy
+  fullName: Mapsui.Tiling.Fetcher.DataFetchStrategy
+- uid: Mapsui.Tiling.Fetcher.IDataFetchStrategy
+  commentId: T:Mapsui.Tiling.Fetcher.IDataFetchStrategy
+  parent: Mapsui.Tiling.Fetcher
+  href: Mapsui.Tiling.Fetcher.IDataFetchStrategy.html
+  name: IDataFetchStrategy
+  nameWithType: IDataFetchStrategy
+  fullName: Mapsui.Tiling.Fetcher.IDataFetchStrategy
+- uid: Mapsui.Tiling.Fetcher.MinimalDataFetchStrategy
+  commentId: T:Mapsui.Tiling.Fetcher.MinimalDataFetchStrategy
+  href: Mapsui.Tiling.Fetcher.MinimalDataFetchStrategy.html
+  name: MinimalDataFetchStrategy
+  nameWithType: MinimalDataFetchStrategy
+  fullName: Mapsui.Tiling.Fetcher.MinimalDataFetchStrategy
+- uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher
+  commentId: T:Mapsui.Tiling.Fetcher.TileFetchDispatcher
+  href: Mapsui.Tiling.Fetcher.TileFetchDispatcher.html
+  name: TileFetchDispatcher
+  nameWithType: TileFetchDispatcher
+  fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher
+- uid: Mapsui.Tiling.Fetcher
+  commentId: N:Mapsui.Tiling.Fetcher
+  href: Mapsui.html
+  name: Mapsui.Tiling.Fetcher
+  nameWithType: Mapsui.Tiling.Fetcher
+  fullName: Mapsui.Tiling.Fetcher
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Fetcher
+    name: Fetcher
+    href: Mapsui.Tiling.Fetcher.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Fetcher
+    name: Fetcher
+    href: Mapsui.Tiling.Fetcher.html

@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.WinUI
+  commentId: N:Mapsui.UI.WinUI
+  id: Mapsui.UI.WinUI
+  children:
+  - Mapsui.UI.WinUI.GlobalStaticResources
+  - Mapsui.UI.WinUI.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.WinUI
+  nameWithType: Mapsui.UI.WinUI
+  fullName: Mapsui.UI.WinUI
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Uno.WinUI
+references:
+- uid: Mapsui.UI.WinUI.MapControl
+  commentId: T:Mapsui.UI.WinUI.MapControl
+  href: Mapsui.UI.WinUI.MapControl.html
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.WinUI.MapControl
+- uid: Mapsui.UI.WinUI.GlobalStaticResources
+  commentId: T:Mapsui.UI.WinUI.GlobalStaticResources
+  href: Mapsui.UI.WinUI.GlobalStaticResources.html
+  name: GlobalStaticResources
+  nameWithType: GlobalStaticResources
+  fullName: Mapsui.UI.WinUI.GlobalStaticResources

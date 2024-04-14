@@ -1,0 +1,441 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.Thematics.IThemeStyle
+  commentId: T:Mapsui.Styles.Thematics.IThemeStyle
+  id: IThemeStyle
+  parent: Mapsui.Styles.Thematics
+  children:
+  - Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+  langs:
+  - csharp
+  - vb
+  name: IThemeStyle
+  nameWithType: IThemeStyle
+  fullName: Mapsui.Styles.Thematics.IThemeStyle
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/IThemeStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IThemeStyle
+    path: ../../Mapsui/Styles/Thematics/IThemeStyle.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Interface for rendering a thematic layer
+  example: []
+  syntax:
+    content: 'public interface IThemeStyle : IStyle'
+    content.vb: Public Interface IThemeStyle Inherits IStyle
+  inheritedMembers:
+  - Mapsui.Styles.IStyle.MinVisible
+  - Mapsui.Styles.IStyle.MaxVisible
+  - Mapsui.Styles.IStyle.Enabled
+  - Mapsui.Styles.IStyle.Opacity
+  extensionMethods:
+  - Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.GetStylesToApply(System.Double)
+  - Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.ShouldBeApplied(System.Double)
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+  commentId: M:Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+  id: GetStyle(Mapsui.IFeature)
+  parent: Mapsui.Styles.Thematics.IThemeStyle
+  langs:
+  - csharp
+  - vb
+  name: GetStyle(IFeature)
+  nameWithType: IThemeStyle.GetStyle(IFeature)
+  fullName: Mapsui.Styles.Thematics.IThemeStyle.GetStyle(Mapsui.IFeature)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Styles/Thematics/IThemeStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetStyle
+    path: ../../Mapsui/Styles/Thematics/IThemeStyle.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles.Thematics
+  summary: Returns the style based on a feature
+  example: []
+  syntax:
+    content: IStyle? GetStyle(IFeature feature)
+    parameters:
+    - id: feature
+      type: Mapsui.IFeature
+      description: Feature to calculate color from
+    return:
+      type: Mapsui.Styles.IStyle
+      description: Color
+    content.vb: Function GetStyle(feature As IFeature) As IStyle
+  overload: Mapsui.Styles.Thematics.IThemeStyle.GetStyle*
+references:
+- uid: Mapsui.Styles.Thematics
+  commentId: N:Mapsui.Styles.Thematics
+  href: Mapsui.html
+  name: Mapsui.Styles.Thematics
+  nameWithType: Mapsui.Styles.Thematics
+  fullName: Mapsui.Styles.Thematics
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  - name: .
+  - uid: Mapsui.Styles.Thematics
+    name: Thematics
+    href: Mapsui.Styles.Thematics.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  - name: .
+  - uid: Mapsui.Styles.Thematics
+    name: Thematics
+    href: Mapsui.Styles.Thematics.html
+- uid: Mapsui.Styles.IStyle.MinVisible
+  commentId: P:Mapsui.Styles.IStyle.MinVisible
+  parent: Mapsui.Styles.IStyle
+  href: Mapsui.Styles.IStyle.html#Mapsui_Styles_IStyle_MinVisible
+  name: MinVisible
+  nameWithType: IStyle.MinVisible
+  fullName: Mapsui.Styles.IStyle.MinVisible
+- uid: Mapsui.Styles.IStyle.MaxVisible
+  commentId: P:Mapsui.Styles.IStyle.MaxVisible
+  parent: Mapsui.Styles.IStyle
+  href: Mapsui.Styles.IStyle.html#Mapsui_Styles_IStyle_MaxVisible
+  name: MaxVisible
+  nameWithType: IStyle.MaxVisible
+  fullName: Mapsui.Styles.IStyle.MaxVisible
+- uid: Mapsui.Styles.IStyle.Enabled
+  commentId: P:Mapsui.Styles.IStyle.Enabled
+  parent: Mapsui.Styles.IStyle
+  href: Mapsui.Styles.IStyle.html#Mapsui_Styles_IStyle_Enabled
+  name: Enabled
+  nameWithType: IStyle.Enabled
+  fullName: Mapsui.Styles.IStyle.Enabled
+- uid: Mapsui.Styles.IStyle.Opacity
+  commentId: P:Mapsui.Styles.IStyle.Opacity
+  parent: Mapsui.Styles.IStyle
+  href: Mapsui.Styles.IStyle.html#Mapsui_Styles_IStyle_Opacity
+  name: Opacity
+  nameWithType: IStyle.Opacity
+  fullName: Mapsui.Styles.IStyle.Opacity
+- uid: Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.GetStylesToApply(System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  parent: Mapsui.Extensions.StyleExtensions
+  definition: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  name: GetStylesToApply(IStyle, double)
+  nameWithType: StyleExtensions.GetStylesToApply(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.GetStylesToApply(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, Double)
+  name.vb: GetStylesToApply(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.ShouldBeApplied(System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  parent: Mapsui.Extensions.StyleExtensions
+  definition: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  name: ShouldBeApplied(IStyle, double)
+  nameWithType: StyleExtensions.ShouldBeApplied(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.ShouldBeApplied(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, Double)
+  name.vb: ShouldBeApplied(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Styles.IStyle
+  commentId: T:Mapsui.Styles.IStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyle.html
+  name: IStyle
+  nameWithType: IStyle
+  fullName: Mapsui.Styles.IStyle
+- uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  isExternal: true
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  name: GetStylesToApply(IStyle, double)
+  nameWithType: StyleExtensions.GetStylesToApply(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.GetStylesToApply(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, Double)
+  name.vb: GetStylesToApply(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Extensions.StyleExtensions
+  commentId: T:Mapsui.Extensions.StyleExtensions
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.StyleExtensions.html
+  name: StyleExtensions
+  nameWithType: StyleExtensions
+  fullName: Mapsui.Extensions.StyleExtensions
+- uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  isExternal: true
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  name: ShouldBeApplied(IStyle, double)
+  nameWithType: StyleExtensions.ShouldBeApplied(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.ShouldBeApplied(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, Double)
+  name.vb: ShouldBeApplied(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.Thematics.IThemeStyle.GetStyle*
+  commentId: Overload:Mapsui.Styles.Thematics.IThemeStyle.GetStyle
+  href: Mapsui.Styles.Thematics.IThemeStyle.html#Mapsui_Styles_Thematics_IThemeStyle_GetStyle_Mapsui_IFeature_
+  name: GetStyle
+  nameWithType: IThemeStyle.GetStyle
+  fullName: Mapsui.Styles.Thematics.IThemeStyle.GetStyle
+- uid: Mapsui.IFeature
+  commentId: T:Mapsui.IFeature
+  parent: Mapsui
+  href: Mapsui.IFeature.html
+  name: IFeature
+  nameWithType: IFeature
+  fullName: Mapsui.IFeature
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui

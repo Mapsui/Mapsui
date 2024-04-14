@@ -1,0 +1,597 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Animations.AnimationResult`1
+  commentId: T:Mapsui.Animations.AnimationResult`1
+  id: AnimationResult`1
+  parent: Mapsui.Animations
+  children:
+  - Mapsui.Animations.AnimationResult`1.#ctor(`0,System.Boolean)
+  - Mapsui.Animations.AnimationResult`1.IsRunning
+  - Mapsui.Animations.AnimationResult`1.State
+  langs:
+  - csharp
+  - vb
+  name: AnimationResult<T>
+  nameWithType: AnimationResult<T>
+  fullName: Mapsui.Animations.AnimationResult<T>
+  type: Struct
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationResult.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AnimationResult
+    path: ../../Mapsui/Animations/AnimationResult.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  example: []
+  syntax:
+    content: 'public record struct AnimationResult<T> : IEquatable<AnimationResult<T>>'
+    typeParameters:
+    - id: T
+      description: The type that the animation is changing over time.
+    content.vb: Public Structure AnimationResult(Of T) Implements IEquatable(Of AnimationResult(Of T))
+  implements:
+  - System.IEquatable{Mapsui.Animations.AnimationResult`1}
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  nameWithType.vb: AnimationResult(Of T)
+  fullName.vb: Mapsui.Animations.AnimationResult(Of T)
+  name.vb: AnimationResult(Of T)
+- uid: Mapsui.Animations.AnimationResult`1.#ctor(`0,System.Boolean)
+  commentId: M:Mapsui.Animations.AnimationResult`1.#ctor(`0,System.Boolean)
+  id: '#ctor(`0,System.Boolean)'
+  parent: Mapsui.Animations.AnimationResult`1
+  langs:
+  - csharp
+  - vb
+  name: AnimationResult(T, bool)
+  nameWithType: AnimationResult<T>.AnimationResult(T, bool)
+  fullName: Mapsui.Animations.AnimationResult<T>.AnimationResult(T, bool)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationResult.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Animations/AnimationResult.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  example: []
+  syntax:
+    content: public AnimationResult(T State, bool IsRunning)
+    parameters:
+    - id: State
+      type: '{T}'
+      description: The state of the object that is animated after the current update.
+    - id: IsRunning
+      type: System.Boolean
+      description: Will be false if the animation is cancelled.
+    content.vb: Public Sub New(State As T, IsRunning As Boolean)
+  overload: Mapsui.Animations.AnimationResult`1.#ctor*
+  nameWithType.vb: AnimationResult(Of T).New(T, Boolean)
+  fullName.vb: Mapsui.Animations.AnimationResult(Of T).New(T, Boolean)
+  name.vb: New(T, Boolean)
+- uid: Mapsui.Animations.AnimationResult`1.State
+  commentId: P:Mapsui.Animations.AnimationResult`1.State
+  id: State
+  parent: Mapsui.Animations.AnimationResult`1
+  langs:
+  - csharp
+  - vb
+  name: State
+  nameWithType: AnimationResult<T>.State
+  fullName: Mapsui.Animations.AnimationResult<T>.State
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationResult.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: State
+    path: ../../Mapsui/Animations/AnimationResult.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  summary: The state of the object that is animated after the current update.
+  example: []
+  syntax:
+    content: public T State { readonly get; set; }
+    parameters: []
+    return:
+      type: '{T}'
+    content.vb: Public Property State As T
+  overload: Mapsui.Animations.AnimationResult`1.State*
+  nameWithType.vb: AnimationResult(Of T).State
+  fullName.vb: Mapsui.Animations.AnimationResult(Of T).State
+- uid: Mapsui.Animations.AnimationResult`1.IsRunning
+  commentId: P:Mapsui.Animations.AnimationResult`1.IsRunning
+  id: IsRunning
+  parent: Mapsui.Animations.AnimationResult`1
+  langs:
+  - csharp
+  - vb
+  name: IsRunning
+  nameWithType: AnimationResult<T>.IsRunning
+  fullName: Mapsui.Animations.AnimationResult<T>.IsRunning
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationResult.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsRunning
+    path: ../../Mapsui/Animations/AnimationResult.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  summary: Will be false if the animation is cancelled.
+  example: []
+  syntax:
+    content: public bool IsRunning { readonly get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsRunning As Boolean
+  overload: Mapsui.Animations.AnimationResult`1.IsRunning*
+  nameWithType.vb: AnimationResult(Of T).IsRunning
+  fullName.vb: Mapsui.Animations.AnimationResult(Of T).IsRunning
+references:
+- uid: Mapsui.Animations
+  commentId: N:Mapsui.Animations
+  href: Mapsui.html
+  name: Mapsui.Animations
+  nameWithType: Mapsui.Animations
+  fullName: Mapsui.Animations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+- uid: System.IEquatable{Mapsui.Animations.AnimationResult`1}
+  commentId: T:System.IEquatable{Mapsui.Animations.AnimationResult`1}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<AnimationResult<T>>
+  nameWithType: IEquatable<AnimationResult<T>>
+  fullName: System.IEquatable<Mapsui.Animations.AnimationResult<T>>
+  nameWithType.vb: IEquatable(Of AnimationResult(Of T))
+  fullName.vb: System.IEquatable(Of Mapsui.Animations.AnimationResult(Of T))
+  name.vb: IEquatable(Of AnimationResult(Of T))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: Mapsui.Animations.AnimationResult`1
+    name: AnimationResult
+    href: Mapsui.Animations.AnimationResult-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Animations.AnimationResult`1
+    name: AnimationResult
+    href: Mapsui.Animations.AnimationResult-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Animations.AnimationResult`1.#ctor*
+  commentId: Overload:Mapsui.Animations.AnimationResult`1.#ctor
+  href: Mapsui.Animations.AnimationResult-1.html#Mapsui_Animations_AnimationResult_1__ctor__0_System_Boolean_
+  name: AnimationResult
+  nameWithType: AnimationResult<T>.AnimationResult
+  fullName: Mapsui.Animations.AnimationResult<T>.AnimationResult
+  nameWithType.vb: AnimationResult(Of T).New
+  fullName.vb: Mapsui.Animations.AnimationResult(Of T).New
+  name.vb: New
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Mapsui.Animations.AnimationResult`1.State*
+  commentId: Overload:Mapsui.Animations.AnimationResult`1.State
+  href: Mapsui.Animations.AnimationResult-1.html#Mapsui_Animations_AnimationResult_1_State
+  name: State
+  nameWithType: AnimationResult<T>.State
+  fullName: Mapsui.Animations.AnimationResult<T>.State
+  nameWithType.vb: AnimationResult(Of T).State
+  fullName.vb: Mapsui.Animations.AnimationResult(Of T).State
+- uid: Mapsui.Animations.AnimationResult`1.IsRunning*
+  commentId: Overload:Mapsui.Animations.AnimationResult`1.IsRunning
+  href: Mapsui.Animations.AnimationResult-1.html#Mapsui_Animations_AnimationResult_1_IsRunning
+  name: IsRunning
+  nameWithType: AnimationResult<T>.IsRunning
+  fullName: Mapsui.Animations.AnimationResult<T>.IsRunning
+  nameWithType.vb: AnimationResult(Of T).IsRunning
+  fullName.vb: Mapsui.Animations.AnimationResult(Of T).IsRunning

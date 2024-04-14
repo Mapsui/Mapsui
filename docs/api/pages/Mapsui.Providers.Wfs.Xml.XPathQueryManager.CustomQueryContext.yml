@@ -1,0 +1,1876 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  id: XPathQueryManager.CustomQueryContext
+  parent: Mapsui.Providers.Wfs.Xml
+  children:
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor(System.Xml.NameTable)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(System.Collections.Generic.IDictionary{System.String,System.String})
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.Collections.DictionaryEntry[])
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.String,System.Object)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument(System.String,System.String)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam(System.String)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam(System.String)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable(System.String,System.String)
+  - Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace
+  langs:
+  - csharp
+  - vb
+  name: XPathQueryManager.CustomQueryContext
+  nameWithType: XPathQueryManager.CustomQueryContext
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CustomQueryContext
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 371
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: >-
+    This class represents a custom context for XPath queries.
+
+    It is derived from XsltContext.
+  example: []
+  syntax:
+    content: 'public class XPathQueryManager.CustomQueryContext : XsltContext, IEnumerable, IXmlNamespaceResolver'
+    content.vb: Public Class XPathQueryManager.CustomQueryContext Inherits XsltContext Implements IEnumerable, IXmlNamespaceResolver
+  inheritance:
+  - System.Object
+  - System.Xml.XmlNamespaceManager
+  - System.Xml.Xsl.XsltContext
+  implements:
+  - System.Collections.IEnumerable
+  - System.Xml.IXmlNamespaceResolver
+  inheritedMembers:
+  - System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)
+  - System.Xml.XmlNamespaceManager.GetEnumerator
+  - System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)
+  - System.Xml.XmlNamespaceManager.HasNamespace(System.String)
+  - System.Xml.XmlNamespaceManager.LookupNamespace(System.String)
+  - System.Xml.XmlNamespaceManager.LookupPrefix(System.String)
+  - System.Xml.XmlNamespaceManager.PopScope
+  - System.Xml.XmlNamespaceManager.PushScope
+  - System.Xml.XmlNamespaceManager.RemoveNamespace(System.String,System.String)
+  - System.Xml.XmlNamespaceManager.DefaultNamespace
+  - System.Xml.XmlNamespaceManager.NameTable
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor
+  id: '#ctor'
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: CustomQueryContext()
+  nameWithType: XPathQueryManager.CustomQueryContext.CustomQueryContext()
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CustomQueryContext()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 381
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Initializes a new instance of the <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public CustomQueryContext()
+    content.vb: Public Sub New()
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.New()
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.New()
+  name.vb: New()
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor(System.Xml.NameTable)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor(System.Xml.NameTable)
+  id: '#ctor(System.Xml.NameTable)'
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: CustomQueryContext(NameTable)
+  nameWithType: XPathQueryManager.CustomQueryContext.CustomQueryContext(NameTable)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CustomQueryContext(System.Xml.NameTable)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 389
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Initializes a new instance of the <xref href="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public CustomQueryContext(NameTable table)
+    parameters:
+    - id: table
+      type: System.Xml.NameTable
+      description: A NameTable instance
+    content.vb: Public Sub New(table As NameTable)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.New(NameTable)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.New(System.Xml.NameTable)
+  name.vb: New(NameTable)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace
+  commentId: P:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace
+  id: Whitespace
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: Whitespace
+  nameWithType: XPathQueryManager.CustomQueryContext.Whitespace
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Whitespace
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 399
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Method from XsltContext.
+  example: []
+  syntax:
+    content: public override bool Whitespace { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Overrides ReadOnly Property Whitespace As Boolean
+  overridden: System.Xml.Xsl.XsltContext.Whitespace
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace*
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(System.Collections.Generic.IDictionary{System.String,System.String})
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(System.Collections.Generic.IDictionary{System.String,System.String})
+  id: AddNamespace(System.Collections.Generic.IDictionary{System.String,System.String})
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: AddNamespace(IDictionary<string, string>)
+  nameWithType: XPathQueryManager.CustomQueryContext.AddNamespace(IDictionary<string, string>)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(System.Collections.Generic.IDictionary<string, string>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddNamespace
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 405
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method adds a list of namespaces to use in the custom context.
+  example: []
+  syntax:
+    content: public void AddNamespace(IDictionary<string, string> namespaces)
+    parameters:
+    - id: namespaces
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
+      description: A list of namespaces
+    content.vb: Public Sub AddNamespace(namespaces As IDictionary(Of String, String))
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.AddNamespace(IDictionary(Of String, String))
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(System.Collections.Generic.IDictionary(Of String, String))
+  name.vb: AddNamespace(IDictionary(Of String, String))
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument(System.String,System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument(System.String,System.String)
+  id: CompareDocument(System.String,System.String)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: CompareDocument(string, string)
+  nameWithType: XPathQueryManager.CustomQueryContext.CompareDocument(string, string)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument(string, string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CompareDocument
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 414
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Method from XsltContext.
+  example: []
+  syntax:
+    content: public override int CompareDocument(string baseUri, string nextbaseUri)
+    parameters:
+    - id: baseUri
+      type: System.String
+    - id: nextbaseUri
+      type: System.String
+    return:
+      type: System.Int32
+    content.vb: Public Overrides Function CompareDocument(baseUri As String, nextbaseUri As String) As Integer
+  overridden: System.Xml.Xsl.XsltContext.CompareDocument(System.String,System.String)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.CompareDocument(String, String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument(String, String)
+  name.vb: CompareDocument(String, String)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+  id: PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: PreserveWhitespace(XPathNavigator)
+  nameWithType: XPathQueryManager.CustomQueryContext.PreserveWhitespace(XPathNavigator)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PreserveWhitespace
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 422
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: Method from XsltContext.
+  example: []
+  syntax:
+    content: public override bool PreserveWhitespace(XPathNavigator node)
+    parameters:
+    - id: node
+      type: System.Xml.XPath.XPathNavigator
+    return:
+      type: System.Boolean
+    content.vb: Public Overrides Function PreserveWhitespace(node As XPathNavigator) As Boolean
+  overridden: System.Xml.Xsl.XsltContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace*
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])
+  id: ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: ResolveFunction(string, string, XPathResultType[])
+  nameWithType: XPathQueryManager.CustomQueryContext.ResolveFunction(string, string, XPathResultType[])
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(string, string, System.Xml.XPath.XPathResultType[])
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ResolveFunction
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 433
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method resolves a function appearing in an XPath expression.
+  example: []
+  syntax:
+    content: public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
+    parameters:
+    - id: prefix
+      type: System.String
+      description: The prefix of the function
+    - id: name
+      type: System.String
+      description: The name of the function
+    - id: argTypes
+      type: System.Xml.XPath.XPathResultType[]
+      description: A list of argument types of the function
+    return:
+      type: System.Xml.Xsl.IXsltContextFunction
+    content.vb: Public Overrides Function ResolveFunction(prefix As String, name As String, argTypes As XPathResultType()) As IXsltContextFunction
+  overridden: System.Xml.Xsl.XsltContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.ResolveFunction(String, String, XPathResultType())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(String, String, System.Xml.XPath.XPathResultType())
+  name.vb: ResolveFunction(String, String, XPathResultType())
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable(System.String,System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable(System.String,System.String)
+  id: ResolveVariable(System.String,System.String)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: ResolveVariable(string, string)
+  nameWithType: XPathQueryManager.CustomQueryContext.ResolveVariable(string, string)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable(string, string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ResolveVariable
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 448
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method resolves a variable appearing in an XPath expression.
+  example: []
+  syntax:
+    content: public override IXsltContextVariable ResolveVariable(string prefix, string name)
+    parameters:
+    - id: prefix
+      type: System.String
+      description: The prefix of the variable
+    - id: name
+      type: System.String
+      description: The name of the variable
+    return:
+      type: System.Xml.Xsl.IXsltContextVariable
+    content.vb: Public Overrides Function ResolveVariable(prefix As String, name As String) As IXsltContextVariable
+  overridden: System.Xml.Xsl.XsltContext.ResolveVariable(System.String,System.String)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.ResolveVariable(String, String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable(String, String)
+  name.vb: ResolveVariable(String, String)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.String,System.Object)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.String,System.Object)
+  id: AddParam(System.String,System.Object)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: AddParam(string, object)
+  nameWithType: XPathQueryManager.CustomQueryContext.AddParam(string, object)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(string, object)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddParam
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 463
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method adds a parameter to the custom context.
+  example: []
+  syntax:
+    content: public void AddParam(string name, object parameter)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the parameter
+    - id: parameter
+      type: System.Object
+      description: The value of the parameter
+    content.vb: Public Sub AddParam(name As String, parameter As Object)
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.AddParam(String, Object)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(String, Object)
+  name.vb: AddParam(String, Object)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.Collections.DictionaryEntry[])
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.Collections.DictionaryEntry[])
+  id: AddParam(System.Collections.DictionaryEntry[])
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: AddParam(DictionaryEntry[])
+  nameWithType: XPathQueryManager.CustomQueryContext.AddParam(DictionaryEntry[])
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.Collections.DictionaryEntry[])
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddParam
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 472
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method adds a list of parameters to the custom context.
+  example: []
+  syntax:
+    content: public void AddParam(DictionaryEntry[] parameters)
+    parameters:
+    - id: parameters
+      type: System.Collections.DictionaryEntry[]
+      description: A list of parameters
+    content.vb: Public Sub AddParam(parameters As DictionaryEntry())
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.AddParam(DictionaryEntry())
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.Collections.DictionaryEntry())
+  name.vb: AddParam(DictionaryEntry())
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam(System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam(System.String)
+  id: GetParam(System.String)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: GetParam(string)
+  nameWithType: XPathQueryManager.CustomQueryContext.GetParam(string)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetParam
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 498
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method gets a parameter by name.
+  example: []
+  syntax:
+    content: public object? GetParam(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the parameter
+    return:
+      type: System.Object
+    content.vb: Public Function GetParam(name As String) As Object
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.GetParam(String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam(String)
+  name.vb: GetParam(String)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam(System.String)
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam(System.String)
+  id: RemoveParam(System.String)
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: RemoveParam(string)
+  nameWithType: XPathQueryManager.CustomQueryContext.RemoveParam(string)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RemoveParam
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 507
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This method removes a parameter from the inherent parameter list.
+  example: []
+  syntax:
+    content: public object? RemoveParam(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the parameter
+    return:
+      type: System.Object
+    content.vb: Public Function RemoveParam(name As String) As Object
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam*
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.RemoveParam(String)
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam(String)
+  name.vb: RemoveParam(String)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams
+  id: ResetParams
+  parent: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  langs:
+  - csharp
+  - vb
+  name: ResetParams()
+  nameWithType: XPathQueryManager.CustomQueryContext.ResetParams()
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ResetParams
+    path: ../../Mapsui.Nts/Providers/Wfs/Xml/XPathQueryManager.cs
+    startLine: 515
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Providers.Wfs.Xml
+  summary: This methods clears the inherent parameter list.
+  example: []
+  syntax:
+    content: public void ResetParams()
+    content.vb: Public Sub ResetParams()
+  overload: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams*
+references:
+- uid: Mapsui.Providers.Wfs.Xml
+  commentId: N:Mapsui.Providers.Wfs.Xml
+  href: Mapsui.html
+  name: Mapsui.Providers.Wfs.Xml
+  nameWithType: Mapsui.Providers.Wfs.Xml
+  fullName: Mapsui.Providers.Wfs.Xml
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml
+    name: Xml
+    href: Mapsui.Providers.Wfs.Xml.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs
+    name: Wfs
+    href: Mapsui.Providers.Wfs.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml
+    name: Xml
+    href: Mapsui.Providers.Wfs.Xml.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: System.Xml.Xsl.XsltContext
+  commentId: T:System.Xml.Xsl.XsltContext
+  parent: System.Xml.Xsl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext
+  name: XsltContext
+  nameWithType: XsltContext
+  fullName: System.Xml.Xsl.XsltContext
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.Xml.IXmlNamespaceResolver
+  commentId: T:System.Xml.IXmlNamespaceResolver
+  parent: System.Xml
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.ixmlnamespaceresolver
+  name: IXmlNamespaceResolver
+  nameWithType: IXmlNamespaceResolver
+  fullName: System.Xml.IXmlNamespaceResolver
+- uid: System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)
+  commentId: M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.addnamespace
+  name: AddNamespace(string, string)
+  nameWithType: XmlNamespaceManager.AddNamespace(string, string)
+  fullName: System.Xml.XmlNamespaceManager.AddNamespace(string, string)
+  nameWithType.vb: XmlNamespaceManager.AddNamespace(String, String)
+  fullName.vb: System.Xml.XmlNamespaceManager.AddNamespace(String, String)
+  name.vb: AddNamespace(String, String)
+  spec.csharp:
+  - uid: System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)
+    name: AddNamespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.addnamespace
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)
+    name: AddNamespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.addnamespace
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Xml.XmlNamespaceManager.GetEnumerator
+  commentId: M:System.Xml.XmlNamespaceManager.GetEnumerator
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.getenumerator
+  name: GetEnumerator()
+  nameWithType: XmlNamespaceManager.GetEnumerator()
+  fullName: System.Xml.XmlNamespaceManager.GetEnumerator()
+  spec.csharp:
+  - uid: System.Xml.XmlNamespaceManager.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Xml.XmlNamespaceManager.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.getenumerator
+  - name: (
+  - name: )
+- uid: System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)
+  commentId: M:System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.getnamespacesinscope
+  name: GetNamespacesInScope(XmlNamespaceScope)
+  nameWithType: XmlNamespaceManager.GetNamespacesInScope(XmlNamespaceScope)
+  fullName: System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)
+  spec.csharp:
+  - uid: System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)
+    name: GetNamespacesInScope
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.getnamespacesinscope
+  - name: (
+  - uid: System.Xml.XmlNamespaceScope
+    name: XmlNamespaceScope
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacescope
+  - name: )
+  spec.vb:
+  - uid: System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)
+    name: GetNamespacesInScope
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.getnamespacesinscope
+  - name: (
+  - uid: System.Xml.XmlNamespaceScope
+    name: XmlNamespaceScope
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacescope
+  - name: )
+- uid: System.Xml.XmlNamespaceManager.HasNamespace(System.String)
+  commentId: M:System.Xml.XmlNamespaceManager.HasNamespace(System.String)
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.hasnamespace
+  name: HasNamespace(string)
+  nameWithType: XmlNamespaceManager.HasNamespace(string)
+  fullName: System.Xml.XmlNamespaceManager.HasNamespace(string)
+  nameWithType.vb: XmlNamespaceManager.HasNamespace(String)
+  fullName.vb: System.Xml.XmlNamespaceManager.HasNamespace(String)
+  name.vb: HasNamespace(String)
+  spec.csharp:
+  - uid: System.Xml.XmlNamespaceManager.HasNamespace(System.String)
+    name: HasNamespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.hasnamespace
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: System.Xml.XmlNamespaceManager.HasNamespace(System.String)
+    name: HasNamespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.hasnamespace
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Xml.XmlNamespaceManager.LookupNamespace(System.String)
+  commentId: M:System.Xml.XmlNamespaceManager.LookupNamespace(System.String)
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.lookupnamespace
+  name: LookupNamespace(string)
+  nameWithType: XmlNamespaceManager.LookupNamespace(string)
+  fullName: System.Xml.XmlNamespaceManager.LookupNamespace(string)
+  nameWithType.vb: XmlNamespaceManager.LookupNamespace(String)
+  fullName.vb: System.Xml.XmlNamespaceManager.LookupNamespace(String)
+  name.vb: LookupNamespace(String)
+  spec.csharp:
+  - uid: System.Xml.XmlNamespaceManager.LookupNamespace(System.String)
+    name: LookupNamespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.lookupnamespace
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: System.Xml.XmlNamespaceManager.LookupNamespace(System.String)
+    name: LookupNamespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.lookupnamespace
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Xml.XmlNamespaceManager.LookupPrefix(System.String)
+  commentId: M:System.Xml.XmlNamespaceManager.LookupPrefix(System.String)
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.lookupprefix
+  name: LookupPrefix(string)
+  nameWithType: XmlNamespaceManager.LookupPrefix(string)
+  fullName: System.Xml.XmlNamespaceManager.LookupPrefix(string)
+  nameWithType.vb: XmlNamespaceManager.LookupPrefix(String)
+  fullName.vb: System.Xml.XmlNamespaceManager.LookupPrefix(String)
+  name.vb: LookupPrefix(String)
+  spec.csharp:
+  - uid: System.Xml.XmlNamespaceManager.LookupPrefix(System.String)
+    name: LookupPrefix
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.lookupprefix
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: System.Xml.XmlNamespaceManager.LookupPrefix(System.String)
+    name: LookupPrefix
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.lookupprefix
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Xml.XmlNamespaceManager.PopScope
+  commentId: M:System.Xml.XmlNamespaceManager.PopScope
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.popscope
+  name: PopScope()
+  nameWithType: XmlNamespaceManager.PopScope()
+  fullName: System.Xml.XmlNamespaceManager.PopScope()
+  spec.csharp:
+  - uid: System.Xml.XmlNamespaceManager.PopScope
+    name: PopScope
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.popscope
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Xml.XmlNamespaceManager.PopScope
+    name: PopScope
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.popscope
+  - name: (
+  - name: )
+- uid: System.Xml.XmlNamespaceManager.PushScope
+  commentId: M:System.Xml.XmlNamespaceManager.PushScope
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.pushscope
+  name: PushScope()
+  nameWithType: XmlNamespaceManager.PushScope()
+  fullName: System.Xml.XmlNamespaceManager.PushScope()
+  spec.csharp:
+  - uid: System.Xml.XmlNamespaceManager.PushScope
+    name: PushScope
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.pushscope
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Xml.XmlNamespaceManager.PushScope
+    name: PushScope
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.pushscope
+  - name: (
+  - name: )
+- uid: System.Xml.XmlNamespaceManager.RemoveNamespace(System.String,System.String)
+  commentId: M:System.Xml.XmlNamespaceManager.RemoveNamespace(System.String,System.String)
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.removenamespace
+  name: RemoveNamespace(string, string)
+  nameWithType: XmlNamespaceManager.RemoveNamespace(string, string)
+  fullName: System.Xml.XmlNamespaceManager.RemoveNamespace(string, string)
+  nameWithType.vb: XmlNamespaceManager.RemoveNamespace(String, String)
+  fullName.vb: System.Xml.XmlNamespaceManager.RemoveNamespace(String, String)
+  name.vb: RemoveNamespace(String, String)
+  spec.csharp:
+  - uid: System.Xml.XmlNamespaceManager.RemoveNamespace(System.String,System.String)
+    name: RemoveNamespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.removenamespace
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: System.Xml.XmlNamespaceManager.RemoveNamespace(System.String,System.String)
+    name: RemoveNamespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.removenamespace
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Xml.XmlNamespaceManager.DefaultNamespace
+  commentId: P:System.Xml.XmlNamespaceManager.DefaultNamespace
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.defaultnamespace
+  name: DefaultNamespace
+  nameWithType: XmlNamespaceManager.DefaultNamespace
+  fullName: System.Xml.XmlNamespaceManager.DefaultNamespace
+- uid: System.Xml.XmlNamespaceManager.NameTable
+  commentId: P:System.Xml.XmlNamespaceManager.NameTable
+  parent: System.Xml.XmlNamespaceManager
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xmlnamespacemanager.nametable
+  name: NameTable
+  nameWithType: XmlNamespaceManager.NameTable
+  fullName: System.Xml.XmlNamespaceManager.NameTable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+- uid: System.Xml.Xsl
+  commentId: N:System.Xml.Xsl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Xml.Xsl
+  nameWithType: System.Xml.Xsl
+  fullName: System.Xml.Xsl
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+  - name: .
+  - uid: System.Xml.Xsl
+    name: Xsl
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+  - name: .
+  - uid: System.Xml.Xsl
+    name: Xsl
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  commentId: T:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  name: XPathQueryManager.CustomQueryContext
+  nameWithType: XPathQueryManager.CustomQueryContext
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+  spec.csharp:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+    name: CustomQueryContext
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html
+  spec.vb:
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
+    name: XPathQueryManager
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
+  - name: .
+  - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext
+    name: CustomQueryContext
+    href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor
+  name: CustomQueryContext
+  nameWithType: XPathQueryManager.CustomQueryContext.CustomQueryContext
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CustomQueryContext
+  nameWithType.vb: XPathQueryManager.CustomQueryContext.New
+  fullName.vb: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.New
+  name.vb: New
+- uid: System.Xml.NameTable
+  commentId: T:System.Xml.NameTable
+  parent: System.Xml
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.nametable
+  name: NameTable
+  nameWithType: NameTable
+  fullName: System.Xml.NameTable
+- uid: System.Xml.Xsl.XsltContext.Whitespace
+  commentId: P:System.Xml.Xsl.XsltContext.Whitespace
+  parent: System.Xml.Xsl.XsltContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.whitespace
+  name: Whitespace
+  nameWithType: XsltContext.Whitespace
+  fullName: System.Xml.Xsl.XsltContext.Whitespace
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_Whitespace
+  name: Whitespace
+  nameWithType: XPathQueryManager.CustomQueryContext.Whitespace
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.Whitespace
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddNamespace_System_Collections_Generic_IDictionary_System_String_System_String__
+  name: AddNamespace
+  nameWithType: XPathQueryManager.CustomQueryContext.AddNamespace
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace
+- uid: System.Collections.Generic.IDictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.IDictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<string, string>
+  nameWithType: IDictionary<string, string>
+  fullName: System.Collections.Generic.IDictionary<string, string>
+  nameWithType.vb: IDictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.IDictionary(Of String, String)
+  name.vb: IDictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Xml.Xsl.XsltContext.CompareDocument(System.String,System.String)
+  commentId: M:System.Xml.Xsl.XsltContext.CompareDocument(System.String,System.String)
+  parent: System.Xml.Xsl.XsltContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.comparedocument
+  name: CompareDocument(string, string)
+  nameWithType: XsltContext.CompareDocument(string, string)
+  fullName: System.Xml.Xsl.XsltContext.CompareDocument(string, string)
+  nameWithType.vb: XsltContext.CompareDocument(String, String)
+  fullName.vb: System.Xml.Xsl.XsltContext.CompareDocument(String, String)
+  name.vb: CompareDocument(String, String)
+  spec.csharp:
+  - uid: System.Xml.Xsl.XsltContext.CompareDocument(System.String,System.String)
+    name: CompareDocument
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.comparedocument
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: System.Xml.Xsl.XsltContext.CompareDocument(System.String,System.String)
+    name: CompareDocument
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.comparedocument
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_CompareDocument_System_String_System_String_
+  name: CompareDocument
+  nameWithType: XPathQueryManager.CustomQueryContext.CompareDocument
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.CompareDocument
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Xml.Xsl.XsltContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+  commentId: M:System.Xml.Xsl.XsltContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+  parent: System.Xml.Xsl.XsltContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.preservewhitespace
+  name: PreserveWhitespace(XPathNavigator)
+  nameWithType: XsltContext.PreserveWhitespace(XPathNavigator)
+  fullName: System.Xml.Xsl.XsltContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+  spec.csharp:
+  - uid: System.Xml.Xsl.XsltContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+    name: PreserveWhitespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.preservewhitespace
+  - name: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathnavigator
+  - name: )
+  spec.vb:
+  - uid: System.Xml.Xsl.XsltContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)
+    name: PreserveWhitespace
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.preservewhitespace
+  - name: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathnavigator
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_PreserveWhitespace_System_Xml_XPath_XPathNavigator_
+  name: PreserveWhitespace
+  nameWithType: XPathQueryManager.CustomQueryContext.PreserveWhitespace
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathnavigator
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+  - name: .
+  - uid: System.Xml.XPath
+    name: XPath
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Xml
+    name: Xml
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml
+  - name: .
+  - uid: System.Xml.XPath
+    name: XPath
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath
+- uid: System.Xml.Xsl.XsltContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])
+  commentId: M:System.Xml.Xsl.XsltContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])
+  parent: System.Xml.Xsl.XsltContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.resolvefunction
+  name: ResolveFunction(string, string, XPathResultType[])
+  nameWithType: XsltContext.ResolveFunction(string, string, XPathResultType[])
+  fullName: System.Xml.Xsl.XsltContext.ResolveFunction(string, string, System.Xml.XPath.XPathResultType[])
+  nameWithType.vb: XsltContext.ResolveFunction(String, String, XPathResultType())
+  fullName.vb: System.Xml.Xsl.XsltContext.ResolveFunction(String, String, System.Xml.XPath.XPathResultType())
+  name.vb: ResolveFunction(String, String, XPathResultType())
+  spec.csharp:
+  - uid: System.Xml.Xsl.XsltContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])
+    name: ResolveFunction
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.resolvefunction
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Xml.XPath.XPathResultType
+    name: XPathResultType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: System.Xml.Xsl.XsltContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])
+    name: ResolveFunction
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.resolvefunction
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Xml.XPath.XPathResultType
+    name: XPathResultType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveFunction_System_String_System_String_System_Xml_XPath_XPathResultType___
+  name: ResolveFunction
+  nameWithType: XPathQueryManager.CustomQueryContext.ResolveFunction
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction
+- uid: System.Xml.XPath.XPathResultType[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype
+  name: XPathResultType[]
+  nameWithType: XPathResultType[]
+  fullName: System.Xml.XPath.XPathResultType[]
+  nameWithType.vb: XPathResultType()
+  fullName.vb: System.Xml.XPath.XPathResultType()
+  name.vb: XPathResultType()
+  spec.csharp:
+  - uid: System.Xml.XPath.XPathResultType
+    name: XPathResultType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Xml.XPath.XPathResultType
+    name: XPathResultType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xpath.xpathresulttype
+  - name: (
+  - name: )
+- uid: System.Xml.Xsl.IXsltContextFunction
+  commentId: T:System.Xml.Xsl.IXsltContextFunction
+  parent: System.Xml.Xsl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.ixsltcontextfunction
+  name: IXsltContextFunction
+  nameWithType: IXsltContextFunction
+  fullName: System.Xml.Xsl.IXsltContextFunction
+- uid: System.Xml.Xsl.XsltContext.ResolveVariable(System.String,System.String)
+  commentId: M:System.Xml.Xsl.XsltContext.ResolveVariable(System.String,System.String)
+  parent: System.Xml.Xsl.XsltContext
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.resolvevariable
+  name: ResolveVariable(string, string)
+  nameWithType: XsltContext.ResolveVariable(string, string)
+  fullName: System.Xml.Xsl.XsltContext.ResolveVariable(string, string)
+  nameWithType.vb: XsltContext.ResolveVariable(String, String)
+  fullName.vb: System.Xml.Xsl.XsltContext.ResolveVariable(String, String)
+  name.vb: ResolveVariable(String, String)
+  spec.csharp:
+  - uid: System.Xml.Xsl.XsltContext.ResolveVariable(System.String,System.String)
+    name: ResolveVariable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.resolvevariable
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: System.Xml.Xsl.XsltContext.ResolveVariable(System.String,System.String)
+    name: ResolveVariable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.xsltcontext.resolvevariable
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveVariable_System_String_System_String_
+  name: ResolveVariable
+  nameWithType: XPathQueryManager.CustomQueryContext.ResolveVariable
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable
+- uid: System.Xml.Xsl.IXsltContextVariable
+  commentId: T:System.Xml.Xsl.IXsltContextVariable
+  parent: System.Xml.Xsl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.xml.xsl.ixsltcontextvariable
+  name: IXsltContextVariable
+  nameWithType: IXsltContextVariable
+  fullName: System.Xml.Xsl.IXsltContextVariable
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_System_String_System_Object_
+  name: AddParam
+  nameWithType: XPathQueryManager.CustomQueryContext.AddParam
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam
+- uid: System.Collections.DictionaryEntry[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  name: DictionaryEntry[]
+  nameWithType: DictionaryEntry[]
+  fullName: System.Collections.DictionaryEntry[]
+  nameWithType.vb: DictionaryEntry()
+  fullName.vb: System.Collections.DictionaryEntry()
+  name.vb: DictionaryEntry()
+  spec.csharp:
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Collections.DictionaryEntry
+    name: DictionaryEntry
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.dictionaryentry
+  - name: (
+  - name: )
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_GetParam_System_String_
+  name: GetParam
+  nameWithType: XPathQueryManager.CustomQueryContext.GetParam
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_RemoveParam_System_String_
+  name: RemoveParam
+  nameWithType: XPathQueryManager.CustomQueryContext.RemoveParam
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams*
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams
+  href: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResetParams
+  name: ResetParams
+  nameWithType: XPathQueryManager.CustomQueryContext.ResetParams
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResetParams

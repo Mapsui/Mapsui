@@ -1,0 +1,401 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Editing.EditMode
+  commentId: T:Mapsui.Nts.Editing.EditMode
+  id: EditMode
+  parent: Mapsui.Nts.Editing
+  children:
+  - Mapsui.Nts.Editing.EditMode.AddLine
+  - Mapsui.Nts.Editing.EditMode.AddPoint
+  - Mapsui.Nts.Editing.EditMode.AddPolygon
+  - Mapsui.Nts.Editing.EditMode.DrawingLine
+  - Mapsui.Nts.Editing.EditMode.DrawingPolygon
+  - Mapsui.Nts.Editing.EditMode.Modify
+  - Mapsui.Nts.Editing.EditMode.None
+  - Mapsui.Nts.Editing.EditMode.Rotate
+  - Mapsui.Nts.Editing.EditMode.Scale
+  langs:
+  - csharp
+  - vb
+  name: EditMode
+  nameWithType: EditMode
+  fullName: Mapsui.Nts.Editing.EditMode
+  type: Enum
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: EditMode
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public enum EditMode
+    content.vb: Public Enum EditMode
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Nts.Editing.EditMode.None
+  commentId: F:Mapsui.Nts.Editing.EditMode.None
+  id: None
+  parent: Mapsui.Nts.Editing.EditMode
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: EditMode.None
+  fullName: Mapsui.Nts.Editing.EditMode.None
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: None
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 11
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: None = 0
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditMode.AddPoint
+  commentId: F:Mapsui.Nts.Editing.EditMode.AddPoint
+  id: AddPoint
+  parent: Mapsui.Nts.Editing.EditMode
+  langs:
+  - csharp
+  - vb
+  name: AddPoint
+  nameWithType: EditMode.AddPoint
+  fullName: Mapsui.Nts.Editing.EditMode.AddPoint
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddPoint
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 12
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: AddPoint = 1
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditMode.AddLine
+  commentId: F:Mapsui.Nts.Editing.EditMode.AddLine
+  id: AddLine
+  parent: Mapsui.Nts.Editing.EditMode
+  langs:
+  - csharp
+  - vb
+  name: AddLine
+  nameWithType: EditMode.AddLine
+  fullName: Mapsui.Nts.Editing.EditMode.AddLine
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddLine
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 13
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: AddLine = 2
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditMode.DrawingLine
+  commentId: F:Mapsui.Nts.Editing.EditMode.DrawingLine
+  id: DrawingLine
+  parent: Mapsui.Nts.Editing.EditMode
+  langs:
+  - csharp
+  - vb
+  name: DrawingLine
+  nameWithType: EditMode.DrawingLine
+  fullName: Mapsui.Nts.Editing.EditMode.DrawingLine
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DrawingLine
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 14
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: DrawingLine = 3
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditMode.AddPolygon
+  commentId: F:Mapsui.Nts.Editing.EditMode.AddPolygon
+  id: AddPolygon
+  parent: Mapsui.Nts.Editing.EditMode
+  langs:
+  - csharp
+  - vb
+  name: AddPolygon
+  nameWithType: EditMode.AddPolygon
+  fullName: Mapsui.Nts.Editing.EditMode.AddPolygon
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddPolygon
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 15
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: AddPolygon = 4
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditMode.DrawingPolygon
+  commentId: F:Mapsui.Nts.Editing.EditMode.DrawingPolygon
+  id: DrawingPolygon
+  parent: Mapsui.Nts.Editing.EditMode
+  langs:
+  - csharp
+  - vb
+  name: DrawingPolygon
+  nameWithType: EditMode.DrawingPolygon
+  fullName: Mapsui.Nts.Editing.EditMode.DrawingPolygon
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DrawingPolygon
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: DrawingPolygon = 5
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditMode.Modify
+  commentId: F:Mapsui.Nts.Editing.EditMode.Modify
+  id: Modify
+  parent: Mapsui.Nts.Editing.EditMode
+  langs:
+  - csharp
+  - vb
+  name: Modify
+  nameWithType: EditMode.Modify
+  fullName: Mapsui.Nts.Editing.EditMode.Modify
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Modify
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: Modify = 6
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditMode.Rotate
+  commentId: F:Mapsui.Nts.Editing.EditMode.Rotate
+  id: Rotate
+  parent: Mapsui.Nts.Editing.EditMode
+  langs:
+  - csharp
+  - vb
+  name: Rotate
+  nameWithType: EditMode.Rotate
+  fullName: Mapsui.Nts.Editing.EditMode.Rotate
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rotate
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 18
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: Rotate = 7
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditMode.Scale
+  commentId: F:Mapsui.Nts.Editing.EditMode.Scale
+  id: Scale
+  parent: Mapsui.Nts.Editing.EditMode
+  langs:
+  - csharp
+  - vb
+  name: Scale
+  nameWithType: EditMode.Scale
+  fullName: Mapsui.Nts.Editing.EditMode.Scale
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Scale
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 19
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: Scale = 8
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+references:
+- uid: Mapsui.Nts.Editing
+  commentId: N:Mapsui.Nts.Editing
+  href: Mapsui.html
+  name: Mapsui.Nts.Editing
+  nameWithType: Mapsui.Nts.Editing
+  fullName: Mapsui.Nts.Editing
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Editing
+    name: Editing
+    href: Mapsui.Nts.Editing.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Editing
+    name: Editing
+    href: Mapsui.Nts.Editing.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Nts.Editing.EditMode
+  commentId: T:Mapsui.Nts.Editing.EditMode
+  parent: Mapsui.Nts.Editing
+  href: Mapsui.Nts.Editing.EditMode.html
+  name: EditMode
+  nameWithType: EditMode
+  fullName: Mapsui.Nts.Editing.EditMode

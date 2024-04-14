@@ -1,0 +1,68 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Tiling.Layers
+  commentId: N:Mapsui.Tiling.Layers
+  id: Mapsui.Tiling.Layers
+  children:
+  - Mapsui.Tiling.Layers.RasterizingTileLayer
+  - Mapsui.Tiling.Layers.TileLayer
+  - Mapsui.Tiling.Layers.TmsTileSourceBuilder
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Tiling.Layers
+  nameWithType: Mapsui.Tiling.Layers
+  fullName: Mapsui.Tiling.Layers
+  type: Namespace
+  assemblies:
+  - Mapsui.Tiling
+references:
+- uid: Mapsui.Tiling.Layers.RasterizingTileLayer
+  commentId: T:Mapsui.Tiling.Layers.RasterizingTileLayer
+  href: Mapsui.Tiling.Layers.RasterizingTileLayer.html
+  name: RasterizingTileLayer
+  nameWithType: RasterizingTileLayer
+  fullName: Mapsui.Tiling.Layers.RasterizingTileLayer
+- uid: Mapsui.Tiling.Layers.TileLayer
+  commentId: T:Mapsui.Tiling.Layers.TileLayer
+  parent: Mapsui.Tiling.Layers
+  href: Mapsui.Tiling.Layers.TileLayer.html
+  name: TileLayer
+  nameWithType: TileLayer
+  fullName: Mapsui.Tiling.Layers.TileLayer
+- uid: Mapsui.Tiling.Layers.TmsTileSourceBuilder
+  commentId: T:Mapsui.Tiling.Layers.TmsTileSourceBuilder
+  href: Mapsui.Tiling.Layers.TmsTileSourceBuilder.html
+  name: TmsTileSourceBuilder
+  nameWithType: TmsTileSourceBuilder
+  fullName: Mapsui.Tiling.Layers.TmsTileSourceBuilder
+- uid: Mapsui.Tiling.Layers
+  commentId: N:Mapsui.Tiling.Layers
+  href: Mapsui.html
+  name: Mapsui.Tiling.Layers
+  nameWithType: Mapsui.Tiling.Layers
+  fullName: Mapsui.Tiling.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Layers
+    name: Layers
+    href: Mapsui.Tiling.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Layers
+    name: Layers
+    href: Mapsui.Tiling.Layers.html

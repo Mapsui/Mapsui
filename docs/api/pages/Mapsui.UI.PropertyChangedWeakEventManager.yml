@@ -1,0 +1,607 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.PropertyChangedWeakEventManager
+  commentId: T:Mapsui.UI.PropertyChangedWeakEventManager
+  id: PropertyChangedWeakEventManager
+  parent: Mapsui.UI
+  children:
+  - Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.ComponentModel.PropertyChangedEventArgs)
+  - Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.Object,System.ComponentModel.PropertyChangedEventArgs)
+  langs:
+  - csharp
+  - vb
+  name: PropertyChangedWeakEventManager
+  nameWithType: PropertyChangedWeakEventManager
+  fullName: Mapsui.UI.PropertyChangedWeakEventManager
+  type: Class
+  source:
+    remote:
+      path: Mapsui/UI/PropertyChangedWeakEventManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PropertyChangedWeakEventManager
+    path: ../../Mapsui/UI/PropertyChangedWeakEventManager.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: 'public class PropertyChangedWeakEventManager : MWeakEventManager'
+    content.vb: Public Class PropertyChangedWeakEventManager Inherits MWeakEventManager
+  inheritance:
+  - System.Object
+  - Mapsui.UI.MWeakEventManager
+  inheritedMembers:
+  - Mapsui.UI.MWeakEventManager.EventHandlers
+  - Mapsui.UI.MWeakEventManager.AddListener(System.Object,System.Delegate)
+  - Mapsui.UI.MWeakEventManager.RemoveListener(System.Object,System.Delegate)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.ComponentModel.PropertyChangedEventArgs)
+  commentId: M:Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.ComponentModel.PropertyChangedEventArgs)
+  id: RaiseEvent(System.Object,System.ComponentModel.PropertyChangedEventArgs)
+  parent: Mapsui.UI.PropertyChangedWeakEventManager
+  langs:
+  - csharp
+  - vb
+  name: RaiseEvent(object, PropertyChangedEventArgs)
+  nameWithType: PropertyChangedWeakEventManager.RaiseEvent(object, PropertyChangedEventArgs)
+  fullName: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(object, System.ComponentModel.PropertyChangedEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/PropertyChangedWeakEventManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RaiseEvent
+    path: ../../Mapsui/UI/PropertyChangedWeakEventManager.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: public void RaiseEvent(object source, PropertyChangedEventArgs args)
+    parameters:
+    - id: source
+      type: System.Object
+    - id: args
+      type: System.ComponentModel.PropertyChangedEventArgs
+    content.vb: Public Sub [RaiseEvent](source As Object, args As PropertyChangedEventArgs)
+  overload: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent*
+  nameWithType.vb: PropertyChangedWeakEventManager.RaiseEvent(Object, PropertyChangedEventArgs)
+  fullName.vb: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(Object, System.ComponentModel.PropertyChangedEventArgs)
+  name.vb: RaiseEvent(Object, PropertyChangedEventArgs)
+- uid: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.Object,System.ComponentModel.PropertyChangedEventArgs)
+  commentId: M:Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.Object,System.ComponentModel.PropertyChangedEventArgs)
+  id: RaiseEvent(System.Object,System.Object,System.ComponentModel.PropertyChangedEventArgs)
+  parent: Mapsui.UI.PropertyChangedWeakEventManager
+  langs:
+  - csharp
+  - vb
+  name: RaiseEvent(object, object?, PropertyChangedEventArgs)
+  nameWithType: PropertyChangedWeakEventManager.RaiseEvent(object, object?, PropertyChangedEventArgs)
+  fullName: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(object, object?, System.ComponentModel.PropertyChangedEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/PropertyChangedWeakEventManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RaiseEvent
+    path: ../../Mapsui/UI/PropertyChangedWeakEventManager.cs
+    startLine: 14
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: public void RaiseEvent(object source, object? sender, PropertyChangedEventArgs args)
+    parameters:
+    - id: source
+      type: System.Object
+    - id: sender
+      type: System.Object
+    - id: args
+      type: System.ComponentModel.PropertyChangedEventArgs
+    content.vb: Public Sub [RaiseEvent](source As Object, sender As Object, args As PropertyChangedEventArgs)
+  overload: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent*
+  nameWithType.vb: PropertyChangedWeakEventManager.RaiseEvent(Object, Object, PropertyChangedEventArgs)
+  fullName.vb: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(Object, Object, System.ComponentModel.PropertyChangedEventArgs)
+  name.vb: RaiseEvent(Object, Object, PropertyChangedEventArgs)
+references:
+- uid: Mapsui.UI
+  commentId: N:Mapsui.UI
+  href: Mapsui.html
+  name: Mapsui.UI
+  nameWithType: Mapsui.UI
+  fullName: Mapsui.UI
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.UI.MWeakEventManager
+  commentId: T:Mapsui.UI.MWeakEventManager
+  parent: Mapsui.UI
+  href: Mapsui.UI.MWeakEventManager.html
+  name: MWeakEventManager
+  nameWithType: MWeakEventManager
+  fullName: Mapsui.UI.MWeakEventManager
+- uid: Mapsui.UI.MWeakEventManager.EventHandlers
+  commentId: F:Mapsui.UI.MWeakEventManager.EventHandlers
+  parent: Mapsui.UI.MWeakEventManager
+  href: Mapsui.UI.MWeakEventManager.html#Mapsui_UI_MWeakEventManager_EventHandlers
+  name: EventHandlers
+  nameWithType: MWeakEventManager.EventHandlers
+  fullName: Mapsui.UI.MWeakEventManager.EventHandlers
+- uid: Mapsui.UI.MWeakEventManager.AddListener(System.Object,System.Delegate)
+  commentId: M:Mapsui.UI.MWeakEventManager.AddListener(System.Object,System.Delegate)
+  parent: Mapsui.UI.MWeakEventManager
+  isExternal: true
+  href: Mapsui.UI.MWeakEventManager.html#Mapsui_UI_MWeakEventManager_AddListener_System_Object_System_Delegate_
+  name: AddListener(object, Delegate)
+  nameWithType: MWeakEventManager.AddListener(object, Delegate)
+  fullName: Mapsui.UI.MWeakEventManager.AddListener(object, System.Delegate)
+  nameWithType.vb: MWeakEventManager.AddListener(Object, Delegate)
+  fullName.vb: Mapsui.UI.MWeakEventManager.AddListener(Object, System.Delegate)
+  name.vb: AddListener(Object, Delegate)
+  spec.csharp:
+  - uid: Mapsui.UI.MWeakEventManager.AddListener(System.Object,System.Delegate)
+    name: AddListener
+    href: Mapsui.UI.MWeakEventManager.html#Mapsui_UI_MWeakEventManager_AddListener_System_Object_System_Delegate_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Delegate
+    name: Delegate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.delegate
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.MWeakEventManager.AddListener(System.Object,System.Delegate)
+    name: AddListener
+    href: Mapsui.UI.MWeakEventManager.html#Mapsui_UI_MWeakEventManager_AddListener_System_Object_System_Delegate_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Delegate
+    name: Delegate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.delegate
+  - name: )
+- uid: Mapsui.UI.MWeakEventManager.RemoveListener(System.Object,System.Delegate)
+  commentId: M:Mapsui.UI.MWeakEventManager.RemoveListener(System.Object,System.Delegate)
+  parent: Mapsui.UI.MWeakEventManager
+  isExternal: true
+  href: Mapsui.UI.MWeakEventManager.html#Mapsui_UI_MWeakEventManager_RemoveListener_System_Object_System_Delegate_
+  name: RemoveListener(object, Delegate)
+  nameWithType: MWeakEventManager.RemoveListener(object, Delegate)
+  fullName: Mapsui.UI.MWeakEventManager.RemoveListener(object, System.Delegate)
+  nameWithType.vb: MWeakEventManager.RemoveListener(Object, Delegate)
+  fullName.vb: Mapsui.UI.MWeakEventManager.RemoveListener(Object, System.Delegate)
+  name.vb: RemoveListener(Object, Delegate)
+  spec.csharp:
+  - uid: Mapsui.UI.MWeakEventManager.RemoveListener(System.Object,System.Delegate)
+    name: RemoveListener
+    href: Mapsui.UI.MWeakEventManager.html#Mapsui_UI_MWeakEventManager_RemoveListener_System_Object_System_Delegate_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Delegate
+    name: Delegate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.delegate
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.MWeakEventManager.RemoveListener(System.Object,System.Delegate)
+    name: RemoveListener
+    href: Mapsui.UI.MWeakEventManager.html#Mapsui_UI_MWeakEventManager_RemoveListener_System_Object_System_Delegate_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Delegate
+    name: Delegate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.delegate
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent*
+  commentId: Overload:Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent
+  href: Mapsui.UI.PropertyChangedWeakEventManager.html#Mapsui_UI_PropertyChangedWeakEventManager_RaiseEvent_System_Object_System_ComponentModel_PropertyChangedEventArgs_
+  name: RaiseEvent
+  nameWithType: PropertyChangedWeakEventManager.RaiseEvent
+  fullName: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent
+- uid: System.ComponentModel.PropertyChangedEventArgs
+  commentId: T:System.ComponentModel.PropertyChangedEventArgs
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventargs
+  name: PropertyChangedEventArgs
+  nameWithType: PropertyChangedEventArgs
+  fullName: System.ComponentModel.PropertyChangedEventArgs
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel

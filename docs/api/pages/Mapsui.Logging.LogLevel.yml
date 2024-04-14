@@ -1,0 +1,285 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Logging.LogLevel
+  commentId: T:Mapsui.Logging.LogLevel
+  id: LogLevel
+  parent: Mapsui.Logging
+  children:
+  - Mapsui.Logging.LogLevel.Debug
+  - Mapsui.Logging.LogLevel.Error
+  - Mapsui.Logging.LogLevel.Information
+  - Mapsui.Logging.LogLevel.Trace
+  - Mapsui.Logging.LogLevel.Warning
+  langs:
+  - csharp
+  - vb
+  name: LogLevel
+  nameWithType: LogLevel
+  fullName: Mapsui.Logging.LogLevel
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Logging/Logger.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LogLevel
+    path: ../../Mapsui/Logging/Logger.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Logging
+  syntax:
+    content: public enum LogLevel
+    content.vb: Public Enum LogLevel
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Logging.LogLevel.Error
+  commentId: F:Mapsui.Logging.LogLevel.Error
+  id: Error
+  parent: Mapsui.Logging.LogLevel
+  langs:
+  - csharp
+  - vb
+  name: Error
+  nameWithType: LogLevel.Error
+  fullName: Mapsui.Logging.LogLevel.Error
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Logging/Logger.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Error
+    path: ../../Mapsui/Logging/Logger.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Logging
+  syntax:
+    content: Error = 0
+    return:
+      type: Mapsui.Logging.LogLevel
+- uid: Mapsui.Logging.LogLevel.Warning
+  commentId: F:Mapsui.Logging.LogLevel.Warning
+  id: Warning
+  parent: Mapsui.Logging.LogLevel
+  langs:
+  - csharp
+  - vb
+  name: Warning
+  nameWithType: LogLevel.Warning
+  fullName: Mapsui.Logging.LogLevel.Warning
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Logging/Logger.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Warning
+    path: ../../Mapsui/Logging/Logger.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Logging
+  syntax:
+    content: Warning = 1
+    return:
+      type: Mapsui.Logging.LogLevel
+- uid: Mapsui.Logging.LogLevel.Information
+  commentId: F:Mapsui.Logging.LogLevel.Information
+  id: Information
+  parent: Mapsui.Logging.LogLevel
+  langs:
+  - csharp
+  - vb
+  name: Information
+  nameWithType: LogLevel.Information
+  fullName: Mapsui.Logging.LogLevel.Information
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Logging/Logger.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Information
+    path: ../../Mapsui/Logging/Logger.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Logging
+  syntax:
+    content: Information = 2
+    return:
+      type: Mapsui.Logging.LogLevel
+- uid: Mapsui.Logging.LogLevel.Debug
+  commentId: F:Mapsui.Logging.LogLevel.Debug
+  id: Debug
+  parent: Mapsui.Logging.LogLevel
+  langs:
+  - csharp
+  - vb
+  name: Debug
+  nameWithType: LogLevel.Debug
+  fullName: Mapsui.Logging.LogLevel.Debug
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Logging/Logger.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Debug
+    path: ../../Mapsui/Logging/Logger.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Logging
+  syntax:
+    content: Debug = 3
+    return:
+      type: Mapsui.Logging.LogLevel
+- uid: Mapsui.Logging.LogLevel.Trace
+  commentId: F:Mapsui.Logging.LogLevel.Trace
+  id: Trace
+  parent: Mapsui.Logging.LogLevel
+  langs:
+  - csharp
+  - vb
+  name: Trace
+  nameWithType: LogLevel.Trace
+  fullName: Mapsui.Logging.LogLevel.Trace
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Logging/Logger.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Trace
+    path: ../../Mapsui/Logging/Logger.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Logging
+  syntax:
+    content: Trace = 4
+    return:
+      type: Mapsui.Logging.LogLevel
+references:
+- uid: Mapsui.Logging
+  commentId: N:Mapsui.Logging
+  href: Mapsui.html
+  name: Mapsui.Logging
+  nameWithType: Mapsui.Logging
+  fullName: Mapsui.Logging
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Logging
+    name: Logging
+    href: Mapsui.Logging.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Logging
+    name: Logging
+    href: Mapsui.Logging.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Logging.LogLevel
+  commentId: T:Mapsui.Logging.LogLevel
+  parent: Mapsui.Logging
+  href: Mapsui.Logging.LogLevel.html
+  name: LogLevel
+  nameWithType: LogLevel
+  fullName: Mapsui.Logging.LogLevel

@@ -1,0 +1,216 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Objects.IFeatureProvider
+  commentId: T:Mapsui.UI.Objects.IFeatureProvider
+  id: IFeatureProvider
+  parent: Mapsui.UI.Objects
+  children:
+  - Mapsui.UI.Objects.IFeatureProvider.Feature
+  langs:
+  - csharp
+  - vb
+  name: IFeatureProvider
+  nameWithType: IFeatureProvider
+  fullName: Mapsui.UI.Objects.IFeatureProvider
+  type: Interface
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IFeatureProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IFeatureProvider
+    path: ../../Mapsui.Nts/Providers/IFeatureProvider.cs
+    startLine: 4
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.UI.Objects
+  syntax:
+    content: public interface IFeatureProvider
+    content.vb: Public Interface IFeatureProvider
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.Objects.IFeatureProvider.Feature
+  commentId: P:Mapsui.UI.Objects.IFeatureProvider.Feature
+  id: Feature
+  parent: Mapsui.UI.Objects.IFeatureProvider
+  langs:
+  - csharp
+  - vb
+  name: Feature
+  nameWithType: IFeatureProvider.Feature
+  fullName: Mapsui.UI.Objects.IFeatureProvider.Feature
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/IFeatureProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Feature
+    path: ../../Mapsui.Nts/Providers/IFeatureProvider.cs
+    startLine: 6
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.UI.Objects
+  syntax:
+    content: GeometryFeature? Feature { get; }
+    parameters: []
+    return:
+      type: Mapsui.Nts.GeometryFeature
+    content.vb: ReadOnly Property Feature As GeometryFeature
+  overload: Mapsui.UI.Objects.IFeatureProvider.Feature*
+references:
+- uid: Mapsui.UI.Objects
+  commentId: N:Mapsui.UI.Objects
+  href: Mapsui.html
+  name: Mapsui.UI.Objects
+  nameWithType: Mapsui.UI.Objects
+  fullName: Mapsui.UI.Objects
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.UI.Objects.IFeatureProvider.Feature*
+  commentId: Overload:Mapsui.UI.Objects.IFeatureProvider.Feature
+  href: Mapsui.UI.Objects.IFeatureProvider.html#Mapsui_UI_Objects_IFeatureProvider_Feature
+  name: Feature
+  nameWithType: IFeatureProvider.Feature
+  fullName: Mapsui.UI.Objects.IFeatureProvider.Feature
+- uid: Mapsui.Nts.GeometryFeature
+  commentId: T:Mapsui.Nts.GeometryFeature
+  parent: Mapsui.Nts
+  href: Mapsui.Nts.GeometryFeature.html
+  name: GeometryFeature
+  nameWithType: GeometryFeature
+  fullName: Mapsui.Nts.GeometryFeature
+- uid: Mapsui.Nts
+  commentId: N:Mapsui.Nts
+  href: Mapsui.html
+  name: Mapsui.Nts
+  nameWithType: Mapsui.Nts
+  fullName: Mapsui.Nts
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html

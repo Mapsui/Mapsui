@@ -1,0 +1,76 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.ButtonWidgets
+  commentId: N:Mapsui.Widgets.ButtonWidgets
+  id: Mapsui.Widgets.ButtonWidgets
+  children:
+  - Mapsui.Widgets.ButtonWidgets.ButtonWidget
+  - Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
+  - Mapsui.Widgets.ButtonWidgets.IconButtonWidget
+  - Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Widgets.ButtonWidgets
+  nameWithType: Mapsui.Widgets.ButtonWidgets
+  fullName: Mapsui.Widgets.ButtonWidgets
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget
+  commentId: T:Mapsui.Widgets.ButtonWidgets.ButtonWidget
+  parent: Mapsui.Widgets.ButtonWidgets
+  href: Mapsui.Widgets.ButtonWidgets.ButtonWidget.html
+  name: ButtonWidget
+  nameWithType: ButtonWidget
+  fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget
+- uid: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
+  commentId: T:Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
+  parent: Mapsui.Widgets.ButtonWidgets
+  href: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.html
+  name: HyperlinkWidget
+  nameWithType: HyperlinkWidget
+  fullName: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
+- uid: Mapsui.Widgets.ButtonWidgets.IconButtonWidget
+  commentId: T:Mapsui.Widgets.ButtonWidgets.IconButtonWidget
+  href: Mapsui.Widgets.ButtonWidgets.IconButtonWidget.html
+  name: IconButtonWidget
+  nameWithType: IconButtonWidget
+  fullName: Mapsui.Widgets.ButtonWidgets.IconButtonWidget
+- uid: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget
+  commentId: T:Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget
+  href: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.html
+  name: ZoomInOutWidget
+  nameWithType: ZoomInOutWidget
+  fullName: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget
+- uid: Mapsui.Widgets.ButtonWidgets
+  commentId: N:Mapsui.Widgets.ButtonWidgets
+  href: Mapsui.html
+  name: Mapsui.Widgets.ButtonWidgets
+  nameWithType: Mapsui.Widgets.ButtonWidgets
+  fullName: Mapsui.Widgets.ButtonWidgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.ButtonWidgets
+    name: ButtonWidgets
+    href: Mapsui.Widgets.ButtonWidgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  - name: .
+  - uid: Mapsui.Widgets.ButtonWidgets
+    name: ButtonWidgets
+    href: Mapsui.Widgets.ButtonWidgets.html

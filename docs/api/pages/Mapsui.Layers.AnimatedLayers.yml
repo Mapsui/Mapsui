@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Layers.AnimatedLayers
+  commentId: N:Mapsui.Layers.AnimatedLayers
+  id: Mapsui.Layers.AnimatedLayers
+  children:
+  - Mapsui.Layers.AnimatedLayers.AnimatedPointLayer
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Layers.AnimatedLayers
+  nameWithType: Mapsui.Layers.AnimatedLayers
+  fullName: Mapsui.Layers.AnimatedLayers
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer
+  commentId: T:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer
+  href: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html
+  name: AnimatedPointLayer
+  nameWithType: AnimatedPointLayer
+  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer

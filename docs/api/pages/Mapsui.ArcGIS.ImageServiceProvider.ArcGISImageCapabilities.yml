@@ -1,0 +1,2938 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  id: ArcGISImageCapabilities
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  children:
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor(System.String,System.Int64,System.Int64,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType)
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.EndTime
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Format
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Interpolation
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ServiceUrl
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.StartTime
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowComputeTiePoints
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowRasterFunction
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowedMosaicMethods
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.bandCount
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.cacheDirectory
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.capabilities
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.copyrightText
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.currentVersion
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultCompressionQuality
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultMosaicMethod
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultResamplingMethod
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.description
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.editFieldsInfo
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fields
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fullExtent
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasColormap
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasHistograms
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasRasterAttributeTable
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.initialExtent
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadImageCount
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadSizeLimit
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageHeight
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageWidth
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxMosaicImageCount
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxPixelSize
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxRecordCount
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxScale
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxValues
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mensurationCapabilities
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minPixelSize
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minScale
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minValues
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mosaicOperator
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.name
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.objectIdField
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ownershipBasedAccessControlForRasters
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeX
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeY
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelType
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterFunctionInfos
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterTypeInfos
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDataType
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDescription
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.singleFusedMapCache
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortField
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortValue
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.spatialReference
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.stdvValues
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsAdvancedQueries
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsStatistics
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.tileInfo
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.timeInfo
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.useStandardizedQueries
+  langs:
+  - csharp
+  - vb
+  name: ArcGISImageCapabilities
+  nameWithType: ArcGISImageCapabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  type: Class
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArcGISImageCapabilities
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 11
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: 'public class ArcGISImageCapabilities : IArcGISCapabilities'
+    content.vb: Public Class ArcGISImageCapabilities Implements IArcGISCapabilities
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor
+  id: '#ctor'
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: ArcGISImageCapabilities()
+  nameWithType: ArcGISImageCapabilities.ArcGISImageCapabilities()
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ArcGISImageCapabilities()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 13
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public ArcGISImageCapabilities()
+    content.vb: Public Sub New()
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor*
+  nameWithType.vb: ArcGISImageCapabilities.New()
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.New()
+  name.vb: New()
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor(System.String,System.Int64,System.Int64,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType)
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor(System.String,System.Int64,System.Int64,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType)
+  id: '#ctor(System.String,System.Int64,System.Int64,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType)'
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: ArcGISImageCapabilities(string, long, long, string, InterpolationType)
+  nameWithType: ArcGISImageCapabilities.ArcGISImageCapabilities(string, long, long, string, InterpolationType)
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ArcGISImageCapabilities(string, long, long, string, Mapsui.ArcGIS.ImageServiceProvider.InterpolationType)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 15
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public ArcGISImageCapabilities(string url, long startTime = -1, long endTime = -1, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor)
+    parameters:
+    - id: url
+      type: System.String
+    - id: startTime
+      type: System.Int64
+    - id: endTime
+      type: System.Int64
+    - id: format
+      type: System.String
+    - id: interpolation
+      type: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+    content.vb: Public Sub New(url As String, startTime As Long = -1, endTime As Long = -1, format As String = "jpgpng", interpolation As InterpolationType = InterpolationType.RSP_NearestNeighbor)
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor*
+  nameWithType.vb: ArcGISImageCapabilities.New(String, Long, Long, String, InterpolationType)
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.New(String, Long, Long, String, Mapsui.ArcGIS.ImageServiceProvider.InterpolationType)
+  name.vb: New(String, Long, Long, String, InterpolationType)
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.StartTime
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.StartTime
+  id: StartTime
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: StartTime
+  nameWithType: ArcGISImageCapabilities.StartTime
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.StartTime
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StartTime
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 24
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public long StartTime { get; set; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property StartTime As Long
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.StartTime*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.EndTime
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.EndTime
+  id: EndTime
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: EndTime
+  nameWithType: ArcGISImageCapabilities.EndTime
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.EndTime
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: EndTime
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 25
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public long EndTime { get; set; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property EndTime As Long
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.EndTime*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Interpolation
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Interpolation
+  id: Interpolation
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: Interpolation
+  nameWithType: ArcGISImageCapabilities.Interpolation
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Interpolation
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Interpolation
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 26
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public InterpolationType Interpolation { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+    content.vb: Public Property Interpolation As InterpolationType
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Interpolation*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Format
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Format
+  id: Format
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: Format
+  nameWithType: ArcGISImageCapabilities.Format
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Format
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Format
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 27
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string Format { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Format As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Format*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ServiceUrl
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ServiceUrl
+  id: ServiceUrl
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: ServiceUrl
+  nameWithType: ArcGISImageCapabilities.ServiceUrl
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ServiceUrl
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ServiceUrl
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 28
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public string ServiceUrl { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ServiceUrl As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ServiceUrl*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.ServiceUrl
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.currentVersion
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.currentVersion
+  id: currentVersion
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: currentVersion
+  nameWithType: ArcGISImageCapabilities.currentVersion
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.currentVersion
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: currentVersion
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 29
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public double? currentVersion { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Double}
+    content.vb: Public Property currentVersion As Double?
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.currentVersion*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.currentVersion
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.singleFusedMapCache
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.singleFusedMapCache
+  id: singleFusedMapCache
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: singleFusedMapCache
+  nameWithType: ArcGISImageCapabilities.singleFusedMapCache
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.singleFusedMapCache
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: singleFusedMapCache
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 30
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public bool singleFusedMapCache { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property singleFusedMapCache As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.singleFusedMapCache*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.singleFusedMapCache
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fullExtent
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fullExtent
+  id: fullExtent
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: fullExtent
+  nameWithType: ArcGISImageCapabilities.fullExtent
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fullExtent
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: fullExtent
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public Extent? fullExtent { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.Extent
+    content.vb: Public Property fullExtent As Extent
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fullExtent*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.fullExtent
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.spatialReference
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.spatialReference
+  id: spatialReference
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: spatialReference
+  nameWithType: ArcGISImageCapabilities.spatialReference
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.spatialReference
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: spatialReference
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 32
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public SpatialReference? spatialReference { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.SpatialReference
+    content.vb: Public Property spatialReference As SpatialReference
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.spatialReference*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.initialExtent
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.initialExtent
+  id: initialExtent
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: initialExtent
+  nameWithType: ArcGISImageCapabilities.initialExtent
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.initialExtent
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: initialExtent
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 33
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public Extent? initialExtent { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.Extent
+    content.vb: Public Property initialExtent As Extent
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.initialExtent*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.initialExtent
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.tileInfo
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.tileInfo
+  id: tileInfo
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: tileInfo
+  nameWithType: ArcGISImageCapabilities.tileInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.tileInfo
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: tileInfo
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 34
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public TileInfo? tileInfo { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.TileInfo
+    content.vb: Public Property tileInfo As TileInfo
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.tileInfo*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.tileInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.copyrightText
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.copyrightText
+  id: copyrightText
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: copyrightText
+  nameWithType: ArcGISImageCapabilities.copyrightText
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.copyrightText
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: copyrightText
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 35
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public string? copyrightText { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property copyrightText As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.copyrightText*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.copyrightText
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDescription
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDescription
+  id: serviceDescription
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: serviceDescription
+  nameWithType: ArcGISImageCapabilities.serviceDescription
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDescription
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: serviceDescription
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 36
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public string? serviceDescription { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property serviceDescription As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDescription*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.serviceDescription
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.capabilities
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.capabilities
+  id: capabilities
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: capabilities
+  nameWithType: ArcGISImageCapabilities.capabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.capabilities
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: capabilities
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 37
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public string? capabilities { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property capabilities As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.capabilities*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.capabilities
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.description
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.description
+  id: description
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: description
+  nameWithType: ArcGISImageCapabilities.description
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.description
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: description
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 38
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public string? description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property description As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.description*
+  implements:
+  - Mapsui.ArcGIS.IArcGISCapabilities.description
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.name
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.name
+  id: name
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: name
+  nameWithType: ArcGISImageCapabilities.name
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.name
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: name
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 39
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property name As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.name*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.timeInfo
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.timeInfo
+  id: timeInfo
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: timeInfo
+  nameWithType: ArcGISImageCapabilities.timeInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.timeInfo
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: timeInfo
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 40
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public TimeInfo? timeInfo { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+    content.vb: Public Property timeInfo As TimeInfo
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.timeInfo*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeX
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeX
+  id: pixelSizeX
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: pixelSizeX
+  nameWithType: ArcGISImageCapabilities.pixelSizeX
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeX
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: pixelSizeX
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 41
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double pixelSizeX { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property pixelSizeX As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeX*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeY
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeY
+  id: pixelSizeY
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: pixelSizeY
+  nameWithType: ArcGISImageCapabilities.pixelSizeY
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeY
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: pixelSizeY
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 42
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double pixelSizeY { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property pixelSizeY As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeY*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.bandCount
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.bandCount
+  id: bandCount
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: bandCount
+  nameWithType: ArcGISImageCapabilities.bandCount
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.bandCount
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: bandCount
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 43
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public int bandCount { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property bandCount As Integer
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.bandCount*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelType
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelType
+  id: pixelType
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: pixelType
+  nameWithType: ArcGISImageCapabilities.pixelType
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelType
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: pixelType
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 44
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? pixelType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property pixelType As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelType*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minPixelSize
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minPixelSize
+  id: minPixelSize
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: minPixelSize
+  nameWithType: ArcGISImageCapabilities.minPixelSize
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minPixelSize
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: minPixelSize
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 45
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double minPixelSize { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property minPixelSize As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minPixelSize*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxPixelSize
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxPixelSize
+  id: maxPixelSize
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: maxPixelSize
+  nameWithType: ArcGISImageCapabilities.maxPixelSize
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxPixelSize
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: maxPixelSize
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 46
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double maxPixelSize { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property maxPixelSize As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxPixelSize*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDataType
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDataType
+  id: serviceDataType
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: serviceDataType
+  nameWithType: ArcGISImageCapabilities.serviceDataType
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDataType
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: serviceDataType
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 47
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? serviceDataType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property serviceDataType As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDataType*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minValues
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minValues
+  id: minValues
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: minValues
+  nameWithType: ArcGISImageCapabilities.minValues
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minValues
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: minValues
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 48
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double[]? minValues { get; set; }
+    parameters: []
+    return:
+      type: System.Double[]
+    content.vb: Public Property minValues As Double()
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minValues*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxValues
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxValues
+  id: maxValues
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: maxValues
+  nameWithType: ArcGISImageCapabilities.maxValues
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxValues
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: maxValues
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 49
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double[]? maxValues { get; set; }
+    parameters: []
+    return:
+      type: System.Double[]
+    content.vb: Public Property maxValues As Double()
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxValues*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.stdvValues
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.stdvValues
+  id: stdvValues
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: stdvValues
+  nameWithType: ArcGISImageCapabilities.stdvValues
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.stdvValues
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: stdvValues
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 50
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double[]? stdvValues { get; set; }
+    parameters: []
+    return:
+      type: System.Double[]
+    content.vb: Public Property stdvValues As Double()
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.stdvValues*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.objectIdField
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.objectIdField
+  id: objectIdField
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: objectIdField
+  nameWithType: ArcGISImageCapabilities.objectIdField
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.objectIdField
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: objectIdField
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 51
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? objectIdField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property objectIdField As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.objectIdField*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fields
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fields
+  id: fields
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: fields
+  nameWithType: ArcGISImageCapabilities.fields
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fields
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: fields
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 52
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public Field[]? fields { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.ImageServiceProvider.Field[]
+    content.vb: Public Property fields As Field()
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fields*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultCompressionQuality
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultCompressionQuality
+  id: defaultCompressionQuality
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: defaultCompressionQuality
+  nameWithType: ArcGISImageCapabilities.defaultCompressionQuality
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultCompressionQuality
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: defaultCompressionQuality
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 53
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double? defaultCompressionQuality { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Double}
+    content.vb: Public Property defaultCompressionQuality As Double?
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultCompressionQuality*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultResamplingMethod
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultResamplingMethod
+  id: defaultResamplingMethod
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: defaultResamplingMethod
+  nameWithType: ArcGISImageCapabilities.defaultResamplingMethod
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultResamplingMethod
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: defaultResamplingMethod
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 54
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? defaultResamplingMethod { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property defaultResamplingMethod As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultResamplingMethod*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageHeight
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageHeight
+  id: maxImageHeight
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: maxImageHeight
+  nameWithType: ArcGISImageCapabilities.maxImageHeight
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageHeight
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: maxImageHeight
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 55
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double maxImageHeight { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property maxImageHeight As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageHeight*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageWidth
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageWidth
+  id: maxImageWidth
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: maxImageWidth
+  nameWithType: ArcGISImageCapabilities.maxImageWidth
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: maxImageWidth
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 56
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double maxImageWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property maxImageWidth As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageWidth*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultMosaicMethod
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultMosaicMethod
+  id: defaultMosaicMethod
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: defaultMosaicMethod
+  nameWithType: ArcGISImageCapabilities.defaultMosaicMethod
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultMosaicMethod
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: defaultMosaicMethod
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 57
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? defaultMosaicMethod { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property defaultMosaicMethod As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultMosaicMethod*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowedMosaicMethods
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowedMosaicMethods
+  id: allowedMosaicMethods
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: allowedMosaicMethods
+  nameWithType: ArcGISImageCapabilities.allowedMosaicMethods
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowedMosaicMethods
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: allowedMosaicMethods
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 58
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? allowedMosaicMethods { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property allowedMosaicMethods As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowedMosaicMethods*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortField
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortField
+  id: sortField
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: sortField
+  nameWithType: ArcGISImageCapabilities.sortField
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortField
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: sortField
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 59
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? sortField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property sortField As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortField*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortValue
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortValue
+  id: sortValue
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: sortValue
+  nameWithType: ArcGISImageCapabilities.sortValue
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortValue
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: sortValue
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 60
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? sortValue { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property sortValue As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortValue*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mosaicOperator
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mosaicOperator
+  id: mosaicOperator
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: mosaicOperator
+  nameWithType: ArcGISImageCapabilities.mosaicOperator
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mosaicOperator
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: mosaicOperator
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 61
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? mosaicOperator { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property mosaicOperator As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mosaicOperator*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxRecordCount
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxRecordCount
+  id: maxRecordCount
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: maxRecordCount
+  nameWithType: ArcGISImageCapabilities.maxRecordCount
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxRecordCount
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: maxRecordCount
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 62
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double maxRecordCount { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property maxRecordCount As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxRecordCount*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadImageCount
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadImageCount
+  id: maxDownloadImageCount
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: maxDownloadImageCount
+  nameWithType: ArcGISImageCapabilities.maxDownloadImageCount
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadImageCount
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: maxDownloadImageCount
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 63
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double maxDownloadImageCount { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property maxDownloadImageCount As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadImageCount*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadSizeLimit
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadSizeLimit
+  id: maxDownloadSizeLimit
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: maxDownloadSizeLimit
+  nameWithType: ArcGISImageCapabilities.maxDownloadSizeLimit
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadSizeLimit
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: maxDownloadSizeLimit
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 64
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double maxDownloadSizeLimit { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property maxDownloadSizeLimit As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadSizeLimit*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxMosaicImageCount
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxMosaicImageCount
+  id: maxMosaicImageCount
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: maxMosaicImageCount
+  nameWithType: ArcGISImageCapabilities.maxMosaicImageCount
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxMosaicImageCount
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: maxMosaicImageCount
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 65
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double maxMosaicImageCount { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property maxMosaicImageCount As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxMosaicImageCount*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.cacheDirectory
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.cacheDirectory
+  id: cacheDirectory
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: cacheDirectory
+  nameWithType: ArcGISImageCapabilities.cacheDirectory
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.cacheDirectory
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: cacheDirectory
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 66
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? cacheDirectory { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property cacheDirectory As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.cacheDirectory*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minScale
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minScale
+  id: minScale
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: minScale
+  nameWithType: ArcGISImageCapabilities.minScale
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minScale
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: minScale
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 67
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double minScale { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property minScale As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minScale*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxScale
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxScale
+  id: maxScale
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: maxScale
+  nameWithType: ArcGISImageCapabilities.maxScale
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxScale
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: maxScale
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 68
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public double maxScale { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property maxScale As Double
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxScale*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowRasterFunction
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowRasterFunction
+  id: allowRasterFunction
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: allowRasterFunction
+  nameWithType: ArcGISImageCapabilities.allowRasterFunction
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowRasterFunction
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: allowRasterFunction
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 69
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public bool allowRasterFunction { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property allowRasterFunction As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowRasterFunction*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterFunctionInfos
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterFunctionInfos
+  id: rasterFunctionInfos
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: rasterFunctionInfos
+  nameWithType: ArcGISImageCapabilities.rasterFunctionInfos
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterFunctionInfos
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: rasterFunctionInfos
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 70
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public RasterFunctionInfo[]? rasterFunctionInfos { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo[]
+    content.vb: Public Property rasterFunctionInfos As RasterFunctionInfo()
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterFunctionInfos*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterTypeInfos
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterTypeInfos
+  id: rasterTypeInfos
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: rasterTypeInfos
+  nameWithType: ArcGISImageCapabilities.rasterTypeInfos
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterTypeInfos
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: rasterTypeInfos
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 71
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public RasterTypeInfo[]? rasterTypeInfos { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo[]
+    content.vb: Public Property rasterTypeInfos As RasterTypeInfo()
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterTypeInfos*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.editFieldsInfo
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.editFieldsInfo
+  id: editFieldsInfo
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: editFieldsInfo
+  nameWithType: ArcGISImageCapabilities.editFieldsInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.editFieldsInfo
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: editFieldsInfo
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 72
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public EditFieldsInfo? editFieldsInfo { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+    content.vb: Public Property editFieldsInfo As EditFieldsInfo
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.editFieldsInfo*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ownershipBasedAccessControlForRasters
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ownershipBasedAccessControlForRasters
+  id: ownershipBasedAccessControlForRasters
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: ownershipBasedAccessControlForRasters
+  nameWithType: ArcGISImageCapabilities.ownershipBasedAccessControlForRasters
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ownershipBasedAccessControlForRasters
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ownershipBasedAccessControlForRasters
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 73
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public OwnershipBasedAccessControlForRasters? ownershipBasedAccessControlForRasters { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+    content.vb: Public Property ownershipBasedAccessControlForRasters As OwnershipBasedAccessControlForRasters
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ownershipBasedAccessControlForRasters*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mensurationCapabilities
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mensurationCapabilities
+  id: mensurationCapabilities
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: mensurationCapabilities
+  nameWithType: ArcGISImageCapabilities.mensurationCapabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mensurationCapabilities
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: mensurationCapabilities
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 74
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? mensurationCapabilities { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property mensurationCapabilities As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mensurationCapabilities*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasHistograms
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasHistograms
+  id: hasHistograms
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: hasHistograms
+  nameWithType: ArcGISImageCapabilities.hasHistograms
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasHistograms
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: hasHistograms
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 75
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public bool hasHistograms { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property hasHistograms As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasHistograms*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasColormap
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasColormap
+  id: hasColormap
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: hasColormap
+  nameWithType: ArcGISImageCapabilities.hasColormap
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasColormap
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: hasColormap
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 76
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public bool hasColormap { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property hasColormap As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasColormap*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasRasterAttributeTable
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasRasterAttributeTable
+  id: hasRasterAttributeTable
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: hasRasterAttributeTable
+  nameWithType: ArcGISImageCapabilities.hasRasterAttributeTable
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasRasterAttributeTable
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: hasRasterAttributeTable
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 77
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public bool hasRasterAttributeTable { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property hasRasterAttributeTable As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasRasterAttributeTable*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowComputeTiePoints
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowComputeTiePoints
+  id: allowComputeTiePoints
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: allowComputeTiePoints
+  nameWithType: ArcGISImageCapabilities.allowComputeTiePoints
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowComputeTiePoints
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: allowComputeTiePoints
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 78
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public bool allowComputeTiePoints { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property allowComputeTiePoints As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowComputeTiePoints*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.useStandardizedQueries
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.useStandardizedQueries
+  id: useStandardizedQueries
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: useStandardizedQueries
+  nameWithType: ArcGISImageCapabilities.useStandardizedQueries
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.useStandardizedQueries
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: useStandardizedQueries
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 79
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public bool useStandardizedQueries { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property useStandardizedQueries As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.useStandardizedQueries*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsStatistics
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsStatistics
+  id: supportsStatistics
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: supportsStatistics
+  nameWithType: ArcGISImageCapabilities.supportsStatistics
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsStatistics
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: supportsStatistics
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 80
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public bool supportsStatistics { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property supportsStatistics As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsStatistics*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsAdvancedQueries
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsAdvancedQueries
+  id: supportsAdvancedQueries
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  langs:
+  - csharp
+  - vb
+  name: supportsAdvancedQueries
+  nameWithType: ArcGISImageCapabilities.supportsAdvancedQueries
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsAdvancedQueries
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: supportsAdvancedQueries
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageCapabilities.cs
+    startLine: 81
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public bool supportsAdvancedQueries { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property supportsAdvancedQueries As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsAdvancedQueries*
+references:
+- uid: Mapsui.ArcGIS.ImageServiceProvider
+  commentId: N:Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.html
+  name: Mapsui.ArcGIS.ImageServiceProvider
+  nameWithType: Mapsui.ArcGIS.ImageServiceProvider
+  fullName: Mapsui.ArcGIS.ImageServiceProvider
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.ImageServiceProvider
+    name: ImageServiceProvider
+    href: Mapsui.ArcGIS.ImageServiceProvider.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.ImageServiceProvider
+    name: ImageServiceProvider
+    href: Mapsui.ArcGIS.ImageServiceProvider.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.ArcGIS.IArcGISCapabilities
+  commentId: T:Mapsui.ArcGIS.IArcGISCapabilities
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html
+  name: IArcGISCapabilities
+  nameWithType: IArcGISCapabilities
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.ArcGIS
+  commentId: N:Mapsui.ArcGIS
+  href: Mapsui.html
+  name: Mapsui.ArcGIS
+  nameWithType: Mapsui.ArcGIS
+  fullName: Mapsui.ArcGIS
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.#ctor
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities__ctor
+  name: ArcGISImageCapabilities
+  nameWithType: ArcGISImageCapabilities.ArcGISImageCapabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ArcGISImageCapabilities
+  nameWithType.vb: ArcGISImageCapabilities.New
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType.html
+  name: InterpolationType
+  nameWithType: InterpolationType
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.StartTime*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.StartTime
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_StartTime
+  name: StartTime
+  nameWithType: ArcGISImageCapabilities.StartTime
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.StartTime
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.EndTime*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.EndTime
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_EndTime
+  name: EndTime
+  nameWithType: ArcGISImageCapabilities.EndTime
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.EndTime
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Interpolation*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Interpolation
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_Interpolation
+  name: Interpolation
+  nameWithType: ArcGISImageCapabilities.Interpolation
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Interpolation
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Format*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Format
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_Format
+  name: Format
+  nameWithType: ArcGISImageCapabilities.Format
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.Format
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ServiceUrl*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ServiceUrl
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_ServiceUrl
+  name: ServiceUrl
+  nameWithType: ArcGISImageCapabilities.ServiceUrl
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ServiceUrl
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.ServiceUrl
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.ServiceUrl
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_ServiceUrl
+  name: ServiceUrl
+  nameWithType: IArcGISCapabilities.ServiceUrl
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.ServiceUrl
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.currentVersion*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.currentVersion
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_currentVersion
+  name: currentVersion
+  nameWithType: ArcGISImageCapabilities.currentVersion
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.currentVersion
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.currentVersion
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.currentVersion
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_currentVersion
+  name: currentVersion
+  nameWithType: IArcGISCapabilities.currentVersion
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.currentVersion
+- uid: System.Nullable{System.Double}
+  commentId: T:System.Nullable{System.Double}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double?
+  nameWithType: double?
+  fullName: double?
+  nameWithType.vb: Double?
+  fullName.vb: Double?
+  name.vb: Double?
+  spec.csharp:
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '?'
+  spec.vb:
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.singleFusedMapCache*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.singleFusedMapCache
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_singleFusedMapCache
+  name: singleFusedMapCache
+  nameWithType: ArcGISImageCapabilities.singleFusedMapCache
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.singleFusedMapCache
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.singleFusedMapCache
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.singleFusedMapCache
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_singleFusedMapCache
+  name: singleFusedMapCache
+  nameWithType: IArcGISCapabilities.singleFusedMapCache
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.singleFusedMapCache
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fullExtent*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fullExtent
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_fullExtent
+  name: fullExtent
+  nameWithType: ArcGISImageCapabilities.fullExtent
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fullExtent
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.fullExtent
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.fullExtent
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_fullExtent
+  name: fullExtent
+  nameWithType: IArcGISCapabilities.fullExtent
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.fullExtent
+- uid: Mapsui.ArcGIS.Extent
+  commentId: T:Mapsui.ArcGIS.Extent
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.Extent.html
+  name: Extent
+  nameWithType: Extent
+  fullName: Mapsui.ArcGIS.Extent
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.spatialReference*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.spatialReference
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_spatialReference
+  name: spatialReference
+  nameWithType: ArcGISImageCapabilities.spatialReference
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.spatialReference
+- uid: Mapsui.ArcGIS.SpatialReference
+  commentId: T:Mapsui.ArcGIS.SpatialReference
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.SpatialReference.html
+  name: SpatialReference
+  nameWithType: SpatialReference
+  fullName: Mapsui.ArcGIS.SpatialReference
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.initialExtent*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.initialExtent
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_initialExtent
+  name: initialExtent
+  nameWithType: ArcGISImageCapabilities.initialExtent
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.initialExtent
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.initialExtent
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.initialExtent
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_initialExtent
+  name: initialExtent
+  nameWithType: IArcGISCapabilities.initialExtent
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.initialExtent
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.tileInfo*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.tileInfo
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_tileInfo
+  name: tileInfo
+  nameWithType: ArcGISImageCapabilities.tileInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.tileInfo
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.tileInfo
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.tileInfo
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_tileInfo
+  name: tileInfo
+  nameWithType: IArcGISCapabilities.tileInfo
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.tileInfo
+- uid: Mapsui.ArcGIS.TileInfo
+  commentId: T:Mapsui.ArcGIS.TileInfo
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.TileInfo.html
+  name: TileInfo
+  nameWithType: TileInfo
+  fullName: Mapsui.ArcGIS.TileInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.copyrightText*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.copyrightText
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_copyrightText
+  name: copyrightText
+  nameWithType: ArcGISImageCapabilities.copyrightText
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.copyrightText
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.copyrightText
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.copyrightText
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_copyrightText
+  name: copyrightText
+  nameWithType: IArcGISCapabilities.copyrightText
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.copyrightText
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDescription*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDescription
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_serviceDescription
+  name: serviceDescription
+  nameWithType: ArcGISImageCapabilities.serviceDescription
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDescription
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.serviceDescription
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.serviceDescription
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_serviceDescription
+  name: serviceDescription
+  nameWithType: IArcGISCapabilities.serviceDescription
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.serviceDescription
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.capabilities*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.capabilities
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_capabilities
+  name: capabilities
+  nameWithType: ArcGISImageCapabilities.capabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.capabilities
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.capabilities
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.capabilities
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_capabilities
+  name: capabilities
+  nameWithType: IArcGISCapabilities.capabilities
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.capabilities
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.description*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.description
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_description
+  name: description
+  nameWithType: ArcGISImageCapabilities.description
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.description
+- uid: Mapsui.ArcGIS.IArcGISCapabilities.description
+  commentId: P:Mapsui.ArcGIS.IArcGISCapabilities.description
+  parent: Mapsui.ArcGIS.IArcGISCapabilities
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html#Mapsui_ArcGIS_IArcGISCapabilities_description
+  name: description
+  nameWithType: IArcGISCapabilities.description
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities.description
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.name*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.name
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_name
+  name: name
+  nameWithType: ArcGISImageCapabilities.name
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.name
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.timeInfo*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.timeInfo
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_timeInfo
+  name: timeInfo
+  nameWithType: ArcGISImageCapabilities.timeInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.timeInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo.html
+  name: TimeInfo
+  nameWithType: TimeInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeX*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeX
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_pixelSizeX
+  name: pixelSizeX
+  nameWithType: ArcGISImageCapabilities.pixelSizeX
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeX
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeY*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeY
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_pixelSizeY
+  name: pixelSizeY
+  nameWithType: ArcGISImageCapabilities.pixelSizeY
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelSizeY
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.bandCount*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.bandCount
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_bandCount
+  name: bandCount
+  nameWithType: ArcGISImageCapabilities.bandCount
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.bandCount
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelType*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelType
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_pixelType
+  name: pixelType
+  nameWithType: ArcGISImageCapabilities.pixelType
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.pixelType
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minPixelSize*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minPixelSize
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_minPixelSize
+  name: minPixelSize
+  nameWithType: ArcGISImageCapabilities.minPixelSize
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minPixelSize
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxPixelSize*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxPixelSize
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_maxPixelSize
+  name: maxPixelSize
+  nameWithType: ArcGISImageCapabilities.maxPixelSize
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxPixelSize
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDataType*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDataType
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_serviceDataType
+  name: serviceDataType
+  nameWithType: ArcGISImageCapabilities.serviceDataType
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.serviceDataType
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minValues*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minValues
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_minValues
+  name: minValues
+  nameWithType: ArcGISImageCapabilities.minValues
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minValues
+- uid: System.Double[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double[]
+  nameWithType: double[]
+  fullName: double[]
+  nameWithType.vb: Double()
+  fullName.vb: Double()
+  name.vb: Double()
+  spec.csharp:
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: (
+  - name: )
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxValues*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxValues
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_maxValues
+  name: maxValues
+  nameWithType: ArcGISImageCapabilities.maxValues
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxValues
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.stdvValues*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.stdvValues
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_stdvValues
+  name: stdvValues
+  nameWithType: ArcGISImageCapabilities.stdvValues
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.stdvValues
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.objectIdField*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.objectIdField
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_objectIdField
+  name: objectIdField
+  nameWithType: ArcGISImageCapabilities.objectIdField
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.objectIdField
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fields*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fields
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_fields
+  name: fields
+  nameWithType: ArcGISImageCapabilities.fields
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.fields
+- uid: Mapsui.ArcGIS.ImageServiceProvider.Field[]
+  isExternal: true
+  href: Mapsui.ArcGIS.ImageServiceProvider.Field.html
+  name: Field[]
+  nameWithType: Field[]
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.Field[]
+  nameWithType.vb: Field()
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.Field()
+  name.vb: Field()
+  spec.csharp:
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Field
+    name: Field
+    href: Mapsui.ArcGIS.ImageServiceProvider.Field.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.Field
+    name: Field
+    href: Mapsui.ArcGIS.ImageServiceProvider.Field.html
+  - name: (
+  - name: )
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultCompressionQuality*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultCompressionQuality
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_defaultCompressionQuality
+  name: defaultCompressionQuality
+  nameWithType: ArcGISImageCapabilities.defaultCompressionQuality
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultCompressionQuality
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultResamplingMethod*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultResamplingMethod
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_defaultResamplingMethod
+  name: defaultResamplingMethod
+  nameWithType: ArcGISImageCapabilities.defaultResamplingMethod
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultResamplingMethod
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageHeight*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageHeight
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_maxImageHeight
+  name: maxImageHeight
+  nameWithType: ArcGISImageCapabilities.maxImageHeight
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageHeight
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageWidth*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageWidth
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_maxImageWidth
+  name: maxImageWidth
+  nameWithType: ArcGISImageCapabilities.maxImageWidth
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxImageWidth
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultMosaicMethod*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultMosaicMethod
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_defaultMosaicMethod
+  name: defaultMosaicMethod
+  nameWithType: ArcGISImageCapabilities.defaultMosaicMethod
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.defaultMosaicMethod
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowedMosaicMethods*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowedMosaicMethods
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_allowedMosaicMethods
+  name: allowedMosaicMethods
+  nameWithType: ArcGISImageCapabilities.allowedMosaicMethods
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowedMosaicMethods
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortField*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortField
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_sortField
+  name: sortField
+  nameWithType: ArcGISImageCapabilities.sortField
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortField
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortValue*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortValue
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_sortValue
+  name: sortValue
+  nameWithType: ArcGISImageCapabilities.sortValue
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.sortValue
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mosaicOperator*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mosaicOperator
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_mosaicOperator
+  name: mosaicOperator
+  nameWithType: ArcGISImageCapabilities.mosaicOperator
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mosaicOperator
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxRecordCount*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxRecordCount
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_maxRecordCount
+  name: maxRecordCount
+  nameWithType: ArcGISImageCapabilities.maxRecordCount
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxRecordCount
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadImageCount*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadImageCount
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_maxDownloadImageCount
+  name: maxDownloadImageCount
+  nameWithType: ArcGISImageCapabilities.maxDownloadImageCount
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadImageCount
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadSizeLimit*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadSizeLimit
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_maxDownloadSizeLimit
+  name: maxDownloadSizeLimit
+  nameWithType: ArcGISImageCapabilities.maxDownloadSizeLimit
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxDownloadSizeLimit
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxMosaicImageCount*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxMosaicImageCount
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_maxMosaicImageCount
+  name: maxMosaicImageCount
+  nameWithType: ArcGISImageCapabilities.maxMosaicImageCount
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxMosaicImageCount
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.cacheDirectory*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.cacheDirectory
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_cacheDirectory
+  name: cacheDirectory
+  nameWithType: ArcGISImageCapabilities.cacheDirectory
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.cacheDirectory
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minScale*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minScale
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_minScale
+  name: minScale
+  nameWithType: ArcGISImageCapabilities.minScale
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.minScale
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxScale*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxScale
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_maxScale
+  name: maxScale
+  nameWithType: ArcGISImageCapabilities.maxScale
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.maxScale
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowRasterFunction*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowRasterFunction
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_allowRasterFunction
+  name: allowRasterFunction
+  nameWithType: ArcGISImageCapabilities.allowRasterFunction
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowRasterFunction
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterFunctionInfos*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterFunctionInfos
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_rasterFunctionInfos
+  name: rasterFunctionInfos
+  nameWithType: ArcGISImageCapabilities.rasterFunctionInfos
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterFunctionInfos
+- uid: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo[]
+  isExternal: true
+  href: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html
+  name: RasterFunctionInfo[]
+  nameWithType: RasterFunctionInfo[]
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo[]
+  nameWithType.vb: RasterFunctionInfo()
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo()
+  name.vb: RasterFunctionInfo()
+  spec.csharp:
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+    name: RasterFunctionInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+    name: RasterFunctionInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html
+  - name: (
+  - name: )
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterTypeInfos*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterTypeInfos
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_rasterTypeInfos
+  name: rasterTypeInfos
+  nameWithType: ArcGISImageCapabilities.rasterTypeInfos
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.rasterTypeInfos
+- uid: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo[]
+  isExternal: true
+  href: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html
+  name: RasterTypeInfo[]
+  nameWithType: RasterTypeInfo[]
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo[]
+  nameWithType.vb: RasterTypeInfo()
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo()
+  name.vb: RasterTypeInfo()
+  spec.csharp:
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+    name: RasterTypeInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+    name: RasterTypeInfo
+    href: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html
+  - name: (
+  - name: )
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.editFieldsInfo*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.editFieldsInfo
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_editFieldsInfo
+  name: editFieldsInfo
+  nameWithType: ArcGISImageCapabilities.editFieldsInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.editFieldsInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo.html
+  name: EditFieldsInfo
+  nameWithType: EditFieldsInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ownershipBasedAccessControlForRasters*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ownershipBasedAccessControlForRasters
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_ownershipBasedAccessControlForRasters
+  name: ownershipBasedAccessControlForRasters
+  nameWithType: ArcGISImageCapabilities.ownershipBasedAccessControlForRasters
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.ownershipBasedAccessControlForRasters
+- uid: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters.html
+  name: OwnershipBasedAccessControlForRasters
+  nameWithType: OwnershipBasedAccessControlForRasters
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mensurationCapabilities*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mensurationCapabilities
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_mensurationCapabilities
+  name: mensurationCapabilities
+  nameWithType: ArcGISImageCapabilities.mensurationCapabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.mensurationCapabilities
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasHistograms*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasHistograms
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_hasHistograms
+  name: hasHistograms
+  nameWithType: ArcGISImageCapabilities.hasHistograms
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasHistograms
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasColormap*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasColormap
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_hasColormap
+  name: hasColormap
+  nameWithType: ArcGISImageCapabilities.hasColormap
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasColormap
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasRasterAttributeTable*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasRasterAttributeTable
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_hasRasterAttributeTable
+  name: hasRasterAttributeTable
+  nameWithType: ArcGISImageCapabilities.hasRasterAttributeTable
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.hasRasterAttributeTable
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowComputeTiePoints*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowComputeTiePoints
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_allowComputeTiePoints
+  name: allowComputeTiePoints
+  nameWithType: ArcGISImageCapabilities.allowComputeTiePoints
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.allowComputeTiePoints
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.useStandardizedQueries*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.useStandardizedQueries
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_useStandardizedQueries
+  name: useStandardizedQueries
+  nameWithType: ArcGISImageCapabilities.useStandardizedQueries
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.useStandardizedQueries
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsStatistics*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsStatistics
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_supportsStatistics
+  name: supportsStatistics
+  nameWithType: ArcGISImageCapabilities.supportsStatistics
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsStatistics
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsAdvancedQueries*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsAdvancedQueries
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_supportsAdvancedQueries
+  name: supportsAdvancedQueries
+  nameWithType: ArcGISImageCapabilities.supportsAdvancedQueries
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.supportsAdvancedQueries

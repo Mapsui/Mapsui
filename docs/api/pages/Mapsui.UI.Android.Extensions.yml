@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Android.Extensions
+  commentId: N:Mapsui.UI.Android.Extensions
+  id: Mapsui.UI.Android.Extensions
+  children:
+  - Mapsui.UI.Android.Extensions.PointExtensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Android.Extensions
+  nameWithType: Mapsui.UI.Android.Extensions
+  fullName: Mapsui.UI.Android.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Android
+references:
+- uid: Mapsui.UI.Android.Extensions.PointExtensions
+  commentId: T:Mapsui.UI.Android.Extensions.PointExtensions
+  href: Mapsui.UI.Android.Extensions.PointExtensions.html
+  name: PointExtensions
+  nameWithType: PointExtensions
+  fullName: Mapsui.UI.Android.Extensions.PointExtensions

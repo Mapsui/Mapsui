@@ -1,0 +1,239 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.RenderFormat
+  commentId: T:Mapsui.Rendering.RenderFormat
+  id: RenderFormat
+  parent: Mapsui.Rendering
+  children:
+  - Mapsui.Rendering.RenderFormat.Png
+  - Mapsui.Rendering.RenderFormat.Skp
+  - Mapsui.Rendering.RenderFormat.WebP
+  langs:
+  - csharp
+  - vb
+  name: RenderFormat
+  nameWithType: RenderFormat
+  fullName: Mapsui.Rendering.RenderFormat
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Rendering/RenderFormat.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RenderFormat
+    path: ../../Mapsui/Rendering/RenderFormat.cs
+    startLine: 3
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  summary: Formats the MapRenderer should render to
+  example: []
+  syntax:
+    content: public enum RenderFormat
+    content.vb: Public Enum RenderFormat
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.RenderFormat.Png
+  commentId: F:Mapsui.Rendering.RenderFormat.Png
+  id: Png
+  parent: Mapsui.Rendering.RenderFormat
+  langs:
+  - csharp
+  - vb
+  name: Png
+  nameWithType: RenderFormat.Png
+  fullName: Mapsui.Rendering.RenderFormat.Png
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Rendering/RenderFormat.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Png
+    path: ../../Mapsui/Rendering/RenderFormat.cs
+    startLine: 6
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  summary: Default Format works everywhere
+  example: []
+  syntax:
+    content: Png = 0
+    return:
+      type: Mapsui.Rendering.RenderFormat
+- uid: Mapsui.Rendering.RenderFormat.WebP
+  commentId: F:Mapsui.Rendering.RenderFormat.WebP
+  id: WebP
+  parent: Mapsui.Rendering.RenderFormat
+  langs:
+  - csharp
+  - vb
+  name: WebP
+  nameWithType: RenderFormat.WebP
+  fullName: Mapsui.Rendering.RenderFormat.WebP
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Rendering/RenderFormat.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WebP
+    path: ../../Mapsui/Rendering/RenderFormat.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  summary: 20 - 30% smaller lossless Format
+  example: []
+  syntax:
+    content: WebP = 1
+    return:
+      type: Mapsui.Rendering.RenderFormat
+- uid: Mapsui.Rendering.RenderFormat.Skp
+  commentId: F:Mapsui.Rendering.RenderFormat.Skp
+  id: Skp
+  parent: Mapsui.Rendering.RenderFormat
+  langs:
+  - csharp
+  - vb
+  name: Skp
+  nameWithType: RenderFormat.Skp
+  fullName: Mapsui.Rendering.RenderFormat.Skp
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Rendering/RenderFormat.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Skp
+    path: ../../Mapsui/Rendering/RenderFormat.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  summary: Skia Vector Format
+  example: []
+  syntax:
+    content: Skp = 2
+    return:
+      type: Mapsui.Rendering.RenderFormat
+references:
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.RenderFormat
+  commentId: T:Mapsui.Rendering.RenderFormat
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.RenderFormat.html
+  name: RenderFormat
+  nameWithType: RenderFormat
+  fullName: Mapsui.Rendering.RenderFormat

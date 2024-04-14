@@ -1,0 +1,1746 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Objects.MyLocationLayer
+  commentId: T:Mapsui.UI.Objects.MyLocationLayer
+  id: MyLocationLayer
+  parent: Mapsui.UI.Objects
+  children:
+  - Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Maui.MapView)
+  - Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Maui.MapView,Mapsui.UI.Maui.Position)
+  - Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  - Mapsui.UI.Objects.MyLocationLayer.Clicked
+  - Mapsui.UI.Objects.MyLocationLayer.Direction
+  - Mapsui.UI.Objects.MyLocationLayer.GetFeatures(Mapsui.MRect,System.Double)
+  - Mapsui.UI.Objects.MyLocationLayer.IsMoving
+  - Mapsui.UI.Objects.MyLocationLayer.MyLocation
+  - Mapsui.UI.Objects.MyLocationLayer.Scale
+  - Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  - Mapsui.UI.Objects.MyLocationLayer.UpdateAnimations
+  - Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double,System.Boolean)
+  - Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Maui.Position,System.Boolean)
+  - Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed(System.Double)
+  - Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection(System.Double,System.Double,System.Boolean)
+  - Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
+  langs:
+  - csharp
+  - vb
+  name: MyLocationLayer
+  nameWithType: MyLocationLayer
+  fullName: Mapsui.UI.Objects.MyLocationLayer
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MyLocationLayer
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 23
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: A layer to display a symbol for own location
+  remarks: >-
+    There are two different symbols for own location: one is used when there isn't a change in position (still),
+
+    and one is used, if the position changes (moving).
+  example: []
+  syntax:
+    content: 'public class MyLocationLayer : BaseLayer, ILayer, IAnimatable, INotifyPropertyChanged, IDisposable'
+    content.vb: Public Class MyLocationLayer Inherits BaseLayer Implements ILayer, IAnimatable, INotifyPropertyChanged, IDisposable
+  inheritance:
+  - System.Object
+  - Mapsui.Layers.BaseLayer
+  implements:
+  - Mapsui.Layers.ILayer
+  - Mapsui.Animations.IAnimatable
+  - System.ComponentModel.INotifyPropertyChanged
+  - System.IDisposable
+  inheritedMembers:
+  - Mapsui.Layers.BaseLayer.PropertyChanged
+  - Mapsui.Layers.BaseLayer.DataChanged
+  - Mapsui.Layers.BaseLayer.Id
+  - Mapsui.Layers.BaseLayer.Tag
+  - Mapsui.Layers.BaseLayer.MinVisible
+  - Mapsui.Layers.BaseLayer.MaxVisible
+  - Mapsui.Layers.BaseLayer.Enabled
+  - Mapsui.Layers.BaseLayer.Name
+  - Mapsui.Layers.BaseLayer.Opacity
+  - Mapsui.Layers.BaseLayer.Busy
+  - Mapsui.Layers.BaseLayer.Style
+  - Mapsui.Layers.BaseLayer.Extent
+  - Mapsui.Layers.BaseLayer.Attribution
+  - Mapsui.Layers.BaseLayer.Resolutions
+  - Mapsui.Layers.BaseLayer.IsMapInfoLayer
+  - Mapsui.Layers.BaseLayer.SortFeatures
+  - Mapsui.Layers.BaseLayer.DataHasChanged
+  - Mapsui.Layers.BaseLayer.ToString
+  - Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+  - Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+  - Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+  - Mapsui.Layers.BaseLayer.Dispose
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.Objects.MyLocationLayer.IsMoving
+  commentId: P:Mapsui.UI.Objects.MyLocationLayer.IsMoving
+  id: IsMoving
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: IsMoving
+  nameWithType: MyLocationLayer.IsMoving
+  fullName: Mapsui.UI.Objects.MyLocationLayer.IsMoving
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsMoving
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 43
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Should be moving arrow or round circle displayed
+  example: []
+  syntax:
+    content: public bool IsMoving { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsMoving As Boolean
+  overload: Mapsui.UI.Objects.MyLocationLayer.IsMoving*
+- uid: Mapsui.UI.Objects.MyLocationLayer.MyLocation
+  commentId: P:Mapsui.UI.Objects.MyLocationLayer.MyLocation
+  id: MyLocation
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: MyLocation
+  nameWithType: MyLocationLayer.MyLocation
+  fullName: Mapsui.UI.Objects.MyLocationLayer.MyLocation
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MyLocation
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 67
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Position of location, that is displayed
+  example: []
+  syntax:
+    content: public Position MyLocation { get; }
+    parameters: []
+    return:
+      type: Mapsui.UI.Maui.Position
+      description: Position of location
+    content.vb: Public ReadOnly Property MyLocation As Position
+  overload: Mapsui.UI.Objects.MyLocationLayer.MyLocation*
+- uid: Mapsui.UI.Objects.MyLocationLayer.Direction
+  commentId: P:Mapsui.UI.Objects.MyLocationLayer.Direction
+  id: Direction
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: Direction
+  nameWithType: MyLocationLayer.Direction
+  fullName: Mapsui.UI.Objects.MyLocationLayer.Direction
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Direction
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 73
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Movement direction of device at location
+  example: []
+  syntax:
+    content: public double Direction { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: Direction at location
+    content.vb: Public Property Direction As Double
+  overload: Mapsui.UI.Objects.MyLocationLayer.Direction*
+- uid: Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
+  commentId: P:Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
+  id: ViewingDirection
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: ViewingDirection
+  nameWithType: MyLocationLayer.ViewingDirection
+  fullName: Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ViewingDirection
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 79
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Viewing direction of device (in degrees wrt. north direction)
+  example: []
+  syntax:
+    content: public double ViewingDirection { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: Direction at location
+    content.vb: Public Property ViewingDirection As Double
+  overload: Mapsui.UI.Objects.MyLocationLayer.ViewingDirection*
+- uid: Mapsui.UI.Objects.MyLocationLayer.Scale
+  commentId: P:Mapsui.UI.Objects.MyLocationLayer.Scale
+  id: Scale
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: Scale
+  nameWithType: MyLocationLayer.Scale
+  fullName: Mapsui.UI.Objects.MyLocationLayer.Scale
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Scale
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 85
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Scale of symbol
+  example: []
+  syntax:
+    content: public double Scale { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+      description: Scale of symbol
+    content.vb: Public Property Scale As Double
+  overload: Mapsui.UI.Objects.MyLocationLayer.Scale*
+- uid: Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  commentId: P:Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  id: CalloutText
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: CalloutText
+  nameWithType: MyLocationLayer.CalloutText
+  fullName: Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CalloutText
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 91
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: >-
+    The text that is displayed in the MyLocation callout
+
+    (can contain line breaks).
+  example: []
+  syntax:
+    content: public string CalloutText { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CalloutText As String
+  overload: Mapsui.UI.Objects.MyLocationLayer.CalloutText*
+- uid: Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  commentId: P:Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  id: ShowCallout
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: ShowCallout
+  nameWithType: MyLocationLayer.ShowCallout
+  fullName: Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShowCallout
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 104
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Show or hide a callout with further infos next to the MyLocation symbol.
+  example: []
+  syntax:
+    content: public bool ShowCallout { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property ShowCallout As Boolean
+  overload: Mapsui.UI.Objects.MyLocationLayer.ShowCallout*
+- uid: Mapsui.UI.Objects.MyLocationLayer.Clicked
+  commentId: E:Mapsui.UI.Objects.MyLocationLayer.Clicked
+  id: Clicked
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: Clicked
+  nameWithType: MyLocationLayer.Clicked
+  fullName: Mapsui.UI.Objects.MyLocationLayer.Clicked
+  type: Event
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Clicked
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 117
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: This event is triggered whenever the MyLocation symbol or label is clicked.
+  example: []
+  syntax:
+    content: public event EventHandler<DrawableClickedEventArgs>? Clicked
+    return:
+      type: System.EventHandler{Mapsui.UI.Maui.DrawableClickedEventArgs}
+    content.vb: Public Event Clicked As EventHandler(Of DrawableClickedEventArgs)
+- uid: Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Maui.MapView,Mapsui.UI.Maui.Position)
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Maui.MapView,Mapsui.UI.Maui.Position)
+  id: '#ctor(Mapsui.UI.Maui.MapView,Mapsui.UI.Maui.Position)'
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: MyLocationLayer(MapView, Position)
+  nameWithType: MyLocationLayer.MyLocationLayer(MapView, Position)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.MyLocationLayer(Mapsui.UI.Maui.MapView, Mapsui.UI.Maui.Position)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 125
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: >-
+    Initializes a new instance of the <xref href="Mapsui.UI.Objects.MyLocationLayer" data-throw-if-not-resolved="false"></xref> class
+
+    with a starting location.
+  example: []
+  syntax:
+    content: public MyLocationLayer(MapView view, Position position)
+    parameters:
+    - id: view
+      type: Mapsui.UI.Maui.MapView
+      description: MapView, to which this layer belongs
+    - id: position
+      type: Mapsui.UI.Maui.Position
+      description: Position, where to start
+    content.vb: Public Sub New(view As MapView, position As Position)
+  overload: Mapsui.UI.Objects.MyLocationLayer.#ctor*
+  nameWithType.vb: MyLocationLayer.New(MapView, Position)
+  fullName.vb: Mapsui.UI.Objects.MyLocationLayer.New(Mapsui.UI.Maui.MapView, Mapsui.UI.Maui.Position)
+  name.vb: New(MapView, Position)
+- uid: Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Maui.MapView)
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Maui.MapView)
+  id: '#ctor(Mapsui.UI.Maui.MapView)'
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: MyLocationLayer(MapView)
+  nameWithType: MyLocationLayer.MyLocationLayer(MapView)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.MyLocationLayer(Mapsui.UI.Maui.MapView)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 134
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Initializes a new instance of the <xref href="Mapsui.UI.Objects.MyLocationLayer" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public MyLocationLayer(MapView view)
+    parameters:
+    - id: view
+      type: Mapsui.UI.Maui.MapView
+      description: MapView, to which this layer belongs
+    content.vb: Public Sub New(view As MapView)
+  overload: Mapsui.UI.Objects.MyLocationLayer.#ctor*
+  nameWithType.vb: MyLocationLayer.New(MapView)
+  fullName.vb: Mapsui.UI.Objects.MyLocationLayer.New(Mapsui.UI.Maui.MapView)
+  name.vb: New(MapView)
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Maui.Position,System.Boolean)
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Maui.Position,System.Boolean)
+  id: UpdateMyLocation(Mapsui.UI.Maui.Position,System.Boolean)
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: UpdateMyLocation(Position, bool)
+  nameWithType: MyLocationLayer.UpdateMyLocation(Position, bool)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Maui.Position, bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateMyLocation
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 217
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Updates my location
+  example: []
+  syntax:
+    content: public void UpdateMyLocation(Position newLocation, bool animated = false)
+    parameters:
+    - id: newLocation
+      type: Mapsui.UI.Maui.Position
+      description: New location
+    - id: animated
+      type: System.Boolean
+      description: true if there is an animation from the old to the new location.
+    content.vb: Public Sub UpdateMyLocation(newLocation As Position, animated As Boolean = False)
+  overload: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation*
+  nameWithType.vb: MyLocationLayer.UpdateMyLocation(Position, Boolean)
+  fullName.vb: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Maui.Position, Boolean)
+  name.vb: UpdateMyLocation(Position, Boolean)
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateAnimations
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.UpdateAnimations
+  id: UpdateAnimations
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: UpdateAnimations()
+  nameWithType: MyLocationLayer.UpdateAnimations()
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateAnimations()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateAnimations
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 295
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  example: []
+  syntax:
+    content: public override bool UpdateAnimations()
+    return:
+      type: System.Boolean
+      description: Returns true if animations are running and a graphics update is needed.
+    content.vb: Public Overrides Function UpdateAnimations() As Boolean
+  overridden: Mapsui.Layers.BaseLayer.UpdateAnimations
+  overload: Mapsui.UI.Objects.MyLocationLayer.UpdateAnimations*
+- uid: Mapsui.UI.Objects.MyLocationLayer.GetFeatures(Mapsui.MRect,System.Double)
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.GetFeatures(Mapsui.MRect,System.Double)
+  id: GetFeatures(Mapsui.MRect,System.Double)
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: GetFeatures(MRect, double)
+  nameWithType: MyLocationLayer.GetFeatures(MRect, double)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.GetFeatures(Mapsui.MRect, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeatures
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 306
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Get all features in a given MRect for a given resolution
+  example: []
+  syntax:
+    content: public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+    parameters:
+    - id: box
+      type: Mapsui.MRect
+    - id: resolution
+      type: System.Double
+      description: Resolution of viewport
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+      description: ''
+    content.vb: Public Overrides Function GetFeatures(box As MRect, resolution As Double) As IEnumerable(Of IFeature)
+  overridden: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+  overload: Mapsui.UI.Objects.MyLocationLayer.GetFeatures*
+  nameWithType.vb: MyLocationLayer.GetFeatures(MRect, Double)
+  fullName.vb: Mapsui.UI.Objects.MyLocationLayer.GetFeatures(Mapsui.MRect, Double)
+  name.vb: GetFeatures(MRect, Double)
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double,System.Boolean)
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double,System.Boolean)
+  id: UpdateMyDirection(System.Double,System.Double,System.Boolean)
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: UpdateMyDirection(double, double, bool)
+  nameWithType: MyLocationLayer.UpdateMyDirection(double, double, bool)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(double, double, bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateMyDirection
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 317
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Updates my movement direction
+  example: []
+  syntax:
+    content: public void UpdateMyDirection(double newDirection, double newViewportRotation, bool animated = false)
+    parameters:
+    - id: newDirection
+      type: System.Double
+      description: New direction
+    - id: newViewportRotation
+      type: System.Double
+      description: New viewport rotation
+    - id: animated
+      type: System.Boolean
+      description: true if animated
+    content.vb: Public Sub UpdateMyDirection(newDirection As Double, newViewportRotation As Double, animated As Boolean = False)
+  overload: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection*
+  nameWithType.vb: MyLocationLayer.UpdateMyDirection(Double, Double, Boolean)
+  fullName.vb: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(Double, Double, Boolean)
+  name.vb: UpdateMyDirection(Double, Double, Boolean)
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed(System.Double)
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed(System.Double)
+  id: UpdateMySpeed(System.Double)
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: UpdateMySpeed(double)
+  nameWithType: MyLocationLayer.UpdateMySpeed(double)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateMySpeed
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 390
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Updates my speed
+  example: []
+  syntax:
+    content: public void UpdateMySpeed(double newSpeed)
+    parameters:
+    - id: newSpeed
+      type: System.Double
+      description: New speed
+    content.vb: Public Sub UpdateMySpeed(newSpeed As Double)
+  overload: Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed*
+  nameWithType.vb: MyLocationLayer.UpdateMySpeed(Double)
+  fullName.vb: Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed(Double)
+  name.vb: UpdateMySpeed(Double)
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection(System.Double,System.Double,System.Boolean)
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection(System.Double,System.Double,System.Boolean)
+  id: UpdateMyViewDirection(System.Double,System.Double,System.Boolean)
+  parent: Mapsui.UI.Objects.MyLocationLayer
+  langs:
+  - csharp
+  - vb
+  name: UpdateMyViewDirection(double, double, bool)
+  nameWithType: MyLocationLayer.UpdateMyViewDirection(double, double, bool)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection(double, double, bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateMyViewDirection
+    path: ../../Mapsui.UI.MapView/Objects/MyLocationLayer.cs
+    startLine: 416
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Objects
+  summary: Updates my view direction
+  example: []
+  syntax:
+    content: public void UpdateMyViewDirection(double newDirection, double newViewportRotation, bool animated = false)
+    parameters:
+    - id: newDirection
+      type: System.Double
+      description: New direction
+    - id: newViewportRotation
+      type: System.Double
+      description: New viewport rotation
+    - id: animated
+      type: System.Boolean
+      description: true if animated
+    content.vb: Public Sub UpdateMyViewDirection(newDirection As Double, newViewportRotation As Double, animated As Boolean = False)
+  overload: Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection*
+  nameWithType.vb: MyLocationLayer.UpdateMyViewDirection(Double, Double, Boolean)
+  fullName.vb: Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection(Double, Double, Boolean)
+  name.vb: UpdateMyViewDirection(Double, Double, Boolean)
+references:
+- uid: Mapsui.UI.Objects
+  commentId: N:Mapsui.UI.Objects
+  href: Mapsui.html
+  name: Mapsui.UI.Objects
+  nameWithType: Mapsui.UI.Objects
+  fullName: Mapsui.UI.Objects
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Objects
+    name: Objects
+    href: Mapsui.UI.Objects.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Layers.BaseLayer
+  commentId: T:Mapsui.Layers.BaseLayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.BaseLayer.html
+  name: BaseLayer
+  nameWithType: BaseLayer
+  fullName: Mapsui.Layers.BaseLayer
+- uid: Mapsui.Layers.ILayer
+  commentId: T:Mapsui.Layers.ILayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.ILayer.html
+  name: ILayer
+  nameWithType: ILayer
+  fullName: Mapsui.Layers.ILayer
+- uid: Mapsui.Animations.IAnimatable
+  commentId: T:Mapsui.Animations.IAnimatable
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.IAnimatable.html
+  name: IAnimatable
+  nameWithType: IAnimatable
+  fullName: Mapsui.Animations.IAnimatable
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Mapsui.Layers.BaseLayer.PropertyChanged
+  commentId: E:Mapsui.Layers.BaseLayer.PropertyChanged
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_PropertyChanged
+  name: PropertyChanged
+  nameWithType: BaseLayer.PropertyChanged
+  fullName: Mapsui.Layers.BaseLayer.PropertyChanged
+- uid: Mapsui.Layers.BaseLayer.DataChanged
+  commentId: E:Mapsui.Layers.BaseLayer.DataChanged
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataChanged
+  name: DataChanged
+  nameWithType: BaseLayer.DataChanged
+  fullName: Mapsui.Layers.BaseLayer.DataChanged
+- uid: Mapsui.Layers.BaseLayer.Id
+  commentId: P:Mapsui.Layers.BaseLayer.Id
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Id
+  name: Id
+  nameWithType: BaseLayer.Id
+  fullName: Mapsui.Layers.BaseLayer.Id
+- uid: Mapsui.Layers.BaseLayer.Tag
+  commentId: P:Mapsui.Layers.BaseLayer.Tag
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Tag
+  name: Tag
+  nameWithType: BaseLayer.Tag
+  fullName: Mapsui.Layers.BaseLayer.Tag
+- uid: Mapsui.Layers.BaseLayer.MinVisible
+  commentId: P:Mapsui.Layers.BaseLayer.MinVisible
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MinVisible
+  name: MinVisible
+  nameWithType: BaseLayer.MinVisible
+  fullName: Mapsui.Layers.BaseLayer.MinVisible
+- uid: Mapsui.Layers.BaseLayer.MaxVisible
+  commentId: P:Mapsui.Layers.BaseLayer.MaxVisible
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MaxVisible
+  name: MaxVisible
+  nameWithType: BaseLayer.MaxVisible
+  fullName: Mapsui.Layers.BaseLayer.MaxVisible
+- uid: Mapsui.Layers.BaseLayer.Enabled
+  commentId: P:Mapsui.Layers.BaseLayer.Enabled
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Enabled
+  name: Enabled
+  nameWithType: BaseLayer.Enabled
+  fullName: Mapsui.Layers.BaseLayer.Enabled
+- uid: Mapsui.Layers.BaseLayer.Name
+  commentId: P:Mapsui.Layers.BaseLayer.Name
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Name
+  name: Name
+  nameWithType: BaseLayer.Name
+  fullName: Mapsui.Layers.BaseLayer.Name
+- uid: Mapsui.Layers.BaseLayer.Opacity
+  commentId: P:Mapsui.Layers.BaseLayer.Opacity
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Opacity
+  name: Opacity
+  nameWithType: BaseLayer.Opacity
+  fullName: Mapsui.Layers.BaseLayer.Opacity
+- uid: Mapsui.Layers.BaseLayer.Busy
+  commentId: P:Mapsui.Layers.BaseLayer.Busy
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Busy
+  name: Busy
+  nameWithType: BaseLayer.Busy
+  fullName: Mapsui.Layers.BaseLayer.Busy
+- uid: Mapsui.Layers.BaseLayer.Style
+  commentId: P:Mapsui.Layers.BaseLayer.Style
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Style
+  name: Style
+  nameWithType: BaseLayer.Style
+  fullName: Mapsui.Layers.BaseLayer.Style
+- uid: Mapsui.Layers.BaseLayer.Extent
+  commentId: P:Mapsui.Layers.BaseLayer.Extent
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Extent
+  name: Extent
+  nameWithType: BaseLayer.Extent
+  fullName: Mapsui.Layers.BaseLayer.Extent
+- uid: Mapsui.Layers.BaseLayer.Attribution
+  commentId: P:Mapsui.Layers.BaseLayer.Attribution
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Attribution
+  name: Attribution
+  nameWithType: BaseLayer.Attribution
+  fullName: Mapsui.Layers.BaseLayer.Attribution
+- uid: Mapsui.Layers.BaseLayer.Resolutions
+  commentId: P:Mapsui.Layers.BaseLayer.Resolutions
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Resolutions
+  name: Resolutions
+  nameWithType: BaseLayer.Resolutions
+  fullName: Mapsui.Layers.BaseLayer.Resolutions
+- uid: Mapsui.Layers.BaseLayer.IsMapInfoLayer
+  commentId: P:Mapsui.Layers.BaseLayer.IsMapInfoLayer
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsMapInfoLayer
+  name: IsMapInfoLayer
+  nameWithType: BaseLayer.IsMapInfoLayer
+  fullName: Mapsui.Layers.BaseLayer.IsMapInfoLayer
+- uid: Mapsui.Layers.BaseLayer.SortFeatures
+  commentId: P:Mapsui.Layers.BaseLayer.SortFeatures
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_SortFeatures
+  name: SortFeatures
+  nameWithType: BaseLayer.SortFeatures
+  fullName: Mapsui.Layers.BaseLayer.SortFeatures
+- uid: Mapsui.Layers.BaseLayer.DataHasChanged
+  commentId: M:Mapsui.Layers.BaseLayer.DataHasChanged
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged
+  name: DataHasChanged()
+  nameWithType: BaseLayer.DataHasChanged()
+  fullName: Mapsui.Layers.BaseLayer.DataHasChanged()
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.DataHasChanged
+    name: DataHasChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.DataHasChanged
+    name: DataHasChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged
+  - name: (
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.ToString
+  commentId: M:Mapsui.Layers.BaseLayer.ToString
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ToString
+  name: ToString()
+  nameWithType: BaseLayer.ToString()
+  fullName: Mapsui.Layers.BaseLayer.ToString()
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.ToString
+    name: ToString
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ToString
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.ToString
+    name: ToString
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ToString
+  - name: (
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+  commentId: M:Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+  parent: Mapsui.Layers.BaseLayer
+  isExternal: true
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnPropertyChanged_System_String_
+  name: OnPropertyChanged(string)
+  nameWithType: BaseLayer.OnPropertyChanged(string)
+  fullName: Mapsui.Layers.BaseLayer.OnPropertyChanged(string)
+  nameWithType.vb: BaseLayer.OnPropertyChanged(String)
+  fullName.vb: Mapsui.Layers.BaseLayer.OnPropertyChanged(String)
+  name.vb: OnPropertyChanged(String)
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+  commentId: M:Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnDataChanged_Mapsui_Fetcher_DataChangedEventArgs_
+  name: OnDataChanged(DataChangedEventArgs)
+  nameWithType: BaseLayer.OnDataChanged(DataChangedEventArgs)
+  fullName: Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+    name: OnDataChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnDataChanged_Mapsui_Fetcher_DataChangedEventArgs_
+  - name: (
+  - uid: Mapsui.Fetcher.DataChangedEventArgs
+    name: DataChangedEventArgs
+    href: Mapsui.Fetcher.DataChangedEventArgs.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)
+    name: OnDataChanged
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_OnDataChanged_Mapsui_Fetcher_DataChangedEventArgs_
+  - name: (
+  - uid: Mapsui.Fetcher.DataChangedEventArgs
+    name: DataChangedEventArgs
+    href: Mapsui.Fetcher.DataChangedEventArgs.html
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+  commentId: M:Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+  parent: Mapsui.Layers.BaseLayer
+  isExternal: true
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose_System_Boolean_
+  name: Dispose(bool)
+  nameWithType: BaseLayer.Dispose(bool)
+  fullName: Mapsui.Layers.BaseLayer.Dispose(bool)
+  nameWithType.vb: BaseLayer.Dispose(Boolean)
+  fullName.vb: Mapsui.Layers.BaseLayer.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+    name: Dispose
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.Dispose(System.Boolean)
+    name: Dispose
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose_System_Boolean_
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Mapsui.Layers.BaseLayer.Dispose
+  commentId: M:Mapsui.Layers.BaseLayer.Dispose
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose
+  name: Dispose()
+  nameWithType: BaseLayer.Dispose()
+  fullName: Mapsui.Layers.BaseLayer.Dispose()
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.Dispose
+    name: Dispose
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.Dispose
+    name: Dispose
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Dispose
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: Mapsui.Animations
+  commentId: N:Mapsui.Animations
+  href: Mapsui.html
+  name: Mapsui.Animations
+  nameWithType: Mapsui.Animations
+  fullName: Mapsui.Animations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.UI.Objects.MyLocationLayer.IsMoving*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.IsMoving
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_IsMoving
+  name: IsMoving
+  nameWithType: MyLocationLayer.IsMoving
+  fullName: Mapsui.UI.Objects.MyLocationLayer.IsMoving
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.UI.Objects.MyLocationLayer.MyLocation*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.MyLocation
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_MyLocation
+  name: MyLocation
+  nameWithType: MyLocationLayer.MyLocation
+  fullName: Mapsui.UI.Objects.MyLocationLayer.MyLocation
+- uid: Mapsui.UI.Maui.Position
+  commentId: T:Mapsui.UI.Maui.Position
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Position.html
+  name: Position
+  nameWithType: Position
+  fullName: Mapsui.UI.Maui.Position
+- uid: Mapsui.UI.Maui
+  commentId: N:Mapsui.UI.Maui
+  href: Mapsui.html
+  name: Mapsui.UI.Maui
+  nameWithType: Mapsui.UI.Maui
+  fullName: Mapsui.UI.Maui
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+- uid: Mapsui.UI.Objects.MyLocationLayer.Direction*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.Direction
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_Direction
+  name: Direction
+  nameWithType: MyLocationLayer.Direction
+  fullName: Mapsui.UI.Objects.MyLocationLayer.Direction
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.UI.Objects.MyLocationLayer.ViewingDirection*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_ViewingDirection
+  name: ViewingDirection
+  nameWithType: MyLocationLayer.ViewingDirection
+  fullName: Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
+- uid: Mapsui.UI.Objects.MyLocationLayer.Scale*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.Scale
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_Scale
+  name: Scale
+  nameWithType: MyLocationLayer.Scale
+  fullName: Mapsui.UI.Objects.MyLocationLayer.Scale
+- uid: Mapsui.UI.Objects.MyLocationLayer.CalloutText*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_CalloutText
+  name: CalloutText
+  nameWithType: MyLocationLayer.CalloutText
+  fullName: Mapsui.UI.Objects.MyLocationLayer.CalloutText
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.UI.Objects.MyLocationLayer.ShowCallout*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_ShowCallout
+  name: ShowCallout
+  nameWithType: MyLocationLayer.ShowCallout
+  fullName: Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+- uid: System.EventHandler{Mapsui.UI.Maui.DrawableClickedEventArgs}
+  commentId: T:System.EventHandler{Mapsui.UI.Maui.DrawableClickedEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<DrawableClickedEventArgs>
+  nameWithType: EventHandler<DrawableClickedEventArgs>
+  fullName: System.EventHandler<Mapsui.UI.Maui.DrawableClickedEventArgs>
+  nameWithType.vb: EventHandler(Of DrawableClickedEventArgs)
+  fullName.vb: System.EventHandler(Of Mapsui.UI.Maui.DrawableClickedEventArgs)
+  name.vb: EventHandler(Of DrawableClickedEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - uid: Mapsui.UI.Maui.DrawableClickedEventArgs
+    name: DrawableClickedEventArgs
+    href: Mapsui.UI.Maui.DrawableClickedEventArgs.html
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.UI.Maui.DrawableClickedEventArgs
+    name: DrawableClickedEventArgs
+    href: Mapsui.UI.Maui.DrawableClickedEventArgs.html
+  - name: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - name: TEventArgs
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEventArgs
+  - name: )
+- uid: Mapsui.UI.Objects.MyLocationLayer
+  commentId: T:Mapsui.UI.Objects.MyLocationLayer
+  parent: Mapsui.UI.Objects
+  href: Mapsui.UI.Objects.MyLocationLayer.html
+  name: MyLocationLayer
+  nameWithType: MyLocationLayer
+  fullName: Mapsui.UI.Objects.MyLocationLayer
+- uid: Mapsui.UI.Objects.MyLocationLayer.#ctor*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.#ctor
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer__ctor_Mapsui_UI_Maui_MapView_Mapsui_UI_Maui_Position_
+  name: MyLocationLayer
+  nameWithType: MyLocationLayer.MyLocationLayer
+  fullName: Mapsui.UI.Objects.MyLocationLayer.MyLocationLayer
+  nameWithType.vb: MyLocationLayer.New
+  fullName.vb: Mapsui.UI.Objects.MyLocationLayer.New
+  name.vb: New
+- uid: Mapsui.UI.Maui.MapView
+  commentId: T:Mapsui.UI.Maui.MapView
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.MapView.html
+  name: MapView
+  nameWithType: MapView
+  fullName: Mapsui.UI.Maui.MapView
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyLocation_Mapsui_UI_Maui_Position_System_Boolean_
+  name: UpdateMyLocation
+  nameWithType: MyLocationLayer.UpdateMyLocation
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation
+- uid: Mapsui.Layers.BaseLayer.UpdateAnimations
+  commentId: M:Mapsui.Layers.BaseLayer.UpdateAnimations
+  parent: Mapsui.Layers.BaseLayer
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_UpdateAnimations
+  name: UpdateAnimations()
+  nameWithType: BaseLayer.UpdateAnimations()
+  fullName: Mapsui.Layers.BaseLayer.UpdateAnimations()
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.UpdateAnimations
+    name: UpdateAnimations
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_UpdateAnimations
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.UpdateAnimations
+    name: UpdateAnimations
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_UpdateAnimations
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateAnimations*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.UpdateAnimations
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateAnimations
+  name: UpdateAnimations
+  nameWithType: MyLocationLayer.UpdateAnimations
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateAnimations
+- uid: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+  commentId: M:Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+  parent: Mapsui.Layers.BaseLayer
+  isExternal: true
+  href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeatures_Mapsui_MRect_System_Double_
+  name: GetFeatures(MRect, double)
+  nameWithType: BaseLayer.GetFeatures(MRect, double)
+  fullName: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect, double)
+  nameWithType.vb: BaseLayer.GetFeatures(MRect, Double)
+  fullName.vb: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect, Double)
+  name.vb: GetFeatures(MRect, Double)
+  spec.csharp:
+  - uid: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+    name: GetFeatures
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeatures_Mapsui_MRect_System_Double_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.BaseLayer.GetFeatures(Mapsui.MRect,System.Double)
+    name: GetFeatures
+    href: Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeatures_Mapsui_MRect_System_Double_
+  - name: (
+  - uid: Mapsui.MRect
+    name: MRect
+    href: Mapsui.MRect.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.UI.Objects.MyLocationLayer.GetFeatures*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.GetFeatures
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_GetFeatures_Mapsui_MRect_System_Double_
+  name: GetFeatures
+  nameWithType: MyLocationLayer.GetFeatures
+  fullName: Mapsui.UI.Objects.MyLocationLayer.GetFeatures
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.IFeature}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<IFeature>
+  nameWithType: IEnumerable<IFeature>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.IFeature>
+  nameWithType.vb: IEnumerable(Of IFeature)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.IFeature)
+  name.vb: IEnumerable(Of IFeature)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyDirection_System_Double_System_Double_System_Boolean_
+  name: UpdateMyDirection
+  nameWithType: MyLocationLayer.UpdateMyDirection
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMySpeed_System_Double_
+  name: UpdateMySpeed
+  nameWithType: MyLocationLayer.UpdateMySpeed
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection*
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection
+  href: Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyViewDirection_System_Double_System_Double_System_Boolean_
+  name: UpdateMyViewDirection
+  nameWithType: MyLocationLayer.UpdateMyViewDirection
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection

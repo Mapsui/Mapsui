@@ -1,0 +1,208 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets.InputAreaType
+  commentId: T:Mapsui.Widgets.InputAreaType
+  id: InputAreaType
+  parent: Mapsui.Widgets
+  children:
+  - Mapsui.Widgets.InputAreaType.Map
+  - Mapsui.Widgets.InputAreaType.Widget
+  langs:
+  - csharp
+  - vb
+  name: InputAreaType
+  nameWithType: InputAreaType
+  fullName: Mapsui.Widgets.InputAreaType
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Widgets/InputAreaType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: InputAreaType
+    path: ../../Mapsui/Widgets/InputAreaType.cs
+    startLine: 2
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  syntax:
+    content: public enum InputAreaType
+    content.vb: Public Enum InputAreaType
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Widgets.InputAreaType.Widget
+  commentId: F:Mapsui.Widgets.InputAreaType.Widget
+  id: Widget
+  parent: Mapsui.Widgets.InputAreaType
+  langs:
+  - csharp
+  - vb
+  name: Widget
+  nameWithType: InputAreaType.Widget
+  fullName: Mapsui.Widgets.InputAreaType.Widget
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Widgets/InputAreaType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Widget
+    path: ../../Mapsui/Widgets/InputAreaType.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Events will be called for interactions within the widget area.
+  example: []
+  syntax:
+    content: Widget = 0
+    return:
+      type: Mapsui.Widgets.InputAreaType
+- uid: Mapsui.Widgets.InputAreaType.Map
+  commentId: F:Mapsui.Widgets.InputAreaType.Map
+  id: Map
+  parent: Mapsui.Widgets.InputAreaType
+  langs:
+  - csharp
+  - vb
+  name: Map
+  nameWithType: InputAreaType.Map
+  fullName: Mapsui.Widgets.InputAreaType.Map
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Widgets/InputAreaType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Map
+    path: ../../Mapsui/Widgets/InputAreaType.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Widgets
+  summary: Events Will be called for interactions over the entire map.
+  example: []
+  syntax:
+    content: Map = 1
+    return:
+      type: Mapsui.Widgets.InputAreaType
+references:
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  href: Mapsui.html
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Widgets.InputAreaType
+  commentId: T:Mapsui.Widgets.InputAreaType
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.InputAreaType.html
+  name: InputAreaType
+  nameWithType: InputAreaType
+  fullName: Mapsui.Widgets.InputAreaType

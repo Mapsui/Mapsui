@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui.Utils
+  commentId: N:Mapsui.UI.Maui.Utils
+  id: Mapsui.UI.Maui.Utils
+  children:
+  - Mapsui.UI.Maui.Utils.PolylineConverter
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Maui.Utils
+  nameWithType: Mapsui.UI.Maui.Utils
+  fullName: Mapsui.UI.Maui.Utils
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Maui
+references:
+- uid: Mapsui.UI.Maui.Utils.PolylineConverter
+  commentId: T:Mapsui.UI.Maui.Utils.PolylineConverter
+  href: Mapsui.UI.Maui.Utils.PolylineConverter.html
+  name: PolylineConverter
+  nameWithType: PolylineConverter
+  fullName: Mapsui.UI.Maui.Utils.PolylineConverter

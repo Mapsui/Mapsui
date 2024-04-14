@@ -1,0 +1,204 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Projections.IProjectionCrs
+  commentId: T:Mapsui.Projections.IProjectionCrs
+  id: IProjectionCrs
+  parent: Mapsui.Projections
+  children:
+  - Mapsui.Projections.IProjectionCrs.CrsFromEsri(System.String)
+  langs:
+  - csharp
+  - vb
+  name: IProjectionCrs
+  nameWithType: IProjectionCrs
+  fullName: Mapsui.Projections.IProjectionCrs
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Projections/IProjectionDetection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IProjectionCrs
+    path: ../../Mapsui/Projections/IProjectionDetection.cs
+    startLine: 2
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  syntax:
+    content: public interface IProjectionCrs
+    content.vb: Public Interface IProjectionCrs
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Projections.IProjectionCrs.CrsFromEsri(System.String)
+  commentId: M:Mapsui.Projections.IProjectionCrs.CrsFromEsri(System.String)
+  id: CrsFromEsri(System.String)
+  parent: Mapsui.Projections.IProjectionCrs
+  langs:
+  - csharp
+  - vb
+  name: CrsFromEsri(string)
+  nameWithType: IProjectionCrs.CrsFromEsri(string)
+  fullName: Mapsui.Projections.IProjectionCrs.CrsFromEsri(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Projections/IProjectionDetection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CrsFromEsri
+    path: ../../Mapsui/Projections/IProjectionDetection.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Projections
+  summary: Get Crs from Esri String
+  example: []
+  syntax:
+    content: string? CrsFromEsri(string esri)
+    parameters:
+    - id: esri
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Function CrsFromEsri(esri As String) As String
+  overload: Mapsui.Projections.IProjectionCrs.CrsFromEsri*
+  nameWithType.vb: IProjectionCrs.CrsFromEsri(String)
+  fullName.vb: Mapsui.Projections.IProjectionCrs.CrsFromEsri(String)
+  name.vb: CrsFromEsri(String)
+references:
+- uid: Mapsui.Projections
+  commentId: N:Mapsui.Projections
+  href: Mapsui.html
+  name: Mapsui.Projections
+  nameWithType: Mapsui.Projections
+  fullName: Mapsui.Projections
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Projections.IProjectionCrs.CrsFromEsri*
+  commentId: Overload:Mapsui.Projections.IProjectionCrs.CrsFromEsri
+  href: Mapsui.Projections.IProjectionCrs.html#Mapsui_Projections_IProjectionCrs_CrsFromEsri_System_String_
+  name: CrsFromEsri
+  nameWithType: IProjectionCrs.CrsFromEsri
+  fullName: Mapsui.Projections.IProjectionCrs.CrsFromEsri
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System

@@ -1,0 +1,963 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Extensions.ViewportExtensions
+  commentId: T:Mapsui.Extensions.ViewportExtensions
+  id: ViewportExtensions
+  parent: Mapsui.Extensions
+  children:
+  - Mapsui.Extensions.ViewportExtensions.HasSize(Mapsui.Viewport)
+  - Mapsui.Extensions.ViewportExtensions.IsRotated(Mapsui.Viewport)
+  - Mapsui.Extensions.ViewportExtensions.ScreenToWorld(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  - Mapsui.Extensions.ViewportExtensions.ScreenToWorld(Mapsui.Viewport,System.Double,System.Double)
+  - Mapsui.Extensions.ViewportExtensions.ScreenToWorldXY(Mapsui.Viewport,System.Double,System.Double)
+  - Mapsui.Extensions.ViewportExtensions.ToExtent(Mapsui.Viewport)
+  - Mapsui.Extensions.ViewportExtensions.ToSection(Mapsui.Viewport)
+  - Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport,Mapsui.MPoint)
+  - Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport,Mapsui.MRect)
+  - Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport,System.Double,System.Double)
+  - Mapsui.Extensions.ViewportExtensions.WorldToScreenXY(Mapsui.Viewport,System.Double,System.Double)
+  langs:
+  - csharp
+  - vb
+  name: ViewportExtensions
+  nameWithType: ViewportExtensions
+  fullName: Mapsui.Extensions.ViewportExtensions
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ViewportExtensions
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  syntax:
+    content: public static class ViewportExtensions
+    content.vb: Public Module ViewportExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Extensions.ViewportExtensions.HasSize(Mapsui.Viewport)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.HasSize(Mapsui.Viewport)
+  id: HasSize(Mapsui.Viewport)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: HasSize(Viewport)
+  nameWithType: ViewportExtensions.HasSize(Viewport)
+  fullName: Mapsui.Extensions.ViewportExtensions.HasSize(Mapsui.Viewport)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: HasSize
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: True if Width and Height are not zero
+  example: []
+  syntax:
+    content: public static bool HasSize(this Viewport viewport)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function HasSize(viewport As Viewport) As Boolean
+  overload: Mapsui.Extensions.ViewportExtensions.HasSize*
+- uid: Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport,Mapsui.MRect)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport,Mapsui.MRect)
+  id: WorldToScreen(Mapsui.Viewport,Mapsui.MRect)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: WorldToScreen(Viewport, MRect)
+  nameWithType: ViewportExtensions.WorldToScreen(Viewport, MRect)
+  fullName: Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport, Mapsui.MRect)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WorldToScreen
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 22
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: >-
+    Transforms the MRect from world coordinates to screen coordinates. Note, that
+        an MRect always represents and unrotated box. If the Viewport is rotated this will result
+        in an unrotated box that encompasses the rotated transformation.
+  example: []
+  syntax:
+    content: public static MRect WorldToScreen(this Viewport viewport, MRect rect)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+      description: Viewport
+    - id: rect
+      type: Mapsui.MRect
+      description: The MRect to transform
+    return:
+      type: Mapsui.MRect
+      description: Transformed rect
+    content.vb: Public Shared Function WorldToScreen(viewport As Viewport, rect As MRect) As MRect
+  overload: Mapsui.Extensions.ViewportExtensions.WorldToScreen*
+- uid: Mapsui.Extensions.ViewportExtensions.ToSection(Mapsui.Viewport)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.ToSection(Mapsui.Viewport)
+  id: ToSection(Mapsui.Viewport)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToSection(Viewport)
+  nameWithType: ViewportExtensions.ToSection(Viewport)
+  fullName: Mapsui.Extensions.ViewportExtensions.ToSection(Mapsui.Viewport)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToSection
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 55
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: IsRotated is true, when viewport displays map rotated
+  example: []
+  syntax:
+    content: public static MSection ToSection(this Viewport viewport)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    return:
+      type: Mapsui.MSection
+    content.vb: Public Shared Function ToSection(viewport As Viewport) As MSection
+  overload: Mapsui.Extensions.ViewportExtensions.ToSection*
+- uid: Mapsui.Extensions.ViewportExtensions.IsRotated(Mapsui.Viewport)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.IsRotated(Mapsui.Viewport)
+  id: IsRotated(Mapsui.Viewport)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: IsRotated(Viewport)
+  nameWithType: ViewportExtensions.IsRotated(Viewport)
+  fullName: Mapsui.Extensions.ViewportExtensions.IsRotated(Mapsui.Viewport)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsRotated
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 63
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: IsRotated is true, when viewport displays map rotated
+  example: []
+  syntax:
+    content: public static bool IsRotated(this Viewport viewport)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function IsRotated(viewport As Viewport) As Boolean
+  overload: Mapsui.Extensions.ViewportExtensions.IsRotated*
+- uid: Mapsui.Extensions.ViewportExtensions.ToExtent(Mapsui.Viewport)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.ToExtent(Mapsui.Viewport)
+  id: ToExtent(Mapsui.Viewport)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: ToExtent(Viewport)
+  nameWithType: ViewportExtensions.ToExtent(Viewport)
+  fullName: Mapsui.Extensions.ViewportExtensions.ToExtent(Mapsui.Viewport)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToExtent
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 73
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: Calculates extent from the viewport.
+  remarks: >-
+    This MRect is horizontally and vertically aligned, even if the viewport
+
+    is rotated. So this MRect perhaps contain parts, that are not visible.
+  example: []
+  syntax:
+    content: public static MRect ToExtent(this Viewport viewport)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    return:
+      type: Mapsui.MRect
+    content.vb: Public Shared Function ToExtent(viewport As Viewport) As MRect
+  overload: Mapsui.Extensions.ViewportExtensions.ToExtent*
+- uid: Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport,Mapsui.MPoint)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport,Mapsui.MPoint)
+  id: WorldToScreen(Mapsui.Viewport,Mapsui.MPoint)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: WorldToScreen(Viewport, MPoint)
+  nameWithType: ViewportExtensions.WorldToScreen(Viewport, MPoint)
+  fullName: Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport, Mapsui.MPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WorldToScreen
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 111
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: >-
+    Converts X/Y in world units to a point in device independent unit (or DIP or DP),
+
+    respecting rotation
+  example: []
+  syntax:
+    content: public static ScreenPosition WorldToScreen(this Viewport viewport, MPoint worldPosition)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: worldPosition
+      type: Mapsui.MPoint
+      description: Coordinate in world units
+    return:
+      type: Mapsui.Manipulations.ScreenPosition
+      description: MPoint in screen pixels
+    content.vb: Public Shared Function WorldToScreen(viewport As Viewport, worldPosition As MPoint) As ScreenPosition
+  overload: Mapsui.Extensions.ViewportExtensions.WorldToScreen*
+- uid: Mapsui.Extensions.ViewportExtensions.ScreenToWorld(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.ScreenToWorld(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  id: ScreenToWorld(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: ScreenToWorld(Viewport, ScreenPosition)
+  nameWithType: ViewportExtensions.ScreenToWorld(Viewport, ScreenPosition)
+  fullName: Mapsui.Extensions.ViewportExtensions.ScreenToWorld(Mapsui.Viewport, Mapsui.Manipulations.ScreenPosition)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ScreenToWorld
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 122
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: Converts a point in screen pixels to one in screen units, respecting rotation
+  example: []
+  syntax:
+    content: public static MPoint ScreenToWorld(this Viewport viewport, ScreenPosition screenPosition)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: screenPosition
+      type: Mapsui.Manipulations.ScreenPosition
+      description: Coordinate in screen units
+    return:
+      type: Mapsui.MPoint
+      description: MPoint in world units
+    content.vb: Public Shared Function ScreenToWorld(viewport As Viewport, screenPosition As ScreenPosition) As MPoint
+  overload: Mapsui.Extensions.ViewportExtensions.ScreenToWorld*
+- uid: Mapsui.Extensions.ViewportExtensions.ScreenToWorld(Mapsui.Viewport,System.Double,System.Double)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.ScreenToWorld(Mapsui.Viewport,System.Double,System.Double)
+  id: ScreenToWorld(Mapsui.Viewport,System.Double,System.Double)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: ScreenToWorld(Viewport, double, double)
+  nameWithType: ViewportExtensions.ScreenToWorld(Viewport, double, double)
+  fullName: Mapsui.Extensions.ViewportExtensions.ScreenToWorld(Mapsui.Viewport, double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ScreenToWorld
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 134
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: Converts X/Y in screen pixels to a point in screen units, respecting rotation
+  example: []
+  syntax:
+    content: public static MPoint ScreenToWorld(this Viewport viewport, double screenX, double screenY)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+      description: The viewport used to calculate the transformation
+    - id: screenX
+      type: System.Double
+      description: Screen position x coordinate
+    - id: screenY
+      type: System.Double
+      description: Screen position y coordinate
+    return:
+      type: Mapsui.MPoint
+      description: MPoint in world units
+    content.vb: Public Shared Function ScreenToWorld(viewport As Viewport, screenX As Double, screenY As Double) As MPoint
+  overload: Mapsui.Extensions.ViewportExtensions.ScreenToWorld*
+  nameWithType.vb: ViewportExtensions.ScreenToWorld(Viewport, Double, Double)
+  fullName.vb: Mapsui.Extensions.ViewportExtensions.ScreenToWorld(Mapsui.Viewport, Double, Double)
+  name.vb: ScreenToWorld(Viewport, Double, Double)
+- uid: Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport,System.Double,System.Double)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport,System.Double,System.Double)
+  id: WorldToScreen(Mapsui.Viewport,System.Double,System.Double)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: WorldToScreen(Viewport, double, double)
+  nameWithType: ViewportExtensions.WorldToScreen(Viewport, double, double)
+  fullName: Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport, double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WorldToScreen
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 148
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: >-
+    Converts X/Y in world units to a point in device independent units (or DIP or DP),
+
+    respecting rotation
+  example: []
+  syntax:
+    content: public static ScreenPosition WorldToScreen(this Viewport viewport, double worldX, double worldY)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+      description: The viewport used to calculate the transformation
+    - id: worldX
+      type: System.Double
+      description: X coordinate in world units
+    - id: worldY
+      type: System.Double
+      description: Y coordinate in world units
+    return:
+      type: Mapsui.Manipulations.ScreenPosition
+      description: MPoint in screen pixels
+    content.vb: Public Shared Function WorldToScreen(viewport As Viewport, worldX As Double, worldY As Double) As ScreenPosition
+  overload: Mapsui.Extensions.ViewportExtensions.WorldToScreen*
+  nameWithType.vb: ViewportExtensions.WorldToScreen(Viewport, Double, Double)
+  fullName.vb: Mapsui.Extensions.ViewportExtensions.WorldToScreen(Mapsui.Viewport, Double, Double)
+  name.vb: WorldToScreen(Viewport, Double, Double)
+- uid: Mapsui.Extensions.ViewportExtensions.WorldToScreenXY(Mapsui.Viewport,System.Double,System.Double)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.WorldToScreenXY(Mapsui.Viewport,System.Double,System.Double)
+  id: WorldToScreenXY(Mapsui.Viewport,System.Double,System.Double)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: WorldToScreenXY(Viewport, double, double)
+  nameWithType: ViewportExtensions.WorldToScreenXY(Viewport, double, double)
+  fullName: Mapsui.Extensions.ViewportExtensions.WorldToScreenXY(Mapsui.Viewport, double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: WorldToScreenXY
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 161
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: >-
+    Converts X/Y in world units to a point in device independent units (or DIP or DP),
+
+    respecting rotation
+  example: []
+  syntax:
+    content: public static (double screenX, double screenY) WorldToScreenXY(this Viewport viewport, double worldX, double worldY)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: worldX
+      type: System.Double
+      description: X coordinate in world units
+    - id: worldY
+      type: System.Double
+      description: Y coordinate in world units
+    return:
+      type: System.ValueTuple{System.Double,System.Double}
+      description: Tuple of x and y in screen coordinates
+    content.vb: Public Shared Function WorldToScreenXY(viewport As Viewport, worldX As Double, worldY As Double) As (screenX As Double, screenY As Double)
+  overload: Mapsui.Extensions.ViewportExtensions.WorldToScreenXY*
+  nameWithType.vb: ViewportExtensions.WorldToScreenXY(Viewport, Double, Double)
+  fullName.vb: Mapsui.Extensions.ViewportExtensions.WorldToScreenXY(Mapsui.Viewport, Double, Double)
+  name.vb: WorldToScreenXY(Viewport, Double, Double)
+- uid: Mapsui.Extensions.ViewportExtensions.ScreenToWorldXY(Mapsui.Viewport,System.Double,System.Double)
+  commentId: M:Mapsui.Extensions.ViewportExtensions.ScreenToWorldXY(Mapsui.Viewport,System.Double,System.Double)
+  id: ScreenToWorldXY(Mapsui.Viewport,System.Double,System.Double)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.ViewportExtensions
+  langs:
+  - csharp
+  - vb
+  name: ScreenToWorldXY(Viewport, double, double)
+  nameWithType: ViewportExtensions.ScreenToWorldXY(Viewport, double, double)
+  fullName: Mapsui.Extensions.ViewportExtensions.ScreenToWorldXY(Mapsui.Viewport, double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/ViewportExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ScreenToWorldXY
+    path: ../../Mapsui/Extensions/ViewportExtensions.cs
+    startLine: 206
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  summary: Converts X/Y in screen pixels to a point in screen units, respecting rotation
+  example: []
+  syntax:
+    content: public static (double worldX, double worldY) ScreenToWorldXY(this Viewport viewport, double screenX, double screenY)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: screenX
+      type: System.Double
+      description: Screen position x coordinate
+    - id: screenY
+      type: System.Double
+      description: Screen position y coordinate
+    return:
+      type: System.ValueTuple{System.Double,System.Double}
+      description: Tuple of x and y in world coordinates
+    content.vb: Public Shared Function ScreenToWorldXY(viewport As Viewport, screenX As Double, screenY As Double) As (worldX As Double, worldY As Double)
+  overload: Mapsui.Extensions.ViewportExtensions.ScreenToWorldXY*
+  nameWithType.vb: ViewportExtensions.ScreenToWorldXY(Viewport, Double, Double)
+  fullName.vb: Mapsui.Extensions.ViewportExtensions.ScreenToWorldXY(Mapsui.Viewport, Double, Double)
+  name.vb: ScreenToWorldXY(Viewport, Double, Double)
+references:
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.ViewportExtensions.HasSize*
+  commentId: Overload:Mapsui.Extensions.ViewportExtensions.HasSize
+  href: Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_HasSize_Mapsui_Viewport_
+  name: HasSize
+  nameWithType: ViewportExtensions.HasSize
+  fullName: Mapsui.Extensions.ViewportExtensions.HasSize
+- uid: Mapsui.Viewport
+  commentId: T:Mapsui.Viewport
+  parent: Mapsui
+  href: Mapsui.Viewport.html
+  name: Viewport
+  nameWithType: Viewport
+  fullName: Mapsui.Viewport
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Extensions.ViewportExtensions.WorldToScreen*
+  commentId: Overload:Mapsui.Extensions.ViewportExtensions.WorldToScreen
+  href: Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_WorldToScreen_Mapsui_Viewport_Mapsui_MRect_
+  name: WorldToScreen
+  nameWithType: ViewportExtensions.WorldToScreen
+  fullName: Mapsui.Extensions.ViewportExtensions.WorldToScreen
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui.Extensions.ViewportExtensions.ToSection*
+  commentId: Overload:Mapsui.Extensions.ViewportExtensions.ToSection
+  href: Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_ToSection_Mapsui_Viewport_
+  name: ToSection
+  nameWithType: ViewportExtensions.ToSection
+  fullName: Mapsui.Extensions.ViewportExtensions.ToSection
+- uid: Mapsui.MSection
+  commentId: T:Mapsui.MSection
+  parent: Mapsui
+  href: Mapsui.MSection.html
+  name: MSection
+  nameWithType: MSection
+  fullName: Mapsui.MSection
+- uid: Mapsui.Extensions.ViewportExtensions.IsRotated*
+  commentId: Overload:Mapsui.Extensions.ViewportExtensions.IsRotated
+  href: Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_IsRotated_Mapsui_Viewport_
+  name: IsRotated
+  nameWithType: ViewportExtensions.IsRotated
+  fullName: Mapsui.Extensions.ViewportExtensions.IsRotated
+- uid: Mapsui.Extensions.ViewportExtensions.ToExtent*
+  commentId: Overload:Mapsui.Extensions.ViewportExtensions.ToExtent
+  href: Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_ToExtent_Mapsui_Viewport_
+  name: ToExtent
+  nameWithType: ViewportExtensions.ToExtent
+  fullName: Mapsui.Extensions.ViewportExtensions.ToExtent
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: Mapsui.Extensions.ViewportExtensions.ScreenToWorld*
+  commentId: Overload:Mapsui.Extensions.ViewportExtensions.ScreenToWorld
+  href: Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_ScreenToWorld_Mapsui_Viewport_Mapsui_Manipulations_ScreenPosition_
+  name: ScreenToWorld
+  nameWithType: ViewportExtensions.ScreenToWorld
+  fullName: Mapsui.Extensions.ViewportExtensions.ScreenToWorld
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Extensions.ViewportExtensions.WorldToScreenXY*
+  commentId: Overload:Mapsui.Extensions.ViewportExtensions.WorldToScreenXY
+  href: Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_WorldToScreenXY_Mapsui_Viewport_System_Double_System_Double_
+  name: WorldToScreenXY
+  nameWithType: ViewportExtensions.WorldToScreenXY
+  fullName: Mapsui.Extensions.ViewportExtensions.WorldToScreenXY
+- uid: System.ValueTuple{System.Double,System.Double}
+  commentId: T:System.ValueTuple{System.Double,System.Double}
+  parent: System
+  definition: System.ValueTuple`2
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: (double x, double y)
+  nameWithType: (double x, double y)
+  fullName: (double x, double y)
+  nameWithType.vb: (x As Double, y As Double)
+  fullName.vb: (x As Double, y As Double)
+  name.vb: (x As Double, y As Double)
+  spec.csharp:
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: " "
+  - uid: System.ValueTuple{System.Double,System.Double}.x
+    name: x
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.double,system.double-.x
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: " "
+  - uid: System.ValueTuple{System.Double,System.Double}.y
+    name: y
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.double,system.double-.y
+  - name: )
+  spec.vb:
+  - name: (
+  - uid: System.ValueTuple{System.Double,System.Double}.x
+    name: x
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.double,system.double-.x
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.ValueTuple{System.Double,System.Double}.y
+    name: y
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.double,system.double-.y
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.ValueTuple`2
+  commentId: T:System.ValueTuple`2
+  name: (T1, T2)
+  nameWithType: (T1, T2)
+  fullName: (T1, T2)
+  spec.csharp:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+  spec.vb:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+- uid: Mapsui.Extensions.ViewportExtensions.ScreenToWorldXY*
+  commentId: Overload:Mapsui.Extensions.ViewportExtensions.ScreenToWorldXY
+  href: Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_ScreenToWorldXY_Mapsui_Viewport_System_Double_System_Double_
+  name: ScreenToWorldXY
+  nameWithType: ViewportExtensions.ScreenToWorldXY
+  fullName: Mapsui.Extensions.ViewportExtensions.ScreenToWorldXY

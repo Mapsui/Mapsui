@@ -1,0 +1,231 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Manipulations.TapType
+  commentId: T:Mapsui.Manipulations.TapType
+  id: TapType
+  parent: Mapsui.Manipulations
+  children:
+  - Mapsui.Manipulations.TapType.Double
+  - Mapsui.Manipulations.TapType.Long
+  - Mapsui.Manipulations.TapType.Single
+  langs:
+  - csharp
+  - vb
+  name: TapType
+  nameWithType: TapType
+  fullName: Mapsui.Manipulations.TapType
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Manipulations/TapGestureTracker.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TapType
+    path: ../../Mapsui/Manipulations/TapGestureTracker.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: public enum TapType
+    content.vb: Public Enum TapType
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Manipulations.TapType.Single
+  commentId: F:Mapsui.Manipulations.TapType.Single
+  id: Single
+  parent: Mapsui.Manipulations.TapType
+  langs:
+  - csharp
+  - vb
+  name: Single
+  nameWithType: TapType.Single
+  fullName: Mapsui.Manipulations.TapType.Single
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Manipulations/TapGestureTracker.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Single
+    path: ../../Mapsui/Manipulations/TapGestureTracker.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: Single = 0
+    return:
+      type: Mapsui.Manipulations.TapType
+- uid: Mapsui.Manipulations.TapType.Double
+  commentId: F:Mapsui.Manipulations.TapType.Double
+  id: Double
+  parent: Mapsui.Manipulations.TapType
+  langs:
+  - csharp
+  - vb
+  name: Double
+  nameWithType: TapType.Double
+  fullName: Mapsui.Manipulations.TapType.Double
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Manipulations/TapGestureTracker.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Double
+    path: ../../Mapsui/Manipulations/TapGestureTracker.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: Double = 1
+    return:
+      type: Mapsui.Manipulations.TapType
+- uid: Mapsui.Manipulations.TapType.Long
+  commentId: F:Mapsui.Manipulations.TapType.Long
+  id: Long
+  parent: Mapsui.Manipulations.TapType
+  langs:
+  - csharp
+  - vb
+  name: Long
+  nameWithType: TapType.Long
+  fullName: Mapsui.Manipulations.TapType.Long
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Manipulations/TapGestureTracker.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Long
+    path: ../../Mapsui/Manipulations/TapGestureTracker.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Manipulations
+  syntax:
+    content: Long = 2
+    return:
+      type: Mapsui.Manipulations.TapType
+references:
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Manipulations.TapType
+  commentId: T:Mapsui.Manipulations.TapType
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.TapType.html
+  name: TapType
+  nameWithType: TapType
+  fullName: Mapsui.Manipulations.TapType

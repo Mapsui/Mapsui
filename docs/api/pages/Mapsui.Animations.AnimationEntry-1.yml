@@ -1,0 +1,960 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Animations.AnimationEntry`1
+  commentId: T:Mapsui.Animations.AnimationEntry`1
+  id: AnimationEntry`1
+  parent: Mapsui.Animations
+  children:
+  - Mapsui.Animations.AnimationEntry`1.#ctor(System.Object,System.Object,System.Double,System.Double,Mapsui.Animations.Easing,System.Boolean,System.Func{`0,Mapsui.Animations.AnimationEntry{`0},System.Double,Mapsui.Animations.AnimationResult{`0}},System.Func{`0,Mapsui.Animations.AnimationEntry{`0},Mapsui.Animations.AnimationResult{`0}})
+  - Mapsui.Animations.AnimationEntry`1.AnimationEnd
+  - Mapsui.Animations.AnimationEntry`1.AnimationStart
+  - Mapsui.Animations.AnimationEntry`1.Easing
+  - Mapsui.Animations.AnimationEntry`1.End
+  - Mapsui.Animations.AnimationEntry`1.Repeat
+  - Mapsui.Animations.AnimationEntry`1.Start
+  langs:
+  - csharp
+  - vb
+  name: AnimationEntry<T>
+  nameWithType: AnimationEntry<T>
+  fullName: Mapsui.Animations.AnimationEntry<T>
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationEntry.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AnimationEntry
+    path: ../../Mapsui/Animations/AnimationEntry.cs
+    startLine: 4
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public class AnimationEntry<T>
+    typeParameters:
+    - id: T
+    content.vb: Public Class AnimationEntry(Of T)
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  nameWithType.vb: AnimationEntry(Of T)
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T)
+  name.vb: AnimationEntry(Of T)
+- uid: Mapsui.Animations.AnimationEntry`1.#ctor(System.Object,System.Object,System.Double,System.Double,Mapsui.Animations.Easing,System.Boolean,System.Func{`0,Mapsui.Animations.AnimationEntry{`0},System.Double,Mapsui.Animations.AnimationResult{`0}},System.Func{`0,Mapsui.Animations.AnimationEntry{`0},Mapsui.Animations.AnimationResult{`0}})
+  commentId: M:Mapsui.Animations.AnimationEntry`1.#ctor(System.Object,System.Object,System.Double,System.Double,Mapsui.Animations.Easing,System.Boolean,System.Func{`0,Mapsui.Animations.AnimationEntry{`0},System.Double,Mapsui.Animations.AnimationResult{`0}},System.Func{`0,Mapsui.Animations.AnimationEntry{`0},Mapsui.Animations.AnimationResult{`0}})
+  id: '#ctor(System.Object,System.Object,System.Double,System.Double,Mapsui.Animations.Easing,System.Boolean,System.Func{`0,Mapsui.Animations.AnimationEntry{`0},System.Double,Mapsui.Animations.AnimationResult{`0}},System.Func{`0,Mapsui.Animations.AnimationEntry{`0},Mapsui.Animations.AnimationResult{`0}})'
+  parent: Mapsui.Animations.AnimationEntry`1
+  langs:
+  - csharp
+  - vb
+  name: AnimationEntry(object, object, double, double, Easing?, bool, Func<T, AnimationEntry<T>, double, AnimationResult<T>>?, Func<T, AnimationEntry<T>, AnimationResult<T>>?)
+  nameWithType: AnimationEntry<T>.AnimationEntry(object, object, double, double, Easing?, bool, Func<T, AnimationEntry<T>, double, AnimationResult<T>>?, Func<T, AnimationEntry<T>, AnimationResult<T>>?)
+  fullName: Mapsui.Animations.AnimationEntry<T>.AnimationEntry(object, object, double, double, Mapsui.Animations.Easing?, bool, System.Func<T, Mapsui.Animations.AnimationEntry<T>, double, Mapsui.Animations.AnimationResult<T>>?, System.Func<T, Mapsui.Animations.AnimationEntry<T>, Mapsui.Animations.AnimationResult<T>>?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationEntry.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Animations/AnimationEntry.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  syntax:
+    content: public AnimationEntry(object start, object end, double animationStart = 0, double animationEnd = 1, Easing? easing = null, bool repeat = false, Func<T, AnimationEntry<T>, double, AnimationResult<T>>? tick = null, Func<T, AnimationEntry<T>, AnimationResult<T>>? final = null)
+    parameters:
+    - id: start
+      type: System.Object
+    - id: end
+      type: System.Object
+    - id: animationStart
+      type: System.Double
+    - id: animationEnd
+      type: System.Double
+    - id: easing
+      type: Mapsui.Animations.Easing
+    - id: repeat
+      type: System.Boolean
+    - id: tick
+      type: System.Func{{T},Mapsui.Animations.AnimationEntry`1,System.Double,Mapsui.Animations.AnimationResult{{T}}}
+    - id: final
+      type: System.Func{{T},Mapsui.Animations.AnimationEntry`1,Mapsui.Animations.AnimationResult{{T}}}
+    content.vb: Public Sub New(start As Object, [end] As Object, animationStart As Double = 0, animationEnd As Double = 1, easing As Easing = Nothing, repeat As Boolean = False, tick As Func(Of T, AnimationEntry(Of T), Double, AnimationResult(Of T)) = Nothing, final As Func(Of T, AnimationEntry(Of T), AnimationResult(Of T)) = Nothing)
+  overload: Mapsui.Animations.AnimationEntry`1.#ctor*
+  nameWithType.vb: AnimationEntry(Of T).New(Object, Object, Double, Double, Easing, Boolean, Func(Of T, AnimationEntry(Of T), Double, AnimationResult(Of T)), Func(Of T, AnimationEntry(Of T), AnimationResult(Of T)))
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).New(Object, Object, Double, Double, Mapsui.Animations.Easing, Boolean, System.Func(Of T, Mapsui.Animations.AnimationEntry(Of T), Double, Mapsui.Animations.AnimationResult(Of T)), System.Func(Of T, Mapsui.Animations.AnimationEntry(Of T), Mapsui.Animations.AnimationResult(Of T)))
+  name.vb: New(Object, Object, Double, Double, Easing, Boolean, Func(Of T, AnimationEntry(Of T), Double, AnimationResult(Of T)), Func(Of T, AnimationEntry(Of T), AnimationResult(Of T)))
+- uid: Mapsui.Animations.AnimationEntry`1.AnimationStart
+  commentId: P:Mapsui.Animations.AnimationEntry`1.AnimationStart
+  id: AnimationStart
+  parent: Mapsui.Animations.AnimationEntry`1
+  langs:
+  - csharp
+  - vb
+  name: AnimationStart
+  nameWithType: AnimationEntry<T>.AnimationStart
+  fullName: Mapsui.Animations.AnimationEntry<T>.AnimationStart
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationEntry.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AnimationStart
+    path: ../../Mapsui/Animations/AnimationEntry.cs
+    startLine: 35
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  summary: When this animation starts in animation cycle. Value between 0 and 1.
+  example: []
+  syntax:
+    content: public double AnimationStart { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property AnimationStart As Double
+  overload: Mapsui.Animations.AnimationEntry`1.AnimationStart*
+  nameWithType.vb: AnimationEntry(Of T).AnimationStart
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).AnimationStart
+- uid: Mapsui.Animations.AnimationEntry`1.AnimationEnd
+  commentId: P:Mapsui.Animations.AnimationEntry`1.AnimationEnd
+  id: AnimationEnd
+  parent: Mapsui.Animations.AnimationEntry`1
+  langs:
+  - csharp
+  - vb
+  name: AnimationEnd
+  nameWithType: AnimationEntry<T>.AnimationEnd
+  fullName: Mapsui.Animations.AnimationEntry<T>.AnimationEnd
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationEntry.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AnimationEnd
+    path: ../../Mapsui/Animations/AnimationEntry.cs
+    startLine: 40
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  summary: When this animation ends in animation cycle. Value between 0 and 1.
+  example: []
+  syntax:
+    content: public double AnimationEnd { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property AnimationEnd As Double
+  overload: Mapsui.Animations.AnimationEntry`1.AnimationEnd*
+  nameWithType.vb: AnimationEntry(Of T).AnimationEnd
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).AnimationEnd
+- uid: Mapsui.Animations.AnimationEntry`1.Start
+  commentId: P:Mapsui.Animations.AnimationEntry`1.Start
+  id: Start
+  parent: Mapsui.Animations.AnimationEntry`1
+  langs:
+  - csharp
+  - vb
+  name: Start
+  nameWithType: AnimationEntry<T>.Start
+  fullName: Mapsui.Animations.AnimationEntry<T>.Start
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationEntry.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Start
+    path: ../../Mapsui/Animations/AnimationEntry.cs
+    startLine: 45
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  summary: Object holding the starting value
+  example: []
+  syntax:
+    content: public object Start { get; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: Public ReadOnly Property Start As Object
+  overload: Mapsui.Animations.AnimationEntry`1.Start*
+  nameWithType.vb: AnimationEntry(Of T).Start
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).Start
+- uid: Mapsui.Animations.AnimationEntry`1.End
+  commentId: P:Mapsui.Animations.AnimationEntry`1.End
+  id: End
+  parent: Mapsui.Animations.AnimationEntry`1
+  langs:
+  - csharp
+  - vb
+  name: End
+  nameWithType: AnimationEntry<T>.End
+  fullName: Mapsui.Animations.AnimationEntry<T>.End
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationEntry.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: End
+    path: ../../Mapsui/Animations/AnimationEntry.cs
+    startLine: 50
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  summary: Object holding the end value
+  example: []
+  syntax:
+    content: public object End { get; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: Public ReadOnly Property [End] As Object
+  overload: Mapsui.Animations.AnimationEntry`1.End*
+  nameWithType.vb: AnimationEntry(Of T).End
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).End
+- uid: Mapsui.Animations.AnimationEntry`1.Easing
+  commentId: P:Mapsui.Animations.AnimationEntry`1.Easing
+  id: Easing
+  parent: Mapsui.Animations.AnimationEntry`1
+  langs:
+  - csharp
+  - vb
+  name: Easing
+  nameWithType: AnimationEntry<T>.Easing
+  fullName: Mapsui.Animations.AnimationEntry<T>.Easing
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationEntry.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Easing
+    path: ../../Mapsui/Animations/AnimationEntry.cs
+    startLine: 55
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  summary: Easing to use for this animation
+  example: []
+  syntax:
+    content: public Easing Easing { get; }
+    parameters: []
+    return:
+      type: Mapsui.Animations.Easing
+    content.vb: Public ReadOnly Property Easing As Easing
+  overload: Mapsui.Animations.AnimationEntry`1.Easing*
+  nameWithType.vb: AnimationEntry(Of T).Easing
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).Easing
+- uid: Mapsui.Animations.AnimationEntry`1.Repeat
+  commentId: P:Mapsui.Animations.AnimationEntry`1.Repeat
+  id: Repeat
+  parent: Mapsui.Animations.AnimationEntry`1
+  langs:
+  - csharp
+  - vb
+  name: Repeat
+  nameWithType: AnimationEntry<T>.Repeat
+  fullName: Mapsui.Animations.AnimationEntry<T>.Repeat
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Animations/AnimationEntry.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Repeat
+    path: ../../Mapsui/Animations/AnimationEntry.cs
+    startLine: 60
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Animations
+  summary: Is this a repeating animation that starts over and over again
+  example: []
+  syntax:
+    content: public bool Repeat { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property Repeat As Boolean
+  overload: Mapsui.Animations.AnimationEntry`1.Repeat*
+  nameWithType.vb: AnimationEntry(Of T).Repeat
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).Repeat
+references:
+- uid: Mapsui.Animations
+  commentId: N:Mapsui.Animations
+  href: Mapsui.html
+  name: Mapsui.Animations
+  nameWithType: Mapsui.Animations
+  fullName: Mapsui.Animations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Animations
+    name: Animations
+    href: Mapsui.Animations.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Animations.AnimationEntry`1.#ctor*
+  commentId: Overload:Mapsui.Animations.AnimationEntry`1.#ctor
+  href: Mapsui.Animations.AnimationEntry-1.html#Mapsui_Animations_AnimationEntry_1__ctor_System_Object_System_Object_System_Double_System_Double_Mapsui_Animations_Easing_System_Boolean_System_Func__0_Mapsui_Animations_AnimationEntry__0__System_Double_Mapsui_Animations_AnimationResult__0___System_Func__0_Mapsui_Animations_AnimationEntry__0__Mapsui_Animations_AnimationResult__0___
+  name: AnimationEntry
+  nameWithType: AnimationEntry<T>.AnimationEntry
+  fullName: Mapsui.Animations.AnimationEntry<T>.AnimationEntry
+  nameWithType.vb: AnimationEntry(Of T).New
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).New
+  name.vb: New
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Animations.Easing
+  commentId: T:Mapsui.Animations.Easing
+  parent: Mapsui.Animations
+  href: Mapsui.Animations.Easing.html
+  name: Easing
+  nameWithType: Easing
+  fullName: Mapsui.Animations.Easing
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Func{{T},Mapsui.Animations.AnimationEntry`1,System.Double,Mapsui.Animations.AnimationResult{{T}}}
+  commentId: T:System.Func{`0,Mapsui.Animations.AnimationEntry`1,System.Double,Mapsui.Animations.AnimationResult{`0}}
+  parent: System
+  definition: System.Func`4
+  href: https://learn.microsoft.com/dotnet/api/system.func-4
+  name: Func<T, AnimationEntry<T>, double, AnimationResult<T>>
+  nameWithType: Func<T, AnimationEntry<T>, double, AnimationResult<T>>
+  fullName: System.Func<T, Mapsui.Animations.AnimationEntry<T>, double, Mapsui.Animations.AnimationResult<T>>
+  nameWithType.vb: Func(Of T, AnimationEntry(Of T), Double, AnimationResult(Of T))
+  fullName.vb: System.Func(Of T, Mapsui.Animations.AnimationEntry(Of T), Double, Mapsui.Animations.AnimationResult(Of T))
+  name.vb: Func(Of T, AnimationEntry(Of T), Double, AnimationResult(Of T))
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Animations.AnimationEntry`1
+    name: AnimationEntry
+    href: Mapsui.Animations.AnimationEntry-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Animations.AnimationResult`1
+    name: AnimationResult
+    href: Mapsui.Animations.AnimationResult-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Animations.AnimationEntry`1
+    name: AnimationEntry
+    href: Mapsui.Animations.AnimationEntry-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Animations.AnimationResult`1
+    name: AnimationResult
+    href: Mapsui.Animations.AnimationResult-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Func{{T},Mapsui.Animations.AnimationEntry`1,Mapsui.Animations.AnimationResult{{T}}}
+  commentId: T:System.Func{`0,Mapsui.Animations.AnimationEntry`1,Mapsui.Animations.AnimationResult{`0}}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T, AnimationEntry<T>, AnimationResult<T>>
+  nameWithType: Func<T, AnimationEntry<T>, AnimationResult<T>>
+  fullName: System.Func<T, Mapsui.Animations.AnimationEntry<T>, Mapsui.Animations.AnimationResult<T>>
+  nameWithType.vb: Func(Of T, AnimationEntry(Of T), AnimationResult(Of T))
+  fullName.vb: System.Func(Of T, Mapsui.Animations.AnimationEntry(Of T), Mapsui.Animations.AnimationResult(Of T))
+  name.vb: Func(Of T, AnimationEntry(Of T), AnimationResult(Of T))
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Animations.AnimationEntry`1
+    name: AnimationEntry
+    href: Mapsui.Animations.AnimationEntry-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Animations.AnimationResult`1
+    name: AnimationResult
+    href: Mapsui.Animations.AnimationResult-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Animations.AnimationEntry`1
+    name: AnimationEntry
+    href: Mapsui.Animations.AnimationEntry-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Animations.AnimationResult`1
+    name: AnimationResult
+    href: Mapsui.Animations.AnimationResult-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: System.Func`4
+  commentId: T:System.Func`4
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-4
+  name: Func<T1, T2, T3, TResult>
+  nameWithType: Func<T1, T2, T3, TResult>
+  fullName: System.Func<T1, T2, T3, TResult>
+  nameWithType.vb: Func(Of T1, T2, T3, TResult)
+  fullName.vb: System.Func(Of T1, T2, T3, TResult)
+  name.vb: Func(Of T1, T2, T3, TResult)
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: Mapsui.Animations.AnimationEntry`1.AnimationStart*
+  commentId: Overload:Mapsui.Animations.AnimationEntry`1.AnimationStart
+  href: Mapsui.Animations.AnimationEntry-1.html#Mapsui_Animations_AnimationEntry_1_AnimationStart
+  name: AnimationStart
+  nameWithType: AnimationEntry<T>.AnimationStart
+  fullName: Mapsui.Animations.AnimationEntry<T>.AnimationStart
+  nameWithType.vb: AnimationEntry(Of T).AnimationStart
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).AnimationStart
+- uid: Mapsui.Animations.AnimationEntry`1.AnimationEnd*
+  commentId: Overload:Mapsui.Animations.AnimationEntry`1.AnimationEnd
+  href: Mapsui.Animations.AnimationEntry-1.html#Mapsui_Animations_AnimationEntry_1_AnimationEnd
+  name: AnimationEnd
+  nameWithType: AnimationEntry<T>.AnimationEnd
+  fullName: Mapsui.Animations.AnimationEntry<T>.AnimationEnd
+  nameWithType.vb: AnimationEntry(Of T).AnimationEnd
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).AnimationEnd
+- uid: Mapsui.Animations.AnimationEntry`1.Start*
+  commentId: Overload:Mapsui.Animations.AnimationEntry`1.Start
+  href: Mapsui.Animations.AnimationEntry-1.html#Mapsui_Animations_AnimationEntry_1_Start
+  name: Start
+  nameWithType: AnimationEntry<T>.Start
+  fullName: Mapsui.Animations.AnimationEntry<T>.Start
+  nameWithType.vb: AnimationEntry(Of T).Start
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).Start
+- uid: Mapsui.Animations.AnimationEntry`1.End*
+  commentId: Overload:Mapsui.Animations.AnimationEntry`1.End
+  href: Mapsui.Animations.AnimationEntry-1.html#Mapsui_Animations_AnimationEntry_1_End
+  name: End
+  nameWithType: AnimationEntry<T>.End
+  fullName: Mapsui.Animations.AnimationEntry<T>.End
+  nameWithType.vb: AnimationEntry(Of T).End
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).End
+- uid: Mapsui.Animations.AnimationEntry`1.Easing*
+  commentId: Overload:Mapsui.Animations.AnimationEntry`1.Easing
+  href: Mapsui.Animations.AnimationEntry-1.html#Mapsui_Animations_AnimationEntry_1_Easing
+  name: Easing
+  nameWithType: AnimationEntry<T>.Easing
+  fullName: Mapsui.Animations.AnimationEntry<T>.Easing
+  nameWithType.vb: AnimationEntry(Of T).Easing
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).Easing
+- uid: Mapsui.Animations.AnimationEntry`1.Repeat*
+  commentId: Overload:Mapsui.Animations.AnimationEntry`1.Repeat
+  href: Mapsui.Animations.AnimationEntry-1.html#Mapsui_Animations_AnimationEntry_1_Repeat
+  name: Repeat
+  nameWithType: AnimationEntry<T>.Repeat
+  fullName: Mapsui.Animations.AnimationEntry<T>.Repeat
+  nameWithType.vb: AnimationEntry(Of T).Repeat
+  fullName.vb: Mapsui.Animations.AnimationEntry(Of T).Repeat

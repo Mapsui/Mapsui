@@ -1,0 +1,1266 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class WFSProvider </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class WFSProvider ">
+    
+    <meta name="description" content="WFS dataprovider This provider can be used to obtain data from an OGC Web Feature Service. It performs the following requests: &#39;GetCapabilities&#39;, &#39;DescribeFeatureType&#39; and &#39;GetFeature&#39;. This class is optimized for performing requests to GeoServer (http://geoserver.org). Supported geometries are:  PointPropertyType LineStringPropertyType PolygonPropertyType CurvePropertyType SurfacePropertyType MultiPointPropertyType MultiLineStringPropertyType MultiPolygonPropertyType MultiCurvePropertyType MultiSurfacePropertyType">
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Providers.Wfs.WFSProvider">
+
+
+
+  <h1 id="Mapsui_Providers_Wfs_WFSProvider" data-uid="Mapsui.Providers.Wfs.WFSProvider" class="text-break">Class WFSProvider</h1>
+  <div class="markdown level0 summary"><p>WFS dataprovider
+This provider can be used to obtain data from an OGC Web Feature Service.
+It performs the following requests: 'GetCapabilities', 'DescribeFeatureType' and 'GetFeature'.
+This class is optimized for performing requests to GeoServer (<a href="http://geoserver.org">http://geoserver.org</a>).
+Supported geometries are:</p>
+<ul>
+<li>PointPropertyType</li>
+<li>LineStringPropertyType</li>
+<li>PolygonPropertyType</li>
+<li>CurvePropertyType</li>
+<li>SurfacePropertyType</li>
+<li>MultiPointPropertyType</li>
+<li>MultiLineStringPropertyType</li>
+<li>MultiPolygonPropertyType</li>
+<li>MultiCurvePropertyType</li>
+<li>MultiSurfacePropertyType</li>
+</ul>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">WFSProvider</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.Providers.html">Providers</a>.<a class="xref" href="Mapsui.Providers.Wfs.html">Wfs</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.Nts.dll</h6>
+  <h5 id="Mapsui_Providers_Wfs_WFSProvider_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class WFSProvider : IProvider, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider__ctor_Mapsui_Providers_Wfs_Utilities_WfsFeatureTypeInfo_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.%23ctor(Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo%2CMapsui.Providers.Wfs.WFSProvider.WFSVersionEnum%2CMapsui.Cache.IUrlPersistentCache)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L388">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider__ctor_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider__ctor_Mapsui_Providers_Wfs_Utilities_WfsFeatureTypeInfo_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor(Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo,Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum,Mapsui.Cache.IUrlPersistentCache)">WFSProvider(WfsFeatureTypeInfo, WFSVersionEnum, IUrlPersistentCache?)</h4>
+  <div class="markdown level1 summary"><p>Use this constructor for initializing this dataprovider with a
+<a class="xref" href="Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html">WfsFeatureTypeInfo</a> object,
+so that 'GetCapabilities' and 'DescribeFeatureType' can be bypassed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSProvider.WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html">WfsFeatureTypeInfo</a></td>
+        <td><span class="parametername">featureTypeInfo</span></td>
+        <td><p>The featureTypeInfo Instance</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html">WFSProvider</a>.<a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html">WFSVersionEnum</a></td>
+        <td><span class="parametername">wfsVersion</span></td>
+        <td><p>The desired WFS Server version.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></td>
+        <td><span class="parametername">persistentCache</span></td>
+        <td><p>Persistent Cache</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider__ctor_Mapsui_Providers_Wfs_Xml_IXPathQueryManager_System_String_System_String_Mapsui_Providers_Wfs_Utilities_GeometryTypeEnum_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.%23ctor(Mapsui.Providers.Wfs.Xml.IXPathQueryManager%2CSystem.String%2CSystem.String%2CMapsui.Providers.Wfs.Utilities.GeometryTypeEnum%2CMapsui.Providers.Wfs.WFSProvider.WFSVersionEnum%2CMapsui.Cache.IUrlPersistentCache)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L484">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider__ctor_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider__ctor_Mapsui_Providers_Wfs_Xml_IXPathQueryManager_System_String_System_String_Mapsui_Providers_Wfs_Utilities_GeometryTypeEnum_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor(Mapsui.Providers.Wfs.Xml.IXPathQueryManager,System.String,System.String,Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum,Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum,Mapsui.Cache.IUrlPersistentCache)">WFSProvider(IXPathQueryManager, string, string, GeometryTypeEnum, WFSVersionEnum, IUrlPersistentCache?)</h4>
+  <div class="markdown level1 summary"><p>Use this constructor for initializing this dataprovider with all necessary
+parameters to gather metadata from 'GetCapabilities' contract.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType, GeometryTypeEnum geometryType, WFSProvider.WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html">IXPathQueryManager</a></td>
+        <td><span class="parametername">getCapabilitiesCache</span></td>
+        <td><p>This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service)
+helps to speed up gathering metadata. It caches the 'GetCapabilities' response.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">nsPrefix</span></td>
+        <td><p>Use an empty string or 'null', if there is no prefix for the featuretype.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">featureType</span></td>
+        <td><p>The name of the feature type</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum.html">GeometryTypeEnum</a></td>
+        <td><span class="parametername">geometryType</span></td>
+        <td><p>Specifying the geometry type helps to accelerate the rendering process,
+if the geometry type in 'DescribeFeatureType is unprecise.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html">WFSProvider</a>.<a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html">WFSVersionEnum</a></td>
+        <td><span class="parametername">wfsVersion</span></td>
+        <td><p>The desired WFS Server version.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></td>
+        <td><span class="parametername">persistentCache</span></td>
+        <td><p>persistent Cache</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider__ctor_Mapsui_Providers_Wfs_Xml_IXPathQueryManager_System_String_System_String_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.%23ctor(Mapsui.Providers.Wfs.Xml.IXPathQueryManager%2CSystem.String%2CSystem.String%2CMapsui.Providers.Wfs.WFSProvider.WFSVersionEnum%2CMapsui.Cache.IUrlPersistentCache)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L525">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider__ctor_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider__ctor_Mapsui_Providers_Wfs_Xml_IXPathQueryManager_System_String_System_String_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor(Mapsui.Providers.Wfs.Xml.IXPathQueryManager,System.String,System.String,Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum,Mapsui.Cache.IUrlPersistentCache)">WFSProvider(IXPathQueryManager, string, string, WFSVersionEnum, IUrlPersistentCache?)</h4>
+  <div class="markdown level1 summary"><p>Use this constructor for initializing this dataprovider with all necessary
+parameters to gather metadata from 'GetCapabilities' contract.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType, WFSProvider.WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html">IXPathQueryManager</a></td>
+        <td><span class="parametername">getCapabilitiesCache</span></td>
+        <td><p>This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service)
+helps to speed up gathering metadata. It caches the 'GetCapabilities' response.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">nsPrefix</span></td>
+        <td><p>Use an empty string or 'null', if there is no prefix for the featuretype.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">featureType</span></td>
+        <td><p>The name of the feature type</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html">WFSProvider</a>.<a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html">WFSVersionEnum</a></td>
+        <td><span class="parametername">wfsVersion</span></td>
+        <td><p>The desired WFS Server version.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></td>
+        <td><span class="parametername">persistentCache</span></td>
+        <td><p>persistent Cache</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider__ctor_System_String_System_String_System_String_System_String_System_String_Mapsui_Providers_Wfs_Utilities_GeometryTypeEnum_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.%23ctor(System.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CMapsui.Providers.Wfs.Utilities.GeometryTypeEnum%2CMapsui.Providers.Wfs.WFSProvider.WFSVersionEnum%2CMapsui.Cache.IUrlPersistentCache)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L425">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider__ctor_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider__ctor_System_String_System_String_System_String_System_String_System_String_Mapsui_Providers_Wfs_Utilities_GeometryTypeEnum_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor(System.String,System.String,System.String,System.String,System.String,Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum,Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum,Mapsui.Cache.IUrlPersistentCache)">WFSProvider(string, string, string, string, string, GeometryTypeEnum, WFSVersionEnum, IUrlPersistentCache?)</h4>
+  <div class="markdown level1 summary"><p>Use this constructor for initializing this dataprovider with all mandatory
+metadata for retrieving a featuretype, so that 'GetCapabilities' and 'DescribeFeatureType' can be bypassed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType, string geometryName, GeometryTypeEnum geometryType, WFSProvider.WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">serviceUri</span></td>
+        <td><p>The service URL</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">nsPrefix</span></td>
+        <td><p>Use an empty string or 'null', if there is no prefix for the featuretype.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">featureTypeNamespace</span></td>
+        <td><p>Use an empty string or 'null', if there is no namespace for the featuretype.
+You don't need to know the namespace of the feature type, if you use the quick geometries option.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">featureType</span></td>
+        <td><p>The name of the feature type</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">geometryName</span></td>
+        <td><p>The name of the geometry.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum.html">GeometryTypeEnum</a></td>
+        <td><span class="parametername">geometryType</span></td>
+        <td><p>Specifying the geometry type helps to accelerate the rendering process.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html">WFSProvider</a>.<a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html">WFSVersionEnum</a></td>
+        <td><span class="parametername">wfsVersion</span></td>
+        <td><p>The desired WFS Server version.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></td>
+        <td><span class="parametername">persistentCache</span></td>
+        <td><p>Persistent Cache</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider__ctor_System_String_System_String_System_String_System_String_System_String_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.%23ctor(System.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CMapsui.Providers.Wfs.WFSProvider.WFSVersionEnum%2CMapsui.Cache.IUrlPersistentCache)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L458">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider__ctor_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider__ctor_System_String_System_String_System_String_System_String_System_String_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_" data-uid="Mapsui.Providers.Wfs.WFSProvider.#ctor(System.String,System.String,System.String,System.String,System.String,Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum,Mapsui.Cache.IUrlPersistentCache)">WFSProvider(string, string, string, string, string, WFSVersionEnum, IUrlPersistentCache?)</h4>
+  <div class="markdown level1 summary"><p>Use this constructor for initializing this dataprovider with all mandatory
+metadata for retrieving a featuretype, so that 'GetCapabilities' and 'DescribeFeatureType' can be bypassed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType, string geometryName, WFSProvider.WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">serviceUri</span></td>
+        <td><p>The service URL</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">nsPrefix</span></td>
+        <td><p>Use an empty string or 'null', if there is no prefix for the featuretype.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">featureTypeNamespace</span></td>
+        <td><p>Use an empty string or 'null', if there is no namespace for the featuretype.
+You don't need to know the namespace of the feature type, if you use the quick geometries option.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">featureType</span></td>
+        <td><p>The name of the feature type</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">geometryName</span></td>
+        <td><p>The name of the geometry</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html">WFSProvider</a>.<a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html">WFSVersionEnum</a></td>
+        <td><span class="parametername">wfsVersion</span></td>
+        <td><p>The desired WFS Server version.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></td>
+        <td><span class="parametername">persistentCache</span></td>
+        <td><p>Persistent Cache</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_AxisOrder.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.AxisOrder%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L120">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_AxisOrder_" data-uid="Mapsui.Providers.Wfs.WFSProvider.AxisOrder*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_AxisOrder" data-uid="Mapsui.Providers.Wfs.WFSProvider.AxisOrder">AxisOrder</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating the axis order</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int[] AxisOrder { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Providers_Wfs_WFSProvider_AxisOrder_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.</p>
+<p></p>If not set explicitly, <a class="xref" href="Mapsui.Projections.CrsAxisOrderRegistry.html">CrsAxisOrderRegistry</a> is asked for a value based on <a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html#Mapsui_Providers_Wfs_WFSProvider_CRS">CRS</a>.
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_CRS.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.CRS%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L688">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_CRS_" data-uid="Mapsui.Providers.Wfs.WFSProvider.CRS*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_CRS" data-uid="Mapsui.Providers.Wfs.WFSProvider.CRS">CRS</h4>
+  <div class="markdown level1 summary"><p>The spatial reference ID (CRS)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? CRS { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_Credentials.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.Credentials%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L219">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_Credentials_" data-uid="Mapsui.Providers.Wfs.WFSProvider.Credentials*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_Credentials" data-uid="Mapsui.Providers.Wfs.WFSProvider.Credentials">Credentials</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the network credentials used for authenticating the request with the Internet resource</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICredentials? Credentials { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.icredentials">ICredentials</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_DefaultCache.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.DefaultCache%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L93">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_DefaultCache_" data-uid="Mapsui.Providers.Wfs.WFSProvider.DefaultCache*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_DefaultCache" data-uid="Mapsui.Providers.Wfs.WFSProvider.DefaultCache">DefaultCache</h4>
+  <div class="markdown level1 summary"><p>Default Cache</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IUrlPersistentCache? DefaultCache { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_FeatureTypeInfo.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.FeatureTypeInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L112">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_FeatureTypeInfo_" data-uid="Mapsui.Providers.Wfs.WFSProvider.FeatureTypeInfo*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_FeatureTypeInfo" data-uid="Mapsui.Providers.Wfs.WFSProvider.FeatureTypeInfo">FeatureTypeInfo</h4>
+  <div class="markdown level1 summary"><p>Gets feature metadata</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WfsFeatureTypeInfo? FeatureTypeInfo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html">WfsFeatureTypeInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_GetCapabilitiesCache.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.GetCapabilitiesCache%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L99">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_GetCapabilitiesCache_" data-uid="Mapsui.Providers.Wfs.WFSProvider.GetCapabilitiesCache*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_GetCapabilitiesCache" data-uid="Mapsui.Providers.Wfs.WFSProvider.GetCapabilitiesCache">GetCapabilitiesCache</h4>
+  <div class="markdown level1 summary"><p>This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service)
+helps to speed up gathering metadata. It caches the 'GetCapabilities' response.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IXPathQueryManager? GetCapabilitiesCache { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html">IXPathQueryManager</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_GetFeatureGetRequest.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.GetFeatureGetRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L180">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_GetFeatureGetRequest_" data-uid="Mapsui.Providers.Wfs.WFSProvider.GetFeatureGetRequest*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_GetFeatureGetRequest" data-uid="Mapsui.Providers.Wfs.WFSProvider.GetFeatureGetRequest">GetFeatureGetRequest</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether the 'GetFeature' request
+should be done with HTTP GET. This option can be important when obtaining
+data from a WFS provided by an UMN MapServer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool GetFeatureGetRequest { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_Labels.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.Labels%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L206">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_Labels_" data-uid="Mapsui.Providers.Wfs.WFSProvider.Labels*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_Labels" data-uid="Mapsui.Providers.Wfs.WFSProvider.Labels">Labels</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the property of the featuretype responsible for labels</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;string&gt; Labels { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_MultiGeometries.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.MultiGeometries%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L165">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_MultiGeometries_" data-uid="Mapsui.Providers.Wfs.WFSProvider.MultiGeometries*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_MultiGeometries" data-uid="Mapsui.Providers.Wfs.WFSProvider.MultiGeometries">MultiGeometries</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether the 'GetFeature' parser
+should ignore multi-geometries (MultiPoint, MultiLineString, MultiCurve, MultiPolygon, MultiSurface).
+By default it does not. Ignoring multi-geometries can lead to a better performance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool MultiGeometries { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_OgcFilter.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.OgcFilter%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L193">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_OgcFilter_" data-uid="Mapsui.Providers.Wfs.WFSProvider.OgcFilter*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_OgcFilter" data-uid="Mapsui.Providers.Wfs.WFSProvider.OgcFilter">OgcFilter</h4>
+  <div class="markdown level1 summary"><p>Gets or sets an OGC Filter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IFilter? OgcFilter { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.Utilities.IFilter.html">IFilter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_ProxyUrl.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.ProxyUrl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L232">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_ProxyUrl_" data-uid="Mapsui.Providers.Wfs.WFSProvider.ProxyUrl*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_ProxyUrl" data-uid="Mapsui.Providers.Wfs.WFSProvider.ProxyUrl">ProxyUrl</h4>
+  <div class="markdown level1 summary"><p>Gets and sets the proxy Url of the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? ProxyUrl { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_QuickGeometries.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.QuickGeometries%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L150">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_QuickGeometries_" data-uid="Mapsui.Providers.Wfs.WFSProvider.QuickGeometries*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_QuickGeometries" data-uid="Mapsui.Providers.Wfs.WFSProvider.QuickGeometries">QuickGeometries</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether extracting geometry information
+from 'GetFeature' response shall be done quickly without paying attention to
+context validation, polygon boundaries and multi-geometries.
+This option accelerates the geometry parsing process,
+but in scarce cases can lead to errors.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool QuickGeometries { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_CreateAsync_System_String_System_String_System_String_Mapsui_Providers_Wfs_Utilities_GeometryTypeEnum_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_System_String_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.CreateAsync(System.String%2CSystem.String%2CSystem.String%2CMapsui.Providers.Wfs.Utilities.GeometryTypeEnum%2CMapsui.Providers.Wfs.WFSProvider.WFSVersionEnum%2CMapsui.Cache.IUrlPersistentCache%2CSystem.String%2CSystem.Net.ICredentials)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L253">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_CreateAsync_" data-uid="Mapsui.Providers.Wfs.WFSProvider.CreateAsync*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_CreateAsync_System_String_System_String_System_String_Mapsui_Providers_Wfs_Utilities_GeometryTypeEnum_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_System_String_System_Net_ICredentials_" data-uid="Mapsui.Providers.Wfs.WFSProvider.CreateAsync(System.String,System.String,System.String,Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum,Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum,Mapsui.Cache.IUrlPersistentCache,System.String,System.Net.ICredentials)">CreateAsync(string, string, string, GeometryTypeEnum, WFSVersionEnum, IUrlPersistentCache?, string?, ICredentials?)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new layer, and downloads and parses the service description</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;WFSProvider&gt; CreateAsync(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType, WFSProvider.WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null, string? proxyUrl = null, ICredentials? credentials = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">getCapabilitiesUri</span></td>
+        <td><p>Url of WMS server</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">nsPrefix</span></td>
+        <td><p>ns Prefix</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">featureType</span></td>
+        <td><p>feature Type</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum.html">GeometryTypeEnum</a></td>
+        <td><span class="parametername">geometryType</span></td>
+        <td><p>geometry Type</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html">WFSProvider</a>.<a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html">WFSVersionEnum</a></td>
+        <td><span class="parametername">wfsVersion</span></td>
+        <td><p>Version number of wms leave null to get the default service version</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></td>
+        <td><span class="parametername">persistentCache</span></td>
+        <td><p>persistent Cache</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">proxyUrl</span></td>
+        <td><p>proxy url</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.icredentials">ICredentials</a></td>
+        <td><span class="parametername">credentials</span></td>
+        <td><p>credentials</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html">WFSProvider</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_CreateAsync_System_String_System_String_System_String_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_System_String_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.CreateAsync(System.String%2CSystem.String%2CSystem.String%2CMapsui.Providers.Wfs.WFSProvider.WFSVersionEnum%2CMapsui.Cache.IUrlPersistentCache%2CSystem.String%2CSystem.Net.ICredentials)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L291">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_CreateAsync_" data-uid="Mapsui.Providers.Wfs.WFSProvider.CreateAsync*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_CreateAsync_System_String_System_String_System_String_Mapsui_Providers_Wfs_WFSProvider_WFSVersionEnum_Mapsui_Cache_IUrlPersistentCache_System_String_System_Net_ICredentials_" data-uid="Mapsui.Providers.Wfs.WFSProvider.CreateAsync(System.String,System.String,System.String,Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum,Mapsui.Cache.IUrlPersistentCache,System.String,System.Net.ICredentials)">CreateAsync(string, string, string, WFSVersionEnum, IUrlPersistentCache?, string?, ICredentials?)</h4>
+  <div class="markdown level1 summary"><p>Use this Method for initializing this dataprovider with all necessary
+parameters to gather metadata from 'GetCapabilities' contract.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;WFSProvider&gt; CreateAsync(string getCapabilitiesUri, string nsPrefix, string featureType, WFSProvider.WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null, string? proxyUrl = null, ICredentials? credentials = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">getCapabilitiesUri</span></td>
+        <td><p>The URL for the 'GetCapabilities' request.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">nsPrefix</span></td>
+        <td><p>Use an empty string or 'null', if there is no prefix for the featuretype.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">featureType</span></td>
+        <td><p>The name of the feature type</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html">WFSProvider</a>.<a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html">WFSVersionEnum</a></td>
+        <td><span class="parametername">wfsVersion</span></td>
+        <td><p>The desired WFS Server version.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></td>
+        <td><span class="parametername">persistentCache</span></td>
+        <td><p>persistent Cache Interface</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">proxyUrl</span></td>
+        <td><p>proxy url</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.icredentials">ICredentials</a></td>
+        <td><span class="parametername">credentials</span></td>
+        <td><p>credentials</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Mapsui.Providers.Wfs.WFSProvider.html">WFSProvider</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L705">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_Dispose_" data-uid="Mapsui.Providers.Wfs.WFSProvider.Dispose*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_Dispose" data-uid="Mapsui.Providers.Wfs.WFSProvider.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_ExecuteIntersectionQueryAsync_Mapsui_MRect_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQueryAsync(Mapsui.MRect)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L536">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_ExecuteIntersectionQueryAsync_" data-uid="Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQueryAsync*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_ExecuteIntersectionQueryAsync_Mapsui_MRect_" data-uid="Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQueryAsync(Mapsui.MRect)">ExecuteIntersectionQueryAsync(MRect?)</h4>
+  <div class="markdown level1 summary"><p>Returns all features whose <a class="xref" href="Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox.html">WfsFeatureTypeInfo.BoundingBox</a> intersects 'bbox'.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;IEnumerable&lt;IFeature&gt;&gt; ExecuteIntersectionQueryAsync(MRect? bbox)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
+        <td><span class="parametername">bbox</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
+        <td><p>Features within the specified <a class="xref" href="Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox.html">WfsFeatureTypeInfo.BoundingBox</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_GetExtent.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.GetExtent%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L677">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_GetExtent_" data-uid="Mapsui.Providers.Wfs.WFSProvider.GetExtent*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_GetExtent" data-uid="Mapsui.Providers.Wfs.WFSProvider.GetExtent">GetExtent()</h4>
+  <div class="markdown level1 summary"><p><a class="xref" href="Mapsui.MRect.html">MRect</a> of data set</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MRect? GetExtent()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
+        <td><p>BoundingBox</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L1119">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_GetFeaturesAsync_" data-uid="Mapsui.Providers.Wfs.WFSProvider.GetFeaturesAsync*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_" data-uid="Mapsui.Providers.Wfs.WFSProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)">GetFeaturesAsync(FetchInfo)</h4>
+  <div class="markdown level1 summary"><p>Gets the features within the specified <a class="xref" href="Mapsui.Layers.FetchInfo.html">FetchInfo</a>.&quot;/&gt;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;IEnumerable&lt;IFeature&gt;&gt; GetFeaturesAsync(FetchInfo fetchInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Layers.FetchInfo.html">FetchInfo</a></td>
+        <td><span class="parametername">fetchInfo</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider_InitAsync.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider.InitAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L358">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_Wfs_WFSProvider_InitAsync_" data-uid="Mapsui.Providers.Wfs.WFSProvider.InitAsync*"></a>
+  <h4 id="Mapsui_Providers_Wfs_WFSProvider_InitAsync" data-uid="Mapsui.Providers.Wfs.WFSProvider.InitAsync">InitAsync()</h4>
+  <div class="markdown level1 summary"><p>Init Async</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task InitAsync()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Providers_Wfs_WFSProvider.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.WFSProvider%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.Nts/Providers/Wfs/WFSProvider.cs/#L41" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

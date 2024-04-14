@@ -1,0 +1,198 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Layers.ILayerDataSource`1
+  commentId: T:Mapsui.Layers.ILayerDataSource`1
+  id: ILayerDataSource`1
+  parent: Mapsui.Layers
+  children:
+  - Mapsui.Layers.ILayerDataSource`1.DataSource
+  langs:
+  - csharp
+  - vb
+  name: ILayerDataSource<T>
+  nameWithType: ILayerDataSource<T>
+  fullName: Mapsui.Layers.ILayerDataSource<T>
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Layers/IDataSourceLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ILayerDataSource
+    path: ../../Mapsui/Layers/IDataSourceLayer.cs
+    startLine: 4
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: 'public interface ILayerDataSource<out T> where T : IProvider'
+    typeParameters:
+    - id: T
+    content.vb: Public Interface ILayerDataSource(Of Out T As IProvider)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  nameWithType.vb: ILayerDataSource(Of T)
+  fullName.vb: Mapsui.Layers.ILayerDataSource(Of T)
+  name.vb: ILayerDataSource(Of T)
+- uid: Mapsui.Layers.ILayerDataSource`1.DataSource
+  commentId: P:Mapsui.Layers.ILayerDataSource`1.DataSource
+  id: DataSource
+  parent: Mapsui.Layers.ILayerDataSource`1
+  langs:
+  - csharp
+  - vb
+  name: DataSource
+  nameWithType: ILayerDataSource<T>.DataSource
+  fullName: Mapsui.Layers.ILayerDataSource<T>.DataSource
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Layers/IDataSourceLayer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DataSource
+    path: ../../Mapsui/Layers/IDataSourceLayer.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Layers
+  syntax:
+    content: T? DataSource { get; }
+    parameters: []
+    return:
+      type: '{T}'
+    content.vb: ReadOnly Property DataSource As T
+  overload: Mapsui.Layers.ILayerDataSource`1.DataSource*
+  nameWithType.vb: ILayerDataSource(Of T).DataSource
+  fullName.vb: Mapsui.Layers.ILayerDataSource(Of T).DataSource
+references:
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Layers.ILayerDataSource`1.DataSource*
+  commentId: Overload:Mapsui.Layers.ILayerDataSource`1.DataSource
+  href: Mapsui.Layers.ILayerDataSource-1.html#Mapsui_Layers_ILayerDataSource_1_DataSource
+  name: DataSource
+  nameWithType: ILayerDataSource<T>.DataSource
+  fullName: Mapsui.Layers.ILayerDataSource<T>.DataSource
+  nameWithType.vb: ILayerDataSource(Of T).DataSource
+  fullName.vb: Mapsui.Layers.ILayerDataSource(Of T).DataSource
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T

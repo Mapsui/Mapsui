@@ -1,0 +1,705 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  commentId: T:Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  id: BoundingClientRect
+  parent: Mapsui.UI.Blazor.Extensions
+  children:
+  - Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  - Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  - Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  - Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  - Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  - Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  - Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  - Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  langs:
+  - csharp
+  - vb
+  name: BoundingClientRect
+  nameWithType: BoundingClientRect
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BoundingClientRect
+    path: ../../Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+    startLine: 2
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public class BoundingClientRect
+    content.vb: Public Class BoundingClientRect
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  id: X
+  parent: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  langs:
+  - csharp
+  - vb
+  name: X
+  nameWithType: BoundingClientRect.X
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: X
+    path: ../../Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+    startLine: 4
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public double X { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property X As Double
+  overload: Mapsui.UI.Blazor.Extensions.BoundingClientRect.X*
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  id: Y
+  parent: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  langs:
+  - csharp
+  - vb
+  name: Y
+  nameWithType: BoundingClientRect.Y
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Y
+    path: ../../Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+    startLine: 5
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public double Y { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Y As Double
+  overload: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y*
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  id: Width
+  parent: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  langs:
+  - csharp
+  - vb
+  name: Width
+  nameWithType: BoundingClientRect.Width
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Width
+    path: ../../Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+    startLine: 6
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public double Width { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Width As Double
+  overload: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width*
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  id: Height
+  parent: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  langs:
+  - csharp
+  - vb
+  name: Height
+  nameWithType: BoundingClientRect.Height
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Height
+    path: ../../Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+    startLine: 7
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public double Height { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Height As Double
+  overload: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height*
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  id: Top
+  parent: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  langs:
+  - csharp
+  - vb
+  name: Top
+  nameWithType: BoundingClientRect.Top
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Top
+    path: ../../Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+    startLine: 8
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public double Top { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Top As Double
+  overload: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top*
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  id: Right
+  parent: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  langs:
+  - csharp
+  - vb
+  name: Right
+  nameWithType: BoundingClientRect.Right
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Right
+    path: ../../Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public double Right { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Right As Double
+  overload: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right*
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  id: Bottom
+  parent: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  langs:
+  - csharp
+  - vb
+  name: Bottom
+  nameWithType: BoundingClientRect.Bottom
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Bottom
+    path: ../../Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+    startLine: 10
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public double Bottom { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Bottom As Double
+  overload: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom*
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  id: Left
+  parent: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  langs:
+  - csharp
+  - vb
+  name: Left
+  nameWithType: BoundingClientRect.Left
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Left
+    path: ../../Mapsui.UI.Blazor/Extensions/BoundingClientRect.cs
+    startLine: 11
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor.Extensions
+  syntax:
+    content: public double Left { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Left As Double
+  overload: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left*
+references:
+- uid: Mapsui.UI.Blazor.Extensions
+  commentId: N:Mapsui.UI.Blazor.Extensions
+  href: Mapsui.html
+  name: Mapsui.UI.Blazor.Extensions
+  nameWithType: Mapsui.UI.Blazor.Extensions
+  fullName: Mapsui.UI.Blazor.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Blazor
+    name: Blazor
+    href: Mapsui.UI.Blazor.html
+  - name: .
+  - uid: Mapsui.UI.Blazor.Extensions
+    name: Extensions
+    href: Mapsui.UI.Blazor.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Blazor
+    name: Blazor
+    href: Mapsui.UI.Blazor.html
+  - name: .
+  - uid: Mapsui.UI.Blazor.Extensions
+    name: Extensions
+    href: Mapsui.UI.Blazor.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.X*
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  href: Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_X
+  name: X
+  nameWithType: BoundingClientRect.X
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y*
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  href: Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Y
+  name: Y
+  nameWithType: BoundingClientRect.Y
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width*
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  href: Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Width
+  name: Width
+  nameWithType: BoundingClientRect.Width
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height*
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  href: Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Height
+  name: Height
+  nameWithType: BoundingClientRect.Height
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top*
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  href: Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Top
+  name: Top
+  nameWithType: BoundingClientRect.Top
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right*
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  href: Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Right
+  name: Right
+  nameWithType: BoundingClientRect.Right
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom*
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  href: Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Bottom
+  name: Bottom
+  nameWithType: BoundingClientRect.Bottom
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left*
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  href: Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Left
+  name: Left
+  nameWithType: BoundingClientRect.Left
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left

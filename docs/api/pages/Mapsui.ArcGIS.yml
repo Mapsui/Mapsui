@@ -1,0 +1,171 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ArcGIS
+  commentId: N:Mapsui.ArcGIS
+  id: Mapsui.ArcGIS
+  children:
+  - Mapsui.ArcGIS.ArcGISContext
+  - Mapsui.ArcGIS.CapabilitiesHelper
+  - Mapsui.ArcGIS.CapabilitiesHelper.StatusEventHandler
+  - Mapsui.ArcGIS.CapabilitiesType
+  - Mapsui.ArcGIS.Extent
+  - Mapsui.ArcGIS.IArcGISCapabilities
+  - Mapsui.ArcGIS.SpatialReference
+  - Mapsui.ArcGIS.Table
+  - Mapsui.ArcGIS.TileInfo
+  - Mapsui.ArcGIS.TileInfo.Lod
+  - Mapsui.ArcGIS.TileInfo.Origin
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.ArcGIS
+  nameWithType: Mapsui.ArcGIS
+  fullName: Mapsui.ArcGIS
+  type: Namespace
+  assemblies:
+  - Mapsui.ArcGIS
+references:
+- uid: Mapsui.ArcGIS.ArcGISContext
+  commentId: T:Mapsui.ArcGIS.ArcGISContext
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.ArcGISContext.html
+  name: ArcGISContext
+  nameWithType: ArcGISContext
+  fullName: Mapsui.ArcGIS.ArcGISContext
+- uid: Mapsui.ArcGIS.CapabilitiesType
+  commentId: T:Mapsui.ArcGIS.CapabilitiesType
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.CapabilitiesType.html
+  name: CapabilitiesType
+  nameWithType: CapabilitiesType
+  fullName: Mapsui.ArcGIS.CapabilitiesType
+- uid: Mapsui.ArcGIS.CapabilitiesHelper
+  commentId: T:Mapsui.ArcGIS.CapabilitiesHelper
+  href: Mapsui.ArcGIS.CapabilitiesHelper.html
+  name: CapabilitiesHelper
+  nameWithType: CapabilitiesHelper
+  fullName: Mapsui.ArcGIS.CapabilitiesHelper
+- uid: Mapsui.ArcGIS.CapabilitiesHelper.StatusEventHandler
+  commentId: T:Mapsui.ArcGIS.CapabilitiesHelper.StatusEventHandler
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.CapabilitiesHelper.html
+  name: CapabilitiesHelper.StatusEventHandler
+  nameWithType: CapabilitiesHelper.StatusEventHandler
+  fullName: Mapsui.ArcGIS.CapabilitiesHelper.StatusEventHandler
+  spec.csharp:
+  - uid: Mapsui.ArcGIS.CapabilitiesHelper
+    name: CapabilitiesHelper
+    href: Mapsui.ArcGIS.CapabilitiesHelper.html
+  - name: .
+  - uid: Mapsui.ArcGIS.CapabilitiesHelper.StatusEventHandler
+    name: StatusEventHandler
+    href: Mapsui.ArcGIS.CapabilitiesHelper.StatusEventHandler.html
+  spec.vb:
+  - uid: Mapsui.ArcGIS.CapabilitiesHelper
+    name: CapabilitiesHelper
+    href: Mapsui.ArcGIS.CapabilitiesHelper.html
+  - name: .
+  - uid: Mapsui.ArcGIS.CapabilitiesHelper.StatusEventHandler
+    name: StatusEventHandler
+    href: Mapsui.ArcGIS.CapabilitiesHelper.StatusEventHandler.html
+- uid: Mapsui.ArcGIS.Extent
+  commentId: T:Mapsui.ArcGIS.Extent
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.Extent.html
+  name: Extent
+  nameWithType: Extent
+  fullName: Mapsui.ArcGIS.Extent
+- uid: Mapsui.ArcGIS.IArcGISCapabilities
+  commentId: T:Mapsui.ArcGIS.IArcGISCapabilities
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.IArcGISCapabilities.html
+  name: IArcGISCapabilities
+  nameWithType: IArcGISCapabilities
+  fullName: Mapsui.ArcGIS.IArcGISCapabilities
+- uid: Mapsui.ArcGIS.SpatialReference
+  commentId: T:Mapsui.ArcGIS.SpatialReference
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.SpatialReference.html
+  name: SpatialReference
+  nameWithType: SpatialReference
+  fullName: Mapsui.ArcGIS.SpatialReference
+- uid: Mapsui.ArcGIS.Table
+  commentId: T:Mapsui.ArcGIS.Table
+  href: Mapsui.ArcGIS.Table.html
+  name: Table
+  nameWithType: Table
+  fullName: Mapsui.ArcGIS.Table
+- uid: Mapsui.ArcGIS.TileInfo
+  commentId: T:Mapsui.ArcGIS.TileInfo
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.TileInfo.html
+  name: TileInfo
+  nameWithType: TileInfo
+  fullName: Mapsui.ArcGIS.TileInfo
+- uid: Mapsui.ArcGIS.TileInfo.Origin
+  commentId: T:Mapsui.ArcGIS.TileInfo.Origin
+  parent: Mapsui.ArcGIS
+  href: Mapsui.ArcGIS.TileInfo.html
+  name: TileInfo.Origin
+  nameWithType: TileInfo.Origin
+  fullName: Mapsui.ArcGIS.TileInfo.Origin
+  spec.csharp:
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Origin
+    name: Origin
+    href: Mapsui.ArcGIS.TileInfo.Origin.html
+  spec.vb:
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Origin
+    name: Origin
+    href: Mapsui.ArcGIS.TileInfo.Origin.html
+- uid: Mapsui.ArcGIS.TileInfo.Lod
+  commentId: T:Mapsui.ArcGIS.TileInfo.Lod
+  href: Mapsui.ArcGIS.TileInfo.html
+  name: TileInfo.Lod
+  nameWithType: TileInfo.Lod
+  fullName: Mapsui.ArcGIS.TileInfo.Lod
+  spec.csharp:
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Lod
+    name: Lod
+    href: Mapsui.ArcGIS.TileInfo.Lod.html
+  spec.vb:
+  - uid: Mapsui.ArcGIS.TileInfo
+    name: TileInfo
+    href: Mapsui.ArcGIS.TileInfo.html
+  - name: .
+  - uid: Mapsui.ArcGIS.TileInfo.Lod
+    name: Lod
+    href: Mapsui.ArcGIS.TileInfo.Lod.html
+- uid: Mapsui.ArcGIS
+  commentId: N:Mapsui.ArcGIS
+  href: Mapsui.html
+  name: Mapsui.ArcGIS
+  nameWithType: Mapsui.ArcGIS
+  fullName: Mapsui.ArcGIS
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html

@@ -1,0 +1,527 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  id: Heuristic
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing
+  children:
+  - Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Maxdepth
+  - Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Minerror
+  - Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Mintricnt
+  - Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Tartricnt
+  langs:
+  - csharp
+  - vb
+  name: Heuristic
+  nameWithType: Heuristic
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  type: Struct
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Heuristic
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Heuristics used for tree generation
+  example: []
+  syntax:
+    content: public struct Heuristic
+    content.vb: Public Structure Heuristic
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Maxdepth
+  commentId: F:Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Maxdepth
+  id: Maxdepth
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  langs:
+  - csharp
+  - vb
+  name: Maxdepth
+  nameWithType: Heuristic.Maxdepth
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Maxdepth
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Maxdepth
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 21
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Maximum tree depth
+  example: []
+  syntax:
+    content: public int Maxdepth
+    return:
+      type: System.Int32
+    content.vb: Public Maxdepth As Integer
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Minerror
+  commentId: F:Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Minerror
+  id: Minerror
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  langs:
+  - csharp
+  - vb
+  name: Minerror
+  nameWithType: Heuristic.Minerror
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Minerror
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Minerror
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 27
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: >-
+    Minimum Error metric – the volume of a box + a unit cube.
+
+    The unit cube in the metric prevents big boxes that happen to be flat having a zero result and muddling things up.
+  example: []
+  syntax:
+    content: public int Minerror
+    return:
+      type: System.Int32
+    content.vb: Public Minerror As Integer
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Mintricnt
+  commentId: F:Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Mintricnt
+  id: Mintricnt
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  langs:
+  - csharp
+  - vb
+  name: Mintricnt
+  nameWithType: Heuristic.Mintricnt
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Mintricnt
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Mintricnt
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 32
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Minimum object count at node
+  example: []
+  syntax:
+    content: public int Mintricnt
+    return:
+      type: System.Int32
+    content.vb: Public Mintricnt As Integer
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Tartricnt
+  commentId: F:Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Tartricnt
+  id: Tartricnt
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  langs:
+  - csharp
+  - vb
+  name: Tartricnt
+  nameWithType: Heuristic.Tartricnt
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.Tartricnt
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Tartricnt
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 37
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Target object count at node
+  example: []
+  syntax:
+    content: public int Tartricnt
+    return:
+      type: System.Int32
+    content.vb: Public Tartricnt As Integer
+references:
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing
+  commentId: N:Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.html
+  name: Mapsui.Nts.Providers.Shapefile.Indexing
+  nameWithType: Mapsui.Nts.Providers.Shapefile.Indexing
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing
+    name: Indexing
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing
+    name: Indexing
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.html
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer

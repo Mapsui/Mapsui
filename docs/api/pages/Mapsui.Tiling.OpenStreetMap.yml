@@ -1,0 +1,499 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Tiling.OpenStreetMap
+  commentId: T:Mapsui.Tiling.OpenStreetMap
+  id: OpenStreetMap
+  parent: Mapsui.Tiling
+  children:
+  - Mapsui.Tiling.OpenStreetMap.CreateTileLayer(System.String)
+  - Mapsui.Tiling.OpenStreetMap.DefaultCache
+  langs:
+  - csharp
+  - vb
+  name: OpenStreetMap
+  nameWithType: OpenStreetMap
+  fullName: Mapsui.Tiling.OpenStreetMap
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Tiling/OpenStreetMap.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OpenStreetMap
+    path: ../../Mapsui.Tiling/OpenStreetMap.cs
+    startLine: 12
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling
+  syntax:
+    content: public static class OpenStreetMap
+    content.vb: Public Module OpenStreetMap
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Tiling.OpenStreetMap.DefaultCache
+  commentId: F:Mapsui.Tiling.OpenStreetMap.DefaultCache
+  id: DefaultCache
+  parent: Mapsui.Tiling.OpenStreetMap
+  langs:
+  - csharp
+  - vb
+  name: DefaultCache
+  nameWithType: OpenStreetMap.DefaultCache
+  fullName: Mapsui.Tiling.OpenStreetMap.DefaultCache
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Tiling/OpenStreetMap.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultCache
+    path: ../../Mapsui.Tiling/OpenStreetMap.cs
+    startLine: 14
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling
+  syntax:
+    content: public static IPersistentCache<byte[]>? DefaultCache
+    return:
+      type: BruTile.Cache.IPersistentCache{System.Byte[]}
+    content.vb: Public Shared DefaultCache As IPersistentCache(Of Byte())
+- uid: Mapsui.Tiling.OpenStreetMap.CreateTileLayer(System.String)
+  commentId: M:Mapsui.Tiling.OpenStreetMap.CreateTileLayer(System.String)
+  id: CreateTileLayer(System.String)
+  parent: Mapsui.Tiling.OpenStreetMap
+  langs:
+  - csharp
+  - vb
+  name: CreateTileLayer(string?)
+  nameWithType: OpenStreetMap.CreateTileLayer(string?)
+  fullName: Mapsui.Tiling.OpenStreetMap.CreateTileLayer(string?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Tiling/OpenStreetMap.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CreateTileLayer
+    path: ../../Mapsui.Tiling/OpenStreetMap.cs
+    startLine: 19
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling
+  syntax:
+    content: public static TileLayer CreateTileLayer(string? userAgent = null)
+    parameters:
+    - id: userAgent
+      type: System.String
+    return:
+      type: Mapsui.Tiling.Layers.TileLayer
+    content.vb: Public Shared Function CreateTileLayer(userAgent As String = Nothing) As TileLayer
+  overload: Mapsui.Tiling.OpenStreetMap.CreateTileLayer*
+  nameWithType.vb: OpenStreetMap.CreateTileLayer(String)
+  fullName.vb: Mapsui.Tiling.OpenStreetMap.CreateTileLayer(String)
+  name.vb: CreateTileLayer(String)
+references:
+- uid: Mapsui.Tiling
+  commentId: N:Mapsui.Tiling
+  href: Mapsui.html
+  name: Mapsui.Tiling
+  nameWithType: Mapsui.Tiling
+  fullName: Mapsui.Tiling
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: BruTile.Cache.IPersistentCache{System.Byte[]}
+  commentId: T:BruTile.Cache.IPersistentCache{System.Byte[]}
+  parent: BruTile.Cache
+  definition: BruTile.Cache.IPersistentCache`1
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: IPersistentCache<byte[]>
+  nameWithType: IPersistentCache<byte[]>
+  fullName: BruTile.Cache.IPersistentCache<byte[]>
+  nameWithType.vb: IPersistentCache(Of Byte())
+  fullName.vb: BruTile.Cache.IPersistentCache(Of Byte())
+  name.vb: IPersistentCache(Of Byte())
+  spec.csharp:
+  - uid: BruTile.Cache.IPersistentCache`1
+    name: IPersistentCache
+    isExternal: true
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: BruTile.Cache.IPersistentCache`1
+    name: IPersistentCache
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: )
+- uid: BruTile.Cache.IPersistentCache`1
+  commentId: T:BruTile.Cache.IPersistentCache`1
+  isExternal: true
+  name: IPersistentCache<T>
+  nameWithType: IPersistentCache<T>
+  fullName: BruTile.Cache.IPersistentCache<T>
+  nameWithType.vb: IPersistentCache(Of T)
+  fullName.vb: BruTile.Cache.IPersistentCache(Of T)
+  name.vb: IPersistentCache(Of T)
+  spec.csharp:
+  - uid: BruTile.Cache.IPersistentCache`1
+    name: IPersistentCache
+    isExternal: true
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: BruTile.Cache.IPersistentCache`1
+    name: IPersistentCache
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: BruTile.Cache
+  commentId: N:BruTile.Cache
+  isExternal: true
+  name: BruTile.Cache
+  nameWithType: BruTile.Cache
+  fullName: BruTile.Cache
+  spec.csharp:
+  - uid: BruTile
+    name: BruTile
+    isExternal: true
+  - name: .
+  - uid: BruTile.Cache
+    name: Cache
+    isExternal: true
+  spec.vb:
+  - uid: BruTile
+    name: BruTile
+    isExternal: true
+  - name: .
+  - uid: BruTile.Cache
+    name: Cache
+    isExternal: true
+- uid: Mapsui.Tiling.OpenStreetMap.CreateTileLayer*
+  commentId: Overload:Mapsui.Tiling.OpenStreetMap.CreateTileLayer
+  href: Mapsui.Tiling.OpenStreetMap.html#Mapsui_Tiling_OpenStreetMap_CreateTileLayer_System_String_
+  name: CreateTileLayer
+  nameWithType: OpenStreetMap.CreateTileLayer
+  fullName: Mapsui.Tiling.OpenStreetMap.CreateTileLayer
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Tiling.Layers.TileLayer
+  commentId: T:Mapsui.Tiling.Layers.TileLayer
+  parent: Mapsui.Tiling.Layers
+  href: Mapsui.Tiling.Layers.TileLayer.html
+  name: TileLayer
+  nameWithType: TileLayer
+  fullName: Mapsui.Tiling.Layers.TileLayer
+- uid: Mapsui.Tiling.Layers
+  commentId: N:Mapsui.Tiling.Layers
+  href: Mapsui.html
+  name: Mapsui.Tiling.Layers
+  nameWithType: Mapsui.Tiling.Layers
+  fullName: Mapsui.Tiling.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Layers
+    name: Layers
+    href: Mapsui.Tiling.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Layers
+    name: Layers
+    href: Mapsui.Tiling.Layers.html

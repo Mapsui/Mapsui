@@ -1,0 +1,135 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ArcGIS.DynamicProvider
+  commentId: N:Mapsui.ArcGIS.DynamicProvider
+  id: Mapsui.ArcGIS.DynamicProvider
+  children:
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISIdentify
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISLayer
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISLegendEventHandler
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer
+  - Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend
+  - Mapsui.ArcGIS.DynamicProvider.ArcGisLegend
+  - Mapsui.ArcGIS.DynamicProvider.Result
+  - Mapsui.ArcGIS.DynamicProvider.StatusEventHandler
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.ArcGIS.DynamicProvider
+  nameWithType: Mapsui.ArcGIS.DynamicProvider
+  fullName: Mapsui.ArcGIS.DynamicProvider
+  type: Namespace
+  assemblies:
+  - Mapsui.ArcGIS
+references:
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+  parent: Mapsui.ArcGIS.DynamicProvider
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities.html
+  name: ArcGISDynamicCapabilities
+  nameWithType: ArcGISDynamicCapabilities
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html
+  name: ArcGISDynamicProvider
+  nameWithType: ArcGISDynamicProvider
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo
+  parent: Mapsui.ArcGIS.DynamicProvider
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo.html
+  name: ArcGISFeatureInfo
+  nameWithType: ArcGISFeatureInfo
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISFeatureInfo
+- uid: Mapsui.ArcGIS.DynamicProvider.Result
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.Result
+  href: Mapsui.ArcGIS.DynamicProvider.Result.html
+  name: Result
+  nameWithType: Result
+  fullName: Mapsui.ArcGIS.DynamicProvider.Result
+- uid: Mapsui.ArcGIS.DynamicProvider.StatusEventHandler
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.StatusEventHandler
+  parent: Mapsui.ArcGIS.DynamicProvider
+  href: Mapsui.ArcGIS.DynamicProvider.StatusEventHandler.html
+  name: StatusEventHandler
+  nameWithType: StatusEventHandler
+  fullName: Mapsui.ArcGIS.DynamicProvider.StatusEventHandler
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISIdentify
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISIdentify
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISIdentify.html
+  name: ArcGISIdentify
+  nameWithType: ArcGISIdentify
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISIdentify
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISLayer
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer.html
+  name: ArcGISLayer
+  nameWithType: ArcGISLayer
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISLayer
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendEventHandler
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISLegendEventHandler
+  parent: Mapsui.ArcGIS.DynamicProvider
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendEventHandler.html
+  name: ArcGISLegendEventHandler
+  nameWithType: ArcGISLegendEventHandler
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendEventHandler
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGisLegend
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.html
+  name: ArcGisLegend
+  nameWithType: ArcGisLegend
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse
+  parent: Mapsui.ArcGIS.DynamicProvider
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse.html
+  name: ArcGISLegendResponse
+  nameWithType: ArcGISLegendResponse
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponse
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer.html
+  name: ArcGISLegendResponseLayer
+  nameWithType: ArcGISLegendResponseLayer
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLayer
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend
+  commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend
+  href: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend.html
+  name: ArcGISLegendResponseLegend
+  nameWithType: ArcGISLegendResponseLegend
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISLegendResponseLegend
+- uid: Mapsui.ArcGIS.DynamicProvider
+  commentId: N:Mapsui.ArcGIS.DynamicProvider
+  href: Mapsui.html
+  name: Mapsui.ArcGIS.DynamicProvider
+  nameWithType: Mapsui.ArcGIS.DynamicProvider
+  fullName: Mapsui.ArcGIS.DynamicProvider
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.DynamicProvider
+    name: DynamicProvider
+    href: Mapsui.ArcGIS.DynamicProvider.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.DynamicProvider
+    name: DynamicProvider
+    href: Mapsui.ArcGIS.DynamicProvider.html

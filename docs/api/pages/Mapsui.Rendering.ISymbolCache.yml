@@ -1,0 +1,311 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.ISymbolCache
+  commentId: T:Mapsui.Rendering.ISymbolCache
+  id: ISymbolCache
+  parent: Mapsui.Rendering
+  children:
+  - Mapsui.Rendering.ISymbolCache.GetOrCreate(System.Int32)
+  - Mapsui.Rendering.ISymbolCache.GetSize(System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: ISymbolCache
+  nameWithType: ISymbolCache
+  fullName: Mapsui.Rendering.ISymbolCache
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Rendering/ISymbolCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ISymbolCache
+    path: ../../Mapsui/Rendering/ISymbolCache.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  syntax:
+    content: 'public interface ISymbolCache : IDisposable'
+    content.vb: Public Interface ISymbolCache Inherits IDisposable
+  inheritedMembers:
+  - System.IDisposable.Dispose
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.ISymbolCache.GetSize(System.Int32)
+  commentId: M:Mapsui.Rendering.ISymbolCache.GetSize(System.Int32)
+  id: GetSize(System.Int32)
+  parent: Mapsui.Rendering.ISymbolCache
+  langs:
+  - csharp
+  - vb
+  name: GetSize(int)
+  nameWithType: ISymbolCache.GetSize(int)
+  fullName: Mapsui.Rendering.ISymbolCache.GetSize(int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Rendering/ISymbolCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetSize
+    path: ../../Mapsui/Rendering/ISymbolCache.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  syntax:
+    content: Size? GetSize(int bitmapId)
+    parameters:
+    - id: bitmapId
+      type: System.Int32
+    return:
+      type: Mapsui.Styles.Size
+    content.vb: Function GetSize(bitmapId As Integer) As Size
+  overload: Mapsui.Rendering.ISymbolCache.GetSize*
+  nameWithType.vb: ISymbolCache.GetSize(Integer)
+  fullName.vb: Mapsui.Rendering.ISymbolCache.GetSize(Integer)
+  name.vb: GetSize(Integer)
+- uid: Mapsui.Rendering.ISymbolCache.GetOrCreate(System.Int32)
+  commentId: M:Mapsui.Rendering.ISymbolCache.GetOrCreate(System.Int32)
+  id: GetOrCreate(System.Int32)
+  parent: Mapsui.Rendering.ISymbolCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreate(int)
+  nameWithType: ISymbolCache.GetOrCreate(int)
+  fullName: Mapsui.Rendering.ISymbolCache.GetOrCreate(int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Rendering/ISymbolCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreate
+    path: ../../Mapsui/Rendering/ISymbolCache.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  syntax:
+    content: IBitmapInfo GetOrCreate(int bitmapID)
+    parameters:
+    - id: bitmapID
+      type: System.Int32
+    return:
+      type: Mapsui.Rendering.IBitmapInfo
+    content.vb: Function GetOrCreate(bitmapID As Integer) As IBitmapInfo
+  overload: Mapsui.Rendering.ISymbolCache.GetOrCreate*
+  nameWithType.vb: ISymbolCache.GetOrCreate(Integer)
+  fullName.vb: Mapsui.Rendering.ISymbolCache.GetOrCreate(Integer)
+  name.vb: GetOrCreate(Integer)
+references:
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.ISymbolCache.GetSize*
+  commentId: Overload:Mapsui.Rendering.ISymbolCache.GetSize
+  href: Mapsui.Rendering.ISymbolCache.html#Mapsui_Rendering_ISymbolCache_GetSize_System_Int32_
+  name: GetSize
+  nameWithType: ISymbolCache.GetSize
+  fullName: Mapsui.Rendering.ISymbolCache.GetSize
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Styles.Size
+  commentId: T:Mapsui.Styles.Size
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Size.html
+  name: Size
+  nameWithType: Size
+  fullName: Mapsui.Styles.Size
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Rendering.ISymbolCache.GetOrCreate*
+  commentId: Overload:Mapsui.Rendering.ISymbolCache.GetOrCreate
+  href: Mapsui.Rendering.ISymbolCache.html#Mapsui_Rendering_ISymbolCache_GetOrCreate_System_Int32_
+  name: GetOrCreate
+  nameWithType: ISymbolCache.GetOrCreate
+  fullName: Mapsui.Rendering.ISymbolCache.GetOrCreate
+- uid: Mapsui.Rendering.IBitmapInfo
+  commentId: T:Mapsui.Rendering.IBitmapInfo
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IBitmapInfo.html
+  name: IBitmapInfo
+  nameWithType: IBitmapInfo
+  fullName: Mapsui.Rendering.IBitmapInfo

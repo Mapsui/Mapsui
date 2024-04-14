@@ -1,0 +1,1103 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.IMapControl
+  commentId: T:Mapsui.UI.IMapControl
+  id: IMapControl
+  parent: Mapsui.UI
+  children:
+  - Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  - Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  - Mapsui.UI.IMapControl.Info
+  - Mapsui.UI.IMapControl.Map
+  - Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+  - Mapsui.UI.IMapControl.Performance
+  - Mapsui.UI.IMapControl.PixelDensity
+  - Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  - Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  - Mapsui.UI.IMapControl.RefreshGraphics
+  - Mapsui.UI.IMapControl.Renderer
+  - Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  - Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  - Mapsui.UI.IMapControl.Unsubscribe
+  langs:
+  - csharp
+  - vb
+  name: IMapControl
+  nameWithType: IMapControl
+  fullName: Mapsui.UI.IMapControl
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IMapControl
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: 'public interface IMapControl : IDisposable'
+    content.vb: Public Interface IMapControl Inherits IDisposable
+  inheritedMembers:
+  - System.IDisposable.Dispose
+  extensionMethods:
+  - Mapsui.UI.IMapControl.Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.IMapControl.Info
+  commentId: E:Mapsui.UI.IMapControl.Info
+  id: Info
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: Info
+  nameWithType: IMapControl.Info
+  fullName: Mapsui.UI.IMapControl.Info
+  type: Event
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Info
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: event EventHandler<MapInfoEventArgs> Info
+    return:
+      type: System.EventHandler{Mapsui.MapInfoEventArgs}
+    content.vb: Event Info As EventHandler(Of MapInfoEventArgs)
+- uid: Mapsui.UI.IMapControl.Map
+  commentId: P:Mapsui.UI.IMapControl.Map
+  id: Map
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: Map
+  nameWithType: IMapControl.Map
+  fullName: Mapsui.UI.IMapControl.Map
+  type: Property
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Map
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: Map Map { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Map
+    content.vb: Property Map As Map
+  overload: Mapsui.UI.IMapControl.Map*
+- uid: Mapsui.UI.IMapControl.RefreshGraphics
+  commentId: M:Mapsui.UI.IMapControl.RefreshGraphics
+  id: RefreshGraphics
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: RefreshGraphics()
+  nameWithType: IMapControl.RefreshGraphics()
+  fullName: Mapsui.UI.IMapControl.RefreshGraphics()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshGraphics
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 15
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: void RefreshGraphics()
+    content.vb: Sub RefreshGraphics()
+  overload: Mapsui.UI.IMapControl.RefreshGraphics*
+- uid: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  id: RefreshData(Mapsui.ChangeType)
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: RefreshData(ChangeType)
+  nameWithType: IMapControl.RefreshData(ChangeType)
+  fullName: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshData
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 17
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    parameters:
+    - id: changeType
+      type: Mapsui.ChangeType
+    content.vb: Sub RefreshData(changeType As ChangeType = ChangeType.Discrete)
+  overload: Mapsui.UI.IMapControl.RefreshData*
+- uid: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  id: Refresh(Mapsui.ChangeType)
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: Refresh(ChangeType)
+  nameWithType: IMapControl.Refresh(ChangeType)
+  fullName: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Refresh
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 19
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: void Refresh(ChangeType changeType = ChangeType.Discrete)
+    parameters:
+    - id: changeType
+      type: Mapsui.ChangeType
+    content.vb: Sub Refresh(changeType As ChangeType = ChangeType.Discrete)
+  overload: Mapsui.UI.IMapControl.Refresh*
+- uid: Mapsui.UI.IMapControl.Unsubscribe
+  commentId: M:Mapsui.UI.IMapControl.Unsubscribe
+  id: Unsubscribe
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: Unsubscribe()
+  nameWithType: IMapControl.Unsubscribe()
+  fullName: Mapsui.UI.IMapControl.Unsubscribe()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Unsubscribe
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 21
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: void Unsubscribe()
+    content.vb: Sub Unsubscribe()
+  overload: Mapsui.UI.IMapControl.Unsubscribe*
+- uid: Mapsui.UI.IMapControl.Renderer
+  commentId: P:Mapsui.UI.IMapControl.Renderer
+  id: Renderer
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: Renderer
+  nameWithType: IMapControl.Renderer
+  fullName: Mapsui.UI.IMapControl.Renderer
+  type: Property
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Renderer
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 23
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: IRenderer Renderer { get; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.IRenderer
+    content.vb: ReadOnly Property Renderer As IRenderer
+  overload: Mapsui.UI.IMapControl.Renderer*
+- uid: Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+  commentId: M:Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+  id: OpenInBrowser(System.String)
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: OpenInBrowser(string)
+  nameWithType: IMapControl.OpenInBrowser(string)
+  fullName: Mapsui.UI.IMapControl.OpenInBrowser(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OpenInBrowser
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 25
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: void OpenInBrowser(string url)
+    parameters:
+    - id: url
+      type: System.String
+    content.vb: Sub OpenInBrowser(url As String)
+  overload: Mapsui.UI.IMapControl.OpenInBrowser*
+  nameWithType.vb: IMapControl.OpenInBrowser(String)
+  fullName.vb: Mapsui.UI.IMapControl.OpenInBrowser(String)
+  name.vb: OpenInBrowser(String)
+- uid: Mapsui.UI.IMapControl.PixelDensity
+  commentId: P:Mapsui.UI.IMapControl.PixelDensity
+  id: PixelDensity
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: PixelDensity
+  nameWithType: IMapControl.PixelDensity
+  fullName: Mapsui.UI.IMapControl.PixelDensity
+  type: Property
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PixelDensity
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 30
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  summary: The number of pixel per device independent unit
+  example: []
+  syntax:
+    content: float PixelDensity { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: ReadOnly Property PixelDensity As Single
+  overload: Mapsui.UI.IMapControl.PixelDensity*
+- uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  id: ToDeviceIndependentUnits(Mapsui.MPoint)
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: ToDeviceIndependentUnits(MPoint)
+  nameWithType: IMapControl.ToDeviceIndependentUnits(MPoint)
+  fullName: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToDeviceIndependentUnits
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 37
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  summary: Converts coordinates in pixels to device independent units (or DIP or DP).
+  example: []
+  syntax:
+    content: MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
+    parameters:
+    - id: coordinateInPixels
+      type: Mapsui.MPoint
+      description: Coordinate in pixels
+    return:
+      type: Mapsui.MPoint
+      description: Coordinate in device independent units (or DIP or DP)
+    content.vb: Function ToDeviceIndependentUnits(coordinateInPixels As MPoint) As MPoint
+  overload: Mapsui.UI.IMapControl.ToDeviceIndependentUnits*
+- uid: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  id: ToPixels(Mapsui.MPoint)
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: ToPixels(MPoint)
+  nameWithType: IMapControl.ToPixels(MPoint)
+  fullName: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToPixels
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 44
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  summary: Converts coordinates in device independent units (or DIP or DP) to pixels.
+  example: []
+  syntax:
+    content: MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
+    parameters:
+    - id: coordinateInDeviceIndependentUnits
+      type: Mapsui.MPoint
+      description: Coordinate in device independent units (or DIP or DP)
+    return:
+      type: Mapsui.MPoint
+      description: Coordinate in pixels
+    content.vb: Function ToPixels(coordinateInDeviceIndependentUnits As MPoint) As MPoint
+  overload: Mapsui.UI.IMapControl.ToPixels*
+- uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  commentId: M:Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  id: GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: GetMapInfo(ScreenPosition, int)
+  nameWithType: IMapControl.GetMapInfo(ScreenPosition, int)
+  fullName: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetMapInfo
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 51
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  summary: Check, if a feature at a given screen position is hit
+  example: []
+  syntax:
+    content: MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)
+    parameters:
+    - id: screenPosition
+      type: Mapsui.Manipulations.ScreenPosition
+      description: Screen position to check for widgets and features
+    - id: margin
+      type: System.Int32
+      description: An optional extra margin around the feature to enlarge the hit area.
+    return:
+      type: Mapsui.MapInfo
+    content.vb: Function GetMapInfo(screenPosition As ScreenPosition, margin As Integer = 0) As MapInfo
+  overload: Mapsui.UI.IMapControl.GetMapInfo*
+  nameWithType.vb: IMapControl.GetMapInfo(ScreenPosition, Integer)
+  fullName.vb: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
+  name.vb: GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  commentId: M:Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  id: GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: GetSnapshot(IEnumerable<ILayer>?)
+  nameWithType: IMapControl.GetSnapshot(IEnumerable<ILayer>?)
+  fullName: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetSnapshot
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 58
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  summary: Create a snapshot form map as PNG image
+  example: []
+  syntax:
+    content: byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
+    parameters:
+    - id: layers
+      type: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+      description: Layers that should be included in snapshot
+    return:
+      type: System.Byte[]
+      description: Byte array with snapshot in png format. If there are any problems than returns null.
+    content.vb: Function GetSnapshot(layers As IEnumerable(Of ILayer) = Nothing) As Byte()
+  overload: Mapsui.UI.IMapControl.GetSnapshot*
+  nameWithType.vb: IMapControl.GetSnapshot(IEnumerable(Of ILayer))
+  fullName.vb: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  name.vb: GetSnapshot(IEnumerable(Of ILayer))
+- uid: Mapsui.UI.IMapControl.Performance
+  commentId: P:Mapsui.UI.IMapControl.Performance
+  id: Performance
+  parent: Mapsui.UI.IMapControl
+  langs:
+  - csharp
+  - vb
+  name: Performance
+  nameWithType: IMapControl.Performance
+  fullName: Mapsui.UI.IMapControl.Performance
+  type: Property
+  source:
+    remote:
+      path: Mapsui/UI/IMapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Performance
+    path: ../../Mapsui/UI/IMapControl.cs
+    startLine: 60
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.UI
+  syntax:
+    content: Performance? Performance { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Utilities.Performance
+    content.vb: Property Performance As Performance
+  overload: Mapsui.UI.IMapControl.Performance*
+references:
+- uid: Mapsui.UI
+  commentId: N:Mapsui.UI
+  href: Mapsui.html
+  name: Mapsui.UI
+  nameWithType: Mapsui.UI
+  fullName: Mapsui.UI
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: Mapsui.UI.IMapControl.Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync
+  commentId: M:Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+  parent: Mapsui.Extensions.MapControlExtensions
+  definition: Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+  href: Mapsui.Extensions.MapControlExtensions.html#Mapsui_Extensions_MapControlExtensions_WaitForLoadingAsync_Mapsui_UI_IMapControl_
+  name: WaitForLoadingAsync(IMapControl)
+  nameWithType: MapControlExtensions.WaitForLoadingAsync(IMapControl)
+  fullName: Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+  spec.csharp:
+  - uid: Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.MapControlExtensions.html#Mapsui_Extensions_MapControlExtensions_WaitForLoadingAsync_Mapsui_UI_IMapControl_
+  - name: (
+  - uid: Mapsui.UI.IMapControl
+    name: IMapControl
+    href: Mapsui.UI.IMapControl.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.MapControlExtensions.html#Mapsui_Extensions_MapControlExtensions_WaitForLoadingAsync_Mapsui_UI_IMapControl_
+  - name: (
+  - uid: Mapsui.UI.IMapControl
+    name: IMapControl
+    href: Mapsui.UI.IMapControl.html
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+  commentId: M:Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+  href: Mapsui.Extensions.MapControlExtensions.html#Mapsui_Extensions_MapControlExtensions_WaitForLoadingAsync_Mapsui_UI_IMapControl_
+  name: WaitForLoadingAsync(IMapControl)
+  nameWithType: MapControlExtensions.WaitForLoadingAsync(IMapControl)
+  fullName: Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+  spec.csharp:
+  - uid: Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.MapControlExtensions.html#Mapsui_Extensions_MapControlExtensions_WaitForLoadingAsync_Mapsui_UI_IMapControl_
+  - name: (
+  - uid: Mapsui.UI.IMapControl
+    name: IMapControl
+    href: Mapsui.UI.IMapControl.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.MapControlExtensions.WaitForLoadingAsync(Mapsui.UI.IMapControl)
+    name: WaitForLoadingAsync
+    href: Mapsui.Extensions.MapControlExtensions.html#Mapsui_Extensions_MapControlExtensions_WaitForLoadingAsync_Mapsui_UI_IMapControl_
+  - name: (
+  - uid: Mapsui.UI.IMapControl
+    name: IMapControl
+    href: Mapsui.UI.IMapControl.html
+  - name: )
+- uid: Mapsui.Extensions.MapControlExtensions
+  commentId: T:Mapsui.Extensions.MapControlExtensions
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.MapControlExtensions.html
+  name: MapControlExtensions
+  nameWithType: MapControlExtensions
+  fullName: Mapsui.Extensions.MapControlExtensions
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: System.EventHandler{Mapsui.MapInfoEventArgs}
+  commentId: T:System.EventHandler{Mapsui.MapInfoEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<MapInfoEventArgs>
+  nameWithType: EventHandler<MapInfoEventArgs>
+  fullName: System.EventHandler<Mapsui.MapInfoEventArgs>
+  nameWithType.vb: EventHandler(Of MapInfoEventArgs)
+  fullName.vb: System.EventHandler(Of Mapsui.MapInfoEventArgs)
+  name.vb: EventHandler(Of MapInfoEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - uid: Mapsui.MapInfoEventArgs
+    name: MapInfoEventArgs
+    href: Mapsui.MapInfoEventArgs.html
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.MapInfoEventArgs
+    name: MapInfoEventArgs
+    href: Mapsui.MapInfoEventArgs.html
+  - name: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - name: TEventArgs
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEventArgs
+  - name: )
+- uid: Mapsui.UI.IMapControl.Map*
+  commentId: Overload:Mapsui.UI.IMapControl.Map
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Map
+  name: Map
+  nameWithType: IMapControl.Map
+  fullName: Mapsui.UI.IMapControl.Map
+- uid: Mapsui.Map
+  commentId: T:Mapsui.Map
+  parent: Mapsui
+  href: Mapsui.Map.html
+  name: Map
+  nameWithType: Map
+  fullName: Mapsui.Map
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.UI.IMapControl.RefreshGraphics*
+  commentId: Overload:Mapsui.UI.IMapControl.RefreshGraphics
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_RefreshGraphics
+  name: RefreshGraphics
+  nameWithType: IMapControl.RefreshGraphics
+  fullName: Mapsui.UI.IMapControl.RefreshGraphics
+- uid: Mapsui.UI.IMapControl.RefreshData*
+  commentId: Overload:Mapsui.UI.IMapControl.RefreshData
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_RefreshData_Mapsui_ChangeType_
+  name: RefreshData
+  nameWithType: IMapControl.RefreshData
+  fullName: Mapsui.UI.IMapControl.RefreshData
+- uid: Mapsui.ChangeType
+  commentId: T:Mapsui.ChangeType
+  parent: Mapsui
+  href: Mapsui.ChangeType.html
+  name: ChangeType
+  nameWithType: ChangeType
+  fullName: Mapsui.ChangeType
+- uid: Mapsui.UI.IMapControl.Refresh*
+  commentId: Overload:Mapsui.UI.IMapControl.Refresh
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Refresh_Mapsui_ChangeType_
+  name: Refresh
+  nameWithType: IMapControl.Refresh
+  fullName: Mapsui.UI.IMapControl.Refresh
+- uid: Mapsui.UI.IMapControl.Unsubscribe*
+  commentId: Overload:Mapsui.UI.IMapControl.Unsubscribe
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Unsubscribe
+  name: Unsubscribe
+  nameWithType: IMapControl.Unsubscribe
+  fullName: Mapsui.UI.IMapControl.Unsubscribe
+- uid: Mapsui.UI.IMapControl.Renderer*
+  commentId: Overload:Mapsui.UI.IMapControl.Renderer
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Renderer
+  name: Renderer
+  nameWithType: IMapControl.Renderer
+  fullName: Mapsui.UI.IMapControl.Renderer
+- uid: Mapsui.Rendering.IRenderer
+  commentId: T:Mapsui.Rendering.IRenderer
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderer.html
+  name: IRenderer
+  nameWithType: IRenderer
+  fullName: Mapsui.Rendering.IRenderer
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: Mapsui.UI.IMapControl.OpenInBrowser*
+  commentId: Overload:Mapsui.UI.IMapControl.OpenInBrowser
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_OpenInBrowser_System_String_
+  name: OpenInBrowser
+  nameWithType: IMapControl.OpenInBrowser
+  fullName: Mapsui.UI.IMapControl.OpenInBrowser
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.UI.IMapControl.PixelDensity*
+  commentId: Overload:Mapsui.UI.IMapControl.PixelDensity
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_PixelDensity
+  name: PixelDensity
+  nameWithType: IMapControl.PixelDensity
+  fullName: Mapsui.UI.IMapControl.PixelDensity
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits*
+  commentId: Overload:Mapsui.UI.IMapControl.ToDeviceIndependentUnits
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
+  name: ToDeviceIndependentUnits
+  nameWithType: IMapControl.ToDeviceIndependentUnits
+  fullName: Mapsui.UI.IMapControl.ToDeviceIndependentUnits
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui.UI.IMapControl.ToPixels*
+  commentId: Overload:Mapsui.UI.IMapControl.ToPixels
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToPixels_Mapsui_MPoint_
+  name: ToPixels
+  nameWithType: IMapControl.ToPixels
+  fullName: Mapsui.UI.IMapControl.ToPixels
+- uid: Mapsui.UI.IMapControl.GetMapInfo*
+  commentId: Overload:Mapsui.UI.IMapControl.GetMapInfo
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
+  name: GetMapInfo
+  nameWithType: IMapControl.GetMapInfo
+  fullName: Mapsui.UI.IMapControl.GetMapInfo
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.MapInfo
+  commentId: T:Mapsui.MapInfo
+  parent: Mapsui
+  href: Mapsui.MapInfo.html
+  name: MapInfo
+  nameWithType: MapInfo
+  fullName: Mapsui.MapInfo
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: Mapsui.UI.IMapControl.GetSnapshot*
+  commentId: Overload:Mapsui.UI.IMapControl.GetSnapshot
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  name: GetSnapshot
+  nameWithType: IMapControl.GetSnapshot
+  fullName: Mapsui.UI.IMapControl.GetSnapshot
+- uid: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<ILayer>
+  nameWithType: IEnumerable<ILayer>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>
+  nameWithType.vb: IEnumerable(Of ILayer)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer)
+  name.vb: IEnumerable(Of ILayer)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.UI.IMapControl.Performance*
+  commentId: Overload:Mapsui.UI.IMapControl.Performance
+  href: Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Performance
+  name: Performance
+  nameWithType: IMapControl.Performance
+  fullName: Mapsui.UI.IMapControl.Performance
+- uid: Mapsui.Utilities.Performance
+  commentId: T:Mapsui.Utilities.Performance
+  parent: Mapsui.Utilities
+  href: Mapsui.Utilities.Performance.html
+  name: Performance
+  nameWithType: Performance
+  fullName: Mapsui.Utilities.Performance
+- uid: Mapsui.Utilities
+  commentId: N:Mapsui.Utilities
+  href: Mapsui.html
+  name: Mapsui.Utilities
+  nameWithType: Mapsui.Utilities
+  fullName: Mapsui.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html

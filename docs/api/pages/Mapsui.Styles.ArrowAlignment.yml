@@ -1,0 +1,268 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.ArrowAlignment
+  commentId: T:Mapsui.Styles.ArrowAlignment
+  id: ArrowAlignment
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.ArrowAlignment.Bottom
+  - Mapsui.Styles.ArrowAlignment.Left
+  - Mapsui.Styles.ArrowAlignment.Right
+  - Mapsui.Styles.ArrowAlignment.Top
+  langs:
+  - csharp
+  - vb
+  name: ArrowAlignment
+  nameWithType: ArrowAlignment
+  fullName: Mapsui.Styles.ArrowAlignment
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowAlignment
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 26
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Determines, where the pointer is
+  example: []
+  syntax:
+    content: public enum ArrowAlignment
+    content.vb: Public Enum ArrowAlignment
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.ArrowAlignment.Bottom
+  commentId: F:Mapsui.Styles.ArrowAlignment.Bottom
+  id: Bottom
+  parent: Mapsui.Styles.ArrowAlignment
+  langs:
+  - csharp
+  - vb
+  name: Bottom
+  nameWithType: ArrowAlignment.Bottom
+  fullName: Mapsui.Styles.ArrowAlignment.Bottom
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Bottom
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 31
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Callout arrow is at bottom side of bubble
+  example: []
+  syntax:
+    content: Bottom = 0
+    return:
+      type: Mapsui.Styles.ArrowAlignment
+- uid: Mapsui.Styles.ArrowAlignment.Left
+  commentId: F:Mapsui.Styles.ArrowAlignment.Left
+  id: Left
+  parent: Mapsui.Styles.ArrowAlignment
+  langs:
+  - csharp
+  - vb
+  name: Left
+  nameWithType: ArrowAlignment.Left
+  fullName: Mapsui.Styles.ArrowAlignment.Left
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Left
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 35
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Callout arrow is at left side of bubble
+  example: []
+  syntax:
+    content: Left = 1
+    return:
+      type: Mapsui.Styles.ArrowAlignment
+- uid: Mapsui.Styles.ArrowAlignment.Top
+  commentId: F:Mapsui.Styles.ArrowAlignment.Top
+  id: Top
+  parent: Mapsui.Styles.ArrowAlignment
+  langs:
+  - csharp
+  - vb
+  name: Top
+  nameWithType: ArrowAlignment.Top
+  fullName: Mapsui.Styles.ArrowAlignment.Top
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Top
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 39
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Callout arrow is at top side of bubble
+  example: []
+  syntax:
+    content: Top = 2
+    return:
+      type: Mapsui.Styles.ArrowAlignment
+- uid: Mapsui.Styles.ArrowAlignment.Right
+  commentId: F:Mapsui.Styles.ArrowAlignment.Right
+  id: Right
+  parent: Mapsui.Styles.ArrowAlignment
+  langs:
+  - csharp
+  - vb
+  name: Right
+  nameWithType: ArrowAlignment.Right
+  fullName: Mapsui.Styles.ArrowAlignment.Right
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Right
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 43
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Callout arrow is at right side of bubble
+  example: []
+  syntax:
+    content: Right = 3
+    return:
+      type: Mapsui.Styles.ArrowAlignment
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.ArrowAlignment
+  commentId: T:Mapsui.Styles.ArrowAlignment
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.ArrowAlignment.html
+  name: ArrowAlignment
+  nameWithType: ArrowAlignment
+  fullName: Mapsui.Styles.ArrowAlignment

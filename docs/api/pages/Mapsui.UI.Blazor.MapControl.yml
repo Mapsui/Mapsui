@@ -1,0 +1,3576 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Blazor.MapControl
+  commentId: T:Mapsui.UI.Blazor.MapControl
+  id: MapControl
+  parent: Mapsui.UI.Blazor
+  children:
+  - Mapsui.UI.Blazor.MapControl.#ctor
+  - Mapsui.UI.Blazor.MapControl.Cursor
+  - Mapsui.UI.Blazor.MapControl.Dispose
+  - Mapsui.UI.Blazor.MapControl.Dispose(System.Boolean)
+  - Mapsui.UI.Blazor.MapControl.ElementId
+  - Mapsui.UI.Blazor.MapControl.ForceUpdate
+  - Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  - Mapsui.UI.Blazor.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  - Mapsui.UI.Blazor.MapControl.Info
+  - Mapsui.UI.Blazor.MapControl.Map
+  - Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement
+  - Mapsui.UI.Blazor.MapControl.MoveButton
+  - Mapsui.UI.Blazor.MapControl.MoveCursor
+  - Mapsui.UI.Blazor.MapControl.MoveModifier
+  - Mapsui.UI.Blazor.MapControl.OnInitialized
+  - Mapsui.UI.Blazor.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OnMouseDown(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OnMouseMove(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OnMouseUp(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OnMouseWheel(Microsoft.AspNetCore.Components.Web.WheelEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OnPaintSurface(SkiaSharp.SKCanvas,SkiaSharp.SKImageInfo)
+  - Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU(SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU(SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OnPropertyChanged(System.String)
+  - Mapsui.UI.Blazor.MapControl.OnTouchEnd(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OnTouchMove(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OnTouchStart(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  - Mapsui.UI.Blazor.MapControl.OpenInBrowser(System.String)
+  - Mapsui.UI.Blazor.MapControl.Performance
+  - Mapsui.UI.Blazor.MapControl.PixelDensity
+  - Mapsui.UI.Blazor.MapControl.PropertyChanged
+  - Mapsui.UI.Blazor.MapControl.Refresh(Mapsui.ChangeType)
+  - Mapsui.UI.Blazor.MapControl.RefreshData(Mapsui.ChangeType)
+  - Mapsui.UI.Blazor.MapControl.RefreshGraphics
+  - Mapsui.UI.Blazor.MapControl.Renderer
+  - Mapsui.UI.Blazor.MapControl.StartUpdates(System.Boolean)
+  - Mapsui.UI.Blazor.MapControl.StopUpdates
+  - Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  - Mapsui.UI.Blazor.MapControl.ToPixels(Mapsui.MPoint)
+  - Mapsui.UI.Blazor.MapControl.Unsubscribe
+  - Mapsui.UI.Blazor.MapControl.UpdateInterval
+  - Mapsui.UI.Blazor.MapControl.UseFling
+  - Mapsui.UI.Blazor.MapControl.UseGPU
+  - Mapsui.UI.Blazor.MapControl.ZoomButton
+  - Mapsui.UI.Blazor.MapControl.ZoomModifier
+  - Mapsui.UI.Blazor.MapControl._elementId
+  - Mapsui.UI.Blazor.MapControl._lastMovePosition
+  - Mapsui.UI.Blazor.MapControl._viewCpu
+  - Mapsui.UI.Blazor.MapControl._viewGpu
+  langs:
+  - csharp
+  - vb
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.Blazor.MapControl
+  type: Class
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MapControl
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 46
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: 'public class MapControl : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender, IMapControl, INotifyPropertyChanged, IDisposable'
+    content.vb: Public Class MapControl Inherits ComponentBase Implements IComponent, IHandleEvent, IHandleAfterRender, IMapControl, INotifyPropertyChanged, IDisposable
+  inheritance:
+  - System.Object
+  - Microsoft.AspNetCore.Components.ComponentBase
+  implements:
+  - Microsoft.AspNetCore.Components.IComponent
+  - Microsoft.AspNetCore.Components.IHandleEvent
+  - Microsoft.AspNetCore.Components.IHandleAfterRender
+  - Mapsui.UI.IMapControl
+  - System.ComponentModel.INotifyPropertyChanged
+  - System.IDisposable
+  inheritedMembers:
+  - Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+  - Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync
+  - Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet
+  - Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync
+  - Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged
+  - Microsoft.AspNetCore.Components.ComponentBase.ShouldRender
+  - Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)
+  - Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(System.Boolean)
+  - Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Action)
+  - Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Func{System.Threading.Tasks.Task})
+  - Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.UI.Blazor.MapControl._viewCpu
+  commentId: F:Mapsui.UI.Blazor.MapControl._viewCpu
+  id: _viewCpu
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: _viewCpu
+  nameWithType: MapControl._viewCpu
+  fullName: Mapsui.UI.Blazor.MapControl._viewCpu
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: _viewCpu
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 13
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected SKCanvasView? _viewCpu
+    return:
+      type: SkiaSharp.Views.Blazor.SKCanvasView
+    content.vb: Protected _viewCpu As SKCanvasView
+- uid: Mapsui.UI.Blazor.MapControl._viewGpu
+  commentId: F:Mapsui.UI.Blazor.MapControl._viewGpu
+  id: _viewGpu
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: _viewGpu
+  nameWithType: MapControl._viewGpu
+  fullName: Mapsui.UI.Blazor.MapControl._viewGpu
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: _viewGpu
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 14
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected SKGLView? _viewGpu
+    return:
+      type: SkiaSharp.Views.Blazor.SKGLView
+    content.vb: Protected _viewGpu As SKGLView
+- uid: Mapsui.UI.Blazor.MapControl._elementId
+  commentId: F:Mapsui.UI.Blazor.MapControl._elementId
+  id: _elementId
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: _elementId
+  nameWithType: MapControl._elementId
+  fullName: Mapsui.UI.Blazor.MapControl._elementId
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: _elementId
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 15
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected readonly string _elementId
+    return:
+      type: System.String
+    content.vb: Protected ReadOnly _elementId As String
+- uid: Mapsui.UI.Blazor.MapControl._lastMovePosition
+  commentId: F:Mapsui.UI.Blazor.MapControl._lastMovePosition
+  id: _lastMovePosition
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: _lastMovePosition
+  nameWithType: MapControl._lastMovePosition
+  fullName: Mapsui.UI.Blazor.MapControl._lastMovePosition
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: _lastMovePosition
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 22
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public ScreenPosition? _lastMovePosition
+    return:
+      type: System.Nullable{Mapsui.Manipulations.ScreenPosition}
+    content.vb: Public _lastMovePosition As ScreenPosition?
+- uid: Mapsui.UI.Blazor.MapControl.UseGPU
+  commentId: P:Mapsui.UI.Blazor.MapControl.UseGPU
+  id: UseGPU
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: UseGPU
+  nameWithType: MapControl.UseGPU
+  fullName: Mapsui.UI.Blazor.MapControl.UseGPU
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UseGPU
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 26
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public static bool UseGPU { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Property UseGPU As Boolean
+  overload: Mapsui.UI.Blazor.MapControl.UseGPU*
+- uid: Mapsui.UI.Blazor.MapControl.MoveCursor
+  commentId: P:Mapsui.UI.Blazor.MapControl.MoveCursor
+  id: MoveCursor
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MoveCursor
+  nameWithType: MapControl.MoveCursor
+  fullName: Mapsui.UI.Blazor.MapControl.MoveCursor
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MoveCursor
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 27
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public string MoveCursor { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MoveCursor As String
+  overload: Mapsui.UI.Blazor.MapControl.MoveCursor*
+- uid: Mapsui.UI.Blazor.MapControl.MoveButton
+  commentId: P:Mapsui.UI.Blazor.MapControl.MoveButton
+  id: MoveButton
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MoveButton
+  nameWithType: MapControl.MoveButton
+  fullName: Mapsui.UI.Blazor.MapControl.MoveButton
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MoveButton
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 28
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public int MoveButton { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property MoveButton As Integer
+  overload: Mapsui.UI.Blazor.MapControl.MoveButton*
+- uid: Mapsui.UI.Blazor.MapControl.MoveModifier
+  commentId: P:Mapsui.UI.Blazor.MapControl.MoveModifier
+  id: MoveModifier
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MoveModifier
+  nameWithType: MapControl.MoveModifier
+  fullName: Mapsui.UI.Blazor.MapControl.MoveModifier
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MoveModifier
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 29
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public int MoveModifier { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property MoveModifier As Integer
+  overload: Mapsui.UI.Blazor.MapControl.MoveModifier*
+- uid: Mapsui.UI.Blazor.MapControl.ZoomButton
+  commentId: P:Mapsui.UI.Blazor.MapControl.ZoomButton
+  id: ZoomButton
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ZoomButton
+  nameWithType: MapControl.ZoomButton
+  fullName: Mapsui.UI.Blazor.MapControl.ZoomButton
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomButton
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 30
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public int ZoomButton { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property ZoomButton As Integer
+  overload: Mapsui.UI.Blazor.MapControl.ZoomButton*
+- uid: Mapsui.UI.Blazor.MapControl.ZoomModifier
+  commentId: P:Mapsui.UI.Blazor.MapControl.ZoomModifier
+  id: ZoomModifier
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ZoomModifier
+  nameWithType: MapControl.ZoomModifier
+  fullName: Mapsui.UI.Blazor.MapControl.ZoomModifier
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ZoomModifier
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public int ZoomModifier { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property ZoomModifier As Integer
+  overload: Mapsui.UI.Blazor.MapControl.ZoomModifier*
+- uid: Mapsui.UI.Blazor.MapControl.ElementId
+  commentId: P:Mapsui.UI.Blazor.MapControl.ElementId
+  id: ElementId
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ElementId
+  nameWithType: MapControl.ElementId
+  fullName: Mapsui.UI.Blazor.MapControl.ElementId
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ElementId
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 32
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public string ElementId { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property ElementId As String
+  overload: Mapsui.UI.Blazor.MapControl.ElementId*
+- uid: Mapsui.UI.Blazor.MapControl.#ctor
+  commentId: M:Mapsui.UI.Blazor.MapControl.#ctor
+  id: '#ctor'
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MapControl()
+  nameWithType: MapControl.MapControl()
+  fullName: Mapsui.UI.Blazor.MapControl.MapControl()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 38
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public MapControl()
+    content.vb: Public Sub New()
+  overload: Mapsui.UI.Blazor.MapControl.#ctor*
+  nameWithType.vb: MapControl.New()
+  fullName.vb: Mapsui.UI.Blazor.MapControl.New()
+  name.vb: New()
+- uid: Mapsui.UI.Blazor.MapControl.OnInitialized
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnInitialized
+  id: OnInitialized
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnInitialized()
+  nameWithType: MapControl.OnInitialized()
+  fullName: Mapsui.UI.Blazor.MapControl.OnInitialized()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnInitialized
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 51
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: >-
+    Method invoked when the component is ready to start, having received its
+
+    initial parameters from its parent in the render tree.
+  example: []
+  syntax:
+    content: protected override void OnInitialized()
+    content.vb: Protected Overrides Sub OnInitialized()
+  overridden: Microsoft.AspNetCore.Components.ComponentBase.OnInitialized
+  overload: Mapsui.UI.Blazor.MapControl.OnInitialized*
+- uid: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU(SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU(SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs)
+  id: OnPaintSurfaceCPU(SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnPaintSurfaceCPU(SKPaintSurfaceEventArgs)
+  nameWithType: MapControl.OnPaintSurfaceCPU(SKPaintSurfaceEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU(SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPaintSurfaceCPU
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 57
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
+    parameters:
+    - id: e
+      type: SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs
+    content.vb: Protected Sub OnPaintSurfaceCPU(e As SKPaintSurfaceEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU*
+- uid: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU(SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU(SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs)
+  id: OnPaintSurfaceGPU(SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs)
+  nameWithType: MapControl.OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU(SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPaintSurfaceGPU
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 66
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e)
+    parameters:
+    - id: e
+      type: SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs
+    content.vb: Protected Sub OnPaintSurfaceGPU(e As SKPaintGLSurfaceEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU*
+- uid: Mapsui.UI.Blazor.MapControl.OnPaintSurface(SkiaSharp.SKCanvas,SkiaSharp.SKImageInfo)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnPaintSurface(SkiaSharp.SKCanvas,SkiaSharp.SKImageInfo)
+  id: OnPaintSurface(SkiaSharp.SKCanvas,SkiaSharp.SKImageInfo)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnPaintSurface(SKCanvas, SKImageInfo)
+  nameWithType: MapControl.OnPaintSurface(SKCanvas, SKImageInfo)
+  fullName: Mapsui.UI.Blazor.MapControl.OnPaintSurface(SkiaSharp.SKCanvas, SkiaSharp.SKImageInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPaintSurface
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 75
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected void OnPaintSurface(SKCanvas canvas, SKImageInfo info)
+    parameters:
+    - id: canvas
+      type: SkiaSharp.SKCanvas
+    - id: info
+      type: SkiaSharp.SKImageInfo
+    content.vb: Protected Sub OnPaintSurface(canvas As SKCanvas, info As SKImageInfo)
+  overload: Mapsui.UI.Blazor.MapControl.OnPaintSurface*
+- uid: Mapsui.UI.Blazor.MapControl.OnMouseWheel(Microsoft.AspNetCore.Components.Web.WheelEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnMouseWheel(Microsoft.AspNetCore.Components.Web.WheelEventArgs)
+  id: OnMouseWheel(Microsoft.AspNetCore.Components.Web.WheelEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMouseWheel(WheelEventArgs)
+  nameWithType: MapControl.OnMouseWheel(WheelEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnMouseWheel(Microsoft.AspNetCore.Components.Web.WheelEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMouseWheel
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 103
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected void OnMouseWheel(WheelEventArgs e)
+    parameters:
+    - id: e
+      type: Microsoft.AspNetCore.Components.Web.WheelEventArgs
+    content.vb: Protected Sub OnMouseWheel(e As WheelEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnMouseWheel*
+- uid: Mapsui.UI.Blazor.MapControl.OnMouseDown(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnMouseDown(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  id: OnMouseDown(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMouseDown(MouseEventArgs)
+  nameWithType: MapControl.OnMouseDown(MouseEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnMouseDown(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMouseDown
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 149
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected void OnMouseDown(MouseEventArgs e)
+    parameters:
+    - id: e
+      type: Microsoft.AspNetCore.Components.Web.MouseEventArgs
+    content.vb: Protected Sub OnMouseDown(e As MouseEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnMouseDown*
+- uid: Mapsui.UI.Blazor.MapControl.OnMouseMove(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnMouseMove(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  id: OnMouseMove(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMouseMove(MouseEventArgs)
+  nameWithType: MapControl.OnMouseMove(MouseEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnMouseMove(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMouseMove
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 164
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected void OnMouseMove(MouseEventArgs e)
+    parameters:
+    - id: e
+      type: Microsoft.AspNetCore.Components.Web.MouseEventArgs
+    content.vb: Protected Sub OnMouseMove(e As MouseEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnMouseMove*
+- uid: Mapsui.UI.Blazor.MapControl.OnMouseUp(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnMouseUp(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  id: OnMouseUp(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMouseUp(MouseEventArgs)
+  nameWithType: MapControl.OnMouseUp(MouseEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnMouseUp(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMouseUp
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 181
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected void OnMouseUp(MouseEventArgs e)
+    parameters:
+    - id: e
+      type: Microsoft.AspNetCore.Components.Web.MouseEventArgs
+    content.vb: Protected Sub OnMouseUp(e As MouseEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnMouseUp*
+- uid: Mapsui.UI.Blazor.MapControl.Dispose
+  commentId: M:Mapsui.UI.Blazor.MapControl.Dispose
+  id: Dispose
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: MapControl.Dispose()
+  fullName: Mapsui.UI.Blazor.MapControl.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 195
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Mapsui.UI.Blazor.MapControl.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+- uid: Mapsui.UI.Blazor.MapControl.Dispose(System.Boolean)
+  commentId: M:Mapsui.UI.Blazor.MapControl.Dispose(System.Boolean)
+  id: Dispose(System.Boolean)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Dispose(bool)
+  nameWithType: MapControl.Dispose(bool)
+  fullName: Mapsui.UI.Blazor.MapControl.Dispose(bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 201
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected virtual void Dispose(bool disposing)
+    parameters:
+    - id: disposing
+      type: System.Boolean
+    content.vb: Protected Overridable Sub Dispose(disposing As Boolean)
+  overload: Mapsui.UI.Blazor.MapControl.Dispose*
+  nameWithType.vb: MapControl.Dispose(Boolean)
+  fullName.vb: Mapsui.UI.Blazor.MapControl.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+- uid: Mapsui.UI.Blazor.MapControl.Cursor
+  commentId: P:Mapsui.UI.Blazor.MapControl.Cursor
+  id: Cursor
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Cursor
+  nameWithType: MapControl.Cursor
+  fullName: Mapsui.UI.Blazor.MapControl.Cursor
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Cursor
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 212
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public string? Cursor { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Cursor As String
+  overload: Mapsui.UI.Blazor.MapControl.Cursor*
+- uid: Mapsui.UI.Blazor.MapControl.OpenInBrowser(System.String)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OpenInBrowser(System.String)
+  id: OpenInBrowser(System.String)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OpenInBrowser(string)
+  nameWithType: MapControl.OpenInBrowser(string)
+  fullName: Mapsui.UI.Blazor.MapControl.OpenInBrowser(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OpenInBrowser
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 214
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  example: []
+  syntax:
+    content: public void OpenInBrowser(string url)
+    parameters:
+    - id: url
+      type: System.String
+    content.vb: Public Sub OpenInBrowser(url As String)
+  overload: Mapsui.UI.Blazor.MapControl.OpenInBrowser*
+  implements:
+  - Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+  nameWithType.vb: MapControl.OpenInBrowser(String)
+  fullName.vb: Mapsui.UI.Blazor.MapControl.OpenInBrowser(String)
+  name.vb: OpenInBrowser(String)
+- uid: Mapsui.UI.Blazor.MapControl.OnTouchStart(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnTouchStart(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  id: OnTouchStart(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnTouchStart(TouchEventArgs)
+  nameWithType: MapControl.OnTouchStart(TouchEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnTouchStart(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnTouchStart
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 223
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public void OnTouchStart(TouchEventArgs e)
+    parameters:
+    - id: e
+      type: Microsoft.AspNetCore.Components.Web.TouchEventArgs
+    content.vb: Public Sub OnTouchStart(e As TouchEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnTouchStart*
+- uid: Mapsui.UI.Blazor.MapControl.OnTouchMove(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnTouchMove(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  id: OnTouchMove(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnTouchMove(TouchEventArgs)
+  nameWithType: MapControl.OnTouchMove(TouchEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnTouchMove(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnTouchMove
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 237
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public void OnTouchMove(TouchEventArgs e)
+    parameters:
+    - id: e
+      type: Microsoft.AspNetCore.Components.Web.TouchEventArgs
+    content.vb: Public Sub OnTouchMove(e As TouchEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnTouchMove*
+- uid: Mapsui.UI.Blazor.MapControl.OnTouchEnd(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnTouchEnd(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  id: OnTouchEnd(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnTouchEnd(TouchEventArgs)
+  nameWithType: MapControl.OnTouchEnd(TouchEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnTouchEnd(Microsoft.AspNetCore.Components.Web.TouchEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Blazor/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnTouchEnd
+    path: ../../Mapsui.UI.Blazor/MapControl.cs
+    startLine: 253
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: public void OnTouchEnd(TouchEventArgs _)
+    parameters:
+    - id: _
+      type: Microsoft.AspNetCore.Components.Web.TouchEventArgs
+    content.vb: Public Sub OnTouchEnd(_ As TouchEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnTouchEnd*
+- uid: Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement
+  commentId: P:Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement
+  id: MaxTapGestureMovement
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: MaxTapGestureMovement
+  nameWithType: MapControl.MaxTapGestureMovement
+  fullName: Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MaxTapGestureMovement
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 69
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
+  example: []
+  syntax:
+    content: public int MaxTapGestureMovement { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property MaxTapGestureMovement As Integer
+  overload: Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement*
+- uid: Mapsui.UI.Blazor.MapControl.UseFling
+  commentId: P:Mapsui.UI.Blazor.MapControl.UseFling
+  id: UseFling
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: UseFling
+  nameWithType: MapControl.UseFling
+  fullName: Mapsui.UI.Blazor.MapControl.UseFling
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UseFling
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 75
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: >-
+    Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a 
+
+    short time after the user has lifted the finger.
+  example: []
+  syntax:
+    content: public bool UseFling { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property UseFling As Boolean
+  overload: Mapsui.UI.Blazor.MapControl.UseFling*
+- uid: Mapsui.UI.Blazor.MapControl.StartUpdates(System.Boolean)
+  commentId: M:Mapsui.UI.Blazor.MapControl.StartUpdates(System.Boolean)
+  id: StartUpdates(System.Boolean)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: StartUpdates(bool)
+  nameWithType: MapControl.StartUpdates(bool)
+  fullName: Mapsui.UI.Blazor.MapControl.StartUpdates(bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StartUpdates
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 170
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Start updates for control
+  remarks: When this function is called, the control is redrawn if needed
+  example: []
+  syntax:
+    content: public void StartUpdates(bool refresh = true)
+    parameters:
+    - id: refresh
+      type: System.Boolean
+    content.vb: Public Sub StartUpdates(refresh As Boolean = True)
+  overload: Mapsui.UI.Blazor.MapControl.StartUpdates*
+  nameWithType.vb: MapControl.StartUpdates(Boolean)
+  fullName.vb: Mapsui.UI.Blazor.MapControl.StartUpdates(Boolean)
+  name.vb: StartUpdates(Boolean)
+- uid: Mapsui.UI.Blazor.MapControl.StopUpdates
+  commentId: M:Mapsui.UI.Blazor.MapControl.StopUpdates
+  id: StopUpdates
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: StopUpdates()
+  nameWithType: MapControl.StopUpdates()
+  fullName: Mapsui.UI.Blazor.MapControl.StopUpdates()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StopUpdates
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 183
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Stop updates for control
+  remarks: >-
+    When this function is called, the control stops to redraw itself, 
+
+    even if it is needed
+  example: []
+  syntax:
+    content: public void StopUpdates()
+    content.vb: Public Sub StopUpdates()
+  overload: Mapsui.UI.Blazor.MapControl.StopUpdates*
+- uid: Mapsui.UI.Blazor.MapControl.ForceUpdate
+  commentId: M:Mapsui.UI.Blazor.MapControl.ForceUpdate
+  id: ForceUpdate
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ForceUpdate()
+  nameWithType: MapControl.ForceUpdate()
+  fullName: Mapsui.UI.Blazor.MapControl.ForceUpdate()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ForceUpdate
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 194
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Force a update of control
+  remarks: When this function is called, the control draws itself once
+  example: []
+  syntax:
+    content: public void ForceUpdate()
+    content.vb: Public Sub ForceUpdate()
+  overload: Mapsui.UI.Blazor.MapControl.ForceUpdate*
+- uid: Mapsui.UI.Blazor.MapControl.UpdateInterval
+  commentId: P:Mapsui.UI.Blazor.MapControl.UpdateInterval
+  id: UpdateInterval
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: UpdateInterval
+  nameWithType: MapControl.UpdateInterval
+  fullName: Mapsui.UI.Blazor.MapControl.UpdateInterval
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateInterval
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 203
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Interval between two redraws of the MapControl in ms
+  example: []
+  syntax:
+    content: public int UpdateInterval { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property UpdateInterval As Integer
+  overload: Mapsui.UI.Blazor.MapControl.UpdateInterval*
+- uid: Mapsui.UI.Blazor.MapControl.Performance
+  commentId: P:Mapsui.UI.Blazor.MapControl.Performance
+  id: Performance
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Performance
+  nameWithType: MapControl.Performance
+  fullName: Mapsui.UI.Blazor.MapControl.Performance
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Performance
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 227
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Object to save performance information about the drawing of the map
+  remarks: If this is null, no performance information is saved.
+  example: []
+  syntax:
+    content: public Performance? Performance { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Utilities.Performance
+    content.vb: Public Property Performance As Performance
+  overload: Mapsui.UI.Blazor.MapControl.Performance*
+  implements:
+  - Mapsui.UI.IMapControl.Performance
+- uid: Mapsui.UI.Blazor.MapControl.PixelDensity
+  commentId: P:Mapsui.UI.Blazor.MapControl.PixelDensity
+  id: PixelDensity
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: PixelDensity
+  nameWithType: MapControl.PixelDensity
+  fullName: Mapsui.UI.Blazor.MapControl.PixelDensity
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PixelDensity
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 240
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: The number of pixel per device independent unit
+  example: []
+  syntax:
+    content: public float PixelDensity { get; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public ReadOnly Property PixelDensity As Single
+  overload: Mapsui.UI.Blazor.MapControl.PixelDensity*
+  implements:
+  - Mapsui.UI.IMapControl.PixelDensity
+- uid: Mapsui.UI.Blazor.MapControl.Renderer
+  commentId: P:Mapsui.UI.Blazor.MapControl.Renderer
+  id: Renderer
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Renderer
+  nameWithType: MapControl.Renderer
+  fullName: Mapsui.UI.Blazor.MapControl.Renderer
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Renderer
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 245
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Renderer that is used from this MapControl
+  example: []
+  syntax:
+    content: public IRenderer Renderer { get; }
+    parameters: []
+    return:
+      type: Mapsui.Rendering.IRenderer
+    content.vb: Public ReadOnly Property Renderer As IRenderer
+  overload: Mapsui.UI.Blazor.MapControl.Renderer*
+  implements:
+  - Mapsui.UI.IMapControl.Renderer
+- uid: Mapsui.UI.Blazor.MapControl.Info
+  commentId: E:Mapsui.UI.Blazor.MapControl.Info
+  id: Info
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Info
+  nameWithType: MapControl.Info
+  fullName: Mapsui.UI.Blazor.MapControl.Info
+  type: Event
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Info
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 251
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: >-
+    Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+
+    the layers that have IsMapInfoLayer set to true.
+  example: []
+  syntax:
+    content: public event EventHandler<MapInfoEventArgs>? Info
+    return:
+      type: System.EventHandler{Mapsui.MapInfoEventArgs}
+    content.vb: Public Event Info As EventHandler(Of MapInfoEventArgs)
+  implements:
+  - Mapsui.UI.IMapControl.Info
+- uid: Mapsui.UI.Blazor.MapControl.PropertyChanged
+  commentId: E:Mapsui.UI.Blazor.MapControl.PropertyChanged
+  id: PropertyChanged
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: PropertyChanged
+  nameWithType: MapControl.PropertyChanged
+  fullName: Mapsui.UI.Blazor.MapControl.PropertyChanged
+  type: Event
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PropertyChanged
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 259
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Called whenever a property is changed
+  example: []
+  syntax:
+    content: public event PropertyChangedEventHandler? PropertyChanged
+    return:
+      type: System.ComponentModel.PropertyChangedEventHandler
+    content.vb: Public Event PropertyChanged As PropertyChangedEventHandler
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: Mapsui.UI.Blazor.MapControl.OnPropertyChanged(System.String)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnPropertyChanged(System.String)
+  id: OnPropertyChanged(System.String)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnPropertyChanged(string)
+  nameWithType: MapControl.OnPropertyChanged(string)
+  fullName: Mapsui.UI.Blazor.MapControl.OnPropertyChanged(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnPropertyChanged
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 268
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected void OnPropertyChanged(string propertyName = "")
+    parameters:
+    - id: propertyName
+      type: System.String
+    content.vb: Protected Sub OnPropertyChanged(propertyName As String = "")
+  overload: Mapsui.UI.Blazor.MapControl.OnPropertyChanged*
+  nameWithType.vb: MapControl.OnPropertyChanged(String)
+  fullName.vb: Mapsui.UI.Blazor.MapControl.OnPropertyChanged(String)
+  name.vb: OnPropertyChanged(String)
+- uid: Mapsui.UI.Blazor.MapControl.Unsubscribe
+  commentId: M:Mapsui.UI.Blazor.MapControl.Unsubscribe
+  id: Unsubscribe
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Unsubscribe()
+  nameWithType: MapControl.Unsubscribe()
+  fullName: Mapsui.UI.Blazor.MapControl.Unsubscribe()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Unsubscribe
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 277
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Unsubscribe from map events
+  example: []
+  syntax:
+    content: public void Unsubscribe()
+    content.vb: Public Sub Unsubscribe()
+  overload: Mapsui.UI.Blazor.MapControl.Unsubscribe*
+  implements:
+  - Mapsui.UI.IMapControl.Unsubscribe
+- uid: Mapsui.UI.Blazor.MapControl.Refresh(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.Blazor.MapControl.Refresh(Mapsui.ChangeType)
+  id: Refresh(Mapsui.ChangeType)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Refresh(ChangeType)
+  nameWithType: MapControl.Refresh(ChangeType)
+  fullName: Mapsui.UI.Blazor.MapControl.Refresh(Mapsui.ChangeType)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Refresh
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 312
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  example: []
+  syntax:
+    content: public void Refresh(ChangeType changeType = ChangeType.Discrete)
+    parameters:
+    - id: changeType
+      type: Mapsui.ChangeType
+    content.vb: Public Sub Refresh(changeType As ChangeType = ChangeType.Discrete)
+  overload: Mapsui.UI.Blazor.MapControl.Refresh*
+  implements:
+  - Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+- uid: Mapsui.UI.Blazor.MapControl.RefreshGraphics
+  commentId: M:Mapsui.UI.Blazor.MapControl.RefreshGraphics
+  id: RefreshGraphics
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: RefreshGraphics()
+  nameWithType: MapControl.RefreshGraphics()
+  fullName: Mapsui.UI.Blazor.MapControl.RefreshGraphics()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshGraphics
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 317
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  example: []
+  syntax:
+    content: public void RefreshGraphics()
+    content.vb: Public Sub RefreshGraphics()
+  overload: Mapsui.UI.Blazor.MapControl.RefreshGraphics*
+  implements:
+  - Mapsui.UI.IMapControl.RefreshGraphics
+- uid: Mapsui.UI.Blazor.MapControl.Map
+  commentId: P:Mapsui.UI.Blazor.MapControl.Map
+  id: Map
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Map
+  nameWithType: MapControl.Map
+  fullName: Mapsui.UI.Blazor.MapControl.Map
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Map
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 427
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Map holding data for which is shown in this MapControl
+  example: []
+  syntax:
+    content: >-
+      [Parameter]
+
+      public Map Map { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Map
+    content.vb: >-
+      <Parameter>
+
+      Public Property Map As Map
+  overload: Mapsui.UI.Blazor.MapControl.Map*
+  implements:
+  - Mapsui.UI.IMapControl.Map
+  attributes:
+  - type: Microsoft.AspNetCore.Components.ParameterAttribute
+    ctor: Microsoft.AspNetCore.Components.ParameterAttribute.#ctor
+    arguments: []
+- uid: Mapsui.UI.Blazor.MapControl.ToPixels(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.Blazor.MapControl.ToPixels(Mapsui.MPoint)
+  id: ToPixels(Mapsui.MPoint)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ToPixels(MPoint)
+  nameWithType: MapControl.ToPixels(MPoint)
+  fullName: Mapsui.UI.Blazor.MapControl.ToPixels(Mapsui.MPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToPixels
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 467
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Converts coordinates in device independent units (or DIP or DP) to pixels.
+  example: []
+  syntax:
+    content: public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
+    parameters:
+    - id: coordinateInDeviceIndependentUnits
+      type: Mapsui.MPoint
+      description: Coordinate in device independent units (or DIP or DP)
+    return:
+      type: Mapsui.MPoint
+      description: Coordinate in pixels
+    content.vb: Public Function ToPixels(coordinateInDeviceIndependentUnits As MPoint) As MPoint
+  overload: Mapsui.UI.Blazor.MapControl.ToPixels*
+  implements:
+  - Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+- uid: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  id: ToDeviceIndependentUnits(Mapsui.MPoint)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: ToDeviceIndependentUnits(MPoint)
+  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
+  fullName: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToDeviceIndependentUnits
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 475
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Converts coordinates in pixels to device independent units (or DIP or DP).
+  example: []
+  syntax:
+    content: public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
+    parameters:
+    - id: coordinateInPixels
+      type: Mapsui.MPoint
+      description: Coordinate in pixels
+    return:
+      type: Mapsui.MPoint
+      description: Coordinate in device independent units (or DIP or DP)
+    content.vb: Public Function ToDeviceIndependentUnits(coordinateInPixels As MPoint) As MPoint
+  overload: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits*
+  implements:
+  - Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+- uid: Mapsui.UI.Blazor.MapControl.RefreshData(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.Blazor.MapControl.RefreshData(Mapsui.ChangeType)
+  id: RefreshData(Mapsui.ChangeType)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: RefreshData(ChangeType)
+  nameWithType: MapControl.RefreshData(ChangeType)
+  fullName: Mapsui.UI.Blazor.MapControl.RefreshData(Mapsui.ChangeType)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshData
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 483
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Refresh data of Map, but don't paint it
+  example: []
+  syntax:
+    content: public void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    parameters:
+    - id: changeType
+      type: Mapsui.ChangeType
+    content.vb: Public Sub RefreshData(changeType As ChangeType = ChangeType.Discrete)
+  overload: Mapsui.UI.Blazor.MapControl.RefreshData*
+  implements:
+  - Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+- uid: Mapsui.UI.Blazor.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)
+  id: OnMapInfo(Mapsui.MapInfoEventArgs)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: OnMapInfo(MapInfoEventArgs)
+  nameWithType: MapControl.OnMapInfo(MapInfoEventArgs)
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMapInfo
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 488
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  syntax:
+    content: protected void OnMapInfo(MapInfoEventArgs mapInfoEventArgs)
+    parameters:
+    - id: mapInfoEventArgs
+      type: Mapsui.MapInfoEventArgs
+    content.vb: Protected Sub OnMapInfo(mapInfoEventArgs As MapInfoEventArgs)
+  overload: Mapsui.UI.Blazor.MapControl.OnMapInfo*
+- uid: Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  commentId: M:Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  id: GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: GetMapInfo(ScreenPosition, int)
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
+  fullName: Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetMapInfo
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 495
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Check, if a feature at a given screen position is hit
+  example: []
+  syntax:
+    content: public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)
+    parameters:
+    - id: screenPosition
+      type: Mapsui.Manipulations.ScreenPosition
+      description: Screen position to check for widgets and features
+    - id: margin
+      type: System.Int32
+      description: An optional extra margin around the feature to enlarge the hit area.
+    return:
+      type: Mapsui.MapInfo
+    content.vb: Public Function GetMapInfo(screenPosition As ScreenPosition, margin As Integer = 0) As MapInfo
+  overload: Mapsui.UI.Blazor.MapControl.GetMapInfo*
+  implements:
+  - Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+  fullName.vb: Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
+  name.vb: GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.Blazor.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  commentId: M:Mapsui.UI.Blazor.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  id: GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  parent: Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: GetSnapshot(IEnumerable<ILayer>?)
+  nameWithType: MapControl.GetSnapshot(IEnumerable<ILayer>?)
+  fullName: Mapsui.UI.Blazor.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.Shared/MapControl.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetSnapshot
+    path: ../../Mapsui.UI.Shared/MapControl.cs
+    startLine: 501
+  assemblies:
+  - Mapsui.UI.Blazor
+  namespace: Mapsui.UI.Blazor
+  summary: Create a snapshot form map as PNG image
+  example: []
+  syntax:
+    content: public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
+    parameters:
+    - id: layers
+      type: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+      description: Layers that should be included in snapshot
+    return:
+      type: System.Byte[]
+      description: Byte array with snapshot in png format. If there are any problems than returns null.
+    content.vb: Public Function GetSnapshot(layers As IEnumerable(Of ILayer) = Nothing) As Byte()
+  overload: Mapsui.UI.Blazor.MapControl.GetSnapshot*
+  implements:
+  - Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  nameWithType.vb: MapControl.GetSnapshot(IEnumerable(Of ILayer))
+  fullName.vb: Mapsui.UI.Blazor.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  name.vb: GetSnapshot(IEnumerable(Of ILayer))
+references:
+- uid: Mapsui.UI.Blazor
+  commentId: N:Mapsui.UI.Blazor
+  href: Mapsui.html
+  name: Mapsui.UI.Blazor
+  nameWithType: Mapsui.UI.Blazor
+  fullName: Mapsui.UI.Blazor
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Blazor
+    name: Blazor
+    href: Mapsui.UI.Blazor.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Blazor
+    name: Blazor
+    href: Mapsui.UI.Blazor.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Microsoft.AspNetCore.Components.ComponentBase
+  commentId: T:Microsoft.AspNetCore.Components.ComponentBase
+  parent: Microsoft.AspNetCore.Components
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase
+  name: ComponentBase
+  nameWithType: ComponentBase
+  fullName: Microsoft.AspNetCore.Components.ComponentBase
+- uid: Microsoft.AspNetCore.Components.IComponent
+  commentId: T:Microsoft.AspNetCore.Components.IComponent
+  parent: Microsoft.AspNetCore.Components
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.icomponent
+  name: IComponent
+  nameWithType: IComponent
+  fullName: Microsoft.AspNetCore.Components.IComponent
+- uid: Microsoft.AspNetCore.Components.IHandleEvent
+  commentId: T:Microsoft.AspNetCore.Components.IHandleEvent
+  parent: Microsoft.AspNetCore.Components
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.ihandleevent
+  name: IHandleEvent
+  nameWithType: IHandleEvent
+  fullName: Microsoft.AspNetCore.Components.IHandleEvent
+- uid: Microsoft.AspNetCore.Components.IHandleAfterRender
+  commentId: T:Microsoft.AspNetCore.Components.IHandleAfterRender
+  parent: Microsoft.AspNetCore.Components
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.ihandleafterrender
+  name: IHandleAfterRender
+  nameWithType: IHandleAfterRender
+  fullName: Microsoft.AspNetCore.Components.IHandleAfterRender
+- uid: Mapsui.UI.IMapControl
+  commentId: T:Mapsui.UI.IMapControl
+  parent: Mapsui.UI
+  href: Mapsui.UI.IMapControl.html
+  name: IMapControl
+  nameWithType: IMapControl
+  fullName: Mapsui.UI.IMapControl
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.buildrendertree
+  name: BuildRenderTree(RenderTreeBuilder)
+  nameWithType: ComponentBase.BuildRenderTree(RenderTreeBuilder)
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+    name: BuildRenderTree
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.buildrendertree
+  - name: (
+  - uid: Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder
+    name: RenderTreeBuilder
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendering.rendertreebuilder
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+    name: BuildRenderTree
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.buildrendertree
+  - name: (
+  - uid: Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder
+    name: RenderTreeBuilder
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendering.rendertreebuilder
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitializedasync
+  name: OnInitializedAsync()
+  nameWithType: ComponentBase.OnInitializedAsync()
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync
+    name: OnInitializedAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitializedasync
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync
+    name: OnInitializedAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitializedasync
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparametersset
+  name: OnParametersSet()
+  nameWithType: ComponentBase.OnParametersSet()
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet
+    name: OnParametersSet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparametersset
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet
+    name: OnParametersSet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparametersset
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparameterssetasync
+  name: OnParametersSetAsync()
+  nameWithType: ComponentBase.OnParametersSetAsync()
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync
+    name: OnParametersSetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparameterssetasync
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync
+    name: OnParametersSetAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparameterssetasync
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.statehaschanged
+  name: StateHasChanged()
+  nameWithType: ComponentBase.StateHasChanged()
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged
+    name: StateHasChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.statehaschanged
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged
+    name: StateHasChanged
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.statehaschanged
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.ShouldRender
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.shouldrender
+  name: ShouldRender()
+  nameWithType: ComponentBase.ShouldRender()
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.ShouldRender()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.ShouldRender
+    name: ShouldRender
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.shouldrender
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.ShouldRender
+    name: ShouldRender
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.shouldrender
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrender
+  name: OnAfterRender(bool)
+  nameWithType: ComponentBase.OnAfterRender(bool)
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(bool)
+  nameWithType.vb: ComponentBase.OnAfterRender(Boolean)
+  fullName.vb: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(Boolean)
+  name.vb: OnAfterRender(Boolean)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)
+    name: OnAfterRender
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrender
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender(System.Boolean)
+    name: OnAfterRender
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrender
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(System.Boolean)
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(System.Boolean)
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrenderasync
+  name: OnAfterRenderAsync(bool)
+  nameWithType: ComponentBase.OnAfterRenderAsync(bool)
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(bool)
+  nameWithType.vb: ComponentBase.OnAfterRenderAsync(Boolean)
+  fullName.vb: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(Boolean)
+  name.vb: OnAfterRenderAsync(Boolean)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(System.Boolean)
+    name: OnAfterRenderAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrenderasync
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync(System.Boolean)
+    name: OnAfterRenderAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrenderasync
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Action)
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Action)
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.invokeasync#microsoft-aspnetcore-components-componentbase-invokeasync(system-action)
+  name: InvokeAsync(Action)
+  nameWithType: ComponentBase.InvokeAsync(Action)
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Action)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Action)
+    name: InvokeAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.invokeasync#microsoft-aspnetcore-components-componentbase-invokeasync(system-action)
+  - name: (
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Action)
+    name: InvokeAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.invokeasync#microsoft-aspnetcore-components-componentbase-invokeasync(system-action)
+  - name: (
+  - uid: System.Action
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Func{System.Threading.Tasks.Task})
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Func{System.Threading.Tasks.Task})
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.invokeasync#microsoft-aspnetcore-components-componentbase-invokeasync(system-func((system-threading-tasks-task)))
+  name: InvokeAsync(Func<Task>)
+  nameWithType: ComponentBase.InvokeAsync(Func<Task>)
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Func<System.Threading.Tasks.Task>)
+  nameWithType.vb: ComponentBase.InvokeAsync(Func(Of Task))
+  fullName.vb: Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Func(Of System.Threading.Tasks.Task))
+  name.vb: InvokeAsync(Func(Of Task))
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Func{System.Threading.Tasks.Task})
+    name: InvokeAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.invokeasync#microsoft-aspnetcore-components-componentbase-invokeasync(system-func((system-threading-tasks-task)))
+  - name: (
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: <
+  - uid: System.Threading.Tasks.Task
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.InvokeAsync(System.Func{System.Threading.Tasks.Task})
+    name: InvokeAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.invokeasync#microsoft-aspnetcore-components-componentbase-invokeasync(system-func((system-threading-tasks-task)))
+  - name: (
+  - uid: System.Func`1
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Threading.Tasks.Task
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  - name: )
+  - name: )
+- uid: Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.setparametersasync
+  name: SetParametersAsync(ParameterView)
+  nameWithType: ComponentBase.SetParametersAsync(ParameterView)
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)
+    name: SetParametersAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.setparametersasync
+  - name: (
+  - uid: Microsoft.AspNetCore.Components.ParameterView
+    name: ParameterView
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.parameterview
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)
+    name: SetParametersAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.setparametersasync
+  - name: (
+  - uid: Microsoft.AspNetCore.Components.ParameterView
+    name: ParameterView
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.parameterview
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.AspNetCore.Components
+  commentId: N:Microsoft.AspNetCore.Components
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Components
+  nameWithType: Microsoft.AspNetCore.Components
+  fullName: Microsoft.AspNetCore.Components
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Components
+    name: Components
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Components
+    name: Components
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components
+- uid: Mapsui.UI
+  commentId: N:Mapsui.UI
+  href: Mapsui.html
+  name: Mapsui.UI
+  nameWithType: Mapsui.UI
+  fullName: Mapsui.UI
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: SkiaSharp.Views.Blazor.SKCanvasView
+  commentId: T:SkiaSharp.Views.Blazor.SKCanvasView
+  parent: SkiaSharp.Views.Blazor
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor.skcanvasview
+  name: SKCanvasView
+  nameWithType: SKCanvasView
+  fullName: SkiaSharp.Views.Blazor.SKCanvasView
+- uid: SkiaSharp.Views.Blazor
+  commentId: N:SkiaSharp.Views.Blazor
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp
+  name: SkiaSharp.Views.Blazor
+  nameWithType: SkiaSharp.Views.Blazor
+  fullName: SkiaSharp.Views.Blazor
+  spec.csharp:
+  - uid: SkiaSharp
+    name: SkiaSharp
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp
+  - name: .
+  - uid: SkiaSharp.Views
+    name: Views
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.views
+  - name: .
+  - uid: SkiaSharp.Views.Blazor
+    name: Blazor
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor
+  spec.vb:
+  - uid: SkiaSharp
+    name: SkiaSharp
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp
+  - name: .
+  - uid: SkiaSharp.Views
+    name: Views
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.views
+  - name: .
+  - uid: SkiaSharp.Views.Blazor
+    name: Blazor
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor
+- uid: SkiaSharp.Views.Blazor.SKGLView
+  commentId: T:SkiaSharp.Views.Blazor.SKGLView
+  parent: SkiaSharp.Views.Blazor
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor.skglview
+  name: SKGLView
+  nameWithType: SKGLView
+  fullName: SkiaSharp.Views.Blazor.SKGLView
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Nullable{Mapsui.Manipulations.ScreenPosition}
+  commentId: T:System.Nullable{Mapsui.Manipulations.ScreenPosition}
+  parent: System
+  definition: System.Nullable`1
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition?
+  nameWithType: ScreenPosition?
+  fullName: Mapsui.Manipulations.ScreenPosition?
+  spec.csharp:
+  - uid: Mapsui.Manipulations.ScreenPosition
+    name: ScreenPosition
+    href: Mapsui.Manipulations.ScreenPosition.html
+  - name: '?'
+  spec.vb:
+  - uid: Mapsui.Manipulations.ScreenPosition
+    name: ScreenPosition
+    href: Mapsui.Manipulations.ScreenPosition.html
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.UI.Blazor.MapControl.UseGPU*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.UseGPU
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_UseGPU
+  name: UseGPU
+  nameWithType: MapControl.UseGPU
+  fullName: Mapsui.UI.Blazor.MapControl.UseGPU
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.UI.Blazor.MapControl.MoveCursor*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.MoveCursor
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_MoveCursor
+  name: MoveCursor
+  nameWithType: MapControl.MoveCursor
+  fullName: Mapsui.UI.Blazor.MapControl.MoveCursor
+- uid: Mapsui.UI.Blazor.MapControl.MoveButton*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.MoveButton
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_MoveButton
+  name: MoveButton
+  nameWithType: MapControl.MoveButton
+  fullName: Mapsui.UI.Blazor.MapControl.MoveButton
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.UI.Blazor.MapControl.MoveModifier*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.MoveModifier
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_MoveModifier
+  name: MoveModifier
+  nameWithType: MapControl.MoveModifier
+  fullName: Mapsui.UI.Blazor.MapControl.MoveModifier
+- uid: Mapsui.UI.Blazor.MapControl.ZoomButton*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.ZoomButton
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ZoomButton
+  name: ZoomButton
+  nameWithType: MapControl.ZoomButton
+  fullName: Mapsui.UI.Blazor.MapControl.ZoomButton
+- uid: Mapsui.UI.Blazor.MapControl.ZoomModifier*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.ZoomModifier
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ZoomModifier
+  name: ZoomModifier
+  nameWithType: MapControl.ZoomModifier
+  fullName: Mapsui.UI.Blazor.MapControl.ZoomModifier
+- uid: Mapsui.UI.Blazor.MapControl.ElementId*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.ElementId
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ElementId
+  name: ElementId
+  nameWithType: MapControl.ElementId
+  fullName: Mapsui.UI.Blazor.MapControl.ElementId
+- uid: Mapsui.UI.Blazor.MapControl.#ctor*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.#ctor
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl__ctor
+  name: MapControl
+  nameWithType: MapControl.MapControl
+  fullName: Mapsui.UI.Blazor.MapControl.MapControl
+  nameWithType.vb: MapControl.New
+  fullName.vb: Mapsui.UI.Blazor.MapControl.New
+  name.vb: New
+- uid: Microsoft.AspNetCore.Components.ComponentBase.OnInitialized
+  commentId: M:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized
+  parent: Microsoft.AspNetCore.Components.ComponentBase
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitialized
+  name: OnInitialized()
+  nameWithType: ComponentBase.OnInitialized()
+  fullName: Microsoft.AspNetCore.Components.ComponentBase.OnInitialized()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnInitialized
+    name: OnInitialized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitialized
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Components.ComponentBase.OnInitialized
+    name: OnInitialized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitialized
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Blazor.MapControl.OnInitialized*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnInitialized
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnInitialized
+  name: OnInitialized
+  nameWithType: MapControl.OnInitialized
+  fullName: Mapsui.UI.Blazor.MapControl.OnInitialized
+- uid: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnPaintSurfaceCPU_SkiaSharp_Views_Blazor_SKPaintSurfaceEventArgs_
+  name: OnPaintSurfaceCPU
+  nameWithType: MapControl.OnPaintSurfaceCPU
+  fullName: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceCPU
+- uid: SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs
+  commentId: T:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs
+  parent: SkiaSharp.Views.Blazor
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor.skpaintsurfaceeventargs
+  name: SKPaintSurfaceEventArgs
+  nameWithType: SKPaintSurfaceEventArgs
+  fullName: SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs
+- uid: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnPaintSurfaceGPU_SkiaSharp_Views_Blazor_SKPaintGLSurfaceEventArgs_
+  name: OnPaintSurfaceGPU
+  nameWithType: MapControl.OnPaintSurfaceGPU
+  fullName: Mapsui.UI.Blazor.MapControl.OnPaintSurfaceGPU
+- uid: SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs
+  commentId: T:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs
+  parent: SkiaSharp.Views.Blazor
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.views.blazor.skpaintglsurfaceeventargs
+  name: SKPaintGLSurfaceEventArgs
+  nameWithType: SKPaintGLSurfaceEventArgs
+  fullName: SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs
+- uid: Mapsui.UI.Blazor.MapControl.OnPaintSurface*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnPaintSurface
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnPaintSurface_SkiaSharp_SKCanvas_SkiaSharp_SKImageInfo_
+  name: OnPaintSurface
+  nameWithType: MapControl.OnPaintSurface
+  fullName: Mapsui.UI.Blazor.MapControl.OnPaintSurface
+- uid: SkiaSharp.SKCanvas
+  commentId: T:SkiaSharp.SKCanvas
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skcanvas
+  name: SKCanvas
+  nameWithType: SKCanvas
+  fullName: SkiaSharp.SKCanvas
+- uid: SkiaSharp.SKImageInfo
+  commentId: T:SkiaSharp.SKImageInfo
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skimageinfo
+  name: SKImageInfo
+  nameWithType: SKImageInfo
+  fullName: SkiaSharp.SKImageInfo
+- uid: SkiaSharp
+  commentId: N:SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp
+  name: SkiaSharp
+  nameWithType: SkiaSharp
+  fullName: SkiaSharp
+- uid: Mapsui.UI.Blazor.MapControl.OnMouseWheel*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnMouseWheel
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMouseWheel_Microsoft_AspNetCore_Components_Web_WheelEventArgs_
+  name: OnMouseWheel
+  nameWithType: MapControl.OnMouseWheel
+  fullName: Mapsui.UI.Blazor.MapControl.OnMouseWheel
+- uid: Microsoft.AspNetCore.Components.Web.WheelEventArgs
+  commentId: T:Microsoft.AspNetCore.Components.Web.WheelEventArgs
+  parent: Microsoft.AspNetCore.Components.Web
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.wheeleventargs
+  name: WheelEventArgs
+  nameWithType: WheelEventArgs
+  fullName: Microsoft.AspNetCore.Components.Web.WheelEventArgs
+- uid: Microsoft.AspNetCore.Components.Web
+  commentId: N:Microsoft.AspNetCore.Components.Web
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Components.Web
+  nameWithType: Microsoft.AspNetCore.Components.Web
+  fullName: Microsoft.AspNetCore.Components.Web
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Components
+    name: Components
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components
+  - name: .
+  - uid: Microsoft.AspNetCore.Components.Web
+    name: Web
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Components
+    name: Components
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components
+  - name: .
+  - uid: Microsoft.AspNetCore.Components.Web
+    name: Web
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web
+- uid: Mapsui.UI.Blazor.MapControl.OnMouseDown*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnMouseDown
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMouseDown_Microsoft_AspNetCore_Components_Web_MouseEventArgs_
+  name: OnMouseDown
+  nameWithType: MapControl.OnMouseDown
+  fullName: Mapsui.UI.Blazor.MapControl.OnMouseDown
+- uid: Microsoft.AspNetCore.Components.Web.MouseEventArgs
+  commentId: T:Microsoft.AspNetCore.Components.Web.MouseEventArgs
+  parent: Microsoft.AspNetCore.Components.Web
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.mouseeventargs
+  name: MouseEventArgs
+  nameWithType: MouseEventArgs
+  fullName: Microsoft.AspNetCore.Components.Web.MouseEventArgs
+- uid: Mapsui.UI.Blazor.MapControl.OnMouseMove*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnMouseMove
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMouseMove_Microsoft_AspNetCore_Components_Web_MouseEventArgs_
+  name: OnMouseMove
+  nameWithType: MapControl.OnMouseMove
+  fullName: Mapsui.UI.Blazor.MapControl.OnMouseMove
+- uid: Mapsui.UI.Blazor.MapControl.OnMouseUp*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnMouseUp
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMouseUp_Microsoft_AspNetCore_Components_Web_MouseEventArgs_
+  name: OnMouseUp
+  nameWithType: MapControl.OnMouseUp
+  fullName: Mapsui.UI.Blazor.MapControl.OnMouseUp
+- uid: Mapsui.UI.Blazor.MapControl.Dispose*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.Dispose
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Dispose
+  name: Dispose
+  nameWithType: MapControl.Dispose
+  fullName: Mapsui.UI.Blazor.MapControl.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Blazor.MapControl.Cursor*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.Cursor
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Cursor
+  name: Cursor
+  nameWithType: MapControl.Cursor
+  fullName: Mapsui.UI.Blazor.MapControl.Cursor
+- uid: Mapsui.UI.Blazor.MapControl.OpenInBrowser*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OpenInBrowser
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OpenInBrowser_System_String_
+  name: OpenInBrowser
+  nameWithType: MapControl.OpenInBrowser
+  fullName: Mapsui.UI.Blazor.MapControl.OpenInBrowser
+- uid: Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+  commentId: M:Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+  parent: Mapsui.UI.IMapControl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: OpenInBrowser(string)
+  nameWithType: IMapControl.OpenInBrowser(string)
+  fullName: Mapsui.UI.IMapControl.OpenInBrowser(string)
+  nameWithType.vb: IMapControl.OpenInBrowser(String)
+  fullName.vb: Mapsui.UI.IMapControl.OpenInBrowser(String)
+  name.vb: OpenInBrowser(String)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+    name: OpenInBrowser
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.OpenInBrowser(System.String)
+    name: OpenInBrowser
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Mapsui.UI.Blazor.MapControl.OnTouchStart*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnTouchStart
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnTouchStart_Microsoft_AspNetCore_Components_Web_TouchEventArgs_
+  name: OnTouchStart
+  nameWithType: MapControl.OnTouchStart
+  fullName: Mapsui.UI.Blazor.MapControl.OnTouchStart
+- uid: Microsoft.AspNetCore.Components.Web.TouchEventArgs
+  commentId: T:Microsoft.AspNetCore.Components.Web.TouchEventArgs
+  parent: Microsoft.AspNetCore.Components.Web
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.web.toucheventargs
+  name: TouchEventArgs
+  nameWithType: TouchEventArgs
+  fullName: Microsoft.AspNetCore.Components.Web.TouchEventArgs
+- uid: Mapsui.UI.Blazor.MapControl.OnTouchMove*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnTouchMove
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnTouchMove_Microsoft_AspNetCore_Components_Web_TouchEventArgs_
+  name: OnTouchMove
+  nameWithType: MapControl.OnTouchMove
+  fullName: Mapsui.UI.Blazor.MapControl.OnTouchMove
+- uid: Mapsui.UI.Blazor.MapControl.OnTouchEnd*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnTouchEnd
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnTouchEnd_Microsoft_AspNetCore_Components_Web_TouchEventArgs_
+  name: OnTouchEnd
+  nameWithType: MapControl.OnTouchEnd
+  fullName: Mapsui.UI.Blazor.MapControl.OnTouchEnd
+- uid: Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_MaxTapGestureMovement
+  name: MaxTapGestureMovement
+  nameWithType: MapControl.MaxTapGestureMovement
+  fullName: Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement
+- uid: Mapsui.UI.Blazor.MapControl.UseFling*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.UseFling
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_UseFling
+  name: UseFling
+  nameWithType: MapControl.UseFling
+  fullName: Mapsui.UI.Blazor.MapControl.UseFling
+- uid: Mapsui.UI.Blazor.MapControl.StartUpdates*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.StartUpdates
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_StartUpdates_System_Boolean_
+  name: StartUpdates
+  nameWithType: MapControl.StartUpdates
+  fullName: Mapsui.UI.Blazor.MapControl.StartUpdates
+- uid: Mapsui.UI.Blazor.MapControl.StopUpdates*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.StopUpdates
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_StopUpdates
+  name: StopUpdates
+  nameWithType: MapControl.StopUpdates
+  fullName: Mapsui.UI.Blazor.MapControl.StopUpdates
+- uid: Mapsui.UI.Blazor.MapControl.ForceUpdate*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.ForceUpdate
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ForceUpdate
+  name: ForceUpdate
+  nameWithType: MapControl.ForceUpdate
+  fullName: Mapsui.UI.Blazor.MapControl.ForceUpdate
+- uid: Mapsui.UI.Blazor.MapControl.UpdateInterval*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.UpdateInterval
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_UpdateInterval
+  name: UpdateInterval
+  nameWithType: MapControl.UpdateInterval
+  fullName: Mapsui.UI.Blazor.MapControl.UpdateInterval
+- uid: Mapsui.UI.Blazor.MapControl.Performance*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.Performance
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Performance
+  name: Performance
+  nameWithType: MapControl.Performance
+  fullName: Mapsui.UI.Blazor.MapControl.Performance
+- uid: Mapsui.UI.IMapControl.Performance
+  commentId: P:Mapsui.UI.IMapControl.Performance
+  parent: Mapsui.UI.IMapControl
+  name: Performance
+  nameWithType: IMapControl.Performance
+  fullName: Mapsui.UI.IMapControl.Performance
+- uid: Mapsui.Utilities.Performance
+  commentId: T:Mapsui.Utilities.Performance
+  parent: Mapsui.Utilities
+  href: Mapsui.Utilities.Performance.html
+  name: Performance
+  nameWithType: Performance
+  fullName: Mapsui.Utilities.Performance
+- uid: Mapsui.Utilities
+  commentId: N:Mapsui.Utilities
+  href: Mapsui.html
+  name: Mapsui.Utilities
+  nameWithType: Mapsui.Utilities
+  fullName: Mapsui.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+- uid: Mapsui.UI.Blazor.MapControl.PixelDensity*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.PixelDensity
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_PixelDensity
+  name: PixelDensity
+  nameWithType: MapControl.PixelDensity
+  fullName: Mapsui.UI.Blazor.MapControl.PixelDensity
+- uid: Mapsui.UI.IMapControl.PixelDensity
+  commentId: P:Mapsui.UI.IMapControl.PixelDensity
+  parent: Mapsui.UI.IMapControl
+  name: PixelDensity
+  nameWithType: IMapControl.PixelDensity
+  fullName: Mapsui.UI.IMapControl.PixelDensity
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Mapsui.UI.Blazor.MapControl.Renderer*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.Renderer
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Renderer
+  name: Renderer
+  nameWithType: MapControl.Renderer
+  fullName: Mapsui.UI.Blazor.MapControl.Renderer
+- uid: Mapsui.UI.IMapControl.Renderer
+  commentId: P:Mapsui.UI.IMapControl.Renderer
+  parent: Mapsui.UI.IMapControl
+  name: Renderer
+  nameWithType: IMapControl.Renderer
+  fullName: Mapsui.UI.IMapControl.Renderer
+- uid: Mapsui.Rendering.IRenderer
+  commentId: T:Mapsui.Rendering.IRenderer
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderer.html
+  name: IRenderer
+  nameWithType: IRenderer
+  fullName: Mapsui.Rendering.IRenderer
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: Mapsui.UI.IMapControl.Info
+  commentId: E:Mapsui.UI.IMapControl.Info
+  parent: Mapsui.UI.IMapControl
+  name: Info
+  nameWithType: IMapControl.Info
+  fullName: Mapsui.UI.IMapControl.Info
+- uid: System.EventHandler{Mapsui.MapInfoEventArgs}
+  commentId: T:System.EventHandler{Mapsui.MapInfoEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<MapInfoEventArgs>
+  nameWithType: EventHandler<MapInfoEventArgs>
+  fullName: System.EventHandler<Mapsui.MapInfoEventArgs>
+  nameWithType.vb: EventHandler(Of MapInfoEventArgs)
+  fullName.vb: System.EventHandler(Of Mapsui.MapInfoEventArgs)
+  name.vb: EventHandler(Of MapInfoEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - uid: Mapsui.MapInfoEventArgs
+    name: MapInfoEventArgs
+    href: Mapsui.MapInfoEventArgs.html
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.MapInfoEventArgs
+    name: MapInfoEventArgs
+    href: Mapsui.MapInfoEventArgs.html
+  - name: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - name: TEventArgs
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEventArgs
+  - name: )
+- uid: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  commentId: E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  parent: System.ComponentModel.INotifyPropertyChanged
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged.propertychanged
+  name: PropertyChanged
+  nameWithType: INotifyPropertyChanged.PropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: System.ComponentModel.PropertyChangedEventHandler
+  commentId: T:System.ComponentModel.PropertyChangedEventHandler
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler
+  name: PropertyChangedEventHandler
+  nameWithType: PropertyChangedEventHandler
+  fullName: System.ComponentModel.PropertyChangedEventHandler
+- uid: Mapsui.UI.Blazor.MapControl.OnPropertyChanged*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnPropertyChanged
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnPropertyChanged_System_String_
+  name: OnPropertyChanged
+  nameWithType: MapControl.OnPropertyChanged
+  fullName: Mapsui.UI.Blazor.MapControl.OnPropertyChanged
+- uid: Mapsui.UI.Blazor.MapControl.Unsubscribe*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.Unsubscribe
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Unsubscribe
+  name: Unsubscribe
+  nameWithType: MapControl.Unsubscribe
+  fullName: Mapsui.UI.Blazor.MapControl.Unsubscribe
+- uid: Mapsui.UI.IMapControl.Unsubscribe
+  commentId: M:Mapsui.UI.IMapControl.Unsubscribe
+  parent: Mapsui.UI.IMapControl
+  name: Unsubscribe()
+  nameWithType: IMapControl.Unsubscribe()
+  fullName: Mapsui.UI.IMapControl.Unsubscribe()
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.Unsubscribe
+    name: Unsubscribe
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.Unsubscribe
+    name: Unsubscribe
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Blazor.MapControl.Refresh*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.Refresh
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Refresh_Mapsui_ChangeType_
+  name: Refresh
+  nameWithType: MapControl.Refresh
+  fullName: Mapsui.UI.Blazor.MapControl.Refresh
+- uid: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  parent: Mapsui.UI.IMapControl
+  name: Refresh(ChangeType)
+  nameWithType: IMapControl.Refresh(ChangeType)
+  fullName: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+    name: Refresh
+  - name: (
+  - uid: Mapsui.ChangeType
+    name: ChangeType
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+    name: Refresh
+  - name: (
+  - uid: Mapsui.ChangeType
+    name: ChangeType
+  - name: )
+- uid: Mapsui.ChangeType
+  commentId: T:Mapsui.ChangeType
+  parent: Mapsui
+  href: Mapsui.ChangeType.html
+  name: ChangeType
+  nameWithType: ChangeType
+  fullName: Mapsui.ChangeType
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.UI.Blazor.MapControl.RefreshGraphics*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.RefreshGraphics
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_RefreshGraphics
+  name: RefreshGraphics
+  nameWithType: MapControl.RefreshGraphics
+  fullName: Mapsui.UI.Blazor.MapControl.RefreshGraphics
+- uid: Mapsui.UI.IMapControl.RefreshGraphics
+  commentId: M:Mapsui.UI.IMapControl.RefreshGraphics
+  parent: Mapsui.UI.IMapControl
+  name: RefreshGraphics()
+  nameWithType: IMapControl.RefreshGraphics()
+  fullName: Mapsui.UI.IMapControl.RefreshGraphics()
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.RefreshGraphics
+    name: RefreshGraphics
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.RefreshGraphics
+    name: RefreshGraphics
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Blazor.MapControl.Map*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.Map
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Map
+  name: Map
+  nameWithType: MapControl.Map
+  fullName: Mapsui.UI.Blazor.MapControl.Map
+- uid: Mapsui.UI.IMapControl.Map
+  commentId: P:Mapsui.UI.IMapControl.Map
+  parent: Mapsui.UI.IMapControl
+  name: Map
+  nameWithType: IMapControl.Map
+  fullName: Mapsui.UI.IMapControl.Map
+- uid: Mapsui.Map
+  commentId: T:Mapsui.Map
+  parent: Mapsui
+  href: Mapsui.Map.html
+  name: Map
+  nameWithType: Map
+  fullName: Mapsui.Map
+- uid: Mapsui.UI.Blazor.MapControl.ToPixels*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.ToPixels
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ToPixels_Mapsui_MPoint_
+  name: ToPixels
+  nameWithType: MapControl.ToPixels
+  fullName: Mapsui.UI.Blazor.MapControl.ToPixels
+- uid: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  parent: Mapsui.UI.IMapControl
+  name: ToPixels(MPoint)
+  nameWithType: IMapControl.ToPixels(MPoint)
+  fullName: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+    name: ToPixels
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
+    name: ToPixels
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+  - name: )
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
+  name: ToDeviceIndependentUnits
+  nameWithType: MapControl.ToDeviceIndependentUnits
+  fullName: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits
+- uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  commentId: M:Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  parent: Mapsui.UI.IMapControl
+  name: ToDeviceIndependentUnits(MPoint)
+  nameWithType: IMapControl.ToDeviceIndependentUnits(MPoint)
+  fullName: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+    name: ToDeviceIndependentUnits
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+    name: ToDeviceIndependentUnits
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+  - name: )
+- uid: Mapsui.UI.Blazor.MapControl.RefreshData*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.RefreshData
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_RefreshData_Mapsui_ChangeType_
+  name: RefreshData
+  nameWithType: MapControl.RefreshData
+  fullName: Mapsui.UI.Blazor.MapControl.RefreshData
+- uid: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  commentId: M:Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  parent: Mapsui.UI.IMapControl
+  name: RefreshData(ChangeType)
+  nameWithType: IMapControl.RefreshData(ChangeType)
+  fullName: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+    name: RefreshData
+  - name: (
+  - uid: Mapsui.ChangeType
+    name: ChangeType
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+    name: RefreshData
+  - name: (
+  - uid: Mapsui.ChangeType
+    name: ChangeType
+  - name: )
+- uid: Mapsui.UI.Blazor.MapControl.OnMapInfo*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnMapInfo
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_
+  name: OnMapInfo
+  nameWithType: MapControl.OnMapInfo
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapInfo
+- uid: Mapsui.MapInfoEventArgs
+  commentId: T:Mapsui.MapInfoEventArgs
+  parent: Mapsui
+  href: Mapsui.MapInfoEventArgs.html
+  name: MapInfoEventArgs
+  nameWithType: MapInfoEventArgs
+  fullName: Mapsui.MapInfoEventArgs
+- uid: Mapsui.UI.Blazor.MapControl.GetMapInfo*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.GetMapInfo
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
+  name: GetMapInfo
+  nameWithType: MapControl.GetMapInfo
+  fullName: Mapsui.UI.Blazor.MapControl.GetMapInfo
+- uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  commentId: M:Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+  parent: Mapsui.UI.IMapControl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: GetMapInfo(ScreenPosition, int)
+  nameWithType: IMapControl.GetMapInfo(ScreenPosition, int)
+  fullName: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
+  nameWithType.vb: IMapControl.GetMapInfo(ScreenPosition, Integer)
+  fullName.vb: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
+  name.vb: GetMapInfo(ScreenPosition, Integer)
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+    name: GetMapInfo
+  - name: (
+  - uid: Mapsui.Manipulations.ScreenPosition
+    name: ScreenPosition
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
+    name: GetMapInfo
+  - name: (
+  - uid: Mapsui.Manipulations.ScreenPosition
+    name: ScreenPosition
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: Mapsui.Manipulations.ScreenPosition
+  commentId: T:Mapsui.Manipulations.ScreenPosition
+  parent: Mapsui.Manipulations
+  href: Mapsui.Manipulations.ScreenPosition.html
+  name: ScreenPosition
+  nameWithType: ScreenPosition
+  fullName: Mapsui.Manipulations.ScreenPosition
+- uid: Mapsui.MapInfo
+  commentId: T:Mapsui.MapInfo
+  parent: Mapsui
+  href: Mapsui.MapInfo.html
+  name: MapInfo
+  nameWithType: MapInfo
+  fullName: Mapsui.MapInfo
+- uid: Mapsui.Manipulations
+  commentId: N:Mapsui.Manipulations
+  href: Mapsui.html
+  name: Mapsui.Manipulations
+  nameWithType: Mapsui.Manipulations
+  fullName: Mapsui.Manipulations
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Manipulations
+    name: Manipulations
+    href: Mapsui.Manipulations.html
+- uid: Mapsui.UI.Blazor.MapControl.GetSnapshot*
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.GetSnapshot
+  href: Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  name: GetSnapshot
+  nameWithType: MapControl.GetSnapshot
+  fullName: Mapsui.UI.Blazor.MapControl.GetSnapshot
+- uid: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  commentId: M:Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  parent: Mapsui.UI.IMapControl
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: GetSnapshot(IEnumerable<ILayer>)
+  nameWithType: IMapControl.GetSnapshot(IEnumerable<ILayer>)
+  fullName: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  nameWithType.vb: IMapControl.GetSnapshot(IEnumerable(Of ILayer))
+  fullName.vb: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  name.vb: GetSnapshot(IEnumerable(Of ILayer))
+  spec.csharp:
+  - uid: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+    name: GetSnapshot
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+    name: GetSnapshot
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<ILayer>
+  nameWithType: IEnumerable<ILayer>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>
+  nameWithType.vb: IEnumerable(Of ILayer)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer)
+  name.vb: IEnumerable(Of ILayer)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+    href: Mapsui.Layers.ILayer.html
+  - name: )
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic

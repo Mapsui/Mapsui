@@ -1,0 +1,284 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Fetcher.IAsyncDataFetcher
+  commentId: T:Mapsui.Fetcher.IAsyncDataFetcher
+  id: IAsyncDataFetcher
+  parent: Mapsui.Fetcher
+  children:
+  - Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch
+  - Mapsui.Fetcher.IAsyncDataFetcher.ClearCache
+  - Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Layers.FetchInfo)
+  langs:
+  - csharp
+  - vb
+  name: IAsyncDataFetcher
+  nameWithType: IAsyncDataFetcher
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Fetcher/IAsyncDataFetcher.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IAsyncDataFetcher
+    path: ../../Mapsui/Fetcher/IAsyncDataFetcher.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  syntax:
+    content: public interface IAsyncDataFetcher
+    content.vb: Public Interface IAsyncDataFetcher
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch
+  commentId: M:Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch
+  id: AbortFetch
+  parent: Mapsui.Fetcher.IAsyncDataFetcher
+  langs:
+  - csharp
+  - vb
+  name: AbortFetch()
+  nameWithType: IAsyncDataFetcher.AbortFetch()
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Fetcher/IAsyncDataFetcher.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AbortFetch
+    path: ../../Mapsui/Fetcher/IAsyncDataFetcher.cs
+    startLine: 17
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  summary: >-
+    Aborts the tile fetches that are in progress. If this method is not called
+
+    the threads will terminate naturally. It will just take a little longer.
+  example: []
+  syntax:
+    content: void AbortFetch()
+    content.vb: Sub AbortFetch()
+  overload: Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch*
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.ClearCache
+  commentId: M:Mapsui.Fetcher.IAsyncDataFetcher.ClearCache
+  id: ClearCache
+  parent: Mapsui.Fetcher.IAsyncDataFetcher
+  langs:
+  - csharp
+  - vb
+  name: ClearCache()
+  nameWithType: IAsyncDataFetcher.ClearCache()
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.ClearCache()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Fetcher/IAsyncDataFetcher.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ClearCache
+    path: ../../Mapsui/Fetcher/IAsyncDataFetcher.cs
+    startLine: 22
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  summary: Clear cache of layer
+  example: []
+  syntax:
+    content: void ClearCache()
+    content.vb: Sub ClearCache()
+  overload: Mapsui.Fetcher.IAsyncDataFetcher.ClearCache*
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Layers.FetchInfo)
+  id: RefreshData(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Fetcher.IAsyncDataFetcher
+  langs:
+  - csharp
+  - vb
+  name: RefreshData(FetchInfo)
+  nameWithType: IAsyncDataFetcher.RefreshData(FetchInfo)
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Layers.FetchInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Fetcher/IAsyncDataFetcher.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshData
+    path: ../../Mapsui/Fetcher/IAsyncDataFetcher.cs
+    startLine: 31
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Fetcher
+  summary: Indicates that there has been a change in the view of the map
+  example: []
+  syntax:
+    content: void RefreshData(FetchInfo fetchInfo)
+    parameters:
+    - id: fetchInfo
+      type: Mapsui.Layers.FetchInfo
+      description: FetchInfo
+    content.vb: Sub RefreshData(fetchInfo As FetchInfo)
+  overload: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData*
+references:
+- uid: Mapsui.Fetcher
+  commentId: N:Mapsui.Fetcher
+  href: Mapsui.html
+  name: Mapsui.Fetcher
+  nameWithType: Mapsui.Fetcher
+  fullName: Mapsui.Fetcher
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch*
+  commentId: Overload:Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch
+  href: Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_AbortFetch
+  name: AbortFetch
+  nameWithType: IAsyncDataFetcher.AbortFetch
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.ClearCache*
+  commentId: Overload:Mapsui.Fetcher.IAsyncDataFetcher.ClearCache
+  href: Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_ClearCache
+  name: ClearCache
+  nameWithType: IAsyncDataFetcher.ClearCache
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.ClearCache
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData*
+  commentId: Overload:Mapsui.Fetcher.IAsyncDataFetcher.RefreshData
+  href: Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_RefreshData_Mapsui_Layers_FetchInfo_
+  name: RefreshData
+  nameWithType: IAsyncDataFetcher.RefreshData
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html

@@ -1,0 +1,97 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Blazor.Extensions
+  commentId: N:Mapsui.UI.Blazor.Extensions
+  id: Mapsui.UI.Blazor.Extensions
+  children:
+  - Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  - Mapsui.UI.Blazor.Extensions.Cursors
+  - Mapsui.UI.Blazor.Extensions.Keys
+  - Mapsui.UI.Blazor.Extensions.MapsuiJsInterop
+  - Mapsui.UI.Blazor.Extensions.MouseButtons
+  - Mapsui.UI.Blazor.Extensions.TouchPointExtensions
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Blazor.Extensions
+  nameWithType: Mapsui.UI.Blazor.Extensions
+  fullName: Mapsui.UI.Blazor.Extensions
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Blazor
+references:
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  commentId: T:Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  parent: Mapsui.UI.Blazor.Extensions
+  href: Mapsui.UI.Blazor.Extensions.BoundingClientRect.html
+  name: BoundingClientRect
+  nameWithType: BoundingClientRect
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+- uid: Mapsui.UI.Blazor.Extensions.Cursors
+  commentId: T:Mapsui.UI.Blazor.Extensions.Cursors
+  href: Mapsui.UI.Blazor.Extensions.Cursors.html
+  name: Cursors
+  nameWithType: Cursors
+  fullName: Mapsui.UI.Blazor.Extensions.Cursors
+- uid: Mapsui.UI.Blazor.Extensions.Keys
+  commentId: T:Mapsui.UI.Blazor.Extensions.Keys
+  href: Mapsui.UI.Blazor.Extensions.Keys.html
+  name: Keys
+  nameWithType: Keys
+  fullName: Mapsui.UI.Blazor.Extensions.Keys
+- uid: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop
+  commentId: T:Mapsui.UI.Blazor.Extensions.MapsuiJsInterop
+  href: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.html
+  name: MapsuiJsInterop
+  nameWithType: MapsuiJsInterop
+  fullName: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop
+- uid: Mapsui.UI.Blazor.Extensions.MouseButtons
+  commentId: T:Mapsui.UI.Blazor.Extensions.MouseButtons
+  href: Mapsui.UI.Blazor.Extensions.MouseButtons.html
+  name: MouseButtons
+  nameWithType: MouseButtons
+  fullName: Mapsui.UI.Blazor.Extensions.MouseButtons
+- uid: Mapsui.UI.Blazor.Extensions.TouchPointExtensions
+  commentId: T:Mapsui.UI.Blazor.Extensions.TouchPointExtensions
+  href: Mapsui.UI.Blazor.Extensions.TouchPointExtensions.html
+  name: TouchPointExtensions
+  nameWithType: TouchPointExtensions
+  fullName: Mapsui.UI.Blazor.Extensions.TouchPointExtensions
+- uid: Mapsui.UI.Blazor.Extensions
+  commentId: N:Mapsui.UI.Blazor.Extensions
+  href: Mapsui.html
+  name: Mapsui.UI.Blazor.Extensions
+  nameWithType: Mapsui.UI.Blazor.Extensions
+  fullName: Mapsui.UI.Blazor.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Blazor
+    name: Blazor
+    href: Mapsui.UI.Blazor.html
+  - name: .
+  - uid: Mapsui.UI.Blazor.Extensions
+    name: Extensions
+    href: Mapsui.UI.Blazor.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Blazor
+    name: Blazor
+    href: Mapsui.UI.Blazor.html
+  - name: .
+  - uid: Mapsui.UI.Blazor.Extensions
+    name: Extensions
+    href: Mapsui.UI.Blazor.Extensions.html

@@ -54,51 +54,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.iOS", "Mapsui.UI.iOS\Mapsui.UI.iOS.csproj", "{E71F3053-056C-4381-9638-048ED73BDFF6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx", "docfx", "{97458DE1-C297-4DED-AECB-5FEFED2B5610}"
-	ProjectSection(SolutionItems) = preProject
-		docfx\CNAME = docfx\CNAME
-		docfx\docfx.json = docfx\docfx.json
-		docfx\index.md = docfx\index.md
-		docfx\metadata.json = docfx\metadata.json
-		docfx\toc.yml = docfx\toc.yml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentation", "{7D976D37-0542-4A0D-99E6-6BAA180E7011}"
-	ProjectSection(SolutionItems) = preProject
-		docfx\documentation\Async-Fetching.md = docfx\documentation\Async-Fetching.md
-		docfx\documentation\Contributors-Guidelines.md = docfx\documentation\Contributors-Guidelines.md
-		docfx\documentation\custom-style-renders.md = docfx\documentation\custom-style-renders.md
-		docfx\documentation\documentation.md = docfx\documentation\documentation.md
-		docfx\documentation\getting-started-android.md = docfx\documentation\getting-started-android.md
-		docfx\documentation\getting-started-avalonia.md = docfx\documentation\getting-started-avalonia.md
-		docfx\documentation\getting-started-blazor.md = docfx\documentation\getting-started-blazor.md
-		docfx\documentation\getting-started-eto.md = docfx\documentation\getting-started-eto.md
-		docfx\documentation\getting-started-ios.md = docfx\documentation\getting-started-ios.md
-		docfx\documentation\getting-started-maui.md = docfx\documentation\getting-started-maui.md
-		docfx\documentation\getting-started-uno-winui.md = docfx\documentation\getting-started-uno-winui.md
-		docfx\documentation\getting-started-uno.md = docfx\documentation\getting-started-uno.md
-		docfx\documentation\getting-started-winui.md = docfx\documentation\getting-started-winui.md
-		docfx\documentation\getting-started-wpf.md = docfx\documentation\getting-started-wpf.md
-		docfx\documentation\getting-started-xamarin-forms.md = docfx\documentation\getting-started-xamarin-forms.md
-		docfx\documentation\Home.md = docfx\documentation\Home.md
-		docfx\documentation\How-to-work-with-Mapsui.md = docfx\documentation\How-to-work-with-Mapsui.md
-		docfx\documentation\Mapsui-Components.md = docfx\documentation\Mapsui-Components.md
-		docfx\documentation\NuGet-of-latest-build.md = docfx\documentation\NuGet-of-latest-build.md
-		docfx\documentation\performance-widget.md = docfx\documentation\performance-widget.md
-		docfx\documentation\projections.md = docfx\documentation\projections.md
-		docfx\documentation\rendering-tests.md = docfx\documentation\rendering-tests.md
-		docfx\documentation\Roadmap.md = docfx\documentation\Roadmap.md
-		docfx\documentation\samples.md = docfx\documentation\samples.md
-		docfx\documentation\toc.md = docfx\documentation\toc.md
-		docfx\documentation\touch-and-mouse-handling.md = docfx\documentation\touch-and-mouse-handling.md
-		docfx\documentation\v2.0-upgrade-guide.md = docfx\documentation\v2.0-upgrade-guide.md
-		docfx\documentation\v4.0-upgrade-guide.md = docfx\documentation\v4.0-upgrade-guide.md
-		docfx\documentation\v5.0-upgrade-guide.md = docfx\documentation\v5.0-upgrade-guide.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{52C84C7C-1D60-454E-804A-1F9691BD61A3}"
-	ProjectSection(SolutionItems) = preProject
-		docfx\documentation\images\brutile_fetcher.png = docfx\documentation\images\brutile_fetcher.png
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{5BB9C8BA-0FF4-40E7-BC36-8D671A951C82}"
 EndProject
@@ -165,87 +124,6 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.MapView", "Mapsui.UI.MapView\Mapsui.UI.MapView.shproj", "{1A4666DB-CD58-4380-858C-7730C0508A85}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeSamples", "CodeSamples", "{F161CDAC-1F47-4942-976B-FB7B154A542E}"
-	ProjectSection(SolutionItems) = preProject
-		docfx\codesamples\AnimatedBusSample.md = docfx\codesamples\AnimatedBusSample.md
-		docfx\codesamples\AnimatedMyLocationSample.md = docfx\codesamples\AnimatedMyLocationSample.md
-		docfx\codesamples\ArcGISImageServiceSample.md = docfx\codesamples\ArcGISImageServiceSample.md
-		docfx\codesamples\AtlasSample.md = docfx\codesamples\AtlasSample.md
-		docfx\codesamples\BingSample.md = docfx\codesamples\BingSample.md
-		docfx\codesamples\CenterOnLocationSample.md = docfx\codesamples\CenterOnLocationSample.md
-		docfx\codesamples\CircleSample.md = docfx\codesamples\CircleSample.md
-		docfx\codesamples\ComplexPolygonSample.md = docfx\codesamples\ComplexPolygonSample.md
-		docfx\codesamples\CustomCalloutSample.md = docfx\codesamples\CustomCalloutSample.md
-		docfx\codesamples\CustomStyleSample.md = docfx\codesamples\CustomStyleSample.md
-		docfx\codesamples\CustomWidgetSample.md = docfx\codesamples\CustomWidgetSample.md
-		docfx\codesamples\DynamicSvgStyleSample.md = docfx\codesamples\DynamicSvgStyleSample.md
-		docfx\codesamples\EditingSample.md = docfx\codesamples\EditingSample.md
-		docfx\codesamples\EmptyMapSample.md = docfx\codesamples\EmptyMapSample.md
-		docfx\codesamples\GeoJsonSample.md = docfx\codesamples\GeoJsonSample.md
-		docfx\codesamples\GeometrySimplifyProviderWithShapefileSample.md = docfx\codesamples\GeometrySimplifyProviderWithShapefileSample.md
-		docfx\codesamples\GeoTiffSample.md = docfx\codesamples\GeoTiffSample.md
-		docfx\codesamples\IFormsSample.md = docfx\codesamples\IFormsSample.md
-		docfx\codesamples\IMapControlSample.md = docfx\codesamples\IMapControlSample.md
-		docfx\codesamples\InfoLayersSample.md = docfx\codesamples\InfoLayersSample.md
-		docfx\codesamples\ISample.md = docfx\codesamples\ISample.md
-		docfx\codesamples\KeepCenterInMapSample.md = docfx\codesamples\KeepCenterInMapSample.md
-		docfx\codesamples\KeepWithinExtentSample.md = docfx\codesamples\KeepWithinExtentSample.md
-		docfx\codesamples\LabelsSample.md = docfx\codesamples\LabelsSample.md
-		docfx\codesamples\LineStringSample.md = docfx\codesamples\LineStringSample.md
-		docfx\codesamples\ManyPinsSample.md = docfx\codesamples\ManyPinsSample.md
-		docfx\codesamples\MapTilerSample.md = docfx\codesamples\MapTilerSample.md
-		docfx\codesamples\MbTilesOverlaySample.md = docfx\codesamples\MbTilesOverlaySample.md
-		docfx\codesamples\MbTilesSample.md = docfx\codesamples\MbTilesSample.md
-		docfx\codesamples\MultiPolygonProjectionSample.md = docfx\codesamples\MultiPolygonProjectionSample.md
-		docfx\codesamples\MutatingTriangleSample.md = docfx\codesamples\MutatingTriangleSample.md
-		docfx\codesamples\MyLocationSample.md = docfx\codesamples\MyLocationSample.md
-		docfx\codesamples\OpacityStyleSample.md = docfx\codesamples\OpacityStyleSample.md
-		docfx\codesamples\OsmSample.md = docfx\codesamples\OsmSample.md
-		docfx\codesamples\PanLockSample.md = docfx\codesamples\PanLockSample.md
-		docfx\codesamples\PenStrokeCapSample.md = docfx\codesamples\PenStrokeCapSample.md
-		docfx\codesamples\PerformanceWidgetSample.md = docfx\codesamples\PerformanceWidgetSample.md
-		docfx\codesamples\PinSample.md = docfx\codesamples\PinSample.md
-		docfx\codesamples\PointProjectionSample.md = docfx\codesamples\PointProjectionSample.md
-		docfx\codesamples\PointsSample.md = docfx\codesamples\PointsSample.md
-		docfx\codesamples\PolygonSample.md = docfx\codesamples\PolygonSample.md
-		docfx\codesamples\PolylineSample.md = docfx\codesamples\PolylineSample.md
-		docfx\codesamples\ProjectionSample.md = docfx\codesamples\ProjectionSample.md
-		docfx\codesamples\RasterizingLayerWithLineStringSample.md = docfx\codesamples\RasterizingLayerWithLineStringSample.md
-		docfx\codesamples\RasterizingLayerWithPointsSample.md = docfx\codesamples\RasterizingLayerWithPointsSample.md
-		docfx\codesamples\RasterizingTileLayerGeoJsonSample.md = docfx\codesamples\RasterizingTileLayerGeoJsonSample.md
-		docfx\codesamples\RasterizingTileLayerWithLineStringSample.md = docfx\codesamples\RasterizingTileLayerWithLineStringSample.md
-		docfx\codesamples\RasterizingTileLayerWithPointsSample.md = docfx\codesamples\RasterizingTileLayerWithPointsSample.md
-		docfx\codesamples\RasterizingTileLayerWithRenderFormatSkpSample.md = docfx\codesamples\RasterizingTileLayerWithRenderFormatSkpSample.md
-		docfx\codesamples\RasterizingTileLayerWithShapefileSample.md = docfx\codesamples\RasterizingTileLayerWithShapefileSample.md
-		docfx\codesamples\ScaleBarSample.md = docfx\codesamples\ScaleBarSample.md
-		docfx\codesamples\SelectionStyleSample.md = docfx\codesamples\SelectionStyleSample.md
-		docfx\codesamples\ShapefileProjectionSample.md = docfx\codesamples\ShapefileProjectionSample.md
-		docfx\codesamples\ShapefileSample.md = docfx\codesamples\ShapefileSample.md
-		docfx\codesamples\ShapefileTilingFilteringSample.md = docfx\codesamples\ShapefileTilingFilteringSample.md
-		docfx\codesamples\SingleCalloutSample.md = docfx\codesamples\SingleCalloutSample.md
-		docfx\codesamples\SingleImageSample.md = docfx\codesamples\SingleImageSample.md
-		docfx\codesamples\SnapshotSample.md = docfx\codesamples\SnapshotSample.md
-		docfx\codesamples\StackedLabelsSample.md = docfx\codesamples\StackedLabelsSample.md
-		docfx\codesamples\SvgSample.md = docfx\codesamples\SvgSample.md
-		docfx\codesamples\SymbolAnimationSample.md = docfx\codesamples\SymbolAnimationSample.md
-		docfx\codesamples\SymbolsSample.md = docfx\codesamples\SymbolsSample.md
-		docfx\codesamples\ThemeStyleSample.md = docfx\codesamples\ThemeStyleSample.md
-		docfx\codesamples\TiledWmsSample.md = docfx\codesamples\TiledWmsSample.md
-		docfx\codesamples\TmsSample.md = docfx\codesamples\TmsSample.md
-		docfx\codesamples\VariousSample.md = docfx\codesamples\VariousSample.md
-		docfx\codesamples\ViewportCenterAndZoomAnimationSample.md = docfx\codesamples\ViewportCenterAndZoomAnimationSample.md
-		docfx\codesamples\ViewportCenterOnAnimationSample.md = docfx\codesamples\ViewportCenterOnAnimationSample.md
-		docfx\codesamples\ViewportFlyToAnimationSample.md = docfx\codesamples\ViewportFlyToAnimationSample.md
-		docfx\codesamples\ViewportRotateAnimationSample.md = docfx\codesamples\ViewportRotateAnimationSample.md
-		docfx\codesamples\ViewportZoomAroundLocationAnimationSample.md = docfx\codesamples\ViewportZoomAroundLocationAnimationSample.md
-		docfx\codesamples\ViewportZoomToResolutionAnimationSample.md = docfx\codesamples\ViewportZoomToResolutionAnimationSample.md
-		docfx\codesamples\WfsSample.md = docfx\codesamples\WfsSample.md
-		docfx\codesamples\WidgetSample.md = docfx\codesamples\WidgetSample.md
-		docfx\codesamples\WmsSample.md = docfx\codesamples\WmsSample.md
-		docfx\codesamples\WmtsMichellinSample.md = docfx\codesamples\WmtsMichellinSample.md
-		docfx\codesamples\WmtsSample.md = docfx\codesamples\WmtsSample.md
-		docfx\codesamples\WriteToLayerSample.md = docfx\codesamples\WriteToLayerSample.md
-		docfx\codesamples\ZoomLockSample.md = docfx\codesamples\ZoomLockSample.md
-	EndProjectSection
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.MapView", "Samples\Mapsui.Samples.MapView\Mapsui.Samples.MapView.shproj", "{D5E9ECB0-9621-49D8-8D50-B3BA642D368C}"
 EndProject

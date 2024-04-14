@@ -1,0 +1,1431 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  id: ArcGISImageServiceProvider
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  children:
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities,System.Boolean,System.String,Mapsui.Cache.IUrlPersistentCache)
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(System.String,System.Boolean,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType,System.Int64,System.Int64,System.String,Mapsui.Cache.IUrlPersistentCache)
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGisImageCapabilities
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.CRS
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ContinueOnError
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Credentials
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetExtent
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.IsCrsSupported(System.String)
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TimeOut
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Token
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TryGetMapAsync(Mapsui.MSection)
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Url
+  langs:
+  - csharp
+  - vb
+  name: ArcGISImageServiceProvider
+  nameWithType: ArcGISImageServiceProvider
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  type: Class
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArcGISImageServiceProvider
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: 'public class ArcGISImageServiceProvider : IProjectingProvider, IProvider'
+    content.vb: Public Class ArcGISImageServiceProvider Implements IProjectingProvider, IProvider
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Providers.IProjectingProvider
+  - Mapsui.Providers.IProvider
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Token
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Token
+  id: Token
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: Token
+  nameWithType: ArcGISImageServiceProvider.Token
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Token
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Token
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 23
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string? Token { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Token As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Token*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGisImageCapabilities
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGisImageCapabilities
+  id: ArcGisImageCapabilities
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: ArcGisImageCapabilities
+  nameWithType: ArcGISImageServiceProvider.ArcGisImageCapabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGisImageCapabilities
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArcGisImageCapabilities
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 24
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public ArcGISImageCapabilities ArcGisImageCapabilities { get; }
+    parameters: []
+    return:
+      type: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+    content.vb: Public Property ArcGisImageCapabilities As ArcGISImageCapabilities
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGisImageCapabilities*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities,System.Boolean,System.String,Mapsui.Cache.IUrlPersistentCache)
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities,System.Boolean,System.String,Mapsui.Cache.IUrlPersistentCache)
+  id: '#ctor(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities,System.Boolean,System.String,Mapsui.Cache.IUrlPersistentCache)'
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: ArcGISImageServiceProvider(ArcGISImageCapabilities, bool, string?, IUrlPersistentCache?)
+  nameWithType: ArcGISImageServiceProvider.ArcGISImageServiceProvider(ArcGISImageCapabilities, bool, string?, IUrlPersistentCache?)
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities, bool, string?, Mapsui.Cache.IUrlPersistentCache?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 26
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true, string? token = null, IUrlPersistentCache? persistentCache = null)
+    parameters:
+    - id: capabilities
+      type: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+    - id: continueOnError
+      type: System.Boolean
+    - id: token
+      type: System.String
+    - id: persistentCache
+      type: Mapsui.Cache.IUrlPersistentCache
+    content.vb: Public Sub New(capabilities As ArcGISImageCapabilities, continueOnError As Boolean = True, token As String = Nothing, persistentCache As IUrlPersistentCache = Nothing)
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor*
+  nameWithType.vb: ArcGISImageServiceProvider.New(ArcGISImageCapabilities, Boolean, String, IUrlPersistentCache)
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.New(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities, Boolean, String, Mapsui.Cache.IUrlPersistentCache)
+  name.vb: New(ArcGISImageCapabilities, Boolean, String, IUrlPersistentCache)
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(System.String,System.Boolean,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType,System.Int64,System.Int64,System.String,Mapsui.Cache.IUrlPersistentCache)
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(System.String,System.Boolean,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType,System.Int64,System.Int64,System.String,Mapsui.Cache.IUrlPersistentCache)
+  id: '#ctor(System.String,System.Boolean,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType,System.Int64,System.Int64,System.String,Mapsui.Cache.IUrlPersistentCache)'
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: ArcGISImageServiceProvider(string, bool, string, InterpolationType, long, long, string?, IUrlPersistentCache?)
+  nameWithType: ArcGISImageServiceProvider.ArcGISImageServiceProvider(string, bool, string, InterpolationType, long, long, string?, IUrlPersistentCache?)
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(string, bool, string, Mapsui.ArcGIS.ImageServiceProvider.InterpolationType, long, long, string?, Mapsui.Cache.IUrlPersistentCache?)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 37
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string? token = null, IUrlPersistentCache? persistentCache = null)
+    parameters:
+    - id: url
+      type: System.String
+    - id: continueOnError
+      type: System.Boolean
+    - id: format
+      type: System.String
+    - id: interpolation
+      type: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+    - id: startTime
+      type: System.Int64
+    - id: endTime
+      type: System.Int64
+    - id: token
+      type: System.String
+    - id: persistentCache
+      type: Mapsui.Cache.IUrlPersistentCache
+    content.vb: Public Sub New(url As String, continueOnError As Boolean = False, format As String = "jpgpng", interpolation As InterpolationType = InterpolationType.RSP_NearestNeighbor, startTime As Long = -1, endTime As Long = -1, token As String = Nothing, persistentCache As IUrlPersistentCache = Nothing)
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor*
+  nameWithType.vb: ArcGISImageServiceProvider.New(String, Boolean, String, InterpolationType, Long, Long, String, IUrlPersistentCache)
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.New(String, Boolean, String, Mapsui.ArcGIS.ImageServiceProvider.InterpolationType, Long, Long, String, Mapsui.Cache.IUrlPersistentCache)
+  name.vb: New(String, Boolean, String, InterpolationType, Long, Long, String, IUrlPersistentCache)
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Url
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Url
+  id: Url
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: Url
+  nameWithType: ArcGISImageServiceProvider.Url
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Url
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Url
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 58
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public string Url { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Url As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Url*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Credentials
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Credentials
+  id: Credentials
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: Credentials
+  nameWithType: ArcGISImageServiceProvider.Credentials
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Credentials
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Credentials
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 83
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public ICredentials? Credentials { get; set; }
+    parameters: []
+    return:
+      type: System.Net.ICredentials
+    content.vb: Public Property Credentials As ICredentials
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Credentials*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.CRS
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.CRS
+  id: CRS
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: CRS
+  nameWithType: ArcGISImageServiceProvider.CRS
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.CRS
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CRS
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 85
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  summary: The spatial reference ID (CRS)
+  example: []
+  syntax:
+    content: public string? CRS { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CRS As String
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.CRS*
+  implements:
+  - Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TimeOut
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TimeOut
+  id: TimeOut
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: TimeOut
+  nameWithType: ArcGISImageServiceProvider.TimeOut
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TimeOut
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TimeOut
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 90
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  summary: Timeout of request in milliseconds. Default is 10 seconds
+  example: []
+  syntax:
+    content: public int TimeOut { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property TimeOut As Integer
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TimeOut*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  id: GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: ArcGISImageServiceProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeaturesAsync
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 96
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  example: []
+  syntax:
+    content: public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    parameters:
+    - id: fetchInfo
+      type: Mapsui.Layers.FetchInfo
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+    content.vb: Public Function GetFeaturesAsync(fetchInfo As FetchInfo) As Task(Of IEnumerable(Of IFeature))
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetFeaturesAsync*
+  implements:
+  - Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TryGetMapAsync(Mapsui.MSection)
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TryGetMapAsync(Mapsui.MSection)
+  id: TryGetMapAsync(Mapsui.MSection)
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: TryGetMapAsync(MSection)
+  nameWithType: ArcGISImageServiceProvider.TryGetMapAsync(MSection)
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TryGetMapAsync(Mapsui.MSection)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TryGetMapAsync
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 106
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public Task<(bool Success, MRaster? Raster)> TryGetMapAsync(MSection section)
+    parameters:
+    - id: section
+      type: Mapsui.MSection
+    return:
+      type: System.Threading.Tasks.Task{System.ValueTuple{System.Boolean,Mapsui.MRaster}}
+    content.vb: Public Function TryGetMapAsync(section As MSection) As Task(Of (Success As Boolean, Raster As MRaster))
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TryGetMapAsync*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetExtent
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetExtent
+  id: GetExtent
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: GetExtent()
+  nameWithType: ArcGISImageServiceProvider.GetExtent()
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetExtent()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetExtent
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 215
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  summary: <xref href="Mapsui.MRect" data-throw-if-not-resolved="false"></xref> of data set
+  example: []
+  syntax:
+    content: public MRect? GetExtent()
+    return:
+      type: Mapsui.MRect
+      description: BoundingBox
+    content.vb: Public Function GetExtent() As MRect
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetExtent*
+  implements:
+  - Mapsui.Providers.IProvider.GetExtent
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ContinueOnError
+  commentId: P:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ContinueOnError
+  id: ContinueOnError
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: ContinueOnError
+  nameWithType: ArcGISImageServiceProvider.ContinueOnError
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ContinueOnError
+  type: Property
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ContinueOnError
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 220
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  syntax:
+    content: public bool ContinueOnError { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property ContinueOnError As Boolean
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ContinueOnError*
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.IsCrsSupported(System.String)
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.IsCrsSupported(System.String)
+  id: IsCrsSupported(System.String)
+  parent: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  langs:
+  - csharp
+  - vb
+  name: IsCrsSupported(string)
+  nameWithType: ArcGISImageServiceProvider.IsCrsSupported(string)
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.IsCrsSupported(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsCrsSupported
+    path: ../../Mapsui.ArcGIS/ImageServiceProvider/ArcGISImageServiceProvider.cs
+    startLine: 222
+  assemblies:
+  - Mapsui.ArcGIS
+  namespace: Mapsui.ArcGIS.ImageServiceProvider
+  summary: Queries whether a provider supports projection to a certain CRS.
+  example: []
+  syntax:
+    content: public bool? IsCrsSupported(string crs)
+    parameters:
+    - id: crs
+      type: System.String
+      description: The crs to project to
+    return:
+      type: System.Nullable{System.Boolean}
+      description: True if is does, false if it does not, null if it is unknown
+    content.vb: Public Function IsCrsSupported(crs As String) As Boolean?
+  overload: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.IsCrsSupported*
+  implements:
+  - Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+  nameWithType.vb: ArcGISImageServiceProvider.IsCrsSupported(String)
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.IsCrsSupported(String)
+  name.vb: IsCrsSupported(String)
+references:
+- uid: Mapsui.ArcGIS.ImageServiceProvider
+  commentId: N:Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.html
+  name: Mapsui.ArcGIS.ImageServiceProvider
+  nameWithType: Mapsui.ArcGIS.ImageServiceProvider
+  fullName: Mapsui.ArcGIS.ImageServiceProvider
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.ImageServiceProvider
+    name: ImageServiceProvider
+    href: Mapsui.ArcGIS.ImageServiceProvider.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.ImageServiceProvider
+    name: ImageServiceProvider
+    href: Mapsui.ArcGIS.ImageServiceProvider.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Providers.IProjectingProvider
+  commentId: T:Mapsui.Providers.IProjectingProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProjectingProvider.html
+  name: IProjectingProvider
+  nameWithType: IProjectingProvider
+  fullName: Mapsui.Providers.IProjectingProvider
+- uid: Mapsui.Providers.IProvider
+  commentId: T:Mapsui.Providers.IProvider
+  parent: Mapsui.Providers
+  href: Mapsui.Providers.IProvider.html
+  name: IProvider
+  nameWithType: IProvider
+  fullName: Mapsui.Providers.IProvider
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Providers
+  commentId: N:Mapsui.Providers
+  href: Mapsui.html
+  name: Mapsui.Providers
+  nameWithType: Mapsui.Providers
+  fullName: Mapsui.Providers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Providers
+    name: Providers
+    href: Mapsui.Providers.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Token*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Token
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_Token
+  name: Token
+  nameWithType: ArcGISImageServiceProvider.Token
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Token
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGisImageCapabilities*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGisImageCapabilities
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_ArcGisImageCapabilities
+  name: ArcGisImageCapabilities
+  nameWithType: ArcGISImageServiceProvider.ArcGisImageCapabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGisImageCapabilities
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html
+  name: ArcGISImageCapabilities
+  nameWithType: ArcGISImageCapabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider__ctor_Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_System_Boolean_System_String_Mapsui_Cache_IUrlPersistentCache_
+  name: ArcGISImageServiceProvider
+  nameWithType: ArcGISImageServiceProvider.ArcGISImageServiceProvider
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider
+  nameWithType.vb: ArcGISImageServiceProvider.New
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.New
+  name.vb: New
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Cache.IUrlPersistentCache
+  commentId: T:Mapsui.Cache.IUrlPersistentCache
+  parent: Mapsui.Cache
+  href: Mapsui.Cache.IUrlPersistentCache.html
+  name: IUrlPersistentCache
+  nameWithType: IUrlPersistentCache
+  fullName: Mapsui.Cache.IUrlPersistentCache
+- uid: Mapsui.Cache
+  commentId: N:Mapsui.Cache
+  href: Mapsui.html
+  name: Mapsui.Cache
+  nameWithType: Mapsui.Cache
+  fullName: Mapsui.Cache
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Cache
+    name: Cache
+    href: Mapsui.Cache.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Cache
+    name: Cache
+    href: Mapsui.Cache.html
+- uid: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType.html
+  name: InterpolationType
+  nameWithType: InterpolationType
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Url*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Url
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_Url
+  name: Url
+  nameWithType: ArcGISImageServiceProvider.Url
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Url
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Credentials*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Credentials
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_Credentials
+  name: Credentials
+  nameWithType: ArcGISImageServiceProvider.Credentials
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.Credentials
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.icredentials
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.CRS*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.CRS
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_CRS
+  name: CRS
+  nameWithType: ArcGISImageServiceProvider.CRS
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.CRS
+- uid: Mapsui.Providers.IProvider.CRS
+  commentId: P:Mapsui.Providers.IProvider.CRS
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_CRS
+  name: CRS
+  nameWithType: IProvider.CRS
+  fullName: Mapsui.Providers.IProvider.CRS
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TimeOut*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TimeOut
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_TimeOut
+  name: TimeOut
+  nameWithType: ArcGISImageServiceProvider.TimeOut
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TimeOut
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetFeaturesAsync*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetFeaturesAsync
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync
+  nameWithType: ArcGISImageServiceProvider.GetFeaturesAsync
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetFeaturesAsync
+- uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  name: GetFeaturesAsync(FetchInfo)
+  nameWithType: IProvider.GetFeaturesAsync(FetchInfo)
+  fullName: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+    name: GetFeaturesAsync
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  - name: (
+  - uid: Mapsui.Layers.FetchInfo
+    name: FetchInfo
+    href: Mapsui.Layers.FetchInfo.html
+  - name: )
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{Mapsui.IFeature}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IEnumerable<IFeature>>
+  nameWithType: Task<IEnumerable<IFeature>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Mapsui.IFeature>>
+  nameWithType.vb: Task(Of IEnumerable(Of IFeature))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IEnumerable(Of Mapsui.IFeature))
+  name.vb: Task(Of IEnumerable(Of IFeature))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: )
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TryGetMapAsync*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TryGetMapAsync
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_TryGetMapAsync_Mapsui_MSection_
+  name: TryGetMapAsync
+  nameWithType: ArcGISImageServiceProvider.TryGetMapAsync
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.TryGetMapAsync
+- uid: Mapsui.MSection
+  commentId: T:Mapsui.MSection
+  parent: Mapsui
+  href: Mapsui.MSection.html
+  name: MSection
+  nameWithType: MSection
+  fullName: Mapsui.MSection
+- uid: System.Threading.Tasks.Task{System.ValueTuple{System.Boolean,Mapsui.MRaster}}
+  commentId: T:System.Threading.Tasks.Task{System.ValueTuple{System.Boolean,Mapsui.MRaster}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<(bool Success, MRaster)>
+  nameWithType: Task<(bool Success, MRaster)>
+  fullName: System.Threading.Tasks.Task<(bool Success, Mapsui.MRaster)>
+  nameWithType.vb: Task(Of (Success As Boolean, MRaster))
+  fullName.vb: System.Threading.Tasks.Task(Of (Success As Boolean, Mapsui.MRaster))
+  name.vb: Task(Of (Success As Boolean, MRaster))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: " "
+  - uid: System.ValueTuple{System.Boolean,Mapsui.MRaster}.Success
+    name: Success
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,mapsui.mraster-.success
+  - name: ','
+  - name: " "
+  - uid: Mapsui.MRaster
+    name: MRaster
+    href: Mapsui.MRaster.html
+  - name: )
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: (
+  - uid: System.ValueTuple{System.Boolean,Mapsui.MRaster}.Success
+    name: Success
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.boolean,mapsui.mraster-.success
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
+  - uid: Mapsui.MRaster
+    name: MRaster
+    href: Mapsui.MRaster.html
+  - name: )
+  - name: )
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetExtent*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetExtent
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_GetExtent
+  name: GetExtent
+  nameWithType: ArcGISImageServiceProvider.GetExtent
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.GetExtent
+- uid: Mapsui.Providers.IProvider.GetExtent
+  commentId: M:Mapsui.Providers.IProvider.GetExtent
+  parent: Mapsui.Providers.IProvider
+  href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  name: GetExtent()
+  nameWithType: IProvider.GetExtent()
+  fullName: Mapsui.Providers.IProvider.GetExtent()
+  spec.csharp:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProvider.GetExtent
+    name: GetExtent
+    href: Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  - name: (
+  - name: )
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ContinueOnError*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ContinueOnError
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_ContinueOnError
+  name: ContinueOnError
+  nameWithType: ArcGISImageServiceProvider.ContinueOnError
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ContinueOnError
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.IsCrsSupported*
+  commentId: Overload:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.IsCrsSupported
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider_IsCrsSupported_System_String_
+  name: IsCrsSupported
+  nameWithType: ArcGISImageServiceProvider.IsCrsSupported
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.IsCrsSupported
+- uid: Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+  commentId: M:Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+  parent: Mapsui.Providers.IProjectingProvider
+  isExternal: true
+  href: Mapsui.Providers.IProjectingProvider.html#Mapsui_Providers_IProjectingProvider_IsCrsSupported_System_String_
+  name: IsCrsSupported(string)
+  nameWithType: IProjectingProvider.IsCrsSupported(string)
+  fullName: Mapsui.Providers.IProjectingProvider.IsCrsSupported(string)
+  nameWithType.vb: IProjectingProvider.IsCrsSupported(String)
+  fullName.vb: Mapsui.Providers.IProjectingProvider.IsCrsSupported(String)
+  name.vb: IsCrsSupported(String)
+  spec.csharp:
+  - uid: Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+    name: IsCrsSupported
+    href: Mapsui.Providers.IProjectingProvider.html#Mapsui_Providers_IProjectingProvider_IsCrsSupported_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Providers.IProjectingProvider.IsCrsSupported(System.String)
+    name: IsCrsSupported
+    href: Mapsui.Providers.IProjectingProvider.html#Mapsui_Providers_IProjectingProvider_IsCrsSupported_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Nullable{System.Boolean}
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool?
+  nameWithType: bool?
+  fullName: bool?
+  nameWithType.vb: Boolean?
+  fullName.vb: Boolean?
+  name.vb: Boolean?
+  spec.csharp:
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '?'
+  spec.vb:
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

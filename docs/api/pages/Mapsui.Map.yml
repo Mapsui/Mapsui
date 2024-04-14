@@ -1,0 +1,1719 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Map
+  commentId: T:Mapsui.Map
+  id: Map
+  parent: Mapsui
+  children:
+  - Mapsui.Map.#ctor
+  - Mapsui.Map.AbortFetch
+  - Mapsui.Map.BackColor
+  - Mapsui.Map.CRS
+  - Mapsui.Map.ClearCache
+  - Mapsui.Map.DataChanged
+  - Mapsui.Map.Dispose
+  - Mapsui.Map.Dispose(System.Boolean)
+  - Mapsui.Map.Extent
+  - Mapsui.Map.GetWidgetsOfMapAndLayers
+  - Mapsui.Map.Info
+  - Mapsui.Map.Layers
+  - Mapsui.Map.Navigator
+  - Mapsui.Map.OnMapInfo(Mapsui.MapInfoEventArgs)
+  - Mapsui.Map.OnViewportSizeInitialized
+  - Mapsui.Map.PropertyChanged
+  - Mapsui.Map.Refresh(Mapsui.ChangeType)
+  - Mapsui.Map.RefreshData(Mapsui.ChangeType)
+  - Mapsui.Map.RefreshData(Mapsui.Layers.FetchInfo)
+  - Mapsui.Map.RefreshGraphics
+  - Mapsui.Map.RefreshGraphicsRequest
+  - Mapsui.Map.UpdateAnimations
+  - Mapsui.Map.ViewportInitialized
+  - Mapsui.Map.Widgets
+  langs:
+  - csharp
+  - vb
+  name: Map
+  nameWithType: Map
+  fullName: Mapsui.Map
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Map
+    path: ../../Mapsui/Map.cs
+    startLine: 27
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Map class
+  remarks: Map holds all map related info like the target CRS, layers, widgets and so on.
+  example: []
+  syntax:
+    content: 'public class Map : INotifyPropertyChanged, IDisposable'
+    content.vb: Public Class Map Implements INotifyPropertyChanged, IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Map.#ctor
+  commentId: M:Mapsui.Map.#ctor
+  id: '#ctor'
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: Map()
+  nameWithType: Map.Map()
+  fullName: Mapsui.Map.Map()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/Map.cs
+    startLine: 36
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Initializes a new map
+  example: []
+  syntax:
+    content: public Map()
+    content.vb: Public Sub New()
+  overload: Mapsui.Map.#ctor*
+  nameWithType.vb: Map.New()
+  fullName.vb: Mapsui.Map.New()
+  name.vb: New()
+- uid: Mapsui.Map.Widgets
+  commentId: P:Mapsui.Map.Widgets
+  id: Widgets
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: Widgets
+  nameWithType: Map.Widgets
+  fullName: Mapsui.Map.Widgets
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Widgets
+    path: ../../Mapsui/Map.cs
+    startLine: 53
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: List of Widgets belonging to map
+  example: []
+  syntax:
+    content: public ConcurrentQueue<IWidget> Widgets { get; }
+    parameters: []
+    return:
+      type: System.Collections.Concurrent.ConcurrentQueue{Mapsui.Widgets.IWidget}
+    content.vb: Public ReadOnly Property Widgets As ConcurrentQueue(Of IWidget)
+  overload: Mapsui.Map.Widgets*
+- uid: Mapsui.Map.CRS
+  commentId: P:Mapsui.Map.CRS
+  id: CRS
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: CRS
+  nameWithType: Map.CRS
+  fullName: Mapsui.Map.CRS
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CRS
+    path: ../../Mapsui/Map.cs
+    startLine: 59
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    Coordinate reference system (projection type of map).
+
+    Default: "EPSG:3857" (SphericalMercator).
+  example: []
+  syntax:
+    content: public string? CRS { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CRS As String
+  overload: Mapsui.Map.CRS*
+- uid: Mapsui.Map.Layers
+  commentId: P:Mapsui.Map.Layers
+  id: Layers
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: Layers
+  nameWithType: Map.Layers
+  fullName: Mapsui.Map.Layers
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Layers
+    path: ../../Mapsui/Map.cs
+    startLine: 64
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: A collection of layers. The first layer in the list is drawn first, the last one on top.
+  example: []
+  syntax:
+    content: public LayerCollection Layers { get; }
+    parameters: []
+    return:
+      type: Mapsui.Layers.LayerCollection
+    content.vb: Public Property Layers As LayerCollection
+  overload: Mapsui.Map.Layers*
+- uid: Mapsui.Map.BackColor
+  commentId: P:Mapsui.Map.BackColor
+  id: BackColor
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: BackColor
+  nameWithType: Map.BackColor
+  fullName: Mapsui.Map.BackColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BackColor
+    path: ../../Mapsui/Map.cs
+    startLine: 115
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Map background color (defaults to transparent)
+  example: []
+  syntax:
+    content: public Color BackColor { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Property BackColor As Color
+  overload: Mapsui.Map.BackColor*
+- uid: Mapsui.Map.Extent
+  commentId: P:Mapsui.Map.Extent
+  id: Extent
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: Extent
+  nameWithType: Map.Extent
+  fullName: Mapsui.Map.Extent
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Extent
+    path: ../../Mapsui/Map.cs
+    startLine: 130
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Gets the extent of the map based on the extent of all the layers in the layers collection
+  example: []
+  syntax:
+    content: public MRect? Extent { get; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+      description: Full map extent
+    content.vb: Public ReadOnly Property Extent As MRect
+  overload: Mapsui.Map.Extent*
+- uid: Mapsui.Map.PropertyChanged
+  commentId: E:Mapsui.Map.PropertyChanged
+  id: PropertyChanged
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: PropertyChanged
+  nameWithType: Map.PropertyChanged
+  fullName: Mapsui.Map.PropertyChanged
+  type: Event
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PropertyChanged
+    path: ../../Mapsui/Map.cs
+    startLine: 148
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Called whenever a property changed
+  example: []
+  syntax:
+    content: public event PropertyChangedEventHandler? PropertyChanged
+    return:
+      type: System.ComponentModel.PropertyChangedEventHandler
+    content.vb: Public Event PropertyChanged As PropertyChangedEventHandler
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: Mapsui.Map.DataChanged
+  commentId: E:Mapsui.Map.DataChanged
+  id: DataChanged
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: DataChanged
+  nameWithType: Map.DataChanged
+  fullName: Mapsui.Map.DataChanged
+  type: Event
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DataChanged
+    path: ../../Mapsui/Map.cs
+    startLine: 153
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: DataChanged should be triggered by any data changes of any of the child layers
+  example: []
+  syntax:
+    content: public event DataChangedEventHandler? DataChanged
+    return:
+      type: Mapsui.Fetcher.DataChangedEventHandler
+    content.vb: Public Event DataChanged As DataChangedEventHandler
+- uid: Mapsui.Map.RefreshGraphicsRequest
+  commentId: E:Mapsui.Map.RefreshGraphicsRequest
+  id: RefreshGraphicsRequest
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: RefreshGraphicsRequest
+  nameWithType: Map.RefreshGraphicsRequest
+  fullName: Mapsui.Map.RefreshGraphicsRequest
+  type: Event
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshGraphicsRequest
+    path: ../../Mapsui/Map.cs
+    startLine: 155
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public event EventHandler? RefreshGraphicsRequest
+    return:
+      type: System.EventHandler
+    content.vb: Public Event RefreshGraphicsRequest As EventHandler
+- uid: Mapsui.Map.Info
+  commentId: E:Mapsui.Map.Info
+  id: Info
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: Info
+  nameWithType: Map.Info
+  fullName: Mapsui.Map.Info
+  type: Event
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Info
+    path: ../../Mapsui/Map.cs
+    startLine: 161
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+
+    the layers that have IsMapInfoLayer set to true.
+  example: []
+  syntax:
+    content: public event EventHandler<MapInfoEventArgs>? Info
+    return:
+      type: System.EventHandler{Mapsui.MapInfoEventArgs}
+    content.vb: Public Event Info As EventHandler(Of MapInfoEventArgs)
+- uid: Mapsui.Map.Navigator
+  commentId: P:Mapsui.Map.Navigator
+  id: Navigator
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: Navigator
+  nameWithType: Map.Navigator
+  fullName: Mapsui.Map.Navigator
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Navigator
+    path: ../../Mapsui/Map.cs
+    startLine: 166
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Handles all manipulations of the map viewport
+  example: []
+  syntax:
+    content: public Navigator Navigator { get; }
+    parameters: []
+    return:
+      type: Mapsui.Navigator
+    content.vb: Public Property Navigator As Navigator
+  overload: Mapsui.Map.Navigator*
+- uid: Mapsui.Map.Refresh(Mapsui.ChangeType)
+  commentId: M:Mapsui.Map.Refresh(Mapsui.ChangeType)
+  id: Refresh(Mapsui.ChangeType)
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: Refresh(ChangeType)
+  nameWithType: Map.Refresh(ChangeType)
+  fullName: Mapsui.Map.Refresh(Mapsui.ChangeType)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Refresh
+    path: ../../Mapsui/Map.cs
+    startLine: 176
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Refresh data of the map and than repaint it
+  example: []
+  syntax:
+    content: public void Refresh(ChangeType changeType = ChangeType.Discrete)
+    parameters:
+    - id: changeType
+      type: Mapsui.ChangeType
+    content.vb: Public Sub Refresh(changeType As ChangeType = ChangeType.Discrete)
+  overload: Mapsui.Map.Refresh*
+- uid: Mapsui.Map.RefreshData(Mapsui.ChangeType)
+  commentId: M:Mapsui.Map.RefreshData(Mapsui.ChangeType)
+  id: RefreshData(Mapsui.ChangeType)
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: RefreshData(ChangeType)
+  nameWithType: Map.RefreshData(ChangeType)
+  fullName: Mapsui.Map.RefreshData(Mapsui.ChangeType)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshData
+    path: ../../Mapsui/Map.cs
+    startLine: 185
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Refresh data of Map, but don't paint it
+  example: []
+  syntax:
+    content: public void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    parameters:
+    - id: changeType
+      type: Mapsui.ChangeType
+    content.vb: Public Sub RefreshData(changeType As ChangeType = ChangeType.Discrete)
+  overload: Mapsui.Map.RefreshData*
+- uid: Mapsui.Map.RefreshGraphics
+  commentId: M:Mapsui.Map.RefreshGraphics
+  id: RefreshGraphics
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: RefreshGraphics()
+  nameWithType: Map.RefreshGraphics()
+  fullName: Mapsui.Map.RefreshGraphics()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshGraphics
+    path: ../../Mapsui/Map.cs
+    startLine: 196
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public void RefreshGraphics()
+    content.vb: Public Sub RefreshGraphics()
+  overload: Mapsui.Map.RefreshGraphics*
+- uid: Mapsui.Map.OnViewportSizeInitialized
+  commentId: M:Mapsui.Map.OnViewportSizeInitialized
+  id: OnViewportSizeInitialized
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: OnViewportSizeInitialized()
+  nameWithType: Map.OnViewportSizeInitialized()
+  fullName: Mapsui.Map.OnViewportSizeInitialized()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnViewportSizeInitialized
+    path: ../../Mapsui/Map.cs
+    startLine: 201
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public void OnViewportSizeInitialized()
+    content.vb: Public Sub OnViewportSizeInitialized()
+  overload: Mapsui.Map.OnViewportSizeInitialized*
+- uid: Mapsui.Map.ViewportInitialized
+  commentId: E:Mapsui.Map.ViewportInitialized
+  id: ViewportInitialized
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: ViewportInitialized
+  nameWithType: Map.ViewportInitialized
+  fullName: Mapsui.Map.ViewportInitialized
+  type: Event
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ViewportInitialized
+    path: ../../Mapsui/Map.cs
+    startLine: 210
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Called when the viewport is initialized
+  example: []
+  syntax:
+    content: public event EventHandler? ViewportInitialized
+    return:
+      type: System.EventHandler
+    content.vb: Public Event ViewportInitialized As EventHandler
+- uid: Mapsui.Map.AbortFetch
+  commentId: M:Mapsui.Map.AbortFetch
+  id: AbortFetch
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: AbortFetch()
+  nameWithType: Map.AbortFetch()
+  fullName: Mapsui.Map.AbortFetch()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AbortFetch
+    path: ../../Mapsui/Map.cs
+    startLine: 216
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Abort fetching of all layers
+  example: []
+  syntax:
+    content: public void AbortFetch()
+    content.vb: Public Sub AbortFetch()
+  overload: Mapsui.Map.AbortFetch*
+- uid: Mapsui.Map.ClearCache
+  commentId: M:Mapsui.Map.ClearCache
+  id: ClearCache
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: ClearCache()
+  nameWithType: Map.ClearCache()
+  fullName: Mapsui.Map.ClearCache()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ClearCache
+    path: ../../Mapsui/Map.cs
+    startLine: 227
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Clear cache of all layers
+  example: []
+  syntax:
+    content: public void ClearCache()
+    content.vb: Public Sub ClearCache()
+  overload: Mapsui.Map.ClearCache*
+- uid: Mapsui.Map.RefreshData(Mapsui.Layers.FetchInfo)
+  commentId: M:Mapsui.Map.RefreshData(Mapsui.Layers.FetchInfo)
+  id: RefreshData(Mapsui.Layers.FetchInfo)
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: RefreshData(FetchInfo)
+  nameWithType: Map.RefreshData(FetchInfo)
+  fullName: Mapsui.Map.RefreshData(Mapsui.Layers.FetchInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RefreshData
+    path: ../../Mapsui/Map.cs
+    startLine: 235
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public void RefreshData(FetchInfo fetchInfo)
+    parameters:
+    - id: fetchInfo
+      type: Mapsui.Layers.FetchInfo
+    content.vb: Public Sub RefreshData(fetchInfo As FetchInfo)
+  overload: Mapsui.Map.RefreshData*
+- uid: Mapsui.Map.GetWidgetsOfMapAndLayers
+  commentId: M:Mapsui.Map.GetWidgetsOfMapAndLayers
+  id: GetWidgetsOfMapAndLayers
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: GetWidgetsOfMapAndLayers()
+  nameWithType: Map.GetWidgetsOfMapAndLayers()
+  fullName: Mapsui.Map.GetWidgetsOfMapAndLayers()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetWidgetsOfMapAndLayers
+    path: ../../Mapsui/Map.cs
+    startLine: 346
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public IEnumerable<IWidget> GetWidgetsOfMapAndLayers()
+    return:
+      type: System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget}
+    content.vb: Public Function GetWidgetsOfMapAndLayers() As IEnumerable(Of IWidget)
+  overload: Mapsui.Map.GetWidgetsOfMapAndLayers*
+- uid: Mapsui.Map.OnMapInfo(Mapsui.MapInfoEventArgs)
+  commentId: M:Mapsui.Map.OnMapInfo(Mapsui.MapInfoEventArgs)
+  id: OnMapInfo(Mapsui.MapInfoEventArgs)
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: OnMapInfo(MapInfoEventArgs)
+  nameWithType: Map.OnMapInfo(MapInfoEventArgs)
+  fullName: Mapsui.Map.OnMapInfo(Mapsui.MapInfoEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: OnMapInfo
+    path: ../../Mapsui/Map.cs
+    startLine: 356
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    This method is to invoke the Info event from the Map. This method is called
+
+    by the MapControl/MapView and should usually not be called from user code.
+  example: []
+  syntax:
+    content: public void OnMapInfo(MapInfoEventArgs e)
+    parameters:
+    - id: e
+      type: Mapsui.MapInfoEventArgs
+    content.vb: Public Sub OnMapInfo(e As MapInfoEventArgs)
+  overload: Mapsui.Map.OnMapInfo*
+- uid: Mapsui.Map.Dispose
+  commentId: M:Mapsui.Map.Dispose
+  id: Dispose
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: Map.Dispose()
+  fullName: Mapsui.Map.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui/Map.cs
+    startLine: 361
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Mapsui.Map.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+- uid: Mapsui.Map.Dispose(System.Boolean)
+  commentId: M:Mapsui.Map.Dispose(System.Boolean)
+  id: Dispose(System.Boolean)
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: Dispose(bool)
+  nameWithType: Map.Dispose(bool)
+  fullName: Mapsui.Map.Dispose(bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui/Map.cs
+    startLine: 367
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: protected virtual void Dispose(bool disposing)
+    parameters:
+    - id: disposing
+      type: System.Boolean
+    content.vb: Protected Overridable Sub Dispose(disposing As Boolean)
+  overload: Mapsui.Map.Dispose*
+  nameWithType.vb: Map.Dispose(Boolean)
+  fullName.vb: Mapsui.Map.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+- uid: Mapsui.Map.UpdateAnimations
+  commentId: M:Mapsui.Map.UpdateAnimations
+  id: UpdateAnimations
+  parent: Mapsui.Map
+  langs:
+  - csharp
+  - vb
+  name: UpdateAnimations()
+  nameWithType: Map.UpdateAnimations()
+  fullName: Mapsui.Map.UpdateAnimations()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Map.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UpdateAnimations
+    path: ../../Mapsui/Map.cs
+    startLine: 377
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public bool UpdateAnimations()
+    return:
+      type: System.Boolean
+    content.vb: Public Function UpdateAnimations() As Boolean
+  overload: Mapsui.Map.UpdateAnimations*
+references:
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Map.#ctor*
+  commentId: Overload:Mapsui.Map.#ctor
+  href: Mapsui.Map.html#Mapsui_Map__ctor
+  name: Map
+  nameWithType: Map.Map
+  fullName: Mapsui.Map.Map
+  nameWithType.vb: Map.New
+  fullName.vb: Mapsui.Map.New
+  name.vb: New
+- uid: Mapsui.Map.Widgets*
+  commentId: Overload:Mapsui.Map.Widgets
+  href: Mapsui.Map.html#Mapsui_Map_Widgets
+  name: Widgets
+  nameWithType: Map.Widgets
+  fullName: Mapsui.Map.Widgets
+- uid: System.Collections.Concurrent.ConcurrentQueue{Mapsui.Widgets.IWidget}
+  commentId: T:System.Collections.Concurrent.ConcurrentQueue{Mapsui.Widgets.IWidget}
+  parent: System.Collections.Concurrent
+  definition: System.Collections.Concurrent.ConcurrentQueue`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  name: ConcurrentQueue<IWidget>
+  nameWithType: ConcurrentQueue<IWidget>
+  fullName: System.Collections.Concurrent.ConcurrentQueue<Mapsui.Widgets.IWidget>
+  nameWithType.vb: ConcurrentQueue(Of IWidget)
+  fullName.vb: System.Collections.Concurrent.ConcurrentQueue(Of Mapsui.Widgets.IWidget)
+  name.vb: ConcurrentQueue(Of IWidget)
+  spec.csharp:
+  - uid: System.Collections.Concurrent.ConcurrentQueue`1
+    name: ConcurrentQueue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  - name: <
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+    href: Mapsui.Widgets.IWidget.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Concurrent.ConcurrentQueue`1
+    name: ConcurrentQueue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+    href: Mapsui.Widgets.IWidget.html
+  - name: )
+- uid: System.Collections.Concurrent.ConcurrentQueue`1
+  commentId: T:System.Collections.Concurrent.ConcurrentQueue`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  name: ConcurrentQueue<T>
+  nameWithType: ConcurrentQueue<T>
+  fullName: System.Collections.Concurrent.ConcurrentQueue<T>
+  nameWithType.vb: ConcurrentQueue(Of T)
+  fullName.vb: System.Collections.Concurrent.ConcurrentQueue(Of T)
+  name.vb: ConcurrentQueue(Of T)
+  spec.csharp:
+  - uid: System.Collections.Concurrent.ConcurrentQueue`1
+    name: ConcurrentQueue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Concurrent.ConcurrentQueue`1
+    name: ConcurrentQueue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentqueue-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Concurrent
+  commentId: N:System.Collections.Concurrent
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Concurrent
+  nameWithType: System.Collections.Concurrent
+  fullName: System.Collections.Concurrent
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Concurrent
+    name: Concurrent
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Concurrent
+    name: Concurrent
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.concurrent
+- uid: Mapsui.Map.CRS*
+  commentId: Overload:Mapsui.Map.CRS
+  href: Mapsui.Map.html#Mapsui_Map_CRS
+  name: CRS
+  nameWithType: Map.CRS
+  fullName: Mapsui.Map.CRS
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Map.Layers*
+  commentId: Overload:Mapsui.Map.Layers
+  href: Mapsui.Map.html#Mapsui_Map_Layers
+  name: Layers
+  nameWithType: Map.Layers
+  fullName: Mapsui.Map.Layers
+- uid: Mapsui.Layers.LayerCollection
+  commentId: T:Mapsui.Layers.LayerCollection
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.LayerCollection.html
+  name: LayerCollection
+  nameWithType: LayerCollection
+  fullName: Mapsui.Layers.LayerCollection
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: Mapsui.Map.BackColor*
+  commentId: Overload:Mapsui.Map.BackColor
+  href: Mapsui.Map.html#Mapsui_Map_BackColor
+  name: BackColor
+  nameWithType: Map.BackColor
+  fullName: Mapsui.Map.BackColor
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Color.html
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Map.Extent*
+  commentId: Overload:Mapsui.Map.Extent
+  href: Mapsui.Map.html#Mapsui_Map_Extent
+  name: Extent
+  nameWithType: Map.Extent
+  fullName: Mapsui.Map.Extent
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  commentId: E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  parent: System.ComponentModel.INotifyPropertyChanged
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged.propertychanged
+  name: PropertyChanged
+  nameWithType: INotifyPropertyChanged.PropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: System.ComponentModel.PropertyChangedEventHandler
+  commentId: T:System.ComponentModel.PropertyChangedEventHandler
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler
+  name: PropertyChangedEventHandler
+  nameWithType: PropertyChangedEventHandler
+  fullName: System.ComponentModel.PropertyChangedEventHandler
+- uid: Mapsui.Fetcher.DataChangedEventHandler
+  commentId: T:Mapsui.Fetcher.DataChangedEventHandler
+  parent: Mapsui.Fetcher
+  href: Mapsui.Fetcher.DataChangedEventHandler.html
+  name: DataChangedEventHandler
+  nameWithType: DataChangedEventHandler
+  fullName: Mapsui.Fetcher.DataChangedEventHandler
+- uid: Mapsui.Fetcher
+  commentId: N:Mapsui.Fetcher
+  href: Mapsui.html
+  name: Mapsui.Fetcher
+  nameWithType: Mapsui.Fetcher
+  fullName: Mapsui.Fetcher
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Fetcher
+    name: Fetcher
+    href: Mapsui.Fetcher.html
+- uid: System.EventHandler
+  commentId: T:System.EventHandler
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler
+  name: EventHandler
+  nameWithType: EventHandler
+  fullName: System.EventHandler
+- uid: System.EventHandler{Mapsui.MapInfoEventArgs}
+  commentId: T:System.EventHandler{Mapsui.MapInfoEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<MapInfoEventArgs>
+  nameWithType: EventHandler<MapInfoEventArgs>
+  fullName: System.EventHandler<Mapsui.MapInfoEventArgs>
+  nameWithType.vb: EventHandler(Of MapInfoEventArgs)
+  fullName.vb: System.EventHandler(Of Mapsui.MapInfoEventArgs)
+  name.vb: EventHandler(Of MapInfoEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - uid: Mapsui.MapInfoEventArgs
+    name: MapInfoEventArgs
+    href: Mapsui.MapInfoEventArgs.html
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.MapInfoEventArgs
+    name: MapInfoEventArgs
+    href: Mapsui.MapInfoEventArgs.html
+  - name: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: <
+  - name: TEventArgs
+  - name: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.eventhandler-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEventArgs
+  - name: )
+- uid: Mapsui.Map.Navigator*
+  commentId: Overload:Mapsui.Map.Navigator
+  href: Mapsui.Map.html#Mapsui_Map_Navigator
+  name: Navigator
+  nameWithType: Map.Navigator
+  fullName: Mapsui.Map.Navigator
+- uid: Mapsui.Navigator
+  commentId: T:Mapsui.Navigator
+  parent: Mapsui
+  href: Mapsui.Navigator.html
+  name: Navigator
+  nameWithType: Navigator
+  fullName: Mapsui.Navigator
+- uid: Mapsui.Map.Refresh*
+  commentId: Overload:Mapsui.Map.Refresh
+  href: Mapsui.Map.html#Mapsui_Map_Refresh_Mapsui_ChangeType_
+  name: Refresh
+  nameWithType: Map.Refresh
+  fullName: Mapsui.Map.Refresh
+- uid: Mapsui.ChangeType
+  commentId: T:Mapsui.ChangeType
+  parent: Mapsui
+  href: Mapsui.ChangeType.html
+  name: ChangeType
+  nameWithType: ChangeType
+  fullName: Mapsui.ChangeType
+- uid: Mapsui.Map.RefreshData*
+  commentId: Overload:Mapsui.Map.RefreshData
+  href: Mapsui.Map.html#Mapsui_Map_RefreshData_Mapsui_ChangeType_
+  name: RefreshData
+  nameWithType: Map.RefreshData
+  fullName: Mapsui.Map.RefreshData
+- uid: Mapsui.Map.RefreshGraphics*
+  commentId: Overload:Mapsui.Map.RefreshGraphics
+  href: Mapsui.Map.html#Mapsui_Map_RefreshGraphics
+  name: RefreshGraphics
+  nameWithType: Map.RefreshGraphics
+  fullName: Mapsui.Map.RefreshGraphics
+- uid: Mapsui.Map.OnViewportSizeInitialized*
+  commentId: Overload:Mapsui.Map.OnViewportSizeInitialized
+  href: Mapsui.Map.html#Mapsui_Map_OnViewportSizeInitialized
+  name: OnViewportSizeInitialized
+  nameWithType: Map.OnViewportSizeInitialized
+  fullName: Mapsui.Map.OnViewportSizeInitialized
+- uid: Mapsui.Map.AbortFetch*
+  commentId: Overload:Mapsui.Map.AbortFetch
+  href: Mapsui.Map.html#Mapsui_Map_AbortFetch
+  name: AbortFetch
+  nameWithType: Map.AbortFetch
+  fullName: Mapsui.Map.AbortFetch
+- uid: Mapsui.Map.ClearCache*
+  commentId: Overload:Mapsui.Map.ClearCache
+  href: Mapsui.Map.html#Mapsui_Map_ClearCache
+  name: ClearCache
+  nameWithType: Map.ClearCache
+  fullName: Mapsui.Map.ClearCache
+- uid: Mapsui.Layers.FetchInfo
+  commentId: T:Mapsui.Layers.FetchInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.FetchInfo.html
+  name: FetchInfo
+  nameWithType: FetchInfo
+  fullName: Mapsui.Layers.FetchInfo
+- uid: Mapsui.Map.GetWidgetsOfMapAndLayers*
+  commentId: Overload:Mapsui.Map.GetWidgetsOfMapAndLayers
+  href: Mapsui.Map.html#Mapsui_Map_GetWidgetsOfMapAndLayers
+  name: GetWidgetsOfMapAndLayers
+  nameWithType: Map.GetWidgetsOfMapAndLayers
+  fullName: Mapsui.Map.GetWidgetsOfMapAndLayers
+- uid: System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget}
+  commentId: T:System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<IWidget>
+  nameWithType: IEnumerable<IWidget>
+  fullName: System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>
+  nameWithType.vb: IEnumerable(Of IWidget)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget)
+  name.vb: IEnumerable(Of IWidget)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+    href: Mapsui.Widgets.IWidget.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Widgets.IWidget
+    name: IWidget
+    href: Mapsui.Widgets.IWidget.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Map.OnMapInfo*
+  commentId: Overload:Mapsui.Map.OnMapInfo
+  href: Mapsui.Map.html#Mapsui_Map_OnMapInfo_Mapsui_MapInfoEventArgs_
+  name: OnMapInfo
+  nameWithType: Map.OnMapInfo
+  fullName: Mapsui.Map.OnMapInfo
+- uid: Mapsui.MapInfoEventArgs
+  commentId: T:Mapsui.MapInfoEventArgs
+  parent: Mapsui
+  href: Mapsui.MapInfoEventArgs.html
+  name: MapInfoEventArgs
+  nameWithType: MapInfoEventArgs
+  fullName: Mapsui.MapInfoEventArgs
+- uid: Mapsui.Map.Dispose*
+  commentId: Overload:Mapsui.Map.Dispose
+  href: Mapsui.Map.html#Mapsui_Map_Dispose
+  name: Dispose
+  nameWithType: Map.Dispose
+  fullName: Mapsui.Map.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Map.UpdateAnimations*
+  commentId: Overload:Mapsui.Map.UpdateAnimations
+  href: Mapsui.Map.html#Mapsui_Map_UpdateAnimations
+  name: UpdateAnimations
+  nameWithType: Map.UpdateAnimations
+  fullName: Mapsui.Map.UpdateAnimations

@@ -1,0 +1,1175 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  id: QuadTree
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing
+  children:
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.#ctor(System.Collections.Generic.List{Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects},System.UInt32,Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic)
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Box
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child0
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child1
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Depth
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Dispose
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ErrorMetric(Mapsui.MRect)
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.FromFile(System.String)
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.IsLeaf
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.SaveIndex(System.String)
+  - Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Search(Mapsui.MRect)
+  langs:
+  - csharp
+  - vb
+  name: QuadTree
+  nameWithType: QuadTree
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: QuadTree
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 43
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Constructs a Quad-tree node from a object list and creates its children recursively
+  example: []
+  syntax:
+    content: 'public class QuadTree : IDisposable'
+    content.vb: Public Class QuadTree Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.#ctor(System.Collections.Generic.List{Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects},System.UInt32,Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.#ctor(System.Collections.Generic.List{Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects},System.UInt32,Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic)
+  id: '#ctor(System.Collections.Generic.List{Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects},System.UInt32,Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic)'
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: QuadTree(List<BoxObjects>, uint, Heuristic)
+  nameWithType: QuadTree.QuadTree(List<QuadTree.BoxObjects>, uint, Heuristic)
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.QuadTree(System.Collections.Generic.List<Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects>, uint, Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 63
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: >-
+    Creates a node and either splits the objects recursively into sub-nodes, or stores them at the node depending on the heuristics.
+
+    Tree is built top-&gt;down
+  example: []
+  syntax:
+    content: public QuadTree(List<QuadTree.BoxObjects> objList, uint depth, Heuristic heurdata)
+    parameters:
+    - id: objList
+      type: System.Collections.Generic.List{Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects}
+      description: Geometries to index
+    - id: depth
+      type: System.UInt32
+      description: Current depth of tree
+    - id: heurdata
+      type: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+      description: Heuristics data
+    content.vb: Public Sub New(objList As List(Of QuadTree.BoxObjects), depth As UInteger, heurdata As Heuristic)
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.#ctor*
+  nameWithType.vb: QuadTree.New(List(Of QuadTree.BoxObjects), UInteger, Heuristic)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.New(System.Collections.Generic.List(Of Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects), UInteger, Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic)
+  name.vb: New(List(Of BoxObjects), UInteger, Heuristic)
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.FromFile(System.String)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.FromFile(System.String)
+  id: FromFile(System.String)
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: FromFile(string)
+  nameWithType: QuadTree.FromFile(string)
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.FromFile(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FromFile
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 140
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Loads a quadtree from a file
+  example: []
+  syntax:
+    content: public static QuadTree FromFile(string filename)
+    parameters:
+    - id: filename
+      type: System.String
+      description: ''
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+      description: ''
+    content.vb: Public Shared Function FromFile(filename As String) As QuadTree
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.FromFile*
+  nameWithType.vb: QuadTree.FromFile(String)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.FromFile(String)
+  name.vb: FromFile(String)
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.SaveIndex(System.String)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.SaveIndex(System.String)
+  id: SaveIndex(System.String)
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: SaveIndex(string)
+  nameWithType: QuadTree.SaveIndex(string)
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.SaveIndex(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SaveIndex
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 199
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Saves the Quadtree to a file
+  example: []
+  syntax:
+    content: public void SaveIndex(string filename)
+    parameters:
+    - id: filename
+      type: System.String
+      description: ''
+    content.vb: Public Sub SaveIndex(filename As String)
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.SaveIndex*
+  nameWithType.vb: QuadTree.SaveIndex(String)
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.SaveIndex(String)
+  name.vb: SaveIndex(String)
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.IsLeaf
+  commentId: P:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.IsLeaf
+  id: IsLeaf
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: IsLeaf
+  nameWithType: QuadTree.IsLeaf
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.IsLeaf
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsLeaf
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 259
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Determines whether the node is a leaf (if data is stored at the node, we assume the node is a leaf)
+  example: []
+  syntax:
+    content: public bool IsLeaf { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsLeaf As Boolean
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.IsLeaf*
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Box
+  commentId: P:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Box
+  id: Box
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: Box
+  nameWithType: QuadTree.Box
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Box
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Box
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 264
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Gets/sets the Axis Aligned Bounding Box
+  example: []
+  syntax:
+    content: public MRect? Box { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Public Property Box As MRect
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Box*
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child0
+  commentId: P:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child0
+  id: Child0
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: Child0
+  nameWithType: QuadTree.Child0
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child0
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Child0
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 273
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Gets/sets the left child node
+  example: []
+  syntax:
+    content: public QuadTree? Child0 { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+    content.vb: Public Property Child0 As QuadTree
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child0*
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child1
+  commentId: P:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child1
+  id: Child1
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: Child1
+  nameWithType: QuadTree.Child1
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child1
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Child1
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 282
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Gets/sets the right child node
+  example: []
+  syntax:
+    content: public QuadTree? Child1 { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+    content.vb: Public Property Child1 As QuadTree
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child1*
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Depth
+  commentId: P:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Depth
+  id: Depth
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: Depth
+  nameWithType: QuadTree.Depth
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Depth
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Depth
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 291
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Gets the depth of the current node in the tree
+  example: []
+  syntax:
+    content: public uint Depth { get; }
+    parameters: []
+    return:
+      type: System.UInt32
+    content.vb: Public ReadOnly Property Depth As UInteger
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Depth*
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Dispose
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Dispose
+  id: Dispose
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: QuadTree.Dispose()
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dispose
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 296
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Disposes the node
+  example: []
+  syntax:
+    content: public virtual void Dispose()
+    content.vb: Public Overridable Sub Dispose()
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ErrorMetric(Mapsui.MRect)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ErrorMetric(Mapsui.MRect)
+  id: ErrorMetric(Mapsui.MRect)
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: ErrorMetric(MRect)
+  nameWithType: QuadTree.ErrorMetric(MRect)
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ErrorMetric(Mapsui.MRect)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ErrorMetric
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 311
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Calculate the floating point error metric
+  example: []
+  syntax:
+    content: public double ErrorMetric(MRect box)
+    parameters:
+    - id: box
+      type: Mapsui.MRect
+    return:
+      type: System.Double
+      description: ''
+    content.vb: Public Function ErrorMetric(box As MRect) As Double
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ErrorMetric*
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Search(Mapsui.MRect)
+  commentId: M:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Search(Mapsui.MRect)
+  id: Search(Mapsui.MRect)
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  langs:
+  - csharp
+  - vb
+  name: Search(MRect)
+  nameWithType: QuadTree.Search(MRect)
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Search(Mapsui.MRect)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Search
+    path: ../../Mapsui.Nts/Providers/Shapefile/Indexing/SpatialIndexing.cs
+    startLine: 321
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Providers.Shapefile.Indexing
+  summary: Searches the tree and looks for intersections with the BoundingBox 'bbox'
+  example: []
+  syntax:
+    content: public Collection<uint> Search(MRect box)
+    parameters:
+    - id: box
+      type: Mapsui.MRect
+      description: BoundingBox to intersect with
+    return:
+      type: System.Collections.ObjectModel.Collection{System.UInt32}
+    content.vb: Public Function Search(box As MRect) As Collection(Of UInteger)
+  overload: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Search*
+references:
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing
+  commentId: N:Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.html
+  name: Mapsui.Nts.Providers.Shapefile.Indexing
+  nameWithType: Mapsui.Nts.Providers.Shapefile.Indexing
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing
+    name: Indexing
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Providers
+    name: Providers
+    href: Mapsui.Nts.Providers.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile
+    name: Shapefile
+    href: Mapsui.Nts.Providers.Shapefile.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing
+    name: Indexing
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.#ctor*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.#ctor
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree__ctor_System_Collections_Generic_List_Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_BoxObjects__System_UInt32_Mapsui_Nts_Providers_Shapefile_Indexing_Heuristic_
+  name: QuadTree
+  nameWithType: QuadTree.QuadTree
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.QuadTree
+  nameWithType.vb: QuadTree.New
+  fullName.vb: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.New
+  name.vb: New
+- uid: System.Collections.Generic.List{Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects}
+  commentId: T:System.Collections.Generic.List{Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<QuadTree.BoxObjects>
+  nameWithType: List<QuadTree.BoxObjects>
+  fullName: System.Collections.Generic.List<Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects>
+  nameWithType.vb: List(Of QuadTree.BoxObjects)
+  fullName.vb: System.Collections.Generic.List(Of Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects)
+  name.vb: List(Of QuadTree.BoxObjects)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+    name: QuadTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects
+    name: BoxObjects
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+    name: QuadTree
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  - name: .
+  - uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects
+    name: BoxObjects
+    href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.BoxObjects.html
+  - name: )
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.uint32
+  name: uint
+  nameWithType: uint
+  fullName: uint
+  nameWithType.vb: UInteger
+  fullName.vb: UInteger
+  name.vb: UInteger
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic.html
+  name: Heuristic
+  nameWithType: Heuristic
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.Heuristic
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.FromFile*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.FromFile
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_FromFile_System_String_
+  name: FromFile
+  nameWithType: QuadTree.FromFile
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.FromFile
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  commentId: T:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+  parent: Mapsui.Nts.Providers.Shapefile.Indexing
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html
+  name: QuadTree
+  nameWithType: QuadTree
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.SaveIndex*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.SaveIndex
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_SaveIndex_System_String_
+  name: SaveIndex
+  nameWithType: QuadTree.SaveIndex
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.SaveIndex
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.IsLeaf*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.IsLeaf
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_IsLeaf
+  name: IsLeaf
+  nameWithType: QuadTree.IsLeaf
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.IsLeaf
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Box*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Box
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_Box
+  name: Box
+  nameWithType: QuadTree.Box
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Box
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child0*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child0
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_Child0
+  name: Child0
+  nameWithType: QuadTree.Child0
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child0
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child1*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child1
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_Child1
+  name: Child1
+  nameWithType: QuadTree.Child1
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Child1
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Depth*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Depth
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_Depth
+  name: Depth
+  nameWithType: QuadTree.Depth
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Depth
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Dispose*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Dispose
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_Dispose
+  name: Dispose
+  nameWithType: QuadTree.Dispose
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ErrorMetric*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ErrorMetric
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_ErrorMetric_Mapsui_MRect_
+  name: ErrorMetric
+  nameWithType: QuadTree.ErrorMetric
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.ErrorMetric
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Search*
+  commentId: Overload:Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Search
+  href: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.html#Mapsui_Nts_Providers_Shapefile_Indexing_QuadTree_Search_Mapsui_MRect_
+  name: Search
+  nameWithType: QuadTree.Search
+  fullName: Mapsui.Nts.Providers.Shapefile.Indexing.QuadTree.Search
+- uid: System.Collections.ObjectModel.Collection{System.UInt32}
+  commentId: T:System.Collections.ObjectModel.Collection{System.UInt32}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  name: Collection<uint>
+  nameWithType: Collection<uint>
+  fullName: System.Collections.ObjectModel.Collection<uint>
+  nameWithType.vb: Collection(Of UInteger)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of UInteger)
+  name.vb: Collection(Of UInteger)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: <
+  - uid: System.UInt32
+    name: uint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.UInt32
+    name: UInteger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.uint32
+  - name: )
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.ObjectModel
+    name: ObjectModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.ObjectModel
+    name: ObjectModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.objectmodel

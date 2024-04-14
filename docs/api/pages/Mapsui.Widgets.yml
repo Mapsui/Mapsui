@@ -1,0 +1,125 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  id: Mapsui.Widgets
+  children:
+  - Mapsui.Widgets.Alignment
+  - Mapsui.Widgets.BaseWidget
+  - Mapsui.Widgets.HorizontalAlignment
+  - Mapsui.Widgets.IWidget
+  - Mapsui.Widgets.IWidgetRenderer
+  - Mapsui.Widgets.InputAreaType
+  - Mapsui.Widgets.InputOnlyWidget
+  - Mapsui.Widgets.Orientation
+  - Mapsui.Widgets.VerticalAlignment
+  - Mapsui.Widgets.WidgetEventArgs
+  - Mapsui.Widgets.WidgetInput
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Widgets.Alignment
+  commentId: T:Mapsui.Widgets.Alignment
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.Alignment.html
+  name: Alignment
+  nameWithType: Alignment
+  fullName: Mapsui.Widgets.Alignment
+- uid: Mapsui.Widgets.HorizontalAlignment
+  commentId: T:Mapsui.Widgets.HorizontalAlignment
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.HorizontalAlignment.html
+  name: HorizontalAlignment
+  nameWithType: HorizontalAlignment
+  fullName: Mapsui.Widgets.HorizontalAlignment
+- uid: Mapsui.Widgets.Orientation
+  commentId: T:Mapsui.Widgets.Orientation
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.Orientation.html
+  name: Orientation
+  nameWithType: Orientation
+  fullName: Mapsui.Widgets.Orientation
+- uid: Mapsui.Widgets.VerticalAlignment
+  commentId: T:Mapsui.Widgets.VerticalAlignment
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.VerticalAlignment.html
+  name: VerticalAlignment
+  nameWithType: VerticalAlignment
+  fullName: Mapsui.Widgets.VerticalAlignment
+- uid: Mapsui.Widgets.BaseWidget
+  commentId: T:Mapsui.Widgets.BaseWidget
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.BaseWidget.html
+  name: BaseWidget
+  nameWithType: BaseWidget
+  fullName: Mapsui.Widgets.BaseWidget
+- uid: Mapsui.Widgets.InputAreaType
+  commentId: T:Mapsui.Widgets.InputAreaType
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.InputAreaType.html
+  name: InputAreaType
+  nameWithType: InputAreaType
+  fullName: Mapsui.Widgets.InputAreaType
+- uid: Mapsui.Widgets.InputOnlyWidget
+  commentId: T:Mapsui.Widgets.InputOnlyWidget
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.InputOnlyWidget.html
+  name: InputOnlyWidget
+  nameWithType: InputOnlyWidget
+  fullName: Mapsui.Widgets.InputOnlyWidget
+- uid: Mapsui.Widgets.IWidget
+  commentId: T:Mapsui.Widgets.IWidget
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.IWidget.html
+  name: IWidget
+  nameWithType: IWidget
+  fullName: Mapsui.Widgets.IWidget
+- uid: Mapsui.Widgets.IWidgetRenderer
+  commentId: T:Mapsui.Widgets.IWidgetRenderer
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.IWidgetRenderer.html
+  name: IWidgetRenderer
+  nameWithType: IWidgetRenderer
+  fullName: Mapsui.Widgets.IWidgetRenderer
+- uid: Mapsui.Widgets.WidgetEventArgs
+  commentId: T:Mapsui.Widgets.WidgetEventArgs
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.WidgetEventArgs.html
+  name: WidgetEventArgs
+  nameWithType: WidgetEventArgs
+  fullName: Mapsui.Widgets.WidgetEventArgs
+- uid: Mapsui.Widgets.WidgetInput
+  commentId: T:Mapsui.Widgets.WidgetInput
+  href: Mapsui.Widgets.WidgetInput.html
+  name: WidgetInput
+  nameWithType: WidgetInput
+  fullName: Mapsui.Widgets.WidgetInput
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  href: Mapsui.html
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html

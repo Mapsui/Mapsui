@@ -1,0 +1,542 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.ILabelCache
+  commentId: T:Mapsui.Rendering.ILabelCache
+  id: ILabelCache
+  parent: Mapsui.Rendering
+  children:
+  - Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  - Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  langs:
+  - csharp
+  - vb
+  name: ILabelCache
+  nameWithType: ILabelCache
+  fullName: Mapsui.Rendering.ILabelCache
+  type: Interface
+  source:
+    remote:
+      path: Mapsui/Rendering/ILabelCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ILabelCache
+    path: ../../Mapsui/Rendering/ILabelCache.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  syntax:
+    content: 'public interface ILabelCache : IDisposable'
+    content.vb: Public Interface ILabelCache Inherits IDisposable
+  inheritedMembers:
+  - System.IDisposable.Dispose
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  commentId: M:Mapsui.Rendering.ILabelCache.GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  id: GetOrCreateTypeface``1(Mapsui.Styles.Font,System.Func{Mapsui.Styles.Font,``0})
+  parent: Mapsui.Rendering.ILabelCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreateTypeface<T>(Font, Func<Font, T>)
+  nameWithType: ILabelCache.GetOrCreateTypeface<T>(Font, Func<Font, T>)
+  fullName: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface<T>(Mapsui.Styles.Font, System.Func<Mapsui.Styles.Font, T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Rendering/ILabelCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreateTypeface
+    path: ../../Mapsui/Rendering/ILabelCache.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  syntax:
+    content: 'T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace) where T : class'
+    parameters:
+    - id: font
+      type: Mapsui.Styles.Font
+    - id: createTypeFace
+      type: System.Func{Mapsui.Styles.Font,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: '{T}'
+    content.vb: Function GetOrCreateTypeface(Of T As Class)(font As Font, createTypeFace As Func(Of Font, T)) As T
+  overload: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface*
+  nameWithType.vb: ILabelCache.GetOrCreateTypeface(Of T)(Font, Func(Of Font, T))
+  fullName.vb: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface(Of T)(Mapsui.Styles.Font, System.Func(Of Mapsui.Styles.Font, T))
+  name.vb: GetOrCreateTypeface(Of T)(Font, Func(Of Font, T))
+- uid: Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  commentId: M:Mapsui.Rendering.ILabelCache.GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  id: GetOrCreateLabel``1(System.String,Mapsui.Styles.LabelStyle,System.Single,System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0})
+  parent: Mapsui.Rendering.ILabelCache
+  langs:
+  - csharp
+  - vb
+  name: GetOrCreateLabel<T>(string?, LabelStyle, float, Func<LabelStyle, string?, float, ILabelCache, T>)
+  nameWithType: ILabelCache.GetOrCreateLabel<T>(string?, LabelStyle, float, Func<LabelStyle, string?, float, ILabelCache, T>)
+  fullName: Mapsui.Rendering.ILabelCache.GetOrCreateLabel<T>(string?, Mapsui.Styles.LabelStyle, float, System.Func<Mapsui.Styles.LabelStyle, string?, float, Mapsui.Rendering.ILabelCache, T>)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Rendering/ILabelCache.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetOrCreateLabel
+    path: ../../Mapsui/Rendering/ILabelCache.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Rendering
+  syntax:
+    content: 'T GetOrCreateLabel<T>(string? text, LabelStyle style, float opacity, Func<LabelStyle, string?, float, ILabelCache, T> createLabelAsBitmap) where T : IBitmapInfo'
+    parameters:
+    - id: text
+      type: System.String
+    - id: style
+      type: Mapsui.Styles.LabelStyle
+    - id: opacity
+      type: System.Single
+    - id: createLabelAsBitmap
+      type: System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: '{T}'
+    content.vb: Function GetOrCreateLabel(Of T As IBitmapInfo)(text As String, style As LabelStyle, opacity As Single, createLabelAsBitmap As Func(Of LabelStyle, String, Single, ILabelCache, T)) As T
+  overload: Mapsui.Rendering.ILabelCache.GetOrCreateLabel*
+  nameWithType.vb: ILabelCache.GetOrCreateLabel(Of T)(String, LabelStyle, Single, Func(Of LabelStyle, String, Single, ILabelCache, T))
+  fullName.vb: Mapsui.Rendering.ILabelCache.GetOrCreateLabel(Of T)(String, Mapsui.Styles.LabelStyle, Single, System.Func(Of Mapsui.Styles.LabelStyle, String, Single, Mapsui.Rendering.ILabelCache, T))
+  name.vb: GetOrCreateLabel(Of T)(String, LabelStyle, Single, Func(Of LabelStyle, String, Single, ILabelCache, T))
+references:
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface*
+  commentId: Overload:Mapsui.Rendering.ILabelCache.GetOrCreateTypeface
+  href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateTypeface__1_Mapsui_Styles_Font_System_Func_Mapsui_Styles_Font___0__
+  name: GetOrCreateTypeface
+  nameWithType: ILabelCache.GetOrCreateTypeface
+  fullName: Mapsui.Rendering.ILabelCache.GetOrCreateTypeface
+- uid: Mapsui.Styles.Font
+  commentId: T:Mapsui.Styles.Font
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Font.html
+  name: Font
+  nameWithType: Font
+  fullName: Mapsui.Styles.Font
+- uid: System.Func{Mapsui.Styles.Font,{T}}
+  commentId: T:System.Func{Mapsui.Styles.Font,``0}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<Font, T>
+  nameWithType: Func<Font, T>
+  fullName: System.Func<Mapsui.Styles.Font, T>
+  nameWithType.vb: Func(Of Font, T)
+  fullName.vb: System.Func(Of Mapsui.Styles.Font, T)
+  name.vb: Func(Of Font, T)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Styles.Font
+    name: Font
+    href: Mapsui.Styles.Font.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Mapsui.Rendering.ILabelCache.GetOrCreateLabel*
+  commentId: Overload:Mapsui.Rendering.ILabelCache.GetOrCreateLabel
+  href: Mapsui.Rendering.ILabelCache.html#Mapsui_Rendering_ILabelCache_GetOrCreateLabel__1_System_String_Mapsui_Styles_LabelStyle_System_Single_System_Func_Mapsui_Styles_LabelStyle_System_String_System_Single_Mapsui_Rendering_ILabelCache___0__
+  name: GetOrCreateLabel
+  nameWithType: ILabelCache.GetOrCreateLabel
+  fullName: Mapsui.Rendering.ILabelCache.GetOrCreateLabel
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Styles.LabelStyle
+  commentId: T:Mapsui.Styles.LabelStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.LabelStyle.html
+  name: LabelStyle
+  nameWithType: LabelStyle
+  fullName: Mapsui.Styles.LabelStyle
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,{T}}
+  commentId: T:System.Func{Mapsui.Styles.LabelStyle,System.String,System.Single,Mapsui.Rendering.ILabelCache,``0}
+  parent: System
+  definition: System.Func`5
+  href: https://learn.microsoft.com/dotnet/api/system.func-5
+  name: Func<LabelStyle, string, float, ILabelCache, T>
+  nameWithType: Func<LabelStyle, string, float, ILabelCache, T>
+  fullName: System.Func<Mapsui.Styles.LabelStyle, string, float, Mapsui.Rendering.ILabelCache, T>
+  nameWithType.vb: Func(Of LabelStyle, String, Single, ILabelCache, T)
+  fullName.vb: System.Func(Of Mapsui.Styles.LabelStyle, String, Single, Mapsui.Rendering.ILabelCache, T)
+  name.vb: Func(Of LabelStyle, String, Single, ILabelCache, T)
+  spec.csharp:
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: <
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: float
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ILabelCache
+    name: ILabelCache
+    href: Mapsui.Rendering.ILabelCache.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.Styles.LabelStyle
+    name: LabelStyle
+    href: Mapsui.Styles.LabelStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Single
+    name: Single
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.single
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.ILabelCache
+    name: ILabelCache
+    href: Mapsui.Rendering.ILabelCache.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Func`5
+  commentId: T:System.Func`5
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-5
+  name: Func<T1, T2, T3, T4, TResult>
+  nameWithType: Func<T1, T2, T3, T4, TResult>
+  fullName: System.Func<T1, T2, T3, T4, TResult>
+  nameWithType.vb: Func(Of T1, T2, T3, T4, TResult)
+  fullName.vb: System.Func(Of T1, T2, T3, T4, TResult)
+  name.vb: Func(Of T1, T2, T3, T4, TResult)
+  spec.csharp:
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: T4
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`5
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-5
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: T4
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )

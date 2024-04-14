@@ -1,0 +1,1554 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  id: MPoint
+  parent: Mapsui
+  children:
+  - Mapsui.MPoint.#ctor
+  - Mapsui.MPoint.#ctor(Mapsui.MPoint)
+  - Mapsui.MPoint.#ctor(System.Double,System.Double)
+  - Mapsui.MPoint.#ctor(System.ValueTuple{System.Double,System.Double})
+  - Mapsui.MPoint.Copy
+  - Mapsui.MPoint.Distance(Mapsui.MPoint)
+  - Mapsui.MPoint.Equals(Mapsui.MPoint)
+  - Mapsui.MPoint.Equals(System.Object)
+  - Mapsui.MPoint.GetHashCode
+  - Mapsui.MPoint.MRect
+  - Mapsui.MPoint.Offset(System.Double,System.Double)
+  - Mapsui.MPoint.Rotate(System.Double)
+  - Mapsui.MPoint.Rotate(System.Double,Mapsui.MPoint)
+  - Mapsui.MPoint.Rotate(System.Double,System.Double,System.Double)
+  - Mapsui.MPoint.ToString
+  - Mapsui.MPoint.X
+  - Mapsui.MPoint.Y
+  - Mapsui.MPoint.op_Addition(Mapsui.MPoint,Mapsui.MPoint)
+  - Mapsui.MPoint.op_Equality(Mapsui.MPoint,Mapsui.MPoint)
+  - Mapsui.MPoint.op_Inequality(Mapsui.MPoint,Mapsui.MPoint)
+  - Mapsui.MPoint.op_Multiply(Mapsui.MPoint,System.Double)
+  - Mapsui.MPoint.op_Subtraction(Mapsui.MPoint,Mapsui.MPoint)
+  langs:
+  - csharp
+  - vb
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+  type: Class
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MPoint
+    path: ../../Mapsui/MPoint.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Class for a point in Mapsui
+  example: []
+  syntax:
+    content: 'public class MPoint : IEquatable<MPoint>'
+    content.vb: Public Class MPoint Implements IEquatable(Of MPoint)
+  inheritance:
+  - System.Object
+  implements:
+  - System.IEquatable{Mapsui.MPoint}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.MPoint.#ctor
+  commentId: M:Mapsui.MPoint.#ctor
+  id: '#ctor'
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: MPoint()
+  nameWithType: MPoint.MPoint()
+  fullName: Mapsui.MPoint.MPoint()
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MPoint.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MPoint()
+    content.vb: Public Sub New()
+  overload: Mapsui.MPoint.#ctor*
+  nameWithType.vb: MPoint.New()
+  fullName.vb: Mapsui.MPoint.New()
+  name.vb: New()
+- uid: Mapsui.MPoint.#ctor(System.Double,System.Double)
+  commentId: M:Mapsui.MPoint.#ctor(System.Double,System.Double)
+  id: '#ctor(System.Double,System.Double)'
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: MPoint(double, double)
+  nameWithType: MPoint.MPoint(double, double)
+  fullName: Mapsui.MPoint.MPoint(double, double)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MPoint.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MPoint(double x, double y)
+    parameters:
+    - id: x
+      type: System.Double
+    - id: y
+      type: System.Double
+    content.vb: Public Sub New(x As Double, y As Double)
+  overload: Mapsui.MPoint.#ctor*
+  nameWithType.vb: MPoint.New(Double, Double)
+  fullName.vb: Mapsui.MPoint.New(Double, Double)
+  name.vb: New(Double, Double)
+- uid: Mapsui.MPoint.#ctor(System.ValueTuple{System.Double,System.Double})
+  commentId: M:Mapsui.MPoint.#ctor(System.ValueTuple{System.Double,System.Double})
+  id: '#ctor(System.ValueTuple{System.Double,System.Double})'
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: MPoint((double x, double y))
+  nameWithType: MPoint.MPoint((double x, double y))
+  fullName: Mapsui.MPoint.MPoint((double x, double y))
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MPoint.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MPoint((double x, double y) position)
+    parameters:
+    - id: position
+      type: System.ValueTuple{System.Double,System.Double}
+    content.vb: Public Sub New(position As (x As Double, y As Double))
+  overload: Mapsui.MPoint.#ctor*
+  nameWithType.vb: MPoint.New((x As Double, y As Double))
+  fullName.vb: Mapsui.MPoint.New((x As Double, y As Double))
+  name.vb: New((x As Double, y As Double))
+- uid: Mapsui.MPoint.#ctor(Mapsui.MPoint)
+  commentId: M:Mapsui.MPoint.#ctor(Mapsui.MPoint)
+  id: '#ctor(Mapsui.MPoint)'
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: MPoint(MPoint)
+  nameWithType: MPoint.MPoint(MPoint)
+  fullName: Mapsui.MPoint.MPoint(Mapsui.MPoint)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MPoint.cs
+    startLine: 24
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MPoint(MPoint point)
+    parameters:
+    - id: point
+      type: Mapsui.MPoint
+    content.vb: Public Sub New(point As MPoint)
+  overload: Mapsui.MPoint.#ctor*
+  nameWithType.vb: MPoint.New(MPoint)
+  fullName.vb: Mapsui.MPoint.New(Mapsui.MPoint)
+  name.vb: New(MPoint)
+- uid: Mapsui.MPoint.X
+  commentId: P:Mapsui.MPoint.X
+  id: X
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: X
+  nameWithType: MPoint.X
+  fullName: Mapsui.MPoint.X
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: X
+    path: ../../Mapsui/MPoint.cs
+    startLine: 30
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public double X { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property X As Double
+  overload: Mapsui.MPoint.X*
+- uid: Mapsui.MPoint.Y
+  commentId: P:Mapsui.MPoint.Y
+  id: Y
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: Y
+  nameWithType: MPoint.Y
+  fullName: Mapsui.MPoint.Y
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Y
+    path: ../../Mapsui/MPoint.cs
+    startLine: 31
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public double Y { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Y As Double
+  overload: Mapsui.MPoint.Y*
+- uid: Mapsui.MPoint.MRect
+  commentId: P:Mapsui.MPoint.MRect
+  id: MRect
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: MRect
+  nameWithType: MPoint.MRect
+  fullName: Mapsui.MPoint.MRect
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MRect
+    path: ../../Mapsui/MPoint.cs
+    startLine: 33
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MRect MRect { get; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Public ReadOnly Property MRect As MRect
+  overload: Mapsui.MPoint.MRect*
+- uid: Mapsui.MPoint.Copy
+  commentId: M:Mapsui.MPoint.Copy
+  id: Copy
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: Copy()
+  nameWithType: MPoint.Copy()
+  fullName: Mapsui.MPoint.Copy()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Copy
+    path: ../../Mapsui/MPoint.cs
+    startLine: 35
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MPoint Copy()
+    return:
+      type: Mapsui.MPoint
+    content.vb: Public Function Copy() As MPoint
+  overload: Mapsui.MPoint.Copy*
+- uid: Mapsui.MPoint.Distance(Mapsui.MPoint)
+  commentId: M:Mapsui.MPoint.Distance(Mapsui.MPoint)
+  id: Distance(Mapsui.MPoint)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: Distance(MPoint)
+  nameWithType: MPoint.Distance(MPoint)
+  fullName: Mapsui.MPoint.Distance(Mapsui.MPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Distance
+    path: ../../Mapsui/MPoint.cs
+    startLine: 45
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Calculate distance to a given point
+  example: []
+  syntax:
+    content: public double Distance(MPoint point)
+    parameters:
+    - id: point
+      type: Mapsui.MPoint
+      description: Point for calculating distance
+    return:
+      type: System.Double
+      description: Distance between this and given point
+    content.vb: Public Function Distance(point As MPoint) As Double
+  overload: Mapsui.MPoint.Distance*
+- uid: Mapsui.MPoint.Equals(Mapsui.MPoint)
+  commentId: M:Mapsui.MPoint.Equals(Mapsui.MPoint)
+  id: Equals(Mapsui.MPoint)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: Equals(MPoint?)
+  nameWithType: MPoint.Equals(MPoint?)
+  fullName: Mapsui.MPoint.Equals(Mapsui.MPoint?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/MPoint.cs
+    startLine: 50
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Indicates whether the current object is equal to another object of the same type.
+  example: []
+  syntax:
+    content: public bool Equals(MPoint? point)
+    parameters:
+    - id: point
+      type: Mapsui.MPoint
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current object is equal to the <code class="paramref">other</code> parameter; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Equals(point As MPoint) As Boolean
+  overload: Mapsui.MPoint.Equals*
+  implements:
+  - System.IEquatable{Mapsui.MPoint}.Equals(Mapsui.MPoint)
+  nameWithType.vb: MPoint.Equals(MPoint)
+  fullName.vb: Mapsui.MPoint.Equals(Mapsui.MPoint)
+  name.vb: Equals(MPoint)
+- uid: Mapsui.MPoint.GetHashCode
+  commentId: M:Mapsui.MPoint.GetHashCode
+  id: GetHashCode
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: MPoint.GetHashCode()
+  fullName: Mapsui.MPoint.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetHashCode
+    path: ../../Mapsui/MPoint.cs
+    startLine: 58
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Serves as the default hash function.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A hash code for the current object.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.Object.GetHashCode
+  overload: Mapsui.MPoint.GetHashCode*
+- uid: Mapsui.MPoint.Offset(System.Double,System.Double)
+  commentId: M:Mapsui.MPoint.Offset(System.Double,System.Double)
+  id: Offset(System.Double,System.Double)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: Offset(double, double)
+  nameWithType: MPoint.Offset(double, double)
+  fullName: Mapsui.MPoint.Offset(double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Offset
+    path: ../../Mapsui/MPoint.cs
+    startLine: 72
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Create a new MPoint with an offset (x, y) to the original one
+  example: []
+  syntax:
+    content: public MPoint Offset(double offsetX, double offsetY)
+    parameters:
+    - id: offsetX
+      type: System.Double
+      description: Offset in X direction
+    - id: offsetY
+      type: System.Double
+      description: Offset in Y direction
+    return:
+      type: Mapsui.MPoint
+      description: ''
+    content.vb: Public Function Offset(offsetX As Double, offsetY As Double) As MPoint
+  overload: Mapsui.MPoint.Offset*
+  nameWithType.vb: MPoint.Offset(Double, Double)
+  fullName.vb: Mapsui.MPoint.Offset(Double, Double)
+  name.vb: Offset(Double, Double)
+- uid: Mapsui.MPoint.Rotate(System.Double,System.Double,System.Double)
+  commentId: M:Mapsui.MPoint.Rotate(System.Double,System.Double,System.Double)
+  id: Rotate(System.Double,System.Double,System.Double)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: Rotate(double, double, double)
+  nameWithType: MPoint.Rotate(double, double, double)
+  fullName: Mapsui.MPoint.Rotate(double, double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rotate
+    path: ../../Mapsui/MPoint.cs
+    startLine: 84
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Calculates a new point by rotating this point clockwise about the specified center point
+  example: []
+  syntax:
+    content: public MPoint Rotate(double degrees, double centerX, double centerY)
+    parameters:
+    - id: degrees
+      type: System.Double
+      description: Angle to rotate clockwise (degrees)
+    - id: centerX
+      type: System.Double
+      description: X coordinate of point about which to rotate
+    - id: centerY
+      type: System.Double
+      description: Y coordinate of point about which to rotate
+    return:
+      type: Mapsui.MPoint
+      description: Returns the rotated point
+    content.vb: Public Function Rotate(degrees As Double, centerX As Double, centerY As Double) As MPoint
+  overload: Mapsui.MPoint.Rotate*
+  nameWithType.vb: MPoint.Rotate(Double, Double, Double)
+  fullName.vb: Mapsui.MPoint.Rotate(Double, Double, Double)
+  name.vb: Rotate(Double, Double, Double)
+- uid: Mapsui.MPoint.Rotate(System.Double,Mapsui.MPoint)
+  commentId: M:Mapsui.MPoint.Rotate(System.Double,Mapsui.MPoint)
+  id: Rotate(System.Double,Mapsui.MPoint)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: Rotate(double, MPoint)
+  nameWithType: MPoint.Rotate(double, MPoint)
+  fullName: Mapsui.MPoint.Rotate(double, Mapsui.MPoint)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rotate
+    path: ../../Mapsui/MPoint.cs
+    startLine: 106
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Calculates a new point by rotating this point clockwise about the specified center point
+  example: []
+  syntax:
+    content: public MPoint Rotate(double degrees, MPoint center)
+    parameters:
+    - id: degrees
+      type: System.Double
+      description: Angle to rotate clockwise (degrees)
+    - id: center
+      type: Mapsui.MPoint
+      description: MPoint about which to rotate
+    return:
+      type: Mapsui.MPoint
+      description: Returns the rotated point
+    content.vb: Public Function Rotate(degrees As Double, center As MPoint) As MPoint
+  overload: Mapsui.MPoint.Rotate*
+  nameWithType.vb: MPoint.Rotate(Double, MPoint)
+  fullName.vb: Mapsui.MPoint.Rotate(Double, Mapsui.MPoint)
+  name.vb: Rotate(Double, MPoint)
+- uid: Mapsui.MPoint.Rotate(System.Double)
+  commentId: M:Mapsui.MPoint.Rotate(System.Double)
+  id: Rotate(System.Double)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: Rotate(double)
+  nameWithType: MPoint.Rotate(double)
+  fullName: Mapsui.MPoint.Rotate(double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rotate
+    path: ../../Mapsui/MPoint.cs
+    startLine: 116
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Calculates a new point by rotating this point clockwise about the origin (0,0)
+  example: []
+  syntax:
+    content: public MPoint Rotate(double degrees)
+    parameters:
+    - id: degrees
+      type: System.Double
+      description: Angle to rotate clockwise (degrees)
+    return:
+      type: Mapsui.MPoint
+      description: Returns the rotated point
+    content.vb: Public Function Rotate(degrees As Double) As MPoint
+  overload: Mapsui.MPoint.Rotate*
+  nameWithType.vb: MPoint.Rotate(Double)
+  fullName.vb: Mapsui.MPoint.Rotate(Double)
+  name.vb: Rotate(Double)
+- uid: Mapsui.MPoint.ToString
+  commentId: M:Mapsui.MPoint.ToString
+  id: ToString
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: MPoint.ToString()
+  fullName: Mapsui.MPoint.ToString()
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToString
+    path: ../../Mapsui/MPoint.cs
+    startLine: 122
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Returns a string that represents the current object.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A string that represents the current object.
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.Object.ToString
+  overload: Mapsui.MPoint.ToString*
+- uid: Mapsui.MPoint.op_Addition(Mapsui.MPoint,Mapsui.MPoint)
+  commentId: M:Mapsui.MPoint.op_Addition(Mapsui.MPoint,Mapsui.MPoint)
+  id: op_Addition(Mapsui.MPoint,Mapsui.MPoint)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: operator +(MPoint, MPoint)
+  nameWithType: MPoint.operator +(MPoint, MPoint)
+  fullName: Mapsui.MPoint.operator +(Mapsui.MPoint, Mapsui.MPoint)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Addition
+    path: ../../Mapsui/MPoint.cs
+    startLine: 124
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public static MPoint operator +(MPoint point1, MPoint point2)
+    parameters:
+    - id: point1
+      type: Mapsui.MPoint
+    - id: point2
+      type: Mapsui.MPoint
+    return:
+      type: Mapsui.MPoint
+    content.vb: Public Shared Operator +(point1 As MPoint, point2 As MPoint) As MPoint
+  overload: Mapsui.MPoint.op_Addition*
+  nameWithType.vb: MPoint.+(MPoint, MPoint)
+  fullName.vb: Mapsui.MPoint.+(Mapsui.MPoint, Mapsui.MPoint)
+  name.vb: +(MPoint, MPoint)
+- uid: Mapsui.MPoint.op_Subtraction(Mapsui.MPoint,Mapsui.MPoint)
+  commentId: M:Mapsui.MPoint.op_Subtraction(Mapsui.MPoint,Mapsui.MPoint)
+  id: op_Subtraction(Mapsui.MPoint,Mapsui.MPoint)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: operator -(MPoint, MPoint)
+  nameWithType: MPoint.operator -(MPoint, MPoint)
+  fullName: Mapsui.MPoint.operator -(Mapsui.MPoint, Mapsui.MPoint)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Subtraction
+    path: ../../Mapsui/MPoint.cs
+    startLine: 129
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public static MPoint operator -(MPoint point1, MPoint point2)
+    parameters:
+    - id: point1
+      type: Mapsui.MPoint
+    - id: point2
+      type: Mapsui.MPoint
+    return:
+      type: Mapsui.MPoint
+    content.vb: Public Shared Operator -(point1 As MPoint, point2 As MPoint) As MPoint
+  overload: Mapsui.MPoint.op_Subtraction*
+  nameWithType.vb: MPoint.-(MPoint, MPoint)
+  fullName.vb: Mapsui.MPoint.-(Mapsui.MPoint, Mapsui.MPoint)
+  name.vb: -(MPoint, MPoint)
+- uid: Mapsui.MPoint.op_Multiply(Mapsui.MPoint,System.Double)
+  commentId: M:Mapsui.MPoint.op_Multiply(Mapsui.MPoint,System.Double)
+  id: op_Multiply(Mapsui.MPoint,System.Double)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: operator *(MPoint, double)
+  nameWithType: MPoint.operator *(MPoint, double)
+  fullName: Mapsui.MPoint.operator *(Mapsui.MPoint, double)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Multiply
+    path: ../../Mapsui/MPoint.cs
+    startLine: 134
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public static MPoint operator *(MPoint point1, double multiplier)
+    parameters:
+    - id: point1
+      type: Mapsui.MPoint
+    - id: multiplier
+      type: System.Double
+    return:
+      type: Mapsui.MPoint
+    content.vb: Public Shared Operator *(point1 As MPoint, multiplier As Double) As MPoint
+  overload: Mapsui.MPoint.op_Multiply*
+  nameWithType.vb: MPoint.*(MPoint, Double)
+  fullName.vb: Mapsui.MPoint.*(Mapsui.MPoint, Double)
+  name.vb: '*(MPoint, Double)'
+- uid: Mapsui.MPoint.Equals(System.Object)
+  commentId: M:Mapsui.MPoint.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: MPoint.Equals(object?)
+  fullName: Mapsui.MPoint.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui/MPoint.cs
+    startLine: 139
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: Determines whether the specified object is equal to the current object.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current object.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the specified object  is equal to the current object; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Mapsui.MPoint.Equals*
+  nameWithType.vb: MPoint.Equals(Object)
+  fullName.vb: Mapsui.MPoint.Equals(Object)
+  name.vb: Equals(Object)
+- uid: Mapsui.MPoint.op_Equality(Mapsui.MPoint,Mapsui.MPoint)
+  commentId: M:Mapsui.MPoint.op_Equality(Mapsui.MPoint,Mapsui.MPoint)
+  id: op_Equality(Mapsui.MPoint,Mapsui.MPoint)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: operator ==(MPoint?, MPoint?)
+  nameWithType: MPoint.operator ==(MPoint?, MPoint?)
+  fullName: Mapsui.MPoint.operator ==(Mapsui.MPoint?, Mapsui.MPoint?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Equality
+    path: ../../Mapsui/MPoint.cs
+    startLine: 159
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public static bool operator ==(MPoint? left, MPoint? right)
+    parameters:
+    - id: left
+      type: Mapsui.MPoint
+    - id: right
+      type: Mapsui.MPoint
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(left As MPoint, right As MPoint) As Boolean
+  overload: Mapsui.MPoint.op_Equality*
+  nameWithType.vb: MPoint.=(MPoint, MPoint)
+  fullName.vb: Mapsui.MPoint.=(Mapsui.MPoint, Mapsui.MPoint)
+  name.vb: =(MPoint, MPoint)
+- uid: Mapsui.MPoint.op_Inequality(Mapsui.MPoint,Mapsui.MPoint)
+  commentId: M:Mapsui.MPoint.op_Inequality(Mapsui.MPoint,Mapsui.MPoint)
+  id: op_Inequality(Mapsui.MPoint,Mapsui.MPoint)
+  parent: Mapsui.MPoint
+  langs:
+  - csharp
+  - vb
+  name: operator !=(MPoint?, MPoint?)
+  nameWithType: MPoint.operator !=(MPoint?, MPoint?)
+  fullName: Mapsui.MPoint.operator !=(Mapsui.MPoint?, Mapsui.MPoint?)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui/MPoint.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Inequality
+    path: ../../Mapsui/MPoint.cs
+    startLine: 164
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public static bool operator !=(MPoint? left, MPoint? right)
+    parameters:
+    - id: left
+      type: Mapsui.MPoint
+    - id: right
+      type: Mapsui.MPoint
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(left As MPoint, right As MPoint) As Boolean
+  overload: Mapsui.MPoint.op_Inequality*
+  nameWithType.vb: MPoint.<>(MPoint, MPoint)
+  fullName.vb: Mapsui.MPoint.<>(Mapsui.MPoint, Mapsui.MPoint)
+  name.vb: <>(MPoint, MPoint)
+references:
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IEquatable{Mapsui.MPoint}
+  commentId: T:System.IEquatable{Mapsui.MPoint}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<MPoint>
+  nameWithType: IEquatable<MPoint>
+  fullName: System.IEquatable<Mapsui.MPoint>
+  nameWithType.vb: IEquatable(Of MPoint)
+  fullName.vb: System.IEquatable(Of Mapsui.MPoint)
+  name.vb: IEquatable(Of MPoint)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: Mapsui.MPoint
+    name: MPoint
+    href: Mapsui.MPoint.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.MPoint
+    name: MPoint
+    href: Mapsui.MPoint.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.MPoint.#ctor*
+  commentId: Overload:Mapsui.MPoint.#ctor
+  href: Mapsui.MPoint.html#Mapsui_MPoint__ctor
+  name: MPoint
+  nameWithType: MPoint.MPoint
+  fullName: Mapsui.MPoint.MPoint
+  nameWithType.vb: MPoint.New
+  fullName.vb: Mapsui.MPoint.New
+  name.vb: New
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: System.ValueTuple{System.Double,System.Double}
+  commentId: T:System.ValueTuple{System.Double,System.Double}
+  parent: System
+  definition: System.ValueTuple`2
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: (double x, double y)
+  nameWithType: (double x, double y)
+  fullName: (double x, double y)
+  nameWithType.vb: (x As Double, y As Double)
+  fullName.vb: (x As Double, y As Double)
+  name.vb: (x As Double, y As Double)
+  spec.csharp:
+  - name: (
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: " "
+  - uid: System.ValueTuple{System.Double,System.Double}.x
+    name: x
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.double,system.double-.x
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: " "
+  - uid: System.ValueTuple{System.Double,System.Double}.y
+    name: y
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.double,system.double-.y
+  - name: )
+  spec.vb:
+  - name: (
+  - uid: System.ValueTuple{System.Double,System.Double}.x
+    name: x
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.double,system.double-.x
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.ValueTuple{System.Double,System.Double}.y
+    name: y
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.double,system.double-.y
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.ValueTuple`2
+  commentId: T:System.ValueTuple`2
+  name: (T1, T2)
+  nameWithType: (T1, T2)
+  fullName: (T1, T2)
+  spec.csharp:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+  spec.vb:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui.MPoint.X*
+  commentId: Overload:Mapsui.MPoint.X
+  href: Mapsui.MPoint.html#Mapsui_MPoint_X
+  name: X
+  nameWithType: MPoint.X
+  fullName: Mapsui.MPoint.X
+- uid: Mapsui.MPoint.Y*
+  commentId: Overload:Mapsui.MPoint.Y
+  href: Mapsui.MPoint.html#Mapsui_MPoint_Y
+  name: Y
+  nameWithType: MPoint.Y
+  fullName: Mapsui.MPoint.Y
+- uid: Mapsui.MPoint.MRect*
+  commentId: Overload:Mapsui.MPoint.MRect
+  href: Mapsui.MPoint.html#Mapsui_MPoint_MRect
+  name: MRect
+  nameWithType: MPoint.MRect
+  fullName: Mapsui.MPoint.MRect
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui.MPoint.Copy*
+  commentId: Overload:Mapsui.MPoint.Copy
+  href: Mapsui.MPoint.html#Mapsui_MPoint_Copy
+  name: Copy
+  nameWithType: MPoint.Copy
+  fullName: Mapsui.MPoint.Copy
+- uid: Mapsui.MPoint.Distance*
+  commentId: Overload:Mapsui.MPoint.Distance
+  href: Mapsui.MPoint.html#Mapsui_MPoint_Distance_Mapsui_MPoint_
+  name: Distance
+  nameWithType: MPoint.Distance
+  fullName: Mapsui.MPoint.Distance
+- uid: Mapsui.MPoint.Equals*
+  commentId: Overload:Mapsui.MPoint.Equals
+  href: Mapsui.MPoint.html#Mapsui_MPoint_Equals_Mapsui_MPoint_
+  name: Equals
+  nameWithType: MPoint.Equals
+  fullName: Mapsui.MPoint.Equals
+- uid: System.IEquatable{Mapsui.MPoint}.Equals(Mapsui.MPoint)
+  commentId: M:System.IEquatable{Mapsui.MPoint}.Equals(Mapsui.MPoint)
+  parent: System.IEquatable{Mapsui.MPoint}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(MPoint)
+  nameWithType: IEquatable<MPoint>.Equals(MPoint)
+  fullName: System.IEquatable<Mapsui.MPoint>.Equals(Mapsui.MPoint)
+  nameWithType.vb: IEquatable(Of MPoint).Equals(MPoint)
+  fullName.vb: System.IEquatable(Of Mapsui.MPoint).Equals(Mapsui.MPoint)
+  spec.csharp:
+  - uid: System.IEquatable{Mapsui.MPoint}.Equals(Mapsui.MPoint)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+    href: Mapsui.MPoint.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{Mapsui.MPoint}.Equals(Mapsui.MPoint)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: Mapsui.MPoint
+    name: MPoint
+    href: Mapsui.MPoint.html
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: Mapsui.MPoint.GetHashCode*
+  commentId: Overload:Mapsui.MPoint.GetHashCode
+  href: Mapsui.MPoint.html#Mapsui_MPoint_GetHashCode
+  name: GetHashCode
+  nameWithType: MPoint.GetHashCode
+  fullName: Mapsui.MPoint.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.MPoint.Offset*
+  commentId: Overload:Mapsui.MPoint.Offset
+  href: Mapsui.MPoint.html#Mapsui_MPoint_Offset_System_Double_System_Double_
+  name: Offset
+  nameWithType: MPoint.Offset
+  fullName: Mapsui.MPoint.Offset
+- uid: Mapsui.MPoint.Rotate*
+  commentId: Overload:Mapsui.MPoint.Rotate
+  href: Mapsui.MPoint.html#Mapsui_MPoint_Rotate_System_Double_System_Double_System_Double_
+  name: Rotate
+  nameWithType: MPoint.Rotate
+  fullName: Mapsui.MPoint.Rotate
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Mapsui.MPoint.ToString*
+  commentId: Overload:Mapsui.MPoint.ToString
+  href: Mapsui.MPoint.html#Mapsui_MPoint_ToString
+  name: ToString
+  nameWithType: MPoint.ToString
+  fullName: Mapsui.MPoint.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.MPoint.op_Addition*
+  commentId: Overload:Mapsui.MPoint.op_Addition
+  href: Mapsui.MPoint.html#Mapsui_MPoint_op_Addition_Mapsui_MPoint_Mapsui_MPoint_
+  name: operator +
+  nameWithType: MPoint.operator +
+  fullName: Mapsui.MPoint.operator +
+  nameWithType.vb: MPoint.+
+  fullName.vb: Mapsui.MPoint.+
+  name.vb: +
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.MPoint.op_Addition*
+    name: +
+    href: Mapsui.MPoint.html#Mapsui_MPoint_op_Addition_Mapsui_MPoint_Mapsui_MPoint_
+- uid: Mapsui.MPoint.op_Subtraction*
+  commentId: Overload:Mapsui.MPoint.op_Subtraction
+  href: Mapsui.MPoint.html#Mapsui_MPoint_op_Subtraction_Mapsui_MPoint_Mapsui_MPoint_
+  name: operator -
+  nameWithType: MPoint.operator -
+  fullName: Mapsui.MPoint.operator -
+  nameWithType.vb: MPoint.-
+  fullName.vb: Mapsui.MPoint.-
+  name.vb: '-'
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.MPoint.op_Subtraction*
+    name: '-'
+    href: Mapsui.MPoint.html#Mapsui_MPoint_op_Subtraction_Mapsui_MPoint_Mapsui_MPoint_
+- uid: Mapsui.MPoint.op_Multiply*
+  commentId: Overload:Mapsui.MPoint.op_Multiply
+  href: Mapsui.MPoint.html#Mapsui_MPoint_op_Multiply_Mapsui_MPoint_System_Double_
+  name: operator *
+  nameWithType: MPoint.operator *
+  fullName: Mapsui.MPoint.operator *
+  nameWithType.vb: MPoint.*
+  fullName.vb: Mapsui.MPoint.*
+  name.vb: '*'
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.MPoint.op_Multiply*
+    name: '*'
+    href: Mapsui.MPoint.html#Mapsui_MPoint_op_Multiply_Mapsui_MPoint_System_Double_
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.MPoint.op_Equality*
+  commentId: Overload:Mapsui.MPoint.op_Equality
+  href: Mapsui.MPoint.html#Mapsui_MPoint_op_Equality_Mapsui_MPoint_Mapsui_MPoint_
+  name: operator ==
+  nameWithType: MPoint.operator ==
+  fullName: Mapsui.MPoint.operator ==
+  nameWithType.vb: MPoint.=
+  fullName.vb: Mapsui.MPoint.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.MPoint.op_Equality*
+    name: ==
+    href: Mapsui.MPoint.html#Mapsui_MPoint_op_Equality_Mapsui_MPoint_Mapsui_MPoint_
+- uid: Mapsui.MPoint.op_Inequality*
+  commentId: Overload:Mapsui.MPoint.op_Inequality
+  href: Mapsui.MPoint.html#Mapsui_MPoint_op_Inequality_Mapsui_MPoint_Mapsui_MPoint_
+  name: operator !=
+  nameWithType: MPoint.operator !=
+  fullName: Mapsui.MPoint.operator !=
+  nameWithType.vb: MPoint.<>
+  fullName.vb: Mapsui.MPoint.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.MPoint.op_Inequality*
+    name: '!='
+    href: Mapsui.MPoint.html#Mapsui_MPoint_op_Inequality_Mapsui_MPoint_Mapsui_MPoint_

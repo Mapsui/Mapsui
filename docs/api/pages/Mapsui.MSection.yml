@@ -1,0 +1,648 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.MSection
+  commentId: T:Mapsui.MSection
+  id: MSection
+  parent: Mapsui
+  children:
+  - Mapsui.MSection.#ctor(Mapsui.MRect,System.Double)
+  - Mapsui.MSection.Extent
+  - Mapsui.MSection.Resolution
+  - Mapsui.MSection.ScreenHeight
+  - Mapsui.MSection.ScreenWidth
+  langs:
+  - csharp
+  - vb
+  name: MSection
+  nameWithType: MSection
+  fullName: Mapsui.MSection
+  type: Class
+  source:
+    remote:
+      path: Mapsui/MSection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MSection
+    path: ../../Mapsui/MSection.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    MSection represents a part of the map defined by the extent and the resolution to indicate the level of detail.
+
+    It's main purpose is to define which data should be fetched.
+  example: []
+  syntax:
+    content: 'public record MSection : IEquatable<MSection>'
+    content.vb: Public Class MSection Implements IEquatable(Of MSection)
+  inheritance:
+  - System.Object
+  implements:
+  - System.IEquatable{Mapsui.MSection}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.MSection.#ctor(Mapsui.MRect,System.Double)
+  commentId: M:Mapsui.MSection.#ctor(Mapsui.MRect,System.Double)
+  id: '#ctor(Mapsui.MRect,System.Double)'
+  parent: Mapsui.MSection
+  langs:
+  - csharp
+  - vb
+  name: MSection(MRect, double)
+  nameWithType: MSection.MSection(MRect, double)
+  fullName: Mapsui.MSection.MSection(Mapsui.MRect, double)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui/MSection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui/MSection.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MSection(MRect extent, double resolution)
+    parameters:
+    - id: extent
+      type: Mapsui.MRect
+    - id: resolution
+      type: System.Double
+    content.vb: Public Sub New(extent As MRect, resolution As Double)
+  overload: Mapsui.MSection.#ctor*
+  nameWithType.vb: MSection.New(MRect, Double)
+  fullName.vb: Mapsui.MSection.New(Mapsui.MRect, Double)
+  name.vb: New(MRect, Double)
+- uid: Mapsui.MSection.Extent
+  commentId: P:Mapsui.MSection.Extent
+  id: Extent
+  parent: Mapsui.MSection
+  langs:
+  - csharp
+  - vb
+  name: Extent
+  nameWithType: MSection.Extent
+  fullName: Mapsui.MSection.Extent
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MSection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Extent
+    path: ../../Mapsui/MSection.cs
+    startLine: 17
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public MRect Extent { get; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Public ReadOnly Property Extent As MRect
+  overload: Mapsui.MSection.Extent*
+- uid: Mapsui.MSection.Resolution
+  commentId: P:Mapsui.MSection.Resolution
+  id: Resolution
+  parent: Mapsui.MSection
+  langs:
+  - csharp
+  - vb
+  name: Resolution
+  nameWithType: MSection.Resolution
+  fullName: Mapsui.MSection.Resolution
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MSection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Resolution
+    path: ../../Mapsui/MSection.cs
+    startLine: 18
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public double Resolution { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property Resolution As Double
+  overload: Mapsui.MSection.Resolution*
+- uid: Mapsui.MSection.ScreenWidth
+  commentId: P:Mapsui.MSection.ScreenWidth
+  id: ScreenWidth
+  parent: Mapsui.MSection
+  langs:
+  - csharp
+  - vb
+  name: ScreenWidth
+  nameWithType: MSection.ScreenWidth
+  fullName: Mapsui.MSection.ScreenWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MSection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ScreenWidth
+    path: ../../Mapsui/MSection.cs
+    startLine: 19
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public double ScreenWidth { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property ScreenWidth As Double
+  overload: Mapsui.MSection.ScreenWidth*
+- uid: Mapsui.MSection.ScreenHeight
+  commentId: P:Mapsui.MSection.ScreenHeight
+  id: ScreenHeight
+  parent: Mapsui.MSection
+  langs:
+  - csharp
+  - vb
+  name: ScreenHeight
+  nameWithType: MSection.ScreenHeight
+  fullName: Mapsui.MSection.ScreenHeight
+  type: Property
+  source:
+    remote:
+      path: Mapsui/MSection.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ScreenHeight
+    path: ../../Mapsui/MSection.cs
+    startLine: 20
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public double ScreenHeight { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property ScreenHeight As Double
+  overload: Mapsui.MSection.ScreenHeight*
+references:
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IEquatable{Mapsui.MSection}
+  commentId: T:System.IEquatable{Mapsui.MSection}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<MSection>
+  nameWithType: IEquatable<MSection>
+  fullName: System.IEquatable<Mapsui.MSection>
+  nameWithType.vb: IEquatable(Of MSection)
+  fullName.vb: System.IEquatable(Of Mapsui.MSection)
+  name.vb: IEquatable(Of MSection)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: Mapsui.MSection
+    name: MSection
+    href: Mapsui.MSection.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.MSection
+    name: MSection
+    href: Mapsui.MSection.html
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.MSection.#ctor*
+  commentId: Overload:Mapsui.MSection.#ctor
+  href: Mapsui.MSection.html#Mapsui_MSection__ctor_Mapsui_MRect_System_Double_
+  name: MSection
+  nameWithType: MSection.MSection
+  fullName: Mapsui.MSection.MSection
+  nameWithType.vb: MSection.New
+  fullName.vb: Mapsui.MSection.New
+  name.vb: New
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.MSection.Extent*
+  commentId: Overload:Mapsui.MSection.Extent
+  href: Mapsui.MSection.html#Mapsui_MSection_Extent
+  name: Extent
+  nameWithType: MSection.Extent
+  fullName: Mapsui.MSection.Extent
+- uid: Mapsui.MSection.Resolution*
+  commentId: Overload:Mapsui.MSection.Resolution
+  href: Mapsui.MSection.html#Mapsui_MSection_Resolution
+  name: Resolution
+  nameWithType: MSection.Resolution
+  fullName: Mapsui.MSection.Resolution
+- uid: Mapsui.MSection.ScreenWidth*
+  commentId: Overload:Mapsui.MSection.ScreenWidth
+  href: Mapsui.MSection.html#Mapsui_MSection_ScreenWidth
+  name: ScreenWidth
+  nameWithType: MSection.ScreenWidth
+  fullName: Mapsui.MSection.ScreenWidth
+- uid: Mapsui.MSection.ScreenHeight*
+  commentId: Overload:Mapsui.MSection.ScreenHeight
+  href: Mapsui.MSection.html#Mapsui_MSection_ScreenHeight
+  name: ScreenHeight
+  nameWithType: MSection.ScreenHeight
+  fullName: Mapsui.MSection.ScreenHeight

@@ -1,0 +1,2762 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class MapControl </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class MapControl ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.UI.iOS.MapControl">
+
+
+
+  <h1 id="Mapsui_UI_iOS_MapControl" data-uid="Mapsui.UI.iOS.MapControl" class="text-break">Class MapControl</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">NSObject</span></div>
+    <div class="level2"><span class="xref">UIResponder</span></div>
+    <div class="level3"><span class="xref">UIView</span></div>
+    <div class="level4"><span class="xref">MapControl</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<span class="xref">NSObject</span>&gt;</div>
+    <div><span class="xref">INSObjectProtocol</span></div>
+    <div><span class="xref">IUIActivityItemsConfigurationProviding</span></div>
+    <div><span class="xref">IUIPasteConfigurationSupporting</span></div>
+    <div><span class="xref">IUIResponderStandardEditActions</span></div>
+    <div><span class="xref">IUIUserActivityRestoring</span></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+    <div><span class="xref">INSCoding</span></div>
+    <div><span class="xref">IUIAccessibilityIdentification</span></div>
+    <div><span class="xref">IUIAppearance</span></div>
+    <div><span class="xref">IUIAppearanceContainer</span></div>
+    <div><span class="xref">IUICoordinateSpace</span></div>
+    <div><span class="xref">IUIDynamicItem</span></div>
+    <div><span class="xref">IUIFocusItem</span></div>
+    <div><span class="xref">IUIFocusEnvironment</span></div>
+    <div><span class="xref">IUIFocusItemContainer</span></div>
+    <div><span class="xref">IUILargeContentViewerItem</span></div>
+    <div><span class="xref">IUIPopoverPresentationControllerSourceItem</span></div>
+    <div><span class="xref">IUITraitEnvironment</span></div>
+    <div><span class="xref">ICALayerDelegate</span></div>
+    <div><span class="xref">INativeObject</span></div>
+    <div><a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">UIView.Add(UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AddSubviews(params UIView[])</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GetEnumerator()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">UIView.BeginAnimations(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.Animate(double, Action, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.Animate(double, double, UIViewAnimationOptions, Action, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.Transition(UIView, UIView, double, UIViewAnimationOptions, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.Transition(UIView, double, UIViewAnimationOptions, Action, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AnimateAsync(double, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">UIView.Capture(bool)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityActivate()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">UIView.ActionForLayer(CALayer, string)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.AddConstraint(NSLayoutConstraint)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AddConstraints(NSLayoutConstraint[])</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AddGestureRecognizer(UIGestureRecognizer)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AddInteraction(IUIInteraction)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AddKeyframeWithRelativeStartTime(double, double, Action)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.AddLayoutGuide(UILayoutGuide)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AddMotionEffect(UIMotionEffect)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AddSubview(UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AlignmentRectForFrame(CGRect)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.Animate(double, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AnimateKeyframes(double, double, UIViewKeyframeAnimationOptions, Action, UICompletionHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AnimateKeyframesAsync(double, double, UIViewKeyframeAnimationOptions, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AnimateNotify(double, Action, UICompletionHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AnimateNotifyAsync(double, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AnimateNotify(double, double, UIViewAnimationOptions, Action, UICompletionHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AnimateNotifyAsync(double, double, UIViewAnimationOptions, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AnimateNotify(double, double, NFloat, NFloat, UIViewAnimationOptions, Action, UICompletionHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.AnimateNotifyAsync(double, double, NFloat, NFloat, UIViewAnimationOptions, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">UIView.BeginAnimations(string, nint)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.BringSubviewToFront(UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.CommitAnimations()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ContentCompressionResistancePriority(UILayoutConstraintAxis)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ContentHuggingPriority(UILayoutConstraintAxis)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ConvertPointFromCoordinateSpace(CGPoint, IUICoordinateSpace)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ConvertPointFromView(CGPoint, UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ConvertPointToCoordinateSpace(CGPoint, IUICoordinateSpace)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ConvertPointToView(CGPoint, UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ConvertRectFromCoordinateSpace(CGRect, IUICoordinateSpace)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ConvertRectFromView(CGRect, UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ConvertRectToCoordinateSpace(CGRect, IUICoordinateSpace)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ConvertRectToView(CGRect, UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.DecodeRestorableState(NSCoder)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.DidHintFocusMovement(UIFocusMovementHint)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.DidUpdateFocus(UIFocusUpdateContext, UIFocusAnimationCoordinator)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.DisplayLayer(CALayer)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Draw(CGRect)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.DrawLayer(CALayer, CGContext)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.DrawRect(CGRect, UIViewPrintFormatter)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">UIView.DrawViewHierarchy(CGRect, bool)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.EncodeRestorableState(NSCoder)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.EncodeTo(NSCoder)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">UIView.ExchangeSubview(nint, nint)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.ExerciseAmbiguityInLayout()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.FrameForAlignmentRect(CGRect)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GestureRecognizerShouldBegin(UIGestureRecognizer)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GetConstraintsAffectingLayout(UILayoutConstraintAxis)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GetFocusItems(CGRect)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GetUserInterfaceLayoutDirection(UISemanticContentAttribute)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GetUserInterfaceLayoutDirection(UISemanticContentAttribute, UIUserInterfaceLayoutDirection)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.HitTest(CGPoint, UIEvent)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">UIView.InsertSubview(UIView, nint)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.InsertSubviewAbove(UIView, UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.InsertSubviewBelow(UIView, UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.InvalidateIntrinsicContentSize()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.IsDescendantOfView(UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LayoutIfNeeded()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LayoutSublayersOfLayer(CALayer)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LayoutSubviews()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.nfloat">UIView.ModifyAnimations(NFloat, bool, Action)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.MovedToSuperview()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.MovedToWindow()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.NeedsUpdateConstraints()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">UIView.PerformSystemAnimation(UISystemAnimation, UIView[], UIViewAnimationOptions, Action, UICompletionHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">UIView.PerformSystemAnimationAsync(UISystemAnimation, UIView[], UIViewAnimationOptions, Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">UIView.PerformWithoutAnimation(Action)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.PointInside(CGPoint, UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RemoveConstraint(NSLayoutConstraint)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RemoveConstraints(NSLayoutConstraint[])</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RemoveFromSuperview()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RemoveGestureRecognizer(UIGestureRecognizer)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RemoveInteraction(IUIInteraction)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RemoveLayoutGuide(UILayoutGuide)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RemoveMotionEffect(UIMotionEffect)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RequiresConstraintBasedLayout()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">UIView.ResizableSnapshotView(CGRect, bool, UIEdgeInsets)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.SafeAreaInsetsDidChange()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SendSubviewToBack(UIView)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">UIView.SetAnimationBeginsFromCurrentState(bool)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.SetAnimationCurve(UIViewAnimationCurve)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.SetAnimationDelay(double)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.SetAnimationDelegate(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SetAnimationDidStopSelector(Selector)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.SetAnimationDuration(double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">UIView.SetAnimationRepeatAutoreverses(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">UIView.SetAnimationRepeatCount(float)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.SetAnimationStartDate(NSDate)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">UIView.SetAnimationTransition(UIViewAnimationTransition, UIView, bool)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.SetAnimationWillStartSelector(Selector)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">UIView.SetContentCompressionResistancePriority(float, UILayoutConstraintAxis)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">UIView.SetContentHuggingPriority(float, UILayoutConstraintAxis)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.SetNeedsDisplay()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SetNeedsDisplayInRect(CGRect)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SetNeedsFocusUpdate()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SetNeedsLayout()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SetNeedsUpdateConstraints()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ShouldUpdateFocus(UIFocusUpdateContext)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SizeThatFits(CGSize)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SizeToFit()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">UIView.SnapshotView(bool)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.SubviewAdded(UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SystemLayoutSizeFittingSize(CGSize)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">UIView.SystemLayoutSizeFittingSize(CGSize, float, float)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.TintColorDidChange()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitCollectionDidChange(UITraitCollection)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.TransitionNotify(UIView, UIView, double, UIViewAnimationOptions, UICompletionHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.TransitionNotifyAsync(UIView, UIView, double, UIViewAnimationOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.TransitionNotify(UIView, double, UIViewAnimationOptions, Action, UICompletionHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">UIView.TransitionNotifyAsync(UIView, double, UIViewAnimationOptions, Action)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.UpdateConstraints()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.UpdateConstraintsIfNeeded()</span>
+    </div>
+    <div>
+      <span class="xref">UIView.UpdateFocusIfNeeded()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">UIView.ViewWithTag(nint)</a>
+    </div>
+    <div>
+      <span class="xref">UIView.WillDrawLayer(CALayer)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.WillMoveToSuperview(UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.WillMoveToWindow(UIWindow)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.WillRemoveSubview(UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GetAppearance&lt;T&gt;()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">UIView.AppearanceWhenContainedIn(params Type[])</a>
+    </div>
+    <div>
+      <span class="xref">UIView.GetAppearance(UITraitCollection)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">UIView.GetAppearance(UITraitCollection, params Type[])</a>
+    </div>
+    <div>
+      <span class="xref">UIView.GetAppearance&lt;T&gt;(UITraitCollection)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">UIView.GetAppearance&lt;T&gt;(UITraitCollection, params Type[])</a>
+    </div>
+    <div>
+      <span class="xref">UIView.ClassHandle</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityActivationPoint</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityAttributedHint</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityAttributedLabel</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityAttributedUserInputLabels</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityAttributedValue</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityElementsHidden</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityFrame</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityHint</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityIgnoresInvertColors</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityLabel</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityLanguage</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityNavigationStyle</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityPath</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityRespondsToUserInteraction</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityTextualContext</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityTraits</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityUserInputLabels</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityValue</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AccessibilityViewIsModal</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AlignmentRectInsets</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Alpha</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AnchorPoint</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AnimationsEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AppliedContentSizeCategoryLimitsDescription</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AutoresizingMask</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AutosizesSubviews</span>
+    </div>
+    <div>
+      <span class="xref">UIView.BackgroundColor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.BottomAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Bounds</span>
+    </div>
+    <div>
+      <span class="xref">UIView.CanBecomeFocused</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Center</span>
+    </div>
+    <div>
+      <span class="xref">UIView.CenterXAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.CenterYAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ClearsContextBeforeDrawing</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ClipsToBounds</span>
+    </div>
+    <div>
+      <span class="xref">UIView.CollisionBoundingPath</span>
+    </div>
+    <div>
+      <span class="xref">UIView.CollisionBoundsType</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Constraints</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ContentMode</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ContentScaleFactor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ContentStretch</span>
+    </div>
+    <div>
+      <span class="xref">UIView.CoordinateSpace</span>
+    </div>
+    <div>
+      <span class="xref">UIView.DirectionalLayoutMargins</span>
+    </div>
+    <div>
+      <span class="xref">UIView.EffectiveUserInterfaceLayoutDirection</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ExclusiveTouch</span>
+    </div>
+    <div>
+      <span class="xref">UIView.FirstBaselineAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.FocusEffect</span>
+    </div>
+    <div>
+      <span class="xref">UIView.FocusGroupIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIView.FocusGroupPriority</span>
+    </div>
+    <div>
+      <span class="xref">UIView.FocusItemContainer</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Focused</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GestureRecognizers</span>
+    </div>
+    <div>
+      <span class="xref">UIView.HasAmbiguousLayout</span>
+    </div>
+    <div>
+      <span class="xref">UIView.HeightAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Hidden</span>
+    </div>
+    <div>
+      <span class="xref">UIView.InheritedAnimationDuration</span>
+    </div>
+    <div>
+      <span class="xref">UIView.InsetsLayoutMarginsFromSafeArea</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Interactions</span>
+    </div>
+    <div>
+      <span class="xref">UIView.IntrinsicContentSize</span>
+    </div>
+    <div>
+      <span class="xref">UIView.IsAccessibilityElement</span>
+    </div>
+    <div>
+      <span class="xref">UIView.IsTransparentFocusItem</span>
+    </div>
+    <div>
+      <span class="xref">UIView.KeyboardLayoutGuide</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LargeContentImage</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LargeContentImageInsets</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LargeContentTitle</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LastBaselineAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Layer</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LayoutGuides</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LayoutMargins</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LayoutMarginsGuide</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LeadingAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LeftAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.MaskView</span>
+    </div>
+    <div>
+      <span class="xref">UIView.MaximumContentSizeCategory</span>
+    </div>
+    <div>
+      <span class="xref">UIView.MinimumContentSizeCategory</span>
+    </div>
+    <div>
+      <span class="xref">UIView.MotionEffects</span>
+    </div>
+    <div>
+      <span class="xref">UIView.MultipleTouchEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Opaque</span>
+    </div>
+    <div>
+      <span class="xref">UIView.OverrideUserInterfaceStyle</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ParentFocusEnvironment</span>
+    </div>
+    <div>
+      <span class="xref">UIView.PreferredFocusEnvironments</span>
+    </div>
+    <div>
+      <span class="xref">UIView.PreferredFocusedView</span>
+    </div>
+    <div>
+      <span class="xref">UIView.PreservesSuperviewLayoutMargins</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ReadableContentGuide</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RestorationIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIView.RightAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SafeAreaInsets</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SafeAreaLayoutGuide</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ScalesLargeContentImage</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SemanticContentAttribute</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ShouldGroupAccessibilityChildren</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ShowsLargeContentViewer</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Subviews</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Superview</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Tag</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TintAdjustmentMode</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TintColor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TopAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TrailingAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitCollection</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Transform</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Transform3D</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TranslatesAutoresizingMaskIntoConstraints</span>
+    </div>
+    <div>
+      <span class="xref">UIView.UserInteractionEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ViewForBaselineLayout</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ViewForFirstBaselineLayout</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ViewForLastBaselineLayout</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ViewPrintFormatter</span>
+    </div>
+    <div>
+      <span class="xref">UIView.WidthAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Window</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AnnouncementDidFinishNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AnnouncementNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AssistiveTechnologyKey</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AssistiveTouchStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.BoldTextStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ButtonShapesEnabledStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ClosedCaptioningStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.DarkerSystemColorsStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ElementFocusedNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.FocusedElementKey</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GrayscaleStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.GuidedAccessStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.HearingDevicePairedEarDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.InvertColorsStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.LayoutChangedNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.MonoAudioStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.NoIntrinsicMetric</span>
+    </div>
+    <div>
+      <span class="xref">UIView.NotificationSwitchControlIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIView.NotificationVoiceOverIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIView.OnOffSwitchLabelsDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.PageScrolledNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.PauseAssistiveTechnologyNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.PrefersCrossFadeTransitionsStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ReduceMotionStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ReduceTransparencyStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ResumeAssistiveTechnologyNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ScreenChangedNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ShakeToUndoDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.ShouldDifferentiateWithoutColorDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SpeakScreenStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SpeakSelectionStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SpeechAttributeIpaNotation</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SpeechAttributeLanguage</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SpeechAttributePitch</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SpeechAttributePunctuation</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SpeechAttributeQueueAnnouncement</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SpeechAttributeSpellOut</span>
+    </div>
+    <div>
+      <span class="xref">UIView.SwitchControlStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TextAttributeContext</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TextAttributeCustom</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TextAttributeHeadingLevel</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitAdjustable</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitAllowsDirectInteraction</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitButton</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitCausesPageTurn</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitHeader</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitImage</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitKeyboardKey</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitLink</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitNone</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitNotEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitPlaysSound</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitSearchField</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitSelected</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitStartsMediaSession</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitStaticText</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitSummaryElement</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitTabBar</span>
+    </div>
+    <div>
+      <span class="xref">UIView.TraitUpdatesFrequently</span>
+    </div>
+    <div>
+      <span class="xref">UIView.UILayoutFittingCompressedSize</span>
+    </div>
+    <div>
+      <span class="xref">UIView.UILayoutFittingExpandedSize</span>
+    </div>
+    <div>
+      <span class="xref">UIView.UnfocusedElementKey</span>
+    </div>
+    <div>
+      <span class="xref">UIView.VideoAutoplayStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.VoiceOverStatusChanged</span>
+    </div>
+    <div>
+      <span class="xref">UIView.VoiceOverStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIView.Appearance</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AnimationWillStart</span>
+    </div>
+    <div>
+      <span class="xref">UIView.AnimationWillEnd</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityDecrement()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityElementDidBecomeFocused()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityElementDidLoseFocus()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityElementIsFocused()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityIncrement()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityPerformEscape()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityPerformMagicTap()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityScroll(UIAccessibilityScrollDirection)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.BecomeFirstResponder()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.BuildMenu(IUIMenuBuilder)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.CanPaste(NSItemProvider[])</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.CanPerform(Selector, NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.CaptureTextFromCamera(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.ClearTextInputContextIdentifier(NSString)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Copy(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Cut(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.DecreaseSize(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Delete(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Duplicate(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Export(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Find(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.FindAndReplace(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.FindNext(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.FindPrevious(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.GetTargetForAction(Selector, NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.IncreaseSize(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.MakeTextWritingDirectionLeftToRight(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.MakeTextWritingDirectionRightToLeft(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.MotionBegan(UIEventSubtype, UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.MotionCancelled(UIEventSubtype, UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.MotionEnded(UIEventSubtype, UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Move(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Paste(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Paste(NSItemProvider[])</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.PasteAndGo(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.PasteAndMatchStyle(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.PasteAndSearch(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.PressesBegan(NSSet&lt;UIPress&gt;, UIPressesEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.PressesCancelled(NSSet&lt;UIPress&gt;, UIPressesEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.PressesChanged(NSSet&lt;UIPress&gt;, UIPressesEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.PressesEnded(NSSet&lt;UIPress&gt;, UIPressesEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Print(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.ReloadInputViews()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.RemoteControlReceived(UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Rename(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.ResignFirstResponder()</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.RestoreUserActivityState(NSUserActivity)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.Select(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.SelectAll(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.ToggleBoldface(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.ToggleItalics(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.ToggleUnderline(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.TouchesCancelled(NSSet, UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.TouchesEstimatedPropertiesUpdated(NSSet)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.UpdateTextAttributes(UITextAttributesConversionHandler)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.UpdateUserActivityState(NSUserActivity)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.UseSelectionForFind(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.ValidateCommand(UICommand)</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityAssistiveTechnologyFocusedIdentifiers</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityCustomActions</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityDragSourceDescriptors</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.AccessibilityDropPointDescriptors</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.ActivityItemsConfiguration</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.CanBecomeFirstResponder</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.CanResignFirstResponder</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.EditingInteractionConfiguration</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.InputAccessoryView</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.InputAccessoryViewController</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.InputAssistantItem</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.InputView</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.InputViewController</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.IsFirstResponder</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.KeyCommands</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.NextResponder</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.PasteConfiguration</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.TextInputContextIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.TextInputMode</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.UndoManager</span>
+    </div>
+    <div>
+      <span class="xref">UIResponder.UserActivity</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.PlatformAssembly</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.MarkDirty()</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ConformsToProtocol(NativeHandle)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.DangerousRelease()</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.DangerousRetain()</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.DangerousAutorelease()</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.BeginInvokeOnMainThread(Selector, NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.InvokeOnMainThread(Selector, NSObject)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">NSObject.BeginInvokeOnMainThread(Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">NSObject.InvokeOnMainThread(Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">NSObject.FromObject(object)</a>
+    </div>
+    <div>
+      <span class="xref">NSObject.SetValueForKeyPath(NativeHandle, NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.GetHashCode()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">NSObject.Equals(object)</a>
+    </div>
+    <div>
+      <span class="xref">NSObject.Equals(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ToString()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">NSObject.Invoke(Action, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">NSObject.Invoke(Action, TimeSpan)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">NSObject.AddObserver(string, NSKeyValueObservingOptions, Action&lt;NSObservedChange&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">NSObject.AddObserver(NSString, NSKeyValueObservingOptions, Action&lt;NSObservedChange&gt;)</a>
+    </div>
+    <div>
+      <span class="xref">NSObject.Alloc(Class)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.Init()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">NSObject.InvokeInBackground(Action)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">NSObject.AddObserver(NSObject, NSString, NSKeyValueObservingOptions, nint)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">NSObject.AddObserver(NSObject, string, NSKeyValueObservingOptions, nint)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">NSObject.AutomaticallyNotifiesObserversForKey(string)</a>
+    </div>
+    <div>
+      <span class="xref">NSObject.AwakeFromNib()</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.CancelPreviousPerformRequest(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.CancelPreviousPerformRequest(NSObject, Selector, NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.Copy()</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.DidChange(NSKeyValueChange, NSIndexSet, NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.DidChange(NSString, NSKeyValueSetMutationKind, NSSet)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">NSObject.DidChangeValue(string)</a>
+    </div>
+    <div>
+      <span class="xref">NSObject.DoesNotRecognizeSelector(Selector)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.GetDictionaryOfValuesFromKeys(NSString[])</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.GetKeyPathsForValuesAffecting(NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.GetMethodForSelector(Selector)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.GetNativeHash()</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.IsEqual(NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.IsKindOfClass(Class)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.IsMemberOfClass(Class)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.MutableCopy()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">NSObject.ObserveValue(NSString, NSObject, NSDictionary, nint)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">NSObject.PerformSelector(Selector, NSObject, double, NSString[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">NSObject.PerformSelector(Selector, NSObject, double)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">NSObject.PerformSelector(Selector, NSThread, NSObject, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">NSObject.PerformSelector(Selector, NSThread, NSObject, bool, NSString[])</a>
+    </div>
+    <div>
+      <span class="xref">NSObject.PerformSelector(Selector)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.PerformSelector(Selector, NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.PerformSelector(Selector, NSObject, NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.PrepareForInterfaceBuilder()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">NSObject.RemoveObserver(NSObject, NSString, nint)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">NSObject.RemoveObserver(NSObject, string, nint)</a>
+    </div>
+    <div>
+      <span class="xref">NSObject.RemoveObserver(NSObject, NSString)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">NSObject.RemoveObserver(NSObject, string)</a>
+    </div>
+    <div>
+      <span class="xref">NSObject.RespondsToSelector(Selector)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.SetNilValueForKey(NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.SetValueForKey(NSObject, NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.SetValueForKeyPath(NSObject, NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.SetValueForUndefinedKey(NSObject, NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.SetValuesForKeysWithDictionary(NSDictionary)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ValueForKey(NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ValueForKeyPath(NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ValueForUndefinedKey(NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.WillChange(NSKeyValueChange, NSIndexSet, NSString)</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.WillChange(NSString, NSKeyValueSetMutationKind, NSSet)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">NSObject.WillChangeValue(string)</a>
+    </div>
+    <div>
+      <span class="xref">NSObject.IsDirectBinding</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.SuperHandle</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.Handle</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.Class</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.DebugDescription</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.Description</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.IsProxy</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.RetainCount</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.Self</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.Superclass</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.Zone</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ChangeIndexesKey</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ChangeKindKey</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ChangeNewKey</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ChangeNotificationIsPriorKey</span>
+    </div>
+    <div>
+      <span class="xref">NSObject.ChangeOldKey</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a>.<a class="xref" href="Mapsui.UI.html">UI</a>.<a class="xref" href="Mapsui.UI.iOS.html">iOS</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.UI.iOS.dll</h6>
+  <h5 id="Mapsui_UI_iOS_MapControl_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Register(&quot;MapControl&quot;)]
+public class MapControl : UIView, IEquatable&lt;NSObject&gt;, INSObjectProtocol, IUIActivityItemsConfigurationProviding, IUIPasteConfigurationSupporting, IUIResponderStandardEditActions, IUIUserActivityRestoring, IEnumerable, INSCoding, IUIAccessibilityIdentification, IUIAppearance, IUIAppearanceContainer, IUICoordinateSpace, IUIDynamicItem, IUIFocusItem, IUIFocusEnvironment, IUIFocusItemContainer, IUILargeContentViewerItem, IUIPopoverPresentationControllerSourceItem, IUITraitEnvironment, ICALayerDelegate, INativeObject, IMapControl, INotifyPropertyChanged, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl__ctor_CoreGraphics_CGRect_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.%23ctor(CoreGraphics.CGRect)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L17">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl__ctor_" data-uid="Mapsui.UI.iOS.MapControl.#ctor*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl__ctor_CoreGraphics_CGRect_" data-uid="Mapsui.UI.iOS.MapControl.#ctor(CoreGraphics.CGRect)">MapControl(CGRect)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapControl(CGRect frame)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">CGRect</span></td>
+        <td><span class="parametername">frame</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl__ctor_System_IntPtr_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.%23ctor(System.IntPtr)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L24">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl__ctor_" data-uid="Mapsui.UI.iOS.MapControl.#ctor*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl__ctor_System_IntPtr_" data-uid="Mapsui.UI.iOS.MapControl.#ctor(System.IntPtr)">MapControl(nint)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Preserve]
+public MapControl(nint handle)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></td>
+        <td><span class="parametername">handle</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Frame.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Frame%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L194">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_Frame_" data-uid="Mapsui.UI.iOS.MapControl.Frame*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_Frame" data-uid="Mapsui.UI.iOS.MapControl.Frame">Frame</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override CGRect Frame { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">CGRect</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIView.Frame</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Map%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L431">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_Map_" data-uid="Mapsui.UI.iOS.MapControl.Map*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_Map" data-uid="Mapsui.UI.iOS.MapControl.Map">Map</h4>
+  <div class="markdown level1 summary"><p>Map holding data for which is shown in this MapControl</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Map Map { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_MaxTapGestureMovement.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.MaxTapGestureMovement%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L70">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_MaxTapGestureMovement_" data-uid="Mapsui.UI.iOS.MapControl.MaxTapGestureMovement*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_MaxTapGestureMovement" data-uid="Mapsui.UI.iOS.MapControl.MaxTapGestureMovement">MaxTapGestureMovement</h4>
+  <div class="markdown level1 summary"><p>The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxTapGestureMovement { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Performance.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Performance%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L228">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_Performance_" data-uid="Mapsui.UI.iOS.MapControl.Performance*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_Performance" data-uid="Mapsui.UI.iOS.MapControl.Performance">Performance</h4>
+  <div class="markdown level1 summary"><p>Object to save performance information about the drawing of the map</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Performance? Performance { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Performance.html">Performance</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_UI_iOS_MapControl_Performance_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If this is null, no performance information is saved.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_PixelDensity.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.PixelDensity%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L241">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_PixelDensity_" data-uid="Mapsui.UI.iOS.MapControl.PixelDensity*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_PixelDensity" data-uid="Mapsui.UI.iOS.MapControl.PixelDensity">PixelDensity</h4>
+  <div class="markdown level1 summary"><p>The number of pixel per device independent unit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PixelDensity { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Renderer.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Renderer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L246">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_Renderer_" data-uid="Mapsui.UI.iOS.MapControl.Renderer*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_Renderer" data-uid="Mapsui.UI.iOS.MapControl.Renderer">Renderer</h4>
+  <div class="markdown level1 summary"><p>Renderer that is used from this MapControl</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRenderer Renderer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_UpdateInterval.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.UpdateInterval%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L204">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_UpdateInterval_" data-uid="Mapsui.UI.iOS.MapControl.UpdateInterval*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_UpdateInterval" data-uid="Mapsui.UI.iOS.MapControl.UpdateInterval">UpdateInterval</h4>
+  <div class="markdown level1 summary"><p>Interval between two redraws of the MapControl in ms</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int UpdateInterval { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_UseFling.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.UseFling%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L76">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_UseFling_" data-uid="Mapsui.UI.iOS.MapControl.UseFling*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_UseFling" data-uid="Mapsui.UI.iOS.MapControl.UseFling">UseFling</h4>
+  <div class="markdown level1 summary"><p>Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a
+short time after the user has lifted the finger.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseFling { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_UseGPU.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.UseGPU%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L31">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_UseGPU_" data-uid="Mapsui.UI.iOS.MapControl.UseGPU*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_UseGPU" data-uid="Mapsui.UI.iOS.MapControl.UseGPU">UseGPU</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool UseGPU { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L233">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_Dispose_" data-uid="Mapsui.UI.iOS.MapControl.Dispose*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_Dispose" data-uid="Mapsui.UI.iOS.MapControl.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Dispose(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L239">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_Dispose_" data-uid="Mapsui.UI.iOS.MapControl.Dispose*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_Dispose_System_Boolean_" data-uid="Mapsui.UI.iOS.MapControl.Dispose(System.Boolean)">Dispose(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ForceUpdate.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ForceUpdate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L195">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_ForceUpdate_" data-uid="Mapsui.UI.iOS.MapControl.ForceUpdate*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_ForceUpdate" data-uid="Mapsui.UI.iOS.MapControl.ForceUpdate">ForceUpdate()</h4>
+  <div class="markdown level1 summary"><p>Force a update of control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ForceUpdate()</code></pre>
+  </div>
+  <h5 id="Mapsui_UI_iOS_MapControl_ForceUpdate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control draws itself once</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L496">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_GetMapInfo_" data-uid="Mapsui.UI.iOS.MapControl.GetMapInfo*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_" data-uid="Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)">GetMapInfo(ScreenPosition, int)</h4>
+  <div class="markdown level1 summary"><p>Check, if a feature at a given screen position is hit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td><p>Screen position to check for widgets and features</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">margin</span></td>
+        <td><p>An optional extra margin around the feature to enlarge the hit area.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfo.html">MapInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L502">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_GetSnapshot_" data-uid="Mapsui.UI.iOS.MapControl.GetSnapshot*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Create a snapshot form map as PNG image</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] GetSnapshot(IEnumerable&lt;ILayer&gt;? layers = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td><p>Layers that should be included in snapshot</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</td>
+        <td><p>Byte array with snapshot in png format. If there are any problems than returns null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_LayoutMarginsDidChange.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.LayoutMarginsDidChange%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L215">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_LayoutMarginsDidChange_" data-uid="Mapsui.UI.iOS.MapControl.LayoutMarginsDidChange*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_LayoutMarginsDidChange" data-uid="Mapsui.UI.iOS.MapControl.LayoutMarginsDidChange">LayoutMarginsDidChange()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void LayoutMarginsDidChange()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIView.LayoutMarginsDidChange()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L489">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_OnMapInfo_" data-uid="Mapsui.UI.iOS.MapControl.OnMapInfo*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_OnMapInfo_Mapsui_MapInfoEventArgs_" data-uid="Mapsui.UI.iOS.MapControl.OnMapInfo(Mapsui.MapInfoEventArgs)">OnMapInfo(MapInfoEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnMapInfo(MapInfoEventArgs mapInfoEventArgs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a></td>
+        <td><span class="parametername">mapInfoEventArgs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.OnPropertyChanged(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L269">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_OnPropertyChanged_" data-uid="Mapsui.UI.iOS.MapControl.OnPropertyChanged*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_OnPropertyChanged_System_String_" data-uid="Mapsui.UI.iOS.MapControl.OnPropertyChanged(System.String)">OnPropertyChanged(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnPropertyChanged(string propertyName = &quot;&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_OpenInBrowser_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.OpenInBrowser(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L224">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_OpenInBrowser_" data-uid="Mapsui.UI.iOS.MapControl.OpenInBrowser*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_OpenInBrowser_System_String_" data-uid="Mapsui.UI.iOS.MapControl.OpenInBrowser(System.String)">OpenInBrowser(string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OpenInBrowser(string url)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">url</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Refresh_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L313">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_Refresh_" data-uid="Mapsui.UI.iOS.MapControl.Refresh*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_Refresh_Mapsui_ChangeType_" data-uid="Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)">Refresh(ChangeType)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Refresh(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_RefreshData_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L484">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_RefreshData_" data-uid="Mapsui.UI.iOS.MapControl.RefreshData*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_RefreshData_Mapsui_ChangeType_" data-uid="Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)">RefreshData(ChangeType)</h4>
+  <div class="markdown level1 summary"><p>Refresh data of Map, but don't paint it</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshData(ChangeType changeType = ChangeType.Discrete)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_RefreshGraphics.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.RefreshGraphics%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L318">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_RefreshGraphics_" data-uid="Mapsui.UI.iOS.MapControl.RefreshGraphics*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_RefreshGraphics" data-uid="Mapsui.UI.iOS.MapControl.RefreshGraphics">RefreshGraphics()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshGraphics()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_StartUpdates_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.StartUpdates(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L171">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_StartUpdates_" data-uid="Mapsui.UI.iOS.MapControl.StartUpdates*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_StartUpdates_System_Boolean_" data-uid="Mapsui.UI.iOS.MapControl.StartUpdates(System.Boolean)">StartUpdates(bool)</h4>
+  <div class="markdown level1 summary"><p>Start updates for control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StartUpdates(bool refresh = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">refresh</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_UI_iOS_MapControl_StartUpdates_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control is redrawn if needed</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_StopUpdates.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.StopUpdates%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L184">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_StopUpdates_" data-uid="Mapsui.UI.iOS.MapControl.StopUpdates*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_StopUpdates" data-uid="Mapsui.UI.iOS.MapControl.StopUpdates">StopUpdates()</h4>
+  <div class="markdown level1 summary"><p>Stop updates for control</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StopUpdates()</code></pre>
+  </div>
+  <h5 id="Mapsui_UI_iOS_MapControl_StopUpdates_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When this function is called, the control stops to redraw itself,
+even if it is needed</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L476">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_" data-uid="Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_" data-uid="Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)">ToDeviceIndependentUnits(MPoint)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in pixels to device independent units (or DIP or DP).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">coordinateInPixels</span></td>
+        <td><p>Coordinate in pixels</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ToPixels_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L468">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_ToPixels_" data-uid="Mapsui.UI.iOS.MapControl.ToPixels*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_ToPixels_Mapsui_MPoint_" data-uid="Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)">ToPixels(MPoint)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in device independent units (or DIP or DP) to pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><span class="parametername">coordinateInDeviceIndependentUnits</span></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
+        <td><p>Coordinate in pixels</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesBegan_Foundation_NSSet_UIKit_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesBegan(Foundation.NSSet%2CUIKit.UIEvent)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L133">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_TouchesBegan_" data-uid="Mapsui.UI.iOS.MapControl.TouchesBegan*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_TouchesBegan_Foundation_NSSet_UIKit_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesBegan(Foundation.NSSet,UIKit.UIEvent)">TouchesBegan(NSSet, UIEvent?)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void TouchesBegan(NSSet touches, UIEvent? e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NSSet</span></td>
+        <td><span class="parametername">touches</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UIEvent</span></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIResponder.TouchesBegan(Foundation.NSSet, UIKit.UIEvent)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesEnded_Foundation_NSSet_UIKit_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesEnded(Foundation.NSSet%2CUIKit.UIEvent)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L162">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_TouchesEnded_" data-uid="Mapsui.UI.iOS.MapControl.TouchesEnded*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_TouchesEnded_Foundation_NSSet_UIKit_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesEnded(Foundation.NSSet,UIKit.UIEvent)">TouchesEnded(NSSet, UIEvent?)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void TouchesEnded(NSSet touches, UIEvent? e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NSSet</span></td>
+        <td><span class="parametername">touches</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UIEvent</span></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIResponder.TouchesEnded(Foundation.NSSet, UIKit.UIEvent)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesMoved_Foundation_NSSet_UIKit_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesMoved(Foundation.NSSet%2CUIKit.UIEvent)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.iOS/MapControl.cs/#L148">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_TouchesMoved_" data-uid="Mapsui.UI.iOS.MapControl.TouchesMoved*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_TouchesMoved_Foundation_NSSet_UIKit_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesMoved(Foundation.NSSet,UIKit.UIEvent)">TouchesMoved(NSSet, UIEvent?)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void TouchesMoved(NSSet touches, UIEvent? e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NSSet</span></td>
+        <td><span class="parametername">touches</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">UIEvent</span></td>
+        <td><span class="parametername">e</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIResponder.TouchesMoved(Foundation.NSSet, UIKit.UIEvent)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Unsubscribe%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L278">View Source</a>
+  </span>
+  <a id="Mapsui_UI_iOS_MapControl_Unsubscribe_" data-uid="Mapsui.UI.iOS.MapControl.Unsubscribe*"></a>
+  <h4 id="Mapsui_UI_iOS_MapControl_Unsubscribe" data-uid="Mapsui.UI.iOS.MapControl.Unsubscribe">Unsubscribe()</h4>
+  <div class="markdown level1 summary"><p>Unsubscribe from map events</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Unsubscribe()</code></pre>
+  </div>
+  <h3 id="events">Events
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Info.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Info%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L252">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_iOS_MapControl_Info" data-uid="Mapsui.UI.iOS.MapControl.Info">Info</h4>
+  <div class="markdown level1 summary"><p>Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+the layers that have IsMapInfoLayer set to true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapInfoEventArgs&gt;? Info</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_PropertyChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.PropertyChanged%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L260">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_iOS_MapControl_PropertyChanged" data-uid="Mapsui.UI.iOS.MapControl.PropertyChanged">PropertyChanged</h4>
+  <div class="markdown level1 summary"><p>Called whenever a property is changed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler? PropertyChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler">PropertyChangedEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable&lt;T&gt;</a>
+  </div>
+  <div>
+      <span class="xref">Foundation.INSObjectProtocol</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIActivityItemsConfigurationProviding</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIPasteConfigurationSupporting</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIResponderStandardEditActions</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIUserActivityRestoring</span>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a>
+  </div>
+  <div>
+      <span class="xref">Foundation.INSCoding</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIAccessibilityIdentification</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIAppearance</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIAppearanceContainer</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUICoordinateSpace</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIDynamicItem</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIFocusItem</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIFocusEnvironment</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIFocusItemContainer</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUILargeContentViewerItem</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIPopoverPresentationControllerSourceItem</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUITraitEnvironment</span>
+  </div>
+  <div>
+      <span class="xref">CoreAnimation.ICALayerDelegate</span>
+  </div>
+  <div>
+      <span class="xref">ObjCRuntime.INativeObject</span>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_UI_iOS_MapControl.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui.UI.Shared/MapControl.cs/#L47" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

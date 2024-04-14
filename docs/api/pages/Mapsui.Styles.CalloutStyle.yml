@@ -1,0 +1,1990 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.CalloutStyle
+  commentId: T:Mapsui.Styles.CalloutStyle
+  id: CalloutStyle
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.CalloutStyle.ArrowAlignment
+  - Mapsui.Styles.CalloutStyle.ArrowHeight
+  - Mapsui.Styles.CalloutStyle.ArrowPosition
+  - Mapsui.Styles.CalloutStyle.ArrowWidth
+  - Mapsui.Styles.CalloutStyle.BackgroundColor
+  - Mapsui.Styles.CalloutStyle.Color
+  - Mapsui.Styles.CalloutStyle.Content
+  - Mapsui.Styles.CalloutStyle.DefaultHeight
+  - Mapsui.Styles.CalloutStyle.DefaultWidth
+  - Mapsui.Styles.CalloutStyle.InternalContent
+  - Mapsui.Styles.CalloutStyle.Invalidated
+  - Mapsui.Styles.CalloutStyle.MaxWidth
+  - Mapsui.Styles.CalloutStyle.Offset
+  - Mapsui.Styles.CalloutStyle.Padding
+  - Mapsui.Styles.CalloutStyle.RectRadius
+  - Mapsui.Styles.CalloutStyle.Rotation
+  - Mapsui.Styles.CalloutStyle.ShadowWidth
+  - Mapsui.Styles.CalloutStyle.Spacing
+  - Mapsui.Styles.CalloutStyle.StrokeWidth
+  - Mapsui.Styles.CalloutStyle.Subtitle
+  - Mapsui.Styles.CalloutStyle.SubtitleFont
+  - Mapsui.Styles.CalloutStyle.SubtitleFontColor
+  - Mapsui.Styles.CalloutStyle.SubtitleTextAlignment
+  - Mapsui.Styles.CalloutStyle.Title
+  - Mapsui.Styles.CalloutStyle.TitleFont
+  - Mapsui.Styles.CalloutStyle.TitleFontColor
+  - Mapsui.Styles.CalloutStyle.TitleTextAlignment
+  - Mapsui.Styles.CalloutStyle.Type
+  langs:
+  - csharp
+  - vb
+  name: CalloutStyle
+  nameWithType: CalloutStyle
+  fullName: Mapsui.Styles.CalloutStyle
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CalloutStyle
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 58
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: A CalloutStyle shows a callout or InfoWindow in Google Maps
+  remarks: >-
+    There are three different types of Callouts
+
+    1. Type = CalloutType.Single
+       The text in Title will be shown
+    2. Type = CalloutType.Detail
+       The text in Title and SubTitle will be shown
+    3. Type = CalloutType.Custom
+       The bitmap with ID in Content will be shown
+  example: []
+  syntax:
+    content: 'public class CalloutStyle : SymbolStyle, IStyle'
+    content.vb: Public Class CalloutStyle Inherits SymbolStyle Implements IStyle
+  inheritance:
+  - System.Object
+  - Mapsui.Styles.Style
+  - Mapsui.Styles.VectorStyle
+  - Mapsui.Styles.SymbolStyle
+  implements:
+  - Mapsui.Styles.IStyle
+  inheritedMembers:
+  - Mapsui.Styles.SymbolStyle.SymbolType
+  - Mapsui.Styles.SymbolStyle.UnitType
+  - Mapsui.Styles.SymbolStyle.BitmapId
+  - Mapsui.Styles.SymbolStyle.SymbolRotation
+  - Mapsui.Styles.SymbolStyle.RotateWithMap
+  - Mapsui.Styles.SymbolStyle.SymbolScale
+  - Mapsui.Styles.SymbolStyle.SymbolOffset
+  - Mapsui.Styles.SymbolStyle.SymbolOffsetRotatesWithMap
+  - Mapsui.Styles.SymbolStyle.BlendModeColor
+  - Mapsui.Styles.SymbolStyle.Equals(System.Object)
+  - Mapsui.Styles.SymbolStyle.Equals(Mapsui.Styles.SymbolStyle)
+  - Mapsui.Styles.SymbolStyle.GetHashCode
+  - Mapsui.Styles.VectorStyle.Line
+  - Mapsui.Styles.VectorStyle.Outline
+  - Mapsui.Styles.VectorStyle.Fill
+  - Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+  - Mapsui.Styles.Style.MinVisible
+  - Mapsui.Styles.Style.MaxVisible
+  - Mapsui.Styles.Style.Enabled
+  - Mapsui.Styles.Style.Opacity
+  - Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.GetStylesToApply(System.Double)
+  - Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.ShouldBeApplied(System.Double)
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.CalloutStyle.DefaultWidth
+  commentId: P:Mapsui.Styles.CalloutStyle.DefaultWidth
+  id: DefaultWidth
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: DefaultWidth
+  nameWithType: CalloutStyle.DefaultWidth
+  fullName: Mapsui.Styles.CalloutStyle.DefaultWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultWidth
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 84
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static double DefaultWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Shared Property DefaultWidth As Double
+  overload: Mapsui.Styles.CalloutStyle.DefaultWidth*
+- uid: Mapsui.Styles.CalloutStyle.DefaultHeight
+  commentId: P:Mapsui.Styles.CalloutStyle.DefaultHeight
+  id: DefaultHeight
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: DefaultHeight
+  nameWithType: CalloutStyle.DefaultHeight
+  fullName: Mapsui.Styles.CalloutStyle.DefaultHeight
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DefaultHeight
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 85
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public static double DefaultHeight { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Shared Property DefaultHeight As Double
+  overload: Mapsui.Styles.CalloutStyle.DefaultHeight*
+- uid: Mapsui.Styles.CalloutStyle.Type
+  commentId: P:Mapsui.Styles.CalloutStyle.Type
+  id: Type
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Type
+  nameWithType: CalloutStyle.Type
+  fullName: Mapsui.Styles.CalloutStyle.Type
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Type
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 93
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Type of Callout
+  remarks: Could be Single, Detail or Custom. The last need a bitmap id in Content for an owner drawn image.
+  example: []
+  syntax:
+    content: public CalloutType Type { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.CalloutType
+    content.vb: Public Property Type As CalloutType
+  overload: Mapsui.Styles.CalloutStyle.Type*
+- uid: Mapsui.Styles.CalloutStyle.Offset
+  commentId: P:Mapsui.Styles.CalloutStyle.Offset
+  id: Offset
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Offset
+  nameWithType: CalloutStyle.Offset
+  fullName: Mapsui.Styles.CalloutStyle.Offset
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Offset
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 109
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Offset position in pixels of Callout
+  example: []
+  syntax:
+    content: public Offset Offset { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Offset
+    content.vb: Public Property Offset As Offset
+  overload: Mapsui.Styles.CalloutStyle.Offset*
+- uid: Mapsui.Styles.CalloutStyle.Rotation
+  commentId: P:Mapsui.Styles.CalloutStyle.Rotation
+  id: Rotation
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Rotation
+  nameWithType: CalloutStyle.Rotation
+  fullName: Mapsui.Styles.CalloutStyle.Rotation
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rotation
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 126
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Gets or sets the rotation of the Callout in degrees (clockwise is positive)
+  example: []
+  syntax:
+    content: public double Rotation { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Rotation As Double
+  overload: Mapsui.Styles.CalloutStyle.Rotation*
+- uid: Mapsui.Styles.CalloutStyle.ArrowAlignment
+  commentId: P:Mapsui.Styles.CalloutStyle.ArrowAlignment
+  id: ArrowAlignment
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: ArrowAlignment
+  nameWithType: CalloutStyle.ArrowAlignment
+  fullName: Mapsui.Styles.CalloutStyle.ArrowAlignment
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowAlignment
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 142
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Anchor position of Callout
+  example: []
+  syntax:
+    content: public ArrowAlignment ArrowAlignment { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.ArrowAlignment
+    content.vb: Public Property ArrowAlignment As ArrowAlignment
+  overload: Mapsui.Styles.CalloutStyle.ArrowAlignment*
+- uid: Mapsui.Styles.CalloutStyle.ArrowWidth
+  commentId: P:Mapsui.Styles.CalloutStyle.ArrowWidth
+  id: ArrowWidth
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: ArrowWidth
+  nameWithType: CalloutStyle.ArrowWidth
+  fullName: Mapsui.Styles.CalloutStyle.ArrowWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowWidth
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 158
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Width of opening of anchor of Callout
+  example: []
+  syntax:
+    content: public float ArrowWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public Property ArrowWidth As Single
+  overload: Mapsui.Styles.CalloutStyle.ArrowWidth*
+- uid: Mapsui.Styles.CalloutStyle.ArrowHeight
+  commentId: P:Mapsui.Styles.CalloutStyle.ArrowHeight
+  id: ArrowHeight
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: ArrowHeight
+  nameWithType: CalloutStyle.ArrowHeight
+  fullName: Mapsui.Styles.CalloutStyle.ArrowHeight
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowHeight
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 174
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Height of anchor of Callout
+  example: []
+  syntax:
+    content: public float ArrowHeight { get; set; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public Property ArrowHeight As Single
+  overload: Mapsui.Styles.CalloutStyle.ArrowHeight*
+- uid: Mapsui.Styles.CalloutStyle.ArrowPosition
+  commentId: P:Mapsui.Styles.CalloutStyle.ArrowPosition
+  id: ArrowPosition
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: ArrowPosition
+  nameWithType: CalloutStyle.ArrowPosition
+  fullName: Mapsui.Styles.CalloutStyle.ArrowPosition
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ArrowPosition
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 190
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Relative position of anchor of Callout on the side given by AnchorType
+  example: []
+  syntax:
+    content: public float ArrowPosition { get; set; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public Property ArrowPosition As Single
+  overload: Mapsui.Styles.CalloutStyle.ArrowPosition*
+- uid: Mapsui.Styles.CalloutStyle.Color
+  commentId: P:Mapsui.Styles.CalloutStyle.Color
+  id: Color
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Color
+  nameWithType: CalloutStyle.Color
+  fullName: Mapsui.Styles.CalloutStyle.Color
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Color
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 206
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Color of stroke around Callout
+  example: []
+  syntax:
+    content: public Color Color { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Property Color As Color
+  overload: Mapsui.Styles.CalloutStyle.Color*
+- uid: Mapsui.Styles.CalloutStyle.BackgroundColor
+  commentId: P:Mapsui.Styles.CalloutStyle.BackgroundColor
+  id: BackgroundColor
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: BackgroundColor
+  nameWithType: CalloutStyle.BackgroundColor
+  fullName: Mapsui.Styles.CalloutStyle.BackgroundColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: BackgroundColor
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 222
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: BackgroundColor of Callout
+  example: []
+  syntax:
+    content: public Color BackgroundColor { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Property BackgroundColor As Color
+  overload: Mapsui.Styles.CalloutStyle.BackgroundColor*
+- uid: Mapsui.Styles.CalloutStyle.StrokeWidth
+  commentId: P:Mapsui.Styles.CalloutStyle.StrokeWidth
+  id: StrokeWidth
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: StrokeWidth
+  nameWithType: CalloutStyle.StrokeWidth
+  fullName: Mapsui.Styles.CalloutStyle.StrokeWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StrokeWidth
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 238
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Stroke width of frame around Callout
+  example: []
+  syntax:
+    content: public float StrokeWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public Property StrokeWidth As Single
+  overload: Mapsui.Styles.CalloutStyle.StrokeWidth*
+- uid: Mapsui.Styles.CalloutStyle.RectRadius
+  commentId: P:Mapsui.Styles.CalloutStyle.RectRadius
+  id: RectRadius
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: RectRadius
+  nameWithType: CalloutStyle.RectRadius
+  fullName: Mapsui.Styles.CalloutStyle.RectRadius
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RectRadius
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 254
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Radius of rounded corners of Callout
+  example: []
+  syntax:
+    content: public float RectRadius { get; set; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public Property RectRadius As Single
+  overload: Mapsui.Styles.CalloutStyle.RectRadius*
+- uid: Mapsui.Styles.CalloutStyle.Padding
+  commentId: P:Mapsui.Styles.CalloutStyle.Padding
+  id: Padding
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Padding
+  nameWithType: CalloutStyle.Padding
+  fullName: Mapsui.Styles.CalloutStyle.Padding
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Padding
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 270
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Padding around content of Callout
+  example: []
+  syntax:
+    content: public MRect Padding { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.MRect
+    content.vb: Public Property Padding As MRect
+  overload: Mapsui.Styles.CalloutStyle.Padding*
+- uid: Mapsui.Styles.CalloutStyle.ShadowWidth
+  commentId: P:Mapsui.Styles.CalloutStyle.ShadowWidth
+  id: ShadowWidth
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: ShadowWidth
+  nameWithType: CalloutStyle.ShadowWidth
+  fullName: Mapsui.Styles.CalloutStyle.ShadowWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShadowWidth
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 286
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Width of shadow around Callout
+  example: []
+  syntax:
+    content: public float ShadowWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Single
+    content.vb: Public Property ShadowWidth As Single
+  overload: Mapsui.Styles.CalloutStyle.ShadowWidth*
+- uid: Mapsui.Styles.CalloutStyle.Content
+  commentId: P:Mapsui.Styles.CalloutStyle.Content
+  id: Content
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Content
+  nameWithType: CalloutStyle.Content
+  fullName: Mapsui.Styles.CalloutStyle.Content
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Content
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 305
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Content of Callout
+  remarks: Is a BitmapId of a save image
+  example: []
+  syntax:
+    content: public int Content { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Content As Integer
+  overload: Mapsui.Styles.CalloutStyle.Content*
+- uid: Mapsui.Styles.CalloutStyle.Title
+  commentId: P:Mapsui.Styles.CalloutStyle.Title
+  id: Title
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: CalloutStyle.Title
+  fullName: Mapsui.Styles.CalloutStyle.Title
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Title
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 321
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Content of Callout title label
+  example: []
+  syntax:
+    content: public string? Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Title As String
+  overload: Mapsui.Styles.CalloutStyle.Title*
+- uid: Mapsui.Styles.CalloutStyle.TitleFontColor
+  commentId: P:Mapsui.Styles.CalloutStyle.TitleFontColor
+  id: TitleFontColor
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: TitleFontColor
+  nameWithType: CalloutStyle.TitleFontColor
+  fullName: Mapsui.Styles.CalloutStyle.TitleFontColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TitleFontColor
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 337
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Font color to render title
+  example: []
+  syntax:
+    content: public Color? TitleFontColor { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Property TitleFontColor As Color
+  overload: Mapsui.Styles.CalloutStyle.TitleFontColor*
+- uid: Mapsui.Styles.CalloutStyle.TitleTextAlignment
+  commentId: P:Mapsui.Styles.CalloutStyle.TitleTextAlignment
+  id: TitleTextAlignment
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: TitleTextAlignment
+  nameWithType: CalloutStyle.TitleTextAlignment
+  fullName: Mapsui.Styles.CalloutStyle.TitleTextAlignment
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TitleTextAlignment
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 350
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Text alignment of title
+  example: []
+  syntax:
+    content: public Alignment TitleTextAlignment { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Widgets.Alignment
+    content.vb: Public Property TitleTextAlignment As Alignment
+  overload: Mapsui.Styles.CalloutStyle.TitleTextAlignment*
+- uid: Mapsui.Styles.CalloutStyle.Subtitle
+  commentId: P:Mapsui.Styles.CalloutStyle.Subtitle
+  id: Subtitle
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Subtitle
+  nameWithType: CalloutStyle.Subtitle
+  fullName: Mapsui.Styles.CalloutStyle.Subtitle
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Subtitle
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 366
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Content of Callout subtitle label
+  example: []
+  syntax:
+    content: public string? Subtitle { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Subtitle As String
+  overload: Mapsui.Styles.CalloutStyle.Subtitle*
+- uid: Mapsui.Styles.CalloutStyle.SubtitleFontColor
+  commentId: P:Mapsui.Styles.CalloutStyle.SubtitleFontColor
+  id: SubtitleFontColor
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: SubtitleFontColor
+  nameWithType: CalloutStyle.SubtitleFontColor
+  fullName: Mapsui.Styles.CalloutStyle.SubtitleFontColor
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SubtitleFontColor
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 382
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Font color to render subtitle
+  example: []
+  syntax:
+    content: public Color? SubtitleFontColor { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Color
+    content.vb: Public Property SubtitleFontColor As Color
+  overload: Mapsui.Styles.CalloutStyle.SubtitleFontColor*
+- uid: Mapsui.Styles.CalloutStyle.SubtitleTextAlignment
+  commentId: P:Mapsui.Styles.CalloutStyle.SubtitleTextAlignment
+  id: SubtitleTextAlignment
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: SubtitleTextAlignment
+  nameWithType: CalloutStyle.SubtitleTextAlignment
+  fullName: Mapsui.Styles.CalloutStyle.SubtitleTextAlignment
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SubtitleTextAlignment
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 395
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Text alignment of subtitle
+  example: []
+  syntax:
+    content: public Alignment SubtitleTextAlignment { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Widgets.Alignment
+    content.vb: Public Property SubtitleTextAlignment As Alignment
+  overload: Mapsui.Styles.CalloutStyle.SubtitleTextAlignment*
+- uid: Mapsui.Styles.CalloutStyle.Spacing
+  commentId: P:Mapsui.Styles.CalloutStyle.Spacing
+  id: Spacing
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Spacing
+  nameWithType: CalloutStyle.Spacing
+  fullName: Mapsui.Styles.CalloutStyle.Spacing
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Spacing
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 411
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: Space between Title and Subtitle of Callout
+  example: []
+  syntax:
+    content: public double Spacing { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Spacing As Double
+  overload: Mapsui.Styles.CalloutStyle.Spacing*
+- uid: Mapsui.Styles.CalloutStyle.MaxWidth
+  commentId: P:Mapsui.Styles.CalloutStyle.MaxWidth
+  id: MaxWidth
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: MaxWidth
+  nameWithType: CalloutStyle.MaxWidth
+  fullName: Mapsui.Styles.CalloutStyle.MaxWidth
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: MaxWidth
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 427
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  summary: MaxWidth for Title and Subtitle of Callout
+  example: []
+  syntax:
+    content: public double MaxWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property MaxWidth As Double
+  overload: Mapsui.Styles.CalloutStyle.MaxWidth*
+- uid: Mapsui.Styles.CalloutStyle.InternalContent
+  commentId: P:Mapsui.Styles.CalloutStyle.InternalContent
+  id: InternalContent
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: InternalContent
+  nameWithType: CalloutStyle.InternalContent
+  fullName: Mapsui.Styles.CalloutStyle.InternalContent
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: InternalContent
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 440
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public int InternalContent { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property InternalContent As Integer
+  overload: Mapsui.Styles.CalloutStyle.InternalContent*
+- uid: Mapsui.Styles.CalloutStyle.TitleFont
+  commentId: P:Mapsui.Styles.CalloutStyle.TitleFont
+  id: TitleFont
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: TitleFont
+  nameWithType: CalloutStyle.TitleFont
+  fullName: Mapsui.Styles.CalloutStyle.TitleFont
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TitleFont
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 445
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public Font TitleFont { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Font
+    content.vb: Public Property TitleFont As Font
+  overload: Mapsui.Styles.CalloutStyle.TitleFont*
+- uid: Mapsui.Styles.CalloutStyle.SubtitleFont
+  commentId: P:Mapsui.Styles.CalloutStyle.SubtitleFont
+  id: SubtitleFont
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: SubtitleFont
+  nameWithType: CalloutStyle.SubtitleFont
+  fullName: Mapsui.Styles.CalloutStyle.SubtitleFont
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SubtitleFont
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 455
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public Font SubtitleFont { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Styles.Font
+    content.vb: Public Property SubtitleFont As Font
+  overload: Mapsui.Styles.CalloutStyle.SubtitleFont*
+- uid: Mapsui.Styles.CalloutStyle.Invalidated
+  commentId: P:Mapsui.Styles.CalloutStyle.Invalidated
+  id: Invalidated
+  parent: Mapsui.Styles.CalloutStyle
+  langs:
+  - csharp
+  - vb
+  name: Invalidated
+  nameWithType: CalloutStyle.Invalidated
+  fullName: Mapsui.Styles.CalloutStyle.Invalidated
+  type: Property
+  source:
+    remote:
+      path: Mapsui/Styles/CalloutStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Invalidated
+    path: ../../Mapsui/Styles/CalloutStyle.cs
+    startLine: 465
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public bool Invalidated { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property Invalidated As Boolean
+  overload: Mapsui.Styles.CalloutStyle.Invalidated*
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Styles.Style
+  commentId: T:Mapsui.Styles.Style
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Style.html
+  name: Style
+  nameWithType: Style
+  fullName: Mapsui.Styles.Style
+- uid: Mapsui.Styles.VectorStyle
+  commentId: T:Mapsui.Styles.VectorStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.VectorStyle.html
+  name: VectorStyle
+  nameWithType: VectorStyle
+  fullName: Mapsui.Styles.VectorStyle
+- uid: Mapsui.Styles.SymbolStyle
+  commentId: T:Mapsui.Styles.SymbolStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.SymbolStyle.html
+  name: SymbolStyle
+  nameWithType: SymbolStyle
+  fullName: Mapsui.Styles.SymbolStyle
+- uid: Mapsui.Styles.IStyle
+  commentId: T:Mapsui.Styles.IStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyle.html
+  name: IStyle
+  nameWithType: IStyle
+  fullName: Mapsui.Styles.IStyle
+- uid: Mapsui.Styles.SymbolStyle.SymbolType
+  commentId: P:Mapsui.Styles.SymbolStyle.SymbolType
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SymbolType
+  name: SymbolType
+  nameWithType: SymbolStyle.SymbolType
+  fullName: Mapsui.Styles.SymbolStyle.SymbolType
+- uid: Mapsui.Styles.SymbolStyle.UnitType
+  commentId: P:Mapsui.Styles.SymbolStyle.UnitType
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_UnitType
+  name: UnitType
+  nameWithType: SymbolStyle.UnitType
+  fullName: Mapsui.Styles.SymbolStyle.UnitType
+- uid: Mapsui.Styles.SymbolStyle.BitmapId
+  commentId: P:Mapsui.Styles.SymbolStyle.BitmapId
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_BitmapId
+  name: BitmapId
+  nameWithType: SymbolStyle.BitmapId
+  fullName: Mapsui.Styles.SymbolStyle.BitmapId
+- uid: Mapsui.Styles.SymbolStyle.SymbolRotation
+  commentId: P:Mapsui.Styles.SymbolStyle.SymbolRotation
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SymbolRotation
+  name: SymbolRotation
+  nameWithType: SymbolStyle.SymbolRotation
+  fullName: Mapsui.Styles.SymbolStyle.SymbolRotation
+- uid: Mapsui.Styles.SymbolStyle.RotateWithMap
+  commentId: P:Mapsui.Styles.SymbolStyle.RotateWithMap
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_RotateWithMap
+  name: RotateWithMap
+  nameWithType: SymbolStyle.RotateWithMap
+  fullName: Mapsui.Styles.SymbolStyle.RotateWithMap
+- uid: Mapsui.Styles.SymbolStyle.SymbolScale
+  commentId: P:Mapsui.Styles.SymbolStyle.SymbolScale
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SymbolScale
+  name: SymbolScale
+  nameWithType: SymbolStyle.SymbolScale
+  fullName: Mapsui.Styles.SymbolStyle.SymbolScale
+- uid: Mapsui.Styles.SymbolStyle.SymbolOffset
+  commentId: P:Mapsui.Styles.SymbolStyle.SymbolOffset
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SymbolOffset
+  name: SymbolOffset
+  nameWithType: SymbolStyle.SymbolOffset
+  fullName: Mapsui.Styles.SymbolStyle.SymbolOffset
+- uid: Mapsui.Styles.SymbolStyle.SymbolOffsetRotatesWithMap
+  commentId: P:Mapsui.Styles.SymbolStyle.SymbolOffsetRotatesWithMap
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SymbolOffsetRotatesWithMap
+  name: SymbolOffsetRotatesWithMap
+  nameWithType: SymbolStyle.SymbolOffsetRotatesWithMap
+  fullName: Mapsui.Styles.SymbolStyle.SymbolOffsetRotatesWithMap
+- uid: Mapsui.Styles.SymbolStyle.BlendModeColor
+  commentId: P:Mapsui.Styles.SymbolStyle.BlendModeColor
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_BlendModeColor
+  name: BlendModeColor
+  nameWithType: SymbolStyle.BlendModeColor
+  fullName: Mapsui.Styles.SymbolStyle.BlendModeColor
+- uid: Mapsui.Styles.SymbolStyle.Equals(System.Object)
+  commentId: M:Mapsui.Styles.SymbolStyle.Equals(System.Object)
+  parent: Mapsui.Styles.SymbolStyle
+  isExternal: true
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Equals_System_Object_
+  name: Equals(object)
+  nameWithType: SymbolStyle.Equals(object)
+  fullName: Mapsui.Styles.SymbolStyle.Equals(object)
+  nameWithType.vb: SymbolStyle.Equals(Object)
+  fullName.vb: Mapsui.Styles.SymbolStyle.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: Mapsui.Styles.SymbolStyle.Equals(System.Object)
+    name: Equals
+    href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.SymbolStyle.Equals(System.Object)
+    name: Equals
+    href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Styles.SymbolStyle.Equals(Mapsui.Styles.SymbolStyle)
+  commentId: M:Mapsui.Styles.SymbolStyle.Equals(Mapsui.Styles.SymbolStyle)
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Equals_Mapsui_Styles_SymbolStyle_
+  name: Equals(SymbolStyle)
+  nameWithType: SymbolStyle.Equals(SymbolStyle)
+  fullName: Mapsui.Styles.SymbolStyle.Equals(Mapsui.Styles.SymbolStyle)
+  spec.csharp:
+  - uid: Mapsui.Styles.SymbolStyle.Equals(Mapsui.Styles.SymbolStyle)
+    name: Equals
+    href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Equals_Mapsui_Styles_SymbolStyle_
+  - name: (
+  - uid: Mapsui.Styles.SymbolStyle
+    name: SymbolStyle
+    href: Mapsui.Styles.SymbolStyle.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.SymbolStyle.Equals(Mapsui.Styles.SymbolStyle)
+    name: Equals
+    href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Equals_Mapsui_Styles_SymbolStyle_
+  - name: (
+  - uid: Mapsui.Styles.SymbolStyle
+    name: SymbolStyle
+    href: Mapsui.Styles.SymbolStyle.html
+  - name: )
+- uid: Mapsui.Styles.SymbolStyle.GetHashCode
+  commentId: M:Mapsui.Styles.SymbolStyle.GetHashCode
+  parent: Mapsui.Styles.SymbolStyle
+  href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_GetHashCode
+  name: GetHashCode()
+  nameWithType: SymbolStyle.GetHashCode()
+  fullName: Mapsui.Styles.SymbolStyle.GetHashCode()
+  spec.csharp:
+  - uid: Mapsui.Styles.SymbolStyle.GetHashCode
+    name: GetHashCode
+    href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_GetHashCode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.SymbolStyle.GetHashCode
+    name: GetHashCode
+    href: Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_GetHashCode
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.VectorStyle.Line
+  commentId: P:Mapsui.Styles.VectorStyle.Line
+  parent: Mapsui.Styles.VectorStyle
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Line
+  name: Line
+  nameWithType: VectorStyle.Line
+  fullName: Mapsui.Styles.VectorStyle.Line
+- uid: Mapsui.Styles.VectorStyle.Outline
+  commentId: P:Mapsui.Styles.VectorStyle.Outline
+  parent: Mapsui.Styles.VectorStyle
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Outline
+  name: Outline
+  nameWithType: VectorStyle.Outline
+  fullName: Mapsui.Styles.VectorStyle.Outline
+- uid: Mapsui.Styles.VectorStyle.Fill
+  commentId: P:Mapsui.Styles.VectorStyle.Fill
+  parent: Mapsui.Styles.VectorStyle
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Fill
+  name: Fill
+  nameWithType: VectorStyle.Fill
+  fullName: Mapsui.Styles.VectorStyle.Fill
+- uid: Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+  commentId: M:Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+  parent: Mapsui.Styles.VectorStyle
+  href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Equals_Mapsui_Styles_VectorStyle_
+  name: Equals(VectorStyle)
+  nameWithType: VectorStyle.Equals(VectorStyle)
+  fullName: Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+  spec.csharp:
+  - uid: Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+    name: Equals
+    href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Equals_Mapsui_Styles_VectorStyle_
+  - name: (
+  - uid: Mapsui.Styles.VectorStyle
+    name: VectorStyle
+    href: Mapsui.Styles.VectorStyle.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.VectorStyle.Equals(Mapsui.Styles.VectorStyle)
+    name: Equals
+    href: Mapsui.Styles.VectorStyle.html#Mapsui_Styles_VectorStyle_Equals_Mapsui_Styles_VectorStyle_
+  - name: (
+  - uid: Mapsui.Styles.VectorStyle
+    name: VectorStyle
+    href: Mapsui.Styles.VectorStyle.html
+  - name: )
+- uid: Mapsui.Styles.Style.MinVisible
+  commentId: P:Mapsui.Styles.Style.MinVisible
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_MinVisible
+  name: MinVisible
+  nameWithType: Style.MinVisible
+  fullName: Mapsui.Styles.Style.MinVisible
+- uid: Mapsui.Styles.Style.MaxVisible
+  commentId: P:Mapsui.Styles.Style.MaxVisible
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_MaxVisible
+  name: MaxVisible
+  nameWithType: Style.MaxVisible
+  fullName: Mapsui.Styles.Style.MaxVisible
+- uid: Mapsui.Styles.Style.Enabled
+  commentId: P:Mapsui.Styles.Style.Enabled
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Enabled
+  name: Enabled
+  nameWithType: Style.Enabled
+  fullName: Mapsui.Styles.Style.Enabled
+- uid: Mapsui.Styles.Style.Opacity
+  commentId: P:Mapsui.Styles.Style.Opacity
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Opacity
+  name: Opacity
+  nameWithType: Style.Opacity
+  fullName: Mapsui.Styles.Style.Opacity
+- uid: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  commentId: M:Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  parent: Mapsui.Styles.Style
+  href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_
+  name: Equals(Style)
+  nameWithType: Style.Equals(Style)
+  fullName: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+  spec.csharp:
+  - uid: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_
+  - name: (
+  - uid: Mapsui.Styles.Style
+    name: Style
+    href: Mapsui.Styles.Style.html
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
+    name: Equals
+    href: Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_
+  - name: (
+  - uid: Mapsui.Styles.Style
+    name: Style
+    href: Mapsui.Styles.Style.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.GetStylesToApply(System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  parent: Mapsui.Extensions.StyleExtensions
+  definition: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  name: GetStylesToApply(IStyle, double)
+  nameWithType: StyleExtensions.GetStylesToApply(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.GetStylesToApply(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, Double)
+  name.vb: GetStylesToApply(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Styles.IStyle.Mapsui.Extensions.StyleExtensions.ShouldBeApplied(System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  parent: Mapsui.Extensions.StyleExtensions
+  definition: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  name: ShouldBeApplied(IStyle, double)
+  nameWithType: StyleExtensions.ShouldBeApplied(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.ShouldBeApplied(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, Double)
+  name.vb: ShouldBeApplied(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  isExternal: true
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  name: GetStylesToApply(IStyle, double)
+  nameWithType: StyleExtensions.GetStylesToApply(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.GetStylesToApply(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, Double)
+  name.vb: GetStylesToApply(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+    name: GetStylesToApply
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Extensions.StyleExtensions
+  commentId: T:Mapsui.Extensions.StyleExtensions
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.StyleExtensions.html
+  name: StyleExtensions
+  nameWithType: StyleExtensions
+  fullName: Mapsui.Extensions.StyleExtensions
+- uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  commentId: M:Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  isExternal: true
+  href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  name: ShouldBeApplied(IStyle, double)
+  nameWithType: StyleExtensions.ShouldBeApplied(IStyle, double)
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, double)
+  nameWithType.vb: StyleExtensions.ShouldBeApplied(IStyle, Double)
+  fullName.vb: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, Double)
+  name.vb: ShouldBeApplied(IStyle, Double)
+  spec.csharp:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+    name: ShouldBeApplied
+    href: Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  - name: (
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+    href: Mapsui.Styles.IStyle.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.CalloutStyle.DefaultWidth*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.DefaultWidth
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_DefaultWidth
+  name: DefaultWidth
+  nameWithType: CalloutStyle.DefaultWidth
+  fullName: Mapsui.Styles.CalloutStyle.DefaultWidth
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Styles.CalloutStyle.DefaultHeight*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.DefaultHeight
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_DefaultHeight
+  name: DefaultHeight
+  nameWithType: CalloutStyle.DefaultHeight
+  fullName: Mapsui.Styles.CalloutStyle.DefaultHeight
+- uid: Mapsui.Styles.CalloutStyle.Type*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Type
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Type
+  name: Type
+  nameWithType: CalloutStyle.Type
+  fullName: Mapsui.Styles.CalloutStyle.Type
+- uid: Mapsui.Styles.CalloutType
+  commentId: T:Mapsui.Styles.CalloutType
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.CalloutType.html
+  name: CalloutType
+  nameWithType: CalloutType
+  fullName: Mapsui.Styles.CalloutType
+- uid: Mapsui.Styles.CalloutStyle.Offset*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Offset
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Offset
+  name: Offset
+  nameWithType: CalloutStyle.Offset
+  fullName: Mapsui.Styles.CalloutStyle.Offset
+- uid: Mapsui.Styles.Offset
+  commentId: T:Mapsui.Styles.Offset
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Offset.html
+  name: Offset
+  nameWithType: Offset
+  fullName: Mapsui.Styles.Offset
+- uid: Mapsui.Styles.CalloutStyle.Rotation*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Rotation
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Rotation
+  name: Rotation
+  nameWithType: CalloutStyle.Rotation
+  fullName: Mapsui.Styles.CalloutStyle.Rotation
+- uid: Mapsui.Styles.CalloutStyle.ArrowAlignment*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.ArrowAlignment
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_ArrowAlignment
+  name: ArrowAlignment
+  nameWithType: CalloutStyle.ArrowAlignment
+  fullName: Mapsui.Styles.CalloutStyle.ArrowAlignment
+- uid: Mapsui.Styles.ArrowAlignment
+  commentId: T:Mapsui.Styles.ArrowAlignment
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.ArrowAlignment.html
+  name: ArrowAlignment
+  nameWithType: ArrowAlignment
+  fullName: Mapsui.Styles.ArrowAlignment
+- uid: Mapsui.Styles.CalloutStyle.ArrowWidth*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.ArrowWidth
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_ArrowWidth
+  name: ArrowWidth
+  nameWithType: CalloutStyle.ArrowWidth
+  fullName: Mapsui.Styles.CalloutStyle.ArrowWidth
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Mapsui.Styles.CalloutStyle.ArrowHeight*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.ArrowHeight
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_ArrowHeight
+  name: ArrowHeight
+  nameWithType: CalloutStyle.ArrowHeight
+  fullName: Mapsui.Styles.CalloutStyle.ArrowHeight
+- uid: Mapsui.Styles.CalloutStyle.ArrowPosition*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.ArrowPosition
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_ArrowPosition
+  name: ArrowPosition
+  nameWithType: CalloutStyle.ArrowPosition
+  fullName: Mapsui.Styles.CalloutStyle.ArrowPosition
+- uid: Mapsui.Styles.CalloutStyle.Color*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Color
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Color
+  name: Color
+  nameWithType: CalloutStyle.Color
+  fullName: Mapsui.Styles.CalloutStyle.Color
+- uid: Mapsui.Styles.Color
+  commentId: T:Mapsui.Styles.Color
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Color.html
+  name: Color
+  nameWithType: Color
+  fullName: Mapsui.Styles.Color
+- uid: Mapsui.Styles.CalloutStyle.BackgroundColor*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.BackgroundColor
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_BackgroundColor
+  name: BackgroundColor
+  nameWithType: CalloutStyle.BackgroundColor
+  fullName: Mapsui.Styles.CalloutStyle.BackgroundColor
+- uid: Mapsui.Styles.CalloutStyle.StrokeWidth*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.StrokeWidth
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_StrokeWidth
+  name: StrokeWidth
+  nameWithType: CalloutStyle.StrokeWidth
+  fullName: Mapsui.Styles.CalloutStyle.StrokeWidth
+- uid: Mapsui.Styles.CalloutStyle.RectRadius*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.RectRadius
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_RectRadius
+  name: RectRadius
+  nameWithType: CalloutStyle.RectRadius
+  fullName: Mapsui.Styles.CalloutStyle.RectRadius
+- uid: Mapsui.Styles.CalloutStyle.Padding*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Padding
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Padding
+  name: Padding
+  nameWithType: CalloutStyle.Padding
+  fullName: Mapsui.Styles.CalloutStyle.Padding
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Styles.CalloutStyle.ShadowWidth*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.ShadowWidth
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_ShadowWidth
+  name: ShadowWidth
+  nameWithType: CalloutStyle.ShadowWidth
+  fullName: Mapsui.Styles.CalloutStyle.ShadowWidth
+- uid: Mapsui.Styles.CalloutStyle.Content*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Content
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Content
+  name: Content
+  nameWithType: CalloutStyle.Content
+  fullName: Mapsui.Styles.CalloutStyle.Content
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Styles.CalloutStyle.Title*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Title
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Title
+  name: Title
+  nameWithType: CalloutStyle.Title
+  fullName: Mapsui.Styles.CalloutStyle.Title
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Styles.CalloutStyle.TitleFontColor*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.TitleFontColor
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_TitleFontColor
+  name: TitleFontColor
+  nameWithType: CalloutStyle.TitleFontColor
+  fullName: Mapsui.Styles.CalloutStyle.TitleFontColor
+- uid: Mapsui.Styles.CalloutStyle.TitleTextAlignment*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.TitleTextAlignment
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_TitleTextAlignment
+  name: TitleTextAlignment
+  nameWithType: CalloutStyle.TitleTextAlignment
+  fullName: Mapsui.Styles.CalloutStyle.TitleTextAlignment
+- uid: Mapsui.Widgets.Alignment
+  commentId: T:Mapsui.Widgets.Alignment
+  parent: Mapsui.Widgets
+  href: Mapsui.Widgets.Alignment.html
+  name: Alignment
+  nameWithType: Alignment
+  fullName: Mapsui.Widgets.Alignment
+- uid: Mapsui.Widgets
+  commentId: N:Mapsui.Widgets
+  href: Mapsui.html
+  name: Mapsui.Widgets
+  nameWithType: Mapsui.Widgets
+  fullName: Mapsui.Widgets
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Widgets
+    name: Widgets
+    href: Mapsui.Widgets.html
+- uid: Mapsui.Styles.CalloutStyle.Subtitle*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Subtitle
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Subtitle
+  name: Subtitle
+  nameWithType: CalloutStyle.Subtitle
+  fullName: Mapsui.Styles.CalloutStyle.Subtitle
+- uid: Mapsui.Styles.CalloutStyle.SubtitleFontColor*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.SubtitleFontColor
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_SubtitleFontColor
+  name: SubtitleFontColor
+  nameWithType: CalloutStyle.SubtitleFontColor
+  fullName: Mapsui.Styles.CalloutStyle.SubtitleFontColor
+- uid: Mapsui.Styles.CalloutStyle.SubtitleTextAlignment*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.SubtitleTextAlignment
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_SubtitleTextAlignment
+  name: SubtitleTextAlignment
+  nameWithType: CalloutStyle.SubtitleTextAlignment
+  fullName: Mapsui.Styles.CalloutStyle.SubtitleTextAlignment
+- uid: Mapsui.Styles.CalloutStyle.Spacing*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Spacing
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Spacing
+  name: Spacing
+  nameWithType: CalloutStyle.Spacing
+  fullName: Mapsui.Styles.CalloutStyle.Spacing
+- uid: Mapsui.Styles.CalloutStyle.MaxWidth*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.MaxWidth
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_MaxWidth
+  name: MaxWidth
+  nameWithType: CalloutStyle.MaxWidth
+  fullName: Mapsui.Styles.CalloutStyle.MaxWidth
+- uid: Mapsui.Styles.CalloutStyle.InternalContent*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.InternalContent
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_InternalContent
+  name: InternalContent
+  nameWithType: CalloutStyle.InternalContent
+  fullName: Mapsui.Styles.CalloutStyle.InternalContent
+- uid: Mapsui.Styles.CalloutStyle.TitleFont*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.TitleFont
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_TitleFont
+  name: TitleFont
+  nameWithType: CalloutStyle.TitleFont
+  fullName: Mapsui.Styles.CalloutStyle.TitleFont
+- uid: Mapsui.Styles.Font
+  commentId: T:Mapsui.Styles.Font
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Font.html
+  name: Font
+  nameWithType: Font
+  fullName: Mapsui.Styles.Font
+- uid: Mapsui.Styles.CalloutStyle.SubtitleFont*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.SubtitleFont
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_SubtitleFont
+  name: SubtitleFont
+  nameWithType: CalloutStyle.SubtitleFont
+  fullName: Mapsui.Styles.CalloutStyle.SubtitleFont
+- uid: Mapsui.Styles.CalloutStyle.Invalidated*
+  commentId: Overload:Mapsui.Styles.CalloutStyle.Invalidated
+  href: Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_Invalidated
+  name: Invalidated
+  nameWithType: CalloutStyle.Invalidated
+  fullName: Mapsui.Styles.CalloutStyle.Invalidated
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean

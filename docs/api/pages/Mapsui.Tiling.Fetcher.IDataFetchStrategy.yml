@@ -1,0 +1,337 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Tiling.Fetcher.IDataFetchStrategy
+  commentId: T:Mapsui.Tiling.Fetcher.IDataFetchStrategy
+  id: IDataFetchStrategy
+  parent: Mapsui.Tiling.Fetcher
+  children:
+  - Mapsui.Tiling.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: IDataFetchStrategy
+  nameWithType: IDataFetchStrategy
+  fullName: Mapsui.Tiling.Fetcher.IDataFetchStrategy
+  type: Interface
+  source:
+    remote:
+      path: Mapsui.Tiling/Fetcher/IDataFetchStrategy.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IDataFetchStrategy
+    path: ../../Mapsui.Tiling/Fetcher/IDataFetchStrategy.cs
+    startLine: 11
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Fetcher
+  syntax:
+    content: public interface IDataFetchStrategy
+    content.vb: Public Interface IDataFetchStrategy
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Tiling.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  commentId: M:Mapsui.Tiling.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  id: Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  parent: Mapsui.Tiling.Fetcher.IDataFetchStrategy
+  langs:
+  - csharp
+  - vb
+  name: Get(ITileSchema, Extent, int)
+  nameWithType: IDataFetchStrategy.Get(ITileSchema, Extent, int)
+  fullName: Mapsui.Tiling.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, int)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Tiling/Fetcher/IDataFetchStrategy.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Get
+    path: ../../Mapsui.Tiling/Fetcher/IDataFetchStrategy.cs
+    startLine: 17
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Fetcher
+  summary: >-
+    Fetches the tiles from the data source to put them into the cache. A strategy could  pre-fetch
+
+    certain tiles to anticipate future use.
+  example: []
+  syntax:
+    content: IList<TileInfo> Get(ITileSchema schema, Extent extent, int level)
+    parameters:
+    - id: schema
+      type: BruTile.ITileSchema
+    - id: extent
+      type: BruTile.Extent
+    - id: level
+      type: System.Int32
+    return:
+      type: System.Collections.Generic.IList{BruTile.TileInfo}
+    content.vb: Function [Get](schema As ITileSchema, extent As Extent, level As Integer) As IList(Of TileInfo)
+  overload: Mapsui.Tiling.Fetcher.IDataFetchStrategy.Get*
+  nameWithType.vb: IDataFetchStrategy.Get(ITileSchema, Extent, Integer)
+  fullName.vb: Mapsui.Tiling.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, Integer)
+  name.vb: Get(ITileSchema, Extent, Integer)
+references:
+- uid: Mapsui.Tiling.Fetcher
+  commentId: N:Mapsui.Tiling.Fetcher
+  href: Mapsui.html
+  name: Mapsui.Tiling.Fetcher
+  nameWithType: Mapsui.Tiling.Fetcher
+  fullName: Mapsui.Tiling.Fetcher
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Fetcher
+    name: Fetcher
+    href: Mapsui.Tiling.Fetcher.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Fetcher
+    name: Fetcher
+    href: Mapsui.Tiling.Fetcher.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Tiling.Fetcher.IDataFetchStrategy.Get*
+  commentId: Overload:Mapsui.Tiling.Fetcher.IDataFetchStrategy.Get
+  href: Mapsui.Tiling.Fetcher.IDataFetchStrategy.html#Mapsui_Tiling_Fetcher_IDataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_Int32_
+  name: Get
+  nameWithType: IDataFetchStrategy.Get
+  fullName: Mapsui.Tiling.Fetcher.IDataFetchStrategy.Get
+- uid: BruTile.ITileSchema
+  commentId: T:BruTile.ITileSchema
+  parent: BruTile
+  isExternal: true
+  name: ITileSchema
+  nameWithType: ITileSchema
+  fullName: BruTile.ITileSchema
+- uid: BruTile.Extent
+  commentId: T:BruTile.Extent
+  parent: BruTile
+  isExternal: true
+  name: Extent
+  nameWithType: Extent
+  fullName: BruTile.Extent
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Collections.Generic.IList{BruTile.TileInfo}
+  commentId: T:System.Collections.Generic.IList{BruTile.TileInfo}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<TileInfo>
+  nameWithType: IList<TileInfo>
+  fullName: System.Collections.Generic.IList<BruTile.TileInfo>
+  nameWithType.vb: IList(Of TileInfo)
+  fullName.vb: System.Collections.Generic.IList(Of BruTile.TileInfo)
+  name.vb: IList(Of TileInfo)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: BruTile.TileInfo
+    name: TileInfo
+    isExternal: true
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: BruTile.TileInfo
+    name: TileInfo
+    isExternal: true
+  - name: )
+- uid: BruTile
+  commentId: N:BruTile
+  isExternal: true
+  name: BruTile
+  nameWithType: BruTile
+  fullName: BruTile
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic

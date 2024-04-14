@@ -1,0 +1,1054 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Maui.Position
+  commentId: T:Mapsui.UI.Maui.Position
+  id: Position
+  parent: Mapsui.UI.Maui
+  children:
+  - Mapsui.UI.Maui.Position.#ctor(Mapsui.UI.Maui.Position)
+  - Mapsui.UI.Maui.Position.#ctor(System.Double,System.Double)
+  - Mapsui.UI.Maui.Position.DecimalDegrees
+  - Mapsui.UI.Maui.Position.DecimalMinutes
+  - Mapsui.UI.Maui.Position.DecimalSeconds
+  - Mapsui.UI.Maui.Position.Equals(System.Object)
+  - Mapsui.UI.Maui.Position.GetHashCode
+  - Mapsui.UI.Maui.Position.Latitude
+  - Mapsui.UI.Maui.Position.Longitude
+  - Mapsui.UI.Maui.Position.ToCoordinate
+  - Mapsui.UI.Maui.Position.ToMapsui
+  - Mapsui.UI.Maui.Position.ToPoint
+  - Mapsui.UI.Maui.Position.ToString
+  - Mapsui.UI.Maui.Position.ToString(System.String)
+  - Mapsui.UI.Maui.Position.op_Equality(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Position)
+  - Mapsui.UI.Maui.Position.op_Inequality(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Position)
+  langs:
+  - csharp
+  - vb
+  name: Position
+  nameWithType: Position
+  fullName: Mapsui.UI.Maui.Position
+  type: Struct
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Position
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 9
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Structure holding latitude and longitude of a position in spherical coordinate system
+  example: []
+  syntax:
+    content: public struct Position
+    content.vb: Public Structure Position
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: Mapsui.UI.Maui.Position.#ctor(System.Double,System.Double)
+  commentId: M:Mapsui.UI.Maui.Position.#ctor(System.Double,System.Double)
+  id: '#ctor(System.Double,System.Double)'
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: Position(double, double)
+  nameWithType: Position.Position(double, double)
+  fullName: Mapsui.UI.Maui.Position.Position(double, double)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Initializes a new instance of the <xref href="Mapsui.UI.Forms.Position" data-throw-if-not-resolved="false"></xref> from latitude and longitude
+  example: []
+  syntax:
+    content: public Position(double latitude, double longitude)
+    parameters:
+    - id: latitude
+      type: System.Double
+      description: Latitude of position
+    - id: longitude
+      type: System.Double
+      description: Longitude of position
+    content.vb: Public Sub New(latitude As Double, longitude As Double)
+  overload: Mapsui.UI.Maui.Position.#ctor*
+  nameWithType.vb: Position.New(Double, Double)
+  fullName.vb: Mapsui.UI.Maui.Position.New(Double, Double)
+  name.vb: New(Double, Double)
+- uid: Mapsui.UI.Maui.Position.#ctor(Mapsui.UI.Maui.Position)
+  commentId: M:Mapsui.UI.Maui.Position.#ctor(Mapsui.UI.Maui.Position)
+  id: '#ctor(Mapsui.UI.Maui.Position)'
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: Position(Position)
+  nameWithType: Position.Position(Position)
+  fullName: Mapsui.UI.Maui.Position.Position(Mapsui.UI.Maui.Position)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 26
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Initializes a new instance of the <xref href="Mapsui.UI.Forms.Position" data-throw-if-not-resolved="false"></xref> from position
+  example: []
+  syntax:
+    content: public Position(Position point)
+    parameters:
+    - id: point
+      type: Mapsui.UI.Maui.Position
+      description: Position to use
+    content.vb: Public Sub New(point As Position)
+  overload: Mapsui.UI.Maui.Position.#ctor*
+  nameWithType.vb: Position.New(Position)
+  fullName.vb: Mapsui.UI.Maui.Position.New(Mapsui.UI.Maui.Position)
+  name.vb: New(Position)
+- uid: Mapsui.UI.Maui.Position.Latitude
+  commentId: P:Mapsui.UI.Maui.Position.Latitude
+  id: Latitude
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: Latitude
+  nameWithType: Position.Latitude
+  fullName: Mapsui.UI.Maui.Position.Latitude
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Latitude
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 35
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Latitude of position
+  example: []
+  syntax:
+    content: public readonly double Latitude { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property Latitude As Double
+  overload: Mapsui.UI.Maui.Position.Latitude*
+- uid: Mapsui.UI.Maui.Position.Longitude
+  commentId: P:Mapsui.UI.Maui.Position.Longitude
+  id: Longitude
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: Longitude
+  nameWithType: Position.Longitude
+  fullName: Mapsui.UI.Maui.Position.Longitude
+  type: Property
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Longitude
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 40
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Longitude of position
+  example: []
+  syntax:
+    content: public readonly double Longitude { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property Longitude As Double
+  overload: Mapsui.UI.Maui.Position.Longitude*
+- uid: Mapsui.UI.Maui.Position.ToMapsui
+  commentId: M:Mapsui.UI.Maui.Position.ToMapsui
+  id: ToMapsui
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: ToMapsui()
+  nameWithType: Position.ToMapsui()
+  fullName: Mapsui.UI.Maui.Position.ToMapsui()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToMapsui
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 46
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Convert Xamarin.Forms.Maps.Position to Mapsui.Geometries.Point
+  example: []
+  syntax:
+    content: public MPoint ToMapsui()
+    return:
+      type: Mapsui.MPoint
+      description: Position in Mapsui format
+    content.vb: Public Function ToMapsui() As MPoint
+  overload: Mapsui.UI.Maui.Position.ToMapsui*
+- uid: Mapsui.UI.Maui.Position.ToPoint
+  commentId: M:Mapsui.UI.Maui.Position.ToPoint
+  id: ToPoint
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: ToPoint()
+  nameWithType: Position.ToPoint()
+  fullName: Mapsui.UI.Maui.Position.ToPoint()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToPoint
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 52
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public Point ToPoint()
+    return:
+      type: NetTopologySuite.Geometries.Point
+    content.vb: Public Function ToPoint() As Point
+  overload: Mapsui.UI.Maui.Position.ToPoint*
+- uid: Mapsui.UI.Maui.Position.ToCoordinate
+  commentId: M:Mapsui.UI.Maui.Position.ToCoordinate
+  id: ToCoordinate
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: ToCoordinate()
+  nameWithType: Position.ToCoordinate()
+  fullName: Mapsui.UI.Maui.Position.ToCoordinate()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToCoordinate
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 58
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public Coordinate ToCoordinate()
+    return:
+      type: NetTopologySuite.Geometries.Coordinate
+    content.vb: Public Function ToCoordinate() As Coordinate
+  overload: Mapsui.UI.Maui.Position.ToCoordinate*
+- uid: Mapsui.UI.Maui.Position.Equals(System.Object)
+  commentId: M:Mapsui.UI.Maui.Position.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: Position.Equals(object?)
+  fullName: Mapsui.UI.Maui.Position.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Equals
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 64
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Indicates whether this instance and a specified object are equal.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">obj</code> and this instance are the same type and represent the same value; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: Mapsui.UI.Maui.Position.Equals*
+  nameWithType.vb: Position.Equals(Object)
+  fullName.vb: Mapsui.UI.Maui.Position.Equals(Object)
+  name.vb: Equals(Object)
+- uid: Mapsui.UI.Maui.Position.GetHashCode
+  commentId: M:Mapsui.UI.Maui.Position.GetHashCode
+  id: GetHashCode
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: Position.GetHashCode()
+  fullName: Mapsui.UI.Maui.Position.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetHashCode
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 74
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Returns the hash code for this instance.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that is the hash code for this instance.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: Mapsui.UI.Maui.Position.GetHashCode*
+- uid: Mapsui.UI.Maui.Position.ToString
+  commentId: M:Mapsui.UI.Maui.Position.ToString
+  id: ToString
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: Position.ToString()
+  fullName: Mapsui.UI.Maui.Position.ToString()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToString
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 88
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Returns a <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Mapsui.UI.Forms.Position" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Mapsui.UI.Forms.Position" data-throw-if-not-resolved="false"></xref>
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: Mapsui.UI.Maui.Position.ToString*
+- uid: Mapsui.UI.Maui.Position.ToString(System.String)
+  commentId: M:Mapsui.UI.Maui.Position.ToString(System.String)
+  id: ToString(System.String)
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: ToString(string)
+  nameWithType: Position.ToString(string)
+  fullName: Mapsui.UI.Maui.Position.ToString(string)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToString
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 122
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Returns a <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Mapsui.UI.Forms.Position" data-throw-if-not-resolved="false"></xref> in a given format
+  remarks: >-
+    <p>
+
+    Format string has 6 parts. This are separated by a "|" character. The first part is the 
+
+    format for the latitude, the second the format for the longitude part. Than follow shortcuts
+
+    for the orientations: north, south, east, west.
+
+    </p>
+
+    <p>
+
+    The parameters for the format for latitude and longitude are
+
+    - P: Cardinal direction like north or east
+
+    - D: Degrees as integer number. If there are more D than numbers, than there are trailing zeros. E.g. "DDD" and 13 is replaced as "013"
+
+    - d: Decimal degrees as numbers. Each d is replaced with a number, e.g. "ddd" and 13.5467 degrees gives "546"
+
+    - M: Minutes as integer number. If there are more M than numbers, than there are trailing zeros. E.g. "MM" and 5 is replaced as "05"
+
+    - m: Decimal minutes as numbers. Each m is replaced with a number, e.g. "mmm" and 13.5467 minutes gives "546"
+
+    - S: Seconds as integer number. If there are more S than numbers, than there are trailing zeros. E.g. "SS" and 5 is replaced as "05"
+
+    - s: Decimal seconds as numbers. Each s is replaced with a number, e.g. "sss" and 13.5467 minutes gives "546"
+
+    </p>
+
+    <p>
+
+    Examples
+
+    All following examples are for the position 38.959390°, -95.265483°.
+
+    - The format string "P DD° MM.mmm'|P DDD° MM.mmm'|N|S|E|W" gives "N 38° 57.563' W 095° 15.928'".
+
+    - The format string "PDD° MM.mmm'|PDDD° MM.mmm'||-||-" gives "38° 57.563' -095° 15.928'".
+
+    - The format string "DD° MM' SS.sss" P|DDD° MM' SS.sss" P|North|South|East|West" gives "38° 57' 33.804" North 095° 15' 55.739" West".
+
+    </p>
+  example: []
+  syntax:
+    content: public string ToString(string format)
+    parameters:
+    - id: format
+      type: System.String
+      description: Format string
+    return:
+      type: System.String
+      description: Position as string
+    content.vb: Public Function ToString(format As String) As String
+  overload: Mapsui.UI.Maui.Position.ToString*
+  nameWithType.vb: Position.ToString(String)
+  fullName.vb: Mapsui.UI.Maui.Position.ToString(String)
+  name.vb: ToString(String)
+- uid: Mapsui.UI.Maui.Position.DecimalDegrees
+  commentId: F:Mapsui.UI.Maui.Position.DecimalDegrees
+  id: DecimalDegrees
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: DecimalDegrees
+  nameWithType: Position.DecimalDegrees
+  fullName: Mapsui.UI.Maui.Position.DecimalDegrees
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DecimalDegrees
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 141
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Format for coordinates with decimal degrees
+  example: []
+  syntax:
+    content: public const string DecimalDegrees = "P DD.ddd°|P DDD.ddd°|N|S|E|W"
+    return:
+      type: System.String
+    content.vb: Public Const DecimalDegrees As String = "P DD.ddd°|P DDD.ddd°|N|S|E|W"
+- uid: Mapsui.UI.Maui.Position.DecimalMinutes
+  commentId: F:Mapsui.UI.Maui.Position.DecimalMinutes
+  id: DecimalMinutes
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: DecimalMinutes
+  nameWithType: Position.DecimalMinutes
+  fullName: Mapsui.UI.Maui.Position.DecimalMinutes
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DecimalMinutes
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 146
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Format for coordinates with decimal minutes
+  example: []
+  syntax:
+    content: public const string DecimalMinutes = "P DD° MM.MMM'|P DDD° MM.MMM'|N|S|E|W"
+    return:
+      type: System.String
+    content.vb: Public Const DecimalMinutes As String = "P DD° MM.MMM'|P DDD° MM.MMM'|N|S|E|W"
+- uid: Mapsui.UI.Maui.Position.DecimalSeconds
+  commentId: F:Mapsui.UI.Maui.Position.DecimalSeconds
+  id: DecimalSeconds
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: DecimalSeconds
+  nameWithType: Position.DecimalSeconds
+  fullName: Mapsui.UI.Maui.Position.DecimalSeconds
+  type: Field
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DecimalSeconds
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 151
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  summary: Format for coordinates with decimal seconds
+  example: []
+  syntax:
+    content: public const string DecimalSeconds = "P DD° MM' SS.sss\"|P DDD° MM' SS.sss\"|N|S|E|W"
+    return:
+      type: System.String
+    content.vb: Public Const DecimalSeconds As String = "P DD° MM' SS.sss""|P DDD° MM' SS.sss""|N|S|E|W"
+- uid: Mapsui.UI.Maui.Position.op_Equality(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Position)
+  commentId: M:Mapsui.UI.Maui.Position.op_Equality(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Position)
+  id: op_Equality(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Position)
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: operator ==(Position, Position)
+  nameWithType: Position.operator ==(Position, Position)
+  fullName: Mapsui.UI.Maui.Position.operator ==(Mapsui.UI.Maui.Position, Mapsui.UI.Maui.Position)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Equality
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 203
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static bool operator ==(Position left, Position right)
+    parameters:
+    - id: left
+      type: Mapsui.UI.Maui.Position
+    - id: right
+      type: Mapsui.UI.Maui.Position
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(left As Position, right As Position) As Boolean
+  overload: Mapsui.UI.Maui.Position.op_Equality*
+  nameWithType.vb: Position.=(Position, Position)
+  fullName.vb: Mapsui.UI.Maui.Position.=(Mapsui.UI.Maui.Position, Mapsui.UI.Maui.Position)
+  name.vb: =(Position, Position)
+- uid: Mapsui.UI.Maui.Position.op_Inequality(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Position)
+  commentId: M:Mapsui.UI.Maui.Position.op_Inequality(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Position)
+  id: op_Inequality(Mapsui.UI.Maui.Position,Mapsui.UI.Maui.Position)
+  parent: Mapsui.UI.Maui.Position
+  langs:
+  - csharp
+  - vb
+  name: operator !=(Position, Position)
+  nameWithType: Position.operator !=(Position, Position)
+  fullName: Mapsui.UI.Maui.Position.operator !=(Mapsui.UI.Maui.Position, Mapsui.UI.Maui.Position)
+  type: Operator
+  source:
+    remote:
+      path: Mapsui.UI.MapView/Objects/Position.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: op_Inequality
+    path: ../../Mapsui.UI.MapView/Objects/Position.cs
+    startLine: 208
+  assemblies:
+  - Mapsui.UI.Maui
+  namespace: Mapsui.UI.Maui
+  syntax:
+    content: public static bool operator !=(Position left, Position right)
+    parameters:
+    - id: left
+      type: Mapsui.UI.Maui.Position
+    - id: right
+      type: Mapsui.UI.Maui.Position
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(left As Position, right As Position) As Boolean
+  overload: Mapsui.UI.Maui.Position.op_Inequality*
+  nameWithType.vb: Position.<>(Position, Position)
+  fullName.vb: Mapsui.UI.Maui.Position.<>(Mapsui.UI.Maui.Position, Mapsui.UI.Maui.Position)
+  name.vb: <>(Position, Position)
+references:
+- uid: Mapsui.UI.Maui
+  commentId: N:Mapsui.UI.Maui
+  href: Mapsui.html
+  name: Mapsui.UI.Maui
+  nameWithType: Mapsui.UI.Maui
+  fullName: Mapsui.UI.Maui
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.UI
+    name: UI
+    href: Mapsui.UI.html
+  - name: .
+  - uid: Mapsui.UI.Maui
+    name: Maui
+    href: Mapsui.UI.Maui.html
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.UI.Forms.Position
+  commentId: T:Mapsui.UI.Forms.Position
+  isExternal: true
+- uid: Mapsui.UI.Maui.Position.#ctor*
+  commentId: Overload:Mapsui.UI.Maui.Position.#ctor
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position__ctor_System_Double_System_Double_
+  name: Position
+  nameWithType: Position.Position
+  fullName: Mapsui.UI.Maui.Position.Position
+  nameWithType.vb: Position.New
+  fullName.vb: Mapsui.UI.Maui.Position.New
+  name.vb: New
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.UI.Maui.Position
+  commentId: T:Mapsui.UI.Maui.Position
+  parent: Mapsui.UI.Maui
+  href: Mapsui.UI.Maui.Position.html
+  name: Position
+  nameWithType: Position
+  fullName: Mapsui.UI.Maui.Position
+- uid: Mapsui.UI.Maui.Position.Latitude*
+  commentId: Overload:Mapsui.UI.Maui.Position.Latitude
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_Latitude
+  name: Latitude
+  nameWithType: Position.Latitude
+  fullName: Mapsui.UI.Maui.Position.Latitude
+- uid: Mapsui.UI.Maui.Position.Longitude*
+  commentId: Overload:Mapsui.UI.Maui.Position.Longitude
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_Longitude
+  name: Longitude
+  nameWithType: Position.Longitude
+  fullName: Mapsui.UI.Maui.Position.Longitude
+- uid: Mapsui.UI.Maui.Position.ToMapsui*
+  commentId: Overload:Mapsui.UI.Maui.Position.ToMapsui
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_ToMapsui
+  name: ToMapsui
+  nameWithType: Position.ToMapsui
+  fullName: Mapsui.UI.Maui.Position.ToMapsui
+- uid: Mapsui.MPoint
+  commentId: T:Mapsui.MPoint
+  parent: Mapsui
+  href: Mapsui.MPoint.html
+  name: MPoint
+  nameWithType: MPoint
+  fullName: Mapsui.MPoint
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.UI.Maui.Position.ToPoint*
+  commentId: Overload:Mapsui.UI.Maui.Position.ToPoint
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_ToPoint
+  name: ToPoint
+  nameWithType: Position.ToPoint
+  fullName: Mapsui.UI.Maui.Position.ToPoint
+- uid: NetTopologySuite.Geometries.Point
+  commentId: T:NetTopologySuite.Geometries.Point
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: Point
+  nameWithType: Point
+  fullName: NetTopologySuite.Geometries.Point
+- uid: NetTopologySuite.Geometries
+  commentId: N:NetTopologySuite.Geometries
+  isExternal: true
+  name: NetTopologySuite.Geometries
+  nameWithType: NetTopologySuite.Geometries
+  fullName: NetTopologySuite.Geometries
+  spec.csharp:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+  spec.vb:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+- uid: Mapsui.UI.Maui.Position.ToCoordinate*
+  commentId: Overload:Mapsui.UI.Maui.Position.ToCoordinate
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_ToCoordinate
+  name: ToCoordinate
+  nameWithType: Position.ToCoordinate
+  fullName: Mapsui.UI.Maui.Position.ToCoordinate
+- uid: NetTopologySuite.Geometries.Coordinate
+  commentId: T:NetTopologySuite.Geometries.Coordinate
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: Coordinate
+  nameWithType: Coordinate
+  fullName: NetTopologySuite.Geometries.Coordinate
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.UI.Maui.Position.Equals*
+  commentId: Overload:Mapsui.UI.Maui.Position.Equals
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_Equals_System_Object_
+  name: Equals
+  nameWithType: Position.Equals
+  fullName: Mapsui.UI.Maui.Position.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Maui.Position.GetHashCode*
+  commentId: Overload:Mapsui.UI.Maui.Position.GetHashCode
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_GetHashCode
+  name: GetHashCode
+  nameWithType: Position.GetHashCode
+  fullName: Mapsui.UI.Maui.Position.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: Mapsui.UI.Maui.Position.ToString*
+  commentId: Overload:Mapsui.UI.Maui.Position.ToString
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_ToString
+  name: ToString
+  nameWithType: Position.ToString
+  fullName: Mapsui.UI.Maui.Position.ToString
+- uid: Mapsui.UI.Maui.Position.op_Equality*
+  commentId: Overload:Mapsui.UI.Maui.Position.op_Equality
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_op_Equality_Mapsui_UI_Maui_Position_Mapsui_UI_Maui_Position_
+  name: operator ==
+  nameWithType: Position.operator ==
+  fullName: Mapsui.UI.Maui.Position.operator ==
+  nameWithType.vb: Position.=
+  fullName.vb: Mapsui.UI.Maui.Position.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.UI.Maui.Position.op_Equality*
+    name: ==
+    href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_op_Equality_Mapsui_UI_Maui_Position_Mapsui_UI_Maui_Position_
+- uid: Mapsui.UI.Maui.Position.op_Inequality*
+  commentId: Overload:Mapsui.UI.Maui.Position.op_Inequality
+  href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_op_Inequality_Mapsui_UI_Maui_Position_Mapsui_UI_Maui_Position_
+  name: operator !=
+  nameWithType: Position.operator !=
+  fullName: Mapsui.UI.Maui.Position.operator !=
+  nameWithType.vb: Position.<>
+  fullName.vb: Mapsui.UI.Maui.Position.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: Mapsui.UI.Maui.Position.op_Inequality*
+    name: '!='
+    href: Mapsui.UI.Maui.Position.html#Mapsui_UI_Maui_Position_op_Inequality_Mapsui_UI_Maui_Position_Mapsui_UI_Maui_Position_

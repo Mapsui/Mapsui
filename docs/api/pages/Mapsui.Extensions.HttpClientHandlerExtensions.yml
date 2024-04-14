@@ -1,0 +1,473 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Extensions.HttpClientHandlerExtensions
+  commentId: T:Mapsui.Extensions.HttpClientHandlerExtensions
+  id: HttpClientHandlerExtensions
+  parent: Mapsui.Extensions
+  children:
+  - Mapsui.Extensions.HttpClientHandlerExtensions.SetCredentials(System.Net.Http.HttpClientHandler,System.Net.ICredentials)
+  - Mapsui.Extensions.HttpClientHandlerExtensions.SetUseDefaultCredentials(System.Net.Http.HttpClientHandler,System.Boolean)
+  langs:
+  - csharp
+  - vb
+  name: HttpClientHandlerExtensions
+  nameWithType: HttpClientHandlerExtensions
+  fullName: Mapsui.Extensions.HttpClientHandlerExtensions
+  type: Class
+  source:
+    remote:
+      path: Mapsui/Extensions/HttpClientHandlerExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: HttpClientHandlerExtensions
+    path: ../../Mapsui/Extensions/HttpClientHandlerExtensions.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  syntax:
+    content: public static class HttpClientHandlerExtensions
+    content.vb: Public Module HttpClientHandlerExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Mapsui.Extensions.HttpClientHandlerExtensions.SetCredentials(System.Net.Http.HttpClientHandler,System.Net.ICredentials)
+  commentId: M:Mapsui.Extensions.HttpClientHandlerExtensions.SetCredentials(System.Net.Http.HttpClientHandler,System.Net.ICredentials)
+  id: SetCredentials(System.Net.Http.HttpClientHandler,System.Net.ICredentials)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.HttpClientHandlerExtensions
+  langs:
+  - csharp
+  - vb
+  name: SetCredentials(HttpClientHandler, ICredentials?)
+  nameWithType: HttpClientHandlerExtensions.SetCredentials(HttpClientHandler, ICredentials?)
+  fullName: Mapsui.Extensions.HttpClientHandlerExtensions.SetCredentials(System.Net.Http.HttpClientHandler, System.Net.ICredentials?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/HttpClientHandlerExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetCredentials
+    path: ../../Mapsui/Extensions/HttpClientHandlerExtensions.cs
+    startLine: 15
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  syntax:
+    content: public static void SetCredentials(this HttpClientHandler httpClientHandler, ICredentials? credentials)
+    parameters:
+    - id: httpClientHandler
+      type: System.Net.Http.HttpClientHandler
+    - id: credentials
+      type: System.Net.ICredentials
+    content.vb: Public Shared Sub SetCredentials(httpClientHandler As HttpClientHandler, credentials As ICredentials)
+  overload: Mapsui.Extensions.HttpClientHandlerExtensions.SetCredentials*
+  nameWithType.vb: HttpClientHandlerExtensions.SetCredentials(HttpClientHandler, ICredentials)
+  fullName.vb: Mapsui.Extensions.HttpClientHandlerExtensions.SetCredentials(System.Net.Http.HttpClientHandler, System.Net.ICredentials)
+  name.vb: SetCredentials(HttpClientHandler, ICredentials)
+- uid: Mapsui.Extensions.HttpClientHandlerExtensions.SetUseDefaultCredentials(System.Net.Http.HttpClientHandler,System.Boolean)
+  commentId: M:Mapsui.Extensions.HttpClientHandlerExtensions.SetUseDefaultCredentials(System.Net.Http.HttpClientHandler,System.Boolean)
+  id: SetUseDefaultCredentials(System.Net.Http.HttpClientHandler,System.Boolean)
+  isExtensionMethod: true
+  parent: Mapsui.Extensions.HttpClientHandlerExtensions
+  langs:
+  - csharp
+  - vb
+  name: SetUseDefaultCredentials(HttpClientHandler, bool)
+  nameWithType: HttpClientHandlerExtensions.SetUseDefaultCredentials(HttpClientHandler, bool)
+  fullName: Mapsui.Extensions.HttpClientHandlerExtensions.SetUseDefaultCredentials(System.Net.Http.HttpClientHandler, bool)
+  type: Method
+  source:
+    remote:
+      path: Mapsui/Extensions/HttpClientHandlerExtensions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SetUseDefaultCredentials
+    path: ../../Mapsui/Extensions/HttpClientHandlerExtensions.cs
+    startLine: 31
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Extensions
+  syntax:
+    content: public static void SetUseDefaultCredentials(this HttpClientHandler httpClientHandler, bool useDefaultCredentials)
+    parameters:
+    - id: httpClientHandler
+      type: System.Net.Http.HttpClientHandler
+    - id: useDefaultCredentials
+      type: System.Boolean
+    content.vb: Public Shared Sub SetUseDefaultCredentials(httpClientHandler As HttpClientHandler, useDefaultCredentials As Boolean)
+  overload: Mapsui.Extensions.HttpClientHandlerExtensions.SetUseDefaultCredentials*
+  nameWithType.vb: HttpClientHandlerExtensions.SetUseDefaultCredentials(HttpClientHandler, Boolean)
+  fullName.vb: Mapsui.Extensions.HttpClientHandlerExtensions.SetUseDefaultCredentials(System.Net.Http.HttpClientHandler, Boolean)
+  name.vb: SetUseDefaultCredentials(HttpClientHandler, Boolean)
+references:
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.HttpClientHandlerExtensions.SetCredentials*
+  commentId: Overload:Mapsui.Extensions.HttpClientHandlerExtensions.SetCredentials
+  href: Mapsui.Extensions.HttpClientHandlerExtensions.html#Mapsui_Extensions_HttpClientHandlerExtensions_SetCredentials_System_Net_Http_HttpClientHandler_System_Net_ICredentials_
+  name: SetCredentials
+  nameWithType: HttpClientHandlerExtensions.SetCredentials
+  fullName: Mapsui.Extensions.HttpClientHandlerExtensions.SetCredentials
+- uid: System.Net.Http.HttpClientHandler
+  commentId: T:System.Net.Http.HttpClientHandler
+  parent: System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.http.httpclienthandler
+  name: HttpClientHandler
+  nameWithType: HttpClientHandler
+  fullName: System.Net.Http.HttpClientHandler
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.net.icredentials
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: System.Net.Http
+  commentId: N:System.Net.Http
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net.Http
+  nameWithType: System.Net.Http
+  fullName: System.Net.Http
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  - name: .
+  - uid: System.Net.Http
+    name: Http
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net.http
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Net
+    name: Net
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.net
+- uid: Mapsui.Extensions.HttpClientHandlerExtensions.SetUseDefaultCredentials*
+  commentId: Overload:Mapsui.Extensions.HttpClientHandlerExtensions.SetUseDefaultCredentials
+  href: Mapsui.Extensions.HttpClientHandlerExtensions.html#Mapsui_Extensions_HttpClientHandlerExtensions_SetUseDefaultCredentials_System_Net_Http_HttpClientHandler_System_Boolean_
+  name: SetUseDefaultCredentials
+  nameWithType: HttpClientHandlerExtensions.SetUseDefaultCredentials
+  fullName: Mapsui.Extensions.HttpClientHandlerExtensions.SetUseDefaultCredentials
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean

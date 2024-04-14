@@ -1,0 +1,175 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Utilities
+  commentId: N:Mapsui.Utilities
+  id: Mapsui.Utilities
+  children:
+  - Mapsui.Utilities.Algorithms
+  - Mapsui.Utilities.ConcurrentHashSet`1
+  - Mapsui.Utilities.Constants
+  - Mapsui.Utilities.EmbeddedResourceLoader
+  - Mapsui.Utilities.Haversine
+  - Mapsui.Utilities.ObservableRangeCollection`1
+  - Mapsui.Utilities.Performance
+  - Mapsui.Utilities.PlatformUtilities
+  - Mapsui.Utilities.Runtime
+  - Mapsui.Utilities.StreamHelper
+  - Mapsui.Utilities.SvgHelper
+  - Mapsui.Utilities.TransformationAlgorithms
+  - Mapsui.Utilities.Version
+  - Mapsui.Utilities.ZoomHelper
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Utilities
+  nameWithType: Mapsui.Utilities
+  fullName: Mapsui.Utilities
+  type: Namespace
+  assemblies:
+  - Mapsui
+references:
+- uid: Mapsui.Utilities.Algorithms
+  commentId: T:Mapsui.Utilities.Algorithms
+  href: Mapsui.Utilities.Algorithms.html
+  name: Algorithms
+  nameWithType: Algorithms
+  fullName: Mapsui.Utilities.Algorithms
+- uid: Mapsui.Utilities.ConcurrentHashSet`1
+  commentId: T:Mapsui.Utilities.ConcurrentHashSet`1
+  href: Mapsui.Utilities.ConcurrentHashSet-1.html
+  name: ConcurrentHashSet<T>
+  nameWithType: ConcurrentHashSet<T>
+  fullName: Mapsui.Utilities.ConcurrentHashSet<T>
+  nameWithType.vb: ConcurrentHashSet(Of T)
+  fullName.vb: Mapsui.Utilities.ConcurrentHashSet(Of T)
+  name.vb: ConcurrentHashSet(Of T)
+  spec.csharp:
+  - uid: Mapsui.Utilities.ConcurrentHashSet`1
+    name: ConcurrentHashSet
+    href: Mapsui.Utilities.ConcurrentHashSet-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Utilities.ConcurrentHashSet`1
+    name: ConcurrentHashSet
+    href: Mapsui.Utilities.ConcurrentHashSet-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Utilities.Constants
+  commentId: T:Mapsui.Utilities.Constants
+  href: Mapsui.Utilities.Constants.html
+  name: Constants
+  nameWithType: Constants
+  fullName: Mapsui.Utilities.Constants
+- uid: Mapsui.Utilities.EmbeddedResourceLoader
+  commentId: T:Mapsui.Utilities.EmbeddedResourceLoader
+  href: Mapsui.Utilities.EmbeddedResourceLoader.html
+  name: EmbeddedResourceLoader
+  nameWithType: EmbeddedResourceLoader
+  fullName: Mapsui.Utilities.EmbeddedResourceLoader
+- uid: Mapsui.Utilities.Haversine
+  commentId: T:Mapsui.Utilities.Haversine
+  href: Mapsui.Utilities.Haversine.html
+  name: Haversine
+  nameWithType: Haversine
+  fullName: Mapsui.Utilities.Haversine
+- uid: Mapsui.Utilities.ObservableRangeCollection`1
+  commentId: T:Mapsui.Utilities.ObservableRangeCollection`1
+  href: Mapsui.Utilities.ObservableRangeCollection-1.html
+  name: ObservableRangeCollection<T>
+  nameWithType: ObservableRangeCollection<T>
+  fullName: Mapsui.Utilities.ObservableRangeCollection<T>
+  nameWithType.vb: ObservableRangeCollection(Of T)
+  fullName.vb: Mapsui.Utilities.ObservableRangeCollection(Of T)
+  name.vb: ObservableRangeCollection(Of T)
+  spec.csharp:
+  - uid: Mapsui.Utilities.ObservableRangeCollection`1
+    name: ObservableRangeCollection
+    href: Mapsui.Utilities.ObservableRangeCollection-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Mapsui.Utilities.ObservableRangeCollection`1
+    name: ObservableRangeCollection
+    href: Mapsui.Utilities.ObservableRangeCollection-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Mapsui.Utilities.Performance
+  commentId: T:Mapsui.Utilities.Performance
+  parent: Mapsui.Utilities
+  href: Mapsui.Utilities.Performance.html
+  name: Performance
+  nameWithType: Performance
+  fullName: Mapsui.Utilities.Performance
+- uid: Mapsui.Utilities.PlatformUtilities
+  commentId: T:Mapsui.Utilities.PlatformUtilities
+  href: Mapsui.Utilities.PlatformUtilities.html
+  name: PlatformUtilities
+  nameWithType: PlatformUtilities
+  fullName: Mapsui.Utilities.PlatformUtilities
+- uid: Mapsui.Utilities.Runtime
+  commentId: T:Mapsui.Utilities.Runtime
+  href: Mapsui.Utilities.Runtime.html
+  name: Runtime
+  nameWithType: Runtime
+  fullName: Mapsui.Utilities.Runtime
+- uid: Mapsui.Utilities.StreamHelper
+  commentId: T:Mapsui.Utilities.StreamHelper
+  href: Mapsui.Utilities.StreamHelper.html
+  name: StreamHelper
+  nameWithType: StreamHelper
+  fullName: Mapsui.Utilities.StreamHelper
+- uid: Mapsui.Utilities.TransformationAlgorithms
+  commentId: T:Mapsui.Utilities.TransformationAlgorithms
+  href: Mapsui.Utilities.TransformationAlgorithms.html
+  name: TransformationAlgorithms
+  nameWithType: TransformationAlgorithms
+  fullName: Mapsui.Utilities.TransformationAlgorithms
+- uid: Mapsui.Utilities.Version
+  commentId: T:Mapsui.Utilities.Version
+  href: Mapsui.Utilities.Version.html
+  name: Version
+  nameWithType: Version
+  fullName: Mapsui.Utilities.Version
+- uid: Mapsui.Utilities.ZoomHelper
+  commentId: T:Mapsui.Utilities.ZoomHelper
+  href: Mapsui.Utilities.ZoomHelper.html
+  name: ZoomHelper
+  nameWithType: ZoomHelper
+  fullName: Mapsui.Utilities.ZoomHelper
+- uid: Mapsui.Utilities.SvgHelper
+  commentId: T:Mapsui.Utilities.SvgHelper
+  href: Mapsui.Utilities.SvgHelper.html
+  name: SvgHelper
+  nameWithType: SvgHelper
+  fullName: Mapsui.Utilities.SvgHelper
+- uid: Mapsui.Utilities
+  commentId: N:Mapsui.Utilities
+  href: Mapsui.html
+  name: Mapsui.Utilities
+  nameWithType: Mapsui.Utilities
+  fullName: Mapsui.Utilities
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Utilities
+    name: Utilities
+    href: Mapsui.Utilities.html

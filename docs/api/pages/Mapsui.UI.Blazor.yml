@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.UI.Blazor
+  commentId: N:Mapsui.UI.Blazor
+  id: Mapsui.UI.Blazor
+  children:
+  - Mapsui.UI.Blazor.MapControl
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.UI.Blazor
+  nameWithType: Mapsui.UI.Blazor
+  fullName: Mapsui.UI.Blazor
+  type: Namespace
+  assemblies:
+  - Mapsui.UI.Blazor
+references:
+- uid: Mapsui.UI.Blazor.MapControl
+  commentId: T:Mapsui.UI.Blazor.MapControl
+  href: Mapsui.UI.Blazor.MapControl.html
+  name: MapControl
+  nameWithType: MapControl
+  fullName: Mapsui.UI.Blazor.MapControl

@@ -1,0 +1,214 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ChangeType
+  commentId: T:Mapsui.ChangeType
+  id: ChangeType
+  parent: Mapsui
+  children:
+  - Mapsui.ChangeType.Continuous
+  - Mapsui.ChangeType.Discrete
+  langs:
+  - csharp
+  - vb
+  name: ChangeType
+  nameWithType: ChangeType
+  fullName: Mapsui.ChangeType
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/ChangeType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ChangeType
+    path: ../../Mapsui/ChangeType.cs
+    startLine: 2
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  syntax:
+    content: public enum ChangeType
+    content.vb: Public Enum ChangeType
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.ChangeType.Discrete
+  commentId: F:Mapsui.ChangeType.Discrete
+  id: Discrete
+  parent: Mapsui.ChangeType
+  langs:
+  - csharp
+  - vb
+  name: Discrete
+  nameWithType: ChangeType.Discrete
+  fullName: Mapsui.ChangeType.Discrete
+  type: Field
+  source:
+    remote:
+      path: Mapsui/ChangeType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Discrete
+    path: ../../Mapsui/ChangeType.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    Discrete changes in Viewport state.
+
+    Examples: 
+
+    - Plus and minus buttons. 
+
+    - Map Initialization.
+
+    - Final change in an animation
+
+    - Touch-up after dragging.
+
+    - Final mouse wheel change
+  example: []
+  syntax:
+    content: Discrete = 0
+    return:
+      type: Mapsui.ChangeType
+- uid: Mapsui.ChangeType.Continuous
+  commentId: F:Mapsui.ChangeType.Continuous
+  id: Continuous
+  parent: Mapsui.ChangeType
+  langs:
+  - csharp
+  - vb
+  name: Continuous
+  nameWithType: ChangeType.Continuous
+  fullName: Mapsui.ChangeType.Continuous
+  type: Field
+  source:
+    remote:
+      path: Mapsui/ChangeType.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Continuous
+    path: ../../Mapsui/ChangeType.cs
+    startLine: 21
+  assemblies:
+  - Mapsui
+  namespace: Mapsui
+  summary: >-
+    Continuous changes in Viewport state.
+
+    Examples:
+
+    - Dragging the map
+
+    - During animations
+
+    - Mouse wheel changes
+  example: []
+  syntax:
+    content: Continuous = 1
+    return:
+      type: Mapsui.ChangeType
+references:
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.ChangeType
+  commentId: T:Mapsui.ChangeType
+  parent: Mapsui
+  href: Mapsui.ChangeType.html
+  name: ChangeType
+  nameWithType: ChangeType
+  fullName: Mapsui.ChangeType

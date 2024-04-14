@@ -1,0 +1,1291 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider
+  commentId: T:Mapsui.Tiling.Provider.RasterizingTileProvider
+  id: RasterizingTileProvider
+  parent: Mapsui.Tiling.Provider
+  children:
+  - Mapsui.Tiling.Provider.RasterizingTileProvider.#ctor(Mapsui.Layers.ILayer,Mapsui.Rendering.IRenderer,System.Single,BruTile.Cache.IPersistentCache{System.Byte[]},Mapsui.Projections.IProjection,Mapsui.Rendering.RenderFormat)
+  - Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution
+  - Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
+  - Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync(BruTile.TileInfo)
+  - Mapsui.Tiling.Provider.RasterizingTileProvider.Name
+  - Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache
+  - Mapsui.Tiling.Provider.RasterizingTileProvider.Schema
+  - Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport(Mapsui.MSection)
+  langs:
+  - csharp
+  - vb
+  name: RasterizingTileProvider
+  nameWithType: RasterizingTileProvider
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: RasterizingTileProvider
+    path: ../../Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+    startLine: 20
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Provider
+  summary: The rasterizing tile provider. Tiles the Layer for faster Rasterizing on Zoom and Move.
+  example: []
+  syntax:
+    content: 'public class RasterizingTileProvider : ITileSource, ITileProvider, ILayerFeatureInfo'
+    content.vb: Public Class RasterizingTileProvider Implements ITileSource, ITileProvider, ILayerFeatureInfo
+  inheritance:
+  - System.Object
+  implements:
+  - BruTile.ITileSource
+  - BruTile.ITileProvider
+  - Mapsui.Layers.ILayerFeatureInfo
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.#ctor(Mapsui.Layers.ILayer,Mapsui.Rendering.IRenderer,System.Single,BruTile.Cache.IPersistentCache{System.Byte[]},Mapsui.Projections.IProjection,Mapsui.Rendering.RenderFormat)
+  commentId: M:Mapsui.Tiling.Provider.RasterizingTileProvider.#ctor(Mapsui.Layers.ILayer,Mapsui.Rendering.IRenderer,System.Single,BruTile.Cache.IPersistentCache{System.Byte[]},Mapsui.Projections.IProjection,Mapsui.Rendering.RenderFormat)
+  id: '#ctor(Mapsui.Layers.ILayer,Mapsui.Rendering.IRenderer,System.Single,BruTile.Cache.IPersistentCache{System.Byte[]},Mapsui.Projections.IProjection,Mapsui.Rendering.RenderFormat)'
+  parent: Mapsui.Tiling.Provider.RasterizingTileProvider
+  langs:
+  - csharp
+  - vb
+  name: RasterizingTileProvider(ILayer, IRenderer?, float, IPersistentCache<byte[]>?, IProjection?, RenderFormat)
+  nameWithType: RasterizingTileProvider.RasterizingTileProvider(ILayer, IRenderer?, float, IPersistentCache<byte[]>?, IProjection?, RenderFormat)
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.RasterizingTileProvider(Mapsui.Layers.ILayer, Mapsui.Rendering.IRenderer?, float, BruTile.Cache.IPersistentCache<byte[]>?, Mapsui.Projections.IProjection?, Mapsui.Rendering.RenderFormat)
+  type: Constructor
+  source:
+    remote:
+      path: Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: .ctor
+    path: ../../Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+    startLine: 33
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Provider
+  syntax:
+    content: public RasterizingTileProvider(ILayer layer, IRenderer? rasterizer = null, float pixelDensity = 1, IPersistentCache<byte[]>? persistentCache = null, IProjection? projection = null, RenderFormat renderFormat = RenderFormat.Png)
+    parameters:
+    - id: layer
+      type: Mapsui.Layers.ILayer
+    - id: rasterizer
+      type: Mapsui.Rendering.IRenderer
+    - id: pixelDensity
+      type: System.Single
+    - id: persistentCache
+      type: BruTile.Cache.IPersistentCache{System.Byte[]}
+    - id: projection
+      type: Mapsui.Projections.IProjection
+    - id: renderFormat
+      type: Mapsui.Rendering.RenderFormat
+    content.vb: Public Sub New(layer As ILayer, rasterizer As IRenderer = Nothing, pixelDensity As Single = 1, persistentCache As IPersistentCache(Of Byte()) = Nothing, projection As IProjection = Nothing, renderFormat As RenderFormat = RenderFormat.Png)
+  overload: Mapsui.Tiling.Provider.RasterizingTileProvider.#ctor*
+  nameWithType.vb: RasterizingTileProvider.New(ILayer, IRenderer, Single, IPersistentCache(Of Byte()), IProjection, RenderFormat)
+  fullName.vb: Mapsui.Tiling.Provider.RasterizingTileProvider.New(Mapsui.Layers.ILayer, Mapsui.Rendering.IRenderer, Single, BruTile.Cache.IPersistentCache(Of Byte()), Mapsui.Projections.IProjection, Mapsui.Rendering.RenderFormat)
+  name.vb: New(ILayer, IRenderer, Single, IPersistentCache(Of Byte()), IProjection, RenderFormat)
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache
+  commentId: P:Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache
+  id: PersistentCache
+  parent: Mapsui.Tiling.Provider.RasterizingTileProvider
+  langs:
+  - csharp
+  - vb
+  name: PersistentCache
+  nameWithType: RasterizingTileProvider.PersistentCache
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PersistentCache
+    path: ../../Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+    startLine: 61
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Provider
+  syntax:
+    content: public IPersistentCache<byte[]> PersistentCache { get; set; }
+    parameters: []
+    return:
+      type: BruTile.Cache.IPersistentCache{System.Byte[]}
+    content.vb: Public Property PersistentCache As IPersistentCache(Of Byte())
+  overload: Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache*
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync(BruTile.TileInfo)
+  commentId: M:Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync(BruTile.TileInfo)
+  id: GetTileAsync(BruTile.TileInfo)
+  parent: Mapsui.Tiling.Provider.RasterizingTileProvider
+  langs:
+  - csharp
+  - vb
+  name: GetTileAsync(TileInfo)
+  nameWithType: RasterizingTileProvider.GetTileAsync(TileInfo)
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync(BruTile.TileInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetTileAsync
+    path: ../../Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+    startLine: 63
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Provider
+  example: []
+  syntax:
+    content: public Task<byte[]?> GetTileAsync(TileInfo tileInfo)
+    parameters:
+    - id: tileInfo
+      type: BruTile.TileInfo
+    return:
+      type: System.Threading.Tasks.Task{System.Byte[]}
+    content.vb: Public Function GetTileAsync(tileInfo As TileInfo) As Task(Of Byte())
+  overload: Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync*
+  implements:
+  - BruTile.ITileProvider.GetTileAsync(BruTile.TileInfo)
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.Schema
+  commentId: P:Mapsui.Tiling.Provider.RasterizingTileProvider.Schema
+  id: Schema
+  parent: Mapsui.Tiling.Provider.RasterizingTileProvider
+  langs:
+  - csharp
+  - vb
+  name: Schema
+  nameWithType: RasterizingTileProvider.Schema
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.Schema
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Schema
+    path: ../../Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+    startLine: 227
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Provider
+  example: []
+  syntax:
+    content: public ITileSchema Schema { get; }
+    parameters: []
+    return:
+      type: BruTile.ITileSchema
+    content.vb: Public ReadOnly Property Schema As ITileSchema
+  overload: Mapsui.Tiling.Provider.RasterizingTileProvider.Schema*
+  implements:
+  - BruTile.ITileSource.Schema
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.Name
+  commentId: P:Mapsui.Tiling.Provider.RasterizingTileProvider.Name
+  id: Name
+  parent: Mapsui.Tiling.Provider.RasterizingTileProvider
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: RasterizingTileProvider.Name
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.Name
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Name
+    path: ../../Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+    startLine: 228
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Provider
+  example: []
+  syntax:
+    content: public string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Name As String
+  overload: Mapsui.Tiling.Provider.RasterizingTileProvider.Name*
+  implements:
+  - BruTile.ITileSource.Name
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution
+  commentId: P:Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution
+  id: Attribution
+  parent: Mapsui.Tiling.Provider.RasterizingTileProvider
+  langs:
+  - csharp
+  - vb
+  name: Attribution
+  nameWithType: RasterizingTileProvider.Attribution
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Attribution
+    path: ../../Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+    startLine: 229
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Provider
+  example: []
+  syntax:
+    content: public Attribution Attribution { get; }
+    parameters: []
+    return:
+      type: BruTile.Attribution
+    content.vb: Public ReadOnly Property Attribution As Attribution
+  overload: Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution*
+  implements:
+  - BruTile.ITileSource.Attribution
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport(Mapsui.MSection)
+  commentId: M:Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport(Mapsui.MSection)
+  id: ToViewport(Mapsui.MSection)
+  parent: Mapsui.Tiling.Provider.RasterizingTileProvider
+  langs:
+  - csharp
+  - vb
+  name: ToViewport(MSection)
+  nameWithType: RasterizingTileProvider.ToViewport(MSection)
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport(Mapsui.MSection)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ToViewport
+    path: ../../Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+    startLine: 231
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Provider
+  syntax:
+    content: public static Viewport ToViewport(MSection section)
+    parameters:
+    - id: section
+      type: Mapsui.MSection
+    return:
+      type: Mapsui.Viewport
+    content.vb: Public Shared Function ToViewport(section As MSection) As Viewport
+  overload: Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport*
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
+  commentId: M:Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
+  id: GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
+  parent: Mapsui.Tiling.Provider.RasterizingTileProvider
+  langs:
+  - csharp
+  - vb
+  name: GetFeatureInfoAsync(Viewport, double, double)
+  nameWithType: RasterizingTileProvider.GetFeatureInfoAsync(Viewport, double, double)
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync(Mapsui.Viewport, double, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetFeatureInfoAsync
+    path: ../../Mapsui.Tiling/Provider/RasterizingTileProvider.cs
+    startLine: 242
+  assemblies:
+  - Mapsui.Tiling
+  namespace: Mapsui.Tiling.Provider
+  example: []
+  syntax:
+    content: public Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
+    parameters:
+    - id: viewport
+      type: Mapsui.Viewport
+    - id: screenX
+      type: System.Double
+    - id: screenY
+      type: System.Double
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}}
+    content.vb: Public Function GetFeatureInfoAsync(viewport As Viewport, screenX As Double, screenY As Double) As Task(Of IDictionary(Of String, IEnumerable(Of IFeature)))
+  overload: Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync*
+  implements:
+  - Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
+  nameWithType.vb: RasterizingTileProvider.GetFeatureInfoAsync(Viewport, Double, Double)
+  fullName.vb: Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync(Mapsui.Viewport, Double, Double)
+  name.vb: GetFeatureInfoAsync(Viewport, Double, Double)
+references:
+- uid: Mapsui.Tiling.Provider
+  commentId: N:Mapsui.Tiling.Provider
+  href: Mapsui.html
+  name: Mapsui.Tiling.Provider
+  nameWithType: Mapsui.Tiling.Provider
+  fullName: Mapsui.Tiling.Provider
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Provider
+    name: Provider
+    href: Mapsui.Tiling.Provider.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Tiling
+    name: Tiling
+    href: Mapsui.Tiling.html
+  - name: .
+  - uid: Mapsui.Tiling.Provider
+    name: Provider
+    href: Mapsui.Tiling.Provider.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: BruTile.ITileSource
+  commentId: T:BruTile.ITileSource
+  parent: BruTile
+  isExternal: true
+  name: ITileSource
+  nameWithType: ITileSource
+  fullName: BruTile.ITileSource
+- uid: BruTile.ITileProvider
+  commentId: T:BruTile.ITileProvider
+  parent: BruTile
+  isExternal: true
+  name: ITileProvider
+  nameWithType: ITileProvider
+  fullName: BruTile.ITileProvider
+- uid: Mapsui.Layers.ILayerFeatureInfo
+  commentId: T:Mapsui.Layers.ILayerFeatureInfo
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.ILayerFeatureInfo.html
+  name: ILayerFeatureInfo
+  nameWithType: ILayerFeatureInfo
+  fullName: Mapsui.Layers.ILayerFeatureInfo
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: BruTile
+  commentId: N:BruTile
+  isExternal: true
+  name: BruTile
+  nameWithType: BruTile
+  fullName: BruTile
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.#ctor*
+  commentId: Overload:Mapsui.Tiling.Provider.RasterizingTileProvider.#ctor
+  href: Mapsui.Tiling.Provider.RasterizingTileProvider.html#Mapsui_Tiling_Provider_RasterizingTileProvider__ctor_Mapsui_Layers_ILayer_Mapsui_Rendering_IRenderer_System_Single_BruTile_Cache_IPersistentCache_System_Byte____Mapsui_Projections_IProjection_Mapsui_Rendering_RenderFormat_
+  name: RasterizingTileProvider
+  nameWithType: RasterizingTileProvider.RasterizingTileProvider
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.RasterizingTileProvider
+  nameWithType.vb: RasterizingTileProvider.New
+  fullName.vb: Mapsui.Tiling.Provider.RasterizingTileProvider.New
+  name.vb: New
+- uid: Mapsui.Layers.ILayer
+  commentId: T:Mapsui.Layers.ILayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.ILayer.html
+  name: ILayer
+  nameWithType: ILayer
+  fullName: Mapsui.Layers.ILayer
+- uid: Mapsui.Rendering.IRenderer
+  commentId: T:Mapsui.Rendering.IRenderer
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderer.html
+  name: IRenderer
+  nameWithType: IRenderer
+  fullName: Mapsui.Rendering.IRenderer
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: BruTile.Cache.IPersistentCache{System.Byte[]}
+  commentId: T:BruTile.Cache.IPersistentCache{System.Byte[]}
+  parent: BruTile.Cache
+  definition: BruTile.Cache.IPersistentCache`1
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: IPersistentCache<byte[]>
+  nameWithType: IPersistentCache<byte[]>
+  fullName: BruTile.Cache.IPersistentCache<byte[]>
+  nameWithType.vb: IPersistentCache(Of Byte())
+  fullName.vb: BruTile.Cache.IPersistentCache(Of Byte())
+  name.vb: IPersistentCache(Of Byte())
+  spec.csharp:
+  - uid: BruTile.Cache.IPersistentCache`1
+    name: IPersistentCache
+    isExternal: true
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: BruTile.Cache.IPersistentCache`1
+    name: IPersistentCache
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: )
+- uid: Mapsui.Projections.IProjection
+  commentId: T:Mapsui.Projections.IProjection
+  parent: Mapsui.Projections
+  href: Mapsui.Projections.IProjection.html
+  name: IProjection
+  nameWithType: IProjection
+  fullName: Mapsui.Projections.IProjection
+- uid: Mapsui.Rendering.RenderFormat
+  commentId: T:Mapsui.Rendering.RenderFormat
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.RenderFormat.html
+  name: RenderFormat
+  nameWithType: RenderFormat
+  fullName: Mapsui.Rendering.RenderFormat
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: BruTile.Cache.IPersistentCache`1
+  commentId: T:BruTile.Cache.IPersistentCache`1
+  isExternal: true
+  name: IPersistentCache<T>
+  nameWithType: IPersistentCache<T>
+  fullName: BruTile.Cache.IPersistentCache<T>
+  nameWithType.vb: IPersistentCache(Of T)
+  fullName.vb: BruTile.Cache.IPersistentCache(Of T)
+  name.vb: IPersistentCache(Of T)
+  spec.csharp:
+  - uid: BruTile.Cache.IPersistentCache`1
+    name: IPersistentCache
+    isExternal: true
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: BruTile.Cache.IPersistentCache`1
+    name: IPersistentCache
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: BruTile.Cache
+  commentId: N:BruTile.Cache
+  isExternal: true
+  name: BruTile.Cache
+  nameWithType: BruTile.Cache
+  fullName: BruTile.Cache
+  spec.csharp:
+  - uid: BruTile
+    name: BruTile
+    isExternal: true
+  - name: .
+  - uid: BruTile.Cache
+    name: Cache
+    isExternal: true
+  spec.vb:
+  - uid: BruTile
+    name: BruTile
+    isExternal: true
+  - name: .
+  - uid: BruTile.Cache
+    name: Cache
+    isExternal: true
+- uid: Mapsui.Projections
+  commentId: N:Mapsui.Projections
+  href: Mapsui.html
+  name: Mapsui.Projections
+  nameWithType: Mapsui.Projections
+  fullName: Mapsui.Projections
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Projections
+    name: Projections
+    href: Mapsui.Projections.html
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache*
+  commentId: Overload:Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache
+  href: Mapsui.Tiling.Provider.RasterizingTileProvider.html#Mapsui_Tiling_Provider_RasterizingTileProvider_PersistentCache
+  name: PersistentCache
+  nameWithType: RasterizingTileProvider.PersistentCache
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.PersistentCache
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync*
+  commentId: Overload:Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync
+  href: Mapsui.Tiling.Provider.RasterizingTileProvider.html#Mapsui_Tiling_Provider_RasterizingTileProvider_GetTileAsync_BruTile_TileInfo_
+  name: GetTileAsync
+  nameWithType: RasterizingTileProvider.GetTileAsync
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.GetTileAsync
+- uid: BruTile.ITileProvider.GetTileAsync(BruTile.TileInfo)
+  commentId: M:BruTile.ITileProvider.GetTileAsync(BruTile.TileInfo)
+  parent: BruTile.ITileProvider
+  isExternal: true
+  name: GetTileAsync(TileInfo)
+  nameWithType: ITileProvider.GetTileAsync(TileInfo)
+  fullName: BruTile.ITileProvider.GetTileAsync(BruTile.TileInfo)
+  spec.csharp:
+  - uid: BruTile.ITileProvider.GetTileAsync(BruTile.TileInfo)
+    name: GetTileAsync
+    isExternal: true
+  - name: (
+  - uid: BruTile.TileInfo
+    name: TileInfo
+    isExternal: true
+  - name: )
+  spec.vb:
+  - uid: BruTile.ITileProvider.GetTileAsync(BruTile.TileInfo)
+    name: GetTileAsync
+    isExternal: true
+  - name: (
+  - uid: BruTile.TileInfo
+    name: TileInfo
+    isExternal: true
+  - name: )
+- uid: BruTile.TileInfo
+  commentId: T:BruTile.TileInfo
+  parent: BruTile
+  isExternal: true
+  name: TileInfo
+  nameWithType: TileInfo
+  fullName: BruTile.TileInfo
+- uid: System.Threading.Tasks.Task{System.Byte[]}
+  commentId: T:System.Threading.Tasks.Task{System.Byte[]}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<byte[]>
+  nameWithType: Task<byte[]>
+  fullName: System.Threading.Tasks.Task<byte[]>
+  nameWithType.vb: Task(Of Byte())
+  fullName.vb: System.Threading.Tasks.Task(Of Byte())
+  name.vb: Task(Of Byte())
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.Schema*
+  commentId: Overload:Mapsui.Tiling.Provider.RasterizingTileProvider.Schema
+  href: Mapsui.Tiling.Provider.RasterizingTileProvider.html#Mapsui_Tiling_Provider_RasterizingTileProvider_Schema
+  name: Schema
+  nameWithType: RasterizingTileProvider.Schema
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.Schema
+- uid: BruTile.ITileSource.Schema
+  commentId: P:BruTile.ITileSource.Schema
+  parent: BruTile.ITileSource
+  isExternal: true
+  name: Schema
+  nameWithType: ITileSource.Schema
+  fullName: BruTile.ITileSource.Schema
+- uid: BruTile.ITileSchema
+  commentId: T:BruTile.ITileSchema
+  parent: BruTile
+  isExternal: true
+  name: ITileSchema
+  nameWithType: ITileSchema
+  fullName: BruTile.ITileSchema
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.Name*
+  commentId: Overload:Mapsui.Tiling.Provider.RasterizingTileProvider.Name
+  href: Mapsui.Tiling.Provider.RasterizingTileProvider.html#Mapsui_Tiling_Provider_RasterizingTileProvider_Name
+  name: Name
+  nameWithType: RasterizingTileProvider.Name
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.Name
+- uid: BruTile.ITileSource.Name
+  commentId: P:BruTile.ITileSource.Name
+  parent: BruTile.ITileSource
+  isExternal: true
+  name: Name
+  nameWithType: ITileSource.Name
+  fullName: BruTile.ITileSource.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution*
+  commentId: Overload:Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution
+  href: Mapsui.Tiling.Provider.RasterizingTileProvider.html#Mapsui_Tiling_Provider_RasterizingTileProvider_Attribution
+  name: Attribution
+  nameWithType: RasterizingTileProvider.Attribution
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.Attribution
+- uid: BruTile.ITileSource.Attribution
+  commentId: P:BruTile.ITileSource.Attribution
+  parent: BruTile.ITileSource
+  isExternal: true
+  name: Attribution
+  nameWithType: ITileSource.Attribution
+  fullName: BruTile.ITileSource.Attribution
+- uid: BruTile.Attribution
+  commentId: T:BruTile.Attribution
+  parent: BruTile
+  isExternal: true
+  name: Attribution
+  nameWithType: Attribution
+  fullName: BruTile.Attribution
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport*
+  commentId: Overload:Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport
+  href: Mapsui.Tiling.Provider.RasterizingTileProvider.html#Mapsui_Tiling_Provider_RasterizingTileProvider_ToViewport_Mapsui_MSection_
+  name: ToViewport
+  nameWithType: RasterizingTileProvider.ToViewport
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.ToViewport
+- uid: Mapsui.MSection
+  commentId: T:Mapsui.MSection
+  parent: Mapsui
+  href: Mapsui.MSection.html
+  name: MSection
+  nameWithType: MSection
+  fullName: Mapsui.MSection
+- uid: Mapsui.Viewport
+  commentId: T:Mapsui.Viewport
+  parent: Mapsui
+  href: Mapsui.Viewport.html
+  name: Viewport
+  nameWithType: Viewport
+  fullName: Mapsui.Viewport
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync*
+  commentId: Overload:Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync
+  href: Mapsui.Tiling.Provider.RasterizingTileProvider.html#Mapsui_Tiling_Provider_RasterizingTileProvider_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_
+  name: GetFeatureInfoAsync
+  nameWithType: RasterizingTileProvider.GetFeatureInfoAsync
+  fullName: Mapsui.Tiling.Provider.RasterizingTileProvider.GetFeatureInfoAsync
+- uid: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
+  commentId: M:Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
+  parent: Mapsui.Layers.ILayerFeatureInfo
+  isExternal: true
+  href: Mapsui.Layers.ILayerFeatureInfo.html#Mapsui_Layers_ILayerFeatureInfo_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_
+  name: GetFeatureInfoAsync(Viewport, double, double)
+  nameWithType: ILayerFeatureInfo.GetFeatureInfoAsync(Viewport, double, double)
+  fullName: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport, double, double)
+  nameWithType.vb: ILayerFeatureInfo.GetFeatureInfoAsync(Viewport, Double, Double)
+  fullName.vb: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport, Double, Double)
+  name.vb: GetFeatureInfoAsync(Viewport, Double, Double)
+  spec.csharp:
+  - uid: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
+    name: GetFeatureInfoAsync
+    href: Mapsui.Layers.ILayerFeatureInfo.html#Mapsui_Layers_ILayerFeatureInfo_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_
+  - name: (
+  - uid: Mapsui.Viewport
+    name: Viewport
+    href: Mapsui.Viewport.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
+    name: GetFeatureInfoAsync
+    href: Mapsui.Layers.ILayerFeatureInfo.html#Mapsui_Layers_ILayerFeatureInfo_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_
+  - name: (
+  - uid: Mapsui.Viewport
+    name: Viewport
+    href: Mapsui.Viewport.html
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: ','
+  - name: " "
+  - uid: System.Double
+    name: Double
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.double
+  - name: )
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature}}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<IDictionary<string, IEnumerable<IFeature>>>
+  nameWithType: Task<IDictionary<string, IEnumerable<IFeature>>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, System.Collections.Generic.IEnumerable<Mapsui.IFeature>>>
+  nameWithType.vb: Task(Of IDictionary(Of String, IEnumerable(Of IFeature)))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IDictionary(Of String, System.Collections.Generic.IEnumerable(Of Mapsui.IFeature)))
+  name.vb: Task(Of IDictionary(Of String, IEnumerable(Of IFeature)))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+    href: Mapsui.IFeature.html
+  - name: )
+  - name: )
+  - name: )

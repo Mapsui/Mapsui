@@ -1,0 +1,944 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer
+  commentId: T:Mapsui.Rendering.Skia.LabelStyleRenderer
+  id: LabelStyleRenderer
+  parent: Mapsui.Rendering.Skia
+  children:
+  - Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace(Mapsui.Styles.Font)
+  - Mapsui.Rendering.Skia.LabelStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,System.Int64)
+  - Mapsui.Rendering.Skia.LabelStyleRenderer.DrawAsBitmap(SkiaSharp.SKCanvas,Mapsui.Styles.LabelStyle,Mapsui.IFeature,System.Single,System.Single,System.Single,Mapsui.Rendering.ILabelCache)
+  - Mapsui.Rendering.Skia.LabelStyleRenderer.FeatureSize(Mapsui.IFeature,Mapsui.Styles.LabelStyle,SkiaSharp.SKPaint,Mapsui.Rendering.ILabelCache)
+  langs:
+  - csharp
+  - vb
+  name: LabelStyleRenderer
+  nameWithType: LabelStyleRenderer
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LabelStyleRenderer
+    path: ../../Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+    startLine: 16
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: 'public class LabelStyleRenderer : ISkiaStyleRenderer, IStyleRenderer, IFeatureSize'
+    content.vb: Public Class LabelStyleRenderer Implements ISkiaStyleRenderer, IStyleRenderer, IFeatureSize
+  inheritance:
+  - System.Object
+  implements:
+  - Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  - Mapsui.Styles.IStyleRenderer
+  - Mapsui.Styles.IFeatureSize
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.DrawAsBitmap(SkiaSharp.SKCanvas,Mapsui.Styles.LabelStyle,Mapsui.IFeature,System.Single,System.Single,System.Single,Mapsui.Rendering.ILabelCache)
+  commentId: M:Mapsui.Rendering.Skia.LabelStyleRenderer.DrawAsBitmap(SkiaSharp.SKCanvas,Mapsui.Styles.LabelStyle,Mapsui.IFeature,System.Single,System.Single,System.Single,Mapsui.Rendering.ILabelCache)
+  id: DrawAsBitmap(SkiaSharp.SKCanvas,Mapsui.Styles.LabelStyle,Mapsui.IFeature,System.Single,System.Single,System.Single,Mapsui.Rendering.ILabelCache)
+  parent: Mapsui.Rendering.Skia.LabelStyleRenderer
+  langs:
+  - csharp
+  - vb
+  name: DrawAsBitmap(SKCanvas, LabelStyle, IFeature, float, float, float, ILabelCache)
+  nameWithType: LabelStyleRenderer.DrawAsBitmap(SKCanvas, LabelStyle, IFeature, float, float, float, ILabelCache)
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.DrawAsBitmap(SkiaSharp.SKCanvas, Mapsui.Styles.LabelStyle, Mapsui.IFeature, float, float, float, Mapsui.Rendering.ILabelCache)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DrawAsBitmap
+    path: ../../Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+    startLine: 26
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity, ILabelCache labelCache)
+    parameters:
+    - id: canvas
+      type: SkiaSharp.SKCanvas
+    - id: style
+      type: Mapsui.Styles.LabelStyle
+    - id: feature
+      type: Mapsui.IFeature
+    - id: x
+      type: System.Single
+    - id: y
+      type: System.Single
+    - id: layerOpacity
+      type: System.Single
+    - id: labelCache
+      type: Mapsui.Rendering.ILabelCache
+    content.vb: Public Sub DrawAsBitmap(canvas As SKCanvas, style As LabelStyle, feature As IFeature, x As Single, y As Single, layerOpacity As Single, labelCache As ILabelCache)
+  overload: Mapsui.Rendering.Skia.LabelStyleRenderer.DrawAsBitmap*
+  nameWithType.vb: LabelStyleRenderer.DrawAsBitmap(SKCanvas, LabelStyle, IFeature, Single, Single, Single, ILabelCache)
+  fullName.vb: Mapsui.Rendering.Skia.LabelStyleRenderer.DrawAsBitmap(SkiaSharp.SKCanvas, Mapsui.Styles.LabelStyle, Mapsui.IFeature, Single, Single, Single, Mapsui.Rendering.ILabelCache)
+  name.vb: DrawAsBitmap(SKCanvas, LabelStyle, IFeature, Single, Single, Single, ILabelCache)
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace(Mapsui.Styles.Font)
+  commentId: M:Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace(Mapsui.Styles.Font)
+  id: CreateTypeFace(Mapsui.Styles.Font)
+  parent: Mapsui.Rendering.Skia.LabelStyleRenderer
+  langs:
+  - csharp
+  - vb
+  name: CreateTypeFace(Font)
+  nameWithType: LabelStyleRenderer.CreateTypeFace(Font)
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace(Mapsui.Styles.Font)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CreateTypeFace
+    path: ../../Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+    startLine: 39
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public static SKTypeface CreateTypeFace(Font font)
+    parameters:
+    - id: font
+      type: Mapsui.Styles.Font
+    return:
+      type: SkiaSharp.SKTypeface
+    content.vb: Public Shared Function CreateTypeFace(font As Font) As SKTypeface
+  overload: Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace*
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,System.Int64)
+  commentId: M:Mapsui.Rendering.Skia.LabelStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,System.Int64)
+  id: Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,System.Int64)
+  parent: Mapsui.Rendering.Skia.LabelStyleRenderer
+  langs:
+  - csharp
+  - vb
+  name: Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, IRenderCache, long)
+  nameWithType: LabelStyleRenderer.Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, IRenderCache, long)
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.IRenderCache, long)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Draw
+    path: ../../Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+    startLine: 48
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  summary: Drawing function for special styles
+  example: []
+  syntax:
+    content: public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
+    parameters:
+    - id: canvas
+      type: SkiaSharp.SKCanvas
+      description: SKCanvas for drawing.
+    - id: viewport
+      type: Mapsui.Viewport
+      description: Active viewport for this drawing operation.
+    - id: layer
+      type: Mapsui.Layers.ILayer
+      description: Layer that contains feature.
+    - id: feature
+      type: Mapsui.IFeature
+      description: Feature to draw.
+    - id: style
+      type: Mapsui.Styles.IStyle
+      description: Style to draw.
+    - id: renderCache
+      type: Mapsui.Rendering.IRenderCache
+      description: SymbolCache for ready rendered bitmaps.
+    - id: iteration
+      type: System.Int64
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Function Draw(canvas As SKCanvas, viewport As Viewport, layer As ILayer, feature As IFeature, style As IStyle, renderCache As IRenderCache, iteration As Long) As Boolean
+  overload: Mapsui.Rendering.Skia.LabelStyleRenderer.Draw*
+  implements:
+  - Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,System.Int64)
+  nameWithType.vb: LabelStyleRenderer.Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, IRenderCache, Long)
+  fullName.vb: Mapsui.Rendering.Skia.LabelStyleRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.IRenderCache, Long)
+  name.vb: Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, IRenderCache, Long)
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.FeatureSize(Mapsui.IFeature,Mapsui.Styles.LabelStyle,SkiaSharp.SKPaint,Mapsui.Rendering.ILabelCache)
+  commentId: M:Mapsui.Rendering.Skia.LabelStyleRenderer.FeatureSize(Mapsui.IFeature,Mapsui.Styles.LabelStyle,SkiaSharp.SKPaint,Mapsui.Rendering.ILabelCache)
+  id: FeatureSize(Mapsui.IFeature,Mapsui.Styles.LabelStyle,SkiaSharp.SKPaint,Mapsui.Rendering.ILabelCache)
+  parent: Mapsui.Rendering.Skia.LabelStyleRenderer
+  langs:
+  - csharp
+  - vb
+  name: FeatureSize(IFeature, LabelStyle, SKPaint, ILabelCache)
+  nameWithType: LabelStyleRenderer.FeatureSize(IFeature, LabelStyle, SKPaint, ILabelCache)
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.FeatureSize(Mapsui.IFeature, Mapsui.Styles.LabelStyle, SkiaSharp.SKPaint, Mapsui.Rendering.ILabelCache)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FeatureSize
+    path: ../../Mapsui.Rendering.Skia/SkiaStyles/LabelStyleRenderer.cs
+    startLine: 396
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia
+  syntax:
+    content: public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint, ILabelCache labelCache)
+    parameters:
+    - id: feature
+      type: Mapsui.IFeature
+    - id: labelStyle
+      type: Mapsui.Styles.LabelStyle
+    - id: paint
+      type: SkiaSharp.SKPaint
+    - id: labelCache
+      type: Mapsui.Rendering.ILabelCache
+    return:
+      type: System.Double
+    content.vb: Public Shared Function FeatureSize(feature As IFeature, labelStyle As LabelStyle, paint As SKPaint, labelCache As ILabelCache) As Double
+  overload: Mapsui.Rendering.Skia.LabelStyleRenderer.FeatureSize*
+references:
+- uid: Mapsui.Rendering.Skia
+  commentId: N:Mapsui.Rendering.Skia
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia
+  nameWithType: Mapsui.Rendering.Skia
+  fullName: Mapsui.Rendering.Skia
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  commentId: T:Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  parent: Mapsui.Rendering.Skia.SkiaStyles
+  href: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html
+  name: ISkiaStyleRenderer
+  nameWithType: ISkiaStyleRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+- uid: Mapsui.Styles.IStyleRenderer
+  commentId: T:Mapsui.Styles.IStyleRenderer
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyleRenderer.html
+  name: IStyleRenderer
+  nameWithType: IStyleRenderer
+  fullName: Mapsui.Styles.IStyleRenderer
+- uid: Mapsui.Styles.IFeatureSize
+  commentId: T:Mapsui.Styles.IFeatureSize
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IFeatureSize.html
+  name: IFeatureSize
+  nameWithType: IFeatureSize
+  fullName: Mapsui.Styles.IFeatureSize
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Rendering.Skia.SkiaStyles
+  commentId: N:Mapsui.Rendering.Skia.SkiaStyles
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia.SkiaStyles
+  nameWithType: Mapsui.Rendering.Skia.SkiaStyles
+  fullName: Mapsui.Rendering.Skia.SkiaStyles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.SkiaStyles
+    name: SkiaStyles
+    href: Mapsui.Rendering.Skia.SkiaStyles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.SkiaStyles
+    name: SkiaStyles
+    href: Mapsui.Rendering.Skia.SkiaStyles.html
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.DrawAsBitmap*
+  commentId: Overload:Mapsui.Rendering.Skia.LabelStyleRenderer.DrawAsBitmap
+  href: Mapsui.Rendering.Skia.LabelStyleRenderer.html#Mapsui_Rendering_Skia_LabelStyleRenderer_DrawAsBitmap_SkiaSharp_SKCanvas_Mapsui_Styles_LabelStyle_Mapsui_IFeature_System_Single_System_Single_System_Single_Mapsui_Rendering_ILabelCache_
+  name: DrawAsBitmap
+  nameWithType: LabelStyleRenderer.DrawAsBitmap
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.DrawAsBitmap
+- uid: SkiaSharp.SKCanvas
+  commentId: T:SkiaSharp.SKCanvas
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skcanvas
+  name: SKCanvas
+  nameWithType: SKCanvas
+  fullName: SkiaSharp.SKCanvas
+- uid: Mapsui.Styles.LabelStyle
+  commentId: T:Mapsui.Styles.LabelStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.LabelStyle.html
+  name: LabelStyle
+  nameWithType: LabelStyle
+  fullName: Mapsui.Styles.LabelStyle
+- uid: Mapsui.IFeature
+  commentId: T:Mapsui.IFeature
+  parent: Mapsui
+  href: Mapsui.IFeature.html
+  name: IFeature
+  nameWithType: IFeature
+  fullName: Mapsui.IFeature
+- uid: System.Single
+  commentId: T:System.Single
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: Mapsui.Rendering.ILabelCache
+  commentId: T:Mapsui.Rendering.ILabelCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.ILabelCache.html
+  name: ILabelCache
+  nameWithType: ILabelCache
+  fullName: Mapsui.Rendering.ILabelCache
+- uid: SkiaSharp
+  commentId: N:SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp
+  name: SkiaSharp
+  nameWithType: SkiaSharp
+  fullName: SkiaSharp
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Rendering
+  commentId: N:Mapsui.Rendering
+  href: Mapsui.html
+  name: Mapsui.Rendering
+  nameWithType: Mapsui.Rendering
+  fullName: Mapsui.Rendering
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace*
+  commentId: Overload:Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace
+  href: Mapsui.Rendering.Skia.LabelStyleRenderer.html#Mapsui_Rendering_Skia_LabelStyleRenderer_CreateTypeFace_Mapsui_Styles_Font_
+  name: CreateTypeFace
+  nameWithType: LabelStyleRenderer.CreateTypeFace
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace
+- uid: Mapsui.Styles.Font
+  commentId: T:Mapsui.Styles.Font
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.Font.html
+  name: Font
+  nameWithType: Font
+  fullName: Mapsui.Styles.Font
+- uid: SkiaSharp.SKTypeface
+  commentId: T:SkiaSharp.SKTypeface
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.sktypeface
+  name: SKTypeface
+  nameWithType: SKTypeface
+  fullName: SkiaSharp.SKTypeface
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.Draw*
+  commentId: Overload:Mapsui.Rendering.Skia.LabelStyleRenderer.Draw
+  href: Mapsui.Rendering.Skia.LabelStyleRenderer.html#Mapsui_Rendering_Skia_LabelStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_IRenderCache_System_Int64_
+  name: Draw
+  nameWithType: LabelStyleRenderer.Draw
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.Draw
+- uid: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,System.Int64)
+  commentId: M:Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,System.Int64)
+  parent: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  isExternal: true
+  href: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html#Mapsui_Rendering_Skia_SkiaStyles_ISkiaStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_IRenderCache_System_Int64_
+  name: Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, IRenderCache, long)
+  nameWithType: ISkiaStyleRenderer.Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, IRenderCache, long)
+  fullName: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.IRenderCache, long)
+  nameWithType.vb: ISkiaStyleRenderer.Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, IRenderCache, Long)
+  fullName.vb: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.IRenderCache, Long)
+  name.vb: Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, IRenderCache, Long)
+  spec.csharp:
+  - uid: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,System.Int64)
+    name: Draw
+    href: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html#Mapsui_Rendering_Skia_SkiaStyles_ISkiaStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_IRenderCache_System_Int64_
+  - name: (
+  - uid: SkiaSharp.SKCanvas
+    name: SKCanvas
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.skcanvas
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Viewport
+    name: Viewport
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: ','
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.IRenderCache
+    name: IRenderCache
+  - name: ','
+  - name: " "
+  - uid: System.Int64
+    name: long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.IRenderCache,System.Int64)
+    name: Draw
+    href: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html#Mapsui_Rendering_Skia_SkiaStyles_ISkiaStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_IRenderCache_System_Int64_
+  - name: (
+  - uid: SkiaSharp.SKCanvas
+    name: SKCanvas
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/skiasharp.skcanvas
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Viewport
+    name: Viewport
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Layers.ILayer
+    name: ILayer
+  - name: ','
+  - name: " "
+  - uid: Mapsui.IFeature
+    name: IFeature
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Styles.IStyle
+    name: IStyle
+  - name: ','
+  - name: " "
+  - uid: Mapsui.Rendering.IRenderCache
+    name: IRenderCache
+  - name: ','
+  - name: " "
+  - uid: System.Int64
+    name: Long
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int64
+  - name: )
+- uid: Mapsui.Viewport
+  commentId: T:Mapsui.Viewport
+  parent: Mapsui
+  href: Mapsui.Viewport.html
+  name: Viewport
+  nameWithType: Viewport
+  fullName: Mapsui.Viewport
+- uid: Mapsui.Layers.ILayer
+  commentId: T:Mapsui.Layers.ILayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.ILayer.html
+  name: ILayer
+  nameWithType: ILayer
+  fullName: Mapsui.Layers.ILayer
+- uid: Mapsui.Styles.IStyle
+  commentId: T:Mapsui.Styles.IStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.IStyle.html
+  name: IStyle
+  nameWithType: IStyle
+  fullName: Mapsui.Styles.IStyle
+- uid: Mapsui.Rendering.IRenderCache
+  commentId: T:Mapsui.Rendering.IRenderCache
+  parent: Mapsui.Rendering
+  href: Mapsui.Rendering.IRenderCache.html
+  name: IRenderCache
+  nameWithType: IRenderCache
+  fullName: Mapsui.Rendering.IRenderCache
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int64
+  name: long
+  nameWithType: long
+  fullName: long
+  nameWithType.vb: Long
+  fullName.vb: Long
+  name.vb: Long
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.FeatureSize*
+  commentId: Overload:Mapsui.Rendering.Skia.LabelStyleRenderer.FeatureSize
+  href: Mapsui.Rendering.Skia.LabelStyleRenderer.html#Mapsui_Rendering_Skia_LabelStyleRenderer_FeatureSize_Mapsui_IFeature_Mapsui_Styles_LabelStyle_SkiaSharp_SKPaint_Mapsui_Rendering_ILabelCache_
+  name: FeatureSize
+  nameWithType: LabelStyleRenderer.FeatureSize
+  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.FeatureSize
+- uid: SkiaSharp.SKPaint
+  commentId: T:SkiaSharp.SKPaint
+  parent: SkiaSharp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/skiasharp.skpaint
+  name: SKPaint
+  nameWithType: SKPaint
+  fullName: SkiaSharp.SKPaint
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double

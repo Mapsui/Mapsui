@@ -1,0 +1,37 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Extensions.Cache
+  commentId: N:Mapsui.Extensions.Cache
+  id: Mapsui.Extensions.Cache
+  children:
+  - Mapsui.Extensions.Cache.SqlitePersistentCache
+  - Mapsui.Extensions.Cache.Tile
+  - Mapsui.Extensions.Cache.UrlCache
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.Extensions.Cache
+  nameWithType: Mapsui.Extensions.Cache
+  fullName: Mapsui.Extensions.Cache
+  type: Namespace
+  assemblies:
+  - Mapsui.Extensions
+references:
+- uid: Mapsui.Extensions.Cache.SqlitePersistentCache
+  commentId: T:Mapsui.Extensions.Cache.SqlitePersistentCache
+  href: Mapsui.Extensions.Cache.SqlitePersistentCache.html
+  name: SqlitePersistentCache
+  nameWithType: SqlitePersistentCache
+  fullName: Mapsui.Extensions.Cache.SqlitePersistentCache
+- uid: Mapsui.Extensions.Cache.Tile
+  commentId: T:Mapsui.Extensions.Cache.Tile
+  href: Mapsui.Extensions.Cache.Tile.html
+  name: Tile
+  nameWithType: Tile
+  fullName: Mapsui.Extensions.Cache.Tile
+- uid: Mapsui.Extensions.Cache.UrlCache
+  commentId: T:Mapsui.Extensions.Cache.UrlCache
+  href: Mapsui.Extensions.Cache.UrlCache.html
+  name: UrlCache
+  nameWithType: UrlCache
+  fullName: Mapsui.Extensions.Cache.UrlCache

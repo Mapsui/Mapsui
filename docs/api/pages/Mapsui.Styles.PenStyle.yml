@@ -1,0 +1,474 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Styles.PenStyle
+  commentId: T:Mapsui.Styles.PenStyle
+  id: PenStyle
+  parent: Mapsui.Styles
+  children:
+  - Mapsui.Styles.PenStyle.Dash
+  - Mapsui.Styles.PenStyle.DashDot
+  - Mapsui.Styles.PenStyle.DashDotDot
+  - Mapsui.Styles.PenStyle.Dot
+  - Mapsui.Styles.PenStyle.LongDash
+  - Mapsui.Styles.PenStyle.LongDashDot
+  - Mapsui.Styles.PenStyle.ShortDash
+  - Mapsui.Styles.PenStyle.ShortDashDot
+  - Mapsui.Styles.PenStyle.ShortDashDotDot
+  - Mapsui.Styles.PenStyle.ShortDot
+  - Mapsui.Styles.PenStyle.Solid
+  - Mapsui.Styles.PenStyle.UserDefined
+  langs:
+  - csharp
+  - vb
+  name: PenStyle
+  nameWithType: PenStyle
+  fullName: Mapsui.Styles.PenStyle
+  type: Enum
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: PenStyle
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 2
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: public enum PenStyle
+    content.vb: Public Enum PenStyle
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Styles.PenStyle.Solid
+  commentId: F:Mapsui.Styles.PenStyle.Solid
+  id: Solid
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: Solid
+  nameWithType: PenStyle.Solid
+  fullName: Mapsui.Styles.PenStyle.Solid
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Solid
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 4
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: Solid = 0
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.Dash
+  commentId: F:Mapsui.Styles.PenStyle.Dash
+  id: Dash
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: Dash
+  nameWithType: PenStyle.Dash
+  fullName: Mapsui.Styles.PenStyle.Dash
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dash
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 5
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: Dash = 1
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.Dot
+  commentId: F:Mapsui.Styles.PenStyle.Dot
+  id: Dot
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: Dot
+  nameWithType: PenStyle.Dot
+  fullName: Mapsui.Styles.PenStyle.Dot
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dot
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 6
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: Dot = 2
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.DashDot
+  commentId: F:Mapsui.Styles.PenStyle.DashDot
+  id: DashDot
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: DashDot
+  nameWithType: PenStyle.DashDot
+  fullName: Mapsui.Styles.PenStyle.DashDot
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DashDot
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 7
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: DashDot = 3
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.DashDotDot
+  commentId: F:Mapsui.Styles.PenStyle.DashDotDot
+  id: DashDotDot
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: DashDotDot
+  nameWithType: PenStyle.DashDotDot
+  fullName: Mapsui.Styles.PenStyle.DashDotDot
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: DashDotDot
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 8
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: DashDotDot = 4
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.LongDash
+  commentId: F:Mapsui.Styles.PenStyle.LongDash
+  id: LongDash
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: LongDash
+  nameWithType: PenStyle.LongDash
+  fullName: Mapsui.Styles.PenStyle.LongDash
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LongDash
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 9
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: LongDash = 5
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.LongDashDot
+  commentId: F:Mapsui.Styles.PenStyle.LongDashDot
+  id: LongDashDot
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: LongDashDot
+  nameWithType: PenStyle.LongDashDot
+  fullName: Mapsui.Styles.PenStyle.LongDashDot
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: LongDashDot
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 10
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: LongDashDot = 6
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.ShortDash
+  commentId: F:Mapsui.Styles.PenStyle.ShortDash
+  id: ShortDash
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: ShortDash
+  nameWithType: PenStyle.ShortDash
+  fullName: Mapsui.Styles.PenStyle.ShortDash
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShortDash
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 11
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: ShortDash = 7
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.ShortDashDot
+  commentId: F:Mapsui.Styles.PenStyle.ShortDashDot
+  id: ShortDashDot
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: ShortDashDot
+  nameWithType: PenStyle.ShortDashDot
+  fullName: Mapsui.Styles.PenStyle.ShortDashDot
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShortDashDot
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 12
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: ShortDashDot = 8
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.ShortDashDotDot
+  commentId: F:Mapsui.Styles.PenStyle.ShortDashDotDot
+  id: ShortDashDotDot
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: ShortDashDotDot
+  nameWithType: PenStyle.ShortDashDotDot
+  fullName: Mapsui.Styles.PenStyle.ShortDashDotDot
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShortDashDotDot
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 13
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: ShortDashDotDot = 9
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.ShortDot
+  commentId: F:Mapsui.Styles.PenStyle.ShortDot
+  id: ShortDot
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: ShortDot
+  nameWithType: PenStyle.ShortDot
+  fullName: Mapsui.Styles.PenStyle.ShortDot
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ShortDot
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 14
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: ShortDot = 10
+    return:
+      type: Mapsui.Styles.PenStyle
+- uid: Mapsui.Styles.PenStyle.UserDefined
+  commentId: F:Mapsui.Styles.PenStyle.UserDefined
+  id: UserDefined
+  parent: Mapsui.Styles.PenStyle
+  langs:
+  - csharp
+  - vb
+  name: UserDefined
+  nameWithType: PenStyle.UserDefined
+  fullName: Mapsui.Styles.PenStyle.UserDefined
+  type: Field
+  source:
+    remote:
+      path: Mapsui/Styles/PenStyle.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: UserDefined
+    path: ../../Mapsui/Styles/PenStyle.cs
+    startLine: 15
+  assemblies:
+  - Mapsui
+  namespace: Mapsui.Styles
+  syntax:
+    content: UserDefined = 11
+    return:
+      type: Mapsui.Styles.PenStyle
+references:
+- uid: Mapsui.Styles
+  commentId: N:Mapsui.Styles
+  href: Mapsui.html
+  name: Mapsui.Styles
+  nameWithType: Mapsui.Styles
+  fullName: Mapsui.Styles
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Styles
+    name: Styles
+    href: Mapsui.Styles.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Styles.PenStyle
+  commentId: T:Mapsui.Styles.PenStyle
+  parent: Mapsui.Styles
+  href: Mapsui.Styles.PenStyle.html
+  name: PenStyle
+  nameWithType: PenStyle
+  fullName: Mapsui.Styles.PenStyle

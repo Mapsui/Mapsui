@@ -1,0 +1,346 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  commentId: T:Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  id: ClippingFunctions.Intersection
+  parent: Mapsui.Rendering.Skia.Functions
+  children:
+  - Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.Both
+  - Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.CompleteInside
+  - Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.CompleteOutside
+  - Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.FirstInside
+  - Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.SecondInside
+  - Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.Unknown
+  langs:
+  - csharp
+  - vb
+  name: ClippingFunctions.Intersection
+  nameWithType: ClippingFunctions.Intersection
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  type: Enum
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Intersection
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 189
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  summary: Type of intersection
+  example: []
+  syntax:
+    content: public enum ClippingFunctions.Intersection
+    content.vb: Public Enum ClippingFunctions.Intersection
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.CompleteInside
+  commentId: F:Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.CompleteInside
+  id: CompleteInside
+  parent: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  langs:
+  - csharp
+  - vb
+  name: CompleteInside
+  nameWithType: ClippingFunctions.Intersection.CompleteInside
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.CompleteInside
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CompleteInside
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 191
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  syntax:
+    content: CompleteInside = 0
+    return:
+      type: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.CompleteOutside
+  commentId: F:Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.CompleteOutside
+  id: CompleteOutside
+  parent: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  langs:
+  - csharp
+  - vb
+  name: CompleteOutside
+  nameWithType: ClippingFunctions.Intersection.CompleteOutside
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.CompleteOutside
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: CompleteOutside
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 192
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  syntax:
+    content: CompleteOutside = 1
+    return:
+      type: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.Both
+  commentId: F:Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.Both
+  id: Both
+  parent: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  langs:
+  - csharp
+  - vb
+  name: Both
+  nameWithType: ClippingFunctions.Intersection.Both
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.Both
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Both
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 193
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  syntax:
+    content: Both = 2
+    return:
+      type: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.FirstInside
+  commentId: F:Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.FirstInside
+  id: FirstInside
+  parent: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  langs:
+  - csharp
+  - vb
+  name: FirstInside
+  nameWithType: ClippingFunctions.Intersection.FirstInside
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.FirstInside
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: FirstInside
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 194
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  syntax:
+    content: FirstInside = 3
+    return:
+      type: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.SecondInside
+  commentId: F:Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.SecondInside
+  id: SecondInside
+  parent: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  langs:
+  - csharp
+  - vb
+  name: SecondInside
+  nameWithType: ClippingFunctions.Intersection.SecondInside
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.SecondInside
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SecondInside
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 195
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  syntax:
+    content: SecondInside = 4
+    return:
+      type: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.Unknown
+  commentId: F:Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.Unknown
+  id: Unknown
+  parent: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  langs:
+  - csharp
+  - vb
+  name: Unknown
+  nameWithType: ClippingFunctions.Intersection.Unknown
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.Unknown
+  type: Field
+  source:
+    remote:
+      path: Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Unknown
+    path: ../../Mapsui.Rendering.Skia/Functions/ClippingFunctions.cs
+    startLine: 196
+  assemblies:
+  - Mapsui.Rendering.Skia
+  namespace: Mapsui.Rendering.Skia.Functions
+  syntax:
+    content: Unknown = 5
+    return:
+      type: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+references:
+- uid: Mapsui.Rendering.Skia.Functions
+  commentId: N:Mapsui.Rendering.Skia.Functions
+  href: Mapsui.html
+  name: Mapsui.Rendering.Skia.Functions
+  nameWithType: Mapsui.Rendering.Skia.Functions
+  fullName: Mapsui.Rendering.Skia.Functions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Functions
+    name: Functions
+    href: Mapsui.Rendering.Skia.Functions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Rendering
+    name: Rendering
+    href: Mapsui.Rendering.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia
+    name: Skia
+    href: Mapsui.Rendering.Skia.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Functions
+    name: Functions
+    href: Mapsui.Rendering.Skia.Functions.html
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  commentId: T:Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  parent: Mapsui.Rendering.Skia.Functions
+  href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.html
+  name: ClippingFunctions.Intersection
+  nameWithType: ClippingFunctions.Intersection
+  fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+  spec.csharp:
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions
+    name: ClippingFunctions
+    href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+    name: Intersection
+    href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.html
+  spec.vb:
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions
+    name: ClippingFunctions
+    href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.html
+  - name: .
+  - uid: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection
+    name: Intersection
+    href: Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.html

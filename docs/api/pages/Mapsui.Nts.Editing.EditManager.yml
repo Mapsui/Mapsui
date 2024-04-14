@@ -1,0 +1,1341 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.Nts.Editing.EditManager
+  commentId: T:Mapsui.Nts.Editing.EditManager
+  id: EditManager
+  parent: Mapsui.Nts.Editing
+  children:
+  - Mapsui.Nts.Editing.EditManager.AddVertex(NetTopologySuite.Geometries.Coordinate)
+  - Mapsui.Nts.Editing.EditManager.AngleBetween(NetTopologySuite.Geometries.Point,NetTopologySuite.Geometries.Point)
+  - Mapsui.Nts.Editing.EditManager.Dragging(NetTopologySuite.Geometries.Point)
+  - Mapsui.Nts.Editing.EditManager.EditMode
+  - Mapsui.Nts.Editing.EditManager.EndEdit
+  - Mapsui.Nts.Editing.EditManager.GetGrownExtent
+  - Mapsui.Nts.Editing.EditManager.HoveringVertex(Mapsui.MapInfo)
+  - Mapsui.Nts.Editing.EditManager.IsManipulating
+  - Mapsui.Nts.Editing.EditManager.Layer
+  - Mapsui.Nts.Editing.EditManager.ResetManipulations
+  - Mapsui.Nts.Editing.EditManager.Rotating(NetTopologySuite.Geometries.Point)
+  - Mapsui.Nts.Editing.EditManager.Scaling(NetTopologySuite.Geometries.Point)
+  - Mapsui.Nts.Editing.EditManager.SelectMode
+  - Mapsui.Nts.Editing.EditManager.StartDragging(Mapsui.MapInfo,System.Double)
+  - Mapsui.Nts.Editing.EditManager.StartRotating(Mapsui.MapInfo)
+  - Mapsui.Nts.Editing.EditManager.StartScaling(Mapsui.MapInfo)
+  - Mapsui.Nts.Editing.EditManager.StopDragging
+  - Mapsui.Nts.Editing.EditManager.StopRotating
+  - Mapsui.Nts.Editing.EditManager.StopScaling
+  - Mapsui.Nts.Editing.EditManager.TryDeleteCoordinate(Mapsui.MapInfo,System.Double)
+  - Mapsui.Nts.Editing.EditManager.TryInsertCoordinate(Mapsui.MapInfo)
+  - Mapsui.Nts.Editing.EditManager.VertexRadius
+  langs:
+  - csharp
+  - vb
+  name: EditManager
+  nameWithType: EditManager
+  fullName: Mapsui.Nts.Editing.EditManager
+  type: Class
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: EditManager
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 22
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public class EditManager
+    content.vb: Public Class EditManager
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+- uid: Mapsui.Nts.Editing.EditManager.Layer
+  commentId: P:Mapsui.Nts.Editing.EditManager.Layer
+  id: Layer
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: Layer
+  nameWithType: EditManager.Layer
+  fullName: Mapsui.Nts.Editing.EditManager.Layer
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Layer
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 24
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public WritableLayer? Layer { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Layers.WritableLayer
+    content.vb: Public Property Layer As WritableLayer
+  overload: Mapsui.Nts.Editing.EditManager.Layer*
+- uid: Mapsui.Nts.Editing.EditManager.EditMode
+  commentId: P:Mapsui.Nts.Editing.EditManager.EditMode
+  id: EditMode
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: EditMode
+  nameWithType: EditManager.EditMode
+  fullName: Mapsui.Nts.Editing.EditManager.EditMode
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: EditMode
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 31
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public EditMode EditMode { get; set; }
+    parameters: []
+    return:
+      type: Mapsui.Nts.Editing.EditMode
+    content.vb: Public Property EditMode As EditMode
+  overload: Mapsui.Nts.Editing.EditManager.EditMode*
+- uid: Mapsui.Nts.Editing.EditManager.VertexRadius
+  commentId: P:Mapsui.Nts.Editing.EditManager.VertexRadius
+  id: VertexRadius
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: VertexRadius
+  nameWithType: EditManager.VertexRadius
+  fullName: Mapsui.Nts.Editing.EditManager.VertexRadius
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: VertexRadius
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 36
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public int VertexRadius { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property VertexRadius As Integer
+  overload: Mapsui.Nts.Editing.EditManager.VertexRadius*
+- uid: Mapsui.Nts.Editing.EditManager.SelectMode
+  commentId: P:Mapsui.Nts.Editing.EditManager.SelectMode
+  id: SelectMode
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: SelectMode
+  nameWithType: EditManager.SelectMode
+  fullName: Mapsui.Nts.Editing.EditManager.SelectMode
+  type: Property
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: SelectMode
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 37
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool SelectMode { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property SelectMode As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.SelectMode*
+- uid: Mapsui.Nts.Editing.EditManager.EndEdit
+  commentId: M:Mapsui.Nts.Editing.EditManager.EndEdit
+  id: EndEdit
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: EndEdit()
+  nameWithType: EditManager.EndEdit()
+  fullName: Mapsui.Nts.Editing.EditManager.EndEdit()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: EndEdit
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 39
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool EndEdit()
+    return:
+      type: System.Boolean
+    content.vb: Public Function EndEdit() As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.EndEdit*
+- uid: Mapsui.Nts.Editing.EditManager.HoveringVertex(Mapsui.MapInfo)
+  commentId: M:Mapsui.Nts.Editing.EditManager.HoveringVertex(Mapsui.MapInfo)
+  id: HoveringVertex(Mapsui.MapInfo)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: HoveringVertex(MapInfo)
+  nameWithType: EditManager.HoveringVertex(MapInfo)
+  fullName: Mapsui.Nts.Editing.EditManager.HoveringVertex(Mapsui.MapInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: HoveringVertex
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 73
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public void HoveringVertex(MapInfo mapInfo)
+    parameters:
+    - id: mapInfo
+      type: Mapsui.MapInfo
+    content.vb: Public Sub HoveringVertex(mapInfo As MapInfo)
+  overload: Mapsui.Nts.Editing.EditManager.HoveringVertex*
+- uid: Mapsui.Nts.Editing.EditManager.AddVertex(NetTopologySuite.Geometries.Coordinate)
+  commentId: M:Mapsui.Nts.Editing.EditManager.AddVertex(NetTopologySuite.Geometries.Coordinate)
+  id: AddVertex(NetTopologySuite.Geometries.Coordinate)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: AddVertex(Coordinate)
+  nameWithType: EditManager.AddVertex(Coordinate)
+  fullName: Mapsui.Nts.Editing.EditManager.AddVertex(NetTopologySuite.Geometries.Coordinate)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AddVertex
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 83
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool AddVertex(Coordinate worldPosition)
+    parameters:
+    - id: worldPosition
+      type: NetTopologySuite.Geometries.Coordinate
+    return:
+      type: System.Boolean
+    content.vb: Public Function AddVertex(worldPosition As Coordinate) As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.AddVertex*
+- uid: Mapsui.Nts.Editing.EditManager.StartDragging(Mapsui.MapInfo,System.Double)
+  commentId: M:Mapsui.Nts.Editing.EditManager.StartDragging(Mapsui.MapInfo,System.Double)
+  id: StartDragging(Mapsui.MapInfo,System.Double)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: StartDragging(MapInfo, double)
+  nameWithType: EditManager.StartDragging(MapInfo, double)
+  fullName: Mapsui.Nts.Editing.EditManager.StartDragging(Mapsui.MapInfo, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StartDragging
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 163
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool StartDragging(MapInfo mapInfo, double screenDistance)
+    parameters:
+    - id: mapInfo
+      type: Mapsui.MapInfo
+    - id: screenDistance
+      type: System.Double
+    return:
+      type: System.Boolean
+    content.vb: Public Function StartDragging(mapInfo As MapInfo, screenDistance As Double) As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.StartDragging*
+  nameWithType.vb: EditManager.StartDragging(MapInfo, Double)
+  fullName.vb: Mapsui.Nts.Editing.EditManager.StartDragging(Mapsui.MapInfo, Double)
+  name.vb: StartDragging(MapInfo, Double)
+- uid: Mapsui.Nts.Editing.EditManager.Dragging(NetTopologySuite.Geometries.Point)
+  commentId: M:Mapsui.Nts.Editing.EditManager.Dragging(NetTopologySuite.Geometries.Point)
+  id: Dragging(NetTopologySuite.Geometries.Point)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: Dragging(Point?)
+  nameWithType: EditManager.Dragging(Point?)
+  fullName: Mapsui.Nts.Editing.EditManager.Dragging(NetTopologySuite.Geometries.Point?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Dragging
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 196
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool Dragging(Point? worldPosition)
+    parameters:
+    - id: worldPosition
+      type: NetTopologySuite.Geometries.Point
+    return:
+      type: System.Boolean
+    content.vb: Public Function Dragging(worldPosition As Point) As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.Dragging*
+  nameWithType.vb: EditManager.Dragging(Point)
+  fullName.vb: Mapsui.Nts.Editing.EditManager.Dragging(NetTopologySuite.Geometries.Point)
+  name.vb: Dragging(Point)
+- uid: Mapsui.Nts.Editing.EditManager.StopDragging
+  commentId: M:Mapsui.Nts.Editing.EditManager.StopDragging
+  id: StopDragging
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: StopDragging()
+  nameWithType: EditManager.StopDragging()
+  fullName: Mapsui.Nts.Editing.EditManager.StopDragging()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StopDragging
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 260
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public void StopDragging()
+    content.vb: Public Sub StopDragging()
+  overload: Mapsui.Nts.Editing.EditManager.StopDragging*
+- uid: Mapsui.Nts.Editing.EditManager.TryDeleteCoordinate(Mapsui.MapInfo,System.Double)
+  commentId: M:Mapsui.Nts.Editing.EditManager.TryDeleteCoordinate(Mapsui.MapInfo,System.Double)
+  id: TryDeleteCoordinate(Mapsui.MapInfo,System.Double)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: TryDeleteCoordinate(MapInfo, double)
+  nameWithType: EditManager.TryDeleteCoordinate(MapInfo, double)
+  fullName: Mapsui.Nts.Editing.EditManager.TryDeleteCoordinate(Mapsui.MapInfo, double)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TryDeleteCoordinate
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 269
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool TryDeleteCoordinate(MapInfo mapInfo, double screenDistance)
+    parameters:
+    - id: mapInfo
+      type: Mapsui.MapInfo
+    - id: screenDistance
+      type: System.Double
+    return:
+      type: System.Boolean
+    content.vb: Public Function TryDeleteCoordinate(mapInfo As MapInfo, screenDistance As Double) As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.TryDeleteCoordinate*
+  nameWithType.vb: EditManager.TryDeleteCoordinate(MapInfo, Double)
+  fullName.vb: Mapsui.Nts.Editing.EditManager.TryDeleteCoordinate(Mapsui.MapInfo, Double)
+  name.vb: TryDeleteCoordinate(MapInfo, Double)
+- uid: Mapsui.Nts.Editing.EditManager.TryInsertCoordinate(Mapsui.MapInfo)
+  commentId: M:Mapsui.Nts.Editing.EditManager.TryInsertCoordinate(Mapsui.MapInfo)
+  id: TryInsertCoordinate(Mapsui.MapInfo)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: TryInsertCoordinate(MapInfo)
+  nameWithType: EditManager.TryInsertCoordinate(MapInfo)
+  fullName: Mapsui.Nts.Editing.EditManager.TryInsertCoordinate(Mapsui.MapInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: TryInsertCoordinate
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 290
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool TryInsertCoordinate(MapInfo mapInfo)
+    parameters:
+    - id: mapInfo
+      type: Mapsui.MapInfo
+    return:
+      type: System.Boolean
+    content.vb: Public Function TryInsertCoordinate(mapInfo As MapInfo) As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.TryInsertCoordinate*
+- uid: Mapsui.Nts.Editing.EditManager.StartRotating(Mapsui.MapInfo)
+  commentId: M:Mapsui.Nts.Editing.EditManager.StartRotating(Mapsui.MapInfo)
+  id: StartRotating(Mapsui.MapInfo)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: StartRotating(MapInfo)
+  nameWithType: EditManager.StartRotating(MapInfo)
+  fullName: Mapsui.Nts.Editing.EditManager.StartRotating(Mapsui.MapInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StartRotating
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 307
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool StartRotating(MapInfo mapInfo)
+    parameters:
+    - id: mapInfo
+      type: Mapsui.MapInfo
+    return:
+      type: System.Boolean
+    content.vb: Public Function StartRotating(mapInfo As MapInfo) As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.StartRotating*
+- uid: Mapsui.Nts.Editing.EditManager.Rotating(NetTopologySuite.Geometries.Point)
+  commentId: M:Mapsui.Nts.Editing.EditManager.Rotating(NetTopologySuite.Geometries.Point)
+  id: Rotating(NetTopologySuite.Geometries.Point)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: Rotating(Point?)
+  nameWithType: EditManager.Rotating(Point?)
+  fullName: Mapsui.Nts.Editing.EditManager.Rotating(NetTopologySuite.Geometries.Point?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Rotating
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 320
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool Rotating(Point? worldPosition)
+    parameters:
+    - id: worldPosition
+      type: NetTopologySuite.Geometries.Point
+    return:
+      type: System.Boolean
+    content.vb: Public Function Rotating(worldPosition As Point) As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.Rotating*
+  nameWithType.vb: EditManager.Rotating(Point)
+  fullName.vb: Mapsui.Nts.Editing.EditManager.Rotating(NetTopologySuite.Geometries.Point)
+  name.vb: Rotating(Point)
+- uid: Mapsui.Nts.Editing.EditManager.StopRotating
+  commentId: M:Mapsui.Nts.Editing.EditManager.StopRotating
+  id: StopRotating
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: StopRotating()
+  nameWithType: EditManager.StopRotating()
+  fullName: Mapsui.Nts.Editing.EditManager.StopRotating()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StopRotating
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 343
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public void StopRotating()
+    content.vb: Public Sub StopRotating()
+  overload: Mapsui.Nts.Editing.EditManager.StopRotating*
+- uid: Mapsui.Nts.Editing.EditManager.AngleBetween(NetTopologySuite.Geometries.Point,NetTopologySuite.Geometries.Point)
+  commentId: M:Mapsui.Nts.Editing.EditManager.AngleBetween(NetTopologySuite.Geometries.Point,NetTopologySuite.Geometries.Point)
+  id: AngleBetween(NetTopologySuite.Geometries.Point,NetTopologySuite.Geometries.Point)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: AngleBetween(Point, Point)
+  nameWithType: EditManager.AngleBetween(Point, Point)
+  fullName: Mapsui.Nts.Editing.EditManager.AngleBetween(NetTopologySuite.Geometries.Point, NetTopologySuite.Geometries.Point)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: AngleBetween
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 352
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public static double AngleBetween(Point vector1, Point vector2)
+    parameters:
+    - id: vector1
+      type: NetTopologySuite.Geometries.Point
+    - id: vector2
+      type: NetTopologySuite.Geometries.Point
+    return:
+      type: System.Double
+    content.vb: Public Shared Function AngleBetween(vector1 As Point, vector2 As Point) As Double
+  overload: Mapsui.Nts.Editing.EditManager.AngleBetween*
+- uid: Mapsui.Nts.Editing.EditManager.StartScaling(Mapsui.MapInfo)
+  commentId: M:Mapsui.Nts.Editing.EditManager.StartScaling(Mapsui.MapInfo)
+  id: StartScaling(Mapsui.MapInfo)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: StartScaling(MapInfo)
+  nameWithType: EditManager.StartScaling(MapInfo)
+  fullName: Mapsui.Nts.Editing.EditManager.StartScaling(Mapsui.MapInfo)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StartScaling
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 360
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool StartScaling(MapInfo mapInfo)
+    parameters:
+    - id: mapInfo
+      type: Mapsui.MapInfo
+    return:
+      type: System.Boolean
+    content.vb: Public Function StartScaling(mapInfo As MapInfo) As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.StartScaling*
+- uid: Mapsui.Nts.Editing.EditManager.Scaling(NetTopologySuite.Geometries.Point)
+  commentId: M:Mapsui.Nts.Editing.EditManager.Scaling(NetTopologySuite.Geometries.Point)
+  id: Scaling(NetTopologySuite.Geometries.Point)
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: Scaling(Point?)
+  nameWithType: EditManager.Scaling(Point?)
+  fullName: Mapsui.Nts.Editing.EditManager.Scaling(NetTopologySuite.Geometries.Point?)
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: Scaling
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 374
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool Scaling(Point? worldPosition)
+    parameters:
+    - id: worldPosition
+      type: NetTopologySuite.Geometries.Point
+    return:
+      type: System.Boolean
+    content.vb: Public Function Scaling(worldPosition As Point) As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.Scaling*
+  nameWithType.vb: EditManager.Scaling(Point)
+  fullName.vb: Mapsui.Nts.Editing.EditManager.Scaling(NetTopologySuite.Geometries.Point)
+  name.vb: Scaling(Point)
+- uid: Mapsui.Nts.Editing.EditManager.StopScaling
+  commentId: M:Mapsui.Nts.Editing.EditManager.StopScaling
+  id: StopScaling
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: StopScaling()
+  nameWithType: EditManager.StopScaling()
+  fullName: Mapsui.Nts.Editing.EditManager.StopScaling()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: StopScaling
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 394
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public void StopScaling()
+    content.vb: Public Sub StopScaling()
+  overload: Mapsui.Nts.Editing.EditManager.StopScaling*
+- uid: Mapsui.Nts.Editing.EditManager.ResetManipulations
+  commentId: M:Mapsui.Nts.Editing.EditManager.ResetManipulations
+  id: ResetManipulations
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: ResetManipulations()
+  nameWithType: EditManager.ResetManipulations()
+  fullName: Mapsui.Nts.Editing.EditManager.ResetManipulations()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: ResetManipulations
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 403
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public void ResetManipulations()
+    content.vb: Public Sub ResetManipulations()
+  overload: Mapsui.Nts.Editing.EditManager.ResetManipulations*
+- uid: Mapsui.Nts.Editing.EditManager.IsManipulating
+  commentId: M:Mapsui.Nts.Editing.EditManager.IsManipulating
+  id: IsManipulating
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: IsManipulating()
+  nameWithType: EditManager.IsManipulating()
+  fullName: Mapsui.Nts.Editing.EditManager.IsManipulating()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: IsManipulating
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 414
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public bool IsManipulating()
+    return:
+      type: System.Boolean
+    content.vb: Public Function IsManipulating() As Boolean
+  overload: Mapsui.Nts.Editing.EditManager.IsManipulating*
+- uid: Mapsui.Nts.Editing.EditManager.GetGrownExtent
+  commentId: M:Mapsui.Nts.Editing.EditManager.GetGrownExtent
+  id: GetGrownExtent
+  parent: Mapsui.Nts.Editing.EditManager
+  langs:
+  - csharp
+  - vb
+  name: GetGrownExtent()
+  nameWithType: EditManager.GetGrownExtent()
+  fullName: Mapsui.Nts.Editing.EditManager.GetGrownExtent()
+  type: Method
+  source:
+    remote:
+      path: Mapsui.Nts/Editing/EditManager.cs
+      branch: main
+      repo: git@github.com:Mapsui/Mapsui.git
+    id: GetGrownExtent
+    path: ../../Mapsui.Nts/Editing/EditManager.cs
+    startLine: 419
+  assemblies:
+  - Mapsui.Nts
+  namespace: Mapsui.Nts.Editing
+  syntax:
+    content: public MRect? GetGrownExtent()
+    return:
+      type: Mapsui.MRect
+    content.vb: Public Function GetGrownExtent() As MRect
+  overload: Mapsui.Nts.Editing.EditManager.GetGrownExtent*
+references:
+- uid: Mapsui.Nts.Editing
+  commentId: N:Mapsui.Nts.Editing
+  href: Mapsui.html
+  name: Mapsui.Nts.Editing
+  nameWithType: Mapsui.Nts.Editing
+  fullName: Mapsui.Nts.Editing
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Editing
+    name: Editing
+    href: Mapsui.Nts.Editing.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Nts
+    name: Nts
+    href: Mapsui.Nts.html
+  - name: .
+  - uid: Mapsui.Nts.Editing
+    name: Editing
+    href: Mapsui.Nts.Editing.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Mapsui.Extensions.DisposableExtension.DisposeIfDisposable
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  parent: Mapsui.Extensions.DisposableExtension
+  definition: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  commentId: M:Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+  isExternal: true
+  href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  name: DisposeIfDisposable(object)
+  nameWithType: DisposableExtension.DisposeIfDisposable(object)
+  fullName: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(object)
+  nameWithType.vb: DisposableExtension.DisposeIfDisposable(Object)
+  fullName.vb: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(Object)
+  name.vb: DisposeIfDisposable(Object)
+  spec.csharp:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: Mapsui.Extensions.DisposableExtension.DisposeIfDisposable(System.Object)
+    name: DisposeIfDisposable
+    href: Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Mapsui.Extensions.DisposableExtension
+  commentId: T:Mapsui.Extensions.DisposableExtension
+  parent: Mapsui.Extensions
+  href: Mapsui.Extensions.DisposableExtension.html
+  name: DisposableExtension
+  nameWithType: DisposableExtension
+  fullName: Mapsui.Extensions.DisposableExtension
+- uid: Mapsui.Extensions
+  commentId: N:Mapsui.Extensions
+  href: Mapsui.html
+  name: Mapsui.Extensions
+  nameWithType: Mapsui.Extensions
+  fullName: Mapsui.Extensions
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Extensions
+    name: Extensions
+    href: Mapsui.Extensions.html
+- uid: Mapsui.Nts.Editing.EditManager.Layer*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.Layer
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_Layer
+  name: Layer
+  nameWithType: EditManager.Layer
+  fullName: Mapsui.Nts.Editing.EditManager.Layer
+- uid: Mapsui.Layers.WritableLayer
+  commentId: T:Mapsui.Layers.WritableLayer
+  parent: Mapsui.Layers
+  href: Mapsui.Layers.WritableLayer.html
+  name: WritableLayer
+  nameWithType: WritableLayer
+  fullName: Mapsui.Layers.WritableLayer
+- uid: Mapsui.Layers
+  commentId: N:Mapsui.Layers
+  href: Mapsui.html
+  name: Mapsui.Layers
+  nameWithType: Mapsui.Layers
+  fullName: Mapsui.Layers
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.Layers
+    name: Layers
+    href: Mapsui.Layers.html
+- uid: Mapsui.Nts.Editing.EditManager.EditMode*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.EditMode
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_EditMode
+  name: EditMode
+  nameWithType: EditManager.EditMode
+  fullName: Mapsui.Nts.Editing.EditManager.EditMode
+- uid: Mapsui.Nts.Editing.EditMode
+  commentId: T:Mapsui.Nts.Editing.EditMode
+  parent: Mapsui.Nts.Editing
+  href: Mapsui.Nts.Editing.EditMode.html
+  name: EditMode
+  nameWithType: EditMode
+  fullName: Mapsui.Nts.Editing.EditMode
+- uid: Mapsui.Nts.Editing.EditManager.VertexRadius*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.VertexRadius
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_VertexRadius
+  name: VertexRadius
+  nameWithType: EditManager.VertexRadius
+  fullName: Mapsui.Nts.Editing.EditManager.VertexRadius
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Mapsui.Nts.Editing.EditManager.SelectMode*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.SelectMode
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_SelectMode
+  name: SelectMode
+  nameWithType: EditManager.SelectMode
+  fullName: Mapsui.Nts.Editing.EditManager.SelectMode
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Mapsui.Nts.Editing.EditManager.EndEdit*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.EndEdit
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_EndEdit
+  name: EndEdit
+  nameWithType: EditManager.EndEdit
+  fullName: Mapsui.Nts.Editing.EditManager.EndEdit
+- uid: Mapsui.Nts.Editing.EditManager.HoveringVertex*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.HoveringVertex
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_HoveringVertex_Mapsui_MapInfo_
+  name: HoveringVertex
+  nameWithType: EditManager.HoveringVertex
+  fullName: Mapsui.Nts.Editing.EditManager.HoveringVertex
+- uid: Mapsui.MapInfo
+  commentId: T:Mapsui.MapInfo
+  parent: Mapsui
+  href: Mapsui.MapInfo.html
+  name: MapInfo
+  nameWithType: MapInfo
+  fullName: Mapsui.MapInfo
+- uid: Mapsui
+  commentId: N:Mapsui
+  href: Mapsui.html
+  name: Mapsui
+  nameWithType: Mapsui
+  fullName: Mapsui
+- uid: Mapsui.Nts.Editing.EditManager.AddVertex*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.AddVertex
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_AddVertex_NetTopologySuite_Geometries_Coordinate_
+  name: AddVertex
+  nameWithType: EditManager.AddVertex
+  fullName: Mapsui.Nts.Editing.EditManager.AddVertex
+- uid: NetTopologySuite.Geometries.Coordinate
+  commentId: T:NetTopologySuite.Geometries.Coordinate
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: Coordinate
+  nameWithType: Coordinate
+  fullName: NetTopologySuite.Geometries.Coordinate
+- uid: NetTopologySuite.Geometries
+  commentId: N:NetTopologySuite.Geometries
+  isExternal: true
+  name: NetTopologySuite.Geometries
+  nameWithType: NetTopologySuite.Geometries
+  fullName: NetTopologySuite.Geometries
+  spec.csharp:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+  spec.vb:
+  - uid: NetTopologySuite
+    name: NetTopologySuite
+    isExternal: true
+  - name: .
+  - uid: NetTopologySuite.Geometries
+    name: Geometries
+    isExternal: true
+- uid: Mapsui.Nts.Editing.EditManager.StartDragging*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.StartDragging
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_StartDragging_Mapsui_MapInfo_System_Double_
+  name: StartDragging
+  nameWithType: EditManager.StartDragging
+  fullName: Mapsui.Nts.Editing.EditManager.StartDragging
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: Mapsui.Nts.Editing.EditManager.Dragging*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.Dragging
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_Dragging_NetTopologySuite_Geometries_Point_
+  name: Dragging
+  nameWithType: EditManager.Dragging
+  fullName: Mapsui.Nts.Editing.EditManager.Dragging
+- uid: NetTopologySuite.Geometries.Point
+  commentId: T:NetTopologySuite.Geometries.Point
+  parent: NetTopologySuite.Geometries
+  isExternal: true
+  name: Point
+  nameWithType: Point
+  fullName: NetTopologySuite.Geometries.Point
+- uid: Mapsui.Nts.Editing.EditManager.StopDragging*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.StopDragging
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_StopDragging
+  name: StopDragging
+  nameWithType: EditManager.StopDragging
+  fullName: Mapsui.Nts.Editing.EditManager.StopDragging
+- uid: Mapsui.Nts.Editing.EditManager.TryDeleteCoordinate*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.TryDeleteCoordinate
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_TryDeleteCoordinate_Mapsui_MapInfo_System_Double_
+  name: TryDeleteCoordinate
+  nameWithType: EditManager.TryDeleteCoordinate
+  fullName: Mapsui.Nts.Editing.EditManager.TryDeleteCoordinate
+- uid: Mapsui.Nts.Editing.EditManager.TryInsertCoordinate*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.TryInsertCoordinate
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_TryInsertCoordinate_Mapsui_MapInfo_
+  name: TryInsertCoordinate
+  nameWithType: EditManager.TryInsertCoordinate
+  fullName: Mapsui.Nts.Editing.EditManager.TryInsertCoordinate
+- uid: Mapsui.Nts.Editing.EditManager.StartRotating*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.StartRotating
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_StartRotating_Mapsui_MapInfo_
+  name: StartRotating
+  nameWithType: EditManager.StartRotating
+  fullName: Mapsui.Nts.Editing.EditManager.StartRotating
+- uid: Mapsui.Nts.Editing.EditManager.Rotating*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.Rotating
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_Rotating_NetTopologySuite_Geometries_Point_
+  name: Rotating
+  nameWithType: EditManager.Rotating
+  fullName: Mapsui.Nts.Editing.EditManager.Rotating
+- uid: Mapsui.Nts.Editing.EditManager.StopRotating*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.StopRotating
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_StopRotating
+  name: StopRotating
+  nameWithType: EditManager.StopRotating
+  fullName: Mapsui.Nts.Editing.EditManager.StopRotating
+- uid: Mapsui.Nts.Editing.EditManager.AngleBetween*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.AngleBetween
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_AngleBetween_NetTopologySuite_Geometries_Point_NetTopologySuite_Geometries_Point_
+  name: AngleBetween
+  nameWithType: EditManager.AngleBetween
+  fullName: Mapsui.Nts.Editing.EditManager.AngleBetween
+- uid: Mapsui.Nts.Editing.EditManager.StartScaling*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.StartScaling
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_StartScaling_Mapsui_MapInfo_
+  name: StartScaling
+  nameWithType: EditManager.StartScaling
+  fullName: Mapsui.Nts.Editing.EditManager.StartScaling
+- uid: Mapsui.Nts.Editing.EditManager.Scaling*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.Scaling
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_Scaling_NetTopologySuite_Geometries_Point_
+  name: Scaling
+  nameWithType: EditManager.Scaling
+  fullName: Mapsui.Nts.Editing.EditManager.Scaling
+- uid: Mapsui.Nts.Editing.EditManager.StopScaling*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.StopScaling
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_StopScaling
+  name: StopScaling
+  nameWithType: EditManager.StopScaling
+  fullName: Mapsui.Nts.Editing.EditManager.StopScaling
+- uid: Mapsui.Nts.Editing.EditManager.ResetManipulations*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.ResetManipulations
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_ResetManipulations
+  name: ResetManipulations
+  nameWithType: EditManager.ResetManipulations
+  fullName: Mapsui.Nts.Editing.EditManager.ResetManipulations
+- uid: Mapsui.Nts.Editing.EditManager.IsManipulating*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.IsManipulating
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_IsManipulating
+  name: IsManipulating
+  nameWithType: EditManager.IsManipulating
+  fullName: Mapsui.Nts.Editing.EditManager.IsManipulating
+- uid: Mapsui.Nts.Editing.EditManager.GetGrownExtent*
+  commentId: Overload:Mapsui.Nts.Editing.EditManager.GetGrownExtent
+  href: Mapsui.Nts.Editing.EditManager.html#Mapsui_Nts_Editing_EditManager_GetGrownExtent
+  name: GetGrownExtent
+  nameWithType: EditManager.GetGrownExtent
+  fullName: Mapsui.Nts.Editing.EditManager.GetGrownExtent
+- uid: Mapsui.MRect
+  commentId: T:Mapsui.MRect
+  parent: Mapsui
+  href: Mapsui.MRect.html
+  name: MRect
+  nameWithType: MRect
+  fullName: Mapsui.MRect

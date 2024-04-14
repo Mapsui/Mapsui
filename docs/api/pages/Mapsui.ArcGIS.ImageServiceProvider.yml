@@ -1,0 +1,130 @@
+### YamlMime:ManagedReference
+items:
+- uid: Mapsui.ArcGIS.ImageServiceProvider
+  commentId: N:Mapsui.ArcGIS.ImageServiceProvider
+  id: Mapsui.ArcGIS.ImageServiceProvider
+  children:
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  - Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  - Mapsui.ArcGIS.ImageServiceProvider.Domain
+  - Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+  - Mapsui.ArcGIS.ImageServiceProvider.Field
+  - Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+  - Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+  - Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+  - Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+  - Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+  - Mapsui.ArcGIS.ImageServiceProvider.TimeReference
+  langs:
+  - csharp
+  - vb
+  name: Mapsui.ArcGIS.ImageServiceProvider
+  nameWithType: Mapsui.ArcGIS.ImageServiceProvider
+  fullName: Mapsui.ArcGIS.ImageServiceProvider
+  type: Namespace
+  assemblies:
+  - Mapsui.ArcGIS
+references:
+- uid: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType.html
+  name: InterpolationType
+  nameWithType: InterpolationType
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.InterpolationType
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities.html
+  name: ArcGISImageCapabilities
+  nameWithType: ArcGISImageCapabilities
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html
+  name: ArcGISImageServiceProvider
+  nameWithType: ArcGISImageServiceProvider
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
+- uid: Mapsui.ArcGIS.ImageServiceProvider.Domain
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.Domain
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.Domain.html
+  name: Domain
+  nameWithType: Domain
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.Domain
+- uid: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo.html
+  name: EditFieldsInfo
+  nameWithType: EditFieldsInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.EditFieldsInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.Field
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.Field
+  href: Mapsui.ArcGIS.ImageServiceProvider.Field.html
+  name: Field
+  nameWithType: Field
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.Field
+- uid: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters.html
+  name: OwnershipBasedAccessControlForRasters
+  nameWithType: OwnershipBasedAccessControlForRasters
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.OwnershipBasedAccessControlForRasters
+- uid: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+  href: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo.html
+  name: RasterFunctionInfo
+  nameWithType: RasterFunctionInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.RasterFunctionInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+  href: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo.html
+  name: RasterTypeInfo
+  nameWithType: RasterTypeInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.RasterTypeInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo.html
+  name: TimeInfo
+  nameWithType: TimeInfo
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.TimeInfo
+- uid: Mapsui.ArcGIS.ImageServiceProvider.TimeReference
+  commentId: T:Mapsui.ArcGIS.ImageServiceProvider.TimeReference
+  parent: Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.ArcGIS.ImageServiceProvider.TimeReference.html
+  name: TimeReference
+  nameWithType: TimeReference
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.TimeReference
+- uid: Mapsui.ArcGIS.ImageServiceProvider
+  commentId: N:Mapsui.ArcGIS.ImageServiceProvider
+  href: Mapsui.html
+  name: Mapsui.ArcGIS.ImageServiceProvider
+  nameWithType: Mapsui.ArcGIS.ImageServiceProvider
+  fullName: Mapsui.ArcGIS.ImageServiceProvider
+  spec.csharp:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.ImageServiceProvider
+    name: ImageServiceProvider
+    href: Mapsui.ArcGIS.ImageServiceProvider.html
+  spec.vb:
+  - uid: Mapsui
+    name: Mapsui
+    href: Mapsui.html
+  - name: .
+  - uid: Mapsui.ArcGIS
+    name: ArcGIS
+    href: Mapsui.ArcGIS.html
+  - name: .
+  - uid: Mapsui.ArcGIS.ImageServiceProvider
+    name: ImageServiceProvider
+    href: Mapsui.ArcGIS.ImageServiceProvider.html
