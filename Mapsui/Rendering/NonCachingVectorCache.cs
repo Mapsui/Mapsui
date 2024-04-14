@@ -2,7 +2,7 @@
 
 namespace Mapsui.Rendering;
 
-public sealed class NonCachingVectorCache(ISymbolCache symbolCache) : IVectorCache
+public sealed class NonCachingVectorCache(IRenderService symbolCache) : IVectorCache
 {
     public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, TPaint> toPaint)
         where TParam : notnull
@@ -11,7 +11,7 @@ public sealed class NonCachingVectorCache(ISymbolCache symbolCache) : IVectorCac
         return new CacheTracker<TPaint>(toPaint(param));
     }
 
-    public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, ISymbolCache, TPaint> toPaint)
+    public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, IRenderService, TPaint> toPaint)
         where TParam : notnull
         where TPaint : class
     {

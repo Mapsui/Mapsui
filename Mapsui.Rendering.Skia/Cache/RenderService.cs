@@ -15,7 +15,7 @@ public sealed class RenderService : IRenderService
         LabelCache = new LabelCache();
         BitmapRegistry = new BitmapRegistry(Styles.BitmapRegistry.Instance);
         SymbolCache = new SymbolCache(BitmapRegistry);
-        _vectorCache = new VectorCache(SymbolCache, capacity);
+        _vectorCache = new VectorCache(this, capacity);
 
     }
 

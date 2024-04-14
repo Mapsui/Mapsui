@@ -8,5 +8,4 @@ public interface ISymbolCache : IDisposable
     Size? GetSize(int bitmapId); // perhaps use a tuple in C#7
 
     IBitmapInfo GetOrCreate(int bitmapID);
-    IBitmapRegistry BitmapRegistry { get; }
 }

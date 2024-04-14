@@ -66,7 +66,7 @@ internal static class PolygonRenderer
         }
     }
 
-    internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, ISymbolCache? symbolCache)
+    internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, IRenderService renderService)
     {
         var brush = valueTuple.brush;
         var opacity = valueTuple.opacity;
@@ -141,13 +141,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(symbolCache, brush.BitmapId);
+                    var image = GetImage(renderService, brush.BitmapId);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(symbolCache, brush.BitmapId);
+                    image = GetImage(renderService, brush.BitmapId);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -205,8 +205,9 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(ISymbolCache? symbolCache, int bitmapId)
+    private static SKImage? GetImage(IRenderService renderService, int bitmapId)
     {
+        var symbolCache = renderService.SymbolCache;
         if (symbolCache == null)
             return null;
         var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(bitmapId);
@@ -216,6 +217,7 @@ internal static class PolygonRenderer
             return bitmapInfo.Bitmap;
         if (bitmapInfo.Type == BitmapType.Sprite)
         {
+            var bitmapRegistry = renderService.BitmapRegistry;
             var sprite = bitmapInfo.Sprite;
             if (sprite == null)
                 return null;
@@ -225,10 +227,10 @@ internal static class PolygonRenderer
                 var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
                 var skImage = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                     sprite.Y + sprite.Height));
-                sprite.BitmapId = symbolCache.BitmapRegistry.Register(skImage);
+                sprite.BitmapId = bitmapRegistry.Register(skImage);
             }
 
-            return (SKImage?)symbolCache.BitmapRegistry.Get(sprite.BitmapId);
+            return (SKImage?)bitmapRegistry.Get(sprite.BitmapId);
         }
         return null;
     }
