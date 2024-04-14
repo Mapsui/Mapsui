@@ -5,6 +5,7 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
+using Mapsui.Logging;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -113,14 +114,21 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static void LoadBitmapId(SymbolStyle symbolStyle, IBitmapRegistry bitmapRegistry)
+    internal static async void LoadBitmapId(SymbolStyle symbolStyle, IBitmapRegistry bitmapRegistry)
     {
         if (symbolStyle.BitmapId < 0)
         {
-            if (symbolStyle.Bitmap != null)
-                symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.Bitmap);
-            if (symbolStyle.BitmapPath != null)
-                symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.BitmapPath);
+            try
+            {
+                if (symbolStyle.Bitmap != null)
+                    symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.Bitmap);
+                if (symbolStyle.BitmapPath != null)
+                    symbolStyle.BitmapId = await bitmapRegistry.RegisterAsync(symbolStyle.BitmapPath);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message, ex);
+            }
         }
     }
 
