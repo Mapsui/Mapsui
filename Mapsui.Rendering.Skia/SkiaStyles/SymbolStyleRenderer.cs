@@ -124,9 +124,13 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         try
         {
             if (symbolStyle.Bitmap != null)
+            {
                 symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.Bitmap);
-            if (symbolStyle.BitmapPath != null)
+            }
+            else if (symbolStyle.BitmapPath != null)
+            {
                 symbolStyle.BitmapId = await bitmapRegistry.RegisterAsync(symbolStyle.BitmapPath);
+            }
         }
         catch (Exception ex)
         {
