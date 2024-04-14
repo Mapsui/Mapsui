@@ -125,6 +125,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             if (symbolStyle.Bitmap != null)
             {
+                await symbolStyle.Bitmap.LoadBitmapIdAsync(bitmapRegistry).ConfigureAwait(false);
                 symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.Bitmap);
             }
             else if (symbolStyle.BitmapPath != null)
