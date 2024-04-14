@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
 
@@ -17,7 +18,7 @@ public interface IBitmapRegistry : IDisposable
     /// </summary>
     /// <param name="bitmapPath">Bitmap data to register</param>
     /// <returns>Id of registered bitmap data</returns>
-    int Register(Uri bitmapPath);
+    Task<int> RegisterAsync(Uri bitmapPath);
 
     /// <summary> Unregister an existing bitmap </summary>
     /// <param name="id">Id of registered bitmap data</param>

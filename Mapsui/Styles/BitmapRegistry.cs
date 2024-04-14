@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
 using Mapsui.Logging;
 
 namespace Mapsui.Styles;
@@ -39,9 +40,6 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// <returns>Id of registered bitmap data</returns>
     public int Register(object bitmapData, string? key = null)
     {
-        if (bitmapData is Uri uri)
-            return Register(uri);
-
         CheckBitmapData(bitmapData);
 
         var id = NextBitmapId();
@@ -53,7 +51,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
         return id;
     }
 
-    public int Register(Uri bitmapPath)
+    public async Task<int> RegisterAsync(Uri bitmapPath)
     {
         var key = bitmapPath.ToString();
         Stream? stream = null;
@@ -81,12 +79,9 @@ public sealed class BitmapRegistry : IBitmapRegistry
                 {
                     using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
                     using HttpClient client = new HttpClient(handler);
-// TODO: Make this async                    
-#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
-                    using HttpResponseMessage response = client.GetAsync(bitmapPath, HttpCompletionOption.ResponseHeadersRead).Result;
+                    using HttpResponseMessage response = await client.GetAsync(bitmapPath, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
                     response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
-                    stream = response.Content.ReadAsStreamAsync().Result;
-#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+                    stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
