@@ -97,7 +97,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
 
     public int NextBitmapId()
     {
-        if (_parent!= null)
+        if (_parent != null)
             _parent.NextBitmapId();
         
         return Interlocked.Increment(ref _counter);
