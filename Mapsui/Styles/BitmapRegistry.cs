@@ -2,11 +2,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
-using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Logging;
 
 namespace Mapsui.Styles;
@@ -44,7 +41,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
     {
         if (bitmapData is Uri uri)
             return Register(uri);
-        
+
         CheckBitmapData(bitmapData);
 
         var id = NextBitmapId();
@@ -63,7 +60,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
         switch (bitmapPath.Scheme)
         {
             case "embeddedresource":
-                foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
                     var name = assembly.GetName().Name;
                     if (name != null)
@@ -73,7 +70,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
                             if (stream != null)
                                 break;
                         }
-                  
+
                 }
                 break;
             case "file":
@@ -89,11 +86,11 @@ public sealed class BitmapRegistry : IBitmapRegistry
                 }
                 catch (Exception ex)
                 {
-                    Logger.Log(LogLevel.Error, $"Could not load from uri {bitmapPath} : { ex.Message}", ex);
+                    Logger.Log(LogLevel.Error, $"Could not load from uri {bitmapPath} : {ex.Message}", ex);
                 }
                 break;
         }
-        
+
         if (stream == null)
             throw new ArgumentException("Resource not found: " + key);
         return Register(stream, key);

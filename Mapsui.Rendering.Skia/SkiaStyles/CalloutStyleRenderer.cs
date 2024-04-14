@@ -260,7 +260,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         {
             callout.InternalContent = bitmapRegistry.Register(picture);
         }
-        
+
         callout.Content = callout.InternalContent;
     }
 

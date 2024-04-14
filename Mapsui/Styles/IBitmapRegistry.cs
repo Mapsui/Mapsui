@@ -11,7 +11,7 @@ public interface IBitmapRegistry : IDisposable
     /// <param name="key">key for accessing bitmap</param>
     /// <returns>Id of registered bitmap data</returns>
     int Register(object bitmapData, string? key = null);
-    
+
     /// <summary>
     /// Register a new bitmap
     /// </summary>
