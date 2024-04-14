@@ -29,7 +29,7 @@ namespace Mapsui.UI.iOS;
 #elif __WINUI__
 namespace Mapsui.UI.WinUI;
 #elif __AVALONIA__
-using Avalonia;
+
 namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto;

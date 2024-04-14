@@ -38,8 +38,8 @@ public class BitmapSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.circle.png", BitmapRegistry.Instance);
-        var checkeredIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.checkered.png", BitmapRegistry.Instance);
+        var circleIconPath = typeof(BitmapSymbolSample).LoadBitmapPath("Resources.Images.circle.png");
+        var checkredIconPath = typeof(BitmapSymbolSample).LoadBitmapPath("Resources.Images.checkered.png");
 
         return new List<IFeature>
         {
@@ -49,11 +49,11 @@ public class BitmapSymbolSample : ISample
             },
             new PointFeature(new MPoint(50, 100))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
+                Styles = new[] {new SymbolStyle { BitmapPath = circleIconPath}}
             },
             new PointFeature(new MPoint(100, 50))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
+                Styles = new[] {new SymbolStyle { BitmapPath = checkredIconPath}}
             },
             new PointFeature(new MPoint(100, 100))
             {

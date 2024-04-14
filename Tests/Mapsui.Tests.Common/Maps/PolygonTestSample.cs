@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
@@ -12,7 +13,7 @@ namespace Mapsui.Tests.Common.Maps;
 
 public class PolygonTestSample : ISample
 {
-    private static int _bitmapId;
+    private static readonly Uri _bitmapPath = typeof(PolygonTestSample).LoadBitmapPath("Resources.Images.avion_silhouette.png");
 
     public string Name => "Polygon";
     public string Category => "Tests";
@@ -21,8 +22,6 @@ public class PolygonTestSample : ISample
 
     public static Map CreateMap()
     {
-        _bitmapId = typeof(PolygonTestSample).LoadBitmapId("Resources.Images.avion_silhouette.png", BitmapRegistry.Instance);
-
         var layer = CreateLayer();
 
         var map = new Map
@@ -61,7 +60,7 @@ public class PolygonTestSample : ISample
         feature.Styles.Add(new VectorStyle
         {
             Enabled = true,
-            Fill = CreateBrush(new Color(255, 0, 0, 120), FillStyle.BitmapRotated, _bitmapId),
+            Fill = CreateBrush(new Color(255, 0, 0, 120), FillStyle.BitmapRotated, _bitmapPath),
             Outline = CreatePen(new Color(255, 255, 0), 2, PenStyle.DashDot),
             Line = null
         });
@@ -188,12 +187,12 @@ public class PolygonTestSample : ISample
         return features;
     }
 
-    private static Brush CreateBrush(Color color, FillStyle fillStyle, int? imageId = null)
+    private static Brush CreateBrush(Color color, FillStyle fillStyle, Uri? imagePath = null)
     {
-        if (imageId.HasValue && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
+        if (imagePath != null && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
             fillStyle = FillStyle.Bitmap;
 
-        return new Brush { FillStyle = fillStyle, BitmapId = imageId ?? -1, Color = color };
+        return new Brush { FillStyle = fillStyle, BitmapPath = imagePath, Color = color };
     }
 
     private static Pen CreatePen(Color color, int width, PenStyle penStyle)

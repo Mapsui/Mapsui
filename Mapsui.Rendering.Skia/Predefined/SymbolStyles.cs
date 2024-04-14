@@ -4,7 +4,7 @@ namespace Mapsui.Styles;
 
 public static class SymbolStyles
 {
-    public static SymbolStyle CreatePinStyle(IBitmapRegistry bitmapRegistry, Color? pinColor = null, double symbolScale = 1.0)
+    public static SymbolStyle CreatePinStyle(Color? pinColor = null, double symbolScale = 1.0)
     {
         // This method is in Mapsui.Rendering.Skia because it has a dependency on Skia
         // because the resource is converted to an image using Skia. I think

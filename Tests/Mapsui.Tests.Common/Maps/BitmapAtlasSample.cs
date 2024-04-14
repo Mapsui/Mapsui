@@ -44,7 +44,7 @@ public class BitmapAtlasSample : ISample
 
     public static List<IFeature> CreateFeatures()
     {
-        var atlas = typeof(BitmapAtlasSample).LoadBitmapId("Resources.Images.osm-liberty.png", BitmapRegistry.Instance);
+        var atlas = typeof(BitmapAtlasSample).LoadBitmapPath("Resources.Images.osm-liberty.png");
         var spriteAmusementPark15 = new Sprite(atlas, 106, 0, 21, 21, 1);
         var spriteClothingStore15 = new Sprite(atlas, 84, 106, 21, 21, 1);
         var spriteDentist15 = new Sprite(atlas, 147, 64, 21, 21, 1);
@@ -55,7 +55,7 @@ public class BitmapAtlasSample : ISample
         {
             new PointFeature(new MPoint(256, 124))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = atlas} }
+                Styles = new[] {new SymbolStyle { BitmapPath = atlas} }
             },
             new PointFeature(new MPoint(20, 280))
             {

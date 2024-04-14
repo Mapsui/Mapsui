@@ -44,7 +44,7 @@ public class AnimatedPointsSample : ISample
 
     private static IStyle CreateSvgArrowStyle(string embeddedResourcePath, double scale, IFeature feature)
     {
-        var bitmapPath = typeof(SvgSample).LoadSvgPath(embeddedResourcePath, BitmapRegistry.Instance);
+        var bitmapPath = typeof(SvgSample).LoadSvgPath(embeddedResourcePath);
         return new SymbolStyle
         {
             BitmapPath = bitmapPath,

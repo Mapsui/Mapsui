@@ -93,8 +93,8 @@ public class SymbolsSample : ISample
 
     private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
     {
-        var bitmapId = typeof(SymbolsSample).LoadBitmapId(embeddedResourcePath, BitmapRegistry.Instance);
-        return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
+        var bitmapPath = typeof(SymbolsSample).LoadBitmapPath(embeddedResourcePath);
+        return new SymbolStyle { BitmapPath = bitmapPath, SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
     }
 
     private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)

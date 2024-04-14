@@ -40,8 +40,8 @@ public class BitmapSymbolInCollectionSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleIconId = typeof(BitmapSymbolInCollectionSample).LoadBitmapId("Resources.Images.circle.png", BitmapRegistry.Instance);
-        var checkeredIconId = typeof(BitmapSymbolInCollectionSample).LoadBitmapId("Resources.Images.checkered.png", BitmapRegistry.Instance);
+        var circleIconPath = typeof(BitmapSymbolInCollectionSample).LoadBitmapPath("Resources.Images.circle.png");
+        var checkeredIconPath = typeof(BitmapSymbolInCollectionSample).LoadBitmapPath("Resources.Images.checkered.png");
 
         // This test was created the easy way, by copying BitmapSymbol and the GeometryCollection. A test 
         // written specifically for GeometryCollection would probably look different.
@@ -56,12 +56,12 @@ public class BitmapSymbolInCollectionSample : ISample
             new GeometryFeature
             {
                 Geometry = new GeometryCollection([new Point(50, 100)]),
-                Styles = [new SymbolStyle { BitmapId = circleIconId }]
+                Styles = [new SymbolStyle { BitmapPath = circleIconPath }]
             },
             new GeometryFeature
             {
                 Geometry = new GeometryCollection([new Point(100, 50)]),
-                Styles = [new SymbolStyle { BitmapId = checkeredIconId }]
+                Styles = [new SymbolStyle { BitmapPath = checkeredIconPath }]
             },
             new GeometryFeature
             {
