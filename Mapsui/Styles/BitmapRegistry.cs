@@ -97,10 +97,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
 
     public int NextBitmapId()
     {
-        if (_parent != null)
-            _parent.NextBitmapId();
-        
-        return Interlocked.Increment(ref _counter);
+        return _parent?.NextBitmapId() ?? Interlocked.Increment(ref _counter);
     }
 
     /// <summary> Unregister an existing bitmap </summary>
