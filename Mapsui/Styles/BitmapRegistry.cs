@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Logging;
@@ -26,6 +27,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
     }
 
     private int _counter;
+    private readonly ConcurrentDictionary<string, Assembly> resourceCache = new();
 
     /// <summary>
     /// Singleton of BitmapRegistry class
@@ -58,18 +60,28 @@ public sealed class BitmapRegistry : IBitmapRegistry
         switch (bitmapPath.Scheme)
         {
             case "embeddedresource":
-                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                if (resourceCache.TryGetValue(bitmapPath.LocalPath, out var foundAssembly))
                 {
-                    var name = assembly.GetName().Name;
-                    if (name != null)
-                        if (bitmapPath.LocalPath.StartsWith(name))
-                        {
-                            stream = assembly.GetManifestResourceStream(bitmapPath.LocalPath);
-                            if (stream != null)
-                                break;
-                        }
-
+                    stream = foundAssembly.GetManifestResourceStream(bitmapPath.LocalPath);
                 }
+                else
+                {
+                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    {
+                        var name = assembly.GetName().Name;
+                        if (name != null)
+                            if (bitmapPath.LocalPath.StartsWith(name))
+                            {
+                                stream = assembly.GetManifestResourceStream(bitmapPath.LocalPath);
+                                if (stream != null)
+                                {
+                                    resourceCache[bitmapPath.LocalPath] = assembly;
+                                    break;
+                                }
+                            }
+                    }
+                }
+              
                 break;
             case "file":
                 stream = File.OpenRead(bitmapPath.LocalPath);
