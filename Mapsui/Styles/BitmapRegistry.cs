@@ -79,10 +79,13 @@ public sealed class BitmapRegistry : IBitmapRegistry
             default:
                 try
                 {
-                    using HttpClient client = new HttpClient();
+                    using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
+                    using HttpClient client = new HttpClient(handler);
+#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
                     using HttpResponseMessage response = client.GetAsync(bitmapPath, HttpCompletionOption.ResponseHeadersRead).Result;
                     response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
                     stream = response.Content.ReadAsStreamAsync().Result;
+#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
                 }
                 catch (Exception ex)
                 {
