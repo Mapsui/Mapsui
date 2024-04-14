@@ -54,7 +54,7 @@ public class SvgSample : ISample
 
     private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
     {
-        var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath, BitmapRegistry.Instance);
-        return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
+        var bitmapPath = typeof(SvgSample).LoadSvgPath(embeddedResourcePath);
+        return new SymbolStyle { BitmapPath = bitmapPath, SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
     }
 }

@@ -40,21 +40,21 @@ public class SvgSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var pinId = typeof(SvgSymbolSample).LoadSvgId("Resources.Images.Pin.svg", BitmapRegistry.Instance);
+        var pinPath = typeof(SvgSymbolSample).LoadSvgPath("Resources.Images.Pin.svg");
 
         return new List<IFeature>
         {
             new PointFeature(new MPoint(50, 50)) {
-                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+                Styles = new[] {new SymbolStyle { BitmapPath = pinPath } }
             },
             new PointFeature(new MPoint(50, 100)) {
-                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+                Styles = new[] {new SymbolStyle { BitmapPath = pinPath } }
             },
             new PointFeature(new MPoint(100, 50)) {
-                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+                Styles = new[] {new SymbolStyle { BitmapPath = pinPath } }
             },
             new PointFeature(new MPoint(100, 100)) {
-                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+                Styles = new[] {new SymbolStyle { BitmapPath = pinPath } }
             }
         };
     }

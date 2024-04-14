@@ -54,22 +54,14 @@ public static class SvgHelper
         return svg;
     }
 
-    /// <summary> Load Svg Picture from String </summary>
-    /// <param name="str">string</param>
-    /// <returns>loaded svg image</returns>
-    [return: NotNullIfNotNull(nameof(str))]
-    public static SKPicture? LoadSvgPicture(this Stream? str)
-    {
-        return str.LoadSvg()?.Picture;
-    }
-
     public static int LoadSvgId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource, IBitmapRegistry bitmapRegistry)
     {
         var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
         var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
         if (!bitmapRegistry.TryGetBitmapId(fullName, out var bitmapId))
         {
-            var result = assembly.GetManifestResourceStream(fullName).LoadSvgPicture();
+            Stream? tempQualifier = assembly.GetManifestResourceStream(fullName);
+            var result = tempQualifier.LoadSvg()?.Picture;
             if (result != null)
             {
                 bitmapId = bitmapRegistry.Register(result, fullName);
@@ -78,5 +70,10 @@ public static class SvgHelper
         }
 
         return bitmapId;
+    }
+
+    public static Uri LoadSvgPath(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
+    {
+        return EmbeddedResourceLoader.GetResourceUri(typeInAssemblyOfEmbeddedResource, relativePathToEmbeddedResource);
     }
 }

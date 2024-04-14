@@ -45,7 +45,7 @@ public class DynamicSvgStyleSample : ISample
 
     private IStyle CreateDynamicSvgStyle(Func<MPoint> getInfoPosition) // Use Func to make it get the latest clicked position
     {
-        var bitmapId = typeof(SvgSample).LoadSvgId("Images.arrow.svg", BitmapRegistry.Instance);
+        var bitmapPath = typeof(SvgSample).LoadSvgPath("Images.arrow.svg");
 
         return new ThemeStyle((f) =>
         {
@@ -55,7 +55,7 @@ public class DynamicSvgStyleSample : ISample
 
             return new SymbolStyle
             {
-                BitmapId = bitmapId,
+                BitmapPath = bitmapPath,
                 SymbolOffset = new RelativeOffset(0.0, 0.0),
                 // 1. Change scale based on the distance
                 SymbolScale = 0.25 + (0.25 * distanceBetweenZeroAndOne),

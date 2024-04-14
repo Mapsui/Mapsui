@@ -25,6 +25,13 @@ public static class EmbeddedResourceLoader
         return result ?? throw new Exception(ConstructExceptionMessage(relativePathToEmbeddedResource, assembly));
     }
 
+    public static Uri GetResourceUri(Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
+    {
+        var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
+        var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
+        return new Uri($"embeddedresource://{fullName}");
+    }
+
     private static string ConstructExceptionMessage(string path, Assembly assembly)
     {
         var stringBuilder = new StringBuilder();

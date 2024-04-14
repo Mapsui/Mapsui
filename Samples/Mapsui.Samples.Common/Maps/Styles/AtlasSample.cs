@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 public class AtlasSample : ISample
 {
     private const string AtlasLayerName = "Atlas Layer";
-    private static int _atlasBitmapId;
+    private static Uri _atlasBitmapPath = typeof(AtlasSample).LoadBitmapPath("Images.osm-liberty.png");
     private static readonly Random Random = new(1);
 
     public string Name => "Atlas";
@@ -23,7 +23,6 @@ public class AtlasSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        _atlasBitmapId = typeof(AtlasSample).LoadBitmapId("Images.osm-liberty.png", BitmapRegistry.Instance);
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
@@ -55,7 +54,7 @@ public class AtlasSample : ISample
 
             var x = 0 + Random.Next(0, 12) * 21;
             var y = 64 + Random.Next(0, 6) * 21;
-            var bitmap = new Sprite(_atlasBitmapId, x, y, 21, 21, 1);
+            var bitmap = new Sprite(_atlasBitmapPath, x, y, 21, 21, 1);
             feature.Styles.Add(new SymbolStyle { Bitmap = bitmap });
             counter++;
             return feature;
