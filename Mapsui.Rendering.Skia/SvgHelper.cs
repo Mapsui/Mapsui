@@ -53,7 +53,7 @@ public static class SvgHelper
         svg.Load(str);
         return svg;
     }
-    
+
     /// <summary> Load Svg Picture from String </summary>
     /// <param name="str">string</param>
     /// <returns>loaded svg image</returns>
