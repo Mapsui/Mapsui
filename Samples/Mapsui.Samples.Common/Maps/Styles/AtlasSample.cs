@@ -23,7 +23,7 @@ public class AtlasSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        _atlasBitmapId = typeof(AtlasSample).LoadBitmapId("Images.osm-liberty.png");
+        _atlasBitmapId = typeof(AtlasSample).LoadBitmapId("Images.osm-liberty.png", BitmapRegistry.Instance);
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());

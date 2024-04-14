@@ -10,7 +10,7 @@ public class GeodanOfficesLayerBuilder
     {
         var geodanAmsterdam = new MPoint(122698, 483922);
         var geodanDenBosch = new MPoint(148949, 411446);
-        var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png");
+        var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png", BitmapRegistry.Instance);
 
         var layer = new MemoryLayer
         {

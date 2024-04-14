@@ -45,7 +45,7 @@ public class DynamicSvgStyleSample : ISample
 
     private IStyle CreateDynamicSvgStyle(Func<MPoint> getInfoPosition) // Use Func to make it get the latest clicked position
     {
-        var bitmapId = typeof(SvgSample).LoadSvgId("Images.arrow.svg");
+        var bitmapId = typeof(SvgSample).LoadSvgId("Images.arrow.svg", BitmapRegistry.Instance);
 
         return new ThemeStyle((f) =>
         {

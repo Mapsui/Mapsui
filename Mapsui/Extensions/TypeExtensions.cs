@@ -8,14 +8,16 @@ namespace Mapsui.Extensions;
 
 public static class TypeExtensions
 {
-    public static int LoadBitmapId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
+    public static int LoadBitmapId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource, IBitmapRegistry bitmapRegistry)
     {
         var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
         var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
-        if (!BitmapRegistry.Instance.TryGetBitmapId(fullName, out var bitmapId))
+        if (bitmapRegistry.TryGetBitmapId(fullName, out var bitmapId))
         {
+#pragma warning disable IDISP001 // Dispose created.
             var result = LoadBitmap(typeInAssemblyOfEmbeddedResource, relativePathToEmbeddedResource);
-            bitmapId = BitmapRegistry.Instance.Register(result, fullName);
+#pragma warning restore IDISP001 // Dispose created.            
+            bitmapId = bitmapRegistry.Register(result, fullName);
             return bitmapId;
         }
 

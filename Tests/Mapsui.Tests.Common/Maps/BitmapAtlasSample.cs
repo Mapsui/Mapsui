@@ -44,12 +44,12 @@ public class BitmapAtlasSample : ISample
 
     public static List<IFeature> CreateFeatures()
     {
-        var atlas = typeof(BitmapAtlasSample).LoadBitmapId("Resources.Images.osm-liberty.png");
+        var atlas = typeof(BitmapAtlasSample).LoadBitmapId("Resources.Images.osm-liberty.png", BitmapRegistry.Instance);
         var spriteAmusementPark15 = new Sprite(atlas, 106, 0, 21, 21, 1);
         var spriteClothingStore15 = new Sprite(atlas, 84, 106, 21, 21, 1);
         var spriteDentist15 = new Sprite(atlas, 147, 64, 21, 21, 1);
         var spritePedestrianPolygon = new Sprite(atlas, 0, 0, 64, 64, 1);
-        var svgTigerBitmap = typeof(BitmapAtlasSample).LoadSvgId("Resources.Images.Ghostscript_Tiger.svg");
+        var svgTigerBitmap = typeof(BitmapAtlasSample).LoadSvgId("Resources.Images.Ghostscript_Tiger.svg", BitmapRegistry.Instance);
 
         return new List<IFeature>
         {

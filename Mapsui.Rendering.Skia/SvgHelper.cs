@@ -63,16 +63,16 @@ public static class SvgHelper
         return str.LoadSvg()?.Picture;
     }
 
-    public static int LoadSvgId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
+    public static int LoadSvgId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource, IBitmapRegistry bitmapRegistry)
     {
         var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
         var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
-        if (!BitmapRegistry.Instance.TryGetBitmapId(fullName, out var bitmapId))
+        if (!bitmapRegistry.TryGetBitmapId(fullName, out var bitmapId))
         {
             var result = assembly.GetManifestResourceStream(fullName).LoadSvgPicture();
             if (result != null)
             {
-                bitmapId = BitmapRegistry.Instance.Register(result, fullName);
+                bitmapId = bitmapRegistry.Register(result, fullName);
                 return bitmapId;
             }
         }

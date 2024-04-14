@@ -57,7 +57,7 @@ public class VariousSample : ISample, ISampleTest
 
     private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath)
     {
-        var bitmapId = typeof(VariousSample).LoadBitmapId(embeddedResourcePath);
+        var bitmapId = typeof(VariousSample).LoadBitmapId(embeddedResourcePath, BitmapRegistry.Instance);
         return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.75 };
     }
 

@@ -38,8 +38,8 @@ public class BitmapSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.circle.png");
-        var checkeredIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.checkered.png");
+        var circleIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.circle.png", BitmapRegistry.Instance);
+        var checkeredIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.checkered.png", BitmapRegistry.Instance);
 
         return new List<IFeature>
         {

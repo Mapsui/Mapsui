@@ -24,7 +24,7 @@ public class WriteToLayerSample : ISample
 
         var layer = new GenericCollectionLayer<List<IFeature>>
         {
-            Style = SymbolStyles.CreatePinStyle()
+            Style = SymbolStyles.CreatePinStyle(BitmapRegistry.Instance)
         };
         map.Layers.Add(layer);
 

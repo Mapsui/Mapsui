@@ -40,7 +40,7 @@ public class SvgSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var pinId = typeof(SvgSymbolSample).LoadSvgId("Resources.Images.Pin.svg");
+        var pinId = typeof(SvgSymbolSample).LoadSvgId("Resources.Images.Pin.svg", BitmapRegistry.Instance);
 
         return new List<IFeature>
         {

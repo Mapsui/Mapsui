@@ -156,21 +156,21 @@ public class MyLocationLayer : BaseLayer, IDisposable
 
         if (_bitmapMovingId == -1)
         {
-            var bitmapMoving = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationMoving.svg");
+            var bitmapMoving = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationMoving.svg", BitmapRegistry.Instance);
             // Register bitmap
             _bitmapMovingId = bitmapMoving;
         }
 
         if (_bitmapStillId == -1)
         {
-            var bitmapStill = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationStill.svg");
+            var bitmapStill = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationStill.svg", BitmapRegistry.Instance);
             // Register bitmap
             _bitmapStillId = bitmapStill;
         }
 
         if (_bitmapDirId == -1)
         {
-            var bitmapDir = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationDir.svg");
+            var bitmapDir = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationDir.svg", BitmapRegistry.Instance);
             // Register bitmap
             _bitmapDirId = bitmapDir;
         }

@@ -55,7 +55,7 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
 
     private static GeometryFeature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
     {
-        var bitmapId = typeof(BitmapSymbolWithRotationAndOffsetSample).LoadBitmapId("Resources.Images.iconthatneedsoffset.png");
+        var bitmapId = typeof(BitmapSymbolWithRotationAndOffsetSample).LoadBitmapId("Resources.Images.iconthatneedsoffset.png", BitmapRegistry.Instance);
 
         var feature = new GeometryFeature { Geometry = new Point(x, y) };
 

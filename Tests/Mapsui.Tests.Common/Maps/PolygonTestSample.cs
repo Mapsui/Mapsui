@@ -21,7 +21,7 @@ public class PolygonTestSample : ISample
 
     public static Map CreateMap()
     {
-        _bitmapId = typeof(PolygonTestSample).LoadBitmapId("Resources.Images.avion_silhouette.png");
+        _bitmapId = typeof(PolygonTestSample).LoadBitmapId("Resources.Images.avion_silhouette.png", BitmapRegistry.Instance);
 
         var layer = CreateLayer();
 

@@ -55,7 +55,7 @@ public class SingleCalloutSample : ISample
             Name = "Cities with callouts",
             IsMapInfoLayer = true,
             Features = new MemoryProvider(GetCitiesFromEmbeddedResource()).Features,
-            Style = SymbolStyles.CreatePinStyle(symbolScale: 0.7),
+            Style = SymbolStyles.CreatePinStyle(BitmapRegistry.Instance, symbolScale: 0.7),
         };
     }
 

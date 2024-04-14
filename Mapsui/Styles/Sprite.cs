@@ -33,11 +33,11 @@ public class Sprite
         Height = height;
         PixelRatio = pixelRatio;
     }
-    
+
     public Sprite(int atlas, MPoint p, Size s, float pixelRatio) : this(atlas, (int)p.X, (int)p.Y, (int)s.Width, (int)s.Height, pixelRatio)
     {
     }
-    
+
     public Sprite(Uri atlasPath, MPoint p, Size s, float pixelRatio) : this(atlasPath, (int)p.X, (int)p.Y, (int)s.Width, (int)s.Height, pixelRatio)
     {
     }
