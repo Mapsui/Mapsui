@@ -53,6 +53,15 @@ public static class SvgHelper
         svg.Load(str);
         return svg;
     }
+    
+    /// <summary> Load Svg Picture from String </summary>
+    /// <param name="str">string</param>
+    /// <returns>loaded svg image</returns>
+    [return: NotNullIfNotNull(nameof(str))]
+    public static SKPicture? LoadSvgPicture(this Stream? str)
+    {
+        return str.LoadSvg()?.Picture;
+    }
 
     public static int LoadSvgId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource, IBitmapRegistry bitmapRegistry)
     {
