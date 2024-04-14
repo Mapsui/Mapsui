@@ -82,9 +82,12 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
     private void LoadBitmapId(CalloutStyle calloutStyle, IBitmapRegistry bitmapRegistry)
     {
-        if (calloutStyle is { BitmapId: < 0, BitmapPath: not null })
+        if (calloutStyle.BitmapId < 0)
         {
-            calloutStyle.BitmapId = bitmapRegistry.Register(calloutStyle.BitmapPath);
+            if (calloutStyle.Bitmap != null)
+                calloutStyle.BitmapId = bitmapRegistry.Register(calloutStyle.Bitmap);
+            if (calloutStyle.BitmapPath != null)
+                calloutStyle.BitmapId = bitmapRegistry.Register(calloutStyle.BitmapPath);
         }
     }
 
@@ -257,6 +260,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         {
             callout.InternalContent = bitmapRegistry.Register(picture);
         }
+        
         callout.Content = callout.InternalContent;
     }
 

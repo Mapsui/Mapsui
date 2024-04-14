@@ -113,11 +113,14 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static void LoadBitmapId(SymbolStyle symbolStyle, IBitmapRegistry renderService)
+    private static void LoadBitmapId(SymbolStyle symbolStyle, IBitmapRegistry bitmapRegistry)
     {
-        if (symbolStyle is { BitmapId: < 0, BitmapPath: not null })
+        if (symbolStyle.BitmapId < 0)
         {
-            symbolStyle.BitmapId = renderService.Register(symbolStyle.BitmapPath);
+            if (symbolStyle.Bitmap != null)
+                symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.Bitmap);
+            if (symbolStyle.BitmapPath != null)
+                symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.BitmapPath);
         }
     }
 
