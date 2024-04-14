@@ -177,7 +177,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
 
         if (bitmapData is Sprite sprite)
         {
-            if (sprite.Atlas < 0 || sprite.Atlas > _counter || !_register.ContainsKey(sprite.Atlas))
+            if (sprite.Atlas < 0 || !_register.ContainsKey(sprite.Atlas))
             {
                 if (_parent != null)
                     _parent.CheckBitmapData(bitmapData);
