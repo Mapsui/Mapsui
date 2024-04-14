@@ -57,7 +57,7 @@ public class Sprite
 
     protected bool Equals(Sprite other)
     {
-        return Atlas == other.Atlas && X == other.X && Y == other.Y && Width == other.Width && Height == other.Height && PixelRatio.Equals(other.PixelRatio) && BitmapId == other.BitmapId;
+        return Atlas == other.Atlas && X == other.X && Y == other.Y && Width == other.Width && Height == other.Height && PixelRatio.Equals(other.PixelRatio) && BitmapId == other.BitmapId && AtlasPath == other.AtlasPath;
     }
 
     public override bool Equals(object? obj)
@@ -91,6 +91,7 @@ public class Sprite
             hashCode = (hashCode * 397) ^ Height;
             hashCode = (hashCode * 397) ^ PixelRatio.GetHashCode();
             hashCode = (hashCode * 397) ^ BitmapId;
+            hashCode = (hashCode * 397) ^ AtlasPath?.GetHashCode() ?? 0;
             return hashCode;
         }
     }
