@@ -116,19 +116,21 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     internal static async void LoadBitmapId(SymbolStyle symbolStyle, IBitmapRegistry bitmapRegistry)
     {
-        if (symbolStyle.BitmapId < 0)
+        if (symbolStyle.BitmapId >= 0)
         {
-            try
-            {
-                if (symbolStyle.Bitmap != null)
-                    symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.Bitmap);
-                if (symbolStyle.BitmapPath != null)
-                    symbolStyle.BitmapId = await bitmapRegistry.RegisterAsync(symbolStyle.BitmapPath);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message, ex);
-            }
+            return;
+        }
+
+        try
+        {
+            if (symbolStyle.Bitmap != null)
+                symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.Bitmap);
+            if (symbolStyle.BitmapPath != null)
+                symbolStyle.BitmapId = await bitmapRegistry.RegisterAsync(symbolStyle.BitmapPath);
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
         }
     }
 
