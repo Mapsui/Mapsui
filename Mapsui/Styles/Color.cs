@@ -276,7 +276,7 @@ public readonly record struct Color
         }
 
         throw new ArgumentException($"Color string did not have any of the known prefixes. Could not create color from input string '{from}'. " +
-            $"For named colors please use the Color statics, like 'Color WhiteSmoke'");
+            $"For named colors please use the Color statics, like 'Color.WhiteSmoke'");
 
     }
 
