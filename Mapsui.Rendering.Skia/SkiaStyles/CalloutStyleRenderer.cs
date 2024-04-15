@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class CalloutStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, IRenderService renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, IRenderService renderService, long iteration)
     {
         if (!style.Enabled)
             return false;
@@ -38,7 +38,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
                 UpdateContent(calloutStyle);
             }
 
-            RenderCallout(calloutStyle, renderCache.SymbolCache);
+            RenderCallout(calloutStyle, renderService.SymbolCache);
         }
 
         // Now we have the complete callout rendered, so we could draw it

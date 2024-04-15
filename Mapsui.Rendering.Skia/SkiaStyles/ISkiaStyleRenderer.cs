@@ -14,7 +14,7 @@ public interface ISkiaStyleRenderer : IStyleRenderer
     /// <param name="layer">Layer that contains feature.</param>
     /// <param name="feature">Feature to draw.</param>
     /// <param name="style">Style to draw.</param>
-    /// <param name="renderCache">SymbolCache for ready rendered bitmaps.</param>
+    /// <param name="renderService">SymbolCache for ready rendered bitmaps.</param>
     /// <returns></returns>
-    bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderCache, long iteration);
+    bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration);
 }

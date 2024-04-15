@@ -10,26 +10,26 @@ namespace Mapsui.Rendering.Skia;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration)
     {
         var symbolStyle = (SymbolStyle)style;
         feature.CoordinateVisitor((x, y, setter) =>
         {
-            DrawXY(canvas, viewport, layer, x, y, symbolStyle, renderCache);
+            DrawXY(canvas, viewport, layer, x, y, symbolStyle, renderService);
         });
         return true;
     }
 
 
-    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderService renderCache)
+    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderService renderService)
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
-            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderCache.SymbolCache);
+            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService.SymbolCache);
         }
         else
         {
-            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderCache.VectorCache);
+            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderService.VectorCache);
         }
     }
 
@@ -225,11 +225,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => false;
 
-    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderCache, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderService, IFeature? feature)
     {
         if (style is SymbolStyle symbolStyle)
         {
-            return FeatureSize(symbolStyle, renderCache.SymbolCache);
+            return FeatureSize(symbolStyle, renderService.SymbolCache);
         }
 
         return 0;

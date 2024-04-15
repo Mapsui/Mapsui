@@ -46,7 +46,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
 
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration)
     {
         try
         {
@@ -60,20 +60,20 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             {
                 case (PointFeature pointFeature):
                     var (pointX, pointY) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
-                    DrawLabel(canvas, (float)pointX, (float)pointY, labelStyle, text, (float)layer.Opacity, renderCache.LabelCache);
+                    DrawLabel(canvas, (float)pointX, (float)pointY, labelStyle, text, (float)layer.Opacity, renderService.LabelCache);
                     break;
                 case (LineString lineStringFeature):
                     if (feature.Extent == null)
                         return false;
                     var (lineStringCenterX, lineStringCenterY) = viewport.WorldToScreenXY(feature.Extent.Centroid.X, feature.Extent.Centroid.Y);
-                    DrawLabel(canvas, (float)lineStringCenterX, (float)lineStringCenterY, labelStyle, text, (float)layer.Opacity, renderCache.LabelCache);
+                    DrawLabel(canvas, (float)lineStringCenterX, (float)lineStringCenterY, labelStyle, text, (float)layer.Opacity, renderService.LabelCache);
                     break;
                 case (GeometryFeature polygonFeature):
                     if (polygonFeature.Extent is null)
                         return false;
                     var worldCenter = polygonFeature.Extent.Centroid;
                     var (polygonCenterX, polygonCenterY) = viewport.WorldToScreenXY(worldCenter.X, worldCenter.Y);
-                    DrawLabel(canvas, (float)polygonCenterX, (float)polygonCenterY, labelStyle, text, (float)layer.Opacity, renderCache.LabelCache);
+                    DrawLabel(canvas, (float)polygonCenterX, (float)polygonCenterY, labelStyle, text, (float)layer.Opacity, renderService.LabelCache);
                     break;
             }
         }
@@ -382,13 +382,13 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => true;
 
-    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderingCache, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderingService, IFeature? feature)
     {
         if (feature == null) throw new ArgumentNullException(nameof(feature));
 
         if (style is LabelStyle labelStyle)
         {
-            return FeatureSize(feature, labelStyle, _paint, renderingCache.LabelCache);
+            return FeatureSize(feature, labelStyle, _paint, renderingService.LabelCache);
         }
 
         return 0;

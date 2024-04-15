@@ -1,8 +1,8 @@
 ﻿namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class RenderCache : IRenderService
+public sealed class RenderService : IRenderService
 {
-    public RenderCache(int capacity = 10000)
+    public RenderService(int capacity = 10000)
     {
         SymbolCache = new SymbolCache();
         VectorCache = new VectorCache(SymbolCache, capacity);

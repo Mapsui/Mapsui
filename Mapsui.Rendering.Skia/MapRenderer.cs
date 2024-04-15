@@ -24,10 +24,10 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly DisposableWrapper<IRenderService> _renderCache;
+    private readonly DisposableWrapper<IRenderService> _renderService;
     private long _currentIteration;
 
-    public IRenderService RenderCache => _renderCache.WrappedObject;
+    public IRenderService RenderService => _renderService.WrappedObject;
 
     public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
@@ -39,12 +39,12 @@ public sealed class MapRenderer : IRenderer, IDisposable
     static MapRenderer()
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
-        DefaultRendererFactory.CreateWithCache = f => new MapRenderer(f);
+        DefaultRendererFactory.CreateWithRenderService = f => new MapRenderer(f);
     }
 
     public MapRenderer(IRenderService renderer)
     {
-        _renderCache = new DisposableWrapper<IRenderService>(renderer, false);
+        _renderService = new DisposableWrapper<IRenderService>(renderer, false);
         InitRenderer();
     }
 
@@ -67,7 +67,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapRenderer()
     {
-        _renderCache = new DisposableWrapper<IRenderService>(new RenderCache(), true);
+        _renderService = new DisposableWrapper<IRenderService>(new RenderService(), true);
         InitRenderer();
     }
 
@@ -188,7 +188,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
             canvas.Save();
             // We have a special renderer, so try, if it could draw this
             var styleRenderer = (ISkiaStyleRenderer)renderer;
-            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, RenderCache, iteration);
+            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, RenderService, iteration);
             // Restore old canvas
             canvas.Restore();
             // Was it drawn?
@@ -326,6 +326,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public void Dispose()
     {
-        _renderCache.Dispose();
+        _renderService.Dispose();
     }
 }
