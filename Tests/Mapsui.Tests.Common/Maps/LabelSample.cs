@@ -19,7 +19,7 @@ public class LabelSample : ISample
 
         var map = new Map
         {
-            BackColor = Color.FromString("WhiteSmoke"),
+            BackColor = Color.WhiteSmoke,
         };
 
         map.Navigator.ZoomToBox(layer.Extent!.Grow(layer.Extent.Width * 2));

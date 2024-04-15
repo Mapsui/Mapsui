@@ -2,16 +2,16 @@
 Mapsui is a .NET map component that supports all main .NET UI frameworks. 
 
 | UI Framework | NuGet  |
-| ---------------|:-------------:|
-| Mapsui.Maui   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Maui.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Maui/) |
-| Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |
-| Mapsui.Avalonia     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia/) |
-| Mapsui.Uno.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg)](https://www.nuget.org/packages/Mapsui.Uno.WinUI) |
-| Mapsui.Blazor     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Blazor.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Blazor/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Blazor.svg)](https://www.nuget.org/packages/Mapsui.Blazor) |
-| Mapsui.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.WinUI.svg)](https://www.nuget.org/packages/Mapsui.WinUI) |
-| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) |
-| Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) |
-| Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) |
+| ---------------|-------------:|
+| MAUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Maui.svg?style=flat&logo=nuget&label=Mapsui.Maui)](https://www.nuget.org/packages/Mapsui.Maui/) |
+| WPF | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat&logo=nuget&label=Mapsui.Wpf)](https://www.nuget.org/packages/Mapsui.Wpf/) |
+| Avalonia | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat&logo=nuget&label=Mapsui.Avalonia)](https://www.nuget.org/packages/Mapsui.Avalonia/) |
+| Uno Platform | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat&logo=nuget&label=Mapsui.Uno.WinUI)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |
+| Blazor | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Blazor.svg?style=flat&logo=nuget&label=Mapsui.Blazor)](https://www.nuget.org/packages/Mapsui.Blazor/) |
+| WinUI | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat&logo=nuget&label=Mapsui.WinUI)](https://www.nuget.org/packages/Mapsui.WinUI/) |
+| .NET for Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat&logo=nuget&label=Mapsui.Android)](https://www.nuget.org/packages/Mapsui.Android/) |
+| .NET for iOS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat&logo=nuget&label=Mapsui.iOS)](https://www.nuget.org/packages/Mapsui.iOS/)
+| Eto Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat&logo=nuget&label=Mapsui.Eto)](https://www.nuget.org/packages/Mapsui.Eto/) |
 
 Try the quick-start for your favorite framework below.
 
