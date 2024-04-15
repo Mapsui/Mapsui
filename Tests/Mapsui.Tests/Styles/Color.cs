@@ -21,10 +21,10 @@ public static class ColorTests
     [Test]
     public static void ColorFromKnownString()
     {
-        var color = Color.FromString("LightBlue");
+        var color = Color.LightBlue;
         ClassicAssert.True(color.R == 0xAD && color.G == 0xD8 && color.B == 0xE6);
 
-        color = Color.FromString("PaleVioletRed");
+        color = Color.PaleVioletRed;
         ClassicAssert.True(color.R == 0xDB && color.G == 0x70 && color.B == 0x93);
     }
 

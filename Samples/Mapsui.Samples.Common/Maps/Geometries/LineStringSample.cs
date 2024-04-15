@@ -49,7 +49,7 @@ public class LineStringSample : ISample
             Fill = null,
             Outline = null,
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
-            Line = { Color = Color.FromString("YellowGreen"), Width = 4 }
+            Line = { Color = Color.YellowGreen, Width = 4 }
         };
     }
 
