@@ -17,5 +17,5 @@ public interface IFeatureSize
     /// <param name="symbolCache">symbol Cache</param>
     /// <param name="feature">feature to detect size</param>
     /// <returns>size in points</returns>
-    double FeatureSize(IStyle style, IRenderCache symbolCache, IFeature? feature = null);
+    double FeatureSize(IStyle style, IRenderService symbolCache, IFeature? feature = null);
 }

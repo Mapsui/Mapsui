@@ -24,10 +24,10 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly DisposableWrapper<IRenderCache> _renderCache;
+    private readonly DisposableWrapper<IRenderService> _renderCache;
     private long _currentIteration;
 
-    public IRenderCache RenderCache => _renderCache.WrappedObject;
+    public IRenderService RenderCache => _renderCache.WrappedObject;
 
     public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
@@ -42,9 +42,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
         DefaultRendererFactory.CreateWithCache = f => new MapRenderer(f);
     }
 
-    public MapRenderer(IRenderCache renderer)
+    public MapRenderer(IRenderService renderer)
     {
-        _renderCache = new DisposableWrapper<IRenderCache>(renderer, false);
+        _renderCache = new DisposableWrapper<IRenderService>(renderer, false);
         InitRenderer();
     }
 
@@ -67,7 +67,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapRenderer()
     {
-        _renderCache = new DisposableWrapper<IRenderCache>(new RenderCache(), true);
+        _renderCache = new DisposableWrapper<IRenderService>(new RenderCache(), true);
         InitRenderer();
     }
 

@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class RasterStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long currentIteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderCache, long currentIteration)
     {
         try
         {

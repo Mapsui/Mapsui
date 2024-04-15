@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.Skia;
 public static class LineStringRenderer
 {
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle? vectorStyle,
-        IFeature feature, LineString lineString, float opacity, IRenderCache renderCache)
+        IFeature feature, LineString lineString, float opacity, IRenderService renderCache)
     {
         if (vectorStyle == null)
             return;
@@ -27,8 +27,8 @@ public static class LineStringRenderer
         var lineWidth = (float)(vectorStyle.Line?.Width ?? 1f);
         if (vectorStyle.Line.IsVisible())
         {
-            using var paint = renderCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
-            using var path = renderCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
+            using var paint = renderCache.VectorCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
+            using var path = renderCache.VectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
             canvas.DrawPath(path, paint);
         }
     }

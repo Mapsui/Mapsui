@@ -11,5 +11,5 @@ public static class DefaultRendererFactory
     }
 
     public static Func<IRenderer> Create { get; set; }
-    public static Func<IRenderCache, IRenderer> CreateWithCache { get; set; }
+    public static Func<IRenderService, IRenderer> CreateWithCache { get; set; }
 }

@@ -29,7 +29,7 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
     private readonly IProvider? _dataSource;
     private readonly RenderFormat _renderFormat;
     private readonly IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
-    private IRenderCache? _renderCache;
+    private IRenderService? _renderCache;
 
     public RasterizingTileProvider(
         ILayer layer,

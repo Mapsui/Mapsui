@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderCache, long iteration)
     {
         try
         {
@@ -27,13 +27,13 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     switch (geometryFeature.Geometry)
                     {
                         case GeometryCollection collection:
-                            GeometryCollectionRenderer.Draw(canvas, viewport, vectorStyle, feature, collection, opacity, renderCache);
+                            GeometryCollectionRenderer.Draw(canvas, viewport, vectorStyle, feature, collection, opacity, renderCache.VectorCache);
                             break;
                         case Point point:
                             SymbolStyleRenderer.DrawXY(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), renderCache);
                             break;
                         case Polygon polygon:
-                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderCache);
+                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderCache.VectorCache);
                             break;
                         case LineString lineString:
                             LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity, renderCache);
@@ -64,7 +64,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => false;
 
-    double IFeatureSize.FeatureSize(IStyle style, IRenderCache renderCache, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderCache, IFeature? feature)
     {
         if (style is VectorStyle vectorStyle)
         {
