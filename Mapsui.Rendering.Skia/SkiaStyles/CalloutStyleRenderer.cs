@@ -417,15 +417,4 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         path.LineTo(center);
         path.LineTo(end);
     }
-
-    /// <summary>
-    /// Convert Mapsui color to Skia color
-    /// </summary>
-    /// <param name="color">Color in Mapsui format</param>
-    /// <returns>Color in Skia format</returns>
-    public static SKColor ToSkia(Color? color)
-    {
-        if (color == null) return new SKColor(128, 128, 128, 0);
-        return new SKColor((byte)color.R, (byte)color.G, (byte)color.B, (byte)color.A);
-    }
 }

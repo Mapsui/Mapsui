@@ -1,24 +1,13 @@
-// ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
-
 using System;
 using System.Globalization;
 
 namespace Mapsui.Styles;
 
-public class Color
+public readonly record struct Color
 {
-    public Color()
-    {
-        A = 255;
-    }
+    public Color() { }
 
-    public Color(Color color)
-    {
-        R = color.R;
-        G = color.G;
-        B = color.B;
-        A = color.A;
-    }
+    public Color(Color color) : this(color.R, color.G, color.B, color.A) { }
 
     public Color(int red, int green, int blue, int alpha = 255)
     {
@@ -31,7 +20,7 @@ public class Color
     public int R { get; init; }
     public int G { get; init; }
     public int B { get; init; }
-    public int A { get; init; }
+    public int A { get; init; } = 255;
 
     public static Color Transparent => new() { A = 0, R = 255, G = 255, B = 255 };
 
@@ -184,49 +173,9 @@ public class Color
     public static readonly Color Yellow = FromString("#FFFF00");
     public static readonly Color YellowGreen = FromString("#9ACD32");
 
-    public static Color FromArgb(int a, int r, int g, int b)
-    {
-        return new Color { A = a, R = r, G = g, B = b };
-    }
+    public static Color FromArgb(int a, int r, int g, int b) => new() { A = a, R = r, G = g, B = b };
 
-    public static Color FromRgba(int r, int g, int b, int a)
-    {
-        return new Color { R = r, G = g, B = b, A = a };
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj is not Color color)
-            return false;
-        return Equals(color);
-    }
-
-    public bool Equals(Color? color)
-    {
-        if (color == null)
-            return false;
-
-        if (R != color.R) return false;
-        if (G != color.G) return false;
-        if (B != color.B) return false;
-        if (A != color.A) return false;
-        return true;
-    }
-
-    public override int GetHashCode()
-    {
-        return R.GetHashCode() ^ G.GetHashCode() ^ B.GetHashCode() ^ A.GetHashCode();
-    }
-
-    public static bool operator ==(Color? color1, Color? color2)
-    {
-        return Equals(color1, color2);
-    }
-
-    public static bool operator !=(Color? color1, Color? color2)
-    {
-        return !Equals(color1, color2);
-    }
+    public static Color FromRgba(int r, int g, int b, int a) => new() { R = r, G = g, B = b, A = a };
 
     /// <summary>
     /// Converts a string in Mapbox GL format to a Mapsui Color
