@@ -93,7 +93,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
                 stream = File.OpenRead(bitmapPath.LocalPath);
                 break;
             case "http":
-            case "https":    
+            case "https":
                 try
                 {
                     using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
