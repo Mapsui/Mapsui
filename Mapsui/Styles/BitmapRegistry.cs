@@ -92,7 +92,8 @@ public sealed class BitmapRegistry : IBitmapRegistry
             case "file":
                 stream = File.OpenRead(bitmapPath.LocalPath);
                 break;
-            default:
+            case "http":
+            case "https":    
                 try
                 {
                     using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
@@ -106,6 +107,8 @@ public sealed class BitmapRegistry : IBitmapRegistry
                     Logger.Log(LogLevel.Error, $"Could not load from uri {bitmapPath} : {ex.Message}", ex);
                 }
                 break;
+            default:
+                throw new ArgumentException($"Unsupported scheme {bitmapPath.Scheme} on {nameof(bitmapPath)}");
         }
 
         if (stream == null)
