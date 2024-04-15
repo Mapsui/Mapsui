@@ -19,64 +19,25 @@
 			"disableGitFeatures": false
 		}
 	],
-	"build": {
-		"content": [
-			{
-				"files": [
-					"pages/**.yml",
-					"pages/index.md",
-					"pages/toc.yml",
-					"../codesamples/**.md",
-					"toc.yml",
-					"*.md"
-				],
-				"exclude": [
-					"obj/**",
-					"_site/**"
-				]
-			}
-		],
-		"resource": [
-			{
-				"files": [
-					"documentation/images/**",
-					"images/**"
-				],
-				"exclude": [
-					"obj/**",
-					"_site/**"
-				]
-			}
-		],
-		"overwrite": [
-			{
-				"files": [
-					"apidoc/**.md"
-				],
-				"exclude": [
-					"obj/**",
-					"_site/**"
-				]
-			}
-		],
-		"xrefService": [
-			"https://xref.docs.microsoft.com/query?uid={uid}"
-		],
-		"dest": "_site",
-		"globalMetadataFiles": [
-			"metadata.json"
-		],
-		"fileMetadataFiles": [],
-		"markdownEngineName": "markdig",
-		"template": [
-			"default"
-		],
-		"postProcessors": [
-			"ExtractSearchIndex"
-		],
-		"noLangKeyword": false,
-		"keepFileLink": false,
-		"cleanupCacheHistory": false,
-		"disableGitFeatures": false
-	}
+  "build": {
+    "cleanupCacheHistory": false,
+    "content": [
+      {
+        "files": [
+          "pages/**.yml",
+          "../codesamples/**.md"
+        ]
+      }
+    ],
+    "dest": "_site",
+    "disableGitFeatures": false,
+    "fileMetadataFiles": [],
+    "globalMetadataFiles": [ "metadata.json" ],
+    "keepFileLink": false,
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "postProcessors": [ "ExtractSearchIndex" ],
+    "template": [ "default" ],
+    "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ]
+  }
 }

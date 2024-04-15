@@ -20,7 +20,7 @@ public class WidgetsSample : ISample
     {
         var map = new Map
         {
-            BackColor = Color.FromString("WhiteSmoke"),
+            BackColor = Color.WhiteSmoke,
             CRS = "EPSG:3857",
         };
 

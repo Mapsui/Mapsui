@@ -41,7 +41,7 @@ nav:
     - 'touch-and-mouse-handling.md'
 
 repo_url: https://github.com/Mapsui/Mapsui/
-edit_uri: blob/master/docs/general/
+edit_uri: blob/master/docs/general/markdown
 plugins:
   - glightbox
   - search:
