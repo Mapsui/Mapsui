@@ -52,7 +52,7 @@ public class CustomWidget : BaseWidget
         if (e.TapType == TapType.Single)
             Color = GenerateRandomColor();
         else
-            Color = Color.Transparent;
+            Color = Mapsui.Styles.Color.Transparent;
         return false;
     }
 

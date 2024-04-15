@@ -75,9 +75,9 @@ internal static class PolygonRenderer
 
         var paintFill = new SKPaint { IsAntialias = true };
 
-        if (brush != null)
+        if (brush?.Color is not null)
         {
-            fillColor = brush.Color;
+            fillColor = brush.Color.Value;
         }
 
         // Is there a FillStyle?
