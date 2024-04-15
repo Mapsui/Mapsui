@@ -113,4 +113,32 @@ public static class ColorTests
         color = Color.FromString("hSlA    (    270. ,  75%   ,25 ,0.5   )");
         ClassicAssert.True(color.R == 64 && color.G == 16 && color.B == 112 && color.A == 127);
     }
+
+    [Test]
+    public static void CastToSystemDrawingColorTest()
+    {
+        // Arrange
+        var color = new Color(63, 127, 191, 255);
+        var expectedSystemDrawingColor = System.Drawing.Color.FromArgb(255, 63, 127, 191);
+
+        // Act
+        var systemDrawingColor = (System.Drawing.Color)color;
+
+        // Assert
+        Assert.That(systemDrawingColor, Is.EqualTo(expectedSystemDrawingColor));
+    }
+
+    [Test]
+    public static void CastFromSystemDrawingColorTest()
+    {
+        // Arrange
+        var systemDrawingColor = System.Drawing.Color.FromArgb(255, 63, 127, 191);
+        var expectedColor = new Color(63, 127, 191, 255);
+
+        // Act
+        var color = (Color)systemDrawingColor;
+
+        // Assert
+        Assert.That(color, Is.EqualTo(expectedColor));
+    }
 }

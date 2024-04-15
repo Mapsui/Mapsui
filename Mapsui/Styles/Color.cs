@@ -177,6 +177,11 @@ public readonly record struct Color
 
     public static Color FromRgba(int r, int g, int b, int a) => new() { R = r, G = g, B = b, A = a };
 
+    public static explicit operator System.Drawing.Color(Color color)
+        => System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+
+    public static explicit operator Color(System.Drawing.Color color) => new(color.R, color.G, color.B, color.A);
+
     /// <summary>
     /// Converts a string in Mapbox GL format to a Mapsui Color
     /// 
