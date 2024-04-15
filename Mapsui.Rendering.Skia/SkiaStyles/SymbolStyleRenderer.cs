@@ -24,14 +24,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderService renderCache)
     {
-        if (symbolStyle.SymbolType == SymbolType.Image)
-        {
-            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderCache);
-        }
-        else
-        {
-            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderCache.VectorCache);
-        }
+        return symbolStyle.SymbolType == SymbolType.Image ? 
+            DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderCache) : 
+            DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderCache.VectorCache);
     }
 
     private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderService renderService)
@@ -128,10 +123,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 await symbolStyle.Bitmap.LoadBitmapIdAsync(bitmapRegistry).ConfigureAwait(false);
                 symbolStyle.BitmapId = bitmapRegistry.Register(symbolStyle.Bitmap);
             }
-            else if (symbolStyle.BitmapPath != null)
-            {
+            else if (symbolStyle.BitmapPath != null) 
                 symbolStyle.BitmapId = await bitmapRegistry.RegisterAsync(symbolStyle.BitmapPath);
-            }
         }
         catch (Exception ex)
         {
