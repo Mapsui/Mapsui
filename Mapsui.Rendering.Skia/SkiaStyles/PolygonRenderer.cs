@@ -150,6 +150,7 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
+                    LoadBitmapId(brush, renderService.BitmapRegistry);
                     image = GetImage(renderService, brush.BitmapId);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
