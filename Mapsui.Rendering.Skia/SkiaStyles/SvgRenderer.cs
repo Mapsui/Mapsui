@@ -1,7 +1,6 @@
 ﻿using SkiaSharp;
 using Svg.Skia;
 using System;
-using ExCSS;
 using Mapsui.Rendering.Skia.Extensions;
 using Color = Mapsui.Styles.Color;
 
@@ -31,17 +30,33 @@ public class SvgRenderer
         var alpha = Convert.ToByte(255 * opacity);
 
         var transparencyColor = SKColors.White;
-        if(blendModeColor != null) transparencyColor = blendModeColor.Value.ToSkia();
-        var transparency = transparencyColor.WithAlpha(alpha);
-        using (var cf = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.SrcIn))
+
+        SKPaint? paint = null;
+        SKColorFilter? colorFilter = null;
+
+        if (blendModeColor != null)
         {
-            using var skPaint = new SKPaint
+            var color = blendModeColor.Value.ToSkia().WithAlpha(alpha);
+            colorFilter = SKColorFilter.CreateBlendMode(color, SKBlendMode.SrcIn);
+        }
+        else
+        {
+            var color = SKColors.White.WithAlpha(alpha);
+            colorFilter = SKColorFilter.CreateBlendMode(color, SKBlendMode.DstIn);
+        }
+
+        if (colorFilter != null)
+        {
+            paint = new SKPaint()
             {
                 IsAntialias = true,
-                ColorFilter = cf,
+                ColorFilter = colorFilter,
             };
-            canvas.DrawPicture(svg.Picture, skPaint);
         }
+        
+        canvas.DrawPicture(svg.Picture, paint);
+        paint?.Dispose();
+        colorFilter?.Dispose();
 
         canvas.Restore();
     }
