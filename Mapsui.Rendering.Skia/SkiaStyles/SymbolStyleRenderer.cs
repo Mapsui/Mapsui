@@ -81,7 +81,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     (float)destX, (float)destY,
                     rotation,
                     (float)offset.X, (float)offset.Y,
-                    opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                    opacity: opacity, scale: (float)symbolStyle.SymbolScale,
+                    blendModeColor: symbolStyle.BlendModeColor);
                 break;
             case BitmapType.Sprite:
                 if (bitmap.Sprite == null)
