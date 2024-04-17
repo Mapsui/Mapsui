@@ -46,7 +46,7 @@ public class SvgRenderer
             paint.ColorFilter = colorFilter;
             canvas.DrawPicture(svg.Picture, paint);
         }
-        
+
         colorFilter?.Dispose();
 
         canvas.Restore();
