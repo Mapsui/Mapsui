@@ -28,12 +28,7 @@ public class SvgRenderer
         canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);
 
         var alpha = Convert.ToByte(255 * opacity);
-
-        var transparencyColor = SKColors.White;
-
-        SKPaint? paint = null;
-        SKColorFilter? colorFilter = null;
-
+        SKColorFilter colorFilter;
         if (blendModeColor != null)
         {
             var color = blendModeColor.Value.ToSkia().WithAlpha(alpha);
@@ -45,17 +40,13 @@ public class SvgRenderer
             colorFilter = SKColorFilter.CreateBlendMode(color, SKBlendMode.DstIn);
         }
 
-        if (colorFilter != null)
+        using (var paint = new SKPaint())
         {
-            paint = new SKPaint()
-            {
-                IsAntialias = true,
-                ColorFilter = colorFilter,
-            };
+            paint.IsAntialias = true;
+            paint.ColorFilter = colorFilter;
+            canvas.DrawPicture(svg.Picture, paint);
         }
         
-        canvas.DrawPicture(svg.Picture, paint);
-        paint?.Dispose();
         colorFilter?.Dispose();
 
         canvas.Restore();
