@@ -9,7 +9,6 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Utilities;
 using Animation = Mapsui.Animations.Animation;
 using Mapsui.UI.Maui;
-using HarfBuzzSharp;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
