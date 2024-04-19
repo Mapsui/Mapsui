@@ -5,6 +5,8 @@ namespace Mapsui.Rendering;
 
 public interface IVectorCache : IDisposable
 {
+    public bool Enabled { get; set; }
+
     [return: NotNullIfNotNull(nameof(param))]
     CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, TPaint> toPaint)
         where TParam : notnull

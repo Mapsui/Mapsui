@@ -24,10 +24,10 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly DisposableWrapper<IRenderService> _renderCache;
+    private readonly DisposableWrapper<IRenderService> _renderService;
     private long _currentIteration;
 
-    public IRenderService RenderService => _renderCache.WrappedObject;
+    public IRenderService RenderService => _renderService.WrappedObject;
 
     public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
@@ -39,13 +39,12 @@ public sealed class MapRenderer : IRenderer, IDisposable
     static MapRenderer()
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
-        DefaultRendererFactory.CreateWithService = f => new MapRenderer(f);
+        DefaultRendererFactory.CreateWithRenderService = f => new MapRenderer(f);
     }
 
     public MapRenderer(IRenderService renderer)
     {
-        _renderCache?.Dispose();
-        _renderCache = new DisposableWrapper<IRenderService>(renderer, false);
+        _renderService = new DisposableWrapper<IRenderService>(renderer, false);
         InitRenderer();
     }
 
@@ -68,7 +67,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapRenderer()
     {
-        _renderCache = new DisposableWrapper<IRenderService>(new RenderService(), true);
+        _renderService = new DisposableWrapper<IRenderService>(new RenderService(), true);
         InitRenderer();
     }
 
@@ -327,6 +326,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public void Dispose()
     {
-        _renderCache.Dispose();
+        _renderService.Dispose();
     }
 }

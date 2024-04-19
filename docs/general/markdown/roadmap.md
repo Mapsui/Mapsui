@@ -33,13 +33,13 @@ Focus: More shared code in platforms. This will affect MapControls, Widgets and 
     * [x] Run dotnet analyze on the entire solution.
     * [x] Always propagate async back to the caller.
     * [x] Remove nuget packages that we previously needed for things now supported in .NET 6.
-    * [ ] Remove code copies of things now in .NET 6 (in the past we copied some .NET Core things which were not in .NET standard).
+    * [x] Remove code copies of things now in .NET 6 (in the past we copied some .NET Core things which were not in .NET standard).
     * [ ] Remove the #if defines we do not need anymore.
-    * [ ] Remove all scripts and configurations we do not use anymore.
+    * [x] Remove all scripts and configurations we do not use anymore.
     * [ ] Simplify the build scripts now that we do not need the workarounds.
     * [ ] Use `<Nullable>enable</Nullable>` everywhere (Add to Directory.Build.props) and revisit all current suppressions.
     * [ ] Fix the remaining warnings wrt IDispose.
-- [ ] Remove older frameworks:
+- [x] Remove older frameworks:
     * [x] Remove Xamarin.Forms (but not Mapsui.MAUI, Mapsui.iOS and Mapsui.Android).
     * [x] Remove Uno UWP (but not Mapsui.Uno.WinUI)
     * [x] Remove Avalonia.V0 (but not Avalonia)
@@ -62,5 +62,6 @@ Focus: Rendering.
 - [ ] Add vector tiles https://github.com/Mapsui/Mapsui/issues/1478
 
 Other options:
+
 - [ ] Add support for GeoParquet https://github.com/Mapsui/Mapsui/issues/2282
 - [ ] For possible other options you could  browse through the ['design discussion' tags](https://github.com/Mapsui/Mapsui/labels/design%20discussion) .

@@ -8,10 +8,15 @@ public sealed class VectorCache(IRenderService symbolCache, int capacity) : IVec
     private readonly LruCache<object, ICacheHolder> _paintCache = new(Math.Min(capacity, 1));
     private readonly LruCache<object, ICacheHolder> _pathParamCache = new(Math.Min(capacity, 1));
 
+    public bool Enabled { get; set; } = true;
+
     public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, TPaint> toPaint)
         where TParam : notnull
         where TPaint : class
     {
+        if (Enabled == false)
+            return new CacheTracker<TPaint>(toPaint(param));
+
         var holder = _paintCache.GetOrCreateValue(param, f =>
         {
             var paint = toPaint(f);
@@ -25,6 +30,9 @@ public sealed class VectorCache(IRenderService symbolCache, int capacity) : IVec
         where TParam : notnull
         where TPaint : class
     {
+        if (Enabled == false)
+            return new CacheTracker<TPaint>(toPaint(param, symbolCache));
+
         var holder = _paintCache.GetOrCreateValue(param, f =>
         {
             var paint = toPaint(f, symbolCache);
@@ -38,6 +46,9 @@ public sealed class VectorCache(IRenderService symbolCache, int capacity) : IVec
         where TParam : notnull
         where TPath : class
     {
+        if (Enabled == false)
+            return new CacheTracker<TPath>(toPath(param));
+
         var holder = _pathParamCache.GetOrCreateValue(param, f =>
         {
             var path = toPath(f);

@@ -1,13 +1,11 @@
-﻿using System;
-using Mapsui.Styles;
+using System;
 
 namespace Mapsui.Rendering;
 
 public interface IRenderService : IDisposable
 {
-    IBitmapRegistry BitmapRegistry { get; }
-    ILabelCache LabelCache { get; set; }
-    ISymbolCache SymbolCache { get; set; }
-    ITileCache TileCache { get; set; }
-    IVectorCache VectorCache { get; set; }
+    ILabelCache LabelCache { get; }
+    ISymbolCache SymbolCache { get; }
+    ITileCache TileCache { get; }
+    IVectorCache VectorCache { get; }
 }

@@ -212,7 +212,7 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
             {
                 if (_renderService != null)
                 {
-                    rasterizer = DefaultRendererFactory.CreateWithService(_renderService);
+                    rasterizer = DefaultRendererFactory.CreateWithRenderService(_renderService);
                 }
                 else
                 {
