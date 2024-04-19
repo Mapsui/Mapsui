@@ -15,12 +15,6 @@ public sealed class RenderService : IRenderService
     public ITileCache TileCache { get; }
     public ILabelCache LabelCache { get; }
 
-    public void UseNonCachingVectorCache()
-    {
-        VectorCache.Dispose();
-        VectorCache = new NonCachingVectorCache(SymbolCache);
-    }
-
     public void Dispose()
     {
         LabelCache.Dispose();
