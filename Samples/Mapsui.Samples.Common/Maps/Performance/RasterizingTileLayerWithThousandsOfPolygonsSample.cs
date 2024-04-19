@@ -33,7 +33,7 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
 
     public Map CreateMap()
     {
-        DefaultRendererFactory.Create = () => new MapRenderer(new RenderCache(900000));
+        DefaultRendererFactory.Create = () => new MapRenderer(new RenderService(900000));
         _map?.AbortFetch();
         _map = new Map();
         _map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());

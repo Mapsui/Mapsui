@@ -14,8 +14,8 @@ public interface IFeatureSize
 
     /// <summary> The Feature Size is in points of the screen </summary>
     /// <param name="style">symbol style to detect size</param>
-    /// <param name="symbolCache">symbol Cache</param>
+    /// <param name="renderService">symbol Cache</param>
     /// <param name="feature">feature to detect size</param>
     /// <returns>size in points</returns>
-    double FeatureSize(IStyle style, IRenderCache symbolCache, IFeature? feature = null);
+    double FeatureSize(IStyle style, IRenderService renderService, IFeature? feature = null);
 }
