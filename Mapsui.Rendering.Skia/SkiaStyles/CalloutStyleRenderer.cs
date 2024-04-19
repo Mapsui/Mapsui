@@ -39,7 +39,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
                 UpdateContent(calloutStyle, renderService.BitmapRegistry);
             }
 
-            RenderCallout(calloutStyle, renderService.SymbolCache);
+            RenderCallout(calloutStyle, renderService);
         }
 
         // Now we have the complete callout rendered, so we could draw it

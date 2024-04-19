@@ -26,7 +26,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
-            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService.SymbolCache);
+            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService);
         }
         else
         {
@@ -258,7 +258,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         if (style is SymbolStyle symbolStyle)
         {
-            return FeatureSize(symbolStyle, renderService.SymbolCache);
+            return FeatureSize(symbolStyle, renderService);
         }
 
         return 0;
