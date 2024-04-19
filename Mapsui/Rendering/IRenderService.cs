@@ -8,5 +8,5 @@ public interface IRenderService : IDisposable
     ISymbolCache SymbolCache { get; }
     ITileCache TileCache { get; }
     IVectorCache VectorCache { get; }
-    public void DisableVectorCache();
+    public void UseNonCachingVectorCache();
 }
