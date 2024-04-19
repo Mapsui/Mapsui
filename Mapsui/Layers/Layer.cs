@@ -20,7 +20,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();
     private readonly ConcurrentStack<IFeature> _cache = new();
-    private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
+    private readonly FeatureFetchDispatcher _fetchDispatcher;
     private readonly FetchMachine _fetchMachine;
 
     public SymbolStyle? SymbolStyle { get; set; }
@@ -38,7 +38,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     /// <param name="layerName">Name to use for layer</param>
     public Layer(string layerName) : base(layerName)
     {
-        _fetchDispatcher = new FeatureFetchDispatcher<IFeature>(_cache);
+        _fetchDispatcher = new FeatureFetchDispatcher(_cache);
         _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
         _fetchDispatcher.PropertyChanged += FetchDispatcherOnPropertyChanged;
 
