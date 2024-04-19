@@ -29,7 +29,6 @@ nav:
     - 'mapsui-components.md'
     - 'async-fetching.md'
     - 'resolution.md'
-    - 'device-independent-units.md'
     - 'projections.md'
     - 'custom-style-renders.md'
     - 'performance-widget.md'
