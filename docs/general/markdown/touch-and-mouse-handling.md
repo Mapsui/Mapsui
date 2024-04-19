@@ -4,6 +4,7 @@ In Mapsui v5 (at the moment of writing this is beta.1) most of the touch and mou
 
 ## Widget Event types
 In v5 beta.1 we have four new event types:
+
 - PointerPressed (down)
 - PointerMoved (can be hover for mouse)
 - PointerReleased (up)
