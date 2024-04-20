@@ -32,7 +32,7 @@ jobs:
       with:
          dotnet-version: |
            8.0.x
-         include-prerelease: true
+         include-prerelease: false
     # Android SDK Install
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
@@ -92,7 +92,7 @@ jobs:
       with:
          dotnet-version: |
            8.0.x
-         include-prerelease: true
+         include-prerelease: false
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies Mapsui.Mac
@@ -179,7 +179,7 @@ jobs:
       with:
          dotnet-version: |
            8.0.x
-         include-prerelease: true
+         include-prerelease: false
     # Java Sdk install 11
     - name: Install Open JDK 11
       uses: actions/setup-java@v4
