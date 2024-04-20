@@ -18,5 +18,14 @@ That makes sense but at the moment there is no good solution for that in Mapsui.
 - The meters / pixel can be different for different locations within a single map view.
 - To implement this for a coordinate system we need projection support for that coordinate system, which we may not have. 
 
-### What is a pixel?
-When we talk about pixels on this page we mean device independent pixels or [device independent units](device-independent-units.md) 
+### Density Independent Pixels
+
+When we talk about pixels on this page we mean density independent pixels, or dip, or dp.
+
+Modern devices have a very high resolution. If something is drawn onto the canvas using raw pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this a scale factor is used. Those scaled-up coordinates are called density independent pixels. Most of the time users deal only with the density independent pixels.
+
+### Density Independent Pixels in SkiaSharp
+
+The scale in skia has caused some confusion in the past and bugs as a consequence. So here is some extra information on this topic. This is mainly targetted at contributors, users of the Mapsui nugets do not need to know about this.
+
+Most (all?) views in SkiaSharp use pixels as coordinates by default but for our purposes we need to use density independent pixels, so we need to correct for this. We do this by setting the scale of skia's SKCanvas. This needs to be done in the render loop because it is the only place where we have access to the SKCanvas. Also the size of the map needs to be adjusted at that point, otherwise we would draw outsize the screen. In later versions of SkiaSharp it is possible to use IgnorePixelScaling=true instead of scaling.
