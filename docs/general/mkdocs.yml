@@ -20,19 +20,16 @@ nav:
   - 'roadmap.md'
   - 'faq.md'
   - 'nuget-of-latest-build.md'
-
+  - 'mapsui-components.md'
+  - 'async-fetching.md'
+  - 'resolution.md'
+  - 'projections.md'
+  - 'custom-style-renders.md'
+  - 'performance-widget.md'
+  
   - Upgrade guides:
     - 'v4.0-upgrade-guide.md'
     - 'v5.0-upgrade-guide.md'
-
-  - How Things Work:
-    - 'mapsui-components.md'
-    - 'async-fetching.md'
-    - 'resolution.md'
-    - 'device-independent-units.md'
-    - 'projections.md'
-    - 'custom-style-renders.md'
-    - 'performance-widget.md'
 
   - Contributing to Mapsui:
     - 'contributors-guidelines.md'
