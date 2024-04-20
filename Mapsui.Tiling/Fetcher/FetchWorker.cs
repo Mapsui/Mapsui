@@ -3,12 +3,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Logging;
+using Mapsui.Tiling.Fetcher;
 
 namespace Mapsui.Fetcher;
 
-public class FetchWorker(IFetchDispatcher fetchDispatcher) : IDisposable // Todo: Make internal
+public class FetchWorker(TileFetchDispatcher fetchDispatcher) : IDisposable // Todo: Make internal
 {
-    private readonly IFetchDispatcher _fetchDispatcher = fetchDispatcher;
+    private readonly TileFetchDispatcher _fetchDispatcher = fetchDispatcher;
     private CancellationTokenSource? _fetchLoopCancellationTokenSource;
 #pragma warning disable CA2211 // Non-constant fields should not be visible - This is a very special case.
     public static long RestartCounter;

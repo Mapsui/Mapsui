@@ -35,7 +35,6 @@ public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
         var layer = new Layer("Points")
         {
             DataSource = new MemoryProvider(CreatePoints(style)),
-            SymbolStyle = style
         };
 
         var animations = CreateAnimationsForSymbolStyle(style);

@@ -1,7 +1,5 @@
-﻿using Mapsui.Layers.AnimatedLayers;
-using Mapsui.Styles;
-using System.Threading.Tasks;
-using Mapsui.Tiling;
+﻿using System.Threading.Tasks;
+using Mapsui.Samples.Common.Maps.Geometries;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -15,22 +13,6 @@ public class AnimatedBusSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        var map = new Map();
-        map!.Layers.Add(OpenStreetMap.CreateTileLayer("AnimatedBusSamplesUserAgent"));
-        map.Layers.Add(new AnimatedPointLayer(new BusPointProvider())
-        {
-            Name = "Buses",
-            Style = new LabelStyle
-            {
-                BackColor = new Brush(Color.Black),
-                ForeColor = Color.White,
-                Text = "Bus",
-            }
-        });
-
-        map.CRS = "EPSG:3857";
-        map.Navigator.CenterOnAndZoomTo(new MPoint(2776952, 8442653), map.Navigator.Resolutions[18]);
-
-        return Task.FromResult(map);
+        return new ManyMutatingLayers().CreateMapAsync();
     }
 }

@@ -9,14 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-using Mapsui.Tiling;
+
 
 namespace Mapsui.Samples.Common.Maps.Geometries;
 
-public class MutatingPointsSample : ISample
+public class ManyMutatingLayers : ISample
 {
-    public string Name => "Mutating Points";
-    public string Category => "Special";
+    public string Name => "Many Mutating Layers";
+    public string Category => "Performance";
 
     private Random _random = new(123);
     private const int _featureCount = 40;
@@ -35,7 +35,7 @@ public class MutatingPointsSample : ISample
     {
         var map = new Map();
 
-        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        //!!!map.Layers.Add(OpenStreetMap.CreateTileLayer());
         var features = RandomPointsBuilder.CreateRandomFeatures(new MRect(-c, -c, c, c), _featureCount, _random);
         map.Layers.Add(CreatePointLayers(_random, features).ToArray());
         map.Navigator.ZoomToBox(map.Layers[0].Extent);
@@ -87,7 +87,7 @@ public class MutatingPointsSample : ISample
     {
         return new Layer
         {
-            Enabled = false,
+            Enabled = true,
             Name = $"Layer {i}",
             DataSource = CreateMemoryProvider(features),
             Style = new SymbolStyle

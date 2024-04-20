@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Mapsui.Tiling.Fetcher;
+using System.Collections.Generic;
 
 namespace Mapsui.Fetcher;
 
-public class FetchMachine // Todo: Make internal
+public class FetchMachine
 {
-    private readonly List<FetchWorker> _worker = new();
+    private readonly List<FetchWorker> _worker = [];
 
-    public FetchMachine(IFetchDispatcher fetchDispatcher, int numberOfWorkers = 4)
+    public FetchMachine(TileFetchDispatcher fetchDispatcher, int numberOfWorkers = 4)
     {
         for (var i = 0; i < numberOfWorkers; i++)
         {

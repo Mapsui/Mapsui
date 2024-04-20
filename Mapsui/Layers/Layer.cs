@@ -7,11 +7,8 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
-using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
@@ -21,9 +18,8 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     private readonly object _syncRoot = new();
     private readonly ConcurrentStack<IFeature> _cache = new();
     private readonly FeatureFetchDispatcher _fetchDispatcher;
-    private readonly FetchMachine _fetchMachine;
+    private readonly FeatureFetchMachine _fetchMachine;
 
-    public SymbolStyle? SymbolStyle { get; set; }
     public List<Func<bool>> Animations { get; } = [];
     public Delayer Delayer { get; } = new();
 
@@ -40,20 +36,10 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     {
         _fetchDispatcher = new FeatureFetchDispatcher(_cache);
         _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
-        _fetchDispatcher.PropertyChanged += FetchDispatcherOnPropertyChanged;
 
-        _fetchMachine = new FetchMachine(_fetchDispatcher);
+        _fetchMachine = new FeatureFetchMachine();
     }
 
-    /// <summary>
-    /// Time to wait before fetching data
-    /// </summary>
-    // ReSharper disable once UnusedMember.Global // todo: Create a sample for this field
-    public int FetchingPostponedInMilliseconds
-    {
-        get => Delayer.MillisecondsToWait;
-        set => Delayer.MillisecondsToWait = value;
-    }
     /// <summary>
     /// Data source for this layer
     /// </summary>
@@ -77,23 +63,17 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
         }
     }
 
-    private void FetchDispatcherOnPropertyChanged(object? sender, PropertyChangedEventArgs propertyChangedEventArgs)
-    {
-        if (propertyChangedEventArgs.PropertyName == nameof(Busy))
-        {
-            if (_fetchDispatcher != null) Busy = _fetchDispatcher.Busy;
-        }
-    }
 
     private void FetchDispatcherOnDataChanged(object sender, DataChangedEventArgs args)
     {
+        Busy = false; // Todo: Properly implement Busy
         OnDataChanged(args);
     }
 
     private void DelayedFetch(FetchInfo fetchInfo)
     {
         _fetchDispatcher.SetViewport(fetchInfo);
-        _fetchMachine.Start();
+        _fetchMachine.Start(_fetchDispatcher.FetchAsync);
     }
 
     /// <summary>
@@ -114,7 +94,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     /// <inheritdoc />
     public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
     {
-        return _cache.ToList();
+        return [.. _cache];
     }
 
     /// <inheritdoc />
