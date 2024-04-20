@@ -7,21 +7,18 @@ using Mapsui.Styles;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class BitmapSymbolSample : ISample
+public class BitmapUriSymbolSample : ISample
 {
-    public string Name => "Bitmap Symbol";
+    public string Name => "Bitmap Uri Symbol";
     public string Category => "Tests";
 
-    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
-
-
-    public static Map CreateMap()
+    public async Task<Map> CreateMapAsync()
     {
         var layer = new MemoryLayer
         {
             Style = null,
-            Features = CreateFeatures(),
-            Name = "Points with bitmaps"
+            Features = await CreateFeaturesAsync(),
+            Name = "Points with Uri bitmaps"
         };
 
         var map = new Map
@@ -36,10 +33,12 @@ public class BitmapSymbolSample : ISample
         return map;
     }
 
-    public static IEnumerable<IFeature> CreateFeatures()
+    public static async Task<IEnumerable<IFeature>> CreateFeaturesAsync()
     {
-        var circleIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.circle.png");
-        var checkeredIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.checkered.png");
+        var circleIconPath = typeof(BitmapUriSymbolSample).LoadBitmapPath("Resources.Images.circle.png");
+        var circleIconId = await BitmapRegistry.Instance.RegisterAsync(circleIconPath);
+        var checkeredIconPath = typeof(BitmapUriSymbolSample).LoadBitmapPath("Resources.Images.checkered.png");
+        var checkeredIconId = await BitmapRegistry.Instance.RegisterAsync(checkeredIconPath);
 
         return new List<IFeature>
         {
