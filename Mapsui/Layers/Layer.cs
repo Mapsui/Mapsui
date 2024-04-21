@@ -5,8 +5,8 @@
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 
@@ -16,9 +16,10 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
 {
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();
-    private readonly ConcurrentStack<IFeature> _cache = new();
+    private IFeature[] _cache = [];
     private readonly FeatureFetchDispatcher _fetchDispatcher;
     private readonly FeatureFetchMachine _fetchMachine;
+    private int busyCounter;
 
     public List<Func<bool>> Animations { get; } = [];
     public Delayer Delayer { get; } = new();
@@ -34,9 +35,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     /// <param name="layerName">Name to use for layer</param>
     public Layer(string layerName) : base(layerName)
     {
-        _fetchDispatcher = new FeatureFetchDispatcher(_cache);
-        _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
-
+        _fetchDispatcher = new FeatureFetchDispatcher();
         _fetchMachine = new FeatureFetchMachine();
     }
 
@@ -63,17 +62,44 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
         }
     }
 
-
-    private void FetchDispatcherOnDataChanged(object sender, DataChangedEventArgs args)
-    {
-        Busy = false; // Todo: Properly implement Busy
-        OnDataChanged(args);
-    }
-
     private void DelayedFetch(FetchInfo fetchInfo)
     {
         _fetchDispatcher.SetViewport(fetchInfo);
-        _fetchMachine.Start(_fetchDispatcher.FetchAsync);
+        _fetchMachine.Start(FetchAsync);
+    }
+
+    private async Task FetchAsync()
+    {
+        await _fetchDispatcher.FetchAsync((r) =>
+        {
+            BusyMinusOne();
+            r.Handle(
+                (f) =>
+                {
+                    _cache = f;
+                    OnDataChanged(new DataChangedEventArgs());
+                },
+                (e) => OnDataChanged(new DataChangedEventArgs(e)));
+        });
+    }
+
+    private void BusyPlusOne()
+    {
+        lock (_syncRoot)
+        {
+            busyCounter++;
+            Busy = true;
+        }
+    }
+
+    private void BusyMinusOne()
+    {
+        lock (_syncRoot)
+        {
+            busyCounter--;
+            if (busyCounter == 0)
+                Busy = false;
+        }
     }
 
     /// <summary>
@@ -94,7 +120,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     /// <inheritdoc />
     public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
     {
-        return [.. _cache];
+        return _cache;
     }
 
     /// <inheritdoc />
@@ -106,7 +132,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     /// <inheritdoc />
     public void ClearCache()
     {
-        _cache.Clear();
+        _cache = [];
     }
 
     /// <inheritdoc />
@@ -118,6 +144,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
         if (DataSource == null) return;
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
+        BusyPlusOne();
         Delayer.ExecuteDelayed(() => DelayedFetch(fetchInfo));
     }
 

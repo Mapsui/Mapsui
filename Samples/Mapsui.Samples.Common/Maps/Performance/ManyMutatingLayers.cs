@@ -10,7 +10,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 
-
 namespace Mapsui.Samples.Common.Maps.Geometries;
 
 public class ManyMutatingLayers : ISample
@@ -90,6 +89,7 @@ public class ManyMutatingLayers : ISample
             Enabled = true,
             Name = $"Layer {i}",
             DataSource = CreateMemoryProvider(features),
+            IsMapInfoLayer = true,
             Style = new SymbolStyle
             {
                 SymbolType = SymbolType.Ellipse,

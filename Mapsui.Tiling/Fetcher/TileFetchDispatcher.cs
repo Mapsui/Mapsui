@@ -110,7 +110,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
 
             Busy = _tilesInProgress.Count > 0 || !_tilesToFetch.IsEmpty;
 
-            DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, tileInfo));
+            DataChanged?.Invoke(this, new TileDataChangedEventArgs(exception, tileInfo));
         }
     }
 
@@ -119,7 +119,8 @@ public class TileFetchDispatcher : INotifyPropertyChanged
         get => _busy;
         private set
         {
-            if (_busy == value) return; // prevent notify              
+            if (_busy == value)
+                return; // prevent notify              
             _busy = value;
             OnPropertyChanged(nameof(Busy));
         }
@@ -164,6 +165,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
 
         _tilesToFetch.Clear();
         _tilesToFetch.AddRange(tilesToFetch);
-        if (!_tilesToFetch.IsEmpty) Busy = true;
+        if (!_tilesToFetch.IsEmpty)
+            Busy = true;
     }
 }
