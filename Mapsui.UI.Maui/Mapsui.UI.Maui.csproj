@@ -33,7 +33,6 @@
   <ItemGroup>
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
