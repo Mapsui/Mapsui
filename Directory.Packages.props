@@ -80,7 +80,7 @@
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="[3.0.0-preview.3.1,4.0.0)" />
     <PackageVersion Include="sqlite-net-pcl" Version="[1.9.172,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
-    <PackageVersion Include="Svg.Skia" Version="1.0.0.17" />
+    <PackageVersion Include="Svg.Skia" Version="1.0.0.18" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
     <PackageVersion Include="System.Text.Json" Version="[8.0.3,9.0.0)" />
     <PackageVersion Include="Uno.Core" Version="[4.0.1,5.0.0)" />
