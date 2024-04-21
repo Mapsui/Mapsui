@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+#pragma warning disable CS0618 // Type or member is obsolete
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable once ClassNeverInstantiated.Local
