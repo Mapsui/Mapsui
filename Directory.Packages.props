@@ -74,7 +74,6 @@
     <PackageVersion Include="SkiaSharp.Views.Blazor" Version="[3.0.0-preview.3.1,4.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Forms" Version="[3.0.0-preview.3.1,4.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="[3.0.0-preview.3.1,4.0.0)" />
-    <PackageVersion Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="[3.0.0-preview.3.1,4.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Uno" Version="[3.0.0-preview.3.1,4.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="[3.0.0-preview.3.1,4.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.WinUI" Version="[3.0.0-preview.3.1,4.0.0)" />
