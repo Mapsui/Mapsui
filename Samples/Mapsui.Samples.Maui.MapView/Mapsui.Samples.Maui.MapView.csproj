@@ -66,7 +66,6 @@
 		<PackageReference Include="SkiaSharp" />
 		<PackageReference Include="SkiaSharp.HarfBuzz" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.StartsWith('net8.0'))">
