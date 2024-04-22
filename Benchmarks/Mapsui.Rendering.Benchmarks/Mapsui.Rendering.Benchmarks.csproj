@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" />
-    <PackageReference Include="SkiaSharp.Views.Forms.WPF" />
   </ItemGroup>
 
   <ItemGroup>
