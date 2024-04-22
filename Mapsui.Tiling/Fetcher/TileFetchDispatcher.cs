@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using BruTile;
@@ -20,14 +18,14 @@ public class TileFetchDispatcher : INotifyPropertyChanged
     private FetchInfo? _fetchInfo;
     private readonly object _lockRoot = new();
     private bool _busy;
-    private bool _viewportIsModified;
     private readonly ITileCache<IFeature?> _tileCache;
     private readonly IDataFetchStrategy _dataFetchStrategy;
-    private readonly ConcurrentQueue<TileInfo> _tilesToFetch = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = [];
+    private readonly ConcurrentHashSet<TileIndex> _tilesThatFailed = [];
     private readonly ITileSchema? _tileSchema;
     private readonly FetchMachine _fetchMachine;
     private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature;
+    private readonly int _fetchThreadCount = 2;
 
     public TileFetchDispatcher(
         ITileCache<IFeature?> tileCache,
@@ -39,7 +37,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
         _tileSchema = tileSchema;
         _fetchTileAsFeature = fetchTileAsFeature;
         _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
-        _fetchMachine = new FetchMachine(this);
+        _fetchMachine = new FetchMachine(_fetchThreadCount);
     }
 
     public event DataChangedEventHandler? DataChanged;
@@ -48,33 +46,47 @@ public class TileFetchDispatcher : INotifyPropertyChanged
 
     public static int MaxTilesInOneRequest { get; set; } = 128;
 
-    public void SetViewport(FetchInfo fetchInfo)
+    public void RefreshData(FetchInfo fetchInfo)
     {
         lock (_lockRoot)
         {
+            // Todo: Only refresh if either
+            // - The fetchInfo has changes. This not so hard to check.
+            // - The data has changed. We have no mechanism for this.
+
+
+            _tilesThatFailed.Clear(); // Try them again on new data refresh.
             _fetchInfo = fetchInfo;
             Busy = true;
-            _viewportIsModified = true;
+            FetchNextTiles();
         }
     }
 
-    public bool TryTake([NotNullWhen(true)] out Func<Task>? method)
+    public void FetchNextTiles()
     {
         lock (_lockRoot)
         {
-            UpdateIfViewportIsModified();
-            if (_tilesToFetch.TryDequeue(out var tileInfo))
-            {
-                _tilesInProgress.Add(tileInfo.Index);
-                method = async () => await FetchOnThreadAsync(tileInfo).ConfigureAwait(false);
-                return true;
-            }
+            var tilesToFetch = GetTilesToFetch();
 
-            Busy = _tilesInProgress.Count > 0 || !_tilesToFetch.IsEmpty;
-            // else the queue is empty, we are done.
-            method = null;
-            return false;
+            if (tilesToFetch.Length > 0)
+            {
+                var tilesToQueue = GetNumberOfTilesToQueue(tilesToFetch);
+
+                for (var i = 0; i < tilesToQueue; i++)
+                {
+                    var tileToFetch = tilesToFetch[i];
+                    _tilesInProgress.Add(tileToFetch.Index);
+                    _fetchMachine.Add(() => FetchOnThreadAsync(tileToFetch));
+                }
+            }
+            Busy = _tilesInProgress.Count > 0 || tilesToFetch.Length > 0;
         }
+    }
+
+    private int GetNumberOfTilesToQueue(TileInfo[] tilesToFetch)
+    {
+        var spaceLeftOnQueue = Math.Max(_fetchThreadCount - _tilesInProgress.Count(), 0);
+        return Math.Min(tilesToFetch.Length, spaceLeftOnQueue);
     }
 
     private async Task FetchOnThreadAsync(TileInfo tileInfo)
@@ -91,26 +103,20 @@ public class TileFetchDispatcher : INotifyPropertyChanged
         }
     }
 
-    private void UpdateIfViewportIsModified()
-    {
-        if (_viewportIsModified)
-        {
-            UpdateTilesToFetchForViewportChange();
-            _viewportIsModified = false;
-        }
-    }
-
     private void FetchCompleted(TileInfo tileInfo, IFeature? feature, Exception? exception)
     {
         lock (_lockRoot)
         {
-            if (exception == null)
+            if (exception != null)
+                _tilesThatFailed.Add(tileInfo.Index);
+            else
                 _tileCache.Add(tileInfo.Index, feature);
+
             _tilesInProgress.TryRemove(tileInfo.Index);
 
-            Busy = _tilesInProgress.Count > 0 || !_tilesToFetch.IsEmpty;
-
             DataChanged?.Invoke(this, new TileDataChangedEventArgs(exception, tileInfo));
+
+            FetchNextTiles();
         }
     }
 
@@ -120,7 +126,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
         private set
         {
             if (_busy == value)
-                return; // prevent notify              
+                return;
             _busy = value;
             OnPropertyChanged(nameof(Busy));
         }
@@ -128,12 +134,6 @@ public class TileFetchDispatcher : INotifyPropertyChanged
 
     public void StopFetching()
     {
-        _fetchMachine.Stop();
-    }
-
-    public void StartFetching()
-    {
-        _fetchMachine.Start();
     }
 
     private void OnPropertyChanged(string propertyName)
@@ -141,19 +141,22 @@ public class TileFetchDispatcher : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private void UpdateTilesToFetchForViewportChange()
+    private TileInfo[] GetTilesToFetch()
     {
         // Use local fields to avoid changes caused by other threads during this calculation.
         var localFetchInfo = _fetchInfo;
         var localTileSchema = _tileSchema;
 
         if (localFetchInfo is null || localTileSchema is null)
-            return;
+            return [];
 
         var levelId = BruTile.Utilities.GetNearestLevel(localTileSchema.Resolutions, localFetchInfo.Resolution);
         var tilesToCoverViewport = _dataFetchStrategy.Get(localTileSchema, localFetchInfo.Extent.ToExtent(), levelId);
         NumberTilesNeeded = tilesToCoverViewport.Count;
-        var tilesToFetch = tilesToCoverViewport.Where(t => _tileCache.Find(t.Index) == null && !_tilesInProgress.Contains(t.Index));
+        var tilesToFetch = tilesToCoverViewport.Where(t =>
+            _tileCache.Find(t.Index) == null
+            && !_tilesInProgress.Contains(t.Index)
+            && !_tilesThatFailed.Contains(t.Index));
         if (tilesToFetch.Count() > MaxTilesInOneRequest)
         {
             tilesToFetch = tilesToFetch.Take(MaxTilesInOneRequest).ToList();
@@ -163,9 +166,6 @@ public class TileFetchDispatcher : INotifyPropertyChanged
                 $"that this may indicate a bug or configuration error");
         }
 
-        _tilesToFetch.Clear();
-        _tilesToFetch.AddRange(tilesToFetch);
-        if (!_tilesToFetch.IsEmpty)
-            Busy = true;
+        return tilesToFetch.ToArray();
     }
 }

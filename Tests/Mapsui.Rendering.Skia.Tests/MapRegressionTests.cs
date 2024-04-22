@@ -15,6 +15,7 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.DataFormats;
+using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Samples.Common.PersistentCaches;
@@ -62,7 +63,8 @@ public class MapRegressionTests
             .All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName),
     ];
 
-    public static object[] ExcludedSamples => _excludedSamples ??= [new AnimatedPointsSample(), new MutatingTriangleSample(), new ArcGISDynamicServiceSample()];
+    public static object[] ExcludedSamples =>
+        _excludedSamples ??= [new AnimatedPointsSample(), new MutatingTriangleSample(), new ArcGISDynamicServiceSample(), new ManyMutatingLayersSample()];
 
     [Test]
     [Retry(5)]

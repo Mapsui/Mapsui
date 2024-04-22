@@ -1,33 +1,32 @@
-﻿using Mapsui.Tiling.Fetcher;
-using System.Collections.Generic;
+﻿using Mapsui.Extensions;
+using System;
+using System.Threading.Channels;
+using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher;
 
 public class FetchMachine
 {
-    private readonly List<FetchWorker> _worker = [];
+    readonly Channel<Func<Task>> _queue = Channel.CreateUnbounded<Func<Task>>();
 
-    public FetchMachine(TileFetchDispatcher fetchDispatcher, int numberOfWorkers = 4)
+    public FetchMachine(int numberOfWorkers = 4)
     {
         for (var i = 0; i < numberOfWorkers; i++)
         {
-            _worker.Add(new FetchWorker(fetchDispatcher));
+            Catch.TaskRun(() => AddConsumerAsync(_queue));
         }
     }
 
-    public void Start()
+    public void Add(Func<Task> action)
     {
-        foreach (var worker in _worker)
-        {
-            worker.Start();
-        }
+        _queue.Writer.TryWrite(action);
     }
 
-    public void Stop()
+    private static async Task AddConsumerAsync(Channel<Func<Task>> queue)
     {
-        foreach (var worker in _worker)
+        await foreach (var action in queue.Reader.ReadAllAsync())
         {
-            worker.Stop();
+            await action();
         }
     }
 }

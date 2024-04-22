@@ -9,7 +9,7 @@ public class FeatureFetchMachine
 {
     readonly Channel<Func<Task>> _queue = Channel.CreateUnbounded<Func<Task>>();
 
-    public FeatureFetchMachine(int numberOfWorkers = 2)
+    public FeatureFetchMachine(int numberOfWorkers = 4)
     {
         for (var i = 0; i < numberOfWorkers; i++)
         {
