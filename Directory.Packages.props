@@ -72,14 +72,11 @@
     <PackageVersion Include="SkiaSharp.Skottie" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Blazor" Version="[2.88.8,3.0.0)" />
-    <PackageVersion Include="SkiaSharp.Views.Forms" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="[2.88.8,3.0.0)" />
-    <PackageVersion Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Uno" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.WinUI" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.WPF" Version="[2.88.8,3.0.0)" />
-    <PackageVersion Include="SkiaSharp.Views.Forms.WPF" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="sqlite-net-pcl" Version="[1.9.172,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
