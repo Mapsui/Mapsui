@@ -33,8 +33,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           8.0.x
-         include-prerelease: false
+           8.0.x         
 
     # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag
