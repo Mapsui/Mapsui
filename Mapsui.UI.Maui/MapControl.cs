@@ -25,10 +25,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     // See https://github.com/mono/SkiaSharp/issues/1893
     // https://github.com/Mapsui/Mapsui/issues/1676
     public static bool UseGPU =
-        DeviceInfo.Platform != DevicePlatform.WinUI &&
         DeviceInfo.Platform != DevicePlatform.macOS &&
-        DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
-        DeviceInfo.Platform != DevicePlatform.Android;
+        DeviceInfo.Platform != DevicePlatform.MacCatalyst;
 
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
