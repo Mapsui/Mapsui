@@ -51,8 +51,4 @@ public interface IBitmapRegistry : IDisposable
     /// </summary>
     /// <param name="bitmapData">Bitmap data to check</param>
     void CheckBitmapData(object bitmapData);
-
-    /// <summary> Next Bitmap id </summary>
-    /// <returns>new id</returns>
-    int NextBitmapId();
 }

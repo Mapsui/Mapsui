@@ -19,13 +19,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
     private static BitmapRegistry? _instance;
     private readonly ConcurrentDictionary<int, object> _register = [];
     private readonly ConcurrentDictionary<string, int> _lookup = [];
-    private readonly IBitmapRegistry? _parent;
     private BitmapRegistry() { }
-
-    public BitmapRegistry(IBitmapRegistry parent)
-    {
-        _parent = parent;
-    }
 
     private int _counter;
     private readonly ConcurrentDictionary<string, (Assembly assembly, string realResourceName)> resourceCache = new();
@@ -121,7 +115,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
 
     public int NextBitmapId()
     {
-        return _parent?.NextBitmapId() ?? Interlocked.Increment(ref _counter);
+        return Interlocked.Increment(ref _counter);
     }
 
     /// <summary> Unregister an existing bitmap </summary>
@@ -129,9 +123,8 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// <returns>The unregistered object</returns>
     public object? Unregister(int id)
     {
-        return _register.Remove(id, out var val) ?
-            val :
-            _parent?.Unregister(id);
+        _register.Remove(id, out var val);
+        return val;
     }
 
     /// <summary>
@@ -145,8 +138,8 @@ public sealed class BitmapRegistry : IBitmapRegistry
         {
             return val;
         }
-
-        return _parent?.Get(id) ?? throw new KeyNotFoundException();
+        
+        throw new ArgumentException("Bitmap not found: " + id);
     }
 
     /// <summary>
@@ -160,7 +153,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
         CheckBitmapData(bitmapData);
 
         if (id < 0 || id > _counter && !_register.ContainsKey(id))
-            return _parent?.Set(id, bitmapData) ?? false;
+            throw new ArgumentException("Bitmap not found: " + id);
 
         _register.TryGetValue(id, out var oldBitmap);
         _register[id] = bitmapData;
@@ -185,10 +178,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
         {
             if (sprite.Atlas < 0 || !_register.ContainsKey(sprite.Atlas))
             {
-                if (_parent != null)
-                    _parent.CheckBitmapData(bitmapData);
-                else
-                    throw new ArgumentException("Sprite has no corresponding atlas bitmap.");
+                throw new ArgumentException("Sprite has no corresponding atlas bitmap.");
             }
         }
     }
@@ -204,7 +194,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
             return true;
         }
 
-        return _parent?.TryGetBitmapId(key, out bitmapId) ?? false;
+        return false;
     }
 
     public void Dispose()
