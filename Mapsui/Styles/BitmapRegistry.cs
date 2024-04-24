@@ -153,7 +153,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
         CheckBitmapData(bitmapData);
 
         if (id < 0 || id > _counter && !_register.ContainsKey(id))
-            throw new ArgumentException("Bitmap not found: " + id);
+            return false;
 
         _register.TryGetValue(id, out var oldBitmap);
         _register[id] = bitmapData;
@@ -169,7 +169,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// Check bitmap data for correctness
     /// </summary>
     /// <param name="bitmapData">Bitmap data to check</param>
-    public void CheckBitmapData(object bitmapData)
+    private void CheckBitmapData(object bitmapData)
     {
         if (bitmapData == null)
             throw new ArgumentException("The bitmap data that is registered is null. Was the image loaded correctly?");
