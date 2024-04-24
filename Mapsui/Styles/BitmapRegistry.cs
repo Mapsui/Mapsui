@@ -138,7 +138,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
         {
             return val;
         }
-        
+
         throw new ArgumentException("Bitmap not found: " + id);
     }
 
