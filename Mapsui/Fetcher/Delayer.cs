@@ -11,6 +11,7 @@ public class Delayer : IDisposable
     private readonly Timer _waitTimer;
     private Action? _action;
     private bool _waiting;
+    private object lockObject = new();
 
     /// <summary>
     /// The delay between two calls.
@@ -35,20 +36,23 @@ public class Delayer : IDisposable
     /// be no delay.</remarks>
     public void ExecuteDelayed(Action action)
     {
-        if (_waiting)
+        lock (lockObject)
         {
-            // If waiting, just assign the action and wait for it to be called.
-            _action = action;
-        }
-        else
-        {
-            // If not waiting call the action immediately.
-            if (!StartWithDelay)
-                action();
-            else
+            if (_waiting)
+            {
+                // If waiting, just assign the action and wait for it to be called.
                 _action = action;
-            // Then wait for another interval to check if more actions come in.
-            StartWaiting();
+            }
+            else
+            {
+                // If not waiting call the action immediately.
+                if (!StartWithDelay)
+                    action();
+                else
+                    _action = action;
+                // Then wait for another interval to check if more actions come in.
+                StartWaiting();
+            }
         }
     }
 
@@ -68,19 +72,22 @@ public class Delayer : IDisposable
 
     private void WaitTimerElapsed(object? state)
     {
-        if (_action != null)
+        lock (lockObject)
         {
-            // Waiting is done, we can call the action.
-            _action?.Invoke();
-            // Set the action to null. This indicates there is no new request.
-            _action = null;
-            // Now we keep the timer running. It will stop if _action is still null.
-        }
-        else
-        {
-            // The _action is null, so during the previous interval no new request came in.
-            // Next time a new request comes in we don't have to wait.
-            StopWaiting();
+            if (_action != null)
+            {
+                // Waiting is done, we can call the action.
+                _action?.Invoke();
+                // Set the action to null. This indicates there is no new request.
+                _action = null;
+                // Now we keep the timer running. It will stop if _action is still null.
+            }
+            else
+            {
+                // The _action is null, so during the previous interval no new request came in.
+                // Next time a new request comes in we don't have to wait.
+                StopWaiting();
+            }
         }
     }
 
