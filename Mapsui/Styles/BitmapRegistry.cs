@@ -113,11 +113,6 @@ public sealed class BitmapRegistry : IBitmapRegistry
         return Register(stream, key);
     }
 
-    public int NextBitmapId()
-    {
-        return Interlocked.Increment(ref _counter);
-    }
-
     /// <summary> Unregister an existing bitmap </summary>
     /// <param name="id">Id of registered bitmap data</param>
     /// <returns>The unregistered object</returns>
@@ -158,6 +153,11 @@ public sealed class BitmapRegistry : IBitmapRegistry
         }
 
         return true;
+    }
+
+    private int NextBitmapId()
+    {
+        return Interlocked.Increment(ref _counter);
     }
 
     /// <summary>
