@@ -1,6 +1,4 @@
-﻿using Mapsui.Styles;
-
-namespace Mapsui.Rendering.Skia.Cache;
+﻿namespace Mapsui.Rendering.Skia.Cache;
 
 public sealed class RenderService : IRenderService
 {
