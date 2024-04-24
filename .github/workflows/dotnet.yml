@@ -31,8 +31,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           8.0.x
-         include-prerelease: true
+           8.0.x        
     # Android SDK Install
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
@@ -48,7 +47,7 @@ jobs:
     #- name: Run Mapsui.Rendering.Skia.Tests
     #  run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll    
     - name: Run Mapsui.Tests
-      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net8.0/Mapsui.Tests.dll
+      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net8.0/Mapsui.Tests.dll --blame-hang-timeout:25s
     # Release Build
     - name: Build Linux packages
       run: dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=$(git describe --tags) Mapsui.Linux.slnf --output Artifacts
@@ -84,15 +83,13 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           6.0.x
-         include-prerelease: false
+           6.0.x         
     # .Net 7 update     
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           8.0.x
-         include-prerelease: true
+           8.0.x         
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies Mapsui.Mac
@@ -130,9 +127,9 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
     # Run Tests   
     - name: Run Mapsui.Rendering.Skia.Tests
-      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll    
+      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:25s    
     - name: Run Mapsui.Tests
-      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net8.0/Mapsui.Tests.dll
+      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net8.0/Mapsui.Tests.dll --blame-hang-timeout:25s
     # Release Build
     - name: Build Mapsui
       run: dotnet pack --no-restore --configuration Release Mapsui/Mapsui.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
@@ -178,8 +175,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           8.0.x
-         include-prerelease: true
+           8.0.x         
     # Java Sdk install 11
     - name: Install Open JDK 11
       uses: actions/setup-java@v4
@@ -211,17 +207,17 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.UI.Maui.Tests/Mapsui.UI.Maui.Tests.csproj
     # Test Run
     - name: Run Mapsui.Nts.Tests
-      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net8.0/Mapsui.Nts.Tests.dll
+      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net8.0/Mapsui.Nts.Tests.dll --blame-hang-timeout:25s
     - name: Run Mapsui.Rendering.Skia.Tests
       uses: nick-fields/retry@v2
       with:
         timeout_minutes: 10
         max_attempts: 3        
-        command: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll    
+        command: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:25s    
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net8.0/Mapsui.Tests.dll
     - name: Run Mapsui.UI.Maui.Tests
-      run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net8.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll
+      run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net8.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll --blame-hang-timeout:25s
     # Release Build
     - name: Build nuget packages
       run: dotnet pack Mapsui.sln --configuration Release /p:Version=$(git describe --tags) -o Artifacts
