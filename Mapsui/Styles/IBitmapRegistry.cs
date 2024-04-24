@@ -30,7 +30,7 @@ public interface IBitmapRegistry : IDisposable
     /// </summary>
     /// <param name="id">Id of existing bitmap data</param>
     /// <returns></returns>
-    object? Get(int id);
+    object Get(int id);
 
     /// <summary>
     /// Set new bitmap data for a already registered bitmap
