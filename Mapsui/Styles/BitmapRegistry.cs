@@ -132,14 +132,9 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// </summary>
     /// <param name="id">Id of existing bitmap data</param>
     /// <returns></returns>
-    public object Get(int id)
+    public object? Get(int id)
     {
-        if (_register.TryGetValue(id, out var val))
-        {
-            return val;
-        }
-
-        throw new ArgumentException("Bitmap not found: " + id);
+        return _register[id];
     }
 
     /// <summary>
