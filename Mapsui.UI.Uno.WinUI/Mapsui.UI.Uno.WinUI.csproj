@@ -1,40 +1,42 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
-
-  <!--
-	Adding project references to this project requires some manual adjustments.
-	Please see https://github.com/unoplatform/uno/issues/3909 for more details.
-	-->
-
+﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-		<TargetFrameworks>net7.0;net7.0-android;net8.0;net8.0-android;</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) or $([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net7.0-ios;net7.0-maccatalyst;net7.0-macos;net8.0-ios;net8.0-maccatalyst;net8.0-macos</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0;net8.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net8.0-ios;net8.0-maccatalyst;net8.0-android;net8.0-windows10.0.19041;net8.0-browserwasm;net8.0-desktop</TargetFrameworks>
+    <UnoSingleProject>true</UnoSingleProject>
+    <OutputType>Library</OutputType>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <RootNamespace>Mapsui.UI.WinUI</RootNamespace>
     <DefineConstants>__WINUI__</DefineConstants>
     <PackageId>Mapsui.Uno.WinUI</PackageId>
     <Description>Uno map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) uno.winui</PackageTags>
-	  <IsPackable>true</IsPackable>
-    <!--Uno has some differences between targets-->
-    <EnablePackageValidation>false</EnablePackageValidation>
-    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('ios'))">14.2</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('maccatalyst'))">14.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('android'))">21.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('macos'))">10.14</SupportedOSPlatformVersion>
-    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <IsPackable>true</IsPackable>
+
+    <!--
+      UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <!--
+    <UnoFeatures></UnoFeatures>
+    -->
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework.Contains('windows'))">    
-    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
-    <UseWinUI>true</UseWinUI>
-    <!-- Workaround see https://github.com/dotnet/maui/issues/5886 -->
-    <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
-  </PropertyGroup>
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+    <!--
+    If you encounter this error message:
+
+      error NETSDK1148: A referenced assembly was compiled using a newer version of Microsoft.Windows.SDK.NET.dll.
+      Please update to a newer .NET SDK in order to reference this assembly.
+
+    This means that the two packages below must be aligned with the "build" version number of
+    the "Microsoft.Windows.SDK.BuildTools" package above, and the "revision" version number
+    must be the highest found in https://www.nuget.org/packages/Microsoft.Windows.SDK.NET.Ref.
+    -->
+    <!-- <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22621.28" />
+    <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22621.28" /> -->
+  </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
     <PackageReference Include="Microsoft.WindowsAppSDK" />
@@ -49,7 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.WinUI" />    
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI" />    
   </ItemGroup>
 
@@ -60,22 +61,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-    <Compile Update="**\*.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="..\Mapsui.UI.WinUI\Extensions\PointExtensions.cs" Link="Extensions\PointExtensions.cs" />
-		<Compile Include="..\Mapsui.UI.WinUI\Extensions\PointerPointExtensions.cs" Link="Extensions\PointerPointExtensions.cs" />
+    <Compile Include="..\Mapsui.UI.WinUI\Extensions\PointerPointExtensions.cs" Link="Extensions\PointerPointExtensions.cs" />
     <Compile Include="..\Mapsui.UI.WinUI\MapControl.cs" Link="MapControl.cs" />
   </ItemGroup>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
-  
 </Project>
