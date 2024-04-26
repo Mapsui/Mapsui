@@ -10,7 +10,7 @@ namespace Mapsui.Fetcher;
 /// </summary>
 public class Delayer
 {
-    private int _ticksPreviousCall = int.MinValue;
+    private int _ticksPreviousCall = 0;
 
     // The Channel has a capacity of just one and if full will drop the oldest, so that
     // if the method on the queue is not in progress yet the new call will replace the waiting one.
@@ -59,7 +59,7 @@ public class Delayer
     {
         if (MillisecondsBeforeCall > 0)
             await Task.Delay(MillisecondsBeforeCall);
-        var ticksToWait = Math.Max(MillisecondsBetweenCalls - Math.Max(Environment.TickCount - _ticksPreviousCall, 0), 0);
+        var ticksToWait = Math.Max(MillisecondsBetweenCalls - (Environment.TickCount - _ticksPreviousCall), 0);
         if (ticksToWait > 0)
             await Task.Delay(ticksToWait);
         await action();
