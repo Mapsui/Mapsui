@@ -64,7 +64,7 @@ public class MapRegressionTests
     ];
 
     public static object[] ExcludedSamples =>
-        _excludedSamples ??= [new AnimatedPointsSample(), new MutatingTriangleSample(), new ArcGISDynamicServiceSample(), new ManyRefreshesSample()];
+        _excludedSamples ??= [new AnimatedPointsSample(), new MutatingTriangleSample(), new ArcGISDynamicServiceSample(), new ManyMutatingLayersSample()];
 
     [Test]
     [Retry(5)]
