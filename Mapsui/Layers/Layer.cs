@@ -51,8 +51,8 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     // ReSharper disable once UnusedMember.Global // todo: Create a sample for this field
     public int FetchingPostponedInMilliseconds
     {
-        get => Delayer.MillisecondsToWait;
-        set => Delayer.MillisecondsToWait = value;
+        get => Delayer.MillisecondsBetweenCalls;
+        set => Delayer.MillisecondsBetweenCalls = value;
     }
     /// <summary>
     /// Data source for this layer
