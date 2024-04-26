@@ -13,22 +13,22 @@ using Mapsui.Tiling;
 
 namespace Mapsui.Samples.Common.Maps.Geometries;
 
-public class ManyMutatingLayersSample : ISample
+public sealed class ManyMutatingLayersSample : ISample, IDisposable
 {
+    private bool _disposed;
+
     public string Name => "Many Mutating Layers";
     public string Category => "Performance";
 
-    private Random _random = new(123);
+    private readonly Random _random = new(123);
     private const int _featureCount = 40;
     private const int _layerCount = 20;
-    private const double c = 40075017 * 0.5; // Half the circumference of the earth
-#pragma warning disable IDISP006 // Implement IDisposable
-    private Timer _timer1 = new(5);
-    private Timer _timer2 = new(6);
-    private Timer _timer3 = new(7);
-    private Timer _timer4 = new(8);
-    private Timer _timer5 = new(9);
-#pragma warning restore IDISP006 // Implement IDisposable
+    private const double _c = 40075017 * 0.5; // Half the circumference of the earth
+    private readonly Timer _timer1 = new(5);
+    private readonly Timer _timer2 = new(6);
+    private readonly Timer _timer3 = new(7);
+    private readonly Timer _timer4 = new(8);
+    private readonly Timer _timer5 = new(9);
     object _syncLock = new();
 
     public Task<Map> CreateMapAsync()
@@ -36,7 +36,7 @@ public class ManyMutatingLayersSample : ISample
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        var features = RandomPointsBuilder.CreateRandomFeatures(new MRect(-c, -c, c, c), _featureCount, _random);
+        var features = RandomPointsBuilder.CreateRandomFeatures(new MRect(-_c, -_c, _c, _c), _featureCount, _random);
         map.Layers.Add(CreatePointLayers(_random, features).ToArray());
         map.Navigator.ZoomToBox(map.Layers[0].Extent);
 
@@ -111,5 +111,21 @@ public class ManyMutatingLayersSample : ISample
         byte[] rgb = new byte[3];
         random.NextBytes(rgb);
         return new Color(rgb[0], rgb[1], rgb[2]);
+    }
+
+    public void Dispose()
+    {
+        if (_disposed)
+        {
+            return;
+        }
+
+        _timer1.Dispose();
+        _timer2.Dispose();
+        _timer3.Dispose();
+        _timer4.Dispose();
+        _timer5.Dispose();
+
+        _disposed = true;
     }
 }
