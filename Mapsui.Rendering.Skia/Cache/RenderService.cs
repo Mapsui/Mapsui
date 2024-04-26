@@ -11,7 +11,7 @@ public sealed class RenderService : IRenderService
     }
 
     public ISymbolCache SymbolCache { get; }
-    public IVectorCache VectorCache { get; private set; }
+    public IVectorCache VectorCache { get; }
     public ITileCache TileCache { get; }
     public ILabelCache LabelCache { get; }
 
