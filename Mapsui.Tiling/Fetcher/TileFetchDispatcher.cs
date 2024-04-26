@@ -25,7 +25,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
     private readonly ITileSchema? _tileSchema;
     private readonly FetchMachine _fetchMachine;
     private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature;
-    private readonly int _fetchThreadCount = 2;
+    private readonly int _fetchThreadCount = 4;
 
     public TileFetchDispatcher(
         ITileCache<IFeature?> tileCache,
@@ -114,7 +114,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
 
             _tilesInProgress.TryRemove(tileInfo.Index);
 
-            DataChanged?.Invoke(this, new TileDataChangedEventArgs(exception, tileInfo));
+            DataChanged?.Invoke(this, new DataChangedEventArgs(exception));
 
             FetchNextTiles();
         }
