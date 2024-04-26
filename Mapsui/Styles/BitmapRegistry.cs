@@ -14,7 +14,7 @@ namespace Mapsui.Styles;
 /// <summary>
 /// Class for managing all bitmaps, which are registered for Mapsui drawing
 /// </summary>
-public class BitmapRegistry
+public sealed class BitmapRegistry : IBitmapRegistry
 {
     private static BitmapRegistry? _instance;
     private readonly ConcurrentDictionary<int, object> _register = [];
@@ -45,8 +45,7 @@ public class BitmapRegistry
     {
         CheckBitmapData(bitmapData);
 
-        var id = _counter;
-        _counter++;
+        var id = NextBitmapId();
         _register[id] = bitmapData;
         if (key != null)
         {
@@ -54,7 +53,7 @@ public class BitmapRegistry
         }
         return id;
     }
-    
+
     public async Task<int> RegisterAsync(Uri bitmapPath)
     {
         var key = bitmapPath.ToString();
@@ -118,6 +117,11 @@ public class BitmapRegistry
         if (stream == null)
             throw new ArgumentException("Resource not found: " + key);
         return Register(stream, key);
+    }
+
+    public int NextBitmapId()
+    {
+        return _parent?.NextBitmapId() ?? Interlocked.Increment(ref _counter);
     }
 
     /// <summary> Unregister an existing bitmap </summary>
