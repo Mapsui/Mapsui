@@ -3,7 +3,7 @@ using Mapsui.Cache;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVectorCache
+public sealed class VectorCache(IRenderService renderService, int capacity) : IVectorCache
 {
     private readonly LruCache<object, ICacheHolder> _paintCache = new(Math.Min(capacity, 1));
     private readonly LruCache<object, ICacheHolder> _pathParamCache = new(Math.Min(capacity, 1));
@@ -26,20 +26,20 @@ public sealed class VectorCache(ISymbolCache symbolCache, int capacity) : IVecto
         return holder?.Get<TPaint>() ?? new CacheTracker<TPaint>(toPaint(param));
     }
 
-    public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, ISymbolCache, TPaint> toPaint)
+    public CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, IRenderService, TPaint> toPaint)
         where TParam : notnull
         where TPaint : class
     {
         if (Enabled == false)
-            return new CacheTracker<TPaint>(toPaint(param, symbolCache));
+            return new CacheTracker<TPaint>(toPaint(param, renderService));
 
         var holder = _paintCache.GetOrCreateValue(param, f =>
         {
-            var paint = toPaint(f, symbolCache);
+            var paint = toPaint(f, renderService);
             return new CacheHolder<TPaint>(paint);
         });
 
-        return holder?.Get<TPaint>() ?? new CacheTracker<TPaint>(toPaint(param, symbolCache));
+        return holder?.Get<TPaint>() ?? new CacheTracker<TPaint>(toPaint(param, renderService));
     }
 
     public CacheTracker<TPath> GetOrCreatePath<TParam, TPath>(TParam param, Func<TParam, TPath> toPath)
