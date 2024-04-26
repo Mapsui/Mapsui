@@ -79,4 +79,9 @@ public static class SvgHelper
 
         return bitmapId;
     }
+
+    public static Uri LoadSvgPath(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
+    {
+        return EmbeddedResourceLoader.GetResourceUri(typeInAssemblyOfEmbeddedResource, relativePathToEmbeddedResource);
+    }
 }
