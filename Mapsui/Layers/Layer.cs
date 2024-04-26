@@ -18,7 +18,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     private readonly object _syncRoot = new();
     private IFeature[] _cache = [];
     private readonly FeatureFetchDispatcher _fetchDispatcher;
-    private readonly FeatureFetchMachine _fetchMachine;
+    private readonly FetchMachine _fetchMachine;
     private int busyCounter;
 
     public List<Func<bool>> Animations { get; } = [];
@@ -36,7 +36,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     public Layer(string layerName) : base(layerName)
     {
         _fetchDispatcher = new FeatureFetchDispatcher();
-        _fetchMachine = new FeatureFetchMachine();
+        _fetchMachine = new FetchMachine();
     }
 
     /// <summary>
