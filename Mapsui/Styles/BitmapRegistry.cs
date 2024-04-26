@@ -54,14 +54,78 @@ public class BitmapRegistry
         }
         return id;
     }
+    
+    public async Task<int> RegisterAsync(Uri bitmapPath)
+    {
+        var key = bitmapPath.ToString();
+        Stream? stream = null;
+        switch (bitmapPath.Scheme)
+        {
+            case "embeddedresource":
+                if (resourceCache.TryGetValue(bitmapPath.Host, out var found))
+                {
+                    stream = found.assembly.GetManifestResourceStream(found.realResourceName);
+                }
+                else
+                {
+                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    {
+                        var name = assembly.GetName().Name;
+                        if (name != null)
+                            if (bitmapPath.Host.StartsWith(name, StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                string[] resourceNames = assembly.GetManifestResourceNames();
+                                var realResourceName = resourceNames.FirstOrDefault(r => r.Equals(bitmapPath.Host, StringComparison.InvariantCultureIgnoreCase));
+                                if (realResourceName != null)
+                                {
+                                    stream = assembly.GetManifestResourceStream(realResourceName);
+                                    if (stream != null)
+                                    {
+                                        resourceCache[bitmapPath.Host] = (assembly, realResourceName);
+                                        break;
+                                    }
+                                }
+                            }
+                    }
+                }
+
+                break;
+            case "file":
+                stream = File.OpenRead(bitmapPath.LocalPath);
+                break;
+            case "http":
+            case "https":
+                try
+                {
+                    using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
+                    using HttpClient client = new HttpClient(handler);
+                    using HttpResponseMessage response = await client.GetAsync(bitmapPath, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+                    response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
+                    await using var tempStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                    // copy stream to memory stream to avoid issues with disposing the stream
+                    stream = new MemoryStream();
+                    await tempStream.CopyToAsync(stream).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, $"Could not load from uri {bitmapPath} : {ex.Message}", ex);
+                }
+                break;
+            default:
+                throw new ArgumentException($"Unsupported scheme {bitmapPath.Scheme} on {nameof(bitmapPath)}");
+        }
+
+        if (stream == null)
+            throw new ArgumentException("Resource not found: " + key);
+        return Register(stream, key);
+    }
 
     /// <summary> Unregister an existing bitmap </summary>
     /// <param name="id">Id of registered bitmap data</param>
     /// <returns>The unregistered object</returns>
     public object? Unregister(int id)
     {
-        _register.TryGetValue(id, out var val);
-        _register.Remove(id);
+        _register.Remove(id, out var val);
         return val;
     }
 
