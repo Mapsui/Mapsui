@@ -17,10 +17,12 @@ public class FetchMachine
         }
     }
 
-    public void Add(Func<Task> action)
+    public void Start(Func<Task> action)
     {
         _queue.Writer.TryWrite(action);
     }
+
+    public void Stop() { }
 
     private static async Task AddConsumerAsync(Channel<Func<Task>> queue)
     {

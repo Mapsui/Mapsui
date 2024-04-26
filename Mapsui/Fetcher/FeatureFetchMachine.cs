@@ -17,21 +17,18 @@ public class FeatureFetchMachine
         }
     }
 
-    private async Task AddConsumerAsync(Channel<Func<Task>> queue)
-    {
-        await foreach (var action in queue.Reader.ReadAllAsync())
-        {
-            await action();
-        }
-    }
-
     public void Start(Func<Task> action)
     {
         _queue.Writer.TryWrite(action);
     }
 
-    public void Stop()
+    public void Stop() { }
+
+    private static async Task AddConsumerAsync(Channel<Func<Task>> queue)
     {
-        // Todo: implement
+        await foreach (var action in queue.Reader.ReadAllAsync())
+        {
+            await action();
+        }
     }
 }
