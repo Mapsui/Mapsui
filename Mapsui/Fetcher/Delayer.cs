@@ -11,6 +11,15 @@ namespace Mapsui.Fetcher;
 public class Delayer
 {
     private int _ticksPreviousCall = int.MinValue;
+
+    // The Channel has a capacity of just one and if full will drop the oldest, so that
+    // if the method on the queue is not in progress yet the new call will replace the waiting one.
+    // This is to avoid requests of an outdated extent.
+    private Channel<Func<Task>> _queue = Channel.CreateBounded<Func<Task>>(
+        new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest });
+
+    public Delayer() => Catch.TaskRun(() => AddConsumerAsync(_queue));
+
     /// <summary>
     /// The minimum delay between two calls.
     /// </summary>
@@ -19,10 +28,7 @@ public class Delayer
     /// The delay between the call to ExecuteDelayed and the actual call to the method.
     /// </summary>
     public int MillisecondsBeforeCall { get; set; } = 0;
-    public Channel<Func<Task>> _queue = Channel.CreateBounded<Func<Task>>(
-        new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest });
 
-    public Delayer() => Catch.TaskRun(() => AddConsumerAsync(_queue));
 
     private static async Task AddConsumerAsync(Channel<Func<Task>> queue)
     {

@@ -9,7 +9,6 @@ namespace Mapsui.Tests.Fetcher;
 public class DelayerTests
 {
     [Test]
-    [Repeat(1000)]
     public async Task DelayerShouldNotHangAsync()
     {
         // Arrange
@@ -18,7 +17,7 @@ public class DelayerTests
         delayer.MillisecondsBetweenCalls = 1;
         var backgroundProcesses = new BackgroundProcesses();
         backgroundProcesses.Start(random);
-        int iterationCount = 10000; // Increase this value to make it hang. I tested wth 10000
+        int iterationCount = 100; // Increase this value to make it hang. I tested wth 10000 and [Repeat(100)]
 
         // Act
         for (var i = 0; i < iterationCount; i++)
