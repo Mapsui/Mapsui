@@ -76,7 +76,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
                 {
                     var tileToFetch = tilesToFetch[i];
                     _tilesInProgress.Add(tileToFetch.Index);
-                    _fetchMachine.Add(() => FetchOnThreadAsync(tileToFetch));
+                    _fetchMachine.Start(() => FetchOnThreadAsync(tileToFetch));
                 }
             }
             Busy = _tilesInProgress.Count > 0 || tilesToFetch.Length > 0;
