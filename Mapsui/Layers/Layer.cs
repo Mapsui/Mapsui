@@ -6,9 +6,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
+using Mapsui.Logging;
 using Mapsui.Providers;
+using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
@@ -21,7 +24,6 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();
     private IFeature[] _cache = [];
-    private readonly FeatureFetchDispatcher _fetchDispatcher = new();
     private readonly FetchMachine _fetchMachine = new();
     private int _busyCounter;
 
@@ -54,12 +56,6 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
 
             _dataSource = value;
             ClearCache();
-
-            if (_dataSource != null)
-            {
-                _fetchDispatcher.DataSource = _dataSource;
-            }
-
             OnPropertyChanged(nameof(DataSource));
             OnPropertyChanged(nameof(Extent));
         }
@@ -67,23 +63,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
 
     private void DelayedFetch(FetchInfo fetchInfo)
     {
-        _fetchDispatcher.SetViewport(fetchInfo);
-        _fetchMachine.Start(FetchAsync);
-    }
-
-    private async Task FetchAsync()
-    {
-        await _fetchDispatcher.FetchAsync((r) =>
-        {
-            BusyMinusOne();
-            r.Handle(
-                (f) =>
-                {
-                    _cache = f;
-                    OnDataChanged(new DataChangedEventArgs());
-                },
-                (e) => OnDataChanged(new DataChangedEventArgs(e)));
-        });
+        _fetchMachine.Start(() => FetchAsync(fetchInfo));
     }
 
     private void BusyPlusOne()
@@ -160,5 +140,24 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
                 areAnimationsRunning = true;
         }
         return areAnimationsRunning;
+    }
+
+    public async Task FetchAsync(FetchInfo fetchInfo)
+    {
+        fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
+
+        try
+        {
+            var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo).ConfigureAwait(false) : [];
+            _cache = features.ToArray();
+            BusyMinusOne();
+            OnDataChanged(new DataChangedEventArgs());
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+            BusyMinusOne();
+            OnDataChanged(new DataChangedEventArgs(ex));
+        }
     }
 }
