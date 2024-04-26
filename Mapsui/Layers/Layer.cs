@@ -40,6 +40,14 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     }
 
     /// <summary>
+    /// Time to wait before fetching data
+    /// </summary>
+    public int FetchingPostponedInMilliseconds
+    {
+        get => Delayer.MillisecondsBetweenCalls;
+        set => Delayer.MillisecondsBetweenCalls = value;
+    }
+    /// <summary>
     /// Data source for this layer
     /// </summary>
     public IProvider? DataSource
