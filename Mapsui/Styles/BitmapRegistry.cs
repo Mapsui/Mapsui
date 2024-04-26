@@ -14,7 +14,7 @@ namespace Mapsui.Styles;
 /// <summary>
 /// Class for managing all bitmaps, which are registered for Mapsui drawing
 /// </summary>
-public sealed class BitmapRegistry : IBitmapRegistry
+public class BitmapRegistry
 {
     private static BitmapRegistry? _instance;
     private readonly ConcurrentDictionary<int, object> _register = [];
@@ -45,7 +45,8 @@ public sealed class BitmapRegistry : IBitmapRegistry
     {
         CheckBitmapData(bitmapData);
 
-        var id = NextBitmapId();
+        var id = _counter;
+        _counter++;
         _register[id] = bitmapData;
         if (key != null)
         {
@@ -54,81 +55,14 @@ public sealed class BitmapRegistry : IBitmapRegistry
         return id;
     }
 
-    public async Task<int> RegisterAsync(Uri bitmapPath)
-    {
-        var key = bitmapPath.ToString();
-        Stream? stream = null;
-        switch (bitmapPath.Scheme)
-        {
-            case "embeddedresource":
-                if (resourceCache.TryGetValue(bitmapPath.Host, out var found))
-                {
-                    stream = found.assembly.GetManifestResourceStream(found.realResourceName);
-                }
-                else
-                {
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        var name = assembly.GetName().Name;
-                        if (name != null)
-                            if (bitmapPath.Host.StartsWith(name, StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                string[] resourceNames = assembly.GetManifestResourceNames();
-                                var realResourceName = resourceNames.FirstOrDefault(r => r.Equals(bitmapPath.Host, StringComparison.InvariantCultureIgnoreCase));
-                                if (realResourceName != null)
-                                {
-                                    stream = assembly.GetManifestResourceStream(realResourceName);
-                                    if (stream != null)
-                                    {
-                                        resourceCache[bitmapPath.Host] = (assembly, realResourceName);
-                                        break;
-                                    }
-                                }
-                            }
-                    }
-                }
-
-                break;
-            case "file":
-                stream = File.OpenRead(bitmapPath.LocalPath);
-                break;
-            case "http":
-            case "https":
-                try
-                {
-                    using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
-                    using HttpClient client = new HttpClient(handler);
-                    using HttpResponseMessage response = await client.GetAsync(bitmapPath, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-                    response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
-                    stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log(LogLevel.Error, $"Could not load from uri {bitmapPath} : {ex.Message}", ex);
-                }
-                break;
-            default:
-                throw new ArgumentException($"Unsupported scheme {bitmapPath.Scheme} on {nameof(bitmapPath)}");
-        }
-
-        if (stream == null)
-            throw new ArgumentException("Resource not found: " + key);
-        return Register(stream, key);
-    }
-
-    public int NextBitmapId()
-    {
-        return _parent?.NextBitmapId() ?? Interlocked.Increment(ref _counter);
-    }
-
     /// <summary> Unregister an existing bitmap </summary>
     /// <param name="id">Id of registered bitmap data</param>
     /// <returns>The unregistered object</returns>
     public object? Unregister(int id)
     {
-        return _register.Remove(id, out var val) ?
-            val :
-            _parent?.Unregister(id);
+        _register.TryGetValue(id, out var val);
+        _register.Remove(id);
+        return val;
     }
 
     /// <summary>
@@ -138,12 +72,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// <returns></returns>
     public object Get(int id)
     {
-        if (_register.TryGetValue(id, out var val))
-        {
-            return val;
-        }
-
-        return _parent?.Get(id) ?? throw new KeyNotFoundException();
+        return _register[id];
     }
 
     /// <summary>
