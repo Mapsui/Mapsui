@@ -12,14 +12,18 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers;
 
-public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
+/// <summary>
+/// Create layer with name
+/// </summary>
+/// <param name="layerName">Name to use for layer</param>
+public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, ILayerDataSource<IProvider>
 {
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();
     private IFeature[] _cache = [];
-    private readonly FeatureFetchDispatcher _fetchDispatcher;
-    private readonly FetchMachine _fetchMachine;
-    private int busyCounter;
+    private readonly FeatureFetchDispatcher _fetchDispatcher = new();
+    private readonly FetchMachine _fetchMachine = new();
+    private int _busyCounter;
 
     public List<Func<bool>> Animations { get; } = [];
     public Delayer Delayer { get; } = new();
@@ -30,16 +34,6 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     public Layer() : this("Layer") { }
 
     /// <summary>
-    /// Create layer with name
-    /// </summary>
-    /// <param name="layerName">Name to use for layer</param>
-    public Layer(string layerName) : base(layerName)
-    {
-        _fetchDispatcher = new FeatureFetchDispatcher();
-        _fetchMachine = new FetchMachine();
-    }
-
-    /// <summary>
     /// Time to wait before fetching data
     /// </summary>
     public int FetchingPostponedInMilliseconds
@@ -47,6 +41,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
         get => Delayer.MillisecondsBetweenCalls;
         set => Delayer.MillisecondsBetweenCalls = value;
     }
+
     /// <summary>
     /// Data source for this layer
     /// </summary>
@@ -95,7 +90,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     {
         lock (_syncRoot)
         {
-            busyCounter++;
+            _busyCounter++;
             Busy = true;
         }
     }
@@ -104,8 +99,8 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     {
         lock (_syncRoot)
         {
-            busyCounter--;
-            if (busyCounter == 0)
+            _busyCounter--;
+            if (_busyCounter == 0)
                 Busy = false;
         }
     }
