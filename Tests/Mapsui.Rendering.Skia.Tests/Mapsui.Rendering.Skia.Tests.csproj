@@ -398,6 +398,7 @@
     <None Remove="Resources\Images\OriginalRegression\LoggingWidgetSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ModifyScaleSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\MyLocationLayerSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\PolygonBitmapPathTestSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\PolygonGeometrySample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ProjectionTestSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\RasterizingTileLayerWithDynamicPointsSample.Regression.png" />
