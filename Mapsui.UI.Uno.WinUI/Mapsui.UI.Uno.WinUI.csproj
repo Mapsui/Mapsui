@@ -18,9 +18,10 @@
       UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
       https://aka.platform.uno/singleproject-features
     -->
-    <!--
-    <UnoFeatures></UnoFeatures>
-    -->
+    
+    <UnoFeatures>
+      Skia;
+    </UnoFeatures>
   </PropertyGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
@@ -40,19 +41,19 @@
 
   <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
     <PackageReference Include="Microsoft.WindowsAppSDK" />
-    <PackageReference Include="SkiaSharp.Views.WinUI" />
+    <!--<PackageReference Include="SkiaSharp.Views.WinUI" />-->
   </ItemGroup>
 
   <!--Harfbuzz Sharp references Workaround for this issue-->
   <!--https://github.com/mono/SkiaSharp/issues/1725-->
-  <ItemGroup Condition="'$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='net7.0' or '$(TargetFramework)'=='net8.0'">
+  <!--<ItemGroup Condition="'$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='net7.0' or '$(TargetFramework)'=='net8.0'">
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI" />    
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
