@@ -94,6 +94,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     return false;
 
                 var sprite = bitmap.Sprite;
+                sprite.LoadBitmapIdAsync(renderService.BitmapRegistry);
                 if (sprite.Data == null)
                 {
                     var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);

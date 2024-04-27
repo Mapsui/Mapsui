@@ -171,7 +171,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
 
         if (bitmapData is Sprite sprite)
         {
-            if (sprite.Atlas < 0 || !_register.ContainsKey(sprite.Atlas))
+            if (sprite.AtlasPath == null && (sprite.Atlas < 0 || !_register.ContainsKey(sprite.Atlas)))
             {
                 throw new ArgumentException("Sprite has no corresponding atlas bitmap.");
             }

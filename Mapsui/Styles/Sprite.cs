@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using Mapsui.Logging;
 
 namespace Mapsui.Styles;
 
@@ -38,7 +38,7 @@ public class Sprite
     {
     }
 
-    public async Task LoadBitmapIdAsync(IBitmapRegistry bitmapRegistry)
+    public async void LoadBitmapIdAsync(IBitmapRegistry bitmapRegistry)
     {
         if (Atlas >= 0)
         {
@@ -47,7 +47,14 @@ public class Sprite
 
         if (AtlasPath != null)
         {
-            Atlas = await bitmapRegistry.RegisterAsync(AtlasPath).ConfigureAwait(false);
+            try
+            {
+                Atlas = await bitmapRegistry.RegisterAsync(AtlasPath).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message);
+            }
         }
     }
 }
