@@ -135,7 +135,7 @@ public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
 
         while (_animationLayer.UpdateAnimations())
         {
-            await Task.Delay(10).ConfigureAwait(true);
+            await Task.Delay(10).ConfigureAwait(false);
         }
     }
 
