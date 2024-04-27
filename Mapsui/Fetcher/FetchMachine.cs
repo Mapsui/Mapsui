@@ -11,15 +11,10 @@ public class FetchMachine
     public FetchMachine(int numberOfWorkers = 4)
     {
         for (var i = 0; i < numberOfWorkers; i++)
-        {
             _ = AddConsumerAsync(_queue);
-        }
     }
 
-    public void Start(Func<Task> action)
-    {
-        _queue.Writer.TryWrite(action);
-    }
+    public void Start(Func<Task> action) => _queue.Writer.TryWrite(action);
 
     public void Stop() { }
 
