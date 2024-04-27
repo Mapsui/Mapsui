@@ -9,7 +9,7 @@ public sealed class RenderService : IRenderService
         SymbolCache = new SymbolCache();
         TileCache = new TileCache();
         LabelCache = new LabelCache();
-        BitmapRegistry = Styles.BitmapRegistry.Instance;
+        BitmapRegistry = new RenderBitmapRegistry(Styles.BitmapRegistry.Instance);
         VectorCache = new VectorCache(this, capacity);
     }
 
@@ -25,6 +25,6 @@ public sealed class RenderService : IRenderService
         SymbolCache.Dispose();
         VectorCache.Dispose();
         TileCache.Dispose();
-        // Don't Dispose BitmapRegistry, it's a singleton
+        BitmapRegistry.Dispose();
     }
 }
