@@ -41,14 +41,14 @@ internal sealed class BusPointProvider : MemoryProvider, IDynamic, IDisposable
 
     private void OnDataChanged()
     {
-        DataChanged?.Invoke(this, new DataChangedEventArgs(null, false, null));
+        DataChanged?.Invoke(this, new DataChangedEventArgs());
     }
 
     public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var busFeature = new PointFeature(SphericalMercator.FromLonLat(_previousCoordinates.Lon, _previousCoordinates.Lat).ToMPoint());
         busFeature["ID"] = "bus";
-        return Task.FromResult((IEnumerable<IFeature>)new[] { busFeature });
+        return Task.FromResult((IEnumerable<IFeature>)[busFeature]);
     }
 
     public void Dispose()
