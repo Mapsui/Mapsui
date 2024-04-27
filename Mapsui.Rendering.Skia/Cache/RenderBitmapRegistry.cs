@@ -43,13 +43,15 @@ public class RenderBitmapRegistry(BitmapRegistry instance) : IBitmapRegistry
     {
         return instance.TryGetBitmapId(key, out bitmapId);
     }
-    
+
     public void Dispose()
     {
         // unregister the created images
-        foreach(var id in _createdImages)
+        foreach (var id in _createdImages)
         {
             instance.Unregister(id);
         }
+
+        _createdImages.Clear();
     }
 }
