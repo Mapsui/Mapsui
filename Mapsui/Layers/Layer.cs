@@ -25,7 +25,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     private readonly object _syncRoot = new();
     private IFeature[] _cache = [];
     private readonly FetchMachine _fetchMachine = new();
-    private int _fetchCounter;
+    private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
 
     public List<Func<bool>> Animations { get; } = [];
     public Delayer Delayer { get; } = new();
@@ -104,7 +104,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => _fetchMachine.Start(() => FetchAsync(fetchInfo, ++_fetchCounter)));
+        Delayer.ExecuteDelayed(() => _fetchMachine.Start(() => FetchAsync(fetchInfo, ++_refreshCounter)));
     }
 
     public override bool UpdateAnimations()
@@ -118,7 +118,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         return areAnimationsRunning;
     }
 
-    public async Task FetchAsync(FetchInfo fetchInfo, int refreshVersion)
+    public async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter)
     {
         fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
 
@@ -126,14 +126,14 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         {
             var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo).ConfigureAwait(false) : [];
             _cache = features.ToArray();
-            if (_fetchCounter == refreshVersion)
+            if (_refreshCounter == refreshCounter)
                 Busy = false;
             OnDataChanged(new DataChangedEventArgs());
         }
         catch (Exception ex)
         {
             Logger.Log(LogLevel.Error, ex.Message, ex);
-            if (_fetchCounter == refreshVersion)
+            if (_refreshCounter == refreshCounter)
                 Busy = false;
             OnDataChanged(new DataChangedEventArgs(ex));
         }
