@@ -1,5 +1,4 @@
-﻿using Mapsui.Extensions;
-using System;
+﻿using System;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
@@ -13,7 +12,7 @@ public class FetchMachine
     {
         for (var i = 0; i < numberOfWorkers; i++)
         {
-            Catch.TaskRun(() => AddConsumerAsync(_queue));
+            _ = AddConsumerAsync(_queue);
         }
     }
 
@@ -26,9 +25,7 @@ public class FetchMachine
 
     private static async Task AddConsumerAsync(Channel<Func<Task>> queue)
     {
-        await foreach (var action in queue.Reader.ReadAllAsync())
-        {
-            await action();
-        }
+        await foreach (var action in queue.Reader.ReadAllAsync().ConfigureAwait(false))
+            await action().ConfigureAwait(false);
     }
 }
