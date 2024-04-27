@@ -17,9 +17,7 @@ public class Delayer
     private readonly Channel<Func<Task>> _queue = Channel.CreateBounded<Func<Task>>(
         new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest });
 
-    Task _consumer;
-
-    public Delayer() => _consumer = AddConsumerAsync(_queue);
+    public Delayer() => _ = AddConsumerAsync(_queue);
 
     /// <summary>
     /// The minimum delay between two calls.
