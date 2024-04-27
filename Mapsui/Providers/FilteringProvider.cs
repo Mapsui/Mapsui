@@ -30,7 +30,7 @@ public class FilteringProvider : IProvider
 
     public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        var features = await _provider.GetFeaturesAsync(fetchInfo);
+        var features = await _provider.GetFeaturesAsync(fetchInfo).ConfigureAwait(false);
         return features.Where(f => _filter(f));
     }
 }

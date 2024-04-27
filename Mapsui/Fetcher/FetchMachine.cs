@@ -1,32 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Threading.Channels;
+using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher;
 
-public class FetchMachine // Todo: Make internal
+public class FetchMachine
 {
-    private readonly List<FetchWorker> _worker = new();
+    readonly Channel<Func<Task>> _queue = Channel.CreateUnbounded<Func<Task>>();
 
-    public FetchMachine(IFetchDispatcher fetchDispatcher, int numberOfWorkers = 4)
+    public FetchMachine(int numberOfWorkers = 4)
     {
         for (var i = 0; i < numberOfWorkers; i++)
-        {
-            _worker.Add(new FetchWorker(fetchDispatcher));
-        }
+            _ = AddConsumerAsync(_queue);
     }
 
-    public void Start()
-    {
-        foreach (var worker in _worker)
-        {
-            worker.Start();
-        }
-    }
+    public void Start(Func<Task> action) => _queue.Writer.TryWrite(action);
 
-    public void Stop()
+    public void Stop() { }
+
+    private static async Task AddConsumerAsync(Channel<Func<Task>> queue)
     {
-        foreach (var worker in _worker)
-        {
-            worker.Stop();
-        }
+        await foreach (var action in queue.Reader.ReadAllAsync().ConfigureAwait(false))
+            await action().ConfigureAwait(false);
     }
 }
