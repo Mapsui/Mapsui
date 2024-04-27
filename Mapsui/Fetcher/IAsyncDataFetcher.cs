@@ -36,25 +36,21 @@ public delegate void DataChangedEventHandler(object sender, DataChangedEventArgs
 
 public class DataChangedEventArgs : EventArgs
 {
-    public DataChangedEventArgs() : this(null, false, null)
+    public DataChangedEventArgs() : this(null)
     {
     }
 
-    public DataChangedEventArgs(Exception? error, bool cancelled, object? info)
-        : this(error, cancelled, info, string.Empty)
+    public DataChangedEventArgs(Exception? error)
+        : this(error, string.Empty)
     {
     }
 
-    public DataChangedEventArgs(Exception? error, bool cancelled, object? info, string layerName)
+    public DataChangedEventArgs(Exception? error, string layerName)
     {
         Error = error;
-        Cancelled = cancelled;
-        Info = info;
         LayerName = layerName;
     }
 
     public Exception? Error { get; }
-    public bool Cancelled { get; }
-    public object? Info { get; }
     public string LayerName { get; }
 }
