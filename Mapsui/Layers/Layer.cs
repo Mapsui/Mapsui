@@ -5,25 +5,28 @@
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
+/// <summary>
+/// Create layer with name
+/// </summary>
+/// <param name="layerName">Name to use for layer</param>
+public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, ILayerDataSource<IProvider>
 {
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();
-    private readonly ConcurrentStack<IFeature> _cache = new();
-    private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
-    private readonly FetchMachine _fetchMachine;
+    private IFeature[] _cache = [];
+    private readonly FetchMachine _fetchMachine = new();
+    private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
 
-    public SymbolStyle? SymbolStyle { get; set; }
     public List<Func<bool>> Animations { get; } = [];
     public Delayer Delayer { get; } = new();
 
@@ -33,27 +36,14 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     public Layer() : this("Layer") { }
 
     /// <summary>
-    /// Create layer with name
-    /// </summary>
-    /// <param name="layerName">Name to use for layer</param>
-    public Layer(string layerName) : base(layerName)
-    {
-        _fetchDispatcher = new FeatureFetchDispatcher<IFeature>(_cache);
-        _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
-        _fetchDispatcher.PropertyChanged += FetchDispatcherOnPropertyChanged;
-
-        _fetchMachine = new FetchMachine(_fetchDispatcher);
-    }
-
-    /// <summary>
     /// Time to wait before fetching data
     /// </summary>
-    // ReSharper disable once UnusedMember.Global // todo: Create a sample for this field
     public int FetchingPostponedInMilliseconds
     {
         get => Delayer.MillisecondsBetweenCalls;
         set => Delayer.MillisecondsBetweenCalls = value;
     }
+
     /// <summary>
     /// Data source for this layer
     /// </summary>
@@ -66,34 +56,9 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
 
             _dataSource = value;
             ClearCache();
-
-            if (_dataSource != null)
-            {
-                _fetchDispatcher.DataSource = _dataSource;
-            }
-
             OnPropertyChanged(nameof(DataSource));
             OnPropertyChanged(nameof(Extent));
         }
-    }
-
-    private void FetchDispatcherOnPropertyChanged(object? sender, PropertyChangedEventArgs propertyChangedEventArgs)
-    {
-        if (propertyChangedEventArgs.PropertyName == nameof(Busy))
-        {
-            if (_fetchDispatcher != null) Busy = _fetchDispatcher.Busy;
-        }
-    }
-
-    private void FetchDispatcherOnDataChanged(object sender, DataChangedEventArgs args)
-    {
-        OnDataChanged(args);
-    }
-
-    private void DelayedFetch(FetchInfo fetchInfo)
-    {
-        _fetchDispatcher.SetViewport(fetchInfo);
-        _fetchMachine.Start();
     }
 
     /// <summary>
@@ -114,7 +79,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     /// <inheritdoc />
     public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
     {
-        return _cache.ToList();
+        return _cache;
     }
 
     /// <inheritdoc />
@@ -126,7 +91,7 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     /// <inheritdoc />
     public void ClearCache()
     {
-        _cache.Clear();
+        _cache = [];
     }
 
     /// <inheritdoc />
@@ -138,7 +103,8 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
         if (DataSource == null) return;
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
-        Delayer.ExecuteDelayed(() => DelayedFetch(fetchInfo));
+        Busy = true;
+        Delayer.ExecuteDelayed(() => _fetchMachine.Start(() => FetchAsync(fetchInfo, ++_refreshCounter)));
     }
 
     public override bool UpdateAnimations()
@@ -150,5 +116,26 @@ public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
                 areAnimationsRunning = true;
         }
         return areAnimationsRunning;
+    }
+
+    public async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter)
+    {
+        fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
+
+        try
+        {
+            var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo).ConfigureAwait(false) : [];
+            _cache = features.ToArray();
+            if (_refreshCounter == refreshCounter)
+                Busy = false;
+            OnDataChanged(new DataChangedEventArgs());
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+            if (_refreshCounter == refreshCounter)
+                Busy = false;
+            OnDataChanged(new DataChangedEventArgs(ex));
+        }
     }
 }

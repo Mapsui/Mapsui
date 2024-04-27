@@ -1,5 +1,4 @@
-﻿using Mapsui.Extensions;
-using System;
+﻿using System;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
@@ -15,10 +14,10 @@ public class Delayer
     // The Channel has a capacity of just one and if full will drop the oldest, so that
     // if the method on the queue is not in progress yet the new call will replace the waiting one.
     // This is to avoid requests of an outdated extent.
-    private Channel<Func<Task>> _queue = Channel.CreateBounded<Func<Task>>(
+    private readonly Channel<Func<Task>> _queue = Channel.CreateBounded<Func<Task>>(
         new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest });
 
-    public Delayer() => Catch.TaskRun(() => AddConsumerAsync(_queue));
+    public Delayer() => _ = AddConsumerAsync(_queue);
 
     /// <summary>
     /// The minimum delay between two calls.
@@ -32,8 +31,8 @@ public class Delayer
 
     private static async Task AddConsumerAsync(Channel<Func<Task>> queue)
     {
-        await foreach (var action in queue.Reader.ReadAllAsync())
-            await action();
+        await foreach (var action in queue.Reader.ReadAllAsync().ConfigureAwait(false))
+            await action().ConfigureAwait(false);
     }
 
     /// <summary>
@@ -52,17 +51,17 @@ public class Delayer
 
     public void ExecuteDelayed(Action action)
     {
-        _queue.Writer.TryWrite(() => CallAsync(async () => { action(); await Task.CompletedTask; }));
+        _queue.Writer.TryWrite(() => CallAsync(async () => { action(); await Task.CompletedTask.ConfigureAwait(false); }));
     }
 
     private async Task CallAsync(Func<Task> action)
     {
         if (MillisecondsBeforeCall > 0)
-            await Task.Delay(MillisecondsBeforeCall);
+            await Task.Delay(MillisecondsBeforeCall).ConfigureAwait(false);
         var ticksToWait = Math.Max(MillisecondsBetweenCalls - (Environment.TickCount - _ticksPreviousCall), 0);
         if (ticksToWait > 0)
-            await Task.Delay(ticksToWait);
-        await action();
+            await Task.Delay(ticksToWait).ConfigureAwait(false);
+        await action().ConfigureAwait(false);
         _ticksPreviousCall = Environment.TickCount;
     }
 }
