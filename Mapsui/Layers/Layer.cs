@@ -25,7 +25,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     private readonly object _syncRoot = new();
     private IFeature[] _cache = [];
     private readonly FetchMachine _fetchMachine = new();
-    private int _busyCounter;
+    private int _fetchCounter;
 
     public List<Func<bool>> Animations { get; } = [];
     public Delayer Delayer { get; } = new();
@@ -58,30 +58,6 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
             ClearCache();
             OnPropertyChanged(nameof(DataSource));
             OnPropertyChanged(nameof(Extent));
-        }
-    }
-
-    private void DelayedFetch(FetchInfo fetchInfo)
-    {
-        _fetchMachine.Start(() => FetchAsync(fetchInfo));
-    }
-
-    private void BusyPlusOne()
-    {
-        lock (_syncRoot)
-        {
-            _busyCounter++;
-            Busy = true;
-        }
-    }
-
-    private void BusyMinusOne()
-    {
-        lock (_syncRoot)
-        {
-            _busyCounter--;
-            if (_busyCounter == 0)
-                Busy = false;
         }
     }
 
@@ -127,8 +103,8 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         if (DataSource == null) return;
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
-        BusyPlusOne();
-        Delayer.ExecuteDelayed(() => DelayedFetch(fetchInfo));
+        Busy = true;
+        Delayer.ExecuteDelayed(() => _fetchMachine.Start(() => FetchAsync(fetchInfo, ++_fetchCounter)));
     }
 
     public override bool UpdateAnimations()
@@ -142,7 +118,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         return areAnimationsRunning;
     }
 
-    public async Task FetchAsync(FetchInfo fetchInfo)
+    public async Task FetchAsync(FetchInfo fetchInfo, int refreshVersion)
     {
         fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
 
@@ -150,13 +126,15 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         {
             var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo).ConfigureAwait(false) : [];
             _cache = features.ToArray();
-            BusyMinusOne();
+            if (_fetchCounter == refreshVersion)
+                Busy = false;
             OnDataChanged(new DataChangedEventArgs());
         }
         catch (Exception ex)
         {
             Logger.Log(LogLevel.Error, ex.Message, ex);
-            BusyMinusOne();
+            if (_fetchCounter == refreshVersion)
+                Busy = false;
             OnDataChanged(new DataChangedEventArgs(ex));
         }
     }
