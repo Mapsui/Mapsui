@@ -40,12 +40,12 @@ foreach ($file in $fileNames) {
             $projectui = $includeui + ".csproj"
         
             # <ProjectReference .... />     
-            $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z0-9]*$project`"` />", "<PackageReference Include=""$include"" />"
-            $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z0-9]*$projectui`"` />", "<PackageReference Include=""$include"" />"       
+            $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z0-9]*$project`"` />", "<PackageReference Include=""$include"" VersionOverride=""$Version"" />"
+            $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z0-9]*$projectui`"` />", "<PackageReference Include=""$include"" VersionOverride=""$Version"" />"       
 
             # <ProjectReference .... >...</ProjectReference'
-            $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z0-9]*$project`"`>[`r`n <>{}/\.\-a-zA-Z0-9]*</ProjectReference>", "<PackageReference Include=""$include"" />"
-            $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z0-9]*$projectui`"`>[`r`n <>{}/\.\-a-zA-Z0-9]*</ProjectReference>", "<PackageReference Include=""$include"" />"       
+            $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z0-9]*$project`"`>[`r`n <>{}/\.\-a-zA-Z0-9]*</ProjectReference>", "<PackageReference Include=""$include"" VersionOverride=""$Version"" />"
+            $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z0-9]*$projectui`"`>[`r`n <>{}/\.\-a-zA-Z0-9]*</ProjectReference>", "<PackageReference Include=""$include"" VersionOverride=""$Version"" />"       
         }
     }
        
