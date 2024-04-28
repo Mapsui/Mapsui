@@ -38,11 +38,11 @@ jobs:
       with:
         distribution: 'microsoft'
         java-version: '11'
-    # # Android SDK Install
-    # - name: Set up Android SDK
-    #   uses: android-actions/setup-android@v3
-    #   with:
-    #     cmdline-tools-version: '8512546'
+    # Android SDK Install
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v3
+      with:
+        cmdline-tools-version: '8512546'
     - name: Install workloads
       run: dotnet workload install android wasm-tools maui-android
     - name: Install Uno Check
