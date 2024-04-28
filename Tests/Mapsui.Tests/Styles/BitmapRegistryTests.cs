@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using BruTile.Wms;
 using Mapsui.Extensions;
 using Mapsui.Styles;
 using Mapsui.Tests.Common.Maps;
