@@ -20,9 +20,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget16-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget15-
+            ${{ runner.os }}-nuget16-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1      
       with:
@@ -78,9 +78,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget13-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget16-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget13-
+            ${{ runner.os }}-nuget16-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.1.1      
       with:
@@ -181,9 +181,9 @@ jobs:
           ~/.nuget/packages/SkiaSharp* 
           ~/.nuget/packages/System*
           ~/.nuget/packages/Xamarin*
-        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget16-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget15-
+            ${{ runner.os }}-nuget16-
     # .Net 8 update     
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
