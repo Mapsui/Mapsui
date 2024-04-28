@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Styles;
+using Mapsui.Tests.Common.Maps;
+using Mapsui.Utilities;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Styles;
