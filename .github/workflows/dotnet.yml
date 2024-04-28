@@ -13,6 +13,8 @@ jobs:
   linuxBuild:      
     runs-on: ubuntu-latest
     steps:
+      # Workaround to provide additional free space.
+      #   https://github.com/actions/virtual-environments/issues/2840
     - name: Clear space            
       run: |
           sudo rm -rf /opt/ghc
