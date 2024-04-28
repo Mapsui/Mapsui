@@ -32,17 +32,17 @@ jobs:
       with:
          dotnet-version: |
            8.0.x     
-    # Open JDK
-    - name: Install Open JDK 11
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'microsoft'
-        java-version: '11'
-    # Android SDK Install
-    - name: Set up Android SDK
-      uses: android-actions/setup-android@v3
-      with:
-        cmdline-tools-version: '8512546'
+    # # Open JDK
+    # - name: Install Open JDK 11
+    #   uses: actions/setup-java@v2
+    #   with:
+    #     distribution: 'microsoft'
+    #     java-version: '11'
+    # # Android SDK Install
+    # - name: Set up Android SDK
+    #   uses: android-actions/setup-android@v3
+    #   with:
+    #     cmdline-tools-version: '8512546'
     - name: Install workloads
       run: dotnet workload install android wasm-tools maui-android
     - name: Install Uno Check
