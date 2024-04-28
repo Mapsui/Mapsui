@@ -13,13 +13,6 @@ jobs:
   linuxBuild:      
     runs-on: ubuntu-latest
     steps:
-      # Workaround to provide additional free space.
-      #   https://github.com/actions/virtual-environments/issues/2840
-    - name: Clear space            
-      run: |
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0   
@@ -58,6 +51,13 @@ jobs:
       run: uno-check -v --ci --non-interactive --fix --skip androidemulator
     - name: Restore dependencies
       run: dotnet restore Mapsui.Linux.slnf
+    # Workaround to provide additional free space.
+    #   https://github.com/actions/virtual-environments/issues/2840
+    - name: Clear space            
+      run: |
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     - name: Build Mapsui.Linux.slnf
       run: dotnet build --no-restore --configuration Debug Mapsui.Linux.slnf
     # Run Tests   
