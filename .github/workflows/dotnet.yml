@@ -24,7 +24,7 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget16-
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.1.1      
+      uses: NuGet/setup-nuget@v2  
       with:
         nuget-version: latest    
     - name: Setup .NET 8 SDK
@@ -80,7 +80,7 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget16-
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.1.1      
+      uses: NuGet/setup-nuget@v2   
       with:
         nuget-version: latest
     - name: Setup Xcode version 15.1
@@ -195,7 +195,7 @@ jobs:
         distribution: 'microsoft' # open jdk
         java-version: '11'
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.1.1
+      uses: NuGet/setup-nuget@v2
       with:
         nuget-version: latest
     - name: install maui macos android ios maccatalyst wasm-tools
