@@ -1,4 +1,3 @@
-// Copyright (c) The Mapsui authors.
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
@@ -16,11 +15,6 @@ using SkiaSharp.Views.Windows;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
-#if !HAS_UNO_WINUI
-using System;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-#endif
 
 namespace Mapsui.UI.WinUI;
 
