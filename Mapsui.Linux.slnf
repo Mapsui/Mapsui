@@ -13,6 +13,7 @@
       "Mapsui.UI.MapView\\Mapsui.UI.MapView.shproj",
       "Mapsui.UI.Maui\\Mapsui.UI.Maui.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
+      "Mapsui.UI.Uno.WinUI\\Mapsui.UI.Uno.WinUI.csproj",
       "Mapsui\\Mapsui.csproj",
       "Samples\\Avalonia\\Mapsui.Samples.Avalonia.Desktop\\Mapsui.Samples.Avalonia.Desktop.csproj",
       "Samples\\Avalonia\\Mapsui.Samples.Avalonia\\Mapsui.Samples.Avalonia.csproj",
