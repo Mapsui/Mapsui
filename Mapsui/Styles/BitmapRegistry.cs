@@ -129,8 +129,10 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// <returns>The unregistered object</returns>
     public object? Unregister(int id)
     {
-        _register.Remove(id, out var val);
-        return val;
+        if (_register.Remove(id, out var val))
+            return val;
+
+        return _parent?.Unregister(id);
     }
 
     /// <summary>
