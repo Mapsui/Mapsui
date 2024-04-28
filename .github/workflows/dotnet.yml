@@ -13,9 +13,14 @@ jobs:
   linuxBuild:      
     runs-on: ubuntu-latest
     steps:
+    - name: Clear space            
+      run: |
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     - uses: actions/checkout@v3
       with:
-        fetch-depth: 0
+        fetch-depth: 0   
     # Cache Nugets
     - uses: actions/cache@v3
       with:
