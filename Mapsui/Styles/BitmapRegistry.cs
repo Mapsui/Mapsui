@@ -140,7 +140,10 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// <returns></returns>
     public object Get(int id)
     {
-        return _register[id];
+        if (_register.TryGetValue(id, out var val))
+            return val;
+
+        return _parent?.Get(id) ?? default!;
     }
 
     /// <summary>
