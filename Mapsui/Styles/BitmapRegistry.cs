@@ -19,21 +19,16 @@ public sealed class BitmapRegistry : IBitmapRegistry
     private static BitmapRegistry? _instance;
     private readonly ConcurrentDictionary<int, object> _register = [];
     private readonly ConcurrentDictionary<string, int> _lookup = [];
-    private BitmapRegistry() { }
-
     private int _counter;
+
+    private BitmapRegistry() { }
 
     /// <summary>
     /// Singleton of BitmapRegistry class
     /// </summary>
     public static BitmapRegistry Instance => _instance ??= new BitmapRegistry();
 
-    /// <summary>
-    /// Register a new bitmap
-    /// </summary>
-    /// <param name="bitmapData">Bitmap data to register</param>
-    /// <param name="key">key for accessing bitmap</param>
-    /// <returns>Id of registered bitmap data</returns>
+    /// <inheritdoc />
     public int Register(object bitmapData, string? key = null)
     {
         CheckBitmapData(bitmapData);
@@ -47,6 +42,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
         return id;
     }
 
+    /// <inheritdoc />
     public async Task<int> RegisterAsync(Uri bitmapPath)
     {
         var key = bitmapPath.ToString();
@@ -63,6 +59,61 @@ public sealed class BitmapRegistry : IBitmapRegistry
             _ => throw new ArgumentException($"Scheme is not supported '{bitmapPath.Scheme}' of '{bitmapPath}'"),
         };
         return Register(stream, key);
+    }
+
+    /// <inheritdoc />
+    public object Get(int id)
+    {
+        return _register[id];
+    }
+
+    /// <inheritdoc />
+    public bool TryGetBitmapId(string key, out int bitmapId)
+    {
+        if (_lookup.TryGetValue(key, out bitmapId))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <inheritdoc />
+    public bool Update(int id, object bitmapData)
+    {
+        CheckBitmapData(bitmapData);
+
+        if (id < 0 || id > _counter && !_register.ContainsKey(id))
+            return false;
+
+        _register.TryGetValue(id, out var oldBitmap);
+        _register[id] = bitmapData;
+        if (oldBitmap is IDisposable disposable)
+        {
+            disposable.Dispose();
+        }
+
+        return true;
+    }
+
+    /// <inheritdoc />
+    public object? Unregister(int id)
+    {
+        _register.Remove(id, out var val);
+        return val;
+    }
+
+    public void Dispose()
+    {
+        _lookup.Clear();
+        foreach (var it in _register)
+        {
+            if (it.Value is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
+        _register.Clear();
     }
 
     private static Stream LoadEmbeddedResourceFromPath(Uri bitmapPath)
@@ -130,48 +181,6 @@ public sealed class BitmapRegistry : IBitmapRegistry
         }
     }
 
-    /// <summary> Unregister an existing bitmap </summary>
-    /// <param name="id">Id of registered bitmap data</param>
-    /// <returns>The unregistered object</returns>
-    public object? Unregister(int id)
-    {
-        _register.Remove(id, out var val);
-        return val;
-    }
-
-    /// <summary>
-    /// Get bitmap data of registered bitmap
-    /// </summary>
-    /// <param name="id">Id of existing bitmap data</param>
-    /// <returns></returns>
-    public object Get(int id)
-    {
-        return _register[id];
-    }
-
-    /// <summary>
-    /// Set new bitmap data for a already registered bitmap
-    /// </summary>
-    /// <param name="id">Id of existing bitmap data</param>
-    /// <param name="bitmapData">New bitmap data to replace</param>
-    /// <returns>True, if replacing worked correct</returns>
-    public bool Set(int id, object bitmapData)
-    {
-        CheckBitmapData(bitmapData);
-
-        if (id < 0 || id > _counter && !_register.ContainsKey(id))
-            return false;
-
-        _register.TryGetValue(id, out var oldBitmap);
-        _register[id] = bitmapData;
-        if (oldBitmap is IDisposable disposable)
-        {
-            disposable.Dispose();
-        }
-
-        return true;
-    }
-
     private int NextBitmapId()
     {
         return Interlocked.Increment(ref _counter);
@@ -193,32 +202,5 @@ public sealed class BitmapRegistry : IBitmapRegistry
                 throw new ArgumentException("Sprite has no corresponding atlas bitmap.");
             }
         }
-    }
-
-    /// <summary> Try Get Bitmap Id </summary>
-    /// <param name="key">key</param>
-    /// <param name="bitmapId">bitmap id</param>
-    /// <returns>true if found</returns>
-    public bool TryGetBitmapId(string key, out int bitmapId)
-    {
-        if (_lookup.TryGetValue(key, out bitmapId))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public void Dispose()
-    {
-        _lookup.Clear();
-        foreach (var it in _register)
-        {
-            if (it.Value is IDisposable disposable)
-            {
-                disposable.Dispose();
-            }
-        }
-        _register.Clear();
     }
 }
