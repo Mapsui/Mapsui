@@ -49,7 +49,11 @@ public class RenderBitmapRegistry(BitmapRegistry instance) : IBitmapRegistry
         // unregister the created images
         foreach (var id in _createdImages)
         {
-            instance.Unregister(id);
+            var obj = instance.Unregister(id);
+            if (obj is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
         }
 
         _createdImages.Clear();
