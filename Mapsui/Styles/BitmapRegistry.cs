@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 
 namespace Mapsui.Styles;
@@ -22,7 +22,6 @@ public sealed class BitmapRegistry : IBitmapRegistry
     private BitmapRegistry() { }
 
     private int _counter;
-    private readonly ConcurrentDictionary<string, (Assembly assembly, string realResourceName)> resourceCache = new();
 
     /// <summary>
     /// Singleton of BitmapRegistry class
@@ -51,66 +50,84 @@ public sealed class BitmapRegistry : IBitmapRegistry
     public async Task<int> RegisterAsync(Uri bitmapPath)
     {
         var key = bitmapPath.ToString();
-        Stream? stream = null;
-        switch (bitmapPath.Scheme)
+        if (TryGetBitmapId(key, out var id))
         {
-            case "embeddedresource":
-                if (resourceCache.TryGetValue(bitmapPath.Host, out var found))
+            Logger.Log(LogLevel.Warning, $"Bitmap already registered: '{key}'");
+            return id;
+        }
+        var stream = bitmapPath.Scheme switch
+        {
+            "embeddedresource" => LoadEmbeddedResourceFromPath(bitmapPath),
+            "file" => LoadFromFileSystem(bitmapPath),
+            "http" or "https" => await LoadFromUrlAsync(bitmapPath),
+            _ => throw new ArgumentException($"Scheme is not supported '{bitmapPath.Scheme}' of '{bitmapPath}'"),
+        };
+        return Register(stream, key);
+    }
+
+    private static Stream LoadEmbeddedResourceFromPath(Uri bitmapPath)
+    {
+        try
+        {
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                var name = assembly.GetName().Name;
+                if (name is null)
+                    throw new Exception($"Assembly name is null: '{assembly}'");
+                if (bitmapPath.Host.StartsWith(name, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    stream = found.assembly.GetManifestResourceStream(found.realResourceName);
-                }
-                else
-                {
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    string[] resourceNames = assembly.GetManifestResourceNames();
+                    var realResourceName = resourceNames.FirstOrDefault(r => r.Equals(bitmapPath.Host, StringComparison.InvariantCultureIgnoreCase));
+                    if (realResourceName != null)
                     {
-                        var name = assembly.GetName().Name;
-                        if (name != null)
-                            if (bitmapPath.Host.StartsWith(name, StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                string[] resourceNames = assembly.GetManifestResourceNames();
-                                var realResourceName = resourceNames.FirstOrDefault(r => r.Equals(bitmapPath.Host, StringComparison.InvariantCultureIgnoreCase));
-                                if (realResourceName != null)
-                                {
-                                    stream = assembly.GetManifestResourceStream(realResourceName);
-                                    if (stream != null)
-                                    {
-                                        resourceCache[bitmapPath.Host] = (assembly, realResourceName);
-                                        break;
-                                    }
-                                }
-                            }
+                        using var stream = assembly.GetManifestResourceStream(realResourceName);
+                        if (stream is null)
+                            throw new Exception($"The resource name was found but GetManifestResourceStream returned null: '{bitmapPath}'");
+                        return stream.CopyToMemoryStream(); // Copy stream to memory stream to avoid issues with disposing the stream
                     }
                 }
-
-                break;
-            case "file":
-                stream = File.OpenRead(bitmapPath.LocalPath);
-                break;
-            case "http":
-            case "https":
-                try
-                {
-                    using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
-                    using HttpClient client = new HttpClient(handler);
-                    using HttpResponseMessage response = await client.GetAsync(bitmapPath, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
-                    response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
-                    await using var tempStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                    // copy stream to memory stream to avoid issues with disposing the stream
-                    stream = new MemoryStream();
-                    await tempStream.CopyToAsync(stream).ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log(LogLevel.Error, $"Could not load from uri {bitmapPath} : {ex.Message}", ex);
-                }
-                break;
-            default:
-                throw new ArgumentException($"Unsupported scheme {bitmapPath.Scheme} on {nameof(bitmapPath)}");
+            }
+            throw new Exception($"Could not find the embedded resource in the CurrentDomain.GetAssemblies(): '{bitmapPath}'");
         }
+        catch (Exception ex)
+        {
+            var message = $"Could not load embedded resource '{bitmapPath}' : '{ex.Message}'";
+            Logger.Log(LogLevel.Error, message, ex);
+            throw new Exception(message, ex);
+        }
+    }
 
-        if (stream == null)
-            throw new ArgumentException("Resource not found: " + key);
-        return Register(stream, key);
+    private async static Task<Stream> LoadFromUrlAsync(Uri bitmapPath)
+    {
+        try
+        {
+            using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
+            using var httpClient = new HttpClient(handler);
+            using HttpResponseMessage response = await httpClient.GetAsync(bitmapPath, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
+            await using var tempStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            return tempStream.CopyToMemoryStream(); // Copy stream to memory stream to avoid issues with disposing the stream
+        }
+        catch (Exception ex)
+        {
+            var message = $"Could not load resource from url '{bitmapPath}' : '{ex.Message}'";
+            Logger.Log(LogLevel.Error, message, ex);
+            throw new Exception(message, ex);
+        }
+    }
+
+    private static Stream LoadFromFileSystem(Uri bitmapPath)
+    {
+        try
+        {
+            return File.OpenRead(bitmapPath.LocalPath);
+        }
+        catch (Exception ex)
+        {
+            var message = $"Could not load resource from file '{bitmapPath}' : '{ex.Message}'";
+            Logger.Log(LogLevel.Error, message, ex);
+            throw new Exception(message, ex);
+        }
     }
 
     /// <summary> Unregister an existing bitmap </summary>
