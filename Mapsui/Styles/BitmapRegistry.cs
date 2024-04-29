@@ -99,8 +99,16 @@ public sealed class BitmapRegistry : IBitmapRegistry
     /// <inheritdoc />
     public object? Unregister(int id)
     {
-        _register.Remove(id, out var val);
+        _register.TryRemove(id, out var val);
+        TryRemoveLookup(_lookup, id);
         return val;
+    }
+
+    private static void TryRemoveLookup(ConcurrentDictionary<string, int> lookup, int id)
+    {
+        var kpv = lookup.FirstOrDefault(kpv => kpv.Value == id);
+        if (!kpv.Equals(default(KeyValuePair<string, int>)))
+            lookup.TryRemove(kpv.Key, out _);
     }
 
     public void Dispose()
