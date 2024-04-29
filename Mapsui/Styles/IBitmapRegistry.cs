@@ -20,11 +20,6 @@ public interface IBitmapRegistry : IDisposable
     /// <returns>Id of registered bitmap data</returns>
     Task<int> RegisterAsync(Uri bitmapPath);
 
-    /// <summary> Unregister an existing bitmap </summary>
-    /// <param name="id">Id of registered bitmap data</param>
-    /// <returns>The unregistered object</returns>
-    object? Unregister(int id);
-
     /// <summary>
     /// Get bitmap data of registered bitmap
     /// </summary>
@@ -32,17 +27,23 @@ public interface IBitmapRegistry : IDisposable
     /// <returns></returns>
     object Get(int id);
 
-    /// <summary>
-    /// Set new bitmap data for a already registered bitmap
-    /// </summary>
-    /// <param name="id">Id of existing bitmap data</param>
-    /// <param name="bitmapData">New bitmap data to replace</param>
-    /// <returns>True, if replacing worked correct</returns>
-    bool Set(int id, object bitmapData);
-
     /// <summary> Try Get Bitmap Id </summary>
     /// <param name="key">key</param>
     /// <param name="bitmapId">bitmap id</param>
     /// <returns>true if found</returns>
     bool TryGetBitmapId(string key, out int bitmapId);
+
+    /// <summary>
+    /// Update the bitmap data for a already registered bitmap
+    /// </summary>
+    /// <param name="id">Id of existing bitmap data</param>
+    /// <param name="bitmapData">New bitmap data to replace</param>
+    /// <returns>True, if replacing worked correct</returns>
+
+    bool Update(int id, object bitmapData);
+
+    /// <summary> Unregister an existing bitmap </summary>
+    /// <param name="id">Id of registered bitmap data</param>
+    /// <returns>The unregistered object</returns>
+    object? Unregister(int id);
 }
