@@ -8,8 +8,5 @@
     "allowPrerelease": false,
     "dotnet": "8.0.100",
     "rollForward": "latestMajor"
-  },
-  "msbuild-sdks": {
-    "Uno.Sdk": "5.2.95"
   }
 }
