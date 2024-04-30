@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
@@ -26,7 +27,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, _) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var expectedTiles = 64;
 
@@ -34,8 +35,7 @@ public class FetchMachineTests
 
         // Act
         // Get all tiles of level 3
-        fetchDispatcher.SetViewport(fetchInfo);
-        tileMachine.Start();
+        fetchDispatcher.RefreshData(fetchInfo);
         // Assert
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
@@ -52,19 +52,17 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, _) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var expectedTiles = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
 
         // Act
-        fetchDispatcher.SetViewport(fetchInfo);
-        tileMachine.Start();
+        fetchDispatcher.RefreshData(fetchInfo);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
         var countAfterFirstTry = tileProvider.CountByTile.Keys.Count;
         // do it again
-        fetchDispatcher.SetViewport(fetchInfo);
-        tileMachine.Start();
+        fetchDispatcher.RefreshData(fetchInfo);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Assert
@@ -83,17 +81,15 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, _) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
         // Act
-        fetchDispatcher.SetViewport(fetchInfo);
-        tileMachine.Start();
+        fetchDispatcher.RefreshData(fetchInfo);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
         // do it again
-        fetchDispatcher.SetViewport(fetchInfo);
-        tileMachine.Start();
+        fetchDispatcher.RefreshData(fetchInfo);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Assert
@@ -108,19 +104,17 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, _) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
 
         // Act
-        fetchDispatcher.SetViewport(fetchInfo);
-        tileMachine.Start();
+        fetchDispatcher.RefreshData(fetchInfo);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Act again
-        fetchDispatcher.SetViewport(fetchInfo);
-        tileMachine.Start();
+        fetchDispatcher.RefreshData(fetchInfo);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Assert
@@ -135,21 +129,19 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, _) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
 
         // Act
-        fetchDispatcher.SetViewport(fetchInfo);
-        tileMachine.Start();
+        fetchDispatcher.RefreshData(fetchInfo);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         var tileCountAfterFirstBatch = tileProvider.TotalCount;
 
         // Act again
-        fetchDispatcher.SetViewport(fetchInfo);
-        tileMachine.Start();
+        fetchDispatcher.RefreshData(fetchInfo);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Assert
@@ -158,8 +150,7 @@ public class FetchMachineTests
 
     }
 
-    [Test]
-    public void RepeatedRestartsShouldNotCauseInfiniteLoop()
+    private async Task<RasterFeature?> TileToFeatureAsync(ITileSource tileSource, TileInfo tileInfo)
     {
         // A tile layer can return a null value. This indicates the tile is not
         // present in the source, permanently. If this is the case no further 
