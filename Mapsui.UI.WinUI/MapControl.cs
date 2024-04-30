@@ -16,6 +16,12 @@ using SkiaSharp.Views.Windows;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
+#if __WINUI__
+using System;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml;
+#endif
 
 namespace Mapsui.UI.WinUI;
 
