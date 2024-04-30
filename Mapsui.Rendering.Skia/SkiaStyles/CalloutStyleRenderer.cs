@@ -125,7 +125,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             if (callout.BitmapId < 0)
                 callout.BitmapId = BitmapRegistry.Instance.Register(picture);
             else
-                BitmapRegistry.Instance.Set(callout.BitmapId, picture);
+                BitmapRegistry.Instance.Update(callout.BitmapId, picture);
         }
 
         callout.Invalidated = false;
@@ -242,7 +242,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var picture = rec.EndRecording();
         if (callout.InternalContent >= 0)
         {
-            BitmapRegistry.Instance.Set(callout.InternalContent, picture);
+            BitmapRegistry.Instance.Update(callout.InternalContent, picture);
         }
         else
         {

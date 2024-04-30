@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 
@@ -29,9 +28,9 @@ public class FilteringProvider : IProvider
         return _provider.GetExtent();
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        var features = await _provider.GetFeaturesAsync(fetchInfo, cancellationToken);
+        var features = await _provider.GetFeaturesAsync(fetchInfo).ConfigureAwait(false);
         return features.Where(f => _filter(f));
     }
 }

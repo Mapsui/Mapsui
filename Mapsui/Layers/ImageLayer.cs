@@ -143,7 +143,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message, ex);
-                OnDataChanged(new DataChangedEventArgs(ex, false, null));
+                OnDataChanged(new DataChangedEventArgs(ex));
             }
         });
     }
@@ -167,7 +167,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
             // Keep only two most recent sets. The older ones will be removed
             _sets = _sets.OrderByDescending(c => c.TimeRequested).Take(_numberOfFeaturesReturned).ToList();
 
-            OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
+            OnDataChanged(new DataChangedEventArgs(null, Name));
         }
 
         if (_needsUpdate)

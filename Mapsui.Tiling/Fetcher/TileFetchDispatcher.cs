@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -28,12 +27,13 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = [];
     private readonly ITileSchema? _tileSchema;
     private readonly FetchMachine _fetchMachine;
-    private readonly Func<TileInfo, CancellationToken, Task<IFeature?>> _fetchTileAsFeature;
+    private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature;
+    private readonly int _fetchThreadCount = 4;
 
     public TileFetchDispatcher(
         ITileCache<IFeature?> tileCache,
         ITileSchema? tileSchema,
-        Func<TileInfo, CancellationToken, Task<IFeature?>> fetchTileAsFeature,
+        Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
         IDataFetchStrategy? dataFetchStrategy = null)
     {
         _tileCache = tileCache;
@@ -59,17 +59,14 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
         }
     }
 
-    public bool TryTake([NotNullWhen(true)] out Func<CancellationToken, Task>? method)
+    public void FetchNextTiles()
     {
         lock (_lockRoot)
         {
             UpdateIfViewportIsModified();
             if (_tilesToFetch.TryDequeue(out var tileInfo))
             {
-                _tilesInProgress.Add(tileInfo.Index);
-                method = async (cancellationToken) => await FetchOnThreadAsync(tileInfo, cancellationToken).ConfigureAwait(false);
-                return true;
-            }
+                var tilesToQueue = GetNumberOfTilesToQueue(tilesToFetch);
 
             Busy = _tilesInProgress.Count > 0 || !_tilesToFetch.IsEmpty;
             // else the queue is empty, we are done.
@@ -78,11 +75,11 @@ public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
         }
     }
 
-    private async Task FetchOnThreadAsync(TileInfo tileInfo, CancellationToken cancellationToken)
+    private async Task FetchOnThreadAsync(TileInfo tileInfo)
     {
         try
         {
-            var feature = await _fetchTileAsFeature(tileInfo, cancellationToken).ConfigureAwait(false);
+            var feature = await _fetchTileAsFeature(tileInfo).ConfigureAwait(false);
             FetchCompleted(tileInfo, feature, null);
         }
         catch (Exception ex)

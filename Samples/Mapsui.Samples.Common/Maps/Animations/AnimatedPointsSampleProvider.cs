@@ -74,7 +74,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposa
 
     private void OnDataChanged()
     {
-        DataChanged?.Invoke(this, new DataChangedEventArgs(null, false, null));
+        DataChanged?.Invoke(this, new DataChangedEventArgs());
     }
 
     public virtual void Dispose()

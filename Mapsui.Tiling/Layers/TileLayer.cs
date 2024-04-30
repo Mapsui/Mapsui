@@ -83,7 +83,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     /// <inheritdoc />
     public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
     {
-        if (_tileSource.Schema == null) return Enumerable.Empty<IFeature>();
+        if (_tileSource.Schema == null) return [];
         UpdateMemoryCacheMinAndMax();
         return _renderFetchStrategy.Get(extent, resolution, _tileSource.Schema, MemoryCache);
     }
@@ -108,8 +108,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
             && MaxVisible >= fetchInfo.Resolution
             && MinVisible <= fetchInfo.Resolution)
         {
-            _tileFetchDispatcher.SetViewport(fetchInfo);
-            _tileFetchDispatcher.StartFetching();
+            _tileFetchDispatcher.RefreshData(fetchInfo);
         }
     }
 
@@ -146,10 +145,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     {
         var tileData = await _tileSource.GetTileAsync(tileInfo).ConfigureAwait(false);
         var mRaster = ToRaster(tileInfo, tileData);
-        if (mRaster != null)
-            return new RasterFeature(mRaster);
-
-        return null;
+        return new RasterFeature(mRaster);
     }
 
     private static MRaster? ToRaster(TileInfo tileInfo, byte[]? tileData)
