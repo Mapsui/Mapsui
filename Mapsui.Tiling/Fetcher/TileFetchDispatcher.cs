@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -24,13 +25,13 @@ public class TileFetchDispatcher : INotifyPropertyChanged
     private readonly ConcurrentHashSet<TileIndex> _tilesThatFailed = [];
     private readonly ITileSchema? _tileSchema;
     private readonly FetchMachine _fetchMachine;
-    private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature;
+    private readonly Func<TileInfo, CancellationToken, Task<IFeature?>> _fetchTileAsFeature;
     private readonly int _fetchThreadCount = 4;
 
     public TileFetchDispatcher(
         ITileCache<IFeature?> tileCache,
         ITileSchema? tileSchema,
-        Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
+        Func<TileInfo, CancellationToken, Task<IFeature?>> fetchTileAsFeature,
         IDataFetchStrategy? dataFetchStrategy = null)
     {
         _tileCache = tileCache;
