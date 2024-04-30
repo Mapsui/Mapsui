@@ -17,6 +17,8 @@ using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
 #if __WINUI__
+// for fixing the Linux build this pragma disable is needed some tooling issue.
+#pragma warning disable IDE0005 // Using directive is unnecessary.
 using System;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
