@@ -11,7 +11,6 @@ using Mapsui.Widgets;
 using System.ComponentModel;
 using System.Net;
 using System.Runtime.CompilerServices;
-using Mapsui.Disposing;
 using System;
 using System.Collections.Generic;
 using System.Linq;

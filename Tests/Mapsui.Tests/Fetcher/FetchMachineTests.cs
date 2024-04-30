@@ -1,10 +1,8 @@
 ﻿using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
-using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Tests.Fetcher.Providers;
 using Mapsui.Tiling.Extensions;
