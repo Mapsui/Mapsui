@@ -34,9 +34,9 @@ public class RenderBitmapRegistry(BitmapRegistry instance) : IBitmapRegistry
         return instance.Get(id);
     }
 
-    public bool Set(int id, object bitmapData)
+    public bool Update(int id, object bitmapData)
     {
-        return instance.Set(id, bitmapData);
+        return instance.Update(id, bitmapData);
     }
 
     public bool TryGetBitmapId(string key, out int bitmapId)
