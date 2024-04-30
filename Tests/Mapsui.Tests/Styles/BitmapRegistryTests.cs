@@ -28,7 +28,7 @@ public static class BitmapRegistryTests
     }
 
     [Test]
-    public static async Task UriResourceEmbeddedRegisterAsyncAddAndRemove()
+    public static async Task AddAndRemoveUriResourceEmbeddedRegisterAsync()
     {
         // Arrange
         var svgTigerPath = typeof(BitmapAtlasSample).LoadSvgPath("Resources.Images.Ghostscript_Tiger.svg");
@@ -42,7 +42,7 @@ public static class BitmapRegistryTests
     }
 
     [Test]
-    public static async Task UriResourceEmbeddedRegisterAsyncAdd()
+    public static async Task AddUriResourceEmbeddedRegisterAsync()
     {
         // Arrange
         var svgTigerPath = typeof(BitmapAtlasSample).LoadSvgPath("Resources.Images.Ghostscript_Tiger.svg");
@@ -58,10 +58,10 @@ public static class BitmapRegistryTests
     }
 
     [Test]
-    public static async Task UriFileRegisterAsyncAddAndRemove()
+    public static async Task AddAndRemoveUriFileRegisterAsync()
     {
         // Arrange
-        var examplePath = new Uri($"file://{System.AppContext.BaseDirectory}/Resources/example.tif");
+        var examplePath = new Uri($"file://{AppContext.BaseDirectory}/Resources/example.tif");
         var bitmapId = await BitmapRegistry.Instance.RegisterAsync(examplePath);
 
         // Act
@@ -72,10 +72,10 @@ public static class BitmapRegistryTests
     }
 
     [Test]
-    public static async Task UriFileRegisterAsyncAdd()
+    public static async Task AddUriFileRegisterAsync()
     {
         // Arrange
-        var examplePath = new Uri($"file://{System.AppContext.BaseDirectory}/Resources/example.tif");
+        var examplePath = new Uri($"file://{AppContext.BaseDirectory}/Resources/example.tif");
         var bitmapId = await BitmapRegistry.Instance.RegisterAsync(examplePath);
 
         // Act
@@ -88,7 +88,7 @@ public static class BitmapRegistryTests
     }
 
     [Test]
-    public static async Task UriHttpsRegisterAsyncAddAndRemove()
+    public static async Task AddAndRemoveUriHttpsRegisterAsync()
     {
         // Arrange
         var mapsuiLogo = new Uri("https://mapsui.com/images/logo.svg");
@@ -102,7 +102,7 @@ public static class BitmapRegistryTests
     }
 
     [Test]
-    public static async Task UriHttpsRegisterAsyncAdd()
+    public static async Task AddUriHttpsRegisterAsync()
     {
         // Arrange
         var mapsuiLogo = new Uri("https://mapsui.com/images/logo.svg");
@@ -115,5 +115,21 @@ public static class BitmapRegistryTests
         var stream = bitmap as Stream;
         Assert.That(stream is not null);
         Assert.That(stream?.ToBytes().Length > 0);
+    }
+
+    [Test]
+    public static void UrlShouldDoValueCompare()
+    {
+        // This is to be sure that Url implements value compare.
+        // They don't mention it in the documentation.
+        // https://learn.microsoft.com/en-us/dotnet/api/system.security.policy.url.equals?view=net-8.0#system-security-policy-url-equals(system-object)
+
+        // Arrange
+        var logoUrl = new Uri("https://mapsui.com/images/logo.svg");
+        var otherInstanceOfSameUrl = new Uri("https://mapsui.com/images/logo.svg");
+
+        // Act and Assert
+        Assert.That(logoUrl == otherInstanceOfSameUrl, Is.True);
+        Assert.That(logoUrl.Equals(otherInstanceOfSameUrl), Is.True);
     }
 }
