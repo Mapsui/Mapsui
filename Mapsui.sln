@@ -88,7 +88,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mapsui.Samples.Uno.WinUI", "Mapsui.Samples.Uno.WinUI", "{B12E8967-0E5B-4728-B877-F3BDFE0871F2}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\Mapsui.Samples.Uno.WinUI\Directory.Build.props = Samples\Mapsui.Samples.Uno.WinUI\Directory.Build.props
-		Samples\Mapsui.Samples.Uno.WinUI\Directory.Build.targets = Samples\Mapsui.Samples.Uno.WinUI\Directory.Build.targets
+		Samples\Mapsui.Samples.Uno.WinUI\global.json = Samples\Mapsui.Samples.Uno.WinUI\global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Uno.WinUI", "Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj", "{3DFDF3B3-D921-4CD5-A35F-64B6E79819E8}"
