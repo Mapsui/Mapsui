@@ -4,6 +4,9 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
+// for fixing the Linux build this pragma disable is needed some tooling issue.
+#pragma warning disable IDE0005 // Using directive is unnecessary.
+
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
