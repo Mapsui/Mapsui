@@ -1,6 +1,6 @@
 ﻿namespace Mapsui.Samples.WinForms;
 
-partial class Window
+partial class SampleWindow
 {
     /// <summary>
     ///  Required designer variable.

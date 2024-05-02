@@ -5,7 +5,7 @@ using Mapsui.UI.WindowsForms;
 
 namespace Mapsui.Samples.WinForms;
 
-public partial class Window : Form
+public partial class SampleWindow : Form
 {
     private readonly MapControl _mapControl;
     private readonly ComboBox _categoryComboBox;
@@ -13,7 +13,7 @@ public partial class Window : Form
     private readonly TrackBar _rotationSlider;
     private readonly CheckedListBox _layerList;
 
-    public Window()
+    public SampleWindow()
     {
         InitializeComponent();
 
