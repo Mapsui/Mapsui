@@ -109,13 +109,16 @@ public partial class SampleWindow : Form
 
     private void ViewportChanged(object sender, ViewportChangedEventArgs e)
     {
-        if (_mapControl.Map.Navigator.Viewport.Rotation != _rotationSlider.Value)
-            _rotationSlider.Value = (int)(_mapControl.Map.Navigator.Viewport.Rotation % 360);
+        Invoke(() =>
+        {
+            if (((int)_mapControl.Map.Navigator.Viewport.Rotation) != _rotationSlider.Value)
+                _rotationSlider.Value = (int)(_mapControl.Map.Navigator.Viewport.Rotation % 360);
+        });
     }
 
     private void RotationChanged(object? sender, EventArgs e)
     {
-        if (_mapControl.Map.Navigator.Viewport.Rotation != _rotationSlider.Value)
+        if (((int)_mapControl.Map.Navigator.Viewport.Rotation) != _rotationSlider.Value)
             _mapControl.Map.Navigator.RotateTo(_rotationSlider.Value);
     }
 
