@@ -10,16 +10,20 @@ using Mapsui.Manipulations;
 using Mapsui.UI.WinUI.Extensions;
 using Microsoft.UI;
 using Microsoft.UI.Input;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 using SkiaSharp.Views.Windows;
-using System;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
+#if __WINUI__
+// for fixing the Linux build this pragma disable is needed some tooling issue.
+#pragma warning disable IDE0005 // Using directive is unnecessary.
+using System;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml;
+#endif
 
 namespace Mapsui.UI.WinUI;
 
