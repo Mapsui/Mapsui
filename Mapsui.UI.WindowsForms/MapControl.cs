@@ -138,8 +138,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private static bool GetShiftPressed()
     {
-        // TODO
-        return false; // Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+        return (ModifierKeys & Keys.Shift) == Keys.Shift;
     }
 
     public void OpenInBrowser(string url)
