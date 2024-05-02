@@ -1,72 +1,48 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) or '$(EnableWindowsTargeting)' == 'true'">$(TargetFrameworks);net8.0-windows10.0.19041</TargetFrameworks>
-    <TargetFrameworks>$(TargetFrameworks);net8.0;net8.0-android</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) or $([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
-
-		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
-		<GenerateLibraryLayout>true</GenerateLibraryLayout>
-		<!--Workaround for this https://github.com/microsoft/WindowsAppSDK/issues/3548-->
-    <EnableCoreMrtTooling Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">false</EnableCoreMrtTooling>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
-    <RuntimeIdentifiers>win10-x64;win10-x86;win10-arm64</RuntimeIdentifiers>
-    <UseRidGraph>true</UseRidGraph>
-  </PropertyGroup>  
-
-	<ItemGroup>
-		<PackageReference Include="Uno.WinUI" />
-		<PackageReference Include="Uno.Resizetizer" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" />
-	</ItemGroup>
-
-	<Choose>
-		<When Condition="$(IsWinAppSdk)">
-			<ItemGroup>
-				<PackageReference Include="Microsoft.WindowsAppSDK" />
-				<PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
-			</ItemGroup>
-
-			<ItemGroup>
-				<!--
-				If you encounter this error message:
-
-					error NETSDK1148: A referenced assembly was compiled using a newer version of Microsoft.Windows.SDK.NET.dll.
-					Please update to a newer .NET SDK in order to reference this assembly.
-
-				This means that the two packages below must be aligned with the "build" version number of
-				the "Microsoft.Windows.SDK.BuildTools" package above, and the "revision" version number
-				must be the highest found in https://www.nuget.org/packages/Microsoft.Windows.SDK.NET.Ref.
-				-->
-				<!-- <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22621.28" />
-				<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22621.28" /> -->
-			</ItemGroup>
-		</When>
-		<Otherwise>
-			<ItemGroup>
-				<Content Include="Assets\**" />
-				<Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-				<Compile Update="**\*.xaml.cs">
-					<DependentUpon>%(Filename)</DependentUpon>
-				</Compile>
-				<PRIResource Include="**\*.resw" />
-			</ItemGroup>
-		</Otherwise>
-	</Choose>
-
-	<ItemGroup>
-		<UnoImage Include="Assets\**\*.svg" />
-		<UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
-	  <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-	  <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-	</ItemGroup>
+﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <!-- Workaround for Error NU1008 Projects that use central package version management should not define the version on the PackageReference ..-->
-    <PreBuildEvent>dotnet restore $(MSBuildProjectDirectory)/Mapsui.Samples.Uno.WinUI.csproj</PreBuildEvent>
+    <TargetFrameworks>
+      net8.0-android;
+      net8.0-ios;
+      net8.0-maccatalyst;
+      net8.0-windows10.0.19041;
+      net8.0-desktop;
+      net8.0-browserwasm;
+    </TargetFrameworks>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>Mapsui.Samples.Uno.WinUI</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.companyname.mapsui-samples-uno-winui</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!--
+      If you encounter this error message:
+
+        error NETSDK1148: A referenced assembly was compiled using a newer version of Microsoft.Windows.SDK.NET.dll.
+        Please update to a newer .NET SDK in order to reference this assembly.
+
+      This means that the two packages below must be aligned with the "build" version number of
+      the "Microsoft.Windows.SDK.BuildTools" package above, and the "revision" version number
+      must be the highest found in https://www.nuget.org/packages/Microsoft.Windows.SDK.NET.Ref.
+    -->
+    <!-- <WindowsSdkPackageVersion>10.0.22621.28</WindowsSdkPackageVersion> -->
+
+    <!--
+      UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures>
+      Skia;
+    </UnoFeatures>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
+    <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
+    <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+  </ItemGroup>
+
 </Project>

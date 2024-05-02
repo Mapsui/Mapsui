@@ -83,20 +83,5 @@
     <PackageVersion Include="Svg.Skia" Version="1.0.0.18" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
     <PackageVersion Include="System.Text.Json" Version="[8.0.3,9.0.0)" />
-    <PackageVersion Include="Uno.Core" Version="[4.0.1,5.0.0)" />
-    <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="[1.6.0,2.0.0)" />
-    <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="[1.6.0,2.0.0)" />
-    <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="[4.0.1,5.0.0)" />
-    <PackageVersion Include="Uno.UniversalImageLoader" Version="[1.9.36,2.0.0)" />
-    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="[5.1.31,6.0.0)" />
-    <PackageVersion Include="Uno.Resizetizer" Version="[1.0.4, 2.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="[8.0.9,9.0.0)" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="[8.0.9,9.0.0)" />
-    <PackageVersion Include="Uno.WinUI" Version="[5.1.31,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="[5.1.31,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="[5.1.31,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="[5.1.31,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="[5.1.31,6.0.0)" />
-    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="[5.1.31,6.0.0)" />
   </ItemGroup>
 </Project>
