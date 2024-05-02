@@ -78,8 +78,6 @@ public partial class SampleWindow : Form
         _rotationSlider.Value = 0;
         _rotationSlider.ValueChanged += RotationChanged;
 
-        _mapControl.Map.Navigator.ViewportChanged += ViewportChanged;
-
         leftLayout.Controls.Add(_rotationSlider, 0, 2);
 
         _layerList = new CheckedListBox();
@@ -168,9 +166,11 @@ public partial class SampleWindow : Form
 
             Catch.Exceptions(async () =>
             {
+                _mapControl.Map.Navigator.ViewportChanged -= ViewportChanged;
                 _mapControl.Map?.Layers.Clear();
                 await sample.SetupAsync(_mapControl);
                 _mapControl.Refresh();
+                _mapControl.Map.Navigator.ViewportChanged += ViewportChanged;
                 _layerList.Items.Clear();
                 foreach (var layer in _mapControl.Map?.Layers)
                 {
