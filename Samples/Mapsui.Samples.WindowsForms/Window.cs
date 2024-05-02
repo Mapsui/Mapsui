@@ -17,7 +17,7 @@ public partial class Window : Form
     {
         InitializeComponent();
 
-        Text = "Samples for Mapsui";
+        Text = "Samples for Mapsui.WindowsForms";
         BackColor = Color.White;
 
         Mapsui.Tests.Common.Samples.Register();
