@@ -148,7 +148,7 @@ public static class BitmapRegistryTests
     }
 
     [Test]
-    public static void RenderBitmapRegistryDispose_RemovesBitmaps()
+    public static void RenderBitmapRegistryDispose_RemovesBitmap()
     {
         // Arrange
         using var stream = new MemoryStream();
@@ -159,7 +159,8 @@ public static class BitmapRegistryTests
         renderRegistry.Dispose();
 
         // Assert
-        Assert.Throws<KeyNotFoundException>(() => renderRegistry.Get(bitmapId));
+        Assert.Throws<ObjectDisposedException>(() => renderRegistry.Get(bitmapId));
+        Assert.Throws<KeyNotFoundException>(() => BitmapRegistry.Instance.Get(bitmapId));
     }
 
     [Test]
