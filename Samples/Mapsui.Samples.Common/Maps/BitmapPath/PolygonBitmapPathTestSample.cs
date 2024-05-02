@@ -2,28 +2,24 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using NetTopologySuite.IO;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.BitmapPath;
 
 public class PolygonBitmapPathTestSample : ISample
 {
-    private static Uri _bitmapPath;
+    private static readonly Uri _bitmapPath = new("embeddedresource://mapsui.tests.common.resources.images.avion_silhouette.png");
 
     public string Name => "Polygon BitmapPath";
-    public string Category => "Tests";
+    public string Category => "BitmapPath";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
-        _bitmapPath = typeof(PolygonTestSample).LoadBitmapPath("Resources.Images.avion_silhouette.png");
-
         var layer = CreateLayer();
 
         var map = new Map

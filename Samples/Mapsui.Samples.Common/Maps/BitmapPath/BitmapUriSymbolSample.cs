@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.BitmapPath;
 
 public class BitmapUriSymbolSample : ISample
 {
     public string Name => "Bitmap Uri Symbol";
-    public string Category => "Tests";
+    public string Category => "BitmapPath";
 
     public async Task<Map> CreateMapAsync()
     {
@@ -35,9 +34,9 @@ public class BitmapUriSymbolSample : ISample
 
     public static async Task<IEnumerable<IFeature>> CreateFeaturesAsync()
     {
-        var circleIconPath = typeof(BitmapUriSymbolSample).LoadBitmapPath("Resources.Images.circle.png");
+        var circleIconPath = new Uri("embeddedresource://mapsui.samples.common.images.circle.png");
         var circleIconId = await BitmapRegistry.Instance.RegisterAsync(circleIconPath);
-        var checkeredIconPath = typeof(BitmapUriSymbolSample).LoadBitmapPath("Resources.Images.checkered.png");
+        var checkeredIconPath = new Uri("embeddedresource://mapsui.samples.common.images.checkered.png");
         var checkeredIconId = await BitmapRegistry.Instance.RegisterAsync(checkeredIconPath);
 
         return new List<IFeature>

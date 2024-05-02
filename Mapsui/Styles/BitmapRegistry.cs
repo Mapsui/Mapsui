@@ -146,6 +146,7 @@ public sealed class BitmapRegistry : IBitmapRegistry
                     }
                 }
             }
+
             throw new Exception($"Could not find the embedded resource in the CurrentDomain.GetAssemblies(): '{bitmapPath}'");
         }
         catch (Exception ex)
