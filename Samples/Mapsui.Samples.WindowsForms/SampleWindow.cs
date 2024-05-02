@@ -51,6 +51,7 @@ public partial class SampleWindow : Form
         leftLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         leftLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 0.2f));
         leftLayout.BackColor = Color.White;
+        leftLayout.Margin = new Padding(10, 0, 10, 0);
 
         _categoryComboBox = new ComboBox();
 
