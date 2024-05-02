@@ -13,32 +13,49 @@ jobs:
   linuxBuild:      
     runs-on: ubuntu-latest
     steps:
+      # Workaround to provide additional free space.
+      #   https://github.com/actions/virtual-environments/issues/2840
+    - name: Clear space            
+      run: |
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     - uses: actions/checkout@v3
       with:
-        fetch-depth: 0
+        fetch-depth: 0   
     # Cache Nugets
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget16-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget15-
+            ${{ runner.os }}-nuget16-
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.1.1      
+      uses: NuGet/setup-nuget@v2  
       with:
         nuget-version: latest    
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           8.0.x        
+           8.0.x     
+    # Open JDK
+    - name: Install Open JDK 11
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'microsoft'
+        java-version: '11'
     # Android SDK Install
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
       with:
-        cmdline-tools-version: '8512546'
+         cmdline-tools-version: '8512546'
     - name: Install workloads
       run: dotnet workload install android wasm-tools maui-android
+    - name: Install Uno Check
+      run: dotnet tool install -g Uno.Check
+    - name: Uno Check
+      run: uno-check -v --ci --non-interactive --fix --skip androidemulator
     - name: Restore dependencies
       run: dotnet restore Mapsui.Linux.slnf
     - name: Build Mapsui.Linux.slnf
@@ -68,11 +85,11 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget13-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget16-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget13-
+            ${{ runner.os }}-nuget16-
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.1.1      
+      uses: NuGet/setup-nuget@v2   
       with:
         nuget-version: latest
     - name: Setup Xcode version 15.1
@@ -92,6 +109,10 @@ jobs:
            8.0.x         
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+    - name: Install Uno Check
+      run: dotnet tool install -g Uno.Check
+    - name: Uno Check
+      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --skip androidsdk
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
@@ -167,9 +188,9 @@ jobs:
           ~/.nuget/packages/SkiaSharp* 
           ~/.nuget/packages/System*
           ~/.nuget/packages/Xamarin*
-        key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget16-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget15-
+            ${{ runner.os }}-nuget16-
     # .Net 8 update     
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
@@ -183,11 +204,15 @@ jobs:
         distribution: 'microsoft' # open jdk
         java-version: '11'
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.1.1
+      uses: NuGet/setup-nuget@v2
       with:
         nuget-version: latest
     - name: install maui macos android ios maccatalyst wasm-tools
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools      
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+    - name: Install Uno Check
+      run: dotnet tool install -g Uno.Check
+    - name: Uno Check
+      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.sln  
     - name: Run dotnet format
