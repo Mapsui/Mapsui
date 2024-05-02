@@ -1,8 +1,7 @@
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps.Demo;
-using Mapsui.UI.WindowsForms;
 using Mapsui.Samples.Common.Extensions;
+using Mapsui.UI.WindowsForms;
 
 namespace Mapsui.Samples.WinForms;
 
