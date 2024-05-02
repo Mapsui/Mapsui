@@ -5,7 +5,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public class RenderBitmapRegistry(BitmapRegistry instance) : IBitmapRegistry
+public sealed class RenderBitmapRegistry(BitmapRegistry instance) : IBitmapRegistry
 {
     private readonly ConcurrentHashSet<int> _createdImages = new();
 
