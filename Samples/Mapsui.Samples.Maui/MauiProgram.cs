@@ -15,7 +15,7 @@ public static class MauiProgram
         // "Microsoft.Maui.Platform.HandlerNotFoundException: 'Handler not found for view SkiaSharp.Views.Maui.Controls.SKGLView.'"
         builder
             .UseMauiApp<App>()
-            .UseSkiaSharp(true)
+            .UseSkiaSharp()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

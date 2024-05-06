@@ -11,7 +11,7 @@ public static class CacheExtensions
 {
     public static async Task<Stream> UrlCachedStreamAsync(this IUrlPersistentCache? persistentCache, string url, Func<string, Task<Stream>>? loadUrl = null)
     {
-        var bytes = await UrlCachedArrayAsync(persistentCache, url, loadUrl);
+        var bytes = await UrlCachedArrayAsync(persistentCache, url, loadUrl).ConfigureAwait(false);
 
         return new MemoryStream(bytes);
     }
@@ -28,7 +28,7 @@ public static class CacheExtensions
 #pragma warning disable IDISP001 // Dispose created                    
                 if (loadUrl != null)
                 {
-                    response = await loadUrl(url);
+                    response = await loadUrl(url).ConfigureAwait(false);
                 }
                 else
                 {
@@ -45,7 +45,7 @@ public static class CacheExtensions
             {
                 if (response != null)
                 {
-                    await response.DisposeAsync();
+                    await response.DisposeAsync().ConfigureAwait(false);
                 }
             }
 

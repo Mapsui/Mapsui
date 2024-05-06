@@ -20,4 +20,9 @@ public static class TypeExtensions
 
         return bitmapId;
     }
+
+    public static Uri LoadBitmapPath(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
+    {
+        return EmbeddedResourceLoader.GetResourceUri(typeInAssemblyOfEmbeddedResource, relativePathToEmbeddedResource);
+    }
 }

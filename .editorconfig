@@ -257,6 +257,7 @@ dotnet_diagnostic.IDE0005.severity = error # Remove unused usings, works only wh
 dotnet_diagnostic.CA1512.severity = silent # CA1512: Use ArgumentOutOfRangeException throw helper - Why set to silent? Because we use net7 and it is not supported there.
 dotnet_diagnostic.IDE0059.severity = warning # IDE0059: Unnecessary assignment of a value
 dotnet_diagnostic.CA2208.severity = silent # CA2208: Instantiate argument exceptions correctly
+dotnet_diagnostic.VSTHRD200.severity = warning # VSTHRD200: Use "Async" suffix for async methods 
 
 # Spelling
 spelling_exclusion_path = spelling_exclusion.txt

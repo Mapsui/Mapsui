@@ -20,7 +20,7 @@ public class FeatureFetcherTests
         {
             DataSource = new MemoryProvider(GenerateRandomPoints(extent, 25))
         };
-        layer.Delayer.MillisecondsToWait = 0;
+        layer.Delayer.MillisecondsBetweenCalls = 0;
 
         var notifications = new List<bool>();
         layer.PropertyChanged += (_, args) =>

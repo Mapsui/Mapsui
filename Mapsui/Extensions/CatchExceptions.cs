@@ -23,7 +23,7 @@ public static class Catch
     {
         try
         {
-            await func();
+            await func().ConfigureAwait(false);
         }
         catch (Exception e)
         {
@@ -54,7 +54,7 @@ public static class Catch
         {
             try
             {
-                await func();
+                await func().ConfigureAwait(false);
             }
             catch (Exception e)
             {

@@ -26,3 +26,4 @@ esri
 nuget
 onscroll
 bbox
+embeddedresource
