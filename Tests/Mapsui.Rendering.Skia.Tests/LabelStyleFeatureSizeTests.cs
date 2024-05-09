@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using SkiaSharp;
@@ -14,7 +15,16 @@ namespace Mapsui.Rendering.Skia.Tests;
 public class LabelStyleFeatureSizeTests
 {
     // The Sizes are different on MacOs and Windows (windows it is 39.6 and macOS it is 42.6)
-    public readonly double LabelSize = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? 39.6 : 42.6;
+    const double labelSizeOnMac = 42.642578125d;
+    const double labelSizeOnWindows = 39.642578125d;
+    const double labelSizeOnLinux = 40.181640625d;
+    public readonly double LabelSize = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+        ? labelSizeOnWindows
+        : RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+            ? labelSizeOnLinux
+            : labelSizeOnMac;
+
+
 
     [Test]
     public void DefaultSizeFeatureSize()
@@ -31,8 +41,7 @@ public class LabelStyleFeatureSizeTests
         using var renderService = new RenderService();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderService.LabelCache);
 
-        //!!!ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize, 0));
-        ClassicAssert.AreEqual(size, 1000);
+        ClassicAssert.AreEqual(size, LabelSize, Constants.Epsilon);
     }
 
     [Test]
@@ -117,6 +126,6 @@ public class LabelStyleFeatureSizeTests
         using var renderService = new RenderService();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderService.LabelCache);
 
-        ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + Math.Sqrt(2 * 2 + 2 * 2) * 2, 0));
+        ClassicAssert.AreEqual(size, LabelSize + Math.Sqrt(2 * 2 + 2 * 2) * 2, Constants.Epsilon);
     }
 }
