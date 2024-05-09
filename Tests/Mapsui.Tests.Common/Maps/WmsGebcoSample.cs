@@ -7,9 +7,9 @@ using Mapsui.Styles;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class WmsOpenSeaSample : ISample
+public class WmsGebcoSample : ISample
 {
-    public string Name => "Wms OpenSea";
+    public string Name => "Wms Gebco";
     public string Category => "Tests";
 
     public async Task<Map> CreateMapAsync()
@@ -17,7 +17,7 @@ public class WmsOpenSeaSample : ISample
         var map = new Map { CRS = "EPSG:4326" };
         // The WMS request needs a CRS
         map.Layers.Add(await CreateLayerAsync());
-        var panBounds = GetLimitsOfItaly();
+        var panBounds = WmsBasilicataSample.GetLimitsOfBasilicata();
         map.Navigator.Limiter = new ViewportLimiterKeepWithinExtent();
         map.Navigator.RotationLock = true;
         map.Navigator.OverridePanBounds = panBounds;
@@ -26,16 +26,9 @@ public class WmsOpenSeaSample : ISample
         return map;
     }
 
-    private static MRect GetLimitsOfItaly()
-    {
-        var (minX, minY) = (6.7499552751, 36.619987291);
-        var (maxX, maxY) = (18.4802470232, 47.1153931748);
-        return new MRect(minX, minY, maxX, maxY);
-    }
-
     public static async Task<ILayer> CreateLayerAsync()
     {
-        return new ImageLayer("Opensea")
+        return new ImageLayer("Gebco")
         {
             DataSource = await CreateWmsProviderAsync(),
             Style = new RasterStyle()
@@ -44,14 +37,14 @@ public class WmsOpenSeaSample : ISample
 
     private static async Task<WmsProvider> CreateWmsProviderAsync()
     {
-        const string wmsUrl = "https://depth.openseamap.org/geoserver/ows";
+        const string wmsUrl = "https://wms.gebco.net/2021/mapserv";
 
-        var provider = await WmsProvider.CreateAsync(wmsUrl, userAgent: "Wms OpenSea Sample", wmsVersion: "1.3.0");
+        var provider = await WmsProvider.CreateAsync(wmsUrl, userAgent: "Wms Gebco Sample", wmsVersion: "1.3.0");
         provider.ContinueOnError = true;
         provider.TimeOut = 40000;
         provider.CRS = "EPSG:4326";
 
-        provider.AddLayer("openseamap:contour2");
+        provider.AddLayer("GEBCO_LATEST");
         provider.SetImageFormat(provider.OutputFormats[0]);
         return provider;
     }
