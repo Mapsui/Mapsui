@@ -28,6 +28,7 @@ public class SymbolStyle : VectorStyle
     public UnitType UnitType { get; set; }
 
     private int _bitmapId = -1;
+    private Uri? _bitmapPath;
 
     /// <summary>
     /// Id of the image in the BitmapRegistry, if SymbolType is Image
@@ -40,6 +41,23 @@ public class SymbolStyle : VectorStyle
             _bitmapId = value;
             if (value >= 0)
                 SymbolType = SymbolType.Image;
+        }
+    }
+
+    /// <summary>
+    /// Bitmap of the image to display during rendering a BitmapId is assigned.
+    /// </summary>
+    public Uri? BitmapPath
+    {
+        get => _bitmapPath;
+        set
+        {
+            _bitmapPath = value;
+            if (value != null)
+            {
+                SymbolType = SymbolType.Image;
+                _bitmapId = -1;
+            }
         }
     }
 
