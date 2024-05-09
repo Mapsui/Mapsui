@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Skia.Tests;
 public class LabelStyleFeatureSizeTests
 {
     // The Sizes are different on MacOs and Windows (windows it is 39.6 and macOS it is 42.6)
-    public readonly double LabelSize = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? 39.6 : 42.6;
+    public readonly double LabelSize = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? 39.6 : 42.6;
 
     [Test]
     public void DefaultSizeFeatureSize()
