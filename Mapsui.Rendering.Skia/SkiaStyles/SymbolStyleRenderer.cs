@@ -5,6 +5,7 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
+using Mapsui.Logging;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -25,7 +26,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
-            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService.SymbolCache);
+            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService);
         }
         else
         {
@@ -33,15 +34,17 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
+    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderService renderService)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
         var (destX, destY) = viewport.WorldToScreenXY(x, y);
 
+        LoadBitmapId(symbolStyle, renderService.BitmapRegistry);
         if (symbolStyle.BitmapId < 0)
             return false;
 
+        var symbolCache = renderService.SymbolCache;
         var bitmap = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.BitmapId);
         if (bitmap == null)
             return false;
@@ -91,6 +94,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     return false;
 
                 var sprite = bitmap.Sprite;
+                sprite.LoadBitmapIdAsync(renderService.BitmapRegistry);
                 if (sprite.Data == null)
                 {
                     var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
@@ -107,6 +111,24 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
 
         return true;
+    }
+
+    internal static async void LoadBitmapId(SymbolStyle symbolStyle, IBitmapRegistry bitmapRegistry)
+    {
+        if (symbolStyle.BitmapId >= 0)
+        {
+            return;
+        }
+
+        try
+        {
+            if (symbolStyle.BitmapPath != null)
+                symbolStyle.BitmapId = await bitmapRegistry.RegisterAsync(symbolStyle.BitmapPath);
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
     }
 
     private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)
@@ -229,22 +251,23 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         if (style is SymbolStyle symbolStyle)
         {
-            return FeatureSize(symbolStyle, renderService.SymbolCache);
+            return FeatureSize(symbolStyle, renderService);
         }
 
         return 0;
     }
 
-    public static double FeatureSize(SymbolStyle symbolStyle, ISymbolCache symbolCache)
+    public static double FeatureSize(SymbolStyle symbolStyle, IRenderService renderService)
     {
         Size symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
 
+        LoadBitmapId(symbolStyle, renderService.BitmapRegistry);
         switch (symbolStyle.SymbolType)
         {
             case SymbolType.Image:
                 if (symbolStyle.BitmapId >= 0)
                 {
-                    var bitmapSize = symbolCache.GetSize(symbolStyle.BitmapId);
+                    var bitmapSize = renderService.SymbolCache.GetSize(symbolStyle.BitmapId);
                     if (bitmapSize != null)
                     {
                         symbolSize = bitmapSize;

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Fetcher;
 
@@ -12,9 +13,11 @@ namespace Mapsui.Tests.Fetcher;
 public class FeatureFetcherTests
 {
     [Test]
-    public async Task TestFeatureFetcherDelayAsync()
+    [Repeat(1000)]
+    [CancelAfter(1000)]
+    public async Task TestFeatureFetcherDelayAsync(CancellationToken token)
     {
-        // arrange
+        // Arrange
         var extent = new MRect(0, 0, 10, 10);
         using var layer = new Layer
         {
@@ -23,28 +26,38 @@ public class FeatureFetcherTests
         layer.Delayer.MillisecondsBetweenCalls = 0;
 
         var notifications = new List<bool>();
-        layer.PropertyChanged += (_, args) =>
+
+        // Because we use weak references for the PropertyChanged event handler it can get
+        // garbage collected if use a lambda directly assigned to the layer.PropertyChanged.
+        // So we need to create the variable below to prevent garbage collection.
+        PropertyChangedEventHandler propertyChanged = (_, args) =>
         {
             if (args.PropertyName == nameof(Layer.Busy))
             {
                 notifications.Add(layer.Busy);
             }
         };
+
+        layer.PropertyChanged += propertyChanged;
         var fetchInfo = new FetchInfo(new MSection(extent, 1), null, ChangeType.Discrete);
 
-        // act
+        // Act
         layer.RefreshData(fetchInfo);
 
-        // assert
-        await Task.Run(() =>
+        // Assert
+        await Task.Run(async () =>
         {
-            while (notifications.Count < 2)
+            while (notifications.Count < 2 && !token.IsCancellationRequested)
             {
-                // just wait until we have two
+                // Wait until we have two notifications
+                await Task.Delay(10);
             }
-        });
-        ClassicAssert.IsTrue(notifications[0]);
-        ClassicAssert.IsFalse(notifications[1]);
+        }).ConfigureAwait(false);
+
+        Assert.That(notifications.Count, Is.GreaterThan(0));
+        Assert.That(notifications[0], Is.True);
+        Assert.That(notifications.Count, Is.GreaterThan(1));
+        Assert.That(notifications[1], Is.False);
     }
 
     private static IEnumerable<IFeature> GenerateRandomPoints(MRect envelope, int count)

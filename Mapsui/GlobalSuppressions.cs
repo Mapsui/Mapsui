@@ -13,3 +13,5 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Extensions.Catch.Exceptions(System.Func{System.Threading.Tasks.Task})")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Providers.Wms.GetFeatureInfo.GetStreamAsync(System.String)~System.Threading.Tasks.Task{System.IO.Stream}")]
 [assembly: SuppressMessage("Usage", "VSTHRD003:Avoid awaiting foreign Tasks", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.MapInfo.GetMapInfoAsync~System.Threading.Tasks.Task{Mapsui.MapInfoBase}")]
+[assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Styles.Sprite.LoadBitmapIdAsync(Mapsui.Styles.IBitmapRegistry)")]
+[assembly: SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Styles.Sprite.LoadBitmapIdAsync(Mapsui.Styles.IBitmapRegistry)")]

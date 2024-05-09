@@ -1,23 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.BitmapPath;
 
-public class BitmapUriSymbolSample : ISample
+public class BitmapBitmapPathSymbolSample : ISample
 {
-    public string Name => "Bitmap Uri Symbol";
-    public string Category => "Tests";
+    public string Name => "Bitmap BitmapPath Symbol";
+    public string Category => "BitmapPath";
 
-    public async Task<Map> CreateMapAsync()
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    private Map CreateMap()
     {
         var layer = new MemoryLayer
         {
             Style = null,
-            Features = await CreateFeaturesAsync(),
+            Features = CreateFeatures(),
             Name = "Points with Uri bitmaps"
         };
 
@@ -33,12 +34,10 @@ public class BitmapUriSymbolSample : ISample
         return map;
     }
 
-    public static async Task<IEnumerable<IFeature>> CreateFeaturesAsync()
+    private static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleIconPath = typeof(BitmapUriSymbolSample).LoadBitmapPath("Resources.Images.circle.png");
-        var circleIconId = await BitmapRegistry.Instance.RegisterAsync(circleIconPath);
-        var checkeredIconPath = typeof(BitmapUriSymbolSample).LoadBitmapPath("Resources.Images.checkered.png");
-        var checkeredIconId = await BitmapRegistry.Instance.RegisterAsync(checkeredIconPath);
+        var circleIconPath = new Uri("embeddedresource://mapsui.tests.common.resources.images.circle.png");
+        var checkeredIconPath = new Uri("embeddedresource://mapsui.tests.common.resources.images.checkered.png");
 
         return new List<IFeature>
         {
@@ -48,11 +47,11 @@ public class BitmapUriSymbolSample : ISample
             },
             new PointFeature(new MPoint(50, 100))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
+                Styles = new[] {new SymbolStyle { BitmapPath = circleIconPath}}
             },
             new PointFeature(new MPoint(100, 50))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
+                Styles = new[] {new SymbolStyle { BitmapPath = checkeredIconPath}}
             },
             new PointFeature(new MPoint(100, 100))
             {

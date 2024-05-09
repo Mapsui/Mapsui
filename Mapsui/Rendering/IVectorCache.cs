@@ -13,7 +13,7 @@ public interface IVectorCache : IDisposable
         where TPaint : class;
 
     [return: NotNullIfNotNull(nameof(param))]
-    CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, ISymbolCache, TPaint> toPaint)
+    CacheTracker<TPaint> GetOrCreatePaint<TParam, TPaint>(TParam param, Func<TParam, IRenderService, TPaint> toPaint)
         where TParam : notnull
         where TPaint : class;
 

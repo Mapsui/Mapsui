@@ -19,8 +19,8 @@ public class SymbolStyleFeatureSizeTests
             SymbolType = SymbolType.Rectangle,
         };
 
-        using var symbolCache = new SymbolCache();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
+        using var renderService = new RenderService();
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
 
         ClassicAssert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1);
     }
@@ -34,8 +34,8 @@ public class SymbolStyleFeatureSizeTests
             SymbolScale = 2,
         };
 
-        using var symbolCache = new SymbolCache();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
+        using var renderService = new RenderService();
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
 
         ClassicAssert.AreEqual(size, (Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1) * 2);
     }
@@ -49,8 +49,8 @@ public class SymbolStyleFeatureSizeTests
             SymbolOffset = new Offset(2, 0),
         };
 
-        using var symbolCache = new SymbolCache();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
+        using var renderService = new RenderService();
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
 
         ClassicAssert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1);
     }
@@ -64,8 +64,8 @@ public class SymbolStyleFeatureSizeTests
             SymbolOffset = new Offset(0, 2),
         };
 
-        using var symbolCache = new SymbolCache();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
+        using var renderService = new RenderService();
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
 
         ClassicAssert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1);
     }
@@ -79,8 +79,8 @@ public class SymbolStyleFeatureSizeTests
             SymbolOffset = new Offset(2, 2),
         };
 
-        using var symbolCache = new SymbolCache();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
+        using var renderService = new RenderService();
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
 
         ClassicAssert.AreEqual(size, Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1 + Math.Sqrt(2 * 2 + 2 * 2) * 2);
     }
@@ -88,7 +88,7 @@ public class SymbolStyleFeatureSizeTests
     [Test]
     public void BitmapInfoFeatureSize()
     {
-        using var symbolCache = new SymbolCache();
+        using var renderService = new RenderService();
 
         var bitmapId = BitmapRegistry.Instance.Register(CreatePng(100, 100));
 
@@ -97,7 +97,7 @@ public class SymbolStyleFeatureSizeTests
             BitmapId = bitmapId,
         };
 
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, symbolCache);
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
 
         ClassicAssert.AreEqual(size, 100);
     }
