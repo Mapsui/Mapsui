@@ -51,7 +51,7 @@ public class LabelStyleFeatureSizeTests
         using var renderService = new RenderService();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderService.LabelCache);
 
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             ClassicAssert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2, 0));
         }
