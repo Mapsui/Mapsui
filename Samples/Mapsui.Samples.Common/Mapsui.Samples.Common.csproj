@@ -32,6 +32,8 @@
     <None Remove="GeoData\World\rivers.shx" />
     <None Remove="Images\arrow.png" />
     <None Remove="Images\arrow.svg" />
+    <None Remove="Images\checkered.png" />
+    <None Remove="Images\circle.png" />
     <None Remove="Images\example.tfw" />
     <None Remove="Images\example.tif" />
     <None Remove="Images\Ghostscript_Tiger.png" />
@@ -132,6 +134,8 @@
     <EmbeddedResource Include="GeoData\GeoTiff\example.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Images\checkered.png" />
+    <EmbeddedResource Include="Images\circle.png" />
     <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
     <EmbeddedResource Include="Images\Ghostscript_Tiger.svg" />
     <EmbeddedResource Include="Images\home.png" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using Mapsui.Tests.Common.Maps;
 using Mapsui.Utilities;
@@ -115,6 +116,51 @@ public static class BitmapRegistryTests
         var stream = bitmap as Stream;
         Assert.That(stream is not null);
         Assert.That(stream?.ToBytes().Length > 0);
+    }
+
+    [Test]
+    public static void RenderBitmapRegistryGet()
+    {
+        // Arrange
+        using var stream = new MemoryStream();
+        var bitmapId = BitmapRegistry.Instance.Register(stream);
+
+        // Act
+        using var renderRegistry = new RenderBitmapRegistry(BitmapRegistry.Instance);
+
+        // Assert
+        Assert.That(() => renderRegistry.Get(bitmapId) != null);
+    }
+
+    [Test]
+    public static void RenderBitmapRegistryRemoveEntry()
+    {
+        // Arrange
+        using var stream = new MemoryStream();
+        var bitmapId = BitmapRegistry.Instance.Register(stream);
+
+        // Act
+        using var renderRegistry = new RenderBitmapRegistry(BitmapRegistry.Instance);
+        renderRegistry.Unregister(bitmapId);
+
+        // Assert
+        Assert.Throws<KeyNotFoundException>(() => renderRegistry.Get(bitmapId));
+    }
+
+    [Test]
+    public static void RenderBitmapRegistryDispose_RemovesBitmap()
+    {
+        // Arrange
+        using var stream = new MemoryStream();
+
+        // Act
+        var renderRegistry = new RenderBitmapRegistry(BitmapRegistry.Instance);
+        var bitmapId = renderRegistry.Register(stream);
+        renderRegistry.Dispose();
+
+        // Assert
+        Assert.Throws<ObjectDisposedException>(() => renderRegistry.Get(bitmapId));
+        Assert.Throws<KeyNotFoundException>(() => BitmapRegistry.Instance.Get(bitmapId));
     }
 
     [Test]

@@ -1,4 +1,6 @@
-﻿using Mapsui.Extensions;
+﻿using System;
+using Mapsui.Extensions;
+using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -66,7 +68,7 @@ internal static class PolygonRenderer
         }
     }
 
-    internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, ISymbolCache? symbolCache)
+    internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, IRenderService renderService)
     {
         var brush = valueTuple.brush;
         var opacity = valueTuple.opacity;
@@ -141,13 +143,15 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(symbolCache, brush.BitmapId);
+                    LoadBitmapId(brush, renderService.BitmapRegistry);
+                    var image = GetImage(renderService.SymbolCache, brush.BitmapId);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(symbolCache, brush.BitmapId);
+                    LoadBitmapId(brush, renderService.BitmapRegistry);
+                    image = GetImage(renderService.SymbolCache, brush.BitmapId);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -161,6 +165,26 @@ internal static class PolygonRenderer
         }
 
         return paintFill;
+    }
+
+    private static async void LoadBitmapId(Brush brush, IBitmapRegistry bitmapRegistry)
+    {
+        if (brush.BitmapId >= 0)
+        {
+            return;
+        }
+
+        try
+        {
+            if (brush.BitmapPath != null)
+            {
+                brush.BitmapId = await bitmapRegistry.RegisterAsync(brush.BitmapPath);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
     }
 
     internal static SKPaint CreateSkPaint((Pen? pen, float opacity) valueTuple)
