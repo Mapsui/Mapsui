@@ -44,7 +44,7 @@ public class WmsGebcoSample : ISample
         provider.TimeOut = 40000;
         provider.CRS = "EPSG:4326";
 
-        provider.AddLayer("GEBCO_LATEST");
+        provider.AddLayer("GEBCO_2021");
         provider.SetImageFormat(provider.OutputFormats[0]);
         return provider;
     }
