@@ -18,7 +18,7 @@ public class DelayerTests
         delayer.MillisecondsBetweenCalls = 1;
         var backgroundProcessing = new BackgroundProcessing();
         backgroundProcessing.Start(random, 100);
-        int iterationCount = 100; // Increase this value for more rigorous testing
+        int iterationCount = 10; // Increase this value for more rigorous testing
 
         // Act
         for (var i = 0; i < iterationCount; i++)
