@@ -1,9 +1,13 @@
 // ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
+
+using System;
+
 namespace Mapsui.Styles;
 
 public class Brush
 {
     private int _bitmapId = -1;
+    private Uri? _bitmapPath;
 
     public Brush()
     {
@@ -40,6 +44,23 @@ public class Brush
             _bitmapId = value;
             if (_bitmapId != -1 && !(FillStyle == FillStyle.Bitmap || FillStyle == FillStyle.BitmapRotated))
                 FillStyle = FillStyle.Bitmap;
+        }
+    }
+
+    public Uri? BitmapPath
+    {
+        get => _bitmapPath;
+        set
+        {
+            _bitmapPath = value;
+            if (_bitmapPath != null)
+            {
+                _bitmapId = -1;
+                if (!(FillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated))
+                {
+                    FillStyle = FillStyle.Bitmap;
+                }
+            }
         }
     }
 
