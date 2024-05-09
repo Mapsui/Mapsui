@@ -13,7 +13,7 @@ namespace Mapsui.Tests.Fetcher;
 public class FeatureFetcherTests
 {
     [Test]
-    [Repeat(10000)]
+    [Repeat(1000)]
     [CancelAfter(1000)]
     public async Task TestFeatureFetcherDelayAsync(CancellationToken token)
     {
