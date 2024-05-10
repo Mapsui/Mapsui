@@ -312,6 +312,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #endif
 
             _canvas?.Dispose();
+#if HAS_UNO_WINUI
+            _canvasGpu?.Dispose();
+#endif            
             _selectRectangle?.Dispose();
 #endif
 #if HAS_UNO || __WINUI__
