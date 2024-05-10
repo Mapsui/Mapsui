@@ -29,6 +29,13 @@ public sealed class BitmapRegistry : IBitmapRegistry
     public static BitmapRegistry Instance => _instance ??= new BitmapRegistry();
 
     /// <inheritdoc />
+    public int Register(string bitmapData, string? key = null) => Register((object)bitmapData, key);
+
+    public int Register(Stream bitmapData, string? key = null) => Register((object)bitmapData, key);
+
+    public int Register(Sprite bitmapData, string? key = null) => Register((object)bitmapData, key);
+
+    /// <inheritdoc />
     public int Register(object bitmapData, string? key = null)
     {
         CheckBitmapData(bitmapData);
