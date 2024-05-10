@@ -29,8 +29,21 @@ namespace Mapsui.UI.WinUI;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
+    // GPU does not work currently on Windows
+#if !HAS_UNO_WINUI    
+    private static bool UseGPU = false;
+#elif HAS_UNO_SKIA || WINDOWS
+    public static bool UseGPU = false;
+#else
+    public static bool UseGPU = true;
+#endif
+
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-    private readonly SKXamlCanvas _canvas = CreateRenderTarget();
+    private readonly SKXamlCanvas? _canvas = !UseGPU ? CreateRenderTarget() : null;
+#if HAS_UNO_WINUI
+    private readonly SKSwapChainPanel? _canvasGpu = UseGPU ? CreateGpuRenderTarget() : null;
+#endif
+
     bool _shiftPressed;
 
     public MapControl()
@@ -42,15 +55,29 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
             //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
             //else RunOnUIThread(() => _canvas?.Invalidate());
-            RunOnUIThread(() => _canvas?.Invalidate());
+            RunOnUIThread(() =>
+            {
+                _canvas?.Invalidate();
+#if HAS_UNO_WINUI
+                _canvasGpu?.Invalidate();
+#endif                
+            });
         };
 
         Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
-
-        Children.Add(_canvas);
+        if (_canvas != null)
+        {
+            Children.Add(_canvas);
+            _canvas.PaintSurface += Canvas_PaintSurface;
+        }
         Children.Add(_selectRectangle);
-
-        _canvas.PaintSurface += Canvas_PaintSurface;
+#if HAS_UNO_WINUI
+        if (_canvasGpu != null)
+        {
+            Children.Add(_canvasGpu);
+            _canvasGpu.PaintSurface += CanvasGpu_PaintSurface;
+        }
+#endif        
 
         Loaded += MapControlLoaded;
 
@@ -160,6 +187,18 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
     }
 
+#if HAS_UNO_WINUI
+    private static SKSwapChainPanel CreateGpuRenderTarget()
+    {
+        return new SKSwapChainPanel
+        {
+            VerticalAlignment = VerticalAlignment.Stretch,
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            Background = new SolidColorBrush(Colors.Transparent)
+        };
+    }
+#endif    
+
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
         var mousePointerPoint = e.GetCurrentPoint(this);
@@ -207,6 +246,20 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         CommonDrawControl(canvas);
     }
+
+#if HAS_UNO_WINUI
+    private void CanvasGpu_PaintSurface(object? sender, SKPaintGLSurfaceEventArgs e)
+    {
+        if (PixelDensity <= 0)
+            return;
+
+        var canvas = e.Surface.Canvas;
+
+        canvas.Scale(PixelDensity, PixelDensity);
+
+        CommonDrawControl(canvas);
+    }
+#endif    
 
     private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
     {
