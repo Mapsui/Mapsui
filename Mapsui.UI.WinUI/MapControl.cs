@@ -32,10 +32,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     // GPU does not work currently on Windows
 #if !HAS_UNO_WINUI    
     private static bool UseGPU = false;
-#elif HAS_UNO_SKIA || WINDOWS
-    public static bool UseGPU = false;
-#else
+#elif ANDROID || IOS || BROWSERWASM
     public static bool UseGPU = true;
+#else
+    public static bool UseGPU = false;
 #endif
 
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
