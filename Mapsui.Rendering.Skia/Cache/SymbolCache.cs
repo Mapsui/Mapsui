@@ -1,34 +1,56 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
 public sealed class SymbolCache : ISymbolCache
 {
-    private readonly IDictionary<int, BitmapInfo> _cache = new ConcurrentDictionary<int, BitmapInfo>();
+    private readonly IDictionary<string, BitmapInfo> _cache = new ConcurrentDictionary<string, BitmapInfo>();
 
-    public IBitmapInfo GetOrCreate(int bitmapId)
+    public Size? GetSize(int bitmapId) => GetSize(ToKey(bitmapId));
+    IBitmapInfo ISymbolCache.GetOrCreate(int bitmapId) => GetOrCreate(ToKey(bitmapId));
+    public Size? GetSize(SymbolStyle symbolStyle) => GetSize(SymbolCache.GetKey(symbolStyle));
+    public IBitmapInfo GetOrCreate(SymbolStyle symbolStyle) => GetOrCreate(SymbolCache.GetKey(symbolStyle));
+    public Size? GetSize(Brush brush) => GetSize(SymbolCache.GetKey(brush));
+    public IBitmapInfo GetOrCreate(Brush brush) => GetOrCreate(SymbolCache.GetKey(brush));
+
+    public IBitmapInfo GetOrCreate(string key)
     {
-        if (_cache.ContainsKey(bitmapId))
+        if (_cache.ContainsKey(key))
         {
-            var result = _cache[bitmapId];
+            var result = _cache[key];
             if (!BitmapHelper.InvalidBitmapInfo(result))
             {
                 return result;
             }
         }
 
-        var bitmapStream = BitmapRegistry.Instance.Get(bitmapId);
-        bool ownsBitmap = bitmapStream is not IDisposable;
-        var loadBitmap = BitmapHelper.LoadBitmap(bitmapStream, ownsBitmap) ?? throw new ArgumentNullException(nameof(bitmapId));
-        return _cache[bitmapId] = loadBitmap;
+        if (key.StartsWith("bitmapId://"))
+        {
+            //!!! This is a hopeless workaround to get things to work for now.
+            var index = "bitmapId://".Length;
+            var subString = key.Substring(index);
+            var bitmapId = int.Parse(subString);
+            object bitmapData = BitmapRegistry.Instance.Get(bitmapId);
+            bool ownsBitmap = bitmapData is not IDisposable;
+            var loadBitmap = BitmapHelper.LoadBitmap(bitmapData, ownsBitmap) ?? throw new ArgumentNullException(nameof(key));
+            return _cache[key] = loadBitmap;
+        }
+        else
+        {
+            Stream bitmapStream = BitmapPathRegistry.Instance.Get(new Uri(key));
+            bool ownsBitmap = bitmapStream is not IDisposable;
+            var loadBitmap = BitmapHelper.LoadBitmap(bitmapStream, ownsBitmap) ?? throw new ArgumentNullException(nameof(key));
+            return _cache[key] = loadBitmap;
+        }
     }
 
-    public Size? GetSize(int bitmapId)
+    private Size? GetSize(string key)
     {
-        var bitmap = (BitmapInfo?)GetOrCreate(bitmapId);
+        var bitmap = (BitmapInfo?)GetOrCreate(key);
         if (bitmap == null)
             return null;
 
@@ -44,4 +66,10 @@ public sealed class SymbolCache : ISymbolCache
 
         _cache.Clear();
     }
+
+    private static string GetKey(Brush brush)
+        => brush.BitmapPath is not null ? brush.BitmapPath.ToString() : ToKey(brush.BitmapId);
+    static string GetKey(SymbolStyle symbolStyle)
+        => symbolStyle.BitmapPath is not null ? symbolStyle.BitmapPath.ToString() : ToKey(symbolStyle.BitmapId);
+    private static string ToKey(int bitmapId) => $"bitmapId://{bitmapId}";
 }

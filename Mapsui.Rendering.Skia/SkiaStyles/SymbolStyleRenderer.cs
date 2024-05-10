@@ -5,7 +5,6 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
-using Mapsui.Logging;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -40,12 +39,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var (destX, destY) = viewport.WorldToScreenXY(x, y);
 
-        LoadBitmapId(symbolStyle, renderService.BitmapRegistry);
-        if (symbolStyle.BitmapId < 0)
+        if (symbolStyle.BitmapId < 0 && symbolStyle.BitmapPath is null)
             return false;
 
         var symbolCache = renderService.SymbolCache;
-        var bitmap = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.BitmapId);
+        var bitmap = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle);
         if (bitmap == null)
             return false;
 
@@ -94,12 +92,23 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     return false;
 
                 var sprite = bitmap.Sprite;
-                sprite.LoadBitmapIdAsync(renderService.BitmapRegistry);
+                sprite.LoadBitmapId();
                 if (sprite.Data == null)
                 {
-                    var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
-                    sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
-                        sprite.Y + sprite.Height));
+                    if (sprite.AtlasPath != null)
+                    {
+                        var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.AtlasPath.ToString());
+                        sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
+                                                       sprite.Y + sprite.Height));
+                    }
+                    else if (sprite.Atlas >= 0)
+                    {
+                        var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
+                        sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
+                            sprite.Y + sprite.Height));
+                    }
+                    else
+                        throw new Exception("Atlas has no bitmapId or bitmapPath.");
                 }
                 if (sprite.Data is SKImage skImage)
                     BitmapRenderer.Draw(canvas, skImage,
@@ -111,24 +120,6 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
 
         return true;
-    }
-
-    internal static async void LoadBitmapId(SymbolStyle symbolStyle, IBitmapRegistry bitmapRegistry)
-    {
-        if (symbolStyle.BitmapId >= 0)
-        {
-            return;
-        }
-
-        try
-        {
-            if (symbolStyle.BitmapPath != null)
-                symbolStyle.BitmapId = await bitmapRegistry.RegisterAsync(symbolStyle.BitmapPath);
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
     }
 
     private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)
@@ -261,13 +252,12 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         Size symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
 
-        LoadBitmapId(symbolStyle, renderService.BitmapRegistry);
         switch (symbolStyle.SymbolType)
         {
             case SymbolType.Image:
                 if (symbolStyle.BitmapId >= 0)
                 {
-                    var bitmapSize = renderService.SymbolCache.GetSize(symbolStyle.BitmapId);
+                    var bitmapSize = renderService.SymbolCache.GetSize(symbolStyle);
                     if (bitmapSize != null)
                     {
                         symbolSize = bitmapSize;

@@ -5,7 +5,16 @@ namespace Mapsui.Rendering;
 
 public interface ISymbolCache : IDisposable
 {
-    Size? GetSize(int bitmapId); // perhaps use a tuple in C#7
+    Size? GetSize(SymbolStyle symbolStyle);
 
-    IBitmapInfo GetOrCreate(int bitmapID);
+    IBitmapInfo GetOrCreate(SymbolStyle symbolStyle);
+
+    Size? GetSize(Brush brush);
+
+    IBitmapInfo GetOrCreate(Brush brush);
+
+    Size? GetSize(int bitmapId);
+
+    IBitmapInfo GetOrCreate(int bitmapId);
+    IBitmapInfo GetOrCreate(string bitmapPath);
 }

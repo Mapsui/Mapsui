@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
 
-public interface IBitmapRegistry : IDisposable
+public interface IRenderBitmapRegistry : IDisposable
 {
     /// <summary>
     /// Register a new bitmap
@@ -17,8 +17,7 @@ public interface IBitmapRegistry : IDisposable
     /// Register a new bitmap
     /// </summary>
     /// <param name="bitmapPath">Bitmap data to register</param>
-    /// <returns>Id of registered bitmap data</returns>
-    Task<int> RegisterAsync(Uri bitmapPath);
+    Task RegisterAsync(Uri bitmapPath);
 
     /// <summary>
     /// Get bitmap data of registered bitmap

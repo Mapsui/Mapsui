@@ -38,18 +38,13 @@ public class Sprite
     {
     }
 
-    public async void LoadBitmapIdAsync(IBitmapRegistry bitmapRegistry)
+    public void LoadBitmapId()
     {
-        if (Atlas >= 0)
-        {
-            return;
-        }
-
         if (AtlasPath != null)
         {
             try
             {
-                Atlas = await bitmapRegistry.RegisterAsync(AtlasPath).ConfigureAwait(false);
+                BitmapPathRegistry.Instance.RegisterAsync(AtlasPath).ConfigureAwait(false).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {

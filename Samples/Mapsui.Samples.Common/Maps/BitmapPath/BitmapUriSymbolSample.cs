@@ -13,12 +13,14 @@ public class BitmapUriSymbolSample : ISample
 
     public async Task<Map> CreateMapAsync()
     {
+#pragma warning disable IDISP001 // Dispose created
         var layer = new MemoryLayer
         {
             Style = null,
             Features = await CreateFeaturesAsync(),
             Name = "Points with Uri bitmaps"
         };
+#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {
@@ -35,9 +37,11 @@ public class BitmapUriSymbolSample : ISample
     public static async Task<IEnumerable<IFeature>> CreateFeaturesAsync()
     {
         var circleIconPath = new Uri("embeddedresource://mapsui.samples.common.images.circle.png");
-        var circleIconId = await BitmapRegistry.Instance.RegisterAsync(circleIconPath);
+        //!!! Todo: Registration should not be necessary with bitmapPath.
+        await BitmapPathRegistry.Instance.RegisterAsync(circleIconPath);
         var checkeredIconPath = new Uri("embeddedresource://mapsui.samples.common.images.checkered.png");
-        var checkeredIconId = await BitmapRegistry.Instance.RegisterAsync(checkeredIconPath);
+        //!!! Todo: Registration should not be necessary with bitmapPath.
+        await BitmapPathRegistry.Instance.RegisterAsync(checkeredIconPath);
 
         return new List<IFeature>
         {
@@ -47,11 +51,11 @@ public class BitmapUriSymbolSample : ISample
             },
             new PointFeature(new MPoint(50, 100))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
+                Styles = new[] {new SymbolStyle { BitmapPath = circleIconPath } }
             },
             new PointFeature(new MPoint(100, 50))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
+                Styles = new[] {new SymbolStyle { BitmapPath = checkeredIconPath } }
             },
             new PointFeature(new MPoint(100, 100))
             {

@@ -33,13 +33,13 @@ public static class BitmapRegistryTests
     {
         // Arrange
         var svgTigerPath = typeof(BitmapAtlasSample).LoadSvgPath("Resources.Images.Ghostscript_Tiger.svg");
-        var bitmapId = await BitmapRegistry.Instance.RegisterAsync(svgTigerPath);
+        await BitmapPathRegistry.Instance.RegisterAsync(svgTigerPath);
 
         // Act
-        BitmapRegistry.Instance.Unregister(bitmapId);
+        BitmapPathRegistry.Instance.Unregister(svgTigerPath);
 
         // Assert
-        Assert.Throws<KeyNotFoundException>(() => BitmapRegistry.Instance.Get(bitmapId));
+        Assert.Throws<KeyNotFoundException>(() => BitmapPathRegistry.Instance.Get(svgTigerPath));
     }
 
     [Test]
@@ -47,13 +47,12 @@ public static class BitmapRegistryTests
     {
         // Arrange
         var svgTigerPath = typeof(BitmapAtlasSample).LoadSvgPath("Resources.Images.Ghostscript_Tiger.svg");
-        var bitmapId = await BitmapRegistry.Instance.RegisterAsync(svgTigerPath);
+        await BitmapPathRegistry.Instance.RegisterAsync(svgTigerPath);
 
         // Act
-        var bitmap = BitmapRegistry.Instance.Get(bitmapId);
+        var stream = BitmapPathRegistry.Instance.Get(svgTigerPath);
 
         // Assert
-        var stream = bitmap as Stream;
         Assert.That(stream is not null);
         Assert.That(stream?.ToBytes().Length > 0);
     }
@@ -63,13 +62,13 @@ public static class BitmapRegistryTests
     {
         // Arrange
         var examplePath = new Uri($"file://{AppContext.BaseDirectory}/Resources/example.tif");
-        var bitmapId = await BitmapRegistry.Instance.RegisterAsync(examplePath);
+        await BitmapPathRegistry.Instance.RegisterAsync(examplePath);
 
         // Act
-        BitmapRegistry.Instance.Unregister(bitmapId);
+        BitmapPathRegistry.Instance.Unregister(examplePath);
 
         // Assert
-        Assert.Throws<KeyNotFoundException>(() => BitmapRegistry.Instance.Get(bitmapId));
+        Assert.Throws<KeyNotFoundException>(() => BitmapPathRegistry.Instance.Get(examplePath));
     }
 
     [Test]
@@ -77,13 +76,12 @@ public static class BitmapRegistryTests
     {
         // Arrange
         var examplePath = new Uri($"file://{AppContext.BaseDirectory}/Resources/example.tif");
-        var bitmapId = await BitmapRegistry.Instance.RegisterAsync(examplePath);
+        await BitmapPathRegistry.Instance.RegisterAsync(examplePath);
 
         // Act
-        var bitmap = BitmapRegistry.Instance.Get(bitmapId);
+        var stream = BitmapPathRegistry.Instance.Get(examplePath);
 
         // Assert
-        var stream = bitmap as Stream;
         Assert.That(stream is not null);
         Assert.That(stream?.ToBytes().Length > 0);
     }
@@ -93,13 +91,13 @@ public static class BitmapRegistryTests
     {
         // Arrange
         var mapsuiLogo = new Uri("https://mapsui.com/images/logo.svg");
-        var bitmapId = await BitmapRegistry.Instance.RegisterAsync(mapsuiLogo);
+        await BitmapPathRegistry.Instance.RegisterAsync(mapsuiLogo);
 
         // Act
-        BitmapRegistry.Instance.Unregister(bitmapId);
+        BitmapPathRegistry.Instance.Unregister(mapsuiLogo);
 
         // Assert
-        Assert.Throws<KeyNotFoundException>(() => BitmapRegistry.Instance.Get(bitmapId));
+        Assert.Throws<KeyNotFoundException>(() => BitmapPathRegistry.Instance.Get(mapsuiLogo));
     }
 
     [Test]
@@ -107,13 +105,12 @@ public static class BitmapRegistryTests
     {
         // Arrange
         var mapsuiLogo = new Uri("https://mapsui.com/images/logo.svg");
-        var bitmapId = await BitmapRegistry.Instance.RegisterAsync(mapsuiLogo);
+        await BitmapPathRegistry.Instance.RegisterAsync(mapsuiLogo);
 
         // Act
-        var bitmap = BitmapRegistry.Instance.Get(bitmapId);
+        var stream = BitmapPathRegistry.Instance.Get(mapsuiLogo);
 
         // Assert
-        var stream = bitmap as Stream;
         Assert.That(stream is not null);
         Assert.That(stream?.ToBytes().Length > 0);
     }
@@ -126,7 +123,7 @@ public static class BitmapRegistryTests
         var bitmapId = BitmapRegistry.Instance.Register(stream);
 
         // Act
-        using var renderRegistry = new RenderBitmapRegistry(BitmapRegistry.Instance);
+        using var renderRegistry = new RenderBitmapRegistry(BitmapRegistry.Instance, BitmapPathRegistry.Instance);
 
         // Assert
         Assert.That(() => renderRegistry.Get(bitmapId) != null);
@@ -140,7 +137,7 @@ public static class BitmapRegistryTests
         var bitmapId = BitmapRegistry.Instance.Register(stream);
 
         // Act
-        using var renderRegistry = new RenderBitmapRegistry(BitmapRegistry.Instance);
+        using var renderRegistry = new RenderBitmapRegistry(BitmapRegistry.Instance, BitmapPathRegistry.Instance);
         renderRegistry.Unregister(bitmapId);
 
         // Assert
@@ -154,7 +151,7 @@ public static class BitmapRegistryTests
         using var stream = new MemoryStream();
 
         // Act
-        var renderRegistry = new RenderBitmapRegistry(BitmapRegistry.Instance);
+        var renderRegistry = new RenderBitmapRegistry(BitmapRegistry.Instance, BitmapPathRegistry.Instance);
         var bitmapId = renderRegistry.Register(stream);
         renderRegistry.Dispose();
 

@@ -144,14 +144,14 @@ internal static class PolygonRenderer
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
                     LoadBitmapId(brush, renderService.BitmapRegistry);
-                    var image = GetImage(renderService.SymbolCache, brush.BitmapId);
+                    var image = GetImage(renderService.SymbolCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
                     LoadBitmapId(brush, renderService.BitmapRegistry);
-                    image = GetImage(renderService.SymbolCache, brush.BitmapId);
+                    image = GetImage(renderService.SymbolCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -167,7 +167,7 @@ internal static class PolygonRenderer
         return paintFill;
     }
 
-    private static async void LoadBitmapId(Brush brush, IBitmapRegistry bitmapRegistry)
+    private static async void LoadBitmapId(Brush brush, IRenderBitmapRegistry bitmapRegistry)
     {
         if (brush.BitmapId >= 0)
         {
@@ -178,7 +178,7 @@ internal static class PolygonRenderer
         {
             if (brush.BitmapPath != null)
             {
-                brush.BitmapId = await bitmapRegistry.RegisterAsync(brush.BitmapPath);
+                await bitmapRegistry.RegisterAsync(brush.BitmapPath);
             }
         }
         catch (Exception ex)
@@ -229,11 +229,12 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(ISymbolCache? symbolCache, int bitmapId)
+    private static SKImage? GetImage(ISymbolCache? symbolCache, Brush brush)
     {
         if (symbolCache == null)
             return null;
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(bitmapId);
+
+        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(brush);
         if (bitmapInfo == null)
             return null;
         if (bitmapInfo.Type == BitmapType.Bitmap)
@@ -246,6 +247,7 @@ internal static class PolygonRenderer
 
             if (sprite.Data == null)
             {
+                //!!! Todo: Replace with bitmap solution
                 var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
                 sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                     sprite.Y + sprite.Height));
