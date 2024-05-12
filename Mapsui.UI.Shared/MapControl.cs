@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Mapsui.Manipulations;
+using Mapsui.Styles;
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -102,6 +103,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // All requested updates up to this point will be handled by this redraw
         _refresh = false;
+        BitmapPathInitializer.InitializeWhenNeeded(RefreshGraphics);
         Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
 
         // Stop stopwatch after drawing control

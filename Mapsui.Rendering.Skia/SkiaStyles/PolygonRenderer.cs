@@ -1,6 +1,4 @@
-﻿using System;
-using Mapsui.Extensions;
-using Mapsui.Logging;
+﻿using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -143,14 +141,12 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    LoadBitmapId(brush, renderService.BitmapRegistry);
                     var image = GetImage(renderService.SymbolCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    LoadBitmapId(brush, renderService.BitmapRegistry);
                     image = GetImage(renderService.SymbolCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
@@ -165,26 +161,6 @@ internal static class PolygonRenderer
         }
 
         return paintFill;
-    }
-
-    private static async void LoadBitmapId(Brush brush, IRenderBitmapRegistry bitmapRegistry)
-    {
-        if (brush.BitmapId >= 0)
-        {
-            return;
-        }
-
-        try
-        {
-            if (brush.BitmapPath != null)
-            {
-                await bitmapRegistry.RegisterAsync(brush.BitmapPath);
-            }
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
-        }
     }
 
     internal static SKPaint CreateSkPaint((Pen? pen, float opacity) valueTuple)

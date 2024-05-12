@@ -12,10 +12,10 @@ public sealed class SymbolCache : ISymbolCache
 
     public Size? GetSize(int bitmapId) => GetSize(ToKey(bitmapId));
     IBitmapInfo ISymbolCache.GetOrCreate(int bitmapId) => GetOrCreate(ToKey(bitmapId));
-    public Size? GetSize(SymbolStyle symbolStyle) => GetSize(SymbolCache.GetKey(symbolStyle));
-    public IBitmapInfo GetOrCreate(SymbolStyle symbolStyle) => GetOrCreate(SymbolCache.GetKey(symbolStyle));
-    public Size? GetSize(Brush brush) => GetSize(SymbolCache.GetKey(brush));
-    public IBitmapInfo GetOrCreate(Brush brush) => GetOrCreate(SymbolCache.GetKey(brush));
+    public Size? GetSize(SymbolStyle symbolStyle) => GetSize(GetKey(symbolStyle));
+    public IBitmapInfo GetOrCreate(SymbolStyle symbolStyle) => GetOrCreate(GetKey(symbolStyle));
+    public Size? GetSize(Brush brush) => GetSize(GetKey(brush));
+    public IBitmapInfo GetOrCreate(Brush brush) => GetOrCreate(GetKey(brush));
 
     public IBitmapInfo GetOrCreate(string key)
     {

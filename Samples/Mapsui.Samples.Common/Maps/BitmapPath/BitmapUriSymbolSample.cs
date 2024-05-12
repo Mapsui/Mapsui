@@ -17,7 +17,7 @@ public class BitmapUriSymbolSample : ISample
         var layer = new MemoryLayer
         {
             Style = null,
-            Features = await CreateFeaturesAsync(),
+            Features = CreateFeatures(),
             Name = "Points with Uri bitmaps"
         };
 #pragma warning restore IDISP001 // Dispose created
@@ -31,20 +31,16 @@ public class BitmapUriSymbolSample : ISample
 
         map.Layers.Add(layer);
 
-        return map;
+        return await Task.FromResult(map);
     }
 
-    public static async Task<IEnumerable<IFeature>> CreateFeaturesAsync()
+    public static IEnumerable<IFeature> CreateFeatures()
     {
         var circleIconPath = new Uri("embeddedresource://mapsui.samples.common.images.circle.png");
-        //!!! Todo: Registration should not be necessary with bitmapPath.
-        await BitmapPathRegistry.Instance.RegisterAsync(circleIconPath);
         var checkeredIconPath = new Uri("embeddedresource://mapsui.samples.common.images.checkered.png");
-        //!!! Todo: Registration should not be necessary with bitmapPath.
-        await BitmapPathRegistry.Instance.RegisterAsync(checkeredIconPath);
 
-        return new List<IFeature>
-        {
+        return
+        [
             new PointFeature(new MPoint(50, 50))
             {
                 Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
@@ -61,6 +57,6 @@ public class BitmapUriSymbolSample : ISample
             {
                 Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
             }
-        };
+        ];
     }
 }

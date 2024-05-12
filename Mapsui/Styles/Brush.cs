@@ -55,6 +55,7 @@ public class Brush
             _bitmapPath = value;
             if (_bitmapPath != null)
             {
+                BitmapPathInitializer.Add(_bitmapPath);
                 _bitmapId = -1;
                 if (!(FillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated))
                 {
