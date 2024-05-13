@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Tests.Extensions;
+using Mapsui.Styles;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
@@ -99,13 +100,16 @@ internal class MapRendererTests
 
         // act
         using var mapRenderer = new MapRenderer();
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        BitmapPathInitializer.InitializeWhenNeeded(() =>
+        {
+            using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-        // aside
-        File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+            // aside
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
-        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+            // assert
+            ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        });
     }
 
     [Test]

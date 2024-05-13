@@ -105,6 +105,12 @@ public class SymbolStyle : VectorStyle
     /// </summary>
     public Color? BlendModeColor { get; set; }
 
+    /// <summary>
+    /// Sets the sprite parameters used to specify which part of the image
+    /// symbol should be used. This only applies if a BitmapPath is set.
+    /// </summary>
+    public Sprite? Sprite { get; set; }
+
     public override bool Equals(object? obj)
     {
         if (!(obj is SymbolStyle style))

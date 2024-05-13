@@ -1,5 +1,4 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Styles;
 using SkiaSharp;
 using Svg.Skia;
 
@@ -9,7 +8,6 @@ public enum BitmapType
 {
     Bitmap,
     Svg,
-    Sprite,
     Picture
 }
 
@@ -78,22 +76,6 @@ public sealed class BitmapInfo : IBitmapInfo
         }
     }
 
-    public Sprite? Sprite
-    {
-        get
-        {
-            if (Type == BitmapType.Sprite)
-                return _data as Sprite;
-            else
-                return null;
-        }
-        set
-        {
-            _data = value;
-            Type = BitmapType.Sprite;
-        }
-    }
-
     public long IterationUsed { get; set; }
 
     public float Width
@@ -106,8 +88,6 @@ public sealed class BitmapInfo : IBitmapInfo
                     return Bitmap?.Width ?? 0;
                 case BitmapType.Svg:
                     return Svg?.Picture?.CullRect.Width ?? 0;
-                case BitmapType.Sprite:
-                    return Sprite?.Width ?? 0;
                 case BitmapType.Picture:
                     return Picture?.CullRect.Width ?? 0;
                 default:
@@ -126,8 +106,6 @@ public sealed class BitmapInfo : IBitmapInfo
                     return Bitmap?.Height ?? 0;
                 case BitmapType.Svg:
                     return Svg?.Picture?.CullRect.Height ?? 0;
-                case BitmapType.Sprite:
-                    return Sprite?.Height ?? 0;
                 case BitmapType.Picture:
                     return Picture?.CullRect.Height ?? 0;
                 default:

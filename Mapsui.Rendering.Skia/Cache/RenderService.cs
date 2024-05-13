@@ -11,6 +11,7 @@ public sealed class RenderService : IRenderService
         LabelCache = new LabelCache();
         BitmapRegistry = new RenderBitmapRegistry(Styles.BitmapRegistry.Instance, BitmapPathRegistry.Instance);
         VectorCache = new VectorCache(this, capacity);
+        SpriteCache = new SpriteCache();
     }
 
     public ISymbolCache SymbolCache { get; }
@@ -18,6 +19,7 @@ public sealed class RenderService : IRenderService
     public ITileCache TileCache { get; }
     public ILabelCache LabelCache { get; }
     public IRenderBitmapRegistry BitmapRegistry { get; }
+    public ISpriteCache SpriteCache { get; }
 
     public void Dispose()
     {
@@ -26,5 +28,6 @@ public sealed class RenderService : IRenderService
         VectorCache.Dispose();
         TileCache.Dispose();
         BitmapRegistry.Dispose();
+        SpriteCache.Dispose();
     }
 }

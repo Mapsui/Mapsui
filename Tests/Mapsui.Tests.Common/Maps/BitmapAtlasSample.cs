@@ -1,8 +1,8 @@
-﻿using Mapsui.Extensions;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -44,34 +44,34 @@ public class BitmapAtlasSample : ISample
 
     public static List<IFeature> CreateFeatures()
     {
-        var atlas = typeof(BitmapAtlasSample).LoadBitmapId("Resources.Images.osm-liberty.png");
-        var spriteAmusementPark15 = new Sprite(atlas, 106, 0, 21, 21, 1);
-        var spriteClothingStore15 = new Sprite(atlas, 84, 106, 21, 21, 1);
-        var spriteDentist15 = new Sprite(atlas, 147, 64, 21, 21, 1);
-        var spritePedestrianPolygon = new Sprite(atlas, 0, 0, 64, 64, 1);
+        var atlasBitmapPath = new Uri("embeddedresource://mapsui.tests.common.resources.Images.osm-liberty.png");
+        var spriteAmusementPark15 = new Sprite(106, 0, 21, 21);
+        var spriteClothingStore15 = new Sprite(84, 106, 21, 21);
+        var spriteDentist15 = new Sprite(147, 64, 21, 21);
+        var spritePedestrianPolygon = new Sprite(0, 0, 64, 64);
         var svgTigerBitmapId = typeof(BitmapAtlasSample).LoadSvgId("Resources.Images.Ghostscript_Tiger.svg");
 
         return new List<IFeature>
         {
             new PointFeature(new MPoint(256, 124))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = atlas} }
+                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath} }
             },
             new PointFeature(new MPoint(20, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spriteAmusementPark15)} }
+                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath, Sprite = spriteAmusementPark15} }
             },
             new PointFeature(new MPoint(60, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spriteClothingStore15)} }
+                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath, Sprite = spriteClothingStore15} }
             },
             new PointFeature(new MPoint(100, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spriteDentist15)} }
+                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath, Sprite = spriteDentist15} }
             },
             new PointFeature(new MPoint(180, 300))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spritePedestrianPolygon)} }
+                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath, Sprite = spritePedestrianPolygon} }
             },
             new PointFeature(new MPoint(380, 280))
             {

@@ -20,7 +20,9 @@ public class PolygonBitmapPathTestSample : ISample
 
     public static Map CreateMap()
     {
+#pragma warning disable IDISP001 // Dispose created
         var layer = CreateLayer();
+#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {

@@ -43,19 +43,19 @@ public class BitmapUriSymbolSample : ISample
         [
             new PointFeature(new MPoint(50, 50))
             {
-                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
+                Styles = new[] { new VectorStyle { Fill = new Brush(Color.Red) } }
             },
             new PointFeature(new MPoint(50, 100))
             {
-                Styles = new[] {new SymbolStyle { BitmapPath = circleIconPath } }
+                Styles = new[] { new SymbolStyle { BitmapPath = circleIconPath } }
             },
             new PointFeature(new MPoint(100, 50))
             {
-                Styles = new[] {new SymbolStyle { BitmapPath = checkeredIconPath } }
+                Styles = new[] { new SymbolStyle { BitmapPath = checkeredIconPath } }
             },
             new PointFeature(new MPoint(100, 100))
             {
-                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
+                Styles = new[] { new VectorStyle { Fill = new Brush(Color.Green), Outline = null } }
             }
         ];
     }

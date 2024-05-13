@@ -283,8 +283,6 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
                     case BitmapType.Bitmap:
                         canvas.DrawImage(bitmapInfo.Bitmap, offset);
                         break;
-                    case BitmapType.Sprite:
-                        throw new Exception();
                     case BitmapType.Svg:
                         if (bitmapInfo.Svg != null)
                         {

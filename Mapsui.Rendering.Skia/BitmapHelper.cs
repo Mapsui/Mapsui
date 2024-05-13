@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Mapsui.Extensions;
@@ -66,9 +67,9 @@ public static class BitmapHelper
             return new BitmapInfo { Bitmap = image };
         }
 
-        if (bitmapStream is Sprite sprite)
+        if (bitmapStream is Sprite)
         {
-            return new BitmapInfo { Sprite = sprite };
+            throw new Exception("A bitmap stream should never be a Sprite. The Sprite class has a different purpose after Mapsui 5.0.0-beta.1.");
         }
 
         return null;

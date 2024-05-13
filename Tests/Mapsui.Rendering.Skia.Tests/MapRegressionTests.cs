@@ -14,6 +14,7 @@ using Mapsui.Samples.Common.Maps.DataFormats;
 using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Widgets;
+using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Widgets.InfoWidgets;
 using NUnit.Framework;
@@ -82,36 +83,41 @@ public class MapRegressionTests
             {
                 // act
                 using var mapRenderer = CreateMapRenderer(mapControl);
-                using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
-                // aside
-                if (bitmap is { Length: > 0 })
+                // Workaround for delayed bitmapPath loading
+                BitmapPathInitializer.InitializeWhenNeeded(() =>
                 {
-                    File.WriteToGeneratedRegressionFolder(fileName, bitmap);
-                }
-                else
-                {
-                    Assert.Fail("Should generate Image");
-                }
+                    using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
-                // assert
-                if (compareImages)
-                {
-                    using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
-                    if (originalStream == null)
+                    // aside
+                    if (bitmap is { Length: > 0 })
                     {
-                        Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
+                        File.WriteToGeneratedRegressionFolder(fileName, bitmap);
                     }
                     else
                     {
-                        ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995));
+                        Assert.Fail("Should generate Image");
                     }
-                }
-                else
-                {
-                    // Don't compare images here because to unreliable
-                    ClassicAssert.True(true);
-                }
+
+                    // assert
+                    if (compareImages)
+                    {
+                        using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
+                        if (originalStream == null)
+                        {
+                            Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
+                        }
+                        else
+                        {
+                            ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995));
+                        }
+                    }
+                    else
+                    {
+                        // Don't compare images here because to unreliable
+                        ClassicAssert.True(true);
+                    }
+                });
             }
         }
         finally
