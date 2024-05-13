@@ -123,14 +123,9 @@ public sealed class BitmapRegistry : IDisposable
         if (bitmapData == null)
             throw new ArgumentException("The bitmap data that is registered is null. Was the image loaded correctly?");
 
-        if (bitmapData is Sprite sprite)
+        if (bitmapData is Sprite)
         {
-            if (sprite.AtlasPath == null && (sprite.Atlas < 0 || !_register.ContainsKey(sprite.Atlas)))
-            {
-                throw new ArgumentException("Sprite has no corresponding atlas bitmap.");
-            }
+            throw new Exception("A bitmap stream should never be a Sprite. The Sprite class has a different purpose after Mapsui 5.0.0-beta.1.");
         }
     }
-
-
 }

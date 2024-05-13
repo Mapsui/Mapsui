@@ -10,4 +10,5 @@ public interface IRenderService : IDisposable
     ITileCache TileCache { get; }
     IVectorCache VectorCache { get; }
     IRenderBitmapRegistry BitmapRegistry { get; }
+    ISpriteCache SpriteCache { get; }
 }

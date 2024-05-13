@@ -34,6 +34,12 @@ public class Brush
     public Color? Background { get; set; }
 
     /// <summary>
+    /// Sets the sprite parameters used to specify which part of the image
+    /// symbol should be used. This only applies if a BitmapPath is set.
+    /// </summary>
+    public Sprite? Sprite { get; set; }
+
+    /// <summary>
     /// This identifies bitmap in the BitmapRegistry
     /// </summary>
     public int BitmapId

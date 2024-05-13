@@ -3,6 +3,7 @@ using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -141,13 +142,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(renderService.SymbolCache, brush);
+                    var image = GetImage(renderService.SymbolCache, renderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(renderService.SymbolCache, brush);
+                    image = GetImage(renderService.SymbolCache, renderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -205,7 +206,7 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(ISymbolCache? symbolCache, Brush brush)
+    private static SKImage? GetImage(ISymbolCache? symbolCache, ISpriteCache spriteCache, Brush brush)
     {
         if (symbolCache == null)
             return null;
@@ -214,22 +215,27 @@ internal static class PolygonRenderer
         if (bitmapInfo == null)
             return null;
         if (bitmapInfo.Type == BitmapType.Bitmap)
-            return bitmapInfo.Bitmap;
-        if (bitmapInfo.Type == BitmapType.Sprite)
         {
-            var sprite = bitmapInfo.Sprite;
-            if (sprite == null)
-                return null;
-
-            if (sprite.Data == null)
+            if (brush.Sprite is null)
+                return bitmapInfo.Bitmap;
+            else
             {
-                //!!! Todo: Replace with bitmap solution
-                var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
-                sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
-                    sprite.Y + sprite.Height));
+                if (brush.BitmapPath is null)
+                    throw new Exception("If Sprite is assigned BitmapPath should be set.");
+                var sprite = brush.Sprite;
+                if (bitmapInfo.Bitmap is null)
+                    throw new Exception("Bitmap is null while type is Bitmap. This should never happen.");
+
+                // The line below generates a string. For performance is it not great to have this in the render loop.
+                var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.BitmapPath.ToString(), brush.Sprite);
+                ((SpriteCache)spriteCache).GetOrCreatePaint(spriteKey, () => GetSpriteFromSKImage(bitmapInfo.Bitmap, sprite));
             }
-            return (SKImage?)sprite.Data;
         }
         return null;
+    }
+
+    private static SKImage GetSpriteFromSKImage(SKImage skImage, Sprite sprite)
+    {
+        return skImage.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height));
     }
 }

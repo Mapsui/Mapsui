@@ -37,40 +37,61 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
-        var (destX, destY) = viewport.WorldToScreenXY(x, y);
+        var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
 
         if (symbolStyle.BitmapId < 0 && symbolStyle.BitmapPath is null)
             return false;
 
         var symbolCache = renderService.SymbolCache;
-        var bitmap = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle);
-        if (bitmap == null)
+        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle);
+        if (bitmapInfo == null)
             return false;
 
         // Calc offset (relative or absolute)
-        var offset = symbolStyle.SymbolOffset.CalcOffset(bitmap.Width, bitmap.Height);
+        var offset = symbolStyle.SymbolOffset.CalcOffset(bitmapInfo.Width, bitmapInfo.Height);
 
         var rotation = (float)symbolStyle.SymbolRotation;
         if (symbolStyle.RotateWithMap) rotation += (float)viewport.Rotation;
 
-        switch (bitmap.Type)
+        switch (bitmapInfo.Type)
         {
             case BitmapType.Bitmap:
-                if (bitmap.Bitmap == null)
-                    return false;
+                if (bitmapInfo.Bitmap == null)
+                    return false; // Should we throw instead?
 
-                BitmapRenderer.Draw(canvas, bitmap.Bitmap,
-                    (float)destX, (float)destY,
-                    rotation,
-                    (float)offset.X, (float)offset.Y,
-                    opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                if (symbolStyle.Sprite is null) // It is an ordinary bitmap.
+                {
+                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap,
+                        (float)destinationX, (float)destinationY,
+                        rotation,
+                        (float)offset.X, (float)offset.Y,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                }
+                else
+                {
+                    var sprite = symbolStyle.Sprite;
+
+                    if (symbolStyle.BitmapPath is null)
+                        throw new Exception("If Sprite parameters are specified a BitmapPath is required.");
+
+                    var skiaSpriteCache = (SpriteCache)renderService.SpriteCache;
+                    var skImage = skiaSpriteCache.GetOrCreatePaint(ToSpriteKey(symbolStyle.BitmapPath.ToString(), symbolStyle.Sprite),
+                        () => bitmapInfo.Bitmap.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
+
+                    BitmapRenderer.Draw(canvas, skImage,
+                        (float)destinationX, (float)destinationY,
+                        rotation,
+                        (float)offset.X, (float)offset.Y,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                }
+
                 break;
             case BitmapType.Picture:
-                if (bitmap.Picture == null)
+                if (bitmapInfo.Picture == null)
                     return false;
 
-                PictureRenderer.Draw(canvas, bitmap.Picture,
-                    (float)destX, (float)destY,
+                PictureRenderer.Draw(canvas, bitmapInfo.Picture,
+                    (float)destinationX, (float)destinationY,
                     rotation,
                     (float)offset.X, (float)offset.Y,
                     opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
@@ -78,44 +99,14 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             case BitmapType.Svg:
                 // Todo: Perhaps remove BitmapType.Svg and SvgRenderer?
                 // It looks like BitmapType.Svg is not use at all the the moment.
-                if (bitmap.Svg == null)
+                if (bitmapInfo.Svg == null)
                     return false;
 
-                SvgRenderer.Draw(canvas, bitmap.Svg,
-                    (float)destX, (float)destY,
+                SvgRenderer.Draw(canvas, bitmapInfo.Svg,
+                    (float)destinationX, (float)destinationY,
                     rotation,
                     (float)offset.X, (float)offset.Y,
                     opacity: opacity, scale: (float)symbolStyle.SymbolScale);
-                break;
-            case BitmapType.Sprite:
-                if (bitmap.Sprite == null)
-                    return false;
-
-                var sprite = bitmap.Sprite;
-                sprite.LoadBitmapId();
-                if (sprite.Data == null)
-                {
-                    if (sprite.AtlasPath != null)
-                    {
-                        var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.AtlasPath.ToString());
-                        sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
-                                                       sprite.Y + sprite.Height));
-                    }
-                    else if (sprite.Atlas >= 0)
-                    {
-                        var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
-                        sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
-                            sprite.Y + sprite.Height));
-                    }
-                    else
-                        throw new Exception("Atlas has no bitmapId or bitmapPath.");
-                }
-                if (sprite.Data is SKImage skImage)
-                    BitmapRenderer.Draw(canvas, skImage,
-                        (float)destX, (float)destY,
-                        rotation,
-                        (float)offset.X, (float)offset.Y,
-                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                 break;
         }
 
@@ -288,4 +279,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         return size;
     }
+
+    public static string ToSpriteKey(string bitmapPath, Sprite sprite)
+        => $"{bitmapPath}?sprite=true,x={sprite.X},x={sprite.Y},width={sprite.Width},height={sprite.Height},pixelRatio{sprite.PixelRatio}";
 }
