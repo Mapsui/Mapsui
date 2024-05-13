@@ -1,11 +1,11 @@
 ﻿namespace Mapsui.Styles;
 
-public class Sprite(int x, int y, int width, int height, float pixelRatio)
-{
-    public int X { get; } = x;
-    public int Y { get; } = y;
-    public int Width { get; } = width;
-    public int Height { get; } = height;
-    public float PixelRatio { get; } = pixelRatio;
-
-}
+/// <summary>
+/// Defines which section of the atlas (the source image) should be used as sprite image.
+/// </summary>
+/// <param name="X">The X-coordinate of the origin within the atlas.</param>
+/// <param name="Y">The Y-coordinate of the origin within the atlas.</param>
+/// <param name="Width">The width of the sprite.</param>
+/// <param name="Height">The height of the sprite.</param>
+public record Sprite(int X, int Y, int Width, int Height)
+{ }
