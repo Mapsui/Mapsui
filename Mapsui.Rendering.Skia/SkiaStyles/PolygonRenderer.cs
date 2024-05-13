@@ -210,10 +210,12 @@ internal static class PolygonRenderer
     {
         if (symbolCache == null)
             return null;
-
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(brush);
+        if (brush.BitmapPath is null)
+            return null;
+        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(brush.BitmapPath.ToString());
         if (bitmapInfo == null)
             return null;
+
         if (bitmapInfo.Type == BitmapType.Bitmap)
         {
             if (brush.Sprite is null)

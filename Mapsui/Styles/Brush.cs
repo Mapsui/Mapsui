@@ -22,7 +22,6 @@ public class Brush
     {
         Color = brush.Color;
         Background = brush.Background;
-        BitmapId = brush.BitmapId;
         FillStyle = brush.FillStyle;
     }
 
@@ -38,20 +37,6 @@ public class Brush
     /// symbol should be used. This only applies if a BitmapPath is set.
     /// </summary>
     public Sprite? Sprite { get; set; }
-
-    /// <summary>
-    /// This identifies bitmap in the BitmapRegistry
-    /// </summary>
-    public int BitmapId
-    {
-        get => _bitmapId;
-        set
-        {
-            _bitmapId = value;
-            if (_bitmapId != -1 && !(FillStyle == FillStyle.Bitmap || FillStyle == FillStyle.BitmapRotated))
-                FillStyle = FillStyle.Bitmap;
-        }
-    }
 
     public Uri? BitmapPath
     {
@@ -125,6 +110,4 @@ public class Brush
     {
         return !Equals(brush1, brush2);
     }
-
-
 }

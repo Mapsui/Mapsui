@@ -14,8 +14,6 @@ public sealed class SymbolCache : ISymbolCache
     IBitmapInfo ISymbolCache.GetOrCreate(int bitmapId) => GetOrCreate(ToKey(bitmapId));
     public Size? GetSize(SymbolStyle symbolStyle) => GetSize(GetKey(symbolStyle));
     public IBitmapInfo GetOrCreate(SymbolStyle symbolStyle) => GetOrCreate(GetKey(symbolStyle));
-    public Size? GetSize(Brush brush) => GetSize(GetKey(brush));
-    public IBitmapInfo GetOrCreate(Brush brush) => GetOrCreate(GetKey(brush));
 
     public IBitmapInfo GetOrCreate(string key)
     {
@@ -67,8 +65,6 @@ public sealed class SymbolCache : ISymbolCache
         _cache.Clear();
     }
 
-    private static string GetKey(Brush brush)
-        => brush.BitmapPath is not null ? brush.BitmapPath.ToString() : ToKey(brush.BitmapId);
     static string GetKey(SymbolStyle symbolStyle)
         => symbolStyle.BitmapPath is not null ? symbolStyle.BitmapPath.ToString() : ToKey(symbolStyle.BitmapId);
     private static string ToKey(int bitmapId) => $"bitmapId://{bitmapId}";

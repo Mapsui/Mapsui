@@ -179,13 +179,17 @@ internal class MapRendererTests
 
         // act
         using var mapRenderer = new MapRenderer();
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-        // aside
-        File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+        BitmapPathInitializer.InitializeWhenNeeded(() =>
+        {
+            using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-        // assert
-        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+            // aside
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+
+            // assert
+            ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+        });
     }
 
     [Test]
