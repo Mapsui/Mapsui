@@ -281,5 +281,5 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
     public static string ToSpriteKey(string bitmapPath, Sprite sprite)
-        => $"{bitmapPath}?sprite=true,x={sprite.X},x={sprite.Y},width={sprite.Width},height={sprite.Height},pixelRatio{sprite.PixelRatio}";
+        => $"{bitmapPath}?sprite=true,x={sprite.X},x={sprite.Y},width={sprite.Width},height={sprite.Height}";
 }

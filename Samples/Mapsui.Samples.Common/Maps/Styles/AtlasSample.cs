@@ -53,7 +53,7 @@ public class AtlasSample : ISample
             var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
             var x = 0 + _random.Next(0, 12) * 21;
             var y = 64 + _random.Next(0, 6) * 21;
-            feature.Styles.Add(new SymbolStyle { BitmapPath = _atlasBitmapPath, Sprite = new Sprite(x, y, 21, 21, 1) });
+            feature.Styles.Add(new SymbolStyle { BitmapPath = _atlasBitmapPath, Sprite = new Sprite(x, y, 21, 21) });
             counter++;
             return feature;
         }).ToList();
