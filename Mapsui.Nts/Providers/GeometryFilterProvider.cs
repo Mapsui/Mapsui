@@ -20,7 +20,7 @@ public class GeometryFilterProvider(IProvider provider, Func<IFeature, bool> fil
 
     public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        if (DateTime.Now - _lastUpdate < TimeSpan.FromSeconds(10))
+        if (DateTime.Now - _lastUpdate < TimeSpan.FromSeconds(20))
         {
             return _current;
         }
