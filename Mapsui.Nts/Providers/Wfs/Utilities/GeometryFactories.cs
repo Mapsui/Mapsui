@@ -505,7 +505,6 @@ internal class PolygonFactory : GeometryFactory
             {
                 while ((GeometryReader = GetSubReaderOf(FeatureReader, labelValues, polygonNode)) != null)
                 {
-
                     LinearRing? exteriorRing = null;
                     XmlReader? outerBoundaryReader;
                     if ((outerBoundaryReader = GetSubReaderOf(
@@ -723,9 +722,6 @@ internal class MultiPolygonFactory : GeometryFactory
         IPathNode multiPolygonNode = new PathNode(GmlNs, "MultiPolygon", (NameTable)XmlReader!.NameTable);
         IPathNode multiSurfaceNode = new PathNode(GmlNs, "MultiSurface", (NameTable)XmlReader.NameTable);
         IPathNode multiPolygonNodeAlt = new AlternativePathNodesCollection(multiPolygonNode, multiSurfaceNode);
-        IPathNode polygonMemberNode = new PathNode(GmlNs, "polygonMember", (NameTable)XmlReader.NameTable);
-        IPathNode surfaceMemberNode = new PathNode(GmlNs, "surfaceMember", (NameTable)XmlReader.NameTable);
-        IPathNode polygonMemberNodeAlt = new AlternativePathNodesCollection(polygonMemberNode, surfaceMemberNode);
         var labelValues = new Dictionary<string, string>();
         var geometryFound = false;
 
@@ -736,7 +732,7 @@ internal class MultiPolygonFactory : GeometryFactory
             {
                 while (
                     (GeometryReader =
-                     GetSubReaderOf(FeatureReader, labelValues, multiPolygonNodeAlt, polygonMemberNodeAlt)) != null)
+                     GetSubReaderOf(FeatureReader, labelValues, multiPolygonNodeAlt)) != null)
                 {
                     using GeometryFactory geometryFactory = new PolygonFactory(GeometryReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
                     var tempFeatures = new List<IFeature>();

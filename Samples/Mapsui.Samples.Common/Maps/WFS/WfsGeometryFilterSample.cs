@@ -38,7 +38,7 @@ public class WfsGeometryFilterSample : ISample
 
             map.Widgets.Add(new MapInfoWidget(map));
 
-            map.Navigator.CenterOnAndZoomTo(new MPoint(963089.84109383647, 6055276.3174265679), map.Navigator.Resolutions[19]);
+            map.Navigator.CenterOnAndZoomTo(new MPoint(964406.63616331492, 6055489.2309588827), map.Navigator.Resolutions[10]);
 
             return map;
 
