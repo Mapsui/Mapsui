@@ -739,7 +739,7 @@ internal class MultiPolygonFactory : GeometryFactory
                      GetSubReaderOf(FeatureReader, labelValues, multiPolygonNodeAlt, polygonMemberNodeAlt)) != null)
                 {
                     using GeometryFactory geometryFactory = new PolygonFactory(GeometryReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
-                    var tempFeatures = new List<IFeature>()
+                    var tempFeatures = new List<IFeature>();
                     var polygons = (await geometryFactory.CreateGeometriesAsync(tempFeatures)).Cast<Polygon>().ToArray();
                     Geometries.Add(new MultiPolygon(polygons));
                     geometryFound = true;
