@@ -29,20 +29,13 @@ namespace Mapsui.UI.WinUI;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
-    // GPU does not work currently on Windows
-#if !HAS_UNO_WINUI    
-    private static bool UseGPU = false;
-#elif ANDROID || IOS || BROWSERWASM
-    public static bool UseGPU = true;
-#else
-    public static bool UseGPU = false;
-#endif
-
-    private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-    private readonly SKXamlCanvas? _canvas = !UseGPU ? CreateRenderTarget() : null;
 #if HAS_UNO_WINUI
-    private readonly SKSwapChainPanel? _canvasGpu = UseGPU ? CreateGpuRenderTarget() : null;
+    // GPU does not work currently on Windows
+    public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid() || OperatingSystem.IsIOS();
+    private readonly SKSwapChainPanel? _canvasGpu;
 #endif
+    private readonly Rectangle _selectRectangle = CreateSelectRectangle();
+    private readonly SKXamlCanvas? _canvas;
 
     bool _shiftPressed;
 
@@ -50,34 +43,30 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         SharedConstructor();
 
-        _invalidate = () =>
-        {
-            // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
-            //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
-            //else RunOnUIThread(() => _canvas?.Invalidate());
-            RunOnUIThread(() =>
-            {
-                _canvas?.Invalidate();
-#if HAS_UNO_WINUI
-                _canvasGpu?.Invalidate();
-#endif                
-            });
-        };
+        // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
+        //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
+        //else RunOnUIThread(() => _canvas?.Invalidate());
 
         Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
-        if (_canvas != null)
-        {
-            Children.Add(_canvas);
-            _canvas.PaintSurface += Canvas_PaintSurface;
-        }
-        Children.Add(_selectRectangle);
 #if HAS_UNO_WINUI
-        if (_canvasGpu != null)
+        if (UseGPU)
         {
+            _canvasGpu = CreateGpuRenderTarget();
+            _invalidate = () => RunOnUIThread(() => _canvasGpu.Invalidate());
             Children.Add(_canvasGpu);
             _canvasGpu.PaintSurface += CanvasGpu_PaintSurface;
         }
+        else
+        {
+#endif
+        _canvas = CreateRenderTarget();
+        _invalidate = () => RunOnUIThread(() => _canvas.Invalidate());
+        Children.Add(_canvas);
+        _canvas.PaintSurface += Canvas_PaintSurface;
+#if HAS_UNO_WINUI            
+        }
 #endif        
+        Children.Add(_selectRectangle);
 
         Loaded += MapControlLoaded;
 
