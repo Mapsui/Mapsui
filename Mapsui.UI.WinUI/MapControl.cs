@@ -59,10 +59,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         else
         {
 #endif
-        _canvas = CreateRenderTarget();
-        _invalidate = () => RunOnUIThread(() => _canvas.Invalidate());
-        Children.Add(_canvas);
-        _canvas.PaintSurface += Canvas_PaintSurface;
+            _canvas = CreateRenderTarget();
+            _invalidate = () => RunOnUIThread(() => _canvas.Invalidate());
+            Children.Add(_canvas);
+            _canvas.PaintSurface += Canvas_PaintSurface;
 #if HAS_UNO_WINUI            
         }
 #endif        
