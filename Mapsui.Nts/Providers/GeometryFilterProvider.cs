@@ -24,7 +24,7 @@ public class GeometryFilterProvider(IProvider provider, Func<IFeature, bool> fil
         {
             return _current;
         }
-        
+
         _lastUpdate = DateTime.Now;
         _current = IterateFeatures(await provider.GetFeaturesAsync(fetchInfo));
         return _current;
