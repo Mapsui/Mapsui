@@ -59,10 +59,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         else
         {
 #endif
+#pragma warning disable IDE0055 // Fixing WinUI build because of HAS_UNO_WINUI the indentation changes in WinUI
             _canvas = CreateRenderTarget();
             _invalidate = () => RunOnUIThread(() => _canvas.Invalidate());
             Children.Add(_canvas);
             _canvas.PaintSurface += Canvas_PaintSurface;
+#pragma warning restore IDE0055           
 #if HAS_UNO_WINUI            
         }
 #endif        
