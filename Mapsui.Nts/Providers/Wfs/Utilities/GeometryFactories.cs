@@ -730,10 +730,6 @@ internal class MultiPolygonFactory : GeometryFactory
         IPathNode multiPolygonNode = new PathNode(Gmlns, "MultiPolygon", (NameTable)XmlReader!.NameTable);
         IPathNode multiSurfaceNode = new PathNode(Gmlns, "MultiSurface", (NameTable)XmlReader.NameTable);
         IPathNode multiPolygonNodeAlt = new AlternativePathNodesCollection(multiPolygonNode, multiSurfaceNode);
-        IPathNode polygonMemberNode = new PathNode(Gmlns, "polygonMember", (NameTable)XmlReader.NameTable);
-        IPathNode surfaceMemberNode = new PathNode(Gmlns, "surfaceMember", (NameTable)XmlReader.NameTable);
-        IPathNode polygonMemberNodeAlt = new AlternativePathNodesCollection(polygonMemberNode, surfaceMemberNode);
-        IPathNode linearRingNode = new PathNode(Gmlns, "LinearRing", (NameTable)XmlReader.NameTable);
         var labelValues = new Dictionary<string, string>();
         var geomFound = false;
 
@@ -744,10 +740,11 @@ internal class MultiPolygonFactory : GeometryFactory
             {
                 while (
                     (GeomReader =
-                     GetSubReaderOf(FeatureReader, labelValues, multiPolygonNodeAlt, polygonMemberNodeAlt)) != null)
+                     GetSubReaderOf(FeatureReader, labelValues, multiPolygonNodeAlt)) != null)
                 {
                     using GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
-                    var polygons = (await geomFactory.CreateGeometriesAsync(features)).Cast<Polygon>();
+                    var tempFeatures = new List<IFeature>();
+                    var polygons = (await geomFactory.CreateGeometriesAsync(tempFeatures)).Cast<Polygon>();
                     Geoms.Add(new MultiPolygon(polygons.ToArray()));
                     geomFound = true;
                 }
