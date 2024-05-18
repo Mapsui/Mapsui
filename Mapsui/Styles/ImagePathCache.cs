@@ -36,9 +36,10 @@ public sealed class ImagePathCache : IDisposable
     }
 
     /// <inheritdoc />
-    public Stream Get(Uri key)
+    public Stream? Get(Uri key)
     {
-        return _register[key.ToString()];
+        _register.TryGetValue(key.ToString(), out var val);
+        return val;
     }
 
     /// <inheritdoc />

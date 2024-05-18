@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
@@ -10,7 +9,7 @@ public sealed class SymbolCache : ISymbolCache
 {
     private readonly IDictionary<string, BitmapInfo> _cache = new ConcurrentDictionary<string, BitmapInfo>();
 
-    public IBitmapInfo GetOrCreate(string key)
+    public IBitmapInfo? GetOrCreate(string key)
     {
         if (_cache.ContainsKey(key))
         {
@@ -21,9 +20,13 @@ public sealed class SymbolCache : ISymbolCache
             }
         }
 
-        Stream bitmapStream = ImagePathCache.Instance.Get(new Uri(key));
-        bool ownsBitmap = bitmapStream is not IDisposable;
-        var loadBitmap = BitmapHelper.LoadBitmap(bitmapStream, ownsBitmap) ?? throw new ArgumentNullException(nameof(key));
+        var imageStream = ImagePathCache.Instance.Get(new Uri(key));
+        if (imageStream == null)
+        {
+            return null;
+        }
+        bool ownsBitmap = imageStream is not IDisposable;
+        var loadBitmap = BitmapHelper.LoadBitmap(imageStream, ownsBitmap) ?? throw new ArgumentNullException(nameof(key));
         return _cache[key] = loadBitmap;
     }
 
