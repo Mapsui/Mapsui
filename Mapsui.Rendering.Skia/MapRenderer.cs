@@ -38,6 +38,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     static MapRenderer()
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
+        DefaultRendererFactory.CreateWithRenderService = f => new MapRenderer(f);
     }
 
     private void InitRenderer()
@@ -60,11 +61,15 @@ public sealed class MapRenderer : IRenderer, IDisposable
     public MapRenderer() : this(10000)
     { }
 
-    public MapRenderer(int vectorCacheCapacity)
+    public MapRenderer(int vectorCacheCapacity) : this(new RenderService(vectorCacheCapacity))
     {
         // Todo: Think about an alternative to initialize. Perhaps the capacity should
         // be determined by the number of features used in one Paint iteration.
-        _renderService = new RenderService(vectorCacheCapacity);
+    }
+
+    public MapRenderer(IRenderService renderService)
+    {
+        _renderService = renderService;
         InitRenderer();
     }
 
