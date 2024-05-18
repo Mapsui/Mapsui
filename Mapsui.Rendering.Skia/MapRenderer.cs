@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Mapsui.Disposing;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -24,10 +23,10 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly DisposableWrapper<IRenderService> _renderService;
+    private readonly IRenderService _renderService;
     private long _currentIteration;
 
-    public IRenderService RenderService => _renderService.WrappedObject;
+    public IRenderService RenderService => _renderService;
 
     public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
@@ -40,12 +39,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
         DefaultRendererFactory.CreateWithRenderService = f => new MapRenderer(f);
-    }
-
-    public MapRenderer(IRenderService renderer)
-    {
-        _renderService = new DisposableWrapper<IRenderService>(renderer, false);
-        InitRenderer();
     }
 
     private void InitRenderer()
@@ -65,9 +58,18 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenders[typeof(InputOnlyWidget)] = new InputOnlyWidgetRenderer();
     }
 
-    public MapRenderer()
+    public MapRenderer() : this(10000)
+    { }
+
+    public MapRenderer(int vectorCacheCapacity) : this(new RenderService(vectorCacheCapacity))
     {
-        _renderService = new DisposableWrapper<IRenderService>(new RenderService(), true);
+        // Todo: Think about an alternative to initialize. Perhaps the capacity should
+        // be determined by the number of features used in one Paint iteration.
+    }
+
+    public MapRenderer(IRenderService renderService)
+    {
+        _renderService = renderService;
         InitRenderer();
     }
 

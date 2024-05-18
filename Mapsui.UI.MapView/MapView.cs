@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Resources;
 using System.Runtime.CompilerServices;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -73,12 +72,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         // Add some events to _mapControl.Map.Layers
         Map.Layers.Changed += HandleLayersChanged;
 
-        _pictMyLocationNoCenter = EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
-        _pictMyLocationCenter = EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationCenter.svg");
+        //_pictMyLocationNoCenter = EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
+        //_pictMyLocationCenter = EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationCenter.svg");
 
-        _pictZoomIn = EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomIn.svg");
-        _pictZoomOut = EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomOut.svg");
-        _pictNorthing = EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.RotationZero.svg");
+        //_pictZoomIn = EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomIn.svg");
+        //_pictZoomOut = EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomOut.svg");
+        //_pictNorthing = EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.RotationZero.svg");
         CreateButtons();
 
         _pins.CollectionChanged += HandlerPinsOnCollectionChanged;

@@ -1,26 +1,14 @@
 ﻿using System;
-using System.Reflection;
-using Mapsui.Styles;
+
 using Mapsui.Utilities;
 
 namespace Mapsui.Extensions;
 
 public static class TypeExtensions
 {
-    public static int LoadBitmapId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
-    {
-        var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
-        var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
-        if (!BitmapRegistry.Instance.TryGetBitmapId(fullName, out var bitmapId))
-        {
-            var result = EmbeddedResourceLoader.Load(relativePathToEmbeddedResource, typeInAssemblyOfEmbeddedResource);
-            bitmapId = BitmapRegistry.Instance.Register(result, fullName);
-            return bitmapId;
-        }
-
-        return bitmapId;
-    }
-
+    // This method can be useful. I don't like to use it in all ImagePath assignments because
+    // it makes the code slightly harder to understand. We should perhaps have one samples to show
+    // how this can make is a bit easier to avoid errors.
     public static Uri LoadBitmapPath(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
     {
         return EmbeddedResourceLoader.GetResourceUri(typeInAssemblyOfEmbeddedResource, relativePathToEmbeddedResource);

@@ -17,97 +17,106 @@ internal class MapRendererTests
     [Test]
     public void RenderPointsWithVectorStyle()
     {
-        // arrange
+        // Arrange
         using var map = VectorStyleSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
+
+        // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // aside
+        // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
+        // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
     public void RenderPointWithBitmapSymbols()
     {
-        // arrange
+        // Arrange
         using var map = BitmapSymbolSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_symbolstyle.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // aside
-        File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        {
+            // Act
+            using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // assert
-        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+            // Aside
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+
+            // Assert
+            ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        });
     }
 
     [Test]
     public void RenderPointWithBitmapSymbolsInCollection()
     {
-        // arrange
+        // Arrange
         using var map = BitmapSymbolInCollectionSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_symbolstyle.png"; // Todo: Do not reuse the png.
-
-        // act
         using var mapRenderer = new MapRenderer();
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // aside
-        File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        {
+            // Act
+            using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // assert
-        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+            // Aside
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+
+            // Assert
+            ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        });
     }
 
     [Test]
     public void RenderPointWithSvgSymbols()
     {
-        // arrange
+        // Arrange
         using var map = SvgSymbolSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_svgsymbolstyle.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // aside
-        File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        {
+            // Act
+            using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // assert
-        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+            // Aside
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+
+            // Assert
+            ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        });
     }
 
     [Test]
     public void RenderBitmapAtlas()
     {
-        // arrange
+        // Arrange
         using var map = BitmapAtlasSample.CreateMap();
         var viewport = new Viewport(256, 200, 1, 0, 512, 400);
         const string fileName = "bitmap_atlas.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
-        BitmapPathInitializer.InitializeWhenNeeded(() =>
+
+        BitmapPathInitializer.InitializeWhenNeeded((r) =>
         {
+            // Act
             using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-            // aside
+            // Aside
             File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-            // assert
+            // Assert
             ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         });
     }
@@ -115,190 +124,196 @@ internal class MapRendererTests
     [Test]
     public void RenderRotatedBitmapSymbolWithOffset()
     {
-        // arrange
+        // Arrange
         using var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
         var viewport = map.Extent!.Multiply(4).ToViewport(200);
         const string fileName = "bitmap_symbol.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // aside
-        File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        {
+            // Act
+            using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // assert
-        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+            // Aside
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+
+            // Assert
+            ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        });
     }
 
     [Test]
     public void RenderPointsWithDifferentSymbolTypes()
     {
-        // arrange
+        // Arrange
         using var map = SymbolTypesSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol_symboltype.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
+
+        // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // aside
+        // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
+        // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
     public void RenderSymbolWithWorldUnits()
     {
-        // arrange
+        // Arrange
         using var map = PointInWorldUnitsSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol_unittype.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
+
+        // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // aside
+        // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
+        // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
     public void RenderPolygon()
     {
-        // arrange
+        // Arrange
         using var map = PolygonTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "polygon.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-        // aside
-        File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        {
+            // Act
+            using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-        // assert
-        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+            // Aside
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+
+            // Assert
+            ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+        });
     }
 
     [Test]
     public void RenderLine()
     {
-        // arrange
+        // Arrange
         using var map = LineSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "line.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
+
+        // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-        // aside
+        // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
+        // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
     }
 
     [Test]
     public async Task RenderTilesAsync()
     {
-        // arrange
+        // Arrange
         using var map = await (new TilesSample()).CreateMapAsync();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "tilelayer.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
+
+        // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-        // aside
+        // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
+        // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
     public void RenderLabels()
     {
-        // arrange
+        // Arrange
         using var map = LabelSample.CreateMap();
         var viewport = map.Extent!.Multiply(2).ToViewport(300);
         const string fileName = "labels.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
+
+        // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
-        // aside
+        // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
+        // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
     public void RenderProjection()
     {
-        // arrange
+        // Arrange
         using var map = ProjectionTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "projection.png";
-
-        // act 
         using var mapRenderer = new MapRenderer();
+
+        // Act 
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-        // aside
+        // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
+        // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 
     [Test]
     public void RenderStackedLabelsLayer()
     {
-        // arrange
+        // Arrange
         using var map = StackedLabelsTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.2).ToViewport(600);
         const string fileName = "stacked_labels.png";
-
-        // act 
         using var mapRenderer = new MapRenderer();
+
+        // Act 
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-        // aside
+        // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
+        // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
     }
 
     [Test]
     public void Widgets()
     {
-        // arrange
+        // Arrange
         using var map = WidgetsSample.CreateMap();
         var viewport = new Viewport(0, 0, 1, 0, 600, 600);
         const string fileName = "widgets.png";
-
-        // act
         using var mapRenderer = new MapRenderer();
+
+        // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2, map.Widgets);
 
-        // aside
+        // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
-        // assert
+        // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
     }
 

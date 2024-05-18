@@ -103,7 +103,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // All requested updates up to this point will be handled by this redraw
         _refresh = false;
-        BitmapPathInitializer.InitializeWhenNeeded(RefreshGraphics);
+        BitmapPathInitializer.InitializeWhenNeeded((needsRefresh) =>
+        {
+            if (needsRefresh)
+                RefreshGraphics();
+        });
+
         Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
 
         // Stop stopwatch after drawing control

@@ -49,7 +49,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
     private double _spacing = 2;
     private double _maxWidth = 300.0;
     private bool _isClosableByClick = true;
-    private int _content = -1;
+    private string? _contentId;
     private string? _title;
     private string? _titleFontName = DefaultTitleFontName;
     private double _titleFontSize = DefaultTitleFontSize;
@@ -327,13 +327,13 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
     /// <summary>
     /// Content of Callout
     /// </summary>
-    public int Content
+    public string? ContentId
     {
-        get => _content;
+        get => _contentId;
         set
         {
-            if (value == _content) return;
-            _content = value;
+            if (value == _contentId) return;
+            _contentId = value;
             OnPropertyChanged();
         }
     }
@@ -545,7 +545,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
         }
 
         style.Type = Type;
-        style.Content = Content;
+        style.ContentId = ContentId;
         style.Title = Title;
         style.TitleFont.FontFamily = TitleFontName;
         style.TitleFont.Size = TitleFontSize;
@@ -590,7 +590,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
         style.Rotation = (float)Rotation;
         style.ShadowWidth = (float)ShadowWidth;
         style.StrokeWidth = (float)StrokeWidth;
-        style.Content = Content;
+        style.ContentId = ContentId;
     }
 
     /// <summary>
@@ -611,12 +611,12 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
         if (propertyName == null)
             return;
 
-        if (Type != CalloutType.Custom && propertyName.Equals(nameof(Content)))
-            Type = CalloutType.Custom;
+        if (Type != CalloutType.Image && propertyName.Equals(nameof(ContentId)))
+            Type = CalloutType.Image;
 
         if (IsVisible && (propertyName.Equals(nameof(Title))
                           || propertyName.Equals(nameof(Subtitle))
-                          || propertyName.Equals(nameof(Content))
+                          || propertyName.Equals(nameof(ContentId))
                           || propertyName.Equals(nameof(Type))
                           || propertyName.Equals(nameof(TitleFontName))
                           || propertyName.Equals(nameof(TitleFontSize))

@@ -9,6 +9,7 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -105,11 +106,11 @@ public class ThemeStyleSample : ISample
 
     private static SymbolStyle CreateCityStyle()
     {
-        var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png");
+        var imagePath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.location.png");
 
         return new SymbolStyle
         {
-            BitmapId = location,
+            BitmapPath = imagePath,
             SymbolOffset = new Offset { Y = 64 },
             SymbolScale = 0.25
         };

@@ -1,13 +1,10 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Layers.AnimatedLayers;
-using Mapsui.Samples.Common.Maps.Styles;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
-using Mapsui.Utilities;
+using System;
 using System.Threading.Tasks;
-
-#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
@@ -34,20 +31,16 @@ public class AnimatedPointsSample : ISample
         };
     }
 
-    private static IStyle CreatePointStyle()
+    private static ThemeStyle CreatePointStyle() => new(f =>
     {
-        return new ThemeStyle(f =>
-        {
-            return CreateSvgArrowStyle("Images.arrow.svg", 0.5, f);
-        });
-    }
+        return CreateSvgArrowStyle("embeddedresource://Mapsui.Samples.Common.Images.arrow.svg", 0.5, f);
+    });
 
-    private static IStyle CreateSvgArrowStyle(string embeddedResourcePath, double scale, IFeature feature)
+    private static SymbolStyle CreateSvgArrowStyle(string embeddedResourcePath, double scale, IFeature feature)
     {
-        var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
         return new SymbolStyle
         {
-            BitmapId = bitmapId,
+            BitmapPath = new Uri(embeddedResourcePath),
             SymbolScale = scale,
             SymbolOffset = new RelativeOffset(0.0, 0.5),
             Opacity = 0.5f,

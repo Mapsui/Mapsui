@@ -7,28 +7,26 @@ namespace Mapsui.Rendering;
 public sealed class SpriteCache() : ISpriteCache
 {
     private bool _disposed;
-    private readonly ConcurrentDictionary<string, SKImage> _cache = new();
+    private readonly ConcurrentDictionary<string, SKObject> _cache = new();
 
     [return: NotNullIfNotNull(nameof(key))]
-    public SKImage GetOrCreatePaint(string key, Func<SKImage> toSKImage)
+    public T GetOrCreateSKObject<T>(string key, Func<T> toSKObject) where T : SKObject
     {
         ThrowIfDisposed();
 
-        if (!_cache.TryGetValue(key, out var skImage))
+        if (!_cache.TryGetValue(key, out var skObject))
         {
-            skImage = toSKImage();
-            _cache[key] = skImage;
+            skObject = toSKObject();
+            _cache[key] = skObject;
         }
 
-        return skImage;
+        return (T)skObject;
     }
 
     public void Dispose()
     {
         if (_disposed)
-        {
             return;
-        }
 
         _disposed = true;
     }
@@ -36,8 +34,6 @@ public sealed class SpriteCache() : ISpriteCache
     private void ThrowIfDisposed()
     {
         if (_disposed)
-        {
             throw new ObjectDisposedException(GetType().FullName);
-        }
     }
 }

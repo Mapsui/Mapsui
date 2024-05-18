@@ -1,4 +1,5 @@
 ﻿using Mapsui.Widgets;
+using System;
 
 namespace Mapsui.Styles;
 
@@ -18,7 +19,7 @@ public enum CalloutType
     /// <summary>
     /// Content is custom, the bitmap given in Content is shown
     /// </summary>
-    Custom,
+    Image,
 }
 
 /// <summary>
@@ -69,7 +70,6 @@ public class CalloutStyle : SymbolStyle
     private Color _color = Color.Black;
     private Color _backgroundColor = Color.White;
     private float _strokeWidth = 1f;
-    private int _content = -1;
     private Offset _offset = new(0, 0);
     private double _rotation;
     private string? _title;
@@ -81,6 +81,9 @@ public class CalloutStyle : SymbolStyle
     private Color? _titleFontColor;
     private Color? _subtitleFontColor;
     private bool _invalidated;
+
+    public string FullCalloutId { get; set; } = Guid.NewGuid().ToString();
+    public string ContentId { get; set; } = Guid.NewGuid().ToString();
 
     public static new double DefaultWidth { get; set; } = 100;
     public static new double DefaultHeight { get; set; } = 30;
@@ -298,25 +301,6 @@ public class CalloutStyle : SymbolStyle
     }
 
     /// <summary>
-    /// Content of Callout
-    /// </summary>
-    /// <remarks>
-    /// Is a BitmapId of a save image
-    /// </remarks>
-    public int Content
-    {
-        get => _content;
-        set
-        {
-            if (_content != value)
-            {
-                _content = value;
-                Invalidated = true;
-            }
-        }
-    }
-
-    /// <summary>
     /// Content of Callout title label
     /// </summary>
     public string? Title
@@ -437,8 +421,6 @@ public class CalloutStyle : SymbolStyle
             }
         }
     }
-
-    public int InternalContent { get; set; } = -1;
 
     private Font _titleFont = new();
     private Font _subtitleFont = new();

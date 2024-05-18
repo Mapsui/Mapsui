@@ -77,7 +77,7 @@ public class CustomSvgStyleSample : ISample
 
             return new SymbolStyle
             {
-                BitmapId = bitmapId,
+                // BitmapId = bitmapId,
                 SymbolOffset = new RelativeOffset(0.0, 0.0),
                 SymbolScale = 0.5,
                 // Let them point to the center of hte map
@@ -93,7 +93,7 @@ public class CustomSvgStyleSample : ISample
         using var bitmapData = EmbeddedResourceLoader.Load(bitmapPath, typeof(SvgSample));
         var skPicture = SvgLoader.ToSKPicture(bitmapData, ToSystemDrawingColor(GetTypeColor(type)))
             ?? throw new Exception($"Failed to load bitmap: {bitmapPath}");
-        return BitmapRegistry.Instance.Register(skPicture);
+        return -1; //return BitmapRegistry.Instance.Register(skPicture);
     }
 
     private static Color GetTypeColor(int type) => type switch

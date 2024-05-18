@@ -24,11 +24,14 @@ public static class BitmapPathInitializer
     /// 
     /// </summary>
     /// <param name="doneInitializing"></param>
-    public static void InitializeWhenNeeded(Action doneInitializing)
+    public static void InitializeWhenNeeded(Action<bool> doneInitializing)
     {
         var bitmapPaths = GetAndClear();
         if (!bitmapPaths.Any())
+        {
+            doneInitializing(false);
             return; // Don't start a thread if there are no bitmap paths to initialize.
+        }
 
         _fetchMachine.Start(async () =>
         {
@@ -36,7 +39,7 @@ public static class BitmapPathInitializer
             {
                 try
                 {
-                    await BitmapPathRegistry.Instance.RegisterAsync(bitmapPath);
+                    await ImagePathCache.Instance.RegisterAsync(bitmapPath);
                 }
                 catch (Exception ex)
                 {
@@ -44,7 +47,7 @@ public static class BitmapPathInitializer
                     Logger.Log(LogLevel.Error, ex.Message, ex);
                 }
             }
-            doneInitializing();
+            doneInitializing(true);
         });
     }
 

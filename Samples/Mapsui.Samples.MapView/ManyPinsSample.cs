@@ -72,7 +72,7 @@ public class ManyPinsSample : IMapViewSample
                 else
                 {
                     pin.Callout.Type = CalloutType.Detail;
-                    pin.Callout.Content = 1;
+                    pin.Callout.ContentId = "1";
                 }
                 mapView.Pins.Add(pin);
                 pin.ShowCallout();
@@ -181,7 +181,7 @@ public class ManyPinsSample : IMapViewSample
         else
         {
             pin.Callout.Type = CalloutType.Detail;
-            pin.Callout.Content = 1;
+            pin.Callout.ContentId = "1";
         }
 
         return pin;

@@ -142,13 +142,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(renderService.SymbolCache, renderService.SpriteCache, brush);
+                    var image = GetImage(renderService.SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(renderService.SymbolCache, renderService.SpriteCache, brush);
+                    image = GetImage(renderService.SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -206,14 +206,16 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(ISymbolCache? symbolCache, ISpriteCache spriteCache, Brush brush)
+    private static SKImage? GetImage(ISymbolCache? symbolCache, SpriteCache spriteCache, Brush brush)
     {
         if (symbolCache == null)
             return null;
-
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(brush);
+        if (brush.BitmapPath is null)
+            return null;
+        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(brush.BitmapPath.ToString());
         if (bitmapInfo == null)
             return null;
+
         if (bitmapInfo.Type == BitmapType.Bitmap)
         {
             if (brush.Sprite is null)
@@ -228,7 +230,7 @@ internal static class PolygonRenderer
 
                 // The line below generates a string. For performance is it not great to have this in the render loop.
                 var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.BitmapPath.ToString(), brush.Sprite);
-                ((SpriteCache)spriteCache).GetOrCreatePaint(spriteKey, () => GetSpriteFromSKImage(bitmapInfo.Bitmap, sprite));
+                spriteCache.GetOrCreateSKObject(spriteKey, () => GetSpriteFromSKImage(bitmapInfo.Bitmap, sprite));
             }
         }
         return null;
