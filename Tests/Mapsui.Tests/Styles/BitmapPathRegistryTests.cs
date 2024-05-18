@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Styles;
@@ -21,7 +20,7 @@ public static class BitmapPathRegistryTests
         ImagePathCache.Instance.Unregister(imagePath);
 
         // Assert
-        Assert.Throws<KeyNotFoundException>(() => ImagePathCache.Instance.Get(imagePath));
+        Assert.That(ImagePathCache.Instance.Get(imagePath), Is.Null);
     }
 
     [Test]
@@ -35,7 +34,7 @@ public static class BitmapPathRegistryTests
         ImagePathCache.Instance.Unregister(imagePath);
 
         // Assert
-        Assert.Throws<KeyNotFoundException>(() => ImagePathCache.Instance.Get(imagePath));
+        Assert.That(ImagePathCache.Instance.Get(imagePath), Is.Null);
     }
 
     [Test]
@@ -64,7 +63,7 @@ public static class BitmapPathRegistryTests
         ImagePathCache.Instance.Unregister(examplePath);
 
         // Assert
-        Assert.Throws<KeyNotFoundException>(() => ImagePathCache.Instance.Get(examplePath));
+        Assert.That(ImagePathCache.Instance.Get(examplePath), Is.Null);
     }
 
     [Test]
@@ -93,7 +92,7 @@ public static class BitmapPathRegistryTests
         ImagePathCache.Instance.Unregister(mapsuiLogo);
 
         // Assert
-        Assert.Throws<KeyNotFoundException>(() => ImagePathCache.Instance.Get(mapsuiLogo));
+        Assert.That(ImagePathCache.Instance.Get(mapsuiLogo), Is.Null);
     }
 
     [Test]
