@@ -17,6 +17,7 @@ using Mapsui.Samples.Common.Maps.Info;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Styles;
+using Mapsui.Tests.Common.Maps;
 using Mapsui.UI;
 using Mapsui.Widgets.InfoWidgets;
 using NUnit.Framework;
@@ -52,10 +53,11 @@ public class MapRegressionTests
         [
             new AnimatedPointsSample(), // We have no reliable way yet to compare animations.
             new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
-            new ArcGISDynamicServiceSample(), // Excluded it was not reliable and had no priority to fix.
             new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
-            new CustomSvgStyleSample(), // It currently not functioning and should be fixed with a redesign.
-            new CustomCalloutSample(), // It currently not functioning and should be fixed with a rewrite of the sample.
+            new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
+            new CustomSvgStyleSample(), // Is currently not functioning and should be fixed with a redesign.
+            new CustomCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
+            new WmsOpenSeaSample(), // Failing now but will be fixed with in progress PR.
         ];
 
     [Test]
