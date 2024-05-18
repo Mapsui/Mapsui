@@ -5,9 +5,6 @@ namespace Mapsui.Rendering;
 
 public interface ISymbolCache : IDisposable
 {
-    Size? GetSize(SymbolStyle symbolStyle);
-    IBitmapInfo GetOrCreate(SymbolStyle symbolStyle);
-    Size? GetSize(int bitmapId);
-    IBitmapInfo GetOrCreate(int bitmapId);
+    Size? GetSize(string bitmapPath);
     IBitmapInfo GetOrCreate(string bitmapPath);
 }

@@ -29,9 +29,9 @@ public class MyLocationLayer : BaseLayer
     private SymbolStyle _dirStyle;  // style for the view-direction indicator
     private CalloutStyle _coStyle;  // style for the callout
 
-    private static int _bitmapMovingId = -1;
-    private static int _bitmapStillId = -1;
-    private static int _bitmapDirId = -1;
+    private static readonly Uri _movingBitmapPath = new("embeddedresource://Mapsui.Resources.Images.MyLocationMoving.svg");
+    private static readonly Uri _stillBitmapPath = new("embeddedresource://Mapsui.Resources.Images.MyLocationStill.svg");
+    private static readonly Uri _directionBitmapPath = new("embeddedresource://Mapsui.Resources.Images.MyLocationDir.svg");
 
     private Position _animationMyLocationStart;
     private Position _animationMyLocationEnd;
@@ -49,10 +49,11 @@ public class MyLocationLayer : BaseLayer
             if (_isMoving != value)
             {
                 _isMoving = value;
-                _locStyle.BitmapId = _isMoving ? _bitmapMovingId : _bitmapStillId;
+                _locStyle.BitmapPath = _isMoving ? _movingBitmapPath : _stillBitmapPath;
             }
         }
     }
+
 
     private Position _myLocation = new(0, 0);
     private readonly ConcurrentHashSet<AnimationEntry<MapView>> _animations = new();
@@ -152,27 +153,6 @@ public class MyLocationLayer : BaseLayer
         Enabled = false;
         IsMapInfoLayer = true;
 
-        if (_bitmapMovingId == -1)
-        {
-            var bitmapMoving = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationMoving.svg");
-            // Register bitmap
-            _bitmapMovingId = bitmapMoving;
-        }
-
-        if (_bitmapStillId == -1)
-        {
-            var bitmapStill = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationStill.svg");
-            // Register bitmap
-            _bitmapStillId = bitmapStill;
-        }
-
-        if (_bitmapDirId == -1)
-        {
-            var bitmapDir = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationDir.svg");
-            // Register bitmap
-            _bitmapDirId = bitmapDir;
-        }
-
         _feature = new GeometryFeature
         {
             Geometry = _myLocation.ToMapsui().ToPoint(),
@@ -182,16 +162,17 @@ public class MyLocationLayer : BaseLayer
         _locStyle = new SymbolStyle
         {
             Enabled = true,
-            BitmapId = _bitmapStillId,
+            BitmapPath = _stillBitmapPath,
             SymbolScale = Scale,
             SymbolRotation = Direction,
             SymbolOffset = new Offset(0, 0),
             Opacity = 1,
         };
+
         _dirStyle = new SymbolStyle
         {
             Enabled = false,
-            BitmapId = _bitmapDirId,
+            BitmapPath = _directionBitmapPath,
             SymbolScale = 0.2,
             SymbolRotation = 0,
             SymbolOffset = new Offset(0, 0),

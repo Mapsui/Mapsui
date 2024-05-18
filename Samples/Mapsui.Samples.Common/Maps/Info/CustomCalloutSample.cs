@@ -6,7 +6,6 @@ using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +23,7 @@ namespace Mapsui.Samples.Common.Maps.Info;
 
 public class CustomCalloutSample : ISample
 {
-    private static readonly Random Random = new(1);
+    private static readonly Random _random = new(1);
 
     public string Name => "Custom Callout";
     public string Category => "Info";
@@ -64,18 +63,17 @@ public class CustomCalloutSample : ISample
             var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
             feature["name"] = c.Name;
             feature["country"] = c.Country;
-            var callbackImage = CreateCallbackImage(c);
-            var bitmapId = BitmapRegistry.Instance.Register(callbackImage);
-            var calloutStyle = CreateCalloutStyle(bitmapId);
+
+            var calloutStyle = CreateCalloutStyle("embeddedresource://Mapsui.Samples.Common.Images.loc.png");
             feature.Styles.Add(calloutStyle);
             return feature;
         });
     }
 
-    private static IStyle CreateCalloutStyle(int bitmapId)
+    private static IStyle CreateCalloutStyle(string ImagePath)
     {
-        var calloutStyle = new CalloutStyle { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Custom };
-        switch (Random.Next(0, 4))
+        var calloutStyle = new CalloutStyle { BitmapPath = new Uri(ImagePath), ArrowPosition = _random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Image };
+        switch (_random.Next(0, 4))
         {
             case 0:
                 calloutStyle.ArrowAlignment = ArrowAlignment.Bottom;
@@ -98,35 +96,6 @@ public class CustomCalloutSample : ISample
         calloutStyle.ShadowWidth = 4; // Random.Next(0, 9);
         calloutStyle.StrokeWidth = 0;
         return calloutStyle;
-    }
-
-    private static MemoryStream CreateCallbackImage(City city)
-    {
-        using var paint = new SKPaint
-        {
-            Color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256)),
-            Typeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal,
-                SKFontStyleSlant.Upright),
-            TextSize = 20
-        };
-
-        SKRect bounds;
-        using (var textPath = paint.GetTextPath(city.Name, 0, 0))
-        {
-            // Set transform to center and enlarge clip path to window height
-            textPath.GetTightBounds(out bounds);
-        }
-
-        using var bitmap = new SKBitmap((int)(bounds.Width + 1), (int)(bounds.Height + 1));
-        using var canvas = new SKCanvas(bitmap);
-        canvas.Clear();
-        canvas.DrawText(city.Name, -bounds.Left, -bounds.Top, paint);
-        var memStream = new MemoryStream();
-        using (var wStream = new SKManagedWStream(memStream))
-        {
-            bitmap.Encode(wStream, SKEncodedImageFormat.Png, 100);
-        }
-        return memStream;
     }
 
     internal class City

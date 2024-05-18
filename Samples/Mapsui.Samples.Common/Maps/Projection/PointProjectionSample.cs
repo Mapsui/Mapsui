@@ -5,6 +5,7 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
+using System;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Projection;
@@ -67,11 +68,11 @@ public class PointProjectionSample : ISample
 
     private static SymbolStyle CreateCityStyle()
     {
-        var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png");
+        var imagePath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.location.png");
 
         return new SymbolStyle
         {
-            BitmapId = location,
+            BitmapPath = imagePath,
             SymbolOffset = new Offset { Y = 64 },
             SymbolScale = 0.25,
             Opacity = 0.5f

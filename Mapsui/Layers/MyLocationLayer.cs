@@ -23,9 +23,9 @@ public class MyLocationLayer : BaseLayer, IDisposable
     private readonly SymbolStyle _dirStyle;  // style for the view-direction indicator
     private readonly CalloutStyle _coStyle;  // style for the callout
 
-    private static int _bitmapMovingId = -1;
-    private static int _bitmapStillId = -1;
-    private static int _bitmapDirId = -1;
+    private static readonly Uri _movingBitmapPath = new("embeddedresource://Mapsui.Resources.Images.MyLocationMoving.svg");
+    private static readonly Uri _stillBitmapPath = new("embeddedresource://Mapsui.Resources.Images.MyLocationStill.svg");
+    private static readonly Uri _directionBitmapPath = new("embeddedresource://Mapsui.Resources.Images.MyLocationDir.svg");
 
     private MPoint? _animationMyLocationStart;
     private MPoint? _animationMyLocationEnd;
@@ -49,7 +49,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
             if (_isMoving != value)
             {
                 _isMoving = value;
-                _locStyle.BitmapId = _isMoving ? _bitmapMovingId : _bitmapStillId;
+                _locStyle.BitmapPath = _isMoving ? _movingBitmapPath : _stillBitmapPath;
             }
         }
     }
@@ -154,27 +154,6 @@ public class MyLocationLayer : BaseLayer, IDisposable
         Enabled = true;
         IsMapInfoLayer = true;
 
-        if (_bitmapMovingId == -1)
-        {
-            var bitmapMoving = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationMoving.svg");
-            // Register bitmap
-            _bitmapMovingId = bitmapMoving;
-        }
-
-        if (_bitmapStillId == -1)
-        {
-            var bitmapStill = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationStill.svg");
-            // Register bitmap
-            _bitmapStillId = bitmapStill;
-        }
-
-        if (_bitmapDirId == -1)
-        {
-            var bitmapDir = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationDir.svg");
-            // Register bitmap
-            _bitmapDirId = bitmapDir;
-        }
-
         _feature = new PointFeature(_myLocation)
         {
             ["Label"] = "MyLocation",
@@ -183,7 +162,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _locStyle = new SymbolStyle
         {
             Enabled = true,
-            BitmapId = _bitmapStillId,
+            BitmapPath = _stillBitmapPath,
             SymbolScale = Scale,
             SymbolRotation = Direction,
             SymbolOffset = new Offset(0, 0),
@@ -193,7 +172,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _dirStyle = new SymbolStyle
         {
             Enabled = false,
-            BitmapId = _bitmapDirId,
+            BitmapPath = _directionBitmapPath,
             SymbolScale = 0.2,
             SymbolRotation = 0,
             SymbolOffset = new Offset(0, 0),
@@ -205,14 +184,14 @@ public class MyLocationLayer : BaseLayer, IDisposable
             Enabled = false,
             Type = CalloutType.Single,
             Title = "",
-            TitleFontColor = Styles.Color.Black,
+            TitleFontColor = Color.Black,
             ArrowAlignment = ArrowAlignment.Top,
             ArrowPosition = 0,
             SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
             MaxWidth = 300,
             RotateWithMap = true,
             SymbolOffsetRotatesWithMap = true,
-            Color = Styles.Color.White,
+            Color = Color.White,
             StrokeWidth = 0,
             ShadowWidth = 0
         };

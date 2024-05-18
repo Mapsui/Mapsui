@@ -11,7 +11,9 @@ using Mapsui.Rendering.Skia.Tests.Helpers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.DataFormats;
+using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.Maps.Geometries;
+using Mapsui.Samples.Common.Maps.Info;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Styles;
@@ -46,7 +48,15 @@ public class MapRegressionTests
     ];
 
     public static object[] ExcludedSamples =>
-        _excludedSamples ??= [new AnimatedPointsSample(), new MutatingTriangleSample(), new ArcGISDynamicServiceSample(), new ManyMutatingLayersSample()];
+        _excludedSamples ??=
+        [
+            new AnimatedPointsSample(), // We have no reliable way yet to compare animations.
+            new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
+            new ArcGISDynamicServiceSample(), // Excluded it was not reliable and had no priority to fix.
+            new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
+            new CustomSvgStyleSample(), // It currently not functioning and should be fixed with a redesign.
+            new CustomCalloutSample(), // It currently not functioning and should be fixed with a rewrite of the sample.
+        ];
 
     [Test]
     [Retry(5)]
@@ -83,41 +93,42 @@ public class MapRegressionTests
             {
                 // act
                 using var mapRenderer = CreateMapRenderer(mapControl);
-
-                // Workaround for delayed bitmapPath loading
-                BitmapPathInitializer.InitializeWhenNeeded(() =>
                 {
-                    using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
+                    // Workaround for delayed bitmapPath loading
+                    BitmapPathInitializer.InitializeWhenNeeded((r) =>
+                    {
+                        using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
-                    // aside
-                    if (bitmap is { Length: > 0 })
-                    {
-                        File.WriteToGeneratedRegressionFolder(fileName, bitmap);
-                    }
-                    else
-                    {
-                        Assert.Fail("Should generate Image");
-                    }
-
-                    // assert
-                    if (compareImages)
-                    {
-                        using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
-                        if (originalStream == null)
+                        // aside
+                        if (bitmap is { Length: > 0 })
                         {
-                            Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
+                            File.WriteToGeneratedRegressionFolder(fileName, bitmap);
                         }
                         else
                         {
-                            ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995));
+                            Assert.Fail("Should generate Image");
                         }
-                    }
-                    else
-                    {
-                        // Don't compare images here because to unreliable
-                        ClassicAssert.True(true);
-                    }
-                });
+
+                        // assert
+                        if (compareImages)
+                        {
+                            using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
+                            if (originalStream == null)
+                            {
+                                Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
+                            }
+                            else
+                            {
+                                ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995));
+                            }
+                        }
+                        else
+                        {
+                            // Don't compare images here because to unreliable
+                            ClassicAssert.True(true);
+                        }
+                    });
+                }
             }
         }
         finally

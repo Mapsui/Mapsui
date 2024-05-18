@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
@@ -38,27 +38,27 @@ public class BitmapSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.circle.png");
-        var checkeredIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.checkered.png");
+        var circleImagePath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.circle.png");
+        var checkeredImagePath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.checkered.png");
 
-        return new List<IFeature>
-        {
+        return
+        [
             new PointFeature(new MPoint(50, 50))
             {
                 Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
             },
             new PointFeature(new MPoint(50, 100))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
+                Styles = new[] {new SymbolStyle { BitmapPath = circleImagePath}}
             },
             new PointFeature(new MPoint(100, 50))
             {
-                Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
+                Styles = new[] {new SymbolStyle { BitmapPath = checkeredImagePath}}
             },
             new PointFeature(new MPoint(100, 100))
             {
                 Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
             }
-        };
+        ];
     }
 }

@@ -27,25 +27,10 @@ public class SymbolStyle : VectorStyle
 
     public UnitType UnitType { get; set; }
 
-    private int _bitmapId = -1;
     private Uri? _bitmapPath;
 
     /// <summary>
-    /// Id of the image in the BitmapRegistry, if SymbolType is Image
-    /// </summary>
-    public int BitmapId
-    {
-        get => _bitmapId;
-        set
-        {
-            _bitmapId = value;
-            if (value >= 0)
-                SymbolType = SymbolType.Image;
-        }
-    }
-
-    /// <summary>
-    /// Bitmap of the image to display during rendering a BitmapId is assigned.
+    /// Bitmap of the image to display during rendering
     /// </summary>
     public Uri? BitmapPath
     {
@@ -57,7 +42,6 @@ public class SymbolStyle : VectorStyle
             {
                 BitmapPathInitializer.Add(value);
                 SymbolType = SymbolType.Image;
-                _bitmapId = -1;
             }
         }
     }
@@ -144,7 +128,7 @@ public class SymbolStyle : VectorStyle
         if (SymbolType != symbolStyle.SymbolType)
             return false;
 
-        if (BitmapId != symbolStyle.BitmapId)
+        if (BitmapPath != symbolStyle.BitmapPath)
             return false;
 
         if (Math.Abs(Opacity - symbolStyle.Opacity) > Constants.Epsilon)
@@ -156,7 +140,7 @@ public class SymbolStyle : VectorStyle
     public override int GetHashCode()
     {
         return
-            BitmapId.GetHashCode() ^
+            BitmapPath?.GetHashCode() ^
             SymbolScale.GetHashCode() ^
             SymbolOffset.GetHashCode() ^
             SymbolRotation.GetHashCode() ^

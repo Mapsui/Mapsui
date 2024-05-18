@@ -78,7 +78,7 @@ public class PinSample : IMapViewSample
                 else
                 {
                     pin.Callout.Type = CalloutType.Detail;
-                    pin.Callout.Content = 1;
+                    pin.Callout.ContentId = "1";
                 }
                 pin.Callout.CalloutClicked += (s, e) =>
                 {

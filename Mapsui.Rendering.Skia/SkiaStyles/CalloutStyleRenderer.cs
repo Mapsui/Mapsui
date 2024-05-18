@@ -23,29 +23,19 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         var calloutStyle = (CalloutStyle)style;
 
-        // Todo: Use opacity
-        // var opacity = (float)(layer.Opacity * style.Opacity);
-
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
 
-        if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
+        var spriteCache = (SpriteCache)renderService.SpriteCache;
+
+        if (calloutStyle.Invalidated)
         {
-            if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
-                return false;
-
-            if (calloutStyle.Invalidated)
-            {
-                UpdateContent(calloutStyle);
-            }
-
-            RenderCallout(calloutStyle, renderService.SymbolCache);
+            // Todo: Move this update to the callout itself
+            calloutStyle.ContentId = Guid.NewGuid().ToString();
+            calloutStyle.FullCalloutId = Guid.NewGuid().ToString();
         }
 
-        // Now we have the complete callout rendered, so we could draw it
-        if (calloutStyle.BitmapId < 0)
-            return false;
-
-        var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
+        var content = spriteCache.GetOrCreateSKObject(calloutStyle.ContentId, () => RenderContent(calloutStyle, renderService.SymbolCache));
+        var picture = spriteCache.GetOrCreateSKObject(calloutStyle.FullCalloutId, () => RenderCallout(calloutStyle, content));
 
         // Calc offset (relative or absolute)
         var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
@@ -79,56 +69,29 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         return true;
     }
 
-    public static void RenderCallout(CalloutStyle callout, ISymbolCache symbolCache)
+    private static SKPicture RenderCallout(CalloutStyle callout, SKPicture content)
     {
-        if (callout.Content < 0)
-            return;
-
-        // Get size of content
-        double contentWidth = 0;
-        double contentHeight = 0;
-
-        if (callout.Type == CalloutType.Custom)
-        {
-            var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.Content);
-
-            contentWidth = bitmapInfo?.Width ?? 0;
-            contentHeight = bitmapInfo?.Height ?? 0;
-        }
-        else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
-        {
-            var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
-
-            contentWidth = picture.CullRect.Width;
-            contentHeight = picture.CullRect.Height;
-        }
+        var contentWidth = content.CullRect.Width;
+        var contentHeight = content.CullRect.Height;
 
         (var width, var height) = CalcSize(callout, contentWidth, contentHeight);
 
         // Create a canvas for drawing
-        using (var rec = new SKPictureRecorder())
-        using (var canvas = rec.BeginRecording(new SKRect(0, 0, (float)width, (float)height)))
-        {
-            (var path, var center) = CreateCalloutPath(callout, contentWidth, contentHeight);
-            // Now move Offset to the position of the arrow
-            callout.Offset = new Offset(-center.X, -center.Y);
+        using var recorder = new SKPictureRecorder();
+        using var canvas = recorder.BeginRecording(new SKRect(0, 0, (float)width, (float)height));
+        (var outline, var center) = CreateCalloutOutline(callout, contentWidth, contentHeight);
+        // Now move Offset to the position of the arrow
+        callout.Offset = new Offset(-center.X, -center.Y);
 
-            // Draw path for bubble
-            DrawCallout(callout, canvas, path);
+        // Draw outline
+        DrawOutline(callout, canvas, outline);
 
-            // Draw content
-            DrawContent(callout, canvas, symbolCache);
-
-            // Create SKPicture from canvas
-            var picture = rec.EndRecording();
-
-            if (callout.BitmapId < 0)
-                callout.BitmapId = BitmapRegistry.Instance.Register(picture);
-            else
-                BitmapRegistry.Instance.Update(callout.BitmapId, picture);
-        }
+        // Draw content
+        DrawContent(callout, canvas, content);
 
         callout.Invalidated = false;
+        // Create SKPicture from canvas
+        return recorder.EndRecording();
     }
 
     /// <summary>
@@ -170,7 +133,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         return (width, height);
     }
 
-    private static void DrawCallout(CalloutStyle callout, SKCanvas canvas, SKPath path)
+    private static void DrawOutline(CalloutStyle callout, SKCanvas canvas, SKPath path)
     {
         using var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, callout.ShadowWidth) };
         using var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = callout.BackgroundColor.ToSkia() };
@@ -184,128 +147,92 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static void UpdateContent(CalloutStyle callout)
+    public static SKPicture RenderContent(CalloutStyle callout, ISymbolCache symbolCache)
     {
-        if (callout.Type == CalloutType.Custom)
-            return;
-
-        if (callout.Title == null)
+        if (callout.Type == CalloutType.Image && callout.BitmapPath is not null)
         {
-            callout.Content = -1;
-            return;
-        }
-
-        var styleSubtitle = new Topten.RichTextKit.Style();
-        var styleTitle = new Topten.RichTextKit.Style();
-        var textBlockTitle = new TextBlock();
-        var textBlockSubtitle = new TextBlock();
-
-        if (callout.Type == CalloutType.Detail)
-        {
-            styleSubtitle.FontFamily = callout.SubtitleFont.FontFamily;
-            styleSubtitle.FontSize = (float)callout.SubtitleFont.Size;
-            styleSubtitle.FontItalic = callout.SubtitleFont.Italic;
-            styleSubtitle.FontWeight = callout.SubtitleFont.Bold ? 700 : 400;
-            styleSubtitle.TextColor = callout.SubtitleFontColor.ToSkia();
-
-            textBlockSubtitle.AddText(callout.Subtitle, styleSubtitle);
-            textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();
-        }
-        styleTitle.FontFamily = callout.TitleFont.FontFamily;
-        styleTitle.FontSize = (float)callout.TitleFont.Size;
-        styleTitle.FontItalic = callout.TitleFont.Italic;
-        styleTitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
-        styleTitle.TextColor = callout.TitleFontColor.ToSkia();
-
-        textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();
-        textBlockTitle.AddText(callout.Title, styleTitle);
-
-        textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = (float)callout.MaxWidth;
-        // Layout TextBlocks
-        textBlockTitle.Layout();
-        textBlockSubtitle.Layout();
-        // Get sizes
-        var width = Math.Max(textBlockTitle.MeasuredWidth, textBlockSubtitle.MeasuredWidth);
-        var height = textBlockTitle.MeasuredHeight + (callout.Type == CalloutType.Detail ? textBlockSubtitle.MeasuredHeight + (float)callout.Spacing : 0f);
-        // Now we have the correct width, so make a new layout cycle for text alignment
-        textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = width;
-        textBlockTitle.Layout();
-        textBlockSubtitle.Layout();
-        // Create bitmap from TextBlock
-        using var rec = new SKPictureRecorder();
-        using var canvas = rec.BeginRecording(new SKRect(0, 0, width, height));
-        // Draw text to canvas
-        textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-        if (callout.Type == CalloutType.Detail)
-            textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-        // Create a SKPicture from canvas
-        var picture = rec.EndRecording();
-        if (callout.InternalContent >= 0)
-        {
-            BitmapRegistry.Instance.Update(callout.InternalContent, picture);
+            using var recorder = new SKPictureRecorder();
+            var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.BitmapPath.ToString());
+            using var canvas = recorder.BeginRecording(new SKRect(0, 0, bitmapInfo.Width, bitmapInfo.Height));
+            using var paint = new SKPaint();
+            canvas.DrawImage(bitmapInfo.Bitmap, 0, 0, paint);
+            return recorder.EndRecording();
         }
         else
         {
-            callout.InternalContent = BitmapRegistry.Instance.Register(picture);
+            var styleSubtitle = new Topten.RichTextKit.Style();
+            var styleTitle = new Topten.RichTextKit.Style();
+            var textBlockTitle = new TextBlock();
+            var textBlockSubtitle = new TextBlock();
+
+            if (callout.Type == CalloutType.Detail)
+            {
+                styleSubtitle.FontFamily = callout.SubtitleFont.FontFamily;
+                styleSubtitle.FontSize = (float)callout.SubtitleFont.Size;
+                styleSubtitle.FontItalic = callout.SubtitleFont.Italic;
+                styleSubtitle.FontWeight = callout.SubtitleFont.Bold ? 700 : 400;
+                styleSubtitle.TextColor = callout.SubtitleFontColor.ToSkia();
+
+                textBlockSubtitle.AddText(callout.Subtitle, styleSubtitle);
+                textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();
+            }
+            styleTitle.FontFamily = callout.TitleFont.FontFamily;
+            styleTitle.FontSize = (float)callout.TitleFont.Size;
+            styleTitle.FontItalic = callout.TitleFont.Italic;
+            styleTitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
+            styleTitle.TextColor = callout.TitleFontColor.ToSkia();
+
+            textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();
+            textBlockTitle.AddText(callout.Title, styleTitle);
+
+            textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = (float)callout.MaxWidth;
+            // Layout TextBlocks
+            textBlockTitle.Layout();
+            textBlockSubtitle.Layout();
+            // Get sizes
+            var width = Math.Max(textBlockTitle.MeasuredWidth, textBlockSubtitle.MeasuredWidth);
+            var height = textBlockTitle.MeasuredHeight + (callout.Type == CalloutType.Detail ? textBlockSubtitle.MeasuredHeight + (float)callout.Spacing : 0f);
+            // Now we have the correct width, so make a new layout cycle for text alignment
+            textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = width;
+            textBlockTitle.Layout();
+            textBlockSubtitle.Layout();
+            // Create bitmap from TextBlock
+            using var recorder = new SKPictureRecorder();
+            using var canvas = recorder.BeginRecording(new SKRect(0, 0, width, height));
+            // Draw text to canvas
+            textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+            if (callout.Type == CalloutType.Detail)
+                textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+            return recorder.EndRecording();
         }
-        callout.Content = callout.InternalContent;
     }
 
-    private static void DrawContent(CalloutStyle callout, SKCanvas canvas, ISymbolCache symbolCache)
+    private static void DrawContent(CalloutStyle callout, SKCanvas canvas, SKPicture content)
     {
-        // Draw content
-        if (callout.Content >= 0)
+        var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
+        var offsetX = callout.ShadowWidth + strokeWidth + (callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left);
+        var offsetY = callout.ShadowWidth + strokeWidth + (callout.Padding.Top < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Top);
+
+        switch (callout.ArrowAlignment)
         {
-            var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
-            var offsetX = callout.ShadowWidth + strokeWidth + (callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left);
-            var offsetY = callout.ShadowWidth + strokeWidth + (callout.Padding.Top < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Top);
-
-            switch (callout.ArrowAlignment)
-            {
-                case ArrowAlignment.Left:
-                    offsetX += callout.ArrowHeight;
-                    break;
-                case ArrowAlignment.Top:
-                    offsetY += callout.ArrowHeight;
-                    break;
-            }
-
-            var offset = new SKPoint((float)offsetX, (float)offsetY);
-
-            if (callout.Type == CalloutType.Custom)
-            {
-
-                // Get size of content
-                var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.Content);
-
-                switch (bitmapInfo?.Type)
-                {
-                    case BitmapType.Bitmap:
-                        canvas.DrawImage(bitmapInfo.Bitmap, offset);
-                        break;
-                    case BitmapType.Svg:
-                        if (bitmapInfo.Svg != null)
-                        {
-                            using var skPaint = new SKPaint() { IsAntialias = true };
-                            canvas.DrawPicture(bitmapInfo.Svg.Picture, offset, skPaint);
-                        }
-
-                        break;
-                }
-            }
-            else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
-            {
-                var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
-                using var skPaint = new SKPaint() { IsAntialias = true };
-                canvas.DrawPicture(picture, offset, skPaint);
-            }
+            case ArrowAlignment.Left:
+                offsetX += callout.ArrowHeight;
+                break;
+            case ArrowAlignment.Top:
+                offsetY += callout.ArrowHeight;
+                break;
         }
+
+        var offset = new SKPoint((float)offsetX, (float)offsetY);
+
+        using var skPaint = new SKPaint() { IsAntialias = true };
+        canvas.DrawPicture(content, offset, skPaint);
     }
 
     /// <summary>
     /// Update path
     /// </summary>
-    private static (SKPath, SKPoint) CreateCalloutPath(CalloutStyle callout, double contentWidth, double contentHeight)
+    private static (SKPath, SKPoint) CreateCalloutOutline(CalloutStyle callout, double contentWidth, double contentHeight)
     {
         var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
         var paddingLeft = callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left;

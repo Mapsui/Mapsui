@@ -1,7 +1,7 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using Mapsui.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,7 +15,6 @@ public class SvgSymbolSample : ISample
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
-
 
     public static Map CreateMap()
     {
@@ -40,22 +39,28 @@ public class SvgSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var pinId = typeof(SvgSymbolSample).LoadSvgId("Resources.Images.Pin.svg");
+        var pinBitmapPath = new Uri("embeddedresource://mapsui.resources.images.pin.svg");
 
         return new List<IFeature>
         {
             new PointFeature(new MPoint(50, 50)) {
-                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+                Styles = new[] { CreateSymbolStyle(pinBitmapPath) }
             },
             new PointFeature(new MPoint(50, 100)) {
-                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+                Styles = new[] { CreateSymbolStyle(pinBitmapPath) }
             },
             new PointFeature(new MPoint(100, 50)) {
-                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+                Styles = new[] { CreateSymbolStyle(pinBitmapPath) }
             },
             new PointFeature(new MPoint(100, 100)) {
-                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+                Styles = new[] { CreateSymbolStyle(pinBitmapPath) }
             }
         };
     }
+
+    private static SymbolStyle CreateSymbolStyle(Uri pinBitmapPath) => new()
+    {
+        BitmapPath = pinBitmapPath,
+        BlendModeColor = Color.FromRgba(0, 177, 0, 255)
+    };
 }

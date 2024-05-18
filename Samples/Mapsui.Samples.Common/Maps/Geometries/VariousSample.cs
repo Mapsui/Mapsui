@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.UI;
+using System;
 
 namespace Mapsui.Samples.Common.Maps.Geometries;
 
@@ -34,13 +35,13 @@ public class VariousSample : ISample, ISampleTest
         return new Layer("Style on Layer")
         {
             DataSource = new MemoryProvider(RandomPointsBuilder.GenerateRandomPoints(envelope, count).ToFeatures()),
-            Style = CreateBitmapStyle("Images.ic_place_black_24dp.png")
+            Style = CreateBitmapStyle("embeddedresource://Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
         };
     }
 
     private static ILayer CreateLayerWithStyleOnFeature(MRect? envelope, int count = 25)
     {
-        var style = CreateBitmapStyle("Images.loc.png");
+        var style = CreateBitmapStyle("embeddedresource://Mapsui.Samples.Common.Images.loc.png");
 
         return new Layer("Style on feature")
         {
@@ -57,8 +58,7 @@ public class VariousSample : ISample, ISampleTest
 
     private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath)
     {
-        var bitmapId = typeof(VariousSample).LoadBitmapId(embeddedResourcePath);
-        return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.75 };
+        return new SymbolStyle { BitmapPath = new Uri(embeddedResourcePath), SymbolScale = 0.75 };
     }
 
     public async Task InitializeTestAsync(IMapControl mapControl)

@@ -39,11 +39,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
 
-        if (symbolStyle.BitmapId < 0 && symbolStyle.BitmapPath is null)
+        if (symbolStyle.BitmapPath is null)
             return false;
 
         var symbolCache = renderService.SymbolCache;
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle);
+        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.BitmapPath.ToString());
         if (bitmapInfo == null)
             return false;
 
@@ -75,7 +75,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                         throw new Exception("If Sprite parameters are specified a BitmapPath is required.");
 
                     var skiaSpriteCache = (SpriteCache)renderService.SpriteCache;
-                    var skImage = skiaSpriteCache.GetOrCreatePaint(ToSpriteKey(symbolStyle.BitmapPath.ToString(), symbolStyle.Sprite),
+                    var skImage = skiaSpriteCache.GetOrCreateSKObject(ToSpriteKey(symbolStyle.BitmapPath.ToString(), symbolStyle.Sprite),
                         () => bitmapInfo.Bitmap.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
 
                     BitmapRenderer.Draw(canvas, skImage,
@@ -100,13 +100,13 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 // Todo: Perhaps remove BitmapType.Svg and SvgRenderer?
                 // It looks like BitmapType.Svg is not use at all the the moment.
                 if (bitmapInfo.Svg == null)
-                    return false;
+                    throw new Exception("The BitmapInfo.Svg can not be null for type Svg.");
 
-                SvgRenderer.Draw(canvas, bitmapInfo.Svg,
+                PictureRenderer.Draw(canvas, bitmapInfo.Svg.Picture,
                     (float)destinationX, (float)destinationY,
                     rotation,
                     (float)offset.X, (float)offset.Y,
-                    opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                    opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
                 break;
         }
 
@@ -246,9 +246,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         switch (symbolStyle.SymbolType)
         {
             case SymbolType.Image:
-                if (symbolStyle.BitmapId >= 0)
+                if (symbolStyle.BitmapPath is not null)
                 {
-                    var bitmapSize = renderService.SymbolCache.GetSize(symbolStyle);
+                    var bitmapSize = renderService.SymbolCache.GetSize(symbolStyle.BitmapPath.ToString());
                     if (bitmapSize != null)
                     {
                         symbolSize = bitmapSize;

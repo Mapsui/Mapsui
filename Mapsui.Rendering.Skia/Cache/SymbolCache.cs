@@ -10,11 +10,6 @@ public sealed class SymbolCache : ISymbolCache
 {
     private readonly IDictionary<string, BitmapInfo> _cache = new ConcurrentDictionary<string, BitmapInfo>();
 
-    public Size? GetSize(int bitmapId) => GetSize(ToKey(bitmapId));
-    IBitmapInfo ISymbolCache.GetOrCreate(int bitmapId) => GetOrCreate(ToKey(bitmapId));
-    public Size? GetSize(SymbolStyle symbolStyle) => GetSize(GetKey(symbolStyle));
-    public IBitmapInfo GetOrCreate(SymbolStyle symbolStyle) => GetOrCreate(GetKey(symbolStyle));
-
     public IBitmapInfo GetOrCreate(string key)
     {
         if (_cache.ContainsKey(key))
@@ -26,27 +21,13 @@ public sealed class SymbolCache : ISymbolCache
             }
         }
 
-        if (key.StartsWith("bitmapId://"))
-        {
-            //!!! This is a hopeless workaround to get things to work for now.
-            var index = "bitmapId://".Length;
-            var subString = key.Substring(index);
-            var bitmapId = int.Parse(subString);
-            object bitmapData = BitmapRegistry.Instance.Get(bitmapId);
-            bool ownsBitmap = bitmapData is not IDisposable;
-            var loadBitmap = BitmapHelper.LoadBitmap(bitmapData, ownsBitmap) ?? throw new ArgumentNullException(nameof(key));
-            return _cache[key] = loadBitmap;
-        }
-        else
-        {
-            Stream bitmapStream = BitmapPathRegistry.Instance.Get(new Uri(key));
-            bool ownsBitmap = bitmapStream is not IDisposable;
-            var loadBitmap = BitmapHelper.LoadBitmap(bitmapStream, ownsBitmap) ?? throw new ArgumentNullException(nameof(key));
-            return _cache[key] = loadBitmap;
-        }
+        Stream bitmapStream = ImagePathCache.Instance.Get(new Uri(key));
+        bool ownsBitmap = bitmapStream is not IDisposable;
+        var loadBitmap = BitmapHelper.LoadBitmap(bitmapStream, ownsBitmap) ?? throw new ArgumentNullException(nameof(key));
+        return _cache[key] = loadBitmap;
     }
 
-    private Size? GetSize(string key)
+    public Size? GetSize(string key)
     {
         var bitmap = (BitmapInfo?)GetOrCreate(key);
         if (bitmap == null)
@@ -64,8 +45,4 @@ public sealed class SymbolCache : ISymbolCache
 
         _cache.Clear();
     }
-
-    static string GetKey(SymbolStyle symbolStyle)
-        => symbolStyle.BitmapPath is not null ? symbolStyle.BitmapPath.ToString() : ToKey(symbolStyle.BitmapId);
-    private static string ToKey(int bitmapId) => $"bitmapId://{bitmapId}";
 }
