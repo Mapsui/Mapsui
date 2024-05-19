@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
@@ -18,6 +19,7 @@ public class TouchPointSample : ISample
 {
     private static Map _map;
     private TextBoxWidget _label;
+    private TextBoxWidget _mousePosition;
     public string Name => "Touch Point";
 
     public string Category => "Tests";
@@ -37,6 +39,8 @@ public class TouchPointSample : ISample
         _map.Layers.Add(memoryLayer);
         _label = CreateLabel(_map, HorizontalAlignment.Center, VerticalAlignment.Top, "Not Selected");
         _map.Widgets.Add(_label);
+        _mousePosition = CreateLabel(_map, HorizontalAlignment.Center, VerticalAlignment.Bottom, "");
+        _map.Widgets.Add(_mousePosition);
         memoryLayer.DataHasChanged();
         _map.Info += MapControl_Info;
         return _map;
@@ -66,6 +70,8 @@ public class TouchPointSample : ISample
 
     private void MapControl_Info(object? sender, MapInfoEventArgs e)
     {
+        _mousePosition.Text = $"X: {Convert.ToInt32(e.MapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(e.MapInfo.ScreenPosition.Y)}";
+        _mousePosition.NeedsRedraw = true;
         if (e.MapInfo is { Feature: PointFeature, Layer: MemoryLayer })
         {
             if (_label.Text == "Not Selected")
