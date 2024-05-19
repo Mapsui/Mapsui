@@ -4,7 +4,6 @@ using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using System.Threading.Tasks;
-using ExCSS;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Tiling;
@@ -20,6 +19,7 @@ public class TouchPointSample : ISample
     private static Map _map;
     private TextBoxWidget _label;
     private TextBoxWidget _mousePosition;
+    private MemoryLayer _clickMemoryLayer;
     public string Name => "Touch Point";
 
     public string Category => "Tests";
@@ -35,8 +35,10 @@ public class TouchPointSample : ISample
         };
 
         _map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        var memoryLayer = CreateMemoryLayer();
+        var memoryLayer = CreateMemoryLayer(Color.Red);
         _map.Layers.Add(memoryLayer);
+        _clickMemoryLayer = CreateMemoryLayer(Color.Blue, 0.3d, false);
+        _map.Layers.Add(_clickMemoryLayer);
         _label = CreateLabel(_map, HorizontalAlignment.Center, VerticalAlignment.Top, "Not Selected");
         _map.Widgets.Add(_label);
         _mousePosition = CreateLabel(_map, HorizontalAlignment.Center, VerticalAlignment.Bottom, "");
@@ -46,16 +48,17 @@ public class TouchPointSample : ISample
         return _map;
     }
 
-    private static ILayer CreateMemoryLayer()
+    private static MemoryLayer CreateMemoryLayer(Color color, double scale = 1, bool createdPoint = true)
     {
         var pinStyle = new SymbolStyle
         {
             SymbolType = SymbolType.Ellipse,
-            Fill = new Brush(Color.Red),
-            Outline = null
+            Fill = new Brush(color),
+            Outline = null,
+            SymbolScale = scale
         };
 
-        var features = new List<IFeature> { new PointFeature(SphericalMercator.FromLonLat(new MPoint(0, 0))) };
+        List<IFeature> features = createdPoint ? [new PointFeature(SphericalMercator.FromLonLat(new MPoint(0, 0)))] : [];
 
         var memoryLayer = new MemoryLayer
         {
@@ -72,6 +75,9 @@ public class TouchPointSample : ISample
     {
         _mousePosition.Text = $"X: {Convert.ToInt32(e.MapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(e.MapInfo.ScreenPosition.Y)}";
         _mousePosition.NeedsRedraw = true;
+        var features = (List<IFeature>)_clickMemoryLayer.Features;
+        features.Add(new PointFeature(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y));
+        _clickMemoryLayer.DataHasChanged();
         if (e.MapInfo is { Feature: PointFeature, Layer: MemoryLayer })
         {
             if (_label.Text == "Not Selected")
