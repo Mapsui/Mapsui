@@ -67,7 +67,7 @@ public static class BitmapHelper
             return new BitmapInfo { Bitmap = image };
         }
 
-        if (bitmapStream is Sprite)
+        if (bitmapStream is BitmapRegion)
         {
             throw new Exception("A bitmap stream should never be a Sprite. The Sprite class has a different purpose after Mapsui 5.0.0-beta.1.");
         }

@@ -59,7 +59,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 if (bitmapInfo.Bitmap == null)
                     return false; // Should we throw instead?
 
-                if (symbolStyle.Sprite is null) // It is an ordinary bitmap.
+                if (symbolStyle.BitmapRegion is null) // It is an ordinary bitmap.
                 {
                     BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap,
                         (float)destinationX, (float)destinationY,
@@ -69,13 +69,13 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 }
                 else
                 {
-                    var sprite = symbolStyle.Sprite;
+                    var sprite = symbolStyle.BitmapRegion;
 
                     if (symbolStyle.ImageSource is null)
                         throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
                     var skiaSpriteCache = (SpriteCache)renderService.SpriteCache;
-                    var skImage = skiaSpriteCache.GetOrCreateSKObject(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.Sprite),
+                    var skImage = skiaSpriteCache.GetOrCreateSKObject(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
                         () => bitmapInfo.Bitmap.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
 
                     BitmapRenderer.Draw(canvas, skImage,
@@ -280,6 +280,6 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return size;
     }
 
-    public static string ToSpriteKey(string imageSource, Sprite sprite)
+    public static string ToSpriteKey(string imageSource, BitmapRegion sprite)
         => $"{imageSource}?sprite=true,x={sprite.X},y={sprite.Y},width={sprite.Width},height={sprite.Height}";
 }

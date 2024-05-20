@@ -95,7 +95,7 @@ public class SymbolStyle : VectorStyle
     /// Sets the sprite parameters used to specify which part of the image
     /// symbol should be used. This only applies if a ImageSource is set.
     /// </summary>
-    public Sprite? Sprite { get; set; }
+    public BitmapRegion? BitmapRegion { get; set; }
 
     public override bool Equals(object? obj)
     {

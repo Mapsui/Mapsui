@@ -218,26 +218,26 @@ internal static class PolygonRenderer
 
         if (bitmapInfo.Type == BitmapType.Bitmap)
         {
-            if (brush.Sprite is null)
+            if (brush.BitmapRegion is null)
                 return bitmapInfo.Bitmap;
             else
             {
                 if (brush.ImageSource is null)
                     throw new Exception("If Sprite is assigned ImageSource should be set.");
-                var sprite = brush.Sprite;
+                var sprite = brush.BitmapRegion;
                 if (bitmapInfo.Bitmap is null)
                     throw new Exception("Bitmap is null while type is Bitmap. This should never happen.");
 
                 // The line below generates a string. For performance is it not great to have this in the render loop.
-                var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.Sprite);
+                var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
                 spriteCache.GetOrCreateSKObject(spriteKey, () => GetSpriteFromSKImage(bitmapInfo.Bitmap, sprite));
             }
         }
         return null;
     }
 
-    private static SKImage GetSpriteFromSKImage(SKImage skImage, Sprite sprite)
+    private static SKImage GetSpriteFromSKImage(SKImage skImage, BitmapRegion bitmapRegion)
     {
-        return skImage.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height));
+        return skImage.Subset(new SKRectI(bitmapRegion.X, bitmapRegion.Y, bitmapRegion.X + bitmapRegion.Width, bitmapRegion.Y + bitmapRegion.Height));
     }
 }

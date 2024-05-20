@@ -61,6 +61,6 @@ public class AtlasSample : ISample
     private static SymbolStyle CreateSymbolStyle(int x, int y) => new()
     {
         ImageSource = "embedded://mapsui.samples.common.images.osm-liberty.png",
-        Sprite = new Sprite(x, y, 21, 21)
+        BitmapRegion = new BitmapRegion(x, y, 21, 21)
     };
 }
