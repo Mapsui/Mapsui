@@ -46,7 +46,7 @@ public sealed partial class MainPage : Page
         {
             CategoryComboBox.Items?.Add(category);
         }
-        CategoryComboBox.SelectedIndex = 12;
+        CategoryComboBox.SelectedIndex = 1;
     }
 
     private void FillListWithSamples()
