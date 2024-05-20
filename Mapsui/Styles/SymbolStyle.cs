@@ -92,6 +92,18 @@ public class SymbolStyle : VectorStyle
     public Color? BlendModeColor { get; set; }
 
     /// <summary>
+    /// Option to override the fill color of the SVG image. This is useful if you want to change the color of the SVG 
+    /// source image.
+    /// </summary>
+    public Color? SvgFillColor { get; set; }
+
+    /// <summary>
+    /// Option to override the stroke color of the SVG image. This is useful if you want to change the color of the SVG 
+    /// source image.
+    /// </summary>
+    public Color? SvgStrokeColor { get; set; }
+
+    /// <summary>
     /// Sets the sprite parameters used to specify which part of the image
     /// symbol should be used. This only applies if a ImageSource is set.
     /// </summary>
