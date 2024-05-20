@@ -29,11 +29,9 @@ namespace Mapsui.UI.WinUI;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
-#if HAS_UNO_WINUI
     // GPU does not work currently on Windows
     public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid() || OperatingSystem.IsIOS();
     private readonly SKSwapChainPanel? _canvasGpu;
-#endif
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas? _canvas;
 
@@ -48,7 +46,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         //else RunOnUIThread(() => _canvas?.Invalidate());
 
         Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
-#if HAS_UNO_WINUI
+
         if (UseGPU)
         {
             _canvasGpu = CreateGpuRenderTarget();
@@ -58,16 +56,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }
         else
         {
-#endif
-#pragma warning disable IDE0055 // Fixing WinUI build because of HAS_UNO_WINUI the indentation changes in WinUI
             _canvas = CreateRenderTarget();
             _invalidate = () => RunOnUIThread(() => _canvas.Invalidate());
             Children.Add(_canvas);
             _canvas.PaintSurface += Canvas_PaintSurface;
-#pragma warning restore IDE0055           
-#if HAS_UNO_WINUI            
         }
-#endif        
+
         Children.Add(_selectRectangle);
 
         Loaded += MapControlLoaded;
@@ -178,7 +172,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
     }
 
-#if HAS_UNO_WINUI
     private static SKSwapChainPanel CreateGpuRenderTarget()
     {
         return new SKSwapChainPanel
@@ -188,7 +181,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             Background = new SolidColorBrush(Colors.Transparent)
         };
     }
-#endif    
 
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
@@ -238,7 +230,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         CommonDrawControl(canvas);
     }
 
-#if HAS_UNO_WINUI
     private void CanvasGpu_PaintSurface(object? sender, SKPaintGLSurfaceEventArgs e)
     {
         if (PixelDensity <= 0)
@@ -250,7 +241,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         CommonDrawControl(canvas);
     }
-#endif    
 
     private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
     {
@@ -303,9 +293,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #endif
 
             _canvas?.Dispose();
-#if HAS_UNO_WINUI
             _canvasGpu?.Dispose();
-#endif            
             _selectRectangle?.Dispose();
 #endif
 #if HAS_UNO || __WINUI__
