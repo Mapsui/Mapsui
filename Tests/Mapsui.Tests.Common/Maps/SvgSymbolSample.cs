@@ -38,16 +38,20 @@ public class SvgSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures() =>
     [
-        new PointFeature(new MPoint(50, 50)) {
+        new PointFeature(new MPoint(50, 50))
+        {
             Styles = new[] { CreateSymbolStyle() }
         },
-        new PointFeature(new MPoint(50, 100)) {
+        new PointFeature(new MPoint(50, 100))
+        {
             Styles = new[] { CreateSymbolStyle() }
         },
-        new PointFeature(new MPoint(100, 50)) {
+        new PointFeature(new MPoint(100, 50))
+        {
             Styles = new[] { CreateSymbolStyle() }
         },
-        new PointFeature(new MPoint(100, 100)) {
+        new PointFeature(new MPoint(100, 100))
+        {
             Styles = new[] { CreateSymbolStyle() }
         }
     ];

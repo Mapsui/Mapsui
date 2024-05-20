@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Skia;
 
 public static class BitmapHelper
 {
-    public static BitmapInfo? LoadBitmap(object? bitmapStream, bool ownsBitmap = true)
+    public static BitmapInfo? LoadBitmap(object? bitmapStream, bool ownsBitmap = true) // LoadBitmap should always be Stream
     {
         // todo: Our BitmapRegistry stores not only bitmaps. Perhaps we should store a class in it
         // which has all information. So we should have a SymbolImageRegistry in which we store a
@@ -31,7 +31,7 @@ public static class BitmapHelper
         {
             if (str.ToLower().Contains("<svg"))
             {
-                return new BitmapInfo { Svg = str.LoadSvg() };
+                return new BitmapInfo { Svg = new SvgWithStream(str.LoadSvg(), new MemoryStream()) }; //!!! str should not be supported
             }
         }
 
@@ -42,7 +42,7 @@ public static class BitmapHelper
                 using var tempStream = new MemoryStream(data);
                 if (tempStream.IsSvg())
                 {
-                    return new BitmapInfo { Svg = tempStream.LoadSvg() };
+                    return new BitmapInfo { Svg = new SvgWithStream(tempStream.LoadSvg(), tempStream) }; // byte[] should not be supported
                 }
             }
             else if (data.IsSkp())
@@ -59,7 +59,7 @@ public static class BitmapHelper
         {
             if (stream.IsSvg())
             {
-                return new BitmapInfo { Svg = stream.LoadSvg() };
+                return new BitmapInfo { Svg = new SvgWithStream(stream.LoadSvg(), stream) };
             }
 
             using var skData = SKData.CreateCopy(stream.ToBytes());

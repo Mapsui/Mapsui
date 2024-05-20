@@ -35,7 +35,7 @@ public class CustomSvgStyleSample : ISample
         map.Layers.Add(new MemoryLayer("Custom Svg Style")
         {
             Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 100).ToList(),
-            Style = CreateDynamicSvgStyle(_random.Next(4))
+            Style = CreateDynamicSvgStyle()
         });
         map.Widgets.Add(CreateTextBox(Description));
 
@@ -50,7 +50,7 @@ public class CustomSvgStyleSample : ISample
         Margin = new MRect(10),
     };
 
-    private static ThemeStyle CreateDynamicSvgStyle(int type)
+    private static ThemeStyle CreateDynamicSvgStyle()
     {
         return new ThemeStyle((f) =>
         {
@@ -60,9 +60,9 @@ public class CustomSvgStyleSample : ISample
 
             return new SymbolStyle
             {
-                ImageSource = $"embedded://Mapsui.Common.Samples.Images.arrow.svg",
-                SvgFillColor = GetTypeColor(type),
-                SvgStrokeColor = GetTypeColor(type),
+                ImageSource = $"embedded://Mapsui.Samples.Common.Images.arrow.svg",
+                SvgFillColor = GetTypeColor((int)f.Id % 4),
+                SvgStrokeColor = Color.Black,
                 SymbolOffset = new RelativeOffset(0.0, 0.0),
                 SymbolScale = 0.5,
                 SymbolRotation = -CalculateAngle(new MPoint(0, 0), featurePosition) - 90, // Let them point to the center of hte map

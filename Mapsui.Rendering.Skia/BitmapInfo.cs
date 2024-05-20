@@ -1,6 +1,7 @@
 ﻿using Mapsui.Extensions;
 using SkiaSharp;
 using Svg.Skia;
+using System.IO;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -60,12 +61,12 @@ public sealed class BitmapInfo : IBitmapInfo
         }
     }
 
-    public SKSvg? Svg
+    public SvgWithStream? Svg
     {
         get
         {
             if (Type == BitmapType.Svg)
-                return _data as SKSvg;
+                return _data as SvgWithStream;
             else
                 return null;
         }
@@ -82,17 +83,13 @@ public sealed class BitmapInfo : IBitmapInfo
     {
         get
         {
-            switch (Type)
+            return Type switch
             {
-                case BitmapType.Bitmap:
-                    return Bitmap?.Width ?? 0;
-                case BitmapType.Svg:
-                    return Svg?.Picture?.CullRect.Width ?? 0;
-                case BitmapType.Picture:
-                    return Picture?.CullRect.Width ?? 0;
-                default:
-                    return 0;
-            }
+                BitmapType.Bitmap => Bitmap?.Width ?? 0,
+                BitmapType.Svg => Svg?.SKSvg.Picture?.CullRect.Width ?? 0,
+                BitmapType.Picture => Picture?.CullRect.Width ?? 0,
+                _ => 0,
+            };
         }
     }
 
@@ -100,17 +97,13 @@ public sealed class BitmapInfo : IBitmapInfo
     {
         get
         {
-            switch (Type)
+            return Type switch
             {
-                case BitmapType.Bitmap:
-                    return Bitmap?.Height ?? 0;
-                case BitmapType.Svg:
-                    return Svg?.Picture?.CullRect.Height ?? 0;
-                case BitmapType.Picture:
-                    return Picture?.CullRect.Height ?? 0;
-                default:
-                    return 0;
-            }
+                BitmapType.Bitmap => Bitmap?.Height ?? 0,
+                BitmapType.Svg => Svg?.SKSvg.Picture?.CullRect.Height ?? 0,
+                BitmapType.Picture => Picture?.CullRect.Height ?? 0,
+                _ => 0,
+            };
         }
     }
 
@@ -124,3 +117,7 @@ public sealed class BitmapInfo : IBitmapInfo
         }
     }
 }
+
+// This class should be removed before the next beta
+public record SvgWithStream(SKSvg SKSvg, Stream OriginalStream)
+{ }

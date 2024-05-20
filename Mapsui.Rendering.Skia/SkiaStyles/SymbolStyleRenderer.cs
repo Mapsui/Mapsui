@@ -4,6 +4,7 @@ using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
+using Svg.Skia;
 using System;
 
 namespace Mapsui.Rendering.Skia;
@@ -102,12 +103,34 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 if (bitmapInfo.Svg == null)
                     throw new Exception("The BitmapInfo.Svg can not be null for type Svg.");
 
-                PictureRenderer.Draw(canvas, bitmapInfo.Svg.Picture,
-                    (float)destinationX, (float)destinationY,
-                    rotation,
-                    (float)offset.X, (float)offset.Y,
-                    opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
-                break;
+                if (symbolStyle.SvgFillColor.HasValue || symbolStyle.SvgStrokeColor.HasValue)
+                {
+                    var skPicture = ((SpriteCache)renderService.SpriteCache).GetOrCreateSKObject(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
+                        () =>
+                        {
+                            var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(bitmapInfo.Svg.OriginalStream, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
+                            var skSvg = new SKSvg();
+                            modifiedSvgStream.Position = 0;
+                            skSvg.Load(modifiedSvgStream);
+                            return skSvg.Picture;
+                        });
+
+                    PictureRenderer.Draw(canvas, skPicture,
+                        (float)destinationX, (float)destinationY,
+                        rotation,
+                        (float)offset.X, (float)offset.Y,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
+                    break;
+                }
+                else
+                {
+                    PictureRenderer.Draw(canvas, bitmapInfo.Svg.SKSvg.Picture,
+                        (float)destinationX, (float)destinationY,
+                        rotation,
+                        (float)offset.X, (float)offset.Y,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
+                    break;
+                }
         }
 
         return true;
@@ -280,6 +303,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return size;
     }
 
-    public static string ToSpriteKey(string imageSource, BitmapRegion sprite)
-        => $"{imageSource}?sprite=true,x={sprite.X},y={sprite.Y},width={sprite.Width},height={sprite.Height}";
+    public static string ToSpriteKey(string imageSource, BitmapRegion bitmapRegion)
+        => $"{imageSource}?sprite=true,x={bitmapRegion.X},y={bitmapRegion.Y},width={bitmapRegion.Width},height={bitmapRegion.Height}";
+    public static string ToModifiedSvgKey(string imageSource, Color? fill, Color? stroke)
+        => $"{imageSource}?modifiedsvg=true,fill={fill?.ToString() ?? ""},stroke={stroke?.ToString() ?? ""}";
+
+
 }

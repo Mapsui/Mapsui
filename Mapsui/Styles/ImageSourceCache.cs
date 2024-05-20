@@ -2,7 +2,6 @@ using System;
 using System.Collections.Concurrent;
 using System.IO;
 using System.Threading.Tasks;
-using Mapsui.Logging;
 
 namespace Mapsui.Styles;
 
@@ -28,7 +27,7 @@ public sealed class ImageSourceCache : IDisposable
         var key = imageSource.ToString();
         if (_register.ContainsKey(key))
         {
-            Logger.Log(LogLevel.Warning, $"Bitmap already registered: '{key}'");
+            return;
         }
 
         var stream = await ImageFetcher.FetchStreamFromImageSourceAsync(imageSource);
