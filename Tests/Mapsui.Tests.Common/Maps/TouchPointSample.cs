@@ -11,22 +11,24 @@ using Mapsui.Widgets.BoxWidgets;
 using Color = Mapsui.Styles.Color;
 using HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment;
 using VerticalAlignment = Mapsui.Widgets.VerticalAlignment;
+#pragma warning disable IDISP003
+#pragma warning disable IDISP001
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class TouchPointSample : ISample
+public class TouchPointSample : ISample, IDisposable
 {
-    private static Map _map;
-    private TextBoxWidget _label;
-    private TextBoxWidget _mousePosition;
-    private MemoryLayer _clickMemoryLayer;
+    private static Map? _map;
+    private TextBoxWidget? _label;
+    private TextBoxWidget? _mousePosition;
+    private MemoryLayer? _clickMemoryLayer;
     public string Name => "Touch Point";
 
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
-    public Map CreateMap()
+    private Map CreateMap()
     {
         _map = new Map
         {
@@ -73,21 +75,14 @@ public class TouchPointSample : ISample
 
     private void MapControl_Info(object? sender, MapInfoEventArgs e)
     {
-        _mousePosition.Text = $"X: {Convert.ToInt32(e.MapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(e.MapInfo.ScreenPosition.Y)}";
+        _mousePosition!.Text = $"X: {Convert.ToInt32(e.MapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(e.MapInfo.ScreenPosition.Y)}";
         _mousePosition.NeedsRedraw = true;
-        var features = (List<IFeature>)_clickMemoryLayer.Features;
+        var features = (List<IFeature>)_clickMemoryLayer!.Features;
         features.Add(new PointFeature(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y));
         _clickMemoryLayer.DataHasChanged();
         if (e.MapInfo is { Feature: PointFeature, Layer: MemoryLayer })
         {
-            if (_label.Text == "Not Selected")
-            {
-                _label.Text = "Selected";
-            }
-            else
-            {
-                _label.Text = "Not Selected";
-            }
+            _label!.Text = _label.Text == "Not Selected" ? "Selected" : "Not Selected";
             _label.NeedsRedraw = true;
         }
     }
@@ -108,5 +103,10 @@ public class TouchPointSample : ISample
             BackColor = new Color(108, 117, 125),
             TextColor = Color.White,
         };
+    }
+
+    public void Dispose()
+    {
+        _clickMemoryLayer?.Dispose();
     }
 }
