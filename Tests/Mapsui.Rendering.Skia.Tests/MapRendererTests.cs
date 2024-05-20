@@ -42,7 +42,7 @@ internal class MapRendererTests
         const string fileName = "points_with_symbolstyle.png";
         using var mapRenderer = new MapRenderer();
 
-        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        ImageSourceInitializer.InitializeWhenNeeded((r) =>
         {
             // Act
             using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
@@ -64,7 +64,7 @@ internal class MapRendererTests
         const string fileName = "points_with_symbolstyle.png"; // Todo: Do not reuse the png.
         using var mapRenderer = new MapRenderer();
 
-        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        ImageSourceInitializer.InitializeWhenNeeded((r) =>
         {
             // Act
             using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
@@ -86,7 +86,7 @@ internal class MapRendererTests
         const string fileName = "points_with_svgsymbolstyle.png";
         using var mapRenderer = new MapRenderer();
 
-        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        ImageSourceInitializer.InitializeWhenNeeded((r) =>
         {
             // Act
             using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
@@ -108,7 +108,7 @@ internal class MapRendererTests
         const string fileName = "bitmap_atlas.png";
         using var mapRenderer = new MapRenderer();
 
-        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        ImageSourceInitializer.InitializeWhenNeeded((r) =>
         {
             // Act
             using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
@@ -130,7 +130,7 @@ internal class MapRendererTests
         const string fileName = "bitmap_symbol.png";
         using var mapRenderer = new MapRenderer();
 
-        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        ImageSourceInitializer.InitializeWhenNeeded((r) =>
         {
             // Act
             using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
@@ -190,7 +190,7 @@ internal class MapRendererTests
         const string fileName = "polygon.png";
         using var mapRenderer = new MapRenderer();
 
-        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        ImageSourceInitializer.InitializeWhenNeeded((r) =>
         {
             // Act
             using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);

@@ -106,11 +106,11 @@ public class ThemeStyleSample : ISample
 
     private static SymbolStyle CreateCityStyle()
     {
-        var imagePath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.location.png");
+        var imageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.location.png");
 
         return new SymbolStyle
         {
-            BitmapPath = imagePath,
+            ImageSource = imageSource,
             SymbolOffset = new Offset { Y = 64 },
             SymbolScale = 0.25
         };

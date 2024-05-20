@@ -590,7 +590,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                 Feature.Styles.Clear();
                 Feature.Styles.Add(new SymbolStyle
                 {
-                    // Not going to fix this: BitmapPath = _bitmapId,
+                    // Not going to fix this: ImageSource = _bitmapId,
                     SymbolScale = Scale,
                     SymbolRotation = Rotation,
                     RotateWithMap = RotateWithMap,

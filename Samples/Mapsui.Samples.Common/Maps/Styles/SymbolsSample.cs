@@ -93,12 +93,12 @@ public class SymbolsSample : ISample
 
     private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { BitmapPath = new Uri(embeddedResourcePath), SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
+        return new SymbolStyle { ImageSource = new Uri(embeddedResourcePath), SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
     }
 
     private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { BitmapPath = new Uri(embeddedResourcePath), SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
+        return new SymbolStyle { ImageSource = new Uri(embeddedResourcePath), SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
     }
 
     private static IFeature CreatePointWithStackedStyles()

@@ -70,9 +70,9 @@ public class CustomCalloutSample : ISample
         });
     }
 
-    private static IStyle CreateCalloutStyle(string ImagePath)
+    private static IStyle CreateCalloutStyle(string ImageSource)
     {
-        var calloutStyle = new CalloutStyle { BitmapPath = new Uri(ImagePath), ArrowPosition = _random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Image };
+        var calloutStyle = new CalloutStyle { ImageSource = new Uri(ImageSource), ArrowPosition = _random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Image };
         switch (_random.Next(0, 4))
         {
             case 0:

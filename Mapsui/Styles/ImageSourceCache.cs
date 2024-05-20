@@ -9,30 +9,30 @@ namespace Mapsui.Styles;
 /// <summary>
 /// Class for managing all bitmaps, which are registered for Mapsui drawing
 /// </summary>
-public sealed class ImagePathCache : IDisposable
+public sealed class ImageSourceCache : IDisposable
 {
-    private static ImagePathCache? _instance;
+    private static ImageSourceCache? _instance;
     private readonly ConcurrentDictionary<string, Stream> _register = [];
     private bool _disposed;
 
-    private ImagePathCache() { }
+    private ImageSourceCache() { }
 
     /// <summary>
     /// Singleton of BitmapRegistry class
     /// </summary>
-    public static ImagePathCache Instance => _instance ??= new ImagePathCache();
+    public static ImageSourceCache Instance => _instance ??= new ImageSourceCache();
 
     /// <inheritdoc />
-    public async Task RegisterAsync(Uri bitmapPath)
+    public async Task RegisterAsync(Uri imageSource)
     {
-        var key = bitmapPath.ToString();
+        var key = imageSource.ToString();
         if (_register.ContainsKey(key))
         {
             Logger.Log(LogLevel.Warning, $"Bitmap already registered: '{key}'");
         }
 
-        var stream = await ImageFetcher.FetchStreamFromImagePathAsync(bitmapPath);
-        _register[bitmapPath.ToString()] = stream;
+        var stream = await ImageFetcher.FetchStreamFromImageSourceAsync(imageSource);
+        _register[imageSource.ToString()] = stream;
     }
 
     /// <inheritdoc />

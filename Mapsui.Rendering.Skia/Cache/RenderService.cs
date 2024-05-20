@@ -9,7 +9,7 @@ public sealed class RenderService : IRenderService
         SymbolCache = new SymbolCache();
         TileCache = new TileCache();
         LabelCache = new LabelCache();
-        ImagePathCache = ImagePathCache.Instance;
+        ImageSourceCache = ImageSourceCache.Instance;
         VectorCache = new VectorCache(this, vectorCacheCapacity);
         SpriteCache = new SpriteCache();
     }
@@ -18,7 +18,7 @@ public sealed class RenderService : IRenderService
     public IVectorCache VectorCache { get; }
     public ITileCache TileCache { get; }
     public ILabelCache LabelCache { get; }
-    public ImagePathCache ImagePathCache { get; }
+    public ImageSourceCache ImageSourceCache { get; }
     public ISpriteCache SpriteCache { get; }
 
     public void Dispose()
@@ -27,7 +27,7 @@ public sealed class RenderService : IRenderService
         SymbolCache.Dispose();
         VectorCache.Dispose();
         TileCache.Dispose();
-        ImagePathCache.Dispose();
+        ImageSourceCache.Dispose();
         SpriteCache.Dispose();
     }
 }

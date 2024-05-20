@@ -43,38 +43,38 @@ public class BitmapAtlasSample : ISample
 
     public static List<IFeature> CreateFeatures()
     {
-        var atlasBitmapPath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.osm-liberty.png");
+        var atlasImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.osm-liberty.png");
         var spriteAmusementPark15 = new Sprite(106, 0, 21, 21);
         var spriteClothingStore15 = new Sprite(84, 106, 21, 21);
         var spriteDentist15 = new Sprite(147, 64, 21, 21);
         var spritePedestrianPolygon = new Sprite(0, 0, 64, 64);
-        var svgTigerBitmapPath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg");
+        var svgTigerImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg");
 
         return new List<IFeature>
         {
             new PointFeature(new MPoint(256, 124))
             {
-                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath} }
+                Styles = new[] {new SymbolStyle { ImageSource = atlasImageSource} }
             },
             new PointFeature(new MPoint(20, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath, Sprite = spriteAmusementPark15} }
+                Styles = new[] {new SymbolStyle { ImageSource = atlasImageSource, Sprite = spriteAmusementPark15} }
             },
             new PointFeature(new MPoint(60, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath, Sprite = spriteClothingStore15} }
+                Styles = new[] {new SymbolStyle { ImageSource = atlasImageSource, Sprite = spriteClothingStore15} }
             },
             new PointFeature(new MPoint(100, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath, Sprite = spriteDentist15} }
+                Styles = new[] {new SymbolStyle { ImageSource = atlasImageSource, Sprite = spriteDentist15} }
             },
             new PointFeature(new MPoint(180, 300))
             {
-                Styles = new[] {new SymbolStyle { BitmapPath = atlasBitmapPath, Sprite = spritePedestrianPolygon} }
+                Styles = new[] {new SymbolStyle { ImageSource = atlasImageSource, Sprite = spritePedestrianPolygon} }
             },
             new PointFeature(new MPoint(380, 280))
             {
-                Styles = new[] {new SymbolStyle { BitmapPath = svgTigerBitmapPath, SymbolScale = 0.1} }
+                Styles = new[] {new SymbolStyle { ImageSource = svgTigerImageSource, SymbolScale = 0.1} }
             }
         };
     }

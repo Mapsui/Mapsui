@@ -40,8 +40,8 @@ public class BitmapSymbolInCollectionSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleImagePath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.circle.png");
-        var checkeredIconImagePath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.checkered.png");
+        var circleImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.circle.png");
+        var checkeredIconImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.checkered.png");
 
         // This test was created the easy way, by copying BitmapSymbol and the GeometryCollection. A test 
         // written specifically for GeometryCollection would probably look different.
@@ -56,12 +56,12 @@ public class BitmapSymbolInCollectionSample : ISample
             new GeometryFeature
             {
                 Geometry = new GeometryCollection([new Point(50, 100)]),
-                Styles = [new SymbolStyle { BitmapPath = circleImagePath }]
+                Styles = [new SymbolStyle { ImageSource = circleImageSource }]
             },
             new GeometryFeature
             {
                 Geometry = new GeometryCollection([new Point(100, 50)]),
-                Styles = [new SymbolStyle { BitmapPath = checkeredIconImagePath }]
+                Styles = [new SymbolStyle { ImageSource = checkeredIconImageSource }]
             },
             new GeometryFeature
             {

@@ -88,13 +88,13 @@ public class SymbolStyleFeatureSizeTests
     {
         // Arrange
         using var renderService = new RenderService();
-        var imagePath = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
+        var imageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
         var symbolStyle = new SymbolStyle
         {
-            BitmapPath = imagePath,
+            ImageSource = imageSource,
         };
 
-        BitmapPathInitializer.InitializeWhenNeeded((r) =>
+        ImageSourceInitializer.InitializeWhenNeeded((r) =>
         {
             // Act
             var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);

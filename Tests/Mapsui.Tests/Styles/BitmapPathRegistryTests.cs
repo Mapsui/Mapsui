@@ -7,45 +7,45 @@ using NUnit.Framework;
 namespace Mapsui.Tests.Styles;
 
 [TestFixture]
-public static class BitmapPathRegistryTests
+public static class ImageSourceCacheTests
 {
     [Test]
     public static async Task AddAndRemoveEntryAsync()
     {
         // Arrange
-        var imagePath = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
-        await ImagePathCache.Instance.RegisterAsync(imagePath);
+        var imageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
+        await ImageSourceCache.Instance.RegisterAsync(imageSource);
 
         // Act
-        ImagePathCache.Instance.Unregister(imagePath);
+        ImageSourceCache.Instance.Unregister(imageSource);
 
         // Assert
-        Assert.That(ImagePathCache.Instance.Get(imagePath), Is.Null);
+        Assert.That(ImageSourceCache.Instance.Get(imageSource), Is.Null);
     }
 
     [Test]
     public static async Task AddAndRemoveUriResourceEmbeddedRegisterAsync()
     {
         // Arrange
-        var imagePath = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
-        await ImagePathCache.Instance.RegisterAsync(imagePath);
+        var imageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
+        await ImageSourceCache.Instance.RegisterAsync(imageSource);
 
         // Act
-        ImagePathCache.Instance.Unregister(imagePath);
+        ImageSourceCache.Instance.Unregister(imageSource);
 
         // Assert
-        Assert.That(ImagePathCache.Instance.Get(imagePath), Is.Null);
+        Assert.That(ImageSourceCache.Instance.Get(imageSource), Is.Null);
     }
 
     [Test]
     public static async Task AddUriResourceEmbeddedRegisterAsync()
     {
         // Arrange
-        var imagePath = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
-        await ImagePathCache.Instance.RegisterAsync(imagePath);
+        var imageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
+        await ImageSourceCache.Instance.RegisterAsync(imageSource);
 
         // Act
-        var stream = ImagePathCache.Instance.Get(imagePath);
+        var stream = ImageSourceCache.Instance.Get(imageSource);
 
         // Assert
         Assert.That(stream is not null);
@@ -57,13 +57,13 @@ public static class BitmapPathRegistryTests
     {
         // Arrange
         var examplePath = new Uri($"file://{AppContext.BaseDirectory}/Resources/example.tif");
-        await ImagePathCache.Instance.RegisterAsync(examplePath);
+        await ImageSourceCache.Instance.RegisterAsync(examplePath);
 
         // Act
-        ImagePathCache.Instance.Unregister(examplePath);
+        ImageSourceCache.Instance.Unregister(examplePath);
 
         // Assert
-        Assert.That(ImagePathCache.Instance.Get(examplePath), Is.Null);
+        Assert.That(ImageSourceCache.Instance.Get(examplePath), Is.Null);
     }
 
     [Test]
@@ -71,10 +71,10 @@ public static class BitmapPathRegistryTests
     {
         // Arrange
         var examplePath = new Uri($"file://{AppContext.BaseDirectory}/Resources/example.tif");
-        await ImagePathCache.Instance.RegisterAsync(examplePath);
+        await ImageSourceCache.Instance.RegisterAsync(examplePath);
 
         // Act
-        var stream = ImagePathCache.Instance.Get(examplePath);
+        var stream = ImageSourceCache.Instance.Get(examplePath);
 
         // Assert
         Assert.That(stream is not null);
@@ -86,13 +86,13 @@ public static class BitmapPathRegistryTests
     {
         // Arrange
         var mapsuiLogo = new Uri("https://mapsui.com/images/logo.svg");
-        await ImagePathCache.Instance.RegisterAsync(mapsuiLogo);
+        await ImageSourceCache.Instance.RegisterAsync(mapsuiLogo);
 
         // Act
-        ImagePathCache.Instance.Unregister(mapsuiLogo);
+        ImageSourceCache.Instance.Unregister(mapsuiLogo);
 
         // Assert
-        Assert.That(ImagePathCache.Instance.Get(mapsuiLogo), Is.Null);
+        Assert.That(ImageSourceCache.Instance.Get(mapsuiLogo), Is.Null);
     }
 
     [Test]
@@ -100,10 +100,10 @@ public static class BitmapPathRegistryTests
     {
         // Arrange
         var mapsuiLogo = new Uri("https://mapsui.com/images/logo.svg");
-        await ImagePathCache.Instance.RegisterAsync(mapsuiLogo);
+        await ImageSourceCache.Instance.RegisterAsync(mapsuiLogo);
 
         // Act
-        var stream = ImagePathCache.Instance.Get(mapsuiLogo);
+        var stream = ImageSourceCache.Instance.Get(mapsuiLogo);
 
         // Assert
         Assert.That(stream is not null);
@@ -114,16 +114,16 @@ public static class BitmapPathRegistryTests
     public async static Task RenderBitmapRegistryDisposeShouldRemoveBitmapAsync()
     {
         // Arrange
-        var imagePath = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
-        var bitmapPathRegistry = ImagePathCache.Instance;
-        await bitmapPathRegistry.RegisterAsync(imagePath);
+        var imageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
+        var imageSourceCache = ImageSourceCache.Instance;
+        await imageSourceCache.RegisterAsync(imageSource);
 
         // Act
 #pragma warning disable IDISP016 // Don't use disposed instance. In this case we want to specifically test dispose.
-        bitmapPathRegistry.Dispose();
+        imageSourceCache.Dispose();
 
         // Assert
-        // Todo: fix test before merging to main: Assert.Throws<ObjectDisposedException>(() => bitmapPathRegistry.Get(imagePath));
+        // Todo: fix test before merging to main: Assert.Throws<ObjectDisposedException>(() => imageSourceCache.Get(imageSource));
     }
 
     [Test]

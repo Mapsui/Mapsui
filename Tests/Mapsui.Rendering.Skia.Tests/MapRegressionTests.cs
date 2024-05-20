@@ -96,8 +96,8 @@ public class MapRegressionTests
                 // act
                 using var mapRenderer = CreateMapRenderer(mapControl);
                 {
-                    // Workaround for delayed bitmapPath loading
-                    BitmapPathInitializer.InitializeWhenNeeded((r) =>
+                    // Workaround for delayed imageSource loading
+                    ImageSourceInitializer.InitializeWhenNeeded((r) =>
                     {
                         using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
