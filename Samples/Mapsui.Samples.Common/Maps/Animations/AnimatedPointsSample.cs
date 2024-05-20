@@ -2,25 +2,40 @@
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
+using System;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-public class AnimatedPointsSample : ISample
+public sealed class AnimatedPointsSample : ISample, IDisposable
 {
-    public string Name => "Animated Points";
+    private bool _disposed;
+    readonly AnimatedPointsSampleProvider _animatedPointsSampleProvider = new();
 
+    public string Name => "Animated Points";
     public string Category => "Animations";
 
     public Task<Map> CreateMapAsync()
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(CreateAnimatedPointLayer());
+        map.Layers.Add(CreateAnimatedPointLayer(_animatedPointsSampleProvider));
         return Task.FromResult(map);
     }
 
-    private static AnimatedPointLayer CreateAnimatedPointLayer() => new(new AnimatedPointsSampleProvider())
+    public void Dispose()
+    {
+        if (_disposed)
+        {
+            return;
+        }
+
+        _animatedPointsSampleProvider.Dispose();
+
+        _disposed = true;
+    }
+
+    private static AnimatedPointLayer CreateAnimatedPointLayer(AnimatedPointsSampleProvider animatedPointsSampleProvider) => new(animatedPointsSampleProvider)
     {
         Name = "Animated Points",
         Style = CreatePointStyle()
@@ -36,4 +51,5 @@ public class AnimatedPointsSample : ISample
         Opacity = 0.5f,
         SymbolRotation = (double)feature["rotation"]!
     };
+
 }
