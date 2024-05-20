@@ -12,47 +12,40 @@ using Color = Mapsui.Styles.Color;
 using HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment;
 using VerticalAlignment = Mapsui.Widgets.VerticalAlignment;
 
-#pragma warning disable IDISP001
-#pragma warning disable IDISP003
-
 namespace Mapsui.Tests.Common.Maps;
 
-public class TouchPointSample : ISample, IDisposable
+public class TouchPointSample : ISample
 {
-    private static Map? _map;
-    private TextBoxWidget? _label;
-    private TextBoxWidget? _mousePosition;
-    private MemoryLayer? _clickMemoryLayer;
+    private static Map _map;
+    private TextBoxWidget _label;
+    private TextBoxWidget _mousePosition;
+    private MemoryLayer _clickMemoryLayer;
     public string Name => "Touch Point";
 
     public string Category => "Tests";
 
-    public Task<Map> CreateMapAsync()
-    {
-        _map = CreateMap();
-        return Task.FromResult(_map);
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public Map CreateMap()
     {
-        var map = new Map
+        _map = new Map
         {
             BackColor = Color.WhiteSmoke,
             CRS = "EPSG:3857",
         };
 
-        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        _map.Layers.Add(OpenStreetMap.CreateTileLayer());
         var memoryLayer = CreateMemoryLayer(Color.Red);
-        map.Layers.Add(memoryLayer);
+        _map.Layers.Add(memoryLayer);
         _clickMemoryLayer = CreateMemoryLayer(Color.Blue, 0.3d, false);
-        map.Layers.Add(_clickMemoryLayer);
+        _map.Layers.Add(_clickMemoryLayer);
         _label = CreateLabel(_map, HorizontalAlignment.Center, VerticalAlignment.Top, "Not Selected");
-        map.Widgets.Add(_label);
+        _map.Widgets.Add(_label);
         _mousePosition = CreateLabel(_map, HorizontalAlignment.Center, VerticalAlignment.Bottom, "");
-        map.Widgets.Add(_mousePosition);
+        _map.Widgets.Add(_mousePosition);
         memoryLayer.DataHasChanged();
-        map.Info += MapControl_Info;
-        return map;
+        _map.Info += MapControl_Info;
+        return _map;
     }
 
     private static MemoryLayer CreateMemoryLayer(Color color, double scale = 1, bool createdPoint = true)
@@ -80,14 +73,21 @@ public class TouchPointSample : ISample, IDisposable
 
     private void MapControl_Info(object? sender, MapInfoEventArgs e)
     {
-        _mousePosition!.Text = $"X: {Convert.ToInt32(e.MapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(e.MapInfo.ScreenPosition.Y)}";
+        _mousePosition.Text = $"X: {Convert.ToInt32(e.MapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(e.MapInfo.ScreenPosition.Y)}";
         _mousePosition.NeedsRedraw = true;
         var features = (List<IFeature>)_clickMemoryLayer.Features;
         features.Add(new PointFeature(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y));
         _clickMemoryLayer.DataHasChanged();
         if (e.MapInfo is { Feature: PointFeature, Layer: MemoryLayer })
         {
-            _label!.Text = _label!.Text == "Not Selected" ? "Selected" : "Not Selected";
+            if (_label.Text == "Not Selected")
+            {
+                _label.Text = "Selected";
+            }
+            else
+            {
+                _label.Text = "Not Selected";
+            }
             _label.NeedsRedraw = true;
         }
     }
@@ -108,10 +108,5 @@ public class TouchPointSample : ISample, IDisposable
             BackColor = new Color(108, 117, 125),
             TextColor = Color.White,
         };
-    }
-
-    public void Dispose()
-    {
-        _clickMemoryLayer?.Dispose();
     }
 }
