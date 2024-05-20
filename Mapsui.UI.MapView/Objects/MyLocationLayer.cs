@@ -25,13 +25,13 @@ public class MyLocationLayer : BaseLayer
 {
     private MapView _mapView;
     private readonly GeometryFeature _feature;
-    private SymbolStyle _locStyle;  // style for the location indicator
-    private SymbolStyle _dirStyle;  // style for the view-direction indicator
-    private CalloutStyle _coStyle;  // style for the callout
+    private readonly SymbolStyle _locStyle;  // style for the location indicator
+    private readonly SymbolStyle _dirStyle;  // style for the view-direction indicator
+    private readonly CalloutStyle _coStyle;  // style for the callout
 
-    private static readonly Uri _movingImageSource = new("embeddedresource://Mapsui.Resources.Images.MyLocationMoving.svg");
-    private static readonly Uri _stillImageSource = new("embeddedresource://Mapsui.Resources.Images.MyLocationStill.svg");
-    private static readonly Uri _directionImageSource = new("embeddedresource://Mapsui.Resources.Images.MyLocationDir.svg");
+    private static readonly string _movingImageSource = "embeddedresource://Mapsui.Resources.Images.MyLocationMoving.svg";
+    private static readonly string _stillImageSource = "embeddedresource://Mapsui.Resources.Images.MyLocationStill.svg";
+    private static readonly string _directionImageSource = "embeddedresource://Mapsui.Resources.Images.MyLocationDir.svg";
 
     private Position _animationMyLocationStart;
     private Position _animationMyLocationEnd;

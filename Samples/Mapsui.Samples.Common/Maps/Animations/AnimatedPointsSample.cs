@@ -1,9 +1,7 @@
-﻿using Mapsui.Layers;
-using Mapsui.Layers.AnimatedLayers;
+﻿using Mapsui.Layers.AnimatedLayers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
-using System;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
@@ -22,29 +20,20 @@ public class AnimatedPointsSample : ISample
         return Task.FromResult(map);
     }
 
-    private static ILayer CreateAnimatedPointLayer()
+    private static AnimatedPointLayer CreateAnimatedPointLayer() => new(new AnimatedPointsSampleProvider())
     {
-        return new AnimatedPointLayer(new AnimatedPointsSampleProvider())
-        {
-            Name = "Animated Points",
-            Style = CreatePointStyle()
-        };
-    }
+        Name = "Animated Points",
+        Style = CreatePointStyle()
+    };
 
-    private static ThemeStyle CreatePointStyle() => new(f =>
-    {
-        return CreateSvgArrowStyle("embeddedresource://Mapsui.Samples.Common.Images.arrow.svg", 0.5, f);
-    });
+    private static ThemeStyle CreatePointStyle() => new(CreateSvgArrowStyle);
 
-    private static SymbolStyle CreateSvgArrowStyle(string embeddedResourcePath, double scale, IFeature feature)
+    private static SymbolStyle CreateSvgArrowStyle(IFeature feature) => new()
     {
-        return new SymbolStyle
-        {
-            ImageSource = new Uri(embeddedResourcePath),
-            SymbolScale = scale,
-            SymbolOffset = new RelativeOffset(0.0, 0.5),
-            Opacity = 0.5f,
-            SymbolRotation = (double)feature["rotation"]!
-        };
-    }
+        ImageSource = "embeddedresource://Mapsui.Samples.Common.Images.arrow.svg",
+        SymbolScale = 0.5,
+        SymbolOffset = new RelativeOffset(0.0, 0.5),
+        Opacity = 0.5f,
+        SymbolRotation = (double)feature["rotation"]!
+    };
 }

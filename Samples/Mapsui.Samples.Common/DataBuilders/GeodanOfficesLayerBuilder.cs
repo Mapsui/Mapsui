@@ -1,7 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Styles;
-using System;
 
 namespace Mapsui.Samples.Common.DataBuilders;
 
@@ -11,7 +10,7 @@ public class GeodanOfficesLayerBuilder
     {
         var geodanAmsterdam = new MPoint(122698, 483922);
         var geodanDenBosch = new MPoint(148949, 411446);
-        var imageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.location.png");
+        var imageSource = "embeddedresource://Mapsui.Samples.Common.Images.location.png";
 
         var layer = new MemoryLayer
         {

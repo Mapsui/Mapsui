@@ -11,14 +11,15 @@ using System.Linq;
 namespace Mapsui.Styles;
 public static class ImageFetcher
 {
-    public static async Task<Stream> FetchStreamFromImageSourceAsync(Uri imageSource)
+    public static async Task<Stream> FetchStreamFromImageSourceAsync(string imageSource)
     {
-        var stream = imageSource.Scheme switch
+        var imageSourceUrl = new Uri(imageSource);
+        var stream = imageSourceUrl.Scheme switch
         {
-            "embeddedresource" => LoadEmbeddedResourceFromPath(imageSource),
-            "file" => LoadFromFileSystem(imageSource),
-            "http" or "https" => await LoadFromUrlAsync(imageSource),
-            _ => throw new ArgumentException($"Scheme is not supported '{imageSource.Scheme}' of '{imageSource}'"),
+            "embeddedresource" => LoadEmbeddedResourceFromPath(imageSourceUrl),
+            "file" => LoadFromFileSystem(imageSourceUrl),
+            "http" or "https" => await LoadFromUrlAsync(imageSourceUrl),
+            _ => throw new ArgumentException($"Scheme is not supported '{imageSourceUrl.Scheme}' of '{imageSource}'"),
         };
         ValidateBitmapData(stream);
         return stream;

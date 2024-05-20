@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers.Shapefile;
@@ -87,7 +86,7 @@ public class ShapefileSample : ISample
         // Scaling city icons based on city population.
         // Cities below 1.000.000 gets the smallest symbol.
         // Cities with more than 5.000.000 the largest symbol.
-        var imageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.icon.png");
+        var imageSource = "embeddedresource://Mapsui.Samples.Common.Images.icon.png";
         var cityMin = new SymbolStyle { ImageSource = imageSource, SymbolScale = 0.5f };
         var cityMax = new SymbolStyle { ImageSource = imageSource, SymbolScale = 1f };
         return new GradientTheme("POPULATION", 1000000, 5000000, cityMin, cityMax);

@@ -6,7 +6,7 @@ namespace Mapsui.Styles;
 
 public class Brush
 {
-    private Uri? _imageSource;
+    private string? _imageSource;
 
     public Brush()
     {
@@ -37,11 +37,13 @@ public class Brush
     /// </summary>
     public Sprite? Sprite { get; set; }
 
-    public Uri? ImageSource
+    public string? ImageSource
     {
         get => _imageSource;
         set
         {
+            if (value != null)
+                ValidateImageSource(value);
             _imageSource = value;
             if (_imageSource != null)
             {
@@ -100,5 +102,11 @@ public class Brush
     public static bool operator !=(Brush? brush1, Brush? brush2)
     {
         return !Equals(brush1, brush2);
+    }
+
+    private static void ValidateImageSource(string imageSource)
+    {
+        // Will throw a UriFormatException exception if the imageSource is not a valid Uri
+        _ = new Uri(imageSource);
     }
 }

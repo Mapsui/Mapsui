@@ -4,7 +4,6 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -93,43 +92,39 @@ public class SymbolsSample : ISample
 
     private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { ImageSource = new Uri(embeddedResourcePath), SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
+        return new SymbolStyle { ImageSource = embeddedResourcePath, SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
     }
 
     private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { ImageSource = new Uri(embeddedResourcePath), SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
+        return new SymbolStyle { ImageSource = embeddedResourcePath, SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
     }
 
-    private static IFeature CreatePointWithStackedStyles()
+    private static PointFeature CreatePointWithStackedStyles() => new(new MPoint(5000000, -5000000))
     {
-        var feature = new PointFeature(new MPoint(5000000, -5000000));
-
-        feature.Styles.Add(new SymbolStyle
-        {
-            SymbolScale = 2.0f,
-            Fill = null,
-            Outline = new Pen { Color = Color.Yellow }
-        });
-
-        feature.Styles.Add(new SymbolStyle
-        {
-            SymbolScale = 0.8f,
-            Fill = new Brush { Color = Color.Red }
-        });
-
-        feature.Styles.Add(new SymbolStyle
-        {
-            SymbolScale = 0.5f,
-            Fill = new Brush { Color = Color.Black }
-        });
-
-        feature.Styles.Add(new LabelStyle
-        {
-            Text = "Stacked Styles",
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left
-        });
-
-        return feature;
-    }
+        Styles =
+        [
+            new SymbolStyle
+            {
+                SymbolScale = 2.0f,
+                Fill = null,
+                Outline = new Pen { Color = Color.Yellow }
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.8f,
+                Fill = new Brush { Color = Color.Red }
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.5f,
+                Fill = new Brush { Color = Color.Black }
+            },
+            new LabelStyle
+            {
+                Text = "Stacked Styles",
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left
+            }
+        ]
+    };
 }
