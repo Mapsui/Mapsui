@@ -64,7 +64,7 @@ public class CustomCalloutSample : ISample
             feature["name"] = c.Name;
             feature["country"] = c.Country;
 
-            var calloutStyle = CreateCalloutStyle("embeddedresource://Mapsui.Samples.Common.Images.loc.png");
+            var calloutStyle = CreateCalloutStyle("embedded://Mapsui.Samples.Common.Images.loc.png");
             feature.Styles.Add(calloutStyle);
             return feature;
         });
@@ -72,7 +72,7 @@ public class CustomCalloutSample : ISample
 
     private static IStyle CreateCalloutStyle(string ImageSource)
     {
-        var calloutStyle = new CalloutStyle { ImageSource = new Uri(ImageSource), ArrowPosition = _random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Image };
+        var calloutStyle = new CalloutStyle { ImageSource = ImageSource, ArrowPosition = _random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Image };
         switch (_random.Next(0, 4))
         {
             case 0:

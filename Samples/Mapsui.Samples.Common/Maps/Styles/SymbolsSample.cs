@@ -4,7 +4,6 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -80,56 +79,52 @@ public class SymbolsSample : ISample
             new SymbolStyle {SymbolScale = 1.2, SymbolOffset = new Offset(diameter, 0)},
             new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(0, diameter)},
             new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(diameter, diameter)},
-            CreateBitmapStyle("embeddedresource://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.7),
-            CreateBitmapStyle("embeddedresource://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.8),
-            CreateBitmapStyle("embeddedresource://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.9),
-            CreateBitmapStyle("embeddedresource://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 1.0),
-            CreateSvgStyle("embeddedresource://Mapsui.Samples.Common.Images.Pin.svg", 0.7),
-            CreateSvgStyle("embeddedresource://Mapsui.Samples.Common.Images.Pin.svg", 0.8),
-            CreateSvgStyle("embeddedresource://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05),
-            CreateSvgStyle("embeddedresource://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.1),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.7),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.8),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.9),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 1.0),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Pin.svg", 0.7),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Pin.svg", 0.8),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.1),
         };
     }
 
     private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { ImageSource = new Uri(embeddedResourcePath), SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
+        return new SymbolStyle { ImageSource = embeddedResourcePath, SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
     }
 
     private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { ImageSource = new Uri(embeddedResourcePath), SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
+        return new SymbolStyle { ImageSource = embeddedResourcePath, SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
     }
 
-    private static IFeature CreatePointWithStackedStyles()
+    private static PointFeature CreatePointWithStackedStyles() => new(new MPoint(5000000, -5000000))
     {
-        var feature = new PointFeature(new MPoint(5000000, -5000000));
-
-        feature.Styles.Add(new SymbolStyle
-        {
-            SymbolScale = 2.0f,
-            Fill = null,
-            Outline = new Pen { Color = Color.Yellow }
-        });
-
-        feature.Styles.Add(new SymbolStyle
-        {
-            SymbolScale = 0.8f,
-            Fill = new Brush { Color = Color.Red }
-        });
-
-        feature.Styles.Add(new SymbolStyle
-        {
-            SymbolScale = 0.5f,
-            Fill = new Brush { Color = Color.Black }
-        });
-
-        feature.Styles.Add(new LabelStyle
-        {
-            Text = "Stacked Styles",
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left
-        });
-
-        return feature;
-    }
+        Styles =
+        [
+            new SymbolStyle
+            {
+                SymbolScale = 2.0f,
+                Fill = null,
+                Outline = new Pen { Color = Color.Yellow }
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.8f,
+                Fill = new Brush { Color = Color.Red }
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.5f,
+                Fill = new Brush { Color = Color.Black }
+            },
+            new LabelStyle
+            {
+                Text = "Stacked Styles",
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left
+            }
+        ]
+    };
 }

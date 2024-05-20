@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Mapsui.Layers;
@@ -19,7 +18,7 @@ public class PolygonTestSample : ISample
 
     public static Map CreateMap()
     {
-        var imageSource = new Uri("embeddedresource://mapsui.tests.common.resources.images.avion_silhouette.png");
+        var imageSource = "embedded://mapsui.tests.common.resources.images.avion_silhouette.png";
 
         var layer = CreateLayer(imageSource);
 
@@ -35,7 +34,7 @@ public class PolygonTestSample : ISample
         return map;
     }
 
-    private static MemoryLayer CreateLayer(Uri imageSource)
+    private static MemoryLayer CreateLayer(string imageSource)
     {
         return new MemoryLayer
         {
@@ -45,7 +44,7 @@ public class PolygonTestSample : ISample
     }
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
-    public static IEnumerable<IFeature> CreatePolygonProvider(Uri imageSource)
+    public static IEnumerable<IFeature> CreatePolygonProvider(string imageSource)
     {
         var wktReader = new WKTReader();
         var features = new List<IFeature>();
@@ -186,7 +185,7 @@ public class PolygonTestSample : ISample
         return features;
     }
 
-    private static Brush CreateBrush(Color color, FillStyle fillStyle, Uri? imageSource = null)
+    private static Brush CreateBrush(Color color, FillStyle fillStyle, string? imageSource = null)
     {
         if (imageSource is not null && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
             fillStyle = FillStyle.Bitmap;

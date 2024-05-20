@@ -13,7 +13,7 @@ public static class ImageSourceCacheTests
     public static async Task AddAndRemoveEntryAsync()
     {
         // Arrange
-        var imageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
+        var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         await ImageSourceCache.Instance.RegisterAsync(imageSource);
 
         // Act
@@ -27,7 +27,7 @@ public static class ImageSourceCacheTests
     public static async Task AddAndRemoveUriResourceEmbeddedRegisterAsync()
     {
         // Arrange
-        var imageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
+        var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         await ImageSourceCache.Instance.RegisterAsync(imageSource);
 
         // Act
@@ -41,7 +41,7 @@ public static class ImageSourceCacheTests
     public static async Task AddUriResourceEmbeddedRegisterAsync()
     {
         // Arrange
-        var imageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
+        var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         await ImageSourceCache.Instance.RegisterAsync(imageSource);
 
         // Act
@@ -56,7 +56,7 @@ public static class ImageSourceCacheTests
     public static async Task AddAndRemoveUriFileRegisterAsync()
     {
         // Arrange
-        var examplePath = new Uri($"file://{AppContext.BaseDirectory}/Resources/example.tif");
+        var examplePath = $"file://{AppContext.BaseDirectory}/Resources/example.tif";
         await ImageSourceCache.Instance.RegisterAsync(examplePath);
 
         // Act
@@ -70,7 +70,7 @@ public static class ImageSourceCacheTests
     public static async Task AddUriFileRegisterAsync()
     {
         // Arrange
-        var examplePath = new Uri($"file://{AppContext.BaseDirectory}/Resources/example.tif");
+        var examplePath = $"file://{AppContext.BaseDirectory}/Resources/example.tif";
         await ImageSourceCache.Instance.RegisterAsync(examplePath);
 
         // Act
@@ -85,7 +85,7 @@ public static class ImageSourceCacheTests
     public static async Task AddAndRemoveUriHttpsRegisterAsync()
     {
         // Arrange
-        var mapsuiLogo = new Uri("https://mapsui.com/images/logo.svg");
+        var mapsuiLogo = "https://mapsui.com/images/logo.svg";
         await ImageSourceCache.Instance.RegisterAsync(mapsuiLogo);
 
         // Act
@@ -99,7 +99,7 @@ public static class ImageSourceCacheTests
     public static async Task AddUriHttpsRegisterAsync()
     {
         // Arrange
-        var mapsuiLogo = new Uri("https://mapsui.com/images/logo.svg");
+        var mapsuiLogo = "https://mapsui.com/images/logo.svg";
         await ImageSourceCache.Instance.RegisterAsync(mapsuiLogo);
 
         // Act
@@ -114,7 +114,7 @@ public static class ImageSourceCacheTests
     public async static Task RenderBitmapRegistryDisposeShouldRemoveBitmapAsync()
     {
         // Arrange
-        var imageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
+        var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         var imageSourceCache = ImageSourceCache.Instance;
         await imageSourceCache.RegisterAsync(imageSource);
 
@@ -124,21 +124,5 @@ public static class ImageSourceCacheTests
 
         // Assert
         // Todo: fix test before merging to main: Assert.Throws<ObjectDisposedException>(() => imageSourceCache.Get(imageSource));
-    }
-
-    [Test]
-    public static void UrlShouldDoValueCompare()
-    {
-        // This is to be sure that Url implements value compare.
-        // They don't mention it in the documentation.
-        // https://learn.microsoft.com/en-us/dotnet/api/system.security.policy.url.equals?view=net-8.0#system-security-policy-url-equals(system-object)
-
-        // Arrange
-        var logoUrl = new Uri("https://mapsui.com/images/logo.svg");
-        var otherInstanceOfSameUrl = new Uri("https://mapsui.com/images/logo.svg");
-
-        // Act and Assert
-        Assert.That(logoUrl == otherInstanceOfSameUrl, Is.True);
-        Assert.That(logoUrl.Equals(otherInstanceOfSameUrl), Is.True);
     }
 }

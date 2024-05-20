@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
@@ -38,8 +37,8 @@ public class BitmapSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.circle.png");
-        var checkeredImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.checkered.png");
+        var circleImageSource = "embedded://Mapsui.Samples.Common.Images.circle.png";
+        var checkeredImageSource = "embedded://Mapsui.Samples.Common.Images.checkered.png";
 
         return
         [

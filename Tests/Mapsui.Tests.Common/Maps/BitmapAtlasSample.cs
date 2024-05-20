@@ -1,7 +1,6 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -43,12 +42,12 @@ public class BitmapAtlasSample : ISample
 
     public static List<IFeature> CreateFeatures()
     {
-        var atlasImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.osm-liberty.png");
+        var atlasImageSource = "embedded://Mapsui.Samples.Common.Images.osm-liberty.png";
+        var svgTigerImageSource = "embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
         var spriteAmusementPark15 = new Sprite(106, 0, 21, 21);
         var spriteClothingStore15 = new Sprite(84, 106, 21, 21);
         var spriteDentist15 = new Sprite(147, 64, 21, 21);
         var spritePedestrianPolygon = new Sprite(0, 0, 64, 64);
-        var svgTigerImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg");
 
         return new List<IFeature>
         {

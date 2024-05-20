@@ -5,7 +5,6 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
-using System;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Projection;
@@ -68,7 +67,7 @@ public class PointProjectionSample : ISample
 
     private static SymbolStyle CreateCityStyle()
     {
-        var imageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.location.png");
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.location.png";
 
         return new SymbolStyle
         {

@@ -23,7 +23,7 @@ public sealed class ImageSourceCache : IDisposable
     public static ImageSourceCache Instance => _instance ??= new ImageSourceCache();
 
     /// <inheritdoc />
-    public async Task RegisterAsync(Uri imageSource)
+    public async Task RegisterAsync(string imageSource)
     {
         var key = imageSource.ToString();
         if (_register.ContainsKey(key))
@@ -36,14 +36,14 @@ public sealed class ImageSourceCache : IDisposable
     }
 
     /// <inheritdoc />
-    public Stream? Get(Uri key)
+    public Stream? Get(string key)
     {
         _register.TryGetValue(key.ToString(), out var val);
         return val;
     }
 
     /// <inheritdoc />
-    public Stream? Unregister(Uri key)
+    public Stream? Unregister(string key)
     {
         _register.TryRemove(key.ToString(), out var val);
         return val;

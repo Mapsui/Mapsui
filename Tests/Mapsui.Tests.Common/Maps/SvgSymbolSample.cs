@@ -1,7 +1,6 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -39,28 +38,28 @@ public class SvgSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var pinImageSource = new Uri("embeddedresource://mapsui.resources.images.pin.svg");
+        var imageSourceOfPinSymbol = "embedded://mapsui.resources.images.pin.svg";
 
         return
         [
             new PointFeature(new MPoint(50, 50)) {
-                Styles = new[] { CreateSymbolStyle(pinImageSource) }
+                Styles = new[] { CreateSymbolStyle(imageSourceOfPinSymbol) }
             },
             new PointFeature(new MPoint(50, 100)) {
-                Styles = new[] { CreateSymbolStyle(pinImageSource) }
+                Styles = new[] { CreateSymbolStyle(imageSourceOfPinSymbol) }
             },
             new PointFeature(new MPoint(100, 50)) {
-                Styles = new[] { CreateSymbolStyle(pinImageSource) }
+                Styles = new[] { CreateSymbolStyle(imageSourceOfPinSymbol) }
             },
             new PointFeature(new MPoint(100, 100)) {
-                Styles = new[] { CreateSymbolStyle(pinImageSource) }
+                Styles = new[] { CreateSymbolStyle(imageSourceOfPinSymbol) }
             }
         ];
     }
 
-    private static SymbolStyle CreateSymbolStyle(Uri pinImageSource) => new()
+    private static SymbolStyle CreateSymbolStyle(string imageSource) => new()
     {
-        ImageSource = pinImageSource,
+        ImageSource = imageSource,
         BlendModeColor = Color.FromRgba(0, 177, 0, 255)
     };
 }

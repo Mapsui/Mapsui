@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Mapsui.Styles;
+﻿namespace Mapsui.Styles;
 
 public static class SymbolStyles
 {
@@ -11,10 +9,9 @@ public static class SymbolStyles
         // It should be possible to create a style with just a reference to the platform
         // independent resource. The conversion to an image should happen in a render phase that
         // precedes a paint phase. https://github.com/Mapsui/Mapsui/issues/1448
-        var pinImageSource = new Uri("embeddedresource://Mapsui.Resources.Images.Pin.svg");
         return new SymbolStyle
         {
-            ImageSource = pinImageSource,
+            ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
             SymbolOffset = new RelativeOffset(0.0, 0.5),
             SymbolScale = symbolScale,
             BlendModeColor = pinColor ?? Color.FromArgb(255, 57, 115, 199) // Determines color of the pin
