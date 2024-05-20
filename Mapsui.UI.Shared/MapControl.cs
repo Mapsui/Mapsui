@@ -103,7 +103,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // All requested updates up to this point will be handled by this redraw
         _refresh = false;
-        BitmapPathInitializer.InitializeWhenNeeded((needsRefresh) =>
+        ImageSourceInitializer.InitializeWhenNeeded((needsRefresh) =>
         {
             if (needsRefresh)
                 RefreshGraphics();

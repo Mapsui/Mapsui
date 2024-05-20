@@ -149,10 +149,10 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// </summary>
     public static SKPicture RenderContent(CalloutStyle callout, ISymbolCache symbolCache)
     {
-        if (callout.Type == CalloutType.Image && callout.BitmapPath is not null)
+        if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {
             using var recorder = new SKPictureRecorder();
-            var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.BitmapPath.ToString());
+            var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.ImageSource.ToString());
             using var canvas = recorder.BeginRecording(new SKRect(0, 0, bitmapInfo.Width, bitmapInfo.Height));
             using var paint = new SKPaint();
             canvas.DrawImage(bitmapInfo.Bitmap, 0, 0, paint);

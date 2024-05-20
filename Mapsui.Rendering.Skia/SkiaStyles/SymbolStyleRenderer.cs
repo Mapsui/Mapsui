@@ -39,11 +39,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
 
-        if (symbolStyle.BitmapPath is null)
+        if (symbolStyle.ImageSource is null)
             return false;
 
         var symbolCache = renderService.SymbolCache;
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.BitmapPath.ToString());
+        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.ImageSource.ToString());
         if (bitmapInfo == null)
             return false;
 
@@ -71,11 +71,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 {
                     var sprite = symbolStyle.Sprite;
 
-                    if (symbolStyle.BitmapPath is null)
-                        throw new Exception("If Sprite parameters are specified a BitmapPath is required.");
+                    if (symbolStyle.ImageSource is null)
+                        throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
                     var skiaSpriteCache = (SpriteCache)renderService.SpriteCache;
-                    var skImage = skiaSpriteCache.GetOrCreateSKObject(ToSpriteKey(symbolStyle.BitmapPath.ToString(), symbolStyle.Sprite),
+                    var skImage = skiaSpriteCache.GetOrCreateSKObject(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.Sprite),
                         () => bitmapInfo.Bitmap.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
 
                     BitmapRenderer.Draw(canvas, skImage,
@@ -246,9 +246,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         switch (symbolStyle.SymbolType)
         {
             case SymbolType.Image:
-                if (symbolStyle.BitmapPath is not null)
+                if (symbolStyle.ImageSource is not null)
                 {
-                    var bitmapSize = renderService.SymbolCache.GetSize(symbolStyle.BitmapPath.ToString());
+                    var bitmapSize = renderService.SymbolCache.GetSize(symbolStyle.ImageSource.ToString());
                     if (bitmapSize != null)
                     {
                         symbolSize = bitmapSize;
@@ -280,6 +280,6 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return size;
     }
 
-    public static string ToSpriteKey(string bitmapPath, Sprite sprite)
-        => $"{bitmapPath}?sprite=true,x={sprite.X},y={sprite.Y},width={sprite.Width},height={sprite.Height}";
+    public static string ToSpriteKey(string imageSource, Sprite sprite)
+        => $"{imageSource}?sprite=true,x={sprite.X},y={sprite.Y},width={sprite.Width},height={sprite.Height}";
 }

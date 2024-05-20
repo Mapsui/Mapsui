@@ -210,9 +210,9 @@ internal static class PolygonRenderer
     {
         if (symbolCache == null)
             return null;
-        if (brush.BitmapPath is null)
+        if (brush.ImageSource is null)
             return null;
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(brush.BitmapPath.ToString());
+        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(brush.ImageSource.ToString());
         if (bitmapInfo == null)
             return null;
 
@@ -222,14 +222,14 @@ internal static class PolygonRenderer
                 return bitmapInfo.Bitmap;
             else
             {
-                if (brush.BitmapPath is null)
-                    throw new Exception("If Sprite is assigned BitmapPath should be set.");
+                if (brush.ImageSource is null)
+                    throw new Exception("If Sprite is assigned ImageSource should be set.");
                 var sprite = brush.Sprite;
                 if (bitmapInfo.Bitmap is null)
                     throw new Exception("Bitmap is null while type is Bitmap. This should never happen.");
 
                 // The line below generates a string. For performance is it not great to have this in the render loop.
-                var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.BitmapPath.ToString(), brush.Sprite);
+                var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.Sprite);
                 spriteCache.GetOrCreateSKObject(spriteKey, () => GetSpriteFromSKImage(bitmapInfo.Bitmap, sprite));
             }
         }

@@ -9,6 +9,6 @@ public interface IRenderService : IDisposable
     ISymbolCache SymbolCache { get; }
     ITileCache TileCache { get; }
     IVectorCache VectorCache { get; }
-    ImagePathCache ImagePathCache { get; }
+    ImageSourceCache ImageSourceCache { get; }
     ISpriteCache SpriteCache { get; }
 }

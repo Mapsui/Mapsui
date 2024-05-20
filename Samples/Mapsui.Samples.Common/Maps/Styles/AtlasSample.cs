@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 public class AtlasSample : ISample
 {
     private const string _layerName = "Sprites";
-    private static readonly Uri _atlasBitmapPath = new("embeddedresource://mapsui.samples.common.images.osm-liberty.png");
+    private static readonly Uri _atlasImageSource = new("embeddedresource://mapsui.samples.common.images.osm-liberty.png");
     private static readonly Random _random = new(1);
 
     public string Name => "Sprites";
@@ -53,7 +53,7 @@ public class AtlasSample : ISample
             var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
             var x = 0 + _random.Next(0, 12) * 21;
             var y = 64 + _random.Next(0, 6) * 21;
-            feature.Styles.Add(new SymbolStyle { BitmapPath = _atlasBitmapPath, Sprite = new Sprite(x, y, 21, 21) });
+            feature.Styles.Add(new SymbolStyle { ImageSource = _atlasImageSource, Sprite = new Sprite(x, y, 21, 21) });
             counter++;
             return feature;
         }).ToList();

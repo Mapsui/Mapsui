@@ -40,7 +40,7 @@ public class AnimatedPointsSample : ISample
     {
         return new SymbolStyle
         {
-            BitmapPath = new Uri(embeddedResourcePath),
+            ImageSource = new Uri(embeddedResourcePath),
             SymbolScale = scale,
             SymbolOffset = new RelativeOffset(0.0, 0.5),
             Opacity = 0.5f,

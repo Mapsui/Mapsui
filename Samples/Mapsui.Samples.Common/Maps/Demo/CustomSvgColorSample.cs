@@ -89,10 +89,10 @@ public class CustomSvgStyleSample : ISample
 
     private static int LoadBitmap(int type)
     {
-        var bitmapPath = "Images.arrow.svg";
-        using var bitmapData = EmbeddedResourceLoader.Load(bitmapPath, typeof(SvgSample));
+        var imageSource = "Images.arrow.svg";
+        using var bitmapData = EmbeddedResourceLoader.Load(imageSource, typeof(SvgSample));
         var skPicture = SvgLoader.ToSKPicture(bitmapData, ToSystemDrawingColor(GetTypeColor(type)))
-            ?? throw new Exception($"Failed to load bitmap: {bitmapPath}");
+            ?? throw new Exception($"Failed to load bitmap: {imageSource}");
         return -1; //return BitmapRegistry.Instance.Register(skPicture);
     }
 

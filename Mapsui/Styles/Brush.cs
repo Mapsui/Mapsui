@@ -6,8 +6,7 @@ namespace Mapsui.Styles;
 
 public class Brush
 {
-    private int _bitmapId = -1;
-    private Uri? _bitmapPath;
+    private Uri? _imageSource;
 
     public Brush()
     {
@@ -34,20 +33,19 @@ public class Brush
 
     /// <summary>
     /// Sets the sprite parameters used to specify which part of the image
-    /// symbol should be used. This only applies if a BitmapPath is set.
+    /// symbol should be used. This only applies if a ImageSource is set.
     /// </summary>
     public Sprite? Sprite { get; set; }
 
-    public Uri? BitmapPath
+    public Uri? ImageSource
     {
-        get => _bitmapPath;
+        get => _imageSource;
         set
         {
-            _bitmapPath = value;
-            if (_bitmapPath != null)
+            _imageSource = value;
+            if (_imageSource != null)
             {
-                BitmapPathInitializer.Add(_bitmapPath);
-                _bitmapId = -1;
+                ImageSourceInitializer.Add(_imageSource);
                 if (!(FillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated))
                 {
                     FillStyle = FillStyle.Bitmap;
@@ -86,19 +84,12 @@ public class Brush
         if (brush == null)
             return false;
 
-        return _bitmapId == brush._bitmapId && Equals(Color, brush.Color) && Equals(Background, brush.Background) && FillStyle == brush.FillStyle;
+        return _imageSource == brush._imageSource && Equals(Color, brush.Color) && Equals(Background, brush.Background) && FillStyle == brush.FillStyle;
     }
 
     public override int GetHashCode()
     {
-        unchecked
-        {
-            var hashCode = _bitmapId;
-            hashCode = (hashCode * 397) ^ (Color != null ? Color.GetHashCode() : 0);
-            hashCode = (hashCode * 397) ^ (Background != null ? Background.GetHashCode() : 0);
-            hashCode = (hashCode * 397) ^ (int)FillStyle;
-            return hashCode;
-        }
+        return HashCode.Combine(_imageSource, Color, Background, FillStyle);
     }
 
     public static bool operator ==(Brush? brush1, Brush? brush2)

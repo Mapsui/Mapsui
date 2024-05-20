@@ -27,20 +27,20 @@ public class SymbolStyle : VectorStyle
 
     public UnitType UnitType { get; set; }
 
-    private Uri? _bitmapPath;
+    private Uri? _imageSource;
 
     /// <summary>
     /// Bitmap of the image to display during rendering
     /// </summary>
-    public Uri? BitmapPath
+    public Uri? ImageSource
     {
-        get => _bitmapPath;
+        get => _imageSource;
         set
         {
-            _bitmapPath = value;
+            _imageSource = value;
             if (value != null)
             {
-                BitmapPathInitializer.Add(value);
+                ImageSourceInitializer.Add(value);
                 SymbolType = SymbolType.Image;
             }
         }
@@ -91,7 +91,7 @@ public class SymbolStyle : VectorStyle
 
     /// <summary>
     /// Sets the sprite parameters used to specify which part of the image
-    /// symbol should be used. This only applies if a BitmapPath is set.
+    /// symbol should be used. This only applies if a ImageSource is set.
     /// </summary>
     public Sprite? Sprite { get; set; }
 
@@ -128,7 +128,7 @@ public class SymbolStyle : VectorStyle
         if (SymbolType != symbolStyle.SymbolType)
             return false;
 
-        if (BitmapPath != symbolStyle.BitmapPath)
+        if (ImageSource != symbolStyle.ImageSource)
             return false;
 
         if (Math.Abs(Opacity - symbolStyle.Opacity) > Constants.Epsilon)
@@ -140,7 +140,7 @@ public class SymbolStyle : VectorStyle
     public override int GetHashCode()
     {
         return
-            BitmapPath?.GetHashCode() ^
+            ImageSource?.GetHashCode() ^
             SymbolScale.GetHashCode() ^
             SymbolOffset.GetHashCode() ^
             SymbolRotation.GetHashCode() ^

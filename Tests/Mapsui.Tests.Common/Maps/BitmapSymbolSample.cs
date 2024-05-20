@@ -38,8 +38,8 @@ public class BitmapSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleImagePath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.circle.png");
-        var checkeredImagePath = new Uri("embeddedresource://Mapsui.Samples.Common.Images.checkered.png");
+        var circleImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.circle.png");
+        var checkeredImageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.checkered.png");
 
         return
         [
@@ -49,11 +49,11 @@ public class BitmapSymbolSample : ISample
             },
             new PointFeature(new MPoint(50, 100))
             {
-                Styles = new[] { new SymbolStyle { BitmapPath = circleImagePath } }
+                Styles = new[] { new SymbolStyle { ImageSource = circleImageSource } }
             },
             new PointFeature(new MPoint(100, 50))
             {
-                Styles = new[] { new SymbolStyle { BitmapPath = checkeredImagePath } }
+                Styles = new[] { new SymbolStyle { ImageSource = checkeredImageSource } }
             },
             new PointFeature(new MPoint(100, 100))
             {

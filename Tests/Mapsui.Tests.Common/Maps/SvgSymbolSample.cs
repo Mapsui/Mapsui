@@ -39,28 +39,28 @@ public class SvgSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var pinBitmapPath = new Uri("embeddedresource://mapsui.resources.images.pin.svg");
+        var pinImageSource = new Uri("embeddedresource://mapsui.resources.images.pin.svg");
 
-        return new List<IFeature>
-        {
+        return
+        [
             new PointFeature(new MPoint(50, 50)) {
-                Styles = new[] { CreateSymbolStyle(pinBitmapPath) }
+                Styles = new[] { CreateSymbolStyle(pinImageSource) }
             },
             new PointFeature(new MPoint(50, 100)) {
-                Styles = new[] { CreateSymbolStyle(pinBitmapPath) }
+                Styles = new[] { CreateSymbolStyle(pinImageSource) }
             },
             new PointFeature(new MPoint(100, 50)) {
-                Styles = new[] { CreateSymbolStyle(pinBitmapPath) }
+                Styles = new[] { CreateSymbolStyle(pinImageSource) }
             },
             new PointFeature(new MPoint(100, 100)) {
-                Styles = new[] { CreateSymbolStyle(pinBitmapPath) }
+                Styles = new[] { CreateSymbolStyle(pinImageSource) }
             }
-        };
+        ];
     }
 
-    private static SymbolStyle CreateSymbolStyle(Uri pinBitmapPath) => new()
+    private static SymbolStyle CreateSymbolStyle(Uri pinImageSource) => new()
     {
-        BitmapPath = pinBitmapPath,
+        ImageSource = pinImageSource,
         BlendModeColor = Color.FromRgba(0, 177, 0, 255)
     };
 }

@@ -23,9 +23,9 @@ public class MyLocationLayer : BaseLayer, IDisposable
     private readonly SymbolStyle _dirStyle;  // style for the view-direction indicator
     private readonly CalloutStyle _coStyle;  // style for the callout
 
-    private static readonly Uri _movingBitmapPath = new("embeddedresource://Mapsui.Resources.Images.MyLocationMoving.svg");
-    private static readonly Uri _stillBitmapPath = new("embeddedresource://Mapsui.Resources.Images.MyLocationStill.svg");
-    private static readonly Uri _directionBitmapPath = new("embeddedresource://Mapsui.Resources.Images.MyLocationDir.svg");
+    private static readonly Uri _movingImageSource = new("embeddedresource://Mapsui.Resources.Images.MyLocationMoving.svg");
+    private static readonly Uri _stillImageSource = new("embeddedresource://Mapsui.Resources.Images.MyLocationStill.svg");
+    private static readonly Uri _directionImageSource = new("embeddedresource://Mapsui.Resources.Images.MyLocationDir.svg");
 
     private MPoint? _animationMyLocationStart;
     private MPoint? _animationMyLocationEnd;
@@ -49,7 +49,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
             if (_isMoving != value)
             {
                 _isMoving = value;
-                _locStyle.BitmapPath = _isMoving ? _movingBitmapPath : _stillBitmapPath;
+                _locStyle.ImageSource = _isMoving ? _movingImageSource : _stillImageSource;
             }
         }
     }
@@ -162,7 +162,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _locStyle = new SymbolStyle
         {
             Enabled = true,
-            BitmapPath = _stillBitmapPath,
+            ImageSource = _stillImageSource,
             SymbolScale = Scale,
             SymbolRotation = Direction,
             SymbolOffset = new Offset(0, 0),
@@ -172,7 +172,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _dirStyle = new SymbolStyle
         {
             Enabled = false,
-            BitmapPath = _directionBitmapPath,
+            ImageSource = _directionImageSource,
             SymbolScale = 0.2,
             SymbolRotation = 0,
             SymbolOffset = new Offset(0, 0),

@@ -6,17 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Mapsui.Styles;
-public static class BitmapPathInitializer
+public static class ImageSourceInitializer
 {
     static readonly ConcurrentHashSet<Uri> _register = [];
     static readonly object _lockObject = new();
     static readonly FetchMachine _fetchMachine = new(1);
 
-    public static void Add(Uri bitmapPath)
+    public static void Add(Uri imageSource)
     {
         lock (_lockObject)
         {
-            _register.Add(bitmapPath);
+            _register.Add(imageSource);
         }
     }
 
@@ -26,8 +26,8 @@ public static class BitmapPathInitializer
     /// <param name="doneInitializing"></param>
     public static void InitializeWhenNeeded(Action<bool> doneInitializing)
     {
-        var bitmapPaths = GetAndClear();
-        if (!bitmapPaths.Any())
+        var imageSources = GetAndClear();
+        if (!imageSources.Any())
         {
             doneInitializing(false);
             return; // Don't start a thread if there are no bitmap paths to initialize.
@@ -35,11 +35,11 @@ public static class BitmapPathInitializer
 
         _fetchMachine.Start(async () =>
         {
-            foreach (var bitmapPath in bitmapPaths)
+            foreach (var imageSource in imageSources)
             {
                 try
                 {
-                    await ImagePathCache.Instance.RegisterAsync(bitmapPath);
+                    await ImageSourceCache.Instance.RegisterAsync(imageSource);
                 }
                 catch (Exception ex)
                 {

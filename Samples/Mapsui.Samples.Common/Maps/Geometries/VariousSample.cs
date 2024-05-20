@@ -58,7 +58,7 @@ public class VariousSample : ISample, ISampleTest
 
     private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath)
     {
-        return new SymbolStyle { BitmapPath = new Uri(embeddedResourcePath), SymbolScale = 0.75 };
+        return new SymbolStyle { ImageSource = new Uri(embeddedResourcePath), SymbolScale = 0.75 };
     }
 
     public async Task InitializeTestAsync(IMapControl mapControl)
