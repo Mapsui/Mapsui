@@ -36,30 +36,25 @@ public class SvgSymbolSample : ISample
         return map;
     }
 
-    public static IEnumerable<IFeature> CreateFeatures()
-    {
-        var imageSourceOfPinSymbol = "embedded://mapsui.resources.images.pin.svg";
+    public static IEnumerable<IFeature> CreateFeatures() =>
+    [
+        new PointFeature(new MPoint(50, 50)) {
+            Styles = new[] { CreateSymbolStyle() }
+        },
+        new PointFeature(new MPoint(50, 100)) {
+            Styles = new[] { CreateSymbolStyle() }
+        },
+        new PointFeature(new MPoint(100, 50)) {
+            Styles = new[] { CreateSymbolStyle() }
+        },
+        new PointFeature(new MPoint(100, 100)) {
+            Styles = new[] { CreateSymbolStyle() }
+        }
+    ];
 
-        return
-        [
-            new PointFeature(new MPoint(50, 50)) {
-                Styles = new[] { CreateSymbolStyle(imageSourceOfPinSymbol) }
-            },
-            new PointFeature(new MPoint(50, 100)) {
-                Styles = new[] { CreateSymbolStyle(imageSourceOfPinSymbol) }
-            },
-            new PointFeature(new MPoint(100, 50)) {
-                Styles = new[] { CreateSymbolStyle(imageSourceOfPinSymbol) }
-            },
-            new PointFeature(new MPoint(100, 100)) {
-                Styles = new[] { CreateSymbolStyle(imageSourceOfPinSymbol) }
-            }
-        ];
-    }
-
-    private static SymbolStyle CreateSymbolStyle(string imageSource) => new()
+    private static SymbolStyle CreateSymbolStyle() => new()
     {
-        ImageSource = imageSource,
+        ImageSource = "embedded://mapsui.resources.images.pin.svg",
         BlendModeColor = Color.FromRgba(0, 177, 0, 255)
     };
 }
