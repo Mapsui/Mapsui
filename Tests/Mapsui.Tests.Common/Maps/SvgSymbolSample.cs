@@ -57,9 +57,9 @@ public class SvgSymbolSample : ISample
         ];
     }
 
-    private static SymbolStyle CreateSymbolStyle(string pinImageSource) => new()
+    private static SymbolStyle CreateSymbolStyle(string imageSource) => new()
     {
-        ImageSource = pinImageSource,
+        ImageSource = imageSource,
         BlendModeColor = Color.FromRgba(0, 177, 0, 255)
     };
 }
