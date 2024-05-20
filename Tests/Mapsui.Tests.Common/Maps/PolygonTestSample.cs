@@ -18,7 +18,7 @@ public class PolygonTestSample : ISample
 
     public static Map CreateMap()
     {
-        var imageSource = "embeddedresource://mapsui.tests.common.resources.images.avion_silhouette.png";
+        var imageSource = "embedded://mapsui.tests.common.resources.images.avion_silhouette.png";
 
         var layer = CreateLayer(imageSource);
 

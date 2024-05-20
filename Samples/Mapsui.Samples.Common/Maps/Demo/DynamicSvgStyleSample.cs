@@ -44,7 +44,7 @@ public class DynamicSvgStyleSample : ISample
 
     private IStyle CreateDynamicSvgStyle(Func<MPoint> getInfoPosition) // Use Func to make it get the latest clicked position
     {
-        var imageSource = "embeddedresource://Mapsui.Samples.Common.Images.arrow.svg";
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.arrow.svg";
 
         return new ThemeStyle((f) =>
         {

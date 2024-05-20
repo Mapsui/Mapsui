@@ -67,7 +67,7 @@ public class PointProjectionSample : ISample
 
     private static SymbolStyle CreateCityStyle()
     {
-        var imageSource = "embeddedresource://Mapsui.Samples.Common.Images.location.png";
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.location.png";
 
         return new SymbolStyle
         {

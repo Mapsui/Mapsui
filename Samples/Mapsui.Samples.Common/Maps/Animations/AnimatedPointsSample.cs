@@ -30,7 +30,7 @@ public class AnimatedPointsSample : ISample
 
     private static SymbolStyle CreateSvgArrowStyle(IFeature feature) => new()
     {
-        ImageSource = "embeddedresource://Mapsui.Samples.Common.Images.arrow.svg",
+        ImageSource = "embedded://Mapsui.Samples.Common.Images.arrow.svg",
         SymbolScale = 0.5,
         SymbolOffset = new RelativeOffset(0.0, 0.5),
         Opacity = 0.5f,

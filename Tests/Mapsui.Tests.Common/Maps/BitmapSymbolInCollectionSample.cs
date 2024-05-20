@@ -39,8 +39,8 @@ public class BitmapSymbolInCollectionSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleImageSource = "embeddedresource://Mapsui.Samples.Common.Images.circle.png";
-        var checkeredIconImageSource = "embeddedresource://Mapsui.Samples.Common.Images.checkered.png";
+        var circleImageSource = "embedded://Mapsui.Samples.Common.Images.circle.png";
+        var checkeredIconImageSource = "embedded://Mapsui.Samples.Common.Images.checkered.png";
 
         // This test was created the easy way, by copying BitmapSymbol and the GeometryCollection. A test 
         // written specifically for GeometryCollection would probably look different.

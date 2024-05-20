@@ -13,7 +13,7 @@ public static class ImageSourceCacheTests
     public static async Task AddAndRemoveEntryAsync()
     {
         // Arrange
-        var imageSource = "embeddedresource://Mapsui.Resources.Images.Pin.svg";
+        var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         await ImageSourceCache.Instance.RegisterAsync(imageSource);
 
         // Act
@@ -27,7 +27,7 @@ public static class ImageSourceCacheTests
     public static async Task AddAndRemoveUriResourceEmbeddedRegisterAsync()
     {
         // Arrange
-        var imageSource = "embeddedresource://Mapsui.Resources.Images.Pin.svg";
+        var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         await ImageSourceCache.Instance.RegisterAsync(imageSource);
 
         // Act
@@ -41,7 +41,7 @@ public static class ImageSourceCacheTests
     public static async Task AddUriResourceEmbeddedRegisterAsync()
     {
         // Arrange
-        var imageSource = "embeddedresource://Mapsui.Resources.Images.Pin.svg";
+        var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         await ImageSourceCache.Instance.RegisterAsync(imageSource);
 
         // Act
@@ -114,7 +114,7 @@ public static class ImageSourceCacheTests
     public async static Task RenderBitmapRegistryDisposeShouldRemoveBitmapAsync()
     {
         // Arrange
-        var imageSource = "embeddedresource://Mapsui.Resources.Images.Pin.svg";
+        var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         var imageSourceCache = ImageSourceCache.Instance;
         await imageSourceCache.RegisterAsync(imageSource);
 

@@ -38,7 +38,7 @@ public class SvgSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var imageSourceOfPinSymbol = "embeddedresource://mapsui.resources.images.pin.svg";
+        var imageSourceOfPinSymbol = "embedded://mapsui.resources.images.pin.svg";
 
         return
         [

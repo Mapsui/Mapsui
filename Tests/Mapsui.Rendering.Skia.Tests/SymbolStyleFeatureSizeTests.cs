@@ -90,7 +90,7 @@ public class SymbolStyleFeatureSizeTests
         using var renderService = new RenderService();
         var symbolStyle = new SymbolStyle
         {
-            ImageSource = "embeddedresource://Mapsui.Resources.Images.Pin.svg",
+            ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
         };
 
         ImageSourceInitializer.InitializeWhenNeeded((r) =>

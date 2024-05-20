@@ -64,7 +64,7 @@ public class CustomCalloutSample : ISample
             feature["name"] = c.Name;
             feature["country"] = c.Country;
 
-            var calloutStyle = CreateCalloutStyle("embeddedresource://Mapsui.Samples.Common.Images.loc.png");
+            var calloutStyle = CreateCalloutStyle("embedded://Mapsui.Samples.Common.Images.loc.png");
             feature.Styles.Add(calloutStyle);
             return feature;
         });

@@ -23,9 +23,9 @@ public class MyLocationLayer : BaseLayer, IDisposable
     private readonly SymbolStyle _dirStyle;  // style for the view-direction indicator
     private readonly CalloutStyle _coStyle;  // style for the callout
 
-    private static readonly string _movingImageSource = "embeddedresource://Mapsui.Resources.Images.MyLocationMoving.svg";
-    private static readonly string _stillImageSource = "embeddedresource://Mapsui.Resources.Images.MyLocationStill.svg";
-    private static readonly string _directionImageSource = "embeddedresource://Mapsui.Resources.Images.MyLocationDir.svg";
+    private static readonly string _movingImageSource = "embedded://Mapsui.Resources.Images.MyLocationMoving.svg";
+    private static readonly string _stillImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg";
+    private static readonly string _directionImageSource = "embedded://Mapsui.Resources.Images.MyLocationDir.svg";
 
     private MPoint? _animationMyLocationStart;
     private MPoint? _animationMyLocationEnd;

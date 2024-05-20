@@ -11,7 +11,7 @@ public static class SymbolStyles
         // precedes a paint phase. https://github.com/Mapsui/Mapsui/issues/1448
         return new SymbolStyle
         {
-            ImageSource = "embeddedresource://Mapsui.Resources.Images.Pin.svg",
+            ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
             SymbolOffset = new RelativeOffset(0.0, 0.5),
             SymbolScale = symbolScale,
             BlendModeColor = pinColor ?? Color.FromArgb(255, 57, 115, 199) // Determines color of the pin

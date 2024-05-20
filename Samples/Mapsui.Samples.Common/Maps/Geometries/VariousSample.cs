@@ -34,13 +34,13 @@ public class VariousSample : ISample, ISampleTest
         return new Layer("Style on Layer")
         {
             DataSource = new MemoryProvider(RandomPointsBuilder.GenerateRandomPoints(envelope, count).ToFeatures()),
-            Style = CreateBitmapStyle("embeddedresource://Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
+            Style = CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
         };
     }
 
     private static ILayer CreateLayerWithStyleOnFeature(MRect? envelope, int count = 25)
     {
-        var style = CreateBitmapStyle("embeddedresource://Mapsui.Samples.Common.Images.loc.png");
+        var style = CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.loc.png");
 
         return new Layer("Style on feature")
         {
