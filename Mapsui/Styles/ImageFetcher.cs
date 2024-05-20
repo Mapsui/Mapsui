@@ -11,20 +11,21 @@ using System.Linq;
 namespace Mapsui.Styles;
 public static class ImageFetcher
 {
-    public static async Task<Stream> FetchStreamFromImageSourceAsync(Uri imageSource)
+    public static async Task<Stream> FetchStreamFromImageSourceAsync(string imageSource)
     {
-        var stream = imageSource.Scheme switch
+        var imageSourceUrl = new Uri(imageSource);
+        var stream = imageSourceUrl.Scheme switch
         {
-            "embeddedresource" => LoadEmbeddedResourceFromPath(imageSource),
-            "file" => LoadFromFileSystem(imageSource),
-            "http" or "https" => await LoadFromUrlAsync(imageSource),
-            _ => throw new ArgumentException($"Scheme is not supported '{imageSource.Scheme}' of '{imageSource}'"),
+            "embedded" => LoadEmbeddedResourceFromPath(imageSourceUrl),
+            "file" => LoadFromFileSystem(imageSourceUrl),
+            "http" or "https" => await LoadFromUrlAsync(imageSourceUrl),
+            _ => throw new ArgumentException($"Scheme is not supported '{imageSourceUrl.Scheme}' of '{imageSource}'"),
         };
         ValidateBitmapData(stream);
         return stream;
     }
 
-    private static Stream LoadEmbeddedResourceFromPath(Uri imageSource)
+    private static MemoryStream LoadEmbeddedResourceFromPath(Uri imageSource)
     {
         try
         {
@@ -53,14 +54,12 @@ public static class ImageFetcher
         }
     }
 
-    static private IEnumerable<Assembly> GetMatchingAssemblies(Uri imageSource)
+    static private List<Assembly> GetMatchingAssemblies(Uri imageSource)
     {
         var result = new List<Assembly>();
         foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
         {
-            var name = assembly.GetName().Name;
-            if (name is null)
-                throw new Exception($"Assembly name is null: '{assembly}'");
+            var name = assembly.GetName().Name ?? throw new Exception($"Assembly name is null: '{assembly}'");
             if (imageSource.Host.StartsWith(name, StringComparison.InvariantCultureIgnoreCase))
             {
                 result.Add(assembly);
@@ -91,7 +90,7 @@ public static class ImageFetcher
         }
     }
 
-    private static Stream LoadFromFileSystem(Uri imageSource)
+    private static FileStream LoadFromFileSystem(Uri imageSource)
     {
         try
         {

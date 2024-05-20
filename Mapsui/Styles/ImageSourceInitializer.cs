@@ -8,11 +8,11 @@ using System.Linq;
 namespace Mapsui.Styles;
 public static class ImageSourceInitializer
 {
-    static readonly ConcurrentHashSet<Uri> _register = [];
+    static readonly ConcurrentHashSet<string> _register = [];
     static readonly object _lockObject = new();
     static readonly FetchMachine _fetchMachine = new(1);
 
-    public static void Add(Uri imageSource)
+    public static void Add(string imageSource)
     {
         lock (_lockObject)
         {
@@ -51,12 +51,12 @@ public static class ImageSourceInitializer
         });
     }
 
-    private static IEnumerable<Uri> GetAndClear()
+    private static IEnumerable<string> GetAndClear()
     {
         lock (_lockObject)
         {
             if (_register.Count == 0)
-                return Array.Empty<Uri>();
+                return [];
             var result = _register.ToArray();
             _register.Clear();
             return result;

@@ -9,7 +9,6 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -104,15 +103,10 @@ public class ThemeStyleSample : ISample
         };
     }
 
-    private static SymbolStyle CreateCityStyle()
+    private static SymbolStyle CreateCityStyle() => new()
     {
-        var imageSource = new Uri("embeddedresource://Mapsui.Samples.Common.Images.location.png");
-
-        return new SymbolStyle
-        {
-            ImageSource = imageSource,
-            SymbolOffset = new Offset { Y = 64 },
-            SymbolScale = 0.25
-        };
-    }
+        ImageSource = "embedded://Mapsui.Samples.Common.Images.location.png",
+        SymbolOffset = new Offset { Y = 64 },
+        SymbolScale = 0.25
+    };
 }

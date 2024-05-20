@@ -27,16 +27,18 @@ public class SymbolStyle : VectorStyle
 
     public UnitType UnitType { get; set; }
 
-    private Uri? _imageSource;
+    private string? _imageSource;
 
     /// <summary>
-    /// Bitmap of the image to display during rendering
+    /// Path to the the image to display during rendering. This can be url, file path or embedded resource.
     /// </summary>
-    public Uri? ImageSource
+    public string? ImageSource
     {
         get => _imageSource;
         set
         {
+            if (value != null)
+                ValidateImageSource(value);
             _imageSource = value;
             if (value != null)
             {
@@ -158,5 +160,11 @@ public class SymbolStyle : VectorStyle
     public static bool operator !=(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)
     {
         return !Equals(symbolStyle1, symbolStyle2);
+    }
+
+    private static void ValidateImageSource(string imageSource)
+    {
+        // Will throw a UriFormatException exception if the imageSource is not a valid Uri
+        _ = new Uri(imageSource);
     }
 }

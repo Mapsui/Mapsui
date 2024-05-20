@@ -20,7 +20,7 @@ public sealed class SymbolCache : ISymbolCache
             }
         }
 
-        var imageStream = ImageSourceCache.Instance.Get(new Uri(key));
+        var imageStream = ImageSourceCache.Instance.Get(key);
         if (imageStream == null)
         {
             return null;
