@@ -179,7 +179,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         CaptureMouse();
     }
 
-    protected virtual bool IsInBoxZoomMode()
+    public virtual bool IsInBoxZoomMode()
     {
         return Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
     }
