@@ -22,9 +22,12 @@ internal class SKSwapChainPanel : UIElement
     public VerticalAlignment VerticalAlignment { get; set; }
     public HorizontalAlignment HorizontalAlignment { get; set; }
     public SolidColorBrush Background { get; set; }
+    public double ActualWidth => throw new NotImplementedException($"No Gpu Rendering implemented set MapControl.UseGPU to false");
+    public SKSize CanvasSize => throw new NotImplementedException($"No Gpu Rendering implemented set MapControl.UseGPU to false");
 
     public void Invalidate()
     {
+        throw new NotImplementedException($"No Gpu Rendering implemented set MapControl.UseGPU to false");
     }
 
     public event EventHandler<SKPaintGLSurfaceEventArgs> PaintSurface;

@@ -273,7 +273,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private double ViewportWidth => ActualWidth;
     private double ViewportHeight => ActualHeight;
 
-    private double GetPixelDensity() => XamlRoot?.RasterizationScale ?? 1d;
+    private double GetPixelDensity()
+    {
+        if (UseGPU)
+            return _canvasGpu!.CanvasSize.Width / _canvasGpu.ActualWidth;
+
+        return _canvas!.CanvasSize.Width / _canvas.ActualWidth;
+    }
 
     private bool GetShiftPressed() => _shiftPressed;
 
