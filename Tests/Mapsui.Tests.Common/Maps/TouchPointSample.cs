@@ -18,7 +18,7 @@ namespace Mapsui.Tests.Common.Maps;
 
 public class TouchPointSample : ISample, IDisposable
 {
-    private static Map? _map;
+    private Map? _map;
     private TextBoxWidget? _label;
     private TextBoxWidget? _mousePosition;
     private MemoryLayer? _clickMemoryLayer;
@@ -41,9 +41,9 @@ public class TouchPointSample : ISample, IDisposable
         _map.Layers.Add(memoryLayer);
         _clickMemoryLayer = CreateMemoryLayer(Color.Blue, 0.3d, false);
         _map.Layers.Add(_clickMemoryLayer);
-        _label = CreateLabel(_map, HorizontalAlignment.Center, VerticalAlignment.Top, "Not Selected");
+        _label = CreateLabel(HorizontalAlignment.Center, VerticalAlignment.Top, "Not Selected");
         _map.Widgets.Add(_label);
-        _mousePosition = CreateLabel(_map, HorizontalAlignment.Center, VerticalAlignment.Bottom, "");
+        _mousePosition = CreateLabel(HorizontalAlignment.Center, VerticalAlignment.Bottom);
         _map.Widgets.Add(_mousePosition);
         memoryLayer.DataHasChanged();
         _map.Info += MapControl_Info;
@@ -87,7 +87,7 @@ public class TouchPointSample : ISample, IDisposable
         }
     }
 
-    private static TextBoxWidget CreateLabel(Map map,
+    private static TextBoxWidget CreateLabel(
         HorizontalAlignment horizontalAlignment = HorizontalAlignment.Left,
         VerticalAlignment verticalAlignment = VerticalAlignment.Top,
         string text = "")
