@@ -30,7 +30,7 @@ namespace Mapsui.UI.WinUI;
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
     // GPU does not work currently on Windows
-    public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid() || OperatingSystem.IsIOS();
+    public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
     private readonly SKSwapChainPanel? _canvasGpu;
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas? _canvas;
