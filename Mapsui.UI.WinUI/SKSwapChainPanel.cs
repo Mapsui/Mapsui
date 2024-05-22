@@ -1,4 +1,5 @@
 #if !HAS_UNO_WINUI
+using SkiaSharp;
 #if __WINUI__
 // for fixing the Linux build this pragma disable is needed some tooling issue.
 #pragma warning disable IDE0005 // Using directive is unnecessary.
