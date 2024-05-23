@@ -13,7 +13,7 @@ public sealed class SymbolCache : ISymbolCache
     {
         if (_cache.ContainsKey(key))
         {
-            var result = _cache[key];
+            BitmapInfo result = _cache[key];
             if (!BitmapHelper.InvalidBitmapInfo(result))
             {
                 return result;
@@ -25,8 +25,7 @@ public sealed class SymbolCache : ISymbolCache
         {
             return null;
         }
-        bool ownsBitmap = imageStream is not IDisposable;
-        var loadBitmap = BitmapHelper.LoadBitmap(imageStream, ownsBitmap) ?? throw new ArgumentNullException(nameof(key));
+        var loadBitmap = BitmapHelper.LoadBitmap(imageStream) ?? throw new ArgumentNullException(nameof(key));
         return _cache[key] = loadBitmap;
     }
 

@@ -17,24 +17,32 @@ public sealed class TileCache : ITileCache
 
     public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
     {
-        _tileCache.TryGetValue(raster, out var cachedBitmapInfo);
-        var bitmapInfo = cachedBitmapInfo as BitmapInfo;
-        if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
+        if (_tileCache.TryGetValue(raster, out var cachedBitmapInfo))
         {
-            bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
+            var bitmapInfo = (BitmapInfo)cachedBitmapInfo;
+            if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
+            {
+                bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
+                _tileCache[raster] = bitmapInfo;
+            }
+
+            if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
+            {
+                // remove invalid image from cache
+                _tileCache.Remove(raster);
+                return null;
+            }
+
+            bitmapInfo.IterationUsed = currentIteration;
+
+            return bitmapInfo;
+        }
+        else // Here we need to Create
+        {
+            var bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
             _tileCache[raster] = bitmapInfo;
+            return bitmapInfo;
         }
-
-        if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
-        {
-            // remove invalid image from cache
-            _tileCache.Remove(raster);
-            return null;
-        }
-
-        bitmapInfo.IterationUsed = currentIteration;
-
-        return bitmapInfo;
     }
 
     public void UpdateCache(long iteration)
