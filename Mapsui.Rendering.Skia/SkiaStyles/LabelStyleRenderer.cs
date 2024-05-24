@@ -30,11 +30,11 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         var text = style.GetLabelText(feature);
 
-        var drawableImage = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
-        var offsetX = style.Offset is RelativeOffset ? drawableImage.Width * style.Offset.X : style.Offset.X;
-        var offsetY = style.Offset is RelativeOffset ? drawableImage.Height * style.Offset.Y : style.Offset.Y;
+        var image = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
+        var offsetX = style.Offset is RelativeOffset ? image.Width * style.Offset.X : style.Offset.X;
+        var offsetY = style.Offset is RelativeOffset ? image.Height * style.Offset.Y : style.Offset.Y;
 
-        if (drawableImage is BitmapImage bitmapImage)
+        if (image is BitmapImage bitmapImage)
         {
             BitmapRenderer.Draw(canvas, bitmapImage.Image, (int)Math.Round(x), (int)Math.Round(y),
                 offsetX: (float)offsetX, offsetY: (float)-offsetY,
