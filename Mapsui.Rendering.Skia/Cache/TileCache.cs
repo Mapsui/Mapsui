@@ -64,7 +64,8 @@ public sealed class TileCache : ITileCache
         tilesToKeep = Math.Max(tilesToKeep, _minimumTilesToKeep);
         var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
 
-        if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
+        if (tilesToRemove > 0)
+            RemoveOldBitmaps(_tileCache, tilesToRemove);
     }
 
     private static void RemoveOldBitmaps(IDictionary<MRaster, IRenderedTile> tileCache, int numberToRemove)
