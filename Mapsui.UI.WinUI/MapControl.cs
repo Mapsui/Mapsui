@@ -30,7 +30,7 @@ namespace Mapsui.UI.WinUI;
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
     // GPU does not work currently on Windows
-    public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid() || OperatingSystem.IsIOS();
+    public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
     private readonly SKSwapChainPanel? _canvasGpu;
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas? _canvas;
@@ -273,7 +273,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private double ViewportWidth => ActualWidth;
     private double ViewportHeight => ActualHeight;
 
-    private double GetPixelDensity() => XamlRoot?.RasterizationScale ?? 1d;
+    private double GetPixelDensity()
+    {
+        if (UseGPU)
+            return _canvasGpu!.CanvasSize.Width / _canvasGpu.ActualWidth;
+
+        return _canvas!.CanvasSize.Width / _canvas.ActualWidth;
+    }
 
     private bool GetShiftPressed() => _shiftPressed;
 
