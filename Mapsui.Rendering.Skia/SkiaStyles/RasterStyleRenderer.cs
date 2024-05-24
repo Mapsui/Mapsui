@@ -51,30 +51,22 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
                 var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
 
-                switch (bitmapInfo.Type)
-                {
-                    case SKiaTileType.Bitmap:
-                        BitmapRenderer.Draw(canvas, bitmapInfo.Image!, destination, opacity);
-                        break;
-                    case SKiaTileType.Picture:
-                        PictureRenderer.Draw(canvas, bitmapInfo.Picture!, destination, opacity);
-                        break;
-                }
+                if (bitmapInfo is ImageTile imageTile)
+                    BitmapRenderer.Draw(canvas, imageTile.Image, destination, opacity);
+                else if (bitmapInfo is PictureTile pictureTile)
+                    PictureRenderer.Draw(canvas, pictureTile.Picture, destination, opacity);
+                else
+                    throw new InvalidOperationException("Unknown tile type");
 
                 canvas.SetMatrix(priorMatrix);
             }
             else
             {
                 var destination = WorldToScreen(viewport, extent);
-                switch (bitmapInfo.Type)
-                {
-                    case SKiaTileType.Bitmap:
-                        BitmapRenderer.Draw(canvas, bitmapInfo.Image!, RoundToPixel(destination), opacity);
-                        break;
-                    case SKiaTileType.Picture:
-                        PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
-                        break;
-                }
+                if (bitmapInfo is ImageTile imageTile)
+                    BitmapRenderer.Draw(canvas, imageTile.Image, RoundToPixel(destination), opacity);
+                else if (bitmapInfo is PictureTile pictureTile)
+                    PictureRenderer.Draw(canvas, pictureTile.Picture, RoundToPixel(destination), opacity);
             }
 
             canvas.Restore();
