@@ -8,8 +8,6 @@ public sealed class ImageTile(SKImage image) : IRenderedTile
 
     public long IterationUsed { get; set; }
     public SKImage Image => _image;
-
-    public bool IsDisposed() => false;
     public void Dispose() => _image.Dispose();
 }
 
