@@ -79,7 +79,7 @@ public class CustomStyleSample : IMapControlSample
     {
         return new MemoryLayer
         {
-            Name = "Custome Style Layer",
+            Name = "Custom Style Layer",
             Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
             Style = null,
             IsMapInfoLayer = true
