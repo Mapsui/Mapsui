@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Skia.Images;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -29,13 +30,18 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         var text = style.GetLabelText(feature);
 
-        var info = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
-        var offsetX = style.Offset is RelativeOffset ? info.Width * style.Offset.X : style.Offset.X;
-        var offsetY = style.Offset is RelativeOffset ? info.Height * style.Offset.Y : style.Offset.Y;
+        var drawableImage = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
+        var offsetX = style.Offset is RelativeOffset ? drawableImage.Width * style.Offset.X : style.Offset.X;
+        var offsetY = style.Offset is RelativeOffset ? drawableImage.Height * style.Offset.Y : style.Offset.Y;
 
-        BitmapRenderer.Draw(canvas, info.Bitmap, (int)Math.Round(x), (int)Math.Round(y),
-            offsetX: (float)offsetX, offsetY: (float)-offsetY,
-            horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
+        if (drawableImage is BitmapImage bitmapImage)
+        {
+            BitmapRenderer.Draw(canvas, bitmapImage.Image, (int)Math.Round(x), (int)Math.Round(y),
+                offsetX: (float)offsetX, offsetY: (float)-offsetY,
+                horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
+        }
+        else
+            throw new InvalidOperationException("Unexpected drawable image type");
     }
 
     public static SKTypeface CreateTypeFace(Font font)
@@ -86,15 +92,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private BitmapInfo CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
+    private IDrawableImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
     {
         UpdatePaint(style, layerOpacity, _paint, labelCache);
 
         var bitmap = CreateLabelAsBitmap(style, text, _paint, layerOpacity);
-        return new BitmapInfo
-        {
-            Bitmap = bitmap,
-        };
+        return new BitmapImage(bitmap);
     }
 
     private static SKImage CreateLabelAsBitmap(LabelStyle style, string? text, SKPaint paint, float layerOpacity)
