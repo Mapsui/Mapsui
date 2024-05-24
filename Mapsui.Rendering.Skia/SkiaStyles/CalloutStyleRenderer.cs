@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
@@ -11,7 +12,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class CalloutStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, IRenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, RenderService renderService, long iteration)
     {
         if (!style.Enabled)
             return false;
@@ -147,7 +148,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static SKPicture RenderContent(CalloutStyle callout, ISymbolCache symbolCache)
+    public static SKPicture RenderContent(CalloutStyle callout, SymbolCache symbolCache)
     {
         if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {

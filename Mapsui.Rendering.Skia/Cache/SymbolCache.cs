@@ -5,11 +5,11 @@ using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class SymbolCache : ISymbolCache
+public sealed class SymbolCache : IDisposable
 {
     private readonly IDictionary<string, BitmapInfo> _cache = new ConcurrentDictionary<string, BitmapInfo>();
 
-    public IBitmapInfo? GetOrCreate(string key)
+    public BitmapInfo? GetOrCreate(string key)
     {
         if (_cache.ContainsKey(key))
         {

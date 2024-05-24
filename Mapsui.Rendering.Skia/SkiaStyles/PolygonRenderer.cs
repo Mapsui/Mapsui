@@ -1,4 +1,5 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -15,7 +16,7 @@ internal static class PolygonRenderer
     private const float _scale = 10.0f;
 
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle vectorStyle, IFeature feature,
-        Polygon polygon, float opacity, IVectorCache vectorCache)
+        Polygon polygon, float opacity, VectorCache vectorCache)
     {
         SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
         {
@@ -69,6 +70,8 @@ internal static class PolygonRenderer
 
     internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, IRenderService renderService)
     {
+        var skiaRenderService = (RenderService)renderService;
+
         var brush = valueTuple.brush;
         var opacity = valueTuple.opacity;
         var rotation = valueTuple.rotation;
@@ -142,13 +145,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(renderService.SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
+                    var image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(renderService.SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
+                    image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -206,13 +209,13 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(ISymbolCache? symbolCache, SpriteCache spriteCache, Brush brush)
+    private static SKImage? GetImage(SymbolCache? symbolCache, SpriteCache spriteCache, Brush brush)
     {
         if (symbolCache == null)
             return null;
         if (brush.ImageSource is null)
             return null;
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(brush.ImageSource.ToString());
+        var bitmapInfo = symbolCache.GetOrCreate(brush.ImageSource.ToString());
         if (bitmapInfo == null)
             return null;
 

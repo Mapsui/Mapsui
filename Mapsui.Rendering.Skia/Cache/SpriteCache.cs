@@ -3,8 +3,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Mapsui.Rendering;
-public sealed class SpriteCache() : ISpriteCache
+namespace Mapsui.Rendering.Skia.Cache;
+public sealed class SpriteCache : IDisposable
 {
     private bool _disposed;
     private readonly ConcurrentDictionary<string, SKObject> _cache = new();

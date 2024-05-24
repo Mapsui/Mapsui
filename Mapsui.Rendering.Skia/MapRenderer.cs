@@ -26,20 +26,26 @@ public sealed class MapRenderer : IRenderer, IDisposable
     private readonly IRenderService _renderService;
     private long _currentIteration;
 
-    public IRenderService RenderService => _renderService;
-
-    public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
-
-    /// <summary>
-    /// Dictionary holding all special renderers for styles
-    /// </summary>
-    public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
-
     static MapRenderer()
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
         DefaultRendererFactory.CreateWithRenderService = f => new MapRenderer(f);
     }
+
+    private RenderService SkiaRenderService => (RenderService)_renderService;
+
+    public bool EnabledVectorCache
+    {
+        get => SkiaRenderService.VectorCache.Enabled;
+        set => SkiaRenderService.VectorCache.Enabled = value;
+    }
+
+    public IRenderService RenderService => _renderService;
+    public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
+    /// <summary>
+    /// Dictionary holding all special renderers for styles
+    /// </summary>
+    public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
 
     private void InitRenderer()
     {
@@ -190,7 +196,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
             canvas.Save();
             // We have a special renderer, so try, if it could draw this
             var styleRenderer = (ISkiaStyleRenderer)renderer;
-            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, RenderService, iteration);
+            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, SkiaRenderService, iteration);
             // Restore old canvas
             canvas.Restore();
             // Was it drawn?
