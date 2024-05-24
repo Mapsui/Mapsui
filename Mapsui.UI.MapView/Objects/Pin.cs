@@ -532,7 +532,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
 
                     // Load the SVG document
                     Svg.Skia.SKSvg svg;
-                    using (var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin)))
+                    using (var stream = EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin)))
                     {
                         if (stream == null)
                             return;

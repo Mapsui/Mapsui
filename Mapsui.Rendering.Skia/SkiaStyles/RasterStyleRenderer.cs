@@ -1,6 +1,7 @@
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -25,9 +26,11 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             if (style is not RasterStyle)
                 return false;
 
-            renderService.TileCache.UpdateCache(currentIteration);
+            var tileCache = (TileCache)renderService.TileCache;
+            tileCache.UpdateCache(currentIteration);
 
-            if (renderService.TileCache.GetOrCreate(raster, currentIteration) is not BitmapInfo bitmapInfo)
+            var tile = tileCache.GetOrCreate(raster, currentIteration);
+            if (tile is null)
                 return false;
 
             var extent = feature.Extent;
@@ -47,30 +50,22 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
                 var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
 
-                switch (bitmapInfo.Type)
-                {
-                    case BitmapType.Bitmap:
-                        BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, destination, opacity);
-                        break;
-                    case BitmapType.Picture:
-                        PictureRenderer.Draw(canvas, bitmapInfo.Picture!, destination, opacity);
-                        break;
-                }
+                if (tile.SKObject is SKImage skImage)
+                    BitmapRenderer.Draw(canvas, skImage, destination, opacity);
+                else if (tile.SKObject is SKPicture skPicture)
+                    PictureRenderer.Draw(canvas, skPicture, destination, opacity);
+                else
+                    throw new InvalidOperationException("Unknown tile type");
 
                 canvas.SetMatrix(priorMatrix);
             }
             else
             {
                 var destination = WorldToScreen(viewport, extent);
-                switch (bitmapInfo.Type)
-                {
-                    case BitmapType.Bitmap:
-                        BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, RoundToPixel(destination), opacity);
-                        break;
-                    case BitmapType.Picture:
-                        PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
-                        break;
-                }
+                if (tile.SKObject is SKImage skImage)
+                    BitmapRenderer.Draw(canvas, skImage, RoundToPixel(destination), opacity);
+                else if (tile.SKObject is SKPicture skPicture)
+                    PictureRenderer.Draw(canvas, skPicture, RoundToPixel(destination), opacity);
             }
 
             canvas.Restore();

@@ -38,13 +38,8 @@ public static class SvgHelper
     /// <param name="str">string</param>
     /// <returns>loaded svg image</returns>
     [return: NotNullIfNotNull(nameof(str))]
-    public static SKSvg? LoadSvg(this Stream? str)
+    public static SKSvg LoadSvg(this Stream str)
     {
-        if (str == null)
-        {
-            return null;
-        }
-
         var svg = new SKSvg();
         svg.Load(str);
         return svg;
