@@ -3,6 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
+using Mapsui.Rendering.Skia.Tiling;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
@@ -53,7 +54,7 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
                 switch (bitmapInfo.Type)
                 {
                     case SKiaTileType.Bitmap:
-                        BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, destination, opacity);
+                        BitmapRenderer.Draw(canvas, bitmapInfo.Image!, destination, opacity);
                         break;
                     case SKiaTileType.Picture:
                         PictureRenderer.Draw(canvas, bitmapInfo.Picture!, destination, opacity);
@@ -68,7 +69,7 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
                 switch (bitmapInfo.Type)
                 {
                     case SKiaTileType.Bitmap:
-                        BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, RoundToPixel(destination), opacity);
+                        BitmapRenderer.Draw(canvas, bitmapInfo.Image!, RoundToPixel(destination), opacity);
                         break;
                     case SKiaTileType.Picture:
                         PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);

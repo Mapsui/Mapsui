@@ -1,6 +1,7 @@
 using System.IO;
 using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Rendering.Skia.Tiling;
 using Mapsui.Utilities;
 using SkiaSharp;
 
@@ -17,14 +18,14 @@ public static class BitmapHelper
 
         using var skData = SKData.CreateCopy(data);
         var image = SKImage.FromEncodedData(skData);
-        return new TileBitmapInfo { Bitmap = image };
+        return new TileBitmapInfo { Image = image };
     }
 
     public static TileBitmapInfo? LoadBitmap(byte[] data)
     {
         using var skData = SKData.CreateCopy(data);
         var image = SKImage.FromEncodedData(skData);
-        return new TileBitmapInfo { Bitmap = image };
+        return new TileBitmapInfo { Image = image };
     }
 
     public static BitmapInfo? LoadBitmap(Stream stream)

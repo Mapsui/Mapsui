@@ -2,7 +2,7 @@
 using SkiaSharp;
 using System;
 
-namespace Mapsui.Rendering.Skia;
+namespace Mapsui.Rendering.Skia.Tiling;
 
 public enum SKiaTileType
 {
@@ -17,7 +17,7 @@ public sealed class TileBitmapInfo : IDisposable
 
     public SKiaTileType Type { get; private set; }
 
-    public SKImage? Bitmap
+    public SKImage? Image
     {
         get
         {
@@ -50,8 +50,6 @@ public sealed class TileBitmapInfo : IDisposable
     }
 
     public long IterationUsed { get; set; }
-    public float Width => Bitmap?.Width ?? Picture?.CullRect.Width ?? 0;
-    public float Height => Bitmap?.Height ?? Picture?.CullRect.Height ?? 0;
 
     public bool IsDisposed => _image == null;
 

@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Mapsui.Rendering.Skia.Tiling;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
@@ -47,7 +48,7 @@ public sealed class TileCache : ITileCache
 
     public static bool IsValid([NotNullWhen(true)] TileBitmapInfo? bitmapInfo)
     {
-        return bitmapInfo is not null && !bitmapInfo.IsDisposed && bitmapInfo.Bitmap is not null;
+        return bitmapInfo is not null && !bitmapInfo.IsDisposed && bitmapInfo.Image is not null;
     }
 
     public void UpdateCache(long iteration)
