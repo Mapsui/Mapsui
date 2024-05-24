@@ -1,6 +1,5 @@
 using System.IO;
 using Mapsui.Extensions;
-using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp;
 
@@ -23,6 +22,6 @@ public static class BitmapHelper
 
     public static bool InvalidBitmapInfo(BitmapInfo bitmapInfo)
     {
-        return bitmapInfo.IsDisposed || (bitmapInfo.Bitmap == null && (bitmapInfo.Picture == null || bitmapInfo.Picture.IsDisposed()));
+        return bitmapInfo.IsDisposed || bitmapInfo.Bitmap == null;
     }
 }

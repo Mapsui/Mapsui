@@ -9,7 +9,6 @@ public enum BitmapType
 {
     Bitmap,
     Svg,
-    Picture
 }
 
 public sealed class BitmapInfo
@@ -31,22 +30,6 @@ public sealed class BitmapInfo
         {
             _data = value;
             Type = BitmapType.Bitmap;
-        }
-    }
-
-    public SKPicture? Picture
-    {
-        get
-        {
-            if (Type == BitmapType.Picture)
-                return _data as SKPicture;
-            else
-                return null;
-        }
-        set
-        {
-            _data = value;
-            Type = BitmapType.Picture;
         }
     }
 
@@ -76,7 +59,6 @@ public sealed class BitmapInfo
             {
                 BitmapType.Bitmap => Bitmap?.Width ?? 0,
                 BitmapType.Svg => Svg?.SKSvg.Picture?.CullRect.Width ?? 0,
-                BitmapType.Picture => Picture?.CullRect.Width ?? 0,
                 _ => 0,
             };
         }
@@ -90,7 +72,6 @@ public sealed class BitmapInfo
             {
                 BitmapType.Bitmap => Bitmap?.Height ?? 0,
                 BitmapType.Svg => Svg?.SKSvg.Picture?.CullRect.Height ?? 0,
-                BitmapType.Picture => Picture?.CullRect.Height ?? 0,
                 _ => 0,
             };
         }

@@ -31,7 +31,7 @@ public sealed class SymbolCache : IDisposable
 
     public Size? GetSize(string key)
     {
-        var bitmap = (BitmapInfo?)GetOrCreate(key);
+        var bitmap = GetOrCreate(key);
         if (bitmap == null)
             return null;
 

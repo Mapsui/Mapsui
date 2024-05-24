@@ -76,7 +76,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     if (symbolStyle.ImageSource is null)
                         throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
-                    var skiaSpriteCache = (SpriteCache)renderService.SpriteCache;
+                    var skiaSpriteCache = renderService.SpriteCache;
                     var skImage = skiaSpriteCache.GetOrCreateSKObject(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
                         () => bitmapInfo.Bitmap.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
 
@@ -88,16 +88,6 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 }
 
                 break;
-            case BitmapType.Picture:
-                if (bitmapInfo.Picture == null)
-                    return false;
-
-                PictureRenderer.Draw(canvas, bitmapInfo.Picture,
-                    (float)destinationX, (float)destinationY,
-                    rotation,
-                    (float)offset.X, (float)offset.Y,
-                    opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
-                break;
             case BitmapType.Svg:
                 // Todo: Perhaps remove BitmapType.Svg and SvgRenderer?
                 // It looks like BitmapType.Svg is not use at all the the moment.
@@ -106,7 +96,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
                 if (symbolStyle.SvgFillColor.HasValue || symbolStyle.SvgStrokeColor.HasValue)
                 {
-                    var skPicture = ((SpriteCache)renderService.SpriteCache).GetOrCreateSKObject(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
+                    var skPicture = renderService.SpriteCache.GetOrCreateSKObject(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
                         () =>
                         {
                             var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(bitmapInfo.Svg.OriginalStream, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
