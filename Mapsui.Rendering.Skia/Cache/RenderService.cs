@@ -14,10 +14,10 @@ public sealed class RenderService : IRenderService
         SpriteCache = new SpriteCache();
     }
 
-    public ISymbolCache SymbolCache { get; }
+    public SymbolCache SymbolCache { get; }
     public IVectorCache VectorCache { get; }
     public ITileCache TileCache { get; }
-    public ILabelCache LabelCache { get; }
+    public LabelCache LabelCache { get; }
     public ImageSourceCache ImageSourceCache { get; }
     public ISpriteCache SpriteCache { get; }
 

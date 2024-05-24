@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
@@ -11,7 +12,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         var symbolStyle = (SymbolStyle)style;
         feature.CoordinateVisitor((x, y, setter) =>
@@ -22,7 +23,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
 
-    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderService renderService)
+    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, RenderService renderService)
     {
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
@@ -34,7 +35,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IRenderService renderService)
+    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, RenderService renderService)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
@@ -44,7 +45,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return false;
 
         var symbolCache = renderService.SymbolCache;
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.ImageSource.ToString());
+        var bitmapInfo = symbolCache.GetOrCreate(symbolStyle.ImageSource.ToString());
         if (bitmapInfo == null)
             return false;
 
@@ -271,7 +272,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             case SymbolType.Image:
                 if (symbolStyle.ImageSource is not null)
                 {
-                    var bitmapSize = renderService.SymbolCache.GetSize(symbolStyle.ImageSource.ToString());
+                    var bitmapSize = ((RenderService)renderService).SymbolCache.GetSize(symbolStyle.ImageSource.ToString());
                     if (bitmapSize != null)
                     {
                         symbolSize = bitmapSize;

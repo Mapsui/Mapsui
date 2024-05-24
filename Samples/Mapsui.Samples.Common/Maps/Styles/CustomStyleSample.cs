@@ -1,6 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Rendering;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
@@ -24,7 +24,7 @@ public class CustomStyle : IStyle
 public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
 {
     public static Random Random = new(1);
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         if (feature is not PointFeature pointFeature) return false;
         var worldPoint = pointFeature.Point;

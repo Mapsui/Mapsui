@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Cache;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -24,7 +25,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         IsEmbeddedBitmapText = true
     };
 
-    public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity, ILabelCache labelCache)
+    public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity, LabelCache labelCache)
     {
         var text = style.GetLabelText(feature);
 
@@ -46,7 +47,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
 
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         try
         {
@@ -85,7 +86,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private BitmapInfo CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
+    private BitmapInfo CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
     {
         UpdatePaint(style, layerOpacity, _paint, labelCache);
 
@@ -116,7 +117,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return bitmap;
     }
 
-    private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
+    private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
     {
         UpdatePaint(style, layerOpacity, _paint, labelCache);
 
@@ -313,7 +314,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint, ILabelCache labelCache)
+    private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint, LabelCache labelCache)
     {
         var typeface = labelCache.GetOrCreateTypeface(style.Font, CreateTypeFace);
 
@@ -384,17 +385,18 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     double IFeatureSize.FeatureSize(IStyle style, IRenderService renderingService, IFeature? feature)
     {
+        var skiaRenderService = (RenderService)renderingService;
         if (feature == null) throw new ArgumentNullException(nameof(feature));
 
         if (style is LabelStyle labelStyle)
         {
-            return FeatureSize(feature, labelStyle, _paint, renderingService.LabelCache);
+            return FeatureSize(feature, labelStyle, _paint, skiaRenderService.LabelCache);
         }
 
         return 0;
     }
 
-    public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint, ILabelCache labelCache)
+    public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint, LabelCache labelCache)
     {
         var text = labelStyle.GetLabelText(feature);
 

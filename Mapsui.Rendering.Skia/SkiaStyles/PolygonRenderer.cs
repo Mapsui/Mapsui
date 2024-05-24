@@ -1,4 +1,5 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -142,13 +143,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(renderService.SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
+                    var image = GetImage(((RenderService)renderService).SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(renderService.SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
+                    image = GetImage(((RenderService)renderService).SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -206,13 +207,13 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(ISymbolCache? symbolCache, SpriteCache spriteCache, Brush brush)
+    private static SKImage? GetImage(SymbolCache? symbolCache, SpriteCache spriteCache, Brush brush)
     {
         if (symbolCache == null)
             return null;
         if (brush.ImageSource is null)
             return null;
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(brush.ImageSource.ToString());
+        var bitmapInfo = symbolCache.GetOrCreate(brush.ImageSource.ToString());
         if (bitmapInfo == null)
             return null;
 
