@@ -16,7 +16,7 @@ internal static class PolygonRenderer
     private const float _scale = 10.0f;
 
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle vectorStyle, IFeature feature,
-        Polygon polygon, float opacity, IVectorCache vectorCache)
+        Polygon polygon, float opacity, VectorCache vectorCache)
     {
         SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
         {

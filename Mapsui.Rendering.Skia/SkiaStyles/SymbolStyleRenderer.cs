@@ -137,7 +137,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, IVectorCache vectorCache)
+    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, VectorCache vectorCache)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
