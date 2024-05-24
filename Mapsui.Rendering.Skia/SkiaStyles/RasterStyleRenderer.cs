@@ -30,8 +30,8 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             var tileCache = (TileCache)renderService.TileCache;
             tileCache.UpdateCache(currentIteration);
 
-            var bitmapInfo = tileCache.GetOrCreate(raster, currentIteration);
-            if (bitmapInfo is null)
+            var tile = tileCache.GetOrCreate(raster, currentIteration);
+            if (tile is null)
                 return false;
 
             var extent = feature.Extent;
@@ -51,9 +51,9 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
                 var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
 
-                if (bitmapInfo is ImageTile imageTile)
+                if (tile is ImageTile imageTile)
                     BitmapRenderer.Draw(canvas, imageTile.Image, destination, opacity);
-                else if (bitmapInfo is PictureTile pictureTile)
+                else if (tile is PictureTile pictureTile)
                     PictureRenderer.Draw(canvas, pictureTile.Picture, destination, opacity);
                 else
                     throw new InvalidOperationException("Unknown tile type");
@@ -63,9 +63,9 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             else
             {
                 var destination = WorldToScreen(viewport, extent);
-                if (bitmapInfo is ImageTile imageTile)
+                if (tile is ImageTile imageTile)
                     BitmapRenderer.Draw(canvas, imageTile.Image, RoundToPixel(destination), opacity);
-                else if (bitmapInfo is PictureTile pictureTile)
+                else if (tile is PictureTile pictureTile)
                     PictureRenderer.Draw(canvas, pictureTile.Picture, RoundToPixel(destination), opacity);
             }
 
