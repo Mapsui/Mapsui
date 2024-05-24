@@ -3,7 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Mapsui.Rendering;
+namespace Mapsui.Rendering.Skia.Cache;
 public sealed class SpriteCache : IDisposable
 {
     private bool _disposed;
