@@ -4,7 +4,7 @@ using Mapsui.Extensions;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class CacheHolder<T> : ICacheHolder, IDisposable
+public sealed class CacheHolder<T> : IDisposable
     where T : class
 {
     private T? _instance;
@@ -21,7 +21,7 @@ public sealed class CacheHolder<T> : ICacheHolder, IDisposable
     }
 
     public CacheTracker<TResult>? Get<TResult>()
-        where TResult : T?
+        where TResult : class, T?
     {
         if (_instance != null)
         {
@@ -35,7 +35,7 @@ public sealed class CacheHolder<T> : ICacheHolder, IDisposable
         return null;
     }
 
-    void ICacheHolder.SetInstance(object instance)
+    void SetInstance(object instance)
     {
         SetInstance((T)instance);
     }

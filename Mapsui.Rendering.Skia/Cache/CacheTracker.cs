@@ -3,9 +3,9 @@ using Mapsui.Extensions;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public readonly struct CacheTracker<T> : IDisposable
+public readonly struct CacheTracker<T> : IDisposable where T : class
 {
-    private readonly ICacheHolder? _holder;
+    private readonly CacheHolder<T>? _holder;
     private readonly T _instance;
 
     public CacheTracker(T instance)
@@ -14,7 +14,7 @@ public readonly struct CacheTracker<T> : IDisposable
         _instance = instance;
     }
 
-    public CacheTracker(ICacheHolder holder, T instance)
+    public CacheTracker(CacheHolder<T> holder, T instance)
     {
         _holder = holder;
         _instance = instance;
