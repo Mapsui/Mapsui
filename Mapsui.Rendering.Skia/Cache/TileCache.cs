@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Tiling;
@@ -15,42 +14,25 @@ public sealed class TileCache : ITileCache
     private const int _minimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now all tile Layers have one Cache
     private long _lastIteration;
 
-    private readonly IDictionary<MRaster, IRenderedTile?> _tileCache =
-        new ConcurrentDictionary<MRaster, IRenderedTile?>(new IdentityComparer<MRaster>());
+    private readonly IDictionary<MRaster, IRenderedTile> _tileCache =
+        new ConcurrentDictionary<MRaster, IRenderedTile>(new IdentityComparer<MRaster>());
 
-    public IRenderedTile? GetOrCreate(MRaster raster, long currentIteration)
+    public IRenderedTile GetOrCreate(MRaster raster, long currentIteration)
     {
-        if (_tileCache.TryGetValue(raster, out var cachedBitmapInfo))
+        if (_tileCache.TryGetValue(raster, out var cachedTile))
         {
-            var bitmapInfo = cachedBitmapInfo;
-            if (!IsValid(bitmapInfo))
-            {
-                bitmapInfo = ToRenderedTile(raster.Data);
-                _tileCache[raster] = bitmapInfo;
-            }
-
-            if (!IsValid(bitmapInfo))
-            {
-                // Remove invalid image from cache
-                _tileCache.Remove(raster);
-                return null;
-            }
-
-            bitmapInfo.IterationUsed = currentIteration;
-
-            return bitmapInfo;
+            // Get
+            var tile = cachedTile;
+            tile.IterationUsed = currentIteration;
+            return tile;
         }
-        else // Here we need to Create
+        else
         {
-            var bitmapInfo = ToRenderedTile(raster.Data);
-            _tileCache[raster] = bitmapInfo;
+            // Create
+            var tile = ToRenderedTile(raster.Data);
+            _tileCache[raster] = tile;
             return _tileCache[raster];
         }
-    }
-
-    public static bool IsValid([NotNullWhen(true)] IRenderedTile? bitmapInfo)
-    {
-        return bitmapInfo is not null;
     }
 
     public void UpdateCache(long iteration)
@@ -62,9 +44,9 @@ public sealed class TileCache : ITileCache
         }
     }
 
-    public static IRenderedTile? ToRenderedTile(byte[] data)
+    public static IRenderedTile ToRenderedTile(byte[] data)
     {
-        if (data.IsSKPicture())
+        if (data.IsSkp())
         {
             return new PictureTile(SKPicture.Deserialize(data));
         }
@@ -85,8 +67,7 @@ public sealed class TileCache : ITileCache
         if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
     }
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
-    private static void RemoveOldBitmaps(IDictionary<MRaster, IRenderedTile?> tileCache, int numberToRemove)
+    private static void RemoveOldBitmaps(IDictionary<MRaster, IRenderedTile> tileCache, int numberToRemove)
     {
         var counter = 0;
         var orderedKeys = tileCache.OrderBy(kvp => kvp.Value?.IterationUsed).Select(kvp => kvp.Key).ToList();
@@ -103,9 +84,11 @@ public sealed class TileCache : ITileCache
 
     public void Dispose()
     {
-        foreach (var bitmapInfo in _tileCache.Values)
+        foreach (var key in _tileCache.Keys)
         {
-            bitmapInfo?.Dispose();
+            var tile = _tileCache[key];
+            _tileCache.Remove(key); // Remove before dispose
+            tile.Dispose();
         }
 
         _tileCache.Clear();
