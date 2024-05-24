@@ -12,23 +12,23 @@ public sealed class TileCache : ITileCache
     private const int _minimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now all tile Layers have one Cache
     private long _lastIteration;
 
-    private readonly IDictionary<object, IBitmapInfo?> _tileCache =
-        new ConcurrentDictionary<object, IBitmapInfo?>(new IdentityComparer<object>());
+    private readonly IDictionary<object, TileBitmapInfo?> _tileCache =
+        new ConcurrentDictionary<object, TileBitmapInfo?>(new IdentityComparer<object>());
 
-    public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
+    public TileBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
     {
         if (_tileCache.TryGetValue(raster, out var cachedBitmapInfo))
         {
-            var bitmapInfo = (BitmapInfo)cachedBitmapInfo;
-            if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
+            var bitmapInfo = cachedBitmapInfo;
+            if (!IsValid(bitmapInfo))
             {
-                bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
+                bitmapInfo = BitmapHelper.LoadTileBitmap(raster.Data);
                 _tileCache[raster] = bitmapInfo;
             }
 
-            if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
+            if (!IsValid(bitmapInfo))
             {
-                // remove invalid image from cache
+                // Remove invalid image from cache
                 _tileCache.Remove(raster);
                 return null;
             }
@@ -39,10 +39,15 @@ public sealed class TileCache : ITileCache
         }
         else // Here we need to Create
         {
-            var bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
+            var bitmapInfo = BitmapHelper.LoadTileBitmap(raster.Data);
             _tileCache[raster] = bitmapInfo;
             return bitmapInfo;
         }
+    }
+
+    public static bool IsValid([NotNullWhen(true)] TileBitmapInfo? bitmapInfo)
+    {
+        return bitmapInfo is not null && !bitmapInfo.IsDisposed && bitmapInfo.Bitmap is not null;
     }
 
     public void UpdateCache(long iteration)
@@ -66,7 +71,7 @@ public sealed class TileCache : ITileCache
     }
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
-    private static void RemoveOldBitmaps(IDictionary<object, IBitmapInfo?> tileCache, int numberToRemove)
+    private static void RemoveOldBitmaps(IDictionary<object, TileBitmapInfo?> tileCache, int numberToRemove)
     {
         var counter = 0;
         var orderedKeys = tileCache.OrderBy(kvp => kvp.Value?.IterationUsed).Select(kvp => kvp.Key).ToList();

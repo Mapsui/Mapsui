@@ -8,16 +8,23 @@ namespace Mapsui.Rendering.Skia;
 
 public static class BitmapHelper
 {
-    public static BitmapInfo? LoadBitmap(byte[] data)
+    public static TileBitmapInfo? LoadTileBitmap(byte[] data)
     {
         if (data.IsSKPicture())
         {
-            return new BitmapInfo { Picture = SKPicture.Deserialize(data) };
+            return new TileBitmapInfo { Picture = SKPicture.Deserialize(data) };
         }
 
         using var skData = SKData.CreateCopy(data);
         var image = SKImage.FromEncodedData(skData);
-        return new BitmapInfo { Bitmap = image };
+        return new TileBitmapInfo { Bitmap = image };
+    }
+
+    public static TileBitmapInfo? LoadBitmap(byte[] data)
+    {
+        using var skData = SKData.CreateCopy(data);
+        var image = SKImage.FromEncodedData(skData);
+        return new TileBitmapInfo { Bitmap = image };
     }
 
     public static BitmapInfo? LoadBitmap(Stream stream)

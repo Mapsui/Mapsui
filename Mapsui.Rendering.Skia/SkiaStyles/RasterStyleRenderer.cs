@@ -1,6 +1,7 @@
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -25,9 +26,11 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             if (style is not RasterStyle)
                 return false;
 
-            renderService.TileCache.UpdateCache(currentIteration);
+            var tileCache = (TileCache)renderService.TileCache;
+            tileCache.UpdateCache(currentIteration);
 
-            if (renderService.TileCache.GetOrCreate(raster, currentIteration) is not BitmapInfo bitmapInfo)
+            var bitmapInfo = tileCache.GetOrCreate(raster, currentIteration);
+            if (bitmapInfo is null)
                 return false;
 
             var extent = feature.Extent;
@@ -49,10 +52,10 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
                 switch (bitmapInfo.Type)
                 {
-                    case BitmapType.Bitmap:
+                    case SKiaTileType.Bitmap:
                         BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, destination, opacity);
                         break;
-                    case BitmapType.Picture:
+                    case SKiaTileType.Picture:
                         PictureRenderer.Draw(canvas, bitmapInfo.Picture!, destination, opacity);
                         break;
                 }
@@ -64,10 +67,10 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
                 var destination = WorldToScreen(viewport, extent);
                 switch (bitmapInfo.Type)
                 {
-                    case BitmapType.Bitmap:
+                    case SKiaTileType.Bitmap:
                         BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, RoundToPixel(destination), opacity);
                         break;
-                    case BitmapType.Picture:
+                    case SKiaTileType.Picture:
                         PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
                         break;
                 }
