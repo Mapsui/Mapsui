@@ -27,7 +27,7 @@ public static class ByteArrayExtensions
     /// <summary> true if is Skp (Skia Serialized SkPicture)</summary>
     /// <param name="buffer">buffer</param>
     /// <returns>true if is xml</returns>
-    public static bool IsSkp(this byte[] buffer)
+    public static bool IsSKPicture(this byte[] buffer)
     {
         if (buffer.Length == 0)
         {

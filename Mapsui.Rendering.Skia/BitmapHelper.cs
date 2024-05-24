@@ -10,7 +10,7 @@ public static class BitmapHelper
 {
     public static BitmapInfo? LoadBitmap(byte[] data)
     {
-        if (data.IsSkp())
+        if (data.IsSKPicture())
         {
             return new BitmapInfo { Picture = SKPicture.Deserialize(data) };
         }
