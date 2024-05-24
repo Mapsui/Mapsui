@@ -19,7 +19,7 @@ public sealed class RenderService : IRenderService
     public ITileCache TileCache { get; }
     public LabelCache LabelCache { get; }
     public ImageSourceCache ImageSourceCache { get; }
-    public ISpriteCache SpriteCache { get; }
+    public SpriteCache SpriteCache { get; }
 
     public void Dispose()
     {

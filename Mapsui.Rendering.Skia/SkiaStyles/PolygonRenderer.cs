@@ -70,6 +70,8 @@ internal static class PolygonRenderer
 
     internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, IRenderService renderService)
     {
+        var skiaRenderService = (RenderService)renderService;
+
         var brush = valueTuple.brush;
         var opacity = valueTuple.opacity;
         var rotation = valueTuple.rotation;
@@ -143,13 +145,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(((RenderService)renderService).SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
+                    var image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(((RenderService)renderService).SymbolCache, (SpriteCache)renderService.SpriteCache, brush);
+                    image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SpriteCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
