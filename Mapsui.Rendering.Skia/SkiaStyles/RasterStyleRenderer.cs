@@ -3,7 +3,6 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
-using Mapsui.Rendering.Skia.Tiling;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
@@ -51,10 +50,10 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
                 var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
 
-                if (tile is ImageTile imageTile)
-                    BitmapRenderer.Draw(canvas, imageTile.Image, destination, opacity);
-                else if (tile is PictureTile pictureTile)
-                    PictureRenderer.Draw(canvas, pictureTile.Picture, destination, opacity);
+                if (tile.SKObject is SKImage skImage)
+                    BitmapRenderer.Draw(canvas, skImage, destination, opacity);
+                else if (tile.SKObject is SKPicture skPicture)
+                    PictureRenderer.Draw(canvas, skPicture, destination, opacity);
                 else
                     throw new InvalidOperationException("Unknown tile type");
 
@@ -63,10 +62,10 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             else
             {
                 var destination = WorldToScreen(viewport, extent);
-                if (tile is ImageTile imageTile)
-                    BitmapRenderer.Draw(canvas, imageTile.Image, RoundToPixel(destination), opacity);
-                else if (tile is PictureTile pictureTile)
-                    PictureRenderer.Draw(canvas, pictureTile.Picture, RoundToPixel(destination), opacity);
+                if (tile.SKObject is SKImage skImage)
+                    BitmapRenderer.Draw(canvas, skImage, RoundToPixel(destination), opacity);
+                else if (tile.SKObject is SKPicture skPicture)
+                    PictureRenderer.Draw(canvas, skPicture, RoundToPixel(destination), opacity);
             }
 
             canvas.Restore();
