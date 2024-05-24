@@ -1,4 +1,5 @@
 using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -9,7 +10,7 @@ namespace Mapsui.Rendering.Skia;
 public static class LineStringRenderer
 {
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle? vectorStyle,
-        IFeature feature, LineString lineString, float opacity, IRenderService renderService)
+        IFeature feature, LineString lineString, float opacity, RenderService renderService)
     {
         if (vectorStyle == null)
             return;

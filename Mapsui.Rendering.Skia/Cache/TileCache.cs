@@ -8,7 +8,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class TileCache : ITileCache
+public sealed class TileCache : IDisposable
 {
     private const int _tilesToKeepMultiplier = 3;
     private const int _minimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now all tile Layers have one Cache

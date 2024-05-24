@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.Rendering;
-public sealed class SpriteCache() : ISpriteCache
+public sealed class SpriteCache : IDisposable
 {
     private bool _disposed;
     private readonly ConcurrentDictionary<string, SKObject> _cache = new();

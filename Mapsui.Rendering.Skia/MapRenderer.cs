@@ -26,7 +26,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
     private readonly IRenderService _renderService;
     private long _currentIteration;
 
-
     static MapRenderer()
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
@@ -34,6 +33,13 @@ public sealed class MapRenderer : IRenderer, IDisposable
     }
 
     private RenderService SkiaRenderService => (RenderService)_renderService;
+
+    public bool EnabledVectorCache
+    {
+        get => SkiaRenderService.VectorCache.Enabled;
+        set => SkiaRenderService.VectorCache.Enabled = value;
+    }
+
     public IRenderService RenderService => _renderService;
     public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
     /// <summary>
