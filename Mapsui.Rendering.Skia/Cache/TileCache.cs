@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Tiling;
+using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
@@ -24,7 +25,7 @@ public sealed class TileCache : ITileCache
             var bitmapInfo = cachedBitmapInfo;
             if (!IsValid(bitmapInfo))
             {
-                bitmapInfo = BitmapHelper.LoadTileBitmap(raster.Data);
+                bitmapInfo = ToRenderedTile(raster.Data);
                 _tileCache[raster] = bitmapInfo;
             }
 
@@ -41,9 +42,9 @@ public sealed class TileCache : ITileCache
         }
         else // Here we need to Create
         {
-            var bitmapInfo = BitmapHelper.LoadTileBitmap(raster.Data);
+            var bitmapInfo = ToRenderedTile(raster.Data);
             _tileCache[raster] = bitmapInfo;
-            return bitmapInfo;
+            return _tileCache[raster];
         }
     }
 
@@ -59,6 +60,18 @@ public sealed class TileCache : ITileCache
             _lastIteration = iteration;
             RemovedUnusedBitmapsFromCache();
         }
+    }
+
+    public static IRenderedTile? ToRenderedTile(byte[] data)
+    {
+        if (data.IsSKPicture())
+        {
+            return new PictureTile(SKPicture.Deserialize(data));
+        }
+
+        using var skData = SKData.CreateCopy(data);
+        var image = SKImage.FromEncodedData(skData);
+        return new ImageTile(image);
     }
 
     private void RemovedUnusedBitmapsFromCache()
