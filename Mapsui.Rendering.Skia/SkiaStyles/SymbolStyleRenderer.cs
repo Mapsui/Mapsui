@@ -46,7 +46,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return false;
 
         var symbolCache = renderService.SymbolCache;
-        var image = symbolCache.GetOrCreate(symbolStyle.ImageSource.ToString());
+        var image = symbolCache.GetOrCreate(symbolStyle.ImageSource,
+            () => TryCreateDrawableImage(symbolStyle.ImageSource));
         if (image == null)
             return false;
 
@@ -68,16 +69,13 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
             else
             {
-                var sprite = symbolStyle.BitmapRegion;
-
                 if (symbolStyle.ImageSource is null)
                     throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
-                var skiaSpriteCache = renderService.SpriteCache;
-                var skImage = skiaSpriteCache.GetOrCreateSKObject(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
-                    () => bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
+                var drawableImage = (BitmapImage)renderService.SymbolCache.GetOrCreate(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
+                    () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.BitmapRegion));
 
-                BitmapRenderer.Draw(canvas, skImage,
+                BitmapRenderer.Draw(canvas, drawableImage.Image,
                     (float)destinationX, (float)destinationY,
                     rotation,
                     (float)offset.X, (float)offset.Y,
@@ -89,17 +87,19 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             if (symbolStyle.SvgFillColor.HasValue || symbolStyle.SvgStrokeColor.HasValue)
             {
-                var skPicture = renderService.SpriteCache.GetOrCreateSKObject(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
+                var drawableImage = renderService.SymbolCache.GetOrCreate(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
                     () =>
                     {
                         var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(svgImage.OriginalStream, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
                         var skSvg = new SKSvg();
                         modifiedSvgStream.Position = 0;
                         skSvg.Load(modifiedSvgStream);
-                        return skSvg.Picture;
+                        if (skSvg.Picture is null)
+                            throw new Exception("Failed to load modified SVG picture.");
+                        return new SvgImage(skSvg.Picture);
                     });
 
-                PictureRenderer.Draw(canvas, skPicture,
+                PictureRenderer.Draw(canvas, ((SvgImage)drawableImage).Picture,
                     (float)destinationX, (float)destinationY,
                     rotation,
                     (float)offset.X, (float)offset.Y,
@@ -116,6 +116,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
 
         return true;
+    }
+
+    private static BitmapImage CreateBitmapImageForRegion(BitmapImage bitmapImage, BitmapRegion sprite)
+    {
+        return new BitmapImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
     }
 
     private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, VectorCache vectorCache)
@@ -253,11 +258,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             case SymbolType.Image:
                 if (symbolStyle.ImageSource is not null)
                 {
-                    var bitmapSize = ((RenderService)renderService).SymbolCache.GetSize(symbolStyle.ImageSource.ToString());
-                    if (bitmapSize != null)
-                    {
-                        symbolSize = bitmapSize;
-                    }
+                    var image = ((RenderService)renderService).SymbolCache.GetOrCreate(symbolStyle.ImageSource,
+                        () => TryCreateDrawableImage(symbolStyle.ImageSource));
+                    if (image != null)
+                        symbolSize = new Size(image.Width, image.Height);
                 }
 
                 break;
@@ -280,7 +284,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);
 
         // add length to size multiplied by two because the total size increased by the offset
-        size += (length * 2);
+        size += length * 2;
 
         return size;
     }
@@ -290,5 +294,14 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     public static string ToModifiedSvgKey(string imageSource, Color? fill, Color? stroke)
         => $"{imageSource}?modifiedsvg=true,fill={fill?.ToString() ?? ""},stroke={stroke?.ToString() ?? ""}";
 
+    // Todo: Figure out a better place for this method
+    public static IDrawableImage? TryCreateDrawableImage(string key)
+    {
+        var imageBytes = ImageSourceCache.Instance.Get(key);
+        if (imageBytes == null)
+            return null;
+        var drawableImage = ImageHelper.ToDrawableImage(imageBytes);
+        return drawableImage;
+    }
 
 }

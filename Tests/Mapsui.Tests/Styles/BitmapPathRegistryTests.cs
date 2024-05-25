@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Mapsui.Extensions;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 using NUnit.Framework;
+using System;
+using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Styles;
 
@@ -49,7 +48,7 @@ public static class ImageSourceCacheTests
 
         // Assert
         Assert.That(stream is not null);
-        Assert.That(stream?.ToBytes().Length > 0);
+        Assert.That(stream?.Length > 0);
     }
 
     [Test]
@@ -74,25 +73,25 @@ public static class ImageSourceCacheTests
         await ImageSourceCache.Instance.RegisterAsync(examplePath);
 
         // Act
-        var stream = ImageSourceCache.Instance.Get(examplePath);
+        var bytes = ImageSourceCache.Instance.Get(examplePath);
 
         // Assert
-        Assert.That(stream is not null);
-        Assert.That(stream?.ToBytes().Length > 0);
+        Assert.That(bytes is not null);
+        Assert.That(bytes?.Length > 0);
     }
 
     [Test]
     public static async Task AddAndRemoveUriHttpsRegisterAsync()
     {
         // Arrange
-        var mapsuiLogo = "https://mapsui.com/images/logo.svg";
-        await ImageSourceCache.Instance.RegisterAsync(mapsuiLogo);
+        var urlToMapsuiLogo = "https://mapsui.com/images/logo.svg";
+        await ImageSourceCache.Instance.RegisterAsync(urlToMapsuiLogo);
 
         // Act
-        ImageSourceCache.Instance.Unregister(mapsuiLogo);
+        ImageSourceCache.Instance.Unregister(urlToMapsuiLogo);
 
         // Assert
-        Assert.That(ImageSourceCache.Instance.Get(mapsuiLogo), Is.Null);
+        Assert.That(ImageSourceCache.Instance.Get(urlToMapsuiLogo), Is.Null);
     }
 
     [Test]
@@ -103,26 +102,10 @@ public static class ImageSourceCacheTests
         await ImageSourceCache.Instance.RegisterAsync(mapsuiLogo);
 
         // Act
-        var stream = ImageSourceCache.Instance.Get(mapsuiLogo);
+        var bytes = ImageSourceCache.Instance.Get(mapsuiLogo);
 
         // Assert
-        Assert.That(stream is not null);
-        Assert.That(stream?.ToBytes().Length > 0);
-    }
-
-    [Test]
-    public async static Task RenderBitmapRegistryDisposeShouldRemoveBitmapAsync()
-    {
-        // Arrange
-        var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
-        var imageSourceCache = ImageSourceCache.Instance;
-        await imageSourceCache.RegisterAsync(imageSource);
-
-        // Act
-#pragma warning disable IDISP016 // Don't use disposed instance. In this case we want to specifically test dispose.
-        imageSourceCache.Dispose();
-
-        // Assert
-        // Todo: fix test before merging to main: Assert.Throws<ObjectDisposedException>(() => imageSourceCache.Get(imageSource));
+        Assert.That(bytes is not null);
+        Assert.That(bytes?.Length > 0);
     }
 }

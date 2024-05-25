@@ -1,51 +1,30 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using Mapsui.Rendering.Skia.Images;
-using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
 public sealed class SymbolCache : IDisposable
 {
-    private readonly IDictionary<string, IDrawableImage> _cache = new ConcurrentDictionary<string, IDrawableImage>();
+    private readonly ConcurrentDictionary<string, IDrawableImage> _cache = new();
 
-    public IDrawableImage? GetOrCreate(string key)
+    public IDrawableImage? GetOrCreate(string key, Func<IDrawableImage?> tryCreateDrawableImage)
     {
-        if (_cache.ContainsKey(key))
-        {
-            IDrawableImage result = _cache[key];
-            if (!result.IsDisposed())
-            {
-                return result;
-            }
-        }
+        if (_cache.TryGetValue(key, out var value))
+            return value;
 
-        var imageStream = ImageSourceCache.Instance.Get(key);
-        if (imageStream == null)
-        {
+        var drawableImage = tryCreateDrawableImage();
+        if (drawableImage == null)
             return null;
-        }
-        var loadBitmap = ImageHelper.LoadBitmap(imageStream) ?? throw new ArgumentNullException(nameof(key));
-        return _cache[key] = loadBitmap;
-    }
-
-    public Size? GetSize(string key)
-    {
-        var bitmap = GetOrCreate(key);
-        if (bitmap == null)
-            return null;
-
-        return new Size(bitmap.Width, bitmap.Height);
+        return _cache[key] = drawableImage;
     }
 
     public void Dispose()
     {
-        foreach (var value in _cache.Values)
+        foreach (var key in _cache.Keys)
         {
-            value.Dispose();
+            if (_cache.TryRemove(key, out var value)) // Remove before disposing so that we never have a disposed object in the cache
+                value.Dispose();
         }
-
-        _cache.Clear();
     }
 }

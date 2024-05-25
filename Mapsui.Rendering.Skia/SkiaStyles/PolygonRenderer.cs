@@ -146,17 +146,17 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SpriteCache, brush);
+                    var image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SymbolCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SpriteCache, brush);
+                    image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SymbolCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
-                            SKMatrix.CreateRotation((float)(rotation * System.Math.PI / 180.0f),
+                            SKMatrix.CreateRotation((float)(rotation * Math.PI / 180.0f),
                                 image.Width >> 1, image.Height >> 1));
                     break;
                 default:
@@ -210,13 +210,14 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(SymbolCache? symbolCache, SpriteCache spriteCache, Brush brush)
+    private static SKImage? GetImage(SymbolCache? symbolCache, SymbolCache drawableImageCache, Brush brush)
     {
         if (symbolCache == null)
             return null;
         if (brush.ImageSource is null)
             return null;
-        var image = symbolCache.GetOrCreate(brush.ImageSource.ToString());
+        var image = symbolCache.GetOrCreate(brush.ImageSource,
+            () => SymbolStyleRenderer.TryCreateDrawableImage(brush.ImageSource));
         if (image == null)
             return null;
 
@@ -232,14 +233,15 @@ internal static class PolygonRenderer
 
                 // The line below generates a string. For performance is it not great to have this in the render loop.
                 var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
-                spriteCache.GetOrCreateSKObject(spriteKey, () => GetSpriteFromSKImage(bitmapImage.Image, sprite));
+                drawableImageCache.GetOrCreate(spriteKey, () => CreateBitmapImage(bitmapImage.Image, sprite));
             }
         }
         return null;
     }
 
-    private static SKImage GetSpriteFromSKImage(SKImage skImage, BitmapRegion bitmapRegion)
+    private static BitmapImage CreateBitmapImage(SKImage skImage, BitmapRegion bitmapRegion)
     {
-        return skImage.Subset(new SKRectI(bitmapRegion.X, bitmapRegion.Y, bitmapRegion.X + bitmapRegion.Width, bitmapRegion.Y + bitmapRegion.Height));
+        return new BitmapImage(skImage.Subset(new SKRectI(bitmapRegion.X, bitmapRegion.Y,
+            bitmapRegion.X + bitmapRegion.Width, bitmapRegion.Y + bitmapRegion.Height)));
     }
 }

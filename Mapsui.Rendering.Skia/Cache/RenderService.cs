@@ -11,7 +11,6 @@ public sealed class RenderService : IRenderService
         LabelCache = new LabelCache();
         ImageSourceCache = ImageSourceCache.Instance;
         VectorCache = new VectorCache(this, vectorCacheCapacity);
-        SpriteCache = new SpriteCache();
     }
 
     public SymbolCache SymbolCache { get; }
@@ -19,7 +18,6 @@ public sealed class RenderService : IRenderService
     public TileCache TileCache { get; }
     public LabelCache LabelCache { get; }
     public ImageSourceCache ImageSourceCache { get; }
-    public SpriteCache SpriteCache { get; }
 
     public void Dispose()
     {
@@ -27,7 +25,5 @@ public sealed class RenderService : IRenderService
         SymbolCache.Dispose();
         VectorCache.Dispose();
         TileCache.Dispose();
-        ImageSourceCache.Dispose();
-        SpriteCache.Dispose();
     }
 }

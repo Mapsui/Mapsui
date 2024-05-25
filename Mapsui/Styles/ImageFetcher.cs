@@ -1,31 +1,30 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using System;
+﻿using Mapsui.Extensions;
 using Mapsui.Logging;
-using System.Net.Http;
-using Mapsui.Extensions;
+using System;
 using System.Collections.Generic;
-using System.Reflection;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
 public static class ImageFetcher
 {
-    public static async Task<Stream> FetchStreamFromImageSourceAsync(string imageSource)
+    public static async Task<byte[]> FetchBytesFromImageSourceAsync(string imageSource)
     {
         var imageSourceUrl = new Uri(imageSource);
-        var stream = imageSourceUrl.Scheme switch
+
+        return imageSourceUrl.Scheme switch
         {
             "embedded" => LoadEmbeddedResourceFromPath(imageSourceUrl),
             "file" => LoadFromFileSystem(imageSourceUrl),
             "http" or "https" => await LoadFromUrlAsync(imageSourceUrl),
             _ => throw new ArgumentException($"Scheme is not supported '{imageSourceUrl.Scheme}' of '{imageSource}'"),
         };
-        ValidateBitmapData(stream);
-        return stream;
     }
 
-    private static MemoryStream LoadEmbeddedResourceFromPath(Uri imageSource)
+    private static byte[] LoadEmbeddedResourceFromPath(Uri imageSource)
     {
         try
         {
@@ -39,7 +38,7 @@ public static class ImageFetcher
                 {
                     using var stream = assembly.GetManifestResourceStream(matchingResourceName)
                         ?? throw new Exception($"The resource name was found but GetManifestResourceStream returned null: '{imageSource}'");
-                    return stream.CopyToMemoryStream(); // Copy stream to memory stream to avoid issues with disposing the stream
+                    return stream.ToBytes();
                 }
             }
             var allResourceNames = assemblies.SelectMany(a => a.GetManifestResourceNames()).ToList();
@@ -71,7 +70,7 @@ public static class ImageFetcher
         return result;
     }
 
-    private async static Task<Stream> LoadFromUrlAsync(Uri imageSource)
+    private async static Task<byte[]> LoadFromUrlAsync(Uri imageSource)
     {
         try
         {
@@ -80,7 +79,7 @@ public static class ImageFetcher
             using HttpResponseMessage response = await httpClient.GetAsync(imageSource, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
             await using var tempStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            return tempStream.CopyToMemoryStream(); // Copy stream to memory stream to avoid issues with disposing the stream
+            return tempStream.ToBytes();
         }
         catch (Exception ex)
         {
@@ -90,11 +89,11 @@ public static class ImageFetcher
         }
     }
 
-    private static FileStream LoadFromFileSystem(Uri imageSource)
+    private static byte[] LoadFromFileSystem(Uri imageSource)
     {
         try
         {
-            return File.OpenRead(imageSource.LocalPath);
+            return File.ReadAllBytes(imageSource.LocalPath);
         }
         catch (Exception ex)
         {
@@ -102,15 +101,5 @@ public static class ImageFetcher
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }
-    }
-
-    /// <summary>
-    /// Validate the correctness of the bitmap. Throws if not valid.
-    /// </summary>
-    /// <param name="bitmapData">Bitmap data to check</param>
-    private static void ValidateBitmapData(Stream bitmapData)
-    {
-        if (bitmapData == null)
-            throw new ArgumentException("The bitmap data that is registered is null. Was the image loaded correctly?");
     }
 }
