@@ -94,7 +94,7 @@ public class WfsGeometryFilterSample : ISample
             }
         };
     }
-    
+
     private class GeometryFilterProvider(IProvider provider, Func<IFeature, bool> filter) : IProvider, IProviderExtended
     {
         private DateTime _lastUpdate;
