@@ -3,13 +3,26 @@ using Svg.Skia;
 
 namespace Mapsui.Rendering.Skia.Images;
 
-internal sealed class SvgImage(byte[] bytes) : IDrawableImage
+public sealed class SvgImage : IDrawableImage
 {
     private bool _disposed;
-    private readonly SKSvg _skSvg = bytes.LoadSvg();
+    private readonly SKSvg? _skSvg;
+    private readonly SKPicture? _picture;
 
-    public SKPicture Picture => _skSvg.Picture!;
-    public byte[] OriginalStream { get; } = bytes;
+    public SvgImage(byte[] bytes)
+    {
+        _skSvg = bytes.LoadSvg();
+        // Perhaps we should dispose the SKSvg but I fear this will dispose the SKSvg.Picture as well. Todo: investigate
+        OriginalStream = bytes;
+    }
+
+    public SvgImage(SKPicture picture)
+    {
+        _picture = picture;
+    }
+
+    public SKPicture Picture => _skSvg?.Picture is null ? _picture! : _skSvg.Picture!;
+    public byte[]? OriginalStream { get; }
     public float Width => Picture.CullRect.Width;
     public float Height => Picture.CullRect.Height;
 
@@ -18,7 +31,8 @@ internal sealed class SvgImage(byte[] bytes) : IDrawableImage
         if (_disposed)
             return;
 
-        _skSvg.Dispose();
+        _skSvg?.Dispose();
+        _picture?.Dispose();
 
         _disposed = true;
     }

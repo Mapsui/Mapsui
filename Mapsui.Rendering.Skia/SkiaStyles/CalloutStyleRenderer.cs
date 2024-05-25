@@ -28,7 +28,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
 
-        var spriteCache = (SpriteCache)renderService.SpriteCache;
+        var spriteCache = renderService.SpriteCache;
 
         if (calloutStyle.Invalidated)
         {
@@ -37,11 +37,11 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             calloutStyle.FullCalloutId = Guid.NewGuid().ToString();
         }
 
-        var content = spriteCache.GetOrCreateSKObject(calloutStyle.ContentId, () => RenderContent(calloutStyle, renderService.SymbolCache));
-        var picture = spriteCache.GetOrCreateSKObject(calloutStyle.FullCalloutId, () => RenderCallout(calloutStyle, content));
+        var contentDrawableImage = (SvgImage)spriteCache.GetOrCreate(calloutStyle.ContentId, () => RenderContent(calloutStyle, renderService.SymbolCache));
+        var drawableImage = (SvgImage)spriteCache.GetOrCreate(calloutStyle.FullCalloutId, () => RenderCallout(calloutStyle, contentDrawableImage.Picture));
 
         // Calc offset (relative or absolute)
-        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
+        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);
 
         var rotation = (float)calloutStyle.SymbolRotation;
 
@@ -65,14 +65,14 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         canvas.Translate((float)calloutStyle.Offset.X, (float)calloutStyle.Offset.Y);
 
         using var skPaint = new SKPaint() { IsAntialias = true };
-        canvas.DrawPicture(picture, skPaint);
+        canvas.DrawPicture(drawableImage.Picture, skPaint);
 
         canvas.Restore();
 
         return true;
     }
 
-    private static SKPicture RenderCallout(CalloutStyle callout, SKPicture content)
+    private static SvgImage RenderCallout(CalloutStyle callout, SKPicture content)
     {
         var contentWidth = content.CullRect.Width;
         var contentHeight = content.CullRect.Height;
@@ -94,7 +94,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         callout.Invalidated = false;
         // Create SKPicture from canvas
-        return recorder.EndRecording();
+        return new SvgImage(recorder.EndRecording());
     }
 
     /// <summary>
@@ -150,7 +150,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static SKPicture RenderContent(CalloutStyle callout, SymbolCache symbolCache)
+    public static SvgImage RenderContent(CalloutStyle callout, SymbolCache symbolCache)
     {
         if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {
@@ -160,7 +160,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             if (image is null)
             {
                 Logger.Log(LogLevel.Error, $"Image not found: {callout.ImageSource}");
-                return recorder.EndRecording();
+                return new SvgImage(recorder.EndRecording());
             }
             using var canvas = recorder.BeginRecording(new SKRect(0, 0, image.Width, image.Height));
             using var paint = new SKPaint();
@@ -168,7 +168,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
                 canvas.DrawImage(bitmapImage.Image, 0, 0, paint);
             else if (image is SvgImage svgImage)
                 canvas.DrawPicture(svgImage.Picture, paint);
-            return recorder.EndRecording();
+            return new SvgImage(recorder.EndRecording());
         }
         else
         {
@@ -215,7 +215,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
             if (callout.Type == CalloutType.Detail)
                 textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-            return recorder.EndRecording();
+            return new SvgImage(recorder.EndRecording());
         }
     }
 

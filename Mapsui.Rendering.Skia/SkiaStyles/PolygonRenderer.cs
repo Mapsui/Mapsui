@@ -233,14 +233,15 @@ internal static class PolygonRenderer
 
                 // The line below generates a string. For performance is it not great to have this in the render loop.
                 var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
-                spriteCache.GetOrCreateSKObject(spriteKey, () => GetSpriteFromSKImage(bitmapImage.Image, sprite));
+                spriteCache.GetOrCreate(spriteKey, () => CreateBitmapImage(bitmapImage.Image, sprite));
             }
         }
         return null;
     }
 
-    private static SKImage GetSpriteFromSKImage(SKImage skImage, BitmapRegion bitmapRegion)
+    private static BitmapImage CreateBitmapImage(SKImage skImage, BitmapRegion bitmapRegion)
     {
-        return skImage.Subset(new SKRectI(bitmapRegion.X, bitmapRegion.Y, bitmapRegion.X + bitmapRegion.Width, bitmapRegion.Y + bitmapRegion.Height));
+        return new BitmapImage(skImage.Subset(new SKRectI(bitmapRegion.X, bitmapRegion.Y,
+            bitmapRegion.X + bitmapRegion.Width, bitmapRegion.Y + bitmapRegion.Height)));
     }
 }

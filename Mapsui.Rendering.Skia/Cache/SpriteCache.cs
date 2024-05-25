@@ -1,4 +1,4 @@
-﻿using SkiaSharp;
+﻿using Mapsui.Rendering.Skia.Images;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
@@ -7,20 +7,20 @@ namespace Mapsui.Rendering.Skia.Cache;
 public sealed class SpriteCache : IDisposable
 {
     private bool _disposed;
-    private readonly ConcurrentDictionary<string, SKObject> _cache = new();
+    private readonly ConcurrentDictionary<string, IDrawableImage> _cache = new();
 
     [return: NotNullIfNotNull(nameof(key))]
-    public T GetOrCreateSKObject<T>(string key, Func<T> toSKObject) where T : SKObject
+    public IDrawableImage GetOrCreate(string key, Func<IDrawableImage> toDrawableImage)
     {
         ThrowIfDisposed();
 
-        if (!_cache.TryGetValue(key, out var skObject))
+        if (!_cache.TryGetValue(key, out var image))
         {
-            skObject = toSKObject();
-            _cache[key] = skObject;
+            image = toDrawableImage();
+            _cache[key] = image;
         }
 
-        return (T)skObject;
+        return image;
     }
 
     public void Dispose()
