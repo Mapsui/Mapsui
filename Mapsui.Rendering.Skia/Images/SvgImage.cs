@@ -13,8 +13,6 @@ internal sealed class SvgImage(byte[] bytes) : IDrawableImage
     public float Width => Picture.CullRect.Width;
     public float Height => Picture.CullRect.Height;
 
-    public bool IsDisposed() => _disposed;
-
     public void Dispose()
     {
         if (_disposed)

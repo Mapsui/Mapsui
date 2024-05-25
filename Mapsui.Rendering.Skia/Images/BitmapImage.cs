@@ -22,8 +22,6 @@ internal sealed class BitmapImage : IDrawableImage
     public float Width => _image.Width;
     public float Height => _image.Height;
 
-    public bool IsDisposed() => _disposed;
-
     public void Dispose()
     {
         if (_disposed)

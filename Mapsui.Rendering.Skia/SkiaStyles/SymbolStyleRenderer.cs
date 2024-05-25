@@ -253,11 +253,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             case SymbolType.Image:
                 if (symbolStyle.ImageSource is not null)
                 {
-                    var bitmapSize = ((RenderService)renderService).SymbolCache.GetSize(symbolStyle.ImageSource.ToString());
-                    if (bitmapSize != null)
-                    {
-                        symbolSize = bitmapSize;
-                    }
+                    var image = ((RenderService)renderService).SymbolCache.GetOrCreate(symbolStyle.ImageSource);
+                    if (image != null)
+                        symbolSize = new Size(image.Width, image.Height);
                 }
 
                 break;
@@ -280,7 +278,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);
 
         // add length to size multiplied by two because the total size increased by the offset
-        size += (length * 2);
+        size += length * 2;
 
         return size;
     }
