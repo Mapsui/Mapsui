@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿using Mapsui.Rendering.Skia.Extensions;
+using SkiaSharp;
 using Svg.Skia;
 
 namespace Mapsui.Rendering.Skia.Images;
