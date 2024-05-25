@@ -6,14 +6,14 @@ public sealed class RenderService : IRenderService
 {
     public RenderService(int vectorCacheCapacity = 10000)
     {
-        SymbolCache = new SymbolCache();
+        DrawableImageCache = new DrawableImageCache();
         TileCache = new TileCache();
         LabelCache = new LabelCache();
         ImageSourceCache = ImageSourceCache.Instance;
         VectorCache = new VectorCache(this, vectorCacheCapacity);
     }
 
-    public SymbolCache SymbolCache { get; }
+    public DrawableImageCache DrawableImageCache { get; }
     public VectorCache VectorCache { get; }
     public TileCache TileCache { get; }
     public LabelCache LabelCache { get; }
@@ -22,7 +22,7 @@ public sealed class RenderService : IRenderService
     public void Dispose()
     {
         LabelCache.Dispose();
-        SymbolCache.Dispose();
+        DrawableImageCache.Dispose();
         VectorCache.Dispose();
         TileCache.Dispose();
     }

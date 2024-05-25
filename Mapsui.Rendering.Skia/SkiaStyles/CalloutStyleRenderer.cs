@@ -35,8 +35,8 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             calloutStyle.FullCalloutId = Guid.NewGuid().ToString();
         }
 
-        var contentDrawableImage = (SvgImage)renderService.SymbolCache.GetOrCreate(calloutStyle.ContentId, () => RenderContent(calloutStyle, renderService.SymbolCache));
-        var drawableImage = (SvgImage)renderService.SymbolCache.GetOrCreate(calloutStyle.FullCalloutId, () => RenderCallout(calloutStyle, contentDrawableImage.Picture));
+        var contentDrawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ContentId, () => RenderContent(calloutStyle, renderService.DrawableImageCache));
+        var drawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.FullCalloutId, () => RenderCallout(calloutStyle, contentDrawableImage.Picture));
 
         // Calc offset (relative or absolute)
         var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);
@@ -148,12 +148,12 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static SvgImage RenderContent(CalloutStyle callout, SymbolCache symbolCache)
+    public static SvgImage RenderContent(CalloutStyle callout, DrawableImageCache drawableImageCache)
     {
         if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {
             using var recorder = new SKPictureRecorder();
-            var image = symbolCache.GetOrCreate(callout.ImageSource,
+            var image = drawableImageCache.GetOrCreate(callout.ImageSource,
                 () => SymbolStyleRenderer.TryCreateDrawableImage(callout.ImageSource));
             if (image is null)
             {
