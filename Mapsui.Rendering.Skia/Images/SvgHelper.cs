@@ -44,4 +44,15 @@ public static class SvgHelper
         svg.Load(str);
         return svg;
     }
+
+    /// <summary> Load Svg from byte array</summary>
+    /// <param name="bytes">svg data</param>
+    /// <returns>loaded svg image</returns>
+    [return: NotNullIfNotNull(nameof(bytes))]
+    public static SKSvg LoadSvg(this byte[] bytes)
+    {
+        var svg = new SKSvg();
+        svg.Load(new MemoryStream(bytes));
+        return svg;
+    }
 }

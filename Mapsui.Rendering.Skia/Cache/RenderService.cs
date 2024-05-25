@@ -27,7 +27,6 @@ public sealed class RenderService : IRenderService
         SymbolCache.Dispose();
         VectorCache.Dispose();
         TileCache.Dispose();
-        ImageSourceCache.Dispose();
         SpriteCache.Dispose();
     }
 }

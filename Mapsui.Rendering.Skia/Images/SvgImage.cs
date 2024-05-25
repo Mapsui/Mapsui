@@ -1,16 +1,15 @@
 ﻿using SkiaSharp;
 using Svg.Skia;
-using System.IO;
 
 namespace Mapsui.Rendering.Skia.Images;
 
-internal sealed class SvgImage(Stream stream) : IDrawableImage
+internal sealed class SvgImage(byte[] bytes) : IDrawableImage
 {
     private bool _disposed;
-    private readonly SKSvg _skSvg = stream.LoadSvg();
+    private readonly SKSvg _skSvg = bytes.LoadSvg();
 
     public SKPicture Picture => _skSvg.Picture!;
-    public Stream OriginalStream { get; } = stream;
+    public byte[] OriginalStream { get; } = bytes;
     public float Width => Picture.CullRect.Width;
     public float Height => Picture.CullRect.Height;
 
@@ -22,7 +21,6 @@ internal sealed class SvgImage(Stream stream) : IDrawableImage
             return;
 
         _skSvg.Dispose();
-        OriginalStream.Dispose();
 
         _disposed = true;
     }

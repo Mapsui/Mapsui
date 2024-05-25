@@ -21,12 +21,11 @@ public sealed class SymbolCache : IDisposable
             }
         }
 
-        var imageStream = ImageSourceCache.Instance.Get(key);
-        if (imageStream == null)
-        {
+        var imageBytes = ImageSourceCache.Instance.Get(key);
+        if (imageBytes == null)
             return null;
-        }
-        var loadBitmap = ImageHelper.LoadBitmap(imageStream) ?? throw new ArgumentNullException(nameof(key));
+
+        var loadBitmap = ImageHelper.LoadBitmap(imageBytes) ?? throw new ArgumentNullException(nameof(key));
         return _cache[key] = loadBitmap;
     }
 

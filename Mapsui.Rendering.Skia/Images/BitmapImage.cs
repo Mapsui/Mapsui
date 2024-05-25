@@ -1,6 +1,4 @@
-﻿using Mapsui.Extensions;
-using SkiaSharp;
-using System.IO;
+﻿using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Images;
 
@@ -14,9 +12,9 @@ internal sealed class BitmapImage : IDrawableImage
         _image = image;
     }
 
-    public BitmapImage(Stream stream)
+    public BitmapImage(byte[] bytes)
     {
-        using var skData = SKData.CreateCopy(stream.ToBytes());
+        using var skData = SKData.CreateCopy(bytes);
         _image = SKImage.FromEncodedData(skData);
     }
 

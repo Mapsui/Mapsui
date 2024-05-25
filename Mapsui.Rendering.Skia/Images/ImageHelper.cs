@@ -1,14 +1,13 @@
-using System.IO;
 using Mapsui.Extensions;
 
 namespace Mapsui.Rendering.Skia.Images;
 
 internal static class ImageHelper
 {
-    public static IDrawableImage? LoadBitmap(Stream stream)
+    public static IDrawableImage? LoadBitmap(byte[] bytes)
     {
-        if (stream.IsSvg())
-            return new SvgImage(stream);
-        return new BitmapImage(stream);
+        if (bytes.IsSvg())
+            return new SvgImage(bytes);
+        return new BitmapImage(bytes);
     }
 }

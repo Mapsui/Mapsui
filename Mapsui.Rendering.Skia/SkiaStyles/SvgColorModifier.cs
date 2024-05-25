@@ -8,13 +8,12 @@ namespace Mapsui.Styles;
 
 public static class SvgColorModifier
 {
-    public static MemoryStream GetModifiedSvg(Stream stream, Color? fillColor = null, Color? strokeColor = null)
+    public static MemoryStream GetModifiedSvg(byte[] bytes, Color? fillColor = null, Color? strokeColor = null)
     {
         var svgFillColor = (System.Drawing.Color?)fillColor;
         var svgStrokeColor = (System.Drawing.Color?)strokeColor;
 
-        stream.Position = 0;
-        var svgDocument = SvgExtensions.Open(stream) ?? throw new Exception("Could not open stream as svg");
+        var svgDocument = SvgExtensions.Open(new MemoryStream(bytes)) ?? throw new Exception("Could not open stream as svg");
 
         var elements = GetAllElements(svgDocument.Children);
         foreach (var element in elements)
