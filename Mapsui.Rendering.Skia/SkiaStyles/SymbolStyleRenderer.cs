@@ -45,8 +45,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (symbolStyle.ImageSource is null)
             return false;
 
-        var symbolCache = renderService.SymbolCache;
-        var image = symbolCache.GetOrCreate(symbolStyle.ImageSource,
+        var image = renderService.DrawableImageCache.GetOrCreate(symbolStyle.ImageSource,
             () => TryCreateDrawableImage(symbolStyle.ImageSource));
         if (image == null)
             return false;
@@ -72,7 +71,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 if (symbolStyle.ImageSource is null)
                     throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
-                var drawableImage = (BitmapImage)renderService.SymbolCache.GetOrCreate(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
+                var drawableImage = (BitmapImage)renderService.DrawableImageCache.GetOrCreate(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
                     () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.BitmapRegion));
 
                 BitmapRenderer.Draw(canvas, drawableImage.Image,
@@ -87,7 +86,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             if (symbolStyle.SvgFillColor.HasValue || symbolStyle.SvgStrokeColor.HasValue)
             {
-                var drawableImage = renderService.SymbolCache.GetOrCreate(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
+                var drawableImage = renderService.DrawableImageCache.GetOrCreate(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
                     () =>
                     {
                         var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(svgImage.OriginalStream, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
@@ -258,7 +257,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             case SymbolType.Image:
                 if (symbolStyle.ImageSource is not null)
                 {
-                    var image = ((RenderService)renderService).SymbolCache.GetOrCreate(symbolStyle.ImageSource,
+                    var image = ((RenderService)renderService).DrawableImageCache.GetOrCreate(symbolStyle.ImageSource,
                         () => TryCreateDrawableImage(symbolStyle.ImageSource));
                     if (image != null)
                         symbolSize = new Size(image.Width, image.Height);

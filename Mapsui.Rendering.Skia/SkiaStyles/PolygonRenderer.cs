@@ -146,13 +146,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SymbolCache, brush);
+                    var image = GetImage(skiaRenderService.DrawableImageCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(skiaRenderService.SymbolCache, skiaRenderService.SymbolCache, brush);
+                    image = GetImage(skiaRenderService.DrawableImageCache, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -210,13 +210,13 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(SymbolCache? symbolCache, SymbolCache drawableImageCache, Brush brush)
+    private static SKImage? GetImage(DrawableImageCache drawableImageCache, Brush brush)
     {
-        if (symbolCache == null)
+        if (drawableImageCache == null)
             return null;
         if (brush.ImageSource is null)
             return null;
-        var image = symbolCache.GetOrCreate(brush.ImageSource,
+        var image = drawableImageCache.GetOrCreate(brush.ImageSource,
             () => SymbolStyleRenderer.TryCreateDrawableImage(brush.ImageSource));
         if (image == null)
             return null;

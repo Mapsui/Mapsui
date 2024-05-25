@@ -4,7 +4,7 @@ using Mapsui.Rendering.Skia.Images;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class SymbolCache : IDisposable
+public sealed class DrawableImageCache : IDisposable
 {
     private readonly ConcurrentDictionary<string, IDrawableImage> _cache = new();
 
