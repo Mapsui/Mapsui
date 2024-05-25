@@ -95,12 +95,10 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     private IDrawableImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
     {
         UpdatePaint(style, layerOpacity, _paint, labelCache);
-
-        var bitmap = CreateLabelAsBitmap(style, text, _paint, layerOpacity);
-        return new BitmapImage(bitmap);
+        return new BitmapImage(CreateLabelAsImage(style, text, _paint, layerOpacity));
     }
 
-    private static SKImage CreateLabelAsBitmap(LabelStyle style, string? text, SKPaint paint, float layerOpacity)
+    private static SKImage CreateLabelAsImage(LabelStyle style, string? text, SKPaint paint, float layerOpacity)
     {
         var rect = new SKRect();
         paint.MeasureText(text, ref rect);
@@ -109,15 +107,15 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var skImageInfo = new SKImageInfo((int)backRect.Width, (int)backRect.Height);
 
-        var bitmap = SKImage.Create(skImageInfo);
+        var image = SKImage.Create(skImageInfo);
+        using var bitmap = SKBitmap.FromImage(image);
+        // Todo: Construct the SKCanvas from SKImage instead of SKBitmap once this option becomes available.
+        using var canvas = new SKCanvas(bitmap);
+        canvas.Clear();
 
-        // todo: Construct SKCanvas with SKImage once this option becomes available
-        using var target = new SKCanvas(SKBitmap.FromImage(bitmap));
-        target.Clear();
-
-        DrawBackground(style, backRect, target, layerOpacity);
-        target.DrawText(text, -rect.Left + 3, -rect.Top + 3, paint);
-        return bitmap;
+        DrawBackground(style, backRect, canvas, layerOpacity);
+        canvas.DrawText(text, -rect.Left + 3, -rect.Top + 3, paint);
+        return image;
     }
 
     private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
