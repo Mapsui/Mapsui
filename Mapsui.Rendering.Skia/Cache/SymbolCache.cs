@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Mapsui.Rendering.Skia.Images;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
 public sealed class SymbolCache : IDisposable
 {
-    private readonly IDictionary<string, BitmapInfo> _cache = new ConcurrentDictionary<string, BitmapInfo>();
+    private readonly IDictionary<string, IDrawableImage> _cache = new ConcurrentDictionary<string, IDrawableImage>();
 
-    public BitmapInfo? GetOrCreate(string key)
+    public IDrawableImage? GetOrCreate(string key)
     {
         if (_cache.ContainsKey(key))
         {
-            BitmapInfo result = _cache[key];
-            if (!BitmapHelper.InvalidBitmapInfo(result))
+            IDrawableImage result = _cache[key];
+            if (!result.IsDisposed())
             {
                 return result;
             }
@@ -25,13 +26,13 @@ public sealed class SymbolCache : IDisposable
         {
             return null;
         }
-        var loadBitmap = BitmapHelper.LoadBitmap(imageStream) ?? throw new ArgumentNullException(nameof(key));
+        var loadBitmap = ImageHelper.LoadBitmap(imageStream) ?? throw new ArgumentNullException(nameof(key));
         return _cache[key] = loadBitmap;
     }
 
     public Size? GetSize(string key)
     {
-        var bitmap = (BitmapInfo?)GetOrCreate(key);
+        var bitmap = GetOrCreate(key);
         if (bitmap == null)
             return null;
 

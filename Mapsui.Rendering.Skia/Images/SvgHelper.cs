@@ -5,7 +5,7 @@ using Svg.Skia;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
-namespace Mapsui.Utilities;
+namespace Mapsui.Rendering.Skia.Images;
 
 public static class SvgHelper
 {

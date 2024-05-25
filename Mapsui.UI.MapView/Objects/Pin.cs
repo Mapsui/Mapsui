@@ -11,6 +11,7 @@ using SkiaSharp;
 using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using Color = Microsoft.Maui.Graphics.Color;
+using Mapsui.Rendering.Skia.Images;
 
 namespace Mapsui.UI.Maui;
 

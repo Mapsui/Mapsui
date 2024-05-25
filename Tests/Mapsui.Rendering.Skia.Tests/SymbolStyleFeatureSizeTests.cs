@@ -83,7 +83,7 @@ public class SymbolStyleFeatureSizeTests
     }
 
     [Test]
-    public void BitmapInfoFeatureSize()
+    public void ImageFeatureSize()
     {
         // Arrange
         using var renderService = new RenderService();

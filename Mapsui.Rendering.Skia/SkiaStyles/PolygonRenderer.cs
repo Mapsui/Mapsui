@@ -1,6 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Rendering.Skia.Images;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
@@ -215,25 +216,23 @@ internal static class PolygonRenderer
             return null;
         if (brush.ImageSource is null)
             return null;
-        var bitmapInfo = symbolCache.GetOrCreate(brush.ImageSource.ToString());
-        if (bitmapInfo == null)
+        var image = symbolCache.GetOrCreate(brush.ImageSource.ToString());
+        if (image == null)
             return null;
 
-        if (bitmapInfo.Type == BitmapType.Bitmap)
+        if (image is BitmapImage bitmapImage)
         {
             if (brush.BitmapRegion is null)
-                return bitmapInfo.Bitmap;
+                return bitmapImage.Image;
             else
             {
                 if (brush.ImageSource is null)
                     throw new Exception("If Sprite is assigned ImageSource should be set.");
                 var sprite = brush.BitmapRegion;
-                if (bitmapInfo.Bitmap is null)
-                    throw new Exception("Bitmap is null while type is Bitmap. This should never happen.");
 
                 // The line below generates a string. For performance is it not great to have this in the render loop.
                 var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
-                spriteCache.GetOrCreateSKObject(spriteKey, () => GetSpriteFromSKImage(bitmapInfo.Bitmap, sprite));
+                spriteCache.GetOrCreateSKObject(spriteKey, () => GetSpriteFromSKImage(bitmapImage.Image, sprite));
             }
         }
         return null;

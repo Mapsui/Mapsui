@@ -1,5 +1,5 @@
 ﻿using Mapsui.Rendering.Skia.Extensions;
-using Mapsui.Utilities;
+using Mapsui.Rendering.Skia.Images;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using SkiaSharp;

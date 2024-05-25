@@ -1,7 +1,9 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Rendering.Skia.Images;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -153,10 +155,18 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {
             using var recorder = new SKPictureRecorder();
-            var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.ImageSource.ToString());
-            using var canvas = recorder.BeginRecording(new SKRect(0, 0, bitmapInfo.Width, bitmapInfo.Height));
+            var image = symbolCache.GetOrCreate(callout.ImageSource.ToString());
+            if (image is null)
+            {
+                Logger.Log(LogLevel.Error, $"Image not found: {callout.ImageSource}");
+                return recorder.EndRecording();
+            }
+            using var canvas = recorder.BeginRecording(new SKRect(0, 0, image.Width, image.Height));
             using var paint = new SKPaint();
-            canvas.DrawImage(bitmapInfo.Bitmap, 0, 0, paint);
+            if (image is BitmapImage bitmapImage)
+                canvas.DrawImage(bitmapImage.Image, 0, 0, paint);
+            else if (image is SvgImage svgImage)
+                canvas.DrawPicture(svgImage.Picture, paint);
             return recorder.EndRecording();
         }
         else
