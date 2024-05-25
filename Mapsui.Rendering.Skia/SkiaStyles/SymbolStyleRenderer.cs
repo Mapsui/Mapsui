@@ -46,7 +46,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return false;
 
         var symbolCache = renderService.SymbolCache;
-        var image = symbolCache.GetOrCreate(symbolStyle.ImageSource.ToString());
+        var image = symbolCache.GetOrCreate(symbolStyle.ImageSource);
         if (image == null)
             return false;
 

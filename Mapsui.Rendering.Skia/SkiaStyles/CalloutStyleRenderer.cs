@@ -155,7 +155,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {
             using var recorder = new SKPictureRecorder();
-            var image = symbolCache.GetOrCreate(callout.ImageSource.ToString());
+            var image = symbolCache.GetOrCreate(callout.ImageSource);
             if (image is null)
             {
                 Logger.Log(LogLevel.Error, $"Image not found: {callout.ImageSource}");
