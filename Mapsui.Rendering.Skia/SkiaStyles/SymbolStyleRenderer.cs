@@ -46,7 +46,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return false;
 
         var symbolCache = renderService.SymbolCache;
-        var image = symbolCache.GetOrCreate(symbolStyle.ImageSource);
+        var image = symbolCache.GetOrCreate(symbolStyle.ImageSource,
+            () => TryCreateDrawableImage(symbolStyle.ImageSource));
         if (image == null)
             return false;
 
@@ -96,6 +97,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                         var skSvg = new SKSvg();
                         modifiedSvgStream.Position = 0;
                         skSvg.Load(modifiedSvgStream);
+                        if (skSvg.Picture is null)
+                            throw new Exception("Failed to load modified SVG picture.");
                         return skSvg.Picture;
                     });
 
@@ -253,7 +256,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             case SymbolType.Image:
                 if (symbolStyle.ImageSource is not null)
                 {
-                    var image = ((RenderService)renderService).SymbolCache.GetOrCreate(symbolStyle.ImageSource);
+                    var image = ((RenderService)renderService).SymbolCache.GetOrCreate(symbolStyle.ImageSource,
+                        () => TryCreateDrawableImage(symbolStyle.ImageSource));
                     if (image != null)
                         symbolSize = new Size(image.Width, image.Height);
                 }
@@ -288,5 +292,14 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     public static string ToModifiedSvgKey(string imageSource, Color? fill, Color? stroke)
         => $"{imageSource}?modifiedsvg=true,fill={fill?.ToString() ?? ""},stroke={stroke?.ToString() ?? ""}";
 
+    // Todo: Figure out a better place for this method
+    public static IDrawableImage? TryCreateDrawableImage(string key)
+    {
+        var imageBytes = ImageSourceCache.Instance.Get(key);
+        if (imageBytes == null)
+            return null;
+        var drawableImage = ImageHelper.ToDrawableImage(imageBytes);
+        return drawableImage;
+    }
 
 }

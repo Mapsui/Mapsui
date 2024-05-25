@@ -216,7 +216,8 @@ internal static class PolygonRenderer
             return null;
         if (brush.ImageSource is null)
             return null;
-        var image = symbolCache.GetOrCreate(brush.ImageSource);
+        var image = symbolCache.GetOrCreate(brush.ImageSource,
+            () => SymbolStyleRenderer.TryCreateDrawableImage(brush.ImageSource));
         if (image == null)
             return null;
 
