@@ -28,8 +28,6 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
 
-        var spriteCache = renderService.SpriteCache;
-
         if (calloutStyle.Invalidated)
         {
             // Todo: Move this update to the callout itself
@@ -37,8 +35,8 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             calloutStyle.FullCalloutId = Guid.NewGuid().ToString();
         }
 
-        var contentDrawableImage = (SvgImage)spriteCache.GetOrCreate(calloutStyle.ContentId, () => RenderContent(calloutStyle, renderService.SymbolCache));
-        var drawableImage = (SvgImage)spriteCache.GetOrCreate(calloutStyle.FullCalloutId, () => RenderCallout(calloutStyle, contentDrawableImage.Picture));
+        var contentDrawableImage = (SvgImage)renderService.SymbolCache.GetOrCreate(calloutStyle.ContentId, () => RenderContent(calloutStyle, renderService.SymbolCache));
+        var drawableImage = (SvgImage)renderService.SymbolCache.GetOrCreate(calloutStyle.FullCalloutId, () => RenderCallout(calloutStyle, contentDrawableImage.Picture));
 
         // Calc offset (relative or absolute)
         var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);

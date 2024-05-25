@@ -69,14 +69,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
             else
             {
-                var sprite = symbolStyle.BitmapRegion;
-
                 if (symbolStyle.ImageSource is null)
                     throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
-                var skiaSpriteCache = renderService.SpriteCache;
-                var drawableImage = (BitmapImage)skiaSpriteCache.GetOrCreate(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
-                    () => new BitmapImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height))));
+                var drawableImage = (BitmapImage)renderService.SymbolCache.GetOrCreate(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
+                    () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.BitmapRegion));
 
                 BitmapRenderer.Draw(canvas, drawableImage.Image,
                     (float)destinationX, (float)destinationY,
@@ -90,7 +87,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             if (symbolStyle.SvgFillColor.HasValue || symbolStyle.SvgStrokeColor.HasValue)
             {
-                var drawableImage = renderService.SpriteCache.GetOrCreate(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
+                var drawableImage = renderService.SymbolCache.GetOrCreate(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
                     () =>
                     {
                         var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(svgImage.OriginalStream, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
@@ -119,6 +116,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
 
         return true;
+    }
+
+    private static BitmapImage CreateBitmapImageForRegion(BitmapImage bitmapImage, BitmapRegion sprite)
+    {
+        return new BitmapImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
     }
 
     private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, VectorCache vectorCache)
