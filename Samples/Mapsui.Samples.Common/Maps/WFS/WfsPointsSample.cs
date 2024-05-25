@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
 
-namespace Mapsui.Samples.Common.Maps.DataFormats;
+namespace Mapsui.Samples.Common.Maps.WFS;
 
 public class WfsPointsSample : ISample
 {
     public string Name => "WFS Points";
-    public string Category => "Data Formats";
+    public string Category => "WFS";
 
     private const string crs = "EPSG:31254";
 
