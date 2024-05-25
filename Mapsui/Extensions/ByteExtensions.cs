@@ -44,35 +44,32 @@ public static class ByteExtensions
     /// <param name="haystack">stream to search</param>
     /// <param name="needle">pattern to find</param>
     /// <returns>position</returns>
-    private static long ReadOneSearch(this byte[] haystack, byte[] needle)
+    public static long ReadOneSearch(this byte[] haystack, byte[] needle)
     {
-        long position = 0;
+        int haystackLength = haystack.Length;
+        int needleLength = needle.Length;
 
-        int b;
-        long i = 0;
-        while ((b = haystack[position]) != -1)
+        if (needleLength == 0)
         {
-            if (b == needle[i++])
+            return 0; // Empty needle is found at the start of haystack
+        }
+
+        for (int i = 0; i <= haystackLength - needleLength; i++)
+        {
+            int j;
+            for (j = 0; j < needleLength; j++)
             {
-                if (i == needle.Length)
+                if (haystack[i + j] != needle[j])
                 {
-                    return position - needle.Length;
+                    break;
                 }
             }
-            else if (b == needle[0])
+            if (j == needleLength)
             {
-                i = 1;
-            }
-            else
-            {
-                // go back for searching one position later
-                // for finding haystack[2,1,2,1,1], needle=[2,1,1]
-                position = position - i + 1;
-                i = 0;
+                return i; // Needle found at position i
             }
         }
 
-        return -1;
-
+        return -1; // Needle not found
     }
 }
