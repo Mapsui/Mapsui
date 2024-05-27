@@ -3,11 +3,7 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
-using Svg.Model;
-using Svg;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Styles;
@@ -21,7 +17,6 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 public class CustomSvgStyleSample : ISample
 {
     private const double _circumferenceOfTheEarth = 40075017;
-    private readonly Random _random = new(1337);
 
     public string Name => "Custom Svg Color";
     public string Category => "Styles";
@@ -61,9 +56,9 @@ public class CustomSvgStyleSample : ISample
             return new SymbolStyle
             {
                 ImageSource = $"embedded://Mapsui.Samples.Common.Images.arrow.svg",
+                SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
                 SvgFillColor = GetTypeColor((int)f.Id % 4),
                 SvgStrokeColor = Color.Black,
-                SymbolOffset = new RelativeOffset(0.0, 0.0),
                 SymbolScale = 0.5,
                 SymbolRotation = -CalculateAngle(new MPoint(0, 0), featurePosition) - 90, // Let them point to the center of hte map
                 RotateWithMap = true,
@@ -86,48 +81,5 @@ public class CustomSvgStyleSample : ISample
 
         // Radians into degrees
         return angleInRadians * (180 / Math.PI);
-    }
-
-    public class SvgColorModifier
-    {
-        public static MemoryStream GetAsSvgString(Stream stream, Color? fillColor = null, Color? strokeColor = null)
-        {
-            var svgFillColor = (System.Drawing.Color?)fillColor;
-            var svgStrokeColor = (System.Drawing.Color?)strokeColor;
-
-            var svgDocument = SvgExtensions.Open(stream) ?? throw new Exception("Could not open stream as svg");
-
-            var elements = GetAllElements(svgDocument.Children);
-            foreach (var element in elements)
-            {
-                if (element.Fill is not null && svgFillColor is not null)
-                    element.Fill = new SvgColourServer(svgFillColor.Value);
-                if (element.Stroke is not null && svgStrokeColor is not null)
-                    element.Stroke = new SvgColourServer(svgStrokeColor.Value);
-            }
-
-            var memoryStream = new MemoryStream();
-            SaveSvgDocumentToStream(svgDocument, memoryStream);
-            return memoryStream;
-        }
-
-        public static ReadOnlySpan<SvgElement> GetAllElements(SvgElementCollection elements)
-        {
-            var result = new List<SvgElement>();
-            foreach (var element in elements)
-            {
-                result.Add(element);
-
-                if (element.Children.Count > 0)
-                    result.AddRange(GetAllElements(element.Children));
-            }
-            return result.ToArray();
-        }
-
-        public static void SaveSvgDocumentToStream(SvgDocument svgDocument, Stream outputStream)
-        {
-            // Save the SvgDocument directly to the provided stream
-            svgDocument.Write(outputStream);
-        }
     }
 }

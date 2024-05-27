@@ -33,9 +33,9 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         // just a drawable like any other. We probably should use the general cache instead.
 
         var contentDrawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfContent,
-            () => CreateSvgImage(calloutStyle, renderService.DrawableImageCache))!;
+            () => CreateCalloutContent(calloutStyle, renderService.DrawableImageCache))!;
         var drawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfFullCallout,
-            () => RenderCallout(calloutStyle, contentDrawableImage.Picture))!;
+            () => CreateFullCallout(calloutStyle, contentDrawableImage.Picture))!;
 
         // Calc offset (relative or absolute)
         var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);
@@ -69,7 +69,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         return true;
     }
 
-    private static SvgImage RenderCallout(CalloutStyle callout, SKPicture content)
+    public static SvgImage CreateFullCallout(CalloutStyle callout, SKPicture content)
     {
         var contentWidth = content.CullRect.Width;
         var contentHeight = content.CullRect.Height;
@@ -97,7 +97,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// Calc the size which is needed for the canvas
     /// </summary>
     /// <returns></returns>
-    private static (double, double) CalcSize(CalloutStyle callout, double contentWidth, double contentHeight)
+    public static (double, double) CalcSize(CalloutStyle callout, double contentWidth, double contentHeight)
     {
         var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
         // Add padding around the content
@@ -146,7 +146,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static SvgImage CreateSvgImage(CalloutStyle callout, DrawableImageCache drawableImageCache)
+    public static SvgImage CreateCalloutContent(CalloutStyle callout, DrawableImageCache drawableImageCache)
     {
         if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {
