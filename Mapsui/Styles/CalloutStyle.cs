@@ -92,7 +92,7 @@ public class CalloutStyle : SymbolStyle
     /// Type of Callout
     /// </summary>
     /// <remarks>
-    /// Could be Single, Detail or Custom. The last need a bitmap id in Content for an owner drawn image.
+    /// Could be Single, Detail or Image.
     /// </remarks>
     public CalloutType Type
     {
