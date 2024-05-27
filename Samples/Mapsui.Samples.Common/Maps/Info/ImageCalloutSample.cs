@@ -19,11 +19,11 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Info;
 
-public class CustomCalloutSample : ISample
+public class ImageCalloutSample : ISample
 {
     private static readonly Random _random = new(1);
 
-    public string Name => "Custom Callout";
+    public string Name => "Image Callout";
     public string Category => "Info";
 
     public Task<Map> CreateMapAsync()
@@ -118,11 +118,11 @@ public class CustomCalloutSample : ISample
 
     private static List<City> DeserializeFromStream(Stream stream)
     {
-        return JsonSerializer.Deserialize(stream, CustomCalloutSampleContext.Default.ListCity) ?? [];
+        return JsonSerializer.Deserialize(stream, ImageCalloutSampleContext.Default.ListCity) ?? [];
     }
 }
 
-[JsonSerializable(typeof(List<CustomCalloutSample.City>))]
-internal partial class CustomCalloutSampleContext : JsonSerializerContext
+[JsonSerializable(typeof(List<ImageCalloutSample.City>))]
+internal partial class ImageCalloutSampleContext : JsonSerializerContext
 {
 }
