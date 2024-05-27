@@ -14,7 +14,8 @@ namespace Mapsui.Rendering.Skia;
 
 public class CalloutStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, RenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style,
+        RenderService renderService, long iteration)
     {
         if (!style.Enabled)
             return false;
@@ -28,15 +29,13 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
 
-        if (calloutStyle.Invalidated)
-        {
-            // Todo: Move this update to the callout itself
-            calloutStyle.ContentId = Guid.NewGuid().ToString();
-            calloutStyle.FullCalloutId = Guid.NewGuid().ToString();
-        }
+        // The CalloutStyleRenderer creates an SKPicture for rendering. We store inside an SvgImage and put it in the image cache, but it is actually
+        // just a drawable like any other. We probably should use the general cache instead.
 
-        var contentDrawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ContentId, () => RenderContent(calloutStyle, renderService.DrawableImageCache));
-        var drawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.FullCalloutId, () => RenderCallout(calloutStyle, contentDrawableImage.Picture));
+        var contentDrawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfContent,
+            () => CreateSvgImage(calloutStyle, renderService.DrawableImageCache))!;
+        var drawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfFullCallout,
+            () => RenderCallout(calloutStyle, contentDrawableImage.Picture))!;
 
         // Calc offset (relative or absolute)
         var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);
@@ -90,7 +89,6 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         // Draw content
         DrawContent(callout, canvas, content);
 
-        callout.Invalidated = false;
         // Create SKPicture from canvas
         return new SvgImage(recorder.EndRecording());
     }
@@ -148,7 +146,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static SvgImage RenderContent(CalloutStyle callout, DrawableImageCache drawableImageCache)
+    public static SvgImage CreateSvgImage(CalloutStyle callout, DrawableImageCache drawableImageCache)
     {
         if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {

@@ -80,10 +80,9 @@ public class CalloutStyle : SymbolStyle
     private double _maxWidth;
     private Color? _titleFontColor;
     private Color? _subtitleFontColor;
-    private bool _invalidated;
 
-    public string FullCalloutId { get; set; } = Guid.NewGuid().ToString();
-    public string ContentId { get; set; } = Guid.NewGuid().ToString();
+    public string ImageIdOfFullCallout { get; private set; } = Guid.NewGuid().ToString();
+    public string ImageIdOfContent { get; private set; } = Guid.NewGuid().ToString();
 
     public static new double DefaultWidth { get; set; } = 100;
     public static new double DefaultHeight { get; set; } = 30;
@@ -102,7 +101,7 @@ public class CalloutStyle : SymbolStyle
             if (_type != value)
             {
                 _type = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -118,7 +117,7 @@ public class CalloutStyle : SymbolStyle
             if (!_offset.Equals(value))
             {
                 _offset = value;
-                Invalidated = true;
+                Invalidate();
                 //SymbolOffset = new Offset(_offset.X, _offset.Y);
             }
         }
@@ -151,7 +150,7 @@ public class CalloutStyle : SymbolStyle
             if (value != _arrowAlignment)
             {
                 _arrowAlignment = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -167,7 +166,7 @@ public class CalloutStyle : SymbolStyle
             if (value != _arrowWidth)
             {
                 _arrowWidth = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -183,7 +182,7 @@ public class CalloutStyle : SymbolStyle
             if (value != _arrowHeight)
             {
                 _arrowHeight = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -199,7 +198,7 @@ public class CalloutStyle : SymbolStyle
             if (value != _arrowPosition)
             {
                 _arrowPosition = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -215,7 +214,7 @@ public class CalloutStyle : SymbolStyle
             if (value != _color)
             {
                 _color = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -231,7 +230,7 @@ public class CalloutStyle : SymbolStyle
             if (value != _backgroundColor)
             {
                 _backgroundColor = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -247,7 +246,7 @@ public class CalloutStyle : SymbolStyle
             if (value != _strokeWidth)
             {
                 _strokeWidth = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -263,7 +262,7 @@ public class CalloutStyle : SymbolStyle
             if (value != _rectRadius)
             {
                 _rectRadius = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -279,7 +278,7 @@ public class CalloutStyle : SymbolStyle
             if (!value.Equals(_padding))
             {
                 _padding = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -295,7 +294,7 @@ public class CalloutStyle : SymbolStyle
             if (value != _shadowWidth)
             {
                 _shadowWidth = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -311,7 +310,7 @@ public class CalloutStyle : SymbolStyle
             if (_title != value)
             {
                 _title = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -325,7 +324,7 @@ public class CalloutStyle : SymbolStyle
         set
         {
             _titleFontColor = value;
-            Invalidated = true;
+            Invalidate();
         }
     }
 
@@ -340,7 +339,7 @@ public class CalloutStyle : SymbolStyle
             if (_titleTextAlignment != value)
             {
                 _titleTextAlignment = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -356,7 +355,7 @@ public class CalloutStyle : SymbolStyle
             if (_subtitle != value)
             {
                 _subtitle = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -370,7 +369,7 @@ public class CalloutStyle : SymbolStyle
         set
         {
             _subtitleFontColor = value;
-            Invalidated = true;
+            Invalidate();
         }
     }
 
@@ -385,7 +384,7 @@ public class CalloutStyle : SymbolStyle
             if (_subtitleTextAlignment != value)
             {
                 _subtitleTextAlignment = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -401,7 +400,7 @@ public class CalloutStyle : SymbolStyle
             if (_spacing != value)
             {
                 _spacing = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -417,7 +416,7 @@ public class CalloutStyle : SymbolStyle
             if (_maxWidth != value)
             {
                 _maxWidth = value;
-                Invalidated = true;
+                Invalidate();
             }
         }
     }
@@ -431,7 +430,7 @@ public class CalloutStyle : SymbolStyle
         set
         {
             _titleFont = value;
-            Invalidated = true;
+            Invalidate();
         }
     }
 
@@ -441,18 +440,13 @@ public class CalloutStyle : SymbolStyle
         set
         {
             _subtitleFont = value;
-            Invalidated = true;
+            Invalidate();
         }
     }
 
-    public bool Invalidated
+    public void Invalidate()
     {
-        get => _invalidated | TitleFont.Invalidated | SubtitleFont.Invalidated;
-        set
-        {
-            _invalidated = value;
-            TitleFont.Invalidated = value;
-            SubtitleFont.Invalidated = value;
-        }
+        ImageIdOfContent = Guid.NewGuid().ToString();
+        ImageIdOfFullCallout = Guid.NewGuid().ToString();
     }
 }

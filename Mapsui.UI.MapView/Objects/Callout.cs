@@ -545,7 +545,6 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
         }
 
         style.Type = Type;
-        style.ContentId = ContentId;
         style.Title = Title;
         style.TitleFont.FontFamily = TitleFontName;
         style.TitleFont.Size = TitleFontSize;
@@ -562,6 +561,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
         style.SubtitleTextAlignment = SubtitleTextAlignment.ToMapsui();
         style.Spacing = Spacing;
         style.MaxWidth = MaxWidth;
+        //style.ImageIdOfContent = Guid.NewGuid().ToString();
     }
 
     /// <summary>
@@ -590,7 +590,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
         style.Rotation = (float)Rotation;
         style.ShadowWidth = (float)ShadowWidth;
         style.StrokeWidth = (float)StrokeWidth;
-        style.ContentId = ContentId;
+        //style.ImageIdOfFullCallout = Guid.NewGuid().ToString();
     }
 
     /// <summary>

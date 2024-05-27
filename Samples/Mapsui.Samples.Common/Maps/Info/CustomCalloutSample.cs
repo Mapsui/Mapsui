@@ -15,8 +15,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-// ReSharper disable UnusedAutoPropertyAccessor.Local
-// ReSharper disable once ClassNeverInstantiated.Local
 #pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.Info;
@@ -37,15 +35,26 @@ public class CustomCalloutSample : ISample
         map.Navigator.CenterOnAndZoomTo(map.Layers[1].Extent!.Centroid, map.Navigator.Resolutions[5]);
 
         map.Widgets.Add(new MapInfoWidget(map));
+        map.Info += MapOnInfo;
 
         return Task.FromResult(map);
+    }
+
+    private static void MapOnInfo(object? sender, MapInfoEventArgs e)
+    {
+        var calloutStyle = e.MapInfo?.Feature?.Styles.OfType<CalloutStyle>().FirstOrDefault();
+        if (calloutStyle is not null)
+        {
+            calloutStyle.Enabled = !calloutStyle.Enabled;
+            e.MapInfo?.Layer?.DataHasChanged();
+        }
     }
 
     private static Layer CreatePointLayer()
     {
         return new Layer
         {
-            Name = "Point",
+            Name = "Point with callout",
             DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
             IsMapInfoLayer = true
         };
@@ -70,7 +79,7 @@ public class CustomCalloutSample : ISample
         });
     }
 
-    private static IStyle CreateCalloutStyle(string ImageSource)
+    private static CalloutStyle CreateCalloutStyle(string ImageSource)
     {
         var calloutStyle = new CalloutStyle { ImageSource = ImageSource, ArrowPosition = _random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Image };
         switch (_random.Next(0, 4))
@@ -92,9 +101,10 @@ public class CustomCalloutSample : ISample
                 calloutStyle.Offset = new Offset(-SymbolStyle.DefaultHeight * 0.5f, 0);
                 break;
         }
-        calloutStyle.RectRadius = 10; // Random.Next(0, 9);
-        calloutStyle.ShadowWidth = 4; // Random.Next(0, 9);
+        calloutStyle.RectRadius = 10;
+        calloutStyle.ShadowWidth = 4;
         calloutStyle.StrokeWidth = 0;
+        calloutStyle.Enabled = false;
         return calloutStyle;
     }
 
