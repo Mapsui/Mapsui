@@ -14,7 +14,8 @@ public static class LineStringRenderer
         if (vectorStyle == null)
             return;
 
-        SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
+        // lineString - relevant for GeometryCollection children
+        SKPath ToPath((long featureId, LineString lineString, MRect extent, double rotation, float lineWidth) valueTuple)
         {
             var result = lineString.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
             _ = result.Bounds;
@@ -28,7 +29,7 @@ public static class LineStringRenderer
         if (vectorStyle.Line.IsVisible())
         {
             using var paint = renderService.VectorCache.GetOrCreatePaint((vectorStyle.Line, opacity), CreateSkPaint);
-            using var path = renderService.VectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
+            using var path = renderService.VectorCache.GetOrCreatePath((feature.Id, lineString, extent, rotation, lineWidth), ToPath);
             canvas.DrawPath(path, paint);
         }
     }

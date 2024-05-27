@@ -13,36 +13,46 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration)
     {
+        var vectorStyle = (VectorStyle)style;
+        var opacity = (float)(layer.Opacity * style.Opacity);
+
+        void DrawGeometry(Geometry? geometry)
+        {
+            switch (geometry)
+            {
+                case GeometryCollection collection:
+                    {
+                        foreach (var child in collection)
+                        {
+                            DrawGeometry(child);
+                        }
+                    }
+                    break;
+                case Point point:
+                    SymbolStyleRenderer.DrawXY(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), renderService);
+                    break;
+                case Polygon polygon:
+                    PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderService.VectorCache);
+                    break;
+                case LineString lineString:
+                    LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity, renderService);
+                    break;
+                case null:
+                    throw new ArgumentException($"Geometry is null, Layer: {layer.Name}");
+                default:
+                    throw new ArgumentException($"Unknown geometry type: {geometry?.GetType()}, Layer: {layer.Name}");
+            }
+        }
+
         try
         {
-            var vectorStyle = (VectorStyle)style;
-            var opacity = (float)(layer.Opacity * style.Opacity);
-
             switch (feature)
             {
                 case PointFeature pointFeature:
                     SymbolStyleRenderer.DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, CreateSymbolStyle(vectorStyle), renderService);
                     break;
                 case GeometryFeature geometryFeature:
-                    switch (geometryFeature.Geometry)
-                    {
-                        case GeometryCollection collection:
-                            GeometryCollectionRenderer.Draw(canvas, viewport, vectorStyle, feature, collection, opacity, renderService.VectorCache);
-                            break;
-                        case Point point:
-                            SymbolStyleRenderer.DrawXY(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), renderService);
-                            break;
-                        case Polygon polygon:
-                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderService.VectorCache);
-                            break;
-                        case LineString lineString:
-                            LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity, renderService);
-                            break;
-                        case null:
-                            throw new ArgumentException($"Geometry is null, Layer: {layer.Name}");
-                        default:
-                            throw new ArgumentException($"Unknown geometry type: {geometryFeature.Geometry?.GetType()}, Layer: {layer.Name}");
-                    }
+                    DrawGeometry(geometryFeature?.Geometry);
                     break;
                 default:
                     Logger.Log(LogLevel.Warning, $"{nameof(VectorStyleRenderer)} can not render feature of type '{feature.GetType()}', Layer: {layer.Name}");
