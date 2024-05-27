@@ -30,7 +30,7 @@ public class GeometryCollectionSample : ISample
         };
     }
 
-    private static IEnumerable<IFeature> CreateGeometries()
+    public static IEnumerable<IFeature> CreateGeometries()
     {
         yield return new GeometryFeature
         {
