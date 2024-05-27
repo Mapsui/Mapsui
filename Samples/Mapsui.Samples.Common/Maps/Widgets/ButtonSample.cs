@@ -31,7 +31,7 @@ public class ButtonSample : ISample
                 map.RefreshGraphics();
                 return false;
             }));
-        map.Widgets.Add(CreateButtonWithImage(VerticalAlignment.Top, HorizontalAlignment.Right));
+        map.Widgets.Add(CreateImageButtonWidget(VerticalAlignment.Top, HorizontalAlignment.Right));
         map.Widgets.Add(CreateButton("Hello!", VerticalAlignment.Bottom, HorizontalAlignment.Right, (s, a) =>
             {
                 s.Text = $"{s.Text}!";
@@ -64,7 +64,7 @@ public class ButtonSample : ISample
             Tapped = tapped
         };
 
-    private static IconButtonWidget CreateButtonWithImage(
+    private static ImageButtonWidget CreateImageButtonWidget(
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment) => new()
         {
             ImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg",

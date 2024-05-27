@@ -7,22 +7,9 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// <summary>
 /// Widget that shows a button with an icon
 /// </summary>
-/// <remarks>
-/// With this, the user could add buttons with SVG icons to the map.
-/// 
-/// Usage
-/// To show a IconButtonWidget, add a instance of the IconButtonWidget to Map.Widgets by
-/// 
-///   map.Widgets.Add(new IconButtonWidget(map, picture));
-///   
-/// Customize
-/// Picture: SVG image to display for button
-/// Rotation: Value for rotation in degrees
-/// Opacity: Opacity of button
-/// </remarks>
-public class IconButtonWidget : BoxWidget
+public class ImageButtonWidget : BoxWidget
 {
-    public IconButtonWidget() : base()
+    public ImageButtonWidget() : base()
     {
         BackColor = Color.Transparent;
     }
@@ -30,7 +17,7 @@ public class IconButtonWidget : BoxWidget
     /// <summary>
     /// Event handler which is called, when the button is touched
     /// </summary>
-    public Func<IconButtonWidget, WidgetEventArgs, bool> Tapped = (s, e) => false;
+    public Func<ImageButtonWidget, WidgetEventArgs, bool> Tapped = (s, e) => false;
 
     private MRect _padding = new(0);
 

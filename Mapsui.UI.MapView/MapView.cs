@@ -34,10 +34,10 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer = new(f => f.Feature) { Name = _calloutLayerName, IsMapInfoLayer = true };
     private readonly ObservableMemoryLayer<Pin> _mapPinLayer = new(f => f.Feature) { Name = _pinLayerName, IsMapInfoLayer = true };
     private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer = new(f => f.Feature) { Name = _drawableLayerName, IsMapInfoLayer = true };
-    private IconButtonWidget? _mapZoomInButton;
-    private IconButtonWidget? _mapZoomOutButton;
-    private IconButtonWidget? _mapMyLocationButton;
-    private IconButtonWidget? _mapNorthingButton;
+    private ImageButtonWidget? _mapZoomInButton;
+    private ImageButtonWidget? _mapZoomOutButton;
+    private ImageButtonWidget? _mapMyLocationButton;
+    private ImageButtonWidget? _mapNorthingButton;
     private readonly SKPicture _pictMyLocationNoCenter;
     private readonly SKPicture _pictMyLocationCenter;
     private readonly SKPicture _pictZoomIn;
@@ -793,8 +793,8 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         UpdateButtonPositions();
     }
 
-    private IconButtonWidget CreateButton(
-        float x, float y, SKPicture picture, Func<IconButtonWidget, WidgetEventArgs, bool> tapped) => new()
+    private ImageButtonWidget CreateButton(
+        float x, float y, SKPicture picture, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
         {
             //Picture = picture,
             HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,

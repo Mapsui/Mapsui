@@ -8,11 +8,11 @@ using System;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
-public class IconButtonWidgetRenderer : ISkiaWidgetRenderer
+public class ImageButtonWidgetRenderer : ISkiaWidgetRenderer
 {
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService, float layerOpacity)
     {
-        var button = (IconButtonWidget)widget;
+        var button = (ImageButtonWidget)widget;
 
         if (button.ImageSource == null)
             throw new InvalidOperationException("ImageSource is not set");
@@ -43,7 +43,7 @@ public class IconButtonWidgetRenderer : ISkiaWidgetRenderer
         using var skPaint = new SKPaint { IsAntialias = true };
         if (drawableImage is BitmapImage bitmapImage)
         {
-            throw new Exception($"BitmapImage is not supported as {nameof(button.ImageSource)}  or {nameof(IconButtonWidget)}");
+            throw new Exception($"BitmapImage is not supported as {nameof(button.ImageSource)}  or {nameof(ImageButtonWidget)}");
             // Todo: Implement this. It should have a tested sample. Perhaps in a separate ImageButtonWidgetSample. Things like scale and
             // rotation should be tested. Could be something like this:
             // BitmapRenderer.Draw(canvas, bitmapImage.Image,
