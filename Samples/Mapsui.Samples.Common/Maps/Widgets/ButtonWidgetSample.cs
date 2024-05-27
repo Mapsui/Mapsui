@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
 
-public class ButtonSample : ISample
+public class ButtonWidgetSample : ISample
 {
     public string Name => "Button";
     public string Category => "Widgets";
