@@ -212,31 +212,32 @@ internal static class PolygonRenderer
 
     private static SKImage? GetImage(DrawableImageCache drawableImageCache, Brush brush)
     {
-        if (drawableImageCache == null)
-            return null;
         if (brush.ImageSource is null)
             return null;
-        var image = drawableImageCache.GetOrCreate(brush.ImageSource,
+        var drawableImage = drawableImageCache.GetOrCreate(brush.ImageSource,
             () => SymbolStyleRenderer.TryCreateDrawableImage(brush.ImageSource));
-        if (image == null)
+        if (drawableImage == null)
             return null;
 
-        if (image is BitmapImage bitmapImage)
+        if (drawableImage is BitmapImage bitmapImage)
         {
             if (brush.BitmapRegion is null)
                 return bitmapImage.Image;
             else
             {
                 if (brush.ImageSource is null)
-                    throw new Exception("If Sprite is assigned ImageSource should be set.");
-                var sprite = brush.BitmapRegion;
+                    throw new Exception("If BitmapRegion is not null the ImageSource should be set.");
 
-                // The line below generates a string. For performance is it not great to have this in the render loop.
-                var spriteKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
-                drawableImageCache.GetOrCreate(spriteKey, () => CreateBitmapImage(bitmapImage.Image, sprite));
+                var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
+                var regionDrawableImage = drawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, brush.BitmapRegion));
+                if (regionDrawableImage == null)
+                    return null;
+                if (regionDrawableImage is BitmapImage regionBitmapImage)
+                    return regionBitmapImage.Image;
+                throw new Exception("Only bitmaps are is supported for polygon fill.");
             }
         }
-        return null;
+        throw new Exception("Only bitmaps are is supported for polygon fill.");
     }
 
     private static BitmapImage CreateBitmapImage(SKImage skImage, BitmapRegion bitmapRegion)
