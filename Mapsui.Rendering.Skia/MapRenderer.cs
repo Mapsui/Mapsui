@@ -208,7 +208,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
     {
-        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
+        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, SkiaRenderService, layerOpacity);
     }
 
     public MapInfo GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)

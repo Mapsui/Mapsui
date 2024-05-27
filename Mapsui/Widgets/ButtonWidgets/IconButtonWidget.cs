@@ -50,37 +50,22 @@ public class IconButtonWidget : BoxWidget
         }
     }
 
-    private string? _svgImage;
+    private string? _imageSource;
 
     /// <summary>
-    /// SVG image to show for button
+    /// The image to show as button
     /// </summary>
-    public string? SvgImage
+    public string? ImageSource
     {
-        get => _svgImage;
+        get => _imageSource;
         set
         {
-            if (_svgImage == value)
+            if (_imageSource == value)
                 return;
 
-            _svgImage = value;
-            Picture = null;
-            Invalidate();
-        }
-    }
-
-    private object? _picture;
-
-    /// <summary>
-    /// Object for prerendered image. For internal use only.
-    /// </summary>
-    public object? Picture
-    {
-        get => _picture;
-        set
-        {
-            if (Equals(value, _picture)) return;
-            _picture = value;
+            if (!string.IsNullOrEmpty(value))
+                ImageSourceInitializer.Add(value);
+            _imageSource = value;
             Invalidate();
         }
     }

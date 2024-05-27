@@ -5,8 +5,6 @@ using Mapsui.Tiling;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using System;
-using System.IO;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
@@ -69,7 +67,7 @@ public class ButtonSample : ISample
     private static IconButtonWidget CreateButtonWithImage(
         VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment) => new()
         {
-            SvgImage = LoadSomeSvgAsString(),
+            ImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg",
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
             Margin = new MRect(30),
@@ -77,13 +75,4 @@ public class ButtonSample : ISample
             CornerRadius = 8,
             Envelope = new MRect(0, 0, 64, 64)
         };
-
-    static string LoadSomeSvgAsString()
-    {
-        Assembly assembly = typeof(Map).Assembly ?? throw new ArgumentNullException("assembly");
-        using Stream stream = assembly.GetManifestResourceStream(assembly.GetFullName("Resources.Images.MyLocationStill.svg"))
-            ?? throw new Exception("Can not find embedded resource");
-        using StreamReader reader = new StreamReader(stream);
-        return reader.ReadToEnd();
-    }
 }
