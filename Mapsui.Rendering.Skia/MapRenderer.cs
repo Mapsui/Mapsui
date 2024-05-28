@@ -58,7 +58,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenders[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
         WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
-        WidgetRenders[typeof(IconButtonWidget)] = new IconButtonWidgetRenderer();
+        WidgetRenders[typeof(ImageButtonWidget)] = new ImageButtonWidgetRenderer();
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
         WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
         WidgetRenders[typeof(InputOnlyWidget)] = new InputOnlyWidgetRenderer();
@@ -208,7 +208,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
     {
-        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
+        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, SkiaRenderService, layerOpacity);
     }
 
     public MapInfo GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
