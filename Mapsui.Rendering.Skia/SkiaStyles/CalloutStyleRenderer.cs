@@ -71,7 +71,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         return true;
     }
 
-    public static SKPicture CreateCallout(CalloutOptions callout, SKPicture content)
+    public static SKPicture CreateCallout(CalloutBalloonStyle callout, SKPicture content)
     {
         Size contentSize = new(content.CullRect.Width, content.CullRect.Height);
 
@@ -96,7 +96,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// Calc the size which is needed for the canvas
     /// </summary>
     /// <returns></returns>
-    public static (double, double) CalcSize(CalloutOptions callout, Size contentSize)
+    public static (double, double) CalcSize(CalloutBalloonStyle callout, Size contentSize)
     {
         var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
         // Add padding around the content
@@ -108,15 +108,15 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var height = contentSize.Height + paddingTop + paddingBottom + 1;
 
         // Add length of arrow
-        switch (callout.ArrowAlignment)
+        switch (callout.TailAlignment)
         {
-            case ArrowAlignment.Bottom:
-            case ArrowAlignment.Top:
-                height += callout.ArrowHeight;
+            case TailAlignment.Bottom:
+            case TailAlignment.Top:
+                height += callout.TailHeight;
                 break;
-            case ArrowAlignment.Left:
-            case ArrowAlignment.Right:
-                width += callout.ArrowHeight;
+            case TailAlignment.Left:
+            case TailAlignment.Right:
+                width += callout.TailHeight;
                 break;
         }
 
@@ -131,11 +131,11 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         return (width, height);
     }
 
-    private static void DrawOutline(CalloutOptions options, SKCanvas canvas, SKPath path)
+    private static void DrawOutline(CalloutBalloonStyle balloonStyle, SKCanvas canvas, SKPath path)
     {
-        using var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, (float)options.ShadowWidth) };
-        using var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = options.BackgroundColor.ToSkia() };
-        using var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = options.Color.ToSkia(), StrokeWidth = (float)options.StrokeWidth };
+        using var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, (float)balloonStyle.ShadowWidth) };
+        using var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = balloonStyle.BackgroundColor.ToSkia() };
+        using var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = balloonStyle.Color.ToSkia(), StrokeWidth = (float)balloonStyle.StrokeWidth };
 
         canvas.DrawPath(path, shadow);
         canvas.DrawPath(path, fill);
@@ -214,19 +214,19 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         }
     }
 
-    private static void DrawContent(CalloutOptions options, SKCanvas canvas, SKPicture content)
+    private static void DrawContent(CalloutBalloonStyle options, SKCanvas canvas, SKPicture content)
     {
         var strokeWidth = options.StrokeWidth < 1 ? 1 : options.StrokeWidth;
         var offsetX = options.ShadowWidth + strokeWidth + (options.Padding.Left < options.RectRadius * 0.5 ? options.RectRadius * 0.5 : options.Padding.Left);
         var offsetY = options.ShadowWidth + strokeWidth + (options.Padding.Top < options.RectRadius * 0.5 ? options.RectRadius * 0.5 : options.Padding.Top);
 
-        switch (options.ArrowAlignment)
+        switch (options.TailAlignment)
         {
-            case ArrowAlignment.Left:
-                offsetX += options.ArrowHeight;
+            case TailAlignment.Left:
+                offsetX += options.TailHeight;
                 break;
-            case ArrowAlignment.Top:
-                offsetY += options.ArrowHeight;
+            case TailAlignment.Top:
+                offsetY += options.TailHeight;
                 break;
         }
 
@@ -239,7 +239,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update path
     /// </summary>
-    private static SKPath CreateCalloutOutline(CalloutOptions callout, Size contentSize)
+    private static SKPath CreateCalloutOutline(CalloutBalloonStyle callout, Size contentSize)
     {
         var rect = GetBalloonBounds(callout, contentSize);
 
@@ -250,29 +250,29 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         path.MoveTo((float)(rect.Left + callout.RectRadius), (float)rect.Top);
 
         // Top horizontal line
-        if (callout.ArrowAlignment == ArrowAlignment.Top)
-            DrawArrow(path, rect.TailStart, rect.TailTip, rect.TailEnd);
+        if (callout.TailAlignment == TailAlignment.Top)
+            DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
 
         // Top right arc
         path.ArcTo(new SKRect((float)(rect.Right - callout.RectRadius), (float)rect.Top, (float)rect.Right, (float)(rect.Top + callout.RectRadius)), 270, 90, false);
 
         // Right vertical line
-        if (callout.ArrowAlignment == ArrowAlignment.Right)
-            DrawArrow(path, rect.TailStart, rect.TailTip, rect.TailEnd);
+        if (callout.TailAlignment == TailAlignment.Right)
+            DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
 
         // Bottom right arc
         path.ArcTo(new SKRect((float)(rect.Right - callout.RectRadius), (float)(rect.Bottom - callout.RectRadius), (float)rect.Right, (float)rect.Bottom), 0, 90, false);
 
         // Bottom horizontal line
-        if (callout.ArrowAlignment == ArrowAlignment.Bottom)
-            DrawArrow(path, rect.TailStart, rect.TailTip, rect.TailEnd);
+        if (callout.TailAlignment == TailAlignment.Bottom)
+            DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
 
         // Bottom left arc
         path.ArcTo(new SKRect((float)rect.Left, (float)(rect.Bottom - callout.RectRadius), (float)(rect.Left + callout.RectRadius), (float)rect.Bottom), 90, 90, false);
 
         // Left vertical line
-        if (callout.ArrowAlignment == ArrowAlignment.Left)
-            DrawArrow(path, rect.TailStart, rect.TailTip, rect.TailEnd);
+        if (callout.TailAlignment == TailAlignment.Left)
+            DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
 
         // Top left arc
         path.ArcTo(new SKRect((float)rect.Left, (float)rect.Top, (float)(rect.Left + callout.RectRadius), (float)(rect.Top + callout.RectRadius)), 180, 90, false);
@@ -282,7 +282,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         return path;
     }
 
-    public static CalloutBalloonBounds GetBalloonBounds(CalloutOptions callout, Size contentSize)
+    public static CalloutBalloonBounds GetBalloonBounds(CalloutBalloonStyle callout, Size contentSize)
     {
         double bottom, left, top, right;
         var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
@@ -293,8 +293,8 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var width = contentSize.Width + paddingLeft + paddingRight;
         var height = contentSize.Height + paddingTop + paddingBottom;
         // Half width is distance from left/top to arrow position, so we have to add shadow and stroke
-        var halfWidth = width * callout.ArrowPosition + callout.ShadowWidth + strokeWidth * 2;
-        var halfHeight = height * callout.ArrowPosition + callout.ShadowWidth + strokeWidth * 2;
+        var halfWidth = width * callout.TailPosition + callout.ShadowWidth + strokeWidth * 2;
+        var halfHeight = height * callout.TailPosition + callout.ShadowWidth + strokeWidth * 2;
         bottom = height + callout.ShadowWidth + strokeWidth * 2;
         left = callout.ShadowWidth + strokeWidth;
         top = callout.ShadowWidth + strokeWidth;
@@ -304,40 +304,40 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var end = new SKPoint();
 
         // Check, if we are to near at corners
-        if (halfWidth - callout.ArrowWidth * 0.5f - left < callout.RectRadius)
-            halfWidth = callout.ArrowWidth * 0.5f + left + callout.RectRadius;
-        else if (halfWidth + callout.ArrowWidth * 0.5f > width - callout.RectRadius)
-            halfWidth = width - callout.ArrowWidth * 0.5f - callout.RectRadius;
-        if (halfHeight - callout.ArrowWidth * 0.5f - top < callout.RectRadius)
-            halfHeight = callout.ArrowWidth * 0.5f + top + callout.RectRadius;
-        else if (halfHeight + callout.ArrowWidth * 0.5f > height - callout.RectRadius)
-            halfHeight = height - callout.ArrowWidth * 0.5f - callout.RectRadius;
+        if (halfWidth - callout.TailWidth * 0.5f - left < callout.RectRadius)
+            halfWidth = callout.TailWidth * 0.5f + left + callout.RectRadius;
+        else if (halfWidth + callout.TailWidth * 0.5f > width - callout.RectRadius)
+            halfWidth = width - callout.TailWidth * 0.5f - callout.RectRadius;
+        if (halfHeight - callout.TailWidth * 0.5f - top < callout.RectRadius)
+            halfHeight = callout.TailWidth * 0.5f + top + callout.RectRadius;
+        else if (halfHeight + callout.TailWidth * 0.5f > height - callout.RectRadius)
+            halfHeight = height - callout.TailWidth * 0.5f - callout.RectRadius;
 
-        switch (callout.ArrowAlignment)
+        switch (callout.TailAlignment)
         {
-            case ArrowAlignment.Bottom:
-                start = new SKPoint((float)(halfWidth + callout.ArrowWidth * 0.5), (float)bottom);
-                center = new SKPoint((float)halfWidth, (float)(bottom + callout.ArrowHeight));
-                end = new SKPoint((float)(halfWidth - callout.ArrowWidth * 0.5), (float)bottom);
+            case TailAlignment.Bottom:
+                start = new SKPoint((float)(halfWidth + callout.TailWidth * 0.5), (float)bottom);
+                center = new SKPoint((float)halfWidth, (float)(bottom + callout.TailHeight));
+                end = new SKPoint((float)(halfWidth - callout.TailWidth * 0.5), (float)bottom);
                 break;
-            case ArrowAlignment.Top:
-                top += callout.ArrowHeight;
-                bottom += callout.ArrowHeight;
-                start = new SKPoint((float)(halfWidth - callout.ArrowWidth * 0.5), (float)top);
-                center = new SKPoint((float)halfWidth, (float)(top - callout.ArrowHeight));
-                end = new SKPoint((float)(halfWidth + callout.ArrowWidth * 0.5), (float)top);
+            case TailAlignment.Top:
+                top += callout.TailHeight;
+                bottom += callout.TailHeight;
+                start = new SKPoint((float)(halfWidth - callout.TailWidth * 0.5), (float)top);
+                center = new SKPoint((float)halfWidth, (float)(top - callout.TailHeight));
+                end = new SKPoint((float)(halfWidth + callout.TailWidth * 0.5), (float)top);
                 break;
-            case ArrowAlignment.Left:
-                left += callout.ArrowHeight;
-                right += callout.ArrowHeight;
-                start = new SKPoint((float)left, (float)(halfHeight + callout.ArrowWidth * 0.5));
-                center = new SKPoint((float)(left - callout.ArrowHeight), (float)halfHeight);
-                end = new SKPoint((float)left, (float)(halfHeight - callout.ArrowWidth * 0.5));
+            case TailAlignment.Left:
+                left += callout.TailHeight;
+                right += callout.TailHeight;
+                start = new SKPoint((float)left, (float)(halfHeight + callout.TailWidth * 0.5));
+                center = new SKPoint((float)(left - callout.TailHeight), (float)halfHeight);
+                end = new SKPoint((float)left, (float)(halfHeight - callout.TailWidth * 0.5));
                 break;
-            case ArrowAlignment.Right:
-                start = new SKPoint((float)right, (float)(halfHeight - callout.ArrowWidth * 0.5));
-                center = new SKPoint((float)(right + callout.ArrowHeight), (float)halfHeight);
-                end = new SKPoint((float)right, (float)(halfHeight + callout.ArrowWidth * 0.5));
+            case TailAlignment.Right:
+                start = new SKPoint((float)right, (float)(halfHeight - callout.TailWidth * 0.5));
+                center = new SKPoint((float)(right + callout.TailHeight), (float)halfHeight);
+                end = new SKPoint((float)right, (float)(halfHeight + callout.TailWidth * 0.5));
                 break;
         }
 
@@ -345,13 +345,13 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     }
 
     /// <summary>
-    /// Draw arrow to path
+    /// Draw tail to path
     /// </summary>
-    /// <param name="path">The arrow path</param>
-    /// <param name="start">Start of arrow at bubble</param>
-    /// <param name="center">Center of arrow</param>
-    /// <param name="end">End of arrow at bubble</param>
-    private static void DrawArrow(SKPath path, SKPoint start, SKPoint center, SKPoint end)
+    /// <param name="path">The tail path</param>
+    /// <param name="start">Start of tail at bubble</param>
+    /// <param name="center">Center of tail</param>
+    /// <param name="end">End of tail at bubble</param>
+    private static void DrawTrail(SKPath path, SKPoint start, SKPoint center, SKPoint end)
     {
         path.LineTo(start);
         path.LineTo(center);

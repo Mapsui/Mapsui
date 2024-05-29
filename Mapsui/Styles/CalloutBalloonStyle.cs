@@ -1,13 +1,13 @@
 ﻿namespace Mapsui.Styles;
 
-public record CalloutOptions(
+public record CalloutBalloonStyle(
     double StrokeWidth,
     MRect Padding,
     double RectRadius,
-    ArrowAlignment ArrowAlignment,
-    double ArrowWidth,
-    double ArrowHeight,
-    double ArrowPosition,
+    TailAlignment TailAlignment,
+    double TailWidth,
+    double TailHeight,
+    double TailPosition,
     double ShadowWidth,
     Color BackgroundColor,
     Color Color)

@@ -25,22 +25,22 @@ public enum CalloutType
 /// <summary>
 /// Determines, where the pointer is
 /// </summary>
-public enum ArrowAlignment
+public enum TailAlignment
 {
     /// <summary>
-    /// Callout arrow is at bottom side of bubble
+    /// Callout tail is at bottom side of bubble
     /// </summary>
     Bottom,
     /// <summary>
-    /// Callout arrow is at left side of bubble
+    /// Callout tail is at left side of bubble
     /// </summary>
     Left,
     /// <summary>
-    /// Callout arrow is at top side of bubble
+    /// Callout tail is at top side of bubble
     /// </summary>
     Top,
     /// <summary>
-    /// Callout arrow is at right side of bubble
+    /// Callout tail is at right side of bubble
     /// </summary>
     Right,
 }
@@ -60,7 +60,7 @@ public enum ArrowAlignment
 public class CalloutStyle : SymbolStyle
 {
     private CalloutType _type = CalloutType.Single;
-    private ArrowAlignment _arrowAlignment = ArrowAlignment.Bottom;
+    private TailAlignment _arrowAlignment = TailAlignment.Bottom;
     private float _arrowWidth = 8f;
     private float _arrowHeight = 8f;
     private float _arrowPosition = 0.5f;
@@ -142,7 +142,7 @@ public class CalloutStyle : SymbolStyle
     /// <summary>
     /// Anchor position of Callout
     /// </summary>
-    public ArrowAlignment ArrowAlignment
+    public TailAlignment ArrowAlignment
     {
         get => _arrowAlignment;
         set

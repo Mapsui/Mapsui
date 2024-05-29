@@ -34,7 +34,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
 
     private CalloutType _type;
     private Point _anchor;
-    private ArrowAlignment _arrowAlignment;
+    private TailAlignment _arrowAlignment;
     private double _arrowWidth = 12.0;
     private double _arrowHeight = 16.0;
     private double _arrowPosition = 0.5;
@@ -112,7 +112,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
     /// <summary>
     /// Arrow alignment of Callout
     /// </summary>
-    public ArrowAlignment ArrowAlignment
+    public TailAlignment ArrowAlignment
     {
         get => _arrowAlignment;
         set

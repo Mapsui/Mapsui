@@ -185,7 +185,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
             Type = CalloutType.Single,
             Title = "",
             TitleFontColor = Color.Black,
-            ArrowAlignment = ArrowAlignment.Top,
+            ArrowAlignment = TailAlignment.Top,
             ArrowPosition = 0,
             SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
             MaxWidth = 300,

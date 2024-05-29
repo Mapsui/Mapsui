@@ -57,7 +57,7 @@ public class ManyPinsSample : IMapViewSample
                 pin.Callout.RectRadius = rnd.Next(0, 30);
                 pin.Callout.ArrowHeight = rnd.Next(0, 20);
                 pin.Callout.ArrowWidth = rnd.Next(0, 20);
-                pin.Callout.ArrowAlignment = (ArrowAlignment)rnd.Next(0, 4);
+                pin.Callout.ArrowAlignment = (TailAlignment)rnd.Next(0, 4);
                 pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100;
                 pin.Callout.BackgroundColor = KnownColor.White;
                 pin.Callout.Color = pin.Color;
@@ -166,7 +166,7 @@ public class ManyPinsSample : IMapViewSample
         pin.Callout.RectRadius = rnd.Next(0, 30);
         pin.Callout.ArrowHeight = rnd.Next(0, 20);
         pin.Callout.ArrowWidth = rnd.Next(0, 20);
-        pin.Callout.ArrowAlignment = (ArrowAlignment)rnd.Next(0, 4);
+        pin.Callout.ArrowAlignment = (TailAlignment)rnd.Next(0, 4);
         pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100;
         pin.Callout.BackgroundColor = KnownColor.White;
         pin.Callout.Color = pin.Color;

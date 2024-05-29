@@ -55,7 +55,7 @@ public class PinSample : IMapViewSample
                 pin.Callout.RectRadius = _random.Next(0, 10);
                 pin.Callout.ArrowHeight = _random.Next(5, 20);
                 pin.Callout.ArrowWidth = _random.Next(0, 20);
-                pin.Callout.ArrowAlignment = (ArrowAlignment)_random.Next(0, 4);
+                pin.Callout.ArrowAlignment = (TailAlignment)_random.Next(0, 4);
                 pin.Callout.ArrowPosition = _random.Next(0, 100) / 100.0;
                 pin.Callout.StrokeWidth = _random.Next(0, 10);
                 pin.Callout.Padding = new Thickness(_random.Next(0, 20), _random.Next(0, 20));

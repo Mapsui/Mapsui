@@ -4,9 +4,9 @@ namespace Mapsui.Extensions;
 
 public static class CalloutStyleExtensions
 {
-    public static CalloutOptions ToCalloutOptions(this CalloutStyle calloutStyle)
+    public static CalloutBalloonStyle ToCalloutOptions(this CalloutStyle calloutStyle)
     {
-        return new CalloutOptions(
+        return new CalloutBalloonStyle(
             calloutStyle.StrokeWidth,
             calloutStyle.Padding,
             calloutStyle.RectRadius,

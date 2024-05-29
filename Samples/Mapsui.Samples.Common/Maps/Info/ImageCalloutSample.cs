@@ -85,19 +85,19 @@ public class ImageCalloutSample : ISample
         switch (_random.Next(0, 4))
         {
             case 0:
-                calloutStyle.ArrowAlignment = ArrowAlignment.Bottom;
+                calloutStyle.ArrowAlignment = TailAlignment.Bottom;
                 calloutStyle.Offset = new Offset(0, SymbolStyle.DefaultHeight * 0.5f);
                 break;
             case 1:
-                calloutStyle.ArrowAlignment = ArrowAlignment.Left;
+                calloutStyle.ArrowAlignment = TailAlignment.Left;
                 calloutStyle.Offset = new Offset(SymbolStyle.DefaultHeight * 0.5f, 0);
                 break;
             case 2:
-                calloutStyle.ArrowAlignment = ArrowAlignment.Top;
+                calloutStyle.ArrowAlignment = TailAlignment.Top;
                 calloutStyle.Offset = new Offset(0, -SymbolStyle.DefaultHeight * 0.5f);
                 break;
             case 3:
-                calloutStyle.ArrowAlignment = ArrowAlignment.Right;
+                calloutStyle.ArrowAlignment = TailAlignment.Right;
                 calloutStyle.Offset = new Offset(-SymbolStyle.DefaultHeight * 0.5f, 0);
                 break;
         }
