@@ -4,16 +4,16 @@ namespace Mapsui.Extensions;
 
 public static class CalloutStyleExtensions
 {
-    public static CalloutBalloonStyle ToCalloutOptions(this CalloutStyle calloutStyle)
+    public static CalloutBalloonStyle ToCalloutBalloonStyle(this CalloutStyle calloutStyle)
     {
         return new CalloutBalloonStyle(
             calloutStyle.StrokeWidth,
             calloutStyle.Padding,
             calloutStyle.RectRadius,
-            calloutStyle.ArrowAlignment,
-            calloutStyle.ArrowWidth,
-            calloutStyle.ArrowHeight,
-            calloutStyle.ArrowPosition,
+            calloutStyle.TailAlignment,
+            calloutStyle.TailWidth,
+            calloutStyle.TailHeight,
+            calloutStyle.TailPosition,
             calloutStyle.ShadowWidth,
             calloutStyle.BackgroundColor,
             calloutStyle.Color

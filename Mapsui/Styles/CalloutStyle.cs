@@ -60,10 +60,10 @@ public enum TailAlignment
 public class CalloutStyle : SymbolStyle
 {
     private CalloutType _type = CalloutType.Single;
-    private TailAlignment _arrowAlignment = TailAlignment.Bottom;
-    private float _arrowWidth = 8f;
-    private float _arrowHeight = 8f;
-    private float _arrowPosition = 0.5f;
+    private TailAlignment _tailAlignment = TailAlignment.Bottom;
+    private float _tailWidth = 8f;
+    private float _tailHeight = 8f;
+    private float _tailPosition = 0.5f;
     private float _rectRadius = 4f;
     private float _shadowWidth = 2f;
     private MRect _padding = new(3f, 3f, 3f, 3f);
@@ -142,14 +142,14 @@ public class CalloutStyle : SymbolStyle
     /// <summary>
     /// Anchor position of Callout
     /// </summary>
-    public TailAlignment ArrowAlignment
+    public TailAlignment TailAlignment
     {
-        get => _arrowAlignment;
+        get => _tailAlignment;
         set
         {
-            if (value != _arrowAlignment)
+            if (value != _tailAlignment)
             {
-                _arrowAlignment = value;
+                _tailAlignment = value;
                 Invalidate();
             }
         }
@@ -158,14 +158,14 @@ public class CalloutStyle : SymbolStyle
     /// <summary>
     /// Width of opening of anchor of Callout
     /// </summary>
-    public float ArrowWidth
+    public float TailWidth
     {
-        get => _arrowWidth;
+        get => _tailWidth;
         set
         {
-            if (value != _arrowWidth)
+            if (value != _tailWidth)
             {
-                _arrowWidth = value;
+                _tailWidth = value;
                 Invalidate();
             }
         }
@@ -174,14 +174,14 @@ public class CalloutStyle : SymbolStyle
     /// <summary>
     /// Height of anchor of Callout
     /// </summary>
-    public float ArrowHeight
+    public float TailHeight
     {
-        get => _arrowHeight;
+        get => _tailHeight;
         set
         {
-            if (value != _arrowHeight)
+            if (value != _tailHeight)
             {
-                _arrowHeight = value;
+                _tailHeight = value;
                 Invalidate();
             }
         }
@@ -190,14 +190,14 @@ public class CalloutStyle : SymbolStyle
     /// <summary>
     /// Relative position of anchor of Callout on the side given by AnchorType
     /// </summary>
-    public float ArrowPosition
+    public float TailPosition
     {
-        get => _arrowPosition;
+        get => _tailPosition;
         set
         {
-            if (value != _arrowPosition)
+            if (value != _tailPosition)
             {
-                _arrowPosition = value;
+                _tailPosition = value;
                 Invalidate();
             }
         }

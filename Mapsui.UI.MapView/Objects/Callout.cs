@@ -577,9 +577,9 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
             Feature.Styles.Add(style);
         }
 
-        style.ArrowAlignment = ArrowAlignment;
-        style.ArrowHeight = (float)ArrowHeight;
-        style.ArrowPosition = (float)ArrowPosition;
+        style.TailAlignment = ArrowAlignment;
+        style.TailHeight = (float)ArrowHeight;
+        style.TailPosition = (float)ArrowPosition;
         style.BackgroundColor = BackgroundColor.ToMapsui();
         style.Color = Color.ToMapsui();
         style.SymbolOffset = new Offset(Anchor.X, Anchor.Y);
