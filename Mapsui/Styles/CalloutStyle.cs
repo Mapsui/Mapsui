@@ -81,8 +81,8 @@ public class CalloutStyle : SymbolStyle
     private Color? _titleFontColor;
     private Color? _subtitleFontColor;
 
-    public string ImageIdOfFullCallout { get; private set; } = Guid.NewGuid().ToString();
-    public string ImageIdOfContent { get; private set; } = Guid.NewGuid().ToString();
+    public string ImageIdOfCallout { get; private set; } = Guid.NewGuid().ToString();
+    public string ImageIdOfCalloutContent { get; private set; } = Guid.NewGuid().ToString();
 
     public static new double DefaultWidth { get; set; } = 100;
     public static new double DefaultHeight { get; set; } = 30;
@@ -446,7 +446,7 @@ public class CalloutStyle : SymbolStyle
 
     public void Invalidate()
     {
-        ImageIdOfContent = Guid.NewGuid().ToString();
-        ImageIdOfFullCallout = Guid.NewGuid().ToString();
+        ImageIdOfCalloutContent = Guid.NewGuid().ToString();
+        ImageIdOfCallout = Guid.NewGuid().ToString();
     }
 }

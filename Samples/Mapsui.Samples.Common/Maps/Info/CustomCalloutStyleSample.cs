@@ -114,10 +114,10 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         // Create content for callout
         var content = CreateCalloutContent(calloutStyle);
         // Create bubble around content
-        var drawableImage = CalloutStyleRenderer.CreateFullCallout(calloutStyle, content);
+        var picture = CalloutStyleRenderer.CreateCallout(calloutStyle.ToCalloutOptions(), content);
 
         // Calc offset (relative or absolute)
-        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Width, drawableImage.Height);
+        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
 
         // Save state of the canvas, so we could move and rotate the canvas
         canvas.Save();
@@ -128,10 +128,12 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
 
         // 0/0 are assumed at center of image, but Picture has 0/0 at left top position
         canvas.RotateDegrees(0);
-        canvas.Translate((float)calloutStyle.Offset.X, (float)calloutStyle.Offset.Y);
+
+        var bounds = CalloutStyleRenderer.GetBalloonBounds(calloutStyle.ToCalloutOptions(), content.GetSize());
+        canvas.Translate((float)-bounds.TailTip.X, (float)-bounds.TailTip.Y);
 
         using var skPaint = new SKPaint() { IsAntialias = true };
-        canvas.DrawPicture(drawableImage.Picture, skPaint);
+        canvas.DrawPicture(picture, skPaint);
 
         canvas.Restore();
 
