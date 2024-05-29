@@ -27,11 +27,73 @@ public static class CalloutBalloonStyleExtensions
         return recorder.EndRecording();
     }
 
+    public static CalloutBalloonBounds GetBalloonBounds(this CalloutBalloonStyle callout, Size contentSize)
+    {
+        double bottom, left, top, right;
+        var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
+        var paddingLeft = callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left;
+        var paddingTop = callout.Padding.Top < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Top;
+        var paddingRight = callout.Padding.Right < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Right;
+        var paddingBottom = callout.Padding.Bottom < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Bottom;
+        var width = contentSize.Width + paddingLeft + paddingRight;
+        var height = contentSize.Height + paddingTop + paddingBottom;
+        // Half width is distance from left/top to tail position, so we have to add shadow and stroke
+        var halfWidth = width * callout.TailPosition + callout.ShadowWidth + strokeWidth * 2;
+        var halfHeight = height * callout.TailPosition + callout.ShadowWidth + strokeWidth * 2;
+        bottom = height + callout.ShadowWidth + strokeWidth * 2;
+        left = callout.ShadowWidth + strokeWidth;
+        top = callout.ShadowWidth + strokeWidth;
+        right = width + callout.ShadowWidth + strokeWidth * 2;
+        var start = new SKPoint();
+        var center = new SKPoint();
+        var end = new SKPoint();
+
+        // Check, if we are to near at corners
+        if (halfWidth - callout.TailWidth * 0.5f - left < callout.RectRadius)
+            halfWidth = callout.TailWidth * 0.5f + left + callout.RectRadius;
+        else if (halfWidth + callout.TailWidth * 0.5f > width - callout.RectRadius)
+            halfWidth = width - callout.TailWidth * 0.5f - callout.RectRadius;
+        if (halfHeight - callout.TailWidth * 0.5f - top < callout.RectRadius)
+            halfHeight = callout.TailWidth * 0.5f + top + callout.RectRadius;
+        else if (halfHeight + callout.TailWidth * 0.5f > height - callout.RectRadius)
+            halfHeight = height - callout.TailWidth * 0.5f - callout.RectRadius;
+
+        switch (callout.TailAlignment)
+        {
+            case TailAlignment.Bottom:
+                start = new SKPoint((float)(halfWidth + callout.TailWidth * 0.5), (float)bottom);
+                center = new SKPoint((float)halfWidth, (float)(bottom + callout.TailHeight));
+                end = new SKPoint((float)(halfWidth - callout.TailWidth * 0.5), (float)bottom);
+                break;
+            case TailAlignment.Top:
+                top += callout.TailHeight;
+                bottom += callout.TailHeight;
+                start = new SKPoint((float)(halfWidth - callout.TailWidth * 0.5), (float)top);
+                center = new SKPoint((float)halfWidth, (float)(top - callout.TailHeight));
+                end = new SKPoint((float)(halfWidth + callout.TailWidth * 0.5), (float)top);
+                break;
+            case TailAlignment.Left:
+                left += callout.TailHeight;
+                right += callout.TailHeight;
+                start = new SKPoint((float)left, (float)(halfHeight + callout.TailWidth * 0.5));
+                center = new SKPoint((float)(left - callout.TailHeight), (float)halfHeight);
+                end = new SKPoint((float)left, (float)(halfHeight - callout.TailWidth * 0.5));
+                break;
+            case TailAlignment.Right:
+                start = new SKPoint((float)right, (float)(halfHeight - callout.TailWidth * 0.5));
+                center = new SKPoint((float)(right + callout.TailHeight), (float)halfHeight);
+                end = new SKPoint((float)right, (float)(halfHeight + callout.TailWidth * 0.5));
+                break;
+        }
+
+        return new CalloutBalloonBounds(bottom, left, top, right, start, end, center);
+    }
+
     /// <summary>
     /// Calc the size which is needed for the canvas
     /// </summary>
     /// <returns></returns>
-    public static (double, double) CalcSize(this CalloutBalloonStyle callout, Size contentSize)
+    private static (double, double) CalcSize(this CalloutBalloonStyle callout, Size contentSize)
     {
         var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
         // Add padding around the content
@@ -66,7 +128,7 @@ public static class CalloutBalloonStyleExtensions
         return (width, height);
     }
 
-    public static void DrawOutline(this CalloutBalloonStyle balloonStyle, SKCanvas canvas, SKPath path)
+    private static void DrawOutline(this CalloutBalloonStyle balloonStyle, SKCanvas canvas, SKPath path)
     {
         using var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, (float)balloonStyle.ShadowWidth) };
         using var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = balloonStyle.BackgroundColor.ToSkia() };
@@ -158,67 +220,4 @@ public static class CalloutBalloonStyleExtensions
         path.LineTo(center);
         path.LineTo(end);
     }
-
-    public static CalloutBalloonBounds GetBalloonBounds(this CalloutBalloonStyle callout, Size contentSize)
-    {
-        double bottom, left, top, right;
-        var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
-        var paddingLeft = callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left;
-        var paddingTop = callout.Padding.Top < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Top;
-        var paddingRight = callout.Padding.Right < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Right;
-        var paddingBottom = callout.Padding.Bottom < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Bottom;
-        var width = contentSize.Width + paddingLeft + paddingRight;
-        var height = contentSize.Height + paddingTop + paddingBottom;
-        // Half width is distance from left/top to tail position, so we have to add shadow and stroke
-        var halfWidth = width * callout.TailPosition + callout.ShadowWidth + strokeWidth * 2;
-        var halfHeight = height * callout.TailPosition + callout.ShadowWidth + strokeWidth * 2;
-        bottom = height + callout.ShadowWidth + strokeWidth * 2;
-        left = callout.ShadowWidth + strokeWidth;
-        top = callout.ShadowWidth + strokeWidth;
-        right = width + callout.ShadowWidth + strokeWidth * 2;
-        var start = new SKPoint();
-        var center = new SKPoint();
-        var end = new SKPoint();
-
-        // Check, if we are to near at corners
-        if (halfWidth - callout.TailWidth * 0.5f - left < callout.RectRadius)
-            halfWidth = callout.TailWidth * 0.5f + left + callout.RectRadius;
-        else if (halfWidth + callout.TailWidth * 0.5f > width - callout.RectRadius)
-            halfWidth = width - callout.TailWidth * 0.5f - callout.RectRadius;
-        if (halfHeight - callout.TailWidth * 0.5f - top < callout.RectRadius)
-            halfHeight = callout.TailWidth * 0.5f + top + callout.RectRadius;
-        else if (halfHeight + callout.TailWidth * 0.5f > height - callout.RectRadius)
-            halfHeight = height - callout.TailWidth * 0.5f - callout.RectRadius;
-
-        switch (callout.TailAlignment)
-        {
-            case TailAlignment.Bottom:
-                start = new SKPoint((float)(halfWidth + callout.TailWidth * 0.5), (float)bottom);
-                center = new SKPoint((float)halfWidth, (float)(bottom + callout.TailHeight));
-                end = new SKPoint((float)(halfWidth - callout.TailWidth * 0.5), (float)bottom);
-                break;
-            case TailAlignment.Top:
-                top += callout.TailHeight;
-                bottom += callout.TailHeight;
-                start = new SKPoint((float)(halfWidth - callout.TailWidth * 0.5), (float)top);
-                center = new SKPoint((float)halfWidth, (float)(top - callout.TailHeight));
-                end = new SKPoint((float)(halfWidth + callout.TailWidth * 0.5), (float)top);
-                break;
-            case TailAlignment.Left:
-                left += callout.TailHeight;
-                right += callout.TailHeight;
-                start = new SKPoint((float)left, (float)(halfHeight + callout.TailWidth * 0.5));
-                center = new SKPoint((float)(left - callout.TailHeight), (float)halfHeight);
-                end = new SKPoint((float)left, (float)(halfHeight - callout.TailWidth * 0.5));
-                break;
-            case TailAlignment.Right:
-                start = new SKPoint((float)right, (float)(halfHeight - callout.TailWidth * 0.5));
-                center = new SKPoint((float)(right + callout.TailHeight), (float)halfHeight);
-                end = new SKPoint((float)right, (float)(halfHeight + callout.TailWidth * 0.5));
-                break;
-        }
-
-        return new CalloutBalloonBounds(bottom, left, top, right, start, end, center);
-    }
-
 }
