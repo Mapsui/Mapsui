@@ -62,7 +62,5 @@ public class ImageButtonWidgetRenderer : ISkiaWidgetRenderer
         }
         else
             throw new NotSupportedException("DrawableImage type not supported");
-
-
     }
 }

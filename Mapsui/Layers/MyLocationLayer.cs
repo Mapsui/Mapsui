@@ -185,15 +185,18 @@ public class MyLocationLayer : BaseLayer, IDisposable
             Type = CalloutType.Single,
             Title = "",
             TitleFontColor = Color.Black,
-            ArrowAlignment = ArrowAlignment.Top,
-            ArrowPosition = 0,
-            SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
             MaxWidth = 300,
             RotateWithMap = true,
             SymbolOffsetRotatesWithMap = true,
-            Color = Color.White,
-            StrokeWidth = 0,
-            ShadowWidth = 0
+            SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
+            BalloonDefinition = new CalloutBalloonDefinition
+            {
+                Color = Color.White,
+                TailAlignment = TailAlignment.Top,
+                TailPosition = 0,
+                StrokeWidth = 0,
+                ShadowWidth = 0
+            },
         };
 
         _feature.Styles.Clear();

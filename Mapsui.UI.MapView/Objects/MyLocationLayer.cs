@@ -183,16 +183,19 @@ public class MyLocationLayer : BaseLayer
             Enabled = false,
             Type = CalloutType.Single,
             Title = "",
-            TitleFontColor = Styles.Color.Black,
-            ArrowAlignment = ArrowAlignment.Top,
-            ArrowPosition = 0,
+            TitleFontColor = Color.Black,
             SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
             MaxWidth = 300,
             RotateWithMap = true,
             SymbolOffsetRotatesWithMap = true,
-            Color = Styles.Color.White,
-            StrokeWidth = 0,
-            ShadowWidth = 0
+            BalloonDefinition = new CalloutBalloonDefinition
+            {
+                TailAlignment = TailAlignment.Top,
+                TailPosition = 0,
+                Color = Color.White,
+                StrokeWidth = 0,
+                ShadowWidth = 0
+            },
         };
 
         _feature.Styles.Clear();

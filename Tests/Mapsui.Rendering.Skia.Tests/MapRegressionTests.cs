@@ -56,7 +56,7 @@ public class MapRegressionTests
             new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
             new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
             new CustomSvgStyleSample(), // Is currently not functioning and should be fixed with a redesign.
-            new CustomCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
+            new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
             new WmsOpenSeaSample(), // Failing now but will be fixed with in progress PR.
         ];
 
