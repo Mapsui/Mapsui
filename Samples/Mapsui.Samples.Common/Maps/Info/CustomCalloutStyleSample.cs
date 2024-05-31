@@ -112,7 +112,7 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
             return false;
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
         // Create content for callout
-        var content = CreateCalloutContent(calloutStyle);
+        var content = CreateCalloutContent();
         // Create bubble around content
         var balloonStyle = calloutStyle.ToCalloutBalloonDefinition();
         var picture = balloonStyle.CreateCallout(content);
@@ -163,38 +163,46 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static SKPicture CreateCalloutContent(CalloutStyle calloutStyle)
+    public static SKPicture CreateCalloutContent()
     {
+        var title = "title";
+        var titleFont = new Font { FontFamily = null, Size = 15, Italic = false, Bold = true };
+        var TitleFontColor = Color.Black;
+        var subtitle = "subtitle";
+        var subtitleFont = new Font { FontFamily = null, Size = 12, Italic = false, Bold = true };
+        var subtitleFontColor = Color.Gray;
+        var maxWidth = 120;
+
         var styleSubtitle = new Topten.RichTextKit.Style();
         var styleTitle = new Topten.RichTextKit.Style();
         var textBlockTitle = new TextBlock();
         var textBlockSubtitle = new TextBlock();
 
-        styleSubtitle.FontFamily = calloutStyle.SubtitleFont.FontFamily;
-        styleSubtitle.FontSize = (float)calloutStyle.SubtitleFont.Size;
-        styleSubtitle.FontItalic = calloutStyle.SubtitleFont.Italic;
-        styleSubtitle.FontWeight = calloutStyle.SubtitleFont.Bold ? 700 : 400;
-        styleSubtitle.TextColor = calloutStyle.SubtitleFontColor.ToSkia();
+        styleSubtitle.FontFamily = subtitleFont.FontFamily;
+        styleSubtitle.FontSize = (float)subtitleFont.Size;
+        styleSubtitle.FontItalic = subtitleFont.Italic;
+        styleSubtitle.FontWeight = subtitleFont.Bold ? 700 : 400;
+        styleSubtitle.TextColor = subtitleFontColor.ToSkia();
 
-        textBlockSubtitle.AddText(calloutStyle.Subtitle, styleSubtitle);
-        textBlockSubtitle.Alignment = calloutStyle.SubtitleTextAlignment.ToRichTextKit();
+        textBlockSubtitle.AddText(subtitle, styleSubtitle);
+        //!!!textBlockSubtitle.Alignment = SubtitleTextAlignment.ToRichTextKit();
 
-        styleTitle.FontFamily = calloutStyle.TitleFont.FontFamily;
-        styleTitle.FontSize = (float)calloutStyle.TitleFont.Size;
-        styleTitle.FontItalic = calloutStyle.TitleFont.Italic;
-        styleTitle.FontWeight = calloutStyle.TitleFont.Bold ? 700 : 400;
-        styleTitle.TextColor = calloutStyle.TitleFontColor.ToSkia();
+        styleTitle.FontFamily = titleFont.FontFamily;
+        styleTitle.FontSize = (float)titleFont.Size;
+        styleTitle.FontItalic = titleFont.Italic;
+        styleTitle.FontWeight = titleFont.Bold ? 700 : 400;
+        styleTitle.TextColor = TitleFontColor.ToSkia();
 
-        textBlockTitle.Alignment = calloutStyle.TitleTextAlignment.ToRichTextKit();
-        textBlockTitle.AddText(calloutStyle.Title, styleTitle);
+        //!!!textBlockTitle.Alignment = TitleTextAlignment.ToRichTextKit();
+        textBlockTitle.AddText(title, styleTitle);
 
-        textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = (float)calloutStyle.MaxWidth;
+        textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = maxWidth;
         // Layout TextBlocks
         textBlockTitle.Layout();
         textBlockSubtitle.Layout();
         // Get sizes
         var width = Math.Max(textBlockTitle.MeasuredWidth, textBlockSubtitle.MeasuredWidth);
-        var height = textBlockTitle.MeasuredHeight + textBlockSubtitle.MeasuredHeight + (float)calloutStyle.Spacing;
+        var height = textBlockTitle.MeasuredHeight + textBlockSubtitle.MeasuredHeight;
         // Now we have the correct width, so make a new layout cycle for text alignment
         textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = width;
         textBlockTitle.Layout();
@@ -204,7 +212,7 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         using var canvas = recorder.BeginRecording(new SKRect(0, 0, width, height));
         // Draw text to canvas
         textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-        textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)calloutStyle.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+        textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
         return recorder.EndRecording();
     }
 }
