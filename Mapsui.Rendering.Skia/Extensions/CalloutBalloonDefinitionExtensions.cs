@@ -4,24 +4,24 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Extensions;
 
-public static class CalloutBalloonStyleExtensions
+public static class CalloutBalloonDefinitionExtensions
 {
-    public static SKPicture CreateCallout(this CalloutBalloonDefinition balloonStyle, SKPicture content)
+    public static SKPicture CreateCallout(this CalloutBalloonDefinition balloonDefinition, SKPicture content)
     {
         Size contentSize = new(content.CullRect.Width, content.CullRect.Height);
 
-        (var width, var height) = CalcSize(balloonStyle, contentSize);
+        (var width, var height) = CalcSize(balloonDefinition, contentSize);
 
         // Create a canvas for drawing
         using var recorder = new SKPictureRecorder();
         using var canvas = recorder.BeginRecording(new SKRect(0, 0, (float)width, (float)height));
 
-        using var outline = balloonStyle.CreateCalloutOutline(contentSize);
+        using var outline = balloonDefinition.CreateCalloutOutline(contentSize);
         // Draw outline
-        DrawOutline(balloonStyle, canvas, outline);
+        DrawOutline(balloonDefinition, canvas, outline);
 
         // Draw content
-        DrawContent(balloonStyle, canvas, content);
+        DrawContent(balloonDefinition, canvas, content);
 
         // Create SKPicture from canvas
         return recorder.EndRecording();
@@ -29,6 +29,9 @@ public static class CalloutBalloonStyleExtensions
 
     public static CalloutBalloonBounds GetBalloonBounds(this CalloutBalloonDefinition callout, Size contentSize)
     {
+        // This method is public because the location of the TailTip is needed when drawing
+        // the callout. It may be possible to reorganize things so that this is not necessary.
+
         double bottom, left, top, right;
         var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
         var paddingLeft = callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left;
@@ -128,30 +131,30 @@ public static class CalloutBalloonStyleExtensions
         return (width, height);
     }
 
-    private static void DrawOutline(this CalloutBalloonDefinition balloonStyle, SKCanvas canvas, SKPath path)
+    private static void DrawOutline(this CalloutBalloonDefinition balloonDefinition, SKCanvas canvas, SKPath path)
     {
-        using var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, (float)balloonStyle.ShadowWidth) };
-        using var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = balloonStyle.BackgroundColor.ToSkia() };
-        using var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = balloonStyle.Color.ToSkia(), StrokeWidth = (float)balloonStyle.StrokeWidth };
+        using var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, (float)balloonDefinition.ShadowWidth) };
+        using var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = balloonDefinition.BackgroundColor.ToSkia() };
+        using var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = balloonDefinition.Color.ToSkia(), StrokeWidth = (float)balloonDefinition.StrokeWidth };
 
         canvas.DrawPath(path, shadow);
         canvas.DrawPath(path, fill);
         canvas.DrawPath(path, stroke);
     }
 
-    private static void DrawContent(CalloutBalloonDefinition balloonStyle, SKCanvas canvas, SKPicture content)
+    private static void DrawContent(CalloutBalloonDefinition balloonDefinition, SKCanvas canvas, SKPicture content)
     {
-        var strokeWidth = balloonStyle.StrokeWidth < 1 ? 1 : balloonStyle.StrokeWidth;
-        var offsetX = balloonStyle.ShadowWidth + strokeWidth + (balloonStyle.Padding.Left < balloonStyle.RectRadius * 0.5 ? balloonStyle.RectRadius * 0.5 : balloonStyle.Padding.Left);
-        var offsetY = balloonStyle.ShadowWidth + strokeWidth + (balloonStyle.Padding.Top < balloonStyle.RectRadius * 0.5 ? balloonStyle.RectRadius * 0.5 : balloonStyle.Padding.Top);
+        var strokeWidth = balloonDefinition.StrokeWidth < 1 ? 1 : balloonDefinition.StrokeWidth;
+        var offsetX = balloonDefinition.ShadowWidth + strokeWidth + (balloonDefinition.Padding.Left < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Left);
+        var offsetY = balloonDefinition.ShadowWidth + strokeWidth + (balloonDefinition.Padding.Top < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Top);
 
-        switch (balloonStyle.TailAlignment)
+        switch (balloonDefinition.TailAlignment)
         {
             case TailAlignment.Left:
-                offsetX += balloonStyle.TailHeight;
+                offsetX += balloonDefinition.TailHeight;
                 break;
             case TailAlignment.Top:
-                offsetY += balloonStyle.TailHeight;
+                offsetY += balloonDefinition.TailHeight;
                 break;
         }
 
@@ -164,43 +167,43 @@ public static class CalloutBalloonStyleExtensions
     /// <summary>
     /// Update path
     /// </summary>
-    private static SKPath CreateCalloutOutline(this CalloutBalloonDefinition balloonStyle, Size contentSize)
+    private static SKPath CreateCalloutOutline(this CalloutBalloonDefinition balloonDefinition, Size contentSize)
     {
-        var rect = balloonStyle.GetBalloonBounds(contentSize);
+        var rect = balloonDefinition.GetBalloonBounds(contentSize);
 
         // Create path
         var path = new SKPath();
 
         // Move to start point at left/top
-        path.MoveTo((float)(rect.Left + balloonStyle.RectRadius), (float)rect.Top);
+        path.MoveTo((float)(rect.Left + balloonDefinition.RectRadius), (float)rect.Top);
 
         // Top horizontal line
-        if (balloonStyle.TailAlignment == TailAlignment.Top)
+        if (balloonDefinition.TailAlignment == TailAlignment.Top)
             DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
 
         // Top right arc
-        path.ArcTo(new SKRect((float)(rect.Right - balloonStyle.RectRadius), (float)rect.Top, (float)rect.Right, (float)(rect.Top + balloonStyle.RectRadius)), 270, 90, false);
+        path.ArcTo(new SKRect((float)(rect.Right - balloonDefinition.RectRadius), (float)rect.Top, (float)rect.Right, (float)(rect.Top + balloonDefinition.RectRadius)), 270, 90, false);
 
         // Right vertical line
-        if (balloonStyle.TailAlignment == TailAlignment.Right)
+        if (balloonDefinition.TailAlignment == TailAlignment.Right)
             DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
 
         // Bottom right arc
-        path.ArcTo(new SKRect((float)(rect.Right - balloonStyle.RectRadius), (float)(rect.Bottom - balloonStyle.RectRadius), (float)rect.Right, (float)rect.Bottom), 0, 90, false);
+        path.ArcTo(new SKRect((float)(rect.Right - balloonDefinition.RectRadius), (float)(rect.Bottom - balloonDefinition.RectRadius), (float)rect.Right, (float)rect.Bottom), 0, 90, false);
 
         // Bottom horizontal line
-        if (balloonStyle.TailAlignment == TailAlignment.Bottom)
+        if (balloonDefinition.TailAlignment == TailAlignment.Bottom)
             DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
 
         // Bottom left arc
-        path.ArcTo(new SKRect((float)rect.Left, (float)(rect.Bottom - balloonStyle.RectRadius), (float)(rect.Left + balloonStyle.RectRadius), (float)rect.Bottom), 90, 90, false);
+        path.ArcTo(new SKRect((float)rect.Left, (float)(rect.Bottom - balloonDefinition.RectRadius), (float)(rect.Left + balloonDefinition.RectRadius), (float)rect.Bottom), 90, 90, false);
 
         // Left vertical line
-        if (balloonStyle.TailAlignment == TailAlignment.Left)
+        if (balloonDefinition.TailAlignment == TailAlignment.Left)
             DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
 
         // Top left arc
-        path.ArcTo(new SKRect((float)rect.Left, (float)rect.Top, (float)(rect.Left + balloonStyle.RectRadius), (float)(rect.Top + balloonStyle.RectRadius)), 180, 90, false);
+        path.ArcTo(new SKRect((float)rect.Left, (float)rect.Top, (float)(rect.Left + balloonDefinition.RectRadius), (float)(rect.Top + balloonDefinition.RectRadius)), 180, 90, false);
 
         path.Close();
 

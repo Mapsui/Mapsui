@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDISP001
-#pragma warning disable IDISP004
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Rendering.Skia;
 using Mapsui.Rendering.Skia.Cache;
@@ -22,7 +20,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 public class CustomCalloutStyleSample : IMapControlSample
 {
     public string Name => "Custom Callout Style";
-    public string Category => "1";//!!!"Info";
+    public string Category => "Info";
 
     public void Setup(IMapControl mapControl)
     {
@@ -84,87 +82,60 @@ public class CustomCalloutStyleSample : IMapControlSample
         return features;
     }
 
-    private static SymbolStyle CreatePinSymbol()
+    private static SymbolStyle CreatePinSymbol() => new()
     {
-        return new SymbolStyle
-        {
-            ImageSource = $"embedded://Mapsui.Resources.Images.pin.svg",
-            SymbolOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.
-            SvgFillColor = Color.FromString("#4193CF"),
-            SvgStrokeColor = Color.DimGrey,
-        };
-    }
+        ImageSource = $"embedded://Mapsui.Resources.Images.pin.svg",
+        SymbolOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.
+        SvgFillColor = Color.FromString("#4193CF"),
+        SvgStrokeColor = Color.DimGrey,
+    };
 }
 
 public class CustomCalloutStyle : BaseStyle { }
 
 public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style,
+        RenderService renderService, long iteration)
     {
         if (feature is not PointFeature pointFeature)
             throw new Exception($"Callout style only applies the {nameof(PointFeature)}");
         if (feature["show-callout"]?.ToString() != "true")
             return false;
-        var calloutStyle = CreateCalloutStyle();
+
+        var balloonDefinition = new CalloutBalloonDefinition { RectRadius = 10, ShadowWidth = 4 };
+        var symbolOffset = new Offset(0, 52 * 1f);
         var centroid = feature.Extent?.Centroid;
         if (centroid is null)
             return false;
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
-        // Create content for callout
-        var content = CreateCalloutContent();
-        // Create bubble around content
-        var balloonStyle = calloutStyle.ToCalloutBalloonDefinition();
-        var picture = balloonStyle.CreateCallout(content);
-
-        // Calc offset (relative or absolute)
-        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
+        // Create the custom content.
+        using var content = CreateCalloutContent();
+        // Create bubble around content.
+        using var callout = balloonDefinition.CreateCallout(content);
 
         // Save state of the canvas, so we could move and rotate the canvas
         canvas.Save();
 
-        // Move 0/0 to the Anchor point of Callout
         canvas.Translate((float)(x - symbolOffset.X), (float)(y - symbolOffset.Y));
-        canvas.Scale((float)calloutStyle.SymbolScale, (float)calloutStyle.SymbolScale);
-
-        // 0/0 are assumed at center of image, but Picture has 0/0 at left top position
-        canvas.RotateDegrees(0);
-
-        var bounds = balloonStyle.GetBalloonBounds(content.GetSize());
+        var bounds = balloonDefinition.GetBalloonBounds(content.GetSize());
         canvas.Translate((float)-bounds.TailTip.X, (float)-bounds.TailTip.Y);
 
-        using var skPaint = new SKPaint() { IsAntialias = true };
-        canvas.DrawPicture(picture, skPaint);
+        using var paint = new SKPaint() { IsAntialias = true };
+        canvas.DrawPicture(callout, paint);
 
         canvas.Restore();
 
         return true;
     }
 
-    private static CalloutStyle CreateCalloutStyle() => new()
-    {
-        Title = "title",
-        TitleFont = { FontFamily = null, Size = 15, Italic = false, Bold = true },
-        TitleFontColor = Color.Black,
-        Subtitle = "subtitle",
-        SubtitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
-        SubtitleFontColor = Color.Gray,
-        Type = CalloutType.Detail,
-        MaxWidth = 120,
-        Enabled = false,
-        SymbolOffset = new Offset(0, 52 * 1f),
-        BalloonDefinition = new CalloutBalloonDefinition
-        {
-            RectRadius = 10,
-            ShadowWidth = 4
-        }
-    };
-
-    /// <summary>
-    /// Update content for single and detail
-    /// </summary>
     public static SKPicture CreateCalloutContent()
     {
+        // This method creates the content of the callout. The code
+        // below is based on the CalloutStyle.Type = CalloutType.Detail
+        // renderer, but this could be anything. The content is totally
+        // up to you when working with a custom callout style.
+
         var title = "title";
         var titleFont = new Font { FontFamily = null, Size = 15, Italic = false, Bold = true };
         var TitleFontColor = Color.Black;
@@ -185,7 +156,6 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         styleSubtitle.TextColor = subtitleFontColor.ToSkia();
 
         textBlockSubtitle.AddText(subtitle, styleSubtitle);
-        //!!!textBlockSubtitle.Alignment = SubtitleTextAlignment.ToRichTextKit();
 
         styleTitle.FontFamily = titleFont.FontFamily;
         styleTitle.FontSize = (float)titleFont.Size;
@@ -193,7 +163,6 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         styleTitle.FontWeight = titleFont.Bold ? 700 : 400;
         styleTitle.TextColor = TitleFontColor.ToSkia();
 
-        //!!!textBlockTitle.Alignment = TitleTextAlignment.ToRichTextKit();
         textBlockTitle.AddText(title, styleTitle);
 
         textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = maxWidth;
