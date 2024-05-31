@@ -114,7 +114,7 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         // Create content for callout
         var content = CreateCalloutContent(calloutStyle);
         // Create bubble around content
-        var balloonStyle = calloutStyle.ToCalloutBalloonStyle();
+        var balloonStyle = calloutStyle.ToCalloutBalloonDefinition();
         var picture = balloonStyle.CreateCallout(content);
 
         // Calc offset (relative or absolute)
@@ -151,10 +151,13 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         SubtitleFontColor = Color.Gray,
         Type = CalloutType.Detail,
         MaxWidth = 120,
-        RectRadius = 10,
-        ShadowWidth = 4,
         Enabled = false,
-        SymbolOffset = new Offset(0, 52 * 1f)
+        SymbolOffset = new Offset(0, 52 * 1f),
+        BalloonDefinition = new CalloutBalloonDefinition
+        {
+            RectRadius = 10,
+            ShadowWidth = 4
+        }
     };
 
     /// <summary>

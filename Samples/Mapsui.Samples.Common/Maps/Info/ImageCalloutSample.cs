@@ -79,34 +79,44 @@ public class ImageCalloutSample : ISample
         });
     }
 
-    private static CalloutStyle CreateCalloutStyle(string ImageSource)
+    private static CalloutStyle CreateCalloutStyle(string imageSource) => new()
     {
-        var calloutStyle = new CalloutStyle { ImageSource = ImageSource, TailPosition = _random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Image };
-        switch (_random.Next(0, 4))
+        BalloonDefinition = CreateCalloutBalloonDefinition(),
+        ImageSource = imageSource,
+        Type = CalloutType.Image,
+        Enabled = false
+    };
+
+    private static CalloutBalloonDefinition CreateCalloutBalloonDefinition()
+    {
+        var tailAlignment = _random.Next(0, 4);
+        return new CalloutBalloonDefinition
         {
-            case 0:
-                calloutStyle.TailAlignment = TailAlignment.Bottom;
-                calloutStyle.Offset = new Offset(0, SymbolStyle.DefaultHeight * 0.5f);
-                break;
-            case 1:
-                calloutStyle.TailAlignment = TailAlignment.Left;
-                calloutStyle.Offset = new Offset(SymbolStyle.DefaultHeight * 0.5f, 0);
-                break;
-            case 2:
-                calloutStyle.TailAlignment = TailAlignment.Top;
-                calloutStyle.Offset = new Offset(0, -SymbolStyle.DefaultHeight * 0.5f);
-                break;
-            case 3:
-                calloutStyle.TailAlignment = TailAlignment.Right;
-                calloutStyle.Offset = new Offset(-SymbolStyle.DefaultHeight * 0.5f, 0);
-                break;
-        }
-        calloutStyle.RectRadius = 10;
-        calloutStyle.ShadowWidth = 4;
-        calloutStyle.StrokeWidth = 0;
-        calloutStyle.Enabled = false;
-        return calloutStyle;
+            TailPosition = _random.Next(1, 9) * 0.1f,
+            RectRadius = 10,
+            ShadowWidth = 4,
+            StrokeWidth = 0,
+            TailAlignment = GetTailAlignment(tailAlignment),
+            Offset = GetOffset(tailAlignment),
+        };
     }
+    private static Offset GetOffset(int tailAlignment) => tailAlignment switch
+    {
+        0 => new Offset(0, SymbolStyle.DefaultHeight * 0.5f),
+        1 => new Offset(SymbolStyle.DefaultHeight * 0.5f, 0),
+        2 => new Offset(0, -SymbolStyle.DefaultHeight * 0.5f),
+        3 => new Offset(-SymbolStyle.DefaultHeight * 0.5f, 0),
+        _ => throw new ArgumentOutOfRangeException(nameof(tailAlignment)),
+    };
+
+    private static TailAlignment GetTailAlignment(int tailAlignment) => tailAlignment switch
+    {
+        0 => TailAlignment.Bottom,
+        1 => TailAlignment.Left,
+        2 => TailAlignment.Top,
+        3 => TailAlignment.Right,
+        _ => throw new ArgumentOutOfRangeException(nameof(tailAlignment)),
+    };
 
     internal class City
     {

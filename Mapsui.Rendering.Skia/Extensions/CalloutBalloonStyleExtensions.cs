@@ -6,7 +6,7 @@ namespace Mapsui.Rendering.Skia.Extensions;
 
 public static class CalloutBalloonStyleExtensions
 {
-    public static SKPicture CreateCallout(this CalloutBalloonStyle balloonStyle, SKPicture content)
+    public static SKPicture CreateCallout(this CalloutBalloonDefinition balloonStyle, SKPicture content)
     {
         Size contentSize = new(content.CullRect.Width, content.CullRect.Height);
 
@@ -27,7 +27,7 @@ public static class CalloutBalloonStyleExtensions
         return recorder.EndRecording();
     }
 
-    public static CalloutBalloonBounds GetBalloonBounds(this CalloutBalloonStyle callout, Size contentSize)
+    public static CalloutBalloonBounds GetBalloonBounds(this CalloutBalloonDefinition callout, Size contentSize)
     {
         double bottom, left, top, right;
         var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
@@ -93,7 +93,7 @@ public static class CalloutBalloonStyleExtensions
     /// Calc the size which is needed for the canvas
     /// </summary>
     /// <returns></returns>
-    private static (double, double) CalcSize(this CalloutBalloonStyle callout, Size contentSize)
+    private static (double, double) CalcSize(this CalloutBalloonDefinition callout, Size contentSize)
     {
         var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
         // Add padding around the content
@@ -128,7 +128,7 @@ public static class CalloutBalloonStyleExtensions
         return (width, height);
     }
 
-    private static void DrawOutline(this CalloutBalloonStyle balloonStyle, SKCanvas canvas, SKPath path)
+    private static void DrawOutline(this CalloutBalloonDefinition balloonStyle, SKCanvas canvas, SKPath path)
     {
         using var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, (float)balloonStyle.ShadowWidth) };
         using var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = balloonStyle.BackgroundColor.ToSkia() };
@@ -139,7 +139,7 @@ public static class CalloutBalloonStyleExtensions
         canvas.DrawPath(path, stroke);
     }
 
-    private static void DrawContent(CalloutBalloonStyle balloonStyle, SKCanvas canvas, SKPicture content)
+    private static void DrawContent(CalloutBalloonDefinition balloonStyle, SKCanvas canvas, SKPicture content)
     {
         var strokeWidth = balloonStyle.StrokeWidth < 1 ? 1 : balloonStyle.StrokeWidth;
         var offsetX = balloonStyle.ShadowWidth + strokeWidth + (balloonStyle.Padding.Left < balloonStyle.RectRadius * 0.5 ? balloonStyle.RectRadius * 0.5 : balloonStyle.Padding.Left);
@@ -164,7 +164,7 @@ public static class CalloutBalloonStyleExtensions
     /// <summary>
     /// Update path
     /// </summary>
-    private static SKPath CreateCalloutOutline(this CalloutBalloonStyle balloonStyle, Size contentSize)
+    private static SKPath CreateCalloutOutline(this CalloutBalloonDefinition balloonStyle, Size contentSize)
     {
         var rect = balloonStyle.GetBalloonBounds(contentSize);
 

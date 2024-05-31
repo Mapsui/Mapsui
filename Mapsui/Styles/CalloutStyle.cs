@@ -60,17 +60,6 @@ public enum TailAlignment
 public class CalloutStyle : SymbolStyle
 {
     private CalloutType _type = CalloutType.Single;
-    private TailAlignment _tailAlignment = TailAlignment.Bottom;
-    private float _tailWidth = 8f;
-    private float _tailHeight = 8f;
-    private float _tailPosition = 0.5f;
-    private float _rectRadius = 4f;
-    private float _shadowWidth = 2f;
-    private MRect _padding = new(3f, 3f, 3f, 3f);
-    private Color _color = Color.Black;
-    private Color _backgroundColor = Color.White;
-    private float _strokeWidth = 1f;
-    private Offset _offset = new(0, 0);
     private double _rotation;
     private string? _title;
     private string? _subtitle;
@@ -107,23 +96,6 @@ public class CalloutStyle : SymbolStyle
     }
 
     /// <summary>
-    /// Offset position in pixels of Callout
-    /// </summary>
-    public Offset Offset
-    {
-        get => _offset;
-        set
-        {
-            if (!_offset.Equals(value))
-            {
-                _offset = value;
-                Invalidate();
-                //SymbolOffset = new Offset(_offset.X, _offset.Y);
-            }
-        }
-    }
-
-    /// <summary>
     /// Gets or sets the rotation of the Callout in degrees (clockwise is positive)
     /// </summary>
     public double Rotation
@@ -135,166 +107,6 @@ public class CalloutStyle : SymbolStyle
             {
                 _rotation = value;
                 SymbolRotation = _rotation;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Anchor position of Callout
-    /// </summary>
-    public TailAlignment TailAlignment
-    {
-        get => _tailAlignment;
-        set
-        {
-            if (value != _tailAlignment)
-            {
-                _tailAlignment = value;
-                Invalidate();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Width of opening of anchor of Callout
-    /// </summary>
-    public float TailWidth
-    {
-        get => _tailWidth;
-        set
-        {
-            if (value != _tailWidth)
-            {
-                _tailWidth = value;
-                Invalidate();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Height of anchor of Callout
-    /// </summary>
-    public float TailHeight
-    {
-        get => _tailHeight;
-        set
-        {
-            if (value != _tailHeight)
-            {
-                _tailHeight = value;
-                Invalidate();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Relative position of anchor of Callout on the side given by AnchorType
-    /// </summary>
-    public float TailPosition
-    {
-        get => _tailPosition;
-        set
-        {
-            if (value != _tailPosition)
-            {
-                _tailPosition = value;
-                Invalidate();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Color of stroke around Callout
-    /// </summary>
-    public Color Color
-    {
-        get => _color;
-        set
-        {
-            if (value != _color)
-            {
-                _color = value;
-                Invalidate();
-            }
-        }
-    }
-
-    /// <summary>
-    /// BackgroundColor of Callout
-    /// </summary>
-    public Color BackgroundColor
-    {
-        get => _backgroundColor;
-        set
-        {
-            if (value != _backgroundColor)
-            {
-                _backgroundColor = value;
-                Invalidate();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Stroke width of frame around Callout
-    /// </summary>
-    public float StrokeWidth
-    {
-        get => _strokeWidth;
-        set
-        {
-            if (value != _strokeWidth)
-            {
-                _strokeWidth = value;
-                Invalidate();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Radius of rounded corners of Callout
-    /// </summary>
-    public float RectRadius
-    {
-        get => _rectRadius;
-        set
-        {
-            if (value != _rectRadius)
-            {
-                _rectRadius = value;
-                Invalidate();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Padding around content of Callout
-    /// </summary>
-    public MRect Padding
-    {
-        get => _padding;
-        set
-        {
-            if (!value.Equals(_padding))
-            {
-                _padding = value;
-                Invalidate();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Width of shadow around Callout
-    /// </summary>
-    public float ShadowWidth
-    {
-        get => _shadowWidth;
-        set
-        {
-            if (value != _shadowWidth)
-            {
-                _shadowWidth = value;
-                Invalidate();
             }
         }
     }
@@ -423,6 +235,7 @@ public class CalloutStyle : SymbolStyle
 
     private Font _titleFont = new();
     private Font _subtitleFont = new();
+    private CalloutBalloonDefinition _calloutBalloonDefinition = new();
 
     public Font TitleFont
     {
@@ -440,6 +253,16 @@ public class CalloutStyle : SymbolStyle
         set
         {
             _subtitleFont = value;
+            Invalidate();
+        }
+    }
+
+    public CalloutBalloonDefinition BalloonDefinition
+    {
+        get => _calloutBalloonDefinition;
+        set
+        {
+            _calloutBalloonDefinition = value;
             Invalidate();
         }
     }
