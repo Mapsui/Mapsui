@@ -35,7 +35,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var contentDrawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCalloutContent,
             () => new SvgImage(CreateCalloutContent(calloutStyle, renderService.DrawableImageCache)))!;
         var drawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCallout,
-            () => new SvgImage(calloutStyle.ToCalloutBalloonDefinition().CreateCallout(contentDrawableImage.Picture)))!;
+            () => new SvgImage(calloutStyle.BalloonDefinition.CreateCallout(contentDrawableImage.Picture)))!;
 
         // Calc offset (relative or absolute)
         var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);
@@ -60,7 +60,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         // 0/0 are assumed at center of image, but Picture has 0/0 at left top position
         canvas.RotateDegrees(rotation);
 
-        var balloonBounds = calloutStyle.ToCalloutBalloonDefinition().GetBalloonBounds(contentDrawableImage.Picture.GetSize());
+        var balloonBounds = calloutStyle.BalloonDefinition.GetBalloonBounds(contentDrawableImage.Picture.GetSize());
         canvas.Translate((float)-balloonBounds.TailTip.X, (float)-balloonBounds.TailTip.Y);
 
         using var skPaint = new SKPaint() { IsAntialias = true };

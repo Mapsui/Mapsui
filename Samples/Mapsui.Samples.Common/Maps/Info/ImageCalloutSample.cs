@@ -81,13 +81,13 @@ public class ImageCalloutSample : ISample
 
     private static CalloutStyle CreateCalloutStyle(string imageSource) => new()
     {
-        BalloonDefinition = CreateCalloutBalloonDefinition(),
+        BalloonDefinition = CreateBalloonDefinition(),
         ImageSource = imageSource,
         Type = CalloutType.Image,
         Enabled = false
     };
 
-    private static CalloutBalloonDefinition CreateCalloutBalloonDefinition()
+    private static CalloutBalloonDefinition CreateBalloonDefinition()
     {
         var tailAlignment = _random.Next(0, 4);
         return new CalloutBalloonDefinition

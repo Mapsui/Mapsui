@@ -118,8 +118,8 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         canvas.Save();
 
         canvas.Translate((float)(x - symbolOffset.X), (float)(y - symbolOffset.Y));
-        var bounds = balloonDefinition.GetBalloonBounds(content.GetSize());
-        canvas.Translate((float)-bounds.TailTip.X, (float)-bounds.TailTip.Y);
+        var balloonBounds = balloonDefinition.GetBalloonBounds(content.GetSize());
+        canvas.Translate((float)-balloonBounds.TailTip.X, (float)-balloonBounds.TailTip.Y);
 
         using var paint = new SKPaint() { IsAntialias = true };
         canvas.DrawPicture(callout, paint);

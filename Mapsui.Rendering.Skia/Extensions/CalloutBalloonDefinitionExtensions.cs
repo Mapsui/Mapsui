@@ -27,65 +27,65 @@ public static class CalloutBalloonDefinitionExtensions
         return recorder.EndRecording();
     }
 
-    public static CalloutBalloonBounds GetBalloonBounds(this CalloutBalloonDefinition callout, Size contentSize)
+    public static CalloutBalloonBounds GetBalloonBounds(this CalloutBalloonDefinition balloonDefinition, Size contentSize)
     {
         // This method is public because the location of the TailTip is needed when drawing
         // the callout. It may be possible to reorganize things so that this is not necessary.
 
         double bottom, left, top, right;
-        var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
-        var paddingLeft = callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left;
-        var paddingTop = callout.Padding.Top < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Top;
-        var paddingRight = callout.Padding.Right < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Right;
-        var paddingBottom = callout.Padding.Bottom < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Bottom;
+        var strokeWidth = balloonDefinition.StrokeWidth < 1 ? 1 : balloonDefinition.StrokeWidth;
+        var paddingLeft = balloonDefinition.Padding.Left < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Left;
+        var paddingTop = balloonDefinition.Padding.Top < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Top;
+        var paddingRight = balloonDefinition.Padding.Right < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Right;
+        var paddingBottom = balloonDefinition.Padding.Bottom < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Bottom;
         var width = contentSize.Width + paddingLeft + paddingRight;
         var height = contentSize.Height + paddingTop + paddingBottom;
         // Half width is distance from left/top to tail position, so we have to add shadow and stroke
-        var halfWidth = width * callout.TailPosition + callout.ShadowWidth + strokeWidth * 2;
-        var halfHeight = height * callout.TailPosition + callout.ShadowWidth + strokeWidth * 2;
-        bottom = height + callout.ShadowWidth + strokeWidth * 2;
-        left = callout.ShadowWidth + strokeWidth;
-        top = callout.ShadowWidth + strokeWidth;
-        right = width + callout.ShadowWidth + strokeWidth * 2;
+        var halfWidth = width * balloonDefinition.TailPosition + balloonDefinition.ShadowWidth + strokeWidth * 2;
+        var halfHeight = height * balloonDefinition.TailPosition + balloonDefinition.ShadowWidth + strokeWidth * 2;
+        bottom = height + balloonDefinition.ShadowWidth + strokeWidth * 2;
+        left = balloonDefinition.ShadowWidth + strokeWidth;
+        top = balloonDefinition.ShadowWidth + strokeWidth;
+        right = width + balloonDefinition.ShadowWidth + strokeWidth * 2;
         var start = new SKPoint();
         var center = new SKPoint();
         var end = new SKPoint();
 
         // Check, if we are to near at corners
-        if (halfWidth - callout.TailWidth * 0.5f - left < callout.RectRadius)
-            halfWidth = callout.TailWidth * 0.5f + left + callout.RectRadius;
-        else if (halfWidth + callout.TailWidth * 0.5f > width - callout.RectRadius)
-            halfWidth = width - callout.TailWidth * 0.5f - callout.RectRadius;
-        if (halfHeight - callout.TailWidth * 0.5f - top < callout.RectRadius)
-            halfHeight = callout.TailWidth * 0.5f + top + callout.RectRadius;
-        else if (halfHeight + callout.TailWidth * 0.5f > height - callout.RectRadius)
-            halfHeight = height - callout.TailWidth * 0.5f - callout.RectRadius;
+        if (halfWidth - balloonDefinition.TailWidth * 0.5f - left < balloonDefinition.RectRadius)
+            halfWidth = balloonDefinition.TailWidth * 0.5f + left + balloonDefinition.RectRadius;
+        else if (halfWidth + balloonDefinition.TailWidth * 0.5f > width - balloonDefinition.RectRadius)
+            halfWidth = width - balloonDefinition.TailWidth * 0.5f - balloonDefinition.RectRadius;
+        if (halfHeight - balloonDefinition.TailWidth * 0.5f - top < balloonDefinition.RectRadius)
+            halfHeight = balloonDefinition.TailWidth * 0.5f + top + balloonDefinition.RectRadius;
+        else if (halfHeight + balloonDefinition.TailWidth * 0.5f > height - balloonDefinition.RectRadius)
+            halfHeight = height - balloonDefinition.TailWidth * 0.5f - balloonDefinition.RectRadius;
 
-        switch (callout.TailAlignment)
+        switch (balloonDefinition.TailAlignment)
         {
             case TailAlignment.Bottom:
-                start = new SKPoint((float)(halfWidth + callout.TailWidth * 0.5), (float)bottom);
-                center = new SKPoint((float)halfWidth, (float)(bottom + callout.TailHeight));
-                end = new SKPoint((float)(halfWidth - callout.TailWidth * 0.5), (float)bottom);
+                start = new SKPoint((float)(halfWidth + balloonDefinition.TailWidth * 0.5), (float)bottom);
+                center = new SKPoint((float)halfWidth, (float)(bottom + balloonDefinition.TailHeight));
+                end = new SKPoint((float)(halfWidth - balloonDefinition.TailWidth * 0.5), (float)bottom);
                 break;
             case TailAlignment.Top:
-                top += callout.TailHeight;
-                bottom += callout.TailHeight;
-                start = new SKPoint((float)(halfWidth - callout.TailWidth * 0.5), (float)top);
-                center = new SKPoint((float)halfWidth, (float)(top - callout.TailHeight));
-                end = new SKPoint((float)(halfWidth + callout.TailWidth * 0.5), (float)top);
+                top += balloonDefinition.TailHeight;
+                bottom += balloonDefinition.TailHeight;
+                start = new SKPoint((float)(halfWidth - balloonDefinition.TailWidth * 0.5), (float)top);
+                center = new SKPoint((float)halfWidth, (float)(top - balloonDefinition.TailHeight));
+                end = new SKPoint((float)(halfWidth + balloonDefinition.TailWidth * 0.5), (float)top);
                 break;
             case TailAlignment.Left:
-                left += callout.TailHeight;
-                right += callout.TailHeight;
-                start = new SKPoint((float)left, (float)(halfHeight + callout.TailWidth * 0.5));
-                center = new SKPoint((float)(left - callout.TailHeight), (float)halfHeight);
-                end = new SKPoint((float)left, (float)(halfHeight - callout.TailWidth * 0.5));
+                left += balloonDefinition.TailHeight;
+                right += balloonDefinition.TailHeight;
+                start = new SKPoint((float)left, (float)(halfHeight + balloonDefinition.TailWidth * 0.5));
+                center = new SKPoint((float)(left - balloonDefinition.TailHeight), (float)halfHeight);
+                end = new SKPoint((float)left, (float)(halfHeight - balloonDefinition.TailWidth * 0.5));
                 break;
             case TailAlignment.Right:
-                start = new SKPoint((float)right, (float)(halfHeight - callout.TailWidth * 0.5));
-                center = new SKPoint((float)(right + callout.TailHeight), (float)halfHeight);
-                end = new SKPoint((float)right, (float)(halfHeight + callout.TailWidth * 0.5));
+                start = new SKPoint((float)right, (float)(halfHeight - balloonDefinition.TailWidth * 0.5));
+                center = new SKPoint((float)(right + balloonDefinition.TailHeight), (float)halfHeight);
+                end = new SKPoint((float)right, (float)(halfHeight + balloonDefinition.TailWidth * 0.5));
                 break;
         }
 
@@ -96,27 +96,27 @@ public static class CalloutBalloonDefinitionExtensions
     /// Calc the size which is needed for the canvas
     /// </summary>
     /// <returns></returns>
-    private static (double, double) CalcSize(this CalloutBalloonDefinition callout, Size contentSize)
+    private static (double, double) CalcSize(this CalloutBalloonDefinition balloonDefinition, Size contentSize)
     {
-        var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
+        var strokeWidth = balloonDefinition.StrokeWidth < 1 ? 1 : balloonDefinition.StrokeWidth;
         // Add padding around the content
-        var paddingLeft = callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left;
-        var paddingTop = callout.Padding.Top < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Top;
-        var paddingRight = callout.Padding.Right < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Right;
-        var paddingBottom = callout.Padding.Bottom < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Bottom;
+        var paddingLeft = balloonDefinition.Padding.Left < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Left;
+        var paddingTop = balloonDefinition.Padding.Top < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Top;
+        var paddingRight = balloonDefinition.Padding.Right < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Right;
+        var paddingBottom = balloonDefinition.Padding.Bottom < balloonDefinition.RectRadius * 0.5 ? balloonDefinition.RectRadius * 0.5 : balloonDefinition.Padding.Bottom;
         var width = contentSize.Width + paddingLeft + paddingRight + 1;
         var height = contentSize.Height + paddingTop + paddingBottom + 1;
 
         // Add length of tail
-        switch (callout.TailAlignment)
+        switch (balloonDefinition.TailAlignment)
         {
             case TailAlignment.Bottom:
             case TailAlignment.Top:
-                height += callout.TailHeight;
+                height += balloonDefinition.TailHeight;
                 break;
             case TailAlignment.Left:
             case TailAlignment.Right:
-                width += callout.TailHeight;
+                width += balloonDefinition.TailHeight;
                 break;
         }
 
@@ -125,8 +125,8 @@ public static class CalloutBalloonDefinitionExtensions
         height += strokeWidth * 2;
 
         // Add shadow to all sides
-        width += callout.ShadowWidth * 2;
-        height += callout.ShadowWidth * 2;
+        width += balloonDefinition.ShadowWidth * 2;
+        height += balloonDefinition.ShadowWidth * 2;
 
         return (width, height);
     }
@@ -169,41 +169,41 @@ public static class CalloutBalloonDefinitionExtensions
     /// </summary>
     private static SKPath CreateCalloutOutline(this CalloutBalloonDefinition balloonDefinition, Size contentSize)
     {
-        var rect = balloonDefinition.GetBalloonBounds(contentSize);
+        var balloonBounds = balloonDefinition.GetBalloonBounds(contentSize);
 
         // Create path
         var path = new SKPath();
 
         // Move to start point at left/top
-        path.MoveTo((float)(rect.Left + balloonDefinition.RectRadius), (float)rect.Top);
+        path.MoveTo((float)(balloonBounds.Left + balloonDefinition.RectRadius), (float)balloonBounds.Top);
 
         // Top horizontal line
         if (balloonDefinition.TailAlignment == TailAlignment.Top)
-            DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
+            DrawTrail(path, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
 
         // Top right arc
-        path.ArcTo(new SKRect((float)(rect.Right - balloonDefinition.RectRadius), (float)rect.Top, (float)rect.Right, (float)(rect.Top + balloonDefinition.RectRadius)), 270, 90, false);
+        path.ArcTo(new SKRect((float)(balloonBounds.Right - balloonDefinition.RectRadius), (float)balloonBounds.Top, (float)balloonBounds.Right, (float)(balloonBounds.Top + balloonDefinition.RectRadius)), 270, 90, false);
 
         // Right vertical line
         if (balloonDefinition.TailAlignment == TailAlignment.Right)
-            DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
+            DrawTrail(path, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
 
         // Bottom right arc
-        path.ArcTo(new SKRect((float)(rect.Right - balloonDefinition.RectRadius), (float)(rect.Bottom - balloonDefinition.RectRadius), (float)rect.Right, (float)rect.Bottom), 0, 90, false);
+        path.ArcTo(new SKRect((float)(balloonBounds.Right - balloonDefinition.RectRadius), (float)(balloonBounds.Bottom - balloonDefinition.RectRadius), (float)balloonBounds.Right, (float)balloonBounds.Bottom), 0, 90, false);
 
         // Bottom horizontal line
         if (balloonDefinition.TailAlignment == TailAlignment.Bottom)
-            DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
+            DrawTrail(path, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
 
         // Bottom left arc
-        path.ArcTo(new SKRect((float)rect.Left, (float)(rect.Bottom - balloonDefinition.RectRadius), (float)(rect.Left + balloonDefinition.RectRadius), (float)rect.Bottom), 90, 90, false);
+        path.ArcTo(new SKRect((float)balloonBounds.Left, (float)(balloonBounds.Bottom - balloonDefinition.RectRadius), (float)(balloonBounds.Left + balloonDefinition.RectRadius), (float)balloonBounds.Bottom), 90, 90, false);
 
         // Left vertical line
         if (balloonDefinition.TailAlignment == TailAlignment.Left)
-            DrawTrail(path, rect.TailStart, rect.TailTip, rect.TailEnd);
+            DrawTrail(path, balloonBounds.TailStart, balloonBounds.TailTip, balloonBounds.TailEnd);
 
         // Top left arc
-        path.ArcTo(new SKRect((float)rect.Left, (float)rect.Top, (float)(rect.Left + balloonDefinition.RectRadius), (float)(rect.Top + balloonDefinition.RectRadius)), 180, 90, false);
+        path.ArcTo(new SKRect((float)balloonBounds.Left, (float)balloonBounds.Top, (float)(balloonBounds.Left + balloonDefinition.RectRadius), (float)(balloonBounds.Top + balloonDefinition.RectRadius)), 180, 90, false);
 
         path.Close();
 

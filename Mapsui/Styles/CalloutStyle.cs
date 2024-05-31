@@ -235,7 +235,7 @@ public class CalloutStyle : SymbolStyle
 
     private Font _titleFont = new();
     private Font _subtitleFont = new();
-    private CalloutBalloonDefinition _calloutBalloonDefinition = new();
+    private CalloutBalloonDefinition _balloonDefinition = new();
 
     public Font TitleFont
     {
@@ -259,10 +259,10 @@ public class CalloutStyle : SymbolStyle
 
     public CalloutBalloonDefinition BalloonDefinition
     {
-        get => _calloutBalloonDefinition;
+        get => _balloonDefinition;
         set
         {
-            _calloutBalloonDefinition = value;
+            _balloonDefinition = value;
             Invalidate();
         }
     }
