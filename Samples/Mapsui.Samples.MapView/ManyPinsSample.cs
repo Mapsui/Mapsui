@@ -55,10 +55,10 @@ public class ManyPinsSample : IMapViewSample
                 };
                 pin.Callout.Anchor = new Point(0, pin.Height * pin.Scale);
                 pin.Callout.RectRadius = rnd.Next(0, 30);
-                pin.Callout.ArrowHeight = rnd.Next(0, 20);
-                pin.Callout.ArrowWidth = rnd.Next(0, 20);
-                pin.Callout.ArrowAlignment = (TailAlignment)rnd.Next(0, 4);
-                pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100;
+                pin.Callout.TailHeight = rnd.Next(0, 20);
+                pin.Callout.TailWidth = rnd.Next(0, 20);
+                pin.Callout.TailAlignment = (TailAlignment)rnd.Next(0, 4);
+                pin.Callout.TailPosition = rnd.Next(0, 100) / 100;
                 pin.Callout.BackgroundColor = KnownColor.White;
                 pin.Callout.Color = pin.Color;
                 if (rnd.Next(0, 3) < 2)
@@ -164,10 +164,10 @@ public class ManyPinsSample : IMapViewSample
         };
         pin.Callout.Anchor = new Point(0, pin.Height * pin.Scale);
         pin.Callout.RectRadius = rnd.Next(0, 30);
-        pin.Callout.ArrowHeight = rnd.Next(0, 20);
-        pin.Callout.ArrowWidth = rnd.Next(0, 20);
-        pin.Callout.ArrowAlignment = (TailAlignment)rnd.Next(0, 4);
-        pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100;
+        pin.Callout.TailHeight = rnd.Next(0, 20);
+        pin.Callout.TailWidth = rnd.Next(0, 20);
+        pin.Callout.TailAlignment = (TailAlignment)rnd.Next(0, 4);
+        pin.Callout.TailPosition = rnd.Next(0, 100) / 100;
         pin.Callout.BackgroundColor = KnownColor.White;
         pin.Callout.Color = pin.Color;
         if (rnd.Next(0, 3) < 2)
