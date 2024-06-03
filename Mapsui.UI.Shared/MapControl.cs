@@ -126,7 +126,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     public void InitializeSymbolStyles(Action<bool> doneInitializing) =>
-        ImageSourceInitializer.FetchImageSourcesInViewport(Map.Navigator.Viewport, Map.Layers, _renderer.ImageSourceCache, doneInitializing);
+        ImageSourceCacheInitializer.FetchImagesInViewport(_renderer.ImageSourceCache, Map.Navigator.Viewport, 
+            Map.Layers, doneInitializing);
     
     private void InvalidateTimerCallback(object? state)
     {

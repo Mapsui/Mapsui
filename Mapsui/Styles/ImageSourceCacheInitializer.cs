@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
-public static class ImageSourceInitializer
+public static class ImageSourceCacheInitializer
 {
     readonly static FetchMachine _fetchMachine = new(1);
 
@@ -16,7 +16,8 @@ public static class ImageSourceInitializer
     /// 
     /// </summary>
     /// <param name="doneInitializing"></param>
-    public static void FetchImageSourcesInViewport(Viewport viewport, IEnumerable<ILayer> layers, ImageSourceCache imageSourceCache, Action<bool> doneInitializing)
+    public static void FetchImagesInViewport(ImageSourceCache imageSourceCache, Viewport viewport,
+        IEnumerable<ILayer> layers, Action<bool> doneInitializing)
     {
         var imageSources = GetAllImageSources(viewport, layers);
         if (imageSources.Count == 0)
@@ -43,7 +44,8 @@ public static class ImageSourceInitializer
         });
     }
 
-    public static async Task<bool> FetchImageSourcesInViewportAsync(Viewport viewport, IEnumerable<ILayer> layers, ImageSourceCache imageSourceCache)
+    public static async Task<bool> FetchImagesInViewportAsync(ImageSourceCache imageSourceCache,
+        Viewport viewport, IEnumerable<ILayer> layers)
     {
         var imageSources = GetAllImageSources(viewport, layers);
         if (!imageSources.Any())
@@ -89,8 +91,6 @@ public static class ImageSourceInitializer
                     if (fillImageSource.ImageSource is not null)
                         result.Add(fillImageSource.ImageSource);
             }
-
-
         });
         return result;
     }
