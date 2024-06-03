@@ -20,6 +20,7 @@ public static class ImageSourceCacheInitializer
         IEnumerable<ILayer> layers, Action<bool> doneInitializing)
     {
         var imageSources = GetAllImageSources(viewport, layers);
+
         if (imageSources.Count == 0)
         {
             doneInitializing(false);
@@ -48,7 +49,8 @@ public static class ImageSourceCacheInitializer
         Viewport viewport, IEnumerable<ILayer> layers)
     {
         var imageSources = GetAllImageSources(viewport, layers);
-        if (!imageSources.Any())
+
+        if (imageSources.Count == 0)
             return await Task.FromResult(false);
 
         foreach (var imageSource in imageSources)
