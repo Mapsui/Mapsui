@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Skia.Images;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -24,17 +26,22 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         IsEmbeddedBitmapText = true
     };
 
-    public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity, ILabelCache labelCache)
+    public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity, LabelCache labelCache)
     {
         var text = style.GetLabelText(feature);
 
-        var info = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
-        var offsetX = style.Offset is RelativeOffset ? info.Width * style.Offset.X : style.Offset.X;
-        var offsetY = style.Offset is RelativeOffset ? info.Height * style.Offset.Y : style.Offset.Y;
+        var image = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
+        var offsetX = style.Offset is RelativeOffset ? image.Width * style.Offset.X : style.Offset.X;
+        var offsetY = style.Offset is RelativeOffset ? image.Height * style.Offset.Y : style.Offset.Y;
 
-        BitmapRenderer.Draw(canvas, info.Bitmap, (int)Math.Round(x), (int)Math.Round(y),
-            offsetX: (float)offsetX, offsetY: (float)-offsetY,
-            horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
+        if (image is BitmapImage bitmapImage)
+        {
+            BitmapRenderer.Draw(canvas, bitmapImage.Image, (int)Math.Round(x), (int)Math.Round(y),
+                offsetX: (float)offsetX, offsetY: (float)-offsetY,
+                horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
+        }
+        else
+            throw new InvalidOperationException("Unexpected drawable image type");
     }
 
     public static SKTypeface CreateTypeFace(Font font)
@@ -46,7 +53,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
 
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         try
         {
@@ -85,18 +92,13 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private BitmapInfo CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
+    private IDrawableImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
     {
         UpdatePaint(style, layerOpacity, _paint, labelCache);
-
-        var bitmap = CreateLabelAsBitmap(style, text, _paint, layerOpacity);
-        return new BitmapInfo
-        {
-            Bitmap = bitmap,
-        };
+        return new BitmapImage(CreateLabelAsImage(style, text, _paint, layerOpacity));
     }
 
-    private static SKImage CreateLabelAsBitmap(LabelStyle style, string? text, SKPaint paint, float layerOpacity)
+    private static SKImage CreateLabelAsImage(LabelStyle style, string? text, SKPaint paint, float layerOpacity)
     {
         var rect = new SKRect();
         paint.MeasureText(text, ref rect);
@@ -105,18 +107,18 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var skImageInfo = new SKImageInfo((int)backRect.Width, (int)backRect.Height);
 
-        var bitmap = SKImage.Create(skImageInfo);
+        var image = SKImage.Create(skImageInfo);
+        using var bitmap = SKBitmap.FromImage(image);
+        // Todo: Construct the SKCanvas from SKImage instead of SKBitmap once this option becomes available.
+        using var canvas = new SKCanvas(bitmap);
+        canvas.Clear();
 
-        // todo: Construct SKCanvas with SKImage once this option becomes available
-        using var target = new SKCanvas(SKBitmap.FromImage(bitmap));
-        target.Clear();
-
-        DrawBackground(style, backRect, target, layerOpacity);
-        target.DrawText(text, -rect.Left + 3, -rect.Top + 3, paint);
-        return bitmap;
+        DrawBackground(style, backRect, canvas, layerOpacity);
+        canvas.DrawText(text, -rect.Left + 3, -rect.Top + 3, paint);
+        return image;
     }
 
-    private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
+    private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
     {
         UpdatePaint(style, layerOpacity, _paint, labelCache);
 
@@ -313,7 +315,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint, ILabelCache labelCache)
+    private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint, LabelCache labelCache)
     {
         var typeface = labelCache.GetOrCreateTypeface(style.Font, CreateTypeFace);
 
@@ -384,17 +386,18 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     double IFeatureSize.FeatureSize(IStyle style, IRenderService renderingService, IFeature? feature)
     {
+        var skiaRenderService = (RenderService)renderingService;
         if (feature == null) throw new ArgumentNullException(nameof(feature));
 
         if (style is LabelStyle labelStyle)
         {
-            return FeatureSize(feature, labelStyle, _paint, renderingService.LabelCache);
+            return FeatureSize(feature, labelStyle, _paint, skiaRenderService.LabelCache);
         }
 
         return 0;
     }
 
-    public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint, ILabelCache labelCache)
+    public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint, LabelCache labelCache)
     {
         var text = labelStyle.GetLabelText(feature);
 

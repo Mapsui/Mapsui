@@ -15,4 +15,5 @@ public interface IRenderer : IRenderInfo, IDisposable
     IRenderService RenderService { get; }
     IDictionary<Type, IWidgetRenderer> WidgetRenders { get; }
     IDictionary<Type, IStyleRenderer> StyleRenderers { get; }
+    ImageSourceCache ImageSourceCache { get; }
 }

@@ -1,6 +1,9 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Rendering.Skia.Images;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -11,7 +14,8 @@ namespace Mapsui.Rendering.Skia;
 
 public class CalloutStyleRenderer : ISkiaStyleRenderer
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, IRenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, Styles.IStyle style,
+        RenderService renderService, long iteration)
     {
         if (!style.Enabled)
             return false;
@@ -23,32 +27,18 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         var calloutStyle = (CalloutStyle)style;
 
-        // Todo: Use opacity
-        // var opacity = (float)(layer.Opacity * style.Opacity);
-
         var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
 
-        if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
-        {
-            if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
-                return false;
+        // The CalloutStyleRenderer creates an SKPicture for rendering. We store inside an SvgImage and put it in the image cache, but it is actually
+        // just a drawable like any other. We probably should use the general cache instead.
 
-            if (calloutStyle.Invalidated)
-            {
-                UpdateContent(calloutStyle);
-            }
-
-            RenderCallout(calloutStyle, renderService.SymbolCache);
-        }
-
-        // Now we have the complete callout rendered, so we could draw it
-        if (calloutStyle.BitmapId < 0)
-            return false;
-
-        var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
+        var contentDrawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCalloutContent,
+            () => new SvgImage(CreateCalloutContent(calloutStyle, renderService)))!;
+        var drawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCallout,
+            () => new SvgImage(calloutStyle.BalloonDefinition.CreateCallout(contentDrawableImage.Picture)))!;
 
         // Calc offset (relative or absolute)
-        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(picture.CullRect.Width, picture.CullRect.Height);
+        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);
 
         var rotation = (float)calloutStyle.SymbolRotation;
 
@@ -69,352 +59,87 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         // 0/0 are assumed at center of image, but Picture has 0/0 at left top position
         canvas.RotateDegrees(rotation);
-        canvas.Translate((float)calloutStyle.Offset.X, (float)calloutStyle.Offset.Y);
+
+        var balloonBounds = calloutStyle.BalloonDefinition.GetBalloonBounds(contentDrawableImage.Picture.GetSize());
+        canvas.Translate((float)-balloonBounds.TailTip.X, (float)-balloonBounds.TailTip.Y);
 
         using var skPaint = new SKPaint() { IsAntialias = true };
-        canvas.DrawPicture(picture, skPaint);
+        canvas.DrawPicture(drawableImage.Picture, skPaint);
 
         canvas.Restore();
 
         return true;
     }
 
-    public static void RenderCallout(CalloutStyle callout, ISymbolCache symbolCache)
-    {
-        if (callout.Content < 0)
-            return;
-
-        // Get size of content
-        double contentWidth = 0;
-        double contentHeight = 0;
-
-        if (callout.Type == CalloutType.Custom)
-        {
-            var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.Content);
-
-            contentWidth = bitmapInfo?.Width ?? 0;
-            contentHeight = bitmapInfo?.Height ?? 0;
-        }
-        else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
-        {
-            var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
-
-            contentWidth = picture.CullRect.Width;
-            contentHeight = picture.CullRect.Height;
-        }
-
-        (var width, var height) = CalcSize(callout, contentWidth, contentHeight);
-
-        // Create a canvas for drawing
-        using (var rec = new SKPictureRecorder())
-        using (var canvas = rec.BeginRecording(new SKRect(0, 0, (float)width, (float)height)))
-        {
-            (var path, var center) = CreateCalloutPath(callout, contentWidth, contentHeight);
-            // Now move Offset to the position of the arrow
-            callout.Offset = new Offset(-center.X, -center.Y);
-
-            // Draw path for bubble
-            DrawCallout(callout, canvas, path);
-
-            // Draw content
-            DrawContent(callout, canvas, symbolCache);
-
-            // Create SKPicture from canvas
-            var picture = rec.EndRecording();
-
-            if (callout.BitmapId < 0)
-                callout.BitmapId = BitmapRegistry.Instance.Register(picture);
-            else
-                BitmapRegistry.Instance.Update(callout.BitmapId, picture);
-        }
-
-        callout.Invalidated = false;
-    }
-
-    /// <summary>
-    /// Calc the size which is needed for the canvas
-    /// </summary>
-    /// <returns></returns>
-    private static (double, double) CalcSize(CalloutStyle callout, double contentWidth, double contentHeight)
-    {
-        var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
-        // Add padding around the content
-        var paddingLeft = callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left;
-        var paddingTop = callout.Padding.Top < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Top;
-        var paddingRight = callout.Padding.Right < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Right;
-        var paddingBottom = callout.Padding.Bottom < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Bottom;
-        var width = contentWidth + paddingLeft + paddingRight + 1;
-        var height = contentHeight + paddingTop + paddingBottom + 1;
-
-        // Add length of arrow
-        switch (callout.ArrowAlignment)
-        {
-            case ArrowAlignment.Bottom:
-            case ArrowAlignment.Top:
-                height += callout.ArrowHeight;
-                break;
-            case ArrowAlignment.Left:
-            case ArrowAlignment.Right:
-                width += callout.ArrowHeight;
-                break;
-        }
-
-        // Add StrokeWidth to all sides
-        width += strokeWidth * 2;
-        height += strokeWidth * 2;
-
-        // Add shadow to all sides
-        width += callout.ShadowWidth * 2;
-        height += callout.ShadowWidth * 2;
-
-        return (width, height);
-    }
-
-    private static void DrawCallout(CalloutStyle callout, SKCanvas canvas, SKPath path)
-    {
-        using var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, callout.ShadowWidth) };
-        using var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = callout.BackgroundColor.ToSkia() };
-        using var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = callout.Color.ToSkia(), StrokeWidth = callout.StrokeWidth };
-
-        canvas.DrawPath(path, shadow);
-        canvas.DrawPath(path, fill);
-        canvas.DrawPath(path, stroke);
-    }
-
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static void UpdateContent(CalloutStyle callout)
+    public static SKPicture CreateCalloutContent(CalloutStyle callout, RenderService renderService)
     {
-        if (callout.Type == CalloutType.Custom)
-            return;
-
-        if (callout.Title == null)
+        if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {
-            callout.Content = -1;
-            return;
-        }
-
-        var styleSubtitle = new Topten.RichTextKit.Style();
-        var styleTitle = new Topten.RichTextKit.Style();
-        var textBlockTitle = new TextBlock();
-        var textBlockSubtitle = new TextBlock();
-
-        if (callout.Type == CalloutType.Detail)
-        {
-            styleSubtitle.FontFamily = callout.SubtitleFont.FontFamily;
-            styleSubtitle.FontSize = (float)callout.SubtitleFont.Size;
-            styleSubtitle.FontItalic = callout.SubtitleFont.Italic;
-            styleSubtitle.FontWeight = callout.SubtitleFont.Bold ? 700 : 400;
-            styleSubtitle.TextColor = callout.SubtitleFontColor.ToSkia();
-
-            textBlockSubtitle.AddText(callout.Subtitle, styleSubtitle);
-            textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();
-        }
-        styleTitle.FontFamily = callout.TitleFont.FontFamily;
-        styleTitle.FontSize = (float)callout.TitleFont.Size;
-        styleTitle.FontItalic = callout.TitleFont.Italic;
-        styleTitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
-        styleTitle.TextColor = callout.TitleFontColor.ToSkia();
-
-        textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();
-        textBlockTitle.AddText(callout.Title, styleTitle);
-
-        textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = (float)callout.MaxWidth;
-        // Layout TextBlocks
-        textBlockTitle.Layout();
-        textBlockSubtitle.Layout();
-        // Get sizes
-        var width = Math.Max(textBlockTitle.MeasuredWidth, textBlockSubtitle.MeasuredWidth);
-        var height = textBlockTitle.MeasuredHeight + (callout.Type == CalloutType.Detail ? textBlockSubtitle.MeasuredHeight + (float)callout.Spacing : 0f);
-        // Now we have the correct width, so make a new layout cycle for text alignment
-        textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = width;
-        textBlockTitle.Layout();
-        textBlockSubtitle.Layout();
-        // Create bitmap from TextBlock
-        using var rec = new SKPictureRecorder();
-        using var canvas = rec.BeginRecording(new SKRect(0, 0, width, height));
-        // Draw text to canvas
-        textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-        if (callout.Type == CalloutType.Detail)
-            textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-        // Create a SKPicture from canvas
-        var picture = rec.EndRecording();
-        if (callout.InternalContent >= 0)
-        {
-            BitmapRegistry.Instance.Update(callout.InternalContent, picture);
+            using var recorder = new SKPictureRecorder();
+            var image = renderService.DrawableImageCache.GetOrCreate(callout.ImageSource,
+                () => SymbolStyleRenderer.TryCreateDrawableImage(callout.ImageSource, renderService.ImageSourceCache));
+            if (image is null)
+            {
+                Logger.Log(LogLevel.Error, $"Image not found: {callout.ImageSource}");
+                return recorder.EndRecording();
+            }
+            using var canvas = recorder.BeginRecording(new SKRect(0, 0, image.Width, image.Height));
+            using var paint = new SKPaint();
+            if (image is BitmapImage bitmapImage)
+                canvas.DrawImage(bitmapImage.Image, 0, 0, paint);
+            else if (image is SvgImage svgImage)
+                canvas.DrawPicture(svgImage.Picture, paint);
+            return recorder.EndRecording();
         }
         else
         {
-            callout.InternalContent = BitmapRegistry.Instance.Register(picture);
-        }
-        callout.Content = callout.InternalContent;
-    }
+            var styleSubtitle = new Topten.RichTextKit.Style();
+            var styleTitle = new Topten.RichTextKit.Style();
+            var textBlockTitle = new TextBlock();
+            var textBlockSubtitle = new TextBlock();
 
-    private static void DrawContent(CalloutStyle callout, SKCanvas canvas, ISymbolCache symbolCache)
-    {
-        // Draw content
-        if (callout.Content >= 0)
-        {
-            var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
-            var offsetX = callout.ShadowWidth + strokeWidth + (callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left);
-            var offsetY = callout.ShadowWidth + strokeWidth + (callout.Padding.Top < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Top);
-
-            switch (callout.ArrowAlignment)
+            if (callout.Type == CalloutType.Detail)
             {
-                case ArrowAlignment.Left:
-                    offsetX += callout.ArrowHeight;
-                    break;
-                case ArrowAlignment.Top:
-                    offsetY += callout.ArrowHeight;
-                    break;
+                styleSubtitle.FontFamily = callout.SubtitleFont.FontFamily;
+                styleSubtitle.FontSize = (float)callout.SubtitleFont.Size;
+                styleSubtitle.FontItalic = callout.SubtitleFont.Italic;
+                styleSubtitle.FontWeight = callout.SubtitleFont.Bold ? 700 : 400;
+                styleSubtitle.TextColor = callout.SubtitleFontColor.ToSkia();
+
+                textBlockSubtitle.AddText(callout.Subtitle, styleSubtitle);
+                textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();
             }
+            styleTitle.FontFamily = callout.TitleFont.FontFamily;
+            styleTitle.FontSize = (float)callout.TitleFont.Size;
+            styleTitle.FontItalic = callout.TitleFont.Italic;
+            styleTitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
+            styleTitle.TextColor = callout.TitleFontColor.ToSkia();
 
-            var offset = new SKPoint((float)offsetX, (float)offsetY);
+            textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();
+            textBlockTitle.AddText(callout.Title, styleTitle);
 
-            if (callout.Type == CalloutType.Custom)
-            {
-
-                // Get size of content
-                var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(callout.Content);
-
-                switch (bitmapInfo?.Type)
-                {
-                    case BitmapType.Bitmap:
-                        canvas.DrawImage(bitmapInfo.Bitmap, offset);
-                        break;
-                    case BitmapType.Sprite:
-                        throw new Exception();
-                    case BitmapType.Svg:
-                        if (bitmapInfo.Svg != null)
-                        {
-                            using var skPaint = new SKPaint() { IsAntialias = true };
-                            canvas.DrawPicture(bitmapInfo.Svg.Picture, offset, skPaint);
-                        }
-
-                        break;
-                }
-            }
-            else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
-            {
-                var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
-                using var skPaint = new SKPaint() { IsAntialias = true };
-                canvas.DrawPicture(picture, offset, skPaint);
-            }
+            textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = (float)callout.MaxWidth;
+            // Layout TextBlocks
+            textBlockTitle.Layout();
+            textBlockSubtitle.Layout();
+            // Get sizes
+            var width = Math.Max(textBlockTitle.MeasuredWidth, textBlockSubtitle.MeasuredWidth);
+            var height = textBlockTitle.MeasuredHeight + (callout.Type == CalloutType.Detail ? textBlockSubtitle.MeasuredHeight + (float)callout.Spacing : 0f);
+            // Now we have the correct width, so make a new layout cycle for text alignment
+            textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = width;
+            textBlockTitle.Layout();
+            textBlockSubtitle.Layout();
+            // Create bitmap from TextBlock
+            using var recorder = new SKPictureRecorder();
+            using var canvas = recorder.BeginRecording(new SKRect(0, 0, width, height));
+            // Draw text to canvas
+            textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+            if (callout.Type == CalloutType.Detail)
+                textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+            return recorder.EndRecording();
         }
-    }
-
-    /// <summary>
-    /// Update path
-    /// </summary>
-    private static (SKPath, SKPoint) CreateCalloutPath(CalloutStyle callout, double contentWidth, double contentHeight)
-    {
-        var strokeWidth = callout.StrokeWidth < 1 ? 1 : callout.StrokeWidth;
-        var paddingLeft = callout.Padding.Left < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Left;
-        var paddingTop = callout.Padding.Top < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Top;
-        var paddingRight = callout.Padding.Right < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Right;
-        var paddingBottom = callout.Padding.Bottom < callout.RectRadius * 0.5 ? callout.RectRadius * 0.5 : callout.Padding.Bottom;
-        var width = contentWidth + paddingLeft + paddingRight;
-        var height = contentHeight + paddingTop + paddingBottom;
-        // Half width is distance from left/top to arrow position, so we have to add shadow and stroke
-        var halfWidth = width * callout.ArrowPosition + callout.ShadowWidth + strokeWidth * 2;
-        var halfHeight = height * callout.ArrowPosition + callout.ShadowWidth + strokeWidth * 2;
-        var bottom = height + callout.ShadowWidth + strokeWidth * 2;
-        var left = callout.ShadowWidth + strokeWidth;
-        var top = callout.ShadowWidth + strokeWidth;
-        var right = width + callout.ShadowWidth + strokeWidth * 2;
-        var start = new SKPoint();
-        var center = new SKPoint();
-        var end = new SKPoint();
-
-        // Check, if we are to near at corners
-        if (halfWidth - callout.ArrowWidth * 0.5f - left < callout.RectRadius)
-            halfWidth = callout.ArrowWidth * 0.5f + left + callout.RectRadius;
-        else if (halfWidth + callout.ArrowWidth * 0.5f > width - callout.RectRadius)
-            halfWidth = width - callout.ArrowWidth * 0.5f - callout.RectRadius;
-        if (halfHeight - callout.ArrowWidth * 0.5f - top < callout.RectRadius)
-            halfHeight = callout.ArrowWidth * 0.5f + top + callout.RectRadius;
-        else if (halfHeight + callout.ArrowWidth * 0.5f > height - callout.RectRadius)
-            halfHeight = height - callout.ArrowWidth * 0.5f - callout.RectRadius;
-
-        switch (callout.ArrowAlignment)
-        {
-            case ArrowAlignment.Bottom:
-                start = new SKPoint((float)(halfWidth + callout.ArrowWidth * 0.5), (float)bottom);
-                center = new SKPoint((float)halfWidth, (float)(bottom + callout.ArrowHeight));
-                end = new SKPoint((float)(halfWidth - callout.ArrowWidth * 0.5), (float)bottom);
-                break;
-            case ArrowAlignment.Top:
-                top += callout.ArrowHeight;
-                bottom += callout.ArrowHeight;
-                start = new SKPoint((float)(halfWidth - callout.ArrowWidth * 0.5), top);
-                center = new SKPoint((float)halfWidth, (float)(top - callout.ArrowHeight));
-                end = new SKPoint((float)(halfWidth + callout.ArrowWidth * 0.5), (float)top);
-                break;
-            case ArrowAlignment.Left:
-                left += callout.ArrowHeight;
-                right += callout.ArrowHeight;
-                start = new SKPoint((float)(left), (float)(halfHeight + callout.ArrowWidth * 0.5));
-                center = new SKPoint((float)(left - callout.ArrowHeight), (float)halfHeight);
-                end = new SKPoint((float)left, (float)(halfHeight - callout.ArrowWidth * 0.5));
-                break;
-            case ArrowAlignment.Right:
-                start = new SKPoint((float)(right), (float)(halfHeight - callout.ArrowWidth * 0.5));
-                center = new SKPoint((float)(right + callout.ArrowHeight), (float)halfHeight);
-                end = new SKPoint((float)right, (float)(halfHeight + callout.ArrowWidth * 0.5));
-                break;
-        }
-
-        // Create path
-        var path = new SKPath();
-
-        // Move to start point at left/top
-        path.MoveTo(left + callout.RectRadius, top);
-
-        // Top horizontal line
-        if (callout.ArrowAlignment == ArrowAlignment.Top)
-            DrawArrow(path, start, center, end);
-
-        // Top right arc
-        path.ArcTo(new SKRect((float)(right - callout.RectRadius), (float)top, (float)right, (float)(top + callout.RectRadius)), 270, 90, false);
-
-        // Right vertical line
-        if (callout.ArrowAlignment == ArrowAlignment.Right)
-            DrawArrow(path, start, center, end);
-
-        // Bottom right arc
-        path.ArcTo(new SKRect((float)(right - callout.RectRadius), (float)(bottom - callout.RectRadius), (float)right, (float)bottom), 0, 90, false);
-
-        // Bottom horizontal line
-        if (callout.ArrowAlignment == ArrowAlignment.Bottom)
-            DrawArrow(path, start, center, end);
-
-        // Bottom left arc
-        path.ArcTo(new SKRect((float)left, (float)(bottom - callout.RectRadius), (float)(left + callout.RectRadius), (float)bottom), 90, 90, false);
-
-        // Left vertical line
-        if (callout.ArrowAlignment == ArrowAlignment.Left)
-            DrawArrow(path, start, center, end);
-
-        // Top left arc
-        path.ArcTo(new SKRect(left, top, left + callout.RectRadius, top + callout.RectRadius), 180, 90, false);
-
-        path.Close();
-
-        return (path, center);
-    }
-
-    /// <summary>
-    /// Draw arrow to path
-    /// </summary>
-    /// <param name="path">The arrow path</param>
-    /// <param name="start">Start of arrow at bubble</param>
-    /// <param name="center">Center of arrow</param>
-    /// <param name="end">End of arrow at bubble</param>
-    private static void DrawArrow(SKPath path, SKPoint start, SKPoint center, SKPoint end)
-    {
-        path.LineTo(start);
-        path.LineTo(center);
-        path.LineTo(end);
     }
 }

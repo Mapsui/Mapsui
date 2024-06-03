@@ -40,8 +40,7 @@ public class RenderToCpuPerformance : IDisposable
     static RenderToCpuPerformance()
     {
         _mapRenderer = new MapRenderer();
-        _mapRendererWithoutCache = new MapRenderer();
-        _mapRendererWithoutCache.RenderService.VectorCache.Enabled = false;
+        _mapRendererWithoutCache = new MapRenderer { EnabledVectorCache = false };
         _tilingSkpMap = CreateMapControlAsync(RenderFormat.Skp).Result;
         _tilingPngMap = CreateMapControlAsync(RenderFormat.Png).Result;
         _tilingWebpMap = CreateMapControlAsync(RenderFormat.WebP).Result;

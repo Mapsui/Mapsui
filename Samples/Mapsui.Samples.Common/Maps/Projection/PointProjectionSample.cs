@@ -67,11 +67,11 @@ public class PointProjectionSample : ISample
 
     private static SymbolStyle CreateCityStyle()
     {
-        var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png");
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.location.png";
 
         return new SymbolStyle
         {
-            BitmapId = location,
+            ImageSource = imageSource,
             SymbolOffset = new Offset { Y = 64 },
             SymbolScale = 0.25,
             Opacity = 0.5f

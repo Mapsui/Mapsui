@@ -1,4 +1,5 @@
 ﻿using Mapsui.Logging;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
@@ -29,7 +30,7 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         _levelWidth = _informationTextPaint.MeasureText(LogLevel.Information.ToString());
     }
 
-    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService, float layerOpacity)
     {
         var loggingWidget = (LoggingWidget)widget;
 
