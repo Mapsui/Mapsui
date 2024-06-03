@@ -4,7 +4,6 @@ using Mapsui.Logging;
 using Mapsui.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
@@ -12,10 +11,6 @@ public static class ImageSourceCacheInitializer
 {
     readonly static FetchMachine _fetchMachine = new(1);
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="doneInitializing"></param>
     public static void FetchImagesInViewport(ImageSourceCache imageSourceCache, Viewport viewport,
         IEnumerable<ILayer> layers, Action<bool> doneInitializing)
     {
