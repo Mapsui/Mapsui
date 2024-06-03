@@ -4,7 +4,7 @@ using System;
 
 namespace Mapsui.Styles;
 
-public class Brush
+public class Brush : IHasImageSource
 {
     private string? _imageSource;
 
@@ -43,12 +43,10 @@ public class Brush
         get => _imageSource;
         set
         {
-            if (value != null)
-                ValidateImageSource(value);
+            ValidateImageSource(value);
             _imageSource = value;
             if (_imageSource != null)
             {
-                ImageSourceInitializer.Add(_imageSource);
                 if (!(FillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated))
                 {
                     FillStyle = FillStyle.Bitmap;
@@ -105,8 +103,10 @@ public class Brush
         return !Equals(brush1, brush2);
     }
 
-    private static void ValidateImageSource(string imageSource)
+    private static void ValidateImageSource(string? imageSource)
     {
+        if (imageSource is null)
+            return;
         // Will throw a UriFormatException exception if the imageSource is not a valid Uri
         _ = new Uri(imageSource);
     }

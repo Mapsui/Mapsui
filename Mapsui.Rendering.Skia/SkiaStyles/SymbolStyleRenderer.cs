@@ -46,7 +46,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return false;
 
         var image = renderService.DrawableImageCache.GetOrCreate(symbolStyle.ImageSource,
-            () => TryCreateDrawableImage(symbolStyle.ImageSource));
+            () => TryCreateDrawableImage(symbolStyle.ImageSource, renderService.ImageSourceCache));
         if (image == null)
             return false;
 
@@ -258,7 +258,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 if (symbolStyle.ImageSource is not null)
                 {
                     var image = ((RenderService)renderService).DrawableImageCache.GetOrCreate(symbolStyle.ImageSource,
-                        () => TryCreateDrawableImage(symbolStyle.ImageSource));
+                        () => TryCreateDrawableImage(symbolStyle.ImageSource, ((RenderService)renderService).ImageSourceCache));
                     if (image != null)
                         symbolSize = new Size(image.Width, image.Height);
                 }
@@ -294,9 +294,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         => $"{imageSource}?modifiedsvg=true,fill={fill?.ToString() ?? ""},stroke={stroke?.ToString() ?? ""}";
 
     // Todo: Figure out a better place for this method
-    public static IDrawableImage? TryCreateDrawableImage(string key)
+    public static IDrawableImage? TryCreateDrawableImage(string key, ImageSourceCache imageSourceCache)
     {
-        var imageBytes = ImageSourceCache.Instance.Get(key);
+        var imageBytes = imageSourceCache.Get(key);
         if (imageBytes == null)
             return null;
         var drawableImage = ImageHelper.ToDrawableImage(imageBytes);

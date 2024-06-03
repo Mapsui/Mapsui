@@ -8,15 +8,7 @@ namespace Mapsui.Styles;
 /// </summary>
 public sealed class ImageSourceCache
 {
-    private static ImageSourceCache? _instance;
     private readonly ConcurrentDictionary<string, byte[]> _register = [];
-
-    private ImageSourceCache() { }
-
-    /// <summary>
-    /// Singleton of BitmapRegistry class
-    /// </summary>
-    public static ImageSourceCache Instance => _instance ??= new ImageSourceCache();
 
     /// <inheritdoc />
     public async Task RegisterAsync(string imageSource)

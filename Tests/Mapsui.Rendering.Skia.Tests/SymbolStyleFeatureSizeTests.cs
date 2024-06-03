@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using NUnit.Framework;
@@ -83,7 +84,7 @@ public class SymbolStyleFeatureSizeTests
     }
 
     [Test]
-    public void ImageFeatureSize()
+    public async Task ImageFeatureSizeAsync()
     {
         // Arrange
         using var renderService = new RenderService();
@@ -92,13 +93,13 @@ public class SymbolStyleFeatureSizeTests
             ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
         };
 
-        ImageSourceInitializer.InitializeWhenNeeded((r) =>
-        {
-            // Act
-            var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
+        await renderService.ImageSourceCache.RegisterAsync(symbolStyle.ImageSource);
 
-            // Assert
-            Assert.That(size, Is.EqualTo(32));
-        });
+        // Act
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
+
+        // Assert
+        Assert.That(size, Is.EqualTo(56));
+
     }
 }

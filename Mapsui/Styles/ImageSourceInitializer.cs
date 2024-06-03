@@ -1,33 +1,25 @@
 ﻿using Mapsui.Fetcher;
+using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Utilities;
+using Mapsui.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
 public static class ImageSourceInitializer
 {
-    static readonly ConcurrentHashSet<string> _register = [];
-    static readonly object _lockObject = new();
-    static readonly FetchMachine _fetchMachine = new(1);
-
-    public static void Add(string imageSource)
-    {
-        lock (_lockObject)
-        {
-            _register.Add(imageSource);
-        }
-    }
+    readonly static FetchMachine _fetchMachine = new(1);
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="doneInitializing"></param>
-    public static void InitializeWhenNeeded(Action<bool> doneInitializing)
+    public static void FetchImageSourcesInViewport(Viewport viewport, IEnumerable<ILayer> layers, ImageSourceCache imageSourceCache, Action<bool> doneInitializing)
     {
-        var imageSources = GetAndClear();
-        if (!imageSources.Any())
+        var imageSources = GetAllImageSources(viewport, layers);
+        if (imageSources.Count == 0)
         {
             doneInitializing(false);
             return; // Don't start a thread if there are no bitmap paths to initialize.
@@ -39,7 +31,7 @@ public static class ImageSourceInitializer
             {
                 try
                 {
-                    await ImageSourceCache.Instance.RegisterAsync(imageSource);
+                    await imageSourceCache.RegisterAsync(imageSource);
                 }
                 catch (Exception ex)
                 {
@@ -51,15 +43,55 @@ public static class ImageSourceInitializer
         });
     }
 
-    private static IEnumerable<string> GetAndClear()
+    public static async Task<bool> FetchImageSourcesInViewportAsync(Viewport viewport, IEnumerable<ILayer> layers, ImageSourceCache imageSourceCache)
     {
-        lock (_lockObject)
+        var imageSources = GetAllImageSources(viewport, layers);
+        if (!imageSources.Any())
+            return await Task.FromResult(false);
+
+        foreach (var imageSource in imageSources)
         {
-            if (_register.Count == 0)
-                return [];
-            var result = _register.ToArray();
-            _register.Clear();
-            return result;
+            try
+            {
+                await imageSourceCache.RegisterAsync(imageSource);
+            }
+            catch (Exception ex)
+            {
+                // Todo: We might need to deal with failed initializations, and possible reties, but not too many retries.
+                Logger.Log(LogLevel.Error, ex.Message, ex);
+            }
         }
+        return await Task.FromResult(true);
+    }
+
+    private static List<string> GetAllImageSources(Viewport viewport, IEnumerable<ILayer> layers)
+    {
+        var result = new List<string>();
+        VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, l, s, f, o, i) =>
+        {
+            // Get ImageSource directly from Styles
+            if (s is IHasImageSource imageSource)
+            {
+                if (imageSource.ImageSource is not null)
+                    result.Add(imageSource.ImageSource);
+            }
+
+            // Get ImageSource from Brushes
+            if (s is SymbolStyle symbolStyle)
+            {
+                if (symbolStyle.Fill is IHasImageSource fillImageSource)
+                    if (fillImageSource.ImageSource is not null)
+                        result.Add(fillImageSource.ImageSource);
+            }
+            else if (s is VectorStyle vectorStyle)
+            {
+                if (vectorStyle.Fill is IHasImageSource fillImageSource)
+                    if (fillImageSource.ImageSource is not null)
+                        result.Add(fillImageSource.ImageSource);
+            }
+
+
+        });
+        return result;
     }
 }

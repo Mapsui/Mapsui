@@ -33,7 +33,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         // just a drawable like any other. We probably should use the general cache instead.
 
         var contentDrawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCalloutContent,
-            () => new SvgImage(CreateCalloutContent(calloutStyle, renderService.DrawableImageCache)))!;
+            () => new SvgImage(CreateCalloutContent(calloutStyle, renderService)))!;
         var drawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCallout,
             () => new SvgImage(calloutStyle.BalloonDefinition.CreateCallout(contentDrawableImage.Picture)))!;
 
@@ -74,13 +74,13 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// <summary>
     /// Update content for single and detail
     /// </summary>
-    public static SKPicture CreateCalloutContent(CalloutStyle callout, DrawableImageCache drawableImageCache)
+    public static SKPicture CreateCalloutContent(CalloutStyle callout, RenderService renderService)
     {
         if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
         {
             using var recorder = new SKPictureRecorder();
-            var image = drawableImageCache.GetOrCreate(callout.ImageSource,
-                () => SymbolStyleRenderer.TryCreateDrawableImage(callout.ImageSource));
+            var image = renderService.DrawableImageCache.GetOrCreate(callout.ImageSource,
+                () => SymbolStyleRenderer.TryCreateDrawableImage(callout.ImageSource, renderService.ImageSourceCache));
             if (image is null)
             {
                 Logger.Log(LogLevel.Error, $"Image not found: {callout.ImageSource}");
