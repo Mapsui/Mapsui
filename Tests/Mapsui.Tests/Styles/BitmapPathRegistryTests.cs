@@ -13,13 +13,14 @@ public static class ImageSourceCacheTests
     {
         // Arrange
         var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
-        await ImageSourceCache.Instance.RegisterAsync(imageSource);
+        var imageSourceCache = new ImageSourceCache();
+        await imageSourceCache.RegisterAsync(imageSource);
 
         // Act
-        ImageSourceCache.Instance.Unregister(imageSource);
+        imageSourceCache.Unregister(imageSource);
 
         // Assert
-        Assert.That(ImageSourceCache.Instance.Get(imageSource), Is.Null);
+        Assert.That(imageSourceCache.Get(imageSource), Is.Null);
     }
 
     [Test]
@@ -27,13 +28,14 @@ public static class ImageSourceCacheTests
     {
         // Arrange
         var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
-        await ImageSourceCache.Instance.RegisterAsync(imageSource);
+        var imageSourceCache = new ImageSourceCache();
+        await imageSourceCache.RegisterAsync(imageSource);
 
         // Act
-        ImageSourceCache.Instance.Unregister(imageSource);
+        imageSourceCache.Unregister(imageSource);
 
         // Assert
-        Assert.That(ImageSourceCache.Instance.Get(imageSource), Is.Null);
+        Assert.That(imageSourceCache.Get(imageSource), Is.Null);
     }
 
     [Test]
@@ -41,10 +43,11 @@ public static class ImageSourceCacheTests
     {
         // Arrange
         var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
-        await ImageSourceCache.Instance.RegisterAsync(imageSource);
+        var imageSourceCache = new ImageSourceCache();
+        await imageSourceCache.RegisterAsync(imageSource);
 
         // Act
-        var stream = ImageSourceCache.Instance.Get(imageSource);
+        var stream = imageSourceCache.Get(imageSource);
 
         // Assert
         Assert.That(stream is not null);
@@ -56,13 +59,14 @@ public static class ImageSourceCacheTests
     {
         // Arrange
         var examplePath = $"file://{AppContext.BaseDirectory}/Resources/example.tif";
-        await ImageSourceCache.Instance.RegisterAsync(examplePath);
+        var imageSourceCache = new ImageSourceCache();
+        await imageSourceCache.RegisterAsync(examplePath);
 
         // Act
-        ImageSourceCache.Instance.Unregister(examplePath);
+        imageSourceCache.Unregister(examplePath);
 
         // Assert
-        Assert.That(ImageSourceCache.Instance.Get(examplePath), Is.Null);
+        Assert.That(imageSourceCache.Get(examplePath), Is.Null);
     }
 
     [Test]
@@ -70,10 +74,11 @@ public static class ImageSourceCacheTests
     {
         // Arrange
         var examplePath = $"file://{AppContext.BaseDirectory}/Resources/example.tif";
-        await ImageSourceCache.Instance.RegisterAsync(examplePath);
+        var imageSourceCache = new ImageSourceCache();
+        await imageSourceCache.RegisterAsync(examplePath);
 
         // Act
-        var bytes = ImageSourceCache.Instance.Get(examplePath);
+        var bytes = imageSourceCache.Get(examplePath);
 
         // Assert
         Assert.That(bytes is not null);
@@ -85,13 +90,14 @@ public static class ImageSourceCacheTests
     {
         // Arrange
         var urlToMapsuiLogo = "https://mapsui.com/images/logo.svg";
-        await ImageSourceCache.Instance.RegisterAsync(urlToMapsuiLogo);
+        var imageSourceCache = new ImageSourceCache();
+        await imageSourceCache.RegisterAsync(urlToMapsuiLogo);
 
         // Act
-        ImageSourceCache.Instance.Unregister(urlToMapsuiLogo);
+        imageSourceCache.Unregister(urlToMapsuiLogo);
 
         // Assert
-        Assert.That(ImageSourceCache.Instance.Get(urlToMapsuiLogo), Is.Null);
+        Assert.That(imageSourceCache.Get(urlToMapsuiLogo), Is.Null);
     }
 
     [Test]
@@ -99,10 +105,11 @@ public static class ImageSourceCacheTests
     {
         // Arrange
         var mapsuiLogo = "https://mapsui.com/images/logo.svg";
-        await ImageSourceCache.Instance.RegisterAsync(mapsuiLogo);
+        var imageSourceCache = new ImageSourceCache();
+        await imageSourceCache.RegisterAsync(mapsuiLogo);
 
         // Act
-        var bytes = ImageSourceCache.Instance.Get(mapsuiLogo);
+        var bytes = imageSourceCache.Get(mapsuiLogo);
 
         // Assert
         Assert.That(bytes is not null);

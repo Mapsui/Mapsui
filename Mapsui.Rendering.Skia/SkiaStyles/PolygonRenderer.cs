@@ -146,13 +146,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(skiaRenderService.DrawableImageCache, brush);
+                    var image = GetImage(skiaRenderService, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(skiaRenderService.DrawableImageCache, brush);
+                    image = GetImage(skiaRenderService, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -210,12 +210,12 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(DrawableImageCache drawableImageCache, Brush brush)
+    private static SKImage? GetImage(RenderService renderService, Brush brush)
     {
         if (brush.ImageSource is null)
             return null;
-        var drawableImage = drawableImageCache.GetOrCreate(brush.ImageSource,
-            () => SymbolStyleRenderer.TryCreateDrawableImage(brush.ImageSource));
+        var drawableImage = renderService.DrawableImageCache.GetOrCreate(brush.ImageSource,
+            () => SymbolStyleRenderer.TryCreateDrawableImage(brush.ImageSource, renderService.ImageSourceCache));
         if (drawableImage == null)
             return null;
 
@@ -229,7 +229,7 @@ internal static class PolygonRenderer
                     throw new Exception("If BitmapRegion is not null the ImageSource should be set.");
 
                 var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
-                var regionDrawableImage = drawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, brush.BitmapRegion));
+                var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, brush.BitmapRegion));
                 if (regionDrawableImage == null)
                     return null;
                 if (regionDrawableImage is BitmapImage regionBitmapImage)

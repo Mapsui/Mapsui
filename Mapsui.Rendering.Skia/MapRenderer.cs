@@ -23,21 +23,18 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly IRenderService _renderService;
+    private readonly RenderService _renderService;
     private long _currentIteration;
 
     static MapRenderer()
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
-        DefaultRendererFactory.CreateWithRenderService = f => new MapRenderer(f);
     }
-
-    private RenderService SkiaRenderService => (RenderService)_renderService;
 
     public bool EnabledVectorCache
     {
-        get => SkiaRenderService.VectorCache.Enabled;
-        set => SkiaRenderService.VectorCache.Enabled = value;
+        get => _renderService.VectorCache.Enabled;
+        set => _renderService.VectorCache.Enabled = value;
     }
 
     public IRenderService RenderService => _renderService;
@@ -46,6 +43,8 @@ public sealed class MapRenderer : IRenderer, IDisposable
     /// Dictionary holding all special renderers for styles
     /// </summary>
     public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
+
+    public ImageSourceCache ImageSourceCache => _renderService.ImageSourceCache;
 
     private void InitRenderer()
     {
@@ -67,15 +66,11 @@ public sealed class MapRenderer : IRenderer, IDisposable
     public MapRenderer() : this(10000)
     { }
 
-    public MapRenderer(int vectorCacheCapacity) : this(new RenderService(vectorCacheCapacity))
+    public MapRenderer(int vectorCacheCapacity)
     {
         // Todo: Think about an alternative to initialize. Perhaps the capacity should
         // be determined by the number of features used in one Paint iteration.
-    }
-
-    public MapRenderer(IRenderService renderService)
-    {
-        _renderService = renderService;
+        _renderService = new RenderService(vectorCacheCapacity);
         InitRenderer();
     }
 
@@ -177,7 +172,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         {
             layers = layers.ToList();
 
-            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
+            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, o, i));
 
             _currentIteration++;
         }
@@ -196,7 +191,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
             canvas.Save();
             // We have a special renderer, so try, if it could draw this
             var styleRenderer = (ISkiaStyleRenderer)renderer;
-            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, SkiaRenderService, iteration);
+            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderService, iteration);
             // Restore old canvas
             canvas.Restore();
             // Was it drawn?
@@ -208,7 +203,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
     {
-        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, SkiaRenderService, layerOpacity);
+        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, _renderService, layerOpacity);
     }
 
     public MapInfo GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)

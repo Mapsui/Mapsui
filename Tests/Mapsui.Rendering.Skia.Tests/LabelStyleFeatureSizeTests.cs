@@ -37,8 +37,7 @@ public class LabelStyleFeatureSizeTests
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
-        using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderService.LabelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new LabelCache());
 
         Assert.That(size, Is.EqualTo(LabelSize).Within(Constants.Epsilon));
     }
@@ -57,8 +56,7 @@ public class LabelStyleFeatureSizeTests
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
-        using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderService.LabelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new LabelCache());
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
@@ -84,8 +82,7 @@ public class LabelStyleFeatureSizeTests
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
-        using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderService.LabelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new LabelCache());
 
         Assert.That(size, Is.EqualTo(LabelSize + 2 * 2).Within(Constants.Epsilon));
     }
@@ -103,8 +100,7 @@ public class LabelStyleFeatureSizeTests
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
-        using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderService.LabelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new LabelCache());
 
         Assert.That(size, Is.EqualTo(LabelSize + 2 * 2).Within(Constants.Epsilon));
     }
@@ -122,8 +118,7 @@ public class LabelStyleFeatureSizeTests
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
-        using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, renderService.LabelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new LabelCache());
 
         Assert.That(size, Is.EqualTo(LabelSize + Math.Sqrt(2 * 2 + 2 * 2) * 2).Within(Constants.Epsilon));
     }

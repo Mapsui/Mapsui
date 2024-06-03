@@ -18,7 +18,7 @@ public enum UnitType
     WorldUnit
 }
 
-public class SymbolStyle : VectorStyle
+public class SymbolStyle : VectorStyle, IHasImageSource
 {
     public static double DefaultWidth { get; set; } = 32;
     public static double DefaultHeight { get; set; } = 32;
@@ -42,7 +42,6 @@ public class SymbolStyle : VectorStyle
             _imageSource = value;
             if (value != null)
             {
-                ImageSourceInitializer.Add(value);
                 SymbolType = SymbolType.Image;
             }
         }

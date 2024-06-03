@@ -18,7 +18,7 @@ public class ImageButtonWidgetRenderer : ISkiaWidgetRenderer
             throw new InvalidOperationException("ImageSource is not set");
 
         var drawableImage = renderService.DrawableImageCache.GetOrCreate(button.ImageSource,
-            () => SymbolStyleRenderer.TryCreateDrawableImage(button.ImageSource));
+            () => SymbolStyleRenderer.TryCreateDrawableImage(button.ImageSource, renderService.ImageSourceCache));
         if (drawableImage == null)
             return;
 

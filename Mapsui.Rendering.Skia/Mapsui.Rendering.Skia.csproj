@@ -18,7 +18,7 @@
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
-  <PropertyGroup>
+	<PropertyGroup>
     <DebugType>portable</DebugType>
   </PropertyGroup>
 

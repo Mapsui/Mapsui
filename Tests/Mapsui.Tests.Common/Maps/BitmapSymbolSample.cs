@@ -44,19 +44,19 @@ public class BitmapSymbolSample : ISample
         [
             new PointFeature(new MPoint(50, 50))
             {
-                Styles = new[] { new VectorStyle { Fill = new Brush(Color.Red) } }
+                Styles = [new VectorStyle { Fill = new Brush(Color.Red) }]
             },
             new PointFeature(new MPoint(50, 100))
             {
-                Styles = new[] { new SymbolStyle { ImageSource = circleImageSource } }
+                Styles = [new SymbolStyle { ImageSource = circleImageSource }]
             },
             new PointFeature(new MPoint(100, 50))
             {
-                Styles = new[] { new SymbolStyle { ImageSource = checkeredImageSource } }
+                Styles = [new SymbolStyle { ImageSource = checkeredImageSource }]
             },
             new PointFeature(new MPoint(100, 100))
             {
-                Styles = new[] { new VectorStyle { Fill = new Brush(Color.Green), Outline = null } }
+                Styles = [new VectorStyle { Fill = new Brush(Color.Green), Outline = null }]
             }
         ];
     }
