@@ -328,7 +328,7 @@ public class WFSProvider : IProvider, IDisposable
     private WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
                WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         _getCapabilitiesUri = getCapabilitiesUri;
         _featureType = featureType;
         _uriScheme = getCapabilitiesUri.GetUriScheme();
