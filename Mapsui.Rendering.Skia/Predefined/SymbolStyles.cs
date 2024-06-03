@@ -2,19 +2,12 @@
 
 public static class SymbolStyles
 {
-    public static SymbolStyle CreatePinStyle(Color? pinColor = null, double symbolScale = 1.0)
+    public static SymbolStyle CreatePinStyle(Color? fillColor = null, Color? strokeColor = null, double symbolScale = 1.0) => new()
     {
-        // This method is in Mapsui.Rendering.Skia because it has a dependency on Skia
-        // because the resource is converted to an image using Skia. I think
-        // It should be possible to create a style with just a reference to the platform
-        // independent resource. The conversion to an image should happen in a render phase that
-        // precedes a paint phase. https://github.com/Mapsui/Mapsui/issues/1448
-        return new SymbolStyle
-        {
-            ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
-            SymbolOffset = new RelativeOffset(0.0, 0.5),
-            SymbolScale = symbolScale,
-            BlendModeColor = pinColor ?? Color.FromArgb(255, 57, 115, 199) // Determines color of the pin
-        };
-    }
+        ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
+        SymbolOffset = new RelativeOffset(0.0, 0.5),
+        SymbolScale = symbolScale,
+        SvgFillColor = fillColor ?? Color.FromArgb(255, 57, 115, 199),
+        SvgStrokeColor = strokeColor ?? Color.FromArgb(255, 16, 32, 96) // Determines color of the pin
+    };
 }
