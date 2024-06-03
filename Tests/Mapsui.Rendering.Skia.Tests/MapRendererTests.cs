@@ -59,7 +59,7 @@ internal class MapRendererTests
         // Arrange
         using var map = BitmapSymbolInCollectionSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
-        const string fileName = "points_with_symbolstyle.png"; // Todo: Do not reuse the png.
+        const string fileName = "points_in_collection_with_symbolstyle.png";
         using var mapRenderer = new MapRenderer();
         _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(mapRenderer.ImageSourceCache, viewport, map.Layers);
 

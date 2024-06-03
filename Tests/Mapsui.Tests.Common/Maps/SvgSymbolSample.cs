@@ -40,25 +40,26 @@ public class SvgSymbolSample : ISample
     [
         new PointFeature(new MPoint(50, 50))
         {
-            Styles = new[] { CreateSymbolStyle() }
+            Styles = [CreateSymbolStyle()]
         },
         new PointFeature(new MPoint(50, 100))
         {
-            Styles = new[] { CreateSymbolStyle() }
+            Styles = [CreateSymbolStyle()]
         },
         new PointFeature(new MPoint(100, 50))
         {
-            Styles = new[] { CreateSymbolStyle() }
+            Styles = [CreateSymbolStyle()]
         },
         new PointFeature(new MPoint(100, 100))
         {
-            Styles = new[] { CreateSymbolStyle() }
+            Styles = [CreateSymbolStyle()]
         }
     ];
 
     private static SymbolStyle CreateSymbolStyle() => new()
     {
         ImageSource = "embedded://mapsui.resources.images.pin.svg",
-        BlendModeColor = Color.FromRgba(0, 177, 0, 255)
+        SvgFillColor = Color.FromRgba(0, 177, 0, 255),
+        SvgStrokeColor = Color.FromRgba(32, 96, 32, 255),
     };
 }
