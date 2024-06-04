@@ -28,15 +28,6 @@ public class MapRenderer : IRenderer
     private readonly IRenderCache _renderCache = new RenderCache();
     private long _currentIteration;
 
-    public IRenderCache RenderCache => _renderCache;
-
-    public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
-
-    /// <summary>
-    /// Dictionary holding all special renderers for styles
-    /// </summary>
-    public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
-
     static MapRenderer()
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
@@ -61,6 +52,15 @@ public class MapRenderer : IRenderer
         WidgetRenders[typeof(MapInfoWidget)] = new MapInfoWidgetRenderer();
     }
 
+    public IRenderCache RenderCache => _renderCache;
+
+    public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
+
+    /// <summary>
+    /// Dictionary holding all special renderers for styles
+    /// </summary>
+    public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
+
     public void Render(object target, Viewport viewport, IEnumerable<ILayer> layers,
         IEnumerable<IWidget> widgets, Color? background = null)
     {
@@ -69,16 +69,6 @@ public class MapRenderer : IRenderer
         var allWidgets = widgets.Concat(attributions);
 
         RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, background);
-    }
-
-    private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
-        IEnumerable<IWidget> widgets, Color? background = null)
-    {
-        if (!viewport.HasSize()) return;
-
-        if (background is not null) canvas.Clear(background.ToSkia());
-        Render(canvas, viewport, layers);
-        Render(canvas, viewport, widgets, 1);
     }
 
     public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
@@ -138,59 +128,6 @@ public class MapRenderer : IRenderer
         }
     }
 
-    private void RenderTo(Viewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
-        IEnumerable<IWidget>? widgets, SKCanvas skCanvas)
-    {
-        if (skCanvas == null) throw new ArgumentNullException(nameof(viewport));
-
-        // Not sure if this is needed here:
-        if (background is not null) skCanvas.Clear(background.ToSkia());
-        skCanvas.Scale(pixelDensity, pixelDensity);
-        Render(skCanvas, viewport, layers);
-        if (widgets is not null)
-            Render(skCanvas, viewport, widgets, 1);
-    }
-
-    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers)
-    {
-        try
-        {
-            layers = layers.ToList();
-
-            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
-
-            _currentIteration++;
-        }
-        catch (Exception exception)
-        {
-            Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
-        }
-    }
-
-    private void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)
-    {
-        // Check, if we have a special renderer for this style
-        if (StyleRenderers.TryGetValue(style.GetType(), out var renderer))
-        {
-            // Save canvas
-            canvas.Save();
-            // We have a special renderer, so try, if it could draw this
-            var styleRenderer = (ISkiaStyleRenderer)renderer;
-            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderCache, iteration);
-            // Restore old canvas
-            canvas.Restore();
-            // Was it drawn?
-            if (result)
-                // Yes, special style renderer drawn correct
-                return;
-        }
-    }
-
-    private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
-    {
-        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
-    }
-
     public MapInfo? GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
         // todo: use margin to increase the pixel area
@@ -234,7 +171,6 @@ public class MapRenderer : IRenderer
                 using var pixmap = surface.PeekPixels();
                 var color = pixmap.GetPixelColor(intX, intY);
 
-
                 VisibleFeatureIterator.IterateLayers(viewport, mapInfoLayers, 0, (v, layer, style, feature, opacity, iteration) =>
                 {
                     try
@@ -269,7 +205,6 @@ public class MapRenderer : IRenderer
             result.Style = itemDrawnOnTop.Style;
             result.Layer = itemDrawnOnTop.Layer;
             result.MapInfoRecords = list;
-
         }
         catch (Exception exception)
         {
@@ -277,5 +212,69 @@ public class MapRenderer : IRenderer
         }
 
         return result;
+    }
+
+    private void RenderTypeSave(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers,
+                IEnumerable<IWidget> widgets, Color? background = null)
+    {
+        if (!viewport.HasSize()) return;
+
+        if (background is not null) canvas.Clear(background.ToSkia());
+        Render(canvas, viewport, layers);
+        Render(canvas, viewport, widgets, 1);
+    }
+
+    private void RenderTo(Viewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
+        IEnumerable<IWidget>? widgets, SKCanvas skCanvas)
+    {
+        if (skCanvas == null) throw new ArgumentNullException(nameof(viewport));
+
+        // Not sure if this is needed here:
+        if (background is not null) skCanvas.Clear(background.ToSkia());
+        skCanvas.Scale(pixelDensity, pixelDensity);
+        Render(skCanvas, viewport, layers);
+        if (widgets is not null)
+            Render(skCanvas, viewport, widgets, 1);
+    }
+
+    private void Render(SKCanvas canvas, Viewport viewport, IEnumerable<ILayer> layers)
+    {
+        try
+        {
+            layers = layers.ToList();
+
+            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
+
+            _currentIteration++;
+        }
+        catch (Exception exception)
+        {
+            Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
+        }
+    }
+
+    private void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)
+    {
+        // Check, if we have a special renderer for this style
+        if (StyleRenderers.TryGetValue(style.GetType(), out var renderer))
+        {
+            // Save canvas
+            canvas.Save();
+            // We have a special renderer, so try, if it could draw this
+            var styleRenderer = (ISkiaStyleRenderer)renderer;
+
+            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderCache, iteration);
+            // Restore old canvas
+            canvas.Restore();
+            // Was it drawn?
+            if (result)
+                // Yes, special style renderer drawn correct
+                return;
+        }
+    }
+
+    private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
+    {
+        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
     }
 }
