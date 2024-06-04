@@ -4,10 +4,9 @@ using System;
 
 namespace Mapsui.Styles;
 
-public class Brush
+public class Brush : IHasImageSource
 {
-    private int _bitmapId = -1;
-    private Uri? _bitmapPath;
+    private string? _imageSource;
 
     public Brush()
     {
@@ -22,7 +21,6 @@ public class Brush
     {
         Color = brush.Color;
         Background = brush.Background;
-        BitmapId = brush.BitmapId;
         FillStyle = brush.FillStyle;
     }
 
@@ -34,28 +32,21 @@ public class Brush
     public Color? Background { get; set; }
 
     /// <summary>
-    /// This identifies bitmap in the BitmapRegistry
+    /// If a bitmap is used as <see cref="ImageSource"/> the <see cref="BitmapRegion"/> can be used to specific a 
+    /// subregion that will be used as image symbol. This way the  <see cref="ImageSource"/> can be used as an 'atlas'
+    /// for 'sprites', which is a common mechanism in 2D gaming engines This will not affect SVGs.
     /// </summary>
-    public int BitmapId
-    {
-        get => _bitmapId;
-        set
-        {
-            _bitmapId = value;
-            if (_bitmapId != -1 && !(FillStyle == FillStyle.Bitmap || FillStyle == FillStyle.BitmapRotated))
-                FillStyle = FillStyle.Bitmap;
-        }
-    }
+    public BitmapRegion? BitmapRegion { get; set; }
 
-    public Uri? BitmapPath
+    public string? ImageSource
     {
-        get => _bitmapPath;
+        get => _imageSource;
         set
         {
-            _bitmapPath = value;
-            if (_bitmapPath != null)
+            ValidateImageSource(value);
+            _imageSource = value;
+            if (_imageSource != null)
             {
-                _bitmapId = -1;
                 if (!(FillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated))
                 {
                     FillStyle = FillStyle.Bitmap;
@@ -94,19 +85,12 @@ public class Brush
         if (brush == null)
             return false;
 
-        return _bitmapId == brush._bitmapId && Equals(Color, brush.Color) && Equals(Background, brush.Background) && FillStyle == brush.FillStyle;
+        return _imageSource == brush._imageSource && Equals(Color, brush.Color) && Equals(Background, brush.Background) && FillStyle == brush.FillStyle;
     }
 
     public override int GetHashCode()
     {
-        unchecked
-        {
-            var hashCode = _bitmapId;
-            hashCode = (hashCode * 397) ^ (Color != null ? Color.GetHashCode() : 0);
-            hashCode = (hashCode * 397) ^ (Background != null ? Background.GetHashCode() : 0);
-            hashCode = (hashCode * 397) ^ (int)FillStyle;
-            return hashCode;
-        }
+        return HashCode.Combine(_imageSource, Color, Background, FillStyle);
     }
 
     public static bool operator ==(Brush? brush1, Brush? brush2)
@@ -119,5 +103,11 @@ public class Brush
         return !Equals(brush1, brush2);
     }
 
-
+    private static void ValidateImageSource(string? imageSource)
+    {
+        if (imageSource is null)
+            return;
+        // Will throw a UriFormatException exception if the imageSource is not a valid Uri
+        _ = new Uri(imageSource);
+    }
 }

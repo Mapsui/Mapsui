@@ -3,7 +3,6 @@ using Mapsui.Layers;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.Utilities;
 using Mapsui.Widgets.InfoWidgets;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,15 +45,16 @@ public class SvgSample : ISample
         return randomPoints.Select(p =>
         {
             var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
-            feature.Styles.Add(CreateSvgStyle(@"Images.Pin.svg", 0.5));
+            feature.Styles.Add(CreateSvgStyle());
             counter++;
             return feature;
         });
     }
 
-    private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
+    private static SymbolStyle CreateSvgStyle() => new()
     {
-        var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
-        return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
-    }
+        ImageSource = "embedded://Mapsui.Samples.Common.Images.Pin.svg",
+        SymbolScale = 0.5,
+        SymbolOffset = new RelativeOffset(0.0, 0.5)
+    };
 }

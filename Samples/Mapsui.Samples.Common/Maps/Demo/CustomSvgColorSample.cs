@@ -3,18 +3,11 @@ using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
-using Svg.Model;
-using Svg.Skia;
-using Svg;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using SkiaSharp;
 using Mapsui.Styles;
 using System.Diagnostics.CodeAnalysis;
-using Mapsui.Samples.Common.Maps.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using Mapsui.Extensions;
 
@@ -23,13 +16,12 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
 public class CustomSvgStyleSample : ISample
 {
+    private const double _circumferenceOfTheEarth = 40075017;
+
     public string Name => "Custom Svg Color";
     public string Category => "Styles";
     private static string Description => "This samples applies custom colors for a specific element of an SVG." +
         "This allows users to change the fill and outline of an SVG with different colors.";
-
-    private const double _circumferenceOfTheEarth = 40075017;
-    private readonly Random _random = new(1337);
 
     public Task<Map> CreateMapAsync()
     {
@@ -37,13 +29,7 @@ public class CustomSvgStyleSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new MemoryLayer("Custom Svg Style")
         {
-            Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 100).Select(f =>
-            {
-                // Add four random types to use in the style
-                f["type"] = _random.Next(4);
-                return f;
-            }).ToList(),
-
+            Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 100).ToList(),
             Style = CreateDynamicSvgStyle()
         });
         map.Widgets.Add(CreateTextBox(Description));
@@ -59,41 +45,25 @@ public class CustomSvgStyleSample : ISample
         Margin = new MRect(10),
     };
 
-    private static ThemeStyle CreateDynamicSvgStyle() // Use Func to make it get the latest clicked position
+    private static ThemeStyle CreateDynamicSvgStyle()
     {
-        var bitmapIds = new[] {
-            LoadBitmap(0),
-            LoadBitmap(1),
-            LoadBitmap(2),
-            LoadBitmap(3),
-        };
-
         return new ThemeStyle((f) =>
         {
             var featurePosition = ((PointFeature)f).Point;
             var distance = Algorithms.Distance(new MPoint(0, 0), featurePosition);
             var distanceBetweenZeroAndOne = Math.Min(distance / _circumferenceOfTheEarth, 1);
-            var bitmapId = bitmapIds[(int)f["type"]!];
 
             return new SymbolStyle
             {
-                BitmapId = bitmapId,
-                SymbolOffset = new RelativeOffset(0.0, 0.0),
+                ImageSource = $"embedded://Mapsui.Samples.Common.Images.arrow.svg",
+                SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
+                SvgFillColor = GetTypeColor((int)f.Id % 4),
+                SvgStrokeColor = Color.Black,
                 SymbolScale = 0.5,
-                // Let them point to the center of hte map
-                SymbolRotation = -CalculateAngle(new MPoint(0, 0), featurePosition) - 90,
+                SymbolRotation = -CalculateAngle(new MPoint(0, 0), featurePosition) - 90, // Let them point to the center of hte map
                 RotateWithMap = true,
             };
         });
-    }
-
-    private static int LoadBitmap(int type)
-    {
-        var bitmapPath = "Images.arrow.svg";
-        using var bitmapData = EmbeddedResourceLoader.Load(bitmapPath, typeof(SvgSample));
-        var skPicture = SvgLoader.ToSKPicture(bitmapData, ToSystemDrawingColor(GetTypeColor(type)))
-            ?? throw new Exception($"Failed to load bitmap: {bitmapPath}");
-        return BitmapRegistry.Instance.Register(skPicture);
     }
 
     private static Color GetTypeColor(int type) => type switch
@@ -105,55 +75,11 @@ public class CustomSvgStyleSample : ISample
         _ => throw new Exception("Unknown type"),
     };
 
-    public static System.Drawing.Color ToSystemDrawingColor(Color color) =>
-        System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
-
     private static double CalculateAngle(MPoint point1, MPoint point2)
     {
         var angleInRadians = Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
 
         // Radians into degrees
         return angleInRadians * (180 / Math.PI);
-    }
-
-    public class SvgLoader
-    {
-        public static SKPicture? ToSKPicture(Stream stream, System.Drawing.Color? fillColor = null, System.Drawing.Color? strokeColor = null)
-        {
-            var svgDocument = SvgExtensions.Open(stream);
-            if (svgDocument is null) return null;
-
-            var elements = GetAllElements(svgDocument.Children);
-            foreach (var element in elements)
-            {
-                if (element.Fill is not null && fillColor is not null)
-                    element.Fill = new SvgColourServer(fillColor.Value);
-                if (element.Stroke is not null && strokeColor is not null)
-                    element.Stroke = new SvgColourServer(strokeColor.Value);
-            }
-
-            return ToSKPicture(svgDocument);
-        }
-
-        private static SKPicture? ToSKPicture(SvgDocument svgDocument)
-        {
-            var skiaModel = new SkiaModel(new SKSvgSettings());
-            var assetLoader = new SkiaAssetLoader(skiaModel);
-            var model = SvgExtensions.ToModel(svgDocument, assetLoader, out var _, out _);
-            return skiaModel.ToSKPicture(model);
-        }
-
-        public static ReadOnlySpan<SvgElement> GetAllElements(SvgElementCollection elements)
-        {
-            var result = new List<SvgElement>();
-            foreach (var element in elements)
-            {
-                result.Add(element);
-
-                if (element.Children.Count > 0)
-                    result.AddRange(GetAllElements(element.Children));
-            }
-            return result.ToArray();
-        }
     }
 }

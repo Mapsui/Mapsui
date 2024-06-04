@@ -86,10 +86,13 @@ public class SingleCalloutSample : ISample
             TitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
             TitleFontColor = Color.Gray,
             MaxWidth = 120,
-            RectRadius = 10,
-            ShadowWidth = 4,
             Enabled = false,
-            SymbolOffset = new Offset(0, SymbolStyle.DefaultHeight * 1f)
+            SymbolOffset = new Offset(0, SymbolStyle.DefaultHeight * 1f),
+            BalloonDefinition = new CalloutBalloonDefinition
+            {
+                RectRadius = 10,
+                ShadowWidth = 4,
+            },
         };
     }
 

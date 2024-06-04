@@ -357,4 +357,9 @@ public readonly record struct Color
 
         return new Color(color.R, color.G, color.B, (int)Math.Round(color.A * (float)opacity));
     }
+
+    public override string ToString()
+    {
+        return $"rgba({R},{G},{B},{A})";
+    }
 }

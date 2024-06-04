@@ -13,17 +13,15 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class AtlasSample : ISample
 {
-    private const string AtlasLayerName = "Atlas Layer";
-    private static int _atlasBitmapId;
-    private static readonly Random Random = new(1);
+    private const string _layerName = "Sprites";
+    private static readonly Random _random = new(1);
 
-    public string Name => "Atlas";
+    public string Name => "Sprites";
 
     public string Category => "Styles";
 
     public Task<Map> CreateMapAsync()
     {
-        _atlasBitmapId = typeof(AtlasSample).LoadBitmapId("Images.osm-liberty.png");
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
@@ -38,7 +36,7 @@ public class AtlasSample : ISample
     {
         return new MemoryLayer
         {
-            Name = AtlasLayerName,
+            Name = _layerName,
             Features = CreateAtlasFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 1000)),
             Style = null,
             IsMapInfoLayer = true
@@ -52,13 +50,17 @@ public class AtlasSample : ISample
         return randomPoints.Select(p =>
         {
             var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
-
-            var x = 0 + Random.Next(0, 12) * 21;
-            var y = 64 + Random.Next(0, 6) * 21;
-            var bitmapId = BitmapRegistry.Instance.Register(new Sprite(_atlasBitmapId, x, y, 21, 21, 1));
-            feature.Styles.Add(new SymbolStyle { BitmapId = bitmapId });
+            var x = 0 + _random.Next(0, 12) * 21;
+            var y = 64 + _random.Next(0, 6) * 21;
+            feature.Styles.Add(CreateSymbolStyle(x, y));
             counter++;
             return feature;
         }).ToList();
     }
+
+    private static SymbolStyle CreateSymbolStyle(int x, int y) => new()
+    {
+        ImageSource = "embedded://mapsui.samples.common.images.osm-liberty.png",
+        BitmapRegion = new BitmapRegion(x, y, 21, 21)
+    };
 }

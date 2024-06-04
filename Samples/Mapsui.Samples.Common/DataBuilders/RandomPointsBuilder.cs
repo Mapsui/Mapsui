@@ -28,6 +28,11 @@ public static class RandomPointsBuilder
         return randomPoints.Select(p => new PointFeature(p) { ["Label"] = counter++.ToString() }).ToList();
     }
 
+    public static IEnumerable<MPoint> GenerateRandomPoints(MRect? envelope, int count, int randomSeed)
+    {
+        return GenerateRandomPoints(envelope, count, new Random(randomSeed));
+    }
+
     public static IEnumerable<MPoint> GenerateRandomPoints(MRect? envelope, int count, Random? random = null)
     {
         random ??= new Random(192);

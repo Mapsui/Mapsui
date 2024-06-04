@@ -1,6 +1,7 @@
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Nts;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -11,7 +12,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         var vectorStyle = (VectorStyle)style;
         var opacity = (float)(layer.Opacity * style.Opacity);

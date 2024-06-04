@@ -18,7 +18,7 @@ public enum UnitType
     WorldUnit
 }
 
-public class SymbolStyle : VectorStyle
+public class SymbolStyle : VectorStyle, IHasImageSource
 {
     public static double DefaultWidth { get; set; } = 32;
     public static double DefaultHeight { get; set; } = 32;
@@ -27,36 +27,22 @@ public class SymbolStyle : VectorStyle
 
     public UnitType UnitType { get; set; }
 
-    private int _bitmapId = -1;
-    private Uri? _bitmapPath;
+    private string? _imageSource;
 
     /// <summary>
-    /// Id of the image in the BitmapRegistry, if SymbolType is Image
+    /// Path to the the image to display during rendering. This can be url, file path or embedded resource.
     /// </summary>
-    public int BitmapId
+    public string? ImageSource
     {
-        get => _bitmapId;
+        get => _imageSource;
         set
         {
-            _bitmapId = value;
-            if (value >= 0)
-                SymbolType = SymbolType.Image;
-        }
-    }
-
-    /// <summary>
-    /// Bitmap of the image to display during rendering a BitmapId is assigned.
-    /// </summary>
-    public Uri? BitmapPath
-    {
-        get => _bitmapPath;
-        set
-        {
-            _bitmapPath = value;
+            if (value != null)
+                ValidateImageSource(value);
+            _imageSource = value;
             if (value != null)
             {
                 SymbolType = SymbolType.Image;
-                _bitmapId = -1;
             }
         }
     }
@@ -104,6 +90,24 @@ public class SymbolStyle : VectorStyle
     /// </summary>
     public Color? BlendModeColor { get; set; }
 
+    /// <summary>
+    /// Option to override the fill color of the SVG image. This is useful if you want to change the color of the SVG 
+    /// source image. Note that each different color used will add an new object to the image cache.
+    /// </summary>
+    public Color? SvgFillColor { get; set; }
+
+    /// <summary>
+    /// Option to override the stroke color of the SVG image. This is useful if you want to change the color of the SVG 
+    /// source image. Note that each different color used will add an new object to the image cache.
+    /// </summary>
+    public Color? SvgStrokeColor { get; set; }
+
+    /// <summary>
+    /// Sets the sprite parameters used to specify which part of the image
+    /// symbol should be used. This only applies if a ImageSource is set.
+    /// </summary>
+    public BitmapRegion? BitmapRegion { get; set; }
+
     public override bool Equals(object? obj)
     {
         if (!(obj is SymbolStyle style))
@@ -137,7 +141,7 @@ public class SymbolStyle : VectorStyle
         if (SymbolType != symbolStyle.SymbolType)
             return false;
 
-        if (BitmapId != symbolStyle.BitmapId)
+        if (ImageSource != symbolStyle.ImageSource)
             return false;
 
         if (Math.Abs(Opacity - symbolStyle.Opacity) > Constants.Epsilon)
@@ -149,7 +153,7 @@ public class SymbolStyle : VectorStyle
     public override int GetHashCode()
     {
         return
-            BitmapId.GetHashCode() ^
+            ImageSource?.GetHashCode() ^
             SymbolScale.GetHashCode() ^
             SymbolOffset.GetHashCode() ^
             SymbolRotation.GetHashCode() ^
@@ -167,5 +171,11 @@ public class SymbolStyle : VectorStyle
     public static bool operator !=(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)
     {
         return !Equals(symbolStyle1, symbolStyle2);
+    }
+
+    private static void ValidateImageSource(string imageSource)
+    {
+        // Will throw a UriFormatException exception if the imageSource is not a valid Uri
+        _ = new Uri(imageSource);
     }
 }
