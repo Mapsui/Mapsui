@@ -30,7 +30,6 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
     private string? _proxyUrl;
     private string? _url;
     private ICredentials? _credentials;
-    private readonly IUrlPersistentCache? _persistentCache = persistentCache;
 
     /// <summary>
     /// Gets ans sets the Url of the request.
@@ -92,7 +91,7 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
         if (string.IsNullOrEmpty(_url))
             throw new Exception($"Property {nameof(Url)} was not set");
 
-        var bytes = _persistentCache?.Find(_url!, _postData);
+        var bytes = persistentCache?.Find(_url!, _postData);
         if (bytes != null)
         {
             return new MemoryStream(bytes);
@@ -160,13 +159,13 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
             else
                 webResponse = await httpClient.GetAsync(_url, cancellationToken).ConfigureAwait(false);
 
-            if (_persistentCache != null)
+            if (persistentCache != null)
             {
                 await using var stream = await webResponse.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
                 if (stream != null && _url != null)
                 {
                     bytes = StreamHelper.ReadFully(stream);
-                    _persistentCache?.Add(_url, _postData, bytes);
+                    persistentCache?.Add(_url, _postData, bytes);
                     return new MemoryStream(bytes);
                 }
 

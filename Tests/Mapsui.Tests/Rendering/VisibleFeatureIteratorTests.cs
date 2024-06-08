@@ -24,12 +24,12 @@ internal class VisibleFeatureIteratorTests
         var result = new Dictionary<IFeature, List<IStyle>>();
 
         // Act
-        VisibleFeatureIterator.IterateLayers(viewport, new[] { memoryLayer }, 0, (v, l, s, f, o, i) =>
+        VisibleFeatureIterator.IterateLayers(viewport, [memoryLayer], 0, (v, l, s, f, o, i) =>
         {
             if (result.ContainsKey(f))
                 result[f].Add(s);
             else
-                result[f] = new List<IStyle> { s };
+                result[f] = [s];
         });
 
         // Assert
@@ -45,11 +45,11 @@ internal class VisibleFeatureIteratorTests
         var viewport = new Viewport(0, 0, 1, 0, 100, 100);
         using var memoryLayer = new MemoryLayer { Style = style };
         var feature = new PointFeature(0, 0);
-        memoryLayer.Features = new List<IFeature> { feature };
+        memoryLayer.Features = [feature];
         var isApplied = false;
 
         // Act
-        VisibleFeatureIterator.IterateLayers(viewport, new[] { memoryLayer }, 0, (v, l, s, f, o, i) => isApplied = true);
+        VisibleFeatureIterator.IterateLayers(viewport, [memoryLayer], 0, (v, l, s, f, o, i) => isApplied = true);
 
         // Assert
         ClassicAssert.AreEqual(isAppliedExpected, isApplied, assertMessage);
@@ -63,11 +63,11 @@ internal class VisibleFeatureIteratorTests
         using var memoryLayer = new MemoryLayer { Style = null };
         var feature = new PointFeature(0, 0);
         feature.Styles.Add(style);
-        memoryLayer.Features = new List<IFeature> { feature };
+        memoryLayer.Features = [feature];
         var isApplied = false;
 
         // Act
-        VisibleFeatureIterator.IterateLayers(viewport, new[] { memoryLayer }, 0, (v, l, s, f, o, i) => isApplied = true);
+        VisibleFeatureIterator.IterateLayers(viewport, [memoryLayer], 0, (v, l, s, f, o, i) => isApplied = true);
 
         // Assert
         ClassicAssert.AreEqual(isAppliedExpected, isApplied, assertMessage);

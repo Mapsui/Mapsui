@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.XPath;
 using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers.Wfs.Utilities;
@@ -327,7 +328,7 @@ public class WFSProvider : IProvider, IDisposable
     private WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
                WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        _persistentCache = persistentCache;
+        _persistentCache = persistentCache ?? DefaultCache;
         _getCapabilitiesUri = getCapabilitiesUri;
         _featureType = featureType;
         _uriScheme = getCapabilitiesUri.GetUriScheme();

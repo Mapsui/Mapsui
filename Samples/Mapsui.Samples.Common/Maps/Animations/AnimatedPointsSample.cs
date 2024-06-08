@@ -1,57 +1,55 @@
-﻿using Mapsui.Layers;
-using Mapsui.Layers.AnimatedLayers;
-using Mapsui.Samples.Common.Maps.Styles;
+﻿using Mapsui.Layers.AnimatedLayers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
-using Mapsui.Utilities;
+using System;
 using System.Threading.Tasks;
-
-#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-public class AnimatedPointsSample : ISample
+public sealed class AnimatedPointsSample : ISample, IDisposable
 {
-    public string Name => "Animated Points";
+    private bool _disposed;
+    readonly AnimatedPointsSampleProvider _animatedPointsSampleProvider = new();
 
+    public string Name => "Animated Points";
     public string Category => "Animations";
 
     public Task<Map> CreateMapAsync()
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(CreateAnimatedPointLayer());
+        map.Layers.Add(CreateAnimatedPointLayer(_animatedPointsSampleProvider));
         return Task.FromResult(map);
     }
 
-    private static ILayer CreateAnimatedPointLayer()
+    public void Dispose()
     {
-        return new AnimatedPointLayer(new AnimatedPointsSampleProvider())
+        if (_disposed)
         {
-            Name = "Animated Points",
-            Style = CreatePointStyle()
-        };
+            return;
+        }
+
+        _animatedPointsSampleProvider.Dispose();
+
+        _disposed = true;
     }
 
-    private static IStyle CreatePointStyle()
+    private static AnimatedPointLayer CreateAnimatedPointLayer(AnimatedPointsSampleProvider animatedPointsSampleProvider) => new(animatedPointsSampleProvider)
     {
-        return new ThemeStyle(f =>
-        {
-            return CreateSvgArrowStyle("Images.arrow.svg", 0.5, f);
-        });
-    }
+        Name = "Animated Points",
+        Style = CreatePointStyle()
+    };
 
-    private static IStyle CreateSvgArrowStyle(string embeddedResourcePath, double scale, IFeature feature)
+    private static ThemeStyle CreatePointStyle() => new(CreateSvgArrowStyle);
+
+    private static SymbolStyle CreateSvgArrowStyle(IFeature feature) => new()
     {
-        var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
-        return new SymbolStyle
-        {
-            BitmapId = bitmapId,
-            SymbolScale = scale,
-            SymbolOffset = new RelativeOffset(0.0, 0.5),
-            Opacity = 0.5f,
-            SymbolRotation = (double)feature["rotation"]!
-        };
-    }
+        ImageSource = "embedded://Mapsui.Samples.Common.Images.arrow.svg",
+        SymbolScale = 0.5,
+        SymbolOffset = new RelativeOffset(0.0, 0.5),
+        Opacity = 0.5f,
+        SymbolRotation = (double)feature["rotation"]!
+    };
+
 }

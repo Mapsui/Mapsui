@@ -2,8 +2,6 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-// This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
-
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
@@ -129,7 +127,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (OnMapPointerMoved([position], true)) // Only for hover events
             return;
 
-        RefreshGraphics();
+        RefreshGraphics(); // Todo: Figure out if we really need to refresh the graphics here. It might be better to only do this when the map is actually changed. In that case it should perhaps be done  in the users handler to OnMapPointerMoved
     }
 
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)

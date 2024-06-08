@@ -1,4 +1,5 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -17,7 +18,7 @@ public static class GeometryCollectionRenderer
         IFeature feature,
         GeometryCollection collection,
         float opacity,
-        IVectorCache vectorCache)
+        VectorCache vectorCache)
     {
         SKPath ToPath((GeometryCollection collection, IFeature feature, Viewport viewport, float lineWidth) valueTuple)
         {

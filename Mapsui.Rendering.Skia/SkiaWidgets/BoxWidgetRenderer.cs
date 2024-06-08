@@ -1,4 +1,5 @@
-﻿using Mapsui.Rendering.Skia.Extensions;
+﻿using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidgets;
 using SkiaSharp;
@@ -7,7 +8,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
 public class BoxWidgetRenderer : ISkiaWidgetRenderer
 {
-    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService, float layerOpacity)
     {
         var boxWidget = (BoxWidget)widget;
 

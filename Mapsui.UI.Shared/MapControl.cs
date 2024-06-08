@@ -16,6 +16,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Mapsui.Manipulations;
+using Mapsui.Styles;
+using System.Threading.Tasks;
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -101,6 +103,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // All requested updates up to this point will be handled by this redraw
         _refresh = false;
+
+        // Start initializing symbol styles and refresh to trigger another render loop.
+        InitializeSymbolStyles((needRefresh) => 
+            { 
+                if (needRefresh) 
+                    RefreshGraphics(); 
+            }); 
+
         Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
 
         // Stop stopwatch after drawing control
@@ -114,6 +124,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidated = false;
     }
 
+    public void InitializeSymbolStyles(Action<bool> doneInitializing) =>
+        ImageSourceCacheInitializer.FetchImagesInViewport(_renderer.ImageSourceCache, Map.Navigator.Viewport, 
+            Map.Layers, doneInitializing);
+    
     private void InvalidateTimerCallback(object? state)
     {
         try

@@ -25,13 +25,13 @@ public class MyLocationLayer : BaseLayer
 {
     private MapView _mapView;
     private readonly GeometryFeature _feature;
-    private SymbolStyle _locStyle;  // style for the location indicator
-    private SymbolStyle _dirStyle;  // style for the view-direction indicator
-    private CalloutStyle _coStyle;  // style for the callout
+    private readonly SymbolStyle _locStyle;  // style for the location indicator
+    private readonly SymbolStyle _dirStyle;  // style for the view-direction indicator
+    private readonly CalloutStyle _coStyle;  // style for the callout
 
-    private static int _bitmapMovingId = -1;
-    private static int _bitmapStillId = -1;
-    private static int _bitmapDirId = -1;
+    private static readonly string _movingImageSource = "embedded://Mapsui.Resources.Images.MyLocationMoving.svg";
+    private static readonly string _stillImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg";
+    private static readonly string _directionImageSource = "embedded://Mapsui.Resources.Images.MyLocationDir.svg";
 
     private Position _animationMyLocationStart;
     private Position _animationMyLocationEnd;
@@ -49,10 +49,11 @@ public class MyLocationLayer : BaseLayer
             if (_isMoving != value)
             {
                 _isMoving = value;
-                _locStyle.BitmapId = _isMoving ? _bitmapMovingId : _bitmapStillId;
+                _locStyle.ImageSource = _isMoving ? _movingImageSource : _stillImageSource;
             }
         }
     }
+
 
     private Position _myLocation = new(0, 0);
     private readonly ConcurrentHashSet<AnimationEntry<MapView>> _animations = new();
@@ -152,27 +153,6 @@ public class MyLocationLayer : BaseLayer
         Enabled = false;
         IsMapInfoLayer = true;
 
-        if (_bitmapMovingId == -1)
-        {
-            var bitmapMoving = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationMoving.svg");
-            // Register bitmap
-            _bitmapMovingId = bitmapMoving;
-        }
-
-        if (_bitmapStillId == -1)
-        {
-            var bitmapStill = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationStill.svg");
-            // Register bitmap
-            _bitmapStillId = bitmapStill;
-        }
-
-        if (_bitmapDirId == -1)
-        {
-            var bitmapDir = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationDir.svg");
-            // Register bitmap
-            _bitmapDirId = bitmapDir;
-        }
-
         _feature = new GeometryFeature
         {
             Geometry = _myLocation.ToMapsui().ToPoint(),
@@ -182,16 +162,17 @@ public class MyLocationLayer : BaseLayer
         _locStyle = new SymbolStyle
         {
             Enabled = true,
-            BitmapId = _bitmapStillId,
+            ImageSource = _stillImageSource,
             SymbolScale = Scale,
             SymbolRotation = Direction,
             SymbolOffset = new Offset(0, 0),
             Opacity = 1,
         };
+
         _dirStyle = new SymbolStyle
         {
             Enabled = false,
-            BitmapId = _bitmapDirId,
+            ImageSource = _directionImageSource,
             SymbolScale = 0.2,
             SymbolRotation = 0,
             SymbolOffset = new Offset(0, 0),
@@ -202,16 +183,19 @@ public class MyLocationLayer : BaseLayer
             Enabled = false,
             Type = CalloutType.Single,
             Title = "",
-            TitleFontColor = Styles.Color.Black,
-            ArrowAlignment = ArrowAlignment.Top,
-            ArrowPosition = 0,
+            TitleFontColor = Color.Black,
             SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
             MaxWidth = 300,
             RotateWithMap = true,
             SymbolOffsetRotatesWithMap = true,
-            Color = Styles.Color.White,
-            StrokeWidth = 0,
-            ShadowWidth = 0
+            BalloonDefinition = new CalloutBalloonDefinition
+            {
+                TailAlignment = TailAlignment.Top,
+                TailPosition = 0,
+                Color = Color.White,
+                StrokeWidth = 0,
+                ShadowWidth = 0
+            },
         };
 
         _feature.Styles.Clear();

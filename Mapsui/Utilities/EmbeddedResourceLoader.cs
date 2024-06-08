@@ -29,7 +29,7 @@ public static class EmbeddedResourceLoader
     {
         var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
         var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
-        return new Uri($"embeddedresource://{fullName}");
+        return new Uri($"embedded://{fullName}");
     }
 
     private static string ConstructExceptionMessage(string path, Assembly assembly)
