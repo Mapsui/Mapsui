@@ -34,10 +34,10 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
 
     private CalloutType _type;
     private Point _anchor;
-    private ArrowAlignment _arrowAlignment;
-    private double _arrowWidth = 12.0;
-    private double _arrowHeight = 16.0;
-    private double _arrowPosition = 0.5;
+    private TailAlignment _tailAlignment;
+    private double _tailWidth = 12.0;
+    private double _tailHeight = 16.0;
+    private double _tailPosition = 0.5;
     private Color _color = KnownColor.White;
     private Color _backgroundColor = KnownColor.White;
     private double _shadowWidth;
@@ -49,7 +49,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
     private double _spacing = 2;
     private double _maxWidth = 300.0;
     private bool _isClosableByClick = true;
-    private int _content = -1;
+    private string? _contentId;
     private string? _title;
     private string? _titleFontName = DefaultTitleFontName;
     private double _titleFontSize = DefaultTitleFontSize;
@@ -110,15 +110,15 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Arrow alignment of Callout
+    /// Tail alignment of Callout
     /// </summary>
-    public ArrowAlignment ArrowAlignment
+    public TailAlignment TailAlignment
     {
-        get => _arrowAlignment;
+        get => _tailAlignment;
         set
         {
-            if (value == _arrowAlignment) return;
-            _arrowAlignment = value;
+            if (value == _tailAlignment) return;
+            _tailAlignment = value;
             OnPropertyChanged();
         }
     }
@@ -126,13 +126,13 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
     /// <summary>
     /// Width from arrow of Callout
     /// </summary>
-    public double ArrowWidth
+    public double TailWidth
     {
-        get => _arrowWidth;
+        get => _tailWidth;
         set
         {
-            if (value.Equals(_arrowWidth)) return;
-            _arrowWidth = value;
+            if (value.Equals(_tailWidth)) return;
+            _tailWidth = value;
             OnPropertyChanged();
         }
     }
@@ -140,27 +140,27 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
     /// <summary>
     /// Height from arrow of Callout
     /// </summary>
-    public double ArrowHeight
+    public double TailHeight
     {
-        get => _arrowHeight;
+        get => _tailHeight;
         set
         {
-            if (value.Equals(_arrowHeight)) return;
-            _arrowHeight = value;
+            if (value.Equals(_tailHeight)) return;
+            _tailHeight = value;
             OnPropertyChanged();
         }
     }
 
     /// <summary>
-    /// Relative position of anchor of Callout on the side given by <see cref="ArrowAlignment"/>
+    /// Relative position of anchor of Callout on the side given by <see cref="TailAlignment"/>
     /// </summary>
-    public double ArrowPosition
+    public double TailPosition
     {
-        get => _arrowPosition;
+        get => _tailPosition;
         set
         {
-            if (value.Equals(_arrowPosition)) return;
-            _arrowPosition = value;
+            if (value.Equals(_tailPosition)) return;
+            _tailPosition = value;
             OnPropertyChanged();
         }
     }
@@ -327,13 +327,13 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
     /// <summary>
     /// Content of Callout
     /// </summary>
-    public int Content
+    public string? ContentId
     {
-        get => _content;
+        get => _contentId;
         set
         {
-            if (value == _content) return;
-            _content = value;
+            if (value == _contentId) return;
+            _contentId = value;
             OnPropertyChanged();
         }
     }
@@ -545,7 +545,6 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
         }
 
         style.Type = Type;
-        style.Content = Content;
         style.Title = Title;
         style.TitleFont.FontFamily = TitleFontName;
         style.TitleFont.Size = TitleFontSize;
@@ -562,6 +561,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
         style.SubtitleTextAlignment = SubtitleTextAlignment.ToMapsui();
         style.Spacing = Spacing;
         style.MaxWidth = MaxWidth;
+        //style.ImageIdOfContent = Guid.NewGuid().ToString();
     }
 
     /// <summary>
@@ -577,20 +577,22 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
             Feature.Styles.Add(style);
         }
 
-        style.ArrowAlignment = ArrowAlignment;
-        style.ArrowHeight = (float)ArrowHeight;
-        style.ArrowPosition = (float)ArrowPosition;
-        style.BackgroundColor = BackgroundColor.ToMapsui();
-        style.Color = Color.ToMapsui();
         style.SymbolOffset = new Offset(Anchor.X, Anchor.Y);
         style.SymbolOffsetRotatesWithMap = _pin.RotateWithMap;
-        style.Padding = new MRect(Padding.Left, Padding.Top, Padding.Right, Padding.Bottom);
-        style.RectRadius = (float)RectRadius;
         style.RotateWithMap = RotateWithMap;
         style.Rotation = (float)Rotation;
-        style.ShadowWidth = (float)ShadowWidth;
-        style.StrokeWidth = (float)StrokeWidth;
-        style.Content = Content;
+        style.BalloonDefinition = new CalloutBalloonDefinition
+        {
+            TailAlignment = TailAlignment,
+            TailHeight = (float)TailHeight,
+            TailPosition = (float)TailPosition,
+            BackgroundColor = BackgroundColor.ToMapsui(),
+            Color = Color.ToMapsui(),
+            Padding = new MRect(Padding.Left, Padding.Top, Padding.Right, Padding.Bottom),
+            RectRadius = (float)RectRadius,
+            ShadowWidth = (float)ShadowWidth,
+            StrokeWidth = (float)StrokeWidth,
+        };
     }
 
     /// <summary>
@@ -611,12 +613,12 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
         if (propertyName == null)
             return;
 
-        if (Type != CalloutType.Custom && propertyName.Equals(nameof(Content)))
-            Type = CalloutType.Custom;
+        if (Type != CalloutType.Image && propertyName.Equals(nameof(ContentId)))
+            Type = CalloutType.Image;
 
         if (IsVisible && (propertyName.Equals(nameof(Title))
                           || propertyName.Equals(nameof(Subtitle))
-                          || propertyName.Equals(nameof(Content))
+                          || propertyName.Equals(nameof(ContentId))
                           || propertyName.Equals(nameof(Type))
                           || propertyName.Equals(nameof(TitleFontName))
                           || propertyName.Equals(nameof(TitleFontSize))
@@ -632,10 +634,10 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
                           || propertyName.Equals(nameof(MaxWidth)))
            )
             UpdateContent();
-        else if (IsVisible && propertyName.Equals(nameof(ArrowAlignment))
-                 || propertyName.Equals(nameof(ArrowWidth))
-                 || propertyName.Equals(nameof(ArrowHeight))
-                 || propertyName.Equals(nameof(ArrowPosition))
+        else if (IsVisible && propertyName.Equals(nameof(TailAlignment))
+                 || propertyName.Equals(nameof(TailWidth))
+                 || propertyName.Equals(nameof(TailHeight))
+                 || propertyName.Equals(nameof(TailPosition))
                  || propertyName.Equals(nameof(Anchor))
                  || propertyName.Equals(nameof(IsVisible))
                  || propertyName.Equals(nameof(Padding))

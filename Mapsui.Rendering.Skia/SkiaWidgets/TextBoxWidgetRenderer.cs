@@ -1,4 +1,5 @@
-﻿using Mapsui.Rendering.Skia.Extensions;
+﻿using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidgets;
 using SkiaSharp;
@@ -7,7 +8,8 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
 public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 {
-    public virtual void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
+    public virtual void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService,
+        float layerOpacity)
     {
         DrawText(canvas, viewport, widget, layerOpacity);
     }

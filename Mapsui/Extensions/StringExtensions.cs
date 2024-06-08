@@ -1,5 +1,7 @@
 ﻿using System;
 
+namespace Mapsui.Extensions;
+
 public static class StringExtensions
 {
     public static string GetUriScheme(this string url)

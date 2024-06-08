@@ -1,6 +1,5 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Samples.Common.DataBuilders;
-using Mapsui.Samples.Common.Maps.Styles;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
@@ -45,7 +44,7 @@ public class DynamicSvgStyleSample : ISample
 
     private IStyle CreateDynamicSvgStyle(Func<MPoint> getInfoPosition) // Use Func to make it get the latest clicked position
     {
-        var bitmapId = typeof(SvgSample).LoadSvgId("Images.arrow.svg");
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.arrow.svg";
 
         return new ThemeStyle((f) =>
         {
@@ -55,7 +54,7 @@ public class DynamicSvgStyleSample : ISample
 
             return new SymbolStyle
             {
-                BitmapId = bitmapId,
+                ImageSource = imageSource,
                 SymbolOffset = new RelativeOffset(0.0, 0.0),
                 // 1. Change scale based on the distance
                 SymbolScale = 0.25 + (0.25 * distanceBetweenZeroAndOne),

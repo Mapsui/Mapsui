@@ -1,40 +1,38 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Tiling;
+using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class TileCache : ITileCache
+public sealed class TileCache : IDisposable
 {
     private const int _tilesToKeepMultiplier = 3;
     private const int _minimumTilesToKeep = 128; // in RasterStyle it was 32, I quadrupled it because now all tile Layers have one Cache
     private long _lastIteration;
 
-    private readonly IDictionary<object, IBitmapInfo?> _tileCache =
-        new ConcurrentDictionary<object, IBitmapInfo?>(new IdentityComparer<object>());
+    private readonly IDictionary<MRaster, TileCacheEntry> _tileCache =
+        new ConcurrentDictionary<MRaster, TileCacheEntry>(new IdentityComparer<MRaster>());
 
-    public IBitmapInfo? GetOrCreate(MRaster raster, long currentIteration)
+    public TileCacheEntry GetOrCreate(MRaster raster, long currentIteration)
     {
-        _tileCache.TryGetValue(raster, out var cachedBitmapInfo);
-        var bitmapInfo = cachedBitmapInfo as BitmapInfo;
-        if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
+        if (_tileCache.TryGetValue(raster, out var cachedTile))
         {
-            bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
-            _tileCache[raster] = bitmapInfo;
+            // Get
+            var entry = cachedTile;
+            entry.IterationUsed = currentIteration;
+            return entry;
         }
-
-        if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
+        else
         {
-            // remove invalid image from cache
-            _tileCache.Remove(raster);
-            return null;
+            // Create
+            var entry = ToTileCacheEntry(raster.Data);
+            _tileCache[raster] = entry;
+            return _tileCache[raster];
         }
-
-        bitmapInfo.IterationUsed = currentIteration;
-
-        return bitmapInfo;
     }
 
     public void UpdateCache(long iteration)
@@ -46,6 +44,18 @@ public sealed class TileCache : ITileCache
         }
     }
 
+    public static TileCacheEntry ToTileCacheEntry(byte[] data)
+    {
+        if (data.IsSkp())
+        {
+            return new TileCacheEntry(SKPicture.Deserialize(data));
+        }
+
+        using var skData = SKData.CreateCopy(data);
+        var image = SKImage.FromEncodedData(skData);
+        return new TileCacheEntry(image);
+    }
+
     private void RemovedUnusedBitmapsFromCache()
     {
         var tilesUsedInCurrentIteration =
@@ -54,21 +64,20 @@ public sealed class TileCache : ITileCache
         tilesToKeep = Math.Max(tilesToKeep, _minimumTilesToKeep);
         var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
 
-        if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
+        if (tilesToRemove > 0)
+            RemoveOldBitmaps(_tileCache, tilesToRemove);
     }
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
-    private static void RemoveOldBitmaps(IDictionary<object, IBitmapInfo?> tileCache, int numberToRemove)
+    private static void RemoveOldBitmaps(IDictionary<MRaster, TileCacheEntry> tileCache, int numberToRemove)
     {
         var counter = 0;
         var orderedKeys = tileCache.OrderBy(kvp => kvp.Value?.IterationUsed).Select(kvp => kvp.Key).ToList();
         foreach (var key in orderedKeys)
         {
             if (counter >= numberToRemove) break;
-            var textureInfo = tileCache[key];
+            var entry = tileCache[key];
             tileCache.Remove(key);
-            if (textureInfo is IDisposable textureInfoDisposable)
-                textureInfoDisposable.Dispose();
+            entry.SKObject.Dispose();
             counter++;
         }
     }
@@ -76,12 +85,12 @@ public sealed class TileCache : ITileCache
 
     public void Dispose()
     {
-        foreach (var bitmapInfo in _tileCache.Values)
+        foreach (var key in _tileCache.Keys)
         {
-            bitmapInfo?.Dispose();
+            var tile = _tileCache[key];
+            _tileCache.Remove(key); // Remove before dispose to make sure the disposed object is not used anymore
+            tile.SKObject.Dispose();
         }
-
-        _tileCache.Clear();
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Mapsui.Rendering.Skia.Extensions;
+﻿using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
@@ -10,7 +11,7 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
     private readonly string[] _textHeader = { "Last", "Mean", "Frames", "Min", "Max", "Count", "Dropped" };
     private readonly string[] _text = new string[7];
 
-    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService, float layerOpacity)
     {
         var performanceWidget = (PerformanceWidget)widget;
         var textSize = performanceWidget.TextSize;
