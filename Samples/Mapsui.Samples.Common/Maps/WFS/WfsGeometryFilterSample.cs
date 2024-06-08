@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -122,12 +123,7 @@ public class WfsGeometryFilterSample : ISample
 
         private IEnumerable<IFeature> IterateFeatures(IEnumerable<IFeature> features, CancellationToken cancellationToken)
         {
-            foreach (var feature in features)
-                if (cancellationToken.IsCancellationRequested)
-                    yield break;
-                else
-                    if (filter(feature))
-                        yield return feature;
+            return features.TakeWhile(_ => !cancellationToken.IsCancellationRequested).Where(filter);
         }
 
         public MRect? GetExtent()
