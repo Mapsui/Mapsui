@@ -25,7 +25,7 @@
     <PackageVersion Include="CommunityToolkit.Maui.Markup" Version="[1.0.0,2.0.0)" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="[7.1.2,8.0.0)" />
     <PackageVersion Include="DotNext.Threading" Version="[4.9.0,5.0.0)" />
-    <PackageVersion Include="Eto.Forms" Version="2.8.0" />
+    <PackageVersion Include="Eto.Forms" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.Platform.Wpf" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.Platform.Windows" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.Platform.Mac64" Version="[2.8.0,3.0.0)" />
