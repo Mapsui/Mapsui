@@ -45,6 +45,7 @@ public class VectorCache : IVectorCache
 
     public TPath GetOrCreatePath<TPath, TGeometry>(Viewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, Viewport, float, TPath> toPath) where TPath : class where TGeometry : class
     {
+        return toPath(geometry, viewport, lineWidth);
         var key = (viewport.ToExtent(), viewport.Rotation, geometry, lineWidth);
         if (!_pathCache.TryGetValue(key, out var path))
         {
