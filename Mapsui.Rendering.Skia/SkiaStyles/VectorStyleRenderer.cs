@@ -17,15 +17,16 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var vectorStyle = (VectorStyle)style;
         var opacity = (float)(layer.Opacity * style.Opacity);
 
-        void DrawGeometry(Geometry? geometry)
+        void DrawGeometry(Geometry? geometry, int position = 0)
         {
             switch (geometry)
             {
                 case GeometryCollection collection:
                     {
-                        foreach (var child in collection)
+                        for (var index = 0; index < collection.Count; index++)
                         {
-                            DrawGeometry(child);
+                            var child = collection[index];
+                            DrawGeometry(child, index);
                         }
                     }
                     break;
@@ -33,10 +34,10 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     SymbolStyleRenderer.DrawXY(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), renderService);
                     break;
                 case Polygon polygon:
-                    PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderService.VectorCache);
+                    PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderService.VectorCache, position);
                     break;
                 case LineString lineString:
-                    LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity, renderService);
+                    LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity, renderService, position);
                     break;
                 case null:
                     throw new ArgumentException($"Geometry is null, Layer: {layer.Name}");
