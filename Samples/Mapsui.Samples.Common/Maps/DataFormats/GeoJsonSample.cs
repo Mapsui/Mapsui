@@ -17,47 +17,43 @@ public class GeoJsonSample : ISample
     static GeoJsonSample()
     {
         GeoJsonDeployer.CopyEmbeddedResourceToFile("cities.geojson");
+        GeoJsonDeployer.CopyEmbeddedResourceToFile("countries.geojson");
     }
 
-    public string Name => "13 GeoJson";
-    public string Category => "Data Formats";
+    public string Name => "1";
+    public string Category => "1";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
-        var map = new Map
-        {
-            CRS = "EPSG:3857", // The Map CRS needs to be set   
-        };
-
-        var examplePath = Path.Combine(GeoJsonDeployer.GeoJsonLocation, "cities.geojson");
-        var geoJson = new GeoJsonProvider(examplePath)
-        {
-            CRS = "EPSG:4326" // The DataSource CRS needs to be set
-        };
-
-        var dataSource = new ProjectingProvider(geoJson)
-        {
-            CRS = "EPSG:3857",
-        };
-
+        var map = new Map();
         map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(dataSource)));
-
+        map.Layers.Add(CreateCitiesLayer());
         return map;
     }
 
-    private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
-        => new Layer("City labels")
+    private static RasterizingTileLayer CreateCitiesLayer()
+    {
+        return new RasterizingTileLayer(CreateCityLabelLayer());
+    }
+
+    private static ProjectingProvider CreateCitiesProvider()
+    {
+        var path = Path.Combine(GeoJsonDeployer.GeoJsonLocation, "cities.geojson");
+        var provider = new GeoJsonProvider(path) { CRS = "EPSG:4326" }; // The ProjectingProvider needs to know the source CRS (EPSG:4326)
+        return new ProjectingProvider(provider) { CRS = "EPSG:3857" }; // The ProjectingProvider needs to know the target CRS (EPSG:3857)
+    }
+
+    private static Layer CreateCityLabelLayer()
+        => new("City labels")
         {
-            DataSource = citiesProvider,
-            Enabled = true,
+            DataSource = CreateCitiesProvider(),
             Style = CreateCityLabelStyle()
         };
 
     private static LabelStyle CreateCityLabelStyle()
-        => new LabelStyle
+        => new()
         {
             ForeColor = Color.Black,
             BackColor = new Brush(Color.White),
