@@ -8,6 +8,7 @@ using SkiaSharp;
 using System;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Rendering.Skia.Cache;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
 
@@ -66,7 +67,7 @@ public class CustomWidget : BaseWidget
 
 public class CustomWidgetSkiaRenderer : ISkiaWidgetRenderer
 {
-    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, float layerOpacity)
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService, float layerOpacity)
     {
         // Cast to custom widget to be able to access the specific CustomWidget fields
         var customWidget = (CustomWidget)widget;

@@ -383,9 +383,6 @@
     <None Remove="Resources\Images\OriginalRegression\AnimatedBusSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\AnimatedPointsSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ArcGISDynamicServiceSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\AtlasBitmapPathSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\BitmapBitmapPathSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\BitmapUriSymbolSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingAddLineSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingAddPointSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\EditingAddPolygonSample.Regression.png" />
@@ -398,7 +395,6 @@
     <None Remove="Resources\Images\OriginalRegression\LoggingWidgetSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ModifyScaleSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\MyLocationLayerSample.Regression.png" />
-    <None Remove="Resources\Images\OriginalRegression\PolygonBitmapPathTestSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\PolygonGeometrySample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\ProjectionTestSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\RasterizingTileLayerWithDynamicPointsSample.Regression.png" />

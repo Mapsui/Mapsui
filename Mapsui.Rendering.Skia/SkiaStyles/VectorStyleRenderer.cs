@@ -1,6 +1,7 @@
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Nts;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -11,7 +12,7 @@ namespace Mapsui.Rendering.Skia;
 
 public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
-    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration)
+    public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         try
         {
@@ -27,7 +28,7 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     switch (geometryFeature.Geometry)
                     {
                         case GeometryCollection collection:
-                            GeometryCollectionRenderer.Draw(canvas, viewport, vectorStyle, feature, collection, opacity, renderService.VectorCache);
+                            GeometryCollectionRenderer.Draw(canvas, viewport, vectorStyle, feature, collection, opacity, (VectorCache)renderService.VectorCache);
                             break;
                         case Point point:
                             SymbolStyleRenderer.DrawXY(canvas, viewport, layer, point.X, point.Y, CreateSymbolStyle(vectorStyle), renderService);

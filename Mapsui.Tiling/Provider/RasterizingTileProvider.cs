@@ -28,8 +28,7 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
     private readonly RenderFormat _renderFormat;
-    private readonly IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
-    private IRenderService? _renderService;
+    private readonly ConcurrentDictionary<TileIndex, double> _searchSizeCache = new();
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -42,7 +41,6 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
         _renderFormat = renderFormat;
         _layer = layer;
         _rasterizer = rasterizer;
-        _renderService = rasterizer?.RenderService;
         _pixelDensity = pixelDensity;
         PersistentCache = persistentCache ?? new NullCache();
 
@@ -69,7 +67,8 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
         {
             var renderer = GetRenderer();
             (MSection section, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
-            using var stream = renderer.RenderToBitmapStream(ToViewport(section), new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+            _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(renderer.ImageSourceCache, ToViewport(section), [renderLayer]);
+            using var stream = renderer.RenderToBitmapStream(ToViewport(section), [renderLayer], pixelDensity: _pixelDensity, renderFormat: _renderFormat);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
             PersistentCache?.Add(index, result ?? []);
@@ -210,18 +209,9 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
             rasterizer = _rasterizer;
             if (rasterizer == null)
             {
-                if (_renderService != null)
-                {
-                    rasterizer = DefaultRendererFactory.CreateWithRenderService(_renderService);
-                }
-                else
-                {
-                    rasterizer = DefaultRendererFactory.Create();
-                    _renderService = rasterizer.RenderService; // get the render cache from the first renderer
-                }
+                rasterizer = DefaultRendererFactory.Create();
             }
         }
-
         return rasterizer;
     }
 

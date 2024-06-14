@@ -77,12 +77,9 @@ public class PointsSample : ISample
 
     private static SymbolStyle CreateBitmapStyle()
     {
-        // For this sample we get the bitmap from an embedded resouce
-        // but you could get the data stream from the web or anywhere
-        // else.
-        var bitmapId = typeof(PointsSample).LoadBitmapId(@"Images.home.png"); // Designed by Freepik http://www.freepik.com
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.home.png"; // Designed by Freepik http://www.freepik.com
         var bitmapHeight = 176; // To set the offset correct we need to know the bitmap height
-        return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.20, SymbolOffset = new Offset(0, bitmapHeight * 0.5) };
+        return new SymbolStyle { ImageSource = imageSource, SymbolScale = 0.20, SymbolOffset = new Offset(0, bitmapHeight * 0.5) };
     }
 }
 

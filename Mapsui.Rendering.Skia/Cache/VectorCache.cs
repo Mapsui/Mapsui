@@ -3,7 +3,7 @@ using Mapsui.Cache;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class VectorCache(IRenderService renderService, int capacity) : IVectorCache
+public sealed class VectorCache(IRenderService renderService, int capacity) : IDisposable
 {
     private readonly LruCache<object, ICacheHolder> _paintCache = new(Math.Min(capacity, 1));
     private readonly LruCache<object, ICacheHolder> _pathParamCache = new(Math.Min(capacity, 1));

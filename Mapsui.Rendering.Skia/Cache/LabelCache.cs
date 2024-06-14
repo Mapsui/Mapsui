@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Images;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class LabelCache : ILabelCache
+public sealed class LabelCache : IDisposable
 {
     private readonly ConcurrentDictionary<Font, object> _cacheTypeface = new();
 
-    private readonly ConcurrentDictionary<(string? Text, Font Font, Brush? BackColor, Color ForeColor, float Opacity), IBitmapInfo> _labelCache = new();
+    private readonly ConcurrentDictionary<(string? Text, Font Font, Brush? BackColor, Color ForeColor, float Opacity), IDrawableImage> _labelCache = new();
 
     public T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace)
         where T : class
@@ -23,8 +24,7 @@ public sealed class LabelCache : ILabelCache
         return (T)typeface;
     }
 
-    public T GetOrCreateLabel<T>(string? text, LabelStyle style, float layerOpacity, Func<LabelStyle, string?, float, ILabelCache, T> createLabelAsBitmap)
-        where T : IBitmapInfo
+    public IDrawableImage GetOrCreateLabel(string? text, LabelStyle style, float layerOpacity, Func<LabelStyle, string?, float, LabelCache, IDrawableImage> createLabelAsBitmap)
     {
         var key = (text, style.Font, style.BackColor, style.ForeColor, layerOpacity);
         if (!_labelCache.TryGetValue(key, out var info))
@@ -33,7 +33,7 @@ public sealed class LabelCache : ILabelCache
             _labelCache[key] = info;
         }
 
-        return (T)info;
+        return info;
     }
 
     public void Dispose()
