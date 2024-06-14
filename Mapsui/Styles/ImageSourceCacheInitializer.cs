@@ -5,6 +5,7 @@ using Mapsui.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapsui.Widgets;
 
 namespace Mapsui.Styles;
 public static class ImageSourceCacheInitializer
@@ -12,9 +13,10 @@ public static class ImageSourceCacheInitializer
     readonly static FetchMachine _fetchMachine = new(1);
 
     public static void FetchImagesInViewport(ImageSourceCache imageSourceCache, Viewport viewport,
-        IEnumerable<ILayer> layers, Action<bool> doneInitializing)
+        IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Action<bool> doneInitializing)
     {
         var imageSources = GetAllImageSources(viewport, layers);
+        GetAllImageSources(imageSources, widgets);
 
         if (imageSources.Count == 0)
         {
@@ -38,6 +40,13 @@ public static class ImageSourceCacheInitializer
             }
             doneInitializing(true);
         });
+    }
+
+    private static void GetAllImageSources(List<string> imageSources, IEnumerable<IWidget> widgets)
+    {
+        foreach (var widget in widgets)
+            if (widget is IHasImageSource { ImageSource: not null } imageSource)
+                imageSources.Add(imageSource.ImageSource);
     }
 
     public static async Task<bool> FetchImagesInViewportAsync(ImageSourceCache imageSourceCache,
