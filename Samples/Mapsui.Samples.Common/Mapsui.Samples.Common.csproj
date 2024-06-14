@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="GeoData\GeoJson\countries.geojson" />
     <None Remove="GeoData\TrueMarble\0\0\0.png" />
     <None Remove="GeoData\TrueMarble\1\0\0.png" />
     <None Remove="GeoData\TrueMarble\1\0\1.png" />
@@ -45,6 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="GeoData\GeoJson\countries.geojson" />
     <EmbeddedResource Include="GeoData\Images\a123330.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
