@@ -6,8 +6,8 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Layers;
 using System;
-using System.Collections.Concurrent;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
@@ -17,6 +17,8 @@ namespace Mapsui.Samples.Common.Maps.DataFormats;
 
 public class GeoJsonSample : ISample
 {
+    private static readonly MRect _extent = new(-2066786, 3982655, 3558942, 7705420);
+
     static GeoJsonSample()
     {
         GeoJsonDeployer.CopyEmbeddedResourceToFile("cities.geojson");
@@ -31,17 +33,30 @@ public class GeoJsonSample : ISample
     public static Map CreateMap()
     {
         var map = new Map();
-        map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
+        map.Home = (n) => n.ZoomToBox(_extent);
+        map.BackColor = new Color(55, 84, 162);
         map.Layers.Add(CountriesLayerBuilder.CreateCountriesLayer());
         map.Layers.Add(CitiesLayerBuilder.CreateCitiesLayer());
         return map;
-    }  
+    }
 }
 
 internal static class CountriesLayerBuilder
 {
-    private static readonly ConcurrentDictionary<string, VectorStyle> _styles = new();
-    private static readonly Random _random = new();
+    private static readonly string[] _euroZoneCountries = new string[] {
+        "Austria","Belgium", "Croatia", "Cyprus", "Estonia", "Finland", "France", "Germany", "Greece", "Ireland",
+        "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "the Netherlands", "Portugal", "Slovakia", "Slovenia", "Spain"
+    };
+    private static readonly VectorStyle _euroStyle = new()
+    {
+        Fill = new Brush(new Color(245, 245, 242)),
+        Outline = new Pen(new Color(55, 84, 162), 2),
+    };
+    private static readonly VectorStyle _nonEuroStyle = new()
+    {
+        Fill = new Brush(new Color(86, 109, 176)),
+        Outline = new Pen(new Color(55, 84, 162), 2),
+    };    
 
     public static RasterizingTileLayer CreateCountriesLayer() => new(CreateCountriesGeoJsonLayer());
 
@@ -51,7 +66,7 @@ internal static class CountriesLayerBuilder
             DataSource = CreateCountriesProvider(),
             Style = new StyleCollection
             {
-                Styles = 
+                Styles =
                 {
                     CreateCountriesStyle(),
                     new CalloutStyle()
@@ -70,28 +85,17 @@ internal static class CountriesLayerBuilder
         => new ThemeStyle((f) =>
         {
             // With a ThemeStyle it is possible to create a specific style for each feature
-
             var name = f["name"] as string ?? throw new Exception("Feature should have name field");
-            return _styles.GetOrAdd(name, (k) =>
-                new VectorStyle
-                {
-                    Fill = new Brush(GenerateRandomColor()),
-                    Outline = new Pen(Color.Black, 1),
-                });
+            return IsInEuroZone(name) ? _euroStyle : _nonEuroStyle;
         });
-    
 
-    public static Color GenerateRandomColor()
-    {
-        byte[] rgb = new byte[3];
-        _random.NextBytes(rgb);
-        return new Color(rgb[0], rgb[1], rgb[2], 128);
-    }
+    private static bool IsInEuroZone(string name) => _euroZoneCountries.Contains(name);
+
 }
 
 internal static class CitiesLayerBuilder
 {
-    public static RasterizingTileLayer CreateCitiesLayer() => new(CreateCitiesLabelLayer());
+    public static Layer CreateCitiesLayer() => CreateCitiesLabelLayer();
 
     private static Layer CreateCitiesLabelLayer()
         => new("Cities labels")
@@ -111,7 +115,7 @@ internal static class CitiesLayerBuilder
         => new()
         {
             ForeColor = Color.Black,
-            BackColor = new Brush(Color.White),
+            BackColor = new Brush(new Color(245, 245, 242)),
             LabelColumn = "city",
         };
 }
