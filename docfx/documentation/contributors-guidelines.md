@@ -23,7 +23,7 @@ At all times:
 - They should be in a class that has the name '{ClassItExtends}Extensions'. 
 - It should be in a namespace that follows the folder name (so not in the namespace of the class it extends).
 - Extensions of a collection (IEnumerable, List, Array etc) of a type should also be in the class that extends the individual type.
-- If an interface is extended, the I should not be in the class name. So and ILayer extension should be LayerExtensions.
+- If an interface is extended, the I should not be in the class name. So an ILayer extension should be in LayerExtensions.
 
 ## Direct and indirect nuget dependencies should point to the same version
 For instance, we have a direct dependency on SkiaSharp, but we also use Svg.Skia which has a dependency on SkiaSharp too. We want both of those to point to the same version. If not, linking or runtime errors could occur. In some cases this might not be possible, for instance, when we have to downgrade because of a bug in some package.
