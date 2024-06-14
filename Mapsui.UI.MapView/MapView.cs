@@ -1,7 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Manipulations;
 using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Objects;
 using Mapsui.Utilities;
@@ -10,7 +9,6 @@ using Mapsui.Widgets.ButtonWidgets;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
-using SkiaSharp;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,11 +36,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private ImageButtonWidget? _mapZoomOutButton;
     private ImageButtonWidget? _mapMyLocationButton;
     private ImageButtonWidget? _mapNorthingButton;
-    private readonly SKPicture _pictMyLocationNoCenter;
-    private readonly SKPicture _pictMyLocationCenter;
-    private readonly SKPicture _pictZoomIn;
-    private readonly SKPicture _pictZoomOut;
-    private readonly SKPicture _pictNorthing;
     private readonly ObservableRangeCollection<Pin> _pins = [];
     private readonly ObservableRangeCollection<Drawable> _drawables = [];
     private readonly ObservableRangeCollection<Callout> _callouts = [];
@@ -764,23 +757,19 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void CreateButtons()
     {
-        _mapZoomInButton ??= CreateButton(0, 0, _pictZoomIn, (s, e) => { Map.Navigator.ZoomIn(); return true; });
-        _mapZoomInButton.ImageSource = "embedded://Mapsui.UI.Maui.Images.ZoomIn.svg";
+        _mapZoomInButton ??= CreateButton(0, 0, "embedded://Mapsui.UI.Maui.Images.ZoomIn.svg", (s, e) => { Map.Navigator.ZoomIn(); return true; });
         _mapZoomInButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomInButton);
 
-        _mapZoomOutButton ??= CreateButton(0, 40, _pictZoomOut, (s, e) => { Map.Navigator.ZoomOut(); return true; });
-        _mapZoomOutButton.ImageSource = "embedded://Mapsui.UI.Maui.Images.ZoomOut.svg";
+        _mapZoomOutButton ??= CreateButton(0, 40, "embedded://Mapsui.UI.Maui.Images.ZoomOut.svg", (s, e) => { Map.Navigator.ZoomOut(); return true; });
         _mapZoomOutButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomOutButton);
 
-        _mapMyLocationButton ??= CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; return true; });
-        _mapMyLocationButton.ImageSource = "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg";
+        _mapMyLocationButton ??= CreateButton(0, 88, "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg", (s, e) => { MyLocationFollow = true; return true; });
         _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
         Map!.Widgets.Add(_mapMyLocationButton);
 
-        _mapNorthingButton ??= CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); return true; });
-        _mapNorthingButton.ImageSource = "embedded://Mapsui.UI.Maui.Images.RotationZero.svg";
+        _mapNorthingButton ??= CreateButton(0, 136, "embedded://Mapsui.UI.Maui.Images.RotationZero.svg", (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); return true; });
         _mapNorthingButton.Enabled = IsNorthingButtonVisible;
         Map!.Widgets.Add(_mapNorthingButton);
 
@@ -788,9 +777,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     }
 
     private ImageButtonWidget CreateButton(
-        float x, float y, SKPicture picture, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
+        float x, float y, string imageSource, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
         {
-            //Picture = picture,
+            ImageSource = imageSource,
             HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
             VerticalAlignment = Widgets.VerticalAlignment.Absolute,
             Position = new MPoint(x, y),
@@ -809,11 +798,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             _mapCalloutLayer?.Dispose();
             _mapPinLayer?.Dispose();
             _mapDrawableLayer?.Dispose();
-            _pictMyLocationNoCenter?.Dispose();
-            _pictMyLocationCenter?.Dispose();
-            _pictZoomIn?.Dispose();
-            _pictZoomOut?.Dispose();
-            _pictNorthing?.Dispose();
             MyLocationLayer?.Dispose();
         }
     }
@@ -823,10 +807,5 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         Pins.Clear();
         Drawables.Clear();
         HideCallouts();
-    }
-
-    private void OnTapped(ScreenPosition screenPosition)
-    {
-        // Todo: Implement to test simple scenarios.
     }
 }
