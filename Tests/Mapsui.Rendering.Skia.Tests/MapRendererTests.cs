@@ -241,6 +241,25 @@ internal class MapRendererTests
     }
 
     [Test]
+    public void RenderGeometryCollection()
+    {
+        // arrange
+        using var map = GeometryCollectionSample.CreateMap();
+        var viewport = map.Extent!.Multiply(1.1).ToViewport(400);
+        const string fileName = "geometry_collection.png";
+
+        // act
+        using var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+
+        // aside
+        File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+
+        // assert
+        ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+    }
+
+    [Test]
     public async Task RenderTilesAsync()
     {
         // Arrange
