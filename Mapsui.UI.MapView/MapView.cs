@@ -72,12 +72,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         // Add some events to _mapControl.Map.Layers
         Map.Layers.Changed += HandleLayersChanged;
 
-        //_pictMyLocationNoCenter = EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
-        //_pictMyLocationCenter = EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationCenter.svg");
-
-        //_pictZoomIn = EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomIn.svg");
-        //_pictZoomOut = EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomOut.svg");
-        //_pictNorthing = EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.RotationZero.svg");
         CreateButtons();
 
         _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
@@ -362,12 +356,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         {
             if (MyLocationFollow)
             {
-                //_mapMyLocationButton!.Picture = _pictMyLocationCenter;
+                _mapMyLocationButton!.ImageSource = "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg";
                 Map.Navigator.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
             }
             else
             {
-                //_mapMyLocationButton!.Picture = _pictMyLocationNoCenter;
+                _mapMyLocationButton!.ImageSource = "embedded://Mapsui.UI.Maui.Resources.Images.LocationNoCenter.svg";
             }
 
             Refresh();
@@ -771,22 +765,22 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private void CreateButtons()
     {
         _mapZoomInButton ??= CreateButton(0, 0, _pictZoomIn, (s, e) => { Map.Navigator.ZoomIn(); return true; });
-        //_mapZoomInButton.Picture = _pictZoomIn;
+        _mapZoomInButton.ImageSource = "embedded://Mapsui.UI.Maui.Images.ZoomIn.svg";
         _mapZoomInButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomInButton);
 
         _mapZoomOutButton ??= CreateButton(0, 40, _pictZoomOut, (s, e) => { Map.Navigator.ZoomOut(); return true; });
-        //_mapZoomOutButton.Picture = _pictZoomOut;
+        _mapZoomOutButton.ImageSource = "embedded://Mapsui.UI.Maui.Images.ZoomOut.svg";
         _mapZoomOutButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomOutButton);
 
         _mapMyLocationButton ??= CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; return true; });
-        //_mapMyLocationButton.Picture = _pictMyLocationNoCenter;
+        _mapMyLocationButton.ImageSource = "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg";
         _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
         Map!.Widgets.Add(_mapMyLocationButton);
 
         _mapNorthingButton ??= CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); return true; });
-        //_mapNorthingButton.Picture = _pictNorthing;
+        _mapNorthingButton.ImageSource = "embedded://Mapsui.UI.Maui.Images.RotationZero.svg";
         _mapNorthingButton.Enabled = IsNorthingButtonVisible;
         Map!.Widgets.Add(_mapNorthingButton);
 
