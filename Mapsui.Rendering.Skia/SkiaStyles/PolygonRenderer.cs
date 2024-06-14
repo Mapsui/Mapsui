@@ -17,9 +17,10 @@ internal static class PolygonRenderer
     private const float _scale = 10.0f;
 
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle vectorStyle, IFeature feature,
-        Polygon polygon, float opacity, VectorCache vectorCache)
+        Polygon polygon, float opacity, VectorCache vectorCache, int position)
     {
-        SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
+        // polygon - relevant for GeometryCollection children
+        SKPath ToPath((long featureId, int position, MRect extent, double rotation, float lineWidth) valueTuple)
         {
             var result = polygon.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
             return result;
@@ -32,7 +33,7 @@ internal static class PolygonRenderer
         var rotation = viewport.Rotation;
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
 
-        using var path = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
+        using var path = vectorCache.GetOrCreatePath((feature.Id, position, extent, rotation, lineWidth), ToPath);
         if (vectorStyle.Fill.IsVisible())
         {
             using var fillPaint = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
