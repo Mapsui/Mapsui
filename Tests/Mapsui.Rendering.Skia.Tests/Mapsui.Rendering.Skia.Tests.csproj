@@ -399,6 +399,7 @@
     <None Remove="Resources\Images\OriginalRegression\ProjectionTestSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\RasterizingTileLayerWithDynamicPointsSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\RasterizingTileLayerWithThousandsOfPolygonsSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WfsOgcFilterSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WfsPointsSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WmsBasilicataSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WmsOpenSeaSample.Regression.png" />
