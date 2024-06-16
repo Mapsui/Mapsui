@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0</TargetFrameworks>
+		<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
 		<!--Windows does not work because of this https://github.com/dotnet/maui/issues/6529-->
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks)</TargetFrameworks>
 		<UseMaui>true</UseMaui>
@@ -46,6 +46,11 @@
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
 	</ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
+    <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="[$(MauiVersion),9.0.0)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="[$(MauiVersion),9.0.0)" />
+  </ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
