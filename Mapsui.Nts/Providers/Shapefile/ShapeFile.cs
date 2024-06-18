@@ -31,11 +31,13 @@ public enum ShapeType
     /// Null shape with no geometric data
     /// </summary>
     Null = 0,
+
     /// <summary>
     /// A point consists of a pair of double-precision coordinates.
     /// Mapsui interprets this as <see cref="Point"/>
     /// </summary>
     Point = 1,
+
     /// <summary>
     /// PolyLine is an ordered set of coordinates that consists of one or more parts. A part is a
     /// connected sequence of two or more points. Parts may or may not be connected to one
@@ -43,6 +45,7 @@ public enum ShapeType
     /// Mapsui interprets this as either <see cref="LineString"/> or <see cref="MultiLineString"/>
     /// </summary>
     PolyLine = 3,
+
     /// <summary>
     /// A polygon consists of one or more rings. A ring is a connected sequence of four or more
     /// points that form a closed, non-self-intersecting loop. A polygon may contain multiple
@@ -55,16 +58,19 @@ public enum ShapeType
     /// Mapsui interprets this as either <see cref="Polygon"/> or <see cref="MultiPolygon"/>
     /// </summary>
     Polygon = 5,
+
     /// <summary>
     /// A MultiPoint represents a set of points.
     /// Mapsui interprets this as <see cref="MultiPoint"/>
     /// </summary>
     Multipoint = 8,
+
     /// <summary>
     /// A PointZ consists of a triplet of double-precision coordinates plus a measure.
     /// Mapsui interprets this as <see cref="Point"/>
     /// </summary>
     PointZ = 11,
+
     /// <summary>
     /// A PolyLineZ consists of one or more parts. A part is a connected sequence of two or
     /// more points. Parts may or may not be connected to one another. Parts may or may not
@@ -72,6 +78,7 @@ public enum ShapeType
     /// Mapsui interprets this as <see cref="LineString"/> or <see cref="MultiLineString"/>
     /// </summary>
     PolyLineZ = 13,
+
     /// <summary>
     /// A PolygonZ consists of a number of rings. A ring is a closed, non-self-intersecting loop.
     /// A PolygonZ may contain multiple outer rings. The rings of a PolygonZ are referred to as
@@ -79,16 +86,19 @@ public enum ShapeType
     /// Mapsui interprets this as either <see cref="Polygon"/> or <see cref="MultiPolygon"/>
     /// </summary>
     PolygonZ = 15,
+
     /// <summary>
     /// A MultiPointZ represents a set of <see cref="PointZ"/>s.
     /// Mapsui interprets this as <see cref="MultiPoint"/>
     /// </summary>
     MultiPointZ = 18,
+
     /// <summary>
     /// A PointM consists of a pair of double-precision coordinates in the order X, Y, plus a measure M.
     /// Mapsui interprets this as <see cref="Point"/>
     /// </summary>
     PointM = 21,
+
     /// <summary>
     /// A shapefile PolyLineM consists of one or more parts. A part is a connected sequence of
     /// two or more points. Parts may or may not be connected to one another. Parts may or may
@@ -96,16 +106,19 @@ public enum ShapeType
     /// Mapsui interprets this as <see cref="LineString"/> or <see cref="MultiLineString"/>
     /// </summary>
     PolyLineM = 23,
+
     /// <summary>
     /// A PolygonM consists of a number of rings. A ring is a closed, non-self-intersecting loop.
     /// Mapsui interprets this as either <see cref="Polygon"/> or <see cref="MultiPolygon"/>
     /// </summary>
     PolygonM = 25,
+
     /// <summary>
     /// A MultiPointM represents a set of <see cref="PointM"/>s.
     /// Mapsui interprets this as <see cref="MultiPoint"/>
     /// </summary>
     MultiPointM = 28,
+
     /// <summary>
     /// A MultiPatch consists of a number of surface patches. Each surface patch describes a
     /// surface. The surface patches of a MultiPatch are referred to as its parts, and the type of
@@ -132,6 +145,38 @@ public enum ShapeType
 /// </remarks>
 public class ShapeFile : IProvider, IDisposable
 {
+    private readonly bool _fileBasedIndex;
+
+    private readonly DbaseReader? _dbaseFile;
+
+    private readonly object _syncRoot = new();
+
+    private readonly IProjectionCrs? _projectionCrs;
+
+    private MRect? _envelope;
+
+    private int _featureCount;
+
+    private string _filename;
+
+    private bool _isOpen;
+
+    private ShapeType _shapeType;
+
+    private BinaryReader? _brShapeFile;
+
+    private BinaryReader? _brShapeIndex;
+
+    private FileStream? _fsShapeFile;
+
+    private FileStream? _fsShapeIndex;
+
+    /// <summary>
+    /// Tree used for fast query of data
+    /// </summary>
+    private QuadTree? _tree;
+
+    private bool _disposed;
 
     static ShapeFile()
     {
@@ -150,34 +195,6 @@ public class ShapeFile : IProvider, IDisposable
             Logger.Log(LogLevel.Error, e.Message, e);
         }
     }
-
-    /// <summary>
-    /// Filter Delegate Method
-    /// </summary>
-    /// <remarks>
-    /// The FilterMethod delegate is used for applying a method that filters data from the data set.
-    /// The method should return 'true' if the feature should be included and false if not.
-    /// </remarks>
-    /// <returns>true if this feature should be included, false if it should be filtered</returns>
-    public delegate bool FilterMethod(IFeature dr);
-
-    private MRect? _envelope;
-    private int _featureCount;
-    private readonly bool _fileBasedIndex;
-    private string _filename;
-    private bool _isOpen;
-    private ShapeType _shapeType;
-    private BinaryReader? _brShapeFile;
-    private BinaryReader? _brShapeIndex;
-    private readonly DbaseReader? _dbaseFile;
-    private FileStream? _fsShapeFile;
-    private FileStream? _fsShapeIndex;
-    private readonly object _syncRoot = new();
-
-    /// <summary>
-    /// Tree used for fast query of data
-    /// </summary>
-    private QuadTree? _tree;
 
     /// <summary>
     /// Initializes a ShapeFile DataProvider.
@@ -213,11 +230,29 @@ public class ShapeFile : IProvider, IDisposable
     }
 
     /// <summary>
+    /// Finalizes the object
+    /// </summary>
+    ~ShapeFile()
+    {
+        Dispose(false);
+    }
+
+    /// <summary>
+    /// Filter Delegate Method
+    /// </summary>
+    /// <remarks>
+    /// The FilterMethod delegate is used for applying a method that filters data from the data set.
+    /// The method should return 'true' if the feature should be included and false if not.
+    /// </remarks>
+    /// <returns>true if this feature should be included, false if it should be filtered</returns>
+    public delegate bool FilterMethod(IFeature dr);
+
+    /// <summary>
     /// Gets the <see cref="Shapefile.ShapeType">shape geometry type</see> in this shapefile.
     /// </summary>
     /// <remarks>
     /// The property isn't set until the first time the data source has been opened,
-    /// and will throw an exception if this property has been called since initialization. 
+    /// and will throw an exception if this property has been called since initialization.
     /// <para>All the non-Null shapes in a shapefile are required to be of the same shape
     /// type.</para>
     /// </remarks>
@@ -268,9 +303,10 @@ public class ShapeFile : IProvider, IDisposable
     /// </summary>
     public FilterMethod? FilterDelegate { get; set; }
 
-
-    private bool _disposed;
-    private readonly IProjectionCrs? _projectionCrs;
+    /// <summary>
+    /// Gets or sets the spatial reference ID (CRS)
+    /// </summary>
+    public string? CRS { get; set; } = "";
 
     /// <summary>
     /// Disposes the object
@@ -279,6 +315,209 @@ public class ShapeFile : IProvider, IDisposable
     {
         Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Returns geometries whose bounding box intersects 'bbox'
+    /// </summary>
+    /// <remarks>
+    /// <para>Please note that this method doesn't guarantee that the geometries returned actually intersect 'bbox', but only
+    /// that their BoundingBox intersects 'bbox'.</para>
+    /// <para>This method is much faster than the QueryFeatures method, because intersection tests
+    /// are performed on objects simplified by their BoundingBox, and using the Spatial Index.</para>
+    /// </remarks>
+    /// <param name="bbox"></param>
+    /// <returns></returns>
+    public Collection<Geometry> GetGeometriesInView(MRect bbox)
+    {
+        lock (_syncRoot)
+        {
+            Open();
+
+            try
+            {
+                //Use the spatial index to get a list of features whose BoundingBox intersects bbox
+                var objectList = GetObjectIDsInViewPrivate(bbox);
+                if (objectList.Count == 0) //no features found. Return an empty set
+                    return new Collection<Geometry>();
+
+                var geometries = new Collection<Geometry>();
+
+                for (var i = 0; i < objectList.Count; i++)
+                {
+                    var g = GetGeometryPrivate(objectList[i]);
+                    if (g != null) geometries.Add(g);
+                }
+                return geometries;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns geometry Object IDs whose bounding box intersects 'bbox'
+    /// </summary>
+    /// <param name="bbox"></param>
+    /// <returns></returns>
+    public Collection<uint> GetObjectIDsInView(MRect bbox)
+    {
+        lock (_syncRoot)
+        {
+            Open();
+
+            try
+            {
+                return GetObjectIDsInViewPrivate(bbox);
+            }
+            finally
+            {
+                Close();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns the geometry corresponding to the Object ID
+    /// </summary>
+    /// <param name="oid">Object ID</param>
+    /// <returns>geometry</returns>
+    public Geometry? GetGeometry(uint oid)
+    {
+        lock (_syncRoot)
+        {
+            Open();
+
+            try
+            {
+                return GetGeometryPrivate(oid);
+            }
+            finally
+            {
+                Close();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns the total number of features in the data source (without any filter applied)
+    /// </summary>
+    /// <returns></returns>
+    public int GetFeatureCount()
+    {
+        return _featureCount;
+    }
+
+    /// <summary>
+    /// Returns the extent of the data source
+    /// </summary>
+    /// <returns></returns>
+    public MRect? GetExtent()
+    {
+        lock (_syncRoot)
+        {
+            Open();
+
+            try
+            {
+                if (_tree == null)
+                    return _envelope;
+                return _tree.Box;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Forces a rebuild of the spatial index. If the instance of the ShapeFile provider
+    /// uses a file-based index the file is rewritten to disk.
+    /// </summary>
+    public void RebuildSpatialIndex()
+    {
+        if (_fileBasedIndex)
+        {
+            if (File.Exists(_filename + ".sidx"))
+                File.Delete(_filename + ".sidx");
+            {
+                _tree?.Dispose();
+                _tree = CreateSpatialIndexFromFile(_filename);
+            }
+        }
+        else
+        {
+            _tree?.Dispose();
+            _tree = CreateSpatialIndex();
+        }
+    }
+
+    /// <summary>
+    /// Gets a data row from the data source at the specified index belonging to the specified datatable
+    /// </summary>
+    /// <param name="rowId"></param>
+    /// <param name="features">Data table to feature should belong to.</param>
+    /// <returns></returns>
+    public GeometryFeature? GetFeature(uint rowId, List<GeometryFeature>? features = null)
+    {
+        lock (_syncRoot)
+        {
+            Open();
+
+            try
+            {
+                return GetFeaturePrivate(rowId, features);
+            }
+            finally
+            {
+                Close();
+            }
+        }
+    }
+
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
+    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    {
+        lock (_syncRoot)
+        {
+            Open();
+            try
+            {
+                //Use the spatial index to get a list of features whose BoundingBox intersects bbox
+                var objectList = GetObjectIDsInViewPrivate(fetchInfo.Extent);
+                var features = new List<GeometryFeature>();
+
+                foreach (var index in objectList)
+                {
+                    var feature = _dbaseFile?.GetFeature(index, features);
+                    if (feature != null)
+                    {
+                        feature.Geometry = ReadGeometry(index);
+                        if (feature.Geometry?.EnvelopeInternal == null) continue;
+                        if (!feature.Geometry.EnvelopeInternal.Intersects(fetchInfo.Extent.ToEnvelope())) continue;
+                        if (FilterDelegate != null && !FilterDelegate(feature)) continue;
+                        features.Add(feature);
+                    }
+                }
+                return Task.FromResult((IEnumerable<IFeature>)features);
+            }
+            finally
+            {
+                Close();
+            }
+        }
+    }
+
+    private static Polygon? CreatePolygon(List<LinearRing> poly)
+    {
+        if (poly.Count == 1)
+            return new Polygon(poly[0]);
+        if (poly.Count > 1)
+            return new Polygon(poly[0], poly.Skip(1).ToArray());
+        return null;
     }
 
     private void Dispose(bool disposing)
@@ -295,16 +534,6 @@ public class ShapeFile : IProvider, IDisposable
             _disposed = true;
         }
     }
-
-    /// <summary>
-    /// Finalizes the object
-    /// </summary>
-    ~ShapeFile()
-    {
-        Dispose(false);
-    }
-
-
 
     /// <summary>
     /// Opens the data source
@@ -348,71 +577,6 @@ public class ShapeFile : IProvider, IDisposable
             }
     }
 
-    /// <summary>
-    /// Returns geometries whose bounding box intersects 'bbox'
-    /// </summary>
-    /// <remarks>
-    /// <para>Please note that this method doesn't guarantee that the geometries returned actually intersect 'bbox', but only
-    /// that their BoundingBox intersects 'bbox'.</para>
-    /// <para>This method is much faster than the QueryFeatures method, because intersection tests
-    /// are performed on objects simplified by their BoundingBox, and using the Spatial Index.</para>
-    /// </remarks>
-    /// <param name="bbox"></param>
-    /// <returns></returns>
-    public Collection<Geometry> GetGeometriesInView(MRect bbox)
-    {
-        lock (_syncRoot)
-        {
-            Open();
-
-            try
-            {
-                //Use the spatial index to get a list of features whose BoundingBox intersects bbox
-                var objectList = GetObjectIDsInViewPrivate(bbox);
-                if (objectList.Count == 0) //no features found. Return an empty set
-                    return new Collection<Geometry>();
-
-                var geometries = new Collection<Geometry>();
-
-                for (var i = 0; i < objectList.Count; i++)
-                {
-                    var g = GetGeometryPrivate(objectList[i]);
-                    if (g != null) geometries.Add(g);
-                }
-                return geometries;
-            }
-            finally
-            {
-                Close();
-            }
-        }
-
-    }
-
-
-    /// <summary>
-    /// Returns geometry Object IDs whose bounding box intersects 'bbox'
-    /// </summary>
-    /// <param name="bbox"></param>
-    /// <returns></returns>
-    public Collection<uint> GetObjectIDsInView(MRect bbox)
-    {
-        lock (_syncRoot)
-        {
-            Open();
-
-            try
-            {
-                return GetObjectIDsInViewPrivate(bbox);
-            }
-            finally
-            {
-                Close();
-            }
-        }
-
-    }
-
     private Collection<uint> GetObjectIDsInViewPrivate(MRect? bbox)
     {
         if (bbox == null)
@@ -421,28 +585,6 @@ public class ShapeFile : IProvider, IDisposable
             throw new ApplicationException("An attempt was made to read from a closed data source");
         //Use the spatial index to get a list of features whose BoundingBox intersects bbox
         return _tree!.Search(bbox);
-    }
-
-    /// <summary>
-    /// Returns the geometry corresponding to the Object ID
-    /// </summary>
-    /// <param name="oid">Object ID</param>
-    /// <returns>geometry</returns>
-    public Geometry? GetGeometry(uint oid)
-    {
-        lock (_syncRoot)
-        {
-            Open();
-
-            try
-            {
-                return GetGeometryPrivate(oid);
-            }
-            finally
-            {
-                Close();
-            }
-        }
     }
 
     private Geometry? GetGeometryPrivate(uint oid)
@@ -456,43 +598,6 @@ public class ShapeFile : IProvider, IDisposable
         return ReadGeometry(oid);
     }
 
-    /// <summary>
-    /// Returns the total number of features in the data source (without any filter applied)
-    /// </summary>
-    /// <returns></returns>
-    public int GetFeatureCount()
-    {
-        return _featureCount;
-    }
-
-    /// <summary>
-    /// Returns the extent of the data source
-    /// </summary>
-    /// <returns></returns>
-    public MRect? GetExtent()
-    {
-        lock (_syncRoot)
-        {
-            Open();
-
-            try
-            {
-                if (_tree == null)
-                    return _envelope;
-                return _tree.Box;
-            }
-            finally
-            {
-                Close();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the spatial reference ID (CRS)
-    /// </summary>
-    public string? CRS { get; set; } = "";
-
     private void InitializeShape(string filename, bool fileBasedIndex)
     {
         if (!File.Exists(filename))
@@ -500,7 +605,7 @@ public class ShapeFile : IProvider, IDisposable
         if (!filename.ToLower().EndsWith(".shp"))
             throw new Exception("Invalid shapefile filename: " + filename);
 
-        LoadSpatialIndex(fileBasedIndex); //Load spatial index			
+        LoadSpatialIndex(fileBasedIndex); //Load spatial index
     }
 
     /// <summary>
@@ -553,7 +658,6 @@ public class ShapeFile : IProvider, IDisposable
                 {
                     CRS = _projectionCrs.CrsFromEsri(esriString);
                 }
-
             }
             catch (Exception ex)
             {
@@ -637,7 +741,7 @@ public class ShapeFile : IProvider, IDisposable
     private QuadTree CreateSpatialIndex()
     {
         var objList = new List<QuadTree.BoxObjects>();
-        // Convert all the geometries to BoundingBoxes 
+        // Convert all the geometries to BoundingBoxes
         uint i = 0;
         foreach (var box in GetAllFeatureBoundingBoxes())
             if (!double.IsNaN(box.Left) && !double.IsNaN(box.Right) && !double.IsNaN(box.Bottom) &&
@@ -672,28 +776,6 @@ public class ShapeFile : IProvider, IDisposable
     }
 
     /// <summary>
-    /// Forces a rebuild of the spatial index. If the instance of the ShapeFile provider
-    /// uses a file-based index the file is rewritten to disk.
-    /// </summary>
-    public void RebuildSpatialIndex()
-    {
-        if (_fileBasedIndex)
-        {
-            if (File.Exists(_filename + ".sidx"))
-                File.Delete(_filename + ".sidx");
-            {
-                _tree?.Dispose();
-                _tree = CreateSpatialIndexFromFile(_filename);
-            }
-        }
-        else
-        {
-            _tree?.Dispose();
-            _tree = CreateSpatialIndex();
-        }
-    }
-
-    /// <summary>
     /// Reads all BoundingBoxes of features in the shapefile. This is used for spatial indexing.
     /// </summary>
     /// <returns></returns>
@@ -711,32 +793,32 @@ public class ShapeFile : IProvider, IDisposable
             case ShapeType.Point:
             case ShapeType.PointZ:
             case ShapeType.PointM:
-            {
-                for (var a = 0; a < _featureCount; ++a)
                 {
-                    _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
-                    if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                    for (var a = 0; a < _featureCount; ++a)
                     {
-                        var x = _brShapeFile.ReadDouble();
-                        var y = _brShapeFile.ReadDouble();
-                        yield return new MRect(x, y, x, y);
+                        _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
+                        if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                        {
+                            var x = _brShapeFile.ReadDouble();
+                            var y = _brShapeFile.ReadDouble();
+                            yield return new MRect(x, y, x, y);
+                        }
                     }
-                }
 
-                break;
-            }
+                    break;
+                }
             default:
-            {
-                for (var a = 0; a < _featureCount; ++a)
                 {
-                    _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
-                    if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
-                        yield return new MRect(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
-                            _brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
-                }
+                    for (var a = 0; a < _featureCount; ++a)
+                    {
+                        _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
+                        if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                            yield return new MRect(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
+                                _brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
+                    }
 
-                break;
-            }
+                    break;
+                }
         }
     }
 
@@ -853,39 +935,6 @@ public class ShapeFile : IProvider, IDisposable
         throw new ApplicationException($"Shapefile type {_shapeType} not supported");
     }
 
-    private static Polygon? CreatePolygon(List<LinearRing> poly)
-    {
-        if (poly.Count == 1)
-            return new Polygon(poly[0]);
-        if (poly.Count > 1)
-            return new Polygon(poly[0], poly.Skip(1).ToArray());
-        return null;
-    }
-
-    /// <summary>
-    /// Gets a data row from the data source at the specified index belonging to the specified datatable
-    /// </summary>
-    /// <param name="rowId"></param>
-    /// <param name="features">Data table to feature should belong to.</param>
-    /// <returns></returns>
-    public GeometryFeature? GetFeature(uint rowId, List<GeometryFeature>? features = null)
-    {
-        lock (_syncRoot)
-        {
-            Open();
-
-            try
-            {
-                return GetFeaturePrivate(rowId, features);
-            }
-            finally
-            {
-                Close();
-            }
-        }
-
-    }
-
     private GeometryFeature? GetFeaturePrivate(uint rowId, IEnumerable<GeometryFeature>? dt)
     {
         if (_dbaseFile != null)
@@ -900,39 +949,5 @@ public class ShapeFile : IProvider, IDisposable
             return null;
         }
         throw new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file");
-    }
-
-
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
-    {
-        lock (_syncRoot)
-        {
-            Open();
-            try
-            {
-                //Use the spatial index to get a list of features whose BoundingBox intersects bbox
-                var objectList = GetObjectIDsInViewPrivate(fetchInfo.Extent);
-                var features = new List<GeometryFeature>();
-
-                foreach (var index in objectList)
-                {
-                    var feature = _dbaseFile?.GetFeature(index, features);
-                    if (feature != null)
-                    {
-                        feature.Geometry = ReadGeometry(index);
-                        if (feature.Geometry?.EnvelopeInternal == null) continue;
-                        if (!feature.Geometry.EnvelopeInternal.Intersects(fetchInfo.Extent.ToEnvelope())) continue;
-                        if (FilterDelegate != null && !FilterDelegate(feature)) continue;
-                        features.Add(feature);
-                    }
-                }
-                return Task.FromResult((IEnumerable<IFeature>)features);
-            }
-            finally
-            {
-                Close();
-            }
-        }
     }
 }
