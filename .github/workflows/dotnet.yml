@@ -20,9 +20,10 @@ jobs:
           sudo rm -rf /opt/ghc
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
-        fetch-depth: 1   
+        fetch-depth: 1
+        fetch-tags: true
     # Cache Nugets
     - uses: actions/cache@v3
       with:
@@ -80,9 +81,10 @@ jobs:
     # macos-latest is currently macos-13
     runs-on: macos-13
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
+        fetch-tags: true
     # Cache Nugets
     - uses: actions/cache@v3
       with:
@@ -183,9 +185,10 @@ jobs:
   winBuild:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 1
+        fetch-tags: true
     # Cache Nugets
     - uses: actions/cache@v3
       with:
