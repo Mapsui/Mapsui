@@ -54,7 +54,7 @@ public static class ImageSourceCacheInitializer
     {
         var imageSources = GetAllImageSources(viewport, layers);
         if (widgets != null)
-            GetAllImageSources(imageSources, widgets);   
+            GetAllImageSources(imageSources, widgets);
 
         if (imageSources.Count == 0)
             return await Task.FromResult(false);
