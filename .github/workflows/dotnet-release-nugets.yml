@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        fetch-depth: 0 # Prevent a shallow clone to allow git describe --tags
+        fetch-depth: 1
     - uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
@@ -38,7 +38,7 @@ jobs:
     # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag
       run: |
-        echo ("VERSION_OF_RELEASE=" + $(git describe --tags --abbrev=0)) >> $env:GITHUB_ENV
+        echo ("VERSION_OF_RELEASE=" + $(git rev-parse --short HEAD --abbrev=0)) >> $env:GITHUB_ENV
         echo $VERSION_OF_RELEASE
 
     - name: install workloads
