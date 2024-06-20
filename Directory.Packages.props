@@ -6,7 +6,6 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Appveyor.TestLogger" Version="[2.0.0,3.0.0)" />
     <PackageVersion Include="Avalonia" Version="[11.0.7,12.0.0)" />
     <PackageVersion Include="Avalonia.Skia" Version="[11.0.7,12.0.0)" />
     <PackageVersion Include="Avalonia.Desktop" Version="[11.0.7,12.0.0)" />
