@@ -18,11 +18,11 @@ jobs:
     steps:
         
 #Begin install mkdocs        
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: 3.x
     - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       with:
         key: mkdocs-material-${{ env.cache_id }}
         path: .cache
@@ -34,11 +34,11 @@ jobs:
 #End install mkdocs        
 
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0 
     - name: Setup .NET 8 SDK
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
            8.0.x
@@ -52,7 +52,7 @@ jobs:
       shell: pwsh
       run: ./Scripts/BuildSamplesWebsite.ps1     
     - name: Upload artifact
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./website

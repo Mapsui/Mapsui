@@ -50,9 +50,11 @@ public static class ImageSourceCacheInitializer
     }
 
     public static async Task<bool> FetchImagesInViewportAsync(ImageSourceCache imageSourceCache,
-        Viewport viewport, IEnumerable<ILayer> layers)
+        Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget>? widgets = null)
     {
         var imageSources = GetAllImageSources(viewport, layers);
+        if (widgets != null)
+            GetAllImageSources(imageSources, widgets);
 
         if (imageSources.Count == 0)
             return await Task.FromResult(false);
