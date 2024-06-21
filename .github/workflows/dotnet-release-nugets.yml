@@ -19,7 +19,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0 # Prevent a shallow clone to allow git describe --tags
+        fetch-depth: 0
+        filter: tree:0    
     - uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
