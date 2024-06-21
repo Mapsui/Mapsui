@@ -15,8 +15,7 @@ public static class ImageSourceCacheInitializer
     public static void FetchImagesInViewport(ImageSourceCache imageSourceCache, Viewport viewport,
         IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Action<bool> doneInitializing)
     {
-        var imageSources = GetAllImageSources(viewport, layers);
-        GetAllImageSources(imageSources, widgets);
+        var imageSources = GetAllImageSources(viewport, layers, widgets);
 
         if (imageSources.Count == 0)
         {
@@ -42,19 +41,10 @@ public static class ImageSourceCacheInitializer
         });
     }
 
-    private static void GetAllImageSources(List<string> imageSources, IEnumerable<IWidget> widgets)
-    {
-        foreach (var widget in widgets)
-            if (widget is IHasImageSource { ImageSource: not null } imageSource)
-                imageSources.Add(imageSource.ImageSource);
-    }
-
     public static async Task<bool> FetchImagesInViewportAsync(ImageSourceCache imageSourceCache,
-        Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget>? widgets = null)
+        Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets)
     {
-        var imageSources = GetAllImageSources(viewport, layers);
-        if (widgets != null)
-            GetAllImageSources(imageSources, widgets);
+        var imageSources = GetAllImageSources(viewport, layers, widgets);
 
         if (imageSources.Count == 0)
             return await Task.FromResult(false);
@@ -71,10 +61,11 @@ public static class ImageSourceCacheInitializer
                 Logger.Log(LogLevel.Error, ex.Message, ex);
             }
         }
+        
         return await Task.FromResult(true);
     }
 
-    private static List<string> GetAllImageSources(Viewport viewport, IEnumerable<ILayer> layers)
+    private static List<string> GetAllImageSources(Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets)
     {
         var result = new List<string>();
         VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, l, s, f, o, i) =>
@@ -100,6 +91,11 @@ public static class ImageSourceCacheInitializer
                         result.Add(fillImageSource.ImageSource);
             }
         });
+        
+        foreach (var widget in widgets)
+            if (widget is IHasImageSource { ImageSource: not null } imageSource)
+                result.Add(imageSource.ImageSource);
+        
         return result;
     }
 }
