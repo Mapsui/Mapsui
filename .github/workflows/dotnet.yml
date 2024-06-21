@@ -24,6 +24,8 @@ jobs:
       with:
         fetch-depth: 1
         fetch-tags: true
+    - name: Fetch Tags
+      run: git fetch --tags
     # Cache Nugets
     - uses: actions/cache@v3
       with:
@@ -85,6 +87,8 @@ jobs:
       with:
         fetch-depth: 1
         fetch-tags: true
+    - name: Fetch Tags
+      run: git fetch --tags
     # Cache Nugets
     - uses: actions/cache@v3
       with:
@@ -189,6 +193,8 @@ jobs:
       with:
         fetch-depth: 1
         fetch-tags: true
+    - name: Fetch Tags
+      run: git fetch --tags
     # Cache Nugets
     - uses: actions/cache@v3
       with:

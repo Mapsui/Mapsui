@@ -38,6 +38,8 @@ jobs:
       with:
         fetch-depth: 1 
         fetch-tags: true
+    - name: Fetch Tags
+      run: git fetch --tags
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:

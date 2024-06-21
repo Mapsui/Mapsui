@@ -21,6 +21,8 @@ jobs:
       with:
         fetch-depth: 1
         fetch-tags: true
+    - name: Fetch Tags
+      run: git fetch --tags
     - uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
