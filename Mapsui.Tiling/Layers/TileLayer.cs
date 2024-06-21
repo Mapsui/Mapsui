@@ -133,7 +133,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
         MemoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
     }
 
-    private void TileFetchDispatcherOnDataChanged(object sender, Exception ex)
+    private void TileFetchDispatcherOnDataChanged(object? sender, Exception? ex)
     {
         OnDataChanged(new DataChangedEventArgs(ex, Name));
     }
