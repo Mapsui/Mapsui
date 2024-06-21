@@ -73,7 +73,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         DeviceInfo.Platform != DevicePlatform.WinUI &&
         DeviceInfo.Platform != DevicePlatform.macOS &&
         DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
-        DeviceInfo.Platform != DevicePlatform.Android;
+        DeviceInfo.Platform != DevicePlatform.Android &&
+        DeviceInfo.Platform != DevicePlatform.iOS; // 3d rendering does not work on ios 17.5 with 2.88.8 skiasharp.
 #else
     public static bool UseGPU = true;
 #endif
