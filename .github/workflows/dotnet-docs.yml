@@ -36,7 +36,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
-        fetch-depth: 1 
+        fetch-depth: 0 
         fetch-tags: true
         filter: tree:0 
     - name: Setup .NET 8 SDK
