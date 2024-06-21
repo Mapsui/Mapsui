@@ -18,8 +18,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-      with:        
-        filter: tree:0    
+      with:
+        filter: tree:0
     - uses: actions/setup-java@v4
       with:
         distribution: 'temurin'

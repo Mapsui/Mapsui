@@ -21,8 +21,8 @@ jobs:
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     - uses: actions/checkout@v4
-      with:              
-        filter: tree:0    
+      with:
+        filter: tree:0
     # Cache Nugets
     - uses: actions/cache@v4
       with:
@@ -81,7 +81,7 @@ jobs:
     runs-on: macos-13
     steps:
     - uses: actions/checkout@v4
-      with:                
+      with:
         filter: tree:0
     # Cache Nugets
     - uses: actions/cache@v4
@@ -184,7 +184,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-      with:        
+      with:
         filter: tree:0
     # Cache Nugets
     - uses: actions/cache@v4
