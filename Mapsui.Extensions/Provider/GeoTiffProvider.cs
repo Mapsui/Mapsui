@@ -108,9 +108,9 @@ public class GeoTiffProvider : IProvider, IDisposable
     private const TiffTag TIFFTAG_ModelPixelScaleTag = (TiffTag)33550;
     private const TiffTag TIFFTAG_ModelTiepointTag = (TiffTag)33922;
 
-    private Tiff.TiffExtendProc? _parentExtender;
+    private static Tiff.TiffExtendProc? _parentExtender;
 
-    public void TagExtender(Tiff tif)
+    public static void TagExtender(Tiff tif)
     {
         TiffFieldInfo[] tiffFieldInfo =
         {
@@ -124,7 +124,7 @@ public class GeoTiffProvider : IProvider, IDisposable
             _parentExtender(tif);
     }
 
-    private TiffProperties LoadTiff(string location)
+    private static TiffProperties LoadTiff(string location)
     {
         TiffProperties tiffFileProperties;
 
