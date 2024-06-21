@@ -6,7 +6,7 @@ namespace Mapsui.UI.Avalonia.Tests;
 public class MapControlTests
 {
     [Test]
-    public void MapIsAliveAfterUsage()
+    public void MapControlIsAliveAfterUsage()
     {
         var weak = CreateMapControl();
 
@@ -39,8 +39,10 @@ public class MapControlTests
 
     private static WeakReference CreateMapControl()
     {
-        var map = new MapControl();
-        var weak = new WeakReference(map);
+        var mapControl = new MapControl();
+        var tileLayer = Tiling.OpenStreetMap.CreateTileLayer();
+        mapControl.Map.Layers.Add(tileLayer);
+        var weak = new WeakReference(mapControl);
         return weak;
     }
 }
