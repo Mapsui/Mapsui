@@ -14,9 +14,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <UnoExtensionsVersion>4.1.14</UnoExtensionsVersion>
-    <UnoToolkitVersion>6.0.18</UnoToolkitVersion>
-    <UnoThemesVersion>5.0.13</UnoThemesVersion>
-    <UnoCSharpMarkupVersion>5.2.13</UnoCSharpMarkupVersion>
+	<UnoExtensionsVersion>4.1.23</UnoExtensionsVersion>
+	<UnoToolkitVersion>6.0.18</UnoToolkitVersion>
+	<UnoThemesVersion>5.0.13</UnoThemesVersion>
+	<UnoCSharpMarkupVersion>5.2.14</UnoCSharpMarkupVersion>
   </PropertyGroup>
 </Project>
