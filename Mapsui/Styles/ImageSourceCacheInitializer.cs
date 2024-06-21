@@ -61,7 +61,7 @@ public static class ImageSourceCacheInitializer
                 Logger.Log(LogLevel.Error, ex.Message, ex);
             }
         }
-        
+
         return await Task.FromResult(true);
     }
 
@@ -91,11 +91,11 @@ public static class ImageSourceCacheInitializer
                         result.Add(fillImageSource.ImageSource);
             }
         });
-        
+
         foreach (var widget in widgets)
             if (widget is IHasImageSource { ImageSource: not null } imageSource)
                 result.Add(imageSource.ImageSource);
-        
+
         return result;
     }
 }
