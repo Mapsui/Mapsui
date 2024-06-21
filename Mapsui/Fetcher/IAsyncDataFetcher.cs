@@ -34,11 +34,6 @@ public delegate void DataChangedEventHandler(object sender, DataChangedEventArgs
 
 public class DataChangedEventArgs(Exception? error, string layerName) : EventArgs
 {
-    public DataChangedEventArgs()
-    : this(string.Empty)
-    {
-    }
-
     public DataChangedEventArgs(string layerName) : this(null, layerName)
     {
     }
