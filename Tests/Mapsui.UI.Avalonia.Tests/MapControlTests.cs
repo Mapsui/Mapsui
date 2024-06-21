@@ -1,17 +1,12 @@
-using System;
-using Mapsui.UI.Forms;
 using NUnit.Framework;
 
-#pragma warning disable IDISP001 // Disposable object created
-#pragma warning disable IDISP007 // Don't Dispose injected
-
-namespace Mapsui.Tests.Memory;
+namespace Mapsui.UI.Avalonia.Tests;
 
 [TestFixture]
 public class MapControlTests
 {
     [Test]
-    public void MapIsAliveAfterUsage()
+    public void MapControlIsAliveAfterUsage()
     {
         var weak = CreateMapControl();
 
@@ -44,8 +39,10 @@ public class MapControlTests
 
     private static WeakReference CreateMapControl()
     {
-        var map = new MapControl();
-        var weak = new WeakReference(map);
+        var mapControl = new MapControl();
+        var tileLayer = Tiling.OpenStreetMap.CreateTileLayer();
+        mapControl.Map.Layers.Add(tileLayer);
+        var weak = new WeakReference(mapControl);
         return weak;
     }
 }
