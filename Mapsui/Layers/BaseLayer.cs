@@ -182,7 +182,7 @@ public abstract class BaseLayer : ILayer
 
     public void DataHasChanged()
     {
-        DataChanged?.Invoke(this, new DataChangedEventArgs());
+        DataChanged?.Invoke(this, new DataChangedEventArgs(Name));
     }
 
     public override string ToString()

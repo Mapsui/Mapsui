@@ -101,10 +101,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 var features = new RasterFeature[1];
                 features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
                 _cache.PushRange(features);
-#if DEBUG
-                Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
-#endif
-                OnDataChanged(new DataChangedEventArgs());
+                OnDataChanged(new DataChangedEventArgs(Name));
 
                 if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher)
                     Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));

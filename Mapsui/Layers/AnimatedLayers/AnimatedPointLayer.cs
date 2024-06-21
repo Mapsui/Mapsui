@@ -63,7 +63,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
 
         var features = await _dataSource.GetFeaturesAsync(_fetchInfo);
         SetAnimationTarget(features.Cast<PointFeature>());
-        OnDataChanged(new DataChangedEventArgs());
+        OnDataChanged(new DataChangedEventArgs(Name));
     }
 
     public void SetAnimationTarget(IEnumerable<PointFeature> targets)
