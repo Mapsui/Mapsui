@@ -22,6 +22,6 @@ public class TestDataChanged
 
     public virtual void OnDataChanged()
     {
-        _eventMangerDataChanged?.RaiseEvent(this, new DataChangedEventArgs());
+        _eventMangerDataChanged?.RaiseEvent(this, new DataChangedEventArgs("LayerName"));
     }
 }

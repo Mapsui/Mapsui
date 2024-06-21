@@ -32,23 +32,17 @@ public interface IAsyncDataFetcher
 
 public delegate void DataChangedEventHandler(object sender, DataChangedEventArgs e);
 
-public class DataChangedEventArgs : EventArgs
+public class DataChangedEventArgs(Exception? error, string layerName) : EventArgs
 {
-    public DataChangedEventArgs() : this(null)
+    public DataChangedEventArgs()
+    : this(string.Empty)
     {
     }
 
-    public DataChangedEventArgs(Exception? error)
-        : this(error, string.Empty)
+    public DataChangedEventArgs(string layerName) : this(null, layerName)
     {
     }
 
-    public DataChangedEventArgs(Exception? error, string layerName)
-    {
-        Error = error;
-        LayerName = layerName;
-    }
-
-    public Exception? Error { get; }
-    public string LayerName { get; }
+    public Exception? Error { get; } = error;
+    public string LayerName { get; } = layerName;
 }
