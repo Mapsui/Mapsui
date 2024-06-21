@@ -51,6 +51,8 @@ public class MapRegressionTests
     public static object[] ExcludedSamples =>
         _excludedSamples ??=
         [
+            new SymbolAnimationSample(), // We have no reliable way yet to compare animations.
+            new AnimatedBusSample(), // We have no reliable way yet to compare animations.
             new AnimatedPointsSample(), // We have no reliable way yet to compare animations.
             new MutatingTriangleSample(), // We have no reliable way yet to compare animations.
             new ManyMutatingLayersSample(), // We have no reliable way yet to compare animations.
