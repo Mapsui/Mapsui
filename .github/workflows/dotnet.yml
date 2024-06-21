@@ -22,10 +22,8 @@ jobs:
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 1
-        fetch-tags: true
-    - name: Fetch Tags
-      run: git fetch --tags
+        fetch-depth: 1          
+        filter: tree:0    
     # Cache Nugets
     - uses: actions/cache@v3
       with:
@@ -85,10 +83,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 1
-        fetch-tags: true
-    - name: Fetch Tags
-      run: git fetch --tags
+        fetch-depth: 1          
+        filter: tree:0
     # Cache Nugets
     - uses: actions/cache@v3
       with:
@@ -191,10 +187,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 1
-        fetch-tags: true
-    - name: Fetch Tags
-      run: git fetch --tags
+        fetch-depth: 1          
+        filter: tree:0
     # Cache Nugets
     - uses: actions/cache@v3
       with:
