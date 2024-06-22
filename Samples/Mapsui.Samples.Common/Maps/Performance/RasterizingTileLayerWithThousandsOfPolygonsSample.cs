@@ -33,8 +33,8 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
     public Map CreateMap()
     {
         // Todo: Our users should not need to be aware of the DefaultRendererFactory.
-        DefaultRendererFactory.Create = () => new MapRenderer(900000);
-        _map?.AbortFetch();
+        DefaultRendererFactory.Create = () => new MapRenderer(new RenderCache(900000));
+        _map?.Dispose();
         _map = new Map();
         _map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
         _map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer()));
@@ -103,6 +103,6 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
 
     public void Dispose()
     {
-        _map?.AbortFetch();
+        _map?.Dispose();
     }
 }

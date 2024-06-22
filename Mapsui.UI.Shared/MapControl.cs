@@ -390,7 +390,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     // ReSharper restore RedundantNameQualifier
-    private Map? _map;
+    private DisposableWrapper<Map>? _map;
 
 #if __MAUI__
 
@@ -419,8 +419,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         {
             if (GetValue(MapProperty) is not Map map)
             {
-                _map ??= new Map();
-                map = _map;
+                _map ??= new DisposableWrapper<Map>(new Map(), true);
+                map = _map.WrappedObject;
                 SetValue(MapProperty, map);
             }
 
@@ -441,15 +441,16 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         get
         {
-            return _map ??= new Map();
+            _map ??= new DisposableWrapper<Map>(new Map(), true);
+            return _map.WrappedObject;
         }
         set
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
 
             BeforeSetMap();
-            _map?.AbortFetch();
-            _map = value;
+            _map?.Dispose();
+            _map = new DisposableWrapper<Map>(value, false);
             AfterSetMap(value);
             OnPropertyChanged();
         }
@@ -543,7 +544,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer?.Dispose();
             _invalidateTimer = null;
             _renderer.Dispose();
-            _map?.AbortFetch();
+            _map?.Dispose();
             _map = null;
         }
         _invalidateTimer = null;

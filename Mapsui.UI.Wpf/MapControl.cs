@@ -236,7 +236,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
-            _map?.AbortFetch();
+            _map?.Dispose();
         }
 
         CommonDispose(disposing);

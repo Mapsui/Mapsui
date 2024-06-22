@@ -35,7 +35,7 @@ public class ImageLayerTests
         // arrange
         var provider = new FakeProvider();
         using var imageLayer = new ImageLayer("imageLayer") { DataSource = provider };
-        var map = new Map();
+        using var map = new Map();
         map.Layers.Add(imageLayer);
         using var waitHandle = new AutoResetEvent(false);
         Exception? exception = null;
@@ -54,6 +54,5 @@ public class ImageLayerTests
         // assert
         waitHandle.WaitOne();
         ClassicAssert.AreEqual(ExceptionMessage, exception?.Message);
-        map.AbortFetch();
     }
 }

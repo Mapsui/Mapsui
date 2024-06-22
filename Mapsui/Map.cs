@@ -25,7 +25,7 @@ namespace Mapsui;
 /// <remarks>
 /// Map holds all map related info like the target CRS, layers, widgets and so on.
 /// </remarks>
-public class Map : INotifyPropertyChanged
+public class Map : INotifyPropertyChanged, IDisposable
 {
     private LayerCollection _layers = [];
     private Color _backColor = Color.White;
@@ -357,6 +357,22 @@ public class Map : INotifyPropertyChanged
     public void OnMapInfo(MapInfoEventArgs e)
     {
         Info?.Invoke(this, e);
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            foreach (var layer in Layers)
+                LayerRemoved(layer); // Remove Event so that no memory leaks occur
+            Layers.Clear();
+        }
     }
 
     public bool UpdateAnimations()
