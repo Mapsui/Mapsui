@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -208,16 +208,13 @@ internal class MapRendererTests
 
         // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
-
-        // Cleanup
-        map.AbortFetch();
     }
 
     [Test]
     public void RenderGeometryCollection()
     {
         // arrange
-        var map = GeometryCollectionSample.CreateMap();
+        using var map = GeometryCollectionSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(400);
         const string fileName = "geometry_collection.png";
 
@@ -274,7 +271,7 @@ internal class MapRendererTests
     public void RenderProjection()
     {
         // Arrange
-        var map = ProjectionTestSample.CreateMap();
+        using var map = ProjectionTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "projection.png";
         using var mapRenderer = new MapRenderer();
@@ -287,7 +284,7 @@ internal class MapRendererTests
 
         // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
-        map.AbortFetch();
+    }
 
     [Test]
     public void RenderStackedLabelsLayer()
@@ -306,7 +303,7 @@ internal class MapRendererTests
 
         // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
-        map.AbortFetch();
+    }
 
     [Test]
     public void Widgets()
@@ -325,7 +322,7 @@ internal class MapRendererTests
 
         // Assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
-        map.AbortFetch();
+    }
 
     private static bool CompareColors(SKColor color1, SKColor color2, int allowedColorDistance)
     {
