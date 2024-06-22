@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
@@ -91,7 +92,7 @@ public class IndexedMemoryProvider : IProvider
         _boundingBox = MemoryProvider.GetExtent(Features);
     }
 
-    public virtual Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public virtual Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(fetchInfo);
         ArgumentNullException.ThrowIfNull(fetchInfo.Extent);

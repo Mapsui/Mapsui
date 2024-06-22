@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -45,7 +46,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
     public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
         IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
-        int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Task<IFeature?>>? fetchTileAsFeature = null)
+        int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, CancellationToken, Task<IFeature?>>? fetchTileAsFeature = null)
     {
         _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
         MemoryCache = new MemoryCache<IFeature?>(minTiles, maxTiles);
@@ -138,7 +139,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
         OnDataChanged(e);
     }
 
-    private async Task<IFeature?> ToFeatureAsync(TileInfo tileInfo)
+    private async Task<IFeature?> ToFeatureAsync(TileInfo tileInfo, CancellationToken cancellationToken)
     {
         var tileData = await _tileSource.GetTileAsync(tileInfo).ConfigureAwait(false);
         var mRaster = ToRaster(tileInfo, tileData);

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using BitMiracle.LibTiff.Classic;
 using Mapsui.Layers;
@@ -252,7 +253,7 @@ public class GeoTiffProvider : IProvider, IDisposable
 
     public string? CRS { get; set; } = "";
 
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         if (_extent.Intersects(fetchInfo.Extent))
         {
