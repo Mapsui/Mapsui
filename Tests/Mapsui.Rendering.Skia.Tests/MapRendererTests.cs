@@ -244,7 +244,7 @@ internal class MapRendererTests
     public void RenderGeometryCollection()
     {
         // arrange
-        using var map = GeometryCollectionSample.CreateMap();
+        var map = GeometryCollectionSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(400);
         const string fileName = "geometry_collection.png";
 
@@ -257,6 +257,9 @@ internal class MapRendererTests
 
         // assert
         ClassicAssert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+
+        // Cleanup
+        map.AbortFetch();
     }
 
     [Test]
