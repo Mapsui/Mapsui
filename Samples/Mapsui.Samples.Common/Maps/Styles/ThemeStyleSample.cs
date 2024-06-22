@@ -103,15 +103,10 @@ public class ThemeStyleSample : ISample
         };
     }
 
-    private static SymbolStyle CreateCityStyle()
+    private static SymbolStyle CreateCityStyle() => new()
     {
-        var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png");
-
-        return new SymbolStyle
-        {
-            BitmapId = location,
-            SymbolOffset = new Offset { Y = 64 },
-            SymbolScale = 0.25
-        };
-    }
+        ImageSource = "embedded://Mapsui.Samples.Common.Images.location.png",
+        SymbolOffset = new Offset { Y = 64 },
+        SymbolScale = 0.25
+    };
 }

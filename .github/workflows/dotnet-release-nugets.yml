@@ -17,20 +17,21 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
-        fetch-depth: 0 # Prevent a shallow clone to allow git describe --tags
-    - uses: actions/setup-java@v3
+        fetch-depth: 0
+        filter: tree:0    
+    - uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '17'
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.1.1
+      uses: NuGet/setup-nuget@v2
 
     # .Net 7 update     
     - name: Setup .NET 7 SDK
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
            8.0.x         
@@ -52,7 +53,7 @@ jobs:
       run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o nugets
 
     - name: Upload nugets
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
       # Upload the 'nugets' folder as artifact
         name: packages

@@ -1,8 +1,11 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Rendering.Skia.Images;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -14,9 +17,10 @@ internal static class PolygonRenderer
     private const float _scale = 10.0f;
 
     public static void Draw(SKCanvas canvas, Viewport viewport, VectorStyle vectorStyle, IFeature feature,
-        Polygon polygon, float opacity, IVectorCache vectorCache)
+        Polygon polygon, float opacity, VectorCache vectorCache, int position)
     {
-        SKPath ToPath((long featureId, MRect extent, double rotation, float lineWidth) valueTuple)
+        // polygon - relevant for GeometryCollection children
+        SKPath ToPath((long featureId, int position, MRect extent, double rotation, float lineWidth) valueTuple)
         {
             var result = polygon.ToSkiaPath(viewport, viewport.ToSkiaRect(), valueTuple.lineWidth);
             return result;
@@ -29,7 +33,7 @@ internal static class PolygonRenderer
         var rotation = viewport.Rotation;
         float lineWidth = (float)(vectorStyle.Outline?.Width ?? 1);
 
-        using var path = vectorCache.GetOrCreatePath((feature.Id, extent, rotation, lineWidth), ToPath);
+        using var path = vectorCache.GetOrCreatePath((feature.Id, position, extent, rotation, lineWidth), ToPath);
         if (vectorStyle.Fill.IsVisible())
         {
             using var fillPaint = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
@@ -66,8 +70,10 @@ internal static class PolygonRenderer
         }
     }
 
-    internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, ISymbolCache? symbolCache)
+    internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, IRenderService renderService)
     {
+        var skiaRenderService = (RenderService)renderService;
+
         var brush = valueTuple.brush;
         var opacity = valueTuple.opacity;
         var rotation = valueTuple.rotation;
@@ -141,17 +147,17 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(symbolCache, brush.BitmapId);
+                    var image = GetImage(skiaRenderService, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(symbolCache, brush.BitmapId);
+                    image = GetImage(skiaRenderService, brush);
                     if (image != null)
                         paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
-                            SKMatrix.CreateRotation((float)(rotation * System.Math.PI / 180.0f),
+                            SKMatrix.CreateRotation((float)(rotation * Math.PI / 180.0f),
                                 image.Width >> 1, image.Height >> 1));
                     break;
                 default:
@@ -205,29 +211,39 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(ISymbolCache? symbolCache, int bitmapId)
+    private static SKImage? GetImage(RenderService renderService, Brush brush)
     {
-        if (symbolCache == null)
+        if (brush.ImageSource is null)
             return null;
-        var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(bitmapId);
-        if (bitmapInfo == null)
+        var drawableImage = renderService.DrawableImageCache.GetOrCreate(brush.ImageSource,
+            () => SymbolStyleRenderer.TryCreateDrawableImage(brush.ImageSource, renderService.ImageSourceCache));
+        if (drawableImage == null)
             return null;
-        if (bitmapInfo.Type == BitmapType.Bitmap)
-            return bitmapInfo.Bitmap;
-        if (bitmapInfo.Type == BitmapType.Sprite)
-        {
-            var sprite = bitmapInfo.Sprite;
-            if (sprite == null)
-                return null;
 
-            if (sprite.Data == null)
+        if (drawableImage is BitmapImage bitmapImage)
+        {
+            if (brush.BitmapRegion is null)
+                return bitmapImage.Image;
+            else
             {
-                var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
-                sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
-                    sprite.Y + sprite.Height));
+                if (brush.ImageSource is null)
+                    throw new Exception("If BitmapRegion is not null the ImageSource should be set.");
+
+                var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
+                var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, brush.BitmapRegion));
+                if (regionDrawableImage == null)
+                    return null;
+                if (regionDrawableImage is BitmapImage regionBitmapImage)
+                    return regionBitmapImage.Image;
+                throw new Exception("Only bitmaps are is supported for polygon fill.");
             }
-            return (SKImage?)sprite.Data;
         }
-        return null;
+        throw new Exception("Only bitmaps are is supported for polygon fill.");
+    }
+
+    private static BitmapImage CreateBitmapImage(SKImage skImage, BitmapRegion bitmapRegion)
+    {
+        return new BitmapImage(skImage.Subset(new SKRectI(bitmapRegion.X, bitmapRegion.Y,
+            bitmapRegion.X + bitmapRegion.Width, bitmapRegion.Y + bitmapRegion.Height)));
     }
 }

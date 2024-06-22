@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
@@ -14,7 +15,7 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     private readonly SKPaint _paintScaleText = CreateTextPaint(SKPaintStyle.Fill);
     private readonly SKPaint _paintScaleTextStroke = CreateTextPaint(SKPaintStyle.Stroke);
 
-    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget,
+    public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService,
         float layerOpacity)
     {
         var scaleBar = (ScaleBarWidget)widget;

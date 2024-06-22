@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Samples.Common;
@@ -12,8 +11,6 @@ namespace Mapsui.Tests.Common.Maps;
 
 public class PolygonTestSample : ISample
 {
-    private static int _bitmapId;
-
     public string Name => "Polygon";
     public string Category => "Tests";
 
@@ -21,9 +18,9 @@ public class PolygonTestSample : ISample
 
     public static Map CreateMap()
     {
-        _bitmapId = typeof(PolygonTestSample).LoadBitmapId("Resources.Images.avion_silhouette.png");
+        var imageSource = "embedded://mapsui.tests.common.resources.images.avion_silhouette.png";
 
-        var layer = CreateLayer();
+        var layer = CreateLayer(imageSource);
 
         var map = new Map
         {
@@ -37,17 +34,17 @@ public class PolygonTestSample : ISample
         return map;
     }
 
-    private static MemoryLayer CreateLayer()
+    private static MemoryLayer CreateLayer(string imageSource)
     {
         return new MemoryLayer
         {
-            Features = CreatePolygonProvider(),
+            Features = CreatePolygonProvider(imageSource),
             Name = "Polygon"
         };
     }
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
-    public static IEnumerable<IFeature> CreatePolygonProvider()
+    public static IEnumerable<IFeature> CreatePolygonProvider(string imageSource)
     {
         var wktReader = new WKTReader();
         var features = new List<IFeature>();
@@ -61,7 +58,7 @@ public class PolygonTestSample : ISample
         feature.Styles.Add(new VectorStyle
         {
             Enabled = true,
-            Fill = CreateBrush(new Color(255, 0, 0, 120), FillStyle.BitmapRotated, _bitmapId),
+            Fill = CreateBrush(new Color(255, 0, 0, 120), FillStyle.BitmapRotated, imageSource),
             Outline = CreatePen(new Color(255, 255, 0), 2, PenStyle.DashDot),
             Line = null
         });
@@ -188,12 +185,12 @@ public class PolygonTestSample : ISample
         return features;
     }
 
-    private static Brush CreateBrush(Color color, FillStyle fillStyle, int? imageId = null)
+    private static Brush CreateBrush(Color color, FillStyle fillStyle, string? imageSource = null)
     {
-        if (imageId.HasValue && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
+        if (imageSource is not null && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
             fillStyle = FillStyle.Bitmap;
 
-        return new Brush { FillStyle = fillStyle, BitmapId = imageId ?? -1, Color = color };
+        return new Brush { FillStyle = fillStyle, ImageSource = imageSource, Color = color };
     }
 
     private static Pen CreatePen(Color color, int width, PenStyle penStyle)

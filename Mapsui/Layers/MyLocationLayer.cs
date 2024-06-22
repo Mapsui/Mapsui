@@ -23,9 +23,9 @@ public class MyLocationLayer : BaseLayer, IDisposable
     private readonly SymbolStyle _dirStyle;  // style for the view-direction indicator
     private readonly CalloutStyle _coStyle;  // style for the callout
 
-    private static int _bitmapMovingId = -1;
-    private static int _bitmapStillId = -1;
-    private static int _bitmapDirId = -1;
+    private static readonly string _movingImageSource = "embedded://Mapsui.Resources.Images.MyLocationMoving.svg";
+    private static readonly string _stillImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg";
+    private static readonly string _directionImageSource = "embedded://Mapsui.Resources.Images.MyLocationDir.svg";
 
     private MPoint? _animationMyLocationStart;
     private MPoint? _animationMyLocationEnd;
@@ -49,7 +49,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
             if (_isMoving != value)
             {
                 _isMoving = value;
-                _locStyle.BitmapId = _isMoving ? _bitmapMovingId : _bitmapStillId;
+                _locStyle.ImageSource = _isMoving ? _movingImageSource : _stillImageSource;
             }
         }
     }
@@ -154,27 +154,6 @@ public class MyLocationLayer : BaseLayer, IDisposable
         Enabled = true;
         IsMapInfoLayer = true;
 
-        if (_bitmapMovingId == -1)
-        {
-            var bitmapMoving = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationMoving.svg");
-            // Register bitmap
-            _bitmapMovingId = bitmapMoving;
-        }
-
-        if (_bitmapStillId == -1)
-        {
-            var bitmapStill = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationStill.svg");
-            // Register bitmap
-            _bitmapStillId = bitmapStill;
-        }
-
-        if (_bitmapDirId == -1)
-        {
-            var bitmapDir = typeof(MyLocationLayer).LoadBitmapId(@"Resources.Images.MyLocationDir.svg");
-            // Register bitmap
-            _bitmapDirId = bitmapDir;
-        }
-
         _feature = new PointFeature(_myLocation)
         {
             ["Label"] = "MyLocation",
@@ -183,7 +162,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _locStyle = new SymbolStyle
         {
             Enabled = true,
-            BitmapId = _bitmapStillId,
+            ImageSource = _stillImageSource,
             SymbolScale = Scale,
             SymbolRotation = Direction,
             SymbolOffset = new Offset(0, 0),
@@ -193,7 +172,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _dirStyle = new SymbolStyle
         {
             Enabled = false,
-            BitmapId = _bitmapDirId,
+            ImageSource = _directionImageSource,
             SymbolScale = 0.2,
             SymbolRotation = 0,
             SymbolOffset = new Offset(0, 0),
@@ -205,16 +184,19 @@ public class MyLocationLayer : BaseLayer, IDisposable
             Enabled = false,
             Type = CalloutType.Single,
             Title = "",
-            TitleFontColor = Styles.Color.Black,
-            ArrowAlignment = ArrowAlignment.Top,
-            ArrowPosition = 0,
-            SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
+            TitleFontColor = Color.Black,
             MaxWidth = 300,
             RotateWithMap = true,
             SymbolOffsetRotatesWithMap = true,
-            Color = Styles.Color.White,
-            StrokeWidth = 0,
-            ShadowWidth = 0
+            SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
+            BalloonDefinition = new CalloutBalloonDefinition
+            {
+                Color = Color.White,
+                TailAlignment = TailAlignment.Top,
+                TailPosition = 0,
+                StrokeWidth = 0,
+                ShadowWidth = 0
+            },
         };
 
         _feature.Styles.Clear();

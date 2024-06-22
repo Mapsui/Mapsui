@@ -11,6 +11,7 @@ using SkiaSharp;
 using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using Color = Microsoft.Maui.Graphics.Color;
+using Mapsui.Rendering.Skia.Extensions;
 
 namespace Mapsui.UI.Maui;
 
@@ -513,7 +514,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                         break;
                     }
                     // Save this SVG for later use
-                    _bitmapId = BitmapRegistry.Instance.Register(Svg!);
+                    // Not going to fix this: _bitmapId = BitmapRegistry.Instance.Register(Svg!);
                     _bitmapIdKey = Svg!;
                     _bitmapIds.Add(Svg!, _bitmapId);
                     break;
@@ -532,7 +533,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
 
                     // Load the SVG document
                     Svg.Skia.SKSvg svg;
-                    using (var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin)))
+                    using (var stream = EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin)))
                     {
                         if (stream == null)
                             return;
@@ -564,7 +565,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                         {
                             _bitmapData = data.ToArray();
                         }
-                        _bitmapId = BitmapRegistry.Instance.Register(_bitmapData);
+                        // Broke this with no plans to repair: _bitmapId = BitmapRegistry.Instance.Register(_bitmapData);
                         _bitmapIdKey = colorInHex;
                         _bitmapIds.Add(colorInHex, _bitmapId);
                     }
@@ -577,7 +578,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                         {
                             Width = image.Width * Scale;
                             Height = image.Height * Scale;
-                            _bitmapId = BitmapRegistry.Instance.Register(Icon);
+                            // Broke this with no plans to repair: _bitmapId = BitmapRegistry.Instance.Register(Icon);
                         }
                     }
                     break;
@@ -590,7 +591,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                 Feature.Styles.Clear();
                 Feature.Styles.Add(new SymbolStyle
                 {
-                    BitmapId = _bitmapId,
+                    // Not going to fix this: ImageSource = _bitmapId,
                     SymbolScale = Scale,
                     SymbolRotation = Rotation,
                     RotateWithMap = RotateWithMap,

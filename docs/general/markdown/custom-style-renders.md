@@ -20,7 +20,7 @@ This is the ISkiaStyleRenderer interface that you need to implement:
 ```csharp
 public interface ISkiaStyleRenderer : IStyleRenderer
 {
-  bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache);
+  bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration);
 }
 ```
 

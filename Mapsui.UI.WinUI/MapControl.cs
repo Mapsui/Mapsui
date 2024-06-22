@@ -2,8 +2,6 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-// This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
-
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
@@ -29,28 +27,40 @@ namespace Mapsui.UI.WinUI;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
+    // GPU does not work currently on Windows
+    public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
+    private readonly SKSwapChainPanel? _canvasGpu;
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-    private readonly SKXamlCanvas _canvas = CreateRenderTarget();
+    private readonly SKXamlCanvas? _canvas;
+
     bool _shiftPressed;
 
     public MapControl()
     {
         SharedConstructor();
 
-        _invalidate = () =>
-        {
-            // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
-            //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
-            //else RunOnUIThread(() => _canvas?.Invalidate());
-            RunOnUIThread(() => _canvas?.Invalidate());
-        };
+        // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
+        //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
+        //else RunOnUIThread(() => _canvas?.Invalidate());
 
         Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
 
-        Children.Add(_canvas);
-        Children.Add(_selectRectangle);
+        if (UseGPU)
+        {
+            _canvasGpu = CreateGpuRenderTarget();
+            _invalidate = () => RunOnUIThread(() => _canvasGpu.Invalidate());
+            Children.Add(_canvasGpu);
+            _canvasGpu.PaintSurface += CanvasGpu_PaintSurface;
+        }
+        else
+        {
+            _canvas = CreateRenderTarget();
+            _invalidate = () => RunOnUIThread(() => _canvas.Invalidate());
+            Children.Add(_canvas);
+            _canvas.PaintSurface += Canvas_PaintSurface;
+        }
 
-        _canvas.PaintSurface += Canvas_PaintSurface;
+        Children.Add(_selectRectangle);
 
         Loaded += MapControlLoaded;
 
@@ -117,7 +127,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (OnMapPointerMoved([position], true)) // Only for hover events
             return;
 
-        RefreshGraphics();
+        RefreshGraphics(); // Todo: Figure out if we really need to refresh the graphics here. It might be better to only do this when the map is actually changed. In that case it should perhaps be done  in the users handler to OnMapPointerMoved
     }
 
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
@@ -153,6 +163,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private static SKXamlCanvas CreateRenderTarget()
     {
         return new SKXamlCanvas
+        {
+            VerticalAlignment = VerticalAlignment.Stretch,
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            Background = new SolidColorBrush(Colors.Transparent)
+        };
+    }
+
+    private static SKSwapChainPanel CreateGpuRenderTarget()
+    {
+        return new SKSwapChainPanel
         {
             VerticalAlignment = VerticalAlignment.Stretch,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -208,6 +228,18 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         CommonDrawControl(canvas);
     }
 
+    private void CanvasGpu_PaintSurface(object? sender, SKPaintGLSurfaceEventArgs e)
+    {
+        if (PixelDensity <= 0)
+            return;
+
+        var canvas = e.Surface.Canvas;
+
+        canvas.Scale(PixelDensity, PixelDensity);
+
+        CommonDrawControl(canvas);
+    }
+
     private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
     {
         e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
@@ -239,7 +271,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private double ViewportWidth => ActualWidth;
     private double ViewportHeight => ActualHeight;
 
-    private double GetPixelDensity() => XamlRoot?.RasterizationScale ?? 1d;
+    private double GetPixelDensity()
+    {
+        if (UseGPU)
+            return _canvasGpu!.CanvasSize.Width / _canvasGpu.ActualWidth;
+
+        return _canvas!.CanvasSize.Width / _canvas.ActualWidth;
+    }
 
     private bool GetShiftPressed() => _shiftPressed;
 
@@ -259,6 +297,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #endif
 
             _canvas?.Dispose();
+            _canvasGpu?.Dispose();
             _selectRectangle?.Dispose();
 #endif
 #if HAS_UNO || __WINUI__

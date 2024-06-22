@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Mapsui.Disposing;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -24,29 +23,28 @@ namespace Mapsui.Rendering.Skia;
 
 public sealed class MapRenderer : IRenderer, IDisposable
 {
-    private readonly DisposableWrapper<IRenderService> _renderService;
+    private readonly RenderService _renderService;
     private long _currentIteration;
 
-    public IRenderService RenderService => _renderService.WrappedObject;
+    static MapRenderer()
+    {
+        DefaultRendererFactory.Create = () => new MapRenderer();
+    }
 
+    public bool EnabledVectorCache
+    {
+        get => _renderService.VectorCache.Enabled;
+        set => _renderService.VectorCache.Enabled = value;
+    }
+
+    public IRenderService RenderService => _renderService;
     public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
-
     /// <summary>
     /// Dictionary holding all special renderers for styles
     /// </summary>
     public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
 
-    static MapRenderer()
-    {
-        DefaultRendererFactory.Create = () => new MapRenderer();
-        DefaultRendererFactory.CreateWithRenderService = f => new MapRenderer(f);
-    }
-
-    public MapRenderer(IRenderService renderer)
-    {
-        _renderService = new DisposableWrapper<IRenderService>(renderer, false);
-        InitRenderer();
-    }
+    public ImageSourceCache ImageSourceCache => _renderService.ImageSourceCache;
 
     private void InitRenderer()
     {
@@ -59,15 +57,20 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenders[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
         WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
         WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
-        WidgetRenders[typeof(IconButtonWidget)] = new IconButtonWidgetRenderer();
+        WidgetRenders[typeof(ImageButtonWidget)] = new ImageButtonWidgetRenderer();
         WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
         WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
         WidgetRenders[typeof(InputOnlyWidget)] = new InputOnlyWidgetRenderer();
     }
 
-    public MapRenderer()
+    public MapRenderer() : this(10000)
+    { }
+
+    public MapRenderer(int vectorCacheCapacity)
     {
-        _renderService = new DisposableWrapper<IRenderService>(new RenderService(), true);
+        // Todo: Think about an alternative to initialize. Perhaps the capacity should
+        // be determined by the number of features used in one Paint iteration.
+        _renderService = new RenderService(vectorCacheCapacity);
         InitRenderer();
     }
 
@@ -169,7 +172,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         {
             layers = layers.ToList();
 
-            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
+            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, o, i));
 
             _currentIteration++;
         }
@@ -188,7 +191,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
             canvas.Save();
             // We have a special renderer, so try, if it could draw this
             var styleRenderer = (ISkiaStyleRenderer)renderer;
-            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, RenderService, iteration);
+            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderService, iteration);
             // Restore old canvas
             canvas.Restore();
             // Was it drawn?
@@ -200,7 +203,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
     {
-        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
+        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, _renderService, layerOpacity);
     }
 
     public MapInfo GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)

@@ -1,4 +1,5 @@
 ﻿using Mapsui.Layers;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -14,7 +15,7 @@ public interface ISkiaStyleRenderer : IStyleRenderer
     /// <param name="layer">Layer that contains feature.</param>
     /// <param name="feature">Feature to draw.</param>
     /// <param name="style">Style to draw.</param>
-    /// <param name="renderService">SymbolCache for ready rendered bitmaps.</param>
+    /// <param name="renderService">RenderService to provide caches and such.</param>
     /// <returns></returns>
-    bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderService renderService, long iteration);
+    bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration);
 }

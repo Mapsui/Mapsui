@@ -25,38 +25,38 @@
     <PackageVersion Include="CommunityToolkit.Maui.Markup" Version="[1.0.0,2.0.0)" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="[7.1.2,8.0.0)" />
     <PackageVersion Include="DotNext.Threading" Version="[4.9.0,5.0.0)" />
-    <PackageVersion Include="Eto.Forms" Version="[2.6.0,3.0.0)" />
-    <PackageVersion Include="Eto.Platform.Wpf" Version="[2.6.0,3.0.0)" />
-    <PackageVersion Include="Eto.Platform.Windows" Version="[2.6.0,3.0.0)" />
-    <PackageVersion Include="Eto.Platform.Mac64" Version="[2.6.0,3.0.0)" />
-    <PackageVersion Include="Eto.Platform.XamMac2" Version="[2.6.0,3.0.0)" />
-    <PackageVersion Include="Eto.Platform.Gtk" Version="[2.6.0,3.0.0)" />
+    <PackageVersion Include="Eto.Forms" Version="[2.8.0,3.0.0)" />
+    <PackageVersion Include="Eto.Platform.Wpf" Version="[2.8.0,3.0.0)" />
+    <PackageVersion Include="Eto.Platform.Windows" Version="[2.8.0,3.0.0)" />
+    <PackageVersion Include="Eto.Platform.Mac64" Version="[2.8.0,3.0.0)" />
+    <PackageVersion Include="Eto.Platform.XamMac2" Version="[2.8.0,3.0.0)" />
+    <PackageVersion Include="Eto.Platform.Gtk" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.SkiaDraw" Version="[0.2.0,0.3.0)" />
     <PackageVersion Include="HarfBuzzSharp" Version="[7.3.0.2,8.0.0.0)" />
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="[7.3.0.2,8.0.0.0)" />
     <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.7,5.0.0)" />
-    <PackageVersion Include="Mapsui.Android" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.ArcGIS" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Avalonia" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Blazor" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Eto" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Extensions" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.iOS" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Maui" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Nts" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Rendering.Skia" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Tiling" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Uno.WinUI" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.WinUI" Version="5.0.0-alpha.0" />
-    <PackageVersion Include="Mapsui.Wpf" Version="5.0.0-alpha.0" />
+    <PackageVersion Include="Mapsui.Android" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.ArcGIS" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Avalonia" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Blazor" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Eto" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Extensions" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.iOS" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Maui" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Nts" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Rendering.Skia" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Tiling" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Uno.WinUI" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.WinUI" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Mapsui.Wpf" Version="5.0.0-beta.1" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="[17.8.0,18.0.0)" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[8.0.0,9.0.0)" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="[17.8.0, 18.0.0)" />
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="[6.2.14,7.0.0)" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="[2.6.2,3.0.0)" />
-    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.10.48" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="[1.5.240227000,2.0.0)" />
+    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.6.40,18.0.0)" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="[1.5.240311000,2.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWin32" Version="[0.1.588-beta,1.0.0)" />
     <PackageVersion Include="Microsoft.Windows.CsWinRT" Version="[2.0.0,3.0.0)" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26031-preview" />
@@ -64,7 +64,7 @@
     <PackageVersion Include="NetTopologySuite.IO.GeoJSON4STJ" Version="[4.0.0,5.0.0)" />
     <PackageVersion Include="NUnit" Version="[4.0.1,5.0.0)" />
     <PackageVersion Include="NUnit3TestAdapter" Version="[4.5.0,5.0.0)" />
-    <PackageVersion Include="SkiaSharp" Version="2.88.8" />
+    <PackageVersion Include="SkiaSharp" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.HarfBuzz" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="[2.88.8,3.0.0)" />
     <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version="[2.88.8,3.0.0)" />
