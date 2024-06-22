@@ -39,6 +39,5 @@ public class WmtsZurichSample : ISample
         }
 
         return new TileLayer(stadtplanSource) { Name = stadtplanSource.Name };
-
     }
 }
