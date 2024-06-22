@@ -32,6 +32,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             // Events
             _invalidate = () =>
             {
+                if (!_glView.IsHandleCreated)
+                    return;
+
                 Invoke(() => _glView.Invalidate());
             };
             _glView.PaintSurface += OnGLPaintSurface;
@@ -44,6 +47,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             // Events
             _invalidate = () =>
             {
+                if (!_canvasView.IsHandleCreated)
+                    return;
+
                 Invoke(() => _canvasView.Invalidate());
             };
             _canvasView.PaintSurface += OnPaintSurface;
