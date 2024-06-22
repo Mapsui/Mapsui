@@ -1,6 +1,14 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net8.0-ios;net8.0-maccatalyst;net8.0-android;net8.0-windows10.0.19041;net8.0-browserwasm;net8.0-desktop</TargetFrameworks>
+    <TargetFrameworks>
+      net8.0;
+      net8.0-ios;
+      net8.0-maccatalyst;
+      net8.0-android;
+      net8.0-windows10.0.19041;
+      net8.0-browserwasm;
+      net8.0-desktop
+    </TargetFrameworks>
     <UnoSingleProject>true</UnoSingleProject>
     <OutputType>Library</OutputType>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
@@ -20,7 +28,6 @@
     -->
     
     <UnoFeatures>
-      Skia;
     </UnoFeatures>
   </PropertyGroup>
 
@@ -46,9 +53,17 @@
 
   <!--Harfbuzz Sharp references Workaround for this issue-->
   <!--https://github.com/mono/SkiaSharp/issues/1725-->
-  <ItemGroup Condition="'$(TargetFramework)'=='net7.0' or '$(TargetFramework)'=='net8.0-browserwasm'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net8.0-browserwasm'">
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
+  </ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'!='net8.0-windows10.0.19041'">
+    <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows10.0.19041'">
+    <PackageReference Include="SkiaSharp.Views.WinUI"/>
   </ItemGroup>
 
   <ItemGroup>
