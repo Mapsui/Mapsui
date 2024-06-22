@@ -32,13 +32,13 @@ public class WmtsZurichSample : ISample
 
         using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
         var tileSources = WmtsParser.Parse(response);
-        var nature2000TileSource = tileSources.FirstOrDefault(t => t.Name == "Stadtplan") ?? tileSources.First();
+        var stadtplanSource = tileSources.FirstOrDefault(t => t.Name == "Stadtplan") ?? tileSources.First();
         if (DefaultCache != null)
         {
-            nature2000TileSource.PersistentCache = DefaultCache;
+            stadtplanSource.PersistentCache = DefaultCache;
         }
 
-        return new TileLayer(nature2000TileSource) { Name = nature2000TileSource.Name };
+        return new TileLayer(stadtplanSource) { Name = stadtplanSource.Name };
 
     }
 }
