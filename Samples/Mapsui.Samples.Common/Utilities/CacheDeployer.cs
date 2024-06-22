@@ -1,8 +1,8 @@
 ﻿using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Maps.Wms;
 using System;
 using System.IO;
 using System.Reflection;
+using Mapsui.Samples.Common.Maps.WMS;
 
 namespace Mapsui.Samples.Common.Utilities;
 

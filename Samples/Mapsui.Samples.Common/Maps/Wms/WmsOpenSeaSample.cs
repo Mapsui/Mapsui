@@ -2,10 +2,9 @@
 using Mapsui.Layers;
 using Mapsui.Limiting;
 using Mapsui.Providers.Wms;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.WMS;
 
 public class WmsOpenSeaSample : ISample
 {

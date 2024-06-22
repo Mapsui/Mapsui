@@ -1,10 +1,10 @@
-﻿using Mapsui.Layers;
-using Mapsui.Providers.Wms;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Providers.Wms;
 using Mapsui.Styles;
 
-namespace Mapsui.Samples.Common.Maps.Wms;
+namespace Mapsui.Samples.Common.Maps.WMS;
 
 public class WmsProjectionSample : ISample
 {

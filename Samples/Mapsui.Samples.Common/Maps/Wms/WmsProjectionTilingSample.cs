@@ -1,4 +1,6 @@
-﻿using Mapsui.Extensions.Cache;
+﻿using System.IO;
+using System.Threading.Tasks;
+using Mapsui.Extensions.Cache;
 using Mapsui.Extensions.Projections;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -8,12 +10,10 @@ using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
-using System.IO;
-using System.Threading.Tasks;
 
 #pragma warning disable IDISP001
 
-namespace Mapsui.Samples.Common.Maps.Wms;
+namespace Mapsui.Samples.Common.Maps.WMS;
 public class WmsProjectionTilingSample : ISample
 {
     static WmsProjectionTilingSample()

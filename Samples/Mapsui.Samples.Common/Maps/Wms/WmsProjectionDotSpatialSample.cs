@@ -1,13 +1,13 @@
-﻿using Mapsui.Extensions.Projections;
+﻿using System.Threading.Tasks;
+using Mapsui.Extensions.Projections;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Providers.Wms;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
-using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Wms;
+namespace Mapsui.Samples.Common.Maps.WMS;
 
 public class WmsProjectionDotSpatialSample : ISample
 {
