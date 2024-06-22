@@ -17,7 +17,6 @@ using Mapsui.Samples.Common.Maps.Info;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Styles;
-using Mapsui.Tests.Common.Maps;
 using Mapsui.UI;
 using Mapsui.Widgets.InfoWidgets;
 using NUnit.Framework;
