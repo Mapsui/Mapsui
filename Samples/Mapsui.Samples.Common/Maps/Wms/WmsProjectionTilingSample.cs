@@ -11,8 +11,9 @@ using Mapsui.Widgets.ButtonWidgets;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Wms;
+#pragma warning disable IDISP001
 
+namespace Mapsui.Samples.Common.Maps.Wms;
 public class WmsProjectionTilingSample : ISample
 {
     static WmsProjectionTilingSample()

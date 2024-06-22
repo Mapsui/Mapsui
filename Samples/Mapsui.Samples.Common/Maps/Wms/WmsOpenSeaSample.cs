@@ -9,7 +9,7 @@ namespace Mapsui.Tests.Common.Maps;
 
 public class WmsOpenSeaSample : ISample
 {
-    public string Name => "Wms OpenSea";
+    public string Name => "WMS OpenSea";
     public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()
