@@ -115,7 +115,7 @@ public class CapabilitiesHelper
 
                     if (!response.IsSuccessStatusCode)
                     {
-                        OnCapabilitiesFailed(EventArgs.Empty);
+                        OnCapabilitiesFailed(new EventArgs());
                         return;
                     }
 
