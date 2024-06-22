@@ -6,12 +6,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.DataFormats;
+namespace Mapsui.Samples.Common.Maps.Wmts;
 
 public class WmtsMichelinSample : ISample
 {
     public string Name => "WMTS Michelin";
-    public string Category => "Data Formats";
+    public string Category => "WMTS";
 
     public async Task<Map> CreateMapAsync()
     {

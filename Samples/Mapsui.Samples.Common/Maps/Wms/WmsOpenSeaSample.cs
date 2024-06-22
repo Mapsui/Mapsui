@@ -7,17 +7,17 @@ using Mapsui.Styles;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class WmsBasilicataSample : ISample
+public class WmsOpenSeaSample : ISample
 {
-    public string Name => "Wms Basilicata";
-    public string Category => "Tests";
+    public string Name => "Wms OpenSea";
+    public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()
     {
-        var map = new Map() { CRS = "EPSG:4326" };
+        var map = new Map { CRS = "EPSG:4326" };
         // The WMS request needs a CRS
         map.Layers.Add(await CreateLayerAsync());
-        var panBounds = GetLimitsOfBasilicata();
+        var panBounds = GetLimitsOfItaly();
         map.Navigator.Limiter = new ViewportLimiterKeepWithinExtent();
         map.Navigator.RotationLock = true;
         map.Navigator.OverridePanBounds = panBounds;
@@ -26,9 +26,16 @@ public class WmsBasilicataSample : ISample
         return map;
     }
 
+    private static MRect GetLimitsOfItaly()
+    {
+        var (minX, minY) = (6.7499552751, 36.619987291);
+        var (maxX, maxY) = (18.4802470232, 47.1153931748);
+        return new MRect(minX, minY, maxX, maxY);
+    }
+
     public static async Task<ILayer> CreateLayerAsync()
     {
-        return new ImageLayer("Basilicata")
+        return new ImageLayer("Opensea")
         {
             DataSource = await CreateWmsProviderAsync(),
             Style = new RasterStyle()
@@ -37,22 +44,15 @@ public class WmsBasilicataSample : ISample
 
     private static async Task<WmsProvider> CreateWmsProviderAsync()
     {
-        const string wmsUrl = "http://rsdi.regione.basilicata.it:80/rbgeoserver2016/maps_ctr/LC.LandCoverRaster/ows";
+        const string wmsUrl = "https://depth.openseamap.org/geoserver/ows";
 
-        var provider = await WmsProvider.CreateAsync(wmsUrl, userAgent: "Wms Basilicata Sample");
+        var provider = await WmsProvider.CreateAsync(wmsUrl, userAgent: "Wms OpenSea Sample", wmsVersion: "1.3.0");
         provider.ContinueOnError = true;
         provider.TimeOut = 40000;
         provider.CRS = "EPSG:4326";
 
-        provider.AddLayer("LC.LandCoverRaster");
+        provider.AddLayer("openseamap:contour2");
         provider.SetImageFormat(provider.OutputFormats[0]);
         return provider;
-    }
-
-    public static MRect GetLimitsOfBasilicata()
-    {
-        var (minX, minY) = (13.804827, 38.63506);
-        var (maxX, maxY) = (17.804827, 42.63506);
-        return new MRect(minX, minY, maxX, maxY);
     }
 }

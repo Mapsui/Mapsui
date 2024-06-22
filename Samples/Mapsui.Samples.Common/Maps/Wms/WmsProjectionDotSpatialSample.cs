@@ -7,16 +7,16 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.DataFormats;
+namespace Mapsui.Samples.Common.Maps.Wms;
 
 public class WmsProjectionDotSpatialSample : ISample
 {
     public string Name => "WMS Projection DotSpatial";
-    public string Category => "Data Formats";
+    public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()
     {
-        var map = new Mapsui.Map
+        var map = new Map
         {
             CRS = "EPSG:3857",
         };
@@ -63,7 +63,7 @@ public class WmsProjectionDotSpatialSample : ISample
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:6706";
         provider.AddLayer("province");
-        provider.SetImageFormat((provider.OutputFormats)[0]);
+        provider.SetImageFormat(provider.OutputFormats[0]);
         provider.Transparent = null;
         return provider;
     }

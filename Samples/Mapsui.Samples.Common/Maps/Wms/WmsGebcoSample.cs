@@ -10,7 +10,7 @@ namespace Mapsui.Tests.Common.Maps;
 public class WmsGebcoSample : ISample
 {
     public string Name => "Wms Gebco";
-    public string Category => "Tests";
+    public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()
     {
