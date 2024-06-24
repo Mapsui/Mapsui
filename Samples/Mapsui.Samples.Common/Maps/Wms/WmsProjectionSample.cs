@@ -1,19 +1,19 @@
-﻿using Mapsui.Layers;
-using Mapsui.Providers.Wms;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Providers.Wms;
 using Mapsui.Styles;
 
-namespace Mapsui.Samples.Common.Maps.DataFormats;
+namespace Mapsui.Samples.Common.Maps.WMS;
 
 public class WmsProjectionSample : ISample
 {
     public string Name => "WMS Projection";
-    public string Category => "Data Formats";
+    public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()
     {
-        var map = new Mapsui.Map
+        var map = new Map
         {
             CRS = "EPSG:3857",
         };
@@ -45,7 +45,7 @@ public class WmsProjectionSample : ISample
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:4326";
         provider.AddLayer("igm25k_lazio_wgs");
-        provider.SetImageFormat((provider.OutputFormats)[1]);
+        provider.SetImageFormat(provider.OutputFormats[1]);
         return provider;
     }
 }

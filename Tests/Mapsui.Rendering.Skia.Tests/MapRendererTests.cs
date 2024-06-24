@@ -214,7 +214,7 @@ internal class MapRendererTests
     public void RenderGeometryCollection()
     {
         // arrange
-        using var map = GeometryCollectionSample.CreateMap();
+        using var map = GeometryCollectionTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(400);
         const string fileName = "geometry_collection.png";
 
