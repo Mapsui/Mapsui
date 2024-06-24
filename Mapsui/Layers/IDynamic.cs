@@ -2,7 +2,7 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using Mapsui.Fetcher;
+using System;
 
 namespace Mapsui.Layers;
 
@@ -12,7 +12,7 @@ public interface IDynamic
     /// Event called when the data within the layer has changed allowing
     /// listeners to react to this.
     /// </summary>
-    event DataChangedEventHandler DataChanged;
+    event EventHandler DataChanged;
 
     /// <summary>
     /// To indicate the data withing the class has changed. This triggers a DataChanged event.
