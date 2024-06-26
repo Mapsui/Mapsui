@@ -696,7 +696,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         {
             _updateWidget = Map.Widgets.Count;
             _extendedWidgets = new List<IWidgetExtended>();
-            var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
+            var widgetsOfMapAndLayers = GetWidgetsOfMapAndLayers();
             foreach (var widget in widgetsOfMapAndLayers)
             {
                 if (widget is IWidgetExtended extendedWidget)
@@ -706,7 +706,19 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
         }
 
-        return _extendedWidgets;
+        return _extendedWidgets.Where(w => w.Enabled).ToList();
+    }
+
+    /// <summary>
+    /// Gets the enabled and disabled widgets of the map and layers. We need the disable ones because the result
+    /// is cached.
+    /// </summary>
+    private List<IWidget> GetWidgetsOfMapAndLayers()
+    {
+        var list = new List<IWidget>();
+        list.AddRange(Map.Widgets);
+        list.AddRange(Map.Layers.Select(l => l.Attribution).Where(a => a != null));
+        return list;
     }
 
     private void AssureWidgets()
