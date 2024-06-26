@@ -143,7 +143,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message, ex);
-                OnDataChanged(new DataChangedEventArgs(ex));
+                OnDataChanged(new DataChangedEventArgs(ex, Name));
             }
         });
     }

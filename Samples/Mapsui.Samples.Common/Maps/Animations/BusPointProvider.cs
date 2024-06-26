@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -12,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.Animations;
 
 internal sealed class BusPointProvider : MemoryProvider, IDynamic, IDisposable
 {
-    public event DataChangedEventHandler? DataChanged;
+    public event EventHandler? DataChanged;
 
     private readonly PeriodicTimer _timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
 
@@ -41,7 +40,7 @@ internal sealed class BusPointProvider : MemoryProvider, IDynamic, IDisposable
 
     private void OnDataChanged()
     {
-        DataChanged?.Invoke(this, new DataChangedEventArgs());
+        DataChanged?.Invoke(this, new EventArgs());
     }
 
     public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
