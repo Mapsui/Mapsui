@@ -2,15 +2,14 @@
 using Mapsui.Layers;
 using Mapsui.Limiting;
 using Mapsui.Providers.Wms;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.WMS;
 
 public class WmsBasilicataSample : ISample
 {
-    public string Name => "Wms Basilicata";
-    public string Category => "Tests";
+    public string Name => "WMS Basilicata";
+    public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()
     {

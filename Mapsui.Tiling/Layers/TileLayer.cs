@@ -133,9 +133,9 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
         MemoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
     }
 
-    private void TileFetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
+    private void TileFetchDispatcherOnDataChanged(object? sender, Exception? ex)
     {
-        OnDataChanged(e);
+        OnDataChanged(new DataChangedEventArgs(ex, Name));
     }
 
     private async Task<IFeature?> ToFeatureAsync(TileInfo tileInfo)

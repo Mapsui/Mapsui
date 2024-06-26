@@ -2,7 +2,6 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.DataBuilders;
@@ -29,7 +28,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposa
         _timer = new Timer(_ => DataHasChanged(), this, 0, 2000);
     }
 
-    public event DataChangedEventHandler? DataChanged;
+    public event EventHandler? DataChanged;
 
     public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
@@ -74,7 +73,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposa
 
     private void OnDataChanged()
     {
-        DataChanged?.Invoke(this, new DataChangedEventArgs());
+        DataChanged?.Invoke(this, new EventArgs());
     }
 
     public virtual void Dispose()
