@@ -44,8 +44,26 @@ public class GeoJsonSample : ISample
 internal static class CountriesLayerBuilder
 {
     private static readonly string[] _euroZoneCountries = [
-        "Austria","Belgium", "Croatia", "Cyprus", "Estonia", "Finland", "France", "Germany", "Greece", "Ireland",
-        "Italy", "Latvia", "Lithuania", "Luxembourg", "Malta", "the Netherlands", "Portugal", "Slovakia", "Slovenia", "Spain"
+        "Austria",
+        "Belgium",
+        "Croatia",
+        "Cyprus",
+        "Estonia",
+        "Finland",
+        "France",
+        "Germany",
+        "Greece",
+        "Ireland",
+        "Italy",
+        "Latvia",
+        "Lithuania",
+        "Luxembourg",
+        "Malta",
+        "the Netherlands",
+        "Portugal",
+        "Slovakia",
+        "Slovenia",
+        "Spain"
     ];
     private static readonly VectorStyle _euroStyle = new()
     {
