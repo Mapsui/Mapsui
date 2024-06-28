@@ -696,7 +696,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         {
             _updateWidget = Map.Widgets.Count;
             _extendedWidgets = new List<IWidgetExtended>();
-            var widgetsOfMapAndLayers = Map.GetWidgetsOfMapAndLayers().ToList();
+            var widgetsOfMapAndLayers = GetWidgetsOfMapAndLayers();
             foreach (var widget in widgetsOfMapAndLayers)
             {
                 if (widget is IWidgetExtended extendedWidget)
@@ -706,7 +706,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
         }
 
-        return _extendedWidgets;
+        return _extendedWidgets.Where(w => w.Enabled).ToList();
     }
 
     private void AssureWidgets()
@@ -727,7 +727,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         {
             _updateTouchableWidget = Map.Widgets.Count;
             _touchableWidgets = new List<IWidget>();
-            var touchableWidgets = Map.GetWidgetsOfMapAndLayers().ToList();
+            var touchableWidgets = GetWidgetsOfMapAndLayers();
             foreach (var widget in touchableWidgets)
             {
                 if (widget is IWidgetTouchable { Touchable: false }) continue;
@@ -736,6 +736,18 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
         }
 
-        return _touchableWidgets;
+        return _touchableWidgets.Where(w => w.Enabled).ToList();
+    }
+
+    /// <summary>
+    /// Gets the enabled and disabled widgets of the map and layers. The result is cached so we need disabled
+    /// ones as well because they could be enabled later.
+    /// </summary>
+    private List<IWidget> GetWidgetsOfMapAndLayers()
+    {
+        var list = new List<IWidget>();
+        list.AddRange(Map.Widgets);
+        list.AddRange(Map.Layers.Select(l => l.Attribution).Where(a => a != null));
+        return list;
     }
 }
