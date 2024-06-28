@@ -739,7 +739,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         {
             _updateTouchableWidget = Map.Widgets.Count;
             _touchableWidgets = new List<IWidget>();
-            var touchableWidgets = Map.GetWidgetsOfMapAndLayers().ToList();
+            var touchableWidgets = GetWidgetsOfMapAndLayers();
             foreach (var widget in touchableWidgets)
             {
                 if (widget is IWidgetTouchable { Touchable: false }) continue;
@@ -748,6 +748,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
         }
 
-        return _touchableWidgets;
+        return _touchableWidgets.Where(w => w.Enabled).ToList();
     }
 }
