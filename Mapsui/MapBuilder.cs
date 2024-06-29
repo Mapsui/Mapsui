@@ -31,11 +31,20 @@ public class MapBuilder
         return this;
     }
 
-    public MapBuilder WithLayer(AddLayer layerFactory)
+    public MapBuilder WithLayer(AddLayer layerFactory, ConfigureLayer configureLayer)
     {
-        _layerFactories.Add(layerFactory);
+        _layerFactories.Add(() =>
+        {
+            var layer = layerFactory();
+            configureLayer(layer);
+            return layer;
+        });
         return this;
     }
+
+    public MapBuilder WithLayer(AddLayer layerFactory)
+        => WithLayer(layerFactory, (l) => { });
+
 
     public MapBuilder WithMapCRS(string crs)
     {
@@ -54,6 +63,9 @@ public class MapBuilder
         return this;
     }
 
+    public MapBuilder WithWidget(AddWidget widgetFactory)
+        => WithWidget(widgetFactory, (w) => { });
+
     public Map Build()
     {
         var map = new Map();
@@ -70,8 +82,9 @@ public class MapBuilder
         return map;
     }
 
-    public delegate void ConfigureMap(Map map);
-    public delegate void ConfigureWidget(IWidget widget);
     public delegate ILayer AddLayer();
+    public delegate void ConfigureMap(Map map);
     public delegate IWidget AddWidget(Map map);
+    public delegate void ConfigureLayer(ILayer layer);
+    public delegate void ConfigureWidget(IWidget widget);
 }

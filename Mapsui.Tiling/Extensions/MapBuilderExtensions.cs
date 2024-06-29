@@ -5,9 +5,12 @@ namespace Mapsui.Tiling.Extensions;
 
 public static class MapBuilderExtensions
 {
-    public static MapBuilder WithOpenStreetMapLayer(this MapBuilder mapBuilder)
+    public static MapBuilder WithOpenStreetMapLayer(this MapBuilder mapBuilder, ConfigureLayer configureLayer)
     {
-        return mapBuilder.WithLayer(() => OpenStreetMap.CreateTileLayer());
+        return mapBuilder.WithLayer(() => OpenStreetMap.CreateTileLayer(), (l) =>
+        {
+            configureLayer(l);
+        });
     }
 
     /// <summary>
@@ -16,9 +19,14 @@ public static class MapBuilderExtensions
     /// </summary>
     /// <param name="mapBuilder"></param>
     /// <returns></returns>
-    public static MapBuilder WithScaleBarWidget(this MapBuilder mapBuilder, ConfigureWidget configureWidget)
+    public static MapBuilder WithScaleBarWidget(this MapBuilder mapBuilder, ConfigureScaleBarWidget configureScaleBarWidget)
     {
-        return mapBuilder.WithWidget((m) => new ScaleBarWidget(m) { Margin = new MRect(16) }, configureWidget);
+        return mapBuilder.WithWidget((m) => new ScaleBarWidget(m) { Margin = new MRect(16) },
+            (w) =>
+            {
+                var scaleBarWidget = (ScaleBarWidget)w;
+                configureScaleBarWidget(scaleBarWidget);
+            });
     }
 
     /// <summary>
@@ -31,4 +39,7 @@ public static class MapBuilderExtensions
     {
         return mapBuilder.WithWidget((m) => new ScaleBarWidget(m) { Margin = new MRect(16) }, (w) => { });
     }
+
+    public delegate void ConfigureScaleBarWidget(ScaleBarWidget widget);
+
 }
