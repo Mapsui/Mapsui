@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp.Views.WindowsForms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+    <ProjectReference Include="..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
+    <ProjectReference Include="..\..\Mapsui.UI.WindowsForms\Mapsui.UI.WindowsForms.csproj" />
+    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
+    <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
+    <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+  </ItemGroup>
+
+</Project>

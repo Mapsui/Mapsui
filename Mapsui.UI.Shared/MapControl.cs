@@ -40,6 +40,10 @@ using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.UI.Blazor;
+#elif __WINDOWSFORMS__
+using Timer = System.Threading.Timer;
+    
+namespace Mapsui.UI.WindowsForms;
 #else
 namespace Mapsui.UI.Wpf;
 #endif
