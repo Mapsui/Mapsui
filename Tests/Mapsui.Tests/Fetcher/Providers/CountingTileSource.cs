@@ -3,14 +3,21 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
+using BruTile.Predefined;
 
 namespace Mapsui.Tests.Fetcher.Providers;
 
-internal class CountingTileProvider : ITileProvider
+internal class CountingTileSource : ILocalTileSource
 {
-    private readonly Random _random = new Random(32435);
+    private readonly Random _random = new(32435);
     public ConcurrentDictionary<TileIndex, long> CountByTile { get; } = new ConcurrentDictionary<TileIndex, long>();
     public long TotalCount;
+
+    public ITileSchema Schema { get; } = new GlobalSphericalMercator();
+
+    public string Name { get; } = "TileSource";
+
+    public Attribution Attribution { get; } = new Attribution();
 
     public virtual async Task<byte[]?> GetTileAsync(TileInfo tileInfo)
     {
@@ -21,4 +28,5 @@ internal class CountingTileProvider : ITileProvider
 
         return await Task.FromResult(Array.Empty<byte>());
     }
+
 }

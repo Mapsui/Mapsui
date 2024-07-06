@@ -48,7 +48,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
         IPersistentCache<byte[]>? persistentCache = null,
         IProjection? projection = null,
         RenderFormat renderFormat = RenderFormat.Png) : base(
-        new RasterizingTileProvider(layer, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
+        new RasterizingTileSource(layer, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
         minTiles,
         maxTiles,
         dataFetchStrategy,
@@ -77,9 +77,9 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
     }
 
     public ILayer SourceLayer { get; }
-    private RasterizingTileProvider RasterizingTileProvider => ((RasterizingTileProvider)TileSource);
+    private RasterizingTileSource RasterizingTileSource => (RasterizingTileSource)TileSource;
     public Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
     {
-        return RasterizingTileProvider.GetFeatureInfoAsync(viewport, screenX, screenY);
+        return RasterizingTileSource.GetFeatureInfoAsync(viewport, screenX, screenY);
     }
 }
