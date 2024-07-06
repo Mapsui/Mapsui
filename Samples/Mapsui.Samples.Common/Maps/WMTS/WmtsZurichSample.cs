@@ -31,7 +31,7 @@ public class WmtsZurichSample : ISample
         var url = " https://www.ogd.stadt-zuerich.ch/mapproxy/wmts/1.0.0/WMTSCapabilities.xml";
 
         using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
-        var tileSources = WmtsParser.Parse(response);
+        var tileSources = WmtsCapabilitiesParser.Parse(response);
         var stadtplanSource = tileSources.FirstOrDefault(t => t.Name == "Stadtplan") ?? tileSources.First();
         if (DefaultCache != null)
         {
