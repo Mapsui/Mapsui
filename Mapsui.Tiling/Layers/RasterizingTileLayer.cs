@@ -77,9 +77,9 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
     }
 
     public ILayer SourceLayer { get; }
-    private RasterizingTileSource RasterizingTileProvider => (RasterizingTileSource)TileSource;
+    private RasterizingTileSource RasterizingTileSource => (RasterizingTileSource)TileSource;
     public Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
     {
-        return RasterizingTileProvider.GetFeatureInfoAsync(viewport, screenX, screenY);
+        return RasterizingTileSource.GetFeatureInfoAsync(viewport, screenX, screenY);
     }
 }
