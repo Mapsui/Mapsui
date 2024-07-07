@@ -25,8 +25,8 @@ public class WmtsMichelinSample : ISample
         var handler = new HttpClientHandler();
         using var httpClient = new HttpClient(handler);
         // When testing today (20-10-2021) tile 0,0,0 returned a 500. Perhaps this should be fixed in the xml.
-        await using var response = await httpClient.GetStreamAsync("https://bertt.github.io/wmts/capabilities/michelin.xml").ConfigureAwait(false);
-        var tileSource = WmtsParser.Parse(response).First();
+        using var response = await httpClient.GetStreamAsync("https://bertt.github.io/wmts/capabilities/michelin.xml").ConfigureAwait(false);
+        var tileSource = WmtsCapabilitiesParser.Parse(response).First();
 
         if (Michelin.DefaultCache != null)
         {

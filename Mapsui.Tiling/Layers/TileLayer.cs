@@ -8,11 +8,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
-<<<<<<< HEAD
-using System.Threading;
-=======
-using System.Net.Http;
->>>>>>> upstream/main
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;

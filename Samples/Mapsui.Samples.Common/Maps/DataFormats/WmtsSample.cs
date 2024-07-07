@@ -32,8 +32,8 @@ public class WmtsSample : ISample
     {
         var url = "https://service.pdok.nl/brt/achtergrondkaart/wmts/v2_0?request=GetCapabilities&service=wmts";
 
-        await using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
-        var tileSources = WmtsParser.Parse(response);
+        using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
+        var tileSources = WmtsCapabilitiesParser.Parse(response);
         var nature2000TileSource = tileSources.FirstOrDefault(t => t.Name == "top1000raster") ?? tileSources.First();
         if (DefaultCache != null)
         {
