@@ -23,7 +23,7 @@ public class FetchMachineTests
     public void TileFetcherShouldRequestAllTilesJustOnes()
     {
         // Arrange
-        var tileProvider = new CountingTileProvider();
+        var tileProvider = new CountingTileSource();
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
