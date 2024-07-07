@@ -54,7 +54,7 @@ public class WeakEventManagerTests
         dataChanged.DataChanged += TestDataChanged;
         dataChanged.DataChanged -= TestDataChanged;
         dataChanged.OnDataChanged();
-        eventManager.RaiseEvent(this, new DataChangedEventArgs());
+        eventManager.RaiseEvent(this, new DataChangedEventArgs("LayerName"));
         Assert.That(_changed, Is.EqualTo(false));
     }
 

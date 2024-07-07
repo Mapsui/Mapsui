@@ -47,7 +47,7 @@ public class TilesSample : ISample
         };
     }
 
-    private static async Task<List<RasterFeature>> TileIndexToFeaturesAsync(TileIndex[] tileIndexes, ITileSource tileSource)
+    private static async Task<List<RasterFeature>> TileIndexToFeaturesAsync(TileIndex[] tileIndexes, SampleTileSource tileSource)
     {
         var features = new List<RasterFeature>();
         foreach (var tileIndex in tileIndexes)
