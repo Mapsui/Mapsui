@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
@@ -24,7 +25,7 @@ public class LayerThreadingTests
         var provider = new ObservableCollectionProvider<Callout>(observableCollection);
         using var layer = new Layer("test");
         layer.DataSource = provider;
-
+        CancellationTokenSource source = new CancellationTokenSource();
 
         var task1 = Task.Run(() =>
         {
@@ -42,7 +43,7 @@ public class LayerThreadingTests
         {
             try
             {
-                await GetFeaturesAsync(provider);
+                await GetFeaturesAsync(provider, source.Token);
             }
             catch (Exception e)
             {
@@ -68,15 +69,16 @@ public class LayerThreadingTests
         await task1;
 
         ClassicAssert.IsTrue(_exceptions.Count == 0); // no Exceptions should have occurred
+        await source.CancelAsync();
     }
 
-    private async Task GetFeaturesAsync(ObservableCollectionProvider<Callout> provider)
+    private async Task GetFeaturesAsync(ObservableCollectionProvider<Callout> provider, CancellationToken cancellationToken)
     {
         for (int i = 0; i < 5000; i++)
         {
             try
             {
-                await provider.GetFeaturesAsync(new FetchInfo(new MSection(new MRect(0, 0, 0, 0), 1)));
+                await provider.GetFeaturesAsync(new FetchInfo(new MSection(new MRect(0, 0, 0, 0), 1)), cancellationToken);
             }
             catch (Exception e)
             {
