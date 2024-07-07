@@ -18,7 +18,7 @@ using Attribution = BruTile.Attribution;
 namespace Mapsui.Tiling.Provider;
 
 /// <summary> The rasterizing tile provider. Tiles the Layer for faster Rasterizing on Zoom and Move. </summary>
-public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
+public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
 {
     private readonly ConcurrentStack<IRenderer> _rasterizingLayers = new();
     private readonly IRenderer? _rasterizer;
@@ -30,7 +30,7 @@ public class RasterizingTileProvider : ITileSource, ILayerFeatureInfo
     private readonly RenderFormat _renderFormat;
     private readonly ConcurrentDictionary<TileIndex, double> _searchSizeCache = new();
 
-    public RasterizingTileProvider(
+    public RasterizingTileSource(
         ILayer layer,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,

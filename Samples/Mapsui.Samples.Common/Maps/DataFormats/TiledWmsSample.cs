@@ -35,10 +35,9 @@ public class TiledWmsSample : ISample
     public static ITileSource CreateTileSource()
     {
         const string url = "https://service.pdok.nl/rvo/omgevingswarmte/wms/v1_0";
-        // You need to know the schema. This can be a problem. Usally it is GlobalSphericalMercator
+        // You need to know the schema. This can be a problem. Usually it is GlobalSphericalMercator
         var schema = new WkstNederlandSchema { Format = "image/png", Srs = "EPSG:28992" };
-        var request = new WmscRequest(new Uri(url), schema, new[] { "koudegeslotenwkobuurt" }.ToList(), [string.Empty], version: "1.3.0");
-        var provider = new HttpTileProvider(request, DefaultCache);
-        return new TileSource(provider, schema) { Name = "Omgevingswarmte (PDOK)" };
+        var request = new WmscUrlBuilder(new Uri(url), schema, new[] { "koudegeslotenwkobuurt" }.ToList(), [string.Empty], version: "1.3.0");
+        return new HttpTileSource(schema, request, "Omgevingswarmte (PDOK)", DefaultCache);
     }
 }

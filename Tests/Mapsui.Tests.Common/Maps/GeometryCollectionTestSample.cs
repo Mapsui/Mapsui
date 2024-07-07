@@ -5,7 +5,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class GeometryCollectionSample : ISample
+public class GeometryCollectionTestSample : ISample
 {
     public string Name => "GeometryCollection";
     public string Category => "Tests";

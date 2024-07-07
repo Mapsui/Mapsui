@@ -1,22 +1,32 @@
-﻿using Mapsui.Extensions.Projections;
+﻿using System.IO;
+using System.Threading.Tasks;
+using Mapsui.Extensions.Cache;
+using Mapsui.Extensions.Projections;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Providers.Wms;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
+using Mapsui.Tiling.Layers;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
-using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.DataFormats;
+#pragma warning disable IDISP001
 
-public class WmsProjectionDotSpatialSample : ISample
+namespace Mapsui.Samples.Common.Maps.WMS;
+public class WmsProjectionTilingSample : ISample
 {
-    public string Name => "WMS Projection DotSpatial";
-    public string Category => "Data Formats";
+    static WmsProjectionTilingSample()
+    {
+        CacheDeployer.CopyEmbeddedResourceToFile("WmsSample.sqlite");
+    }
+
+    public string Name => "WMS Projection Tiling";
+    public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()
     {
-        var map = new Mapsui.Map
+        var map = new Map
         {
             CRS = "EPSG:3857",
         };
@@ -39,7 +49,7 @@ public class WmsProjectionDotSpatialSample : ISample
             CRS = "EPSG:3857"
         };
 
-        return new ImageLayer("mainmap")
+        var imageLayer = new ImageLayer("mainmap")
         {
             DataSource = dataSource,
             Style = new RasterStyle(),
@@ -53,17 +63,22 @@ public class WmsProjectionDotSpatialSample : ISample
                 BackColor = Color.LightGray,
             }
         };
+
+        return new RasterizingTileLayer(imageLayer);
     }
 
     private static async Task<WmsProvider> CreateWmsProviderAsync()
     {
+        var wmsCachePath = Path.Combine(CacheDeployer.CacheLocation, "WmsSample");
+        ////var testPath = @"C:\Github\Mapsui\Tests\Mapsui.Rendering.Skia.Tests\Resources\Cache\WmsSample";
+        var persistentCache = new SqlitePersistentCache(wmsCachePath);
         const string wmsUrl = "https://wms.cartografia.agenziaentrate.gov.it/inspire/wms/ows01.php?service=WMS&request=getcapabilities";
-        var provider = await WmsProvider.CreateAsync(wmsUrl);
+        var provider = await WmsProvider.CreateAsync(wmsUrl, persistentCache: persistentCache);
         provider.ContinueOnError = true;
         provider.TimeOut = 20000;
         provider.CRS = "EPSG:6706";
         provider.AddLayer("province");
-        provider.SetImageFormat((provider.OutputFormats)[0]);
+        provider.SetImageFormat(provider.OutputFormats[0]);
         provider.Transparent = null;
         return provider;
     }

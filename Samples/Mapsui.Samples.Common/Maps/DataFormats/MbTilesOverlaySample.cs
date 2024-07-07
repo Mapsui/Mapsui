@@ -22,7 +22,10 @@ public class MbTilesOverlaySample : ISample
     public Task<Map> CreateMapAsync()
     {
         var map = new Map();
-        map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial, persistentCache: BingArial.DefaultCache)) { Name = "Bing Aerial" });
+        map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial, persistentCache: BingArial.DefaultCache))
+        {
+            Name = "Bing Aerial"
+        });
         map.Layers.Add(CreateMbTilesLayer(Path.Combine(MbTilesDeployer.MbTilesLocation, "torrejon-de-ardoz.mbtiles")));
         return Task.FromResult(map);
     }

@@ -36,7 +36,6 @@
       https://aka.platform.uno/singleproject-features
     -->
     <UnoFeatures>
-      Skia;
     </UnoFeatures>
   </PropertyGroup>
   <ItemGroup>

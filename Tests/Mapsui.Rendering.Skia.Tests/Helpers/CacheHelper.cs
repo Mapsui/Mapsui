@@ -5,6 +5,7 @@
 using Mapsui.Providers.Wfs;
 using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common.Maps.DataFormats;
+using Mapsui.Samples.Common.Maps.WMTS;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Tiling;
 
@@ -22,6 +23,7 @@ internal static class CacheHelper
         TiledWmsSample.DefaultCache ??= File.ReadFromCacheFolder("TiledWmsSample");
         TmsSample.DefaultCache ??= File.ReadFromCacheFolder("TmsSample");
         WmtsSample.DefaultCache ??= File.ReadFromCacheFolder("WmtsSample");
+        WmtsZurichSample.DefaultCache ??= File.ReadFromCacheFolder("WmtsZurichSample");
 
         // Url Cache
         WmsProvider.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
@@ -40,7 +42,7 @@ internal static class CacheHelper
         Michelin.DefaultCache = null;
         TiledWmsSample.DefaultCache = null;
         TmsSample.DefaultCache = null;
-        WmtsSample.DefaultCache = null;
+        WmtsZurichSample.DefaultCache = null;
 
         // Url Cache
         WmsProvider.DefaultCache = null;
