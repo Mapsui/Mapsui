@@ -4,9 +4,9 @@ using BruTile;
 
 namespace Mapsui.Tests.Fetcher.Providers;
 
-internal class SometimesFailingTileProvider : CountingTileProvider
+internal class SometimesFailingTileSource : CountingTileSource
 {
-    private readonly Random _random = new Random(1000);
+    private readonly Random _random = new(1000);
 
     public override async Task<byte[]?> GetTileAsync(TileInfo tileInfo)
     {

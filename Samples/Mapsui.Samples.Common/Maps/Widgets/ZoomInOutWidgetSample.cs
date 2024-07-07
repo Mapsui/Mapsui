@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps.Widgets;
 public class ZoomInOutWidgetSample : ISample
 {
     public string Name => "ZoomInOutWidget";
-    public string Category => "Widgets";
+    public string Category => "1";
 
     public Task<Map> CreateMapAsync()
     {
@@ -20,6 +20,13 @@ public class ZoomInOutWidgetSample : ISample
         map.Widgets.Add(CreateZoomInOutWidget(Orientation.Horizontal, VerticalAlignment.Top, HorizontalAlignment.Right));
         map.Widgets.Add(CreateZoomInOutWidget(Orientation.Vertical, VerticalAlignment.Bottom, HorizontalAlignment.Right));
         map.Widgets.Add(CreateZoomInOutWidget(Orientation.Horizontal, VerticalAlignment.Bottom, HorizontalAlignment.Left));
+
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(2000);
+            map.Navigator.PanLock = true;
+            map.Navigator.RotationLock = true;
+        });
 
         return Task.FromResult(map);
     }

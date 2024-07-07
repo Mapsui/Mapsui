@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Fetcher.Providers;
 
-internal class NullTileProvider : CountingTileProvider
+internal class NullTileSource : CountingTileSource
 {
     public override async Task<byte[]?> GetTileAsync(TileInfo tileInfo)
     {
