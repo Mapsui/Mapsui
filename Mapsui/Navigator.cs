@@ -421,23 +421,31 @@ public class Navigator
     /// <param name="maxDuration">Maximum duration of fling deceleration></param>
     public void Fling(double velocityX, double velocityY, long maxDuration)
     {
-        if (PanLock) return;
+        if (PanLock)
+            return;
 
         _animations = FlingAnimation.Create(velocityX, velocityY, maxDuration);
     }
 
     public void Manipulate(Manipulation? manipulation)
     {
-        if (manipulation is null) return;
-        if (RotationLock) manipulation = manipulation with { RotationChange = 0 };
-        if (ZoomLock) manipulation = manipulation with { ScaleFactor = 1 };
-        if (PanLock) manipulation = manipulation with { Center = manipulation.PreviousCenter };
+        if (manipulation is null)
+            return;
+
+        if (RotationLock)
+            manipulation = manipulation with { RotationChange = 0 };
+        if (ZoomLock)
+            manipulation = manipulation with { ScaleFactor = 1 };
+        if (PanLock)
+            manipulation = manipulation with { Center = GetScreenCenter(), PreviousCenter = GetScreenCenter() };
 
         ClearAnimations();
 
         var viewport = TransformState(Viewport, manipulation);
         SetViewportWithLimit(viewport);
     }
+
+    private ScreenPosition GetScreenCenter() => new ScreenPosition(Viewport.Width * 0.5, Viewport.Height * 0.5);
 
     private Viewport TransformState(Viewport viewport, Manipulation manipulation)
     {

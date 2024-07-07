@@ -2,15 +2,17 @@
 using System.IO;
 using System.Reflection;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui;
-using Color = Microsoft.Maui.Graphics.Color;
 using Mapsui.Manipulations;
+using BruTile.Predefined;
+using Mapsui.Tiling.Layers;
+using Mapsui.Tiling.Fetcher;
+using Color = Microsoft.Maui.Graphics.Color;
 
 namespace Mapsui.Samples.Maui;
 
@@ -128,6 +130,26 @@ public class PinSample : IMapViewSample
         return true;
     }
 
-    public void Setup(IMapControl mapControl)
-        => mapControl.Map = BingSample.CreateMap(BingHybrid.DefaultCache, BruTile.Predefined.KnownTileSource.BingHybrid);
+    public void Setup(IMapControl mapControl) => mapControl.Map = CreateMap();
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+
+        map.Layers.Add(CreateLayer());
+        map.Navigator.CenterOnAndZoomTo(new MPoint(1059114.80157058, 5179580.75916194), map.Navigator.Resolutions[14]);
+        map.BackColor = Styles.Color.FromString("#000613");
+
+        return map;
+    }
+
+    private static TileLayer CreateLayer()
+    {
+        var apiKey = "Enter your api key here"; // Contact Microsoft about how to use this
+        var tileSource = KnownTileSources.Create(KnownTileSource.BingHybrid, apiKey, BingHybrid.DefaultCache);
+        return new TileLayer(tileSource, dataFetchStrategy: new DataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
+        {
+            Name = "Bing Aerial",
+        };
+    }
 }
