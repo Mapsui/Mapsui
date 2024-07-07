@@ -112,7 +112,7 @@ public partial class SampleWindow : Form
         Invoke(() =>
         {
             if (((int)_mapControl.Map.Navigator.Viewport.Rotation) != _rotationSlider.Value)
-                _rotationSlider.Value = (int)((_mapControl.Map.Navigator.Viewport.Rotation + 360) % 360);
+                _rotationSlider.Value = Convert.ToInt32(RotationSnapper.NormalizeRotation(_mapControl.Map.Navigator.Viewport.Rotation));
         });
     }
 
