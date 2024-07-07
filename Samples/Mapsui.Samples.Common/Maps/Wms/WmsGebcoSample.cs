@@ -2,15 +2,14 @@
 using Mapsui.Layers;
 using Mapsui.Limiting;
 using Mapsui.Providers.Wms;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.WMS;
 
 public class WmsGebcoSample : ISample
 {
-    public string Name => "Wms Gebco";
-    public string Category => "Tests";
+    public string Name => "WMS Gebco";
+    public string Category => "WMS";
 
     public async Task<Map> CreateMapAsync()
     {

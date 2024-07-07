@@ -41,7 +41,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
         _fetchMachine = new FetchMachine(_fetchThreadCount);
     }
 
-    public event DataChangedEventHandler? DataChanged;
+    public event EventHandler<Exception?>? DataChanged;
     public event PropertyChangedEventHandler? PropertyChanged;
     public int NumberTilesNeeded { get; private set; }
 
@@ -115,7 +115,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
 
             _tilesInProgress.TryRemove(tileInfo.Index);
 
-            DataChanged?.Invoke(this, new DataChangedEventArgs(exception));
+            DataChanged?.Invoke(this, exception);
 
             FetchNextTiles();
         }

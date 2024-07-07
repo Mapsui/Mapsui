@@ -1,13 +1,11 @@
 ﻿using System.IO;
 using BruTile;
-using BruTile.Cache;
 using BruTile.FileSystem;
 using BruTile.Predefined;
 using Mapsui.Layers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling.Layers;
 using System.Threading.Tasks;
-using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
@@ -31,35 +29,9 @@ public class MapTilerSample : ISample
     }
 
     public static ILayer CreateLayer()
-        => new TileLayer(new MapTilerTileSource()) { Name = "True Marble in MapTiler" };
-}
+        => new TileLayer(new FileTileSource(GetTileSchema(), Path.Combine(MapTilesDeployer.MapTileLocation, "TrueMarble"), "png", name: "MapTiler")) { Name = "True Marble in MapTiler" };
 
-public class MapTilerTileSource : ITileSource
-{
-    public MapTilerTileSource()
-    {
-        Schema = GetTileSchema();
-        Provider = GetTileProvider();
-        Name = "MapTiler";
-    }
-
-    public ITileSchema Schema { get; }
-    public string Name { get; }
-    public Attribution Attribution { get; } = new Attribution();
-    public ITileProvider Provider { get; }
-
-    public async Task<byte[]?> GetTileAsync(TileInfo tileInfo)
-    {
-        return await Provider.GetTileAsync(tileInfo);
-    }
-
-    public static ITileProvider GetTileProvider()
-    {
-        var trueMarblePath = Path.Combine(MapTilesDeployer.MapTileLocation, "TrueMarble");
-        return new FileTileProvider(new FileCache(trueMarblePath, "png"));
-    }
-
-    public static ITileSchema GetTileSchema()
+    private static GlobalSphericalMercator GetTileSchema()
     {
         var schema = new GlobalSphericalMercator(YAxis.TMS);
         schema.Resolutions.Clear();

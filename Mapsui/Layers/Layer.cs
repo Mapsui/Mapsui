@@ -128,14 +128,14 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
             _cache = features.ToArray();
             if (_refreshCounter == refreshCounter)
                 Busy = false;
-            OnDataChanged(new DataChangedEventArgs());
+            OnDataChanged(new DataChangedEventArgs(Name));
         }
         catch (Exception ex)
         {
             Logger.Log(LogLevel.Error, ex.Message, ex);
             if (_refreshCounter == refreshCounter)
                 Busy = false;
-            OnDataChanged(new DataChangedEventArgs(ex));
+            OnDataChanged(new DataChangedEventArgs(ex, Name));
         }
     }
 }

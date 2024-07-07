@@ -27,7 +27,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var expectedTiles = 64;
 
@@ -52,7 +52,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var expectedTiles = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
@@ -81,7 +81,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
@@ -104,7 +104,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
@@ -129,7 +129,7 @@ public class FetchMachineTests
         var tileSchema = new GlobalSphericalMercator();
         var tileSource = new TileSource(tileProvider, tileSchema);
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo, cancellationToken));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
