@@ -43,6 +43,10 @@
     <!--<PackageReference Include="SkiaSharp.Views.WinUI" />-->
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="HarfBuzzSharp"/>
+  </ItemGroup>
+
   <!--Harfbuzz Sharp references Workaround for this issue-->
   <!--https://github.com/mono/SkiaSharp/issues/1725-->
   <ItemGroup Condition="'$(TargetFramework)'=='net8.0-browserwasm'">
