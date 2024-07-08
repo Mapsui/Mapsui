@@ -39,6 +39,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     /// <param name="renderFormat">render Format png is default and skp is skia picture</param>
     public RasterizingLayer(
         ILayer layer,
+        IRenderer renderer,
         int delayBeforeRasterize = 1000,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
