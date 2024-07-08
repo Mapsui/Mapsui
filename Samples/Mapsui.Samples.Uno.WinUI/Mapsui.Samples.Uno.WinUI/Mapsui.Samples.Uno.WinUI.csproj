@@ -6,8 +6,8 @@
       net8.0-maccatalyst;
       net8.0-windows10.0.19041;
       net8.0-desktop;
-      net8.0-browserwasm;
 		</TargetFrameworks>
+    <!--net8.0-browserwasm;--> <!-- does not compile yet-->
 
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
