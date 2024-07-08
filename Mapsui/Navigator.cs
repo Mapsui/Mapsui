@@ -39,6 +39,11 @@ public class Navigator
     public bool RotationLock { get; set; }
 
     /// <summary>
+    /// If <see cref="PanLock"/> == true, avoid pan if zooming (always zoom to center)
+    /// </summary>
+    public bool AvoidPanDuringZoom { get; set; }
+
+    /// <summary>
     /// The bounds to restrict panning. Exactly how these bounds affects panning
     /// depends on the implementation of the IViewportLimiter.
     /// </summary>
@@ -208,7 +213,7 @@ public class Navigator
 
         var (centerOfZoomX, centerOfZoomY) = Viewport.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
 
-        if (PanLock)
+        if (PanLock && AvoidPanDuringZoom)
         {
             // Avoid pan by zooming on center
             centerOfZoomX = Viewport.CenterX;
