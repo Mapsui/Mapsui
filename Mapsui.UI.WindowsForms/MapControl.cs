@@ -169,7 +169,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     public double GetPixelDensity()
     {
-        return (UseGPU ? _glView.CanvasSize.Width : _canvasView.CanvasSize.Width) / Width;
+        return (UseGPU ? _glView!.CanvasSize.Width : _canvasView!.CanvasSize.Width) / Width;
     }
 
     protected override void Dispose(bool disposing)
@@ -189,13 +189,5 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         }
 
         base.Dispose(disposing);
-    }
-
-    protected virtual void ThrowIfDisposed()
-    {
-        if (_disposed)
-        {
-            throw new ObjectDisposedException(GetType().FullName);
-        }
     }
 }

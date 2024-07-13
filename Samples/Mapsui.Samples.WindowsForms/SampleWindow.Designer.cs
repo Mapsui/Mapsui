@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Samples.WinForms;
+﻿namespace Mapsui.Samples.WindowsForms;
 
 partial class SampleWindow
 {

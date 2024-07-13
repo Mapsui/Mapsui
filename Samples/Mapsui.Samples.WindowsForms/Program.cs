@@ -1,3 +1,5 @@
+using Mapsui.Samples.WindowsForms;
+
 namespace Mapsui.Samples.WinForms;
 
 internal static class Program

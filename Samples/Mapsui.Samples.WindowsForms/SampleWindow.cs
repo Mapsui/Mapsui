@@ -3,8 +3,7 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.UI.WindowsForms;
 
-namespace Mapsui.Samples.WinForms;
-
+namespace Mapsui.Samples.WindowsForms;
 public partial class SampleWindow : Form
 {
     private readonly MapControl _mapControl;
@@ -20,8 +19,8 @@ public partial class SampleWindow : Form
         Text = "Samples for Mapsui.WindowsForms";
         BackColor = Color.White;
 
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Tests.Common.Samples.Register();
+        Common.Samples.Register();
 
         var layout = new TableLayoutPanel();
 
@@ -150,7 +149,7 @@ public partial class SampleWindow : Form
             _sampleList.Controls.Add(CreateRadioButton(sample));
         }
 
-        ((RadioButton)_sampleList.Controls[_sampleList.Controls.Count - 1]).Checked = true;
+        ((RadioButton)_sampleList.Controls[^1]).Checked = true;
     }
 
     private RadioButton CreateRadioButton(ISampleBase sample)
@@ -162,20 +161,20 @@ public partial class SampleWindow : Form
             BackColor = Color.White,
         };
 
-        radioButton.CheckedChanged += (s, a) =>
+        radioButton.CheckedChanged += (s, _) =>
         {
-            if (s is RadioButton rb && !rb.Checked)
+            if (s is RadioButton { Checked: false })
                 return;
 
             Catch.Exceptions(async () =>
             {
                 _mapControl.Map.Navigator.ViewportChanged -= ViewportChanged;
-                _mapControl.Map?.Layers.Clear();
+                _mapControl.Map.Layers.Clear();
                 await sample.SetupAsync(_mapControl);
                 _mapControl.Refresh();
                 _mapControl.Map.Navigator.ViewportChanged += ViewportChanged;
                 _layerList.Items.Clear();
-                foreach (var layer in _mapControl.Map?.Layers)
+                foreach (var layer in _mapControl.Map.Layers)
                 {
                     _layerList.Items.Add(layer.Name);
                     _layerList.SetItemCheckState(_layerList.Items.Count - 1, layer.Enabled ? CheckState.Checked : CheckState.Unchecked);
