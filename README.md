@@ -27,6 +27,7 @@ The documentation can be found at [mapsui.com](https://mapsui.com).
 | Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) |       [Android](https://mapsui.com/documentation/getting-started-android.html)       |
 | Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) |           [iOS](https://mapsui.com/documentation/getting-started-ios.html)           |
 | Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) |           [Eto](https://mapsui.com/documentation/getting-started-eto.html)           |
+| Mapsui.WindowsForms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WindowsForms/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.WindowsForms.svg)](https://www.nuget.org/packages/Mapsui.WindowsForms) | [Eto](https://mapsui.com/documentation/getting-started-windowsforms.html) |
 
 ## Core Nugets
 
