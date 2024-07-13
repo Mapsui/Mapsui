@@ -16,6 +16,7 @@ An ImageSource can point to an SVG (supported via [Svg.Skia](https://github.com/
 
 ### Types with an ImageSource
 The following types in Mapsui currently support the ImageSource path:
+
 - SymbolStyle
 - CalloutStyle
 - Brush
@@ -23,11 +24,13 @@ The following types in Mapsui currently support the ImageSource path:
 
 ### BitmapRegion for Bitmap Types
 For bitmap types, you can specify a sub-region of the bitmap to use. This is useful for utilizing a smaller part of a bitmap or working with a meta image (or atlas) that contains multiple smaller images. In Mapsui 5.0.0-beta.2, BitmapRegions are supported by:
+
 - SymbolStyle 
 - Brush
 
 ### Custom SVG colors
 When using an SVG, you can override the built-in colors of the stroke and fill with:
+
 - SvgFillColor
 - SvgStrokeColor
 
