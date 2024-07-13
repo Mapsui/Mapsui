@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps.Widgets;
 public class ZoomInOutWidgetSample : ISample
 {
     public string Name => "ZoomInOutWidget";
-    public string Category => "1";
+    public string Category => "Widgets";
 
     public Task<Map> CreateMapAsync()
     {
