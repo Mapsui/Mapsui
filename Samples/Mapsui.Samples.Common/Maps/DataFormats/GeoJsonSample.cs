@@ -25,7 +25,7 @@ public class GeoJsonSample : ISample
         GeoJsonDeployer.CopyEmbeddedResourceToFile("countries.geojson");
     }
 
-    public string Name => "13 GeoJson";
+    public string Name => "GeoJson";
     public string Category => "Data Formats";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
