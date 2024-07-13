@@ -40,25 +40,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HarfBuzzSharp"/>
-  </ItemGroup>
-
-  <!--Harfbuzz Sharp references Workaround for this issue-->
-  <!--https://github.com/mono/SkiaSharp/issues/1725-->
-  <ItemGroup Condition="'$(TargetFramework)'=='net8.0-browserwasm'">
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)'!='net8.0-windows10.0.19041'">
-    <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows10.0.19041'">
-    <PackageReference Include="SkiaSharp.Views.WinUI"/>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
     <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
