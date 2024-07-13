@@ -115,4 +115,20 @@ public static class ImageSourceCacheTests
         Assert.That(bytes is not null);
         Assert.That(bytes?.Length > 0);
     }
+
+    [Test]
+    public static async Task AddUriDataRegisterAsync()
+    {
+        // Arrange
+        var mapsuiLogo = $"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSI1NiI+PHBhdGggZD0iTTE4IC4zNEM4LjMyNS4zNC41IDguMTY4LjUgMTcuODFjMCAzLjMzOS45NjIgNi40NDEgMi41OTQgOS4wOTRIM2w3LjgyIDE1LjExN0wxOCA1NS45MDNsNy4xODctMTMuODk1TDMzIDI2LjkwM2gtLjA2M2MxLjYzMi0yLjY1MyAyLjU5NC01Ljc1NSAyLjU5NC05LjA5NEMzNS41MzEgOC4xNjkgMjcuNjc1LjM0IDE4IC4zNHptMCA5LjQzOGE2LjUgNi41IDAgMSAxIDAgMTMgNi41IDYuNSAwIDAgMSAwLTEzeiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMDAwMDAwIi8+PC9zdmc+";
+        var imageSourceCache = new ImageSourceCache();
+        await imageSourceCache.RegisterAsync(mapsuiLogo);
+
+        // Act
+        var bytes = imageSourceCache.Get(mapsuiLogo);
+
+        // Assert
+        Assert.That(bytes is not null);
+        Assert.That(bytes?.Length > 0);
+    }
 }
