@@ -22,6 +22,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         Control view;
 
+        Dock = DockStyle.Fill;
+        AutoSize = true;
         BackColor = Color.White;
         Resize += MapControlResize;
 
