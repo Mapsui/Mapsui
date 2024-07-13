@@ -221,7 +221,7 @@ jobs:
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip android --skip sdkpsexecpolicy
+      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.sln  
     - name: Run dotnet format
