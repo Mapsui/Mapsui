@@ -26,6 +26,7 @@ nav:
   - 'projections.md'
   - 'custom-style-renders.md'
   - 'performance-widget.md'
+  - 'imagesource.md'
   
   - Upgrade guides:
     - 'v4.0-upgrade-guide.md'
