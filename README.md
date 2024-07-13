@@ -1,6 +1,6 @@
 ## Mapsui (pronounced map-su-wii)
 
-Mapsui is a map component for apps built with: MAUI, WPF, Avalonia, Uno, Blazor, WinUI, Eto, .NET Android and .NET iOS. 
+Mapsui is a map component for apps built with: MAUI, WPF, Avalonia, Uno, Blazor, WinUI, Windows Forms, Eto, .NET Android and .NET iOS. 
 
 ## Quick Start
 Below is a table with the nuget packages for all the supported UI frameworks. The right most column has a link to the guickstart.
