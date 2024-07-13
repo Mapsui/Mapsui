@@ -412,9 +412,9 @@ Try the quick-start for your favorite framework below.
         **Step 3:** In Form1.cs add this to the class constructor:
 
         ```csharp
-        var mapControl = new Mapsui.UI.WindowsForms.MapControl();
-        mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());    
-        Controls.Add(mapControl);
+        var mapControl = new MapControl();
+		Controls.Add(mapControl);
+		mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
         ```
 
         **Step 4:** Run it and you should see a map of the world.
