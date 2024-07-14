@@ -23,8 +23,8 @@ public static class ImageFetcher
             "file" => LoadFromFileSystem(new Uri(imageSource)),
             "http" or "https" => await LoadFromUrlAsync(new Uri(imageSource)),
             "svg" => LoadFromSvg(imageSource.Substring(4)),
-            "svg-base64" => LoadFromSvgBase64(imageSource.Substring(11)),
-            "image-base64" => LoadFromImageBase64(imageSource.Substring(13)),
+            "svg-base64" => LoadFromBase64(imageSource.Substring(11)),
+            "image-base64" => LoadFromBase64(imageSource.Substring(13)),
             _ => throw new ArgumentException($"Scheme '{scheme}' of '{imageSource}' is not supported"),
         };
     }
@@ -122,7 +122,7 @@ public static class ImageFetcher
         }
     }
 
-    private static byte[] LoadFromSvgBase64(string imageSource)
+    private static byte[] LoadFromBase64(string imageSource)
     {
         try
         {
@@ -130,21 +130,7 @@ public static class ImageFetcher
         }
         catch (Exception ex)
         {
-            var message = $"Could not load svg from base64 encoded string '{imageSource}' : '{ex.Message}'";
-            Logger.Log(LogLevel.Error, message, ex);
-            throw new Exception(message, ex);
-        }
-    }
-
-    private static byte[] LoadFromImageBase64(string imageSource)
-    {
-        try
-        {
-            return Convert.FromBase64String(imageSource);
-        }
-        catch (Exception ex)
-        {
-            var message = $"Could not load binary image from base64 encoded string '{imageSource}' : '{ex.Message}'";
+            var message = $"Could not load resource from base64 encoded string '{imageSource}' : '{ex.Message}'";
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }
