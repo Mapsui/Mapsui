@@ -22,9 +22,9 @@ public static class ImageFetcher
             "embedded" => LoadEmbeddedResourceFromPath(new Uri(imageSource)),
             "file" => LoadFromFileSystem(new Uri(imageSource)),
             "http" or "https" => await LoadFromUrlAsync(new Uri(imageSource)),
-            "svg" => LoadFromSvg(imageSource),
-            "svg-base64" => LoadFromSvgBase64(imageSource),
-            "image-base64" => LoadFromImageBase64(imageSource),
+            "svg" => LoadFromSvg(imageSource.Substring(4)),
+            "svg-base64" => LoadFromSvgBase64(imageSource.Substring(11)),
+            "image-base64" => LoadFromImageBase64(imageSource.Substring(13)),
             _ => throw new ArgumentException($"Scheme '{scheme}' of '{imageSource}' is not supported"),
         };
     }
@@ -112,7 +112,7 @@ public static class ImageFetcher
     {
         try
         {
-            return Encoding.UTF8.GetBytes(imageSource.Substring(4));
+            return Encoding.UTF8.GetBytes(imageSource);
         }
         catch (Exception ex)
         {
@@ -126,7 +126,7 @@ public static class ImageFetcher
     {
         try
         {
-            return Convert.FromBase64String(imageSource.Substring(11));
+            return Convert.FromBase64String(imageSource);
         }
         catch (Exception ex)
         {
@@ -140,7 +140,7 @@ public static class ImageFetcher
     {
         try
         {
-            return Convert.FromBase64String(imageSource.Substring(13));
+            return Convert.FromBase64String(imageSource);
         }
         catch (Exception ex)
         {
