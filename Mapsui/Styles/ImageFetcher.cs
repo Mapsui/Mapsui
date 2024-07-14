@@ -14,17 +14,18 @@ public static class ImageFetcher
 {
     public static async Task<byte[]> FetchBytesFromImageSourceAsync(string imageSource)
     {
-        var imageSourceUrl = new Uri(imageSource);
+        // Uri has a limitation of ~2000 bytes for URLs
+        var scheme = imageSource.Substring(0, imageSource.IndexOf(':'));
 
-        return imageSourceUrl.Scheme switch
+        return scheme switch
         {
-            "embedded" => LoadEmbeddedResourceFromPath(imageSourceUrl),
-            "file" => LoadFromFileSystem(imageSourceUrl),
-            "http" or "https" => await LoadFromUrlAsync(imageSourceUrl),
-            "svg" => LoadFromSvg(imageSourceUrl),
-            "svg-base64" => LoadFromSvgBase64(imageSourceUrl),
-            "image-base64" => LoadFromImageBase64(imageSourceUrl),
-            _ => throw new ArgumentException($"Scheme is not supported '{imageSourceUrl.Scheme}' of '{imageSource}'"),
+            "embedded" => LoadEmbeddedResourceFromPath(new Uri(imageSource)),
+            "file" => LoadFromFileSystem(new Uri(imageSource)),
+            "http" or "https" => await LoadFromUrlAsync(new Uri(imageSource)),
+            "svg" => LoadFromSvg(imageSource),
+            "svg-base64" => LoadFromSvgBase64(imageSource),
+            "image-base64" => LoadFromImageBase64(imageSource),
+            _ => throw new ArgumentException($"Scheme '{scheme}' of '{imageSource}' is not supported"),
         };
     }
 
@@ -107,43 +108,43 @@ public static class ImageFetcher
         }
     }
 
-    private static byte[] LoadFromSvg(Uri imageSource)
+    private static byte[] LoadFromSvg(string imageSource)
     {
         try
         {
-            return Encoding.UTF8.GetBytes(Uri.UnescapeDataString(imageSource.AbsoluteUri.Substring(4)));
+            return Encoding.UTF8.GetBytes(imageSource.Substring(4));
         }
         catch (Exception ex)
         {
-            var message = $"Could not load resource from string '{imageSource.AbsolutePath}' : '{ex.Message}'";
+            var message = $"Could not load resource from string '{imageSource}' : '{ex.Message}'";
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }
     }
 
-    private static byte[] LoadFromSvgBase64(Uri imageSource)
+    private static byte[] LoadFromSvgBase64(string imageSource)
     {
         try
         {
-            return Convert.FromBase64String(imageSource.AbsoluteUri.Substring(11));
+            return Convert.FromBase64String(imageSource.Substring(11));
         }
         catch (Exception ex)
         {
-            var message = $"Could not load resource from base64 encoded string '{imageSource.AbsoluteUri}' : '{ex.Message}'";
+            var message = $"Could not load resource from base64 encoded string '{imageSource}' : '{ex.Message}'";
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }
     }
 
-    private static byte[] LoadFromImageBase64(Uri imageSource)
+    private static byte[] LoadFromImageBase64(string imageSource)
     {
         try
         {
-            return Convert.FromBase64String(imageSource.AbsoluteUri.Substring(13));
+            return Convert.FromBase64String(imageSource.Substring(13));
         }
         catch (Exception ex)
         {
-            var message = $"Could not load binary image from base64 encoded string '{imageSource.AbsoluteUri}' : '{ex.Message}'";
+            var message = $"Could not load binary image from base64 encoded string '{imageSource}' : '{ex.Message}'";
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }
