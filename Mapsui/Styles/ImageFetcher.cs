@@ -14,7 +14,7 @@ public static class ImageFetcher
 {
     public static async Task<byte[]> FetchBytesFromImageSourceAsync(string imageSource)
     {
-        // Uri has a limitation of ~2000 bytes for URLs
+        // Uri has a limitation of ~2000 bytes for URLs, so extract the scheme by hand
         var scheme = imageSource.Substring(0, imageSource.IndexOf(':'));
 
         return scheme switch
