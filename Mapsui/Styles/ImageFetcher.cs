@@ -116,7 +116,7 @@ public static class ImageFetcher
         }
         catch (Exception ex)
         {
-            var message = $"Could not load resource from string '{imageSource}' : '{ex.Message}'";
+            var message = $"Could not load svg from string '{imageSource}' : '{ex.Message}'";
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }
@@ -130,7 +130,7 @@ public static class ImageFetcher
         }
         catch (Exception ex)
         {
-            var message = $"Could not load resource from base64 encoded string '{imageSource}' : '{ex.Message}'";
+            var message = $"Could not load svg from base64 encoded string '{imageSource}' : '{ex.Message}'";
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }
