@@ -21,7 +21,9 @@ public static class ImageFetcher
             "embedded" => LoadEmbeddedResourceFromPath(imageSourceUrl),
             "file" => LoadFromFileSystem(imageSourceUrl),
             "http" or "https" => await LoadFromUrlAsync(imageSourceUrl),
-            "data" => LoadFromData(imageSourceUrl),
+            "svg" => LoadFromSvg(imageSourceUrl),
+            "svg-base64" => LoadFromSvgBase64(imageSourceUrl),
+            "image-base64" => LoadFromImageBase64(imageSourceUrl),
             _ => throw new ArgumentException($"Scheme is not supported '{imageSourceUrl.Scheme}' of '{imageSource}'"),
         };
     }
@@ -105,56 +107,43 @@ public static class ImageFetcher
         }
     }
 
-    private static byte[] LoadFromData(Uri imageSource)
-    {
-        var path = imageSource.AbsolutePath;
-        var parameters = path.Split(',')[0];
-        var data = path.Split(',')[1];
-        var segments = parameters.Split(';');
-        var mediaType = segments[0];
-        var charset = segments.Length > 1 && segments[1].Split('=')[0].Trim().StartsWith("charset")
-            ? segments[1].Split('=')[1].Trim()
-            : "US-ASCII";
-        var isBase64 = segments.Last().ToLower().StartsWith("base64");
-
-        return mediaType switch
-        {
-            "image/svg+xml" => LoadFromDataImageSvg(data, isBase64, charset),
-            "image/png" => LoadFromDataImageBinary(data, isBase64),
-            "image/jpeg" => LoadFromDataImageBinary(data, isBase64),
-            _ => throw new ArgumentException($"Media type '{mediaType}' is not supported"),
-        };
-    }
-
-    private static byte[] LoadFromDataImageSvg(string data, bool isBase64, string charset)
+    private static byte[] LoadFromSvg(Uri imageSource)
     {
         try
         {
-            if (isBase64)
-                return Convert.FromBase64String(data);
-            else
-                return Encoding.GetEncoding(charset).GetBytes(data);
+            return Encoding.UTF8.GetBytes(Uri.UnescapeDataString(imageSource.AbsoluteUri.Substring(4)));
         }
         catch (Exception ex)
         {
-            var message = $"Could not load resource from {(isBase64 ? "base64 encoded" : "")} string '{data}' : '{ex.Message}'";
+            var message = $"Could not load resource from string '{imageSource.AbsolutePath}' : '{ex.Message}'";
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }
     }
 
-    private static byte[] LoadFromDataImageBinary(string data, bool isBase64)
+    private static byte[] LoadFromSvgBase64(Uri imageSource)
     {
         try
         {
-            if (!isBase64)
-                return Array.Empty<byte>();
-
-            return Convert.FromBase64String(data);
+            return Convert.FromBase64String(imageSource.AbsoluteUri.Substring(11));
         }
         catch (Exception ex)
         {
-            var message = $"Could not load resource from base64 encoded string '{data}' : '{ex.Message}'";
+            var message = $"Could not load resource from base64 encoded string '{imageSource.AbsoluteUri}' : '{ex.Message}'";
+            Logger.Log(LogLevel.Error, message, ex);
+            throw new Exception(message, ex);
+        }
+    }
+
+    private static byte[] LoadFromImageBase64(Uri imageSource)
+    {
+        try
+        {
+            return Convert.FromBase64String(imageSource.AbsoluteUri.Substring(13));
+        }
+        catch (Exception ex)
+        {
+            var message = $"Could not load binary image from base64 encoded string '{imageSource.AbsoluteUri}' : '{ex.Message}'";
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }
