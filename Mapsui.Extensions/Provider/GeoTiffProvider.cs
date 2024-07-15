@@ -108,9 +108,9 @@ public class GeoTiffProvider : IProvider, IDisposable
     private const TiffTag TIFFTAG_ModelPixelScaleTag = (TiffTag)33550;
     private const TiffTag TIFFTAG_ModelTiepointTag = (TiffTag)33922;
 
-    private static Tiff.TiffExtendProc? _parentExtender;
+    private Tiff.TiffExtendProc? _parentExtender;
 
-    public static void TagExtender(Tiff tif)
+    public void TagExtender(Tiff tif)
     {
         TiffFieldInfo[] tiffFieldInfo =
         {
@@ -124,13 +124,15 @@ public class GeoTiffProvider : IProvider, IDisposable
             _parentExtender(tif);
     }
 
-    private static TiffProperties LoadTiff(string location)
+    private TiffProperties LoadTiff(string location)
     {
         TiffProperties tiffFileProperties;
 
         // Register the custom tag handler
         Tiff.TiffExtendProc extender = TagExtender;
-        _parentExtender = Tiff.SetTagExtender(extender);
+        var previousExtender = Tiff.SetTagExtender(extender);
+        if (previousExtender != extender) // avoid recursion;
+            _parentExtender = previousExtender;
 
         using var tif = Tiff.Open(location, "r4") ?? Tiff.Open(location, "r8"); // read big tiff if normal tiff fails.
 
@@ -282,6 +284,7 @@ public class GeoTiffProvider : IProvider, IDisposable
     public virtual void Dispose()
     {
         (_feature as IDisposable)?.Dispose();
+        Tiff.SetTagExtender(_parentExtender); // set previous Tag Extender
     }
 }
 
