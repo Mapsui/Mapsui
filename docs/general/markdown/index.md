@@ -379,7 +379,7 @@ Try the quick-start for your favorite framework below.
 
         **Step 5:** Run it and you should see a map of the world.
 
-     === "Eto Forms"
+    === "Eto Forms"
 
         **Step 1:** Start a new [Eto.Forms](https://github.com/picoe/Eto/wiki/Quick-Start) application in Visual Studio.
 
