@@ -38,4 +38,4 @@ When using an SVG, you can override the built-in colors of the stroke and fill w
 
 This feature offers great flexibility, allowing you to, for instance, indicate different types of vehicles or different states of a single vehicle. 
 
-In Mapsui 5.0.0-beta.2 the only the SymbolStyle supports SvgFillColor and SvgStrokeColor.
+In Mapsui 5.0.0-beta.2 only the SymbolStyle supports SvgFillColor and SvgStrokeColor.
