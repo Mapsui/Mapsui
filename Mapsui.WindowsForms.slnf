@@ -1,0 +1,24 @@
+{
+  "solution": {
+    "path": "Mapsui.sln",
+    "projects": [
+      "Benchmarks\\Mapsui.Rendering.Benchmarks\\Mapsui.Rendering.Benchmarks.csproj",
+      "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
+      "Mapsui.Extensions\\Mapsui.Extensions.csproj",
+      "Mapsui.Nts\\Mapsui.Nts.csproj",
+      "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
+      "Mapsui.Tiling\\Mapsui.Tiling.csproj",
+      "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
+      "Mapsui.UI.WindowsForms\\Mapsui.UI.WindowsForms.csproj",
+      "Mapsui\\Mapsui.csproj",
+      "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
+      "Samples\\Mapsui.Samples.WindowsForms\\Mapsui.Samples.WindowsForms.csproj",
+      "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
+      "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
+      "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
+      "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
+      "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj",
+      "WinFormsApp1\\WinFormsApp1.csproj"
+    ]
+  }
+}
