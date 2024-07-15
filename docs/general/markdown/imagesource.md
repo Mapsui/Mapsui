@@ -15,7 +15,7 @@ myStyle.ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg"
 An ImageSource can point to an SVG (supported via [Svg.Skia](https://github.com/wieslawsoltes/Svg.Skia)) or a bitmap type, which can be PNG, WEBP, JPEG, and any other formats [supported by SkiaSharp](https://learn.microsoft.com/en-us/dotnet/api/skiasharp.skencodedimageformat?view=skiasharp-2.88#fields).
 
 ### Types with an ImageSource
-The following types in Mapsui currently support the ImageSource path:
+In Mapsui 5.0.0-beta.2 the following types support the ImageSource path:
 
 - SymbolStyle
 - CalloutStyle
@@ -23,7 +23,9 @@ The following types in Mapsui currently support the ImageSource path:
 - ImageButtonWidget
 
 ### BitmapRegion for Bitmap Types
-For bitmap types, you can specify a sub-region of the bitmap to use. This is useful for utilizing a smaller part of a bitmap or working with a meta image (or atlas) that contains multiple smaller images. In Mapsui 5.0.0-beta.2, BitmapRegions are supported by:
+For bitmap types, you can specify a sub-region of the bitmap to use. This is useful for utilizing a smaller part of a bitmap or working with a meta image (or atlas) that contains multiple smaller images. 
+
+In Mapsui 5.0.0-beta.2 the following types support the BitmapRegion:
 
 - SymbolStyle 
 - Brush
@@ -34,4 +36,6 @@ When using an SVG, you can override the built-in colors of the stroke and fill w
 - SvgFillColor
 - SvgStrokeColor
 
-This feature offers great flexibility, allowing you to, for instance, indicate different types of vehicles or different states of a single vehicle.
+This feature offers great flexibility, allowing you to, for instance, indicate different types of vehicles or different states of a single vehicle. 
+
+In Mapsui 5.0.0-beta.2 only the SymbolStyle supports SvgFillColor and SvgStrokeColor.
