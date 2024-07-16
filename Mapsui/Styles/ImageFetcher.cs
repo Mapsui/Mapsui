@@ -112,7 +112,11 @@ public static class ImageFetcher
     {
         try
         {
-            return Encoding.UTF8.GetBytes(imageSource);
+            var source = imageSource.StartsWith("//")
+                ? imageSource = imageSource.Substring(2)
+                : imageSource;
+
+            return Encoding.UTF8.GetBytes(source);
         }
         catch (Exception ex)
         {
@@ -126,7 +130,11 @@ public static class ImageFetcher
     {
         try
         {
-            return Convert.FromBase64String(imageSource);
+            var source = imageSource.StartsWith("//")
+                ? imageSource = imageSource.Substring(2)
+                : imageSource;
+
+            return Convert.FromBase64String(source);
         }
         catch (Exception ex)
         {
