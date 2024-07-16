@@ -1,7 +1,6 @@
 ﻿using Mapsui.Styles;
 using NUnit.Framework;
 using System;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
