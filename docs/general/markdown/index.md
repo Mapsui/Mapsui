@@ -12,6 +12,7 @@ Mapsui is a .NET map component that supports all main .NET UI frameworks.
 | .NET for Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat&logo=nuget&label=Mapsui.Android)](https://www.nuget.org/packages/Mapsui.Android/) |
 | .NET for iOS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat&logo=nuget&label=Mapsui.iOS)](https://www.nuget.org/packages/Mapsui.iOS/)
 | Eto Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat&logo=nuget&label=Mapsui.Eto)](https://www.nuget.org/packages/Mapsui.Eto/) |
+| Windows Forms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat&logo=nuget&label=Mapsui.WindowsForms)](https://www.nuget.org/packages/Mapsui.WindowsForms/) |
 
 Try the quick-start for your favorite framework below.
 
@@ -394,6 +395,26 @@ Try the quick-start for your favorite framework below.
         var mapControl = new Mapsui.UI.Eto.MapControl();
         mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
         Content = mapControl;
+        ```
+
+        **Step 4:** Run it and you should see a map of the world.
+		
+	=== "Windows Forms"
+
+        **Step 1:** Start a new Windows Forms App in Visual Studio.
+
+        **Step 2:** In the package manager console type:
+
+        ```console
+        PM> Install-Package Mapsui.WindowsForms
+        ```
+
+        **Step 3:** In Form1.cs add this to the class constructor:
+
+        ```csharp
+        var mapControl = new MapControl();
+		Controls.Add(mapControl);
+		mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
         ```
 
         **Step 4:** Run it and you should see a map of the world.
