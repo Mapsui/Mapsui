@@ -320,7 +320,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         base.Dispose();
     }
 #endif
-
     public new void Dispose()
     {
         Dispose(true);
