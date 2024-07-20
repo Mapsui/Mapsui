@@ -29,9 +29,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 {
     // GPU does not work currently on Windows
     public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
+#pragma warning disable IDISP002 // These should not be disposed here in WINUI they are not disposable and in UNO They shouldn't be disposed
     private readonly SKSwapChainPanel? _canvasGpu;
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas? _canvas;
+#pragma warning restore IDISP002    
 
     bool _shiftPressed;
 
@@ -291,11 +293,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
-#if HAS_UNO   
-#if  __WINUI__
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context
-#endif
-
+#if __ANDROID__ || __MACOS__
             _canvas?.Dispose();
             _canvasGpu?.Dispose();
             _selectRectangle?.Dispose();
@@ -304,11 +302,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _invalidateTimer?.Dispose();
 #endif
             _map?.Dispose();
-
         }
         CommonDispose(disposing);
 
-#if __ANDROID__ || __IOS__ || __MACOS__
+#if __ANDROID__ || __MACOS__
         base.Dispose(disposing);
 #endif
     }
@@ -320,7 +317,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     public void Dispose()
 #endif
     {
+#if __ANDROID__ || __MACOS__        
         Dispose(true);
+#endif
         GC.SuppressFinalize(this);
     }
 #endif
