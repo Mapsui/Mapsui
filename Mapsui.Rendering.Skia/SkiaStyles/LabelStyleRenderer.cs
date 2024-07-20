@@ -27,11 +27,9 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var offsetY = style.Offset is RelativeOffset ? image.Height * style.Offset.Y : style.Offset.Y;
 
         if (image is BitmapImage bitmapImage)
-        {
             BitmapRenderer.Draw(canvas, bitmapImage.Image, (int)Math.Round(x), (int)Math.Round(y),
                 offsetX: (float)offsetX, offsetY: (float)-offsetY,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
-        }
         else
             throw new InvalidOperationException("Unexpected drawable image type");
     }
