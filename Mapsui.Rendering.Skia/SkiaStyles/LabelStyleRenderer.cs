@@ -230,9 +230,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         // If style has a halo value, than draw halo text
         if (style.Halo != null)
         {
-            var strokeWidth = (float)style.Halo.Width * 2;
-            var paintStyle = SKPaintStyle.StrokeAndFill;
-            using var paintHaloHolder = paintCache.GetOrCreatePaint((style.Font, style.Halo.Color, layerOpacity, paintStyle, strokeWidth), f => CreatePaint(f, labelCache));
+            using var paintHaloHolder = CreateHaloPaintHolder(style, labelCache);
             var paintHalo = paintHaloHolder.Instance;
 
             if (lines != null)
@@ -416,23 +414,47 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var paintCache = labelCache.PaintCache;
 
         // for measuring the text size the opacity can be set to 1
-        using var paintHolder = paintCache.GetOrCreatePaint((labelStyle.Font, labelStyle.ForeColor, 1), f => CreatePaint(f, labelCache));
-        var paint = paintHolder.Instance;
-        var rect = new SKRect();
-        paint.MeasureText(text, ref rect);
+        CacheTracker<SKPaint> paintHolder = default;
+        try
+        {
+            if (labelStyle.Halo != null)
+            {
+                paintHolder = CreateHaloPaintHolder(labelStyle, labelCache);
+            }
+            else
+            {
+                paintHolder = paintCache.GetOrCreatePaint((labelStyle.Font, labelStyle.ForeColor, 1), f => CreatePaint(f, labelCache));
+            }
 
-        double size = Math.Max(rect.Width, rect.Height);
+            var paint = paintHolder.Instance;
+            var rect = new SKRect();
+            paint.MeasureText(text, ref rect);
 
-        var drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
+            double size = Math.Max(rect.Width, rect.Height);
 
-        var offset = labelStyle.Offset.CalcOffset(drawRect.Width, drawRect.Height);
+            var drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
 
-        // Pythagoras for maximal distance
-        var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);
+            var offset = labelStyle.Offset.CalcOffset(drawRect.Width, drawRect.Height);
 
-        // add offset to size multiplied by two because the total size increased by the offset
-        size += (length * 2);
+            // Pythagoras for maximal distance
+            var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);
 
-        return size;
+            // add offset to size multiplied by two because the total size increased by the offset
+            size += (length * 2);
+
+            return size;
+        }
+        finally
+        {
+            paintHolder.Dispose();
+        }
+    }
+
+    private static CacheTracker<SKPaint> CreateHaloPaintHolder(LabelStyle labelStyle, LabelCache labelCache)
+    {
+        var paintCache = labelCache.PaintCache;
+        var strokeWidth = (float)labelStyle.Halo.Width * 2;
+        var paintStyle = SKPaintStyle.StrokeAndFill;
+        return paintCache.GetOrCreatePaint((labelStyle.Font, labelStyle.Halo.Color, 1, paintStyle, strokeWidth), f => CreatePaint(f, labelCache));
     }
 }

@@ -41,6 +41,24 @@ public class LabelStyleFeatureSizeTests
     }
 
     [Test]
+    public void DefaultSizeFeatureSize_Halo()
+    {
+        var labelStyle = new LabelStyle
+        {
+            LabelColumn = "test",
+            Halo = new Pen { Color = Color.Yellow, Width = 2 },
+        };
+
+        var feature = new PointFeature(new MPoint(0, 0));
+        feature["test"] = "Mapsui";
+
+        using var skPaint = new SKPaint();
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, new LabelCache(new PaintCache(new RenderService(), 1000)));
+
+        Assert.That(size, Is.EqualTo(LabelSize + 4).Within(Constants.Epsilon));
+    }
+
+    [Test]
     public void DefaultSizeFeatureSize_Font()
     {
         var labelStyle = new LabelStyle
