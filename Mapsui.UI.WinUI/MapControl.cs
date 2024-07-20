@@ -310,24 +310,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     #if __ANDROID__
     protected new virtual void Dispose(bool disposing)
     {
-        if (disposing)
-        {
-            _canvas?.Dispose();
-            _canvasGpu?.Dispose();
-            _selectRectangle?.Dispose();
-        }
+        CommonUnoDispose(disposing);
         CommonDispose(disposing);
         base.Dispose(disposing);
     }
     #else
     protected virtual void Dispose(bool disposing)
     {
-        if (disposing)
-        {
-            _canvas?.Dispose();
-            _canvasGpu?.Dispose();
-            _selectRectangle?.Dispose();
-        }
+        CommonUnoDispose(disposing);
         CommonDispose(disposing);
         base.Dispose();
     }
@@ -337,6 +327,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    private void CommonUnoDispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _canvas?.Dispose();
+            _canvasGpu?.Dispose();
+            _selectRectangle?.Dispose();
+        } 
     }
 #endif
 }
