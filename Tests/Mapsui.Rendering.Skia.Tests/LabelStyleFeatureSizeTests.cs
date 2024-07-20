@@ -54,8 +54,10 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, new LabelCache(new PaintCache(new RenderService(), 1000)));
-
-        Assert.That(size, Is.EqualTo(LabelSize + 4).Within(Constants.Epsilon));
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            Assert.That(size, Is.EqualTo(LabelSize + 4).Within(Constants.Epsilon));
+        else
+            Assert.That(size, Is.EqualTo(LabelSize + 2).Within(Constants.Epsilon));
     }
 
     [Test]
@@ -75,14 +77,10 @@ public class LabelStyleFeatureSizeTests
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, new LabelCache(new PaintCache(new RenderService(), 1000)));
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-        {
             Assert.That(size, Is.EqualTo(LabelSize * 2 - 1).Within(Constants.Epsilon));
-        }
         else
-        {
             // on macos it is not two times as big but almost two times with 3 less
             Assert.That(size, Is.EqualTo(LabelSize * 2 - 3).Within(Constants.Epsilon));
-        }
     }
 
     [Test]
