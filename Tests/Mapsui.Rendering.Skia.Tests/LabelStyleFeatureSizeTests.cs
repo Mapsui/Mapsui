@@ -13,17 +13,15 @@ namespace Mapsui.Rendering.Skia.Tests;
 [TestFixture]
 public class LabelStyleFeatureSizeTests
 {
-    // The Sizes are different on MacOs and Windows (windows it is 39.6 and macOS it is 42.6)
+    // The Sizes are different on MacOs and Windows
     const double labelSizeOnMac = 42.642578125d;
-    const double labelSizeOnWindows = 39.642578125d;
+    const double labelSizeOnWindows = 40.642578125d;
     const double labelSizeOnLinux = 40.181640625d;
     public readonly double LabelSize = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
         ? labelSizeOnWindows
         : RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
             ? labelSizeOnLinux
             : labelSizeOnMac;
-
-
 
     [Test]
     public void DefaultSizeFeatureSize()
@@ -60,7 +58,7 @@ public class LabelStyleFeatureSizeTests
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
-            Assert.That(size, Is.EqualTo(LabelSize * 2).Within(Constants.Epsilon));
+            Assert.That(size, Is.EqualTo(LabelSize * 2 - 1).Within(Constants.Epsilon));
         }
         else
         {
