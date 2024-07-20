@@ -432,16 +432,6 @@ Try the quick-start for your favorite framework below.
 - [Mapsui on GitHub](https://github.com/mapsui/mapsui)
 - [Online samples in Blazor for Mapsui](https://mapsui.com/v5/samples/)
 
-## Projects that use Mapsui
-
-### Breath Companion
-
-[![Breath Companion website](images/breath-companion.png)](https://software-notion.de/apps/breath-companion)
-
-### Squadra
-
-[![Squadra](images/squadra.png)](https://bertt.github.io/squadra/)
-
 ## Support
 
 For paid support in the form of contract work or consoluting mail: [info.mapsui@gmail.com](mailto:info.mapsui@gmail.com).
