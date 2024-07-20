@@ -283,7 +283,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private bool GetShiftPressed() => _shiftPressed;
 
-#if !HAS_UNO    
+#if !HAS_UNO
     protected virtual void Dispose(bool disposing)
     {
         CommonDispose(disposing);
@@ -306,7 +306,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Dispose(true);
         GC.SuppressFinalize(this);
     }
-#else    
+#else
     #if __ANDROID__
     protected new virtual void Dispose(bool disposing)
     {
@@ -336,7 +336,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _canvas?.Dispose();
             _canvasGpu?.Dispose();
             _selectRectangle?.Dispose();
-        } 
+        }
     }
 #endif
 }
