@@ -283,39 +283,59 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private bool GetShiftPressed() => _shiftPressed;
 
-#if __ANDROID__
-    protected override void Dispose(bool disposing)
-#elif __IOS__ || __MACOS__
-    protected new virtual void Dispose(bool disposing)
-#else
+#if !HAS_UNO    
     protected virtual void Dispose(bool disposing)
-#endif
+    {
+        CommonDispose(disposing);
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+#elif HAS_UNO && __IOS__ // on ios don't dispose _canvas, _canvasGPU, _selectRectangle 
+    protected new virtual void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        CommonDispose(disposing);
+    }
+
+    public new void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+#else    
+    #if __ANDROID__
+    protected new virtual void Dispose(bool disposing)
     {
         if (disposing)
         {
-#if __ANDROID__ || __MACOS__
             _canvas?.Dispose();
             _canvasGpu?.Dispose();
             _selectRectangle?.Dispose();
-#endif
         }
         CommonDispose(disposing);
-
-#if __ANDROID__ || __MACOS__
         base.Dispose(disposing);
-#endif
     }
-
-#if !(__ANDROID__ )
-#if __IOS__ || __MACOS__ || HAS_UNO
-    public new void Dispose()
-#else 
-    public void Dispose()
-#endif
+    #else
+    protected virtual void Dispose(bool disposing)
     {
-#if !(HAS_UNO && __IOS__)        
+        if (disposing)
+        {
+            _canvas?.Dispose();
+            _canvasGpu?.Dispose();
+            _selectRectangle?.Dispose();
+        }
+        CommonDispose(disposing);
+        base.Dispose();
+    }
+    #endif
+
+    public new void Dispose()
+    {
         Dispose(true);
-#endif
         GC.SuppressFinalize(this);
     }
 #endif
