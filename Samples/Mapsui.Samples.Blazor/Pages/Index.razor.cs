@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps.Widgets;
@@ -110,15 +111,18 @@ public partial class Index
         SampleId = MapSamples.FirstOrDefault()?.Name;
     }
 
-    private async void FillMap()
+    private void FillMap()
     {
-        if (Sample != null && _mapControl != null)
+        Catch.Exceptions(async () =>
         {
-            var sample = Sample;
-            Title = sample.Name;
-            await sample.SetupAsync(_mapControl);
-            _sourceCodeUrl = $@"../codesamples/{sample.GetType().Name}.html";
-        }
+            if (Sample != null && _mapControl != null)
+            {
+                var sample = Sample;
+                Title = sample.Name;
+                await sample.SetupAsync(_mapControl);
+                _sourceCodeUrl = $@"../codesamples/{sample.GetType().Name}.html";
+            }
+        });
     }
 
     public ISampleBase? Sample { get; set; }
