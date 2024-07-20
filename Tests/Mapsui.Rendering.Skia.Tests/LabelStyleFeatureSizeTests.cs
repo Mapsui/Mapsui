@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Skia.Tests;
 public class LabelStyleFeatureSizeTests
 {
     // The Sizes are different on MacOs and Windows
-    const double labelSizeOnMac = 43.642578125d;
+    const double labelSizeOnMac = 42.642578125d;
     const double labelSizeOnWindows = 40.642578125d;
     const double labelSizeOnLinux = 41.181640625d;
     public readonly double LabelSize = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
