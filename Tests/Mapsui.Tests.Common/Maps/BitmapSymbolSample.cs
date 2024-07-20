@@ -11,7 +11,7 @@ public class BitmapSymbolSample : ISample
     public string Name => "Bitmap Symbol";
     public string Category => "Tests";
 
-    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+    public Task<Map> CreateMapAsync() => Task.FromResult(BitmapSymbolSample.CreateMap());
 
 
     public static Map CreateMap()

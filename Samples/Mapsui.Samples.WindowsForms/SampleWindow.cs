@@ -4,7 +4,7 @@ using Mapsui.Samples.Common.Extensions;
 using Mapsui.UI.WindowsForms;
 
 namespace Mapsui.Samples.WindowsForms;
-public partial class SampleWindow : Form
+public partial class SampleWindow : Form, IDisposable
 {
     private readonly MapControl _mapControl;
     private readonly ComboBox _categoryComboBox;
