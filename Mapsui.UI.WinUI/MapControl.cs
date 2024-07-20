@@ -317,7 +317,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     public void Dispose()
 #endif
     {
-#if __ANDROID__ || __MACOS__        
+#if !(HAS_UNO && __IOS__)        
         Dispose(true);
 #endif
         GC.SuppressFinalize(this);
