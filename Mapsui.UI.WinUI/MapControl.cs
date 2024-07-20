@@ -298,10 +298,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _canvasGpu?.Dispose();
             _selectRectangle?.Dispose();
 #endif
-#if HAS_UNO || __WINUI__
-            _invalidateTimer?.Dispose();
-#endif
-            _map?.Dispose();
         }
         CommonDispose(disposing);
 
