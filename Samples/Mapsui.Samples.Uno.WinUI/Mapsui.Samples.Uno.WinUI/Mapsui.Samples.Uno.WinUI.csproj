@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst;net8.0-windows10.0.19041;net8.0-desktop</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst;net8.0-windows10.0.19041;net8.0-desktop</TargetFrameworks>
     <!--<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst;net8.0-windows10.0.19041;net8.0-browserwasm;net8.0-desktop</TargetFrameworks>net8.0-browserwasm; does not compile yet -->
 
 		<OutputType>Exe</OutputType>
@@ -33,21 +33,9 @@
     </UnoFeatures>
   </PropertyGroup>
 
-	<!--<ItemGroup Condition="'$(TargetFramework)'=='net8.0-desktop'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net8.0-desktop'">
     <PackageReference Include="SkiaSharp.Skottie"/>
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
-  </ItemGroup>-->
-
-  <ItemGroup Condition="'$(TargetFramework)'=='net8.0-desktop'">
-    <PackageReference Include="SkiaSharp.Skottie"/>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)'!='net8.0-windows10.0.19041'">
-    <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows10.0.19041'">
-    <PackageReference Include="SkiaSharp.Views.WinUI"/>
   </ItemGroup>
 
   <ItemGroup>
