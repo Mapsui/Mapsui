@@ -12,11 +12,4 @@
     -->
     <NoWarn>$(NoWarn);NU1507;NETSDK1201;PRI257</NoWarn>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <UnoExtensionsVersion>4.1.24</UnoExtensionsVersion>
-    <UnoToolkitVersion>6.0.24</UnoToolkitVersion>
-    <UnoThemesVersion>5.0.13</UnoThemesVersion>
-    <UnoCSharpMarkupVersion>5.2.14</UnoCSharpMarkupVersion>
-  </PropertyGroup>
 </Project>
