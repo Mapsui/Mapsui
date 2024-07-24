@@ -1,5 +1,3 @@
-using System;
-using Microsoft.Extensions.Logging;
 using Uno.Resizetizer;
 
 namespace Mapsui.Samples.Uno.WinUI;
