@@ -23,8 +23,7 @@ public static class ImageFetcher
             "file" => LoadFromFileSystem(new Uri(imageSource)),
             "http" or "https" => await LoadFromUrlAsync(new Uri(imageSource)),
             "svg" => LoadFromSvg(imageSource.Substring(6)),
-            "svg-base64" => LoadFromBase64(imageSource.Substring(13)),
-            "image-base64" => LoadFromBase64(imageSource.Substring(15)),
+            "image" => LoadFromBase64(imageSource.Substring(8)),
             _ => throw new ArgumentException($"Scheme '{scheme}' of '{imageSource}' is not supported"),
         };
     }
