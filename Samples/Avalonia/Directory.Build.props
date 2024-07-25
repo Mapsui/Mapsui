@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <AvaloniaVersion>11.0.0</AvaloniaVersion>
+    <AvaloniaVersion>11.1.0</AvaloniaVersion>
 	<IsPackable>false</IsPackable> <!--Default to not packable and override in projects that do need to be packed.-->
 	<Nullable>enable</Nullable> <!--This is in the root Directory.Build.props but apparently needs repeating. Probably a bug in the tooling. -->
   </PropertyGroup>
