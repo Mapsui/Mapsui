@@ -9,9 +9,10 @@ using Mapsui.Samples.Avalonia;
 
 internal partial class Program
 {
-    private static async Task Main(string[] args) => BuildAvaloniaApp()
+    private static Task Main(string[] args) => BuildAvaloniaApp()
         .WithInterFont()
-        .UseReactiveUI();
+        .UseReactiveUI()
+        .StartBrowserAppAsync("out");
 
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>();
