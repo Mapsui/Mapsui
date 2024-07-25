@@ -15,6 +15,7 @@ theme:
     - content.code.select
 nav:
   - 'index.md'
+  - 'projects-that-use-mapsui.md'
   - 'samples.md'
   - 'logging.md'
   - 'roadmap.md'
