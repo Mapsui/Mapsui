@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.Versioning;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Browser;
 using Avalonia.ReactiveUI;
 using Mapsui.Samples.Avalonia;
+
+[assembly: SupportedOSPlatform("browser")]
 
 internal partial class Program
 {
