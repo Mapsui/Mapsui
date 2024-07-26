@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.XPath;
@@ -76,16 +77,21 @@ public class XPathQueryManager : IXPathQueryManager
         _httpClientUtil = httpClientUtil;
     }
 
+    public async Task InitAsync()
+    {
+        await InitAsync(CancellationToken.None).ConfigureAwait(false);
+    }
+
     /// <summary>Init Async</summary>
     /// <returns>Task</returns>
-    public async Task InitAsync()
+    public async Task InitAsync(CancellationToken cancellationToken)
     {
         if (_initialized)
             return;
 
         _initialized = true;
         if (_httpClientUtil != null)
-            await SetDocumentToParseAsync(_httpClientUtil);
+            await SetDocumentToParseAsync(_httpClientUtil, cancellationToken);
     }
 
     /// <summary>
@@ -265,11 +271,11 @@ public class XPathQueryManager : IXPathQueryManager
     /// Sets a new XML document. 
     /// </summary>
     /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
-    public async Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil)
+    public async Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil, CancellationToken cancellationToken)
     {
         try
         {
-            InitializeXPathObjects(await httpClientUtil.GetDataStreamAsync());
+            InitializeXPathObjects(await httpClientUtil.GetDataStreamAsync(cancellationToken));
         }
         catch (Exception e)
         {
