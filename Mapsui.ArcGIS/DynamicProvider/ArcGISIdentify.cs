@@ -142,7 +142,9 @@ public class ArcGISIdentify
             count = inputStream.Read(buffer, 0, readSize);
         }
         ms.Position = 0;
+#pragma warning disable IDISP007
         inputStream.Dispose();
+#pragma warning restore IDISP007
         return ms;
     }
 

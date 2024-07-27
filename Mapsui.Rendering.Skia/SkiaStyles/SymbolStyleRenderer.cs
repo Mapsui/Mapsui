@@ -71,10 +71,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 if (symbolStyle.ImageSource is null)
                     throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
-                var drawableImage = (BitmapImage)renderService.DrawableImageCache.GetOrCreate(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
+                var drawableImage = (BitmapImage?)renderService.DrawableImageCache.GetOrCreate(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
                     () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.BitmapRegion));
 
-                BitmapRenderer.Draw(canvas, drawableImage.Image,
+                BitmapRenderer.Draw(canvas, drawableImage?.Image,
                     (float)destinationX, (float)destinationY,
                     rotation,
                     (float)offset.X, (float)offset.Y,
@@ -89,16 +89,20 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 var drawableImage = renderService.DrawableImageCache.GetOrCreate(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
                     () =>
                     {
-                        var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(svgImage.OriginalStream, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
+                        using var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(svgImage.OriginalStream ?? throw new NullReferenceException("Original Stream is null"), symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
+#pragma warning disable IDISP001
+#pragma warning disable IDISP004
                         var skSvg = new SKSvg();
                         modifiedSvgStream.Position = 0;
                         skSvg.Load(modifiedSvgStream);
+#pragma warning restore IDISP001                        
+#pragma warning restore IDISP004
                         if (skSvg.Picture is null)
                             throw new Exception("Failed to load modified SVG picture.");
                         return new SvgImage(skSvg.Picture);
                     });
 
-                PictureRenderer.Draw(canvas, ((SvgImage)drawableImage).Picture,
+                PictureRenderer.Draw(canvas, ((SvgImage?)drawableImage)?.Picture,
                     (float)destinationX, (float)destinationY,
                     rotation,
                     (float)offset.X, (float)offset.Y,

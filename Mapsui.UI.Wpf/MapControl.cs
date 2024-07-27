@@ -234,11 +234,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        if (disposing)
-        {
-            _map?.Dispose();
-        }
-
         CommonDispose(disposing);
     }
 

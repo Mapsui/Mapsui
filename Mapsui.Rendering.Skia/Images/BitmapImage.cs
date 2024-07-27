@@ -29,7 +29,9 @@ internal sealed class BitmapImage : IDrawableImage
             return;
         }
 
+#pragma warning disable IDISP007
         _image.Dispose();
+#pragma warning restore IDISP007
 
         _disposed = true;
     }
