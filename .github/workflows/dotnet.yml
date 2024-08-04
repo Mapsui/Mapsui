@@ -30,9 +30,9 @@ jobs:
         path: |
            ~/.nuget/packages/*
            !/.nuget/packages/Mapsui*    
-        key: ${{ runner.os }}-nuget18-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget19-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget18-
+            ${{ runner.os }}-nuget19-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v2  
       with:
@@ -93,9 +93,9 @@ jobs:
         path: |
            ~/.nuget/packages/*
            !/.nuget/packages/Mapsui*
-        key: ${{ runner.os }}-nuget18-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget19-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget18-
+            ${{ runner.os }}-nuget19-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v2   
       with:
@@ -199,9 +199,9 @@ jobs:
         path: |
            ~/.nuget/packages/*
            !/.nuget/packages/Mapsui*
-        key: ${{ runner.os }}-nuget18-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget19-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget18-
+            ${{ runner.os }}-nuget19-
     # .Net 8 update     
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v4
