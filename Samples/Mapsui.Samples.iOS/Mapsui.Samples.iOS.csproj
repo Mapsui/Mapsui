@@ -8,6 +8,7 @@
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
     <PublishTrimmed>true</PublishTrimmed>
 	  <MtouchLink>None</MtouchLink>
+    <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|iPhoneSimulator'">
     <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
