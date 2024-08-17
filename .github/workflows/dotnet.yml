@@ -99,7 +99,7 @@ jobs:
     - name: Setup Xcode version 15.2
       uses: maxim-lobanov/setup-xcode@v1.6.0
       with:
-        xcode-version: '15.4' 
+        xcode-version: '15.2' 
     - name: Setup .NET 6 SDK
       uses: actions/setup-dotnet@v4
       with:
