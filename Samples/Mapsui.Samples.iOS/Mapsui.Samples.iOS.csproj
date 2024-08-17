@@ -12,7 +12,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|iPhoneSimulator'">
     <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|iPhone'">
+  <PropertyGroup Condition="'$(Platform)'=='iPhone'">
+    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='iPhone'">
     <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>
