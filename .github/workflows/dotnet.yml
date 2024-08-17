@@ -97,7 +97,7 @@ jobs:
       with:
         nuget-version: latest
     - name: Setup Xcode version 15.2
-      uses: maxim-lobanov/setup-xcode@v1.6.0
+      uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: '15.2' 
     - name: Setup .NET 6 SDK
