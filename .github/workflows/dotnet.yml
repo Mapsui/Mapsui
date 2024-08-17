@@ -79,7 +79,7 @@ jobs:
   
   macBuild:  
     # macos-latest is currently macos-13
-    runs-on: macos-latest
+    runs-on: macos-latest-large
     steps:
     - uses: actions/checkout@v4
       with:
