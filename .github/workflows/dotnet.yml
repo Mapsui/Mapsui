@@ -125,7 +125,7 @@ jobs:
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
     - name: Build Mapsui.Samples.iOS
-      run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
+      run: dotnet build --no-restore --configuration Debug -r ios-arm64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     # Samples Uno WinUI
     #- name: Mapsui.Samples.Uno.WinUI.Mobile
     #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Mobile/Mapsui.Samples.Uno.WinUI.Mobile.csproj

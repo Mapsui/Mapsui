@@ -8,16 +8,6 @@
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
     <PublishTrimmed>true</PublishTrimmed>
 	  <MtouchLink>None</MtouchLink>
-    <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|iPhoneSimulator'">
-    <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Platform)'=='iPhone'">
-    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Platform)'=='iPhone'">
-    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
