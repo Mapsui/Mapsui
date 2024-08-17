@@ -9,6 +9,12 @@
     <PublishTrimmed>true</PublishTrimmed>
 	  <MtouchLink>None</MtouchLink>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|iPhoneSimulator'">
+    <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|iPhone'">
+    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\Mapsui.UI.iOS\Mapsui.UI.iOS.csproj" />
