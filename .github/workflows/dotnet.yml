@@ -79,7 +79,7 @@ jobs:
   
   macBuild:  
     # macos-latest is currently macos-13
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v4
       with:
@@ -96,10 +96,10 @@ jobs:
       uses: NuGet/setup-nuget@v2   
       with:
         nuget-version: latest
-    - name: Setup Xcode version 15.2
+    - name: Setup Xcode version 15.4
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '15.2' 
+        xcode-version: '15.4' 
     - name: Setup .NET 6 SDK
       uses: actions/setup-dotnet@v4
       with:
