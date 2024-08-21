@@ -79,7 +79,7 @@ jobs:
   
   macBuild:  
     # macos-latest is currently macos-13
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
       with:
@@ -96,10 +96,10 @@ jobs:
       uses: NuGet/setup-nuget@v2   
       with:
         nuget-version: latest
-    - name: Setup Xcode version 15.1
-      uses: maxim-lobanov/setup-xcode@v1.6.0
-      with:
-        xcode-version: '15.1' 
+    #- name: Setup Xcode version 15.4
+    #  uses: maxim-lobanov/setup-xcode@v1
+    #  with:
+    #    xcode-version: '15.4' 
     - name: Setup .NET 6 SDK
       uses: actions/setup-dotnet@v4
       with:
@@ -124,8 +124,8 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
-    - name: Build Mapsui.Samples.iOS
-      run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
+    - name: Build Mapsui.Samples.iOS      
+      run: dotnet build --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     # Samples Uno WinUI
     #- name: Mapsui.Samples.Uno.WinUI.Mobile
     #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Mobile/Mapsui.Samples.Uno.WinUI.Mobile.csproj
