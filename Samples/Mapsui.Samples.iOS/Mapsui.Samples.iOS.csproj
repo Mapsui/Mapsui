@@ -7,7 +7,7 @@
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
     <PublishTrimmed>true</PublishTrimmed>
-	  <MtouchLink>None</MtouchLink>
+	  <MtouchLink>None</MtouchLink>    
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
