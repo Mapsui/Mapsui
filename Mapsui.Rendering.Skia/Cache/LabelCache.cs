@@ -6,7 +6,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class LabelCache() : IDisposable
+public sealed class LabelCache : IDisposable
 {
     private readonly ConcurrentDictionary<Font, object> _cacheTypeface = new();
 
