@@ -36,13 +36,13 @@ internal static class PolygonRenderer
         using var path = vectorCache.GetOrCreatePath((feature.Id, position, extent, rotation, lineWidth), ToPath);
         if (vectorStyle.Fill.IsVisible())
         {
-            using var fillPaint = vectorCache.PaintCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
+            using var fillPaint = vectorCache.GetOrCreatePaint((vectorStyle.Fill, opacity, viewport.Rotation), CreateSkPaint);
             DrawPath(canvas, vectorStyle, path, fillPaint);
         }
 
         if (vectorStyle.Outline.IsVisible())
         {
-            using var paint = vectorCache.PaintCache.GetOrCreatePaint((vectorStyle.Outline, opacity), CreateSkPaint);
+            using var paint = vectorCache.GetOrCreatePaint((vectorStyle.Outline, opacity), CreateSkPaint);
             canvas.DrawPath(path, paint);
         }
     }

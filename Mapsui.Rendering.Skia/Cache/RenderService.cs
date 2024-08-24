@@ -9,14 +9,12 @@ public sealed class RenderService : IRenderService
         DrawableImageCache = new DrawableImageCache();
         TileCache = new TileCache();
         ImageSourceCache = new ImageSourceCache();
-        PaintCache = new PaintCache(this, vectorCacheCapacity);
         LabelCache = new LabelCache();
-        VectorCache = new VectorCache(PaintCache, vectorCacheCapacity);
+        VectorCache = new VectorCache(this, vectorCacheCapacity);
     }
 
     public DrawableImageCache DrawableImageCache { get; }
     public VectorCache VectorCache { get; }
-    public PaintCache PaintCache { get; }
     public TileCache TileCache { get; }
     public LabelCache LabelCache { get; }
     public ImageSourceCache ImageSourceCache { get; }
