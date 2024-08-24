@@ -6,13 +6,11 @@ using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 
-public sealed class LabelCache(PaintCache paintCache) : IDisposable
+public sealed class LabelCache() : IDisposable
 {
     private readonly ConcurrentDictionary<Font, object> _cacheTypeface = new();
 
     private readonly ConcurrentDictionary<(string? Text, Font Font, Brush? BackColor, Color ForeColor, float Opacity), IDrawableImage> _labelCache = new();
-
-    public PaintCache PaintCache => paintCache;
 
     public T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace)
         where T : class

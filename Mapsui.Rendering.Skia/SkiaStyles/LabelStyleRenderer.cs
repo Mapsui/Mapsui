@@ -84,9 +84,8 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     private IDrawableImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
     {
-        var paintCache = labelCache.PaintCache;
-        using var paint = paintCache.GetOrCreatePaint((style.Font, style.ForeColor, layerOpacity), f => CreatePaint(f, labelCache));
-        return new BitmapImage(CreateLabelAsImage(style, text, paint.Instance, layerOpacity));
+        using var paint = CreatePaint((style.Font, style.ForeColor, layerOpacity), labelCache);
+        return new BitmapImage(CreateLabelAsImage(style, text, paint, layerOpacity));
     }
 
     private static SKImage CreateLabelAsImage(LabelStyle style, string? text, SKPaint paint, float layerOpacity)
@@ -111,9 +110,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
     {
-        var paintCache = labelCache.PaintCache;
-        using var paintTracker = paintCache.GetOrCreatePaint((style.Font, style.ForeColor, layerOpacity), f => CreatePaint(f, labelCache));
-        var paint = paintTracker.Instance;
+        using var paint = CreatePaint((style.Font, style.ForeColor, layerOpacity), labelCache);
 
         var rect = new SKRect();
 
@@ -228,8 +225,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         // If style has a halo value, than draw halo text
         if (style.Halo != null)
         {
-            using var paintHaloHolder = CreateHaloPaintHolder(style, labelCache);
-            var paintHalo = paintHaloHolder.Instance;
+            using var paintHalo = CreateHaloPaintHolder(style, labelCache);
 
             if (lines != null)
             {
@@ -409,22 +405,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         if (string.IsNullOrEmpty(text))
             return 0;
-        var paintCache = labelCache.PaintCache;
 
         // for measuring the text size the opacity can be set to 1
-        CacheTracker<SKPaint> paintHolder = default;
+        SKPaint? paint = null;
         try
         {
-            if (labelStyle.Halo != null)
-            {
-                paintHolder = CreateHaloPaintHolder(labelStyle, labelCache);
-            }
-            else
-            {
-                paintHolder = paintCache.GetOrCreatePaint((labelStyle.Font, labelStyle.ForeColor, 1), f => CreatePaint(f, labelCache));
-            }
-
-            var paint = paintHolder.Instance;
+            paint = labelStyle.Halo != null ? CreateHaloPaintHolder(labelStyle, labelCache) : CreatePaint((labelStyle.Font, labelStyle.ForeColor, 1), labelCache);
             var rect = new SKRect();
             paint.MeasureText(text, ref rect);
 
@@ -444,15 +430,14 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
         finally
         {
-            paintHolder.Dispose();
+            paint?.Dispose();
         }
     }
 
-    private static CacheTracker<SKPaint> CreateHaloPaintHolder(LabelStyle labelStyle, LabelCache labelCache)
+    private static SKPaint CreateHaloPaintHolder(LabelStyle labelStyle, LabelCache labelCache)
     {
-        var paintCache = labelCache.PaintCache;
         var strokeWidth = (float)labelStyle.Halo.Width * 2;
         var paintStyle = SKPaintStyle.StrokeAndFill;
-        return paintCache.GetOrCreatePaint((labelStyle.Font, labelStyle.Halo.Color, 1, paintStyle, strokeWidth), f => CreatePaint(f, labelCache));
+        return CreatePaint((labelStyle.Font, labelStyle.Halo.Color, 1, paintStyle, strokeWidth), labelCache);
     }
 }

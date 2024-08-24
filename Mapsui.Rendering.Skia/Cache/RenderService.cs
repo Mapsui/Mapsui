@@ -10,7 +10,7 @@ public sealed class RenderService : IRenderService
         TileCache = new TileCache();
         ImageSourceCache = new ImageSourceCache();
         PaintCache = new PaintCache(this, vectorCacheCapacity);
-        LabelCache = new LabelCache(PaintCache);
+        LabelCache = new LabelCache();
         VectorCache = new VectorCache(PaintCache, vectorCacheCapacity);
     }
 
