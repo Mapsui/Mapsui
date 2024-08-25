@@ -26,11 +26,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         IsEmbeddedBitmapText = true
     };
 
-    public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity, LabelCache labelCache)
+    public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity, VectorCache vectorCache)
     {
         var text = style.GetLabelText(feature);
 
-        var image = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
+        using var holder = vectorCache.GetOrCreate((text, style, layerOpacity), CreateLabelAsBitmap);
+        var image = holder.Instance;
         var offsetX = style.Offset is RelativeOffset ? image.Width * style.Offset.X : style.Offset.X;
         var offsetY = style.Offset is RelativeOffset ? image.Height * style.Offset.Y : style.Offset.Y;
 
@@ -42,6 +43,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
         else
             throw new InvalidOperationException("Unexpected drawable image type");
+
+        IDrawableImage CreateLabelAsBitmap((string? text, LabelStyle style, float layerOpacity) style)
+        {
+            UpdatePaint(style.style, style.layerOpacity, _paint, vectorCache);
+            return new BitmapImage(CreateLabelAsImage(style.style, style.text, _paint, style.layerOpacity));
+        }
     }
 
     public static SKTypeface CreateTypeFace(Font font)
@@ -67,20 +74,20 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             {
                 case (PointFeature pointFeature):
                     var (pointX, pointY) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
-                    DrawLabel(canvas, (float)pointX, (float)pointY, labelStyle, text, (float)layer.Opacity, renderService.LabelCache);
+                    DrawLabel(canvas, (float)pointX, (float)pointY, labelStyle, text, (float)layer.Opacity, renderService.VectorCache);
                     break;
                 case (LineString lineStringFeature):
                     if (feature.Extent == null)
                         return false;
                     var (lineStringCenterX, lineStringCenterY) = viewport.WorldToScreenXY(feature.Extent.Centroid.X, feature.Extent.Centroid.Y);
-                    DrawLabel(canvas, (float)lineStringCenterX, (float)lineStringCenterY, labelStyle, text, (float)layer.Opacity, renderService.LabelCache);
+                    DrawLabel(canvas, (float)lineStringCenterX, (float)lineStringCenterY, labelStyle, text, (float)layer.Opacity, renderService.VectorCache);
                     break;
                 case (GeometryFeature polygonFeature):
                     if (polygonFeature.Extent is null)
                         return false;
                     var worldCenter = polygonFeature.Extent.Centroid;
                     var (polygonCenterX, polygonCenterY) = viewport.WorldToScreenXY(worldCenter.X, worldCenter.Y);
-                    DrawLabel(canvas, (float)polygonCenterX, (float)polygonCenterY, labelStyle, text, (float)layer.Opacity, renderService.LabelCache);
+                    DrawLabel(canvas, (float)polygonCenterX, (float)polygonCenterY, labelStyle, text, (float)layer.Opacity, renderService.VectorCache);
                     break;
             }
         }
@@ -90,12 +97,6 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
 
         return true;
-    }
-
-    private IDrawableImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
-    {
-        UpdatePaint(style, layerOpacity, _paint, labelCache);
-        return new BitmapImage(CreateLabelAsImage(style, text, _paint, layerOpacity));
     }
 
     private static SKImage CreateLabelAsImage(LabelStyle style, string? text, SKPaint paint, float layerOpacity)
@@ -118,9 +119,9 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return image;
     }
 
-    private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, LabelCache labelCache)
+    private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, VectorCache vectorCache)
     {
-        UpdatePaint(style, layerOpacity, _paint, labelCache);
+        UpdatePaint(style, layerOpacity, _paint, vectorCache);
 
         var rect = new SKRect();
 
@@ -235,7 +236,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         // If style has a halo value, than draw halo text
         if (style.Halo != null)
         {
-            UpdatePaint(style, layerOpacity, _paint, labelCache);
+            UpdatePaint(style, layerOpacity, _paint, vectorCache);
             _paint.Style = SKPaintStyle.StrokeAndFill;
             _paint.Color = style.Halo.Color.ToSkia(layerOpacity);
             _paint.StrokeWidth = (float)style.Halo.Width * 2;
@@ -257,7 +258,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 target.DrawText(text, drawRect.Left, drawRect.Top + baseline, _paint);
         }
 
-        UpdatePaint(style, layerOpacity, _paint, labelCache);
+        UpdatePaint(style, layerOpacity, _paint, vectorCache);
 
         if (lines != null)
         {
@@ -315,14 +316,14 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint, LabelCache labelCache)
+    private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint, VectorCache vectorCache)
     {
-        var typeface = labelCache.GetOrCreateTypeface(style.Font, CreateTypeFace);
+        using var typeface = vectorCache.GetOrCreate(style.Font, CreateTypeFace);
 
         paint.Style = SKPaintStyle.Fill;
         paint.TextSize = (float)style.Font.Size;
         paint.Color = style.ForeColor.ToSkia(layerOpacity);
-        paint.Typeface = typeface;
+        paint.Typeface = typeface.Instance;
     }
 
     private class Line
@@ -391,20 +392,20 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         if (style is LabelStyle labelStyle)
         {
-            return FeatureSize(feature, labelStyle, _paint, skiaRenderService.LabelCache);
+            return FeatureSize(feature, labelStyle, _paint, skiaRenderService.VectorCache);
         }
 
         return 0;
     }
 
-    public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint, LabelCache labelCache)
+    public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint, VectorCache vectorCache)
     {
         var text = labelStyle.GetLabelText(feature);
 
         if (string.IsNullOrEmpty(text))
             return 0;
 
-        UpdatePaint(labelStyle, 1, paint, labelCache);
+        UpdatePaint(labelStyle, 1, paint, vectorCache);
 
         var rect = new SKRect();
         paint.MeasureText(text, ref rect);
