@@ -4,7 +4,7 @@ namespace Mapsui.Rendering.Skia.Cache;
 
 public sealed class RenderService : IRenderService
 {
-    public RenderService(int vectorCacheCapacity = 10000)
+    public RenderService(int vectorCacheCapacity = 30000)
     {
         DrawableImageCache = new DrawableImageCache();
         TileCache = new TileCache();
