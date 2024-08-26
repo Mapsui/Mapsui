@@ -64,19 +64,19 @@ public class ThemeStyleSample : ISample
 
             switch (f["NAME"]?.ToString()?.ToLower())
             {
-                case "brazil": //If country name is Denmark, fill it with green
+                case "brazil": //If country name is Barzil, fill it with green
                     style.Fill = new Brush(Color.Green);
                     style.Outline = new Pen(Color.Black);
                     break;
-                case "united states": //If country name is USA, fill it with Blue and add a red outline
+                case "united states": //If country name is USA, fill it with violet
                     style.Fill = new Brush(Color.Violet);
                     style.Outline = new Pen(Color.Black);
                     break;
-                case "china": //If country name is China, fill it with red
+                case "china": //If country name is China, fill it with orange
                     style.Fill = new Brush(Color.Orange);
                     style.Outline = new Pen(Color.Black);
                     break;
-                case "japan": //If country name is China, fill it with red
+                case "japan": //If country name is Japan, fill it with cyan
                     style.Fill = new Brush(Color.Cyan);
                     style.Outline = new Pen(Color.Black);
                     break;
@@ -85,7 +85,6 @@ public class ThemeStyleSample : ISample
                     style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64));
                     break;
             }
-            style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64));
             return style;
         });
     }
