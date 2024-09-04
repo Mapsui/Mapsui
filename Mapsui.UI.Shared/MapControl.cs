@@ -709,14 +709,22 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return _extendedWidgets.Where(w => w.Enabled).ToList();
     }
 
+    /// <summary>
+    /// Reset the widget cache. It may be necessary to call this explicitly after the widgets have changed.
+    /// </summary>
+    protected void ResetWidgetCache()
+    {
+        // reset widgets
+        _extendedWidgets = null;
+        _touchableWidgets = null;
+        _widgetCollection = Map.Widgets;
+    }
+
     private void AssureWidgets()
     {
         if (_widgetCollection != Map.Widgets)
         {
-            // reset widgets
-            _extendedWidgets = null;
-            _touchableWidgets = null;
-            _widgetCollection = Map.Widgets;
+            ResetWidgetCache();
         }
     }
 
