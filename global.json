@@ -2,11 +2,11 @@
   "sdk": {
     "allowPrerelease": false,
     "version": "8.0.300",
-    "rollForward": "latestMajor"
+    "rollForward": "latestPatch"
   },
   "tools": {
     "allowPrerelease": false,
     "dotnet": "8.0.300",
-    "rollForward": "latestMajor"
-  }  
+    "rollForward": "latestPatch"
+  }
 }
