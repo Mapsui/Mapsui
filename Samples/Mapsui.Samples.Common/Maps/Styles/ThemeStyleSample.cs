@@ -64,7 +64,7 @@ public class ThemeStyleSample : ISample
 
             switch (f["NAME"]?.ToString()?.ToLower())
             {
-                case "brazil": //If country name is Barzil, fill it with green
+                case "brazil": //If country name is Brazil, fill it with green
                     style.Fill = new Brush(Color.Green);
                     style.Outline = new Pen(Color.Black);
                     break;
