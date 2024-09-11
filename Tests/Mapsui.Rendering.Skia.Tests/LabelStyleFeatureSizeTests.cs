@@ -36,11 +36,30 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
         using var labelCache = new LabelCache();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, labelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, labelCache);
 
         Assert.That(size, Is.EqualTo(LabelSize).Within(Constants.Epsilon));
+    }
+
+    [Test]
+    public void DefaultSizeFeatureSize_Halo()
+    {
+        var labelStyle = new LabelStyle
+        {
+            LabelColumn = "test",
+            Halo = new Pen { Color = Color.Yellow, Width = 2 },
+        };
+
+        var feature = new PointFeature(new MPoint(0, 0));
+        feature["test"] = "Mapsui";
+
+        using var labelCache = new LabelCache();
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, labelCache);
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            Assert.That(size, Is.EqualTo(LabelSize + 4).Within(Constants.Epsilon));
+        else
+            Assert.That(size, Is.EqualTo(LabelSize + 2).Within(Constants.Epsilon));
     }
 
     [Test]
@@ -56,9 +75,8 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
         using var labelCache = new LabelCache();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, labelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, labelCache);
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
@@ -83,9 +101,8 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
         using var labelCache = new LabelCache();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, labelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, labelCache);
 
         Assert.That(size, Is.EqualTo(LabelSize + 2 * 2).Within(Constants.Epsilon));
     }
@@ -102,9 +119,8 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
         using var labelCache = new LabelCache();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, labelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, labelCache);
 
         Assert.That(size, Is.EqualTo(LabelSize + 2 * 2).Within(Constants.Epsilon));
     }
@@ -121,9 +137,8 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
         using var labelCache = new LabelCache();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, labelCache);
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, labelCache);
 
         Assert.That(size, Is.EqualTo(LabelSize + Math.Sqrt(2 * 2 + 2 * 2) * 2).Within(Constants.Epsilon));
     }
