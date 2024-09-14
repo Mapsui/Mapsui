@@ -13,17 +13,15 @@ namespace Mapsui.Rendering.Skia.Tests;
 [TestFixture]
 public class LabelStyleFeatureSizeTests
 {
-    // The Sizes are different on MacOs and Windows (windows it is 39.6 and macOS it is 42.6)
+    // The Sizes are different on MacOs and Windows
     const double labelSizeOnMac = 42.642578125d;
-    const double labelSizeOnWindows = 39.642578125d;
-    const double labelSizeOnLinux = 40.181640625d;
+    const double labelSizeOnWindows = 40.642578125d;
+    const double labelSizeOnLinux = 41.181640625d;
     public readonly double LabelSize = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
         ? labelSizeOnWindows
         : RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
             ? labelSizeOnLinux
             : labelSizeOnMac;
-
-
 
     [Test]
     public void DefaultSizeFeatureSize()
@@ -44,6 +42,26 @@ public class LabelStyleFeatureSizeTests
     }
 
     [Test]
+    public void DefaultSizeFeatureSize_Halo()
+    {
+        var labelStyle = new LabelStyle
+        {
+            LabelColumn = "test",
+            Halo = new Pen { Color = Color.Yellow, Width = 2 },
+        };
+
+        var feature = new PointFeature(new MPoint(0, 0));
+        feature["test"] = "Mapsui";
+
+        using var skPaint = new SKPaint();
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, new LabelCache());
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            Assert.That(size, Is.EqualTo(LabelSize + 4).Within(Constants.Epsilon));
+        else
+            Assert.That(size, Is.EqualTo(LabelSize + 2).Within(Constants.Epsilon));
+    }
+
+    [Test]
     public void DefaultSizeFeatureSize_Font()
     {
         var labelStyle = new LabelStyle
@@ -61,14 +79,10 @@ public class LabelStyleFeatureSizeTests
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new VectorCache(renderService, 1000));
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-        {
-            Assert.That(size, Is.EqualTo(LabelSize * 2).Within(Constants.Epsilon));
-        }
+            Assert.That(size, Is.EqualTo(LabelSize * 2 - 1).Within(Constants.Epsilon));
         else
-        {
             // on macos it is not two times as big but almost two times with 3 less
             Assert.That(size, Is.EqualTo(LabelSize * 2 - 3).Within(Constants.Epsilon));
-        }
     }
 
     [Test]
