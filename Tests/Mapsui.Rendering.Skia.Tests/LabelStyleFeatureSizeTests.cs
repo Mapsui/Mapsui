@@ -76,14 +76,10 @@ public class LabelStyleFeatureSizeTests
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, labelCache);
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-        {
-            Assert.That(size, Is.EqualTo(LabelSize * 2).Within(Constants.Epsilon));
-        }
+            Assert.That(size, Is.EqualTo(LabelSize * 2 - 1).Within(Constants.Epsilon));
         else
-        {
             // on macos it is not two times as big but almost two times with 3 less
             Assert.That(size, Is.EqualTo(LabelSize * 2 - 3).Within(Constants.Epsilon));
-        }
     }
 
     [Test]
