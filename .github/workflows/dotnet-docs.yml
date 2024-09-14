@@ -2,10 +2,10 @@ name: Build Website
 
 on:
   push:
-    branches:
+    branches:  
       - main
       - feature/docs
-
+      
 permissions:
   contents: write
   # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
@@ -16,45 +16,47 @@ jobs:
   build-and-publish-website:
     runs-on: windows-latest
     steps:
-      
-      #Begin install mkdocs        
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-      - uses: actions/cache@v4
-        with:
-          key: mkdocs-material-${{ env.cache_id }}
-          path: .cache
-          restore-keys: |
-            mkdocs-material-
-      - run: |
-          pip install mkdocs-material 
-          pip install mkdocs-glightbox
-      #End install mkdocs        
+        
+#Begin install mkdocs        
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.x
+    - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+    - uses: actions/cache@v4
+      with:
+        key: mkdocs-material-${{ env.cache_id }}
+        path: .cache
+        restore-keys: |
+          mkdocs-material-
+    - run: |
+        pip install mkdocs-material 
+        pip install mkdocs-glightbox
+#End install mkdocs        
 
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          filter: tree:0
-      - name: Setup .NET 8 SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: |
-            8.0.x
-      - name: install workloads
-        run: dotnet workload install maui macos android ios maccatalyst wasm-tools
-      - name: Run DocFx
-        shell: pwsh
-        run: ./Scripts/BuildDocumentationWebSite.ps1
-        # build blazor samples to website/samples/
-      - name: Build Blazor Website Sample
-        shell: pwsh
-        run: ./Scripts/BuildSamplesWebsite.ps1
-      - name: Upload artifact
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website
-          destination_dir: v5
-          keep_files: true
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0         
+        filter: tree:0 
+    - name: Setup .NET 8 SDK
+      uses: actions/setup-dotnet@v4
+      with:
+         dotnet-version: |
+           9.0.100-rc.1
+         dotnet-quality: 'preview'  
+    - name: install workloads
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+    - name: Run DocFx
+      shell: pwsh
+      run: ./Scripts/BuildDocumentationWebSite.ps1
+      # build blazor samples to website/samples/
+    - name: Build Blazor Website Sample
+      shell: pwsh
+      run: ./Scripts/BuildSamplesWebsite.ps1     
+    - name: Upload artifact
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./website
+        destination_dir: v5
+        keep_files: true
