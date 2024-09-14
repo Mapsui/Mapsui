@@ -51,6 +51,7 @@
     <PackageVersion Include="Mapsui.WinUI" Version="5.0.0-beta.1" />
     <PackageVersion Include="Mapsui.Wpf" Version="5.0.0-beta.1" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="[17.8.0,18.0.0)" />
+    <PackageVersion Include="Microsoft.Windows.CsWin32" Version="0.3.106" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[8.0.0,9.0.0)" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="[17.8.0, 18.0.0)" />
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="[6.2.14,7.0.0)" />
