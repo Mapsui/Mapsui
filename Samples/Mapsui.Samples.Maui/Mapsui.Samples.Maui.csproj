@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0-android</TargetFramework>
-		<TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net9.0-android</TargetFrameworks>
+		<TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -54,7 +54,7 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" />
 	</ItemGroup>
 
-	<ItemGroup Condition="$(TargetFramework.StartsWith('net8.0'))">
+	<ItemGroup Condition="$(TargetFramework.StartsWith('net9.0'))">
 		<PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="$(MauiVersion)" />
 	</ItemGroup>
