@@ -42,6 +42,7 @@ jobs:
       with:
          dotnet-version: |
            9.0.100-rc.1     
+         dotnet-quality: 'preview'
     # Open JDK
     - name: Install Open JDK 11
       uses: actions/setup-java@v4
@@ -108,8 +109,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           6.0.x         
-         dotnet-quality: 'preview'
+           6.0.x                  
     # .Net 7 update     
     - name: Setup .NET 9 SDK 
       uses: actions/setup-dotnet@v4
