@@ -33,7 +33,7 @@
   <PropertyGroup>
 	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	  <LangVersion>12.0</LangVersion>
+	  <LangVersion>13.0</LangVersion>
       <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
       <!-- Enable Windows Targeting on non Windows platforms -->
       <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
@@ -49,6 +49,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <!-- Roslyn Compiler -->
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
