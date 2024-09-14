@@ -50,11 +50,11 @@
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
 
-	<ItemGroup Condition="$(TargetFramework.Contains('windows'))">
+	<ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
   </ItemGroup>
 
-  <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
+  <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
     <PackageReference Include="SkiaSharp.Views.WinUI"/>
   </ItemGroup>
 
