@@ -48,6 +48,11 @@ namespace Mapsui.UI.Wpf;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
+#if __WINDOWSFORMS__
+#if NET9_OR_GREATER
+[Register("MapControl"), DesignTimeVisible(true)]
+#endif
+#endif
 public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
     // Flag indicating if a drawing process is running
@@ -71,12 +76,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public int MaxTapGestureMovement { get; set; } = 8;
 
     /// <summary>
     /// Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a 
     /// short time after the user has lifted the finger.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public bool UseFling { get; set; } = true;
 
     private void SharedConstructor()
@@ -217,6 +224,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Interval between two redraws of the MapControl in ms
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)] 
     public int UpdateInterval
     {
         get => _updateInterval;
@@ -241,6 +249,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <remarks>
     /// If this is null, no performance information is saved.
     /// </remarks>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
     public Performance? Performance
     {
         get => _performance;
@@ -440,6 +449,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     [Parameter]
     [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
 #endif
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public Map Map
     {
         get
