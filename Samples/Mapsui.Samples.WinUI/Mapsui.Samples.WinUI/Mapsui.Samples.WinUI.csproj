@@ -18,7 +18,6 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.Views.WinUI" />
-    <PackageReference Include="Microsoft.Windows.CsWin32" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

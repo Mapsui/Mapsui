@@ -21,6 +21,8 @@
     <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
 	<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	<NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+    <!-- Windows App Sdk 1.6 Workaround-->
+    <WindowsSdkPackageVersion>10.0.19041.41</WindowsSdkPackageVersion>
   </PropertyGroup>
 
 	<!--Package Icon Include -->
