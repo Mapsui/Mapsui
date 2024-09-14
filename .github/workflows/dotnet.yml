@@ -109,12 +109,14 @@ jobs:
       with:
          dotnet-version: |
            6.0.x         
+         dotnet-quality: 'preview'
     # .Net 7 update     
     - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.100-rc.1         
+           9.0.100-rc.1        
+      dotnet-quality: 'preview'     
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Install Uno Check
@@ -207,7 +209,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.100-rc.1         
+           9.0.100-rc.1   
+         dotnet-quality: 'preview'  
     # Java Sdk install 11
     - name: Install Open JDK 11
       uses: actions/setup-java@v4

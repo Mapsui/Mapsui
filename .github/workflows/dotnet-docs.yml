@@ -43,6 +43,7 @@ jobs:
       with:
          dotnet-version: |
            9.0.100-rc.1
+         dotnet-quality: 'preview'  
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Run DocFx
