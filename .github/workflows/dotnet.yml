@@ -37,7 +37,7 @@ jobs:
       uses: NuGet/setup-nuget@v2  
       with:
         nuget-version: latest    
-    - name: Setup .NET 8 SDK
+    - name: Setup .NET 9 SDK 
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
@@ -111,7 +111,7 @@ jobs:
            6.0.x         
          dotnet-quality: 'preview'
     # .Net 7 update     
-    - name: Setup .NET 8 SDK
+    - name: Setup .NET 9 SDK 
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
@@ -205,7 +205,7 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget19-
     # .Net 8 update     
-    - name: Setup .NET 8 SDK
+    - name: Setup .NET 9 SDK 
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
