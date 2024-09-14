@@ -6,7 +6,7 @@ on:
       release_nugets:
         description: 'release to nuget.org'
         required: true
-        type: boolean 
+        type: boolean
 
 jobs:
   build:
@@ -17,48 +17,47 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        filter: tree:0    
-    - uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - uses: actions/checkout@v4
+        with:
+          filter: tree:0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v2
-
-    # .Net 7 update     
-    - name: Setup .NET 7 SDK
-      uses: actions/setup-dotnet@v4
-      with:
-         dotnet-version: |
-           9.0.100-rc.1     
-         dotnet-quality: 'preview'  
-    # The version tag needs to be set before the release. If not if will fail on nuget publish.
-    - name: Set VERSION_OF_RELEASE to last tag
-      run: |
-        echo ("VERSION_OF_RELEASE=" + $(git describe --tags --abbrev=0)) >> $env:GITHUB_ENV
-        echo $VERSION_OF_RELEASE
-
-    - name: install workloads
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
-
-    - name: Test
-      run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
       
-    - name: Pack
-      # The version argument overrides the version in the Directory.Build.props.
-      run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o nugets
+      # .Net 7 update     
+      - name: Setup .NET 7 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x         
+      
+      # The version tag needs to be set before the release. If not if will fail on nuget publish.
+      - name: Set VERSION_OF_RELEASE to last tag
+        run: |
+          echo ("VERSION_OF_RELEASE=" + $(git describe --tags --abbrev=0)) >> $env:GITHUB_ENV
+          echo $VERSION_OF_RELEASE
 
-    - name: Upload nugets
-      uses: actions/upload-artifact@v4
-      with:
-      # Upload the 'nugets' folder as artifact
-        name: packages
-        path: nugets/*.nupkg
+      - name: install workloads
+        run: dotnet workload install maui macos android ios maccatalyst wasm-tools
 
-    - name: Release NuGets
-      if: ${{ inputs.release_nugets }} 
-      run: nuget push "nugets\**\*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_APIKEY}}
+      - name: Test
+        run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+
+      - name: Pack
+        # The version argument overrides the version in the Directory.Build.props.
+        run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o nugets
+
+      - name: Upload nugets
+        uses: actions/upload-artifact@v4
+        with:
+          # Upload the 'nugets' folder as artifact
+          name: packages
+          path: nugets/*.nupkg
+
+      - name: Release NuGets
+        if: ${{ inputs.release_nugets }}
+        run: nuget push "nugets\**\*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_APIKEY}}
