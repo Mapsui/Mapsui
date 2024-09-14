@@ -1,0 +1,8 @@
+<Project DefaultTargets="BuildExtension" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!-- BEGIN workaround for https://github.com/dotnet/sdk/issues/43339; remove after updated to VS 17.12 or a future 17.11 patch -->
+  <Target Name="WorkaroundDotnetSdk43339" BeforeTargets="ResolvePackageAssets" Condition=" '$(MSBuildRuntimeType)' == 'Full' and $([MSBuild]::VersionLessThan($(MSBuildVersion), 17.12.0))">
+    <PrimeSystemTextJson804 />
+    </Task>
+  </UsingTask>
+  <!-- END workaround for https://github.com/dotnet/sdk/issues/43339 -->
+</Project>  
