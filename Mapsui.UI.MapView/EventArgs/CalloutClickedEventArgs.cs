@@ -1,8 +1,5 @@
 ﻿using System;
 using Mapsui.Manipulations;
-#if NET8_0
-using Microsoft.Maui.Graphics;
-#else
 
 namespace Mapsui.UI.Maui;
 
