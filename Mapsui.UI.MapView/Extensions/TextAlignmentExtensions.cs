@@ -1,7 +1,4 @@
 ﻿using Mapsui.Widgets;
-#if NET8_0
-using Microsoft.Maui;
-#endif
 
 namespace Mapsui.UI.Maui.Extensions;
 
