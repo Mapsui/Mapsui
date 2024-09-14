@@ -36,7 +36,7 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new VectorCache(renderService, 1000));
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, renderService);
 
         Assert.That(size, Is.EqualTo(LabelSize).Within(Constants.Epsilon));
     }
@@ -53,8 +53,8 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, new LabelCache());
+        using var renderService = new RenderService();
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, renderService);
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             Assert.That(size, Is.EqualTo(LabelSize + 4).Within(Constants.Epsilon));
         else
@@ -74,9 +74,8 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
         using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new VectorCache(renderService, 1000));
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, renderService);
 
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             Assert.That(size, Is.EqualTo(LabelSize * 2 - 1).Within(Constants.Epsilon));
@@ -97,9 +96,8 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
         using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new VectorCache(renderService, 1000));
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, renderService);
 
         Assert.That(size, Is.EqualTo(LabelSize + 2 * 2).Within(Constants.Epsilon));
     }
@@ -116,9 +114,8 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
         using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new VectorCache(renderService, 1000));
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, renderService);
 
         Assert.That(size, Is.EqualTo(LabelSize + 2 * 2).Within(Constants.Epsilon));
     }
@@ -135,9 +132,8 @@ public class LabelStyleFeatureSizeTests
         var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
-        using var skPaint = new SKPaint();
         using var renderService = new RenderService();
-        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new VectorCache(renderService, 1000));
+        var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, renderService);
 
         Assert.That(size, Is.EqualTo(LabelSize + Math.Sqrt(2 * 2 + 2 * 2) * 2).Within(Constants.Epsilon));
     }
