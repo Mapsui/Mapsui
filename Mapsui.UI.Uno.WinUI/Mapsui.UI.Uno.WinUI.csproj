@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net8.0-ios;net8.0-maccatalyst;net8.0-android;net8.0-windows10.0.19041;net8.0-browserwasm;net8.0-desktop;net9.0;net9.0-ios;net9.0-maccatalyst;net9.0-android;net9.0-windows10.0.19041;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
+    <TargetFrameworks>net8.0;net8.0-ios;net8.0-maccatalyst;net8.0-android;net8.0-windows10.0.19041;net8.0-browserwasm;net8.0-desktop;net9.0;net9.0-ios;net9.0-maccatalyst;net9.0-android;net9.0-windows10.0.19041;net9.0-desktop</TargetFrameworks>
+    <!--Uno 5.3 or Uno 5.4 does not support .net9.0-browser probably Uno5.5 does-->
+    <!--<TargetFrameworks>$(TargetFrameworks);net9.0-browserwasm;</TargetFrameworks> -->
     <UnoSingleProject>true</UnoSingleProject>
     <OutputType>Library</OutputType>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
