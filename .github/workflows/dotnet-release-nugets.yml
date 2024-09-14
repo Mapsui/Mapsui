@@ -30,7 +30,7 @@ jobs:
       uses: NuGet/setup-nuget@v2
 
     # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
