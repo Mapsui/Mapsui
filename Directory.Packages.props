@@ -82,9 +82,9 @@
     <PackageVersion Include="sqlite-net-pcl" Version="[1.9.172,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
     <PackageVersion Include="Svg.Skia" Version="2.0.0" />
-    <PackageVersion Include="System.Formats.Asn1" Version="8.0.1" />
+    <PackageVersion Include="System.Formats.Asn1" Version="9.0.0-rc.1.24431.7" />
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
-    <PackageVersion Include="System.Text.Json" Version="[8.0.4,9.0.0)" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.0-rc.1.24431.7" />
   </ItemGroup>
 </Project>
