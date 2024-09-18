@@ -48,11 +48,6 @@ namespace Mapsui.UI.Wpf;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
-#if __WINDOWSFORMS__
-#if NET9_OR_GREATER
-[Register("MapControl"), DesignTimeVisible(true)]
-#endif
-#endif
 public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
     // Flag indicating if a drawing process is running
