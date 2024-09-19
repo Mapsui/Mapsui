@@ -18,10 +18,6 @@
   <ItemGroup>
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="SkiaSharp.Views.WinUI" />
-    <PackageReference Include="Microsoft.Windows.CsWin32" >
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
