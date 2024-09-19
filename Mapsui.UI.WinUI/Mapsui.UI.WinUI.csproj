@@ -14,7 +14,7 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>
 		<RuntimeIdentifiers>win10-x64;win10-x86;win10-arm64</RuntimeIdentifiers>
-		<UseRidGraph>true</UseRidGraph>    
+		<UseRidGraph>true</UseRidGraph>
   </PropertyGroup>	
 
   <ItemGroup>
