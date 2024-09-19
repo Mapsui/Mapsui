@@ -18,7 +18,6 @@
       UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
       https://aka.platform.uno/singleproject-features
     -->
-    
     <UnoFeatures>
     </UnoFeatures>
   </PropertyGroup>
@@ -36,11 +35,6 @@
     -->
     <!-- <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22621.28" />
     <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22621.28" /> -->
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="Microsoft.WindowsAppSDK" />
-    <!--<PackageReference Include="SkiaSharp.Views.WinUI" />-->
   </ItemGroup>
 
   <!--Harfbuzz Sharp references Workaround for this issue-->
