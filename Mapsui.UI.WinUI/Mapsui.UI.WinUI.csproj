@@ -18,7 +18,7 @@
   </PropertyGroup>	
 
   <ItemGroup>
-	  <PackageReference Include="Microsoft.WindowsAppSDK" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" VersionOverride="1.5.240627000" />
     <PackageReference Include="SkiaSharp.Views.WinUI" />
   </ItemGroup>
 
