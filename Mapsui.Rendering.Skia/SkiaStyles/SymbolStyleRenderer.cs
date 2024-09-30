@@ -148,16 +148,16 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             canvas.RotateDegrees((float)rotation);
         }
 
-        using var path = vectorCache.GetOrCreatePath(symbolStyle.SymbolType, CreatePath);
+        using var path = vectorCache.GetOrCreate(symbolStyle.SymbolType, CreatePath);
         if (symbolStyle.Fill.IsVisible())
         {
-            using var fillPaint = vectorCache.GetOrCreatePaint((symbolStyle.Fill!, opacity), CreateFillPaint);
+            using var fillPaint = vectorCache.GetOrCreate((symbolStyle.Fill!, opacity), CreateFillPaint);
             canvas.DrawPath(path, fillPaint);
         }
 
         if (symbolStyle.Outline.IsVisible())
         {
-            using var linePaint = vectorCache.GetOrCreatePaint((symbolStyle.Outline!, opacity), CreateLinePaint);
+            using var linePaint = vectorCache.GetOrCreate((symbolStyle.Outline!, opacity), CreateLinePaint);
             canvas.DrawPath(path, linePaint);
         }
 
