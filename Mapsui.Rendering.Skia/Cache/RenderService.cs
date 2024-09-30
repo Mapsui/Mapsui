@@ -4,11 +4,10 @@ namespace Mapsui.Rendering.Skia.Cache;
 
 public sealed class RenderService : IRenderService
 {
-    public RenderService(int vectorCacheCapacity = 10000)
+    public RenderService(int vectorCacheCapacity = 30000)
     {
         DrawableImageCache = new DrawableImageCache();
         TileCache = new TileCache();
-        LabelCache = new LabelCache();
         ImageSourceCache = new ImageSourceCache();
         VectorCache = new VectorCache(this, vectorCacheCapacity);
     }
@@ -16,12 +15,10 @@ public sealed class RenderService : IRenderService
     public DrawableImageCache DrawableImageCache { get; }
     public VectorCache VectorCache { get; }
     public TileCache TileCache { get; }
-    public LabelCache LabelCache { get; }
     public ImageSourceCache ImageSourceCache { get; }
 
     public void Dispose()
     {
-        LabelCache.Dispose();
         DrawableImageCache.Dispose();
         VectorCache.Dispose();
         TileCache.Dispose();
