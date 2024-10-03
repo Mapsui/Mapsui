@@ -38,7 +38,7 @@ public sealed class VectorCache(IRenderService renderService, int capacity) : ID
             var paint = toPaint(f, renderService);
             return new CacheHolder<TPaint>(paint);
         });
-        
+
 #pragma warning restore IDISP001
         return holder?.Get<TPaint>() ?? new CacheTracker<TPaint>(toPaint(param, renderService));
     }
