@@ -5,6 +5,7 @@ using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using NUnit.Framework;
+using SkiaSharp;
 using OSPlatform = System.Runtime.InteropServices.OSPlatform;
 
 namespace Mapsui.Rendering.Skia.Tests;
