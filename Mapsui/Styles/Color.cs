@@ -20,7 +20,7 @@ public readonly record struct Color
         A = alpha;
     }
 
-    public static Dictionary<string, Color> NamedColors
+    private static Dictionary<string, Color> NamedColors
     {
         get
         {
