@@ -171,9 +171,7 @@ public readonly record struct Color
     }
 
     public int R { get; init; }
-
     public int G { get; init; }
-
     public int B { get; init; }
     public int A { get; init; } = 255;
 
