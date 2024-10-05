@@ -443,6 +443,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #if __BLAZOR__
     [Parameter]
     [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
+#endif    
+#if __WINDOWSFORMS__
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [Browsable(false)]
 #endif
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public Map Map

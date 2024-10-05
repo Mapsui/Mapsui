@@ -101,10 +101,10 @@ jobs:
       uses: NuGet/setup-nuget@v2   
       with:
         nuget-version: latest
-    #- name: Setup Xcode version 15.4
-    #  uses: maxim-lobanov/setup-xcode@v1
-    #  with:
-    #    xcode-version: '15.4' 
+    - name: Set up Xcode 16
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '16'
     - name: Setup .NET 6 SDK
       uses: actions/setup-dotnet@v4
       with:
