@@ -14,7 +14,6 @@
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
       "Samples\\Mapsui.Samples.Wpf\\Mapsui.Samples.Wpf.csproj",
       "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
-      "SourceGenerators\\Mapsui.SourceGenerator\\Mapsui.SourceGenerator.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
       "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
