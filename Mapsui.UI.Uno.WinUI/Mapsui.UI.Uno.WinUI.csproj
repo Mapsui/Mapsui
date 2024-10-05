@@ -18,7 +18,6 @@
       UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
       https://aka.platform.uno/singleproject-features
     -->
-    
     <UnoFeatures>
     </UnoFeatures>
   </PropertyGroup>
@@ -49,7 +48,7 @@
 
   <!--Harfbuzz Sharp references Workaround for this issue-->
   <!--https://github.com/mono/SkiaSharp/issues/1725-->
-  <ItemGroup Condition="'$(TargetFramework)'=='net8.0-browserwasm'">
+  <ItemGroup Condition="$(TargetFramework.Contains('browserwasm'))">
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
@@ -59,10 +58,11 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'!='net8.0-windows10.0.19041'">
+  <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows10.0.19041'">
+  <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
     <PackageReference Include="SkiaSharp.Views.WinUI"/>
   </ItemGroup>
 
