@@ -8,7 +8,6 @@ using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 using SkiaSharp;
-using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using Color = Microsoft.Maui.Graphics.Color;
 using Mapsui.Rendering.Skia.Extensions;

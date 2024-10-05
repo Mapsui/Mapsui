@@ -50,10 +50,12 @@
     <PackageVersion Include="Mapsui.Uno.WinUI" Version="5.0.0-beta.1" />
     <PackageVersion Include="Mapsui.WinUI" Version="5.0.0-beta.1" />
     <PackageVersion Include="Mapsui.Wpf" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components" Version="8.0.8" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="17.11.1" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[8.0.0,9.0.0)" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="[6.2.14,7.0.0)" />
+    <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="4.12.0-1.final" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="[2.6.2,3.0.0)" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.10.48,18.0.0)" />       
     <PackageVersion Include="NetTopologySuite" Version="[2.5.0,3.0.0)" />
@@ -77,9 +79,9 @@
     <PackageVersion Include="sqlite-net-pcl" Version="[1.9.172,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
     <PackageVersion Include="Svg.Skia" Version="2.0.0" />
-    <PackageVersion Include="System.Formats.Asn1" Version="8.0.1" />
+    <PackageVersion Include="System.Formats.Asn1" Version="9.0.0-rc.1.24431.7" />
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
-    <PackageVersion Include="System.Text.Json" Version="[8.0.4,9.0.0)" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.0-rc.1.24431.7" />
   </ItemGroup>
 </Project>

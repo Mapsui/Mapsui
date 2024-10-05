@@ -10,7 +10,6 @@ using Microsoft.UI;
 using Microsoft.UI.Input;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Shapes;
-using SkiaSharp.Views.Windows;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;

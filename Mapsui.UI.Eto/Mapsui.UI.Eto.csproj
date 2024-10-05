@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <DefineConstants>__ETO_FORMS__</DefineConstants>
     <PackageId>Mapsui.Eto</PackageId>

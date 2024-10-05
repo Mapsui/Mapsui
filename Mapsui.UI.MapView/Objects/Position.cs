@@ -1,6 +1,7 @@
 ﻿using System;
 using Mapsui.Projections;
 using NetTopologySuite.Geometries;
+using Point = NetTopologySuite.Geometries.Point;
 
 namespace Mapsui.UI.Maui;
 
