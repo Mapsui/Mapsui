@@ -10,6 +10,8 @@
 *.fsproj merge=union
 *.dbproj merge=union
 # Denote all files that are truly binary and should not be modified.
-*.png filter=lfs diff=lfs merge=lfs -text
 *.jpg binary
 *.jpeg binary
+# Git Lfs tracked files for regression Testing
+Tests\Mapsui.Rendering.Skia.Tests\**\*.png filter=lfs diff=lfs merge=lfs -text
+Tests\Mapsui.Rendering.Skia.Tests\**\*.sqlite filter=lfs diff=lfs merge=lfs -text
