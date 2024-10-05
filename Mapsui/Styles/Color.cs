@@ -8,6 +8,8 @@ public readonly record struct Color
 {
     private static Dictionary<string, Color>? _namedColors;
 
+    public Color() { }
+
     public Color(Color color) : this(color.R, color.G, color.B, color.A) { }
 
     public Color(int red, int green, int blue, int alpha = 255)
@@ -17,8 +19,6 @@ public readonly record struct Color
         B = blue;
         A = alpha;
     }
-
-    public Color() { }
 
     public static Dictionary<string, Color> NamedColors
     {
