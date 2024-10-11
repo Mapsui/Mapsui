@@ -1,0 +1,16 @@
+{
+  "$schema": "https://alirezanet.github.io/Husky.Net/schema.json",
+  "tasks": [
+    {
+      "name": "dotnet-format-whitespace",
+      "command": "dotnet",
+      "args": [
+        "format",
+        "whitespace",
+        "Watchful.slnf",
+        "--include",
+        "${staged}"
+      ]
+    }
+  ]
+}
