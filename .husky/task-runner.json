@@ -7,12 +7,11 @@
       "args": [
         "format",
         "whitespace",
-        "Watchful.slnf",
+        "Mapsui.sln",
         "--include",
         "${staged}"
       ]
     },
-
     {
       "name": "re-add-the-staged-files-after-formatting",
       "group": "pre-commit",
