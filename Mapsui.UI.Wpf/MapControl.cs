@@ -21,7 +21,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public MapControl()
     {
-        SharedConstructor();
+           SharedConstructor();
 
         _invalidate = () =>
         {
