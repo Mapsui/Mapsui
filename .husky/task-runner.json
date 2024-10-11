@@ -11,6 +11,18 @@
         "--include",
         "${staged}"
       ]
+    },
+
+    {
+      "name": "re-add-the-staged-files-after-formatting",
+      "group": "pre-commit",
+      "output": "always",
+      "command": "bash",
+      "args": [ "git", "add", "${staged}" ],
+      "windows": {
+        "command": "cmd",
+        "args": [ "git", "add", "${staged}" ]
+      }
     }
   ]
 }
