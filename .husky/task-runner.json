@@ -3,6 +3,7 @@
   "tasks": [
     {
       "name": "dotnet-format-whitespace",
+      "group": "pre-commit",
       "command": "dotnet",
       "args": [
         "format",

@@ -21,7 +21,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public MapControl()
     {
-           SharedConstructor();
+        SharedConstructor();
 
         _invalidate = () =>
         {
@@ -32,7 +32,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Children.Add(SkiaCanvas);
 
         SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
-          Loaded += MapControlLoaded;
+        Loaded += MapControlLoaded;
         SizeChanged += MapControlSizeChanged;
 
         MouseLeftButtonDown += MapControlMouseLeftButtonDown;
