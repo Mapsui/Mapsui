@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "husky": {
+      "version": "0.7.1",
+      "commands": [
+        "husky"
+      ],
+      "rollForward": false
+    }
+  }
+}
