@@ -6,7 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
 		<DefineConstants>$(DefineConstants);__WINDOWSFORMS__</DefineConstants>
-	  <!--<PackageId>Mapsui.WindowsForms</PackageId>-->
+	  <PackageId>Mapsui.WindowsForms</PackageId>
 	  <Description>Mapsui.WindowsForms - Library for mapping for Windows Forms</Description>
 	  <PackageTags>$(PackageTags) WindowsForms WinForms</PackageTags>
 	  <IsPackable>true</IsPackable>
