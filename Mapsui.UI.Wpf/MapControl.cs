@@ -222,6 +222,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             ?? throw new Exception("PresentationSource is null");
         var compositionTarget = presentationSource.CompositionTarget
             ?? throw new Exception("CompositionTarget is null");
+
         var matrix = compositionTarget.TransformToDevice;
 
         var dpiX = matrix.M11;
