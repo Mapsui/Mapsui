@@ -6,6 +6,7 @@
 
 using System.Collections;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.XPath;
 using Mapsui.Providers.Wfs.Utilities;
@@ -26,5 +27,11 @@ public interface IXPathQueryManager
     IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression? xPath, DictionaryEntry[]? queryParameters = null);
     void ResetNamespaces();
     void SetDocumentToParse(Stream documentStream);
-    Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil);
+
+    Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil)
+    {
+        return SetDocumentToParseAsync(httpClientUtil, CancellationToken.None);
+    }
+
+    Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil, CancellationToken cancellationToken);
 }

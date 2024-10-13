@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.ArcGIS.Extensions;
 using Mapsui.Cache;
@@ -95,13 +96,13 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
         set => _crs = value;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         //If there are no layers (probably not initialized) return nothing
         if (ArcGisDynamicCapabilities.layers == null)
             return [];
 
-        var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
+        var (success, raster) = await TryGetMapAsync(fetchInfo.Section, cancellationToken);
         if (success)
         {
             return [new RasterFeature(raster)];
@@ -138,10 +139,15 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
             ArcGisDynamicCapabilities = capabilities;
     }
 
+    public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(MSection section)
+    {
+        return await TryGetMapAsync(section, CancellationToken.None).ConfigureAwait(false);
+    }
+
     /// <summary>
     /// Retrieves the bitmap from ArcGIS Dynamic service
     /// </summary>
-    public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(MSection section)
+    public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(MSection section, CancellationToken cancellationToken)
     {
         int width;
         int height;
