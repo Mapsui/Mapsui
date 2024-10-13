@@ -13,7 +13,8 @@ public static class SvgColorModifier
         var svgFillColor = (System.Drawing.Color?)fillColor;
         var svgStrokeColor = (System.Drawing.Color?)strokeColor;
 
-        var svgDocument = SvgExtensions.Open(new MemoryStream(bytes)) ?? throw new Exception("Could not open stream as svg");
+        using var memoryStream = new MemoryStream(bytes);
+        var svgDocument = SvgExtensions.Open(memoryStream) ?? throw new Exception("Could not open stream as svg");
 
         var elements = GetAllElements(svgDocument.Children);
         foreach (var element in elements)

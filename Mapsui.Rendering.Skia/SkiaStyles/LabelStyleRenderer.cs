@@ -438,7 +438,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     private static SKPaint CreateHaloPaintHolder(LabelStyle labelStyle, IRenderService renderService)
     {
-        var strokeWidth = (float)labelStyle.Halo.Width * 2;
+        var strokeWidth = (float)labelStyle.Halo!.Width * 2;
         var paintStyle = SKPaintStyle.StrokeAndFill;
         return CreatePaint((labelStyle.Font, labelStyle.Halo.Color, 1, paintStyle, strokeWidth), renderService);
     }

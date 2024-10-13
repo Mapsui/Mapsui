@@ -18,7 +18,7 @@ public class SamplesRegistryGenerator : ISourceGenerator
         // Uncomment to debug SourceCode Generator
         // System.Diagnostics.Debugger.Launch();
     }
-
+    
     public void Execute(GeneratorExecutionContext context)
     {
         // begin creating the source we'll inject into the users compilation
@@ -26,11 +26,13 @@ public class SamplesRegistryGenerator : ISourceGenerator
 using System;
 namespace {{context.Compilation.Assembly.Name}}
 {
+    /// <summary> Samples Class </summary>
     public static class Samples
     {
         // Avoid double registration
         private static bool _registered;
         
+        /// <summary> Sample Register Method </summary>
         public static void Register() 
         {
             if (_registered)

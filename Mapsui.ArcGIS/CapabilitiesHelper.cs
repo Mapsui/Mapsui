@@ -215,7 +215,7 @@ public class CapabilitiesHelper
         }
 
         schema.Name = "ESRI";
-        schema.Format = arcGisDynamicCapabilities.tileInfo.format;
+        schema.Format = arcGisDynamicCapabilities.tileInfo.format ?? string.Empty;
         schema.YAxis = YAxis.OSM;
         if (arcGisDynamicCapabilities.tileInfo.spatialReference != null)
             schema.Srs = $"EPSG:{arcGisDynamicCapabilities.tileInfo.spatialReference.wkid}";

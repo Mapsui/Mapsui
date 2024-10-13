@@ -34,10 +34,11 @@ internal class MapRendererTests
     }
 
     [Test]
-    public async Task RenderPointWithBitmapSymbols()
+    public async Task RenderPointWithBitmapSymbolsAsync()
     {
         // Arrange
-        using var map = BitmapSymbolSample.CreateMap();
+        var sample = new BitmapSymbolSample();
+        using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_symbolstyle.png";
         using var mapRenderer = new MapRenderer();
@@ -54,10 +55,11 @@ internal class MapRendererTests
     }
 
     [Test]
-    public async Task RenderPointWithBitmapSymbolsInCollection()
+    public async Task RenderPointWithBitmapSymbolsInCollectionAsync()
     {
         // Arrange
-        using var map = BitmapSymbolInCollectionSample.CreateMap();
+        var sample = new BitmapSymbolInCollectionSample();
+        using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_in_collection_with_symbolstyle.png";
         using var mapRenderer = new MapRenderer();
@@ -74,10 +76,11 @@ internal class MapRendererTests
     }
 
     [Test]
-    public async Task RenderPointWithSvgSymbols()
+    public async Task RenderPointWithSvgSymbolsAsync()
     {
         // Arrange
-        using var map = SvgSymbolSample.CreateMap();
+        var sample = new SvgSymbolSample();
+        using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_svgsymbolstyle.png";
         using var mapRenderer = new MapRenderer();
@@ -94,10 +97,11 @@ internal class MapRendererTests
     }
 
     [Test]
-    public async Task RenderBitmapAtlas()
+    public async Task RenderBitmapAtlasAsync()
     {
         // Arrange
-        using var map = BitmapAtlasSample.CreateMap();
+        var sample = new BitmapAtlasSample();
+        using var map = await sample.CreateMapAsync();
         var viewport = new Viewport(256, 200, 1, 0, 512, 400);
         const string fileName = "bitmap_atlas.png";
         using var mapRenderer = new MapRenderer();
@@ -114,10 +118,11 @@ internal class MapRendererTests
     }
 
     [Test]
-    public async Task RenderRotatedBitmapSymbolWithOffset()
+    public async Task RenderRotatedBitmapSymbolWithOffsetAsync()
     {
         // Arrange
-        using var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
+        var sample = new BitmapSymbolWithRotationAndOffsetSample();
+        using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(4).ToViewport(200);
         const string fileName = "bitmap_symbol.png";
         using var mapRenderer = new MapRenderer();
@@ -172,10 +177,11 @@ internal class MapRendererTests
     }
 
     [Test]
-    public async Task RenderPolygon()
+    public async Task RenderPolygonAsync()
     {
         // Arrange
-        using var map = PolygonTestSample.CreateMap();
+        var sample = new PolygonTestSample();
+        using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "polygon.png";
         using var mapRenderer = new MapRenderer();
