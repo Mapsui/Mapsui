@@ -27,12 +27,22 @@ public class LayerCollection : IEnumerable<ILayer>
 
     public IEnumerator<ILayer> GetEnumerator()
     {
-        return (IEnumerator<ILayer>)_entries.OrderBy(l => l.Group).Select(l => l.Layer).ToList().GetEnumerator();
+        return _entries.OrderBy(e => e.Order).OrderBy(e => e.Group).Select(e => e.Layer).ToList().GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return _entries.OrderBy(l => l.Group).Select(l => l.Layer).ToList().GetEnumerator();
+        return _entries.OrderBy(e => e.Order).OrderBy(e => e.Group).Select(e => e.Layer).ToList().GetEnumerator();
+    }
+
+    public Span<ILayer> GetLayersOfGroup(int group)
+    {
+        return _entries.Where(e => e.Group == group).OrderBy(e => e.Order).Select(e => e.Layer).ToArray();
+    }
+
+    private Span<LayerEntry> GetEntriesOfGroup(int group)
+    {
+        return _entries.Where(e => e.Group == group).OrderBy(e => e.Order).ToArray();
     }
 
     public void ClearGroup(int group)
@@ -68,18 +78,6 @@ public class LayerCollection : IEnumerable<ILayer>
         return _entries.Any(l => l.Layer == item);
     }
 
-    public void CopyTo(ILayer[] array, int arrayIndex)
-    {
-        var copy = _entries.ToArray().ToList();
-
-        var maxCount = Math.Min(array.Length, copy.Count);
-        var count = maxCount - arrayIndex;
-        var entries = new ConcurrentQueue<LayerEntry>(array.Select(l => new LayerEntry(l))).ToArray();
-        copy.CopyTo(0, entries, arrayIndex, count);
-
-        _entries = new ConcurrentQueue<LayerEntry>(copy);
-    }
-
     public ILayer this[int index] => _entries.ToArray()[index].Layer;
 
     public void Add(params ILayer[] layers)
@@ -110,67 +108,94 @@ public class LayerCollection : IEnumerable<ILayer>
         Insert(0, layer, group);
     }
 
-    public void Move(int index, ILayer layer)
+    public void Move(int order, ILayer layer)
     {
-        MoveLayer(index, layer);
+        MoveLayer(order, layer);
     }
 
-    public void MoveToBottom(int index, ILayer layer)
+    public void MoveToBottom(ILayer layer)
     {
         MoveLayer(0, layer);
     }
 
-    public void MoveToTop(int index, ILayer layer)
+    public void MoveToTop(ILayer layer)
     {
         MoveLayer(_entries.Count - 1, layer);
     }
 
-    private void MoveLayer(int index, ILayer layer)
+    private void MoveLayer(int order, ILayer layer)
     {
-        var copy = _entries.ToArray().ToList();
-        copy.Remove(copy.First(e => e.Layer == layer));
+        var entryToMove = _entries.First(e => e.Layer == layer);
 
-        if (copy.Count > index)
-            copy.Insert(index, new LayerEntry(layer));
-        else
-            copy.Add(new LayerEntry(layer));
+        entryToMove.Order = order;
 
-        _entries = new ConcurrentQueue<LayerEntry>(copy);
+        var counter = 0;
+        foreach (var entry in GetEntriesOfGroup(entryToMove.Group))
+        {
+            if (entryToMove == entry) // Skip the entry we are moving
+                continue;
+
+            if (counter < order)
+                entry.Order = counter;
+            else
+                entry.Order = counter + 1;
+
+            counter++;
+        };
+
         OnLayerMoved(layer);
         OnChanged(null, null, [layer]);
     }
 
-    public void Insert(int index, params ILayer[] layers)
+    public void Insert(int order, params ILayer[] layers)
     {
-        InsertLayers(index, layers, 0);
-    }
-    public void Insert(int index, ILayer[] layers, int group)
-    {
-        InsertLayers(index, layers, group);
+        InsertLayers(order, layers, 0);
     }
 
-    public void Insert(int index, ILayer layer, int group)
+    public void Insert(int order, ILayer[] layers, int group)
     {
-        InsertLayers(index, [layer], group);
+        InsertLayers(order, layers, group);
     }
 
-    private void InsertLayers(int index, ILayer[] layers, int group)
+    public void Insert(int order, ILayer layer, int group)
+    {
+        InsertLayers(order, [layer], group);
+    }
+
+    private void InsertLayers(int order, ILayer[] layers, int group)
     {
         if (layers == null || layers.Length == 0)
             throw new ArgumentException("Layers cannot be null or empty");
 
-        var entries = layers.Select(l => new LayerEntry(l, group)).ToArray();
-        var copy = _entries.ToArray().ToList();
-        if (copy.Count > index)
-            copy.InsertRange(index, entries);
-        else
-            copy.AddRange(entries);
+        foreach (var layer in layers)
+        {
+            InsertLayer(layer, order, group);
+            order++;
+        }
 
-        _entries = new ConcurrentQueue<LayerEntry>(copy);
         foreach (var layer in layers)
             OnLayerAdded(layer);
 
         OnChanged(layers, null);
+    }
+
+    private void InsertLayer(ILayer layer, int order, int group)
+    {
+        var entryToInsert = new LayerEntry(layer, order, group);
+        var counter = 0;
+        foreach (var entry in GetEntriesOfGroup(entryToInsert.Group))
+        {
+            if (entry.Group != entryToInsert.Group) // Skip entries in other groups
+                continue;
+
+            if (counter < order)
+                entry.Order = counter;
+            else
+                entry.Order = counter + 1;
+
+            counter++;
+        };
+        _entries.Enqueue(entryToInsert);
     }
 
     public bool Remove(params ILayer[] layers)
@@ -219,7 +244,8 @@ public class LayerCollection : IEnumerable<ILayer>
 
         foreach (var layer in layers)
         {
-            _entries.Enqueue(new LayerEntry(layer, group));
+            var order = _entries.Count(e => e.Group == group);
+            _entries.Enqueue(new LayerEntry(layer, order, group));
             OnLayerAdded(layer);
         }
     }
@@ -231,8 +257,19 @@ public class LayerCollection : IEnumerable<ILayer>
 
         foreach (var layer in layers)
         {
-            if (!copy.Remove(new LayerEntry(layer)))
+            var entryToRemove = copy.First(e => e.Layer == layer);
+            if (!copy.Remove(entryToRemove))
                 success = false;
+
+            var counter = 0;
+            foreach (var entry in copy)
+            {
+                if (entry.Group != entryToRemove.Group) // Skip entries in other groups
+                    continue;
+
+                entry.Order = counter;
+                counter++;
+            }
 
             if (layer is IAsyncDataFetcher asyncLayer)
             {
@@ -273,9 +310,10 @@ public class LayerCollection : IEnumerable<ILayer>
         return _entries.Where(e => e.Layer.Name == layerName).Select(e => e.Layer).ToArray();
     }
 
-    private class LayerEntry(ILayer layer, int group = 0)
+    private class LayerEntry(ILayer layer, int order, int group = 0)
     {
         public ILayer Layer { get; set; } = layer;
         public int Group { get; set; } = group;
+        public int Order { get; set; } = order;
     }
 }
