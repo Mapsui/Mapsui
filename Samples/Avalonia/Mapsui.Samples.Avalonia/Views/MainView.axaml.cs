@@ -80,7 +80,7 @@ public partial class MainView : UserControl
         {
             Catch.Exceptions(async () =>
             {
-                MapControl.Map?.Layers.Clear();
+                MapControl.Map?.Layers.ClearAllGroups();
                 await sample.SetupAsync(MapControl);
                 MapControl.Refresh();
             });

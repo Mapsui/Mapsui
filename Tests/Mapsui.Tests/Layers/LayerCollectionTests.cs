@@ -54,7 +54,7 @@ public class LayerCollectionTests
         layerCollection.Insert(1, layer3);
 
         // Assert
-        var list = layerCollection.GetLayersOfGroup(0);
+        var list = layerCollection.GetLayers(0).ToArray();
         Assert.That(list.Length, Is.EqualTo(2));
         Assert.That(list[0], Is.Not.Null);
         Assert.That(list[0].Name, Is.EqualTo("Layer2"));

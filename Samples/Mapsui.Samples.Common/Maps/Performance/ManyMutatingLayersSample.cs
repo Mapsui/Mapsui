@@ -38,7 +38,7 @@ public sealed class ManyMutatingLayersSample : ISample, IDisposable
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         var features = RandomPointsBuilder.CreateRandomFeatures(new MRect(-_c, -_c, _c, _c), _featureCount, _random);
         map.Layers.Add(CreatePointLayers(_random, features).ToArray());
-        map.Navigator.ZoomToBox(map.Layers[0].Extent);
+        map.Navigator.ZoomToBox(map.Layers.Get(0).Extent);
 
         map.Widgets.Add(new MapInfoWidget(map));
 
