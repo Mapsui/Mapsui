@@ -9,7 +9,7 @@ namespace Mapsui.Layers;
 
 public class LayerCollection : IEnumerable<ILayer>
 {
-    private ConcurrentQueue<ILayer> _layers = new();
+    private ConcurrentQueue<LayerEntry> _entries = new();
 
     public delegate void LayerRemovedEventHandler(ILayer layer);
     public delegate void LayerAddedEventHandler(ILayer layer);
@@ -23,106 +23,196 @@ public class LayerCollection : IEnumerable<ILayer>
 
     public event LayerCollectionChangedEventHandler? Changed;
 
-    public int Count => _layers.Count;
+    public int Count => _entries.Count;
 
     public IEnumerator<ILayer> GetEnumerator()
     {
-        return _layers.GetEnumerator();
+        return _entries.OrderBy(e => e.Index).OrderBy(e => e.Group).Select(e => e.Layer).ToList().GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return _layers.GetEnumerator();
+        return _entries.OrderBy(e => e.Index).OrderBy(e => e.Group).Select(e => e.Layer).ToList().GetEnumerator();
     }
 
-    public void Clear()
+    public IEnumerable<ILayer> GetLayers(int group = 0)
     {
-        var copy = _layers.ToArray().ToList();
+        return _entries.Where(e => e.Group == group).OrderBy(e => e.Index).Select(e => e.Layer).ToArray();
+    }
 
-        _layers = new ConcurrentQueue<ILayer>();
+    public IEnumerable<ILayer> GetLayersOfAllGroups()
+    {
+        return _entries.OrderBy(e => e.Index).Select(e => e.Layer).ToArray();
+    }
 
-        foreach (var layer in copy)
+    public void Clear(int group = 0)
+    {
+        var copy = _entries.ToArray();
+
+        var entries = copy.Where(e => e.Group != group).Select(e => e.Layer).ToArray();
+
+        RemoveLayers(entries);
+    }
+
+    public void ClearAllGroups()
+    {
+        var copy = _entries.ToArray();
+
+        var entries = new ConcurrentQueue<LayerEntry>();
+
+        foreach (var entry in copy)
         {
-            if (layer is IAsyncDataFetcher asyncLayer)
+            if (entry is IAsyncDataFetcher asyncLayer)
             {
                 asyncLayer.AbortFetch();
                 asyncLayer.ClearCache();
             }
-            OnLayerRemoved(layer);
+            OnLayerRemoved(entry.Layer);
         }
+
+        _entries = entries;
     }
 
-    public bool Contains(ILayer item)
+    public ILayer Get(int index, int group = 0)
     {
-        return _layers.Contains(item);
+        return GetEntriesOfGroup(group)[index].Layer;
+    }
+    public void Add(IEnumerable<ILayer> layers, int group = 0)
+    {
+        AddLayers(layers, group);
+        OnChanged(layers, [], []);
     }
 
-    public void CopyTo(ILayer[] array, int arrayIndex)
+    public void Add(ILayer layer, int group = 0)
     {
-        var copy = _layers.ToArray().ToList();
-
-        var maxCount = Math.Min(array.Length, copy.Count);
-        var count = maxCount - arrayIndex;
-        copy.CopyTo(0, array, arrayIndex, count);
-
-        _layers = new ConcurrentQueue<ILayer>(copy);
+        AddLayers([layer], group);
+        OnChanged([layer], [], []);
     }
 
-    public ILayer this[int index] => _layers.ToArray()[index];
-
-    public void Add(params ILayer[] layers)
+    public void AddOnTop(ILayer layer, int group = 0)
     {
-        AddLayers(layers);
-        OnChanged(layers, null);
+        Add(layer, group);
+    }
+
+    public void AddOnBottom(ILayer layer, int group = 0)
+    {
+        Insert(0, layer, group);
     }
 
     public void Move(int index, ILayer layer)
     {
-        var copy = _layers.ToArray().ToList();
-        copy.Remove(layer);
-
-        if (copy.Count > index)
-            copy.Insert(index, layer);
-        else
-            copy.Add(layer);
-
-        _layers = new ConcurrentQueue<ILayer>(copy);
-        OnLayerMoved(layer);
-        OnChanged(null, null, [layer]);
+        MoveLayer(index, layer);
     }
 
-    public void Insert(int index, params ILayer[] layers)
+    public void MoveToBottom(ILayer layer)
     {
-        if (layers == null || layers.Length == 0)
+        MoveLayer(0, layer);
+    }
+
+    public void MoveToTop(ILayer layer)
+    {
+        MoveLayer(_entries.Count - 1, layer);
+    }
+
+    private void MoveLayer(int index, ILayer layer)
+    {
+        var entryToMove = _entries.First(e => e.Layer == layer);
+
+        entryToMove.Index = index;
+
+        var counter = 0;
+        foreach (var entry in GetEntriesOfGroup(entryToMove.Group))
+        {
+            if (entryToMove == entry) // Skip the entry we are moving
+                continue;
+
+            if (counter < index)
+                entry.Index = counter;
+            else
+                entry.Index = counter + 1;
+
+            counter++;
+        };
+
+        OnLayerMoved(layer);
+        OnChanged([], [], [layer]);
+    }
+
+    public void Insert(int index, ILayer layer, int group = 0)
+    {
+        InsertLayers(index, [layer], group);
+    }
+
+    public void Insert(int index, IEnumerable<ILayer> layers, int group = 0)
+    {
+        InsertLayers(index, layers, group);
+    }
+
+    private LayerEntry[] GetEntriesOfGroup(int group)
+    {
+        return _entries.Where(e => e.Group == group).OrderBy(e => e.Index).ToArray();
+    }
+
+    private void InsertLayers(int index, IEnumerable<ILayer> layers, int group)
+    {
+        if (layers == null || layers.Count() == 0)
             throw new ArgumentException("Layers cannot be null or empty");
 
-        var copy = _layers.ToArray().ToList();
-        if (copy.Count > index)
-            copy.InsertRange(index, layers);
-        else
-            copy.AddRange(layers);
+        foreach (var layer in layers)
+        {
+            InsertLayer(layer, index, group);
+            index++;
+        }
 
-        _layers = new ConcurrentQueue<ILayer>(copy);
         foreach (var layer in layers)
             OnLayerAdded(layer);
 
-        OnChanged(layers, null);
+        OnChanged(layers, [], []);
     }
 
-    public bool Remove(params ILayer[] layers)
+    private void InsertLayer(ILayer layer, int index, int group)
+    {
+        var entryToInsert = new LayerEntry(layer, index, group);
+        var counter = 0;
+        foreach (var entry in GetEntriesOfGroup(entryToInsert.Group))
+        {
+            if (entry.Group != entryToInsert.Group) // Skip entries in other groups
+                continue;
+
+            if (counter < index)
+                entry.Index = counter;
+            else
+                entry.Index = counter + 1;
+
+            counter++;
+        };
+        _entries.Enqueue(entryToInsert);
+    }
+
+
+    public bool Remove(ILayer[] layers)
     {
         var success = RemoveLayers(layers);
-        OnChanged(null, layers);
+        OnChanged([], layers, []);
+
+        return success;
+    }
+
+
+    public bool Remove(ILayer layer)
+    {
+        var success = RemoveLayers([layer]);
+        OnChanged([], [layer], []);
 
         return success;
     }
 
     public bool Remove(Func<ILayer, bool> predicate)
     {
-        var copyLayers = _layers.ToArray().Where(predicate).ToArray();
+        var copyLayers = _entries.Select(e => e.Layer).ToArray().Where(predicate).ToArray();
         var success = RemoveLayers(copyLayers);
 
-        OnChanged(null, copyLayers);
+        OnChanged([], copyLayers, []);
         return success;
     }
 
@@ -134,41 +224,58 @@ public class LayerCollection : IEnumerable<ILayer>
         RemoveLayers(copyLayersToRemove);
         AddLayers(copyLayersToAdd);
 
-        OnChanged(copyLayersToAdd, copyLayersToRemove);
+        OnChanged(copyLayersToAdd, copyLayersToRemove, []);
     }
 
     public void Modify(Func<ILayer, bool> removePredicate, IEnumerable<ILayer> layersToAdd)
     {
-        var copyLayersToRemove = _layers.ToArray().Where(removePredicate).ToArray();
+        var copyLayersToRemove = _entries.Select(e => e.Layer).ToArray().Where(removePredicate).ToArray();
         var copyLayersToAdd = layersToAdd.ToArray();
 
         RemoveLayers(copyLayersToRemove);
         AddLayers(copyLayersToAdd);
 
-        OnChanged(copyLayersToAdd, copyLayersToRemove);
+        OnChanged(copyLayersToAdd, copyLayersToRemove, []);
     }
 
-    private void AddLayers(ILayer[] layers)
+    public IEnumerable<ILayer> FindLayer(string layerName)
     {
-        if (layers == null || layers.Length == 0)
+        return _entries.Where(e => e.Layer.Name == layerName).Select(e => e.Layer).ToArray();
+    }
+
+    private void AddLayers(IEnumerable<ILayer> layers, int group = 0)
+    {
+        if (layers == null || layers.Count() == 0)
             throw new ArgumentException("Layers cannot be null or empty");
 
         foreach (var layer in layers)
         {
-            _layers.Enqueue(layer);
+            var index = _entries.Count(e => e.Group == group);
+            _entries.Enqueue(new LayerEntry(layer, index, group));
             OnLayerAdded(layer);
         }
     }
 
     private bool RemoveLayers(ILayer[] layers)
     {
-        var copy = _layers.ToArray().ToList();
+        var copy = _entries.ToList();
         var success = true;
 
         foreach (var layer in layers)
         {
-            if (!copy.Remove(layer))
+            var entryToRemove = copy.First(e => e.Layer == layer);
+            if (!copy.Remove(entryToRemove))
                 success = false;
+
+            var counter = 0;
+            foreach (var entry in copy)
+            {
+                if (entry.Group != entryToRemove.Group) // Skip entries in other groups
+                    continue;
+
+                entry.Index = counter;
+                counter++;
+            }
 
             if (layer is IAsyncDataFetcher asyncLayer)
             {
@@ -177,7 +284,7 @@ public class LayerCollection : IEnumerable<ILayer>
             }
         }
 
-        _layers = new ConcurrentQueue<ILayer>(copy);
+        _entries = new ConcurrentQueue<LayerEntry>(copy);
         foreach (var layer in layers)
             OnLayerRemoved(layer);
 
@@ -199,13 +306,15 @@ public class LayerCollection : IEnumerable<ILayer>
         LayerMoved?.Invoke(layer);
     }
 
-    private void OnChanged(IEnumerable<ILayer>? added, IEnumerable<ILayer>? removed, IEnumerable<ILayer>? moved = null)
+    private void OnChanged(IEnumerable<ILayer> added, IEnumerable<ILayer> removed, IEnumerable<ILayer> moved)
     {
         Changed?.Invoke(this, new LayerCollectionChangedEventArgs(added, removed, moved));
     }
 
-    public IEnumerable<ILayer> FindLayer(string layerName)
+    private class LayerEntry(ILayer layer, int index, int group = 0)
     {
-        return _layers.Where(layer => layer.Name.Contains(layerName));
+        public ILayer Layer { get; set; } = layer;
+        public int Group { get; set; } = group;
+        public int Index { get; set; } = index;
     }
 }

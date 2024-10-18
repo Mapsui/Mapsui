@@ -30,7 +30,7 @@ public class SingleCalloutSample : ISample
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreatePointLayer());
-        map.Navigator.CenterOnAndZoomTo(map.Layers[1].Extent!.Centroid, map.Navigator.Resolutions[5]);
+        map.Navigator.CenterOnAndZoomTo(map.Layers.Get(1).Extent!.Centroid, map.Navigator.Resolutions[5]);
         map.Info += MapOnInfo;
 
         map.Widgets.Add(new MapInfoWidget(map));
