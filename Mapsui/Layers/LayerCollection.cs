@@ -44,7 +44,7 @@ public class LayerCollection : IEnumerable<ILayer>
     /// Retrieves all layers in a specific group.
     /// </summary>
     /// <param name="group">The group identifier (default is 0).</param>
-    /// <returns>An enumerable of layers in the specified group.</returns>
+    /// <returns>All the layers in the specified group.</returns>
     public IEnumerable<ILayer> GetLayers(int group = 0)
     {
         return _entries.Where(e => e.Group == group).OrderBy(e => e.Index).Select(e => e.Layer).ToArray();
@@ -53,7 +53,7 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <summary>
     /// Retrieves all layers from all groups.
     /// </summary>
-    /// <returns>An enumerable of all layers.</returns>
+    /// <returns>All the layers of all groups.</returns>
     public IEnumerable<ILayer> GetLayersOfAllGroups()
     {
         return _entries.OrderBy(e => e.Index).Select(e => e.Layer).ToArray();
@@ -158,7 +158,7 @@ public class LayerCollection : IEnumerable<ILayer>
     }
 
     /// <summary>
-    /// Moves a layer to the bottom of the collection.
+    /// Moves a layer to the bottom of it's current group. This means the other layers will be drawn on top of it.
     /// </summary>
     /// <param name="layer">The layer to move.</param>
     public void MoveToBottom(ILayer layer)
@@ -168,7 +168,7 @@ public class LayerCollection : IEnumerable<ILayer>
     }
 
     /// <summary>
-    /// Moves a layer to the top of the collection.
+    /// Moves a layer to the top of it's current group. This means this layer will be drawn on top of the other layers.
     /// </summary>
     /// <param name="layer">The layer to move.</param>
     public void MoveToTop(ILayer layer)
