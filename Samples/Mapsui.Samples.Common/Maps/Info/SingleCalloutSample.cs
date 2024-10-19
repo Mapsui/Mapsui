@@ -14,8 +14,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-// ReSharper disable UnusedAutoPropertyAccessor.Local
-// ReSharper disable once ClassNeverInstantiated.Local
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Info;
 
@@ -30,7 +29,7 @@ public class SingleCalloutSample : ISample
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreatePointLayer());
-        map.Navigator.CenterOnAndZoomTo(map.Layers[1].Extent!.Centroid, map.Navigator.Resolutions[5]);
+        map.Navigator.CenterOnAndZoomTo(map.Layers.Get(1).Extent!.Centroid, map.Navigator.Resolutions[5]);
         map.Info += MapOnInfo;
 
         map.Widgets.Add(new MapInfoWidget(map));

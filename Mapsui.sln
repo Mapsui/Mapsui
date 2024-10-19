@@ -196,7 +196,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.WindowsForms
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.WindowsForms", "Mapsui.UI.WindowsForms\Mapsui.UI.WindowsForms.csproj", "{563CAE64-573F-4D0F-9DFF-D037E2FE114F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".husky", ".husky", "{1192D94C-B051-403B-91BE-D0C218238175}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "husky", "husky", "{1192D94C-B051-403B-91BE-D0C218238175}"
 	ProjectSection(SolutionItems) = preProject
 		.husky\pre-commit = .husky\pre-commit
 		.husky\task-runner.json = .husky\task-runner.json
