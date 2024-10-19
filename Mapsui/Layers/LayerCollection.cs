@@ -11,15 +11,7 @@ public class LayerCollection : IEnumerable<ILayer>
 {
     private ConcurrentQueue<LayerEntry> _entries = new();
 
-    public delegate void LayerRemovedEventHandler(ILayer layer);
-    public delegate void LayerAddedEventHandler(ILayer layer);
-    public delegate void LayerMovedEventHandler(ILayer layer);
-
     public delegate void LayerCollectionChangedEventHandler(object sender, LayerCollectionChangedEventArgs args);
-
-    public event LayerRemovedEventHandler? LayerRemoved;
-    public event LayerAddedEventHandler? LayerAdded;
-    public event LayerMovedEventHandler? LayerMoved;
 
     public event LayerCollectionChangedEventHandler? Changed;
 
@@ -67,7 +59,6 @@ public class LayerCollection : IEnumerable<ILayer>
                 asyncLayer.AbortFetch();
                 asyncLayer.ClearCache();
             }
-            OnLayerRemoved(entry.Layer);
         }
 
         _entries = entries;
@@ -134,7 +125,6 @@ public class LayerCollection : IEnumerable<ILayer>
             counter++;
         };
 
-        OnLayerMoved(layer);
         OnChanged([], [], [layer]);
     }
 
@@ -163,9 +153,6 @@ public class LayerCollection : IEnumerable<ILayer>
             InsertLayer(layer, index, group);
             index++;
         }
-
-        foreach (var layer in layers)
-            OnLayerAdded(layer);
 
         OnChanged(layers, [], []);
     }
@@ -252,7 +239,6 @@ public class LayerCollection : IEnumerable<ILayer>
         {
             var index = _entries.Count(e => e.Group == group);
             _entries.Enqueue(new LayerEntry(layer, index, group));
-            OnLayerAdded(layer);
         }
     }
 
@@ -285,25 +271,8 @@ public class LayerCollection : IEnumerable<ILayer>
         }
 
         _entries = new ConcurrentQueue<LayerEntry>(copy);
-        foreach (var layer in layers)
-            OnLayerRemoved(layer);
 
         return success;
-    }
-
-    private void OnLayerRemoved(ILayer layer)
-    {
-        LayerRemoved?.Invoke(layer);
-    }
-
-    private void OnLayerAdded(ILayer layer)
-    {
-        LayerAdded?.Invoke(layer);
-    }
-
-    private void OnLayerMoved(ILayer layer)
-    {
-        LayerMoved?.Invoke(layer);
     }
 
     private void OnChanged(IEnumerable<ILayer> added, IEnumerable<ILayer> removed, IEnumerable<ILayer> moved)
