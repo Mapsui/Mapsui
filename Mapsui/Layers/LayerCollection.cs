@@ -239,6 +239,11 @@ public class LayerCollection : IEnumerable<ILayer>
         return success;
     }
 
+    /// <summary>
+    /// Modifies the layer collection by removing specified layers and adding new layers.
+    /// </summary>
+    /// <param name="layersToRemove">The layers to remove from the collection.</param>
+    /// <param name="layersToAdd">The layers to add to the collection.</param>
     public void Modify(IEnumerable<ILayer> layersToRemove, IEnumerable<ILayer> layersToAdd)
     {
         var copyLayersToRemove = layersToRemove.ToArray();
@@ -250,6 +255,11 @@ public class LayerCollection : IEnumerable<ILayer>
         OnChanged(copyLayersToAdd, copyLayersToRemove, []);
     }
 
+    /// <summary>
+    /// Modifies the layer collection by removing layers that match a specified predicate and adding new layers.
+    /// </summary>
+    /// <param name="removePredicate">The predicate to determine which layers to remove from the collection.</param>
+    /// <param name="layersToAdd">The layers to add to the collection.</param>
     public void Modify(Func<ILayer, bool> removePredicate, IEnumerable<ILayer> layersToAdd)
     {
         var copyLayersToRemove = _entries.Select(e => e.Layer).ToArray().Where(removePredicate).ToArray();
@@ -261,6 +271,11 @@ public class LayerCollection : IEnumerable<ILayer>
         OnChanged(copyLayersToAdd, copyLayersToRemove, []);
     }
 
+    /// <summary>
+    /// Finds layers in the collection by their name.
+    /// </summary>
+    /// <param name="layerName">The name of the layer to find.</param>
+    /// <returns>The layers with the specified name.</returns>
     public IEnumerable<ILayer> FindLayer(string layerName)
     {
         return _entries.Where(e => e.Layer.Name == layerName).Select(e => e.Layer).ToArray();
