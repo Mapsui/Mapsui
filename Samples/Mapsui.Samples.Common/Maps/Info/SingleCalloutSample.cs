@@ -14,8 +14,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-// ReSharper disable UnusedAutoPropertyAccessor.Local
-// ReSharper disable once ClassNeverInstantiated.Local
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Info;
 
