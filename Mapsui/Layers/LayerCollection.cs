@@ -7,16 +7,29 @@ using Mapsui.Fetcher;
 
 namespace Mapsui.Layers;
 
+/// <summary>
+/// Represents a collection of map layers with support for grouping, ordering, and change notifications.
+/// </summary>
 public class LayerCollection : IEnumerable<ILayer>
 {
     private ConcurrentQueue<LayerEntry> _entries = new();
 
     public delegate void LayerCollectionChangedEventHandler(object sender, LayerCollectionChangedEventArgs args);
 
+    /// <summary>
+    /// Occurs when the layer collection has changed (layers are added, removed, or moved).
+    /// </summary>
     public event LayerCollectionChangedEventHandler? Changed;
 
+    /// <summary>
+    /// Gets the number of layers in the collection.
+    /// </summary>
     public int Count => _entries.Count;
 
+    /// <summary>
+    /// Returns an enumerator that iterates through the collection.
+    /// </summary>
+    /// <returns>An enumerator for the layers in the collection.</returns>
     public IEnumerator<ILayer> GetEnumerator()
     {
         return _entries.OrderBy(e => e.Index).OrderBy(e => e.Group).Select(e => e.Layer).ToList().GetEnumerator();
@@ -27,16 +40,29 @@ public class LayerCollection : IEnumerable<ILayer>
         return _entries.OrderBy(e => e.Index).OrderBy(e => e.Group).Select(e => e.Layer).ToList().GetEnumerator();
     }
 
+    /// <summary>
+    /// Retrieves all layers in a specific group.
+    /// </summary>
+    /// <param name="group">The group identifier (default is 0).</param>
+    /// <returns>An enumerable of layers in the specified group.</returns>
     public IEnumerable<ILayer> GetLayers(int group = 0)
     {
         return _entries.Where(e => e.Group == group).OrderBy(e => e.Index).Select(e => e.Layer).ToArray();
     }
 
+    /// <summary>
+    /// Retrieves all layers from all groups.
+    /// </summary>
+    /// <returns>An enumerable of all layers.</returns>
     public IEnumerable<ILayer> GetLayersOfAllGroups()
     {
         return _entries.OrderBy(e => e.Index).Select(e => e.Layer).ToArray();
     }
 
+    /// <summary>
+    /// Clears layers from a specific group.
+    /// </summary>
+    /// <param name="group">The group identifier (default is 0).</param>
     public void Clear(int group = 0)
     {
         var layersToRemove = _entries.Where(e => e.Group != group).Select(e => e.Layer).ToArray();
@@ -44,6 +70,9 @@ public class LayerCollection : IEnumerable<ILayer>
         OnChanged([], layersToRemove, []);
     }
 
+    /// <summary>
+    /// Clears all layers from all groups.
+    /// </summary>
     public void ClearAllGroups()
     {
         var entries = new ConcurrentQueue<LayerEntry>();
@@ -61,28 +90,55 @@ public class LayerCollection : IEnumerable<ILayer>
         OnChanged([], layersToRemove, []);
     }
 
+    /// <summary>
+    /// Gets a layer at a specific index in a group.
+    /// </summary>
+    /// <param name="index">The index of the layer.</param>
+    /// <param name="group">The group identifier (default is 0).</param>
+    /// <returns>The layer at the specified index and group.</returns>
     public ILayer Get(int index, int group = 0)
     {
         return GetEntriesOfGroup(group)[index].Layer;
     }
+
+    /// <summary>
+    /// Adds multiple layers to a specific group.
+    /// </summary>
+    /// <param name="layers">The layers to add.</param>
+    /// <param name="group">The group identifier (default is 0).</param>
     public void Add(IEnumerable<ILayer> layers, int group = 0)
     {
         AddInternal(layers, group);
         OnChanged(layers, [], []);
     }
 
+    /// <summary>
+    /// Adds a layer to a specific group.
+    /// </summary>
+    /// <param name="layer">The layer to add.</param>
+    /// <param name="group">The group identifier (default is 0).</param>
     public void Add(ILayer layer, int group = 0)
     {
         AddInternal([layer], group);
         OnChanged([layer], [], []);
     }
 
+    /// <summary>
+    /// Adds a layer on top of the collection in a specific group.
+    /// </summary>
+    /// <param name="layer">The layer to add.</param>
+    /// <param name="group">The group identifier (default is 0).</param>
     public void AddOnTop(ILayer layer, int group = 0)
     {
         AddInternal([layer], group);
         OnChanged([layer], [], []);
     }
 
+    /// <summary>
+    /// Adds a layer at the bottom of the collection in a specific group.
+    /// </summary>
+    /// <param name="layer">The layer to add.</param>
+    /// <param name="group">The group identifier (default is 0).</param>
     public void AddOnBottom(ILayer layer, int group = 0)
     {
         IEnumerable<ILayer> layers = [layer];
@@ -90,32 +146,55 @@ public class LayerCollection : IEnumerable<ILayer>
         OnChanged(layers, [], []);
     }
 
+    /// <summary>
+    /// Moves a layer to a specific index in the collection.
+    /// </summary>
+    /// <param name="index">The target index.</param>
+    /// <param name="layer">The layer to move.</param>
     public void Move(int index, ILayer layer)
     {
         MoveInternal(index, layer);
         OnChanged([], [], [layer]);
     }
 
+    /// <summary>
+    /// Moves a layer to the bottom of the collection.
+    /// </summary>
+    /// <param name="layer">The layer to move.</param>
     public void MoveToBottom(ILayer layer)
     {
         MoveInternal(0, layer);
         OnChanged([], [], [layer]);
     }
 
+    /// <summary>
+    /// Moves a layer to the top of the collection.
+    /// </summary>
+    /// <param name="layer">The layer to move.</param>
     public void MoveToTop(ILayer layer)
     {
         MoveInternal(_entries.Count - 1, layer);
         OnChanged([], [], [layer]);
     }
 
+    /// <summary>
+    /// Inserts a layer at a specific index in a group.
+    /// </summary>
+    /// <param name="index">The target index.</param>
+    /// <param name="layer">The layer to insert.</param>
+    /// <param name="group">The group identifier (default is 0).</param>
     public void Insert(int index, ILayer layer, int group = 0)
     {
-        IEnumerable<ILayer> layers = [layer];
-        InsertInternal(index, layers, group);
-        OnChanged(layers, [], []);
-
+        InsertInternal(index, [layer], group);
+        OnChanged([layer], [], []);
     }
 
+    /// <summary>
+    /// Inserts multiple layers at a specific index in a group.
+    /// </summary>
+    /// <param name="index">The target index.</param>
+    /// <param name="layers">The layers to insert.</param>
+    /// <param name="group">The group identifier (default is 0).</param>
     public void Insert(int index, IEnumerable<ILayer> layers, int group = 0)
     {
         InsertInternal(index, layers, group);
@@ -180,6 +259,11 @@ public class LayerCollection : IEnumerable<ILayer>
     }
 
 
+    /// <summary>
+    /// Removes multiple layers from the collection.
+    /// </summary>
+    /// <param name="layers">The layers to remove.</param>
+    /// <returns>True if all layers were removed successfully; otherwise, false.</returns>
     public bool Remove(ILayer[] layers)
     {
         var success = RemoveInternal(layers);
@@ -187,7 +271,11 @@ public class LayerCollection : IEnumerable<ILayer>
         return success;
     }
 
-
+    /// <summary>
+    /// Removes a specific layer from the collection.
+    /// </summary>
+    /// <param name="layer">The layer to remove.</param>
+    /// <returns>True if the layer was removed successfully; otherwise, false.</returns>
     public bool Remove(ILayer layer)
     {
         var success = RemoveInternal([layer]);
@@ -195,6 +283,11 @@ public class LayerCollection : IEnumerable<ILayer>
         return success;
     }
 
+    /// <summary>
+    /// Removes layers that match a specific predicate.
+    /// </summary>
+    /// <param name="predicate">The condition to match for removal.</param>
+    /// <returns>True if all matching layers were removed successfully; otherwise, false.</returns>
     public bool Remove(Func<ILayer, bool> predicate)
     {
         var copyLayers = _entries.Select(e => e.Layer).ToArray().Where(predicate).ToArray();
