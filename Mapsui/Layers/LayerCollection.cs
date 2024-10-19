@@ -201,64 +201,6 @@ public class LayerCollection : IEnumerable<ILayer>
         OnChanged(layers, [], []);
     }
 
-    private void MoveInternal(int index, ILayer layer)
-    {
-        var entryToMove = _entries.First(e => e.Layer == layer);
-
-        entryToMove.Index = index;
-
-        var counter = 0;
-        foreach (var entry in GetEntriesOfGroup(entryToMove.Group))
-        {
-            if (entryToMove == entry) // Skip the entry we are moving
-                continue;
-
-            if (counter < index)
-                entry.Index = counter;
-            else
-                entry.Index = counter + 1;
-
-            counter++;
-        };
-    }
-
-    private LayerEntry[] GetEntriesOfGroup(int group)
-    {
-        return _entries.Where(e => e.Group == group).OrderBy(e => e.Index).ToArray();
-    }
-
-    private void InsertInternal(int index, IEnumerable<ILayer> layers, int group)
-    {
-        if (layers == null || layers.Count() == 0)
-            throw new ArgumentException("Layers cannot be null or empty");
-
-        foreach (var layer in layers)
-        {
-            InsertInternal(layer, index, group);
-            index++;
-        }
-    }
-
-    private void InsertInternal(ILayer layer, int index, int group)
-    {
-        var entryToInsert = new LayerEntry(layer, index, group);
-        var counter = 0;
-        foreach (var entry in GetEntriesOfGroup(entryToInsert.Group))
-        {
-            if (entry.Group != entryToInsert.Group) // Skip entries in other groups
-                continue;
-
-            if (counter < index)
-                entry.Index = counter;
-            else
-                entry.Index = counter + 1;
-
-            counter++;
-        };
-        _entries.Enqueue(entryToInsert);
-    }
-
-
     /// <summary>
     /// Removes multiple layers from the collection.
     /// </summary>
@@ -322,6 +264,63 @@ public class LayerCollection : IEnumerable<ILayer>
     public IEnumerable<ILayer> FindLayer(string layerName)
     {
         return _entries.Where(e => e.Layer.Name == layerName).Select(e => e.Layer).ToArray();
+    }
+
+    private void MoveInternal(int index, ILayer layer)
+    {
+        var entryToMove = _entries.First(e => e.Layer == layer);
+
+        entryToMove.Index = index;
+
+        var counter = 0;
+        foreach (var entry in GetEntriesOfGroup(entryToMove.Group))
+        {
+            if (entryToMove == entry) // Skip the entry we are moving
+                continue;
+
+            if (counter < index)
+                entry.Index = counter;
+            else
+                entry.Index = counter + 1;
+
+            counter++;
+        };
+    }
+
+    private LayerEntry[] GetEntriesOfGroup(int group)
+    {
+        return _entries.Where(e => e.Group == group).OrderBy(e => e.Index).ToArray();
+    }
+
+    private void InsertInternal(int index, IEnumerable<ILayer> layers, int group)
+    {
+        if (layers == null || layers.Count() == 0)
+            throw new ArgumentException("Layers cannot be null or empty");
+
+        foreach (var layer in layers)
+        {
+            InsertInternal(layer, index, group);
+            index++;
+        }
+    }
+
+    private void InsertInternal(ILayer layer, int index, int group)
+    {
+        var entryToInsert = new LayerEntry(layer, index, group);
+        var counter = 0;
+        foreach (var entry in GetEntriesOfGroup(entryToInsert.Group))
+        {
+            if (entry.Group != entryToInsert.Group) // Skip entries in other groups
+                continue;
+
+            if (counter < index)
+                entry.Index = counter;
+            else
+                entry.Index = counter + 1;
+
+            counter++;
+        };
+        _entries.Enqueue(entryToInsert);
     }
 
     private void AddInternal(IEnumerable<ILayer> layers, int group = 0)
