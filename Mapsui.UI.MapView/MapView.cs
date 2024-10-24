@@ -92,11 +92,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// </summary>
     public event EventHandler<SelectedPinChangedEventArgs>? SelectedPinChanged;
 
-    /// <summary>
-    /// Occurs when map clicked
-    /// </summary>
-    public event EventHandler<MapClickedEventArgs>? MapClicked;
-
     #endregion
 
     #region Bindings
@@ -625,41 +620,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             e.Handled = args.Handled;
 
             return;
-        }
-    }
-
-    private void HandlerTap(TappedEventArgs e)
-    {
-        e.Handled = false;
-
-        if (Map != null)
-        {
-            // Check if we hit a drawable/pin/callout etc
-            var mapInfo = GetMapInfo(e.ScreenPosition);
-
-            var mapInfoEventArgs = new MapInfoEventArgs(mapInfo, e.TapType, e.Handled);
-
-            HandlerInfo(mapInfoEventArgs);
-
-            e.Handled = mapInfoEventArgs.Handled;
-
-            if (!e.Handled)
-            {
-                // if nothing else was hit, then we hit the map
-                var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.TapType);
-                MapClicked?.Invoke(this, args);
-
-                if (args.Handled)
-                {
-                    e.Handled = true;
-                    return;
-                }
-
-                // Event isn't handled up to now.
-                // Than look, what we could do.
-
-                return;
-            }
         }
     }
 
