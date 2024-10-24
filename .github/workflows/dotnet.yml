@@ -23,8 +23,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0              
-        filter: tree:0   
-        lfs: true
+        filter: tree:0           
     # Cache Nugets
     - uses: actions/cache@v4
       with:
@@ -87,8 +86,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0              
-        filter: tree:0
-        lfs: true
+        filter: tree:0        
     # Cache Nugets
     - uses: actions/cache@v4
       with:
@@ -194,8 +192,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0          
-        filter: tree:0
-        lfs: true
+        filter: tree:0        
     # Cache Nugets
     - uses: actions/cache@v4
       with:
