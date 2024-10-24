@@ -12,6 +12,7 @@ using Mapsui.Manipulations;
 using BruTile.Predefined;
 using Mapsui.Tiling.Layers;
 using Mapsui.Tiling.Fetcher;
+using Mapsui.UI.Maui.Extensions;
 using Color = Microsoft.Maui.Graphics.Color;
 
 namespace Mapsui.Samples.Maui;
@@ -30,7 +31,7 @@ public class PinSample : IMapViewSample
     public bool OnTap(object? sender, EventArgs args)
     {
         // The namespace prefix is somehow necessary on Linux.
-        var mapClickedArgs = (MapClickedEventArgs)args;
+        var mapClickedArgs = (MapInfoEventArgs)args;
 
         if (sender is not UI.Maui.MapView mapView)
             return false;
@@ -39,14 +40,15 @@ public class PinSample : IMapViewSample
         foreach (var str in assembly.GetManifestResourceNames())
             System.Diagnostics.Debug.WriteLine(str);
 
+        var position = mapClickedArgs.MapInfo.WorldPosition.ToMaui();
         switch (mapClickedArgs.TapType)
         {
             case TapType.Single:
                 var pin = new Pin(mapView)
                 {
                     Label = $"PinType.Pin {_markerNum++}",
-                    Position = mapClickedArgs.Point,
-                    Address = mapClickedArgs.Point.ToString(),
+                    Position = position,
+                    Address = position.ToString(),
                     Type = PinType.Pin,
                     Color = new Color(_random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f),
                     Transparency = 0.5f,
@@ -116,7 +118,7 @@ public class PinSample : IMapViewSample
                     mapView.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Svg {_markerNum++}",
-                        Position = mapClickedArgs.Point,
+                        Position = position,
                         Type = PinType.Svg,
                         Scale = 0.1f,
                         RotateWithMap = true,
