@@ -41,7 +41,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.100-rc.1.24452.12     
+           9.0.100-rc.2.24474.11     
          dotnet-quality: 'preview'
     # Open JDK
     - name: Install Open JDK 11
@@ -115,7 +115,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.100-rc.1.24452.12        
+           9.0.100-rc.2.24474.11        
          dotnet-quality: 'preview'     
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
@@ -209,7 +209,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.100-rc.1.24452.12   
+           9.0.100-rc.2.24474.11   
          dotnet-quality: 'preview'  
     # Java Sdk install 11
     - name: Install Open JDK 11
