@@ -697,7 +697,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private void AddLayers()
     {
         // Add MapView layers
-        Map?.Layers.Add(_mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer);
+        Map?.Layers.Add([_mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer]);
     }
 
     /// <summary>
@@ -706,7 +706,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private void RemoveLayers()
     {
         // Remove MapView layers
-        Map?.Layers.Remove(MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer);
+        Map?.Layers.Remove([MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer]);
     }
 
     private void UpdateButtonPositions()

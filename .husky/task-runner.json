@@ -1,0 +1,30 @@
+{
+  "$schema": "https://alirezanet.github.io/Husky.Net/schema.json",
+  "tasks": [
+    {
+      "name": "dotnet-format-whitespace",
+      "group": "pre-commit",
+      "command": "dotnet",
+      "args": [
+        "format",
+        "whitespace",
+        "Mapsui.sln",
+        "--include",
+        "${staged}"
+      ]
+    }
+    // This adds the changed files back to the staging after formatting, but it sometimes fails
+    //,
+    //{
+    //  "name": "re-add-the-staged-files-after-formatting",
+    //  "group": "pre-commit",
+    //  "output": "always",
+    //  "command": "bash",
+    //  "args": [ "git", "add", "${staged}" ],
+    //  "windows": {
+    //    "command": "cmd",
+    //    "args": [ "git", "add", "${staged}" ]
+    //  }
+    //}
+  ]
+}

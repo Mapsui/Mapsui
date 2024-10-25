@@ -102,7 +102,7 @@ public partial class SampleWindow : Form
 
     private void ItemCheck(object? sender, ItemCheckEventArgs e)
     {
-        _mapControl.Map.Layers[e.Index].Enabled = e.NewValue == CheckState.Checked;
+        _mapControl.Map.Layers.Get(e.Index).Enabled = e.NewValue == CheckState.Checked;
         _mapControl.Map.Refresh();
     }
 
@@ -169,7 +169,7 @@ public partial class SampleWindow : Form
             Catch.Exceptions(async () =>
             {
                 _mapControl.Map.Navigator.ViewportChanged -= ViewportChanged;
-                _mapControl.Map.Layers.Clear();
+                _mapControl.Map.Layers.ClearAllGroups();
                 await sample.SetupAsync(_mapControl);
                 _mapControl.Refresh();
                 _mapControl.Map.Navigator.ViewportChanged += ViewportChanged;

@@ -45,6 +45,9 @@ jobs:
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
 
+    - name: Build
+      run: dotnet build ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+
     - name: Test
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
       
