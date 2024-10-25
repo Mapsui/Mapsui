@@ -177,6 +177,24 @@ public class LayerCollection : IEnumerable<ILayer>
         OnChanged([], [], [layer]);
     }
 
+    public void MoveDown(ILayer layer)
+    {
+        var index = GetLayerIndex(layer);
+        if (index <= 0)
+            return;
+        MoveInternal(--index, layer);
+        OnChanged([], [], [layer]);
+    }
+
+    public void MoveUp(ILayer layer)
+    {
+        var index = GetLayerIndex(layer);
+        if (index >= _entries.Count - 1)
+            return;
+        MoveInternal(++index, layer);
+        OnChanged([], [], [layer]);
+    }
+
     /// <summary>
     /// Inserts a layer at a specific index in a group.
     /// </summary>
@@ -387,6 +405,9 @@ public class LayerCollection : IEnumerable<ILayer>
     {
         Changed?.Invoke(this, new LayerCollectionChangedEventArgs(added, removed, moved));
     }
+
+    private int GetLayerIndex(ILayer layer) =>
+        _entries.First(e => e.Layer == layer).Index;
 
     private class LayerEntry(ILayer layer, int index, int group = 0)
     {

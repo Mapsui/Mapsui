@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Mapsui.Layers;
 using NUnit.Framework;
 
@@ -183,5 +184,67 @@ public class LayerCollectionTests
         Assert.That(list[3].Name, Is.EqualTo("Layer5"));
         Assert.That(list[4].Name, Is.EqualTo("Layer3"));
         Assert.That(list[5].Name, Is.EqualTo("Layer6"));
+    }
+
+    [TestCase(2, -1)]
+    [TestCase(1, -1)]
+    [TestCase(0, -1)]
+    [TestCase(2, 0)]
+    [TestCase(1, 0)]
+    [TestCase(0, 0)]
+    [TestCase(2, 1)]
+    [TestCase(1, 1)]
+    [TestCase(0, 1)]
+
+    public void MoveDown(int index, int group)
+    {
+        // Arrange
+        var layerCollection = BuildLayerCollection();
+        var layer = layerCollection.Get(index, group);
+
+        // Act
+        layerCollection.MoveDown(layer);
+
+        // Assert
+        var indexAfterMove = Math.Max(index - 1, 0);
+        Assert.That(layer.Name, Is.EqualTo(layerCollection.Get(indexAfterMove, group).Name));
+    }
+
+    [TestCase(2, -1)]
+    [TestCase(1, -1)]
+    [TestCase(0, -1)]
+    [TestCase(2, 0)]
+    [TestCase(1, 0)]
+    [TestCase(0, 0)]
+    [TestCase(2, 1)]
+    [TestCase(1, 1)]
+    [TestCase(0, 1)]
+    public void MoveUp(int index, int group)
+    {
+        // Arrange
+        var layerCollection = BuildLayerCollection();
+        var layer = layerCollection.Get(index, group);
+
+        // Act
+        layerCollection.MoveUp(layer);
+
+        // Assert
+        var indexAfterMove = Math.Min(index + 1, 2);
+        Assert.That(layer.Name, Is.EqualTo(layerCollection.Get(indexAfterMove, group).Name));
+    }
+
+    private static LayerCollection BuildLayerCollection()
+    {
+        var layerCollection = new LayerCollection();
+
+        for (var i = -1; i < 3; i++) // Start with group -1
+        {
+            for (var j = 0; j < 3; j++)
+            {
+                layerCollection.Add(new MemoryLayer() { Name = $"Layer{i}{j}" }, i);
+            }
+        }
+
+        return layerCollection;
     }
 }
