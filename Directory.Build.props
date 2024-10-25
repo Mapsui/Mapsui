@@ -44,7 +44,7 @@
     <!-- for fixing the windows build-->
     <ItemGroup> 
 	    <!--Specify Compiler for Mac Builds-->
-	    <PackageReference Include="Microsoft.Net.Compilers.Toolset" VersionOverride="4.10.0-3.final">
+	    <PackageReference Include="Microsoft.Net.Compilers.Toolset" VersionOverride="4.11.0">
 		    <PrivateAssets>all</PrivateAssets>
 		    <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 	    </PackageReference>
