@@ -108,7 +108,7 @@ jobs:
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
     - name: Build Mapsui.Samples.Forms.iOS
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj         
-    # Builds that need XCode 14.0
+    # Builds that need XCode 16.0
     # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
     - name: Setup Xcode version 16.0
       uses: maxim-lobanov/setup-xcode@v1
