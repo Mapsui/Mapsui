@@ -108,12 +108,12 @@ jobs:
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
     - name: Build Mapsui.Samples.Forms.iOS
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj         
-    # Builds that need XCode 16.0
+    # Builds that need XCode 14.0
     # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
-    - name: Setup Xcode version 16.0
-      uses: maxim-lobanov/setup-xcode@v1
+    - name: Setup Xcode version 14.0
+      uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
-         xcode-version: '16'
+        xcode-version: '14.0'
     - name: Build Mapsui.Samples.Forms.Mac
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj        
     # Release Build
@@ -127,7 +127,7 @@ jobs:
 
   macBuild:  
     # macos-latest is currently macos-13
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
       with:
@@ -143,10 +143,10 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest
-    - name: Setup Xcode version 14.3
-      uses: maxim-lobanov/setup-xcode@v1.5.1
+    - name: Setup Xcode version 16.0
+      uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '14.3' 
+         xcode-version: '16'
     - name: Setup .NET 6 SDK
       uses: actions/setup-dotnet@v3
       with:
