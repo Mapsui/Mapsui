@@ -666,7 +666,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 return handled;
             }
         }
-        
+
         return handled;
     }
 
