@@ -26,7 +26,7 @@ public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity));
-        var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.1);
+        var extent = map.Layers.Get(1).Extent!.Grow(map.Layers.Get(1).Extent!.Width * 0.1);
         map.Navigator.ZoomToBox(extent);
         return map;
     }
