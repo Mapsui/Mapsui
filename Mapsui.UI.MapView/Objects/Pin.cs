@@ -12,17 +12,15 @@ using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using Color = Microsoft.Maui.Graphics.Color;
 using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.UI.Maui.Extensions;
+using Microsoft.Maui.Platform;
+using Microsoft.Maui.Controls;
 
 namespace Mapsui.UI.Maui;
 
 public class Pin : IFeatureProvider, INotifyPropertyChanged
 {
     // Cache for used bitmaps
-    private static readonly Dictionary<string, int> _bitmapIds = new Dictionary<string, int>();
-
-    private string _bitmapIdKey = string.Empty; // Key for active _bitmapIds entry
-    private int _bitmapId = -1;
-    private byte[]? _bitmapData;
     private MapView? _mapView;
 
     /// <summary>
@@ -149,34 +147,6 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
             _address = value;
             OnPropertyChanged();
             OnPropertyChanged(nameof(Callout));
-        }
-    }
-
-    /// <summary>
-    /// Byte[] holding the bitmap informations
-    /// </summary>
-    public byte[]? Icon
-    {
-        get => _icon;
-        set
-        {
-            if (Equals(value, _icon)) return;
-            _icon = value;
-            OnPropertyChanged();
-        }
-    }
-
-    /// <summary>
-    /// String holding the Svg image informations
-    /// </summary>
-    public string? Svg
-    {
-        get => _svg;
-        set
-        {
-            if (value == _svg) return;
-            _svg = value;
-            OnPropertyChanged();
         }
     }
 
@@ -460,8 +430,6 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
     private Color _color = KnownColor.Red;
     private string? _label;
     private string? _address;
-    private byte[]? _icon;
-    private string? _svg;
     private float _rotation;
     private bool _rotateWithMap;
     private bool _isVisible = true;
@@ -473,6 +441,23 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
     private float _transparency;
     private object? _tag;
     private GeometryFeature? _feature;
+    private string _imageSource;
+
+    /// <summary> Gets or sets an ImageSource for the Pin </summary>
+    public string ImageSource
+    {
+        get => _imageSource;
+        set
+        {
+            if (value == _imageSource)
+            {
+                return;
+            }
+
+            _imageSource = value;
+            OnPropertyChanged();
+        }
+    }
 
     private void CreateFeature()
     {
@@ -492,112 +477,35 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                 if (_callout != null)
                     _callout.Feature.Geometry = Position.ToPoint();
             }
-            // Check for bitmapId
-            if (_bitmapId != -1)
-            {
-                // There is already a registered bitmap, so delete it
-                _bitmapId = -1;
-                _bitmapIdKey = string.Empty;
-            }
+            
+            string imageSource = string.Empty;
 
             switch (Type)
             {
-                case PinType.Svg:
-                    // Load the SVG document
-                    if (string.IsNullOrEmpty(Svg))
-                        return;
-                    // Check, if it is already in cache
-                    if (_bitmapIds.ContainsKey(Svg!))
-                    {
-                        _bitmapId = _bitmapIds[Svg!];
-                        _bitmapIdKey = Svg!;
-                        break;
-                    }
-                    // Save this SVG for later use
-                    // Not going to fix this: _bitmapId = BitmapRegistry.Instance.Register(Svg!);
-                    _bitmapIdKey = Svg!;
-                    _bitmapIds.Add(Svg!, _bitmapId);
+                case PinType.ImageSource:
+                    imageSource = ImageSource;
                     break;
                 case PinType.Pin:
-                    var colorInHex = Color.ToHex();
-                    if (colorInHex == null)
-                        return;
-
-                    // Check, if it is already in cache
-                    if (_bitmapIds.TryGetValue(colorInHex, out var id))
-                    {
-                        _bitmapId = id;
-                        _bitmapIdKey = colorInHex;
-                        break;
-                    }
-
-                    // Load the SVG document
-                    Svg.Skia.SKSvg svg;
-                    using (var stream = EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin)))
-                    {
-                        if (stream == null)
-                            return;
-
-                        // Create a new SVG object
-                        svg = stream.LoadSvg();
-                        if (svg.Picture == null)
-                            return;
-                    }
-
-                    Width = svg.Picture.CullRect.Width * Scale;
-                    Height = svg.Picture.CullRect.Height * Scale;
-                    // Create bitmap to hold canvas
-                    var info = new SKImageInfo((int)svg.Picture.CullRect.Width, (int)svg.Picture.CullRect.Height) { AlphaType = SKAlphaType.Premul };
-                    using (var bitmap = new SKBitmap(info))
-                    {
-                        using var canvas = new SKCanvas(bitmap);
-                        // Now draw Svg image to bitmap
-                        using (var paint = new SKPaint() { IsAntialias = true })
-                        {
-                            // Replace color while drawing
-                            paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
-                            canvas.Clear();
-                            canvas.DrawPicture(svg.Picture, paint);
-                        }
-                        // Now convert canvas to bitmap
-                        using (var image = SKImage.FromBitmap(bitmap))
-                        using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
-                        {
-                            _bitmapData = data.ToArray();
-                        }
-                        // Broke this with no plans to repair: _bitmapId = BitmapRegistry.Instance.Register(_bitmapData);
-                        _bitmapIdKey = colorInHex;
-                        _bitmapIds.Add(colorInHex, _bitmapId);
-                    }
-
-                    break;
-                case PinType.Icon:
-                    if (Icon != null)
-                    {
-                        using (var image = SKBitmap.Decode(Icon))
-                        {
-                            Width = image.Width * Scale;
-                            Height = image.Height * Scale;
-                            // Broke this with no plans to repair: _bitmapId = BitmapRegistry.Instance.Register(Icon);
-                        }
-                    }
+                    imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
                     break;
             }
 
             // If we have a bitmapId (and we should have one), than draw bitmap, otherwise nothing
-            if (_bitmapId != -1)
+            if (!string.IsNullOrEmpty(imageSource))
             {
                 // We only want to have one style
                 Feature.Styles.Clear();
                 Feature.Styles.Add(new SymbolStyle
                 {
                     // Not going to fix this: ImageSource = _bitmapId,
+                    ImageSource = imageSource,
                     SymbolScale = Scale,
                     SymbolRotation = Rotation,
                     RotateWithMap = RotateWithMap,
                     SymbolOffset = new Offset(Anchor.X, Anchor.Y),
                     Opacity = 1 - Transparency,
                     Enabled = IsVisible,
+                    SvgFillColor = Color.ToMapsui(),
                 });
             }
         }
@@ -667,12 +575,8 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
             case nameof(Color):
                 CreateFeature();
                 break;
-            case nameof(Icon):
-                if (Type == PinType.Icon)
-                    CreateFeature();
-                break;
-            case nameof(Svg):
-                if (Type == PinType.Svg)
+            case nameof(ImageSource):
+                if (Type == PinType.ImageSource)
                     CreateFeature();
                 break;
         }

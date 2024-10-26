@@ -8,12 +8,7 @@ public enum PinType
     Pin,
 
     /// <summary>
-    /// Pin as icon image
+    /// Pin as ImageSource
     /// </summary>
-    Icon,
-
-    /// <summary>
-    /// Pin as Svg image
-    /// </summary>
-    Svg
+    ImageSource,
 }
