@@ -39,6 +39,16 @@ public static class ColorTests
     }
 
     [Test]
+    public static void ColorFromKnownColor()
+    {
+        var color = Color.FromString("Magenta");
+        ClassicAssert.True(color.R == Color.Magenta.R && color.G == Color.Magenta.G && color.B == Color.Magenta.B);
+
+        color = Color.FromString("Yellow");
+        ClassicAssert.True(color.R == Color.Yellow.R && color.G == Color.Yellow.G && color.B == Color.Yellow.B);
+    }
+
+    [Test]
     public static void ColorFromRgbString()
     {
         var color = Color.FromString("rgb(64,128,192)");
