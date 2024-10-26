@@ -470,7 +470,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                 if (_callout != null)
                     _callout.Feature.Geometry = Position.ToPoint();
             }
-            
+
             string imageSource = string.Empty;
 
             switch (Type)
