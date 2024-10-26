@@ -669,7 +669,17 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private void RemoveLayers()
     {
         // Remove MapView layers
-        Map?.Layers.Remove([MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer]);
+        if (Map?.Layers.Count >= 4)
+        {
+            try
+            {
+                Map?.Layers.Remove([MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer]);    
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, "Layers could not be removed", ex);   
+            }
+        }
     }
 
     private void UpdateButtonPositions()
