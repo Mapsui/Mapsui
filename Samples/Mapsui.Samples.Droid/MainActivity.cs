@@ -36,7 +36,7 @@ public class MainActivity : AppCompatActivity
         _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;
-        _mapControl.Map.Layers.Clear();
+        _mapControl.Map.Layers.ClearAllGroups();
         var sample = new OsmSample();
 
         Catch.Exceptions(async () =>
@@ -106,7 +106,7 @@ public class MainActivity : AppCompatActivity
             var sample = AllSamples.GetSamples()?.FirstOrDefault(s => s.Name == item.TitleFormatted?.ToString());
             if (sample != null)
             {
-                _mapControl?.Map?.Layers.Clear();
+                _mapControl?.Map?.Layers.ClearAllGroups();
 
                 Catch.Exceptions(async () =>
                 {
