@@ -71,16 +71,17 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 if (symbolStyle.ImageSource is null)
                     throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
-                var drawableImage = (BitmapImage?)renderService.DrawableImageCache.GetOrCreate(ToSpriteKey(symbolStyle.ImageSource.ToString(), symbolStyle.BitmapRegion),
-                    () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.BitmapRegion));
-
-                BitmapRenderer.Draw(canvas, drawableImage?.Image,
-                    (float)destinationX, (float)destinationY,
-                    rotation,
-                    (float)offset.X, (float)offset.Y,
-                    opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                if (renderService.DrawableImageCache.GetOrCreate(
+                        ToSpriteKey(symbolStyle.ImageSource, symbolStyle.BitmapRegion),
+                        () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.BitmapRegion)) is BitmapImage drawableImage)
+                {
+                    BitmapRenderer.Draw(canvas, drawableImage.Image,
+                        (float)destinationX, (float)destinationY,
+                        rotation,
+                        (float)offset.X, (float)offset.Y,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                }
             }
-
         }
         else if (image is SvgImage svgImage)
         {
