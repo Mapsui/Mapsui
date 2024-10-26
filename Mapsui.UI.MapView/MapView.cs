@@ -40,9 +40,11 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly ObservableRangeCollection<Pin> _pins = [];
     private readonly ObservableRangeCollection<Drawable> _drawables = [];
     private readonly ObservableRangeCollection<Callout> _callouts = [];
+    private readonly MapTappedWidget _mapTappedWidget;
 
     public MapView()
     {
+        _mapTappedWidget = new MapTappedWidget(HandlerTap);
         MyLocationFollow = false;
 
         IsClippedToBounds = true;
@@ -59,9 +61,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         Info += (s, e) => HandlerInfo(e);
         SizeChanged += HandlerSizeChanged;
 
-
         // Add MapView layers to Map
         AddLayers();
+        AddWidgets();
 
         // Add some events to _mapControl.Map.Layers
         Map.Layers.Changed += HandleLayersChanged;
@@ -413,6 +415,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 // Readd them, so that they always on top
                 AddLayers();
+                AddWidgets();
 
                 // Remove widget buttons and readd them
                 RemoveButtons();
@@ -629,6 +632,44 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         }
     }
 
+    private bool HandlerTap(WidgetEventArgs e)
+    {
+        var handled = false;
+        var screenPosition = e.Position;
+
+        if (Map != null)
+        {
+            // Check if we hit a drawable/pin/callout etc
+            var mapInfo = GetMapInfo(screenPosition);
+
+            var mapInfoEventArgs = new MapInfoEventArgs(mapInfo, e.TapType, handled);
+
+            HandlerInfo(mapInfoEventArgs);
+
+            handled = mapInfoEventArgs.Handled;
+
+            if (!handled)
+            {
+                // if nothing else was hit, then we hit the map
+                var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToNative(), e.TapType);
+                MapClicked?.Invoke(this, args);
+
+                if (args.Handled)
+                {
+                    handled = true;
+                    return handled;
+                }
+
+                // Event isn't handled up to now.
+                // Than look, what we could do.
+
+                return handled;
+            }
+        }
+        
+        return handled;
+    }
+
     private void HandlerPinPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (Map.Navigator.Viewport.ToExtent() is not null)
@@ -667,6 +708,14 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         // Add MapView layers
         Map?.Layers.Add([_mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer]);
+    }
+
+    /// <summary> Add Default Widgets </summary>
+    private void AddWidgets()
+    {
+        if (Map != null && !Map.Widgets.Contains(this._mapTappedWidget))
+            // Add MapView widgets
+            Map.Widgets.Add(this._mapTappedWidget);
     }
 
     /// <summary>
