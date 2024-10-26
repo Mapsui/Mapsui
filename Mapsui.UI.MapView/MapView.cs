@@ -673,11 +673,11 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         {
             try
             {
-                Map?.Layers.Remove([MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer]);    
+                Map?.Layers.Remove([MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer]);
             }
             catch (Exception ex)
             {
-                Logger.Log(LogLevel.Error, "Layers could not be removed", ex);   
+                Logger.Log(LogLevel.Error, "Layers could not be removed", ex);
             }
         }
     }
