@@ -6,14 +6,8 @@ using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
-using Mapsui.Utilities;
-using SkiaSharp;
-using SkiaSharp.Views.Maui;
 using Color = Microsoft.Maui.Graphics.Color;
-using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.UI.Maui.Extensions;
-using Microsoft.Maui.Platform;
-using Microsoft.Maui.Controls;
 
 namespace Mapsui.UI.Maui;
 
