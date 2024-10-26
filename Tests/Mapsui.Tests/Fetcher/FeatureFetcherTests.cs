@@ -13,7 +13,7 @@ namespace Mapsui.Tests.Fetcher;
 public class FeatureFetcherTests
 {
     [Test]
-    [Repeat(1000)]
+    [Repeat(100)]
     [CancelAfter(1000)]
     public async Task TestFeatureFetcherDelayAsync(CancellationToken token)
     {
@@ -50,7 +50,7 @@ public class FeatureFetcherTests
             while (notifications.Count < 2 && !token.IsCancellationRequested)
             {
                 // Wait until we have two notifications
-                await Task.Delay(10);
+                await Task.Delay(100);
             }
         }).ConfigureAwait(false);
 

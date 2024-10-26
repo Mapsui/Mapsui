@@ -29,8 +29,7 @@ jobs:
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v2
 
-    # .Net 7 update     
-    - name: Setup .NET 7 SDK
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
@@ -44,6 +43,9 @@ jobs:
 
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+
+    - name: Build
+      run: dotnet build ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
 
     - name: Test
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}

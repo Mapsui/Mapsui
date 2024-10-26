@@ -372,7 +372,7 @@ public class Map : INotifyPropertyChanged, IDisposable
             AbortFetch();
             foreach (var layer in Layers)
                 LayerRemoved(layer); // Remove Event so that no memory leaks occur
-            Layers.Clear();
+            Layers.ClearAllGroups();
         }
     }
 

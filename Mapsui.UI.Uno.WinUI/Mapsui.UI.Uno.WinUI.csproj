@@ -20,7 +20,7 @@
     -->
     <UnoFeatures>
     </UnoFeatures>
-  </PropertyGroup>
+	</PropertyGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
     <!--
