@@ -448,7 +448,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
 #endif
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public Map Map
     {
         get
