@@ -479,6 +479,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
             }
             
             string imageSource = string.Empty;
+            Styles.Color? svgFillColor = null;
 
             switch (Type)
             {
@@ -487,6 +488,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                     break;
                 case PinType.Pin:
                     imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
+                    svgFillColor = Color.ToMapsui();
                     break;
             }
 
@@ -505,7 +507,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                     SymbolOffset = new Offset(Anchor.X, Anchor.Y),
                     Opacity = 1 - Transparency,
                     Enabled = IsVisible,
-                    SvgFillColor = Color.ToMapsui(),
+                    SvgFillColor = svgFillColor,
                 });
             }
         }
