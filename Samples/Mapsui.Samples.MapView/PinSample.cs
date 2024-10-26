@@ -107,22 +107,16 @@ public class PinSample : IMapViewSample
                 pin.ShowCallout();
                 break;
             case TapType.Double:
-                var resourceName = "Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
-                var stream = assembly.GetManifestResourceStream(resourceName)
-                    ?? throw new Exception($"Could not find EmbeddedResource {resourceName}");
-                using (var reader = new StreamReader(stream))
+                var resourceName = "embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
+                mapView.Pins.Add(new Pin(mapView)
                 {
-                    string svgString = reader.ReadToEnd();
-                    mapView.Pins.Add(new Pin(mapView)
-                    {
-                        Label = $"PinType.Svg {_markerNum++}",
-                        Position = mapClickedArgs.Point,
-                        Type = PinType.Svg,
-                        Scale = 0.1f,
-                        RotateWithMap = true,
-                        Svg = svgString
-                    });
-                }
+                    Label = $"PinType.Svg {_markerNum++}",
+                    Position = mapClickedArgs.Point,
+                    Type = PinType.ImageSource,
+                    Scale = 0.1f,
+                    RotateWithMap = true,
+                    ImageSource = resourceName
+                });
 
                 break;
         }

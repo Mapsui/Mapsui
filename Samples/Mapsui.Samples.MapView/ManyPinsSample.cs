@@ -81,20 +81,15 @@ public class ManyPinsSample : IMapViewSample
                 foreach (var r in assembly.GetManifestResourceNames())
                     System.Diagnostics.Debug.WriteLine(r);
 
-                using (var stream = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg"))
+                var resourceName = "embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
+                mapView?.Pins.Add(new Pin(mapView)
                 {
-                    using StreamReader reader = new StreamReader(stream!);
-                    var svgString = reader.ReadToEnd();
-                    mapView?.Pins.Add(new Pin(mapView)
-                    {
-                        Label = $"PinType.Svg {markerNum++}",
-                        Position = e.Point,
-                        Type = PinType.Svg,
-                        Scale = 0.1f,
-                        Svg = svgString
-                    });
-                }
-
+                    Label = $"PinType.Svg {markerNum++}",
+                    Position = e.Point,
+                    Type = PinType.ImageSource,
+                    Scale = 0.1f,
+                    ImageSource = resourceName
+                });
                 break;
             default:
                 throw new Exception("Unknown TapType. This is bug in Mapsui.");
