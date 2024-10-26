@@ -527,18 +527,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void HandlerInfo(MapInfoEventArgs e)
     {
-        // Handle Map Clicked
-        if (MapClicked != null)
-        {
-            var position = e.MapInfo.WorldPosition.ToMaui();
-            var mapClicked = new MapClickedEventArgs(position, TapType.Single);
-            MapClicked.Invoke(this, mapClicked);
-            if (mapClicked.Handled)
-            {
-                return;
-            }
-        }
-        
         // Click on pin?
         if (e.MapInfo?.Layer == _mapPinLayer)
         {
