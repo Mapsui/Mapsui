@@ -113,7 +113,7 @@ public class PinSample : IMapViewSample
                 mapView.Pins.Add(new Pin(mapView)
                 {
                     Label = $"PinType.Svg {_markerNum++}",
-                    Position = mapClickedArgs.Position,
+                    Position = position,
                     Type = PinType.ImageSource,
                     Scale = 0.1f,
                     RotateWithMap = true,
