@@ -91,6 +91,11 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// Occurs when selected pin changed
     /// </summary>
     public event EventHandler<SelectedPinChangedEventArgs>? SelectedPinChanged;
+    
+    /// <summary>
+    /// Occurs when map clicked
+    /// </summary>
+    public event EventHandler<MapClickedEventArgs>? MapClicked;
 
     #endregion
 

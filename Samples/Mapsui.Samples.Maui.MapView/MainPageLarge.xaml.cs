@@ -50,7 +50,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         mapView!.RotationLock = false;
 
         mapView.PinClicked += OnPinClicked;
-        mapView.Info += OnMapInfo;
+        mapView.MapClicked += OnMapClicked;
 
         mapView.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position());
 
@@ -101,7 +101,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         FillListWithSamples();
     }
 
-    private void OnMapInfo(object? sender, MapInfoEventArgs e)
+    private void OnMapClicked(object? sender, MapClickedEventArgs e)
     {
         e.Handled = _clicker?.Invoke(sender as UI.Maui.MapView, e) ?? false;
     }

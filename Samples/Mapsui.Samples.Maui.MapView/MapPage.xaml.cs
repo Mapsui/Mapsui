@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Maui;
 public sealed partial class MapPage : ContentPage, IDisposable
 {
     private CancellationTokenSource? _gpsCancelation;
-    public Func<UI.Maui.MapView, MapInfoEventArgs, bool> Clicker { get; set; }
+    public Func<UI.Maui.MapView, MapClickedEventArgs, bool> Clicker { get; set; }
 
     public MapPage()
     {
@@ -41,7 +41,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
         mapView!.RotationLock = false;
 
         mapView.PinClicked += OnPinClicked;
-        mapView.Info += OnInfoClicked;
+        mapView.MapClicked += OnMapClicked;
 
         Compass.ReadingChanged += Compass_ReadingChanged;
 
@@ -93,7 +93,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
         }
     }
 
-    private void OnInfoClicked(object? sender, MapInfoEventArgs e)
+    private void OnMapClicked(object? sender, MapClickedEventArgs e)
     {
         e.Handled = Clicker?.Invoke(sender as UI.Maui.MapView, e) ?? false;
         //Samples.SetPins(mapView, e);
