@@ -121,7 +121,7 @@ public class RenderToCpuPerformance : IDisposable
 
         map.Layers.Add(layer);
 
-        var extent = map.Layers[0].Extent!;
+        var extent = map.Layers.Get(0).Extent!;
         map.Navigator.ZoomToBox(extent);
 
         return map;
