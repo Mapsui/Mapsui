@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Mapsui.Styles;
 
 public readonly record struct Color
 {
+    private static Dictionary<string, Color>? _namedColors;
+
     public Color() { }
 
     public Color(Color color) : this(color.R, color.G, color.B, color.A) { }
@@ -15,6 +18,156 @@ public readonly record struct Color
         G = green;
         B = blue;
         A = alpha;
+    }
+
+    private static Dictionary<string, Color> NamedColors
+    {
+        get
+        {
+            return _namedColors ??= new(StringComparer.InvariantCultureIgnoreCase)
+            {
+                { nameof(Color.AliceBlue), Color.AliceBlue },
+                { nameof(Color.AntiqueWhite), Color.AntiqueWhite },
+                { nameof(Color.Aqua), Color.Aqua },
+                { nameof(Color.Aquamarine), Color.Aquamarine },
+                { nameof(Color.Azure), Color.Azure },
+                { nameof(Color.Beige), Color.Beige },
+                { nameof(Color.Bisque), Color.Bisque },
+                { nameof(Color.Black), Color.Black },
+                { nameof(Color.BlanchedAlmond), Color.BlanchedAlmond },
+                { nameof(Color.Blue), Color.Blue },
+                { nameof(Color.BlueViolet), Color.BlueViolet },
+                { nameof(Color.Brown), Color.Brown },
+                { nameof(Color.BurlyWood), Color.BurlyWood },
+                { nameof(Color.CadetBlue), Color.CadetBlue },
+                { nameof(Color.Chartreuse), Color.Chartreuse },
+                { nameof(Color.Chocolate), Color.Chocolate },
+                { nameof(Color.Coral), Color.Coral },
+                { nameof(Color.CornflowerBlue), Color.CornflowerBlue },
+                { nameof(Color.Cornsilk), Color.Cornsilk },
+                { nameof(Color.Crimson), Color.Crimson },
+                { nameof(Color.Cyan), Color.Cyan },
+                { nameof(Color.DarkBlue), Color.DarkBlue },
+                { nameof(Color.DarkCyan), Color.DarkCyan },
+                { nameof(Color.DarkGoldenRod), Color.DarkGoldenRod },
+                { nameof(Color.DarkGray), Color.DarkGray },
+                { nameof(Color.DarkGreen), Color.DarkGreen },
+                { nameof(Color.DarkKhaki), Color.DarkKhaki },
+                { nameof(Color.DarkMagenta), Color.DarkMagenta },
+                { nameof(Color.DarkOliveGreen), Color.DarkOliveGreen },
+                { nameof(Color.DarkOrange), Color.DarkOrange },
+                { nameof(Color.DarkOrchid), Color.DarkOrchid },
+                { nameof(Color.DarkRed), Color.DarkRed },
+                { nameof(Color.DarkSalmon), Color.DarkSalmon },
+                { nameof(Color.DarkSeaGreen), Color.DarkSeaGreen },
+                { nameof(Color.DarkSlateBlue), Color.DarkSlateBlue },
+                { nameof(Color.DarkSlateGray), Color.DarkSlateGray },
+                { nameof(Color.DarkTurquoise), Color.DarkTurquoise },
+                { nameof(Color.DarkViolet), Color.DarkViolet },
+                { nameof(Color.DeepPink), Color.DeepPink },
+                { nameof(Color.DeepSkyBlue), Color.DeepSkyBlue },
+                { nameof(Color.DimGray), Color.DimGray },
+                { nameof(Color.DodgerBlue), Color.DodgerBlue },
+                { nameof(Color.FireBrick), Color.FireBrick },
+                { nameof(Color.FloralWhite), Color.FloralWhite },
+                { nameof(Color.ForestGreen), Color.ForestGreen },
+                { nameof(Color.Fuchsia), Color.Fuchsia },
+                { nameof(Color.Gainsboro), Color.Gainsboro },
+                { nameof(Color.GhostWhite), Color.GhostWhite },
+                { nameof(Color.Gold), Color.Gold },
+                { nameof(Color.GoldenRod), Color.GoldenRod },
+                { nameof(Color.Gray), Color.Gray },
+                { nameof(Color.Green), Color.Green },
+                { nameof(Color.GreenYellow), Color.GreenYellow },
+                { nameof(Color.HoneyDew), Color.HoneyDew },
+                { nameof(Color.HotPink), Color.HotPink },
+                { nameof(Color.IndianRed), Color.IndianRed },
+                { nameof(Color.Indigo), Color.Indigo },
+                { nameof(Color.Ivory), Color.Ivory },
+                { nameof(Color.Khaki), Color.Khaki },
+                { nameof(Color.Lavender), Color.Lavender },
+                { nameof(Color.LavenderBlush), Color.LavenderBlush },
+                { nameof(Color.LawnGreen), Color.LawnGreen },
+                { nameof(Color.LemonChiffon), Color.LemonChiffon },
+                { nameof(Color.LightBlue), Color.LightBlue },
+                { nameof(Color.LightCoral), Color.LightCoral },
+                { nameof(Color.LightCyan), Color.LightCyan },
+                { nameof(Color.LightGoldenRodYellow), Color.LightGoldenRodYellow },
+                { nameof(Color.LightGray), Color.LightGray },
+                { nameof(Color.LightGreen), Color.LightGreen },
+                { nameof(Color.LightPink), Color.LightPink },
+                { nameof(Color.LightSalmon), Color.LightSalmon },
+                { nameof(Color.LightSeaGreen), Color.LightSeaGreen },
+                { nameof(Color.LightSkyBlue), Color.LightSkyBlue },
+                { nameof(Color.LightSlateGray), Color.LightSlateGray },
+                { nameof(Color.LightSteelBlue), Color.LightSteelBlue },
+                { nameof(Color.LightYellow), Color.LightYellow },
+                { nameof(Color.Lime), Color.Lime },
+                { nameof(Color.LimeGreen), Color.LimeGreen },
+                { nameof(Color.Linen), Color.Linen },
+                { nameof(Color.Magenta), Color.Magenta },
+                { nameof(Color.Maroon), Color.Maroon },
+                { nameof(Color.MediumAquaMarine), Color.MediumAquaMarine },
+                { nameof(Color.MediumBlue), Color.MediumBlue },
+                { nameof(Color.MediumOrchid), Color.MediumOrchid },
+                { nameof(Color.MediumPurple), Color.MediumPurple },
+                { nameof(Color.MediumSeaGreen), Color.MediumSeaGreen },
+                { nameof(Color.MediumSlateBlue), Color.MediumSlateBlue },
+                { nameof(Color.MediumSpringGreen), Color.MediumSpringGreen },
+                { nameof(Color.MediumTurquoise), Color.MediumTurquoise },
+                { nameof(Color.MediumVioletRed), Color.MediumVioletRed },
+                { nameof(Color.MidnightBlue), Color.MidnightBlue },
+                { nameof(Color.MintCream), Color.MintCream },
+                { nameof(Color.MistyRose), Color.MistyRose },
+                { nameof(Color.Moccasin), Color.Moccasin },
+                { nameof(Color.NavajoWhite), Color.NavajoWhite },
+                { nameof(Color.Navy), Color.Navy },
+                { nameof(Color.OldLace), Color.OldLace },
+                { nameof(Color.Olive), Color.Olive },
+                { nameof(Color.OliveDrab), Color.OliveDrab },
+                { nameof(Color.Orange), Color.Orange },
+                { nameof(Color.OrangeRed), Color.OrangeRed },
+                { nameof(Color.Orchid), Color.Orchid },
+                { nameof(Color.PaleGoldenRod), Color.PaleGoldenRod },
+                { nameof(Color.PaleGreen), Color.PaleGreen },
+                { nameof(Color.PaleTurquoise), Color.PaleTurquoise },
+                { nameof(Color.PaleVioletRed), Color.PaleVioletRed },
+                { nameof(Color.PapayaWhip), Color.PapayaWhip },
+                { nameof(Color.PeachPuff), Color.PeachPuff },
+                { nameof(Color.Peru), Color.Peru },
+                { nameof(Color.Pink), Color.Pink },
+                { nameof(Color.Plum), Color.Plum },
+                { nameof(Color.PowderBlue), Color.PowderBlue },
+                { nameof(Color.Purple), Color.Purple },
+                { nameof(Color.Red), Color.Red },
+                { nameof(Color.RosyBrown), Color.RosyBrown },
+                { nameof(Color.RoyalBlue), Color.RoyalBlue },
+                { nameof(Color.SaddleBrown), Color.SaddleBrown },
+                { nameof(Color.Salmon), Color.Salmon },
+                { nameof(Color.SandyBrown), Color.SandyBrown },
+                { nameof(Color.SeaGreen), Color.SeaGreen },
+                { nameof(Color.SeaShell), Color.SeaShell },
+                { nameof(Color.Sienna), Color.Sienna },
+                { nameof(Color.Silver), Color.Silver },
+                { nameof(Color.SkyBlue), Color.SkyBlue },
+                { nameof(Color.SlateBlue), Color.SlateBlue },
+                { nameof(Color.SlateGray), Color.SlateGray },
+                { nameof(Color.Snow), Color.Snow },
+                { nameof(Color.SpringGreen), Color.SpringGreen },
+                { nameof(Color.SteelBlue), Color.SteelBlue },
+                { nameof(Color.Tan), Color.Tan },
+                { nameof(Color.Teal), Color.Teal },
+                { nameof(Color.Thistle), Color.Thistle },
+                { nameof(Color.Tomato), Color.Tomato },
+                { nameof(Color.Turquoise), Color.Turquoise },
+                { nameof(Color.Violet), Color.Violet },
+                { nameof(Color.Wheat), Color.Wheat },
+                { nameof(Color.White), Color.White },
+                { nameof(Color.WhiteSmoke), Color.WhiteSmoke },
+                { nameof(Color.Yellow), Color.Yellow },
+                { nameof(Color.YellowGreen), Color.YellowGreen }
+            };
+        }
     }
 
     public int R { get; init; }
@@ -274,10 +427,13 @@ public readonly record struct Color
 
             return FromHsl(h / 360.0f, s / 100.0f, l / 100.0f);
         }
+        else if (NamedColors.TryGetValue(from, out var color))
+        {
+            return color;
+        }
 
         throw new ArgumentException($"Color string did not have any of the known prefixes. Could not create color from input string '{from}'. " +
             $"For named colors please use the Color statics, like 'Color.WhiteSmoke'");
-
     }
 
     /// <summary>
