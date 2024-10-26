@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.PersistentCaches;
@@ -12,7 +11,6 @@ using Mapsui.Manipulations;
 using BruTile.Predefined;
 using Mapsui.Tiling.Layers;
 using Mapsui.Tiling.Fetcher;
-using Mapsui.UI.Maui.Extensions;
 using Color = Microsoft.Maui.Graphics.Color;
 
 namespace Mapsui.Samples.Maui;
