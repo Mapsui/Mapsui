@@ -16,7 +16,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Mapsui.Manipulations;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
