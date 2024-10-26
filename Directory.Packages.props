@@ -32,8 +32,8 @@
     <PackageVersion Include="Eto.Platform.XamMac2" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.Platform.Gtk" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.SkiaDraw" Version="[0.2.0,0.3.0)" />
-    <PackageVersion Include="HarfBuzzSharp" Version="3.0.0-preview.5.4" />
-    <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="3.0.0-preview.5.4" />
+    <PackageVersion Include="HarfBuzzSharp" Version="8.3.0-preview.5.4" />
+    <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="8.3.0-preview.5.4" />
     <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.8,5.0.0)" />
     <PackageVersion Include="Mapsui.Android" Version="5.0.0-beta.1" />
     <PackageVersion Include="Mapsui.ArcGIS" Version="5.0.0-beta.1" />
