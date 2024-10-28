@@ -767,7 +767,7 @@ public class WFSProvider : IProvider, IDisposable
             _featureTypeInfo.ServiceUri =
                 _featureTypeInfo.ServiceUri.Remove(_featureTypeInfo.ServiceUri.Length - 1);
 
-        _featureTypeInfo.ServiceUri = _featureTypeInfo.ServiceUri.AssureUriScheme(_uriScheme);
+        _featureTypeInfo.ServiceUri = _featureTypeInfo.ServiceUri != null && _uriScheme != null ? _featureTypeInfo.ServiceUri.AssureUriScheme(_uriScheme) : null;
         /* URI for DescribeFeatureType request */
         var describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_DESCRIBEFEATURETYPERESOURCE));
@@ -777,7 +777,7 @@ public class WFSProvider : IProvider, IDisposable
             describeFeatureTypeUri =
                 describeFeatureTypeUri.Remove(describeFeatureTypeUri.Length - 1);
 
-        describeFeatureTypeUri = describeFeatureTypeUri.AssureUriScheme(_uriScheme);
+        describeFeatureTypeUri = describeFeatureTypeUri != null && _uriScheme != null ? describeFeatureTypeUri.AssureUriScheme(_uriScheme) : null;
         /* Spatial reference ID */
         var srid = _featureTypeInfoQueryManager.GetValueFromNode
             (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), [new DictionaryEntry("_param1", featureQueryName)]);
