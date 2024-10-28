@@ -33,7 +33,9 @@ public sealed class SvgImage : IDrawableImage
             return;
 
         _skSvg?.Dispose();
+#pragma warning disable IDISP007
         _picture?.Dispose();
+#pragma warning restore IDISP007
 
         _disposed = true;
     }

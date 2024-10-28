@@ -179,7 +179,6 @@ public class WfsFeatureTypeInfo
     /// <param name="geometryType">
     ///     Specifying the geometry type helps to accelerate the rendering process.   
     /// </param>
-    /// <param name="textResourcesNsgml"></param>
     public WfsFeatureTypeInfo(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
         string geometryName, GeometryTypeEnum geometryType, string gmlNs)
     {
