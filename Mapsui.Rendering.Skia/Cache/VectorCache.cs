@@ -16,11 +16,13 @@ public sealed class VectorCache(IRenderService renderService, int capacity) : ID
         if (Enabled == false)
             return new CacheTracker<TPaint>(toPaint(param));
 
+#pragma warning disable IDISP001
         var holder = _cache.GetOrCreateValue(param, f =>
         {
             var paint = toPaint(f);
             return new CacheHolder<TPaint>(paint);
         });
+#pragma warning restore IDISP001
 
         return holder?.Get<TPaint>() ?? new CacheTracker<TPaint>(toPaint(param));
     }
@@ -32,12 +34,14 @@ public sealed class VectorCache(IRenderService renderService, int capacity) : ID
         if (Enabled == false)
             return new CacheTracker<TPaint>(toPaint(param, renderService));
 
+#pragma warning disable IDISP001
         var holder = _cache.GetOrCreateValue(param, f =>
         {
             var paint = toPaint(f, renderService);
             return new CacheHolder<TPaint>(paint);
         });
 
+#pragma warning restore IDISP001
         return holder?.Get<TPaint>() ?? new CacheTracker<TPaint>(toPaint(param, renderService));
     }
 
