@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.PersistentCaches;
@@ -39,14 +38,15 @@ public class PinSample : IMapViewSample
         foreach (var str in assembly.GetManifestResourceNames())
             System.Diagnostics.Debug.WriteLine(str);
 
+        var position = mapClickedArgs.Point;
         switch (mapClickedArgs.TapType)
         {
             case TapType.Single:
                 var pin = new Pin(mapView)
                 {
                     Label = $"PinType.Pin {_markerNum++}",
-                    Position = mapClickedArgs.Point,
-                    Address = mapClickedArgs.Point.ToString(),
+                    Position = position,
+                    Address = position.ToString(),
                     Type = PinType.Pin,
                     Color = new Color(_random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f),
                     Transparency = 0.5f,
@@ -107,22 +107,16 @@ public class PinSample : IMapViewSample
                 pin.ShowCallout();
                 break;
             case TapType.Double:
-                var resourceName = "Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
-                var stream = assembly.GetManifestResourceStream(resourceName)
-                    ?? throw new Exception($"Could not find EmbeddedResource {resourceName}");
-                using (var reader = new StreamReader(stream))
+                var resourceName = "embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
+                mapView.Pins.Add(new Pin(mapView)
                 {
-                    string svgString = reader.ReadToEnd();
-                    mapView.Pins.Add(new Pin(mapView)
-                    {
-                        Label = $"PinType.Svg {_markerNum++}",
-                        Position = mapClickedArgs.Point,
-                        Type = PinType.Svg,
-                        Scale = 0.1f,
-                        RotateWithMap = true,
-                        Svg = svgString
-                    });
-                }
+                    Label = $"PinType.Svg {_markerNum++}",
+                    Position = position,
+                    Type = PinType.ImageSource,
+                    Scale = 0.1f,
+                    RotateWithMap = true,
+                    ImageSource = resourceName
+                });
 
                 break;
         }

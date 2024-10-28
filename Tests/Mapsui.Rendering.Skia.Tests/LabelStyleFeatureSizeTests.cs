@@ -117,6 +117,7 @@ public class LabelStyleFeatureSizeTests
         using var renderService = new RenderService();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, renderService);
 
+
         Assert.That(size, Is.EqualTo(LabelSize + 2 * 2).Within(Constants.Epsilon));
     }
 

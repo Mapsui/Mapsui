@@ -232,7 +232,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         // If style has a halo value, than draw halo text
         if (style.Halo != null)
         {
-            using var paintHaloHolder = vectorCache.GetOrCreate(style, CreateHaloPaintHolder);
+            using var paintHaloHolder = vectorCache.GetOrCreate((style, style.Halo), CreateHaloPaintHolder);
             using var paintHalo = paintHaloHolder.Instance;
             if (lines != null)
             {
@@ -416,7 +416,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             return 0;
 
         // for measuring the text size the opacity can be set to 1try
-        using var paintHolder = labelStyle.Halo != null ? vectorCache.GetOrCreate(labelStyle, CreateHaloPaintHolder) : vectorCache.GetOrCreate((labelStyle.Font, labelStyle.ForeColor, 1f), CreatePaint);
+        using var paintHolder = labelStyle.Halo != null ? vectorCache.GetOrCreate((labelStyle, labelStyle.Halo), CreateHaloPaintHolder) : vectorCache.GetOrCreate((labelStyle.Font, labelStyle.ForeColor, 1f), CreatePaint);
         var paint = paintHolder.Instance;
         var rect = new SKRect();
         paint.MeasureText(text, ref rect);
@@ -436,10 +436,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return size;
     }
 
-    private static SKPaint CreateHaloPaintHolder(LabelStyle labelStyle, IRenderService renderService)
+    private static SKPaint CreateHaloPaintHolder((LabelStyle labelStyle, Pen halo) style, IRenderService renderService)
     {
-        var strokeWidth = (float)labelStyle.Halo.Width * 2;
+        LabelStyle labelStyle = style.labelStyle;
+        Pen halo = style.halo;
+        var strokeWidth = (float)halo!.Width * 2;
         var paintStyle = SKPaintStyle.StrokeAndFill;
-        return CreatePaint((labelStyle.Font, labelStyle.Halo.Color, 1, paintStyle, strokeWidth), renderService);
+        return CreatePaint((labelStyle.Font, halo.Color, 1, paintStyle, strokeWidth), renderService);
     }
 }

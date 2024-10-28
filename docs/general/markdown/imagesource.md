@@ -39,3 +39,7 @@ When using an SVG, you can override the built-in colors of the stroke and fill w
 This feature offers great flexibility, allowing you to, for instance, indicate different types of vehicles or different states of a single vehicle. 
 
 In Mapsui 5.0.0-beta.2 only the SymbolStyle supports SvgFillColor and SvgStrokeColor.
+
+!!! warning
+
+    Note that a new instance of the SVG object needs to be stored in memory for every different color. So you need to keep some restraint on the number of colors used. An example where this could cause trouble is if you use a float value in a calculation to determine the color, for instance if you let the speed of a vehicle determine the color. To circumvent this you could use categories. Many SVG object instances can also impact performance. If a single color suffices you could use BlendColorMode as an alternative to SvgFillColor/SvgStrokeColor. 
