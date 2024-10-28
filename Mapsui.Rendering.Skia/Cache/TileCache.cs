@@ -77,7 +77,9 @@ public sealed class TileCache : IDisposable
             if (counter >= numberToRemove) break;
             var entry = tileCache[key];
             tileCache.Remove(key);
+#pragma warning disable IDISP007
             entry.SKObject.Dispose();
+#pragma warning restore IDISP007
             counter++;
         }
     }
@@ -89,7 +91,9 @@ public sealed class TileCache : IDisposable
         {
             var tile = _tileCache[key];
             _tileCache.Remove(key); // Remove before dispose to make sure the disposed object is not used anymore
+#pragma warning disable IDISP007
             tile.SKObject.Dispose();
+#pragma warning restore IDISP007
         }
     }
 }
