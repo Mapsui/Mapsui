@@ -3,6 +3,7 @@ using SkiaSharp;
 #if __WINUI__
 // for fixing the Linux build this pragma disable is needed some tooling issue.
 #pragma warning disable IDE0005 // Using directive is unnecessary.
+#pragma warning disable CS0067 // Event is never used
 using System;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml;

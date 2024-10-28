@@ -16,7 +16,7 @@ using VerticalAlignment = Mapsui.Widgets.VerticalAlignment;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class TouchPointSample : ISample, IDisposable
+public sealed class TouchPointSample : ISample, IDisposable
 {
     private Map? _map;
     private TextBoxWidget? _label;
@@ -108,5 +108,6 @@ public class TouchPointSample : ISample, IDisposable
     public void Dispose()
     {
         _clickMemoryLayer?.Dispose();
+        _map?.Dispose();
     }
 }
