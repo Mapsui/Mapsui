@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using System.Collections.Generic;
@@ -45,6 +46,8 @@ public class MapBuilder
     public MapBuilder WithLayer(AddLayer layerFactory)
         => WithLayer(layerFactory, (l) => { });
 
+    public MapBuilder WithPinWithCalloutLayer()
+        => WithLayer(CreatePinWithCalloutLayer, (l) => { });
 
     public MapBuilder WithMapCRS(string crs)
     {
@@ -87,4 +90,16 @@ public class MapBuilder
     public delegate IWidget AddWidget(Map map);
     public delegate void ConfigureLayer(ILayer layer);
     public delegate void ConfigureWidget(IWidget widget);
+
+    private MemoryLayer CreatePinWithCalloutLayer() => new()
+    {
+        Style = new SymbolStyle
+        {
+            ImageSource = $"embedded://Mapsui.Samples.Common.Images.arrow.svg",
+            SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
+            SvgFillColor = Color.AliceBlue,
+            SvgStrokeColor = Color.Black,
+            SymbolScale = 0.5,
+        }
+    };
 }
