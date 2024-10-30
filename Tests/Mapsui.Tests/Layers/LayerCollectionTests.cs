@@ -233,6 +233,20 @@ public class LayerCollectionTests
         Assert.That(layer.Name, Is.EqualTo(layerCollection.Get(indexAfterMove, group).Name));
     }
 
+    [Test]
+    public void RemoveShouldNotThrowIfNotExists()
+    {
+        // Arrange
+        var layerCollection = BuildLayerCollection();
+        using var layer = new MemoryLayer() { Name = $"LayerNotInList" };
+
+        // Act
+        var result = layerCollection.Remove(layer);
+
+        // Assert
+        Assert.That(result, Is.EqualTo(false));
+    }
+
     private static LayerCollection BuildLayerCollection()
     {
         var layerCollection = new LayerCollection();
