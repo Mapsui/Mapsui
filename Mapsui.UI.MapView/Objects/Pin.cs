@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
+using Microsoft.Maui.Graphics;
 using Color = Microsoft.Maui.Graphics.Color;
 using Mapsui.UI.Maui.Extensions;
 
@@ -423,6 +424,8 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
     private Color _color = KnownColor.Red;
     private string? _label;
     private string? _address;
+    private byte[]? _icon;
+    private string? _svg;
     private float _rotation;
     private bool _rotateWithMap;
     private bool _isVisible = true;
@@ -472,6 +475,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
             }
 
             string imageSource = string.Empty;
+            Styles.Color? blendColorMode = null;
 
             switch (Type)
             {
@@ -480,6 +484,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                     break;
                 case PinType.Pin:
                     imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
+                    blendColorMode = Color.ToMapsui();
                     break;
             }
 
@@ -498,7 +503,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                     SymbolOffset = new Offset(Anchor.X, Anchor.Y),
                     Opacity = 1 - Transparency,
                     Enabled = IsVisible,
-                    SvgFillColor = Color.ToMapsui(),
+                    BlendModeColor = blendColorMode,
                 });
             }
         }

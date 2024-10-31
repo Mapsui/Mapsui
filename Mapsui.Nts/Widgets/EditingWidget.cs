@@ -3,6 +3,7 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 
 namespace Mapsui.Nts.Widgets;
+
 public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget because the EditingWidget does not need to draw anything
 {
     private readonly IMapControl _mapControl;

@@ -81,24 +81,20 @@ public class ArcGISIdentify
 
             try
             {
-                using var dataStream = CopyAndClose(await response.Content.ReadAsStreamAsync().ConfigureAwait(false));
+                using var inputStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
-                if (dataStream != null)
+                _featureInfo = JsonSerializer.Deserialize(inputStream, ArcGISContext.Default.ArcGISFeatureInfo);
+
+                inputStream.Position = 0;
+
+                using (var reader = new StreamReader(inputStream))
                 {
-                    _featureInfo = JsonSerializer.Deserialize(dataStream, ArcGISContext.Default.ArcGISFeatureInfo);
-
-                    dataStream.Position = 0;
-
-                    using (var reader = new StreamReader(dataStream))
+                    var contentString = await reader.ReadToEndAsync();
+                    if (contentString.Contains("{\"error\":{\""))
                     {
-                        var contentString = await reader.ReadToEndAsync();
-                        if (contentString.Contains("{\"error\":{\""))
-                        {
-                            OnIdentifyFailed();
-                            return;
-                        }
+                        OnIdentifyFailed();
+                        return;
                     }
-                    await dataStream.DisposeAsync();
                 }
 
                 OnIdentifyFinished();
@@ -127,23 +123,6 @@ public class ArcGISIdentify
         }
 
         return layerString;
-    }
-
-    private static MemoryStream CopyAndClose(Stream inputStream)
-    {
-        const int readSize = 256;
-        var buffer = new byte[readSize];
-        var ms = new MemoryStream();
-
-        var count = inputStream.Read(buffer, 0, readSize);
-        while (count > 0)
-        {
-            ms.Write(buffer, 0, count);
-            count = inputStream.Read(buffer, 0, readSize);
-        }
-        ms.Position = 0;
-        inputStream.Dispose();
-        return ms;
     }
 
     private void OnIdentifyFinished()

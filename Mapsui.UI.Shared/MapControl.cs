@@ -64,7 +64,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _updateInterval = 16;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
+#pragma warning disable IDISP002 // Is disposed in CommonDispose
     private readonly IRenderer _renderer = new MapRenderer();
+#pragma warning restore IDISP002
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
 
@@ -397,7 +399,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     // ReSharper restore RedundantNameQualifier
+#pragma warning disable IDISP002 // Is Disposed in Common Dispose
     private DisposableWrapper<Map>? _map;
+#pragma warning restore IDISP002
 
 #if __MAUI__
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.PersistentCaches;
@@ -38,14 +39,15 @@ public class PinSample : IMapViewSample
         foreach (var str in assembly.GetManifestResourceNames())
             System.Diagnostics.Debug.WriteLine(str);
 
+        var position = mapClickedArgs.Point;
         switch (mapClickedArgs.TapType)
         {
             case TapType.Single:
                 var pin = new Pin(mapView)
                 {
                     Label = $"PinType.Pin {_markerNum++}",
-                    Position = mapClickedArgs.Point,
-                    Address = mapClickedArgs.Point.ToString(),
+                    Position = position,
+                    Address = position.ToString(),
                     Type = PinType.Pin,
                     Color = new Color(_random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f, _random.Next(0, 256) / 256.0f),
                     Transparency = 0.5f,
@@ -110,7 +112,7 @@ public class PinSample : IMapViewSample
                 mapView.Pins.Add(new Pin(mapView)
                 {
                     Label = $"PinType.Svg {_markerNum++}",
-                    Position = mapClickedArgs.Point,
+                    Position = position,
                     Type = PinType.ImageSource,
                     Scale = 0.1f,
                     RotateWithMap = true,

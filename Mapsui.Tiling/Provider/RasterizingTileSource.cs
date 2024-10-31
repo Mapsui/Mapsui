@@ -217,7 +217,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
 
     public ITileSchema Schema => _tileSchema ??= new GlobalSphericalMercator();
     public string Name => _layer.Name;
-    public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text, _layer.Attribution.Url);
+    public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text ?? string.Empty, _layer.Attribution.Url ?? string.Empty);
 
     public static Viewport ToViewport(MSection section)
     {

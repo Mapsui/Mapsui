@@ -28,9 +28,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 {
     // GPU does not work currently on Windows
     public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
+#pragma warning disable IDISP002 // These should not be disposed here in WINUI they are not disposable and in UNO They shouldn't be disposed
     private readonly SKSwapChainPanel? _canvasGpu;
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas? _canvas;
+#pragma warning restore IDISP002    
 
     bool _shiftPressed;
 
@@ -280,47 +282,57 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private bool GetShiftPressed() => _shiftPressed;
 
-#if __ANDROID__
-    protected override void Dispose(bool disposing)
-#elif __IOS__ || __MACOS__
-    protected new virtual void Dispose(bool disposing)
-#else
+#if !HAS_UNO
     protected virtual void Dispose(bool disposing)
-#endif
     {
-        if (disposing)
-        {
-#if HAS_UNO   
-#if  __WINUI__
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context
-#endif
-
-            _canvas?.Dispose();
-            _canvasGpu?.Dispose();
-            _selectRectangle?.Dispose();
-#endif
-#if HAS_UNO || __WINUI__
-            _invalidateTimer?.Dispose();
-#endif
-            _map?.Dispose();
-
-        }
         CommonDispose(disposing);
-
-#if __ANDROID__ || __IOS__ || __MACOS__
-        base.Dispose(disposing);
-#endif
     }
 
-#if !(__ANDROID__ )
-#if __IOS__ || __MACOS__ || HAS_UNO
-    public new void Dispose()
-#else 
     public void Dispose()
-#endif
     {
         Dispose(true);
         GC.SuppressFinalize(this);
+    }
+#elif HAS_UNO && __IOS__ // on ios don't dispose _canvas, _canvasGPU, _selectRectangle, base class 
+    protected new virtual void Dispose(bool disposing)
+    {
+        CommonDispose(disposing);
+    }
+
+    public new void Dispose()
+    {
+        GC.SuppressFinalize(this);
+    }
+#else
+#if __ANDROID__
+    protected new virtual void Dispose(bool disposing)
+    {
+        CommonUnoDispose(disposing);
+        CommonDispose(disposing);
+        base.Dispose(disposing);
+    }
+#else
+    protected virtual void Dispose(bool disposing)
+    {
+        CommonUnoDispose(disposing);
+        CommonDispose(disposing);
+        base.Dispose();
+    }
+#endif
+    public new void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    private void CommonUnoDispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _canvas?.Dispose();
+            _canvasGpu?.Dispose();
+            _selectRectangle?.Dispose();
+        }
     }
 #endif
 }

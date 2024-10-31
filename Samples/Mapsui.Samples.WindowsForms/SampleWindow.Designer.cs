@@ -16,6 +16,11 @@ partial class SampleWindow
         if (disposing && (components != null))
         {
             components.Dispose();
+            _mapControl?.Dispose();
+            _categoryComboBox?.Dispose();
+            _sampleList?.Dispose();
+            _rotationSlider?.Dispose();
+            _layerList?.Dispose();
         }
         base.Dispose(disposing);
     }
