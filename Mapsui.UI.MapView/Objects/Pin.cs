@@ -423,8 +423,6 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
     private Color _color = KnownColor.Red;
     private string? _label;
     private string? _address;
-    private byte[]? _icon;
-    private string? _svg;
     private float _rotation;
     private bool _rotateWithMap;
     private bool _isVisible = true;
