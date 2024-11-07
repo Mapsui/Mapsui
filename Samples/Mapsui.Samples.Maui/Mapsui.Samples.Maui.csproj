@@ -52,12 +52,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.Markup" />
 		<PackageReference Include="CommunityToolkit.Mvvm" />
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
     <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Resizetizer" VersionOverride="$(MauiVersion)" />
 	</ItemGroup>
 
 	<ItemGroup>
