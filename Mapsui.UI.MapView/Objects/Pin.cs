@@ -434,10 +434,10 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
     private float _transparency;
     private object? _tag;
     private GeometryFeature? _feature;
-    private string _imageSource;
+    private string? _imageSource;
 
     /// <summary> Gets or sets an ImageSource for the Pin </summary>
-    public string ImageSource
+    public string? ImageSource
     {
         get => _imageSource;
         set
