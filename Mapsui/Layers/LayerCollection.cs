@@ -370,24 +370,21 @@ public class LayerCollection : IEnumerable<ILayer>
 
     private bool RemoveInternal(ILayer[] layers)
     {
-        var copy = _entries.ToList();
+        var copyOfEntries = _entries.ToList();
         var success = true;
 
         foreach (var layer in layers)
         {
-            var entryToRemove = copy.First(e => e.Layer == layer);
-            if (!copy.Remove(entryToRemove))
+            var entryToRemove = copyOfEntries.FirstOrDefault(e => e.Layer == layer);
+            if (entryToRemove == null)
+            {
+                success = false;
+                continue;
+            }
+            if (!copyOfEntries.Remove(entryToRemove))
                 success = false;
 
-            var counter = 0;
-            foreach (var entry in copy)
-            {
-                if (entry.Group != entryToRemove.Group) // Skip entries in other groups
-                    continue;
-
-                entry.Index = counter;
-                counter++;
-            }
+            UpdateIndexes(copyOfEntries, entryToRemove.Group);
 
             if (layer is IAsyncDataFetcher asyncLayer)
             {
@@ -396,9 +393,22 @@ public class LayerCollection : IEnumerable<ILayer>
             }
         }
 
-        _entries = new ConcurrentQueue<LayerEntry>(copy);
+        _entries = new ConcurrentQueue<LayerEntry>(copyOfEntries);
 
         return success;
+    }
+
+    private static void UpdateIndexes(List<LayerEntry> entries, int group)
+    {
+        var counter = 0;
+        foreach (var entry in entries.OrderBy(e => e.Index))
+        {
+            if (entry.Group != group) // Skip entries in other groups
+                continue;
+
+            entry.Index = counter;
+            counter++;
+        }
     }
 
     private void OnChanged(IEnumerable<ILayer> added, IEnumerable<ILayer> removed, IEnumerable<ILayer> moved)
