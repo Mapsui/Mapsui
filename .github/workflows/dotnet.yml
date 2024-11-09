@@ -43,12 +43,12 @@ jobs:
          dotnet-version: |
            9.0.100-rc.2.24474.11     
          dotnet-quality: 'preview'
-    # # Open JDK
-    # - name: Install Open JDK 11
-    #   uses: actions/setup-java@v4
-    #   with:
-    #     distribution: 'microsoft'
-    #     java-version: '11'
+    # Open JDK
+    - name: Install Open JDK 11
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'microsoft'
+        java-version: '11'
     # Android SDK Install
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
@@ -212,11 +212,11 @@ jobs:
            9.0.100-rc.2.24474.11   
          dotnet-quality: 'preview'  
     # Java Sdk install 11
-    # - name: Install Open JDK 11
-    #   uses: actions/setup-java@v4
-    #   with:
-    #     distribution: 'microsoft' # open jdk
-    #     java-version: '11'
+    - name: Install Open JDK 11
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'microsoft' # open jdk
+        java-version: '11'
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v2
       with:
