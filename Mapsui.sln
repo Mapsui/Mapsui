@@ -41,7 +41,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		Nuget.config = Nuget.config
 		README.md = README.md
-		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.iOS", "Samples\Mapsui.Samples.iOS\Mapsui.Samples.iOS.csproj", "{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}"
