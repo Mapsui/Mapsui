@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using NUnit.Framework;
 
@@ -31,6 +32,9 @@ public class LayerCollectionTests
         Assert.That(list[1].Name, Is.EqualTo("Layer3"));
         Assert.That(list[2], Is.Not.Null);
         Assert.That(list[2].Name, Is.EqualTo("Layer2"));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
     }
 
     [Test]
@@ -61,6 +65,9 @@ public class LayerCollectionTests
         Assert.That(list[0].Name, Is.EqualTo("Layer2"));
         Assert.That(list[1], Is.Not.Null);
         Assert.That(list[1].Name, Is.EqualTo("Layer3"));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
     }
 
     [Test]
@@ -87,6 +94,10 @@ public class LayerCollectionTests
         Assert.That(list[1].Name, Is.EqualTo("Layer3"));
         Assert.That(list[2], Is.Not.Null);
         Assert.That(list[2].Name, Is.EqualTo("Layer2"));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
+
     }
 
     [Test]
@@ -110,6 +121,10 @@ public class LayerCollectionTests
         Assert.That(list[0].Name, Is.EqualTo("Layer2"));
         Assert.That(list[1].Name, Is.EqualTo("Layer3"));
         Assert.That(list[2].Name, Is.EqualTo("Layer1"));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
+
     }
 
     [Test]
@@ -147,6 +162,9 @@ public class LayerCollectionTests
         Assert.That(list[3].Name, Is.EqualTo("Layer5"));
         Assert.That(list[4].Name, Is.EqualTo("Layer3"));
         Assert.That(list[5].Name, Is.EqualTo("Layer6"));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
     }
 
     [Test]
@@ -184,6 +202,9 @@ public class LayerCollectionTests
         Assert.That(list[3].Name, Is.EqualTo("Layer5"));
         Assert.That(list[4].Name, Is.EqualTo("Layer3"));
         Assert.That(list[5].Name, Is.EqualTo("Layer6"));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
     }
 
     [TestCase(2, -1)]
@@ -208,6 +229,9 @@ public class LayerCollectionTests
         // Assert
         var indexAfterMove = Math.Max(index - 1, 0);
         Assert.That(layer.Name, Is.EqualTo(layerCollection.Get(indexAfterMove, group).Name));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
     }
 
     [TestCase(2, -1)]
@@ -231,6 +255,27 @@ public class LayerCollectionTests
         // Assert
         var indexAfterMove = Math.Min(index + 1, 2);
         Assert.That(layer.Name, Is.EqualTo(layerCollection.Get(indexAfterMove, group).Name));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
+    }
+
+    [Test]
+    public void RemoveShouldNotThrowIfNotExists()
+    {
+        // Arrange
+        var layerCollection = BuildLayerCollection();
+        using var layer = new MemoryLayer() { Name = $"LayerNotInList" };
+
+        // Act
+        var result = layerCollection.Remove(layer);
+
+        // Assert
+        Assert.That(result, Is.EqualTo(false));
+
+        // Absolve
+        layerCollection.GetLayersOfAllGroups().DisposeAllIfDisposable();
+
     }
 
     private static LayerCollection BuildLayerCollection()

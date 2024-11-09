@@ -12,19 +12,18 @@
         "--include",
         "${staged}"
       ]
+    },
+    {
+      "name": "re-add-the-staged-files-after-formatting-so-that-the-fix-becomes-part-of-the-commit",
+      "group": "pre-commit",
+      "output": "always",
+      "command": "bash",
+      "args": [ "-c", "git", "add", "${staged}" ],
+      "windows": {
+        "command": "cmd",
+        "args": [ "/c", "git", "add", "${staged}" ]
+      },
+      "include": [ "**/*.cs" ]
     }
-    // This adds the changed files back to the staging after formatting, but it sometimes fails
-    //,
-    //{
-    //  "name": "re-add-the-staged-files-after-formatting",
-    //  "group": "pre-commit",
-    //  "output": "always",
-    //  "command": "bash",
-    //  "args": [ "git", "add", "${staged}" ],
-    //  "windows": {
-    //    "command": "cmd",
-    //    "args": [ "git", "add", "${staged}" ]
-    //  }
-    //}
   ]
 }
