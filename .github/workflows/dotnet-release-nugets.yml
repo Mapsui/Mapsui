@@ -34,8 +34,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.100-rc.2   
-         dotnet-quality: 'preview'  
+           9.0.100            
     # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag
       run: |
