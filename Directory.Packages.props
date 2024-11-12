@@ -81,6 +81,6 @@
     <PackageVersion Include="System.Formats.Asn1" Version="9.0.100" />
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
-    <PackageVersion Include="System.Text.Json" Version="9.0.0-rc.2.24473.5" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.0" />
   </ItemGroup>
 </Project>
