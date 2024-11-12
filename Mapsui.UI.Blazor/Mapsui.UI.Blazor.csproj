@@ -22,6 +22,10 @@
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'=='net9.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components" VersionOverride="9.0.0" />
+  </ItemGroup>
+
   <!--target to remove System.Memory-->
   <ItemGroup>
     <None Include="Mapsui.Blazor.targets" PackagePath="build/Mapsui.Blazor.targets" Pack="true" />
