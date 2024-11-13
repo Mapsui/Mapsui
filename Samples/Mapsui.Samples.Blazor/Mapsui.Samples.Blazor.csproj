@@ -31,12 +31,6 @@
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
 	</ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net9.0'">
-    <WasmExtraFilesToDeploy Include="$(MSBuildThisFileDirectory)/wwwroot/**/*.*" />
-    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\3.1.56\simd,mt\libHarfBuzzSharp.a" />
-    <NativeFileReference Include="$(SkiaSharpStaticLibraryPath)\3.1.56\simd,mt\libSkiaSharp.a" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.UI.Blazor\Mapsui.UI.Blazor.csproj" />
     <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
