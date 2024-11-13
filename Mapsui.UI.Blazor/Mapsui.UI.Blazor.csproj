@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-
+  <Import Project="$(SolutionDir)\Mapsui.UI.Blazor\Mapsui.Blazor.targets" />
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 	  <ImplicitUsings>enable</ImplicitUsings>
