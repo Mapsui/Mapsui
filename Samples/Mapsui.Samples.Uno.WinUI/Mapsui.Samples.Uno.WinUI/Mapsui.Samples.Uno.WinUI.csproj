@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.19041;net8.0-browserwasm;net9.0-desktop</TargetFrameworks>
+    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.19041;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
 
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
@@ -31,6 +31,7 @@
     <UnoFeatures>
     </UnoFeatures>
   </PropertyGroup>
+
   <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
     <PackageReference Include="SkiaSharp.Views.WinUI"/>
   </ItemGroup>
@@ -38,6 +39,23 @@
   <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
   </ItemGroup>
+
+  <!--https://github.com/dotnet/runtime/issues/109289#issuecomment-2448960065-->
+  <Target Name="Issue109289_Workaround" AfterTargets="_BrowserWasmWriteRspForLinking" Condition="'$(TargetFramework)' == 'net9.0-browserwasm'">
+    <ItemGroup>
+      <_WasmLinkStepArgs Remove="@(_EmccLinkStepArgs)" />
+      <_EmccLinkStepArgs Remove="&quot;%(_WasmNativeFileForLinking.Identity)&quot;" />
+      <_WasmLinkDependencies Remove="@(_WasmNativeFileForLinking)" />
+
+      <_SkiaSharpToReorder Include="@(_WasmNativeFileForLinking)" Condition="$([System.String]::Copy('%(FullPath)').Contains('SkiaSharp'))" />
+      <_WasmNativeFileForLinking Remove="@(_SkiaSharpToReorder)" />
+      <_WasmNativeFileForLinking Include="@(_SkiaSharpToReorder)" />
+
+      <_EmccLinkStepArgs Include="&quot;%(_WasmNativeFileForLinking.Identity)&quot;" />
+      <_WasmLinkDependencies Include="@(_WasmNativeFileForLinking)" />
+      <_WasmLinkStepArgs Include="@(_EmccLinkStepArgs)" />
+    </ItemGroup>
+  </Target>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
