@@ -80,8 +80,8 @@ jobs:
         path: Artifacts/*.nupkg
   
   macBuild:  
-    # macos-latest is currently macos-13
-    runs-on: macos-latest
+    # macos-15 is currently macos-13
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@v4
       with:
