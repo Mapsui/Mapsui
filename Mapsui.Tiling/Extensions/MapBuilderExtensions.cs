@@ -7,7 +7,7 @@ public static class MapBuilderExtensions
 {
     public static MapBuilder WithOpenStreetMapLayer(this MapBuilder mapBuilder, ConfigureLayer configureLayer)
     {
-        return mapBuilder.WithLayer(() => OpenStreetMap.CreateTileLayer(), (l) =>
+        return mapBuilder.WithLayer((map) => OpenStreetMap.CreateTileLayer(), (l) =>
         {
             configureLayer(l);
         });

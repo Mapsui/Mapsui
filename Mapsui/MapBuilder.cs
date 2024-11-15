@@ -1,8 +1,10 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
+using System;
 using System.Collections.Generic;
 
 namespace Mapsui;
@@ -34,9 +36,9 @@ public class MapBuilder
 
     public MapBuilder WithLayer(AddLayer layerFactory, ConfigureLayer configureLayer)
     {
-        _layerFactories.Add(() =>
+        _layerFactories.Add((m) =>
         {
-            var layer = layerFactory();
+            var layer = layerFactory(m);
             configureLayer(layer);
             return layer;
         });
@@ -46,8 +48,8 @@ public class MapBuilder
     public MapBuilder WithLayer(AddLayer layerFactory)
         => WithLayer(layerFactory, (l) => { });
 
-    public MapBuilder WithPinWithCalloutLayer()
-        => WithLayer(CreatePinWithCalloutLayer, (l) => { });
+    public MapBuilder WithPinWithCalloutLayer(IEnumerable<IFeature>? features = null)
+        => WithLayer(m => CreateLayerWithPinWithCallout(m, features ?? []), (l) => { });
 
     public MapBuilder WithMapCRS(string crs)
     {
@@ -74,7 +76,7 @@ public class MapBuilder
         var map = new Map();
 
         foreach (var layerFactory in _layerFactories)
-            map.Layers.Add(layerFactory());
+            map.Layers.Add(layerFactory(map));
 
         foreach (var widgetFactory in _widgetFactories)
             map.Widgets.Add(widgetFactory(map));
@@ -85,21 +87,56 @@ public class MapBuilder
         return map;
     }
 
-    public delegate ILayer AddLayer();
+    public delegate ILayer AddLayer(Map map);
     public delegate void ConfigureMap(Map map);
     public delegate IWidget AddWidget(Map map);
     public delegate void ConfigureLayer(ILayer layer);
     public delegate void ConfigureWidget(IWidget widget);
+    public delegate void TapFeature(Action<IFeature> tapFeature);
 
-    private MemoryLayer CreatePinWithCalloutLayer() => new()
+    private static MemoryLayer CreateLayerWithPinWithCallout(Map map, IEnumerable<IFeature> features)
     {
-        Style = new SymbolStyle
+        map.Info += (sender, args) =>
         {
-            ImageSource = $"embedded://Mapsui.Samples.Common.Images.arrow.svg",
-            SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
-            SvgFillColor = Color.AliceBlue,
-            SvgStrokeColor = Color.Black,
-            SymbolScale = 0.5,
-        }
-    };
+            var feature = args.MapInfo.Feature;
+            if (feature is null)
+                return;
+
+            var enabled = feature["enabled"]?.ToString() == "True";
+            feature["enabled"] = (!enabled).ToString();
+        };
+
+        return new()
+        {
+            IsMapInfoLayer = true,
+            Features = features,
+            Style = new StyleCollection
+            {
+                Styles =
+                {
+                    new SymbolStyle
+                    {
+                        ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
+                        SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
+                        SvgFillColor = Color.CornflowerBlue,
+                        SvgStrokeColor = Color.Black,
+                        SymbolScale = 1,
+                    },
+                    new ThemeStyle(f =>
+                    {
+                        return new CalloutStyle()
+                        {
+                            Enabled = f["enabled"]?.ToString() == "True",
+                            SymbolOffset = new Offset(0, 52),
+                            TitleFont = { FontFamily = null, Size = 24, Italic = false, Bold = true },
+                            TitleFontColor = Color.Black,
+                            Type = CalloutType.Single,
+                            MaxWidth = 120,
+                            Title = f["Name"]!.ToString()
+                        };
+                    })
+                }
+            }
+        };
+    }
 }
