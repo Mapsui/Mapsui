@@ -120,7 +120,7 @@ jobs:
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --skip androidsdk
+      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
