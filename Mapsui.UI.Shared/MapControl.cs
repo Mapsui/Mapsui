@@ -19,6 +19,7 @@ using System.Threading;
 using Mapsui.Manipulations;
 using Mapsui.Styles;
 using System.Threading.Tasks;
+using LogLevel = Mapsui.Logging.LogLevel;
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
