@@ -116,10 +116,16 @@ jobs:
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator
-    - name: Install Android SDK 34
-      run: | 
-          brew install android-sdk 
-          sdkmanager "platform-tools" "platforms;android-34"
+     # Android SDK Install
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v3
+      with:
+         cmdline-tools-version: '8512546'
+    # - name: Install Android SDK 34
+    #   run: | 
+    #       brew install --cask temurin@8
+    #       brew install android-sdk 
+    #       sdkmanager "platform-tools" "platforms;android-34"
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
