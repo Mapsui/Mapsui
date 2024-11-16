@@ -119,7 +119,7 @@ jobs:
     # Android SDK Install
     - name: Install Android SDK 
       run: | 
-          brew install temurin@8
+          brew install --cask temurin@8
           brew install android-sdk 
           sdkmanager "platform-tools" "platforms;android-34" 
     - name: Restore dependencies Mapsui.Mac
