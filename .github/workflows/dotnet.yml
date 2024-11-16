@@ -115,17 +115,12 @@ jobs:
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator
-    # Open JDK 11
-    - name: Install Open JDK 8
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'microsoft'
-        java-version: '8'
+      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator 
     # Android SDK Install
     - name: Install Android SDK 
       run: | 
-          brew install --cask android-sdk 
+          brew install temurin@8
+          brew install android-sdk 
           sdkmanager "platform-tools" "platforms;android-34" 
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
