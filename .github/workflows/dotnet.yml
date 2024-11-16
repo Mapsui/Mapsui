@@ -149,6 +149,10 @@ jobs:
       run: dotnet pack --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
     - name: Build Mapsui.UI.iOS
       run: dotnet pack --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.UI.Maui
+      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.UI.Uno.WinUI
+      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Uno.WinUI/Mapsui.UI.Uno.WinUI.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
     - name: Upload packages
       uses: actions/upload-artifact@v4
       with:
