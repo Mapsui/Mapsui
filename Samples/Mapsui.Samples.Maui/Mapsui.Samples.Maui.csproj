@@ -33,7 +33,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\appicon.png" Color="#512BD4" Resize="false" />
+    <MauiIcon Include="Resources\AppIcon\appicon.png" Resize="false" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
