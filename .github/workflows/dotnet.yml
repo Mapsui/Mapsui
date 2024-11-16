@@ -115,7 +115,7 @@ jobs:
     - name: install Uno.Check 1.26.1
       run: dotnet tool install --global Uno.Check --version 1.26.1
     - name: install Android SDK 34
-      run: uno-check -v --ci --non-interactive --fix --target android 
+      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator  
     - name: Install newest Uno Check
       run: dotnet tool update -g uno.check
     - name: Uno Check
