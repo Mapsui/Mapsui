@@ -112,8 +112,12 @@ jobs:
            9.0.x
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
-    - name: Install Uno Check
-      run: dotnet tool install -g Uno.Check
+    - name: install Uno.Check 1.26.1
+      run: dotnet tool install --global Uno.Check --version 1.26.1
+    - name: install Android SDK 34
+      run: uno-check -v --ci --non-interactive --fix --target android 
+    - name: Install newest Uno Check
+      run: dotnet tool update -g uno.check
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator    
     - name: Restore dependencies Mapsui.Mac
