@@ -115,13 +115,7 @@ jobs:
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator 
-    # Android SDK Install
-    - name: Install Android SDK 
-      run: | 
-          brew install --cask temurin@8
-          brew install android-sdk 
-          sdkmanager "platform-tools" "platforms;android-34" 
+      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator    
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Build        
