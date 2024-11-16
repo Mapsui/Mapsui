@@ -103,12 +103,7 @@ jobs:
     - name: Set up Xcode 16
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '16'
-    - name: Setup .NET 6 SDK
-      uses: actions/setup-dotnet@v4
-      with:
-         dotnet-version: |
-           6.0.x                  
+        xcode-version: '16'           
     # .Net 7 update     
     - name: Setup .NET 9 SDK 
       uses: actions/setup-dotnet@v4
@@ -121,6 +116,8 @@ jobs:
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator
+    - name: Install Android 34 SDK
+      run: dotnet build -t:InstallAndroidDependencies -f net8.0-android "-p:AndroidSdkDirectory=/Users/runner/Library/Android/sdk"
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
