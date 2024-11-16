@@ -120,12 +120,7 @@ jobs:
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
       with:
-         cmdline-tools-version: '8512546'
-    # - name: Install Android SDK 34
-    #   run: | 
-    #       brew install --cask temurin@8
-    #       brew install android-sdk 
-    #       sdkmanager "platform-tools" "platforms;android-34"
+         cmdline-tools-version: '8512546'   
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build               
@@ -136,24 +131,8 @@ jobs:
     - name: Build Mapsui.Samples.iOS      
       run: dotnet build --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     # Samples Uno WinUI
-    #- name: Mapsui.Samples.Uno.WinUI.Mobile
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Mobile/Mapsui.Samples.Uno.WinUI.Mobile.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer/Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Skia.WPF
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.WPF/Mapsui.Samples.Uno.WinUI.Skia.WPF.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Wasm
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Wasm/Mapsui.Samples.Uno.WinUI.Wasm.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Windows
-    #  run: dotnet build --no-restore --configuration Debug  /p:Platform=x64 Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Windows/Mapsui.Samples.Uno.WinUI.Windows.csproj
-    # Builds that need XCode 14.0
-    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
-    #- name: Setup Xcode version 14.0
-    #  uses: maxim-lobanov/setup-xcode@v1.6.0
-    #  with:
-    #    xcode-version: '14.0'
+    - name: Mapsui.Samples.Uno.WinUI.Mobile
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Mobile/Mapsui.Samples.Uno.WinUI.Mobile.csproj       
     # Build Tests   
     - name: Build Mapsui.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
