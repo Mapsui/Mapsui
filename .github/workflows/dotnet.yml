@@ -120,7 +120,10 @@ jobs:
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
       with:
-         cmdline-tools-version: '8512546'   
+          api-level: 34 # Specify Android SDK version
+          build-tools: 34.0.0 # Specify Build Tools version
+          target: default # Default emulator target (if needed)
+          ndk: false # Whether to install the NDK (set true if required)
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Build        
