@@ -27,7 +27,7 @@ public class ShapefileTestSample : ISample
     {
         var map = new Map();
 
-        var shapeFilePath = Path.Combine(TestShapeFilesDeployer.ShapeFilesLocation, "test.shp");
+        var shapeFilePath = Path.Combine(TestShapeFilesDeployer.ShapeFilesLocation, "test_file.shp");
         var shpSource = new ShapeFile(shapeFilePath);
 
         // Apply basic styles
@@ -39,7 +39,8 @@ public class ShapefileTestSample : ISample
                 Fill = new Brush(Color.FromArgb(128, 0, 255, 0)),
                 Line = new Pen(Color.FromString("#0969da"), 4)
                 {
-                    PenStrokeCap = PenStrokeCap.Round, StrokeJoin = StrokeJoin.Round
+                    PenStrokeCap = PenStrokeCap.Round,
+                    StrokeJoin = StrokeJoin.Round
                 }
             }
         };

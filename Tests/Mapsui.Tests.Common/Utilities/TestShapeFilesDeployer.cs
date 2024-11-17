@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Maps.Performance;
+using Mapsui.Tests.Common.Maps;
 
 namespace Mapsui.Tests.Common.Utilities;
 
@@ -13,7 +13,7 @@ public static class TestShapeFilesDeployer
     public static void CopyEmbeddedResourceToFile(string shapefile)
     {
         shapefile = Path.GetFileNameWithoutExtension(shapefile);
-        var assembly = typeof(ShapefileTileSample).GetTypeInfo().Assembly;
+        var assembly = typeof(ShapefileTestSample).GetTypeInfo().Assembly;
         assembly.CopyEmbeddedResourceToFile("Mapsui.Tests.Common.Resources.Shapefiles.", ShapeFilesLocation, shapefile + ".dbf");
         assembly.CopyEmbeddedResourceToFile("Mapsui.Tests.Common.Resources.Shapefiles.", ShapeFilesLocation, shapefile + ".prj");
         assembly.CopyEmbeddedResourceToFile("Mapsui.Tests.Common.Resources.Shapefiles.", ShapeFilesLocation, shapefile + ".shp");
