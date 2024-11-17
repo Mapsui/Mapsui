@@ -218,8 +218,8 @@ jobs:
       uses: NuGet/setup-nuget@v2
       with:
         nuget-version: latest
-    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net8 wasm-tools wasm-tools-net8-net8
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8 wasm-tools wasm-tools-net8-net8
+    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net8 wasm-tools wasm-tools-net8
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8 wasm-tools wasm-tools-net8
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
