@@ -53,7 +53,7 @@ jobs:
       uses: android-actions/setup-android@v3
       with:
          cmdline-tools-version: '8512546'
-    - name: Install workloads
+    - name: Install workloads android wasm-tools maui-android
       run: dotnet workload install android wasm-tools maui-android
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check
@@ -218,8 +218,8 @@ jobs:
       uses: NuGet/setup-nuget@v2
       with:
         nuget-version: latest
-    - name: install maui macos android ios maccatalyst wasm-tools
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
