@@ -37,7 +37,7 @@ public class MapBuilder
         _layerFactories.Add((m) =>
         {
             var layer = layerFactory(m);
-            configureLayer?.Invoke(layer);
+            configureLayer?.Invoke(layer, m);
             return layer;
         });
         return this;
@@ -82,7 +82,7 @@ public class MapBuilder
     public delegate ILayer AddLayer(Map map);
     public delegate void ConfigureMap(Map map);
     public delegate IWidget AddWidget(Map map);
-    public delegate void ConfigureLayer(ILayer layer);
+    public delegate void ConfigureLayer(ILayer layer, Map map);
     public delegate void ConfigureWidget(IWidget widget);
     public delegate void TapFeature(Action<IFeature> tapFeature);
 }
