@@ -2,7 +2,10 @@
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Extensions;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.MapBuilders;
@@ -18,7 +21,7 @@ public class MapBuilderSample : ISample
         => Task.FromResult(new MapBuilder()
             .WithOpenStreetMapLayer((l) => l.Name = "OpenStreetMap")
             .WithLayer((map) => new MemoryLayer("Pin Layer") { Features = [new PointFeature(_sphericalMercatorCoordinate)], Style = SymbolStyles.CreatePinStyle() })
-            .WithPinWithCalloutLayer([new PointFeature(_sphericalMercatorCoordinate) { ["Name"] = "Hello!" }])
+            .WithPinWithCalloutLayer("Name", [new PointFeature(_sphericalMercatorCoordinate) { ["Name"] = "Hello!" }])
             .WithZoomButtons()
             .WithScaleBarWidget(w =>
                 {
@@ -29,4 +32,67 @@ public class MapBuilderSample : ISample
             .WithMapConfiguration(map => map.CRS = "EPSG:3857") // Does the same thing as the line above.
             .WithMapConfiguration(map => map.Navigator.CenterOnAndZoomTo(_sphericalMercatorCoordinate, 1222.99)) // Navigation is complex, because the Map is passed as argument the navigation methods could be called. Better to have specific builder methods for navigation.
             .Build());
+}
+
+public static class SampleMapBuilderExtensions
+{
+    public static MapBuilder WithPinWithCalloutLayer(this MapBuilder mapBuilder, string textField, IEnumerable<IFeature>? features = null)
+    => mapBuilder.WithLayer(m => CreateLayerWithPinWithCallout(textField, m, features ?? []), (l) => { });
+
+    private static ILayer CreateLayerWithPinWithCallout(string textField, Map map, IEnumerable<IFeature> features)
+    {
+        map.Info += (sender, args) =>
+        {
+            var feature = args.MapInfo.Feature;
+            if (feature is null)
+                return;
+
+            var enabled = feature["callout-enabled"]?.ToString() == "True";
+            feature["callout-enabled"] = (!enabled).ToString();
+        };
+
+        return new MemoryLayer()
+        {
+            IsMapInfoLayer = true,
+            Features = features,
+        }.WithPinAndCallout(
+            (f) => f["callout-enabled"]?.ToString() == "True",
+            (f) => f[textField]?.ToString() ?? "");
+    }
+}
+
+public static class SampleLayerExtensions
+{
+    public static ILayer WithPinAndCallout(this ILayer layer, Func<IFeature, bool> enabledFromFeature, Func<IFeature, string> calloutTextFromFeature)
+    {
+        layer.Style = new StyleCollection
+        {
+            Styles =
+            {
+                new SymbolStyle
+                {
+                    ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
+                    SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
+                    SvgFillColor = Color.CornflowerBlue,
+                    SvgStrokeColor = Color.Black,
+                    SymbolScale = 1,
+                },
+                new ThemeStyle(f =>
+                {
+                    return new CalloutStyle()
+                    {
+                        Enabled = enabledFromFeature(f),
+                        SymbolOffset = new Offset(0, 52),
+                        TitleFont = { FontFamily = null, Size = 24, Italic = false, Bold = true },
+                        TitleFontColor = Color.Black,
+                        Type = CalloutType.Single,
+                        MaxWidth = 120,
+                        Title = calloutTextFromFeature(f),
+                    };
+                })
+            }
+        };
+
+        return layer;
+    }
 }
