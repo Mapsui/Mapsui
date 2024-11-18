@@ -2,6 +2,7 @@
 using Mapsui.Layers;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
+using System;
 using System.Collections.Generic;
 
 namespace Mapsui;
@@ -31,20 +32,16 @@ public class MapBuilder
         return this;
     }
 
-    public MapBuilder WithLayer(AddLayer layerFactory, ConfigureLayer configureLayer)
+    public MapBuilder WithLayer(AddLayer layerFactory, ConfigureLayer? configureLayer = null)
     {
-        _layerFactories.Add(() =>
+        _layerFactories.Add((m) =>
         {
-            var layer = layerFactory();
-            configureLayer(layer);
+            var layer = layerFactory(m);
+            configureLayer?.Invoke(layer, m);
             return layer;
         });
         return this;
     }
-
-    public MapBuilder WithLayer(AddLayer layerFactory)
-        => WithLayer(layerFactory, (l) => { });
-
 
     public MapBuilder WithMapCRS(string crs)
     {
@@ -71,7 +68,7 @@ public class MapBuilder
         var map = new Map();
 
         foreach (var layerFactory in _layerFactories)
-            map.Layers.Add(layerFactory());
+            map.Layers.Add(layerFactory(map));
 
         foreach (var widgetFactory in _widgetFactories)
             map.Widgets.Add(widgetFactory(map));
@@ -82,9 +79,10 @@ public class MapBuilder
         return map;
     }
 
-    public delegate ILayer AddLayer();
+    public delegate ILayer AddLayer(Map map);
     public delegate void ConfigureMap(Map map);
     public delegate IWidget AddWidget(Map map);
-    public delegate void ConfigureLayer(ILayer layer);
+    public delegate void ConfigureLayer(ILayer layer, Map map);
     public delegate void ConfigureWidget(IWidget widget);
+    public delegate void TapFeature(Action<IFeature> tapFeature);
 }
