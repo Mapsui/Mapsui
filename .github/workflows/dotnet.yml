@@ -37,7 +37,7 @@ jobs:
       uses: NuGet/setup-nuget@v2  
       with:
         nuget-version: latest    
-    - name: Setup .NET 8 SDK
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
@@ -103,14 +103,9 @@ jobs:
     - name: Set up Xcode 16
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '16'
-    - name: Setup .NET 6 SDK
-      uses: actions/setup-dotnet@v4
-      with:
-         dotnet-version: |
-           6.0.x         
-    # .Net 7 update     
-    - name: Setup .NET 8 SDK
+        xcode-version: '16'          
+    # .Net 9 update     
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
@@ -203,7 +198,7 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget19-
     # .Net 8 update     
-    - name: Setup .NET 8 SDK
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
