@@ -25,18 +25,13 @@ public class RasterFeature : BaseFeature, IFeature
     /// <summary>
     /// Extent of feature
     /// </summary>
-    public MRect? Extent => Raster;
-
-    /// <summary>
-    /// Order of feature which is here always 0, because all rasters are on the same level
-    /// </summary>
-    public int ZOrder => 0;
+    public override MRect? Extent => Raster;
 
     /// <summary>
     /// Implementation of visitor pattern for coordinates
     /// </summary>
     /// <param name="visit"></param>
-    public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
+    public override void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
     {
         if (Raster != null)
             foreach (var point in new[] { Raster.Min, Raster.Max })
@@ -47,7 +42,7 @@ public class RasterFeature : BaseFeature, IFeature
                 });
     }
 
-    public virtual object Clone()
+    public override object Clone()
     {
         return new RasterFeature(this);
     }

@@ -29,14 +29,6 @@ public interface IFeature : ICloneable
     IEnumerable<string> Fields { get; }
 
     /// <summary>
-    /// Order of features retrieved from GetFeatures() .
-    /// </summary>
-    /// <remarks>
-    /// Smaller values are retrieved later.
-    /// </remarks>
-    int ZOrder { get; }
-
-    /// <summary>
     /// Extent of the feature.
     /// </summary>
     MRect? Extent { get; }

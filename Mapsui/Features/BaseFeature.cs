@@ -54,10 +54,7 @@ public abstract class BaseFeature : IFeature
     public IEnumerable<string> Fields => _dictionary.Keys;
 
     /// <inheritdoc />
-    public int ZOrder => throw new NotImplementedException();
-
-    /// <inheritdoc />
-    public MRect? Extent => throw new NotImplementedException();
+    public abstract MRect? Extent { get; }
 
     /// <inheritdoc />
     public object? Data { get; set; }
@@ -90,6 +87,6 @@ public abstract class BaseFeature : IFeature
     public abstract void CoordinateVisitor(Action<double, double, CoordinateSetter> visit);
 
     /// <inheritdoc />
-    abstract public object Clone();
+    public abstract object Clone();
 
 }

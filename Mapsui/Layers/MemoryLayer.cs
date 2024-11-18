@@ -34,7 +34,7 @@ public class MemoryLayer(string layerName) : BaseLayer(layerName)
         return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
     }
 
-    public override Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; set; } = (features) => features.OrderBy(f => f.ZOrder).ThenBy(f => f.Id);
+    public override Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; set; } = (features) => features.OrderBy(f => f.Id);
 
     public override MRect? Extent => Features.GetExtent();
 }

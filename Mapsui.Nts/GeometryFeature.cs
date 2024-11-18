@@ -41,18 +41,13 @@ public class GeometryFeature : BaseFeature, IFeature
     /// <summary>
     /// Extent of feature
     /// </summary>
-    public MRect? Extent => Geometry?.EnvelopeInternal.ToMRect();
-
-    /// <summary>
-    /// Order of feature
-    /// </summary>
-    public int ZOrder { get; set; } = 0;
+    public override MRect? Extent => Geometry?.EnvelopeInternal.ToMRect();
 
     /// <summary>
     /// Implementation of visitor pattern for coordinates
     /// </summary>
     /// <param name="visit"></param>
-    public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
+    public override void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
     {
         if (Geometry is null) return;
         var vertices = Geometry.Coordinates;
@@ -79,7 +74,7 @@ public class GeometryFeature : BaseFeature, IFeature
         Geometry?.GeometryChangedAction();
     }
 
-    public virtual object Clone()
+    public override object Clone()
     {
         return new GeometryFeature(this);
     }
