@@ -34,7 +34,7 @@ public class MapBuilderSample : ISample
             .Build());
 
     private IEnumerable<IFeature> CreateFeatures()
-        => [new PointFeature(_sphericalMercatorCoordinate) { ["Name"] = "Hello!" }];
+        => [new PointFeature(_sphericalMercatorCoordinate) { Data = new UserData { CalloutText = "Hello!" } }];
 }
 
 public static class SampleMapBuilderExtensions
@@ -47,13 +47,13 @@ public static class SampleMapBuilderExtensions
             if (feature is null)
                 return;
 
-            var enabled = feature["callout-enabled"]?.ToString() == "True";
-            feature["callout-enabled"] = (!enabled).ToString();
+            if (feature.Data is UserData vehicle)
+                vehicle.CalloutEnabled = !vehicle.CalloutEnabled;
         };
 
         layer.WithPinAndCallout(
-            (f) => f["callout-enabled"]?.ToString() == "True",
-            (f) => f[calloutTextField]?.ToString() ?? "");
+            (f) => f.DataAs<UserData>().CalloutEnabled,
+            (f) => f.DataAs<UserData>().CalloutText);
 
         return layer;
     }
@@ -93,4 +93,10 @@ public static class SampleLayerExtensions
 
         return layer;
     }
+}
+
+public class UserData
+{
+    public bool CalloutEnabled { get; set; }
+    public string CalloutText { get; set; } = string.Empty;
 }
