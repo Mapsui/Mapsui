@@ -42,9 +42,9 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           8.0.x
+           9.0.x
     - name: install workloads
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8 
     - name: Run DocFx
       shell: pwsh
       run: ./Scripts/BuildDocumentationWebSite.ps1
