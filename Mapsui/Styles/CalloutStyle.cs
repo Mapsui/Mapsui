@@ -69,6 +69,9 @@ public class CalloutStyle : SymbolStyle
     private double _maxWidth;
     private Color? _titleFontColor;
     private Color? _subtitleFontColor;
+    private Font _titleFont = new();
+    private Font _subtitleFont = new();
+    private CalloutBalloonDefinition _balloonDefinition = new();
 
     public string ImageIdOfCallout { get; private set; } = Guid.NewGuid().ToString();
     public string ImageIdOfCalloutContent { get; private set; } = Guid.NewGuid().ToString();
@@ -232,10 +235,6 @@ public class CalloutStyle : SymbolStyle
             }
         }
     }
-
-    private Font _titleFont = new();
-    private Font _subtitleFont = new();
-    private CalloutBalloonDefinition _balloonDefinition = new();
 
     public Font TitleFont
     {
