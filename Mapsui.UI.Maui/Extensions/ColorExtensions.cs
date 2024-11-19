@@ -1,18 +1,20 @@
-﻿namespace Mapsui.UI.Maui.Extensions;
+﻿using System;
+
+namespace Mapsui.UI.Maui.Extensions;
 
 public static class ColorExtensions
 {
+    [Obsolete("Use ToMaui instead", true)]
+    public static Microsoft.Maui.Graphics.Color ToNative(this Styles.Color color)
+    {
+        throw new NotImplementedException();
+    }
     /// <summary>
     /// Convert Mapsui.Styles.Color to Microsoft.Maui.Graphics.Color
     /// </summary>
     /// <param name="color">Color in Mapsui format</param>
     /// <returns>Color in Microsoft.Maui.Graphics format</returns>
     public static Microsoft.Maui.Graphics.Color ToMaui(this Styles.Color color)
-    {
-        return color.ToNative();
-    }
-
-    public static Microsoft.Maui.Graphics.Color ToNative(this Styles.Color color)
     {
         return new Microsoft.Maui.Graphics.Color(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f, color.A / 255.0f);
     }
