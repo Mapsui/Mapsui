@@ -5,7 +5,7 @@ Write-Output "Create general documentation with mkdocs in 'docs/general/_site'"
 mkdocs build -f docs/general/mkdocs.yml
 
 Write-Output "Installing DocFX"
-dotnet tool update -g docfx --version 2.75.3
+dotnet tool update -g docfx --version 2.78
 
 Write-Output "Create api documentation with docfx in 'docs/api/_site'"
 docfx docs/api/docfx.json
