@@ -13,7 +13,7 @@ public static class TestShapeFilesDeployer
     public static void CopyEmbeddedResourceToFile(string shapefile)
     {
         shapefile = Path.GetFileNameWithoutExtension(shapefile);
-        var assembly = typeof(ShapefileTestSample).GetTypeInfo().Assembly;
+        var assembly = typeof(ShapefileZoomSample).GetTypeInfo().Assembly;
         assembly.CopyEmbeddedResourceToFile("Mapsui.Tests.Common.Resources.Shapefiles.", ShapeFilesLocation, shapefile + ".dbf");
         assembly.CopyEmbeddedResourceToFile("Mapsui.Tests.Common.Resources.Shapefiles.", ShapeFilesLocation, shapefile + ".prj");
         assembly.CopyEmbeddedResourceToFile("Mapsui.Tests.Common.Resources.Shapefiles.", ShapeFilesLocation, shapefile + ".shp");

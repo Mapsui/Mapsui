@@ -8,9 +8,9 @@ using Mapsui.Tests.Common.Utilities;
 
 namespace Mapsui.Tests.Common.Maps;
 
-public class ShapefileTestSample : ISample
+public class ShapefileZoomSample : ISample
 {
-    static ShapefileTestSample()
+    static ShapefileZoomSample()
     {
         TestShapeFilesDeployer.CopyEmbeddedResourceToFile("test_file.shp");
     }
@@ -28,7 +28,7 @@ public class ShapefileTestSample : ISample
         var map = new Map();
 
         var shapeFilePath = Path.Combine(TestShapeFilesDeployer.ShapeFilesLocation, "test_file.shp");
-        var shpSource = new ShapeFile(shapeFilePath);
+        var shpSource = new ShapeFile(shapeFilePath, calculateBoundingBoxes: true);
 
         // Apply basic styles
         var layer = new Layer
