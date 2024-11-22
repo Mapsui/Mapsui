@@ -533,9 +533,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, TapType tapType)
     {
-        var mapInfo = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
+        var getMapInfo = () => Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
 
-        return new MapInfoEventArgs(mapInfo, tapType, false);
+        return new MapInfoEventArgs(getMapInfo, tapType, false);
     }
 
     private void SetViewportSize()

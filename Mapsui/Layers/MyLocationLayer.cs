@@ -500,7 +500,8 @@ public class MyLocationLayer : BaseLayer, IDisposable
 
     private void HandleClicked(object? sender, MapInfoEventArgs e)
     {
-        if (e.MapInfo?.Feature != null && e.MapInfo.Feature.Equals(_feature))
+        var mapInfo = e.GetMapInfo();
+        if (mapInfo.Feature != null && mapInfo.Feature.Equals(_feature))
         {
             Clicked?.Invoke(this, e);
         }

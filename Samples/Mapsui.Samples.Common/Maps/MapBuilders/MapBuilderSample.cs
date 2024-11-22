@@ -41,9 +41,10 @@ public static class SampleMapBuilderExtensions
 {
     public static ILayer WithPinWithCalloutLayer(this ILayer layer, Map map, string calloutTextField)
     {
-        map.Info += (sender, args) =>
+        map.Info += (s, e) =>
         {
-            var feature = args.MapInfo.Feature;
+            var mapInfo = e.GetMapInfo();
+            var feature = mapInfo.Feature;
             if (feature is null)
                 return;
 

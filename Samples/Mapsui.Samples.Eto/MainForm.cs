@@ -102,7 +102,7 @@ public class MainForm : Form
             Text = sample.Name,
         };
 
-        radioButton.CheckedChanged += (s, a) =>
+        radioButton.CheckedChanged += (s, e) =>
         {
             Catch.Exceptions(async () =>
             {

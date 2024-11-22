@@ -26,22 +26,20 @@ public class MapInfoWidget : TextBoxWidget
 
     private void Map_Info(object? sender, MapInfoEventArgs a)
     {
-        Text = FeatureToText(a.MapInfo?.Feature);
+        var mapInfo = a.GetMapInfo();
+        Text = FeatureToText(mapInfo.Feature);
         _map.RefreshGraphics();
-        if (a.MapInfo != null)
+        // Try to load async data
+        Catch.Exceptions(async () =>
         {
-            // Try to load async data
-            Catch.Exceptions(async () =>
+            var info = await mapInfo.GetMapInfoAsync();
+            var featureText = FeatureToText(info.Feature);
+            if (Text != featureText)
             {
-                var info = await a.MapInfo.GetMapInfoAsync();
-                var featureText = FeatureToText(info.Feature);
-                if (Text != featureText)
-                {
-                    Text = featureText;
-                    _map.RefreshGraphics();
-                }
-            });
-        }
+                Text = featureText;
+                _map.RefreshGraphics();
+            }
+        });
     }
 
     public Func<IFeature?, string> FeatureToText { get; set; } = (f) =>
