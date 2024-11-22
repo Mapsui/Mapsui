@@ -192,11 +192,13 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     /// <param name="fileBasedIndex">Use file-based spatial index</param>
     /// <param name="readPrjFile">Read the proj File and set the correct CRS</param>
     /// <param name="projectionCrs">Projection Crs</param>
-    public ShapeFile(string filename, bool fileBasedIndex = false, bool readPrjFile = false, IProjectionCrs? projectionCrs = null)
+    /// <param name="calculateBoundingBoxes">if true the Bounding Box of Features is calculated instead of being read solves problems in Zooming when the written Bounding Boxes are not correct.</param>
+    public ShapeFile(string filename, bool fileBasedIndex = false, bool readPrjFile = false, IProjectionCrs? projectionCrs = null, bool calculateBoundingBoxes = false)
     {
         _filename = filename;
         _fileBasedIndex = fileBasedIndex && File.Exists(Path.ChangeExtension(filename, ".shx"));
         _projectionCrs = projectionCrs ?? ProjectionDefaults.Projection as IProjectionCrs;
+        _calculateBoundingBoxes = calculateBoundingBoxes;
 
         //Initialize DBF
         var dbfFile = Path.ChangeExtension(filename, ".dbf");
@@ -272,6 +274,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
 
     private bool _disposed;
     private readonly IProjectionCrs? _projectionCrs;
+    private readonly bool _calculateBoundingBoxes;
 
     /// <summary>
     /// Disposes the object
@@ -704,8 +707,18 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
         if (_brShapeFile is null)
             yield break;
 
-        var offsetOfRecord = ReadIndex(); //Read the whole .idx file
+        if (_calculateBoundingBoxes)
+        {
+            for (uint a = 0; a < _featureCount; ++a)
+            {
+                var geometry = ReadGeometry(a);
+                yield return geometry?.EnvelopeInternal.ToMRect() ?? new MRect(0, 0, 0, 0);
+            }
 
+            yield break;
+        }
+
+        var offsetOfRecord = ReadIndex(); //Read the whole .idx file
         switch (_shapeType)
         {
             case ShapeType.Point:

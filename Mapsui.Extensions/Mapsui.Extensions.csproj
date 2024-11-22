@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <description>Mapsui - Library for mapping Extensions</description>
     <PackageTags>$(PackageTags) arcgis geotiff cache projection</PackageTags>
 		<IsPackable>true</IsPackable>
