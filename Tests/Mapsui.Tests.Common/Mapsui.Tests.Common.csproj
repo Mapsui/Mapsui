@@ -20,6 +20,12 @@
     <None Remove="Resources\SampleTiles\1_0_1.png" />
     <None Remove="Resources\SampleTiles\1_1_0.png" />
     <None Remove="Resources\SampleTiles\1_1_1.png" />
+    <None Remove="Resources\Shapefiles\test_file.dbf" />
+    <None Remove="Resources\Shapefiles\test_file.prj" />
+    <None Remove="Resources\Shapefiles\test_file.qmd" />
+    <None Remove="Resources\Shapefiles\test_file.shp" />
+    <None Remove="Resources\Shapefiles\test_file.shp.sidx" />
+    <None Remove="Resources\Shapefiles\test_file.shx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +41,12 @@
     <EmbeddedResource Include="Resources\SampleTiles\1_0_1.png" />
     <EmbeddedResource Include="Resources\SampleTiles\1_1_0.png" />
     <EmbeddedResource Include="Resources\SampleTiles\1_1_1.png" />
+    <EmbeddedResource Include="Resources\Shapefiles\test_file.dbf" />
+    <EmbeddedResource Include="Resources\Shapefiles\test_file.prj" />
+    <EmbeddedResource Include="Resources\Shapefiles\test_file.qmd" />
+    <EmbeddedResource Include="Resources\Shapefiles\test_file.shp" />
+    <EmbeddedResource Include="Resources\Shapefiles\test_file.shp.sidx" />
+    <EmbeddedResource Include="Resources\Shapefiles\test_file.shx" />
   </ItemGroup>
 
   <ItemGroup>
