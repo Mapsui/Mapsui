@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers.Shapefile;
@@ -48,6 +50,9 @@ public class ShapefileZoomSample : ISample
         // Add the new layer
         map.Layers.Add(layer);
 
+        map.CRS = "EPSG:3857";
+        map.Navigator.CenterOnAndZoomTo(new MPoint(253442.5275139774, 5522921.705309941), 152);
+        
         return map;
     }
 }
