@@ -1,8 +1,5 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Mapsui.Logging;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices;
 using Application = Microsoft.Maui.Controls.Application;
 using LogLevel = Mapsui.Logging.LogLevel;
 

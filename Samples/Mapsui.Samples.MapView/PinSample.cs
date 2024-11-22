@@ -1,12 +1,9 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Maui;
-using Microsoft.Maui.Graphics;
-using Microsoft.Maui;
 using Mapsui.Manipulations;
 using BruTile.Predefined;
 using Mapsui.Tiling.Layers;
