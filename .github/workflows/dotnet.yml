@@ -37,7 +37,7 @@ jobs:
       uses: NuGet/setup-nuget@v2  
       with:
         nuget-version: latest    
-    - name: Setup .NET 9 SDK 
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
@@ -103,9 +103,9 @@ jobs:
     - name: Set up Xcode 16
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '16'           
-    # .Net 7 update     
-    - name: Setup .NET 9 SDK 
+        xcode-version: '16'          
+    # .Net 9 update     
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |

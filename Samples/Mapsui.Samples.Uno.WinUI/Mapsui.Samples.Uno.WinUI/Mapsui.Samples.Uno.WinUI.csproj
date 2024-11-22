@@ -63,4 +63,8 @@
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
+    <PackageReference Include="System.IO.Packaging" VersionOverride="9.0.0" />
+  </ItemGroup>
+
 </Project>

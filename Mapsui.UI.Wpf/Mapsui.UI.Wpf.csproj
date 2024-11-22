@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0-windows;net9.0-windows</TargetFrameworks>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
     <UseWpf>true</UseWpf>
     <PackageId>Mapsui.Wpf</PackageId>
     <Description>WPF map components based on the Mapsui library</Description>

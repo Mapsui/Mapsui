@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <DefineConstants>__ETO_FORMS__</DefineConstants>
     <PackageId>Mapsui.Eto</PackageId>
