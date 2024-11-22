@@ -717,7 +717,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
 
             yield break;
         }
-        
+
         var offsetOfRecord = ReadIndex(); //Read the whole .idx file
         switch (_shapeType)
         {

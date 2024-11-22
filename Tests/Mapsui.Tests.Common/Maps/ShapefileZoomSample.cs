@@ -52,7 +52,7 @@ public class ShapefileZoomSample : ISample
 
         map.CRS = "EPSG:3857";
         map.Navigator.CenterOnAndZoomTo(new MPoint(253442.5275139774, 5522921.705309941), 152);
-        
+
         return map;
     }
 }
