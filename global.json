@@ -10,6 +10,6 @@
     "rollForward": "latestFeature"
   },
   "msbuild-sdks": {
-    "Uno.Sdk": "5.6.0-dev.180"
+    "Uno.Sdk": "5.6.0-dev.248"
   }
 }
