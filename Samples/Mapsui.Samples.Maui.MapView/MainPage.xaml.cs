@@ -57,7 +57,7 @@ public partial class MainPage : ContentPage
             clicker = formsSample.OnTap;
 
         if (sample != null)
-            (Application.Current?.MainPage as NavigationPage)?.PushAsync(new MapPage(sample, clicker));
+            Navigation.PushAsync(new MapPage(sample, clicker));
 
         listView.SelectedItem = null;
     }

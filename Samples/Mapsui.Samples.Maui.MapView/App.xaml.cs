@@ -2,6 +2,7 @@
 using Mapsui.Logging;
 using Application = Microsoft.Maui.Controls.Application;
 using LogLevel = Mapsui.Logging.LogLevel;
+#pragma warning disable IDISP004
 
 namespace Mapsui.Samples.Maui;
 
@@ -12,15 +13,18 @@ public partial class App : Application
         InitializeComponent();
 
         Logger.LogDelegate += LogMethod;
-
-        if (DeviceInfo.Idiom == DeviceIdiom.Phone)
-            MainPage = new NavigationPage(new MainPage());
-        else
-            MainPage = new MainPageLarge();
     }
 
     private void LogMethod(LogLevel logLevel, string message, Exception? exception)
     {
         Debug.WriteLine($"{logLevel}: {message}, {exception}");
+    }
+
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+            return new Window(new MainPage());
+
+        return new Window(new MainPageLarge());
     }
 }
