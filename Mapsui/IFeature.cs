@@ -50,11 +50,6 @@ public interface IFeature : ICloneable
     object? Data { get; set; }
 
     /// <summary>
-    /// Convenience method to retrieve the Data property as a specific type.
-    /// </summary>
-    public T DataAs<T>();
-
-    /// <summary>
     /// Function to call whenever something changes in settings of feature.
     /// </summary>
     void Modified() { } // default implementation

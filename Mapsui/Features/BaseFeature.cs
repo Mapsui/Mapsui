@@ -60,16 +60,6 @@ public abstract class BaseFeature : IFeature
     public object? Data { get; set; }
 
     /// <inheritdoc />
-    public T DataAs<T>()
-    {
-        if (Data is null)
-            throw new Exception("Data is null");
-        if (Data is T data)
-            return data;
-        throw new Exception($"Data is not of type {typeof(T)}");
-    }
-
-    /// <inheritdoc />
     public virtual object? this[string key]
     {
         get => _dictionary.TryGetValue(key, out var value) ? value : null;

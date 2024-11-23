@@ -21,7 +21,7 @@ public class MapBuilderSample : ISample
         => Task.FromResult(new MapBuilder()
             .WithOpenStreetMapLayer((l, m) => l.Name = "OpenStreetMap")
             .WithLayer((map) => new MemoryLayer("Pin Layer") { Features = CreateFeatures(), IsMapInfoLayer = true },
-                (l, map) => l.WithPinWithCalloutLayer(map, "Name"))
+                (l, map) => l.WithPinWithCalloutLayer(map))
             .WithZoomButtons()
             .WithScaleBarWidget(w =>
             {
@@ -39,21 +39,17 @@ public class MapBuilderSample : ISample
 
 public static class SampleMapBuilderExtensions
 {
-    public static ILayer WithPinWithCalloutLayer(this ILayer layer, Map map, string calloutTextField)
+    public static ILayer WithPinWithCalloutLayer(this ILayer layer, Map map)
     {
         map.Info += (sender, args) =>
         {
-            var feature = args.MapInfo.Feature;
-            if (feature is null)
-                return;
-
-            if (feature.Data is UserData vehicle)
-                vehicle.CalloutEnabled = !vehicle.CalloutEnabled;
+            if (args.MapInfo.Feature?.Data is UserData data)
+                data.CalloutEnabled = !data.CalloutEnabled;
         };
 
         layer.WithPinAndCallout(
-            (f) => f.DataAs<UserData>().CalloutEnabled,
-            (f) => f.DataAs<UserData>().CalloutText);
+            (f) => ((UserData)f.Data!).CalloutEnabled,
+            (f) => ((UserData)f.Data!).CalloutText);
 
         return layer;
     }
