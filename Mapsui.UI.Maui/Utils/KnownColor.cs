@@ -6,8 +6,8 @@ namespace Mapsui.UI.Maui;
 /// <summary> Known Color Helper for Maui </summary>
 public static class KnownColor
 {
-    public static Color White => Mapsui.Styles.Color.White.ToNative();
-    public static Color Red => Mapsui.Styles.Color.Red.ToNative();
-    public static Color Black => Mapsui.Styles.Color.Black.ToNative();
-    public static Color DarkGray => Mapsui.Styles.Color.DarkGray.ToNative();
+    public static Color White => Styles.Color.White.ToMaui();
+    public static Color Red => Styles.Color.Red.ToMaui();
+    public static Color Black => Styles.Color.Black.ToMaui();
+    public static Color DarkGray => Styles.Color.DarkGray.ToMaui();
 }

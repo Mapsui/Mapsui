@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
     <UseWpf>true</UseWpf>
     <PackageId>Mapsui.Wpf</PackageId>
     <Description>WPF map components based on the Mapsui library</Description>
