@@ -519,9 +519,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     /// <inheritdoc />
-    public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
+    public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
-        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity);
+        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity, renderFormat: renderFormat, quality: quality);
         return stream.ToArray();
     }
 
