@@ -35,18 +35,13 @@ public class PointFeature : BaseFeature, IFeature
     /// <summary>
     /// Extent of feature
     /// </summary>
-    public MRect Extent => Point.MRect;
-
-    /// <summary>
-    /// Order of feature
-    /// </summary>
-    public int ZOrder { get; set; } = 0;
+    public override MRect Extent => Point.MRect;
 
     /// <summary>
     /// Implementation of visitor pattern for coordinates
     /// </summary>
     /// <param name="visit"></param>
-    public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
+    public override void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
     {
         visit(Point.X, Point.Y, (x, y) =>
         {
@@ -55,8 +50,5 @@ public class PointFeature : BaseFeature, IFeature
         });
     }
 
-    public virtual object Clone()
-    {
-        return new PointFeature(this);
-    }
+    public override object Clone() => new PointFeature(this);
 }
