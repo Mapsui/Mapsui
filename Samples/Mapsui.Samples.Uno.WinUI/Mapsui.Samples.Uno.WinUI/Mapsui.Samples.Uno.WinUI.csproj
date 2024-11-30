@@ -35,11 +35,6 @@
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
     <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="System.IO.Packaging" VersionOverride="9.0.0" />
-  </ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" /></ItemGroup>
 
 </Project>
