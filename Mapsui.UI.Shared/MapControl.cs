@@ -452,7 +452,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         get
         {
-            _map ??= new DisposableWrapper<Map>(new Map(), true);
+            if (_map == null)
+            {
+                _map = new DisposableWrapper<Map>(new Map(), true);
+                AfterSetMap(_map.WrappedObject);
+                OnPropertyChanged();
+            }
+
             return _map.WrappedObject;
         }
         set
@@ -475,7 +481,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         UnsubscribeFromMapEvents(Map);
     }
 
-    private void AfterSetMap(Map? map)
+    public void AfterSetMap(Map? map)
     {
         if (map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
 
