@@ -12,8 +12,7 @@
     <PackageId>Mapsui.Uno.WinUI</PackageId>
     <Description>Uno map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) uno.winui</PackageTags>
-    <IsPackable>true</IsPackable>
-    <WindowsSdkPackageVersion>10.0.19041.45</WindowsSdkPackageVersion>
+    <IsPackable>true</IsPackable>    
 
     <!--
       UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
