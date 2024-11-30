@@ -481,7 +481,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         UnsubscribeFromMapEvents(Map);
     }
 
-    public void AfterSetMap(Map? map)
+    private void AfterSetMap(Map? map)
     {
         if (map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
 
