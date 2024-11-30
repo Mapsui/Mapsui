@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
 using Mapsui.UI.Maui;

@@ -16,6 +16,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private readonly ManipulationTracker _manipulationTracker = new();
     private bool _disposed;
 
+#if NET9_OR_GREATER
+    [Register("MapControl"), DesignTimeVisible(true)]
+#endif
     public MapControl()
     {
         SharedConstructor();

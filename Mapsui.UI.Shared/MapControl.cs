@@ -19,6 +19,7 @@ using System.Threading;
 using Mapsui.Manipulations;
 using Mapsui.Styles;
 using System.Threading.Tasks;
+using LogLevel = Mapsui.Logging.LogLevel;
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -73,12 +74,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public int MaxTapGestureMovement { get; set; } = 8;
 
     /// <summary>
     /// Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a 
     /// short time after the user has lifted the finger.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public bool UseFling { get; set; } = true;
 
     private void SharedConstructor()
@@ -219,6 +222,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Interval between two redraws of the MapControl in ms
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)] 
     public int UpdateInterval
     {
         get => _updateInterval;
@@ -243,6 +247,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <remarks>
     /// If this is null, no performance information is saved.
     /// </remarks>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
     public Performance? Performance
     {
         get => _performance;

@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
-using Microsoft.Maui.Graphics;
 using Color = Microsoft.Maui.Graphics.Color;
 using Mapsui.UI.Maui.Extensions;
 
@@ -435,10 +434,10 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
     private float _transparency;
     private object? _tag;
     private GeometryFeature? _feature;
-    private string _imageSource;
+    private string? _imageSource;
 
     /// <summary> Gets or sets an ImageSource for the Pin </summary>
-    public string ImageSource
+    public string? ImageSource
     {
         get => _imageSource;
         set
@@ -478,7 +477,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
             switch (Type)
             {
                 case PinType.ImageSource:
-                    imageSource = ImageSource;
+                    imageSource = ImageSource ?? throw new ArgumentNullException(nameof(ImageSource), "ImageSource must be set for PinType.ImageSource");
                     break;
                 case PinType.Pin:
                     imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";

@@ -38,7 +38,7 @@ jobs:
       with:
         fetch-depth: 0         
         filter: tree:0 
-    - name: Setup .NET 8 SDK
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |

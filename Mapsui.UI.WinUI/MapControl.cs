@@ -10,10 +10,10 @@ using Microsoft.UI;
 using Microsoft.UI.Input;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Shapes;
-using SkiaSharp.Views.Windows;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
+using LogLevel = Mapsui.Logging.LogLevel;
 #if __WINUI__
 // for fixing the Linux build this pragma disable is needed some tooling issue.
 #pragma warning disable IDE0005 // Using directive is unnecessary.

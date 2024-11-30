@@ -7,8 +7,6 @@ using Mapsui.UI;
 using Mapsui.UI.Maui;
 using Mapsui.Utilities;
 using Mapsui.Widgets.InfoWidgets;
-using Microsoft.Maui.Graphics;
-using System;
 using System.Diagnostics;
 using System.Reflection;
 using Color = Microsoft.Maui.Graphics.Color;
