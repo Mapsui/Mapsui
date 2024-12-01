@@ -36,6 +36,12 @@
 	<ItemGroup Condition="'$(TargetFramework)'=='net8.0-desktop'">
     <PackageReference Include="SkiaSharp.Skottie"/>
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
+  <!--workaround for Uno.Resizetizer uses a newer skiasharp version then maui resizetizer -->
+  <ItemGroup>
+    <PackageReference Include="Uno.Resizetizer" VersionOverride="1.5.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -43,10 +49,6 @@
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
     <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="System.IO.Packaging" VersionOverride="9.0.0" />
   </ItemGroup>
 
 </Project>
