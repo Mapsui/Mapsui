@@ -37,11 +37,6 @@
     <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22621.28" /> -->
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="Microsoft.WindowsAppSDK" />
-    <!--<PackageReference Include="SkiaSharp.Views.WinUI" />-->
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="HarfBuzzSharp"/>
   </ItemGroup>
