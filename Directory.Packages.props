@@ -76,7 +76,7 @@
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="3.118.0-preview.1.2" />
     <PackageVersion Include="sqlite-net-pcl" Version="[1.9.172,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
-    <PackageVersion Include="Svg.Skia" Version="2.0.0" />
+    <PackageVersion Include="Svg.Skia" Version="2.0.0.4" />
     <PackageVersion Include="System.Formats.Asn1" Version="8.0.1" />
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
