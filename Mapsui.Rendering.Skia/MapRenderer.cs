@@ -127,7 +127,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                         var options = new SKPngEncoderOptions(SKPngEncoderFilterFlags.AllFilters, 9); // 9 is the highest compression
                         using var peekPixels = image.PeekPixels();
                         using var data = peekPixels.Encode(options);
-                        data.SaveTo(memoryStream);
+                        data?.SaveTo(memoryStream);
                         break;
                     }
                 case RenderFormat.WebP:
@@ -139,7 +139,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                         var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
                         using var peekPixels = image.PeekPixels();
                         using var data = peekPixels.Encode(options);
-                        data.SaveTo(memoryStream);
+                        data?.SaveTo(memoryStream);
                         break;
                     }
             }
