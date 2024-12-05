@@ -43,7 +43,7 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework.Contains('desktop'))'">
+  <ItemGroup Condition="$(TargetFramework.Contains('desktop'))">
     <PackageReference Include="SkiaSharp.Skottie"/>
   </ItemGroup>
 
