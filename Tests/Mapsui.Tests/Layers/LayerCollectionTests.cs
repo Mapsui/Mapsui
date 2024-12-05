@@ -4,6 +4,9 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using NUnit.Framework;
 
+#pragma warning disable IDISP004 // Don't ignore created disposable
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Tests.Layers;
 
 [TestFixture]
