@@ -32,8 +32,8 @@
     <PackageVersion Include="Eto.Platform.XamMac2" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.Platform.Gtk" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.SkiaDraw" Version="[0.2.0,0.3.0)" />
-    <PackageVersion Include="HarfBuzzSharp" Version="8.3.0" />
-    <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="8.3.0" />
+    <PackageVersion Include="HarfBuzzSharp" Version="8.3.0.1" />
+    <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="8.3.0.1" />
     <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.8,5.0.0)" />
     <PackageVersion Include="Mapsui.Android" Version="5.0.0-beta.1" />
     <PackageVersion Include="Mapsui.ArcGIS" Version="5.0.0-beta.1" />
@@ -60,20 +60,20 @@
     <PackageVersion Include="NetTopologySuite.IO.GeoJSON4STJ" Version="[4.0.0,5.0.0)" />
     <PackageVersion Include="NUnit" Version="4.2.2" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.6.0" />
-    <PackageVersion Include="SkiaSharp" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.HarfBuzz" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.Skottie" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.Views" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.Views.Blazor" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.Views.Uno" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.Views.WinUI" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.Views.WPF" Version="3.116.0" />
-    <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="3.116.0" />
+    <PackageVersion Include="SkiaSharp" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.HarfBuzz" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.Skottie" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.Views" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.Views.Blazor" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.Views.Uno" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.Views.WinUI" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.Views.WPF" Version="3.116.1" />
+    <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="3.116.1" />
     <PackageVersion Include="sqlite-net-pcl" Version="[1.9.172,2.0.0)" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="[2.1.6,3.0.0)" />
     <PackageVersion Include="Svg.Skia" Version="2.0.0.4" />
