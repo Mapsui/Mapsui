@@ -13,6 +13,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Microsoft.Maui.Devices;
 
 namespace Mapsui.UI.Maui;
 
@@ -330,4 +331,59 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     }
 
     private static bool GetShiftPressed() => false; // Work in progress: https://github.com/dotnet/maui/issues/16202
+
+    // Workaround for Android Not displaying Map on second time Display on Gpu
+    // https://github.com/mono/SkiaSharp/pull/3076
+    protected override void OnParentSet()
+    {
+        base.OnParentSet();
+        AttachToOnAppearing();
+    }
+
+    private void AttachToOnAppearing()
+    {
+        if (UseGPU && DeviceInfo.Platform == DevicePlatform.Android)
+        {
+            if (Parent != null)
+            {
+                var page = GetPage(Parent);
+                if (page != null)
+                {
+                    page.Appearing += Page_Appearing;
+                }
+            }
+        }
+    }
+
+    private void Page_Appearing(object? sender, EventArgs e)
+    {
+        IsVisible = false;
+        IsVisible = true;
+    }
+
+    private void Element_ParentChanged(object? sender, EventArgs e)
+    {
+        AttachToOnAppearing();
+    }
+
+    private Page? GetPage(Element? element)
+    {
+        if (element == null)
+        {
+            return null;
+        }
+
+        if (element is Page page)
+        {
+            return page;
+        }
+
+        if (element.Parent == null)
+        {
+            element.ParentChanged += Element_ParentChanged;
+            return null;
+        }
+
+        return GetPage(element.Parent);
+    }
 }
