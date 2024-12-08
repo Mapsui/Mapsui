@@ -18,13 +18,13 @@ public sealed class MapsuiJsInterop : IAsyncDisposable
     {
         ArgumentNullException.ThrowIfNull(jsRuntime);
 
-        _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+        _moduleTask = new(f => jsRuntime.InvokeAsync<IJSObjectReference>(
             "import", "./_content/Mapsui.Blazor/mapsuiJsInterop.js").AsTask());
     }
 
     public async Task<BoundingClientRect> BoundingClientRectAsync(string elementId)
     {
-        var module = await _moduleTask;
+        var module = await _moduleTask.WithCancellation(CancellationToken.None);
         return await module.InvokeAsync<BoundingClientRect>("getBoundingClientRect", elementId);
     }
 
@@ -32,26 +32,26 @@ public sealed class MapsuiJsInterop : IAsyncDisposable
     {
         if (_moduleTask.IsValueCreated)
         {
-            var module = await _moduleTask;
+            var module = await _moduleTask.WithCancellation(CancellationToken.None);
             await module.DisposeAsync();
         }
     }
 
     public async ValueTask DisableMouseWheelAsync(string elementId)
     {
-        var module = await _moduleTask;
+        var module = await _moduleTask.WithCancellation(CancellationToken.None);
         await module.InvokeVoidAsync(@"disableMousewheelScroll", elementId);
     }
 
     public async ValueTask DisableTouchAsync(string elementId)
     {
-        var module = await _moduleTask;
+        var module = await _moduleTask.WithCancellation(CancellationToken.None);
         await module.InvokeVoidAsync(@"disableTouch", elementId);
     }
 
     public async ValueTask<double> GetPixelDensityAsync()
     {
-        var module = await _moduleTask;
+        var module = await _moduleTask.WithCancellation(CancellationToken.None);
         return await module.InvokeAsync<double>(@"getPixelDensity");
     }
 }
