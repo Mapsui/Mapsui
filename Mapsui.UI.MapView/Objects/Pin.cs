@@ -435,10 +435,10 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
     private float _transparency;
     private object? _tag;
     private GeometryFeature? _feature;
-    private string _imageSource;
+    private string? _imageSource;
 
     /// <summary> Gets or sets an ImageSource for the Pin </summary>
-    public string ImageSource
+    public string? ImageSource
     {
         get => _imageSource;
         set
@@ -478,7 +478,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
             switch (Type)
             {
                 case PinType.ImageSource:
-                    imageSource = ImageSource;
+                    imageSource = ImageSource ?? throw new InvalidOperationException("You have to set ImageSource when using PinType.ImageSource");
                     break;
                 case PinType.Pin:
                     imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
