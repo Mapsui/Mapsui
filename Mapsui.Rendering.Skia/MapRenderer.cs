@@ -136,9 +136,10 @@ public sealed class MapRenderer : IRenderer, IDisposable
                         using var skCanvas = surface.Canvas;
                         RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas);
                         using var image = surface.Snapshot();
-                        var options = quality == 100 ?
-                            new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100) :
-                            new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossy, quality);
+                        var compression = quality == 100
+                            ? SKWebpEncoderCompression.Lossless
+                            : SKWebpEncoderCompression.Lossy;
+                        var options = new SKWebpEncoderOptions(compression, quality);
                         using var peekPixels = image.PeekPixels();
                         using var data = peekPixels.Encode(options);
                         data.SaveTo(memoryStream);

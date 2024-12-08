@@ -39,7 +39,7 @@ public class TestRenderFormats
 
     [Test]
     [Retry(5)]
-    public async Task TestSameOutputJpegGetsSmallerWithLessQuality()
+    public async Task TestSameOutputJpegGetsSmallerWithLessQualityAsync()
     {
         var sample = new SymbolTypesSample();
         using var mapControl = await SampleHelper.InitMapAsync(sample).ConfigureAwait(false);
@@ -59,7 +59,7 @@ public class TestRenderFormats
 
     [Test]
     [Retry(5)]
-    public async Task TestSameOutputWebPGetsSmallerWithLessQuality()
+    public async Task TestSameOutputWebPGetsSmallerWithLessQualityAsync()
     {
         var sample = new SymbolTypesSample();
         using var mapControl = await SampleHelper.InitMapAsync(sample).ConfigureAwait(false);
@@ -78,7 +78,7 @@ public class TestRenderFormats
     }
     [Test]
     [Retry(5)]
-    public async Task TestSameOutputWebPIsSmallerThanJpeg()
+    public async Task TestSameOutputWebPIsSmallerThanJpegAsync()
     {
         var sample = new SymbolTypesSample();
         using var mapControl = await SampleHelper.InitMapAsync(sample).ConfigureAwait(false);
