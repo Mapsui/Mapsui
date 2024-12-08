@@ -37,6 +37,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
+    private Page? _page;
+    private Element? _element;
 
     public MapControl()
     {
@@ -312,6 +314,19 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             Map?.Dispose();
         }
+
+        if (_element != null)
+        {
+            _element.ParentChanged -= Element_ParentChanged;
+            _element = null;
+        }
+
+        if (_page != null)
+        {
+            _page.Appearing -= Page_Appearing;
+            _page = null;
+        }
+
         CommonDispose(disposing);
     }
 
@@ -330,4 +345,66 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     }
 
     private static bool GetShiftPressed() => false; // Work in progress: https://github.com/dotnet/maui/issues/16202
+
+    // Workaround for Android Not displaying Map on second time Display on Gpu
+    // https://github.com/mono/SkiaSharp/pull/3076
+    protected override void OnParentSet()
+    {
+        base.OnParentSet();
+        AttachToOnAppearing();
+    }
+
+    private void AttachToOnAppearing()
+    {
+        if (UseGPU && DeviceInfo.Platform == DevicePlatform.Android)
+        {
+            if (Parent != null)
+            {
+                _page = GetPage(Parent);
+                if (_page != null)
+                {
+                    _page.Appearing += Page_Appearing;
+                }
+            }
+        }
+    }
+
+    private void Page_Appearing(object? sender, EventArgs e)
+    {
+        IsVisible = false;
+        IsVisible = true;
+    }
+
+    private void Element_ParentChanged(object? sender, EventArgs e)
+    {
+        if (_element != null)
+        {
+            _element.ParentChanged -= Element_ParentChanged;
+            _element = null;
+        }
+
+        AttachToOnAppearing();
+    }
+
+    private Page? GetPage(Element? element)
+    {
+        if (element == null)
+        {
+            return null;
+        }
+
+        if (element is Page page)
+        {
+            return page;
+        }
+
+        if (element.Parent == null)
+        {
+            _element = element;
+            _element.ParentChanged += Element_ParentChanged;
+            return null;
+        }
+
+        return GetPage(element.Parent);
+    }
 }
