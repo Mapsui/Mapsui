@@ -55,8 +55,10 @@ public interface IMapControl : IDisposable
     /// Create a snapshot form map as PNG image
     /// </summary>
     /// <param name="layers">Layers that should be included in snapshot</param>
+    /// <param name="renderFormat">render format</param>
+    /// <param name="quality">default quality is 90 is applicable for webp and jpg</param>
     /// <returns>Byte array with snapshot in png format. If there are any problems than returns null.</returns>
-    byte[] GetSnapshot(IEnumerable<ILayer>? layers = null);
+    byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100);
 
     Performance? Performance { get; set; }
 }
