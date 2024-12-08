@@ -13,7 +13,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Microsoft.Maui.Devices;
 
 namespace Mapsui.UI.Maui;
 
