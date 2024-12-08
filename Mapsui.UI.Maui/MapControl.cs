@@ -38,6 +38,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
+    private Page? _page;
+    private Element? _element;
 
     public MapControl()
     {
@@ -313,6 +315,19 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             Map?.Dispose();
         }
+
+        if (_element != null)
+        {
+            _element.ParentChanged -= Element_ParentChanged;
+            _element = null;
+        }
+
+        if (_page != null)
+        {
+            _page.Appearing -= Page_Appearing;
+            _page = null;
+        }
+
         CommonDispose(disposing);
     }
 
@@ -346,10 +361,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         {
             if (Parent != null)
             {
-                var page = GetPage(Parent);
-                if (page != null)
+                _page = GetPage(Parent);
+                if (_page != null)
                 {
-                    page.Appearing += Page_Appearing;
+                    _page.Appearing += Page_Appearing;
                 }
             }
         }
@@ -363,6 +378,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void Element_ParentChanged(object? sender, EventArgs e)
     {
+        if (_element != null)
+        {
+            _element.ParentChanged -= Element_ParentChanged;
+            _element = null;
+        }
+
         AttachToOnAppearing();
     }
 
@@ -380,7 +401,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         if (element.Parent == null)
         {
-            element.ParentChanged += Element_ParentChanged;
+            _element = element;
+            _element.ParentChanged += Element_ParentChanged;
             return null;
         }
 
