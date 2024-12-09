@@ -47,7 +47,7 @@ public class CustomCalloutStyleSample : IMapControlSample
 
     private static void MapOnInfo(object? sender, MapInfoEventArgs e)
     {
-        var feature = e.MapInfo?.Feature;
+        var feature = e.GetMapInfo().Feature;
         if (feature is not null)
         {
             if (feature["show-callout"]?.ToString() == "true")

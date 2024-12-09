@@ -41,9 +41,9 @@ public static class SampleMapBuilderExtensions
 {
     public static ILayer WithPinWithCalloutLayer(this ILayer layer, Map map)
     {
-        map.Info += (sender, args) =>
+        map.Info += (s, e) =>
         {
-            if (args.MapInfo.Feature?.Data is UserData data)
+            if (e.GetMapInfo().Feature?.Data is UserData data)
                 data.CalloutEnabled = !data.CalloutEnabled;
         };
 

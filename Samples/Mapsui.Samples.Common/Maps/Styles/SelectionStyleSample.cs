@@ -20,7 +20,7 @@ internal class SelectionStyleSample : ISample
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreatePointLayer());
-        map.Info += (s, a) => SelectionStyleSample.ToggleSelected(a.MapInfo?.Feature);
+        map.Info += static (s, e) => ToggleSelected(e.GetMapInfo().Feature);
 
         map.Widgets.Add(new MapInfoWidget(map));
 
