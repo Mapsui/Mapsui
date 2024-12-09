@@ -8,5 +8,7 @@ public enum RenderFormat
     ///<summary>20 - 30% smaller lossless Format</summary>
     WebP,
     ///<summary>Skia Vector Format</summary>
-    Skp
+    Skp,
+    ///<summary>Jpeg Lossy Format</summary>
+    Jpeg
 }
