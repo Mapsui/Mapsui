@@ -81,7 +81,6 @@ public class ZoomInOutWidgetRenderer : ISkiaWidgetRenderer
     {
         var paint = new SKPaint
         {
-            LcdRenderText = true,
             Color = color,
             StrokeWidth = strokeWidth,
             Style = style,

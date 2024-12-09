@@ -3,7 +3,6 @@ using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices;
 using Microsoft.Maui.Graphics;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
@@ -13,6 +12,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Microsoft.Maui.Devices;
 
 namespace Mapsui.UI.Maui;
 
@@ -21,15 +21,7 @@ namespace Mapsui.UI.Maui;
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
-    // GPU does not work currently on MAUI
-    // See https://github.com/mono/SkiaSharp/issues/1893
-    // https://github.com/Mapsui/Mapsui/issues/1676
-    public static bool UseGPU =
-        DeviceInfo.Platform != DevicePlatform.WinUI &&
-        DeviceInfo.Platform != DevicePlatform.macOS &&
-        DeviceInfo.Platform != DevicePlatform.MacCatalyst &&
-        DeviceInfo.Platform != DevicePlatform.Android &&
-        DeviceInfo.Platform != DevicePlatform.iOS; // 3d rendering does not work on ios 17.5 with 2.88.8 skiasharp.
+    public static bool UseGPU = true;
 
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
