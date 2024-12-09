@@ -16,9 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs\PinClickedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs\SelectedPinChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TappedEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ColorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\PositionExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TextAlignmentExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ZoomLevelExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Callout.cs" />

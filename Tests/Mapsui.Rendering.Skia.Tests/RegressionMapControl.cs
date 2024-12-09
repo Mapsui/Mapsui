@@ -86,7 +86,7 @@ public sealed class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
+    public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
         throw new NotImplementedException();
     }

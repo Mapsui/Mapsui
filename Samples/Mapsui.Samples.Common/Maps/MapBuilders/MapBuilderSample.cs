@@ -21,7 +21,7 @@ public class MapBuilderSample : ISample
         => Task.FromResult(new MapBuilder()
             .WithOpenStreetMapLayer((l, m) => l.Name = "OpenStreetMap")
             .WithLayer((map) => new MemoryLayer("Pin Layer") { Features = CreateFeatures(), IsMapInfoLayer = true },
-                (l, map) => l.WithPinWithCalloutLayer(map, "Name"))
+                (l, map) => l.WithPinWithCalloutLayer(map))
             .WithZoomButtons()
             .WithScaleBarWidget(w =>
             {
@@ -34,27 +34,22 @@ public class MapBuilderSample : ISample
             .Build());
 
     private IEnumerable<IFeature> CreateFeatures()
-        => [new PointFeature(_sphericalMercatorCoordinate) { ["Name"] = "Hello!" }];
+        => [new PointFeature(_sphericalMercatorCoordinate) { Data = new UserData { CalloutText = "Hello!" } }];
 }
 
 public static class SampleMapBuilderExtensions
 {
-    public static ILayer WithPinWithCalloutLayer(this ILayer layer, Map map, string calloutTextField)
+    public static ILayer WithPinWithCalloutLayer(this ILayer layer, Map map)
     {
         map.Info += (s, e) =>
         {
-            var mapInfo = e.GetMapInfo();
-            var feature = mapInfo.Feature;
-            if (feature is null)
-                return;
-
-            var enabled = feature["callout-enabled"]?.ToString() == "True";
-            feature["callout-enabled"] = (!enabled).ToString();
+            if (args.MapInfo.Feature?.Data is UserData data)
+                data.CalloutEnabled = !data.CalloutEnabled;
         };
 
         layer.WithPinAndCallout(
-            (f) => f["callout-enabled"]?.ToString() == "True",
-            (f) => f[calloutTextField]?.ToString() ?? "");
+            (f) => ((UserData)f.Data!).CalloutEnabled,
+            (f) => ((UserData)f.Data!).CalloutText);
 
         return layer;
     }
@@ -94,4 +89,10 @@ public static class SampleLayerExtensions
 
         return layer;
     }
+}
+
+public class UserData
+{
+    public bool CalloutEnabled { get; set; }
+    public string CalloutText { get; set; } = string.Empty;
 }

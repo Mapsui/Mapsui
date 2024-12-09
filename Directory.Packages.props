@@ -6,16 +6,16 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Avalonia" Version="[11.1.0,12.0.0)" />
-    <PackageVersion Include="Avalonia.Skia" Version="[11.1.0,12.0.0)" />
-    <PackageVersion Include="Avalonia.Desktop" Version="[11.1.0,12.0.0)" />
-    <PackageVersion Include="Avalonia.Browser" Version="[11.1.0,12.0.0)" />
-    <PackageVersion Include="Avalonia.Android" Version="[11.1.0,12.0.0)" />
-    <PackageVersion Include="Avalonia.iOS" Version="[11.1.0,12.0.0)" />
-    <PackageVersion Include="Avalonia.Diagnostics" Version="[11.1.0,12.0.0)" />
-    <PackageVersion Include="Avalonia.ReactiveUI" Version="[11.1.0,12.0.0)" />
-    <PackageVersion Include="Avalonia.Themes.Fluent" Version="[11.1.0,12.0.0)" />
-    <PackageVersion Include="Avalonia.Fonts.Inter" Version="[11.1.0,12.0.0)" />
+    <PackageVersion Include="Avalonia" Version="11.2.1" />
+    <PackageVersion Include="Avalonia.Skia" Version="11.2.1" />
+    <PackageVersion Include="Avalonia.Desktop" Version="11.2.1" />
+    <PackageVersion Include="Avalonia.Browser" Version="11.2.1" />
+    <PackageVersion Include="Avalonia.Android" Version="11.2.1" />
+    <PackageVersion Include="Avalonia.iOS" Version="11.2.1" />
+    <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.1" />
+    <PackageVersion Include="Avalonia.ReactiveUI" Version="11.2.1" />
+    <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.2.1" />
+    <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.1" />
     <PackageVersion Include="BenchmarkDotNet" Version="[0.13.9,1.0.0)" />
     <PackageVersion Include="BitMiracle.LibTiff.NET" Version="[2.4.649,3.0.0)" />
     <PackageVersion Include="BruTile" Version="[6.0.0-beta.3,7.0)" />
@@ -23,8 +23,8 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="DotSpatial.Projections" Version="[4.0.656,5.0.0)" />
     <PackageVersion Include="CommunityToolkit.Maui.Markup" Version="[1.0.0,2.0.0)" />
-    <PackageVersion Include="CommunityToolkit.Mvvm" Version="[7.1.2,8.0.0)" />
-    <PackageVersion Include="DotNext.Threading" Version="[4.9.0,5.0.0)" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageVersion Include="DotNext.Threading" Version="5.15.0" />
     <PackageVersion Include="Eto.Forms" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.Platform.Wpf" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.Platform.Windows" Version="[2.8.0,3.0.0)" />
@@ -50,6 +50,7 @@
     <PackageVersion Include="Mapsui.Uno.WinUI" Version="5.0.0-beta.1" />
     <PackageVersion Include="Mapsui.WinUI" Version="5.0.0-beta.1" />
     <PackageVersion Include="Mapsui.Wpf" Version="5.0.0-beta.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="17.11.1" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[8.0.0,9.0.0)" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
