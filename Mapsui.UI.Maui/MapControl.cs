@@ -20,10 +20,7 @@ namespace Mapsui.UI.Maui;
 /// UI component that displays an interactive map 
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
-{
-    // GPU does not work currently on MAUI
-    // See https://github.com/mono/SkiaSharp/issues/1893
-    // https://github.com/Mapsui/Mapsui/issues/1676
+{    
     public static bool UseGPU = true;
 
     private readonly SKGLView? _glView;
