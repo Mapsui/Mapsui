@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Blazor" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" VersionOverride="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" VersionOverride="8.0.0" PrivateAssets="all" />
 		<!--still needed for direct project reference the nuget package of blazor doesn't need this anymore-->

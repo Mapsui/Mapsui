@@ -143,7 +143,7 @@ public class MapRegressionTests
         }
     }
 
-    private static MapRenderer CreateMapRenderer(IMapControl mapControl)
+    internal static MapRenderer CreateMapRenderer(IMapControl mapControl)
     {
         var mapRenderer = new MapRenderer
         {
