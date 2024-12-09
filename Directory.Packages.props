@@ -23,7 +23,7 @@
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="DotSpatial.Projections" Version="[4.0.656,5.0.0)" />
     <PackageVersion Include="CommunityToolkit.Maui.Markup" Version="[1.0.0,2.0.0)" />
-    <PackageVersion Include="CommunityToolkit.Mvvm" Version="[7.1.2,8.0.0)" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.2" />
     <PackageVersion Include="DotNext.Threading" Version="5.15.0" />
     <PackageVersion Include="Eto.Forms" Version="[2.8.0,3.0.0)" />
     <PackageVersion Include="Eto.Platform.Wpf" Version="[2.8.0,3.0.0)" />
