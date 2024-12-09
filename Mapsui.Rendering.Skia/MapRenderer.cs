@@ -141,7 +141,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                             : SKWebpEncoderCompression.Lossy;
                         var options = new SKWebpEncoderOptions(compression, quality);
                         using var peekPixels = image.PeekPixels();
-                        using var data = peekPixels.Encode(options);
+                        using var data = peekPixels.Encode(options) ?? throw new NotSupportedException();
                         data.SaveTo(memoryStream);
                         break;
                     }
