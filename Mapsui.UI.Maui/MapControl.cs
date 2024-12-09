@@ -20,7 +20,7 @@ namespace Mapsui.UI.Maui;
 /// UI component that displays an interactive map 
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
-{    
+{
     public static bool UseGPU = true;
 
     private readonly SKGLView? _glView;
