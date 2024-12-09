@@ -43,7 +43,7 @@ public static class SampleMapBuilderExtensions
     {
         map.Info += (s, e) =>
         {
-            if (args.MapInfo.Feature?.Data is UserData data)
+            if (e.GetMapInfo().Feature?.Data is UserData data)
                 data.CalloutEnabled = !data.CalloutEnabled;
         };
 
