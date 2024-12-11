@@ -104,7 +104,7 @@ public class MapRegressionTests
                     // aside
                     if (bitmap is { Length: > 0 })
                     {
-                        File.WriteToGeneratedRegressionFolder(fileName, bitmap);
+                        ////File.WriteToGeneratedRegressionFolder(fileName, bitmap);
                     }
                     else
                     {
@@ -121,7 +121,13 @@ public class MapRegressionTests
                         }
                         else
                         {
-                            ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995));
+                            var compareBitmaps = MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995);
+                            if (!compareBitmaps)
+                            {
+                                File.WriteToGeneratedRegressionFolder(fileName, bitmap);
+                            }
+
+                            ClassicAssert.IsTrue(compareBitmaps);
                         }
                     }
                     else
