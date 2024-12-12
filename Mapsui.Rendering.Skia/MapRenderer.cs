@@ -126,7 +126,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                         using var image = surface.Snapshot();
                         var options = new SKPngEncoderOptions(SKPngEncoderFilterFlags.AllFilters, 9); // 9 is the highest compression
                         using var peekPixels = image.PeekPixels();
-                        using var data = peekPixels.Encode(options);
+                        using var data = peekPixels.Encode(options) ?? throw new NotSupportedException();;
                         data.SaveTo(memoryStream);
                         break;
                     }
@@ -141,7 +141,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                             : SKWebpEncoderCompression.Lossy;
                         var options = new SKWebpEncoderOptions(compression, quality);
                         using var peekPixels = image.PeekPixels();
-                        using var data = peekPixels.Encode(options);
+                        using var data = peekPixels.Encode(options) ?? throw new NotSupportedException();;
                         data.SaveTo(memoryStream);
                         break;
                     }
@@ -153,7 +153,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                         using var image = surface.Snapshot();
                         var options = new SKJpegEncoderOptions(quality, SKJpegEncoderDownsample.Downsample420, SKJpegEncoderAlphaOption.Ignore);
                         using var peekPixels = image.PeekPixels();
-                        using var data = peekPixels.Encode(options);
+                        using var data = peekPixels.Encode(options) ?? throw new NotSupportedException();;
                         data.SaveTo(memoryStream);
                         break;
                     }
