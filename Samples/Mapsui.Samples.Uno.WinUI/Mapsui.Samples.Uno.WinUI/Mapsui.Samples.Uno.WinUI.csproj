@@ -40,6 +40,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Uno.Resizetizer" VersionOverride="1.5.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
   <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
     <PackageReference Include="SkiaSharp.Views.WinUI"/>
   </ItemGroup>

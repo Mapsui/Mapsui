@@ -477,7 +477,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
             switch (Type)
             {
                 case PinType.ImageSource:
-                    imageSource = ImageSource ?? throw new ArgumentNullException(nameof(ImageSource), "ImageSource must be set for PinType.ImageSource");
+                    imageSource = ImageSource ?? throw new InvalidOperationException("You have to set ImageSource when using PinType.ImageSource");
                     break;
                 case PinType.Pin:
                     imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
