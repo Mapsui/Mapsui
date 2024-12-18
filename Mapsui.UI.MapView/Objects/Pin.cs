@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
-using Microsoft.Maui.Graphics;
 using Color = Microsoft.Maui.Graphics.Color;
 using Mapsui.UI.Maui.Extensions;
 

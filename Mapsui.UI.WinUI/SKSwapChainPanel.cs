@@ -14,7 +14,7 @@ using WinRT;
 
 namespace Mapsui.UI.WinUI;
 
-internal class SKSwapChainPanel : UIElement
+internal partial class SKSwapChainPanel : UIElement
 {
     public SKSwapChainPanel() : base(DerivedComposed.Instance)
     {

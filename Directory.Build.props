@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <Version>5.0.0-beta.1</Version>
+    <Version>5.0.0-beta.4</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright © Mapsui Developers 2018-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -17,10 +17,11 @@
     <IsPackable>false</IsPackable> <!--Default to not packable and override in projects that do need to be packed.-->
     <!--Disable Run Api Compat Task causes Build failure on github actions with visual studio 2022 17.5 and .net Compilers Toolset 4.6-->
     <RunApiCompat>false</RunApiCompat>
-	<Nullable>enable</Nullable>
+	  <Nullable>enable</Nullable>
     <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
-	<GenerateDocumentationFile>True</GenerateDocumentationFile>
-	<NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+    <MauiVersion>9.0.10</MauiVersion>
   </PropertyGroup>
 
 	<!--Package Icon Include -->
@@ -33,7 +34,7 @@
   <PropertyGroup>
 	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	  <LangVersion>12.0</LangVersion>
+	  <LangVersion>13.0</LangVersion>
       <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
       <!-- Enable Windows Targeting on non Windows platforms -->
       <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
@@ -50,6 +51,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <!-- Roslyn Compiler -->
+    <!-- <PackageReference Include="Microsoft.Net.Compilers.Toolset">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference> -->
   </ItemGroup>
 
 </Project>
