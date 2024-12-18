@@ -149,6 +149,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                     {
                         using var surface = SKSurface.Create(imageInfo);
                         using var skCanvas = surface.Canvas;
+                        skCanvas.Clear(SKColors.White); // Avoiding Black Background when Transparent Pixels
                         RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas);
                         using var image = surface.Snapshot();
                         var options = new SKJpegEncoderOptions(quality, SKJpegEncoderDownsample.Downsample420, SKJpegEncoderAlphaOption.Ignore);

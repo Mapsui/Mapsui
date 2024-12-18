@@ -20,6 +20,21 @@ jobs:
           sudo rm -rf /opt/ghc
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+        
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: false
+        dotnet: false
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: false
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0              
@@ -30,9 +45,9 @@ jobs:
         path: |
            ~/.nuget/packages/*
            !/.nuget/packages/Mapsui*    
-        key: ${{ runner.os }}-nuget19-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget20-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget19-
+            ${{ runner.os }}-nuget20-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v2  
       with:
@@ -93,9 +108,9 @@ jobs:
         path: |
            ~/.nuget/packages/*
            !/.nuget/packages/Mapsui*
-        key: ${{ runner.os }}-nuget19-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget20-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget19-
+            ${{ runner.os }}-nuget20-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v2   
       with:
@@ -194,9 +209,9 @@ jobs:
         path: |
            ~/.nuget/packages/*
            !/.nuget/packages/Mapsui*
-        key: ${{ runner.os }}-nuget19-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget20-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget19-
+            ${{ runner.os }}-nuget20-
     # .Net 8 update     
     - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
