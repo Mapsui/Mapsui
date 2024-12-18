@@ -95,7 +95,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     }
 
     public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
-        Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png)
+        Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
         try
         {
@@ -126,7 +126,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                         using var image = surface.Snapshot();
                         var options = new SKPngEncoderOptions(SKPngEncoderFilterFlags.AllFilters, 9); // 9 is the highest compression
                         using var peekPixels = image.PeekPixels();
-                        using var data = peekPixels.Encode(options);
+                        using var data = peekPixels.Encode(options) ?? throw new NotSupportedException();
                         data.SaveTo(memoryStream);
                         break;
                     }
@@ -136,9 +136,25 @@ public sealed class MapRenderer : IRenderer, IDisposable
                         using var skCanvas = surface.Canvas;
                         RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas);
                         using var image = surface.Snapshot();
-                        var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
+                        var compression = quality == 100
+                            ? SKWebpEncoderCompression.Lossless
+                            : SKWebpEncoderCompression.Lossy;
+                        var options = new SKWebpEncoderOptions(compression, quality);
                         using var peekPixels = image.PeekPixels();
-                        using var data = peekPixels.Encode(options);
+                        using var data = peekPixels.Encode(options) ?? throw new NotSupportedException();
+                        data.SaveTo(memoryStream);
+                        break;
+                    }
+                case RenderFormat.Jpeg:
+                    {
+                        using var surface = SKSurface.Create(imageInfo);
+                        using var skCanvas = surface.Canvas;
+                        skCanvas.Clear(SKColors.White); // Avoiding Black Background when Transparent Pixels
+                        RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas);
+                        using var image = surface.Snapshot();
+                        var options = new SKJpegEncoderOptions(quality, SKJpegEncoderDownsample.Downsample420, SKJpegEncoderAlphaOption.Ignore);
+                        using var peekPixels = image.PeekPixels();
+                        using var data = peekPixels.Encode(options) ?? throw new NotSupportedException();
                         data.SaveTo(memoryStream);
                         break;
                     }
