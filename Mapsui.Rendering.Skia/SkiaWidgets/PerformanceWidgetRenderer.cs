@@ -16,15 +16,16 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
         var performanceWidget = (PerformanceWidget)widget;
         var textSize = performanceWidget.TextSize;
 
-        using var textPaint = new SKPaint { Color = performanceWidget.TextColor.ToSkia(), TextSize = (float)textSize, };
+        using var font = new SKFont() { Size = (float)textSize };
+        using var textPaint = new SKPaint { Color = performanceWidget.TextColor.ToSkia() };
         using var backgroundPaint = new SKPaint { Color = performanceWidget.BackColor.ToSkia().WithAlpha((byte)(255.0f * performanceWidget.Opacity)), Style = SKPaintStyle.Fill, };
 
         var widthHeader = 0f;
 
         for (var i = 0; i < _textHeader.Length; i++)
-            widthHeader = System.Math.Max(widthHeader, textPaint.MeasureText(_textHeader[5]));
+            widthHeader = System.Math.Max(widthHeader, font.MeasureText(_textHeader[5], textPaint));
 
-        var width = widthHeader + 20 + textPaint.MeasureText("0000.000") + 4;
+        var width = widthHeader + 20 + font.MeasureText("0000.000", textPaint) + 4;
         var height = _textHeader.Length * (performanceWidget.TextSize + 2) - 2 + 4;
 
         performanceWidget.UpdateEnvelope(width, height, viewport.Width, viewport.Height);
@@ -43,8 +44,8 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
 
         for (var i = 0; i < _textHeader.Length; i++)
         {
-            canvas.DrawText(_textHeader[i], (float)(rect.Left + 2), (float)(rect.Top + 2 * i + textSize * (i + 1)), textPaint);
-            canvas.DrawText(_text[i], (float)(rect.Right - 2 - textPaint.MeasureText(_text[i])), (float)(rect.Top + (2 + textSize) * (i + 1)), textPaint);
+            canvas.DrawText(_textHeader[i], (float)(rect.Left + 2), (float)(rect.Top + 2 * i + textSize * (i + 1)), font, textPaint);
+            canvas.DrawText(_text[i], (float)(rect.Right - 2 - font.MeasureText(_text[i], textPaint)), (float)(rect.Top + (2 + textSize) * (i + 1)), font, textPaint);
         }
     }
 }
