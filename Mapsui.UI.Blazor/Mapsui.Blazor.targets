@@ -6,7 +6,7 @@
 	</ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net9.0'">
 		<WasmExtraFilesToDeploy Include="$(MSBuildThisFileDirectory)/wwwroot/**/*.*" />
-		<NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\3.1.56\simd,mt\libHarfBuzzSharp.a" />
-		<NativeFileReference Include="$(SkiaSharpStaticLibraryPath)\3.1.56\simd,mt\libSkiaSharp.a" />
+		<NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\3.1.56\mt,simd\libHarfBuzzSharp.a" />
+		<NativeFileReference Include="$(SkiaSharpStaticLibraryPath)\3.1.56\mt,simd\libSkiaSharp.a" />
 	</ItemGroup>
 </Project>
