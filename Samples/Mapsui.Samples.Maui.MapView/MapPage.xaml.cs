@@ -45,7 +45,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
 
         Compass.ReadingChanged += Compass_ReadingChanged;
 
-        mapView.MyLocationLayer.UpdateMyLocation(new Mapsui.UI.Maui.Position());
+        mapView.MyLocationLayer.UpdateMyLocation(new Position());
 
         mapView.Info += MapView_Info;
         mapView.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -76,11 +76,16 @@ public sealed partial class MapPage : ContentPage, IDisposable
         mapView.Refresh();
     }
 
-    private void MapView_Info(object? sender, Mapsui.MapInfoEventArgs? e)
+    private void MapView_Info(object? sender, MapInfoEventArgs? e)
     {
-        if (e?.MapInfo?.Feature != null)
+        if (e is null)
+            return;
+
+        var mapInfo = e.GetMapInfo();
+
+        if (mapInfo.Feature != null)
         {
-            foreach (var style in e.MapInfo.Feature.Styles)
+            foreach (var style in mapInfo.Feature.Styles)
             {
                 if (style is CalloutStyle)
                 {
