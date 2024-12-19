@@ -24,7 +24,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
-    public static bool UseGPU { get; set; } = false;
+    public static bool UseGPU { get; set; } = true;
     public string MoveCursor { get; set; } = Cursors.Move;
     public int MoveButton { get; set; } = MouseButtons.Primary;
     public int MoveModifier { get; set; } = Keys.None;
