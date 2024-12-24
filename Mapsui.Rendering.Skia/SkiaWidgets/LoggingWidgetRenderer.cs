@@ -1,4 +1,4 @@
-﻿﻿using Mapsui.Logging;
+﻿using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
