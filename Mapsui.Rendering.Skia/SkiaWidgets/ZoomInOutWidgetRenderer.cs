@@ -1,4 +1,4 @@
-﻿using Mapsui.Rendering.Skia.Cache;
+﻿﻿using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
@@ -81,7 +81,6 @@ public class ZoomInOutWidgetRenderer : ISkiaWidgetRenderer
     {
         var paint = new SKPaint
         {
-            LcdRenderText = true,
             Color = color,
             StrokeWidth = strokeWidth,
             Style = style,
