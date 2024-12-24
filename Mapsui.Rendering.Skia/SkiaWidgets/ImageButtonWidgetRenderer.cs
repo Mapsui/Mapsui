@@ -58,7 +58,7 @@ public class ImageButtonWidgetRenderer : ISkiaWidgetRenderer
             // Translate picture to right place
             matrix = matrix.PostConcat(SKMatrix.CreateTranslation((float)(button.Envelope.MinX + button.Padding.Left), (float)(button.Envelope.MinY + button.Padding.Top)));
             // Draw picture
-            canvas.DrawPicture(svgImage.Picture, ref matrix, skPaint);
+            canvas.DrawPicture(svgImage.Picture, in matrix, skPaint);
         }
         else
             throw new NotSupportedException("DrawableImage type not supported");
