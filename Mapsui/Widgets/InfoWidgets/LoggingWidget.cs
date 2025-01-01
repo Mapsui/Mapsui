@@ -8,9 +8,20 @@ namespace Mapsui.Widgets.InfoWidgets;
 
 public enum ShowLoggingInMap
 {
-    WhenLoggingWidgetIsEnabled,
-    WhenLoggingWidgetIsEnabledAndDebuggerIsAttached,
-    Never,
+    /// <summary>
+    /// Show logging in the map. Note, this only has effect if LoggingWidget.Enabled == true.
+    /// </summary>
+    Yes,
+    /// <summary>
+    /// Show logging in the map only if the debugger is attached. Note, this is independent of a debug build.
+    /// You can attach a debugger to a release build and it will show logging, or run a debug build without
+    /// a debugger attached and it won't show logging.
+    /// </summary>
+    ShowOnlyInDebugMode,
+    /// <summary>
+    /// Never show logging in the map.
+    /// </summary>
+    No,
 }
 
 /// <summary>
@@ -46,7 +57,7 @@ public class LoggingWidget : TextBoxWidget
     /// Enabled field of the logging widget is false.
     /// </summary>
     public static ShowLoggingInMap ShowLoggingInMap { get; set; }
-        = ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached;
+        = ShowLoggingInMap.ShowOnlyInDebugMode;
 
     /// <summary>
     ///  Event handler for logging
@@ -168,9 +179,9 @@ public class LoggingWidget : TextBoxWidget
     private static bool ShouldLog(bool enabled, ShowLoggingInMap showLoggingInMap) =>
         enabled && showLoggingInMap switch
         {
-            ShowLoggingInMap.WhenLoggingWidgetIsEnabled => true,
-            ShowLoggingInMap.Never => false,
-            ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached => System.Diagnostics.Debugger.IsAttached,
+            ShowLoggingInMap.Yes => true,
+            ShowLoggingInMap.No => false,
+            ShowLoggingInMap.ShowOnlyInDebugMode => System.Diagnostics.Debugger.IsAttached,
             _ => throw new NotSupportedException(nameof(InfoWidgets.ShowLoggingInMap))
         };
 }
