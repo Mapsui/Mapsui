@@ -528,12 +528,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <inheritdoc />
     public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)
     {
-        return Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
+        return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
     }
 
     public Task<MapInfo> GetMapInfoAsync(ScreenPosition screenPosition, int margin = 0)
     {
-        return Renderer.GetMapInfoAsync(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
+        return Renderer.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
     }
 
     /// <inheritdoc />
@@ -551,8 +551,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, TapType tapType)
     {
-        var getMapInfo = () => Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
-        var getMapInfoAsync = () => Renderer.GetMapInfoAsync(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
+        var getMapInfo = () => Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? []);
+        var getMapInfoAsync = () => Renderer.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? []);
 
         return new MapInfoEventArgs(getMapInfo, getMapInfoAsync, tapType, false);
     }

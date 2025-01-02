@@ -8,6 +8,7 @@ using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Rendering;
@@ -230,15 +231,15 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
             section.ScreenHeight);
     }
 
-    public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
+    public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition)
     {
         var result = new Dictionary<string, IEnumerable<IFeature>>();
         var renderer = GetRenderer();
 
         var tileInfos = Schema.GetTileInfos(viewport.ToExtent().ToExtent(), viewport.Resolution);
-        var (worldX, worldY) = viewport.ScreenToWorldXY(screenX, screenY);
+        var worldPosition = viewport.ScreenToWorld(screenPosition);
         var tileInfo = tileInfos.FirstOrDefault(f =>
-            f.Extent.MinX <= worldX && f.Extent.MaxX >= worldX && f.Extent.MinY <= worldY && f.Extent.MaxY >= worldY);
+            f.Extent.MinX <= worldPosition.X && f.Extent.MaxX >= worldPosition.X && f.Extent.MinY <= worldPosition.Y && f.Extent.MaxY >= worldPosition.Y);
 
         if (tileInfo == null)
         {
@@ -253,10 +254,10 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
             layerRenderLayer
         };
 
-        var info = renderer.GetMapInfo(screenX, screenY, viewport, layers);
+        var info = renderer.GetMapInfo(screenPosition, viewport, layers);
         if (info != null)
         {
-            var mapInfo = await renderer.GetMapInfoAsync(screenX, screenY, viewport, layers);
+            var mapInfo = await renderer.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
             var infos = mapInfo.MapInfoRecords;
             if (infos != null)
             {

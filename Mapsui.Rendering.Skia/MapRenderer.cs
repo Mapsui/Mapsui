@@ -223,7 +223,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, _renderService, layerOpacity);
     }
 
-    public MapInfo GetMapInfo(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
         // Todo: Use margin to increase the pixel area
         // Todo: Select on style instead of layer
@@ -235,7 +235,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
 
         var list = new ConcurrentQueue<List<MapInfoRecord>>();
-        var result = new MapInfo(new ScreenPosition(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
+        var result = new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution);
 
         if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
 
@@ -246,8 +246,8 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
             var imageInfo = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
-            var intX = (int)x;
-            var intY = (int)y;
+            var intX = (int)screenPosition.X;
+            var intY = (int)screenPosition.Y;
 
             if (intX >= width || intY >= height)
                 return result;
@@ -260,7 +260,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                     return result;
                 }
 
-                surface.Canvas.ClipRect(new SKRect((float)(x - 1), (float)(y - 1), (float)(x + 1), (float)(y + 1)));
+                surface.Canvas.ClipRect(new SKRect((float)(screenPosition.X - 1), (float)(screenPosition.Y - 1), (float)(screenPosition.X + 1), (float)(screenPosition.Y + 1)));
                 surface.Canvas.Clear(SKColors.Transparent);
 
                 using var pixMap = surface.PeekPixels();
@@ -316,12 +316,12 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     delegate Task<IEnumerable<MapInfoRecord>> GetMapInfoAsyncDelegate();
 
-    public async Task<MapInfo> GetMapInfoAsync(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    public async Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
         var featureInfoLayers = layers.Where(l => l is ILayerFeatureInfo).ToList();
 
         var tasks = new List<Task<IEnumerable<MapInfoRecord>>>();
-        var result = new MapInfo(new ScreenPosition(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
+        var result = new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution);
 
         if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return await Task.FromResult(result);
 
@@ -330,9 +330,8 @@ public sealed class MapRenderer : IRenderer, IDisposable
             var width = (int)viewport.Width;
             var height = (int)viewport.Height;
 
-
-            var intX = (int)x;
-            var intY = (int)y;
+            var intX = (int)screenPosition.X;
+            var intY = (int)screenPosition.Y;
 
             if (intX >= width || intY >= height)
                 return await Task.FromResult(result);
@@ -350,7 +349,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                             // creating new list to avoid multithreading problems
                             var mapList = new List<MapInfoRecord>();
                             // get information from ILayer Feature Info
-                            var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
+                            var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, screenPosition);
                             foreach (var it in features)
                             {
                                 foreach (var feature in it.Value)
