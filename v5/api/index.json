@@ -2622,7 +2622,7 @@
   "pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html": {
     "href": "pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html",
     "title": "Enum ShowLoggingInMap",
-    "keywords": "Enum ShowLoggingInMap Namespace: Mapsui.Widgets.InfoWidgets Assembly: Mapsui.dll Syntax public enum ShowLoggingInMap Fields Name Description Never WhenLoggingWidgetIsEnabled WhenLoggingWidgetIsEnabledAndDebuggerIsAttached Extension Methods DisposableExtension.DisposeIfDisposable(object)"
+    "keywords": "Enum ShowLoggingInMap Namespace: Mapsui.Widgets.InfoWidgets Assembly: Mapsui.dll Syntax public enum ShowLoggingInMap Fields Name Description No Never show logging in the map. ShowOnlyInDebugMode Show logging in the map only if the debugger is attached. Note, this is independent of a debug build. You can attach a debugger to a release build and it will show logging, or run a debug build without a debugger attached and it won't show logging. Yes Show logging in the map. Note, this only has effect if LoggingWidget.Enabled == true. Extension Methods DisposableExtension.DisposeIfDisposable(object)"
   },
   "pages/Mapsui.Widgets.InfoWidgets.html": {
     "href": "pages/Mapsui.Widgets.InfoWidgets.html",

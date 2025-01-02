@@ -345,6 +345,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#show-logging-in-the-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Show logging in the map
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -812,6 +821,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#show-logging-in-the-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Show logging in the map
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -865,6 +883,14 @@
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">        </span><span class="p">};</span>
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div></p>
+<h3 id="show-logging-in-the-map">Show logging in the map</h3>
+<p>It is possible to show all Mapsui logging in the map. By default this shows only if the debugger is attached. In most 
+scenarios this is what you want and you don't have to change anything for a release of your app. You could change the 
+logging behavior by setting the static <code>LoggingWidget.ShowLoggingInMap</code> to <code>Yes</code>, <code>No</code> or <code>ShowOnlyInDebugMode</code> (the 
+default). </p>
+<p>Logging in the map is implemented through the LoggingWidget which is added by default to the Map class. Usually you
+can just leave it there. If you remove or disable it no logging will be shown in the map.</p>
+<p>If you have two maps in your app both will show all Mapsui logging.</p>
 
 
 

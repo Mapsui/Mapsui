@@ -41258,24 +41258,24 @@ references:
   commentId: T:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
   fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
   nameWithType: ShowLoggingInMap
-- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Never
-  name: Never
-  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html#Mapsui_Widgets_InfoWidgets_ShowLoggingInMap_Never
-  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Never
-  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Never
-  nameWithType: ShowLoggingInMap.Never
-- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabled
-  name: WhenLoggingWidgetIsEnabled
-  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html#Mapsui_Widgets_InfoWidgets_ShowLoggingInMap_WhenLoggingWidgetIsEnabled
-  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabled
-  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabled
-  nameWithType: ShowLoggingInMap.WhenLoggingWidgetIsEnabled
-- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
-  name: WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
-  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html#Mapsui_Widgets_InfoWidgets_ShowLoggingInMap_WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
-  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
-  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
-  nameWithType: ShowLoggingInMap.WhenLoggingWidgetIsEnabledAndDebuggerIsAttached
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.No
+  name: No
+  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html#Mapsui_Widgets_InfoWidgets_ShowLoggingInMap_No
+  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.No
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.No
+  nameWithType: ShowLoggingInMap.No
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.ShowOnlyInDebugMode
+  name: ShowOnlyInDebugMode
+  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html#Mapsui_Widgets_InfoWidgets_ShowLoggingInMap_ShowOnlyInDebugMode
+  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.ShowOnlyInDebugMode
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.ShowOnlyInDebugMode
+  nameWithType: ShowLoggingInMap.ShowOnlyInDebugMode
+- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Yes
+  name: Yes
+  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html#Mapsui_Widgets_InfoWidgets_ShowLoggingInMap_Yes
+  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Yes
+  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Yes
+  nameWithType: ShowLoggingInMap.Yes
 - uid: Mapsui.Widgets.InputAreaType
   name: InputAreaType
   href: pages/Mapsui.Widgets.InputAreaType.html
