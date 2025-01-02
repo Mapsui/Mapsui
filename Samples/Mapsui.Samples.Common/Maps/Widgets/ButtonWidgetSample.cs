@@ -25,29 +25,29 @@ public class ButtonWidgetSample : ISample
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
-        map.Widgets.Add(CreateButtonWidget("Tap me", VerticalAlignment.Top, HorizontalAlignment.Left, (s, a) =>
+        map.Widgets.Add(CreateButtonWidget("Tap me", VerticalAlignment.Top, HorizontalAlignment.Left, (s, e) =>
         {
-            if (a.TapType == TapType.Double)
+            if (e.TapType == TapType.Double)
                 return false;
             s.Text = $"Tapped {++_tapCount} times";
             map.RefreshGraphics();
             return false;
         }));
-        map.Widgets.Add(CreateImageButtonWidget(VerticalAlignment.Top, HorizontalAlignment.Right, (s, a) =>
+        map.Widgets.Add(CreateImageButtonWidget(VerticalAlignment.Top, HorizontalAlignment.Right, (s, e) =>
         {
             Logger.Log(LogLevel.Information, $"Image Tapped {++_imageTapCount} times");
             map.RefreshGraphics();
             return false;
         }));
-        map.Widgets.Add(CreateButtonWidget("Hello!", VerticalAlignment.Bottom, HorizontalAlignment.Right, (s, a) =>
+        map.Widgets.Add(CreateButtonWidget("Hello!", VerticalAlignment.Bottom, HorizontalAlignment.Right, (s, e) =>
         {
             s.Text = $"{s.Text}!";
             map.RefreshGraphics();
             return false;
         }));
-        map.Widgets.Add(CreateButtonWidget("Double Tap me", VerticalAlignment.Bottom, HorizontalAlignment.Left, (s, a) =>
+        map.Widgets.Add(CreateButtonWidget("Double Tap me", VerticalAlignment.Bottom, HorizontalAlignment.Left, (s, e) =>
         {
-            if (a.TapType == TapType.Single)
+            if (e.TapType == TapType.Single)
                 return false;
             s.Text = $"Double Tapped {++_doubleTapCount} times";
             map.RefreshGraphics();

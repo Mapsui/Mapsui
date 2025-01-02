@@ -75,12 +75,13 @@ public sealed class TouchPointSample : ISample, IDisposable
 
     private void MapControl_Info(object? sender, MapInfoEventArgs e)
     {
-        _mousePosition!.Text = $"X: {Convert.ToInt32(e.MapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(e.MapInfo.ScreenPosition.Y)}";
+        var mapInfo = e.GetMapInfo();
+        _mousePosition!.Text = $"X: {Convert.ToInt32(mapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(mapInfo.ScreenPosition.Y)}";
         _mousePosition.NeedsRedraw = true;
         var features = (List<IFeature>)_clickMemoryLayer!.Features;
-        features.Add(new PointFeature(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y));
+        features.Add(new PointFeature(mapInfo.WorldPosition.X, mapInfo.WorldPosition.Y));
         _clickMemoryLayer.DataHasChanged();
-        if (e.MapInfo is { Feature: PointFeature, Layer: MemoryLayer })
+        if (mapInfo is { Feature: PointFeature, Layer: MemoryLayer })
         {
             _label!.Text = _label.Text == "Not Selected" ? "Selected" : "Not Selected";
             _label.NeedsRedraw = true;
