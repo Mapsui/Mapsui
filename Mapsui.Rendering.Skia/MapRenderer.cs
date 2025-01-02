@@ -318,9 +318,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public async Task<MapInfo> GetMapInfoAsync(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
-        // Todo: Use margin to increase the pixel area
-        // Todo: Select on style instead of layer
-
         var mapInfoLayers = layers
             .Select(l => l is ISourceLayer sl ? sl.SourceLayer : l)
             .ToList();
@@ -335,7 +332,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
             var width = (int)viewport.Width;
             var height = (int)viewport.Height;
 
-            var imageInfo = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
             var intX = (int)x;
             var intY = (int)y;
@@ -343,55 +339,42 @@ public sealed class MapRenderer : IRenderer, IDisposable
             if (intX >= width || intY >= height)
                 return await Task.FromResult(result);
 
-            using (var surface = SKSurface.Create(imageInfo))
+
+
+            for (var index = 0; index < mapInfoLayers.Count; index++)
             {
-                if (surface == null)
+                var list = new ConcurrentQueue<List<MapInfoRecord>>();
+                var infoLayer = mapInfoLayers[index];
+                if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
                 {
-                    Logger.Log(LogLevel.Error, "SKSurface is null while getting MapInfo.  This is not expected.");
-                    return await Task.FromResult(result);
-                }
-
-                surface.Canvas.ClipRect(new SKRect((float)(x - 1), (float)(y - 1), (float)(x + 1), (float)(y + 1)));
-                surface.Canvas.Clear(SKColors.Transparent);
-
-                using var pixMap = surface.PeekPixels();
-                var color = pixMap.GetPixelColor(intX, intY);
-
-                for (var index = 0; index < mapInfoLayers.Count; index++)
-                {
-                    var list = new ConcurrentQueue<List<MapInfoRecord>>();
-                    var infoLayer = mapInfoLayers[index];
-                    if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
+                    GetMapInfoAsyncDelegate getMapInfoAsync = async () =>
                     {
-                        GetMapInfoAsyncDelegate getMapInfoAsync = async () =>
+                        try
                         {
-                            try
+                            // creating new list to avoid multithreading problems
+                            var mapList = new List<MapInfoRecord>();
+                            // get information from ILayer Feature Info
+                            var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
+                            foreach (var it in features)
                             {
-                                // creating new list to avoid multithreading problems
-                                var mapList = new List<MapInfoRecord>();
-                                // get information from ILayer Feature Info
-                                var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
-                                foreach (var it in features)
+                                foreach (var feature in it.Value)
                                 {
-                                    foreach (var feature in it.Value)
-                                    {
-                                        var mapInfoRecord = new MapInfoRecord(feature, infoLayer.Style!, infoLayer);
-                                        mapList.Add(mapInfoRecord);
-                                    }
+                                    var mapInfoRecord = new MapInfoRecord(feature, infoLayer.Style!, infoLayer);
+                                    mapList.Add(mapInfoRecord);
                                 }
-
-                                // atomic replace of new list is thread safe.
-                                list.Enqueue(mapList);
                             }
-                            catch (Exception e)
-                            {
-                                Logger.Log(LogLevel.Error, e.Message, e);
-                            }
-                            return list.SelectMany(l => l);
-                        };
 
-                        tasks.Add(getMapInfoAsync());
-                    }
+                            // atomic replace of new list is thread safe.
+                            list.Enqueue(mapList);
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.Log(LogLevel.Error, e.Message, e);
+                        }
+                        return list.SelectMany(l => l);
+                    };
+
+                    tasks.Add(getMapInfoAsync());
                 }
             }
 
