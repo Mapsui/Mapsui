@@ -49,6 +49,4 @@ public class MapInfo : MapInfoBase
 
         return this;
     }
-
-
 }
