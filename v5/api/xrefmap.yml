@@ -11879,15 +11879,15 @@ references:
   commentId: T:Mapsui.MapInfoEventArgs
   fullName: Mapsui.MapInfoEventArgs
   nameWithType: MapInfoEventArgs
-- uid: Mapsui.MapInfoEventArgs.#ctor(Mapsui.MapInfo,Mapsui.Manipulations.TapType,System.Boolean)
-  name: MapInfoEventArgs(MapInfo, TapType, bool)
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_Mapsui_MapInfo_Mapsui_Manipulations_TapType_System_Boolean_
-  commentId: M:Mapsui.MapInfoEventArgs.#ctor(Mapsui.MapInfo,Mapsui.Manipulations.TapType,System.Boolean)
-  name.vb: New(MapInfo, TapType, Boolean)
-  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(Mapsui.MapInfo, Mapsui.Manipulations.TapType, bool)
-  fullName.vb: Mapsui.MapInfoEventArgs.New(Mapsui.MapInfo, Mapsui.Manipulations.TapType, Boolean)
-  nameWithType: MapInfoEventArgs.MapInfoEventArgs(MapInfo, TapType, bool)
-  nameWithType.vb: MapInfoEventArgs.New(MapInfo, TapType, Boolean)
+- uid: Mapsui.MapInfoEventArgs.#ctor(System.Func{Mapsui.MapInfo},Mapsui.Manipulations.TapType,System.Boolean)
+  name: MapInfoEventArgs(Func<MapInfo>, TapType, bool)
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_System_Func_Mapsui_MapInfo__Mapsui_Manipulations_TapType_System_Boolean_
+  commentId: M:Mapsui.MapInfoEventArgs.#ctor(System.Func{Mapsui.MapInfo},Mapsui.Manipulations.TapType,System.Boolean)
+  name.vb: New(Func(Of MapInfo), TapType, Boolean)
+  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(System.Func<Mapsui.MapInfo>, Mapsui.Manipulations.TapType, bool)
+  fullName.vb: Mapsui.MapInfoEventArgs.New(System.Func(Of Mapsui.MapInfo), Mapsui.Manipulations.TapType, Boolean)
+  nameWithType: MapInfoEventArgs.MapInfoEventArgs(Func<MapInfo>, TapType, bool)
+  nameWithType.vb: MapInfoEventArgs.New(Func(Of MapInfo), TapType, Boolean)
 - uid: Mapsui.MapInfoEventArgs.#ctor*
   name: MapInfoEventArgs
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_
@@ -11898,6 +11898,19 @@ references:
   fullName.vb: Mapsui.MapInfoEventArgs.New
   nameWithType: MapInfoEventArgs.MapInfoEventArgs
   nameWithType.vb: MapInfoEventArgs.New
+- uid: Mapsui.MapInfoEventArgs.GetMapInfo
+  name: GetMapInfo
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_GetMapInfo
+  commentId: P:Mapsui.MapInfoEventArgs.GetMapInfo
+  fullName: Mapsui.MapInfoEventArgs.GetMapInfo
+  nameWithType: MapInfoEventArgs.GetMapInfo
+- uid: Mapsui.MapInfoEventArgs.GetMapInfo*
+  name: GetMapInfo
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_GetMapInfo_
+  commentId: Overload:Mapsui.MapInfoEventArgs.GetMapInfo
+  isSpec: "True"
+  fullName: Mapsui.MapInfoEventArgs.GetMapInfo
+  nameWithType: MapInfoEventArgs.GetMapInfo
 - uid: Mapsui.MapInfoEventArgs.Handled
   name: Handled
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_Handled
@@ -11911,19 +11924,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MapInfoEventArgs.Handled
   nameWithType: MapInfoEventArgs.Handled
-- uid: Mapsui.MapInfoEventArgs.MapInfo
-  name: MapInfo
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_MapInfo
-  commentId: P:Mapsui.MapInfoEventArgs.MapInfo
-  fullName: Mapsui.MapInfoEventArgs.MapInfo
-  nameWithType: MapInfoEventArgs.MapInfo
-- uid: Mapsui.MapInfoEventArgs.MapInfo*
-  name: MapInfo
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_MapInfo_
-  commentId: Overload:Mapsui.MapInfoEventArgs.MapInfo
-  isSpec: "True"
-  fullName: Mapsui.MapInfoEventArgs.MapInfo
-  nameWithType: MapInfoEventArgs.MapInfo
 - uid: Mapsui.MapInfoEventArgs.TapType
   name: TapType
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_TapType

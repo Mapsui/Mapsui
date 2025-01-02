@@ -126,18 +126,18 @@
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_MapInfoEventArgs__ctor_Mapsui_MapInfo_Mapsui_Manipulations_TapType_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.MapInfoEventArgs.%23ctor(Mapsui.MapInfo%2CMapsui.Manipulations.TapType%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_MapInfoEventArgs__ctor_System_Func_Mapsui_MapInfo__Mapsui_Manipulations_TapType_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.MapInfoEventArgs.%23ctor(System.Func%7BMapsui.MapInfo%7D%2CMapsui.Manipulations.TapType%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/MapInfoEventArgs.cs/#L6">View Source</a>
   </span>
   <a id="Mapsui_MapInfoEventArgs__ctor_" data-uid="Mapsui.MapInfoEventArgs.#ctor*"></a>
-  <h4 id="Mapsui_MapInfoEventArgs__ctor_Mapsui_MapInfo_Mapsui_Manipulations_TapType_System_Boolean_" data-uid="Mapsui.MapInfoEventArgs.#ctor(Mapsui.MapInfo,Mapsui.Manipulations.TapType,System.Boolean)">MapInfoEventArgs(MapInfo, TapType, bool)</h4>
+  <h4 id="Mapsui_MapInfoEventArgs__ctor_System_Func_Mapsui_MapInfo__Mapsui_Manipulations_TapType_System_Boolean_" data-uid="Mapsui.MapInfoEventArgs.#ctor(System.Func{Mapsui.MapInfo},Mapsui.Manipulations.TapType,System.Boolean)">MapInfoEventArgs(Func&lt;MapInfo&gt;, TapType, bool)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MapInfoEventArgs(MapInfo mapInfo, TapType tapType, bool handled)</code></pre>
+    <pre><code class="lang-csharp hljs">public MapInfoEventArgs(Func&lt;MapInfo&gt; getMapInfo, TapType tapType, bool handled)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -150,8 +150,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.MapInfo.html">MapInfo</a></td>
-        <td><span class="parametername">mapInfo</span></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="Mapsui.MapInfo.html">MapInfo</a>&gt;</td>
+        <td><span class="parametername">getMapInfo</span></td>
         <td></td>
       </tr>
       <tr>
@@ -170,10 +170,41 @@
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_MapInfoEventArgs_GetMapInfo.md&amp;value=---%0Auid%3A%20Mapsui.MapInfoEventArgs.GetMapInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/MapInfoEventArgs.cs/#L21">View Source</a>
+  </span>
+  <a id="Mapsui_MapInfoEventArgs_GetMapInfo_" data-uid="Mapsui.MapInfoEventArgs.GetMapInfo*"></a>
+  <h4 id="Mapsui_MapInfoEventArgs_GetMapInfo" data-uid="Mapsui.MapInfoEventArgs.GetMapInfo">GetMapInfo</h4>
+  <div class="markdown level1 summary"><p>Function to get the map info</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;MapInfo&gt; GetMapInfo { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="Mapsui.MapInfo.html">MapInfo</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_MapInfoEventArgs_Handled.md&amp;value=---%0Auid%3A%20Mapsui.MapInfoEventArgs.Handled%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/MapInfoEventArgs.cs/#L18">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/MapInfoEventArgs.cs/#L16">View Source</a>
   </span>
   <a id="Mapsui_MapInfoEventArgs_Handled_" data-uid="Mapsui.MapInfoEventArgs.Handled*"></a>
   <h4 id="Mapsui_MapInfoEventArgs_Handled" data-uid="Mapsui.MapInfoEventArgs.Handled">Handled</h4>
@@ -201,40 +232,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_MapInfoEventArgs_MapInfo.md&amp;value=---%0Auid%3A%20Mapsui.MapInfoEventArgs.MapInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/MapInfoEventArgs.cs/#L8">View Source</a>
-  </span>
-  <a id="Mapsui_MapInfoEventArgs_MapInfo_" data-uid="Mapsui.MapInfoEventArgs.MapInfo*"></a>
-  <h4 id="Mapsui_MapInfoEventArgs_MapInfo" data-uid="Mapsui.MapInfoEventArgs.MapInfo">MapInfo</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MapInfo MapInfo { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.MapInfo.html">MapInfo</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_MapInfoEventArgs_TapType.md&amp;value=---%0Auid%3A%20Mapsui.MapInfoEventArgs.TapType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/MapInfoEventArgs.cs/#L13">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/MapInfoEventArgs.cs/#L11">View Source</a>
   </span>
   <a id="Mapsui_MapInfoEventArgs_TapType_" data-uid="Mapsui.MapInfoEventArgs.TapType*"></a>
   <h4 id="Mapsui_MapInfoEventArgs_TapType" data-uid="Mapsui.MapInfoEventArgs.TapType">TapType</h4>
