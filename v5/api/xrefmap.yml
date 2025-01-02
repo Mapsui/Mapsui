@@ -22557,19 +22557,6 @@ references:
   commentId: T:Mapsui.Rendering.Skia.LabelStyleRenderer
   fullName: Mapsui.Rendering.Skia.LabelStyleRenderer
   nameWithType: LabelStyleRenderer
-- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace(Mapsui.Styles.Font)
-  name: CreateTypeFace(Font)
-  href: pages/Mapsui.Rendering.Skia.LabelStyleRenderer.html#Mapsui_Rendering_Skia_LabelStyleRenderer_CreateTypeFace_Mapsui_Styles_Font_
-  commentId: M:Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace(Mapsui.Styles.Font)
-  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace(Mapsui.Styles.Font)
-  nameWithType: LabelStyleRenderer.CreateTypeFace(Font)
-- uid: Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace*
-  name: CreateTypeFace
-  href: pages/Mapsui.Rendering.Skia.LabelStyleRenderer.html#Mapsui_Rendering_Skia_LabelStyleRenderer_CreateTypeFace_
-  commentId: Overload:Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.LabelStyleRenderer.CreateTypeFace
-  nameWithType: LabelStyleRenderer.CreateTypeFace
 - uid: Mapsui.Rendering.Skia.LabelStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.Skia.Cache.RenderService,System.Int64)
   name: Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, RenderService, long)
   href: pages/Mapsui.Rendering.Skia.LabelStyleRenderer.html#Mapsui_Rendering_Skia_LabelStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_Skia_Cache_RenderService_System_Int64_
