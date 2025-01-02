@@ -20,13 +20,13 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 
         if (string.IsNullOrEmpty(textBox.Text)) return;
 
-        using var textPaint = new SKPaint { TextSize = (float)textBox.TextSize, Color = textBox.TextColor.ToSkia(layerOpacity), IsAntialias = true };
+        using var skFont = new SKFont() { Size = (float)textBox.TextSize };
+        using var textPaint = new SKPaint { Color = textBox.TextColor.ToSkia(layerOpacity), IsAntialias = true };
         using var backPaint = new SKPaint { Color = textBox.BackColor.ToSkia(layerOpacity), IsAntialias = true };
         // The textRect has an offset which can be confusing. 
         // This is because DrawText's origin is the baseline of the text, not the bottom.
         // Read more here: https://developer.xamarin.com/guides/xamarin-forms/advanced/skiasharp/basics/text/
-        var textRect = new SKRect();
-        textPaint.MeasureText(textBox.Text, ref textRect);
+        skFont.MeasureText(textBox.Text, out var textRect, textPaint);
         // The backRect is straight forward. It is leading for our purpose.
 
         var paddingX = textBox.Padding.Left;
@@ -42,7 +42,7 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         if (textBox.Height != 0)
         {
             // TextBox has a height, so use this
-            paddingY = (textBox.Height - textPaint.TextSize) / 2.0f;
+            paddingY = (textBox.Height - skFont.Size) / 2.0f;
             textRect = new SKRect(textRect.Left, textRect.Top, textRect.Right, (float)(textRect.Top + textBox.Height - paddingY * 2));
         }
 
@@ -61,6 +61,6 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         // To position the text within the backRect correct using the textRect's offset.
         canvas.DrawText(textBox.Text,
             (float)(textBox.Envelope.MinX - textRect.Left + paddingX),
-            (float)(textBox.Envelope.MinY - textRect.Top + paddingY), textPaint);
+            (float)(textBox.Envelope.MinY - textRect.Top + paddingY), skFont, textPaint);
     }
 }
