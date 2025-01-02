@@ -232,7 +232,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
             .Where(l => l.IsMapInfoLayer)
             .ToList();
 
-        var tasks = new List<Task>();
 
         var list = new List<MapInfoRecord>[mapInfoLayers.Count];
         var result = new MapInfo(new ScreenPosition(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
@@ -270,70 +269,40 @@ public sealed class MapRenderer : IRenderer, IDisposable
                 {
                     var mapList = list[index] = [];
                     var infoLayer = mapInfoLayers[index];
-                    if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
-                    {
-                        tasks.Add(Task.Run(async () =>
+
+                    // get information from ILayer
+                    VisibleFeatureIterator.IterateLayers(viewport, [infoLayer], 0,
+                        (v, layer, style, feature, opacity, iteration) =>
                         {
                             try
                             {
-                                // creating new list to avoid multithreading problems
-                                mapList = [];
-                                // get information from ILayer Feature Info
-                                var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
-                                foreach (var it in features)
-                                {
-                                    foreach (var feature in it.Value)
-                                    {
-                                        mapList.Add(new MapInfoRecord(feature, infoLayer.Style!, infoLayer));
-                                    }
-                                }
-
-                                // atomic replace of new list is thread safe.a
-                                list[index] = mapList;
+                                // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
+                                surface.Canvas.Save();
+                                // 1) Clear the entire bitmap
+                                surface.Canvas.Clear(SKColors.Transparent);
+                                // 2) Render the feature to the clean canvas
+                                RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
+                                // 3) Check if the pixel has changed.
+                                if (color != pixMap.GetPixelColor(intX, intY))
+                                    // 4) Add feature and style to result
+                                    mapList.Add(new MapInfoRecord(feature, style, layer));
+                                surface.Canvas.Restore();
+                                // ReSharper restore AccessToDisposedClosure
                             }
-                            catch (Exception e)
+                            catch (Exception exception)
                             {
-                                Logger.Log(LogLevel.Error, e.Message, e);
+                                Logger.Log(LogLevel.Error,
+                                    "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.",
+                                    exception);
                             }
-                        }));
-                    }
-                    else
-                    {
-                        // get information from ILayer
-                        VisibleFeatureIterator.IterateLayers(viewport, [infoLayer], 0,
-                            (v, layer, style, feature, opacity, iteration) =>
-                            {
-                                try
-                                {
-                                    // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
-                                    surface.Canvas.Save();
-                                    // 1) Clear the entire bitmap
-                                    surface.Canvas.Clear(SKColors.Transparent);
-                                    // 2) Render the feature to the clean canvas
-                                    RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
-                                    // 3) Check if the pixel has changed.
-                                    if (color != pixMap.GetPixelColor(intX, intY))
-                                        // 4) Add feature and style to result
-                                        mapList.Add(new MapInfoRecord(feature, style, layer));
-                                    surface.Canvas.Restore();
-                                    // ReSharper restore AccessToDisposedClosure
-                                }
-                                catch (Exception exception)
-                                {
-                                    Logger.Log(LogLevel.Error,
-                                        "Unexpected error in the code detecting if a feature is clicked. This uses SkiaSharp.",
-                                        exception);
-                                }
-                            });
-                    }
+                        });
                 }
             }
 
             // The VisibleFeatureIterator is intended for drawing and puts the bottom features first. In the MapInfo request
             // we want the top feature first. So, we reverse it here.
             var mapInfos = list.SelectMany(f => f).Reverse();
-            var task = Task.WhenAll(tasks);
-            result = new MapInfo(result, mapInfos, task);
+            result = new MapInfo(result, mapInfos);
         }
         catch (Exception exception)
         {
@@ -341,6 +310,99 @@ public sealed class MapRenderer : IRenderer, IDisposable
         }
 
         return result;
+    }
+
+    delegate Task<IEnumerable<MapInfoRecord>> GetMapInfoAsyncDelegate();
+
+    public async Task<MapInfo> GetMapInfoAsync(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    {
+        // Todo: Use margin to increase the pixel area
+        // Todo: Select on style instead of layer
+
+        var mapInfoLayers = layers
+            .Select(l => l is ISourceLayer sl ? sl.SourceLayer : l)
+            .ToList();
+
+        var tasks = new List<Task<IEnumerable<MapInfoRecord>>>();
+        var result = new MapInfo(new ScreenPosition(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
+
+        if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return await Task.FromResult(result);
+
+        try
+        {
+            var width = (int)viewport.Width;
+            var height = (int)viewport.Height;
+
+            var imageInfo = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+
+            var intX = (int)x;
+            var intY = (int)y;
+
+            if (intX >= width || intY >= height)
+                return await Task.FromResult(result);
+
+            using (var surface = SKSurface.Create(imageInfo))
+            {
+                if (surface == null)
+                {
+                    Logger.Log(LogLevel.Error, "SKSurface is null while getting MapInfo.  This is not expected.");
+                    return await Task.FromResult(result);
+                }
+
+                surface.Canvas.ClipRect(new SKRect((float)(x - 1), (float)(y - 1), (float)(x + 1), (float)(y + 1)));
+                surface.Canvas.Clear(SKColors.Transparent);
+
+                using var pixMap = surface.PeekPixels();
+                var color = pixMap.GetPixelColor(intX, intY);
+
+                for (var index = 0; index < mapInfoLayers.Count; index++)
+                {
+                    var list = new List<MapInfoRecord>[mapInfoLayers.Count];
+                    var mapList = list[index] = [];
+                    var infoLayer = mapInfoLayers[index];
+                    if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
+                    {
+                        GetMapInfoAsyncDelegate getMapInfoAsync = async () =>
+                        {
+                            try
+                            {
+                                // creating new list to avoid multithreading problems
+                                mapList = new List<MapInfoRecord>();
+                                // get information from ILayer Feature Info
+                                var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
+                                foreach (var it in features)
+                                {
+                                    foreach (var feature in it.Value)
+                                    {
+                                        var mapInfoRecord = new MapInfoRecord(feature, infoLayer.Style!, infoLayer);
+                                        mapList.Add(mapInfoRecord);
+                                    }
+                                }
+
+                                // atomic replace of new list is thread safe.
+                                list[index] = mapList;
+                            }
+                            catch (Exception e)
+                            {
+                                Logger.Log(LogLevel.Error, e.Message, e);
+                            }
+                            return mapList;
+                        };
+
+                        tasks.Add(getMapInfoAsync());
+                    }
+                }
+            }
+
+            var results = await Task.WhenAll(tasks);
+            return result = new MapInfo(result, results.SelectMany(f => f).Reverse());
+        }
+        catch (Exception exception)
+        {
+            Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
+        }
+
+        return await Task.FromResult(result);
     }
 
     public void Dispose()

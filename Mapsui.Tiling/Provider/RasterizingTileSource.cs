@@ -256,7 +256,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         var info = renderer.GetMapInfo(screenX, screenY, viewport, layers);
         if (info != null)
         {
-            var mapInfo = await info.GetMapInfoAsync();
+            var mapInfo = await renderer.GetMapInfoAsync(screenX, screenY, viewport, layers);
             var infos = mapInfo.MapInfoRecords;
             if (infos != null)
             {

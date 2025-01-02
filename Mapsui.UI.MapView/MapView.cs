@@ -638,8 +638,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         {
             // Check if we hit a drawable/pin/callout etc
             var getMapInfo = () => GetMapInfo(screenPosition);
+            var getMapInfoAsync = () => GetMapInfoAsync(screenPosition);
 
-            var mapInfoEventArgs = new MapInfoEventArgs(getMapInfo, e.TapType, handled);
+            var mapInfoEventArgs = new MapInfoEventArgs(getMapInfo, getMapInfoAsync, e.TapType, handled);
 
             HandlerInfo(mapInfoEventArgs);
 
