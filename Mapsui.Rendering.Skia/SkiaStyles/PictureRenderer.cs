@@ -30,7 +30,7 @@ internal class PictureRenderer
             matrix = SKMatrix.CreateScaleTranslation(scaleX, scaleY, rect.Left, rect.Top);
         }
 
-        canvas.DrawPicture(picture, ref matrix, skPaint);
+        canvas.DrawPicture(picture, in matrix, skPaint);
         if (dispose)
         {
             skPaint.Dispose();

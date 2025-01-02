@@ -527,14 +527,15 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private void HandlerInfo(MapInfoEventArgs e)
     {
         // Click on pin?
-        if (e.MapInfo?.Layer == _mapPinLayer)
+        var mapInfo = e.GetMapInfo();
+        if (mapInfo.Layer == _mapPinLayer)
         {
             Pin? clickedPin = null;
             var pins = _pins.ToList();
 
             foreach (var pin in pins)
             {
-                if (pin.IsVisible && (pin.Feature?.Equals(e.MapInfo.Feature) ?? false))
+                if (pin.IsVisible && (pin.Feature?.Equals(mapInfo.Feature) ?? false))
                 {
                     clickedPin = pin;
                     break;
@@ -547,10 +548,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
 
-                if (e.MapInfo?.ScreenPosition is null)
-                    return;
-
-                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(), e.TapType);
+                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Navigator.Viewport.ScreenToWorld(mapInfo.ScreenPosition).ToNative(), e.TapType);
 
                 PinClicked?.Invoke(this, pinArgs);
 
@@ -562,14 +560,14 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             }
         }
         // Check for clicked callouts
-        else if (e.MapInfo?.Layer == _mapCalloutLayer)
+        else if (mapInfo.Layer == _mapCalloutLayer)
         {
             Callout? clickedCallout = null;
             var callouts = _callouts.ToList();
 
             foreach (var callout in callouts)
             {
-                if (callout.Feature.Equals(e.MapInfo.Feature))
+                if (callout.Feature.Equals(mapInfo.Feature))
                 {
                     clickedCallout = callout;
                     break;
@@ -577,8 +575,8 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             }
 
             var calloutArgs = new CalloutClickedEventArgs(clickedCallout,
-                Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
-                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.TapType);
+                Map.Navigator.Viewport.ScreenToWorld(mapInfo.ScreenPosition).ToNative(),
+                new Point(mapInfo.ScreenPosition.X, mapInfo.ScreenPosition.Y), e.TapType);
 
             clickedCallout?.HandleCalloutClicked(this, calloutArgs);
 
@@ -587,11 +585,11 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             return;
         }
         // Check for clicked drawables
-        else if (e.MapInfo?.Layer == _mapDrawableLayer)
+        else if (mapInfo.Layer == _mapDrawableLayer)
         {
             var drawables = _drawables.ToList();
 
-            foreach (var rec in e.MapInfo.MapInfoRecords)
+            foreach (var rec in mapInfo.MapInfoRecords)
             {
                 foreach (var drawable in drawables)
                 {
@@ -600,8 +598,8 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                     if (drawable.Feature?.Equals(rec.Feature) ?? false)
                     {
                         var drawableArgs = new DrawableClickedEventArgs(
-                            Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
-                            new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.TapType);
+                            Map.Navigator.Viewport.ScreenToWorld(mapInfo.ScreenPosition).ToNative(),
+                            new Point(mapInfo.ScreenPosition.X, mapInfo.ScreenPosition.Y), e.TapType);
 
                         drawable?.HandleClicked(drawableArgs);
 
@@ -614,11 +612,11 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             }
         }
         // Check for clicked myLocation
-        else if (e.MapInfo?.Layer == MyLocationLayer)
+        else if (mapInfo.Layer == MyLocationLayer)
         {
             var args = new DrawableClickedEventArgs(
-                Map.Navigator.Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
-                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.TapType);
+                Map.Navigator.Viewport.ScreenToWorld(mapInfo.ScreenPosition).ToNative(),
+                new Point(mapInfo.ScreenPosition.X, mapInfo.ScreenPosition.Y), e.TapType);
 
             MyLocationLayer?.HandleClicked(args);
 
@@ -636,9 +634,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         if (Map != null)
         {
             // Check if we hit a drawable/pin/callout etc
-            var mapInfo = GetMapInfo(screenPosition);
+            var getMapInfo = () => GetMapInfo(screenPosition);
 
-            var mapInfoEventArgs = new MapInfoEventArgs(mapInfo, e.TapType, handled);
+            var mapInfoEventArgs = new MapInfoEventArgs(getMapInfo, e.TapType, handled);
 
             HandlerInfo(mapInfoEventArgs);
 

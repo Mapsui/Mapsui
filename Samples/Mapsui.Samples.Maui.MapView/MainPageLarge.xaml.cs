@@ -65,11 +65,15 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     {
         featureInfo.Text = $"Click Info:";
 
-        if (e?.MapInfo?.Feature != null)
-        {
-            featureInfo.Text = $"Click Info:{Environment.NewLine}{e.MapInfo.Feature.ToDisplayText()}";
+        if (e is null)
+            return;
 
-            foreach (var style in e.MapInfo.Feature.Styles)
+        var mapInfo = e.GetMapInfo();
+        if (mapInfo.Feature != null)
+        {
+            featureInfo.Text = $"Click Info:{Environment.NewLine}{mapInfo.Feature.ToDisplayText()}";
+
+            foreach (var style in mapInfo.Feature.Styles)
             {
                 if (style is CalloutStyle)
                 {

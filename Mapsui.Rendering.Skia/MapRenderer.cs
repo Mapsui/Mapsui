@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -234,7 +235,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
         var tasks = new List<Task>();
 
-        var list = new List<MapInfoRecord>[mapInfoLayers.Count];
+        var list = new ConcurrentQueue<List<MapInfoRecord>>();
         var result = new MapInfo(new ScreenPosition(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
 
         if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
@@ -268,16 +269,16 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
                 for (var index = 0; index < mapInfoLayers.Count; index++)
                 {
-                    var mapList = list[index] = [];
+                    var mapList = new List<MapInfoRecord>();
                     var infoLayer = mapInfoLayers[index];
                     if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
                     {
                         tasks.Add(Task.Run(async () =>
                         {
+
                             try
                             {
                                 // creating new list to avoid multithreading problems
-                                mapList = [];
                                 // get information from ILayer Feature Info
                                 var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
                                 foreach (var it in features)
@@ -288,8 +289,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                                     }
                                 }
 
-                                // atomic replace of new list is thread safe.a
-                                list[index] = mapList;
+                                list.Enqueue(mapList);
                             }
                             catch (Exception e)
                             {

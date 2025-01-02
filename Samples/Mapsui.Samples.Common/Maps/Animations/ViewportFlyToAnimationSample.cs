@@ -24,13 +24,11 @@ public class ViewportFlyToAnimationSample : ISample
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
         map.Widgets.Add(CreateTextBox("Tap on the map to fly to that location. The fly-to animation zooms out and then in."));
 
-        map.Info += (s, a) =>
+        map.Info += (s, e) =>
         {
-            if (a.MapInfo?.WorldPosition != null)
-            {
-                // 'FlyTo' is a specific navigation that moves to a new center while moving in and out.
-                map.Navigator.FlyTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 1.5, 500);
-            }
+            var mapInfo = e.GetMapInfo();
+            // 'FlyTo' is a specific navigation that moves to a new center while moving in and out.
+            map.Navigator.FlyTo(mapInfo.WorldPosition, mapInfo.Resolution * 1.5, 500);
         };
 
         return map;
