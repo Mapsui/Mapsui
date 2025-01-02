@@ -65,7 +65,7 @@ public class LayerCollection : IEnumerable<ILayer>
     /// <param name="group">The group identifier (default is 0).</param>
     public void Clear(int group = 0)
     {
-        var layersToRemove = _entries.Where(e => e.Group != group).Select(e => e.Layer).ToArray();
+        var layersToRemove = _entries.Where(e => e.Group == group).Select(e => e.Layer).ToArray();
         RemoveInternal(layersToRemove);
         OnChanged([], layersToRemove, []);
     }

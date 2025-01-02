@@ -34,3 +34,14 @@ This is an example of how to forward Mapsui logging to the de facto standard ```
     }
 ```
 
+### Show logging in the map
+
+It is possible to show all Mapsui logging in the map. By default this shows only if the debugger is attached. In most 
+scenarios this is what you want and you don't have to change anything for a release of your app. You could change the 
+logging behavior by setting the static `LoggingWidget.ShowLoggingInMap` to `Yes`, `No` or `ShowOnlyInDebugMode` (the 
+default). 
+
+Logging in the map is implemented through the LoggingWidget which is added by default to the Map class. Usually you
+can just leave it there. If you remove or disable it no logging will be shown in the map.
+
+If you have two maps in your app both will show all Mapsui logging.
