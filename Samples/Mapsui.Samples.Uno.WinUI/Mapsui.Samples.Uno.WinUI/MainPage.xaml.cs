@@ -75,7 +75,7 @@ public sealed partial class MainPage : Page
             Margin = new Thickness(4)
         };
 
-        radioButton.Click += (s, a) =>
+        radioButton.Click += (s, e) =>
         {
             Catch.Exceptions(async () =>
             {

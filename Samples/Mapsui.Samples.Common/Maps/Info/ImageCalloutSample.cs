@@ -42,11 +42,12 @@ public class ImageCalloutSample : ISample
 
     private static void MapOnInfo(object? sender, MapInfoEventArgs e)
     {
-        var calloutStyle = e.MapInfo?.Feature?.Styles.OfType<CalloutStyle>().FirstOrDefault();
+        var mapInfo = e.GetMapInfo();
+        var calloutStyle = mapInfo.Feature?.Styles.OfType<CalloutStyle>().FirstOrDefault();
         if (calloutStyle is not null)
         {
             calloutStyle.Enabled = !calloutStyle.Enabled;
-            e.MapInfo?.Layer?.DataHasChanged();
+            mapInfo.Layer?.DataHasChanged();
         }
     }
 
