@@ -318,9 +318,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public async Task<MapInfo> GetMapInfoAsync(double x, double y, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
-        var mapInfoLayers = layers
-            .Select(l => l is ISourceLayer sl ? sl.SourceLayer : l)
-            .ToList();
+        var featureInfoLayers = layers.Where(l => l is ILayerFeatureInfo).ToList();
 
         var tasks = new List<Task<IEnumerable<MapInfoRecord>>>();
         var result = new MapInfo(new ScreenPosition(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
@@ -339,12 +337,10 @@ public sealed class MapRenderer : IRenderer, IDisposable
             if (intX >= width || intY >= height)
                 return await Task.FromResult(result);
 
-
-
-            for (var index = 0; index < mapInfoLayers.Count; index++)
+            for (var index = 0; index < featureInfoLayers.Count; index++)
             {
                 var list = new ConcurrentQueue<List<MapInfoRecord>>();
-                var infoLayer = mapInfoLayers[index];
+                var infoLayer = featureInfoLayers[index];
                 if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
                 {
                     GetMapInfoAsyncDelegate getMapInfoAsync = async () =>
