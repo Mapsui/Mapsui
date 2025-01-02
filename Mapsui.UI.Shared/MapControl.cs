@@ -69,6 +69,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #pragma warning restore IDISP002
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
+    private static bool _firstRender = true;
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -99,6 +100,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (Renderer is null) return;
         if (Map is null) return;
         if (!Map.Navigator.Viewport.HasSize()) return;
+
+        if (_firstRender)
+        {
+            _firstRender = false;
+            Logger.Log(LogLevel.Information, $"First call to the Mapsui renderer");
+        }
 
         // Start drawing
         _drawing = true;
