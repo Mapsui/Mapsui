@@ -61,7 +61,7 @@ public partial class Index
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        LoggingWidget.ShowLoggingInMap = ShowLoggingInMap.WhenLoggingWidgetIsEnabled; // To show logging in release mode
+        LoggingWidget.ShowLoggingInMap = ShowLoggingInMap.Yes; // To show logging in release mode
         FillComboBoxWithCategories();
     }
 
