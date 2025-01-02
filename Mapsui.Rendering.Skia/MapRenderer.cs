@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -233,7 +234,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
             .ToList();
 
 
-        var list = new List<MapInfoRecord>[mapInfoLayers.Count];
+        var list = new ConcurrentQueue<List<MapInfoRecord>>();
         var result = new MapInfo(new ScreenPosition(x, y), viewport.ScreenToWorld(x, y), viewport.Resolution);
 
         if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
@@ -267,7 +268,8 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
                 for (var index = 0; index < mapInfoLayers.Count; index++)
                 {
-                    var mapList = list[index] = [];
+                    var mapList = new List<MapInfoRecord>();
+                    list.Enqueue(mapList);
                     var infoLayer = mapInfoLayers[index];
 
                     // get information from ILayer
@@ -301,7 +303,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
             // The VisibleFeatureIterator is intended for drawing and puts the bottom features first. In the MapInfo request
             // we want the top feature first. So, we reverse it here.
-            var mapInfos = list.SelectMany(f => f).Reverse();
+            var mapInfos = list.SelectMany(f => f).Reverse().ToList();
             result = new MapInfo(result, mapInfos);
         }
         catch (Exception exception)
@@ -357,8 +359,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
                 for (var index = 0; index < mapInfoLayers.Count; index++)
                 {
-                    var list = new List<MapInfoRecord>[mapInfoLayers.Count];
-                    var mapList = list[index] = [];
+                    var list = new ConcurrentQueue<List<MapInfoRecord>>();
                     var infoLayer = mapInfoLayers[index];
                     if (infoLayer is ILayerFeatureInfo layerFeatureInfo)
                     {
@@ -367,7 +368,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
                             try
                             {
                                 // creating new list to avoid multithreading problems
-                                mapList = new List<MapInfoRecord>();
+                                var mapList = new List<MapInfoRecord>();
                                 // get information from ILayer Feature Info
                                 var features = await layerFeatureInfo.GetFeatureInfoAsync(viewport, x, y);
                                 foreach (var it in features)
@@ -380,13 +381,13 @@ public sealed class MapRenderer : IRenderer, IDisposable
                                 }
 
                                 // atomic replace of new list is thread safe.
-                                list[index] = mapList;
+                                list.Enqueue(mapList);
                             }
                             catch (Exception e)
                             {
                                 Logger.Log(LogLevel.Error, e.Message, e);
                             }
-                            return mapList;
+                            return list.SelectMany(l => l);
                         };
 
                         tasks.Add(getMapInfoAsync());
