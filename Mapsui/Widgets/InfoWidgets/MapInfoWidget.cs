@@ -34,7 +34,7 @@ public class MapInfoWidget : TextBoxWidget
         {
             var info = await a.GetMapInfoAsync();
             var featureText = FeatureToText(info.Feature);
-            if (Text != featureText)
+            if (!string.IsNullOrEmpty(featureText))
             {
                 Text = featureText;
                 _map.RefreshGraphics();
