@@ -23,13 +23,11 @@ public class ViewportCenterAndZoomAnimationSample : ISample
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
         map.Widgets.Add(CreateTextBox("Tap on the map to center on that location and zoom in on it"));
 
-        map.Info += (s, a) =>
+        map.Info += (s, e) =>
         {
-            if (a.MapInfo?.WorldPosition != null)
-            {
-                // Animate to the new center and new resolution
-                map.Navigator.CenterOnAndZoomTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
-            }
+            var mapInfo = e.GetMapInfo();
+            // Animate to the new center and new resolution
+            map.Navigator.CenterOnAndZoomTo(mapInfo.WorldPosition, mapInfo.Resolution * 0.5, 500, Easing.CubicOut);
         };
 
         return map;

@@ -257,7 +257,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         if (info != null)
         {
             var mapInfo = await info.GetMapInfoAsync();
-            var infos = mapInfo?.MapInfoRecords;
+            var infos = mapInfo.MapInfoRecords;
             if (infos != null)
             {
                 foreach (var group in infos.GroupBy(f => f.Layer.Name))

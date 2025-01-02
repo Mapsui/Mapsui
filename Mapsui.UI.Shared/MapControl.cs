@@ -69,6 +69,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #pragma warning restore IDISP002
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
+    private static bool _firstRender = true;
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -99,6 +100,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (Renderer is null) return;
         if (Map is null) return;
         if (!Map.Navigator.Viewport.HasSize()) return;
+
+        if (_firstRender)
+        {
+            _firstRender = false;
+            Logger.Log(LogLevel.Information, $"First call to the Mapsui renderer");
+        }
 
         // Start drawing
         _drawing = true;
@@ -539,9 +546,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <returns>True, if something done </returns>
     private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, TapType tapType)
     {
-        var mapInfo = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
+        var getMapInfo = () => Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Map.Navigator.Viewport, Map?.Layers ?? []);
 
-        return new MapInfoEventArgs(mapInfo, tapType, false);
+        return new MapInfoEventArgs(getMapInfo, tapType, false);
     }
 
     private void SetViewportSize()
