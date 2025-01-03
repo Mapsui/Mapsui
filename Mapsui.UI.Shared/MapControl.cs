@@ -76,7 +76,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
     /// </summary>
 #if __WINDOWSFORMS__
-    [DefaultValue(8)]
+    [DefaultValue(8)] // Fix WOF1000 Error
 #endif
     public int MaxTapGestureMovement { get; set; } = 8;
 
@@ -85,7 +85,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// short time after the user has lifted the finger.
     /// </summary>
 #if __WINDOWSFORMS__
-    [DefaultValue(true)]
+    [DefaultValue(true)] // Fix WOF1000 Error
 #endif
     public bool UseFling { get; set; } = true;
 
