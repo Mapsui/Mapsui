@@ -7,8 +7,9 @@ namespace Mapsui.Rendering.Skia;
 internal class BitmapRenderer
 {
     // The field below is static for performance. Effect has not been measured.
+    // Note that the default FilterQuality is None. Setting it explicitly to Low increases the quality.
     private static readonly SKPaint DefaultPaint = new();
-    private static readonly SKSamplingOptions DefaultSamplingOptions = new(SKFilterMode.Nearest);
+    private static readonly SKSamplingOptions DefaultSamplingOptions = new(SKFilterMode.Linear, SKMipmapMode.None);
 
     public static void Draw(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity = 1f)
     {
