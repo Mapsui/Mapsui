@@ -235,9 +235,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
 
         var list = new ConcurrentQueue<List<MapInfoRecord>>();
-        var result = new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution);
+        var mapInfo = new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution);
 
-        if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
+        if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(mapInfo.ScreenPosition)) ?? false) return mapInfo;
 
         try
         {
@@ -250,14 +250,14 @@ public sealed class MapRenderer : IRenderer, IDisposable
             var intY = (int)screenPosition.Y;
 
             if (intX >= width || intY >= height)
-                return result;
+                return mapInfo;
 
             using (var surface = SKSurface.Create(imageInfo))
             {
                 if (surface == null)
                 {
                     Logger.Log(LogLevel.Error, "SKSurface is null while getting MapInfo.  This is not expected.");
-                    return result;
+                    return mapInfo;
                 }
 
                 surface.Canvas.ClipRect(new SKRect((float)(screenPosition.X - 1), (float)(screenPosition.Y - 1), (float)(screenPosition.X + 1), (float)(screenPosition.Y + 1)));
@@ -303,15 +303,15 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
             // The VisibleFeatureIterator is intended for drawing and puts the bottom features first. In the MapInfo request
             // we want the top feature first. So, we reverse it here.
-            var mapInfos = list.SelectMany(f => f).Reverse().ToList();
-            result = new MapInfo(result, mapInfos);
+            var mapInfoRecords = list.SelectMany(f => f).Reverse().ToList();
+            mapInfo = new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution, mapInfoRecords);
         }
         catch (Exception exception)
         {
             Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
         }
 
-        return result;
+        return mapInfo;
     }
 
     delegate Task<IEnumerable<MapInfoRecord>> GetMapInfoAsyncDelegate();
@@ -321,9 +321,10 @@ public sealed class MapRenderer : IRenderer, IDisposable
         var featureInfoLayers = layers.Where(l => l is ILayerFeatureInfo).ToList();
 
         var tasks = new List<Task<IEnumerable<MapInfoRecord>>>();
-        var result = new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution);
+        var mapInfo = new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution);
 
-        if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return await Task.FromResult(result);
+        if (!viewport.ToExtent()?.Contains(viewport.ScreenToWorld(mapInfo.ScreenPosition)) ?? false)
+            return await Task.FromResult(mapInfo);
 
         try
         {
@@ -334,7 +335,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
             var intY = (int)screenPosition.Y;
 
             if (intX >= width || intY >= height)
-                return await Task.FromResult(result);
+                return await Task.FromResult(mapInfo);
 
             for (var index = 0; index < featureInfoLayers.Count; index++)
             {
@@ -374,14 +375,14 @@ public sealed class MapRenderer : IRenderer, IDisposable
             }
 
             var results = await Task.WhenAll(tasks);
-            return result = new MapInfo(result, results.SelectMany(f => f).Reverse());
+            return new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution, results.SelectMany(f => f).Reverse());
         }
         catch (Exception exception)
         {
             Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
         }
 
-        return await Task.FromResult(result);
+        return await Task.FromResult(mapInfo);
     }
 
     public void Dispose()
