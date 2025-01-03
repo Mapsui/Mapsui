@@ -25,12 +25,8 @@
     <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
   </PropertyGroup>
 
-  <Target Name="GenerateVersionFile" BeforeTargets="SetVersionFromFile">
-    <!-- Run the PowerShell script -->
+  <Target Name="SetVersionFromFile" BeforeTargets="PrepareForBuild" Condition="">
     <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(VersionScriptPath)&quot; &quot;$(GeneratedVersionFile)&quot;" />
-  </Target>
-
-  <Target Name="SetVersionFromFile" BeforeTargets="PrepareForBuild">
     <ReadLinesFromFile File="$(VersionFromGitFile)">
       <Output TaskParameter="Lines" PropertyName="FileVersionContent" />
     </ReadLinesFromFile>
