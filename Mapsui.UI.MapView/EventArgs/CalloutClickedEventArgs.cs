@@ -1,5 +1,6 @@
 ﻿using System;
 using Mapsui.Manipulations;
+using Microsoft.Maui.Graphics;
 
 namespace Mapsui.UI.Maui;
 

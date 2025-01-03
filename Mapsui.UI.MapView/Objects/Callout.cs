@@ -8,6 +8,8 @@ using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using Mapsui.UI.Maui.Extensions;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
 using Color = Microsoft.Maui.Graphics.Color;
 using Point = Microsoft.Maui.Graphics.Point;
 

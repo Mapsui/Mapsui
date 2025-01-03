@@ -1,4 +1,5 @@
 ﻿using Mapsui.Widgets;
+using Microsoft.Maui;
 
 namespace Mapsui.UI.Maui.Extensions;
 
