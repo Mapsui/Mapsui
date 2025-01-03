@@ -54,7 +54,6 @@ public static class EmbeddedResourceLoader
         var nameLength = assembly.GetAssemblyName()?.Length ?? 0;
         similarNames = similarNames.Select(fullName => fullName.Remove(0, nameLength + 1)).ToArray();
         stringBuilder.Append(" Did you try to get any of these embedded resources: " + string.Join("\n ", [.. similarNames]) + ".");
-
         return stringBuilder.ToString();
     }
 }

@@ -6,9 +6,6 @@ using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +13,9 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
