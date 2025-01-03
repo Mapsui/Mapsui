@@ -1,7 +1,8 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <Version>5.0.0-beta.1</Version>
+    <VersionScriptPath>$(SolutionDir)\Scripts\GetVersionFromGitTag.ps1</VersionScriptPath>
+    <VersionFromGitFile>$(SolutionDir)\version-from-git-tag.txt</VersionFromGitFile>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright © Mapsui Developers 2018-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -14,36 +15,51 @@
     <PackageReleaseNotes>Release notes are at https://github.com/Mapsui/Mapsui/releases</PackageReleaseNotes>
     <PackageTags>map maps mapping geo gis osm</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
-    <IsPackable>false</IsPackable> <!--Default to not packable and override in projects that do need to be packed.-->
+    <IsPackable>false</IsPackable>
+    <!--Default to not packable and override in projects that do need to be packed.-->
     <!--Disable Run Api Compat Task causes Build failure on github actions with visual studio 2022 17.5 and .net Compilers Toolset 4.6-->
     <RunApiCompat>false</RunApiCompat>
-	<Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>
     <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
-	<GenerateDocumentationFile>True</GenerateDocumentationFile>
-	<NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
   </PropertyGroup>
 
-	<!--Package Icon Include -->
-	<ItemGroup>
-		<None Include="..\logo\png\icon.png" Pack="true" PackagePath="\"/>
-		<None Include="..\LICENSE" Pack="true" PackagePath="\" />
-	</ItemGroup>
+  <Target Name="GenerateVersionFile" BeforeTargets="SetVersionFromFile">
+    <!-- Run the PowerShell script -->
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(VersionScriptPath)&quot; &quot;$(GeneratedVersionFile)&quot;" />
+  </Target>
+
+  <Target Name="SetVersionFromFile" BeforeTargets="PrepareForBuild">
+    <ReadLinesFromFile File="$(VersionFromGitFile)">
+      <Output TaskParameter="Lines" PropertyName="FileVersionContent" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <Version Condition="'$(FileVersionContent)' != ''">$(FileVersionContent)</Version>
+    </PropertyGroup>
+  </Target>
+
+  <!--Package Icon Include -->
+  <ItemGroup>
+    <None Include="..\logo\png\icon.png" Pack="true" PackagePath="\"/>
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <!-- Common Project Properties -->
   <PropertyGroup>
-	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
-	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	  <LangVersion>12.0</LangVersion>
-      <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
-      <!-- Enable Windows Targeting on non Windows platforms -->
-      <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <LangVersion>12.0</LangVersion>
+    <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
+    <!-- Enable Windows Targeting on non Windows platforms -->
+    <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <ItemGroup>
     <!--Disposable Analyzer-->
     <PackageReference Include="IDisposableAnalyzers">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <!--Threading Analyzer mainly Async Code-->
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers">
