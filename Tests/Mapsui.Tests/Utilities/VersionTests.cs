@@ -11,7 +11,7 @@ public class VersionTests
     public void GetCurrentVersion()
     {
         // act
-        var version = Version.GetCurrentVersion();
+        var version = MapsuiVersion.GetVersion();
 
         // assert
         ClassicAssert.True(version?.ToString().Length > 0);
