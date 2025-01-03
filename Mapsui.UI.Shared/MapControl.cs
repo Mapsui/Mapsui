@@ -104,7 +104,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (_firstRender)
         {
             _firstRender = false;
-            Logger.Log(LogLevel.Information, $"First call to the Mapsui renderer");
+            Logger.Log(LogLevel.Information, $"This is Mapsui {MapsuiVersion.GetVersion()}");
         }
 
         // Start drawing
