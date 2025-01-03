@@ -96,7 +96,6 @@ internal class PictureRenderer
             dispose = true;
             return new SKPaint
             {
-                FilterQuality = SKFilterQuality.Low,
                 ColorFilter = SKColorFilter.CreateBlendMode(blendModeColor.ToSkia(layerOpacity), SKBlendMode.SrcIn)
             };
         };
@@ -108,7 +107,6 @@ internal class PictureRenderer
             dispose = true;
             return new SKPaint
             {
-                FilterQuality = SKFilterQuality.Low,
                 Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity))
             };
         };
