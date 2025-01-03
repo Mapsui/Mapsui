@@ -10,7 +10,7 @@ internal class PictureRenderer
 {
     // The field below is static for performance. Effect has not been measured.
     // Note that setting the FilterQuality to Low increases the quality because the default is None.
-    private static readonly SKPaint DefaultPaint = new() { FilterQuality = SKFilterQuality.Low };
+    private static readonly SKPaint DefaultPaint = new();
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public static void Draw(SKCanvas canvas, SKPicture picture, SKRect rect, float layerOpacity = 1f, Color? blendModeColor = null)
