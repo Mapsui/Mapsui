@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -914,7 +915,7 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
         throw new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file");
     }
 
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         lock (_syncRoot)
         {

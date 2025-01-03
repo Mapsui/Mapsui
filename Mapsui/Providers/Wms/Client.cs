@@ -293,7 +293,7 @@ public class Client
         {
             var doc = new XmlDocument { XmlResolver = null };
 
-            using (var task = await _getStreamAsync(url))
+            await using (var task = await _getStreamAsync(url))
             {
                 using var stReader = new StreamReader(task);
                 using var r = new XmlTextReader(url, stReader) { XmlResolver = null };
