@@ -20,6 +20,7 @@ using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
@@ -595,7 +596,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
     }
 
-    public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
+    public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition)
     {
         IDictionary<string, IEnumerable<IFeature>> result = new Dictionary<string, IEnumerable<IFeature>>();
         var getFeatureInfo = new GetFeatureInfo
@@ -614,12 +615,12 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         var infoFormat = GetFeatureInfoFormat();
 
         var halfSymbolSize = 1.0 / 2.0; // 1 pixel size
-        var point = viewport.ScreenToWorld(screenX, screenY);
-        var minPoint = viewport.ScreenToWorld(screenX - halfSymbolSize, screenY - halfSymbolSize);
-        var maxPoint = viewport.ScreenToWorld(screenX + halfSymbolSize, screenY + halfSymbolSize);
+        var point = viewport.ScreenToWorld(screenPosition);
+        var minPoint = viewport.ScreenToWorld(screenPosition.X - halfSymbolSize, screenPosition.Y - halfSymbolSize);
+        var maxPoint = viewport.ScreenToWorld(screenPosition.X + halfSymbolSize, screenPosition.Y + halfSymbolSize);
 
         var extent = new MRect(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y);
-        var featureInfo = await getFeatureInfo.RequestAsync(resource.OnlineResource!, wmsVersion!, infoFormat, srs!, layer!, extent.MinX, extent.MinY, extent.MaxX, extent.MaxY, (int)screenX, (int)screenY, (int)viewport.Width, (int)viewport.Height).ConfigureAwait(false);
+        var featureInfo = await getFeatureInfo.RequestAsync(resource.OnlineResource!, wmsVersion!, infoFormat, srs!, layer!, extent.MinX, extent.MinY, extent.MaxX, extent.MaxY, (int)screenPosition.X, (int)screenPosition.Y, (int)viewport.Width, (int)viewport.Height).ConfigureAwait(false);
         if (featureInfo != null)
         {
             if (featureInfo.LayerName != null)

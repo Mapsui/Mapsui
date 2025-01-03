@@ -1,3 +1,4 @@
+using Mapsui.Manipulations;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,5 +10,5 @@ namespace Mapsui.Layers;
 /// </summary>
 public interface ILayerFeatureInfo
 {
-    Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY);
+    Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition);
 }
