@@ -66,3 +66,4 @@ AppPackages/
 /docs/samples
 /docs/api/pages
 .vscode
+/version-from-git-tag.txt
