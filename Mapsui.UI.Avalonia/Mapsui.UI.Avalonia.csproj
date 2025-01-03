@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
-    <TargetFrameworks>net8.0</TargetFrameworks>
     <PackageId>Mapsui.Avalonia</PackageId>
     <Description>Avalonia map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) avalonia</PackageTags>

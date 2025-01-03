@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
-    <TargetFrameworks>net8.0</TargetFrameworks>
     <Description>Mapsui - Library for mapping</Description>
     <PackageTags>$(PackageTags) rendering skia</PackageTags>
 		<IsPackable>true</IsPackable>
