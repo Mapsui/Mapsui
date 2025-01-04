@@ -8,6 +8,7 @@ using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Rendering;
@@ -230,15 +231,15 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
             section.ScreenHeight);
     }
 
-    public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
+    public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition)
     {
         var result = new Dictionary<string, IEnumerable<IFeature>>();
         var renderer = GetRenderer();
 
         var tileInfos = Schema.GetTileInfos(viewport.ToExtent().ToExtent(), viewport.Resolution);
-        var (worldX, worldY) = viewport.ScreenToWorldXY(screenX, screenY);
+        var worldPosition = viewport.ScreenToWorld(screenPosition);
         var tileInfo = tileInfos.FirstOrDefault(f =>
-            f.Extent.MinX <= worldX && f.Extent.MaxX >= worldX && f.Extent.MinY <= worldY && f.Extent.MaxY >= worldY);
+            f.Extent.MinX <= worldPosition.X && f.Extent.MaxX >= worldPosition.X && f.Extent.MinY <= worldPosition.Y && f.Extent.MaxY >= worldPosition.Y);
 
         if (tileInfo == null)
         {
@@ -246,17 +247,14 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         }
 
         var layer = await CreateRenderLayerAsync(tileInfo, renderer);
-        var layerRenderLayer = layer.RenderLayer;
-        layerRenderLayer.IsMapInfoLayer = true;
-        var layers = new List<ILayer>
-        {
-            layerRenderLayer
-        };
+        var renderLayer = layer.RenderLayer;
+        renderLayer.IsMapInfoLayer = true;
+        List<ILayer> renderLayers = [renderLayer];
 
-        var info = renderer.GetMapInfo(screenX, screenY, viewport, layers);
+        var info = renderer.GetMapInfo(screenPosition, viewport, renderLayers);
         if (info != null)
         {
-            var mapInfo = await info.GetMapInfoAsync();
+            var mapInfo = await RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, renderLayers);
             var infos = mapInfo.MapInfoRecords;
             if (infos != null)
             {
