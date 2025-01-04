@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
+using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Rendering;
 using Mapsui.Tiling.Fetcher;
@@ -78,8 +79,8 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
 
     public ILayer SourceLayer { get; }
     private RasterizingTileSource RasterizingTileSource => (RasterizingTileSource)TileSource;
-    public Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
+    public Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition)
     {
-        return RasterizingTileSource.GetFeatureInfoAsync(viewport, screenX, screenY);
+        return RasterizingTileSource.GetFeatureInfoAsync(viewport, screenPosition);
     }
 }
