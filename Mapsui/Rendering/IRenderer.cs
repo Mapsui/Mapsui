@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Mapsui.Layers;
+using Mapsui.Manipulations;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 
 namespace Mapsui.Rendering;
 
-public interface IRenderer : IRenderInfo, IDisposable
+public interface IRenderer : IDisposable
 {
     void Render(object target, Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Color? background = null);
     MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
@@ -16,4 +17,6 @@ public interface IRenderer : IRenderInfo, IDisposable
     IDictionary<Type, IWidgetRenderer> WidgetRenders { get; }
     IDictionary<Type, IStyleRenderer> StyleRenderers { get; }
     ImageSourceCache ImageSourceCache { get; }
+    MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0);
+
 }
