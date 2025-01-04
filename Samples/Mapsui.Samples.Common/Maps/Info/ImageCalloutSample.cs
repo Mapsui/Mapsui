@@ -27,6 +27,8 @@ public class ImageCalloutSample : ISample
     public string Name => "Image Callout";
     public string Category => "Info";
 
+    private const string _pointLayerName = "Point with callout";
+
     public Task<Map> CreateMapAsync()
     {
         var map = new Map();
@@ -36,7 +38,7 @@ public class ImageCalloutSample : ISample
         map.Layers.Add(pointLayer);
         map.Navigator.CenterOnAndZoomTo(map.Layers.Get(1).Extent!.Centroid, map.Navigator.Resolutions[5]);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _pointLayerName));
         map.Info += (s, e) => MapOnInfo(s, e, pointLayer);
 
         return Task.FromResult(map);
@@ -57,9 +59,8 @@ public class ImageCalloutSample : ISample
     {
         return new Layer
         {
-            Name = "Point with callout",
+            Name = _pointLayerName,
             DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
-            IsMapInfoLayer = true
         };
     }
 

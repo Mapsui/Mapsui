@@ -29,9 +29,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private const string _calloutLayerName = "Callouts";
     private const string _pinLayerName = "Pins";
     private const string _drawableLayerName = "Drawables";
-    private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer = new(f => f.Feature) { Name = _calloutLayerName, IsMapInfoLayer = true };
-    private readonly ObservableMemoryLayer<Pin> _mapPinLayer = new(f => f.Feature) { Name = _pinLayerName, IsMapInfoLayer = true };
-    private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer = new(f => f.Feature) { Name = _drawableLayerName, IsMapInfoLayer = true };
+    private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer = new(f => f.Feature) { Name = _calloutLayerName };
+    private readonly ObservableMemoryLayer<Pin> _mapPinLayer = new(f => f.Feature) { Name = _pinLayerName };
+    private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer = new(f => f.Feature) { Name = _drawableLayerName };
     private ImageButtonWidget? _mapZoomInButton;
     private ImageButtonWidget? _mapZoomOutButton;
     private ImageButtonWidget? _mapMyLocationButton;
@@ -130,7 +130,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// </summary>
     public Objects.MyLocationLayer MyLocationLayer { get; } = new() { Enabled = true };
 
-    public IEnumerable<ILayer> MapInfoLayers => [_mapCalloutLayer, _mapPinLayer, _mapDrawableLayer];
+    public IEnumerable<ILayer> MapInfoLayers => [_mapCalloutLayer, _mapPinLayer, _mapDrawableLayer, MyLocationLayer];
 
     /// <summary>
     /// Should my location be visible on map

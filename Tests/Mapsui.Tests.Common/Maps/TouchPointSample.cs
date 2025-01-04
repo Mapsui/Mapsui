@@ -65,7 +65,6 @@ public sealed class TouchPointSample : ISample, IDisposable
         var memoryLayer = new MemoryLayer
         {
             Name = "Key",
-            IsMapInfoLayer = true,
             Features = features,
             Style = pinStyle
         };

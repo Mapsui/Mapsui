@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using Mapsui.Tiling;
+using Mapsui.Tiling.Layers;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -42,7 +43,7 @@ public sealed class ManyMutatingLayersSample : ISample, IDisposable
         map.Layers.Add(CreatePointLayers(_random, features).ToArray());
         map.Navigator.ZoomToBox(map.Layers.Get(0).Extent);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l is not TileLayer));
 
         InitializeTimer(_timer1, map, features);
         InitializeTimer(_timer2, map, features);
@@ -92,7 +93,6 @@ public sealed class ManyMutatingLayersSample : ISample, IDisposable
             Enabled = true,
             Name = $"Layer {i}",
             DataSource = CreateMemoryProvider(features),
-            IsMapInfoLayer = true,
             Style = new SymbolStyle
             {
                 SymbolType = SymbolType.Ellipse,

@@ -24,6 +24,8 @@ public class SingleCalloutSample : ISample
     public string Name => "Single Callout";
     public string Category => "Info";
 
+    private const string _calloutLayerName = "Cities with callouts";
+
     public Task<Map> CreateMapAsync()
     {
         var map = new Map();
@@ -34,7 +36,7 @@ public class SingleCalloutSample : ISample
         map.Navigator.CenterOnAndZoomTo(map.Layers.Get(1).Extent!.Centroid, map.Navigator.Resolutions[5]);
         map.Info += (s, e) => MapOnInfo(s, e, pointLayer);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _calloutLayerName));
 
         return Task.FromResult(map);
     }
@@ -54,8 +56,7 @@ public class SingleCalloutSample : ISample
     {
         return new MemoryLayer
         {
-            Name = "Cities with callouts",
-            IsMapInfoLayer = true,
+            Name = _calloutLayerName,
             Features = new MemoryProvider(GetCitiesFromEmbeddedResource()).Features,
             Style = SymbolStyles.CreatePinStyle(symbolScale: 0.7),
         };

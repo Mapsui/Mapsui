@@ -526,12 +526,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     /// <inheritdoc />
-    public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)
-    {
-        return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
-    }
-
-    /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
         using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity, renderFormat: renderFormat, quality: quality);
@@ -543,7 +537,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return new MapInfoEventArgs(screenPosition, worldPosition, GetMapInfo, GetGetRemoteMapInfoAsync, tapType, Map.Navigator.Viewport, false);
     }
 
-    protected MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
+    // Todo: Make protected again.
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
     {
         return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
     }

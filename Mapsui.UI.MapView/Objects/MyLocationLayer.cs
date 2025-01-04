@@ -151,7 +151,6 @@ public class MyLocationLayer : BaseLayer
     {
         _mapView = default!; // will be set in constructor with MapView
         Enabled = false;
-        IsMapInfoLayer = true;
 
         _feature = new GeometryFeature
         {

@@ -101,4 +101,10 @@ public sealed class RegressionMapControl : IMapControl
     {
         Renderer.Dispose();
     }
+
+    //!!! Todo: Remove
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
+    {
+        throw new NotImplementedException();
+    }
 }

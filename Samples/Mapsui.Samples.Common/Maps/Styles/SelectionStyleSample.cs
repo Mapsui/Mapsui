@@ -25,7 +25,7 @@ internal class SelectionStyleSample : ISample
         map.Layers.Add(pointLayer);
         map.Info += (s, e) => ToggleSelected(e.GetMapInfo([pointLayer]).Feature);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Points"));
 
         return Task.FromResult(map);
     }
@@ -41,7 +41,6 @@ internal class SelectionStyleSample : ISample
     {
         DataSource = new MemoryProvider(CreatePoints().Select(p => new PointFeature(p))),
         Style = CreateStyle(),
-        IsMapInfoLayer = true
     };
 
     private static IStyle CreateStyle()

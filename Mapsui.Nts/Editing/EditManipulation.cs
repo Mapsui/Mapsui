@@ -10,7 +10,7 @@ public static class EditManipulation
 {
     public static bool OnPointerPressed(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl)
     {
-        var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
+        var mapInfo = mapControl.GetMapInfo(screenPosition, [editManager.Layer]);
         if (editManager.EditMode == EditMode.Modify && mapInfo.Feature != null)
             return editManager.StartDragging(mapInfo, editManager.VertexRadius);
         if (editManager.EditMode == EditMode.Rotate && mapInfo.Feature != null)
@@ -25,12 +25,12 @@ public static class EditManipulation
         var result = false;
         if (isHovering)
         {
-            editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
+            editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition, [editManager.Layer]));
             result = false;
         }
         else
         {
-            var args = mapControl.GetMapInfo(screenPosition);
+            var args = mapControl.GetMapInfo(screenPosition, [editManager.Layer]);
             if (editManager.EditMode == EditMode.Modify)
                 result = editManager.Dragging(args?.WorldPosition?.ToPoint());
             if (editManager.EditMode == EditMode.Rotate)
@@ -66,7 +66,7 @@ public static class EditManipulation
 
         if (editManager.EditMode == EditMode.Modify)
         {
-            var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
+            var mapInfo = mapControl.GetMapInfo(screenPosition, [editManager.Layer]);
             if (shiftPressed || tapType == TapType.Double || tapType == TapType.Long)
             {
                 return editManager.TryDeleteCoordinate(
@@ -75,7 +75,7 @@ public static class EditManipulation
             else if (mapInfo.MapInfoRecord?.Style is not SymbolStyle) // Do not add a vertex when tapping on a vertex because that is not usually what you want.
             {
                 return editManager.TryInsertCoordinate(
-                    mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
+                    mapControl.GetMapInfo(screenPosition, [editManager.Layer]));
             }
         }
         else if (editManager.EditMode is EditMode.DrawingPolygon or EditMode.DrawingLine)
@@ -95,7 +95,7 @@ public static class EditManipulation
 
         if (editManager.SelectMode)
         {
-            var mapInfo = mapControl.GetMapInfo(screenPosition);
+            var mapInfo = mapControl.GetMapInfo(screenPosition, [editManager.Layer]);
             if (mapInfo.Feature != null)
             {
                 var currentValue = (bool?)mapInfo.Feature["Selected"] == true;

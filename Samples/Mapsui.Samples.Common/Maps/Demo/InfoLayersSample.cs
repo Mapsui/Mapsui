@@ -4,6 +4,7 @@ using Mapsui.Nts;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
@@ -18,9 +19,9 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class InfoLayersSample : ISample, ISampleTest
 {
-    private const string InfoLayerName = "Info Layer";
-    private const string PolygonLayerName = "Polygon Layer";
-    private const string LineLayerName = "Line Layer";
+    private const string _infoLayerName = "Info Layer";
+    private const string _polygonLayerName = "Polygon Layer";
+    private const string _lineLayerName = "Line Layer";
 
     public string Name => "Map Info";
     public string Category => "Demo";
@@ -32,11 +33,9 @@ public class InfoLayersSample : ISample, ISampleTest
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateInfoLayer(map.Extent));
         map.Layers.Add(CreatePolygonLayer());
-        map.Layers.Add(new WritableLayer());
         map.Layers.Add(CreateLineLayer());
 
-        map.Widgets.Add(new MapInfoWidget(map));
-
+        map.Widgets.Add(new MapInfoWidget(map, l => l is not TileLayer));
 
         return map;
     }
@@ -46,53 +45,33 @@ public class InfoLayersSample : ISample, ISampleTest
         return Task.FromResult(CreateMap());
     }
 
-    private static ILayer CreatePolygonLayer()
+    private static MemoryLayer CreatePolygonLayer() => new()
     {
-        var features = new List<IFeature> { CreatePolygonFeature(), CreateMultiPolygonFeature() };
+        Name = _polygonLayerName,
+        Features = new List<IFeature> { CreatePolygonFeature(), CreateMultiPolygonFeature() },
+        Style = null,
+    };
 
-        var layer = new MemoryLayer
-        {
-            Name = PolygonLayerName,
-            Features = features,
-            Style = null,
-            IsMapInfoLayer = true
-        };
-
-        return layer;
-    }
-
-    private static ILayer CreateLineLayer()
+    private static MemoryLayer CreateLineLayer() => new()
     {
-        return new MemoryLayer
-        {
-            Name = LineLayerName,
-            Features = new[] { CreateLineFeature() },
-            Style = null,
-            IsMapInfoLayer = true
-        };
-    }
+        Name = _lineLayerName,
+        Features = [CreateLineFeature()],
+        Style = null,
+    };
 
-    private static GeometryFeature CreateMultiPolygonFeature()
+    private static GeometryFeature CreateMultiPolygonFeature() => new()
     {
-        var feature = new GeometryFeature
-        {
-            Geometry = CreateMultiPolygon(),
-            ["Name"] = "Multipolygon 1"
-        };
-        feature.Styles.Add(new VectorStyle { Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black) });
-        return feature;
-    }
+        Geometry = CreateMultiPolygon(),
+        ["Name"] = "Multipolygon 1",
+        Styles = [new VectorStyle { Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black) }]
+    };
 
-    private static GeometryFeature CreatePolygonFeature()
+    private static GeometryFeature CreatePolygonFeature() => new()
     {
-        var feature = new GeometryFeature
-        {
-            Geometry = CreatePolygon(),
-            ["Name"] = "Polygon 1"
-        };
-        feature.Styles.Add(new VectorStyle());
-        return feature;
-    }
+        Geometry = CreatePolygon(),
+        ["Name"] = "Polygon 1",
+        Styles = [new VectorStyle()]
+    };
 
     private static GeometryFeature CreateLineFeature()
     {
@@ -100,41 +79,41 @@ public class InfoLayersSample : ISample, ISampleTest
         {
             Geometry = CreateLine(),
             ["Name"] = "Line 1",
-            Styles = new List<IStyle> { new VectorStyle { Line = new Pen(Color.Violet, 6) } }
+            Styles = [new VectorStyle { Line = new Pen(Color.Violet, 6) }]
         };
     }
 
     private static MultiPolygon CreateMultiPolygon()
     {
-        return new MultiPolygon(new[] {
-            new Polygon(new LinearRing(new[] {
+        return new MultiPolygon([
+            new Polygon(new LinearRing([
                 new Coordinate(4000000, 3000000),
                 new Coordinate(4000000, 2000000),
                 new Coordinate(3000000, 2000000),
                 new Coordinate(3000000, 3000000),
                 new Coordinate(4000000, 3000000)
-            })),
+            ])),
 
-            new(new LinearRing(new[] {
+            new(new LinearRing([
                 new Coordinate(4000000, 5000000),
                 new Coordinate(4000000, 4000000),
                 new Coordinate(3000000, 4000000),
                 new Coordinate(3000000, 5000000),
                 new Coordinate(4000000, 5000000)
-            }))
-        });
+            ]))
+        ]);
     }
 
     private static Polygon CreatePolygon()
     {
-        return new Polygon(new LinearRing(new[]
-        {
+        return new Polygon(new LinearRing(
+        [
             new Coordinate(1000000, 1000000),
             new Coordinate(1000000, -1000000),
             new Coordinate(-1000000, -1000000),
             new Coordinate(-1000000, 1000000),
             new Coordinate(1000000, 1000000)
-        }));
+        ]));
     }
 
     private static LineString CreateLine()
@@ -143,37 +122,28 @@ public class InfoLayersSample : ISample, ISampleTest
         var offsetY = -2000000;
         var stepSize = -2000000;
 
-        return new LineString(new[]
-        {
+        return new LineString(
+        [
             new Coordinate(offsetX + stepSize,      offsetY + stepSize),
             new Coordinate(offsetX + stepSize * 2,  offsetY + stepSize),
             new Coordinate(offsetX + stepSize * 2,  offsetY + stepSize * 2),
             new Coordinate(offsetX + stepSize * 3,  offsetY + stepSize * 2),
             new Coordinate(offsetX + stepSize * 3,  offsetY + stepSize * 3)
-        });
+        ]);
     }
 
-    private static ILayer CreateInfoLayer(MRect? envelope)
+    private static Layer CreateInfoLayer(MRect? envelope) => new(_infoLayerName)
     {
-        var random = new Random(7);
+        DataSource = RandomPointsBuilder.CreateProviderWithRandomPoints(envelope, 25, new Random(7)),
+        Style = CreateSymbolStyle(),
+    };
 
-        return new Layer(InfoLayerName)
-        {
-            DataSource = RandomPointsBuilder.CreateProviderWithRandomPoints(envelope, 25, random),
-            Style = CreateSymbolStyle(),
-            IsMapInfoLayer = true
-        };
-    }
-
-    private static SymbolStyle CreateSymbolStyle()
+    private static SymbolStyle CreateSymbolStyle() => new()
     {
-        return new SymbolStyle
-        {
-            SymbolScale = 0.8,
-            Fill = new Brush(new Color(213, 234, 194)),
-            Outline = { Color = Color.Gray, Width = 1 }
-        };
-    }
+        SymbolScale = 0.8,
+        Fill = new Brush(new Color(213, 234, 194)),
+        Outline = { Color = Color.Gray, Width = 1 }
+    };
 
     public async Task InitializeTestAsync(IMapControl mapControl)
     {

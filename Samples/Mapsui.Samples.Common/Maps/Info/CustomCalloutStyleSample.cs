@@ -22,6 +22,8 @@ public class CustomCalloutStyleSample : IMapControlSample
     public string Name => "Custom Callout Style";
     public string Category => "Info";
 
+    private const string _customStyleLayerName = "Custom Callout Layer";
+
     public void Setup(IMapControl mapControl)
     {
         mapControl.Map = CreateMap();
@@ -40,7 +42,7 @@ public class CustomCalloutStyleSample : IMapControlSample
         var calloutLayer = CreateCalloutLayer(CreateFeatures(points));
         map.Layers.Add(calloutLayer);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _customStyleLayerName));
         map.Info += (s, e) => MapOnInfo(s, e, calloutLayer);
 
         return map;
@@ -60,7 +62,7 @@ public class CustomCalloutStyleSample : IMapControlSample
 
     private static MemoryLayer CreateCalloutLayer(IEnumerable<IFeature> features) => new()
     {
-        Name = "Custom Style Layer",
+        Name = _customStyleLayerName,
         Features = features,
         Style = new StyleCollection
         {
@@ -69,7 +71,6 @@ public class CustomCalloutStyleSample : IMapControlSample
                 new CustomCalloutStyle()
             },
         },
-        IsMapInfoLayer = true
     };
 
     private static List<IFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)
