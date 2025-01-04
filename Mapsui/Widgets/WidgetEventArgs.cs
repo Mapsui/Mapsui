@@ -6,12 +6,17 @@ namespace Mapsui.Widgets;
 /// <summary>
 /// Arguments for a touched event of a widget
 /// </summary>
-public class WidgetEventArgs(ScreenPosition position, TapType tapType, bool leftButton, bool shiftPressed, Func<MapInfo> getMapInfo) : EventArgs
+public class WidgetEventArgs(ScreenPosition position, MPoint worldPosition, TapType tapType, bool leftButton, bool shiftPressed, Func<MapInfo> getMapInfo) : BaseEventArgs
 {
     /// <summary>
     /// Screen Position of touch in device independent units (or DIP or DP)
     /// </summary>
     public ScreenPosition Position { get; } = position;
+
+    /// <summary>
+    /// World Position of touch in map coordinates
+    /// </summary>
+    public MPoint WorldPosition { get; } = worldPosition;
 
     /// <summary>
     /// Number of clicks on the Widget

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui;
 
-public class MapInfoEventArgs : EventArgs
+public class MapInfoEventArgs : BaseEventArgs
 {
     public MapInfoEventArgs(ScreenPosition screenPosition, MPoint worldPosition, Func<MapInfo> getMapInfo,
         Func<Task<MapInfo>> getRemoteMapInfoAsync, TapType tapType, bool handled)

@@ -569,43 +569,47 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
 
-    private bool OnWidgetPointerPressed(ScreenPosition position, bool shiftPressed)
+    private bool OnWidgetPointerPressed(ScreenPosition screenPosition, bool shiftPressed)
     {
-        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed, () => GetMapInfo(position))))
+            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(screenPosition, worldPosition, 0, true, shiftPressed, () => GetMapInfo(screenPosition))))
                 return true;
         }
         return false;
     }
 
-    private bool OnWidgetPointerMoved(ScreenPosition position, bool leftButton, bool shiftPressed)
+    private bool OnWidgetPointerMoved(ScreenPosition screenPosition, bool leftButton, bool shiftPressed)
     {
-        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
-            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(position, 0, leftButton, shiftPressed, () => GetMapInfo(position))))
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
+            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(screenPosition, worldPosition, 0, leftButton, shiftPressed, () => GetMapInfo(screenPosition))))
                 return true;
         return false;
     }
 
-    private bool OnWidgetPointerReleased(ScreenPosition position, bool shiftPressed)
+    private bool OnWidgetPointerReleased(ScreenPosition screenPosition, bool shiftPressed)
     {
-        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
-            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed, () => GetMapInfo(position))))
+            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(screenPosition, worldPosition, 0, true, shiftPressed, () => GetMapInfo(screenPosition))))
                 return true;
         }
         return false;
     }
 
-    private bool OnWidgetTapped(ScreenPosition position, TapType tapType, bool shiftPressed)
+    private bool OnWidgetTapped(ScreenPosition screenPosition, TapType tapType, bool shiftPressed)
     {
-        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(screenPosition, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapType: {tapType} KeyState: {shiftPressed}");
-            var e = new WidgetEventArgs(position, tapType, true, shiftPressed, () => GetMapInfo(position));
+            var e = new WidgetEventArgs(screenPosition, worldPosition, tapType, true, shiftPressed, () => GetMapInfo(screenPosition));
             if (widget.OnTapped(Map.Navigator, e))
                 return true;
         }
