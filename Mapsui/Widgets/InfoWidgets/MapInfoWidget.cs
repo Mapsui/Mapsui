@@ -1,7 +1,9 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace Mapsui.Widgets.InfoWidgets;
@@ -32,7 +34,7 @@ public class MapInfoWidget : TextBoxWidget
         // Try to load async data
         Catch.Exceptions(async () =>
         {
-            var info = await a.GetRemoteMapInfoAsync();
+            var info = await a.GetRemoteMapInfoAsync(_map.Layers.Where(t => t is ILayerFeatureInfo));
             var featureText = FeatureToText(info.Feature);
             if (!string.IsNullOrEmpty(featureText))
             {

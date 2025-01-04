@@ -1,6 +1,5 @@
 ﻿using Mapsui.Manipulations;
 using System;
-using System.Threading.Tasks;
 
 namespace Mapsui.Widgets;
 
@@ -8,7 +7,7 @@ namespace Mapsui.Widgets;
 /// Arguments for a touched event of a widget
 /// </summary>
 public class WidgetEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, bool leftButton,
-    bool shiftPressed, Func<MapInfo> getMapInfo, Func<Task<MapInfo>> getRemoteMapInfoAsync)
+    bool shiftPressed, Func<MapInfo> getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)
     : BaseEventArgs(screenPosition, worldPosition, tapType, getMapInfo, getRemoteMapInfoAsync)
 {
     /// <summary>
