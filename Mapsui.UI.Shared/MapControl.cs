@@ -572,10 +572,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnWidgetPointerPressed(ScreenPosition screenPosition, bool shiftPressed)
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map.Layers);
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(screenPosition, worldPosition, 0, true, shiftPressed, () => GetMapInfo(screenPosition))))
+            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(screenPosition, worldPosition, 0, true, shiftPressed, 
+                () => GetMapInfo(screenPosition), getRemoteMapInfoAsync)))
                 return true;
         }
         return false;
@@ -584,8 +586,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnWidgetPointerMoved(ScreenPosition screenPosition, bool leftButton, bool shiftPressed)
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map.Layers);
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
-            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(screenPosition, worldPosition, 0, leftButton, shiftPressed, () => GetMapInfo(screenPosition))))
+            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(screenPosition, worldPosition, 0, leftButton, shiftPressed, 
+                () => GetMapInfo(screenPosition), getRemoteMapInfoAsync)))
                 return true;
         return false;
     }
@@ -593,10 +597,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnWidgetPointerReleased(ScreenPosition screenPosition, bool shiftPressed)
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map.Layers);
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
-            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(screenPosition, worldPosition, 0, true, shiftPressed, () => GetMapInfo(screenPosition))))
+            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(screenPosition, worldPosition, 0, true, shiftPressed,
+                () => GetMapInfo(screenPosition), getRemoteMapInfoAsync)))
                 return true;
         }
         return false;
@@ -605,11 +611,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnWidgetTapped(ScreenPosition screenPosition, TapType tapType, bool shiftPressed)
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map.Layers);
         var touchedWidgets = WidgetInput.GetWidgetsAtPosition(screenPosition, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapType: {tapType} KeyState: {shiftPressed}");
-            var e = new WidgetEventArgs(screenPosition, worldPosition, tapType, true, shiftPressed, () => GetMapInfo(screenPosition));
+            var e = new WidgetEventArgs(screenPosition, worldPosition, tapType, true, shiftPressed,
+                () => GetMapInfo(screenPosition), getRemoteMapInfoAsync);
             if (widget.OnTapped(Map.Navigator, e))
                 return true;
         }
