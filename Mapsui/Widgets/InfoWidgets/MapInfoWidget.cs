@@ -32,9 +32,9 @@ public class MapInfoWidget : TextBoxWidget
         // Try to load async data
         Catch.Exceptions(async () =>
         {
-            var info = await mapInfo.GetMapInfoAsync();
+            var info = await a.GetRemoteMapInfoAsync();
             var featureText = FeatureToText(info.Feature);
-            if (Text != featureText)
+            if (!string.IsNullOrEmpty(featureText))
             {
                 Text = featureText;
                 _map.RefreshGraphics();
