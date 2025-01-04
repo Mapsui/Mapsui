@@ -26,9 +26,8 @@ public class ViewportFlyToAnimationSample : ISample
 
         map.Info += (s, e) =>
         {
-            var mapInfo = e.GetMapInfo();
             // 'FlyTo' is a specific navigation that moves to a new center while moving in and out.
-            map.Navigator.FlyTo(mapInfo.WorldPosition, mapInfo.Resolution * 1.5, 500);
+            map.Navigator.FlyTo(e.WorldPosition, e.Viewport.Resolution * 1.5, 500);
         };
 
         return map;

@@ -28,7 +28,7 @@ public class MapInfoWidget : TextBoxWidget
 
     private void Map_Info(object? sender, MapInfoEventArgs a)
     {
-        var mapInfo = a.GetMapInfo();
+        var mapInfo = a.GetMapInfo(_map.Layers.Where(l => l.IsMapInfoLayer));
         Text = FeatureToText(mapInfo.Feature);
         _map.RefreshGraphics();
         // Try to load async data

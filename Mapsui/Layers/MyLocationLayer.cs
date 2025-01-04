@@ -4,6 +4,7 @@ using Mapsui.Styles;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Animation = Mapsui.Animations.Animation;
 
 namespace Mapsui.Layers;
@@ -500,7 +501,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
 
     private void HandleClicked(object? sender, MapInfoEventArgs e)
     {
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo(_map.Layers.Where(l => l.IsMapInfoLayer));
         if (mapInfo.Feature != null && mapInfo.Feature.Equals(_feature))
         {
             Clicked?.Invoke(this, e);

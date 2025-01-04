@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace Mapsui;
 
 public delegate Task<MapInfo> GetRemoteMapInfoAsyncDelegate(ScreenPosition screenPosition, IEnumerable<ILayer> layers);
+public delegate MapInfo GetMapInfoDelegate(ScreenPosition screenPosition, IEnumerable<ILayer> layers);
 
-public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType,
-    Func<MapInfo> getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync) : EventArgs
+public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, Viewport viewport,
+    GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync) : EventArgs
 {
     /// <summary>
     /// Screen Position of touch in device independent units (or DIP or DP)
@@ -27,9 +28,14 @@ public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, 
     public TapType TapType { get; } = tapType;
 
     /// <summary>
+    /// Viewport of the map at the moment of the event
+    /// </summary>
+    public Viewport Viewport { get; } = viewport;
+
+    /// <summary>
     /// Function to get the MapInfo
     /// </summary>
-    public Func<MapInfo> GetMapInfo { get; } = getMapInfo;
+    public Func<IEnumerable<ILayer>, MapInfo> GetMapInfo { get; } = (l) => getMapInfo(screenPosition, l);
 
     /// <summary>
     /// Function to get the remote MapInfo

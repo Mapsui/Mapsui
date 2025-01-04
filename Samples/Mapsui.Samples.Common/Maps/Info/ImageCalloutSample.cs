@@ -15,6 +15,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
+#pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Info;
@@ -31,18 +32,19 @@ public class ImageCalloutSample : ISample
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(CreatePointLayer());
+        var pointLayer = CreatePointLayer();
+        map.Layers.Add(pointLayer);
         map.Navigator.CenterOnAndZoomTo(map.Layers.Get(1).Extent!.Centroid, map.Navigator.Resolutions[5]);
 
         map.Widgets.Add(new MapInfoWidget(map));
-        map.Info += MapOnInfo;
+        map.Info += (s, e) => MapOnInfo(s, e, pointLayer);
 
         return Task.FromResult(map);
     }
 
-    private static void MapOnInfo(object? sender, MapInfoEventArgs e)
+    private static void MapOnInfo(object? sender, MapInfoEventArgs e, ILayer pointLayer)
     {
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo([pointLayer]);
         var calloutStyle = mapInfo.Feature?.Styles.OfType<CalloutStyle>().FirstOrDefault();
         if (calloutStyle is not null)
         {

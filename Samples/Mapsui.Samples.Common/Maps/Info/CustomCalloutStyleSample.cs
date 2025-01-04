@@ -37,17 +37,18 @@ public class CustomCalloutStyleSample : IMapControlSample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var points = RandomPointsBuilder.GenerateRandomPoints(map.Extent, 25, 9898);
-        map.Layers.Add(CreateCalloutLayer(CreateFeatures(points)));
+        var calloutLayer = CreateCalloutLayer(CreateFeatures(points));
+        map.Layers.Add(calloutLayer);
 
         map.Widgets.Add(new MapInfoWidget(map));
-        map.Info += MapOnInfo;
+        map.Info += (s, e) => MapOnInfo(s, e, calloutLayer);
 
         return map;
     }
 
-    private static void MapOnInfo(object? sender, MapInfoEventArgs e)
+    private static void MapOnInfo(object? sender, MapInfoEventArgs e, ILayer calloutLayer)
     {
-        var feature = e.GetMapInfo().Feature;
+        var feature = e.GetMapInfo([calloutLayer]).Feature;
         if (feature is not null)
         {
             if (feature["show-callout"]?.ToString() == "true")

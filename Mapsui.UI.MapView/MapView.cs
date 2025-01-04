@@ -130,6 +130,8 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// </summary>
     public Objects.MyLocationLayer MyLocationLayer { get; } = new() { Enabled = true };
 
+    public IEnumerable<ILayer> MapInfoLayers => [_mapCalloutLayer, _mapPinLayer, _mapDrawableLayer];
+
     /// <summary>
     /// Should my location be visible on map
     /// </summary>
@@ -530,7 +532,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private void HandlerInfo(MapInfoEventArgs e)
     {
         // Click on pin?
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo(MapInfoLayers);
         if (mapInfo.Layer == _mapPinLayer)
         {
             Pin? clickedPin = null;
@@ -640,7 +642,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             var worldPosition = map.Navigator.Viewport.ScreenToWorld(screenPosition);
             var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, map.Navigator.Viewport, map.Layers);
             var mapInfoEventArgs = new MapInfoEventArgs(screenPosition, worldPosition,
-                () => GetMapInfo(screenPosition), getRemoteMapInfoAsync, e.TapType, handled);
+                GetMapInfo, GetRemoteMapInfoAsync, e.TapType, map.Navigator.Viewport, handled);
 
             HandlerInfo(mapInfoEventArgs);
 

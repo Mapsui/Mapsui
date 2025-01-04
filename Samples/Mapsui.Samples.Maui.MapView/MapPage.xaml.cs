@@ -81,7 +81,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
         if (e is null)
             return;
 
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo(mapView.MapInfoLayers);
 
         if (mapInfo.Feature != null)
         {
