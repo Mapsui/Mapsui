@@ -531,11 +531,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
     }
 
-    public Task<MapInfo> GetMapInfoAsync(ScreenPosition screenPosition, int margin = 0)
-    {
-        return Renderer.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
-    }
-
     /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
@@ -552,9 +547,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, TapType tapType)
     {
         var getMapInfo = () => Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? []);
-        var getMapInfoAsync = () => Renderer.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? []);
+        var getMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? []);
 
-        return new MapInfoEventArgs(getMapInfo, getMapInfoAsync, tapType, false);
+        return new MapInfoEventArgs(getMapInfo, tapType, false);
     }
 
     private void SetViewportSize()

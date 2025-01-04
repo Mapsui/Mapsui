@@ -247,17 +247,14 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         }
 
         var layer = await CreateRenderLayerAsync(tileInfo, renderer);
-        var layerRenderLayer = layer.RenderLayer;
-        layerRenderLayer.IsMapInfoLayer = true;
-        var layers = new List<ILayer>
-        {
-            layerRenderLayer
-        };
+        var renderLayer = layer.RenderLayer;
+        renderLayer.IsMapInfoLayer = true;
+        List<ILayer> renderLayers = [renderLayer];
 
-        var info = renderer.GetMapInfo(screenPosition, viewport, layers);
+        var info = renderer.GetMapInfo(screenPosition, viewport, renderLayers);
         if (info != null)
         {
-            var mapInfo = await renderer.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
+            var mapInfo = await RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, renderLayers);
             var infos = mapInfo.MapInfoRecords;
             if (infos != null)
             {
