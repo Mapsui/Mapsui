@@ -7832,15 +7832,12 @@ references:
   commentId: T:Mapsui.Layers.ILayerFeatureInfo
   fullName: Mapsui.Layers.ILayerFeatureInfo
   nameWithType: ILayerFeatureInfo
-- uid: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name: GetFeatureInfoAsync(Viewport, double, double)
-  href: pages/Mapsui.Layers.ILayerFeatureInfo.html#Mapsui_Layers_ILayerFeatureInfo_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_
-  commentId: M:Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name.vb: GetFeatureInfoAsync(Viewport, Double, Double)
-  fullName: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport, double, double)
-  fullName.vb: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport, Double, Double)
-  nameWithType: ILayerFeatureInfo.GetFeatureInfoAsync(Viewport, double, double)
-  nameWithType.vb: ILayerFeatureInfo.GetFeatureInfoAsync(Viewport, Double, Double)
+- uid: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  name: GetFeatureInfoAsync(Viewport, ScreenPosition)
+  href: pages/Mapsui.Layers.ILayerFeatureInfo.html#Mapsui_Layers_ILayerFeatureInfo_GetFeatureInfoAsync_Mapsui_Viewport_Mapsui_Manipulations_ScreenPosition_
+  commentId: M:Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  fullName: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync(Mapsui.Viewport, Mapsui.Manipulations.ScreenPosition)
+  nameWithType: ILayerFeatureInfo.GetFeatureInfoAsync(Viewport, ScreenPosition)
 - uid: Mapsui.Layers.ILayerFeatureInfo.GetFeatureInfoAsync*
   name: GetFeatureInfoAsync
   href: pages/Mapsui.Layers.ILayerFeatureInfo.html#Mapsui_Layers_ILayerFeatureInfo_GetFeatureInfoAsync_
@@ -7969,15 +7966,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ImageLayer.FetchDelay
   nameWithType: ImageLayer.FetchDelay
-- uid: Mapsui.Layers.ImageLayer.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name: GetFeatureInfoAsync(Viewport, double, double)
-  href: pages/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_
-  commentId: M:Mapsui.Layers.ImageLayer.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name.vb: GetFeatureInfoAsync(Viewport, Double, Double)
-  fullName: Mapsui.Layers.ImageLayer.GetFeatureInfoAsync(Mapsui.Viewport, double, double)
-  fullName.vb: Mapsui.Layers.ImageLayer.GetFeatureInfoAsync(Mapsui.Viewport, Double, Double)
-  nameWithType: ImageLayer.GetFeatureInfoAsync(Viewport, double, double)
-  nameWithType.vb: ImageLayer.GetFeatureInfoAsync(Viewport, Double, Double)
+- uid: Mapsui.Layers.ImageLayer.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  name: GetFeatureInfoAsync(Viewport, ScreenPosition)
+  href: pages/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_GetFeatureInfoAsync_Mapsui_Viewport_Mapsui_Manipulations_ScreenPosition_
+  commentId: M:Mapsui.Layers.ImageLayer.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  fullName: Mapsui.Layers.ImageLayer.GetFeatureInfoAsync(Mapsui.Viewport, Mapsui.Manipulations.ScreenPosition)
+  nameWithType: ImageLayer.GetFeatureInfoAsync(Viewport, ScreenPosition)
 - uid: Mapsui.Layers.ImageLayer.GetFeatureInfoAsync*
   name: GetFeatureInfoAsync
   href: pages/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_GetFeatureInfoAsync_
@@ -11672,42 +11666,15 @@ references:
   commentId: T:Mapsui.MapInfo
   fullName: Mapsui.MapInfo
   nameWithType: MapInfo
-- uid: Mapsui.MapInfo.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double)
-  name: MapInfo(ScreenPosition, MPoint, double)
-  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_System_Double_
-  commentId: M:Mapsui.MapInfo.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double)
-  name.vb: New(ScreenPosition, MPoint, Double)
-  fullName: Mapsui.MapInfo.MapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, double)
-  fullName.vb: Mapsui.MapInfo.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Double)
-  nameWithType: MapInfo.MapInfo(ScreenPosition, MPoint, double)
-  nameWithType.vb: MapInfo.New(ScreenPosition, MPoint, Double)
 - uid: Mapsui.MapInfo.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord})
-  name: MapInfo(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>)
+  name: MapInfo(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>?)
   href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_System_Double_System_Collections_Generic_IEnumerable_Mapsui_Rendering_MapInfoRecord__
   commentId: M:Mapsui.MapInfo.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord})
   name.vb: New(ScreenPosition, MPoint, Double, IEnumerable(Of MapInfoRecord))
-  fullName: Mapsui.MapInfo.MapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, double, System.Collections.Generic.IEnumerable<Mapsui.Rendering.MapInfoRecord>)
+  fullName: Mapsui.MapInfo.MapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, double, System.Collections.Generic.IEnumerable<Mapsui.Rendering.MapInfoRecord>?)
   fullName.vb: Mapsui.MapInfo.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Double, System.Collections.Generic.IEnumerable(Of Mapsui.Rendering.MapInfoRecord))
-  nameWithType: MapInfo.MapInfo(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>)
+  nameWithType: MapInfo.MapInfo(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>?)
   nameWithType.vb: MapInfo.New(ScreenPosition, MPoint, Double, IEnumerable(Of MapInfoRecord))
-- uid: Mapsui.MapInfo.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord},System.Threading.Tasks.Task)
-  name: MapInfo(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>, Task)
-  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_System_Double_System_Collections_Generic_IEnumerable_Mapsui_Rendering_MapInfoRecord__System_Threading_Tasks_Task_
-  commentId: M:Mapsui.MapInfo.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord},System.Threading.Tasks.Task)
-  name.vb: New(ScreenPosition, MPoint, Double, IEnumerable(Of MapInfoRecord), Task)
-  fullName: Mapsui.MapInfo.MapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, double, System.Collections.Generic.IEnumerable<Mapsui.Rendering.MapInfoRecord>, System.Threading.Tasks.Task)
-  fullName.vb: Mapsui.MapInfo.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Double, System.Collections.Generic.IEnumerable(Of Mapsui.Rendering.MapInfoRecord), System.Threading.Tasks.Task)
-  nameWithType: MapInfo.MapInfo(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>, Task)
-  nameWithType.vb: MapInfo.New(ScreenPosition, MPoint, Double, IEnumerable(Of MapInfoRecord), Task)
-- uid: Mapsui.MapInfo.#ctor(Mapsui.MapInfoBase,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord},System.Threading.Tasks.Task)
-  name: MapInfo(MapInfoBase, IEnumerable<MapInfoRecord>, Task)
-  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo__ctor_Mapsui_MapInfoBase_System_Collections_Generic_IEnumerable_Mapsui_Rendering_MapInfoRecord__System_Threading_Tasks_Task_
-  commentId: M:Mapsui.MapInfo.#ctor(Mapsui.MapInfoBase,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord},System.Threading.Tasks.Task)
-  name.vb: New(MapInfoBase, IEnumerable(Of MapInfoRecord), Task)
-  fullName: Mapsui.MapInfo.MapInfo(Mapsui.MapInfoBase, System.Collections.Generic.IEnumerable<Mapsui.Rendering.MapInfoRecord>, System.Threading.Tasks.Task)
-  fullName.vb: Mapsui.MapInfo.New(Mapsui.MapInfoBase, System.Collections.Generic.IEnumerable(Of Mapsui.Rendering.MapInfoRecord), System.Threading.Tasks.Task)
-  nameWithType: MapInfo.MapInfo(MapInfoBase, IEnumerable<MapInfoRecord>, Task)
-  nameWithType.vb: MapInfo.New(MapInfoBase, IEnumerable(Of MapInfoRecord), Task)
 - uid: Mapsui.MapInfo.#ctor*
   name: MapInfo
   href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo__ctor_
@@ -11718,176 +11685,125 @@ references:
   fullName.vb: Mapsui.MapInfo.New
   nameWithType: MapInfo.MapInfo
   nameWithType.vb: MapInfo.New
-- uid: Mapsui.MapInfo.GetMapInfoAsync
-  name: GetMapInfoAsync()
-  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_GetMapInfoAsync
-  commentId: M:Mapsui.MapInfo.GetMapInfoAsync
-  fullName: Mapsui.MapInfo.GetMapInfoAsync()
-  nameWithType: MapInfo.GetMapInfoAsync()
-- uid: Mapsui.MapInfo.GetMapInfoAsync*
-  name: GetMapInfoAsync
-  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_GetMapInfoAsync_
-  commentId: Overload:Mapsui.MapInfo.GetMapInfoAsync
-  isSpec: "True"
-  fullName: Mapsui.MapInfo.GetMapInfoAsync
-  nameWithType: MapInfo.GetMapInfoAsync
-- uid: Mapsui.MapInfoBase
-  name: MapInfoBase
-  href: pages/Mapsui.MapInfoBase.html
-  commentId: T:Mapsui.MapInfoBase
-  fullName: Mapsui.MapInfoBase
-  nameWithType: MapInfoBase
-- uid: Mapsui.MapInfoBase.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord})
-  name: MapInfoBase(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>)
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_System_Double_System_Collections_Generic_IEnumerable_Mapsui_Rendering_MapInfoRecord__
-  commentId: M:Mapsui.MapInfoBase.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Double,System.Collections.Generic.IEnumerable{Mapsui.Rendering.MapInfoRecord})
-  name.vb: New(ScreenPosition, MPoint, Double, IEnumerable(Of MapInfoRecord))
-  fullName: Mapsui.MapInfoBase.MapInfoBase(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, double, System.Collections.Generic.IEnumerable<Mapsui.Rendering.MapInfoRecord>)
-  fullName.vb: Mapsui.MapInfoBase.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Double, System.Collections.Generic.IEnumerable(Of Mapsui.Rendering.MapInfoRecord))
-  nameWithType: MapInfoBase.MapInfoBase(ScreenPosition, MPoint, double, IEnumerable<MapInfoRecord>)
-  nameWithType.vb: MapInfoBase.New(ScreenPosition, MPoint, Double, IEnumerable(Of MapInfoRecord))
-- uid: Mapsui.MapInfoBase.#ctor*
-  name: MapInfoBase
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase__ctor_
-  commentId: Overload:Mapsui.MapInfoBase.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: Mapsui.MapInfoBase.MapInfoBase
-  fullName.vb: Mapsui.MapInfoBase.New
-  nameWithType: MapInfoBase.MapInfoBase
-  nameWithType.vb: MapInfoBase.New
-- uid: Mapsui.MapInfoBase.ClearResults
-  name: ClearResults()
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_ClearResults
-  commentId: M:Mapsui.MapInfoBase.ClearResults
-  fullName: Mapsui.MapInfoBase.ClearResults()
-  nameWithType: MapInfoBase.ClearResults()
-- uid: Mapsui.MapInfoBase.ClearResults*
-  name: ClearResults
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_ClearResults_
-  commentId: Overload:Mapsui.MapInfoBase.ClearResults
-  isSpec: "True"
-  fullName: Mapsui.MapInfoBase.ClearResults
-  nameWithType: MapInfoBase.ClearResults
-- uid: Mapsui.MapInfoBase.Feature
+- uid: Mapsui.MapInfo.Feature
   name: Feature
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Feature
-  commentId: P:Mapsui.MapInfoBase.Feature
-  fullName: Mapsui.MapInfoBase.Feature
-  nameWithType: MapInfoBase.Feature
-- uid: Mapsui.MapInfoBase.Feature*
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_Feature
+  commentId: P:Mapsui.MapInfo.Feature
+  fullName: Mapsui.MapInfo.Feature
+  nameWithType: MapInfo.Feature
+- uid: Mapsui.MapInfo.Feature*
   name: Feature
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Feature_
-  commentId: Overload:Mapsui.MapInfoBase.Feature
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_Feature_
+  commentId: Overload:Mapsui.MapInfo.Feature
   isSpec: "True"
-  fullName: Mapsui.MapInfoBase.Feature
-  nameWithType: MapInfoBase.Feature
-- uid: Mapsui.MapInfoBase.Layer
+  fullName: Mapsui.MapInfo.Feature
+  nameWithType: MapInfo.Feature
+- uid: Mapsui.MapInfo.Layer
   name: Layer
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Layer
-  commentId: P:Mapsui.MapInfoBase.Layer
-  fullName: Mapsui.MapInfoBase.Layer
-  nameWithType: MapInfoBase.Layer
-- uid: Mapsui.MapInfoBase.Layer*
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_Layer
+  commentId: P:Mapsui.MapInfo.Layer
+  fullName: Mapsui.MapInfo.Layer
+  nameWithType: MapInfo.Layer
+- uid: Mapsui.MapInfo.Layer*
   name: Layer
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Layer_
-  commentId: Overload:Mapsui.MapInfoBase.Layer
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_Layer_
+  commentId: Overload:Mapsui.MapInfo.Layer
   isSpec: "True"
-  fullName: Mapsui.MapInfoBase.Layer
-  nameWithType: MapInfoBase.Layer
-- uid: Mapsui.MapInfoBase.MapInfoRecord
+  fullName: Mapsui.MapInfo.Layer
+  nameWithType: MapInfo.Layer
+- uid: Mapsui.MapInfo.MapInfoRecord
   name: MapInfoRecord
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_MapInfoRecord
-  commentId: P:Mapsui.MapInfoBase.MapInfoRecord
-  fullName: Mapsui.MapInfoBase.MapInfoRecord
-  nameWithType: MapInfoBase.MapInfoRecord
-- uid: Mapsui.MapInfoBase.MapInfoRecord*
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_MapInfoRecord
+  commentId: P:Mapsui.MapInfo.MapInfoRecord
+  fullName: Mapsui.MapInfo.MapInfoRecord
+  nameWithType: MapInfo.MapInfoRecord
+- uid: Mapsui.MapInfo.MapInfoRecord*
   name: MapInfoRecord
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_MapInfoRecord_
-  commentId: Overload:Mapsui.MapInfoBase.MapInfoRecord
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_MapInfoRecord_
+  commentId: Overload:Mapsui.MapInfo.MapInfoRecord
   isSpec: "True"
-  fullName: Mapsui.MapInfoBase.MapInfoRecord
-  nameWithType: MapInfoBase.MapInfoRecord
-- uid: Mapsui.MapInfoBase.MapInfoRecords
+  fullName: Mapsui.MapInfo.MapInfoRecord
+  nameWithType: MapInfo.MapInfoRecord
+- uid: Mapsui.MapInfo.MapInfoRecords
   name: MapInfoRecords
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_MapInfoRecords
-  commentId: P:Mapsui.MapInfoBase.MapInfoRecords
-  fullName: Mapsui.MapInfoBase.MapInfoRecords
-  nameWithType: MapInfoBase.MapInfoRecords
-- uid: Mapsui.MapInfoBase.MapInfoRecords*
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_MapInfoRecords
+  commentId: P:Mapsui.MapInfo.MapInfoRecords
+  fullName: Mapsui.MapInfo.MapInfoRecords
+  nameWithType: MapInfo.MapInfoRecords
+- uid: Mapsui.MapInfo.MapInfoRecords*
   name: MapInfoRecords
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_MapInfoRecords_
-  commentId: Overload:Mapsui.MapInfoBase.MapInfoRecords
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_MapInfoRecords_
+  commentId: Overload:Mapsui.MapInfo.MapInfoRecords
   isSpec: "True"
-  fullName: Mapsui.MapInfoBase.MapInfoRecords
-  nameWithType: MapInfoBase.MapInfoRecords
-- uid: Mapsui.MapInfoBase.Resolution
+  fullName: Mapsui.MapInfo.MapInfoRecords
+  nameWithType: MapInfo.MapInfoRecords
+- uid: Mapsui.MapInfo.Resolution
   name: Resolution
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Resolution
-  commentId: P:Mapsui.MapInfoBase.Resolution
-  fullName: Mapsui.MapInfoBase.Resolution
-  nameWithType: MapInfoBase.Resolution
-- uid: Mapsui.MapInfoBase.Resolution*
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_Resolution
+  commentId: P:Mapsui.MapInfo.Resolution
+  fullName: Mapsui.MapInfo.Resolution
+  nameWithType: MapInfo.Resolution
+- uid: Mapsui.MapInfo.Resolution*
   name: Resolution
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Resolution_
-  commentId: Overload:Mapsui.MapInfoBase.Resolution
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_Resolution_
+  commentId: Overload:Mapsui.MapInfo.Resolution
   isSpec: "True"
-  fullName: Mapsui.MapInfoBase.Resolution
-  nameWithType: MapInfoBase.Resolution
-- uid: Mapsui.MapInfoBase.ScreenPosition
+  fullName: Mapsui.MapInfo.Resolution
+  nameWithType: MapInfo.Resolution
+- uid: Mapsui.MapInfo.ScreenPosition
   name: ScreenPosition
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_ScreenPosition
-  commentId: P:Mapsui.MapInfoBase.ScreenPosition
-  fullName: Mapsui.MapInfoBase.ScreenPosition
-  nameWithType: MapInfoBase.ScreenPosition
-- uid: Mapsui.MapInfoBase.ScreenPosition*
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_ScreenPosition
+  commentId: P:Mapsui.MapInfo.ScreenPosition
+  fullName: Mapsui.MapInfo.ScreenPosition
+  nameWithType: MapInfo.ScreenPosition
+- uid: Mapsui.MapInfo.ScreenPosition*
   name: ScreenPosition
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_ScreenPosition_
-  commentId: Overload:Mapsui.MapInfoBase.ScreenPosition
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_ScreenPosition_
+  commentId: Overload:Mapsui.MapInfo.ScreenPosition
   isSpec: "True"
-  fullName: Mapsui.MapInfoBase.ScreenPosition
-  nameWithType: MapInfoBase.ScreenPosition
-- uid: Mapsui.MapInfoBase.Style
+  fullName: Mapsui.MapInfo.ScreenPosition
+  nameWithType: MapInfo.ScreenPosition
+- uid: Mapsui.MapInfo.Style
   name: Style
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Style
-  commentId: P:Mapsui.MapInfoBase.Style
-  fullName: Mapsui.MapInfoBase.Style
-  nameWithType: MapInfoBase.Style
-- uid: Mapsui.MapInfoBase.Style*
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_Style
+  commentId: P:Mapsui.MapInfo.Style
+  fullName: Mapsui.MapInfo.Style
+  nameWithType: MapInfo.Style
+- uid: Mapsui.MapInfo.Style*
   name: Style
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_Style_
-  commentId: Overload:Mapsui.MapInfoBase.Style
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_Style_
+  commentId: Overload:Mapsui.MapInfo.Style
   isSpec: "True"
-  fullName: Mapsui.MapInfoBase.Style
-  nameWithType: MapInfoBase.Style
-- uid: Mapsui.MapInfoBase.WorldPosition
+  fullName: Mapsui.MapInfo.Style
+  nameWithType: MapInfo.Style
+- uid: Mapsui.MapInfo.WorldPosition
   name: WorldPosition
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_WorldPosition
-  commentId: P:Mapsui.MapInfoBase.WorldPosition
-  fullName: Mapsui.MapInfoBase.WorldPosition
-  nameWithType: MapInfoBase.WorldPosition
-- uid: Mapsui.MapInfoBase.WorldPosition*
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_WorldPosition
+  commentId: P:Mapsui.MapInfo.WorldPosition
+  fullName: Mapsui.MapInfo.WorldPosition
+  nameWithType: MapInfo.WorldPosition
+- uid: Mapsui.MapInfo.WorldPosition*
   name: WorldPosition
-  href: pages/Mapsui.MapInfoBase.html#Mapsui_MapInfoBase_WorldPosition_
-  commentId: Overload:Mapsui.MapInfoBase.WorldPosition
+  href: pages/Mapsui.MapInfo.html#Mapsui_MapInfo_WorldPosition_
+  commentId: Overload:Mapsui.MapInfo.WorldPosition
   isSpec: "True"
-  fullName: Mapsui.MapInfoBase.WorldPosition
-  nameWithType: MapInfoBase.WorldPosition
+  fullName: Mapsui.MapInfo.WorldPosition
+  nameWithType: MapInfo.WorldPosition
 - uid: Mapsui.MapInfoEventArgs
   name: MapInfoEventArgs
   href: pages/Mapsui.MapInfoEventArgs.html
   commentId: T:Mapsui.MapInfoEventArgs
   fullName: Mapsui.MapInfoEventArgs
   nameWithType: MapInfoEventArgs
-- uid: Mapsui.MapInfoEventArgs.#ctor(System.Func{Mapsui.MapInfo},Mapsui.Manipulations.TapType,System.Boolean)
-  name: MapInfoEventArgs(Func<MapInfo>, TapType, bool)
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_System_Func_Mapsui_MapInfo__Mapsui_Manipulations_TapType_System_Boolean_
-  commentId: M:Mapsui.MapInfoEventArgs.#ctor(System.Func{Mapsui.MapInfo},Mapsui.Manipulations.TapType,System.Boolean)
-  name.vb: New(Func(Of MapInfo), TapType, Boolean)
-  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(System.Func<Mapsui.MapInfo>, Mapsui.Manipulations.TapType, bool)
-  fullName.vb: Mapsui.MapInfoEventArgs.New(System.Func(Of Mapsui.MapInfo), Mapsui.Manipulations.TapType, Boolean)
-  nameWithType: MapInfoEventArgs.MapInfoEventArgs(Func<MapInfo>, TapType, bool)
-  nameWithType.vb: MapInfoEventArgs.New(Func(Of MapInfo), TapType, Boolean)
+- uid: Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Func{Mapsui.MapInfo},System.Func{System.Threading.Tasks.Task{Mapsui.MapInfo}},Mapsui.Manipulations.TapType,System.Boolean)
+  name: MapInfoEventArgs(ScreenPosition, MPoint, Func<MapInfo>, Func<Task<MapInfo>>, TapType, bool)
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_System_Func_Mapsui_MapInfo__System_Func_System_Threading_Tasks_Task_Mapsui_MapInfo___Mapsui_Manipulations_TapType_System_Boolean_
+  commentId: M:Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Func{Mapsui.MapInfo},System.Func{System.Threading.Tasks.Task{Mapsui.MapInfo}},Mapsui.Manipulations.TapType,System.Boolean)
+  name.vb: New(ScreenPosition, MPoint, Func(Of MapInfo), Func(Of Task(Of MapInfo)), TapType, Boolean)
+  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, System.Func<Mapsui.MapInfo>, System.Func<System.Threading.Tasks.Task<Mapsui.MapInfo>>, Mapsui.Manipulations.TapType, bool)
+  fullName.vb: Mapsui.MapInfoEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, System.Func(Of Mapsui.MapInfo), System.Func(Of System.Threading.Tasks.Task(Of Mapsui.MapInfo)), Mapsui.Manipulations.TapType, Boolean)
+  nameWithType: MapInfoEventArgs.MapInfoEventArgs(ScreenPosition, MPoint, Func<MapInfo>, Func<Task<MapInfo>>, TapType, bool)
+  nameWithType.vb: MapInfoEventArgs.New(ScreenPosition, MPoint, Func(Of MapInfo), Func(Of Task(Of MapInfo)), TapType, Boolean)
 - uid: Mapsui.MapInfoEventArgs.#ctor*
   name: MapInfoEventArgs
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_
@@ -11911,6 +11827,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.MapInfoEventArgs.GetMapInfo
   nameWithType: MapInfoEventArgs.GetMapInfo
+- uid: Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_GetRemoteMapInfoAsync
+  commentId: P:Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
+  fullName: Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
+  nameWithType: MapInfoEventArgs.GetRemoteMapInfoAsync
+- uid: Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
+  nameWithType: MapInfoEventArgs.GetRemoteMapInfoAsync
 - uid: Mapsui.MapInfoEventArgs.Handled
   name: Handled
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_Handled
@@ -11924,6 +11853,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.MapInfoEventArgs.Handled
   nameWithType: MapInfoEventArgs.Handled
+- uid: Mapsui.MapInfoEventArgs.ScreenPosition
+  name: ScreenPosition
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_ScreenPosition
+  commentId: P:Mapsui.MapInfoEventArgs.ScreenPosition
+  fullName: Mapsui.MapInfoEventArgs.ScreenPosition
+  nameWithType: MapInfoEventArgs.ScreenPosition
+- uid: Mapsui.MapInfoEventArgs.ScreenPosition*
+  name: ScreenPosition
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_ScreenPosition_
+  commentId: Overload:Mapsui.MapInfoEventArgs.ScreenPosition
+  isSpec: "True"
+  fullName: Mapsui.MapInfoEventArgs.ScreenPosition
+  nameWithType: MapInfoEventArgs.ScreenPosition
 - uid: Mapsui.MapInfoEventArgs.TapType
   name: TapType
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_TapType
@@ -11937,6 +11879,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.MapInfoEventArgs.TapType
   nameWithType: MapInfoEventArgs.TapType
+- uid: Mapsui.MapInfoEventArgs.WorldPosition
+  name: WorldPosition
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_WorldPosition
+  commentId: P:Mapsui.MapInfoEventArgs.WorldPosition
+  fullName: Mapsui.MapInfoEventArgs.WorldPosition
+  nameWithType: MapInfoEventArgs.WorldPosition
+- uid: Mapsui.MapInfoEventArgs.WorldPosition*
+  name: WorldPosition
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_WorldPosition_
+  commentId: Overload:Mapsui.MapInfoEventArgs.WorldPosition
+  isSpec: "True"
+  fullName: Mapsui.MapInfoEventArgs.WorldPosition
+  nameWithType: MapInfoEventArgs.WorldPosition
 - uid: Mapsui.Navigator
   name: Navigator
   href: pages/Mapsui.Navigator.html
@@ -20737,15 +20692,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wms.WmsProvider.GetExtent
   nameWithType: WmsProvider.GetExtent
-- uid: Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name: GetFeatureInfoAsync(Viewport, double, double)
-  href: pages/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_
-  commentId: M:Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name.vb: GetFeatureInfoAsync(Viewport, Double, Double)
-  fullName: Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoAsync(Mapsui.Viewport, double, double)
-  fullName.vb: Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoAsync(Mapsui.Viewport, Double, Double)
-  nameWithType: WmsProvider.GetFeatureInfoAsync(Viewport, double, double)
-  nameWithType.vb: WmsProvider.GetFeatureInfoAsync(Viewport, Double, Double)
+- uid: Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  name: GetFeatureInfoAsync(Viewport, ScreenPosition)
+  href: pages/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_GetFeatureInfoAsync_Mapsui_Viewport_Mapsui_Manipulations_ScreenPosition_
+  commentId: M:Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  fullName: Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoAsync(Mapsui.Viewport, Mapsui.Manipulations.ScreenPosition)
+  nameWithType: WmsProvider.GetFeatureInfoAsync(Viewport, ScreenPosition)
 - uid: Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoAsync*
   name: GetFeatureInfoAsync
   href: pages/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_GetFeatureInfoAsync_
@@ -21111,6 +21063,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wms.XmlGetFeatureInfoParser.ParseWMSResult
   nameWithType: XmlGetFeatureInfoParser.ParseWMSResult
+- uid: Mapsui.RemoteMapInfoFetcher
+  name: RemoteMapInfoFetcher
+  href: pages/Mapsui.RemoteMapInfoFetcher.html
+  commentId: T:Mapsui.RemoteMapInfoFetcher
+  fullName: Mapsui.RemoteMapInfoFetcher
+  nameWithType: RemoteMapInfoFetcher
+- uid: Mapsui.RemoteMapInfoFetcher.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.RemoteMapInfoFetcher.html#Mapsui_RemoteMapInfoFetcher_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.RemoteMapInfoFetcher.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.RemoteMapInfoFetcher.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.RemoteMapInfoFetcher.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: RemoteMapInfoFetcher.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: RemoteMapInfoFetcher.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.RemoteMapInfoFetcher.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.RemoteMapInfoFetcher.html#Mapsui_RemoteMapInfoFetcher_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.RemoteMapInfoFetcher.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.RemoteMapInfoFetcher.GetRemoteMapInfoAsync
+  nameWithType: RemoteMapInfoFetcher.GetRemoteMapInfoAsync
 - uid: Mapsui.Rendering
   name: Mapsui.Rendering
   href: pages/Mapsui.Rendering.html
@@ -21149,28 +21123,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.DefaultRendererFactory.GetRenderer
   nameWithType: DefaultRendererFactory.GetRenderer
-- uid: Mapsui.Rendering.IRenderInfo
-  name: IRenderInfo
-  href: pages/Mapsui.Rendering.IRenderInfo.html
-  commentId: T:Mapsui.Rendering.IRenderInfo
-  fullName: Mapsui.Rendering.IRenderInfo
-  nameWithType: IRenderInfo
-- uid: Mapsui.Rendering.IRenderInfo.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
-  name: GetMapInfo(double, double, Viewport, IEnumerable<ILayer>, int)
-  href: pages/Mapsui.Rendering.IRenderInfo.html#Mapsui_Rendering_IRenderInfo_GetMapInfo_System_Double_System_Double_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
-  commentId: M:Mapsui.Rendering.IRenderInfo.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
-  name.vb: GetMapInfo(Double, Double, Viewport, IEnumerable(Of ILayer), Integer)
-  fullName: Mapsui.Rendering.IRenderInfo.GetMapInfo(double, double, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, int)
-  fullName.vb: Mapsui.Rendering.IRenderInfo.GetMapInfo(Double, Double, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Integer)
-  nameWithType: IRenderInfo.GetMapInfo(double, double, Viewport, IEnumerable<ILayer>, int)
-  nameWithType.vb: IRenderInfo.GetMapInfo(Double, Double, Viewport, IEnumerable(Of ILayer), Integer)
-- uid: Mapsui.Rendering.IRenderInfo.GetMapInfo*
-  name: GetMapInfo
-  href: pages/Mapsui.Rendering.IRenderInfo.html#Mapsui_Rendering_IRenderInfo_GetMapInfo_
-  commentId: Overload:Mapsui.Rendering.IRenderInfo.GetMapInfo
-  isSpec: "True"
-  fullName: Mapsui.Rendering.IRenderInfo.GetMapInfo
-  nameWithType: IRenderInfo.GetMapInfo
 - uid: Mapsui.Rendering.IRenderService
   name: IRenderService
   href: pages/Mapsui.Rendering.IRenderService.html
@@ -21183,6 +21135,22 @@ references:
   commentId: T:Mapsui.Rendering.IRenderer
   fullName: Mapsui.Rendering.IRenderer
   nameWithType: IRenderer
+- uid: Mapsui.Rendering.IRenderer.GetMapInfo(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  name: GetMapInfo(ScreenPosition, Viewport, IEnumerable<ILayer>, int)
+  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_GetMapInfo_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
+  commentId: M:Mapsui.Rendering.IRenderer.GetMapInfo(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  name.vb: GetMapInfo(ScreenPosition, Viewport, IEnumerable(Of ILayer), Integer)
+  fullName: Mapsui.Rendering.IRenderer.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, int)
+  fullName.vb: Mapsui.Rendering.IRenderer.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Integer)
+  nameWithType: IRenderer.GetMapInfo(ScreenPosition, Viewport, IEnumerable<ILayer>, int)
+  nameWithType.vb: IRenderer.GetMapInfo(ScreenPosition, Viewport, IEnumerable(Of ILayer), Integer)
+- uid: Mapsui.Rendering.IRenderer.GetMapInfo*
+  name: GetMapInfo
+  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_GetMapInfo_
+  commentId: Overload:Mapsui.Rendering.IRenderer.GetMapInfo
+  isSpec: "True"
+  fullName: Mapsui.Rendering.IRenderer.GetMapInfo
+  nameWithType: IRenderer.GetMapInfo
 - uid: Mapsui.Rendering.IRenderer.ImageSourceCache
   name: ImageSourceCache
   href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_ImageSourceCache
@@ -22684,15 +22652,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.EnabledVectorCache
   nameWithType: MapRenderer.EnabledVectorCache
-- uid: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
-  name: GetMapInfo(double, double, Viewport, IEnumerable<ILayer>, int)
-  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
-  commentId: M:Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
-  name.vb: GetMapInfo(Double, Double, Viewport, IEnumerable(Of ILayer), Integer)
-  fullName: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(double, double, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, int)
-  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Double, Double, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Integer)
-  nameWithType: MapRenderer.GetMapInfo(double, double, Viewport, IEnumerable<ILayer>, int)
-  nameWithType.vb: MapRenderer.GetMapInfo(Double, Double, Viewport, IEnumerable(Of ILayer), Integer)
+- uid: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  name: GetMapInfo(ScreenPosition, Viewport, IEnumerable<ILayer>, int)
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  name.vb: GetMapInfo(ScreenPosition, Viewport, IEnumerable(Of ILayer), Integer)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, int)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Integer)
+  nameWithType: MapRenderer.GetMapInfo(ScreenPosition, Viewport, IEnumerable<ILayer>, int)
+  nameWithType.vb: MapRenderer.GetMapInfo(ScreenPosition, Viewport, IEnumerable(Of ILayer), Integer)
 - uid: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_
@@ -29459,15 +29427,12 @@ references:
   fullName.vb: Mapsui.Tiling.Layers.RasterizingTileLayer.New
   nameWithType: RasterizingTileLayer.RasterizingTileLayer
   nameWithType.vb: RasterizingTileLayer.New
-- uid: Mapsui.Tiling.Layers.RasterizingTileLayer.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name: GetFeatureInfoAsync(Viewport, double, double)
-  href: pages/Mapsui.Tiling.Layers.RasterizingTileLayer.html#Mapsui_Tiling_Layers_RasterizingTileLayer_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_
-  commentId: M:Mapsui.Tiling.Layers.RasterizingTileLayer.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name.vb: GetFeatureInfoAsync(Viewport, Double, Double)
-  fullName: Mapsui.Tiling.Layers.RasterizingTileLayer.GetFeatureInfoAsync(Mapsui.Viewport, double, double)
-  fullName.vb: Mapsui.Tiling.Layers.RasterizingTileLayer.GetFeatureInfoAsync(Mapsui.Viewport, Double, Double)
-  nameWithType: RasterizingTileLayer.GetFeatureInfoAsync(Viewport, double, double)
-  nameWithType.vb: RasterizingTileLayer.GetFeatureInfoAsync(Viewport, Double, Double)
+- uid: Mapsui.Tiling.Layers.RasterizingTileLayer.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  name: GetFeatureInfoAsync(Viewport, ScreenPosition)
+  href: pages/Mapsui.Tiling.Layers.RasterizingTileLayer.html#Mapsui_Tiling_Layers_RasterizingTileLayer_GetFeatureInfoAsync_Mapsui_Viewport_Mapsui_Manipulations_ScreenPosition_
+  commentId: M:Mapsui.Tiling.Layers.RasterizingTileLayer.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  fullName: Mapsui.Tiling.Layers.RasterizingTileLayer.GetFeatureInfoAsync(Mapsui.Viewport, Mapsui.Manipulations.ScreenPosition)
+  nameWithType: RasterizingTileLayer.GetFeatureInfoAsync(Viewport, ScreenPosition)
 - uid: Mapsui.Tiling.Layers.RasterizingTileLayer.GetFeatureInfoAsync*
   name: GetFeatureInfoAsync
   href: pages/Mapsui.Tiling.Layers.RasterizingTileLayer.html#Mapsui_Tiling_Layers_RasterizingTileLayer_GetFeatureInfoAsync_
@@ -29733,15 +29698,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Tiling.Provider.RasterizingTileSource.Attribution
   nameWithType: RasterizingTileSource.Attribution
-- uid: Mapsui.Tiling.Provider.RasterizingTileSource.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name: GetFeatureInfoAsync(Viewport, double, double)
-  href: pages/Mapsui.Tiling.Provider.RasterizingTileSource.html#Mapsui_Tiling_Provider_RasterizingTileSource_GetFeatureInfoAsync_Mapsui_Viewport_System_Double_System_Double_
-  commentId: M:Mapsui.Tiling.Provider.RasterizingTileSource.GetFeatureInfoAsync(Mapsui.Viewport,System.Double,System.Double)
-  name.vb: GetFeatureInfoAsync(Viewport, Double, Double)
-  fullName: Mapsui.Tiling.Provider.RasterizingTileSource.GetFeatureInfoAsync(Mapsui.Viewport, double, double)
-  fullName.vb: Mapsui.Tiling.Provider.RasterizingTileSource.GetFeatureInfoAsync(Mapsui.Viewport, Double, Double)
-  nameWithType: RasterizingTileSource.GetFeatureInfoAsync(Viewport, double, double)
-  nameWithType.vb: RasterizingTileSource.GetFeatureInfoAsync(Viewport, Double, Double)
+- uid: Mapsui.Tiling.Provider.RasterizingTileSource.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  name: GetFeatureInfoAsync(Viewport, ScreenPosition)
+  href: pages/Mapsui.Tiling.Provider.RasterizingTileSource.html#Mapsui_Tiling_Provider_RasterizingTileSource_GetFeatureInfoAsync_Mapsui_Viewport_Mapsui_Manipulations_ScreenPosition_
+  commentId: M:Mapsui.Tiling.Provider.RasterizingTileSource.GetFeatureInfoAsync(Mapsui.Viewport,Mapsui.Manipulations.ScreenPosition)
+  fullName: Mapsui.Tiling.Provider.RasterizingTileSource.GetFeatureInfoAsync(Mapsui.Viewport, Mapsui.Manipulations.ScreenPosition)
+  nameWithType: RasterizingTileSource.GetFeatureInfoAsync(Viewport, ScreenPosition)
 - uid: Mapsui.Tiling.Provider.RasterizingTileSource.GetFeatureInfoAsync*
   name: GetFeatureInfoAsync
   href: pages/Mapsui.Tiling.Provider.RasterizingTileSource.html#Mapsui_Tiling_Provider_RasterizingTileSource_GetFeatureInfoAsync_

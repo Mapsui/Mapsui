@@ -1562,16 +1562,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.MapInfoBase.yml",
-      "output": {
-        ".html": {
-          "relative_path": "pages/Mapsui.MapInfoBase.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.MapInfoEventArgs.yml",
       "output": {
         ".html": {
@@ -2802,20 +2792,20 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Rendering.DefaultRendererFactory.yml",
+      "source_relative_path": "pages/Mapsui.RemoteMapInfoFetcher.yml",
       "output": {
         ".html": {
-          "relative_path": "pages/Mapsui.Rendering.DefaultRendererFactory.html"
+          "relative_path": "pages/Mapsui.RemoteMapInfoFetcher.html"
         }
       },
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Rendering.IRenderInfo.yml",
+      "source_relative_path": "pages/Mapsui.Rendering.DefaultRendererFactory.yml",
       "output": {
         ".html": {
-          "relative_path": "pages/Mapsui.Rendering.IRenderInfo.html"
+          "relative_path": "pages/Mapsui.Rendering.DefaultRendererFactory.html"
         }
       },
       "version": ""
