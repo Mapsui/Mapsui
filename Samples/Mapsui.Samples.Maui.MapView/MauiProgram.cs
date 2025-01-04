@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Controls.Hosting;
-using Microsoft.Maui.Hosting;
-using SkiaSharp.Views.Maui.Controls.Hosting;
+﻿using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace Mapsui.Samples.Maui;
 

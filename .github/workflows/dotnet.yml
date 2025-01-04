@@ -45,9 +45,9 @@ jobs:
         path: |
            ~/.nuget/packages/*
            !/.nuget/packages/Mapsui*    
-        key: ${{ runner.os }}-nuget20-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget22-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget20-
+            ${{ runner.os }}-nuget22-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v2  
       with:
@@ -80,11 +80,11 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Mapsui.Linux.slnf
    # Run Tests
     - name: Run Mapsui.Tests
-      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net8.0/Mapsui.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net9.0/Mapsui.Tests.dll --blame-hang-timeout:60s
     - name: Run Mapsui.Nts.Tests
-      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net8.0/Mapsui.Nts.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net9.0/Mapsui.Nts.Tests.dll --blame-hang-timeout:60s
     - name: Run Mapsui.Rendering.Skia.Tests
-      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:60s
     # Release Build
     - name: Build Linux packages
       run: dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=$(git describe --tags) Mapsui.Linux.slnf --output Artifacts
@@ -95,8 +95,8 @@ jobs:
         path: Artifacts/*.nupkg
   
   macBuild:  
-    # macos-latest is currently macos-13
-    runs-on: macos-latest
+    # macos-15 is currently macos-13
+    runs-on: macos-15
     steps:
     - uses: actions/checkout@v4
       with:
@@ -108,9 +108,9 @@ jobs:
         path: |
            ~/.nuget/packages/*
            !/.nuget/packages/Mapsui*
-        key: ${{ runner.os }}-nuget20-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget22-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget20-
+            ${{ runner.os }}-nuget22-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v2   
       with:
@@ -124,55 +124,29 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.x         
-    - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
+           9.0.x
+    - name: install workloads maui macos android ios maccatalyst wasm-tools wasm-tools-net8
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
-    - name: Install Uno Check
-      run: dotnet tool install -g Uno.Check
+    - name: install Uno.Check 1.26.1
+      run: dotnet tool install --global Uno.Check --version 1.26.1
+    - name: install Android SDK 34
+      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator  
+    - name: Install newest Uno Check
+      run: dotnet tool update -g uno.check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --skip androidsdk
+      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator    
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
-    # Samples Build               
-    - name: Mapsui.Samples.Avalonia
-      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
-    - name: Build Mapsui.Samples.Droid
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
-    - name: Build Mapsui.Samples.iOS      
-      run: dotnet build --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
-    # Samples Uno WinUI
-    #- name: Mapsui.Samples.Uno.WinUI.Mobile
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Mobile/Mapsui.Samples.Uno.WinUI.Mobile.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Gtk/Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer/Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Skia.WPF
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Skia.WPF/Mapsui.Samples.Uno.WinUI.Skia.WPF.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Wasm
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Wasm/Mapsui.Samples.Uno.WinUI.Wasm.csproj
-    #- name: Mapsui.Samples.Uno.WinUI.Windows
-    #  run: dotnet build --no-restore --configuration Debug  /p:Platform=x64 Samples/Mapsui.Samples.Uno.WinUI/Mapsui.Samples.Uno.WinUI.Windows/Mapsui.Samples.Uno.WinUI.Windows.csproj
-    # Builds that need XCode 14.0
-    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
-    #- name: Setup Xcode version 14.0
-    #  uses: maxim-lobanov/setup-xcode@v1.6.0
-    #  with:
-    #    xcode-version: '14.0'
-    # Build Tests   
-    - name: Build Mapsui.Tests
-      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
-    - name: Build Mapsui.Nts.Tests
-      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Nts.Tests/Mapsui.Nts.Tests.csproj    
-    - name: Build Mapsui.Rendering.Skia.Tests
-      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
+    # Build        
+    - name: Build Samples and Tests
+      run: dotnet build --no-restore --configuration Debug Mapsui.Mac.slnf   
     # Run Tests   
     - name: Run Mapsui.Tests
-      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net8.0/Mapsui.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net9.0/Mapsui.Tests.dll --blame-hang-timeout:60s
     - name: Run Mapsui.Nts.Tests
-      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net8.0/Mapsui.Nts.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net9.0/Mapsui.Nts.Tests.dll --blame-hang-timeout:60s
     - name: Run Mapsui.Rendering.Skia.Tests
-      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:60s
     # Release Build
     - name: Build Mapsui
       run: dotnet pack --no-restore --configuration Release Mapsui/Mapsui.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
@@ -190,6 +164,10 @@ jobs:
       run: dotnet pack --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
     - name: Build Mapsui.UI.iOS
       run: dotnet pack --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.UI.Maui
+      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
+    - name: Build Mapsui.UI.Uno.WinUI
+      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Uno.WinUI/Mapsui.UI.Uno.WinUI.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
     - name: Upload packages
       uses: actions/upload-artifact@v4
       with:
@@ -209,11 +187,11 @@ jobs:
         path: |
            ~/.nuget/packages/*
            !/.nuget/packages/Mapsui*
-        key: ${{ runner.os }}-nuget20-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget22-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget20-
+            ${{ runner.os }}-nuget22-
     # .Net 8 update     
-    - name: Setup .NET 9 SDK
+    - name: Setup .NET 9 SDK 
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
@@ -253,13 +231,13 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.UI.Maui.Tests/Mapsui.UI.Maui.Tests.csproj
     # Run Tests
     - name: Run Mapsui.Tests
-      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net8.0/Mapsui.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net9.0/Mapsui.Tests.dll --blame-hang-timeout:60s
     - name: Run Mapsui.Nts.Tests
-      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net8.0/Mapsui.Nts.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net9.0/Mapsui.Nts.Tests.dll --blame-hang-timeout:60s
     - name: Run Mapsui.Rendering.Skia.Tests
-      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net8.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:60s
     - name: Run Mapsui.UI.Maui.Tests
-      run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net8.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll --blame-hang-timeout:60s
+      run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net9.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll --blame-hang-timeout:60s
     # Release Build
     - name: Build nuget packages
       run: dotnet pack Mapsui.sln --configuration Release /p:Version=$(git describe --tags) -o Artifacts

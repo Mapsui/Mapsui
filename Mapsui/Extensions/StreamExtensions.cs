@@ -48,10 +48,10 @@ public static class StreamExtensions
         var buffer = new byte[5];
 
         stream.Position = 0;
-        stream.Read(buffer, 0, 5);
+        var read = stream.Read(buffer, 0, 5);
         stream.Position = 0;
 
-        if (!buffer.IsXml())
+        if (read < 5 || !buffer.IsXml())
         {
             return false;
         }
@@ -80,10 +80,10 @@ public static class StreamExtensions
         var buffer = new byte[1];
 
         stream.Position = 0;
-        stream.Read(buffer, 0, 5);
+        var read = stream.Read(buffer, 0, 5);
         stream.Position = 0;
 
-        return buffer.IsXml();
+        return read == 5 && buffer.IsXml();
     }
 
     public static long ReadOneSearch(this Stream haystack, string needle)
