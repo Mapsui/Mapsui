@@ -1,52 +1,52 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+using Mapsui.Layers;
+using System.Linq;
 using Mapsui.Manipulations;
 using Mapsui.Rendering;
 
 namespace Mapsui;
 
-public class MapInfo : MapInfoBase
+public class MapInfo(ScreenPosition screenPosition, MPoint worldPosition, double resolution, IEnumerable<MapInfoRecord>? mapInfoRecords = null)
 {
-    private readonly Task? _task;
+    private readonly List<MapInfoRecord> _records = [];
+    private IEnumerable<MapInfoRecord> _mapInfoRecords = mapInfoRecords ?? [];
+    private MapInfoRecord? _mapInfoRecord;
 
-    public MapInfo(ScreenPosition screenPosition,
-        MPoint worldPosition,
-        double resolution) : base(screenPosition, worldPosition, resolution, new List<MapInfoRecord>())
-    {
-    }
+    /// <summary>
+    /// The layer to which the touched feature belongs
+    /// </summary>
+    public ILayer? Layer => MapInfoRecord?.Layer;
+    /// <summary>
+    ///  The feature touched by the user
+    /// </summary>
+    public IFeature? Feature => MapInfoRecord?.Feature;
 
-    public MapInfo(ScreenPosition screenPosition,
-        MPoint worldPosition,
-        double resolution,
-        IEnumerable<MapInfoRecord> records) : base(screenPosition, worldPosition, resolution, records)
-    {
-    }
+    /// <summary>
+    ///  Current Map Info Record
+    /// </summary>
+    public MapInfoRecord? MapInfoRecord => _mapInfoRecord ??= MapInfoRecords.FirstOrDefault();
 
-    public MapInfo(ScreenPosition screenPosition,
-        MPoint worldPosition,
-        double resolution,
-        IEnumerable<MapInfoRecord> records,
-        Task task) : base(screenPosition, worldPosition, resolution, records)
-    {
-        _task = task;
-    }
+    /// <summary>
+    ///  The style of feature touched by the user
+    /// </summary>
+    public Styles.IStyle? Style => MapInfoRecord?.Style;
 
-    public MapInfo(MapInfoBase mapInfoBase,
-        IEnumerable<MapInfoRecord> records,
-        Task task) : base(mapInfoBase.ScreenPosition, mapInfoBase.WorldPosition, mapInfoBase.Resolution, records)
-    {
-        _task = task;
-    }
+    /// <summary>
+    /// World position of the place the user touched
+    /// </summary>
+    public MPoint WorldPosition { get; } = worldPosition;
+    /// <summary>
+    /// Screen position of the place the user touched
+    /// </summary>
+    public ScreenPosition ScreenPosition { get; } = screenPosition;
 
-    public async Task<MapInfoBase> GetMapInfoAsync()
-    {
-        if (_task != null)
-        {
-            // Wait for tasks to finish loading
-            await _task;
-            ClearResults();
-        }
+    /// <summary>
+    /// The resolution at which the info was retrieved. This can
+    /// be useful to calculate screen distances, which are needed
+    /// for editing functionality.
+    /// </summary>
+    public double Resolution { get; } = resolution;
 
-        return this;
-    }
+    /// <summary> List of MapInfo Records </summary>
+    public IEnumerable<MapInfoRecord> MapInfoRecords => _mapInfoRecords ??= [.. _records];
 }
