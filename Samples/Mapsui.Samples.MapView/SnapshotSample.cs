@@ -1,9 +1,6 @@
-﻿using System;
-using System.IO;
-using Mapsui.Samples.Common.Maps.Demo;
+﻿using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
 using Mapsui.UI.Maui;
-using Microsoft.Maui.Controls;
 
 namespace Mapsui.Samples.Maui;
 

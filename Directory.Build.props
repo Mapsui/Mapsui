@@ -1,8 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <VersionScriptPath>$(MSBuildThisFileDirectory)\Scripts\GetVersionFromGitTag.ps1</VersionScriptPath>
-    <VersionFromGitFile>$(MSBuildThisFileDirectory)\version-from-git-tag.txt</VersionFromGitFile>
+    <Version>5.0.0-beta.1</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright © Mapsui Developers 2018-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -21,8 +20,9 @@
     <RunApiCompat>false</RunApiCompat>
     <Nullable>enable</Nullable>
     <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+    <MauiVersion>9.0.10</MauiVersion>
   </PropertyGroup>
 
   <Target Name="SetVersionFromFile" BeforeTargets="PrepareForBuild" Condition="">
@@ -43,12 +43,12 @@
 
   <!-- Common Project Properties -->
   <PropertyGroup>
-    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <LangVersion>12.0</LangVersion>
-    <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
-    <!-- Enable Windows Targeting on non Windows platforms -->
-    <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
+	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	  <LangVersion>13.0</LangVersion>
+      <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
+      <!-- Enable Windows Targeting on non Windows platforms -->
+      <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <ItemGroup>
@@ -62,6 +62,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <!-- Roslyn Compiler -->
+    <!-- <PackageReference Include="Microsoft.Net.Compilers.Toolset">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference> -->
   </ItemGroup>
 
 </Project>
