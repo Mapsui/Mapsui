@@ -1,7 +1,8 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <Version>5.0.0-beta.1</Version>
+    <VersionScriptPath>$(MSBuildThisFileDirectory)\Scripts\GetVersionFromGitTag.ps1</VersionScriptPath>
+    <VersionFromGitFile>$(MSBuildThisFileDirectory)\version-from-git-tag.txt</VersionFromGitFile>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright © Mapsui Developers 2018-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
