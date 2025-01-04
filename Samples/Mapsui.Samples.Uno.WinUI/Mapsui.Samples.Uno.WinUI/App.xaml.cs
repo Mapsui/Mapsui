@@ -1,3 +1,4 @@
+#pragma warning disable IDE0005 // Using directive is unnecessary.
 using Uno.Resizetizer;
 
 namespace Mapsui.Samples.Uno.WinUI;

@@ -1,18 +1,10 @@
 ﻿using Mapsui.Samples.Common;
 using Mapsui.Extensions;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Mapsui.Logging;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Styles;
 using Mapsui.UI.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Dispatching;
-using Microsoft.Maui.Devices.Sensors;
 using Mapsui.Manipulations;
 using Mapsui.Samples.Common.Maps.Widgets;
 

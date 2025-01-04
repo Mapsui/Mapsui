@@ -1,17 +1,11 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Styles;
 using Mapsui.UI.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices.Sensors;
 using Compass = Microsoft.Maui.Devices.Sensors.Compass;
-using Microsoft.Maui.Dispatching;
 using Mapsui.Manipulations;
 using Mapsui.Samples.Common.Maps.Widgets;
 
