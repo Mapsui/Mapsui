@@ -538,18 +538,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return stream.ToArray();
     }
 
-    /// <summary>
-    /// Check if a widget or feature at a given screen position is clicked/tapped
-    /// </summary>
-    /// <param name="screenPosition">Screen position to check for widgets and features</param>
-    /// <param name="tapType">single or double tap</param>
-    /// <returns>True, if something done </returns>
-    private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, TapType tapType)
+    private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType)
     {
         var getMapInfo = () => Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? []);
-        var getMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? []);
-
-        return new MapInfoEventArgs(getMapInfo, tapType, false);
+        var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map.Layers);
+        return new MapInfoEventArgs(screenPosition, worldPosition, getMapInfo, getRemoteMapInfoAsync, tapType, false);
     }
 
     private void SetViewportSize()
@@ -662,7 +655,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (OnWidgetTapped(position, tapType, GetShiftPressed()))
             return true;
-        OnMapInfo(CreateMapInfoEventArgs(position, TapType.Single));
+        if (Map is null)
+            return false;
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(position);
+        OnMapInfo(CreateMapInfoEventArgs(position, worldPosition, TapType.Single));
         return false;
     }
 }

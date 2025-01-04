@@ -15,7 +15,7 @@ public class RemoteMapInfoFetcher
 {
     delegate Task<IEnumerable<MapInfoRecord>> GetMapInfoAsyncDelegate();
 
-    public static async Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    public static async Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers)
     {
         var featureInfoLayers = layers.Where(l => l is ILayerFeatureInfo).ToList();
 

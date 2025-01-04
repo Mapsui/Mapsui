@@ -1,30 +1,51 @@
-﻿using Mapsui.Layers;
-using Mapsui.Manipulations;
+﻿using Mapsui.Manipulations;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mapsui;
 
-public class MapInfoEventArgs(Func<MapInfo> getMapInfo, TapType tapType, bool handled) : EventArgs
+public class MapInfoEventArgs : EventArgs
 {
+    public MapInfoEventArgs(ScreenPosition screenPosition, MPoint worldPosition, Func<MapInfo> getMapInfo,
+        Func<Task<MapInfo>> getRemoteMapInfoAsync, TapType tapType, bool handled)
+    {
+        ScreenPosition = screenPosition;
+        WorldPosition = worldPosition;
+        GetMapInfo = getMapInfo;
+        GetRemoteMapInfoAsync = getRemoteMapInfoAsync;
+        TapType = tapType;
+        Handled = handled;
+    }
+
     /// <summary>
     /// Number of times the user tapped the location
     /// </summary>
-    public TapType TapType { get; } = tapType;
+    public TapType TapType { get; }
 
     /// <summary>
     /// If the interaction was handled by the event subscriber
     /// </summary>
-    public bool Handled { get; set; } = handled;
+    public bool Handled { get; set; }
 
     /// <summary>
     /// Function to get the map info
     /// </summary>
-    public Func<MapInfo> GetMapInfo { get; } = getMapInfo;
+    public Func<MapInfo> GetMapInfo { get; }
 
-    public async Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin)
-    {
-        return await RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, layers, margin);
-    }
+    /// <summary>
+    /// Function to get the remote map info
+    /// </summary>
+    public Func<Task<MapInfo>> GetRemoteMapInfoAsync { get; }
+
+    /// <summary>
+    /// The screen position of the event
+    /// </summary>
+    public ScreenPosition ScreenPosition { get; }
+
+    /// <summary>
+    /// The world position of the event
+    /// </summary>
+    public MPoint WorldPosition { get; }
+
+
 }

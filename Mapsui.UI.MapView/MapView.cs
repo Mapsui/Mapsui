@@ -634,9 +634,13 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         var handled = false;
         var screenPosition = e.Position;
 
-        if (Map != null)
+        var map = Map;
+        if (map != null)
         {
-            var mapInfoEventArgs = new MapInfoEventArgs(() => GetMapInfo(screenPosition), e.TapType, handled);
+            var worldPosition = map.Navigator.Viewport.ScreenToWorld(screenPosition);
+            var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, map.Navigator.Viewport, map.Layers);
+            var mapInfoEventArgs = new MapInfoEventArgs(screenPosition, worldPosition,
+                () => GetMapInfo(screenPosition), getRemoteMapInfoAsync, e.TapType, handled);
 
             HandlerInfo(mapInfoEventArgs);
 
@@ -645,7 +649,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             if (!handled)
             {
                 // if nothing else was hit, then we hit the map
-                var args = new MapClickedEventArgs(Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToNative(), e.TapType);
+                var args = new MapClickedEventArgs(worldPosition.ToNative(), e.TapType);
                 MapClicked?.Invoke(this, args);
 
                 if (args.Handled)
