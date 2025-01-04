@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
+using Mapsui.Manipulations;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -198,11 +199,11 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         base.Dispose(disposing);
     }
 
-    public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, double screenX, double screenY)
+    public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition)
     {
         if (DataSource is ILayerFeatureInfo featureInfo)
         {
-            return await featureInfo.GetFeatureInfoAsync(viewport, screenX, screenY).ConfigureAwait(false);
+            return await featureInfo.GetFeatureInfoAsync(viewport, screenPosition).ConfigureAwait(false);
         }
 
         return new Dictionary<string, IEnumerable<IFeature>>();

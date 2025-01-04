@@ -27,3 +27,4 @@ nuget
 onscroll
 bbox
 embeddedresource
+Infos
