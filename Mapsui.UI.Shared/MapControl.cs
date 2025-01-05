@@ -534,7 +534,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType)
     {
-        return new MapInfoEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, false, GetMapInfo, GetGetRemoteMapInfoAsync);
+        return new MapInfoEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, false, GetMapInfo, GetRemoteMapInfoAsync);
     }
 
     // Todo: Make protected again.
@@ -543,9 +543,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
     }
 
-    protected async Task<MapInfo> GetGetRemoteMapInfoAsync(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
+    private Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers)
     {
-        return await RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, layers);
+        return RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
     }
 
     private void SetViewportSize()
@@ -575,25 +575,22 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnWidgetPointerPressed(ScreenPosition screenPosition, bool shiftPressed)
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
             if (widget.OnPointerPressed(Map.Navigator, eventArgs))
                 return true;
         }
         return false;
     }
 
-    protected Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
-    {
-        return RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, layers);
-    }
-
     private bool OnWidgetPointerMoved(ScreenPosition screenPosition, bool leftButton, bool shiftPressed)
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
         var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, leftButton, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
             if (widget.OnPointerMoved(Map.Navigator, eventArgs))
                 return true;
@@ -603,10 +600,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnWidgetPointerReleased(ScreenPosition screenPosition, bool shiftPressed)
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
-            var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
             if (widget.OnPointerReleased(Map.Navigator, eventArgs))
                 return true;
         }
@@ -616,11 +614,12 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnWidgetTapped(ScreenPosition screenPosition, TapType tapType, bool shiftPressed)
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+
         var touchedWidgets = WidgetInput.GetWidgetsAtPosition(screenPosition, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapType: {tapType} KeyState: {shiftPressed}");
-            var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
             if (widget.OnTapped(Map.Navigator, eventArgs))
                 return true;
         }

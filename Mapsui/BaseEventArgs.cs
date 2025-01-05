@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui;
 
-public delegate Task<MapInfo> GetRemoteMapInfoAsyncDelegate(ScreenPosition screenPosition, IEnumerable<ILayer> layers);
+public delegate Task<MapInfo> GetRemoteMapInfoAsyncDelegate(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers);
 public delegate MapInfo GetMapInfoDelegate(ScreenPosition screenPosition, IEnumerable<ILayer> layers);
 
 public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, Viewport viewport,
@@ -40,5 +40,5 @@ public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, 
     /// <summary>
     /// Function to get the remote MapInfo
     /// </summary>
-    public Func<IEnumerable<ILayer>, Task<MapInfo>> GetRemoteMapInfoAsync { get; } = (l) => getRemoteMapInfoAsync(screenPosition, l);
+    public Func<IEnumerable<ILayer>, Task<MapInfo>> GetRemoteMapInfoAsync { get; } = (l) => getRemoteMapInfoAsync(screenPosition, viewport, l);
 }
