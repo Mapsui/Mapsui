@@ -551,7 +551,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
     }
 
-    private Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers)
+    protected Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers)
     {
         return RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
     }
