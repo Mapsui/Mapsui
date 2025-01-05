@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Mapsui.Samples.Common.Maps.Demo;
+﻿using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
 using Mapsui.UI.Maui;
 using KnownColor = Mapsui.UI.Maui.KnownColor;
