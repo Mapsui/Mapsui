@@ -15,7 +15,7 @@ public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, 
     /// <summary>
     /// Screen Position of touch in device independent units (or DIP or DP)
     /// </summary>
-    public ScreenPosition Position { get; } = screenPosition;
+    public ScreenPosition ScreenPosition { get; } = screenPosition;
 
     /// <summary>
     /// World Position of touch in map coordinates

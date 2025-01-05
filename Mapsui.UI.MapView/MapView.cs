@@ -634,7 +634,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private bool HandlerTap(WidgetEventArgs e)
     {
         var handled = false;
-        var screenPosition = e.Position;
+        var screenPosition = e.ScreenPosition;
 
         var map = Map;
         if (map != null)
