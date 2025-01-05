@@ -534,7 +534,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType)
     {
-        return new MapInfoEventArgs(screenPosition, worldPosition, GetMapInfo, GetGetRemoteMapInfoAsync, tapType, Map.Navigator.Viewport, false);
+        return new MapInfoEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, false, GetMapInfo, GetGetRemoteMapInfoAsync);
     }
 
     // Todo: Make protected again.
@@ -578,7 +578,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, true, shiftPressed, Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync);
+            var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
             if (widget.OnPointerPressed(Map.Navigator, eventArgs))
                 return true;
         }
@@ -593,7 +593,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private bool OnWidgetPointerMoved(ScreenPosition screenPosition, bool leftButton, bool shiftPressed)
     {
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
-        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, leftButton, shiftPressed, Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, leftButton, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
             if (widget.OnPointerMoved(Map.Navigator, eventArgs))
                 return true;
@@ -606,7 +606,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
-            var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, true, shiftPressed, Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync);
+            var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
             if (widget.OnPointerReleased(Map.Navigator, eventArgs))
                 return true;
         }
@@ -620,7 +620,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapType: {tapType} KeyState: {shiftPressed}");
-            var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, tapType, true, shiftPressed, Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync);
+            var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
             if (widget.OnTapped(Map.Navigator, eventArgs))
                 return true;
         }

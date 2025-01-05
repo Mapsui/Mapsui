@@ -642,7 +642,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             var worldPosition = map.Navigator.Viewport.ScreenToWorld(screenPosition);
             var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, map.Navigator.Viewport, map.Layers);
             var mapInfoEventArgs = new MapInfoEventArgs(screenPosition, worldPosition,
-                GetMapInfo, GetRemoteMapInfoAsync, e.TapType, map.Navigator.Viewport, handled);
+                e.TapType, map.Navigator.Viewport, handled, GetMapInfo, GetRemoteMapInfoAsync);
 
             HandlerInfo(mapInfoEventArgs);
 
