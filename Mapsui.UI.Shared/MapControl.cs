@@ -546,7 +546,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return new MapInfoEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, false, GetMapInfo, GetRemoteMapInfoAsync);
     }
 
-    // Todo: Make protected again.
     public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
     {
         return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
