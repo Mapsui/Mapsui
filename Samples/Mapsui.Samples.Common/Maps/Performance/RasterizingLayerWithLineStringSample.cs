@@ -33,7 +33,7 @@ public class RasterizingLayerWithLineStringSample : IMapControlSample
         var extent = map.Layers.Get(1).Extent!.Grow(map.Layers.Get(1).Extent!.Width * 0.25);
         map.Navigator.ZoomToBox(extent);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "LineString"));
 
         return map;
     }
@@ -43,8 +43,7 @@ public class RasterizingLayerWithLineStringSample : IMapControlSample
         return new MemoryLayer
         {
             Name = "LineString",
-            IsMapInfoLayer = true,
-            Features = new List<IFeature>() { GetFeature() }
+            Features = [GetFeature()]
         };
     }
 

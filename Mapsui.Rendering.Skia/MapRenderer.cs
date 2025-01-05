@@ -229,7 +229,6 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
         var mapInfoLayers = layers
             .Select(l => l is ISourceLayer sl and not ILayerFeatureInfo ? sl.SourceLayer : l)
-            .Where(l => l.IsMapInfoLayer)
             .ToList();
 
 

@@ -152,7 +152,6 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _map.Info += HandleClicked;
 
         Enabled = true;
-        IsMapInfoLayer = true;
 
         _feature = new PointFeature(_myLocation)
         {
@@ -500,7 +499,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
 
     private void HandleClicked(object? sender, MapInfoEventArgs e)
     {
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo([this]);
         if (mapInfo.Feature != null && mapInfo.Feature.Equals(_feature))
         {
             Clicked?.Invoke(this, e);

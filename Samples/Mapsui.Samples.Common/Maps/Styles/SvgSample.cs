@@ -22,7 +22,7 @@ public class SvgSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateSvgLayer(map.Extent));
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Svg Layer"));
 
         return Task.FromResult(map);
     }
@@ -34,7 +34,6 @@ public class SvgSample : ISample
             Name = "Svg Layer",
             Features = CreateSvgFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 2000)),
             Style = null,
-            IsMapInfoLayer = true
         };
     }
 

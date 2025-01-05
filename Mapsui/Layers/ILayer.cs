@@ -93,11 +93,6 @@ public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable
     IReadOnlyList<double> Resolutions { get; }
 
     /// <summary>
-    /// Indicates if the layer should be taken into account for the GetMapInfo request
-    /// </summary>
-    bool IsMapInfoLayer { get; set; }
-
-    /// <summary>
     /// Event called when the data within the layer has changed allowing
     /// listeners to react to this.
     /// </summary>

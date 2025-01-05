@@ -46,7 +46,7 @@ public sealed class TouchPointSample : ISample, IDisposable
         _mousePosition = CreateLabel(HorizontalAlignment.Center, VerticalAlignment.Bottom);
         _map.Widgets.Add(_mousePosition);
         memoryLayer.DataHasChanged();
-        _map.Info += MapControl_Info;
+        _map.Info += (s, e) => MapControl_Info(s, e, memoryLayer);
         return _map;
     }
 
@@ -65,7 +65,6 @@ public sealed class TouchPointSample : ISample, IDisposable
         var memoryLayer = new MemoryLayer
         {
             Name = "Key",
-            IsMapInfoLayer = true,
             Features = features,
             Style = pinStyle
         };
@@ -73,9 +72,9 @@ public sealed class TouchPointSample : ISample, IDisposable
         return memoryLayer;
     }
 
-    private void MapControl_Info(object? sender, MapInfoEventArgs e)
+    private void MapControl_Info(object? sender, MapInfoEventArgs e, ILayer memoryLayer)
     {
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo([memoryLayer]);
         _mousePosition!.Text = $"X: {Convert.ToInt32(mapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(mapInfo.ScreenPosition.Y)}";
         _mousePosition.NeedsRedraw = true;
         var features = (List<IFeature>)_clickMemoryLayer!.Features;

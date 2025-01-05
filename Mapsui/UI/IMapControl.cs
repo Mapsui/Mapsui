@@ -45,11 +45,11 @@ public interface IMapControl : IDisposable
     MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits);
 
     /// <summary>
-    /// Check, if a feature at a given screen position is hit
+    /// Check, if a feature at a given screen position is hit.
     /// </summary>
-    /// <param name="screenPosition">Screen position to check for widgets and features</param>
-    /// <param name="margin">An optional extra margin around the feature to enlarge the hit area.</param>
-    MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0);
+    /// <param name="screenPosition">Screen position to check for widgets and features.</param>
+    /// <param name="layers">The layers to query.</param>
+    MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers);
 
     /// <summary>
     /// Create a snapshot form map as PNG image

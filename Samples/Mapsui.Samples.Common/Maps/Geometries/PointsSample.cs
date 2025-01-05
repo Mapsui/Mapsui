@@ -30,7 +30,7 @@ public class PointsSample : ISample
         map.Layers.Add(CreatePointLayer());
         map.Navigator.CenterOnAndZoomTo(map.Layers.Get(1).Extent!.Centroid, map.Navigator.Resolutions[5]);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Points"));
 
         return Task.FromResult(map);
     }
@@ -40,7 +40,6 @@ public class PointsSample : ISample
         return new MemoryLayer
         {
             Name = "Points",
-            IsMapInfoLayer = true,
             Features = GetCitiesFromEmbeddedResource(),
             Style = CreateBitmapStyle()
         };

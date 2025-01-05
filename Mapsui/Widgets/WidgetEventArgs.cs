@@ -1,15 +1,13 @@
 ﻿using Mapsui.Manipulations;
-using System;
-using System.Threading.Tasks;
 
 namespace Mapsui.Widgets;
 
 /// <summary>
 /// Arguments for a touched event of a widget
 /// </summary>
-public class WidgetEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, bool leftButton,
-    bool shiftPressed, Func<MapInfo> getMapInfo, Func<Task<MapInfo>> getRemoteMapInfoAsync)
-    : BaseEventArgs(screenPosition, worldPosition, tapType, getMapInfo, getRemoteMapInfoAsync)
+public class WidgetEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, Viewport viewport,
+    bool leftButton, bool shiftPressed, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)
+    : BaseEventArgs(screenPosition, worldPosition, tapType, viewport, getMapInfo, getRemoteMapInfoAsync)
 {
     /// <summary>
     /// Left button used while touching

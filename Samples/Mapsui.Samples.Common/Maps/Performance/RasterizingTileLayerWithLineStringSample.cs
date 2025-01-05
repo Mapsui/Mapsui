@@ -35,7 +35,7 @@ public class RasterizingTileLayerWithLineStringSample : IMapControlSample
         var extent = lineStringLayer.Extent!.Grow(lineStringLayer.Extent!.Width * 0.25);
         map.Navigator.ZoomToBox(extent);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "LineString"));
 
         return map;
     }
@@ -45,7 +45,6 @@ public class RasterizingTileLayerWithLineStringSample : IMapControlSample
         return new MemoryLayer
         {
             Name = "LineString",
-            IsMapInfoLayer = true,
             Features = new List<IFeature>() { GetFeature() }
         };
     }

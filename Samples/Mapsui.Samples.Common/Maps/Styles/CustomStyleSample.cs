@@ -55,6 +55,8 @@ public class CustomStyleSample : IMapControlSample
     public string Name => "Custom Style";
     public string Category => "Styles";
 
+    private const string _mapInfoLayerName = "Custom Style Layer";
+
     public void Setup(IMapControl mapControl)
     {
         mapControl.Map = CreateMap();
@@ -70,7 +72,7 @@ public class CustomStyleSample : IMapControlSample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateStylesLayer(map.Extent));
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _mapInfoLayerName));
 
         return map;
     }
@@ -79,10 +81,9 @@ public class CustomStyleSample : IMapControlSample
     {
         return new MemoryLayer
         {
-            Name = "Custom Style Layer",
+            Name = _mapInfoLayerName,
             Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
             Style = null,
-            IsMapInfoLayer = true
         };
     }
 

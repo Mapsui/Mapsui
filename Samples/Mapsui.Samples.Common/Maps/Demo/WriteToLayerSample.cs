@@ -30,12 +30,10 @@ public class WriteToLayerSample : ISample
 
         map.Info += (s, e) =>
         {
-            var mapInfo = e.GetMapInfo();
-
             // Add a point to the layer using the Info position
             layer?.Features.Add(new GeometryFeature
             {
-                Geometry = new Point(mapInfo.WorldPosition.X, mapInfo.WorldPosition.Y)
+                Geometry = new Point(e.WorldPosition.X, e.WorldPosition.Y)
             });
             // To notify the map that a redraw is needed.
             layer?.DataHasChanged();

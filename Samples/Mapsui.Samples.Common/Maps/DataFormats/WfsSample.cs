@@ -32,7 +32,7 @@ public class WfsSample : ISample
             map.Layers.Add(CreateWfsLayer(provider));
             map.Layers.Add(CreateLabelLayer(provider));
 
-            map.Widgets.Add(new MapInfoWidget(map));
+            map.Widgets.Add(new MapInfoWidget(map, (l) => Name == "Districts"));
 
             map.Navigator.CenterOnAndZoomTo(new MPoint(1270000.0, 5880000.0), map.Navigator.Resolutions[9]);
 
@@ -46,13 +46,12 @@ public class WfsSample : ISample
         }
     }
 
-    private static ILayer CreateWfsLayer(WFSProvider provider)
+    private static Layer CreateWfsLayer(WFSProvider provider)
     {
         return new Layer(layerName)
         {
             Style = new VectorStyle { Fill = new Brush { Color = Color.FromArgb(192, 255, 0, 0) } },
             DataSource = provider,
-            IsMapInfoLayer = true
         };
     }
 

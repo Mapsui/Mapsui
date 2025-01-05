@@ -68,7 +68,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         if (e is null)
             return;
 
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo(mapView.MapInfoLayers);
         if (mapInfo.Feature != null)
         {
             featureInfo.Text = $"Click Info:{Environment.NewLine}{mapInfo.Feature.ToDisplayText()}";

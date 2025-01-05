@@ -134,8 +134,8 @@ public class ZoomInOutWidget : BaseWidget
         if (Envelope == null)
             return false;
 
-        if (Orientation == Orientation.Vertical && e.Position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
-            Orientation == Orientation.Horizontal && e.Position.X < Envelope.MinX + Envelope.Width * 0.5)
+        if (Orientation == Orientation.Vertical && e.ScreenPosition.Y < Envelope.MinY + Envelope.Height * 0.5 ||
+            Orientation == Orientation.Horizontal && e.ScreenPosition.X < Envelope.MinX + Envelope.Width * 0.5)
         {
             navigator.ZoomIn(500);
         }

@@ -18,14 +18,14 @@ public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget bec
     }
 
     public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
-        => EditManipulation.OnPointerPressed(e.Position, _editManager, _mapControl);
+        => EditManipulation.OnPointerPressed(e.ScreenPosition, _editManager, _mapControl);
 
     public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e) =>
-        EditManipulation.OnPointerMoved(e.Position, _editManager, _mapControl, !e.LeftButton);
+        EditManipulation.OnPointerMoved(e.ScreenPosition, _editManager, _mapControl, !e.LeftButton);
 
     public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e) =>
         EditManipulation.OnPointerReleased(_editManager);
 
     public override bool OnTapped(Navigator navigator, WidgetEventArgs e) =>
-        EditManipulation.OnTapped(e.Position, _editManager, _mapControl, e.TapType, e.ShiftPressed);
+        EditManipulation.OnTapped(e.ScreenPosition, _editManager, _mapControl, e.TapType, e.ShiftPressed);
 }

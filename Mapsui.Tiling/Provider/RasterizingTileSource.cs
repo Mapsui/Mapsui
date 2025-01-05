@@ -248,7 +248,6 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
 
         var layer = await CreateRenderLayerAsync(tileInfo, renderer);
         var renderLayer = layer.RenderLayer;
-        renderLayer.IsMapInfoLayer = true;
         List<ILayer> renderLayers = [renderLayer];
 
         var info = renderer.GetMapInfo(screenPosition, viewport, renderLayers);

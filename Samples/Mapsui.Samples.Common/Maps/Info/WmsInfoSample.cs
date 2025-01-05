@@ -12,23 +12,24 @@ public class WmsInfoSample : ISample
     public string Name => "Wms Info";
     public string Category => "Info";
 
+    private const string _mapInfoLayerName = "Windsnelheden (PDOK)";
+
     public async Task<Map> CreateMapAsync()
     {
         var map = new Map { CRS = "EPSG:28992" };
         // The WMS request needs a CRS
         map.Layers.Add(await CreateLayerAsync());
         map.Navigator.CenterOnAndZoomTo(new MPoint(155000, 463000), 500);
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _mapInfoLayerName));
         return map;
     }
 
     public static async Task<ILayer> CreateLayerAsync()
     {
-        return new ImageLayer("Windsnelheden (PDOK)")
+        return new ImageLayer(_mapInfoLayerName)
         {
             DataSource = await CreateWmsProviderAsync(),
             Style = new RasterStyle(),
-            IsMapInfoLayer = true,
         };
     }
 

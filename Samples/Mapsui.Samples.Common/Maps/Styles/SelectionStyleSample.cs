@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
+#pragma warning disable IDISP001 // Dispose created
+
 internal class SelectionStyleSample : ISample
 {
     public string Name => "Selection";
@@ -19,10 +21,11 @@ internal class SelectionStyleSample : ISample
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(CreatePointLayer());
-        map.Info += static (s, e) => ToggleSelected(e.GetMapInfo().Feature);
+        var pointLayer = CreatePointLayer();
+        map.Layers.Add(pointLayer);
+        map.Info += (s, e) => ToggleSelected(e.GetMapInfo([pointLayer]).Feature);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Points"));
 
         return Task.FromResult(map);
     }
@@ -34,15 +37,11 @@ internal class SelectionStyleSample : ISample
         else feature["selected"] = null;
     }
 
-    public static ILayer CreatePointLayer()
+    public static ILayer CreatePointLayer() => new Layer("Points")
     {
-        return new Layer("Points")
-        {
-            DataSource = new MemoryProvider(CreatePoints().Select(p => new PointFeature(p))),
-            Style = CreateStyle(),
-            IsMapInfoLayer = true
-        };
-    }
+        DataSource = new MemoryProvider(CreatePoints().Select(p => new PointFeature(p))),
+        Style = CreateStyle(),
+    };
 
     private static IStyle CreateStyle()
     {
