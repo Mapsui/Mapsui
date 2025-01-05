@@ -51,7 +51,7 @@ public class EditingSample : IMapControlSample
 
         editManager.EditMode = editMode;
 
-        map.Widgets.Add(new EditingWidget(mapControl, editManager));
+        map.Widgets.Add(new EditingWidget(editManager));
         mapControl.Map = map;
         return editManager;
     }
