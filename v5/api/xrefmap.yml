@@ -4249,6 +4249,109 @@ references:
   isSpec: "True"
   fullName: Mapsui.ArcGIS.TileInfo.spatialReference
   nameWithType: TileInfo.spatialReference
+- uid: Mapsui.BaseEventArgs
+  name: BaseEventArgs
+  href: pages/Mapsui.BaseEventArgs.html
+  commentId: T:Mapsui.BaseEventArgs
+  fullName: Mapsui.BaseEventArgs
+  nameWithType: BaseEventArgs
+- uid: Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: BaseEventArgs(ScreenPosition, MPoint, TapType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, TapType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.BaseEventArgs.BaseEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.BaseEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: BaseEventArgs.BaseEventArgs(ScreenPosition, MPoint, TapType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: BaseEventArgs.New(ScreenPosition, MPoint, TapType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+- uid: Mapsui.BaseEventArgs.#ctor*
+  name: BaseEventArgs
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs__ctor_
+  commentId: Overload:Mapsui.BaseEventArgs.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mapsui.BaseEventArgs.BaseEventArgs
+  fullName.vb: Mapsui.BaseEventArgs.New
+  nameWithType: BaseEventArgs.BaseEventArgs
+  nameWithType.vb: BaseEventArgs.New
+- uid: Mapsui.BaseEventArgs.GetMapInfo
+  name: GetMapInfo
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GetMapInfo
+  commentId: P:Mapsui.BaseEventArgs.GetMapInfo
+  fullName: Mapsui.BaseEventArgs.GetMapInfo
+  nameWithType: BaseEventArgs.GetMapInfo
+- uid: Mapsui.BaseEventArgs.GetMapInfo*
+  name: GetMapInfo
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GetMapInfo_
+  commentId: Overload:Mapsui.BaseEventArgs.GetMapInfo
+  isSpec: "True"
+  fullName: Mapsui.BaseEventArgs.GetMapInfo
+  nameWithType: BaseEventArgs.GetMapInfo
+- uid: Mapsui.BaseEventArgs.GetRemoteMapInfoAsync
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GetRemoteMapInfoAsync
+  commentId: P:Mapsui.BaseEventArgs.GetRemoteMapInfoAsync
+  fullName: Mapsui.BaseEventArgs.GetRemoteMapInfoAsync
+  nameWithType: BaseEventArgs.GetRemoteMapInfoAsync
+- uid: Mapsui.BaseEventArgs.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.BaseEventArgs.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.BaseEventArgs.GetRemoteMapInfoAsync
+  nameWithType: BaseEventArgs.GetRemoteMapInfoAsync
+- uid: Mapsui.BaseEventArgs.ScreenPosition
+  name: ScreenPosition
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_ScreenPosition
+  commentId: P:Mapsui.BaseEventArgs.ScreenPosition
+  fullName: Mapsui.BaseEventArgs.ScreenPosition
+  nameWithType: BaseEventArgs.ScreenPosition
+- uid: Mapsui.BaseEventArgs.ScreenPosition*
+  name: ScreenPosition
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_ScreenPosition_
+  commentId: Overload:Mapsui.BaseEventArgs.ScreenPosition
+  isSpec: "True"
+  fullName: Mapsui.BaseEventArgs.ScreenPosition
+  nameWithType: BaseEventArgs.ScreenPosition
+- uid: Mapsui.BaseEventArgs.TapType
+  name: TapType
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_TapType
+  commentId: P:Mapsui.BaseEventArgs.TapType
+  fullName: Mapsui.BaseEventArgs.TapType
+  nameWithType: BaseEventArgs.TapType
+- uid: Mapsui.BaseEventArgs.TapType*
+  name: TapType
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_TapType_
+  commentId: Overload:Mapsui.BaseEventArgs.TapType
+  isSpec: "True"
+  fullName: Mapsui.BaseEventArgs.TapType
+  nameWithType: BaseEventArgs.TapType
+- uid: Mapsui.BaseEventArgs.Viewport
+  name: Viewport
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Viewport
+  commentId: P:Mapsui.BaseEventArgs.Viewport
+  fullName: Mapsui.BaseEventArgs.Viewport
+  nameWithType: BaseEventArgs.Viewport
+- uid: Mapsui.BaseEventArgs.Viewport*
+  name: Viewport
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Viewport_
+  commentId: Overload:Mapsui.BaseEventArgs.Viewport
+  isSpec: "True"
+  fullName: Mapsui.BaseEventArgs.Viewport
+  nameWithType: BaseEventArgs.Viewport
+- uid: Mapsui.BaseEventArgs.WorldPosition
+  name: WorldPosition
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_WorldPosition
+  commentId: P:Mapsui.BaseEventArgs.WorldPosition
+  fullName: Mapsui.BaseEventArgs.WorldPosition
+  nameWithType: BaseEventArgs.WorldPosition
+- uid: Mapsui.BaseEventArgs.WorldPosition*
+  name: WorldPosition
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_WorldPosition_
+  commentId: Overload:Mapsui.BaseEventArgs.WorldPosition
+  isSpec: "True"
+  fullName: Mapsui.BaseEventArgs.WorldPosition
+  nameWithType: BaseEventArgs.WorldPosition
 - uid: Mapsui.Cache
   name: Mapsui.Cache
   href: pages/Mapsui.Cache.html
@@ -6437,6 +6540,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData
   nameWithType: IAsyncDataFetcher.RefreshData
+- uid: Mapsui.GetMapInfoDelegate
+  name: GetMapInfoDelegate
+  href: pages/Mapsui.GetMapInfoDelegate.html
+  commentId: T:Mapsui.GetMapInfoDelegate
+  fullName: Mapsui.GetMapInfoDelegate
+  nameWithType: GetMapInfoDelegate
+- uid: Mapsui.GetRemoteMapInfoAsyncDelegate
+  name: GetRemoteMapInfoAsyncDelegate
+  href: pages/Mapsui.GetRemoteMapInfoAsyncDelegate.html
+  commentId: T:Mapsui.GetRemoteMapInfoAsyncDelegate
+  fullName: Mapsui.GetRemoteMapInfoAsyncDelegate
+  nameWithType: GetRemoteMapInfoAsyncDelegate
 - uid: Mapsui.IFeature
   name: IFeature
   href: pages/Mapsui.IFeature.html
@@ -7115,19 +7230,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.BaseLayer.Id
   nameWithType: BaseLayer.Id
-- uid: Mapsui.Layers.BaseLayer.IsMapInfoLayer
-  name: IsMapInfoLayer
-  href: pages/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsMapInfoLayer
-  commentId: P:Mapsui.Layers.BaseLayer.IsMapInfoLayer
-  fullName: Mapsui.Layers.BaseLayer.IsMapInfoLayer
-  nameWithType: BaseLayer.IsMapInfoLayer
-- uid: Mapsui.Layers.BaseLayer.IsMapInfoLayer*
-  name: IsMapInfoLayer
-  href: pages/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsMapInfoLayer_
-  commentId: Overload:Mapsui.Layers.BaseLayer.IsMapInfoLayer
-  isSpec: "True"
-  fullName: Mapsui.Layers.BaseLayer.IsMapInfoLayer
-  nameWithType: BaseLayer.IsMapInfoLayer
 - uid: Mapsui.Layers.BaseLayer.MaxVisible
   name: MaxVisible
   href: pages/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_MaxVisible
@@ -7683,19 +7785,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ILayer.Id
   nameWithType: ILayer.Id
-- uid: Mapsui.Layers.ILayer.IsMapInfoLayer
-  name: IsMapInfoLayer
-  href: pages/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_IsMapInfoLayer
-  commentId: P:Mapsui.Layers.ILayer.IsMapInfoLayer
-  fullName: Mapsui.Layers.ILayer.IsMapInfoLayer
-  nameWithType: ILayer.IsMapInfoLayer
-- uid: Mapsui.Layers.ILayer.IsMapInfoLayer*
-  name: IsMapInfoLayer
-  href: pages/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_IsMapInfoLayer_
-  commentId: Overload:Mapsui.Layers.ILayer.IsMapInfoLayer
-  isSpec: "True"
-  fullName: Mapsui.Layers.ILayer.IsMapInfoLayer
-  nameWithType: ILayer.IsMapInfoLayer
 - uid: Mapsui.Layers.ILayer.MaxVisible
   name: MaxVisible
   href: pages/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_MaxVisible
@@ -11795,15 +11884,15 @@ references:
   commentId: T:Mapsui.MapInfoEventArgs
   fullName: Mapsui.MapInfoEventArgs
   nameWithType: MapInfoEventArgs
-- uid: Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Func{Mapsui.MapInfo},System.Func{System.Threading.Tasks.Task{Mapsui.MapInfo}},Mapsui.Manipulations.TapType,System.Boolean)
-  name: MapInfoEventArgs(ScreenPosition, MPoint, Func<MapInfo>, Func<Task<MapInfo>>, TapType, bool)
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_System_Func_Mapsui_MapInfo__System_Func_System_Threading_Tasks_Task_Mapsui_MapInfo___Mapsui_Manipulations_TapType_System_Boolean_
-  commentId: M:Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,System.Func{Mapsui.MapInfo},System.Func{System.Threading.Tasks.Task{Mapsui.MapInfo}},Mapsui.Manipulations.TapType,System.Boolean)
-  name.vb: New(ScreenPosition, MPoint, Func(Of MapInfo), Func(Of Task(Of MapInfo)), TapType, Boolean)
-  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, System.Func<Mapsui.MapInfo>, System.Func<System.Threading.Tasks.Task<Mapsui.MapInfo>>, Mapsui.Manipulations.TapType, bool)
-  fullName.vb: Mapsui.MapInfoEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, System.Func(Of Mapsui.MapInfo), System.Func(Of System.Threading.Tasks.Task(Of Mapsui.MapInfo)), Mapsui.Manipulations.TapType, Boolean)
-  nameWithType: MapInfoEventArgs.MapInfoEventArgs(ScreenPosition, MPoint, Func<MapInfo>, Func<Task<MapInfo>>, TapType, bool)
-  nameWithType.vb: MapInfoEventArgs.New(ScreenPosition, MPoint, Func(Of MapInfo), Func(Of Task(Of MapInfo)), TapType, Boolean)
+- uid: Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: MapInfoEventArgs(ScreenPosition, MPoint, TapType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, TapType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, bool, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.MapInfoEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, Boolean, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: MapInfoEventArgs.MapInfoEventArgs(ScreenPosition, MPoint, TapType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: MapInfoEventArgs.New(ScreenPosition, MPoint, TapType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
 - uid: Mapsui.MapInfoEventArgs.#ctor*
   name: MapInfoEventArgs
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_
@@ -11814,32 +11903,6 @@ references:
   fullName.vb: Mapsui.MapInfoEventArgs.New
   nameWithType: MapInfoEventArgs.MapInfoEventArgs
   nameWithType.vb: MapInfoEventArgs.New
-- uid: Mapsui.MapInfoEventArgs.GetMapInfo
-  name: GetMapInfo
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_GetMapInfo
-  commentId: P:Mapsui.MapInfoEventArgs.GetMapInfo
-  fullName: Mapsui.MapInfoEventArgs.GetMapInfo
-  nameWithType: MapInfoEventArgs.GetMapInfo
-- uid: Mapsui.MapInfoEventArgs.GetMapInfo*
-  name: GetMapInfo
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_GetMapInfo_
-  commentId: Overload:Mapsui.MapInfoEventArgs.GetMapInfo
-  isSpec: "True"
-  fullName: Mapsui.MapInfoEventArgs.GetMapInfo
-  nameWithType: MapInfoEventArgs.GetMapInfo
-- uid: Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
-  name: GetRemoteMapInfoAsync
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_GetRemoteMapInfoAsync
-  commentId: P:Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
-  fullName: Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
-  nameWithType: MapInfoEventArgs.GetRemoteMapInfoAsync
-- uid: Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync*
-  name: GetRemoteMapInfoAsync
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_GetRemoteMapInfoAsync_
-  commentId: Overload:Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
-  isSpec: "True"
-  fullName: Mapsui.MapInfoEventArgs.GetRemoteMapInfoAsync
-  nameWithType: MapInfoEventArgs.GetRemoteMapInfoAsync
 - uid: Mapsui.MapInfoEventArgs.Handled
   name: Handled
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_Handled
@@ -11853,45 +11916,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MapInfoEventArgs.Handled
   nameWithType: MapInfoEventArgs.Handled
-- uid: Mapsui.MapInfoEventArgs.ScreenPosition
-  name: ScreenPosition
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_ScreenPosition
-  commentId: P:Mapsui.MapInfoEventArgs.ScreenPosition
-  fullName: Mapsui.MapInfoEventArgs.ScreenPosition
-  nameWithType: MapInfoEventArgs.ScreenPosition
-- uid: Mapsui.MapInfoEventArgs.ScreenPosition*
-  name: ScreenPosition
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_ScreenPosition_
-  commentId: Overload:Mapsui.MapInfoEventArgs.ScreenPosition
-  isSpec: "True"
-  fullName: Mapsui.MapInfoEventArgs.ScreenPosition
-  nameWithType: MapInfoEventArgs.ScreenPosition
-- uid: Mapsui.MapInfoEventArgs.TapType
-  name: TapType
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_TapType
-  commentId: P:Mapsui.MapInfoEventArgs.TapType
-  fullName: Mapsui.MapInfoEventArgs.TapType
-  nameWithType: MapInfoEventArgs.TapType
-- uid: Mapsui.MapInfoEventArgs.TapType*
-  name: TapType
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_TapType_
-  commentId: Overload:Mapsui.MapInfoEventArgs.TapType
-  isSpec: "True"
-  fullName: Mapsui.MapInfoEventArgs.TapType
-  nameWithType: MapInfoEventArgs.TapType
-- uid: Mapsui.MapInfoEventArgs.WorldPosition
-  name: WorldPosition
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_WorldPosition
-  commentId: P:Mapsui.MapInfoEventArgs.WorldPosition
-  fullName: Mapsui.MapInfoEventArgs.WorldPosition
-  nameWithType: MapInfoEventArgs.WorldPosition
-- uid: Mapsui.MapInfoEventArgs.WorldPosition*
-  name: WorldPosition
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_WorldPosition_
-  commentId: Overload:Mapsui.MapInfoEventArgs.WorldPosition
-  isSpec: "True"
-  fullName: Mapsui.MapInfoEventArgs.WorldPosition
-  nameWithType: MapInfoEventArgs.WorldPosition
 - uid: Mapsui.Navigator
   name: Navigator
   href: pages/Mapsui.Navigator.html
@@ -12905,15 +12929,12 @@ references:
   commentId: T:Mapsui.Nts.Editing.EditManipulation
   fullName: Mapsui.Nts.Editing.EditManipulation
   nameWithType: EditManipulation
-- uid: Mapsui.Nts.Editing.EditManipulation.OnPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.Nts.Editing.EditManager,Mapsui.UI.IMapControl,System.Boolean)
-  name: OnPointerMoved(ScreenPosition, EditManager, IMapControl, bool)
-  href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_Nts_Editing_EditManager_Mapsui_UI_IMapControl_System_Boolean_
-  commentId: M:Mapsui.Nts.Editing.EditManipulation.OnPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.Nts.Editing.EditManager,Mapsui.UI.IMapControl,System.Boolean)
-  name.vb: OnPointerMoved(ScreenPosition, EditManager, IMapControl, Boolean)
-  fullName: Mapsui.Nts.Editing.EditManipulation.OnPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.Nts.Editing.EditManager, Mapsui.UI.IMapControl, bool)
-  fullName.vb: Mapsui.Nts.Editing.EditManipulation.OnPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.Nts.Editing.EditManager, Mapsui.UI.IMapControl, Boolean)
-  nameWithType: EditManipulation.OnPointerMoved(ScreenPosition, EditManager, IMapControl, bool)
-  nameWithType.vb: EditManipulation.OnPointerMoved(ScreenPosition, EditManager, IMapControl, Boolean)
+- uid: Mapsui.Nts.Editing.EditManipulation.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
+  name: OnPointerMoved(WidgetEventArgs, EditManager)
+  href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_Mapsui_Nts_Editing_EditManager_
+  commentId: M:Mapsui.Nts.Editing.EditManipulation.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
+  fullName: Mapsui.Nts.Editing.EditManipulation.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs, Mapsui.Nts.Editing.EditManager)
+  nameWithType: EditManipulation.OnPointerMoved(WidgetEventArgs, EditManager)
 - uid: Mapsui.Nts.Editing.EditManipulation.OnPointerMoved*
   name: OnPointerMoved
   href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnPointerMoved_
@@ -12921,12 +12942,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Nts.Editing.EditManipulation.OnPointerMoved
   nameWithType: EditManipulation.OnPointerMoved
-- uid: Mapsui.Nts.Editing.EditManipulation.OnPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.Nts.Editing.EditManager,Mapsui.UI.IMapControl)
-  name: OnPointerPressed(ScreenPosition, EditManager, IMapControl)
-  href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_Nts_Editing_EditManager_Mapsui_UI_IMapControl_
-  commentId: M:Mapsui.Nts.Editing.EditManipulation.OnPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.Nts.Editing.EditManager,Mapsui.UI.IMapControl)
-  fullName: Mapsui.Nts.Editing.EditManipulation.OnPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.Nts.Editing.EditManager, Mapsui.UI.IMapControl)
-  nameWithType: EditManipulation.OnPointerPressed(ScreenPosition, EditManager, IMapControl)
+- uid: Mapsui.Nts.Editing.EditManipulation.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
+  name: OnPointerPressed(WidgetEventArgs, EditManager)
+  href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnPointerPressed_Mapsui_Widgets_WidgetEventArgs_Mapsui_Nts_Editing_EditManager_
+  commentId: M:Mapsui.Nts.Editing.EditManipulation.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
+  fullName: Mapsui.Nts.Editing.EditManipulation.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs, Mapsui.Nts.Editing.EditManager)
+  nameWithType: EditManipulation.OnPointerPressed(WidgetEventArgs, EditManager)
 - uid: Mapsui.Nts.Editing.EditManipulation.OnPointerPressed*
   name: OnPointerPressed
   href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnPointerPressed_
@@ -12947,15 +12968,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Nts.Editing.EditManipulation.OnPointerReleased
   nameWithType: EditManipulation.OnPointerReleased
-- uid: Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.Nts.Editing.EditManager,Mapsui.UI.IMapControl,Mapsui.Manipulations.TapType,System.Boolean)
-  name: OnTapped(ScreenPosition, EditManager, IMapControl, TapType, bool)
-  href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_Nts_Editing_EditManager_Mapsui_UI_IMapControl_Mapsui_Manipulations_TapType_System_Boolean_
-  commentId: M:Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.Nts.Editing.EditManager,Mapsui.UI.IMapControl,Mapsui.Manipulations.TapType,System.Boolean)
-  name.vb: OnTapped(ScreenPosition, EditManager, IMapControl, TapType, Boolean)
-  fullName: Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.Nts.Editing.EditManager, Mapsui.UI.IMapControl, Mapsui.Manipulations.TapType, bool)
-  fullName.vb: Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.Nts.Editing.EditManager, Mapsui.UI.IMapControl, Mapsui.Manipulations.TapType, Boolean)
-  nameWithType: EditManipulation.OnTapped(ScreenPosition, EditManager, IMapControl, TapType, bool)
-  nameWithType.vb: EditManipulation.OnTapped(ScreenPosition, EditManager, IMapControl, TapType, Boolean)
+- uid: Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
+  name: OnTapped(Navigator, WidgetEventArgs, EditManager)
+  href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_Mapsui_Nts_Editing_EditManager_
+  commentId: M:Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
+  fullName: Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs, Mapsui.Nts.Editing.EditManager)
+  nameWithType: EditManipulation.OnTapped(Navigator, WidgetEventArgs, EditManager)
 - uid: Mapsui.Nts.Editing.EditManipulation.OnTapped*
   name: OnTapped
   href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnTapped_
@@ -14963,15 +14981,15 @@ references:
   commentId: T:Mapsui.Nts.Widgets.EditingWidget
   fullName: Mapsui.Nts.Widgets.EditingWidget
   nameWithType: EditingWidget
-- uid: Mapsui.Nts.Widgets.EditingWidget.#ctor(Mapsui.UI.IMapControl,Mapsui.Nts.Editing.EditManager)
-  name: EditingWidget(IMapControl, EditManager)
-  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget__ctor_Mapsui_UI_IMapControl_Mapsui_Nts_Editing_EditManager_
-  commentId: M:Mapsui.Nts.Widgets.EditingWidget.#ctor(Mapsui.UI.IMapControl,Mapsui.Nts.Editing.EditManager)
-  name.vb: New(IMapControl, EditManager)
-  fullName: Mapsui.Nts.Widgets.EditingWidget.EditingWidget(Mapsui.UI.IMapControl, Mapsui.Nts.Editing.EditManager)
-  fullName.vb: Mapsui.Nts.Widgets.EditingWidget.New(Mapsui.UI.IMapControl, Mapsui.Nts.Editing.EditManager)
-  nameWithType: EditingWidget.EditingWidget(IMapControl, EditManager)
-  nameWithType.vb: EditingWidget.New(IMapControl, EditManager)
+- uid: Mapsui.Nts.Widgets.EditingWidget.#ctor(Mapsui.Nts.Editing.EditManager)
+  name: EditingWidget(EditManager)
+  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget__ctor_Mapsui_Nts_Editing_EditManager_
+  commentId: M:Mapsui.Nts.Widgets.EditingWidget.#ctor(Mapsui.Nts.Editing.EditManager)
+  name.vb: New(EditManager)
+  fullName: Mapsui.Nts.Widgets.EditingWidget.EditingWidget(Mapsui.Nts.Editing.EditManager)
+  fullName.vb: Mapsui.Nts.Widgets.EditingWidget.New(Mapsui.Nts.Editing.EditManager)
+  nameWithType: EditingWidget.EditingWidget(EditManager)
+  nameWithType.vb: EditingWidget.New(EditManager)
 - uid: Mapsui.Nts.Widgets.EditingWidget.#ctor*
   name: EditingWidget
   href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget__ctor_
@@ -30067,15 +30085,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.Android.MapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_
@@ -30083,6 +30101,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Android.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Android.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Android.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Android.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.UI.Android.MapControl.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.UI.Android.MapControl.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.GetRemoteMapInfoAsync
+  nameWithType: MapControl.GetRemoteMapInfoAsync
 - uid: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)
   name: GetSnapshot(IEnumerable<ILayer>?, RenderFormat, int)
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_
@@ -30559,15 +30593,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Avalonia.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.Avalonia.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.Avalonia.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.Avalonia.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.Avalonia.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Avalonia.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Avalonia.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Avalonia.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.Avalonia.MapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_GetMapInfo_
@@ -30575,6 +30609,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Avalonia.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Avalonia.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Avalonia.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Avalonia.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.UI.Avalonia.MapControl.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.UI.Avalonia.MapControl.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.Avalonia.MapControl.GetRemoteMapInfoAsync
+  nameWithType: MapControl.GetRemoteMapInfoAsync
 - uid: Mapsui.UI.Avalonia.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)
   name: GetSnapshot(IEnumerable<ILayer>?, RenderFormat, int)
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_
@@ -31955,15 +32005,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Blazor.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.Blazor.MapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetMapInfo_
@@ -31971,6 +32021,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Blazor.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Blazor.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Blazor.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Blazor.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.UI.Blazor.MapControl.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.GetRemoteMapInfoAsync
+  nameWithType: MapControl.GetRemoteMapInfoAsync
 - uid: Mapsui.UI.Blazor.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)
   name: GetSnapshot(IEnumerable<ILayer>?, RenderFormat, int)
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_
@@ -32648,15 +32714,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Eto.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.Eto.MapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetMapInfo_
@@ -32664,6 +32730,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync
+  nameWithType: MapControl.GetRemoteMapInfoAsync
 - uid: Mapsui.UI.Eto.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)
   name: GetSnapshot(IEnumerable<ILayer>?, RenderFormat, int)
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_
@@ -33139,15 +33221,15 @@ references:
   commentId: T:Mapsui.UI.IMapControl
   fullName: Mapsui.UI.IMapControl
   nameWithType: IMapControl
-- uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: IMapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: IMapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: IMapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: IMapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.IMapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetMapInfo_
@@ -34702,15 +34784,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Maui.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.Maui.MapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_GetMapInfo_
@@ -34718,6 +34800,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Maui.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Maui.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Maui.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Maui.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.UI.Maui.MapControl.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.UI.Maui.MapControl.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapControl.GetRemoteMapInfoAsync
+  nameWithType: MapControl.GetRemoteMapInfoAsync
 - uid: Mapsui.UI.Maui.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)
   name: GetSnapshot(IEnumerable<ILayer>?, RenderFormat, int)
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_
@@ -35493,6 +35591,19 @@ references:
   commentId: E:Mapsui.UI.Maui.MapView.MapClicked
   fullName: Mapsui.UI.Maui.MapView.MapClicked
   nameWithType: MapView.MapClicked
+- uid: Mapsui.UI.Maui.MapView.MapInfoLayers
+  name: MapInfoLayers
+  href: pages/Mapsui.UI.Maui.MapView.html#Mapsui_UI_Maui_MapView_MapInfoLayers
+  commentId: P:Mapsui.UI.Maui.MapView.MapInfoLayers
+  fullName: Mapsui.UI.Maui.MapView.MapInfoLayers
+  nameWithType: MapView.MapInfoLayers
+- uid: Mapsui.UI.Maui.MapView.MapInfoLayers*
+  name: MapInfoLayers
+  href: pages/Mapsui.UI.Maui.MapView.html#Mapsui_UI_Maui_MapView_MapInfoLayers_
+  commentId: Overload:Mapsui.UI.Maui.MapView.MapInfoLayers
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapView.MapInfoLayers
+  nameWithType: MapView.MapInfoLayers
 - uid: Mapsui.UI.Maui.MapView.MyLocationEnabled
   name: MyLocationEnabled
   href: pages/Mapsui.UI.Maui.MapView.html#Mapsui_UI_Maui_MapView_MyLocationEnabled
@@ -37280,15 +37391,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.WinUI.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.WinUI.MapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_GetMapInfo_
@@ -37296,6 +37407,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.WinUI.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.WinUI.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.WinUI.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.WinUI.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.UI.WinUI.MapControl.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.UI.WinUI.MapControl.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.WinUI.MapControl.GetRemoteMapInfoAsync
+  nameWithType: MapControl.GetRemoteMapInfoAsync
 - uid: Mapsui.UI.WinUI.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)
   name: GetSnapshot(IEnumerable<ILayer>?, RenderFormat, int)
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_
@@ -37649,15 +37776,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.WindowsForms.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.WindowsForms.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.WindowsForms.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.WindowsForms.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.WindowsForms.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.WindowsForms.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.WindowsForms.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.WindowsForms.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.WindowsForms.MapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_GetMapInfo_
@@ -37678,6 +37805,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.GetPixelDensity
   nameWithType: MapControl.GetPixelDensity
+- uid: Mapsui.UI.WindowsForms.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.WindowsForms.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.WindowsForms.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.WindowsForms.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.UI.WindowsForms.MapControl.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.WindowsForms.MapControl.GetRemoteMapInfoAsync
+  nameWithType: MapControl.GetRemoteMapInfoAsync
 - uid: Mapsui.UI.WindowsForms.MapControl.GetScreenPosition(System.Drawing.Point)
   name: GetScreenPosition(Point)
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_GetScreenPosition_System_Drawing_Point_
@@ -38075,15 +38218,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.Wpf.MapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_
@@ -38091,6 +38234,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Wpf.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Wpf.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Wpf.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Wpf.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.UI.Wpf.MapControl.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.GetRemoteMapInfoAsync
+  nameWithType: MapControl.GetRemoteMapInfoAsync
 - uid: Mapsui.UI.Wpf.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)
   name: GetSnapshot(IEnumerable<ILayer>?, RenderFormat, int)
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_
@@ -38466,15 +38625,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Frame
   nameWithType: MapControl.Frame
-- uid: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name: GetMapInfo(ScreenPosition, int)
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Int32_
-  commentId: M:Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Int32)
-  name.vb: GetMapInfo(ScreenPosition, Integer)
-  fullName: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, int)
-  fullName.vb: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Integer)
-  nameWithType: MapControl.GetMapInfo(ScreenPosition, int)
-  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, Integer)
+- uid: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_Manipulations_ScreenPosition_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Manipulations.ScreenPosition, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetMapInfo(ScreenPosition, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetMapInfo(ScreenPosition, IEnumerable(Of ILayer))
 - uid: Mapsui.UI.iOS.MapControl.GetMapInfo*
   name: GetMapInfo
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_
@@ -38482,6 +38641,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.iOS.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.iOS.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.iOS.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.iOS.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable(Of ILayer))
+- uid: Mapsui.UI.iOS.MapControl.GetRemoteMapInfoAsync*
+  name: GetRemoteMapInfoAsync
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetRemoteMapInfoAsync_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.GetRemoteMapInfoAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.GetRemoteMapInfoAsync
+  nameWithType: MapControl.GetRemoteMapInfoAsync
 - uid: Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)
   name: GetSnapshot(IEnumerable<ILayer>?, RenderFormat, int)
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_
@@ -41093,15 +41268,33 @@ references:
   commentId: T:Mapsui.Widgets.InfoWidgets.MapInfoWidget
   fullName: Mapsui.Widgets.InfoWidgets.MapInfoWidget
   nameWithType: MapInfoWidget
-- uid: Mapsui.Widgets.InfoWidgets.MapInfoWidget.#ctor(Mapsui.Map)
-  name: MapInfoWidget(Map)
-  href: pages/Mapsui.Widgets.InfoWidgets.MapInfoWidget.html#Mapsui_Widgets_InfoWidgets_MapInfoWidget__ctor_Mapsui_Map_
-  commentId: M:Mapsui.Widgets.InfoWidgets.MapInfoWidget.#ctor(Mapsui.Map)
-  name.vb: New(Map)
-  fullName: Mapsui.Widgets.InfoWidgets.MapInfoWidget.MapInfoWidget(Mapsui.Map)
-  fullName.vb: Mapsui.Widgets.InfoWidgets.MapInfoWidget.New(Mapsui.Map)
-  nameWithType: MapInfoWidget.MapInfoWidget(Map)
-  nameWithType.vb: MapInfoWidget.New(Map)
+- uid: Mapsui.Widgets.InfoWidgets.MapInfoWidget.#ctor(Mapsui.Map,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: MapInfoWidget(Map, IEnumerable<ILayer>)
+  href: pages/Mapsui.Widgets.InfoWidgets.MapInfoWidget.html#Mapsui_Widgets_InfoWidgets_MapInfoWidget__ctor_Mapsui_Map_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.Widgets.InfoWidgets.MapInfoWidget.#ctor(Mapsui.Map,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: New(Map, IEnumerable(Of ILayer))
+  fullName: Mapsui.Widgets.InfoWidgets.MapInfoWidget.MapInfoWidget(Mapsui.Map, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.MapInfoWidget.New(Mapsui.Map, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapInfoWidget.MapInfoWidget(Map, IEnumerable<ILayer>)
+  nameWithType.vb: MapInfoWidget.New(Map, IEnumerable(Of ILayer))
+- uid: Mapsui.Widgets.InfoWidgets.MapInfoWidget.#ctor(Mapsui.Map,System.Func{Mapsui.Layers.ILayer,System.Boolean})
+  name: MapInfoWidget(Map, Func<ILayer, bool>)
+  href: pages/Mapsui.Widgets.InfoWidgets.MapInfoWidget.html#Mapsui_Widgets_InfoWidgets_MapInfoWidget__ctor_Mapsui_Map_System_Func_Mapsui_Layers_ILayer_System_Boolean__
+  commentId: M:Mapsui.Widgets.InfoWidgets.MapInfoWidget.#ctor(Mapsui.Map,System.Func{Mapsui.Layers.ILayer,System.Boolean})
+  name.vb: New(Map, Func(Of ILayer, Boolean))
+  fullName: Mapsui.Widgets.InfoWidgets.MapInfoWidget.MapInfoWidget(Mapsui.Map, System.Func<Mapsui.Layers.ILayer, bool>)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.MapInfoWidget.New(Mapsui.Map, System.Func(Of Mapsui.Layers.ILayer, Boolean))
+  nameWithType: MapInfoWidget.MapInfoWidget(Map, Func<ILayer, bool>)
+  nameWithType.vb: MapInfoWidget.New(Map, Func(Of ILayer, Boolean))
+- uid: Mapsui.Widgets.InfoWidgets.MapInfoWidget.#ctor(Mapsui.Map,System.Func{System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}})
+  name: MapInfoWidget(Map, Func<IEnumerable<ILayer>>)
+  href: pages/Mapsui.Widgets.InfoWidgets.MapInfoWidget.html#Mapsui_Widgets_InfoWidgets_MapInfoWidget__ctor_Mapsui_Map_System_Func_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer___
+  commentId: M:Mapsui.Widgets.InfoWidgets.MapInfoWidget.#ctor(Mapsui.Map,System.Func{System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer}})
+  name.vb: New(Map, Func(Of IEnumerable(Of ILayer)))
+  fullName: Mapsui.Widgets.InfoWidgets.MapInfoWidget.MapInfoWidget(Mapsui.Map, System.Func<System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>>)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.MapInfoWidget.New(Mapsui.Map, System.Func(Of System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer)))
+  nameWithType: MapInfoWidget.MapInfoWidget(Map, Func<IEnumerable<ILayer>>)
+  nameWithType.vb: MapInfoWidget.New(Map, Func(Of IEnumerable(Of ILayer)))
 - uid: Mapsui.Widgets.InfoWidgets.MapInfoWidget.#ctor*
   name: MapInfoWidget
   href: pages/Mapsui.Widgets.InfoWidgets.MapInfoWidget.html#Mapsui_Widgets_InfoWidgets_MapInfoWidget__ctor_
@@ -41846,15 +42039,15 @@ references:
   commentId: T:Mapsui.Widgets.WidgetEventArgs
   fullName: Mapsui.Widgets.WidgetEventArgs
   nameWithType: WidgetEventArgs
-- uid: Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType,System.Boolean,System.Boolean,System.Func{Mapsui.MapInfo})
-  name: WidgetEventArgs(ScreenPosition, TapType, bool, bool, Func<MapInfo>)
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_Manipulations_TapType_System_Boolean_System_Boolean_System_Func_Mapsui_MapInfo__
-  commentId: M:Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType,System.Boolean,System.Boolean,System.Func{Mapsui.MapInfo})
-  name.vb: New(ScreenPosition, TapType, Boolean, Boolean, Func(Of MapInfo))
-  fullName: Mapsui.Widgets.WidgetEventArgs.WidgetEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.TapType, bool, bool, System.Func<Mapsui.MapInfo>)
-  fullName.vb: Mapsui.Widgets.WidgetEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.TapType, Boolean, Boolean, System.Func(Of Mapsui.MapInfo))
-  nameWithType: WidgetEventArgs.WidgetEventArgs(ScreenPosition, TapType, bool, bool, Func<MapInfo>)
-  nameWithType.vb: WidgetEventArgs.New(ScreenPosition, TapType, Boolean, Boolean, Func(Of MapInfo))
+- uid: Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,System.Boolean,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: WidgetEventArgs(ScreenPosition, MPoint, TapType, Viewport, bool, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_System_Boolean_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,System.Boolean,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, TapType, Viewport, Boolean, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.Widgets.WidgetEventArgs.WidgetEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, bool, bool, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.Widgets.WidgetEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, Boolean, Boolean, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: WidgetEventArgs.WidgetEventArgs(ScreenPosition, MPoint, TapType, Viewport, bool, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: WidgetEventArgs.New(ScreenPosition, MPoint, TapType, Viewport, Boolean, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
 - uid: Mapsui.Widgets.WidgetEventArgs.#ctor*
   name: WidgetEventArgs
   href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs__ctor_
@@ -41865,19 +42058,6 @@ references:
   fullName.vb: Mapsui.Widgets.WidgetEventArgs.New
   nameWithType: WidgetEventArgs.WidgetEventArgs
   nameWithType.vb: WidgetEventArgs.New
-- uid: Mapsui.Widgets.WidgetEventArgs.GetMapInfo
-  name: GetMapInfo
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_GetMapInfo
-  commentId: P:Mapsui.Widgets.WidgetEventArgs.GetMapInfo
-  fullName: Mapsui.Widgets.WidgetEventArgs.GetMapInfo
-  nameWithType: WidgetEventArgs.GetMapInfo
-- uid: Mapsui.Widgets.WidgetEventArgs.GetMapInfo*
-  name: GetMapInfo
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_GetMapInfo_
-  commentId: Overload:Mapsui.Widgets.WidgetEventArgs.GetMapInfo
-  isSpec: "True"
-  fullName: Mapsui.Widgets.WidgetEventArgs.GetMapInfo
-  nameWithType: WidgetEventArgs.GetMapInfo
 - uid: Mapsui.Widgets.WidgetEventArgs.LeftButton
   name: LeftButton
   href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_LeftButton
@@ -41891,19 +42071,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.WidgetEventArgs.LeftButton
   nameWithType: WidgetEventArgs.LeftButton
-- uid: Mapsui.Widgets.WidgetEventArgs.Position
-  name: Position
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_Position
-  commentId: P:Mapsui.Widgets.WidgetEventArgs.Position
-  fullName: Mapsui.Widgets.WidgetEventArgs.Position
-  nameWithType: WidgetEventArgs.Position
-- uid: Mapsui.Widgets.WidgetEventArgs.Position*
-  name: Position
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_Position_
-  commentId: Overload:Mapsui.Widgets.WidgetEventArgs.Position
-  isSpec: "True"
-  fullName: Mapsui.Widgets.WidgetEventArgs.Position
-  nameWithType: WidgetEventArgs.Position
 - uid: Mapsui.Widgets.WidgetEventArgs.ShiftPressed
   name: ShiftPressed
   href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_ShiftPressed
@@ -41917,19 +42084,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.WidgetEventArgs.ShiftPressed
   nameWithType: WidgetEventArgs.ShiftPressed
-- uid: Mapsui.Widgets.WidgetEventArgs.TapType
-  name: TapType
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_TapType
-  commentId: P:Mapsui.Widgets.WidgetEventArgs.TapType
-  fullName: Mapsui.Widgets.WidgetEventArgs.TapType
-  nameWithType: WidgetEventArgs.TapType
-- uid: Mapsui.Widgets.WidgetEventArgs.TapType*
-  name: TapType
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_TapType_
-  commentId: Overload:Mapsui.Widgets.WidgetEventArgs.TapType
-  isSpec: "True"
-  fullName: Mapsui.Widgets.WidgetEventArgs.TapType
-  nameWithType: WidgetEventArgs.TapType
 - uid: Mapsui.Widgets.WidgetInput
   name: WidgetInput
   href: pages/Mapsui.Widgets.WidgetInput.html

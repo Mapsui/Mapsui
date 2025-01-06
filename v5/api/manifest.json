@@ -502,6 +502,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.BaseEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.BaseEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Cache.IUrlPersistentCache.yml",
       "output": {
         ".html": {
@@ -986,6 +996,26 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Fetcher.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.GetMapInfoDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.GetMapInfoDelegate.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.GetRemoteMapInfoAsyncDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.GetRemoteMapInfoAsyncDelegate.html"
         }
       },
       "version": ""
