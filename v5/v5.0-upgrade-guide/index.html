@@ -844,6 +844,7 @@
 <li>Moved UnSnapRotationDegrees and UnSnapRotationDegrees properties from MapControl to MapControl.Map.Navigator.</li>
 <li>Rename Microsoft.Maui.Graphics.Color ToNative(this Styles.Color color) to ToMaui.</li>
 <li>Because BaseFeature is now derived from IFeature and the previously not-implemented methods and fields had to be defined as abstract, these now need the <code>override</code> keyword in the derived classes.</li>
+<li>The logic around MapInfo was rewritten. In V4 the Info event returned a MapInfo object which contained the features on the tap location for those layers for which IsMapInfoLayer was set to true. In V5 IsMapInfoLayer is removed. The Info event args do not contain a MapInfo object but a GetMapInfo method to retrieve it. That method needs a list of layers to query. There is also a GetRemoteMapInfo for layers that get the feature info from the server, like WMS.</li>
 </ul>
 
 
