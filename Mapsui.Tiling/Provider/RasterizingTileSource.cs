@@ -250,17 +250,18 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         var renderLayer = layer.RenderLayer;
         List<ILayer> renderLayers = [renderLayer];
 
-        var info = renderer.GetMapInfo(screenPosition, viewport, renderLayers);
-        if (info != null)
+        var mapInfo = renderer.GetMapInfo(screenPosition, viewport, renderLayers);
+        if (mapInfo.Feature is null)
         {
-            var mapInfo = await RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, renderLayers);
-            var infos = mapInfo.MapInfoRecords;
-            if (infos != null)
+            mapInfo = await RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, renderLayers);
+        }
+
+        var mapInfoRecords = mapInfo.MapInfoRecords;
+        if (mapInfoRecords != null)
+        {
+            foreach (var group in mapInfoRecords.GroupBy(f => f.Layer.Name))
             {
-                foreach (var group in infos.GroupBy(f => f.Layer.Name))
-                {
-                    result[group.Key] = group.Select(f => f.Feature).ToArray();
-                }
+                result[group.Key] = group.Select(f => f.Feature).ToArray();
             }
         }
 
