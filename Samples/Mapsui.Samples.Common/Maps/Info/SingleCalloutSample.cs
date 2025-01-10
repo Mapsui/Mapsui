@@ -78,7 +78,7 @@ public class SingleCalloutSample : ISample
             feature[nameof(City.Lng)] = c.Lng;
             feature.Styles.Add(CreateCalloutStyle(feature.ToStringOfKeyValuePairs()));
             return feature;
-        });
+        }).ToArray();
     }
 
     private static CalloutStyle CreateCalloutStyle(string content)

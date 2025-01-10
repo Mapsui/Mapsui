@@ -80,7 +80,7 @@ public class ImageCalloutSample : ISample
             var calloutStyle = CreateCalloutStyle("embedded://Mapsui.Samples.Common.Images.loc.png");
             feature.Styles.Add(calloutStyle);
             return feature;
-        });
+        }).ToArray();
     }
 
     private static CalloutStyle CreateCalloutStyle(string imageSource) => new()

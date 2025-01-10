@@ -58,7 +58,7 @@ public class PointsSample : ISample
             feature["name"] = c.Name;
             feature["country"] = c.Country;
             return feature;
-        });
+        }).ToArray();
     }
 
     internal class City
