@@ -20,7 +20,7 @@
     
     
       
-        <title>v5.0 upgrade guide - Mapsui Documentation</title>
+        <title>v5.0 Upgrade Guide - Mapsui Documentation</title>
       
     
     
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              v5.0 upgrade guide
+              v5.0 Upgrade Guide
             
           </span>
         </div>
@@ -607,7 +607,7 @@
           
   
   <span class="md-ellipsis">
-    v5.0 upgrade guide
+    v5.0 Upgrade Guide
   </span>
   
 
@@ -618,7 +618,7 @@
         
   
   <span class="md-ellipsis">
-    v5.0 upgrade guide
+    v5.0 Upgrade Guide
   </span>
   
 
@@ -638,6 +638,15 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#by-compile-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      By compile error
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#list-of-changes-in-the-order-that-they-were-applied" class="md-nav__link">
@@ -824,6 +833,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#by-compile-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      By compile error
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#list-of-changes-in-the-order-that-they-were-applied" class="md-nav__link">
     <span class="md-ellipsis">
       List of changes in the order that they were applied.
@@ -855,7 +873,24 @@
   
 
 
-<h1 id="v50-upgrade-guide">v5.0 upgrade guide</h1>
+<h1 id="v50-upgrade-guide">v5.0 Upgrade Guide</h1>
+<h2 id="by-compile-error">By compile error</h2>
+<p>Below is a list of compile error that you could encounter when upgrading van Mapsui V4 to V5. Please inform us if you run into compile errors that are not in this list.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&#39;Layer&#39; does not contain a definition for &#39;IsMapInfoLayer&#39;
+</span></code></pre></div>
+This was deprecated. instead call GetMapInfo on the EventArgs and supply the list of layers you want MapInfo of. Here is the <a href="https://mapsui.com/v5/mapinfo/">documentation on MapInfo</a>.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&#39;Map&#39; does not contain a definition for &#39;Home&#39;
+</span></code></pre></div>
+In V5 you can call the Navigator methods to specify the startup view, for instance: <code>Map.Navigator.ZoomToBox(startupBox)</code>. The Home method solved a problem where you could not use the Navigator when the Map size was not initialized. In V5 this problem is solved within the Navigator by postponing the call until it is initialized.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>The type or namespace name &#39;RectFeature&#39; could not be found
+</span></code></pre></div>
+RectFeature was removed to simplify our code. Use <code>new GeometryFeature(myRect.ToPolygon())</code> instead.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&#39;SymbolStyle&#39; does not contain a definition for &#39;BitmapId&#39; 
+</span></code></pre></div>
+In V4 you had to register a bitmap and then assign the id to the SymbolStyle. In V5 you can directly specifify the path to the image source. See is the <a href="https://mapsui.com/v5/imagesource/">documentation on ImageSource</a></p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>The name &#39;BitmapRegistry&#39; does not exist in the current context
+</span></code></pre></div>
+See the item above.</p>
 <h2 id="list-of-changes-in-the-order-that-they-were-applied">List of changes in the order that they were applied.</h2>
 <ul>
 <li>Removed <code>RectFeature</code>. Instead of <code>new RectFeature(myRect)</code> use <code>new GeometryFeature(myRect.ToPolygon())</code></li>
