@@ -1,5 +1,4 @@
-﻿#pragma warning disable IDE0005
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
@@ -14,8 +13,10 @@ using Mapsui.Styles.Thematics;
 using Mapsui.Nts.Providers;
 using SkiaSharp;
 
+#pragma warning disable IDE0005
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
+#pragma warning disable IDISP004
 
 namespace Mapsui.Rendering.Benchmarks;
 

@@ -3,7 +3,10 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.UI.WindowsForms;
 
+#pragma warning disable IDISP004
+
 namespace Mapsui.Samples.WindowsForms;
+
 public partial class SampleWindow : Form
 {
     private readonly MapControl _mapControl;
