@@ -18,11 +18,12 @@ public static class ZoomHelper
 
         for (var i = 0; i < resolutions.Count; i++)
         {
-            // Is there a snap resolution smaller or equal?
-            if (resolutions[i] <= (newResolution - double.Epsilon))
-            {
+            if (resolutions[i] > (newResolution - double.Epsilon))
+                continue; // Ignore bigger snap resolutions
+
+            // The resolutions increase in multiples of two, so we need to take log2 for the difference comparison.
+            if (Math.Log2(newResolution) - Math.Log2(resolutions[i]) < 0.5)
                 return resolutions[i];
-            }
         }
 
         // No snapping, return as calculated.
@@ -38,11 +39,12 @@ public static class ZoomHelper
 
         for (var i = resolutions.Count - 1; i >= 0; i--)
         {
-            // Is there a snap resolution bigger or equal?
-            if (resolutions[i] >= (newResolution + double.Epsilon))
-            {
+            if (resolutions[i] < (newResolution + double.Epsilon))
+                continue; // Ignore smaller snap resolutions
+
+            // The resolutions increase in multiples of two, so we need to take log2 for the difference comparison.
+            if (Math.Log2(resolutions[i] - Math.Log2(newResolution)) < 0.5)
                 return resolutions[i];
-            }
         }
 
         // No snapping, return as calculated.
@@ -55,18 +57,13 @@ public static class ZoomHelper
         var widthResolution = worldWidth / screenWidth;
         var heightResolution = worldHeight / screenHeight;
 
-        switch (boxFit)
+        return boxFit switch
         {
-            case MBoxFit.FitHeight:
-                return heightResolution;
-            case MBoxFit.FitWidth:
-                return widthResolution;
-            case MBoxFit.Fill:
-                return Math.Min(widthResolution, heightResolution);
-            case MBoxFit.Fit:
-                return Math.Max(widthResolution, heightResolution);
-            default:
-                throw new Exception("BoxFit not supported");
-        }
+            MBoxFit.FitHeight => heightResolution,
+            MBoxFit.FitWidth => widthResolution,
+            MBoxFit.Fill => Math.Min(widthResolution, heightResolution),
+            MBoxFit.Fit => Math.Max(widthResolution, heightResolution),
+            _ => throw new Exception("BoxFit not supported"),
+        };
     }
 }
