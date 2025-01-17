@@ -18,7 +18,7 @@ public static class ZoomHelper
 
         for (var i = 0; i < resolutions.Count; i++)
         {
-            // Is there a resolution higher are equal (taking into account a margin of epsilon)?
+            // Is there a snap resolution smaller or equal?
             if (resolutions[i] <= (newResolution - double.Epsilon))
             {
                 return resolutions[i];
@@ -38,7 +38,7 @@ public static class ZoomHelper
 
         for (var i = resolutions.Count - 1; i >= 0; i--)
         {
-            // Is there a resolution smaller are equal (taking into account a margin of epsilon)?
+            // Is there a snap resolution bigger or equal?
             if (resolutions[i] >= (newResolution + double.Epsilon))
             {
                 return resolutions[i];
