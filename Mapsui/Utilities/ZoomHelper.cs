@@ -11,30 +11,42 @@ public static class ZoomHelper
 {
     public static double GetResolutionToZoomIn(IReadOnlyList<double>? resolutions, double resolution)
     {
-        if (resolutions == null || resolutions.Count == 0) return resolution / 2.0;
+        var newResolution = resolution / 2.0;
 
-        foreach (var t in resolutions)
+        if (resolutions == null || resolutions.Count == 0)
+            return newResolution; // No snapping possible. Return as calculated.
+
+        for (var i = 0; i < resolutions.Count; i++)
         {
-            // If there is a smaller resolution in the array return it
-            if (t < resolution - double.Epsilon) return t;
+            // Is there a resolution higher are equal (taking into account a margin of epsilon)?
+            if (resolutions[i] <= (newResolution - double.Epsilon))
+            {
+                return resolutions[i];
+            }
         }
 
-        // Else return half of the current resolution
-        return resolution / 2.0;
+        // No snapping, return as calculated.
+        return newResolution;
     }
 
     public static double GetResolutionToZoomOut(IReadOnlyList<double>? resolutions, double resolution)
     {
-        if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
+        var newResolution = resolution * 2.0;
+
+        if (resolutions == null || resolutions.Count == 0)
+            return newResolution;  // No snapping possible. Return as calculated.
 
         for (var i = resolutions.Count - 1; i >= 0; i--)
         {
-            // If there is a bigger resolution in the array return it
-            if (resolutions[i] > (resolution + double.Epsilon)) return resolutions[i];
+            // Is there a resolution smaller are equal (taking into account a margin of epsilon)?
+            if (resolutions[i] >= (newResolution + double.Epsilon))
+            {
+                return resolutions[i];
+            }
         }
 
-        // Else return double the current resolution
-        return resolution * 2.0;
+        // No snapping, return as calculated.
+        return newResolution;
     }
 
     public static double CalculateResolutionForWorldSize(double worldWidth, double worldHeight, double screenWidth,
