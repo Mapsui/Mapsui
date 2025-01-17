@@ -97,11 +97,16 @@ public class ZoomHelperTests
         Assert.That(result, Is.EqualTo(200.0));
     }
 
-    [TestCase(100, 50)]
+    [TestCase(6400, 3200)] // Zoom before list
+    [TestCase(3200, 1600)] // Zoom onto list
+    [TestCase(1600, 800)] // Zoom within list
+    [TestCase(800, 400)] // Zoom within list
+    [TestCase(400, 200)] // Zoom past list
+    [TestCase(200, 100)] // Zoom far past list
     public void GetResolutionToZoomIn_WithResolutions_ReturnsSnappedResolution(double resolution, double expected)
     {
         // Arrange
-        var resolutions = new List<double> { 400.0, 200.0, 100.0 };
+        var resolutions = new List<double> { 1600.0, 800, 400.0 };
 
         // Act
         double result = ZoomHelper.GetResolutionToZoomIn(resolutions, resolution);
@@ -110,12 +115,16 @@ public class ZoomHelperTests
         Assert.That(result, Is.EqualTo(expected));
     }
 
-
-    [TestCase(100, 200)]
+    [TestCase(100, 200)] // Zoom before list
+    [TestCase(200, 400)] // Zoom onto list
+    [TestCase(400, 800)] // Zoom within list
+    [TestCase(800, 1600)] // Zoom within list
+    [TestCase(1600, 3200)] // Zoom past list
+    [TestCase(3200, 6400)] // Zoom far past list
     public void GetResolutionToZoomOut_WithResolutions_ReturnsSnappedResolution(double resolution, double expected)
     {
         // Arrange
-        var resolutions = new List<double> { 400.0, 200.0, 100.0 };
+        var resolutions = new List<double> { 1600.0, 800, 400.0 };
 
         // Act
         double result = ZoomHelper.GetResolutionToZoomOut(resolutions, resolution);
