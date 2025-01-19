@@ -86,10 +86,10 @@ public class GetFeatureInfo
         var handler = new HttpClientHandler();
         handler.SetCredentials(Credentials ?? CredentialCache.DefaultCredentials);
 
-        var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+        using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
-        var req = new HttpRequestMessage(HttpMethod.Get, url);
-        var response = await client.SendAsync(req).ConfigureAwait(false);
+        using var req = new HttpRequestMessage(HttpMethod.Get, url);
+        using var response = await client.SendAsync(req).ConfigureAwait(false);
 
         if (!response.IsSuccessStatusCode)
         {

@@ -30,7 +30,7 @@ public static class CacheExtensions
             }
             else
             {
-                var handler = new HttpClientHandler();
+                using var handler = new HttpClientHandler();
                 using var httpClient = new HttpClient(handler);
                 // https://github.com/xamarin/xamarin-android/issues/5264 use ConfigureAwait(false) for Network access
                 await using var response = await httpClient.GetStreamAsync(url).ConfigureAwait(false);

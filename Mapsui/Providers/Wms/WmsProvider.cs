@@ -578,10 +578,10 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         var handler = new HttpClientHandler();
         handler.SetCredentials(Credentials);
 
-        var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+        using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
-        var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpper() ?? "GET"), url);
-        var response = await client.SendAsync(req).ConfigureAwait(false);
+        using var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpper() ?? "GET"), url);
+        using var response = await client.SendAsync(req).ConfigureAwait(false);
 
         if (!response.IsSuccessStatusCode)
         {
