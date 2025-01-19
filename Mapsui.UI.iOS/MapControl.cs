@@ -9,7 +9,7 @@ namespace Mapsui.UI.iOS;
 [Register("MapControl"), DesignTimeVisible(true)]
 public partial class MapControl : UIView, IMapControl
 {
-    private SKGLView? _glCanvas;
+    private SKMetalView? _metalCanvas;
     private SKCanvasView? _canvas;
     private bool _canvasInitialized;
     private readonly ManipulationTracker _manipulationTracker = new();
@@ -38,8 +38,8 @@ public partial class MapControl : UIView, IMapControl
             _canvasInitialized = true;
             if (UseGPU)
             {
-                _glCanvas?.Dispose();
-                _glCanvas = [];
+                _metalCanvas?.Dispose();
+                _metalCanvas = [];
             }
             else
             {
@@ -58,7 +58,7 @@ public partial class MapControl : UIView, IMapControl
             RunOnUIThread(() =>
             {
                 SetNeedsDisplay();
-                _glCanvas?.SetNeedsDisplay();
+                _metalCanvas?.SetNeedsDisplay();
             });
         };
 
@@ -66,20 +66,20 @@ public partial class MapControl : UIView, IMapControl
 
         if (UseGPU)
         {
-            _glCanvas!.TranslatesAutoresizingMaskIntoConstraints = false;
-            _glCanvas.MultipleTouchEnabled = true;
-            _glCanvas.PaintSurface += OnPaintSurface;
-            AddSubview(_glCanvas);
+            _metalCanvas!.TranslatesAutoresizingMaskIntoConstraints = false;
+            _metalCanvas.MultipleTouchEnabled = true;
+            _metalCanvas.PaintSurface += OnPaintSurface;
+            AddSubview(_metalCanvas);
 
             AddConstraints(
             [
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _glCanvas,
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _metalCanvas,
                     NSLayoutAttribute.Leading, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _glCanvas,
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _metalCanvas,
                     NSLayoutAttribute.Trailing, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _glCanvas,
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _metalCanvas,
                     NSLayoutAttribute.Top, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _glCanvas,
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _metalCanvas,
                     NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             ]);
         }
@@ -110,7 +110,7 @@ public partial class MapControl : UIView, IMapControl
         Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
     }
 
-    private void OnPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
+    private void OnPaintSurface(object? sender, SKPaintMetalSurfaceEventArgs args)
     {
         if (PixelDensity <= 0)
             return;
@@ -199,7 +199,7 @@ public partial class MapControl : UIView, IMapControl
             InitializeCanvas();
             if (UseGPU)
             {
-                _glCanvas!.Frame = value;
+                _metalCanvas!.Frame = value;
             }
             else
             {
@@ -215,7 +215,7 @@ public partial class MapControl : UIView, IMapControl
     public override void LayoutMarginsDidChange()
     {
         InitializeCanvas();
-        if (_glCanvas == null || _canvas == null) return;
+        if (_metalCanvas == null || _canvas == null) return;
 
         base.LayoutMarginsDidChange();
         SetViewportSize();
@@ -242,7 +242,7 @@ public partial class MapControl : UIView, IMapControl
         {
             _map?.Dispose();
             Unsubscribe();
-            _glCanvas?.Dispose();
+            _metalCanvas?.Dispose();
             _canvas?.Dispose();
             base.Dispose(disposing);
         }
@@ -256,7 +256,7 @@ public partial class MapControl : UIView, IMapControl
         {
             InitializeCanvas();
             return UseGPU
-                ? _glCanvas!.Frame.Width
+                ? _metalCanvas!.Frame.Width
                 : _canvas!.Frame.Width;
         }
     }
@@ -267,7 +267,7 @@ public partial class MapControl : UIView, IMapControl
         {
             InitializeCanvas();
             return UseGPU
-                ? _glCanvas!.Frame.Height
+                ? _metalCanvas!.Frame.Height
                 : _canvas!.Frame.Height;
         }
     }
@@ -276,7 +276,7 @@ public partial class MapControl : UIView, IMapControl
     {
         InitializeCanvas();
         return UseGPU
-            ? (double)_glCanvas!.ContentScaleFactor
+            ? (double)_metalCanvas!.ContentScaleFactor
             : (double)_canvas!.ContentScaleFactor;
     }
 
