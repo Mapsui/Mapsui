@@ -262,7 +262,7 @@ public class Client
             var handler = new HttpClientHandler();
             using var client = new HttpClient(handler);
             client.DefaultRequestHeaders.UserAgent.ParseAdd(_userAgent ?? "If you use BruTile please specify a user-agent specific to your app");
-            var response = await client.GetAsync(url).ConfigureAwait(false);
+            using var response = await client.GetAsync(url).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {

@@ -5,7 +5,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Providers.Wms.Client.GetStreamAsync(System.String)~System.Threading.Tasks.Task{System.IO.Stream}")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Providers.Wms.WmsProvider.GetStreamAsync(System.String)~System.Threading.Tasks.Task{System.IO.Stream}")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP008:Don't assign member with injected and created disposables.", Justification = "<Pending>", Scope = "member", Target = "~P:Mapsui.Layers.RasterFeature.Raster")]
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.ImageLayer.StartNewFetch(Mapsui.Layers.FetchInfo)")]
