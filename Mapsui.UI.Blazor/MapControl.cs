@@ -42,10 +42,15 @@ public partial class MapControl : ComponentBase, IMapControl
 
         _invalidate = () =>
         {
+            if (!OperatingSystem.IsBrowser())
+                throw new InvalidOperationException("Only browser is supported");
+
             if (_viewCpu != null)
-                _viewCpu?.Invalidate();
-            else
+                _viewCpu.Invalidate();
+            else if (_viewGpu != null)
                 _viewGpu?.Invalidate();
+            else
+                throw new InvalidOperationException("Both _viewCpu and _viewGpu are null");
         };
     }
 
