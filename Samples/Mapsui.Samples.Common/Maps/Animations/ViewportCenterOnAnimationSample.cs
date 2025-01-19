@@ -30,9 +30,8 @@ public class ViewportCenterOnAnimationSample : ISample
 
         map.Info += (s, e) =>
         {
-            var mapInfo = e.GetMapInfo();
             // Animate to the new center.
-            map.Navigator.CenterOn(mapInfo.WorldPosition, 500, Easing.CubicOut);
+            map.Navigator.CenterOn(e.WorldPosition, 500, Easing.CubicOut);
         };
         return map;
     }

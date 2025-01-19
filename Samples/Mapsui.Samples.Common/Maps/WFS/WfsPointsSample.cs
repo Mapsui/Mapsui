@@ -26,7 +26,7 @@ public class WfsPointsSample : ISample
             var provider = await CreateWfsProviderAsync();
             map.Layers.Add(CreateWfsLayer(provider));
 
-            map.Widgets.Add(new MapInfoWidget(map));
+            map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Laser Points"));
 
             MRect bbox = new(
                 -34900
@@ -55,7 +55,6 @@ public class WfsPointsSample : ISample
         {
             Style = new SymbolStyle { Fill = new Brush(Color.Red), SymbolScale = 1 },
             DataSource = provider,
-            IsMapInfoLayer = true,
         };
     }
 

@@ -22,7 +22,7 @@ public class SymbolsSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateStylesLayer(map.Extent));
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Styles Layer"));
 
         return Task.FromResult(map);
     }
@@ -34,7 +34,6 @@ public class SymbolsSample : ISample
             Name = "Styles Layer",
             Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
             Style = null,
-            IsMapInfoLayer = true
         };
     }
 

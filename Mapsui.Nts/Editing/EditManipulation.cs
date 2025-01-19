@@ -2,15 +2,19 @@
 using Mapsui.Manipulations;
 using Mapsui.Nts.Extensions;
 using Mapsui.Styles;
-using Mapsui.UI;
+using Mapsui.Widgets;
 
 namespace Mapsui.Nts.Editing;
 
 public static class EditManipulation
 {
-    public static bool OnPointerPressed(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl)
+    public static bool OnPointerPressed(WidgetEventArgs e, EditManager editManager)
     {
-        var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
+        var editLayer = editManager.Layer;
+        if (editLayer == null)
+            return false;
+
+        var mapInfo = e.GetMapInfo([editLayer]);
         if (editManager.EditMode == EditMode.Modify && mapInfo.Feature != null)
             return editManager.StartDragging(mapInfo, editManager.VertexRadius);
         if (editManager.EditMode == EditMode.Rotate && mapInfo.Feature != null)
@@ -20,17 +24,22 @@ public static class EditManipulation
         return false;
     }
 
-    public static bool OnPointerMoved(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, bool isHovering)
+    public static bool OnPointerMoved(WidgetEventArgs e, EditManager editManager)
     {
+        var editLayer = editManager.Layer;
+        if (editLayer == null)
+            return false;
+
         var result = false;
-        if (isHovering)
+
+        if (!e.LeftButton)
         {
-            editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
+            editManager.HoveringVertex(e.GetMapInfo([]));
             result = false;
         }
         else
         {
-            var args = mapControl.GetMapInfo(screenPosition);
+            var args = e.GetMapInfo([editLayer]);
             if (editManager.EditMode == EditMode.Modify)
                 result = editManager.Dragging(args?.WorldPosition?.ToPoint());
             if (editManager.EditMode == EditMode.Rotate)
@@ -38,7 +47,7 @@ public static class EditManipulation
             if (editManager.EditMode == EditMode.Scale)
                 result = editManager.Scaling(args?.WorldPosition?.ToPoint());
         }
-        mapControl.RefreshGraphics();
+        editLayer.DataHasChanged();
         return result;
     }
 
@@ -55,8 +64,12 @@ public static class EditManipulation
         return false;
     }
 
-    public static bool OnTapped(ScreenPosition screenPosition, EditManager editManager, IMapControl mapControl, TapType tapType, bool shiftPressed)
+    public static bool OnTapped(Navigator navigator, WidgetEventArgs e, EditManager editManager)
     {
+        var editLayer = editManager.Layer;
+        if (editLayer == null)
+            return false;
+
         if (editManager.EditMode == EditMode.Modify)
             editManager.StopDragging();
         if (editManager.EditMode == EditMode.Rotate)
@@ -66,8 +79,8 @@ public static class EditManipulation
 
         if (editManager.EditMode == EditMode.Modify)
         {
-            var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
-            if (shiftPressed || tapType == TapType.Double || tapType == TapType.Long)
+            var mapInfo = e.GetMapInfo([editLayer]);
+            if (e.ShiftPressed || e.TapType == TapType.Double || e.TapType == TapType.Long)
             {
                 return editManager.TryDeleteCoordinate(
                     mapInfo, editManager.VertexRadius);
@@ -75,27 +88,27 @@ public static class EditManipulation
             else if (mapInfo.MapInfoRecord?.Style is not SymbolStyle) // Do not add a vertex when tapping on a vertex because that is not usually what you want.
             {
                 return editManager.TryInsertCoordinate(
-                    mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
+                    e.GetMapInfo([editLayer]));
             }
         }
         else if (editManager.EditMode is EditMode.DrawingPolygon or EditMode.DrawingLine)
         {
-            if (shiftPressed || tapType == TapType.Double || tapType == TapType.Long)
+            if (e.ShiftPressed || e.TapType == TapType.Double || e.TapType == TapType.Long)
             {
-                if (tapType != TapType.Double) // Add last vertex but not on a double tap because it is preceded by a single tap.
-                    editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
+                if (e.TapType != TapType.Double) // Add last vertex but not on a double tap because it is preceded by a single tap.
+                    editManager.AddVertex(navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
                 return editManager.EndEdit();
             }
             else
-                editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
+                editManager.AddVertex(navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
         }
         else if (editManager.EditMode is EditMode.AddPoint or EditMode.AddLine or EditMode.AddPolygon)
-            if (tapType == TapType.Single)
-                editManager.AddVertex(mapControl.Map.Navigator.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
+            if (e.TapType == TapType.Single)
+                editManager.AddVertex(navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
 
         if (editManager.SelectMode)
         {
-            var mapInfo = mapControl.GetMapInfo(screenPosition);
+            var mapInfo = e.GetMapInfo([editLayer]);
             if (mapInfo.Feature != null)
             {
                 var currentValue = (bool?)mapInfo.Feature["Selected"] == true;

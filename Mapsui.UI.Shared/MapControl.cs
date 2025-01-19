@@ -19,6 +19,7 @@ using System.Threading;
 using Mapsui.Manipulations;
 using Mapsui.Styles;
 using System.Threading.Tasks;
+using LogLevel = Mapsui.Logging.LogLevel;
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -74,12 +75,18 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
     /// </summary>
+#if __WINDOWSFORMS__
+    [DefaultValue(8)] // Fix WOF1000 Error
+#endif
     public int MaxTapGestureMovement { get; set; } = 8;
 
     /// <summary>
     /// Use fling gesture to move the map. Default is true. Fling means that the map will continue to move for a 
     /// short time after the user has lifted the finger.
     /// </summary>
+#if __WINDOWSFORMS__
+    [DefaultValue(true)] // Fix WOF1000 Error
+#endif
     public bool UseFling { get; set; } = true;
 
     private void SharedConstructor()
@@ -226,6 +233,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Interval between two redraws of the MapControl in ms
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)] 
     public int UpdateInterval
     {
         get => _updateInterval;
@@ -250,6 +258,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <remarks>
     /// If this is null, no performance information is saved.
     /// </remarks>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
     public Performance? Performance
     {
         get => _performance;
@@ -526,12 +535,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     /// <inheritdoc />
-    public MapInfo GetMapInfo(ScreenPosition screenPosition, int margin = 0)
-    {
-        return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? [], margin);
-    }
-
-    /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
         using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity, renderFormat: renderFormat, quality: quality);
@@ -540,9 +543,17 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType)
     {
-        var getMapInfo = () => Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, Map?.Layers ?? []);
-        var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, Map.Navigator.Viewport, Map.Layers);
-        return new MapInfoEventArgs(screenPosition, worldPosition, getMapInfo, getRemoteMapInfoAsync, tapType, false);
+        return new MapInfoEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, false, GetMapInfo, GetRemoteMapInfoAsync);
+    }
+
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
+    {
+        return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
+    }
+
+    protected Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers)
+    {
+        return RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
     }
 
     private void SetViewportSize()
@@ -569,44 +580,55 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
 
-    private bool OnWidgetPointerPressed(ScreenPosition position, bool shiftPressed)
+    private bool OnWidgetPointerPressed(ScreenPosition screenPosition, bool shiftPressed)
     {
-        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            if (widget.OnPointerPressed(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed, () => GetMapInfo(position))))
+            if (widget.OnPointerPressed(Map.Navigator, eventArgs))
                 return true;
         }
         return false;
     }
 
-    private bool OnWidgetPointerMoved(ScreenPosition position, bool leftButton, bool shiftPressed)
+    private bool OnWidgetPointerMoved(ScreenPosition screenPosition, bool leftButton, bool shiftPressed)
     {
-        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
-            if (widget.OnPointerMoved(Map.Navigator, new WidgetEventArgs(position, 0, leftButton, shiftPressed, () => GetMapInfo(position))))
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, leftButton, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
+            if (widget.OnPointerMoved(Map.Navigator, eventArgs))
                 return true;
         return false;
     }
 
-    private bool OnWidgetPointerReleased(ScreenPosition position, bool shiftPressed)
+    private bool OnWidgetPointerReleased(ScreenPosition screenPosition, bool shiftPressed)
     {
-        foreach (var widget in WidgetInput.GetWidgetsAtPosition(position, Map))
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        
+        foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
-            if (widget.OnPointerReleased(Map.Navigator, new WidgetEventArgs(position, 0, true, shiftPressed, () => GetMapInfo(position))))
+            if (widget.OnPointerReleased(Map.Navigator, eventArgs))
                 return true;
         }
         return false;
     }
 
-    private bool OnWidgetTapped(ScreenPosition position, TapType tapType, bool shiftPressed)
+    private bool OnWidgetTapped(ScreenPosition screenPosition, TapType tapType, bool shiftPressed)
     {
-        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(position, Map);
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+
+        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(screenPosition, Map);
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} TapType: {tapType} KeyState: {shiftPressed}");
-            var e = new WidgetEventArgs(position, tapType, true, shiftPressed, () => GetMapInfo(position));
-            if (widget.OnTapped(Map.Navigator, e))
+            if (widget.OnTapped(Map.Navigator, eventArgs))
                 return true;
         }
 

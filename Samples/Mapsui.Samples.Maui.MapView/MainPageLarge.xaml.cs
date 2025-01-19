@@ -1,18 +1,10 @@
 ﻿using Mapsui.Samples.Common;
 using Mapsui.Extensions;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Mapsui.Logging;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Styles;
 using Mapsui.UI.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Dispatching;
-using Microsoft.Maui.Devices.Sensors;
 using Mapsui.Manipulations;
 using Mapsui.Samples.Common.Maps.Widgets;
 
@@ -76,7 +68,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         if (e is null)
             return;
 
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo(mapView.MapInfoLayers);
         if (mapInfo.Feature != null)
         {
             featureInfo.Text = $"Click Info:{Environment.NewLine}{mapInfo.Feature.ToDisplayText()}";

@@ -1,9 +1,6 @@
 ﻿using Android.App;
 using Android.Runtime;
-using Microsoft.Maui;
-using System;
 using System.Runtime.Versioning;
-using Microsoft.Maui.Hosting;
 
 [assembly: SupportedOSPlatform("android31.0")]
 

@@ -27,7 +27,7 @@ public class AtlasSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateAtlasLayer(map.Extent));
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _layerName));
 
         return Task.FromResult(map);
     }
@@ -39,7 +39,6 @@ public class AtlasSample : ISample
             Name = _layerName,
             Features = CreateAtlasFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 1000)),
             Style = null,
-            IsMapInfoLayer = true
         };
     }
 

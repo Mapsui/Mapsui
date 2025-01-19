@@ -51,7 +51,7 @@ public class EditingSample : IMapControlSample
 
         editManager.EditMode = editMode;
 
-        map.Widgets.Add(new EditingWidget(mapControl, editManager));
+        map.Widgets.Add(new EditingWidget(editManager));
         mapControl.Map = map;
         return editManager;
     }
@@ -426,7 +426,6 @@ public class EditingSample : IMapControlSample
     {
         Name = "EditLayer",
         Style = CreateEditLayerStyle(),
-        IsMapInfoLayer = true
     };
 
     // The edit layer has two styles. That is why it needs to use a StyleCollection.

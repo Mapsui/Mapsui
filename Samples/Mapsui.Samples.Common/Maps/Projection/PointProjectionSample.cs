@@ -36,7 +36,7 @@ public class PointProjectionSample : ISample
         map.Layers.Add(geometryLayer);
         map.Navigator.ZoomToBox(extent);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Cities"));
 
         return Task.FromResult(map);
     }
@@ -60,7 +60,6 @@ public class PointProjectionSample : ISample
             DataSource = dataSource,
             Name = "Cities",
             Style = CreateCityStyle(),
-            IsMapInfoLayer = true
         };
     }
 

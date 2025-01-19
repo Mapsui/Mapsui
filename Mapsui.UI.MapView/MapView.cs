@@ -6,9 +6,6 @@ using Mapsui.UI.Objects;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +13,9 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -29,9 +29,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private const string _calloutLayerName = "Callouts";
     private const string _pinLayerName = "Pins";
     private const string _drawableLayerName = "Drawables";
-    private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer = new(f => f.Feature) { Name = _calloutLayerName, IsMapInfoLayer = true };
-    private readonly ObservableMemoryLayer<Pin> _mapPinLayer = new(f => f.Feature) { Name = _pinLayerName, IsMapInfoLayer = true };
-    private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer = new(f => f.Feature) { Name = _drawableLayerName, IsMapInfoLayer = true };
+    private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer = new(f => f.Feature) { Name = _calloutLayerName };
+    private readonly ObservableMemoryLayer<Pin> _mapPinLayer = new(f => f.Feature) { Name = _pinLayerName };
+    private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer = new(f => f.Feature) { Name = _drawableLayerName };
     private ImageButtonWidget? _mapZoomInButton;
     private ImageButtonWidget? _mapZoomOutButton;
     private ImageButtonWidget? _mapMyLocationButton;
@@ -129,6 +129,8 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// MyLocation layer
     /// </summary>
     public Objects.MyLocationLayer MyLocationLayer { get; } = new() { Enabled = true };
+
+    public IEnumerable<ILayer> MapInfoLayers => [_mapCalloutLayer, _mapPinLayer, _mapDrawableLayer, MyLocationLayer];
 
     /// <summary>
     /// Should my location be visible on map
@@ -530,7 +532,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private void HandlerInfo(MapInfoEventArgs e)
     {
         // Click on pin?
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo(MapInfoLayers);
         if (mapInfo.Layer == _mapPinLayer)
         {
             Pin? clickedPin = null;
@@ -632,7 +634,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private bool HandlerTap(WidgetEventArgs e)
     {
         var handled = false;
-        var screenPosition = e.Position;
+        var screenPosition = e.ScreenPosition;
 
         var map = Map;
         if (map != null)
@@ -640,7 +642,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             var worldPosition = map.Navigator.Viewport.ScreenToWorld(screenPosition);
             var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, map.Navigator.Viewport, map.Layers);
             var mapInfoEventArgs = new MapInfoEventArgs(screenPosition, worldPosition,
-                () => GetMapInfo(screenPosition), getRemoteMapInfoAsync, e.TapType, handled);
+                e.TapType, map.Navigator.Viewport, handled, GetMapInfo, GetRemoteMapInfoAsync);
 
             HandlerInfo(mapInfoEventArgs);
 

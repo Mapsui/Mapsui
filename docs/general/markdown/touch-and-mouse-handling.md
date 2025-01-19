@@ -10,11 +10,11 @@ In v5 beta.1 we have four new event types:
 - PointerReleased (up)
 - Tapped. This can be single tap, double tap or long press.
 
-The names were taken from Uno/WinUI and Avalonia. Perhaps we will need other pointer event types in the future. We still have the Info event type, but this could now be replaced by the other event types because they also can be used to get the MapInfo throught a WidgetEventArgs.GetMapInfo() call.
+The names were taken from Uno/WinUI and Avalonia. Perhaps we will need other pointer event types in the future. We still have the Info event type, but this could now be replaced by the other event types because they also can be used to get the MapInfo through a WidgetEventArgs.GetMapInfo() call.
 
 ## Components
 - ManipulationTracker: This component is called from the MapControl with an array of pointer positions (could be mouse or touch, or multitouch) and based on that calculates a new manipulation state (translate, scale, rotate). It is used for both drag and pinch, the difference being that while dragging the scale and rotate fields will have neutral values. The ManipulationTracker is also responsible for rotation snapping (snap out of rotation lock only when the rotation is bigger than some theshold, and snap back in when rotation is close to zero). Rotation snap was previously implemented on only a few platforms.
-- TapTracker: This component detects a tap, a double tap and a long press. Prevously there were many differences in how this was implemented.
+- TapTracker: This component detects a tap, a double tap and a long press. Previously there were many differences in how this was implemented.
 - FlingTracker: This is an old component that was previously used on just two UI frameworks and is now used on all.
 
 ## Testing touch and mouse handling

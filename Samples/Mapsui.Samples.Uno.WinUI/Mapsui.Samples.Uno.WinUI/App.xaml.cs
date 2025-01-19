@@ -1,3 +1,4 @@
+#pragma warning disable IDE0005 // Using directive is unnecessary.
 using Uno.Resizetizer;
 
 namespace Mapsui.Samples.Uno.WinUI;
@@ -19,7 +20,7 @@ public partial class App : Application
     {
         MainWindow = new Window();
 #if DEBUG
-        MainWindow.EnableHotReload();
+        MainWindow.UseStudio();
 #endif
 
 

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Styles;
 using Mapsui.UI.Maui;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices.Sensors;
 using Compass = Microsoft.Maui.Devices.Sensors.Compass;
-using Microsoft.Maui.Dispatching;
 using Mapsui.Manipulations;
 using Mapsui.Samples.Common.Maps.Widgets;
 
@@ -20,7 +14,7 @@ namespace Mapsui.Samples.Maui;
 public sealed partial class MapPage : ContentPage, IDisposable
 {
     private CancellationTokenSource? _gpsCancelation;
-    public Func<UI.Maui.MapView, MapClickedEventArgs, bool> Clicker { get; set; }
+    public Func<UI.Maui.MapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
 
     public MapPage()
     {
@@ -30,7 +24,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
         ArgumentNullException.ThrowIfNull(info, nameof(info));
     }
 
-    public MapPage(ISampleBase sample, Func<UI.Maui.MapView, MapClickedEventArgs, bool> c = null)
+    public MapPage(ISampleBase sample, Func<UI.Maui.MapView?, MapClickedEventArgs, bool>? c = null)
     {
         InitializeComponent();
 
@@ -81,7 +75,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
         if (e is null)
             return;
 
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo(mapView.MapInfoLayers);
 
         if (mapInfo.Feature != null)
         {
