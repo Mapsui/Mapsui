@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -8,6 +9,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets.InfoWidgets;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Providers;
 
@@ -106,7 +108,7 @@ public class WfsGeometryFilterSample : ISample
             set => provider.CRS = value;
         }
 
-        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
         {
             if (DateTime.Now - _lastUpdate < TimeSpan.FromSeconds(20))
             {
@@ -114,15 +116,13 @@ public class WfsGeometryFilterSample : ISample
             }
 
             _lastUpdate = DateTime.Now;
-            _current = IterateFeatures(await provider.GetFeaturesAsync(fetchInfo));
+            _current = IterateFeatures(await provider.GetFeaturesAsync(fetchInfo, cancellationToken), cancellationToken);
             return _current;
         }
 
-        private IEnumerable<IFeature> IterateFeatures(IEnumerable<IFeature> features)
+        private IEnumerable<IFeature> IterateFeatures(IEnumerable<IFeature> features, CancellationToken cancellationToken)
         {
-            foreach (var feature in features)
-                if (filter(feature))
-                    yield return feature;
+            return features.TakeWhile(_ => !cancellationToken.IsCancellationRequested).Where(filter);
         }
 
         public MRect? GetExtent()
