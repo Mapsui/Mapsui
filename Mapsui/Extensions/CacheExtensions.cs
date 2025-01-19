@@ -22,31 +22,19 @@ public static class CacheExtensions
         if (bytes == null)
         {
             Logger.Log(LogLevel.Debug, $@"Load Url {url}");
-            Stream? response = null;
-            try
-            {
-#pragma warning disable IDISP001 // Dispose created                    
-                if (loadUrl != null)
-                {
-                    response = await loadUrl(url).ConfigureAwait(false);
-                }
-                else
-                {
-                    var handler = new HttpClientHandler();
-                    using var httpClient = new HttpClient(handler);
-                    // https://github.com/xamarin/xamarin-android/issues/5264 use ConfigureAwait(false) for Network access
-                    response = await httpClient.GetStreamAsync(url).ConfigureAwait(false);
-                }
-#pragma warning restore IDISP001
 
+            if (loadUrl != null)
+            {
+                await using var response = await loadUrl(url).ConfigureAwait(false);
                 bytes = response.ToBytes();
             }
-            finally
+            else
             {
-                if (response != null)
-                {
-                    await response.DisposeAsync().ConfigureAwait(false);
-                }
+                var handler = new HttpClientHandler();
+                using var httpClient = new HttpClient(handler);
+                // https://github.com/xamarin/xamarin-android/issues/5264 use ConfigureAwait(false) for Network access
+                await using var response = await httpClient.GetStreamAsync(url).ConfigureAwait(false);
+                bytes = response.ToBytes();
             }
 
             Logger.Log(LogLevel.Debug, $@"Caching Url {url}");
