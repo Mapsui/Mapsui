@@ -16,9 +16,7 @@ public static class TmsTileSourceBuilder
         IPersistentCache<byte[]>? persistentCache = null)
     {
         var urlPersistentCache = persistentCache as IUrlPersistentCache;
-#pragma warning disable IDISP001 // Dispose created
-        var stream = await urlPersistentCache.UrlCachedStreamAsync(urlToTileMapXml);
-#pragma warning restore IDISP001
+        using var stream = await urlPersistentCache.UrlCachedStreamAsync(urlToTileMapXml);
 
         var tileSource = overrideTmsUrlWithUrlToTileMapXml
             ? TileMapParser.CreateTileSource(stream, urlToTileMapXml, persistentCache: persistentCache)
