@@ -75,6 +75,22 @@ See the [guidelines](http://mapsui.com/documentation/contributors-guidelines.htm
 
 Made with [contrib.rocks](https://contrib.rocks).
 
+## Sponsors ❤️
+
+Lots of thanks to our sponsors
+
+<a href="https://github.com/TAlecksen"><img src="https://avatars.githubusercontent.com/u/26470677?v=4" width="200px;" alt="Sponsor1" /></a>
+<a href="https://github.com/unoplatform"><img src="https://avatars.githubusercontent.com/u/52228309?v=4" width="200px;" alt="Sponsor2" /></a>
+
+### ⭐ Past Sponsors
+<a href="https://github.com/jamesmontemagno"><img src="https://avatars.githubusercontent.com/u/1676321?v=4" width="40px;" alt="Sponsor3" /></a>
+<a href="https://github.com/P33tr"><img src="https://avatars.githubusercontent.com/u/44436267?v=4" width="40px;" alt="Sponsor4" /></a>
+<a href="https://github.com/Sebastian1989101"><img src="https://avatars.githubusercontent.com/u/25636075?v=4" width="40px;" alt="Sponsor5" /></a>
+<a href="https://github.com/blwhttngtn"><img src="https://avatars.githubusercontent.com/u/12670350?v=4" width="40px;" alt="Sponsor3" /></a>
+<a href="https://github.com/winkmichael"><img src="https://avatars.githubusercontent.com/u/5185889?v=4" width="40px;" alt="Sponsor5" /></a>
+
+[Sponsor Mapsui on GitHub](https://github.com/sponsors/pauldendulk)
+
 ## License
 
 [MIT](LICENSE)

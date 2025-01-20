@@ -11,30 +11,44 @@ public static class ZoomHelper
 {
     public static double GetResolutionToZoomIn(IReadOnlyList<double>? resolutions, double resolution)
     {
-        if (resolutions == null || resolutions.Count == 0) return resolution / 2.0;
+        var newResolution = resolution / 2.0;
 
-        foreach (var t in resolutions)
+        if (resolutions == null || resolutions.Count == 0)
+            return newResolution; // No snapping possible. Return as calculated.
+
+        for (var i = 0; i < resolutions.Count; i++)
         {
-            // If there is a smaller resolution in the array return it
-            if (t < resolution - double.Epsilon) return t;
+            if (resolutions[i] > (newResolution - double.Epsilon))
+                continue; // Ignore bigger snap resolutions
+
+            // The resolutions increase in multiples of two, so we need to take log2 for the difference comparison.
+            if (Math.Log2(newResolution) - Math.Log2(resolutions[i]) < 0.5)
+                return resolutions[i];
         }
 
-        // Else return half of the current resolution
-        return resolution / 2.0;
+        // No snapping, return as calculated.
+        return newResolution;
     }
 
     public static double GetResolutionToZoomOut(IReadOnlyList<double>? resolutions, double resolution)
     {
-        if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
+        var newResolution = resolution * 2.0;
+
+        if (resolutions == null || resolutions.Count == 0)
+            return newResolution;  // No snapping possible. Return as calculated.
 
         for (var i = resolutions.Count - 1; i >= 0; i--)
         {
-            // If there is a bigger resolution in the array return it
-            if (resolutions[i] > (resolution + double.Epsilon)) return resolutions[i];
+            if (resolutions[i] < (newResolution + double.Epsilon))
+                continue; // Ignore smaller snap resolutions
+
+            // The resolutions increase in multiples of two, so we need to take log2 for the difference comparison.
+            if (Math.Log2(resolutions[i] - Math.Log2(newResolution)) < 0.5)
+                return resolutions[i];
         }
 
-        // Else return double the current resolution
-        return resolution * 2.0;
+        // No snapping, return as calculated.
+        return newResolution;
     }
 
     public static double CalculateResolutionForWorldSize(double worldWidth, double worldHeight, double screenWidth,
@@ -43,18 +57,13 @@ public static class ZoomHelper
         var widthResolution = worldWidth / screenWidth;
         var heightResolution = worldHeight / screenHeight;
 
-        switch (boxFit)
+        return boxFit switch
         {
-            case MBoxFit.FitHeight:
-                return heightResolution;
-            case MBoxFit.FitWidth:
-                return widthResolution;
-            case MBoxFit.Fill:
-                return Math.Min(widthResolution, heightResolution);
-            case MBoxFit.Fit:
-                return Math.Max(widthResolution, heightResolution);
-            default:
-                throw new Exception("BoxFit not supported");
-        }
+            MBoxFit.FitHeight => heightResolution,
+            MBoxFit.FitWidth => widthResolution,
+            MBoxFit.Fill => Math.Min(widthResolution, heightResolution),
+            MBoxFit.Fit => Math.Max(widthResolution, heightResolution),
+            _ => throw new Exception("BoxFit not supported"),
+        };
     }
 }
