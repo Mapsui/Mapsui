@@ -150,7 +150,7 @@ public class Client
 
 
 
-    private readonly Func<string, Task<Stream>> _getStreamAsync;
+    private readonly Func<string, Task<byte[]>> _getBytesAsync;
     private string[]? _exceptionFormats;
     private Capabilities.WmsServiceDescription _serviceDescription;
     private readonly IUrlPersistentCache? _persistentCache;
@@ -206,12 +206,12 @@ public class Client
     /// </summary>
     /// <param name="url">URL of wms server</param>
     /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
-    /// <param name="getStreamAsync">Download method, leave null for default</param>
+    /// <param name="getBytesAsync">Download method, leave null for default</param>
     /// <param name="persistentCache">persistent Cache</param>
     /// <param name="userAgent">user Agent</param>
-    public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
-        var client = new Client(getStreamAsync, persistentCache, userAgent);
+        var client = new Client(getBytesAsync, persistentCache, userAgent);
 
         var strReq = new StringBuilder(url);
         if (!url.Contains('?'))
@@ -232,29 +232,29 @@ public class Client
     /// <summary>
     /// Initializes WMS server and parses the Capabilities request
     /// </summary>
-    /// <param name="getStreamAsync">Download method, leave null for default</param>
+    /// <param name="getBytesAsync">Download method, leave null for default</param>
     /// <param name="persistentCache">persistent Cache</param>
-    private Client(Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    private Client(Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
         _userAgent = userAgent;
         _persistentCache = persistentCache;
-        _getStreamAsync = InitializeGetStreamAsyncMethod(getStreamAsync);
+        _getBytesAsync = InitializeGetBytesAsyncMethod(getBytesAsync);
     }
 
-    public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null, string? userAgent = null)
+    public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<byte[]>>? getBytesAsync = null, string? userAgent = null)
     {
         _userAgent = userAgent;
-        _getStreamAsync = InitializeGetStreamAsyncMethod(getStreamAsync);
+        _getBytesAsync = InitializeGetBytesAsyncMethod(getBytesAsync);
         _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
         ParseCapabilities(capabilitiesXmlDocument);
     }
 
-    private Func<string, Task<Stream>> InitializeGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
+    private Func<string, Task<byte[]>> InitializeGetBytesAsyncMethod(Func<string, Task<byte[]>>? getBytesAsync)
     {
-        return getStreamAsync ?? GetStreamAsync;
+        return getBytesAsync ?? GetBytesAsync;
     }
 
-    private async Task<Stream> GetStreamAsync(string url)
+    private async Task<byte[]> GetBytesAsync(string url)
     {
         var result = _persistentCache?.Find(url);
         if (result == null)
@@ -274,7 +274,7 @@ public class Client
             _persistentCache?.Add(url, result);
         }
 
-        return new MemoryStream(result);
+        return result;
     }
 
     /// <summary>
@@ -293,12 +293,10 @@ public class Client
         {
             var doc = new XmlDocument { XmlResolver = null };
 
-            using (var task = await _getStreamAsync(url))
-            {
-                using var stReader = new StreamReader(task);
-                using var r = new XmlTextReader(url, stReader) { XmlResolver = null };
-                doc.Load(r);
-            }
+            var bytes = await _getBytesAsync(url);
+            using var memoryStream = new MemoryStream(bytes);
+            using var xmlReader = new XmlTextReader(memoryStream) { XmlResolver = null };
+            doc.Load(xmlReader);
 
             _nsmgr = new XmlNamespaceManager(doc.NameTable);
             return doc;

@@ -19,12 +19,12 @@ public class GetFeatureInfo
     public const string TextXmlSubtypeGml = "text/xml; subtype=gml/3.1.1";
     private string? _infoFormat;
     private string? _layerName;
-    private readonly Func<string, Task<Stream>> _getStreamAsync;
+    private readonly Func<string, Task<byte[]>> _getBytesAsync;
 
-    public GetFeatureInfo(Func<string, Task<Stream>>? getStreamAsync = null)
+    public GetFeatureInfo(Func<string, Task<byte[]>>? getBytesAsync = null)
     {
         TimeOut = 7000;
-        _getStreamAsync = getStreamAsync ?? GetStreamAsync;
+        _getBytesAsync = getBytesAsync ?? GetBytesAsync;
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class GetFeatureInfo
         _infoFormat = infoFormat;
         var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
 
-        using var task = await _getStreamAsync(requestUrl).ConfigureAwait(false);
+        var task = await _getBytesAsync(requestUrl).ConfigureAwait(false);
         try
         {
             var parser = GetParserFromFormat(_infoFormat);
@@ -69,8 +69,8 @@ public class GetFeatureInfo
             {
                 return null;
             }
-
-            var featureInfo = parser.ParseWMSResult(_layerName, task);
+            using var stream = new MemoryStream(task);
+            var featureInfo = parser.ParseWMSResult(_layerName, stream);
             return featureInfo;
         }
         catch (Exception ex)
@@ -81,7 +81,7 @@ public class GetFeatureInfo
         return null;
     }
 
-    private async Task<Stream> GetStreamAsync(string url)
+    private async Task<byte[]> GetBytesAsync(string url)
     {
         var handler = new HttpClientHandler();
         handler.SetCredentials(Credentials ?? CredentialCache.DefaultCredentials);
@@ -96,7 +96,8 @@ public class GetFeatureInfo
             throw new Exception($"Unexpected response code: {response.StatusCode}");
         }
 
-        return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        return stream.ToBytes();
     }
 
     public string? UserAgent { get; set; }

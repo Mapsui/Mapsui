@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Mapsui.Cache;
@@ -9,24 +8,16 @@ namespace Mapsui.Extensions;
 
 public static class CacheExtensions
 {
-    public static async Task<Stream> UrlCachedStreamAsync(this IUrlPersistentCache? persistentCache, string url, Func<string, Task<Stream>>? loadUrl = null)
-    {
-        var bytes = await UrlCachedArrayAsync(persistentCache, url, loadUrl).ConfigureAwait(false);
-
-        return new MemoryStream(bytes);
-    }
-
-    public static async Task<byte[]> UrlCachedArrayAsync(this IUrlPersistentCache? persistentCache, string url, Func<string, Task<Stream>>? loadUrl = null)
+    public static async Task<byte[]> GetCachedBytesAsync(this IUrlPersistentCache? persistentCache, string url, Func<string, Task<byte[]>>? getBytesAsync = null)
     {
         var bytes = persistentCache?.Find(url);
         if (bytes == null)
         {
             Logger.Log(LogLevel.Debug, $@"Load Url {url}");
 
-            if (loadUrl != null)
+            if (getBytesAsync != null)
             {
-                await using var response = await loadUrl(url).ConfigureAwait(false);
-                bytes = response.ToBytes();
+                bytes = await getBytesAsync(url).ConfigureAwait(false);
             }
             else
             {
