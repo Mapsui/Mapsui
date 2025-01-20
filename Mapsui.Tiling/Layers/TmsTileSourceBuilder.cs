@@ -17,7 +17,7 @@ public static class TmsTileSourceBuilder
         IPersistentCache<byte[]>? persistentCache = null)
     {
         var urlPersistentCache = persistentCache as IUrlPersistentCache;
-        var bytes = await urlPersistentCache.UrlCachedStreamAsync(urlToTileMapXml);
+        var bytes = await urlPersistentCache.GetCachedBytesAsync(urlToTileMapXml);
         using var stream = new MemoryStream(bytes);
 
         var tileSource = overrideTmsUrlWithUrlToTileMapXml
