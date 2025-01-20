@@ -261,3 +261,34 @@ dotnet_diagnostic.VSTHRD200.severity = warning # VSTHRD200: Use "Async" suffix f
 
 # Spelling
 spelling_exclusion_path = spelling_exclusion.txt
+
+### IDISPXXX
+dotnet_diagnostic.IDISP001.severity = error
+dotnet_diagnostic.IDISP002.severity = error
+dotnet_diagnostic.IDISP003.severity = error
+dotnet_diagnostic.IDISP004.severity = error
+dotnet_diagnostic.IDISP005.severity = error
+dotnet_diagnostic.IDISP006.severity = error
+dotnet_diagnostic.IDISP007.severity = error
+dotnet_diagnostic.IDISP008.severity = error
+dotnet_diagnostic.IDISP009.severity = error
+dotnet_diagnostic.IDISP010.severity = error
+dotnet_diagnostic.IDISP011.severity = error
+dotnet_diagnostic.IDISP012.severity = error
+dotnet_diagnostic.IDISP013.severity = error
+# dotnet_diagnostic.IDISP014.severity = error # HttpClient related.
+dotnet_diagnostic.IDISP015.severity = error
+dotnet_diagnostic.IDISP016.severity = error
+dotnet_diagnostic.IDISP017.severity = error
+dotnet_diagnostic.IDISP018.severity = error
+dotnet_diagnostic.IDISP019.severity = error
+dotnet_diagnostic.IDISP020.severity = error
+dotnet_diagnostic.IDISP021.severity = error
+dotnet_diagnostic.IDISP022.severity = error
+dotnet_diagnostic.IDISP023.severity = error
+dotnet_diagnostic.IDISP024.severity = error
+dotnet_diagnostic.IDISP025.severity = error
+dotnet_diagnostic.IDISP026.severity = error
+
+# An alternative to IDISPXXX is to enable CA2000:
+# dotnet_diagnostic.CA2000.severity = error

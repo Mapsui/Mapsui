@@ -269,7 +269,8 @@ public class XPathQueryManager : IXPathQueryManager
     {
         try
         {
-            InitializeXPathObjects(await httpClientUtil.GetDataStreamAsync());
+            using var stream = await httpClientUtil.GetDataStreamAsync();
+            InitializeXPathObjects(stream);
         }
         catch (Exception e)
         {
@@ -285,11 +286,12 @@ public class XPathQueryManager : IXPathQueryManager
     {
         try
         {
-            InitializeXPathObjects(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read));
+            using var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            InitializeXPathObjects(fileStream);
         }
         catch (Exception ex)
         {
-            Logger.Log(LogLevel.Error, "An exception occured while reading the xml file: " + fileName + ". " + ex.Message, ex);
+            Logger.Log(LogLevel.Error, "An exception occurred while reading the xml file: " + fileName + ". " + ex.Message, ex);
             throw;
         }
     }
@@ -322,21 +324,17 @@ public class XPathQueryManager : IXPathQueryManager
         }
         catch (XmlException ex)
         {
-            Logger.Log(LogLevel.Error, "An XML specific exception occured " +
+            Logger.Log(LogLevel.Error, "An XML specific exception occurred " +
                                        "while initializing XPathDocument and XPathNavigator in XPathQueryManager: " +
                                        ex.Message, ex);
             throw;
         }
         catch (Exception ex)
         {
-            Logger.Log(LogLevel.Error, "An exception occured " +
+            Logger.Log(LogLevel.Error, "An exception occurred " +
                                        "while initializing XPathDocument and XPathNavigator in XPathQueryManager: " +
                                        ex.Message, ex);
             throw;
-        }
-        finally
-        {
-            xmlStream.Dispose();
         }
     }
 

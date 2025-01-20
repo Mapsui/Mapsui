@@ -113,45 +113,17 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
             httpClientHandler.SetCredentials(Credentials);
         }
 
-        // To do: Dispose:
-        HttpClient httpClient;
-
         try
         {
-            httpClient = new HttpClient(httpClientHandler);
-        }
-        catch (SecurityException ex)
-        {
-            Logger.Log(LogLevel.Error, "An exception occurred due to security reasons while initializing a request to " + _url +
-                                       ": " + ex.Message, ex);
-            throw;
-        }
-        catch (NotSupportedException ex)
-        {
-            Logger.Log(LogLevel.Error, "An exception occurred while initializing a request to " + _url + ": " + ex.Message, ex);
-            throw;
-        }
+            using var httpClient = new HttpClient(httpClientHandler);
+            httpClient.Timeout = new TimeSpan(0, 0, 1, 30);
 
-        httpClient.Timeout = new TimeSpan(0, 0, 1, 30);
-
-        try
-        {
             foreach (var header in _requestHeaders)
             {
                 httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
             }
 
-            HttpResponseMessage webResponse;
-
-            /* HTTP POST */
-            if (_postData != null)
-            {
-                var httpContent = new ByteArrayContent(_postData);
-                webResponse = await httpClient.PostAsync(_url, httpContent);
-            }
-            /* HTTP GET */
-            else
-                webResponse = await httpClient.GetAsync(_url).ConfigureAwait(false);
+            using var webResponse = await GetWebResponseAsync(httpClient).ConfigureAwait(false);
 
             if (persistentCache != null)
             {
@@ -169,11 +141,35 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
             return await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
         }
+        catch (SecurityException ex)
+        {
+            Logger.Log(LogLevel.Error, "An exception occurred due to security reasons while initializing a request to " + _url +
+                                       ": " + ex.Message, ex);
+            throw;
+        }
+        catch (NotSupportedException ex)
+        {
+            Logger.Log(LogLevel.Error, "An exception occurred while initializing a request to " + _url + ": " + ex.Message, ex);
+            throw;
+        }
         catch (Exception ex)
         {
             Logger.Log(LogLevel.Error, "An exception occurred during a HTTP request to " + _url + ": " + ex.Message, ex);
             throw;
         }
+    }
+
+    private async Task<HttpResponseMessage> GetWebResponseAsync(HttpClient httpClient)
+    {
+        /* HTTP POST */
+        if (_postData != null)
+        {
+            using var httpContent = new ByteArrayContent(_postData);
+            return await httpClient.PostAsync(_url, httpContent);
+        }
+        /* HTTP GET */
+        else
+            return await httpClient.GetAsync(_url).ConfigureAwait(false);
     }
 
     /// <summary>

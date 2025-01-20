@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using BruTile.Cache;
 using BruTile.Wmts;
@@ -30,8 +31,9 @@ public class WmtsZurichSample : ISample
     {
         var url = " https://www.ogd.stadt-zuerich.ch/mapproxy/wmts/1.0.0/WMTSCapabilities.xml";
 
-        using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
-        var tileSources = WmtsCapabilitiesParser.Parse(response);
+        var bytes = await (DefaultCache as IUrlPersistentCache).GetCachedBytesAsync(url);
+        using var stream = new MemoryStream(bytes);
+        var tileSources = WmtsCapabilitiesParser.Parse(stream);
         var stadtplanSource = tileSources.FirstOrDefault(t => t.Name == "Stadtplan") ?? tileSources.First();
         if (DefaultCache != null)
         {

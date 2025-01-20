@@ -5,6 +5,7 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Tiling.Layers;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,8 +33,9 @@ public class WmtsSample : ISample
     {
         var url = "https://service.pdok.nl/brt/achtergrondkaart/wmts/v2_0?request=GetCapabilities&service=wmts";
 
-        using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
-        var tileSources = WmtsCapabilitiesParser.Parse(response);
+        var bytes = await (DefaultCache as IUrlPersistentCache).GetCachedBytesAsync(url);
+        using var stream = new MemoryStream(bytes);
+        var tileSources = WmtsCapabilitiesParser.Parse(stream);
         var nature2000TileSource = tileSources.FirstOrDefault(t => t.Name == "top1000raster") ?? tileSources.First();
         if (DefaultCache != null)
         {

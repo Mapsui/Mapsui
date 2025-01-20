@@ -23,6 +23,8 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml;
 #endif
 
+#pragma warning disable Uno0001 // PointerWheelChanged is not implemented in Uno. Justification: This is not implemented in all platforms. Also see: https://github.com/unoplatform/uno/issues/15629
+
 namespace Mapsui.UI.WinUI;
 
 public partial class MapControl : Grid, IMapControl, IDisposable

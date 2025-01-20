@@ -309,6 +309,7 @@ internal sealed class DbaseReader : IDisposable
     {
         var tab = new DataTable();
         // all of common, non "base-table" fields implemented
+#pragma warning disable IDISP004 // Don't ignore created IDisposable. Justification: The DataTable is returned to the caller.
         tab.Columns.Add("ColumnName", typeof(string));
         tab.Columns.Add("ColumnSize", typeof(int));
         tab.Columns.Add("ColumnOrdinal", typeof(int));

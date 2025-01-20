@@ -72,19 +72,17 @@ public class ArcGisLegend
     {
         var uri = CreateRequestUrl(serviceUrl);
         var data = _urlPersistentCache?.Find(uri);
-        Stream stream;
         if (data == null)
         {
             using var httpClient = CreateRequest(credentials);
             using var response = await httpClient.GetAsync(uri).ConfigureAwait(false);
-            stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             data = StreamHelper.ReadFully(stream);
             _urlPersistentCache?.Add(uri, data);
             await stream.DisposeAsync();
         }
 
-        stream = new MemoryStream(data);
-        _legendResponse = GetLegendResponseFromWebResponse(stream);
+        _legendResponse = GetLegendResponseFromWebResponse(data);
         return _legendResponse;
     }
 
@@ -112,20 +110,16 @@ public class ArcGisLegend
         return requestUrl;
     }
 
-    private static ArcGISLegendResponse? GetLegendResponseFromWebResponse(Stream? dataStream)
+    private static ArcGISLegendResponse? GetLegendResponseFromWebResponse(byte[]? data)
     {
-        if (dataStream != null)
+        if (data == null)
         {
-            var legendResponse = JsonSerializer.Deserialize(dataStream, ArcGISContext.Default.ArcGISLegendResponse);
-
-#pragma warning disable IDISP007 // don't dispose injected
-            dataStream.Dispose();
-#pragma warning restore IDISP007                
-
-            return legendResponse;
+            return null;
         }
+        using var stream = new MemoryStream(data);
 
-        return null;
+        var legendResponse = JsonSerializer.Deserialize(stream, ArcGISContext.Default.ArcGISLegendResponse);
+        return legendResponse;
     }
 
     private void OnLegendReceived(ArcGISLegendResponse legendInfo)

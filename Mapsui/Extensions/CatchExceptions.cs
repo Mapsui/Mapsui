@@ -19,6 +19,7 @@ public static class Catch
         }
     }
 
+#pragma warning disable VSTHRD100 // Avoid async void methods
     public static async void Exceptions(Func<Task> func)
     {
         try
@@ -30,6 +31,7 @@ public static class Catch
             Logger.Log(LogLevel.Error, e.Message, e);
         }
     }
+#pragma warning restore VSTHRD100 // Avoid async void methods
 
     [SuppressMessage("Usage", "VSTHRD110:Observe result of async calls")]
     public static void TaskRun(Action func)

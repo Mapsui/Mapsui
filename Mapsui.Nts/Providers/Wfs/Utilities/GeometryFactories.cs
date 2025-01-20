@@ -16,6 +16,8 @@ using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using NetTopologySuite.Geometries;
 
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
+
 namespace Mapsui.Providers.Wfs.Utilities;
 
 /// <summary>

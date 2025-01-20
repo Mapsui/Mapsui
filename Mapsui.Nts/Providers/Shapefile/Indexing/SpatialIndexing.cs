@@ -44,8 +44,10 @@ public struct Heuristic
 public class QuadTree : IDisposable
 {
     private MRect? _box;
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables. Justification: This is disposed.
     private QuadTree? _child0;
     private QuadTree? _child1;
+#pragma warning restore IDISP008 // Don't assign member with injected and created disposables. Justification: This is disposed.
 
     /// <summary>
     /// Nodes depth in a tree
