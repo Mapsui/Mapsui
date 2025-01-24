@@ -21227,32 +21227,38 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.IRenderer.RenderToBitmapStream
   nameWithType: IRenderer.RenderToBitmapStream
-- uid: Mapsui.Rendering.IRenderer.StyleRenderers
-  name: StyleRenderers
-  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_StyleRenderers
-  commentId: P:Mapsui.Rendering.IRenderer.StyleRenderers
-  fullName: Mapsui.Rendering.IRenderer.StyleRenderers
-  nameWithType: IRenderer.StyleRenderers
-- uid: Mapsui.Rendering.IRenderer.StyleRenderers*
-  name: StyleRenderers
-  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_StyleRenderers_
-  commentId: Overload:Mapsui.Rendering.IRenderer.StyleRenderers
+- uid: Mapsui.Rendering.IRenderer.TryGetStyleRenderer(System.Type,Mapsui.Styles.IStyleRenderer@)
+  name: TryGetStyleRenderer(Type, out IStyleRenderer?)
+  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_TryGetStyleRenderer_System_Type_Mapsui_Styles_IStyleRenderer__
+  commentId: M:Mapsui.Rendering.IRenderer.TryGetStyleRenderer(System.Type,Mapsui.Styles.IStyleRenderer@)
+  name.vb: TryGetStyleRenderer(Type, IStyleRenderer)
+  fullName: Mapsui.Rendering.IRenderer.TryGetStyleRenderer(System.Type, out Mapsui.Styles.IStyleRenderer?)
+  fullName.vb: Mapsui.Rendering.IRenderer.TryGetStyleRenderer(System.Type, Mapsui.Styles.IStyleRenderer)
+  nameWithType: IRenderer.TryGetStyleRenderer(Type, out IStyleRenderer?)
+  nameWithType.vb: IRenderer.TryGetStyleRenderer(Type, IStyleRenderer)
+- uid: Mapsui.Rendering.IRenderer.TryGetStyleRenderer*
+  name: TryGetStyleRenderer
+  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_TryGetStyleRenderer_
+  commentId: Overload:Mapsui.Rendering.IRenderer.TryGetStyleRenderer
   isSpec: "True"
-  fullName: Mapsui.Rendering.IRenderer.StyleRenderers
-  nameWithType: IRenderer.StyleRenderers
-- uid: Mapsui.Rendering.IRenderer.WidgetRenders
-  name: WidgetRenders
-  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_WidgetRenders
-  commentId: P:Mapsui.Rendering.IRenderer.WidgetRenders
-  fullName: Mapsui.Rendering.IRenderer.WidgetRenders
-  nameWithType: IRenderer.WidgetRenders
-- uid: Mapsui.Rendering.IRenderer.WidgetRenders*
-  name: WidgetRenders
-  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_WidgetRenders_
-  commentId: Overload:Mapsui.Rendering.IRenderer.WidgetRenders
+  fullName: Mapsui.Rendering.IRenderer.TryGetStyleRenderer
+  nameWithType: IRenderer.TryGetStyleRenderer
+- uid: Mapsui.Rendering.IRenderer.TryGetWidgetRenderer(System.Type,Mapsui.Widgets.IWidgetRenderer@)
+  name: TryGetWidgetRenderer(Type, out IWidgetRenderer?)
+  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_TryGetWidgetRenderer_System_Type_Mapsui_Widgets_IWidgetRenderer__
+  commentId: M:Mapsui.Rendering.IRenderer.TryGetWidgetRenderer(System.Type,Mapsui.Widgets.IWidgetRenderer@)
+  name.vb: TryGetWidgetRenderer(Type, IWidgetRenderer)
+  fullName: Mapsui.Rendering.IRenderer.TryGetWidgetRenderer(System.Type, out Mapsui.Widgets.IWidgetRenderer?)
+  fullName.vb: Mapsui.Rendering.IRenderer.TryGetWidgetRenderer(System.Type, Mapsui.Widgets.IWidgetRenderer)
+  nameWithType: IRenderer.TryGetWidgetRenderer(Type, out IWidgetRenderer?)
+  nameWithType.vb: IRenderer.TryGetWidgetRenderer(Type, IWidgetRenderer)
+- uid: Mapsui.Rendering.IRenderer.TryGetWidgetRenderer*
+  name: TryGetWidgetRenderer
+  href: pages/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_TryGetWidgetRenderer_
+  commentId: Overload:Mapsui.Rendering.IRenderer.TryGetWidgetRenderer
   isSpec: "True"
-  fullName: Mapsui.Rendering.IRenderer.WidgetRenders
-  nameWithType: IRenderer.WidgetRenders
+  fullName: Mapsui.Rendering.IRenderer.TryGetWidgetRenderer
+  nameWithType: IRenderer.TryGetWidgetRenderer
 - uid: Mapsui.Rendering.MapInfoRecord
   name: MapInfoRecord
   href: pages/Mapsui.Rendering.MapInfoRecord.html
@@ -22699,6 +22705,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.ImageSourceCache
   nameWithType: MapRenderer.ImageSourceCache
+- uid: Mapsui.Rendering.Skia.MapRenderer.RegisterStyleRenderer(System.Type,Mapsui.Styles.IStyleRenderer)
+  name: RegisterStyleRenderer(Type, IStyleRenderer)
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RegisterStyleRenderer_System_Type_Mapsui_Styles_IStyleRenderer_
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RegisterStyleRenderer(System.Type,Mapsui.Styles.IStyleRenderer)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RegisterStyleRenderer(System.Type, Mapsui.Styles.IStyleRenderer)
+  nameWithType: MapRenderer.RegisterStyleRenderer(Type, IStyleRenderer)
+- uid: Mapsui.Rendering.Skia.MapRenderer.RegisterStyleRenderer*
+  name: RegisterStyleRenderer
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RegisterStyleRenderer_
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.RegisterStyleRenderer
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RegisterStyleRenderer
+  nameWithType: MapRenderer.RegisterStyleRenderer
+- uid: Mapsui.Rendering.Skia.MapRenderer.RegisterWidgetRenderer(System.Type,Mapsui.Widgets.IWidgetRenderer)
+  name: RegisterWidgetRenderer(Type, IWidgetRenderer)
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RegisterWidgetRenderer_System_Type_Mapsui_Widgets_IWidgetRenderer_
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RegisterWidgetRenderer(System.Type,Mapsui.Widgets.IWidgetRenderer)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RegisterWidgetRenderer(System.Type, Mapsui.Widgets.IWidgetRenderer)
+  nameWithType: MapRenderer.RegisterWidgetRenderer(Type, IWidgetRenderer)
+- uid: Mapsui.Rendering.Skia.MapRenderer.RegisterWidgetRenderer*
+  name: RegisterWidgetRenderer
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RegisterWidgetRenderer_
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.RegisterWidgetRenderer
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RegisterWidgetRenderer
+  nameWithType: MapRenderer.RegisterWidgetRenderer
 - uid: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},System.Nullable{Mapsui.Styles.Color})
   name: Render(object, Viewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color?)
   href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_Render_System_Object_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__System_Nullable_Mapsui_Styles_Color__
@@ -22744,32 +22776,38 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream
   nameWithType: MapRenderer.RenderToBitmapStream
-- uid: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
-  name: StyleRenderers
-  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_StyleRenderers
-  commentId: P:Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
-  fullName: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
-  nameWithType: MapRenderer.StyleRenderers
-- uid: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers*
-  name: StyleRenderers
-  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_StyleRenderers_
-  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+- uid: Mapsui.Rendering.Skia.MapRenderer.TryGetStyleRenderer(System.Type,Mapsui.Styles.IStyleRenderer@)
+  name: TryGetStyleRenderer(Type, out IStyleRenderer?)
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_TryGetStyleRenderer_System_Type_Mapsui_Styles_IStyleRenderer__
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.TryGetStyleRenderer(System.Type,Mapsui.Styles.IStyleRenderer@)
+  name.vb: TryGetStyleRenderer(Type, IStyleRenderer)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.TryGetStyleRenderer(System.Type, out Mapsui.Styles.IStyleRenderer?)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.TryGetStyleRenderer(System.Type, Mapsui.Styles.IStyleRenderer)
+  nameWithType: MapRenderer.TryGetStyleRenderer(Type, out IStyleRenderer?)
+  nameWithType.vb: MapRenderer.TryGetStyleRenderer(Type, IStyleRenderer)
+- uid: Mapsui.Rendering.Skia.MapRenderer.TryGetStyleRenderer*
+  name: TryGetStyleRenderer
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_TryGetStyleRenderer_
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.TryGetStyleRenderer
   isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
-  nameWithType: MapRenderer.StyleRenderers
-- uid: Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
-  name: WidgetRenders
-  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_WidgetRenders
-  commentId: P:Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
-  fullName: Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
-  nameWithType: MapRenderer.WidgetRenders
-- uid: Mapsui.Rendering.Skia.MapRenderer.WidgetRenders*
-  name: WidgetRenders
-  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_WidgetRenders_
-  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
+  fullName: Mapsui.Rendering.Skia.MapRenderer.TryGetStyleRenderer
+  nameWithType: MapRenderer.TryGetStyleRenderer
+- uid: Mapsui.Rendering.Skia.MapRenderer.TryGetWidgetRenderer(System.Type,Mapsui.Widgets.IWidgetRenderer@)
+  name: TryGetWidgetRenderer(Type, out IWidgetRenderer?)
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_TryGetWidgetRenderer_System_Type_Mapsui_Widgets_IWidgetRenderer__
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.TryGetWidgetRenderer(System.Type,Mapsui.Widgets.IWidgetRenderer@)
+  name.vb: TryGetWidgetRenderer(Type, IWidgetRenderer)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.TryGetWidgetRenderer(System.Type, out Mapsui.Widgets.IWidgetRenderer?)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.TryGetWidgetRenderer(System.Type, Mapsui.Widgets.IWidgetRenderer)
+  nameWithType: MapRenderer.TryGetWidgetRenderer(Type, out IWidgetRenderer?)
+  nameWithType.vb: MapRenderer.TryGetWidgetRenderer(Type, IWidgetRenderer)
+- uid: Mapsui.Rendering.Skia.MapRenderer.TryGetWidgetRenderer*
+  name: TryGetWidgetRenderer
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_TryGetWidgetRenderer_
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.TryGetWidgetRenderer
   isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.MapRenderer.WidgetRenders
-  nameWithType: MapRenderer.WidgetRenders
+  fullName: Mapsui.Rendering.Skia.MapRenderer.TryGetWidgetRenderer
+  nameWithType: MapRenderer.TryGetWidgetRenderer
 - uid: Mapsui.Rendering.Skia.RasterStyleRenderer
   name: RasterStyleRenderer
   href: pages/Mapsui.Rendering.Skia.RasterStyleRenderer.html
