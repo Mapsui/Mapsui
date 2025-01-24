@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Mapsui.Extensions;
@@ -25,6 +26,8 @@ public sealed class MapRenderer : IRenderer, IDisposable
 {
     private readonly RenderService _renderService;
     private long _currentIteration;
+    private static readonly Dictionary<Type, IWidgetRenderer> _widgetRenderers = new Dictionary<Type, IWidgetRenderer>();
+    private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = new Dictionary<Type, IStyleRenderer>();
 
     static MapRenderer()
     {
@@ -38,29 +41,24 @@ public sealed class MapRenderer : IRenderer, IDisposable
     }
 
     public IRenderService RenderService => _renderService;
-    public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
-    /// <summary>
-    /// Dictionary holding all special renderers for styles
-    /// </summary>
-    public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
 
     public ImageSourceCache ImageSourceCache => _renderService.ImageSourceCache;
 
     private void InitRenderer()
     {
-        StyleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
-        StyleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
-        StyleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
-        StyleRenderers[typeof(SymbolStyle)] = new SymbolStyleRenderer();
-        StyleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
+        _styleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
+        _styleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
+        _styleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
+        _styleRenderers[typeof(SymbolStyle)] = new SymbolStyleRenderer();
+        _styleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
 
-        WidgetRenders[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
-        WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
-        WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
-        WidgetRenders[typeof(ImageButtonWidget)] = new ImageButtonWidgetRenderer();
-        WidgetRenders[typeof(BoxWidget)] = new BoxWidgetRenderer();
-        WidgetRenders[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
-        WidgetRenders[typeof(InputOnlyWidget)] = new InputOnlyWidgetRenderer();
+        _widgetRenderers[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
+        _widgetRenderers[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
+        _widgetRenderers[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
+        _widgetRenderers[typeof(ImageButtonWidget)] = new ImageButtonWidgetRenderer();
+        _widgetRenderers[typeof(BoxWidget)] = new BoxWidgetRenderer();
+        _widgetRenderers[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
+        _widgetRenderers[typeof(InputOnlyWidget)] = new InputOnlyWidgetRenderer();
     }
 
     public MapRenderer() : this(10000)
@@ -169,6 +167,38 @@ public sealed class MapRenderer : IRenderer, IDisposable
         }
     }
 
+    public bool TryGetWidgetRenderer(Type widgetType, [NotNullWhen(true)] out IWidgetRenderer? widgetRenderer)
+    {
+        if (_widgetRenderers.TryGetValue(widgetType, out var outWidgetRenderer))
+        {
+            widgetRenderer = outWidgetRenderer;
+            return true;
+        }
+        widgetRenderer = null;
+        return false;
+    }
+
+    public bool TryGetStyleRenderer(Type widgetType, [NotNullWhen(true)] out IStyleRenderer? styleRenderer)
+    {
+        if (_styleRenderers.TryGetValue(widgetType, out var outStyleRenderer))
+        {
+            styleRenderer = outStyleRenderer;
+            return true;
+        }
+        styleRenderer = null;
+        return false;
+    }
+
+    public static void RegisterStyleRenderer(Type type, IStyleRenderer renderer)
+    {
+        _styleRenderers[type] = renderer;
+    }
+
+    public static void RegisterWidgetRenderer(Type type, IWidgetRenderer renderer)
+    {
+        _widgetRenderers[type] = renderer;
+    }
+
     private void RenderTo(Viewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
         IEnumerable<IWidget>? widgets, SKCanvas skCanvas)
     {
@@ -201,7 +231,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     private void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)
     {
         // Check, if we have a special renderer for this style
-        if (StyleRenderers.TryGetValue(style.GetType(), out var renderer))
+        if (_styleRenderers.TryGetValue(style.GetType(), out var renderer))
         {
             // Save canvas
             canvas.Save();
@@ -219,7 +249,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     private void Render(object canvas, Viewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
     {
-        WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, _renderService, layerOpacity);
+        WidgetRenderer.Render(canvas, viewport, widgets, _widgetRenderers, _renderService, layerOpacity);
     }
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)

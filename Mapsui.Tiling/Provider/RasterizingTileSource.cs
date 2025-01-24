@@ -8,6 +8,7 @@ using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -161,7 +162,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
             var layerStyles = _layer.Style.GetStylesToApply(section.Resolution);
             foreach (var style in layerStyles)
             {
-                if (renderer.StyleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
+                if (renderer.TryGetStyleRenderer(style.GetType(), out var styleRenderer))
                 {
                     if (styleRenderer is IFeatureSize featureSize)
                     {
@@ -178,6 +179,8 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
                             tempSize = featureSize.FeatureSize(style, renderer.RenderService, null);
                         }
                     }
+                    else
+                        Logger.Log(LogLevel.Warning, $"No StyleRenderer found for {style.GetType()}");
                 }
             }
 
