@@ -8,6 +8,20 @@ public static class Haversine
     /// Returns the distance in kilometers of any two
     /// latitude / longitude points.
     /// </summary>
+    public static double Distance(Span<MPoint> coordinates)
+    {
+        double distance = 0;
+        for (int i = 0; i < coordinates.Length - 1; i++)
+        {
+            distance += Distance(coordinates[i].X, coordinates[i].Y, coordinates[i + 1].X, coordinates[i + 1].Y);
+        }
+        return distance;
+    }
+
+    /// <summary>
+    /// Returns the distance in kilometers of any two
+    /// latitude / longitude points.
+    /// </summary>
     public static double Distance(double lon1, double lat1, double lon2, double lat2)
     {
         double R = 6371; // Mean radius of the earth
