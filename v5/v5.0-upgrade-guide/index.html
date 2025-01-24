@@ -897,6 +897,12 @@ Use <code>MapControl.Map.Navigator.Viewport.Width</code> instead.</p>
 <p><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&#39;MapControl&#39; does not contain a definition for &#39;ScreenHeight&#39; and no accessible extension method &#39;ScreenHeight&#39; accepting a first argument of type &#39;MapControl&#39; could be found
 </span></code></pre></div>
 Use <code>MapControl.Map.Navigator.Viewport.Height</code> instead.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&#39;IRenderer&#39; does not contain a definition for &#39;StyleRenderers&#39; and no accessible extension method &#39;StyleRenderers&#39; accepting a first argument of type &#39;IRenderer&#39; could be found
+</span></code></pre></div>
+Use the static <code>MapRenderer.RegisterStyleRenderer(...)</code> method for registering and the <code>mapControl.Renderer.TryGetStyleRenderer</code> method when drawing.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&#39;IRenderer&#39; does not contain a definition for &#39;WidgetRenders&#39; and no accessible extension method &#39;WidgetRenders&#39; accepting a first argument of type &#39;IRenderer&#39; could be found
+</span></code></pre></div>
+Use the static <code>MapRenderer.RegisterWidgetRenderer(...)</code> method for registering and the <code>mapControl.Renderer.TryGetWidgetRenderer</code> method when drawing.</p>
 <h2 id="list-of-changes-in-the-order-that-they-were-applied">List of changes in the order that they were applied.</h2>
 <ul>
 <li>Removed <code>RectFeature</code>. Instead of <code>new RectFeature(myRect)</code> use <code>new GeometryFeature(myRect.ToPolygon())</code></li>
