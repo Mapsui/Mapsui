@@ -2,7 +2,6 @@
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.UI.Blazor;
 using Mapsui.Widgets.InfoWidgets;
 using Microsoft.AspNetCore.Components;
@@ -72,8 +71,6 @@ public partial class Index
         {
             _render = false;
             FillMap();
-            if (_mapControl != null)
-                _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
         }
     }
 

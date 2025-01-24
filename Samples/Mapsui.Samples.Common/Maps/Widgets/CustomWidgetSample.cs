@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Skia;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
 
@@ -20,6 +21,8 @@ public class CustomWidgetSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
+        MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
+
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
