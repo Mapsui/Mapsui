@@ -40,10 +40,11 @@ mapControl.Map.Widgets.Add(widget);
 5) To draw the widget on the screen, we need a widget renderer. To use the default widget renderer, use the following lines
 
 ```csharp
-mapControl.Renderer.WidgetRenders[typeof(Widgets.Performance.PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White);
+Mapsui.Rendering.SkiaMapRenderer.RegisterWidgetRenderer(typeof(Widgets.Performance.PerformanceWidget), 
+  new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White));
 ```
 
-The first two parameters are the X and Y coordiantes for the widget. Third parameter is the text size. Fourth is the text color and fifth is the background color.
+The first two parameters are the X and Y coordinates for the widget. Third parameter is the text size. Fourth is the text color and fifth is the background color.
 ## Code copy
 
 ```csharp
@@ -61,7 +62,8 @@ widget.WidgetTouched += (sender, args) =>
 };
 
 mapControl.Map.Widgets.Add(widget);
-mapControl.Renderer.WidgetRenders[typeof(Widgets.Performance.PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White);
+Mapsui.Rendering.SkiaMapRenderer.RegisterWidgetRenderer(typeof(Widgets.Performance.PerformanceWidget), 
+  new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White));
 ```
 
 ## Values

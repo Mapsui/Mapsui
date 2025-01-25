@@ -1,5 +1,6 @@
 ﻿using BruTile.Predefined;
 using Mapsui.Extensions;
+using Mapsui.Rendering.Skia;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
@@ -27,9 +28,8 @@ public class PerformanceWidgetSample : IMapControlSample
         var widget = CreatePerformanceWidget();
         mapControl.Map.Widgets.Add(widget);
         mapControl.Performance = _performance;
-        mapControl.Renderer.WidgetRenders[typeof(PerformanceWidget)] = new PerformanceWidgetRenderer();
+        MapRenderer.RegisterWidgetRenderer(typeof(PerformanceWidget), new PerformanceWidgetRenderer());
     }
-
 
     public static Map CreateMap()
     {
