@@ -23144,6 +23144,44 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.Draw
   nameWithType: PerformanceWidgetRenderer.Draw
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer
+  name: RulerWidgetRenderer
+  href: pages/Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.html
+  commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer
+  nameWithType: RulerWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,Mapsui.Rendering.Skia.Cache.RenderService,System.Single)
+  name: Draw(SKCanvas, Viewport, IWidget, RenderService, float)
+  href: pages/Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_RulerWidgetRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Widgets_IWidget_Mapsui_Rendering_Skia_Cache_RenderService_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.IWidget,Mapsui.Rendering.Skia.Cache.RenderService,System.Single)
+  name.vb: Draw(SKCanvas, Viewport, IWidget, RenderService, Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Widgets.IWidget, Mapsui.Rendering.Skia.Cache.RenderService, float)
+  fullName.vb: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Widgets.IWidget, Mapsui.Rendering.Skia.Cache.RenderService, Single)
+  nameWithType: RulerWidgetRenderer.Draw(SKCanvas, Viewport, IWidget, RenderService, float)
+  nameWithType.vb: RulerWidgetRenderer.Draw(SKCanvas, Viewport, IWidget, RenderService, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.Draw*
+  name: Draw
+  href: pages/Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_RulerWidgetRenderer_Draw_
+  commentId: Overload:Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.Draw
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.Draw
+  nameWithType: RulerWidgetRenderer.Draw
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.DrawLine(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.InfoWidgets.RulerWidget,Mapsui.Rendering.Skia.Cache.RenderService,System.Single)
+  name: DrawLine(SKCanvas, Viewport, RulerWidget, RenderService, float)
+  href: pages/Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_RulerWidgetRenderer_DrawLine_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Widgets_InfoWidgets_RulerWidget_Mapsui_Rendering_Skia_Cache_RenderService_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.DrawLine(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Widgets.InfoWidgets.RulerWidget,Mapsui.Rendering.Skia.Cache.RenderService,System.Single)
+  name.vb: DrawLine(SKCanvas, Viewport, RulerWidget, RenderService, Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.DrawLine(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Widgets.InfoWidgets.RulerWidget, Mapsui.Rendering.Skia.Cache.RenderService, float)
+  fullName.vb: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.DrawLine(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Widgets.InfoWidgets.RulerWidget, Mapsui.Rendering.Skia.Cache.RenderService, Single)
+  nameWithType: RulerWidgetRenderer.DrawLine(SKCanvas, Viewport, RulerWidget, RenderService, float)
+  nameWithType.vb: RulerWidgetRenderer.DrawLine(SKCanvas, Viewport, RulerWidget, RenderService, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.DrawLine*
+  name: DrawLine
+  href: pages/Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_RulerWidgetRenderer_DrawLine_
+  commentId: Overload:Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.DrawLine
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.DrawLine
+  nameWithType: RulerWidgetRenderer.DrawLine
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
   name: ScaleBarWidgetRenderer
   href: pages/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html
@@ -39167,6 +39205,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Algorithms.RotateClockwiseRadians
   nameWithType: Algorithms.RotateClockwiseRadians
+- uid: Mapsui.Utilities.Bearings
+  name: Bearings
+  href: pages/Mapsui.Utilities.Bearings.html
+  commentId: T:Mapsui.Utilities.Bearings
+  fullName: Mapsui.Utilities.Bearings
+  nameWithType: Bearings
+- uid: Mapsui.Utilities.Bearings.CalculateBearing(System.Double,System.Double,System.Double,System.Double)
+  name: CalculateBearing(double, double, double, double)
+  href: pages/Mapsui.Utilities.Bearings.html#Mapsui_Utilities_Bearings_CalculateBearing_System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Mapsui.Utilities.Bearings.CalculateBearing(System.Double,System.Double,System.Double,System.Double)
+  name.vb: CalculateBearing(Double, Double, Double, Double)
+  fullName: Mapsui.Utilities.Bearings.CalculateBearing(double, double, double, double)
+  fullName.vb: Mapsui.Utilities.Bearings.CalculateBearing(Double, Double, Double, Double)
+  nameWithType: Bearings.CalculateBearing(double, double, double, double)
+  nameWithType.vb: Bearings.CalculateBearing(Double, Double, Double, Double)
+- uid: Mapsui.Utilities.Bearings.CalculateBearing*
+  name: CalculateBearing
+  href: pages/Mapsui.Utilities.Bearings.html#Mapsui_Utilities_Bearings_CalculateBearing_
+  commentId: Overload:Mapsui.Utilities.Bearings.CalculateBearing
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Bearings.CalculateBearing
+  nameWithType: Bearings.CalculateBearing
 - uid: Mapsui.Utilities.ConcurrentHashSet`1
   name: ConcurrentHashSet<T>
   href: pages/Mapsui.Utilities.ConcurrentHashSet-1.html
@@ -39445,6 +39505,15 @@ references:
   fullName.vb: Mapsui.Utilities.Haversine.Distance(Double, Double, Double, Double)
   nameWithType: Haversine.Distance(double, double, double, double)
   nameWithType.vb: Haversine.Distance(Double, Double, Double, Double)
+- uid: Mapsui.Utilities.Haversine.Distance(System.Span{Mapsui.MPoint})
+  name: Distance(Span<MPoint>)
+  href: pages/Mapsui.Utilities.Haversine.html#Mapsui_Utilities_Haversine_Distance_System_Span_Mapsui_MPoint__
+  commentId: M:Mapsui.Utilities.Haversine.Distance(System.Span{Mapsui.MPoint})
+  name.vb: Distance(Span(Of MPoint))
+  fullName: Mapsui.Utilities.Haversine.Distance(System.Span<Mapsui.MPoint>)
+  fullName.vb: Mapsui.Utilities.Haversine.Distance(System.Span(Of Mapsui.MPoint))
+  nameWithType: Haversine.Distance(Span<MPoint>)
+  nameWithType.vb: Haversine.Distance(Span(Of MPoint))
 - uid: Mapsui.Utilities.Haversine.Distance*
   name: Distance
   href: pages/Mapsui.Utilities.Haversine.html#Mapsui_Utilities_Haversine_Distance_
@@ -41432,6 +41501,290 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.InfoWidgets.PerformanceWidget.Performance
   nameWithType: PerformanceWidget.Performance
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget
+  name: RulerWidget
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html
+  commentId: T:Mapsui.Widgets.InfoWidgets.RulerWidget
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget
+  nameWithType: RulerWidget
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.#ctor(Mapsui.Map)
+  name: RulerWidget(Map)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget__ctor_Mapsui_Map_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.#ctor(Mapsui.Map)
+  name.vb: New(Map)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidget(Mapsui.Map)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.New(Mapsui.Map)
+  nameWithType: RulerWidget.RulerWidget(Map)
+  nameWithType.vb: RulerWidget.New(Map)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.#ctor*
+  name: RulerWidget
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget__ctor_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidget
+  fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.New
+  nameWithType: RulerWidget.RulerWidget
+  nameWithType.vb: RulerWidget.New
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.Color
+  name: Color
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_Color
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.Color
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.Color
+  nameWithType: RulerWidget.Color
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.Color*
+  name: Color
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_Color_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.Color
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.Color
+  nameWithType: RulerWidget.Color
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.ColorOfBeginAndEndDots
+  name: ColorOfBeginAndEndDots
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_ColorOfBeginAndEndDots
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.ColorOfBeginAndEndDots
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.ColorOfBeginAndEndDots
+  nameWithType: RulerWidget.ColorOfBeginAndEndDots
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.ColorOfBeginAndEndDots*
+  name: ColorOfBeginAndEndDots
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_ColorOfBeginAndEndDots_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.ColorOfBeginAndEndDots
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.ColorOfBeginAndEndDots
+  nameWithType: RulerWidget.ColorOfBeginAndEndDots
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.CurrentPosition
+  name: CurrentPosition
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_CurrentPosition
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.CurrentPosition
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.CurrentPosition
+  nameWithType: RulerWidget.CurrentPosition
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.CurrentPosition*
+  name: CurrentPosition
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_CurrentPosition_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.CurrentPosition
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.CurrentPosition
+  nameWithType: RulerWidget.CurrentPosition
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.DistanceInKilometers
+  name: DistanceInKilometers
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_DistanceInKilometers
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.DistanceInKilometers
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.DistanceInKilometers
+  nameWithType: RulerWidget.DistanceInKilometers
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.DistanceInKilometers*
+  name: DistanceInKilometers
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_DistanceInKilometers_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.DistanceInKilometers
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.DistanceInKilometers
+  nameWithType: RulerWidget.DistanceInKilometers
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.DistanceUpdated
+  name: DistanceUpdated
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_DistanceUpdated
+  commentId: E:Mapsui.Widgets.InfoWidgets.RulerWidget.DistanceUpdated
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.DistanceUpdated
+  nameWithType: RulerWidget.DistanceUpdated
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.InfoBox
+  name: InfoBox
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_InfoBox
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.InfoBox
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.InfoBox
+  nameWithType: RulerWidget.InfoBox
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.InfoBox*
+  name: InfoBox
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_InfoBox_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.InfoBox
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.InfoBox
+  nameWithType: RulerWidget.InfoBox
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.IsActive
+  name: IsActive
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_IsActive
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.IsActive
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.IsActive
+  nameWithType: RulerWidget.IsActive
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.IsActive*
+  name: IsActive
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_IsActive_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.IsActive
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.IsActive
+  nameWithType: RulerWidget.IsActive
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerMoved(Navigator, WidgetEventArgs)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: RulerWidget.OnPointerMoved(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved*
+  name: OnPointerMoved
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerMoved_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved
+  nameWithType: RulerWidget.OnPointerMoved
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerPressed(Navigator, WidgetEventArgs)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: RulerWidget.OnPointerPressed(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed*
+  name: OnPointerPressed
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerPressed_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed
+  nameWithType: RulerWidget.OnPointerPressed
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerReleased(Navigator, WidgetEventArgs)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: RulerWidget.OnPointerReleased(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased*
+  name: OnPointerReleased
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerReleased_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased
+  nameWithType: RulerWidget.OnPointerReleased
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  name: OnTapped(Navigator, WidgetEventArgs)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: RulerWidget.OnTapped(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped*
+  name: OnTapped
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnTapped_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped
+  nameWithType: RulerWidget.OnTapped
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.Reset
+  name: Reset()
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_Reset
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.Reset
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.Reset()
+  nameWithType: RulerWidget.Reset()
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.Reset*
+  name: Reset
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_Reset_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.Reset
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.Reset
+  nameWithType: RulerWidget.Reset
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs
+  name: RulerWidget.RulerWidgetUpdatedEventArgs
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html
+  commentId: T:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs
+  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.#ctor(Mapsui.Widgets.InfoWidgets.RulerWidget.TapType)
+  name: RulerWidgetUpdatedEventArgs(TapType)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs__ctor_Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.#ctor(Mapsui.Widgets.InfoWidgets.RulerWidget.TapType)
+  name.vb: New(TapType)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.RulerWidgetUpdatedEventArgs(Mapsui.Widgets.InfoWidgets.RulerWidget.TapType)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.New(Mapsui.Widgets.InfoWidgets.RulerWidget.TapType)
+  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.RulerWidgetUpdatedEventArgs(RulerWidget.TapType)
+  nameWithType.vb: RulerWidget.RulerWidgetUpdatedEventArgs.New(RulerWidget.TapType)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.#ctor*
+  name: RulerWidgetUpdatedEventArgs
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs__ctor_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.RulerWidgetUpdatedEventArgs
+  fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.New
+  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.RulerWidgetUpdatedEventArgs
+  nameWithType.vb: RulerWidget.RulerWidgetUpdatedEventArgs.New
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
+  name: TapType
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs_TapType
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
+  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.TapType
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType*
+  name: TapType
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs_TapType_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
+  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.TapType
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.ShowInfoNextToRuler
+  name: ShowInfoNextToRuler
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_ShowInfoNextToRuler
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.ShowInfoNextToRuler
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.ShowInfoNextToRuler
+  nameWithType: RulerWidget.ShowInfoNextToRuler
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.ShowInfoNextToRuler*
+  name: ShowInfoNextToRuler
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_ShowInfoNextToRuler_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.ShowInfoNextToRuler
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.ShowInfoNextToRuler
+  nameWithType: RulerWidget.ShowInfoNextToRuler
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature(System.Func{Mapsui.MPoint,Mapsui.IFeature})
+  name: SnapToFeature(Func<MPoint?, IFeature?>)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_SnapToFeature_System_Func_Mapsui_MPoint_Mapsui_IFeature__
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature(System.Func{Mapsui.MPoint,Mapsui.IFeature})
+  name.vb: SnapToFeature(Func(Of MPoint, IFeature))
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature(System.Func<Mapsui.MPoint?, Mapsui.IFeature?>)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature(System.Func(Of Mapsui.MPoint, Mapsui.IFeature))
+  nameWithType: RulerWidget.SnapToFeature(Func<MPoint?, IFeature?>)
+  nameWithType.vb: RulerWidget.SnapToFeature(Func(Of MPoint, IFeature))
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature*
+  name: SnapToFeature
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_SnapToFeature_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature
+  nameWithType: RulerWidget.SnapToFeature
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.StartPosition
+  name: StartPosition
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_StartPosition
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.StartPosition
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.StartPosition
+  nameWithType: RulerWidget.StartPosition
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.StartPosition*
+  name: StartPosition
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_StartPosition_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.StartPosition
+  isSpec: "True"
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.StartPosition
+  nameWithType: RulerWidget.StartPosition
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType
+  name: RulerWidget.TapType
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html
+  commentId: T:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType
+  nameWithType: RulerWidget.TapType
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Down
+  name: Down
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html#Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_Down
+  commentId: F:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Down
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Down
+  nameWithType: RulerWidget.TapType.Down
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Drag
+  name: Drag
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html#Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_Drag
+  commentId: F:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Drag
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Drag
+  nameWithType: RulerWidget.TapType.Drag
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Hover
+  name: Hover
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html#Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_Hover
+  commentId: F:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Hover
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Hover
+  nameWithType: RulerWidget.TapType.Hover
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Up
+  name: Up
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html#Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_Up
+  commentId: F:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Up
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Up
+  nameWithType: RulerWidget.TapType.Up
 - uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
   name: ShowLoggingInMap
   href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html

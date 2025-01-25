@@ -3362,6 +3362,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Rendering.Skia.SkiaWidgets.RulerWidgetRenderer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.yml",
       "output": {
         ".html": {
@@ -4942,6 +4952,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Utilities.Bearings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Utilities.Bearings.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Utilities.ConcurrentHashSet-1.yml",
       "output": {
         ".html": {
@@ -5266,6 +5286,36 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Widgets.InfoWidgets.PerformanceWidget.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html"
         }
       },
       "version": ""
