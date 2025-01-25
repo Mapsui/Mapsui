@@ -59,6 +59,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         _widgetRenderers[typeof(BoxWidget)] = new BoxWidgetRenderer();
         _widgetRenderers[typeof(LoggingWidget)] = new LoggingWidgetRenderer();
         _widgetRenderers[typeof(InputOnlyWidget)] = new InputOnlyWidgetRenderer();
+        _widgetRenderers[typeof(RulerWidget)] = new RulerWidgetRenderer();
     }
 
     public MapRenderer() : this(10000)
