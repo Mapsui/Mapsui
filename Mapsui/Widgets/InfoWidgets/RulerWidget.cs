@@ -26,15 +26,25 @@ public class RulerWidget(Map map) : BaseWidget
     public double? DistanceInKilometers { get; internal set; }
     public bool IsActive { get; set; }
 
-    public TextBoxWidget TextBox { get; set; } = new TextBoxWidget
+    /// <summary>
+    /// Gets or sets a value indicating whether the info should be shown next to the ruler.
+    /// When set to false you can use the RulerWidget.InfoBox fields to position it like any
+    /// other widget.
+    /// </summary>
+    public bool ShowInfoNextToRuler { get; set; } = true;
+
+    public TextBoxWidget InfoBox { get; set; } = new TextBoxWidget
     {
         VerticalAlignment = VerticalAlignment.Bottom,
         HorizontalAlignment = HorizontalAlignment.Left,
-        BackColor = new Color(128, 128, 0, 128),
-        Padding = new MRect(6, 4),
+        BackColor = new Color(108, 117, 125),
+        TextColor = Color.White,
+        Padding = new MRect(8, 6),
+        CornerRadius = 4,
+        Margin = new(4),
     };
 
-    public event EventHandler<MeasureWidgetUpdatedEventArgs>? DistanceUpdated = null;
+    public event EventHandler<RulerWidgetUpdatedEventArgs>? DistanceUpdated = null;
 
     public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
     {
@@ -51,14 +61,14 @@ public class RulerWidget(Map map) : BaseWidget
 
         CurrentPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
         DistanceInKilometers = GetDistance(StartPosition, CurrentPosition);
-        DistanceUpdated?.Invoke(this, new MeasureWidgetUpdatedEventArgs(e.LeftButton ? TapType.Drag : TapType.Hover));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(e.LeftButton ? TapType.Drag : TapType.Hover));
         _map.RefreshGraphics();
         return true;
     }
 
     public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
     {
-        DistanceUpdated?.Invoke(this, new MeasureWidgetUpdatedEventArgs(TapType.Up));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Up));
         _map.RefreshGraphics();
         return true;
     }
@@ -69,7 +79,7 @@ public class RulerWidget(Map map) : BaseWidget
         {
             StartPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
             CurrentPosition = null;
-            DistanceUpdated?.Invoke(this, new MeasureWidgetUpdatedEventArgs(TapType.Down));
+            DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Down));
             _map.RefreshGraphics();
         }
         return true;
@@ -113,7 +123,7 @@ public class RulerWidget(Map map) : BaseWidget
         return (startFeature, currentFeature);
     }
 
-    public class MeasureWidgetUpdatedEventArgs(TapType tapType) : EventArgs
+    public class RulerWidgetUpdatedEventArgs(TapType tapType) : EventArgs
     {
         public TapType TapType { get; } = tapType;
     }
