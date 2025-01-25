@@ -179,9 +179,9 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
                             tempSize = featureSize.FeatureSize(style, renderer.RenderService, null);
                         }
                     }
-                    else
-                        Logger.Log(LogLevel.Warning, $"No StyleRenderer found for {style.GetType()}");
                 }
+                else
+                    Logger.Log(LogLevel.Warning, $"No StyleRenderer found for {style.GetType()}");
             }
 
             result = ConvertToCoordinates(tempSize, section.Resolution);
