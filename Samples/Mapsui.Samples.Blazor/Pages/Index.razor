@@ -140,6 +140,8 @@
     [Parameter]
     public string? Title { get; set; }
 
+    public ISampleBase? Sample { get; set; }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -205,6 +207,4 @@
             _sourceCodeUrl = $@"../codesamples/{sample.GetType().Name}.html";
         }
     }
-
-    public ISampleBase? Sample { get; set; }
 }
