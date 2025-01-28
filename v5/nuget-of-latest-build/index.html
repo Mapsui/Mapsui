@@ -800,7 +800,17 @@
 
 
 <h1 id="nuget-of-latest-build">NuGet of Latest Build</h1>
-<p>Mapsui's 'Build' GitHub action creates nugets and stores them as artifacts. Go to <a href="https://github.com/Mapsui/Mapsui/actions">actions</a>, select the build you are interested in and download them at the bottom of the page.</p>
+<p>Mapsui's 'Build' GitHub action creates nugets and stores them as artifacts. You can use them in your local build.</p>
+<ul>
+<li>Go to <a href="https://github.com/Mapsui/Mapsui/actions">actions</a>.</li>
+<li>Select the 'Build' workflow on the left.</li>
+<li>Select the specific build that you are interested in, for instance, the latest build on the 'main' branch.</li>
+<li>Scroll to the bottom to 'Artifacts' and download the artifacts of your OS.</li>
+<li>Extract the artifacts and place the .nupkg file in a folder, e.g., C:\LocalNuGets.</li>
+<li>Run <code>dotnet nuget add source "C:\LocalNuGets" --name LocalNuGet</code> in your sln folder to add the source to the nuget.config.</li>
+<li>You may need to specify the specific version of the nuget in the csproj or Directory.Package.props</li>
+<li>Note the version will have a build postfix and could look like '5.0.0-beta.7-37-g6bac058'.</li>
+</ul>
 
 
 
