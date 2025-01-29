@@ -680,7 +680,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (Map is null)
             return false;
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(position);
-        OnMapInfo(CreateMapInfoEventArgs(position, worldPosition, TapType.Single));
+        OnMapInfo(CreateMapInfoEventArgs(position, worldPosition, tapType));
         return false;
     }
 }
