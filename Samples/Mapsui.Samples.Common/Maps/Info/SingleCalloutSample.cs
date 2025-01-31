@@ -14,6 +14,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
+#pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Info;
@@ -23,23 +24,26 @@ public class SingleCalloutSample : ISample
     public string Name => "Single Callout";
     public string Category => "Info";
 
+    private const string _calloutLayerName = "Cities with callouts";
+
     public Task<Map> CreateMapAsync()
     {
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(CreatePointLayer());
+        var pointLayer = CreatePointLayer();
+        map.Layers.Add(pointLayer);
         map.Navigator.CenterOnAndZoomTo(map.Layers.Get(1).Extent!.Centroid, map.Navigator.Resolutions[5]);
-        map.Info += MapOnInfo;
+        map.Info += (s, e) => MapOnInfo(s, e, pointLayer);
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _calloutLayerName));
 
         return Task.FromResult(map);
     }
 
-    private static void MapOnInfo(object? sender, MapInfoEventArgs e)
+    private static void MapOnInfo(object? sender, MapInfoEventArgs e, ILayer pointLayer)
     {
-        var mapInfo = e.GetMapInfo();
+        var mapInfo = e.GetMapInfo([pointLayer]);
         var calloutStyle = mapInfo.Feature?.Styles.OfType<CalloutStyle>().FirstOrDefault();
         if (calloutStyle is not null)
         {
@@ -52,8 +56,7 @@ public class SingleCalloutSample : ISample
     {
         return new MemoryLayer
         {
-            Name = "Cities with callouts",
-            IsMapInfoLayer = true,
+            Name = _calloutLayerName,
             Features = new MemoryProvider(GetCitiesFromEmbeddedResource()).Features,
             Style = SymbolStyles.CreatePinStyle(symbolScale: 0.7),
         };
@@ -75,7 +78,7 @@ public class SingleCalloutSample : ISample
             feature[nameof(City.Lng)] = c.Lng;
             feature.Styles.Add(CreateCalloutStyle(feature.ToStringOfKeyValuePairs()));
             return feature;
-        });
+        }).ToArray();
     }
 
     private static CalloutStyle CreateCalloutStyle(string content)

@@ -121,21 +121,8 @@ public class MapLiveTests
 
     private static MapRenderer CreateMapRenderer(IMapControl mapControl)
     {
-        var mapRenderer = new MapRenderer
-        {
-            WidgetRenders =
-            {
-                [typeof(CustomWidget)] = new CustomWidgetSkiaRenderer(),
-            }
-        };
-        foreach (var widgetRender in mapControl.Renderer.WidgetRenders)
-        {
-            if (!mapRenderer.WidgetRenders.Contains(widgetRender))
-            {
-                mapRenderer.WidgetRenders[widgetRender.Key] = widgetRender.Value;
-            }
-        }
-        return mapRenderer;
+        MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
+        return new MapRenderer();
     }
 
     [Test]

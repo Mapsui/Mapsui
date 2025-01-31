@@ -36,7 +36,7 @@ public class ThemeStyleSample : ISample
         map.Layers.Add(CreateCountryLayer(countrySource));
         map.Layers.Add(CreateCityHoverPoints());
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Countries" || l.Name == "Points"));
 
         return map;
     }
@@ -48,7 +48,6 @@ public class ThemeStyleSample : ISample
             Name = "Countries",
             DataSource = countrySource,
             Style = CreateThemeStyle(),
-            IsMapInfoLayer = true
         };
     }
 
@@ -98,7 +97,6 @@ public class ThemeStyleSample : ISample
             Features = features,
             Style = CreateCityStyle(),
             Name = "Points",
-            IsMapInfoLayer = true
         };
     }
 

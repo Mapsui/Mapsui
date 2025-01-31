@@ -8,6 +8,7 @@ using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -161,7 +162,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
             var layerStyles = _layer.Style.GetStylesToApply(section.Resolution);
             foreach (var style in layerStyles)
             {
-                if (renderer.StyleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
+                if (renderer.TryGetStyleRenderer(style.GetType(), out var styleRenderer))
                 {
                     if (styleRenderer is IFeatureSize featureSize)
                     {
@@ -179,6 +180,8 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
                         }
                     }
                 }
+                else
+                    Logger.Log(LogLevel.Warning, $"No StyleRenderer found for {style.GetType()}");
             }
 
             result = ConvertToCoordinates(tempSize, section.Resolution);
@@ -248,20 +251,20 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
 
         var layer = await CreateRenderLayerAsync(tileInfo, renderer);
         var renderLayer = layer.RenderLayer;
-        renderLayer.IsMapInfoLayer = true;
         List<ILayer> renderLayers = [renderLayer];
 
-        var info = renderer.GetMapInfo(screenPosition, viewport, renderLayers);
-        if (info != null)
+        var mapInfo = renderer.GetMapInfo(screenPosition, viewport, renderLayers);
+        if (mapInfo.Feature is null)
         {
-            var mapInfo = await RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, renderLayers);
-            var infos = mapInfo.MapInfoRecords;
-            if (infos != null)
+            mapInfo = await RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, renderLayers);
+        }
+
+        var mapInfoRecords = mapInfo.MapInfoRecords;
+        if (mapInfoRecords != null)
+        {
+            foreach (var group in mapInfoRecords.GroupBy(f => f.Layer.Name))
             {
-                foreach (var group in infos.GroupBy(f => f.Layer.Name))
-                {
-                    result[group.Key] = group.Select(f => f.Feature).ToArray();
-                }
+                result[group.Key] = group.Select(f => f.Feature).ToArray();
             }
         }
 

@@ -22,32 +22,34 @@ public class CustomCalloutStyleSample : IMapControlSample
     public string Name => "Custom Callout Style";
     public string Category => "Info";
 
+    private const string _customStyleLayerName = "Custom Callout Layer";
+
     public void Setup(IMapControl mapControl)
     {
         mapControl.Map = CreateMap();
-
-        if (mapControl.Renderer is MapRenderer && !mapControl.Renderer.StyleRenderers.ContainsKey(typeof(CustomCalloutStyle)))
-            mapControl.Renderer.StyleRenderers.Add(typeof(CustomCalloutStyle), new CustomCalloutStyleRenderer());
     }
 
     public static Map CreateMap()
     {
+        MapRenderer.RegisterStyleRenderer(typeof(CustomCalloutStyle), new CustomCalloutStyleRenderer());
+
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var points = RandomPointsBuilder.GenerateRandomPoints(map.Extent, 25, 9898);
-        map.Layers.Add(CreateCalloutLayer(CreateFeatures(points)));
+        var calloutLayer = CreateCalloutLayer(CreateFeatures(points));
+        map.Layers.Add(calloutLayer);
 
-        map.Widgets.Add(new MapInfoWidget(map));
-        map.Info += MapOnInfo;
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _customStyleLayerName));
+        map.Info += (s, e) => MapOnInfo(s, e, calloutLayer);
 
         return map;
     }
 
-    private static void MapOnInfo(object? sender, MapInfoEventArgs e)
+    private static void MapOnInfo(object? sender, MapInfoEventArgs e, ILayer calloutLayer)
     {
-        var feature = e.GetMapInfo().Feature;
+        var feature = e.GetMapInfo([calloutLayer]).Feature;
         if (feature is not null)
         {
             if (feature["show-callout"]?.ToString() == "true")
@@ -59,7 +61,7 @@ public class CustomCalloutStyleSample : IMapControlSample
 
     private static MemoryLayer CreateCalloutLayer(IEnumerable<IFeature> features) => new()
     {
-        Name = "Custom Style Layer",
+        Name = _customStyleLayerName,
         Features = features,
         Style = new StyleCollection
         {
@@ -68,7 +70,6 @@ public class CustomCalloutStyleSample : IMapControlSample
                 new CustomCalloutStyle()
             },
         },
-        IsMapInfoLayer = true
     };
 
     private static List<IFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)

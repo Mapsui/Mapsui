@@ -45,12 +45,8 @@ public class GeoJsonInfoSample : ISample
         };
 
         map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(dataSource))
-        {
-            IsMapInfoLayer = true,
-        });
-
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(dataSource)));
+        map.Widgets.Add(new MapInfoWidget(map, l => l is RasterizingTileLayer));
 
         return map;
     }

@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Rendering.Skia;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.DataBuilders;
@@ -55,22 +56,23 @@ public class CustomStyleSample : IMapControlSample
     public string Name => "Custom Style";
     public string Category => "Styles";
 
+    private const string _mapInfoLayerName = "Custom Style Layer";
+
     public void Setup(IMapControl mapControl)
     {
         mapControl.Map = CreateMap();
-
-        if (mapControl.Renderer is Rendering.Skia.MapRenderer && !mapControl.Renderer.StyleRenderers.ContainsKey(typeof(CustomStyle)))
-            mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());
     }
 
     public static Map CreateMap()
     {
+        MapRenderer.RegisterStyleRenderer(typeof(CustomStyle), new SkiaCustomStyleRenderer());
+
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateStylesLayer(map.Extent));
 
-        map.Widgets.Add(new MapInfoWidget(map));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _mapInfoLayerName));
 
         return map;
     }
@@ -79,10 +81,9 @@ public class CustomStyleSample : IMapControlSample
     {
         return new MemoryLayer
         {
-            Name = "Custom Style Layer",
+            Name = _mapInfoLayerName,
             Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
             Style = null,
-            IsMapInfoLayer = true
         };
     }
 

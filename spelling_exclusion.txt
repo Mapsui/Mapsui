@@ -9,7 +9,6 @@ Robineau
 geoimpact
 gml
 Mapsui
-Skia
 attrs
 Dbase
 Geodan
@@ -28,3 +27,4 @@ onscroll
 bbox
 embeddedresource
 Infos
+webp

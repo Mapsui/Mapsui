@@ -34,8 +34,7 @@ public class DynamicSvgStyleSample : ISample
 
         map.Info += (s, e) =>
         {
-            var mapInfo = e.GetMapInfo();
-            infoPosition = mapInfo.WorldPosition; // Set the info position to use in the dynamic style
+            infoPosition = e.WorldPosition; // Set the info position to use in the dynamic style
             map.Layers.First().DataHasChanged(); // To notify the map that a redraw is needed.
         };
 

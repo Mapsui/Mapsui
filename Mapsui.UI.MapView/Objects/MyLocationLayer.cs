@@ -9,6 +9,7 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Utilities;
 using Animation = Mapsui.Animations.Animation;
 using Mapsui.UI.Maui;
+using Color = Mapsui.Styles.Color;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -151,7 +152,6 @@ public class MyLocationLayer : BaseLayer
     {
         _mapView = default!; // will be set in constructor with MapView
         Enabled = false;
-        IsMapInfoLayer = true;
 
         _feature = new GeometryFeature
         {

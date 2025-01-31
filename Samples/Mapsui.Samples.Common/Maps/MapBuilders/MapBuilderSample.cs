@@ -20,7 +20,7 @@ public class MapBuilderSample : ISample
     public Task<Map> CreateMapAsync()
         => Task.FromResult(new MapBuilder()
             .WithOpenStreetMapLayer((l, m) => l.Name = "OpenStreetMap")
-            .WithLayer((map) => new MemoryLayer("Pin Layer") { Features = CreateFeatures(), IsMapInfoLayer = true },
+            .WithLayer((map) => new MemoryLayer("Pin Layer") { Features = CreateFeatures() },
                 (l, map) => l.WithPinWithCalloutLayer(map))
             .WithZoomButtons()
             .WithScaleBarWidget(w =>
@@ -43,7 +43,7 @@ public static class SampleMapBuilderExtensions
     {
         map.Info += (s, e) =>
         {
-            if (e.GetMapInfo().Feature?.Data is UserData data)
+            if (e.GetMapInfo([layer]).Feature?.Data is UserData data)
                 data.CalloutEnabled = !data.CalloutEnabled;
         };
 

@@ -35,7 +35,7 @@ public class WfsOgcFilterSample : ISample
             map.Layers.Add(CreateWfsLayer(provider));
             map.Layers.Add(CreateLabelLayer(provider));
 
-            map.Widgets.Add(new MapInfoWidget(map));
+            map.Widgets.Add(new MapInfoWidget(map, l => l.Name == layerName));
 
             map.Navigator.CenterOnAndZoomTo(new MPoint(964406.63616331492, 6055489.2309588827), map.Navigator.Resolutions[10]);
 
@@ -55,7 +55,6 @@ public class WfsOgcFilterSample : ISample
         {
             Style = new VectorStyle { Fill = new Brush { Color = Color.FromArgb(192, 255, 0, 0) } },
             DataSource = provider,
-            IsMapInfoLayer = true
         };
     }
 

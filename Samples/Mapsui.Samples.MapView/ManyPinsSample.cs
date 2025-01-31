@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Manipulations;
+using Mapsui.Rendering.Skia;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
@@ -7,8 +8,6 @@ using Mapsui.UI;
 using Mapsui.UI.Maui;
 using Mapsui.Utilities;
 using Mapsui.Widgets.InfoWidgets;
-using Microsoft.Maui.Graphics;
-using System;
 using System.Diagnostics;
 using System.Reflection;
 using Color = Microsoft.Maui.Graphics.Color;
@@ -105,7 +104,7 @@ public class ManyPinsSample : IMapViewSample
             mapControl.Performance = new Performance();
 
         mapControl.Map.Widgets.Add(CreatePerformanceWidget(mapControl));
-        mapControl.Renderer.WidgetRenders[typeof(PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer();
+        MapRenderer.RegisterWidgetRenderer(typeof(PerformanceWidget), new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer());
 
         ((UI.Maui.MapView)mapControl).UniqueCallout = true;
 
