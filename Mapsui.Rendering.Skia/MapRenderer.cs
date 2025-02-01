@@ -225,7 +225,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         }
         catch (Exception exception)
         {
-            Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
+            Logger.Log(LogLevel.Error, $"Unexpected error in skia renderer", exception);
         }
     }
 
@@ -337,7 +337,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         }
         catch (Exception exception)
         {
-            Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
+            Logger.Log(LogLevel.Error, $"Unexpected error in MapInfo skia renderer: {exception.Message}", exception);
         }
 
         return mapInfo;

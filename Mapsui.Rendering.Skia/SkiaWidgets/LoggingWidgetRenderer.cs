@@ -83,8 +83,7 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
                 _ => _informationTextPaint,
             };
 
-            canvas.DrawText(entry.LogLevel.ToString(), (float)(marginX + paddingX), (float)(marginY + (paddingX * line) + loggingWidget.TextSize * (line + 1)), _font, paint);
-            canvas.DrawText(entry.Description, (float)(marginX + paddingX + _levelWidth + 2 * paddingX), (float)(marginY + (paddingY * line) + loggingWidget.TextSize * (line + 1)), _font, paint);
+            canvas.DrawText(entry.FormattedLogLine, (float)(marginX + paddingX), (float)(marginY + (paddingX * line) + loggingWidget.TextSize * (line + 1)), _font, paint);
 
             line++;
         }
