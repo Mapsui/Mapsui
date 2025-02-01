@@ -41299,18 +41299,12 @@ references:
   commentId: T:Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
   fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry
   nameWithType: LoggingWidget.LogEntry
-- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.Description
-  name: Description
-  href: pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_LogEntry_Description
-  commentId: F:Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.Description
-  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.Description
-  nameWithType: LoggingWidget.LogEntry.Description
-- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.Exception
-  name: Exception
-  href: pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_LogEntry_Exception
-  commentId: F:Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.Exception
-  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.Exception
-  nameWithType: LoggingWidget.LogEntry.Exception
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.FormattedLogLine
+  name: FormattedLogLine
+  href: pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_LogEntry_FormattedLogLine
+  commentId: F:Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.FormattedLogLine
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.FormattedLogLine
+  nameWithType: LoggingWidget.LogEntry.FormattedLogLine
 - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.LogLevel
   name: LogLevel
   href: pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html#Mapsui_Widgets_InfoWidgets_LoggingWidget_LogEntry_LogLevel

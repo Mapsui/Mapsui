@@ -2617,7 +2617,7 @@
   "pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html": {
     "href": "pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.LogEntry.html",
     "title": "Struct LoggingWidget.LogEntry",
-    "keywords": "Struct LoggingWidget.LogEntry Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Namespace: Mapsui.Widgets.InfoWidgets Assembly: Mapsui.dll Syntax public struct LoggingWidget.LogEntry Fields | Edit this page View Source Description Declaration public string Description Field Value Type Description string | Edit this page View Source Exception Declaration public Exception? Exception Field Value Type Description Exception | Edit this page View Source LogLevel Declaration public LogLevel LogLevel Field Value Type Description LogLevel Extension Methods DisposableExtension.DisposeIfDisposable(object?)"
+    "keywords": "Struct LoggingWidget.LogEntry Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Namespace: Mapsui.Widgets.InfoWidgets Assembly: Mapsui.dll Syntax public struct LoggingWidget.LogEntry Fields | Edit this page View Source FormattedLogLine Declaration public string FormattedLogLine Field Value Type Description string | Edit this page View Source LogLevel Declaration public LogLevel LogLevel Field Value Type Description LogLevel Extension Methods DisposableExtension.DisposeIfDisposable(object?)"
   },
   "pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.html": {
     "href": "pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.html",
