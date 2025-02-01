@@ -190,7 +190,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
         catch (Exception ex)
         {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
+            Logger.Log(LogLevel.Error, $"Error in render loop", ex);
         }
     }
 
@@ -680,7 +680,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (Map is null)
             return false;
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(position);
-        OnMapInfo(CreateMapInfoEventArgs(position, worldPosition, TapType.Single));
+        OnMapInfo(CreateMapInfoEventArgs(position, worldPosition, tapType));
         return false;
     }
 }

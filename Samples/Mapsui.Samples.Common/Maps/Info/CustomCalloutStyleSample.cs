@@ -27,13 +27,12 @@ public class CustomCalloutStyleSample : IMapControlSample
     public void Setup(IMapControl mapControl)
     {
         mapControl.Map = CreateMap();
-
-        if (mapControl.Renderer is MapRenderer && !mapControl.Renderer.StyleRenderers.ContainsKey(typeof(CustomCalloutStyle)))
-            mapControl.Renderer.StyleRenderers.Add(typeof(CustomCalloutStyle), new CustomCalloutStyleRenderer());
     }
 
     public static Map CreateMap()
     {
+        MapRenderer.RegisterStyleRenderer(typeof(CustomCalloutStyle), new CustomCalloutStyleRenderer());
+
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());

@@ -3,6 +3,7 @@ using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
 using System;
 using System.Collections.Concurrent;
+using System.Text;
 
 namespace Mapsui.Widgets.InfoWidgets;
 
@@ -36,8 +37,7 @@ public class LoggingWidget : TextBoxWidget
     public struct LogEntry
     {
         public LogLevel LogLevel;
-        public string Description;
-        public Exception? Exception;
+        public string FormattedLogLine;
     }
 
     public LoggingWidget()
@@ -67,7 +67,7 @@ public class LoggingWidget : TextBoxWidget
         if (!ShouldLog(Enabled, ShowLoggingInMap))
             return;
 
-        var entry = new LogEntry { LogLevel = level, Description = description, Exception = exception };
+        var entry = new LogEntry { LogLevel = level, FormattedLogLine = ToFormattedLogLine(level, description, exception) };
 
         _listOfLogEntries.Enqueue(entry);
 
@@ -77,6 +77,25 @@ public class LoggingWidget : TextBoxWidget
         }
 
         Invalidate(nameof(Text));
+    }
+
+    private string ToFormattedLogLine(LogLevel level, string description, Exception? exception)
+    {
+        var builder = new StringBuilder();
+
+        builder.Append(ToString(level));
+        builder.Append(": ");
+        if (string.IsNullOrEmpty(description))
+            builder.Append("NO MESSAGE");
+        else
+            builder.Append(description);
+        if (exception != null)
+        {
+            builder.Append($" - EXCEPTION: {exception.GetType()}");
+            if (!string.IsNullOrEmpty(exception.Message))
+                builder.Append($" - EXCEPTION MESSAGE: {exception.Message}");
+        }
+        return builder.ToString();
     }
 
     public void Clear()
@@ -184,4 +203,14 @@ public class LoggingWidget : TextBoxWidget
             ShowLoggingInMap.ShowOnlyInDebugMode => System.Diagnostics.Debugger.IsAttached,
             _ => throw new NotSupportedException(nameof(InfoWidgets.ShowLoggingInMap))
         };
+
+    private string ToString(LogLevel logLevel) => logLevel switch
+    {
+        LogLevel.Error => "ERROR",
+        LogLevel.Warning => "WARN",
+        LogLevel.Information => "INFO",
+        LogLevel.Debug => "DEBUG",
+        LogLevel.Trace => "TRACE",
+        _ => throw new NotSupportedException(nameof(LogLevel))
+    };
 }

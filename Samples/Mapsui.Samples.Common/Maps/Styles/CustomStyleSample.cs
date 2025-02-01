@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Rendering.Skia;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.DataBuilders;
@@ -60,13 +61,12 @@ public class CustomStyleSample : IMapControlSample
     public void Setup(IMapControl mapControl)
     {
         mapControl.Map = CreateMap();
-
-        if (mapControl.Renderer is Rendering.Skia.MapRenderer && !mapControl.Renderer.StyleRenderers.ContainsKey(typeof(CustomStyle)))
-            mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());
     }
 
     public static Map CreateMap()
     {
+        MapRenderer.RegisterStyleRenderer(typeof(CustomStyle), new SkiaCustomStyleRenderer());
+
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
