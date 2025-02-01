@@ -190,7 +190,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
         catch (Exception ex)
         {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
+            Logger.Log(LogLevel.Error, $"Error in render loop", ex);
         }
     }
 

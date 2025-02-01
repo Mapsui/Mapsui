@@ -78,7 +78,7 @@ public class RemoteMapInfoFetcher
         }
         catch (Exception exception)
         {
-            Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
+            Logger.Log(LogLevel.Error, $"Unexpected error in remote MapInfo skia renderer", exception);
         }
 
         return await Task.FromResult(mapInfo);
