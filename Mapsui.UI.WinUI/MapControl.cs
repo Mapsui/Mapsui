@@ -199,6 +199,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
     {
+        // Accessing ActualWidth and ActualHeight before SizeChange results in a com exception.
+        ViewportWidth = ActualWidth;
+        ViewportHeight = ActualHeight;
         Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
         SetViewportSize();
     }
@@ -270,8 +273,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
     }
 
-    private double ViewportWidth => ActualWidth;
-    private double ViewportHeight => ActualHeight;
+    private double ViewportWidth { get; set; }
+    private double ViewportHeight { get; set; }
 
     private double GetPixelDensity()
     {
