@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 
@@ -35,6 +36,11 @@ public class ArcGISIdentify
         set => _timeOut = value;
     }
 
+    public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials? credentials = null, int sr = int.MinValue)
+    {
+        Request(url, x, y, tolerance, layers, extendXmin, extendYmin, extendXmax, extendYmax, mapWidth, mapHeight, mapDpi, returnGeometry, CancellationToken.None, credentials, sr);
+    }
+
     /// <summary>
     /// Request a ArcGIS Service for FeatureInfo
     /// </summary>
@@ -53,7 +59,7 @@ public class ArcGISIdentify
     /// <param name="returnGeometry"></param>
     /// <param name="credentials"></param>
     /// <param name="sr">sr code of input geometry</param>
-    public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials? credentials = null, int sr = int.MinValue)
+    public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, CancellationToken cancellationToken, ICredentials? credentials = null, int sr = int.MinValue)
     {
         Catch.TaskRun(async () =>
         {
@@ -71,7 +77,7 @@ public class ArcGISIdentify
             var handler = new HttpClientHandler();
             handler.SetCredentials(credentials ?? CredentialCache.DefaultCredentials);
             using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
-            using var response = await client.GetAsync(requestUrl).ConfigureAwait(false);
+            using var response = await client.GetAsync(requestUrl, cancellationToken).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -81,7 +87,7 @@ public class ArcGISIdentify
 
             try
             {
-                using var inputStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                using var inputStream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 
                 _featureInfo = JsonSerializer.Deserialize(inputStream, ArcGISContext.Default.ArcGISFeatureInfo);
 
@@ -89,7 +95,7 @@ public class ArcGISIdentify
 
                 using (var reader = new StreamReader(inputStream))
                 {
-                    var contentString = await reader.ReadToEndAsync();
+                    var contentString = await reader.ReadToEndAsync(cancellationToken);
                     if (contentString.Contains("{\"error\":{\""))
                     {
                         OnIdentifyFailed();

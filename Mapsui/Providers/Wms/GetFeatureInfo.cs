@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 
@@ -19,9 +20,9 @@ public class GetFeatureInfo
     public const string TextXmlSubtypeGml = "text/xml; subtype=gml/3.1.1";
     private string? _infoFormat;
     private string? _layerName;
-    private readonly Func<string, Task<Stream>> _getStreamAsync;
+    private readonly Func<string, CancellationToken, Task<Stream>> _getStreamAsync;
 
-    public GetFeatureInfo(Func<string, Task<Stream>>? getStreamAsync = null)
+    public GetFeatureInfo(Func<string, CancellationToken, Task<Stream>>? getStreamAsync = null)
     {
         TimeOut = 7000;
         _getStreamAsync = getStreamAsync ?? GetStreamAsync;
@@ -39,6 +40,11 @@ public class GetFeatureInfo
     /// </summary>
     public ICredentials? Credentials { get; set; }
 
+    public Task<FeatureInfo?> RequestAsync(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight)
+    {
+        return RequestAsync(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight, CancellationToken.None);
+    }
+
     /// <summary>
     /// Request FeatureInfo for a WMS Server
     /// </summary>
@@ -55,12 +61,12 @@ public class GetFeatureInfo
     /// <param name="y">Coordinate in pixels y</param>
     /// <param name="mapWidth">Width of the map</param>
     /// <param name="mapHeight">Height of the map</param>
-    public async Task<FeatureInfo?> RequestAsync(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight)
+    public async Task<FeatureInfo?> RequestAsync(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight, CancellationToken cancellationToken)
     {
         _infoFormat = infoFormat;
         var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
 
-        await using var task = await _getStreamAsync(requestUrl).ConfigureAwait(false);
+        await using var task = await _getStreamAsync(requestUrl, cancellationToken).ConfigureAwait(false);
         try
         {
             var parser = GetParserFromFormat(_infoFormat);
@@ -81,7 +87,7 @@ public class GetFeatureInfo
         return null;
     }
 
-    private async Task<Stream> GetStreamAsync(string url)
+    private async Task<Stream> GetStreamAsync(string url, CancellationToken cancellationToken)
     {
         var handler = new HttpClientHandler();
         handler.SetCredentials(Credentials ?? CredentialCache.DefaultCredentials);
@@ -90,13 +96,12 @@ public class GetFeatureInfo
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
         var req = new HttpRequestMessage(HttpMethod.Get, url);
         var response = await client.SendAsync(req).ConfigureAwait(false);
-
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception($"Unexpected response code: {response.StatusCode}");
         }
 
-        return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        return await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
     }
 
     public string? UserAgent { get; set; }

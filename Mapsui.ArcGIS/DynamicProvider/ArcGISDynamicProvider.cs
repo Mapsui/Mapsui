@@ -173,7 +173,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
                 handler.SetCredentials(Credentials ?? CredentialCache.DefaultCredentials);
                 using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
                 using var response = await client.GetAsync(uri).ConfigureAwait(false);
-                using var readAsStreamAsync = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                using var readAsStreamAsync = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
                 bytes = BruTile.Utilities.ReadFully(readAsStreamAsync);
                 _persistentCache?.Add(uri.ToString(), bytes);
             }

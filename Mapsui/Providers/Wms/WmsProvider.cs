@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,14 +42,14 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 {
     private string? _mimeType;
     private readonly Client? _wmsClient;
-    private Func<string, Task<Stream>>? _getStreamAsync;
+    private Func<string, CancellationToken, Task<Stream>>? _getStreamAsync;
     private readonly IUrlPersistentCache? _persistentCache;
     private static int[]? _axisOrder;
     private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     public static IUrlPersistentCache? DefaultCache { get; set; }
 
-    public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+    public WmsProvider(XmlDocument capabilities, Func<string, CancellationToken, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache ?? DefaultCache)
     {
         InitializeGetStreamAsyncMethod(getStreamAsync);
@@ -62,7 +63,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
     /// <param name="getStreamAsync">Download method, leave null for default</param>
     /// <param name="userAgent">user Agent</param>
-    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, CancellationToken, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
         var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache ?? DefaultCache, userAgent);
         var provider = new WmsProvider(client, persistentCache: persistentCache ?? DefaultCache)
@@ -73,7 +74,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         return provider;
     }
 
-    private WmsProvider(Client wmsClient, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+    private WmsProvider(Client wmsClient, Func<string, CancellationToken, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
     {
         _persistentCache = persistentCache ?? DefaultCache;
         InitializeGetStreamAsyncMethod(getStreamAsync);
@@ -95,7 +96,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         StylesList = [];
     }
 
-    private void InitializeGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
+    private void InitializeGetStreamAsyncMethod(Func<string, CancellationToken, Task<Stream>>? getStreamAsync)
     {
         _getStreamAsync = getStreamAsync ?? GetStreamAsync;
     }
@@ -356,7 +357,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
         try
         {
-            var bytes = await _persistentCache.UrlCachedArrayAsync(url, _getStreamAsync);
+            var bytes = await _persistentCache.UrlCachedArrayAsync(url, cancellationToken, _getStreamAsync);
 
             if (section.Extent == null)
             {
@@ -496,16 +497,21 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         return legendUrls;
     }
 
-    public async IAsyncEnumerable<MemoryStream> GetLegendsAsync()
+    public IAsyncEnumerable<MemoryStream> GetLegendsAsync()
+    {
+        return GetLegendsAsync(CancellationToken.None);
+    }
+
+    public async IAsyncEnumerable<MemoryStream> GetLegendsAsync([EnumeratorCancellation] CancellationToken cancellationToken)
     {
         var urls = GetLegendRequestUrls();
 
         foreach (var url in urls)
         {
-            if (_getStreamAsync == null)
+            if (cancellationToken.IsCancellationRequested || _getStreamAsync == null)
                 yield break;
 
-            await using var task = await _getStreamAsync(url);
+            await using var task = await _getStreamAsync(url, cancellationToken);
             var bytes = StreamHelper.ReadFully(task);
             yield return new MemoryStream(bytes);
         }
@@ -579,7 +585,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         return [];
     }
 
-    private async Task<Stream> GetStreamAsync(string url)
+    private async Task<Stream> GetStreamAsync(string url, CancellationToken cancellationToken)
     {
         var handler = new HttpClientHandler();
         handler.SetCredentials(Credentials);
@@ -599,7 +605,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
             throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, got - {response.Content.Headers.ContentType?.MediaType}");
         }
 
-        return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        return await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition)

@@ -172,7 +172,7 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
                 return null;
             }
 
-            return await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            return await webResponse.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 
         }
         catch (Exception ex)
