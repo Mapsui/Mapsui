@@ -42,7 +42,6 @@
       "Samples\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI\\Mapsui.Samples.Uno.WinUI.csproj",
       "Samples\\Mapsui.Samples.WinUI\\Mapsui.Samples.WinUI\\Mapsui.Samples.WinUI.csproj",
       "Samples\\Mapsui.Samples.Wpf\\Mapsui.Samples.Wpf.csproj",
-      "Samples\\Mapsui.Samples.iOS\\Mapsui.Samples.iOS.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
       "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
