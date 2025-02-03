@@ -10,6 +10,7 @@
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <DefineConstants>__WINUI__</DefineConstants>
     <PublishProfile>Properties\PublishProfiles\win10-$(Platform).pubxml</PublishProfile>
+    <UseRidGraph>true</UseRidGraph>
   </PropertyGroup>
 
   <ItemGroup>
