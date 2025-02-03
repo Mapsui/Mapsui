@@ -21,7 +21,6 @@
       "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.Skia.Gtk\\Mapsui.Samples.Uno.Skia.Gtk.csproj",
       "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.Skia.Linux.FrameBuffer\\Mapsui.Samples.Uno.Skia.Linux.FrameBuffer.csproj",
       "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.Skia.Wpf\\Mapsui.Samples.Uno.Skia.Wpf.csproj",
-      "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.UWP\\Mapsui.Samples.Uno.UWP.csproj",
       "Samples\\Mapsui.Samples.Uno\\Mapsui.Samples.Uno.Wasm\\Mapsui.Samples.Uno.Wasm.csproj"
     ]
   }
