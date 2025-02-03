@@ -2,12 +2,12 @@
 # Mapsui MAUI getting started
 
 ### Step 1
-Create a new .NET 7.0 MAUI application in Visual Studio.
+Create a new .NET 8.0 or .NET 9.0 MAUI application in Visual Studio.
 
 ### Step 2
 In the package manager console type:
 ```console
-PM> Install-Package Mapsui.Maui -pre
+dotnet add MyApp package Mapsui.Maui
 ```
 
 ### Step 3
