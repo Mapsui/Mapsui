@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0-ios</TargetFramework>
     <OutputType>Exe</OutputType>
+    <RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <OptimizePNGs>False</OptimizePNGs>
