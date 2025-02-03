@@ -97,6 +97,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
     {
+        // Accessing ActualWidth and ActualHeight before size changed causes an exception, so we need to do it here.
+        ViewportWidth = ActualWidth;
+        ViewportHeight = ActualHeight;
+
         Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
         SetViewportSize();
     }
@@ -171,8 +175,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
-    private double ViewportWidth => ActualWidth;
-    private double ViewportHeight => ActualHeight;
+    private double ViewportWidth { get; set; }
+    private double ViewportHeight { get; set; }
 
     private static void OnManipulationInertiaStarting(object? sender, ManipulationInertiaStartingEventArgs e)
     {
