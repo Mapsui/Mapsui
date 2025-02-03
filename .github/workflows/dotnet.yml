@@ -163,9 +163,6 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
-    # Samples Uno
-    - name: Mapsui.Samples.Uno.Mobile
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Mobile/Mapsui.Samples.Uno.Mobile.csproj
     # Test Build    
     - name: Build Mapsui.Rendering.Skia.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
@@ -269,62 +266,6 @@ jobs:
     - name: Build nuget packages
       run: Scripts\buildpack $(git describe --tags)
 
-    # BEGIN TEST MAPSUI NUGET PACKAGES
-    - name: Cleanup
-      run: git clean -fx -d -e Artifacts
-    # Change Project References to nuget package references in samples    
-    - name: nuget ProjectReferences to PackageReferences
-      shell: pwsh
-      run: |
-       ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
-    - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.NoMsBuild.slnf  
-    - name: Restore dependencies (nuget)
-      run: nuget restore Mapsui.MsBuild.slnf   
-    # Samples Build 
-    - name: Mapsui.Samples.Avalonia
-      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.Desktop/Mapsui.Samples.Avalonia.Desktop.csproj
-    - name: Mapsui.Samples.Avalonia.V0
-      run: dotnet build --no-restore --configuration Debug Samples/Avalonia/Mapsui.Samples.Avalonia.V0/Mapsui.Samples.Avalonia.V0.csproj
-    - name: Mapsui.Samples.Blazor
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Blazor/Mapsui.Samples.Blazor.csproj
-    - name: Mapsui.Samples.Droid
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj
-    - name: Mapsui.Samples.Eto
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Eto/Mapsui.Samples.Eto.csproj
-    - name: Mapsui.Samples.Maui
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui/Mapsui.Samples.Maui.csproj
-    - name: Mapsui.Samples.Maui.MapView
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui.MapView/Mapsui.Samples.Maui.MapView.csproj
-    - name: Mapsui.Samples.WinUI
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=x86 Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj
-    - name: Mapsui.Samples.Wpf
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj  
-    # Samples Uno
-    - name: Mapsui.Samples.Uno.Mobile
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Mobile/Mapsui.Samples.Uno.Mobile.csproj
-    - name: Mapsui.Samples.Uno.Skia.Gtk
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Gtk/Mapsui.Samples.Uno.Skia.Gtk.csproj
-    - name: Mapsui.Samples.Uno.Skia.Linux.FrameBuffer
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Linux.FrameBuffer/Mapsui.Samples.Uno.Skia.Linux.FrameBuffer.csproj
-    - name: Mapsui.Samples.Uno.Skia.Tizen
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Tizen/Mapsui.Samples.Uno.Skia.Tizen.csproj
-    - name: Mapsui.Samples.Uno.Skia.Wpf
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Wpf/Mapsui.Samples.Uno.Skia.Wpf.csproj
-    - name: Mapsui.Samples.Uno.UWP
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.UWP/Mapsui.Samples.Uno.UWP.csproj
-    - name: Mapsui.Samples.Uno.Wasm
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno\Mapsui.Samples.Uno.Wasm\Mapsui.Samples.Uno.Wasm.csproj
-    # Samples Uno WinUI
-    - name: Mapsui.Samples.Uno.WinUI.Mobile
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Mobile\Mapsui.Samples.Uno.WinUI.Mobile.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.Gtk\Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Wasm
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Wasm\Mapsui.Samples.Uno.WinUI.Wasm.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Windows
-      run: dotnet build --no-restore --configuration Debug /p:Platform=x64 Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Windows\Mapsui.Samples.Uno.WinUI.Windows.csproj
-    # END TEST MAPSUI NUGET PACKAGES
 
     # Publishing  
     - name: Upload packages
