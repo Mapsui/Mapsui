@@ -245,3 +245,6 @@ dotnet_style_explicit_tuple_names = true:suggestion
 dotnet_style_prefer_inferred_tuple_names = true:suggestion
 dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
 insert_final_newline = true
+
+# Diagnostics
+dotnet_diagnostic.VSTHRD103.severity = none # VSTHRD103: Call async methods when in an async method (deferred: https://github.com/dotnet/interactive-window/issues/182)
