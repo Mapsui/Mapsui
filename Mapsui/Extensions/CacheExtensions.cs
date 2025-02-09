@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Cache;
 using Mapsui.Logging;
@@ -9,14 +10,19 @@ namespace Mapsui.Extensions;
 
 public static class CacheExtensions
 {
-    public static async Task<Stream> UrlCachedStreamAsync(this IUrlPersistentCache? persistentCache, string url, Func<string, Task<Stream>>? loadUrl = null)
+    public static Task<Stream> UrlCachedStreamAsync(this IUrlPersistentCache? persistentCache, string url, Func<string, CancellationToken, Task<Stream>>? loadUrl = null)
     {
-        var bytes = await UrlCachedArrayAsync(persistentCache, url, loadUrl).ConfigureAwait(false);
+        return UrlCachedStreamAsync(persistentCache, url, CancellationToken.None, loadUrl);
+    }
+
+    public static async Task<Stream> UrlCachedStreamAsync(this IUrlPersistentCache? persistentCache, string url, CancellationToken cancellationToken, Func<string, CancellationToken, Task<Stream>>? loadUrl = null)
+    {
+        var bytes = await UrlCachedArrayAsync(persistentCache, url, cancellationToken, loadUrl).ConfigureAwait(false);
 
         return new MemoryStream(bytes);
     }
 
-    public static async Task<byte[]> UrlCachedArrayAsync(this IUrlPersistentCache? persistentCache, string url, Func<string, Task<Stream>>? loadUrl = null)
+    public static async Task<byte[]> UrlCachedArrayAsync(this IUrlPersistentCache? persistentCache, string url, CancellationToken cancellationToken, Func<string, CancellationToken, Task<Stream>>? loadUrl = null)
     {
         var bytes = persistentCache?.Find(url);
         if (bytes == null)
@@ -28,14 +34,14 @@ public static class CacheExtensions
 #pragma warning disable IDISP001 // Dispose created                    
                 if (loadUrl != null)
                 {
-                    response = await loadUrl(url).ConfigureAwait(false);
+                    response = await loadUrl(url, cancellationToken).ConfigureAwait(false);
                 }
                 else
                 {
                     var handler = new HttpClientHandler();
                     using var httpClient = new HttpClient(handler);
                     // https://github.com/xamarin/xamarin-android/issues/5264 use ConfigureAwait(false) for Network access
-                    response = await httpClient.GetStreamAsync(url).ConfigureAwait(false);
+                    response = await httpClient.GetStreamAsync(url, cancellationToken).ConfigureAwait(false);
                 }
 #pragma warning restore IDISP001
 

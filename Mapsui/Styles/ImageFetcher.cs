@@ -6,12 +6,18 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
 public static class ImageFetcher
 {
-    public static async Task<byte[]> FetchBytesFromImageSourceAsync(string imageSource)
+    public static Task<byte[]> FetchBytesFromImageSourceAsync(string imageSource)
+    {
+        return FetchBytesFromImageSourceAsync(imageSource, CancellationToken.None);
+    }
+
+    public static async Task<byte[]> FetchBytesFromImageSourceAsync(string imageSource, CancellationToken cancellationToken)
     {
         var imageSourceUrl = new Uri(imageSource);
 
@@ -19,7 +25,7 @@ public static class ImageFetcher
         {
             "embedded" => LoadEmbeddedResourceFromPath(imageSourceUrl),
             "file" => LoadFromFileSystem(imageSourceUrl),
-            "http" or "https" => await LoadFromUrlAsync(imageSourceUrl),
+            "http" or "https" => await LoadFromUrlAsync(imageSourceUrl, cancellationToken),
             _ => throw new ArgumentException($"Scheme is not supported '{imageSourceUrl.Scheme}' of '{imageSource}'"),
         };
     }
@@ -70,15 +76,15 @@ public static class ImageFetcher
         return result;
     }
 
-    private async static Task<byte[]> LoadFromUrlAsync(Uri imageSource)
+    private async static Task<byte[]> LoadFromUrlAsync(Uri imageSource, CancellationToken cancellationToken)
     {
         try
         {
             using HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
             using var httpClient = new HttpClient(handler);
-            using HttpResponseMessage response = await httpClient.GetAsync(imageSource, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
+            using HttpResponseMessage response = await httpClient.GetAsync(imageSource, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
             response.EnsureSuccessStatusCode(); // Throws an exception if the HTTP response status is unsuccessful
-            await using var tempStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            await using var tempStream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
             return tempStream.ToBytes();
         }
         catch (Exception ex)

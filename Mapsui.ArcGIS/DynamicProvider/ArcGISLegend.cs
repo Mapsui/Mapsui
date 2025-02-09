@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Cache;
 using Mapsui.Extensions;
@@ -68,7 +69,12 @@ public class ArcGisLegend
         });
     }
 
-    public async Task<ArcGISLegendResponse?> GetLegendInfoAsync(string serviceUrl, ICredentials? credentials = null)
+    public Task<ArcGISLegendResponse?> GetLegendInfoAsync(string serviceUrl, ICredentials? credentials = null)
+    {
+        return GetLegendInfoAsync(serviceUrl, CancellationToken.None, credentials);
+    }
+
+    public async Task<ArcGISLegendResponse?> GetLegendInfoAsync(string serviceUrl, CancellationToken cancellationToken, ICredentials? credentials = null)
     {
         var uri = CreateRequestUrl(serviceUrl);
         var data = _urlPersistentCache?.Find(uri);
@@ -76,8 +82,8 @@ public class ArcGisLegend
         if (data == null)
         {
             using var httpClient = CreateRequest(credentials);
-            using var response = await httpClient.GetAsync(uri).ConfigureAwait(false);
-            stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var response = await httpClient.GetAsync(uri, cancellationToken).ConfigureAwait(false);
+            stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
             data = StreamHelper.ReadFully(stream);
             _urlPersistentCache?.Add(uri, data);
             await stream.DisposeAsync();
