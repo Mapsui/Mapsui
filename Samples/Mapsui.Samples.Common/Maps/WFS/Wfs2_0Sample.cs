@@ -23,6 +23,8 @@ public class Wfs2_0Sample : ISample
         try
         {
             var map = new Map { CRS = crs };
+            // The default resolution was changed from 1 to 0 which broke this test so the resolution is set to one 1 explicitly.
+            map.Navigator.SetViewport(map.Navigator.Viewport with { Resolution = 1 });
             var provider = await CreateWfsProviderAsync();
             map.Layers.Add(CreateWfsLayer(provider));
 

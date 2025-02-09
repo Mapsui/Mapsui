@@ -24,6 +24,9 @@ public class WidgetsSample : ISample
             CRS = "EPSG:3857",
         };
 
+        // The default resolution was changed from 1 to 0 which broke this test so the resolution is set to one 1 explicitly.
+        map.Navigator.SetViewport(map.Navigator.Viewport with { Resolution = 1 });
+
         map.Widgets.Add(CreateScaleBarWidget(map));
         map.Widgets.Add(CreateScaleBarWidget(map, HorizontalAlignment.Right, textAligment: Alignment.Right));
         map.Widgets.Add(CreateScaleBarWidget(map, verticalAlignment: VerticalAlignment.Bottom));
