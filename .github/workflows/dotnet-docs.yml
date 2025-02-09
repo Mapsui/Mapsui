@@ -4,7 +4,8 @@ env:
 on:
   push:
     branches:  
-      - develop/4.1   
+      - develop/4.1
+      - develop/4.1-9sdk
       
 permissions:
   contents: write
