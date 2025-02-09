@@ -112,16 +112,31 @@
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Viewport_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public record struct Viewport : IEquatable&lt;Viewport&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public readonly record struct Viewport : IEquatable&lt;Viewport&gt;</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport__ctor_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.%23ctor(System.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport__ctor.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L9">View Source</a>
+  </span>
+  <a id="Mapsui_Viewport__ctor_" data-uid="Mapsui.Viewport.#ctor*"></a>
+  <h4 id="Mapsui_Viewport__ctor" data-uid="Mapsui.Viewport.#ctor">Viewport()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Viewport()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport__ctor_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.%23ctor(System.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L11">View Source</a>
   </span>
   <a id="Mapsui_Viewport__ctor_" data-uid="Mapsui.Viewport.#ctor*"></a>
   <h4 id="Mapsui_Viewport__ctor_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_" data-uid="Mapsui.Viewport.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">Viewport(double, double, double, double, double, double)</h4>
@@ -180,7 +195,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_CenterX.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.CenterX%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L22">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L24">View Source</a>
   </span>
   <a id="Mapsui_Viewport_CenterX_" data-uid="Mapsui.Viewport.CenterX*"></a>
   <h4 id="Mapsui_Viewport_CenterX" data-uid="Mapsui.Viewport.CenterX">CenterX</h4>
@@ -189,7 +204,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double CenterX { readonly get; init; }</code></pre>
+    <pre><code class="lang-csharp hljs">public double CenterX { get; init; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -211,7 +226,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_CenterY.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.CenterY%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L26">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L28">View Source</a>
   </span>
   <a id="Mapsui_Viewport_CenterY_" data-uid="Mapsui.Viewport.CenterY*"></a>
   <h4 id="Mapsui_Viewport_CenterY" data-uid="Mapsui.Viewport.CenterY">CenterY</h4>
@@ -220,7 +235,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double CenterY { readonly get; init; }</code></pre>
+    <pre><code class="lang-csharp hljs">public double CenterY { get; init; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -242,7 +257,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_Height.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Height%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L49">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L51">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Height_" data-uid="Mapsui.Viewport.Height*"></a>
   <h4 id="Mapsui_Viewport_Height" data-uid="Mapsui.Viewport.Height">Height</h4>
@@ -251,7 +266,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double Height { readonly get; init; }</code></pre>
+    <pre><code class="lang-csharp hljs">public double Height { get; init; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -273,7 +288,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_Resolution.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Resolution%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L37">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L39">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Resolution_" data-uid="Mapsui.Viewport.Resolution*"></a>
   <h4 id="Mapsui_Viewport_Resolution" data-uid="Mapsui.Viewport.Resolution">Resolution</h4>
@@ -282,7 +297,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double Resolution { readonly get; init; }</code></pre>
+    <pre><code class="lang-csharp hljs">public double Resolution { get; init; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -311,7 +326,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_Rotation.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Rotation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L41">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L43">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Rotation_" data-uid="Mapsui.Viewport.Rotation*"></a>
   <h4 id="Mapsui_Viewport_Rotation" data-uid="Mapsui.Viewport.Rotation">Rotation</h4>
@@ -320,7 +335,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double Rotation { readonly get; init; }</code></pre>
+    <pre><code class="lang-csharp hljs">public double Rotation { get; init; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -342,7 +357,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_Width.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Width%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L45">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L47">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Width_" data-uid="Mapsui.Viewport.Width*"></a>
   <h4 id="Mapsui_Viewport_Width" data-uid="Mapsui.Viewport.Width">Width</h4>
@@ -351,7 +366,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public double Width { readonly get; init; }</code></pre>
+    <pre><code class="lang-csharp hljs">public double Width { get; init; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-condensed">
@@ -375,7 +390,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_op_Addition_Mapsui_Viewport_Mapsui_Viewport_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.op_Addition(Mapsui.Viewport%2CMapsui.Viewport)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L51">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L53">View Source</a>
   </span>
   <a id="Mapsui_Viewport_op_Addition_" data-uid="Mapsui.Viewport.op_Addition*"></a>
   <h4 id="Mapsui_Viewport_op_Addition_Mapsui_Viewport_Mapsui_Viewport_" data-uid="Mapsui.Viewport.op_Addition(Mapsui.Viewport,Mapsui.Viewport)">operator +(Viewport, Viewport)</h4>
@@ -427,7 +442,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_op_Division_Mapsui_Viewport_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.op_Division(Mapsui.Viewport%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L90">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L92">View Source</a>
   </span>
   <a id="Mapsui_Viewport_op_Division_" data-uid="Mapsui.Viewport.op_Division*"></a>
   <h4 id="Mapsui_Viewport_op_Division_Mapsui_Viewport_System_Double_" data-uid="Mapsui.Viewport.op_Division(Mapsui.Viewport,System.Double)">operator /(Viewport, double)</h4>
@@ -479,7 +494,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_op_Multiply_Mapsui_Viewport_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.op_Multiply(Mapsui.Viewport%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L77">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L79">View Source</a>
   </span>
   <a id="Mapsui_Viewport_op_Multiply_" data-uid="Mapsui.Viewport.op_Multiply*"></a>
   <h4 id="Mapsui_Viewport_op_Multiply_Mapsui_Viewport_System_Double_" data-uid="Mapsui.Viewport.op_Multiply(Mapsui.Viewport,System.Double)">operator *(Viewport, double)</h4>
@@ -531,7 +546,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Viewport_op_Subtraction_Mapsui_Viewport_Mapsui_Viewport_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.op_Subtraction(Mapsui.Viewport%2CMapsui.Viewport)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L64">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Viewport.cs/#L66">View Source</a>
   </span>
   <a id="Mapsui_Viewport_op_Subtraction_" data-uid="Mapsui.Viewport.op_Subtraction*"></a>
   <h4 id="Mapsui_Viewport_op_Subtraction_Mapsui_Viewport_Mapsui_Viewport_" data-uid="Mapsui.Viewport.op_Subtraction(Mapsui.Viewport,Mapsui.Viewport)">operator -(Viewport, Viewport)</h4>

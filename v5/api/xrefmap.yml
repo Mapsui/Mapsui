@@ -11995,19 +11995,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.FlyTo
   nameWithType: Navigator.FlyTo
-- uid: Mapsui.Navigator.Initialize
-  name: Initialize()
-  href: pages/Mapsui.Navigator.html#Mapsui_Navigator_Initialize
-  commentId: M:Mapsui.Navigator.Initialize
-  fullName: Mapsui.Navigator.Initialize()
-  nameWithType: Navigator.Initialize()
-- uid: Mapsui.Navigator.Initialize*
-  name: Initialize
-  href: pages/Mapsui.Navigator.html#Mapsui_Navigator_Initialize_
-  commentId: Overload:Mapsui.Navigator.Initialize
-  isSpec: "True"
-  fullName: Mapsui.Navigator.Initialize
-  nameWithType: Navigator.Initialize
 - uid: Mapsui.Navigator.IsInitialized
   name: IsInitialized
   href: pages/Mapsui.Navigator.html#Mapsui_Navigator_IsInitialized
@@ -40119,6 +40106,15 @@ references:
   commentId: T:Mapsui.Viewport
   fullName: Mapsui.Viewport
   nameWithType: Viewport
+- uid: Mapsui.Viewport.#ctor
+  name: Viewport()
+  href: pages/Mapsui.Viewport.html#Mapsui_Viewport__ctor
+  commentId: M:Mapsui.Viewport.#ctor
+  name.vb: New()
+  fullName: Mapsui.Viewport.Viewport()
+  fullName.vb: Mapsui.Viewport.New()
+  nameWithType: Viewport.Viewport()
+  nameWithType.vb: Viewport.New()
 - uid: Mapsui.Viewport.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
   name: Viewport(double, double, double, double, double, double)
   href: pages/Mapsui.Viewport.html#Mapsui_Viewport__ctor_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_
