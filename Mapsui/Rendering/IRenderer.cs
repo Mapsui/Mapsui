@@ -14,8 +14,8 @@ public interface IRenderer : IDisposable
     MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
         Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100);
     IRenderService RenderService { get; }
-    IDictionary<Type, IWidgetRenderer> WidgetRenders { get; }
-    IDictionary<Type, IStyleRenderer> StyleRenderers { get; }
+    bool TryGetWidgetRenderer(Type widgetType, out IWidgetRenderer? widgetRenderer);
+    bool TryGetStyleRenderer(Type widgetType, out IStyleRenderer? widgetRenderer);
     ImageSourceCache ImageSourceCache { get; }
     MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0);
 

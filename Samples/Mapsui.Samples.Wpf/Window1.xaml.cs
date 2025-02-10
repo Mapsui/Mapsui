@@ -6,7 +6,6 @@ using System.Windows.Controls.Primitives;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Maps.Widgets;
 
 namespace Mapsui.Samples.Wpf;
 
@@ -26,7 +25,6 @@ public partial class Window1
 
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         MapControl.Map.Navigator.RotationLock = false;
-        MapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 

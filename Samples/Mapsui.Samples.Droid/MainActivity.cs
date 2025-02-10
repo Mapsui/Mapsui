@@ -6,7 +6,6 @@ using Mapsui.Samples.Common.Extensions;
 using Mapsui.UI.Android;
 using Mapsui.Samples.Common.Maps.DataFormats;
 using Mapsui.Samples.Common.Maps.Demo;
-using Mapsui.Samples.Common.Maps.Widgets;
 
 namespace Mapsui.Samples.Droid;
 
@@ -33,7 +32,6 @@ public class MainActivity : AppCompatActivity
         _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol) ?? throw new NullReferenceException();
         _mapControl.Map = MbTilesSample.CreateMap();
         _mapControl.Map.Navigator.RotationLock = true;
-        _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;
         _mapControl.Map.Layers.ClearAllGroups();
