@@ -5097,38 +5097,22 @@ references:
   commentId: T:Mapsui.Extensions.CacheExtensions
   fullName: Mapsui.Extensions.CacheExtensions
   nameWithType: CacheExtensions
-- uid: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
-  name: UrlCachedArrayAsync(IUrlPersistentCache?, string, Func<string, Task<Stream>>?)
-  href: pages/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
-  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
-  name.vb: UrlCachedArrayAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
-  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache?, string, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>?)
-  fullName.vb: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache, String, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)))
-  nameWithType: CacheExtensions.UrlCachedArrayAsync(IUrlPersistentCache?, string, Func<string, Task<Stream>>?)
-  nameWithType.vb: CacheExtensions.UrlCachedArrayAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
-- uid: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync*
-  name: UrlCachedArrayAsync
-  href: pages/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_
-  commentId: Overload:Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync
+- uid: Mapsui.Extensions.CacheExtensions.GetCachedBytesAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}})
+  name: GetCachedBytesAsync(IUrlPersistentCache?, string, Func<string, Task<byte[]>>?)
+  href: pages/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_GetCachedBytesAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_Byte_____
+  commentId: M:Mapsui.Extensions.CacheExtensions.GetCachedBytesAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}})
+  name.vb: GetCachedBytesAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Byte())))
+  fullName: Mapsui.Extensions.CacheExtensions.GetCachedBytesAsync(Mapsui.Cache.IUrlPersistentCache?, string, System.Func<string, System.Threading.Tasks.Task<byte[]>>?)
+  fullName.vb: Mapsui.Extensions.CacheExtensions.GetCachedBytesAsync(Mapsui.Cache.IUrlPersistentCache, String, System.Func(Of String, System.Threading.Tasks.Task(Of Byte())))
+  nameWithType: CacheExtensions.GetCachedBytesAsync(IUrlPersistentCache?, string, Func<string, Task<byte[]>>?)
+  nameWithType.vb: CacheExtensions.GetCachedBytesAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Byte())))
+- uid: Mapsui.Extensions.CacheExtensions.GetCachedBytesAsync*
+  name: GetCachedBytesAsync
+  href: pages/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_GetCachedBytesAsync_
+  commentId: Overload:Mapsui.Extensions.CacheExtensions.GetCachedBytesAsync
   isSpec: "True"
-  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync
-  nameWithType: CacheExtensions.UrlCachedArrayAsync
-- uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
-  name: UrlCachedStreamAsync(IUrlPersistentCache?, string, Func<string, Task<Stream>>?)
-  href: pages/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
-  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
-  name.vb: UrlCachedStreamAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
-  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache?, string, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>?)
-  fullName.vb: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache, String, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)))
-  nameWithType: CacheExtensions.UrlCachedStreamAsync(IUrlPersistentCache?, string, Func<string, Task<Stream>>?)
-  nameWithType.vb: CacheExtensions.UrlCachedStreamAsync(IUrlPersistentCache, String, Func(Of String, Task(Of Stream)))
-- uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync*
-  name: UrlCachedStreamAsync
-  href: pages/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_
-  commentId: Overload:Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync
-  isSpec: "True"
-  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync
-  nameWithType: CacheExtensions.UrlCachedStreamAsync
+  fullName: Mapsui.Extensions.CacheExtensions.GetCachedBytesAsync
+  nameWithType: CacheExtensions.GetCachedBytesAsync
 - uid: Mapsui.Extensions.CancellationTokenSourceExtensions
   name: CancellationTokenSourceExtensions
   href: pages/Mapsui.Extensions.CancellationTokenSourceExtensions.html
@@ -16247,19 +16231,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Credentials
   nameWithType: HttpClientUtil.Credentials
-- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose
-  name: Dispose()
-  href: pages/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Dispose
-  commentId: M:Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose
-  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose()
-  nameWithType: HttpClientUtil.Dispose()
-- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose*
-  name: Dispose
-  href: pages/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Dispose_
-  commentId: Overload:Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose
-  isSpec: "True"
-  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose
-  nameWithType: HttpClientUtil.Dispose
 - uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync
   name: GetDataStreamAsync()
   href: pages/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_GetDataStreamAsync
@@ -20050,15 +20021,15 @@ references:
   commentId: T:Mapsui.Providers.Wms.Client
   fullName: Mapsui.Providers.Wms.Client
   nameWithType: Client
-- uid: Mapsui.Providers.Wms.Client.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}},System.String)
-  name: Client(XmlDocument, Func<string, Task<Stream>>?, string?)
-  href: pages/Mapsui.Providers.Wms.Client.html#Mapsui_Providers_Wms_Client__ctor_System_Xml_XmlDocument_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___System_String_
-  commentId: M:Mapsui.Providers.Wms.Client.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}},System.String)
-  name.vb: New(XmlDocument, Func(Of String, Task(Of Stream)), String)
-  fullName: Mapsui.Providers.Wms.Client.Client(System.Xml.XmlDocument, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>?, string?)
-  fullName.vb: Mapsui.Providers.Wms.Client.New(System.Xml.XmlDocument, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)), String)
-  nameWithType: Client.Client(XmlDocument, Func<string, Task<Stream>>?, string?)
-  nameWithType.vb: Client.New(XmlDocument, Func(Of String, Task(Of Stream)), String)
+- uid: Mapsui.Providers.Wms.Client.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}},System.String)
+  name: Client(XmlDocument, Func<string, Task<byte[]>>?, string?)
+  href: pages/Mapsui.Providers.Wms.Client.html#Mapsui_Providers_Wms_Client__ctor_System_Xml_XmlDocument_System_Func_System_String_System_Threading_Tasks_Task_System_Byte_____System_String_
+  commentId: M:Mapsui.Providers.Wms.Client.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}},System.String)
+  name.vb: New(XmlDocument, Func(Of String, Task(Of Byte())), String)
+  fullName: Mapsui.Providers.Wms.Client.Client(System.Xml.XmlDocument, System.Func<string, System.Threading.Tasks.Task<byte[]>>?, string?)
+  fullName.vb: Mapsui.Providers.Wms.Client.New(System.Xml.XmlDocument, System.Func(Of String, System.Threading.Tasks.Task(Of Byte())), String)
+  nameWithType: Client.Client(XmlDocument, Func<string, Task<byte[]>>?, string?)
+  nameWithType.vb: Client.New(XmlDocument, Func(Of String, Task(Of Byte())), String)
 - uid: Mapsui.Providers.Wms.Client.#ctor*
   name: Client
   href: pages/Mapsui.Providers.Wms.Client.html#Mapsui_Providers_Wms_Client__ctor_
@@ -20069,15 +20040,15 @@ references:
   fullName.vb: Mapsui.Providers.Wms.Client.New
   nameWithType: Client.Client
   nameWithType.vb: Client.New
-- uid: Mapsui.Providers.Wms.Client.CreateAsync(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}},Mapsui.Cache.IUrlPersistentCache,System.String)
-  name: CreateAsync(string, string?, Func<string, Task<Stream>>?, IUrlPersistentCache?, string?)
-  href: pages/Mapsui.Providers.Wms.Client.html#Mapsui_Providers_Wms_Client_CreateAsync_System_String_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___Mapsui_Cache_IUrlPersistentCache_System_String_
-  commentId: M:Mapsui.Providers.Wms.Client.CreateAsync(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}},Mapsui.Cache.IUrlPersistentCache,System.String)
-  name.vb: CreateAsync(String, String, Func(Of String, Task(Of Stream)), IUrlPersistentCache, String)
-  fullName: Mapsui.Providers.Wms.Client.CreateAsync(string, string?, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>?, Mapsui.Cache.IUrlPersistentCache?, string?)
-  fullName.vb: Mapsui.Providers.Wms.Client.CreateAsync(String, String, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)), Mapsui.Cache.IUrlPersistentCache, String)
-  nameWithType: Client.CreateAsync(string, string?, Func<string, Task<Stream>>?, IUrlPersistentCache?, string?)
-  nameWithType.vb: Client.CreateAsync(String, String, Func(Of String, Task(Of Stream)), IUrlPersistentCache, String)
+- uid: Mapsui.Providers.Wms.Client.CreateAsync(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}},Mapsui.Cache.IUrlPersistentCache,System.String)
+  name: CreateAsync(string, string?, Func<string, Task<byte[]>>?, IUrlPersistentCache?, string?)
+  href: pages/Mapsui.Providers.Wms.Client.html#Mapsui_Providers_Wms_Client_CreateAsync_System_String_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_Byte_____Mapsui_Cache_IUrlPersistentCache_System_String_
+  commentId: M:Mapsui.Providers.Wms.Client.CreateAsync(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}},Mapsui.Cache.IUrlPersistentCache,System.String)
+  name.vb: CreateAsync(String, String, Func(Of String, Task(Of Byte())), IUrlPersistentCache, String)
+  fullName: Mapsui.Providers.Wms.Client.CreateAsync(string, string?, System.Func<string, System.Threading.Tasks.Task<byte[]>>?, Mapsui.Cache.IUrlPersistentCache?, string?)
+  fullName.vb: Mapsui.Providers.Wms.Client.CreateAsync(String, String, System.Func(Of String, System.Threading.Tasks.Task(Of Byte())), Mapsui.Cache.IUrlPersistentCache, String)
+  nameWithType: Client.CreateAsync(string, string?, Func<string, Task<byte[]>>?, IUrlPersistentCache?, string?)
+  nameWithType.vb: Client.CreateAsync(String, String, Func(Of String, Task(Of Byte())), IUrlPersistentCache, String)
 - uid: Mapsui.Providers.Wms.Client.CreateAsync*
   name: CreateAsync
   href: pages/Mapsui.Providers.Wms.Client.html#Mapsui_Providers_Wms_Client_CreateAsync_
@@ -20378,15 +20349,15 @@ references:
   commentId: T:Mapsui.Providers.Wms.GetFeatureInfo
   fullName: Mapsui.Providers.Wms.GetFeatureInfo
   nameWithType: GetFeatureInfo
-- uid: Mapsui.Providers.Wms.GetFeatureInfo.#ctor(System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
-  name: GetFeatureInfo(Func<string, Task<Stream>>?)
-  href: pages/Mapsui.Providers.Wms.GetFeatureInfo.html#Mapsui_Providers_Wms_GetFeatureInfo__ctor_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___
-  commentId: M:Mapsui.Providers.Wms.GetFeatureInfo.#ctor(System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})
-  name.vb: New(Func(Of String, Task(Of Stream)))
-  fullName: Mapsui.Providers.Wms.GetFeatureInfo.GetFeatureInfo(System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>?)
-  fullName.vb: Mapsui.Providers.Wms.GetFeatureInfo.New(System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)))
-  nameWithType: GetFeatureInfo.GetFeatureInfo(Func<string, Task<Stream>>?)
-  nameWithType.vb: GetFeatureInfo.New(Func(Of String, Task(Of Stream)))
+- uid: Mapsui.Providers.Wms.GetFeatureInfo.#ctor(System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}})
+  name: GetFeatureInfo(Func<string, Task<byte[]>>?)
+  href: pages/Mapsui.Providers.Wms.GetFeatureInfo.html#Mapsui_Providers_Wms_GetFeatureInfo__ctor_System_Func_System_String_System_Threading_Tasks_Task_System_Byte_____
+  commentId: M:Mapsui.Providers.Wms.GetFeatureInfo.#ctor(System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}})
+  name.vb: New(Func(Of String, Task(Of Byte())))
+  fullName: Mapsui.Providers.Wms.GetFeatureInfo.GetFeatureInfo(System.Func<string, System.Threading.Tasks.Task<byte[]>>?)
+  fullName.vb: Mapsui.Providers.Wms.GetFeatureInfo.New(System.Func(Of String, System.Threading.Tasks.Task(Of Byte())))
+  nameWithType: GetFeatureInfo.GetFeatureInfo(Func<string, Task<byte[]>>?)
+  nameWithType.vb: GetFeatureInfo.New(Func(Of String, Task(Of Byte())))
 - uid: Mapsui.Providers.Wms.GetFeatureInfo.#ctor*
   name: GetFeatureInfo
   href: pages/Mapsui.Providers.Wms.GetFeatureInfo.html#Mapsui_Providers_Wms_GetFeatureInfo__ctor_
@@ -20539,15 +20510,15 @@ references:
   commentId: T:Mapsui.Providers.Wms.WmsProvider
   fullName: Mapsui.Providers.Wms.WmsProvider
   nameWithType: WmsProvider
-- uid: Mapsui.Providers.Wms.WmsProvider.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}},Mapsui.Cache.IUrlPersistentCache)
-  name: WmsProvider(XmlDocument, Func<string, Task<Stream>>?, IUrlPersistentCache?)
-  href: pages/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider__ctor_System_Xml_XmlDocument_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___Mapsui_Cache_IUrlPersistentCache_
-  commentId: M:Mapsui.Providers.Wms.WmsProvider.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}},Mapsui.Cache.IUrlPersistentCache)
-  name.vb: New(XmlDocument, Func(Of String, Task(Of Stream)), IUrlPersistentCache)
-  fullName: Mapsui.Providers.Wms.WmsProvider.WmsProvider(System.Xml.XmlDocument, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>?, Mapsui.Cache.IUrlPersistentCache?)
-  fullName.vb: Mapsui.Providers.Wms.WmsProvider.New(System.Xml.XmlDocument, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)), Mapsui.Cache.IUrlPersistentCache)
-  nameWithType: WmsProvider.WmsProvider(XmlDocument, Func<string, Task<Stream>>?, IUrlPersistentCache?)
-  nameWithType.vb: WmsProvider.New(XmlDocument, Func(Of String, Task(Of Stream)), IUrlPersistentCache)
+- uid: Mapsui.Providers.Wms.WmsProvider.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}},Mapsui.Cache.IUrlPersistentCache)
+  name: WmsProvider(XmlDocument, Func<string, Task<byte[]>>?, IUrlPersistentCache?)
+  href: pages/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider__ctor_System_Xml_XmlDocument_System_Func_System_String_System_Threading_Tasks_Task_System_Byte_____Mapsui_Cache_IUrlPersistentCache_
+  commentId: M:Mapsui.Providers.Wms.WmsProvider.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}},Mapsui.Cache.IUrlPersistentCache)
+  name.vb: New(XmlDocument, Func(Of String, Task(Of Byte())), IUrlPersistentCache)
+  fullName: Mapsui.Providers.Wms.WmsProvider.WmsProvider(System.Xml.XmlDocument, System.Func<string, System.Threading.Tasks.Task<byte[]>>?, Mapsui.Cache.IUrlPersistentCache?)
+  fullName.vb: Mapsui.Providers.Wms.WmsProvider.New(System.Xml.XmlDocument, System.Func(Of String, System.Threading.Tasks.Task(Of Byte())), Mapsui.Cache.IUrlPersistentCache)
+  nameWithType: WmsProvider.WmsProvider(XmlDocument, Func<string, Task<byte[]>>?, IUrlPersistentCache?)
+  nameWithType.vb: WmsProvider.New(XmlDocument, Func(Of String, Task(Of Byte())), IUrlPersistentCache)
 - uid: Mapsui.Providers.Wms.WmsProvider.#ctor*
   name: WmsProvider
   href: pages/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider__ctor_
@@ -20629,15 +20600,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wms.WmsProvider.ContinueOnError
   nameWithType: WmsProvider.ContinueOnError
-- uid: Mapsui.Providers.Wms.WmsProvider.CreateAsync(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}},Mapsui.Cache.IUrlPersistentCache,System.String)
-  name: CreateAsync(string, string?, Func<string, Task<Stream>>?, IUrlPersistentCache?, string?)
-  href: pages/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_CreateAsync_System_String_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___Mapsui_Cache_IUrlPersistentCache_System_String_
-  commentId: M:Mapsui.Providers.Wms.WmsProvider.CreateAsync(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}},Mapsui.Cache.IUrlPersistentCache,System.String)
-  name.vb: CreateAsync(String, String, Func(Of String, Task(Of Stream)), IUrlPersistentCache, String)
-  fullName: Mapsui.Providers.Wms.WmsProvider.CreateAsync(string, string?, System.Func<string, System.Threading.Tasks.Task<System.IO.Stream>>?, Mapsui.Cache.IUrlPersistentCache?, string?)
-  fullName.vb: Mapsui.Providers.Wms.WmsProvider.CreateAsync(String, String, System.Func(Of String, System.Threading.Tasks.Task(Of System.IO.Stream)), Mapsui.Cache.IUrlPersistentCache, String)
-  nameWithType: WmsProvider.CreateAsync(string, string?, Func<string, Task<Stream>>?, IUrlPersistentCache?, string?)
-  nameWithType.vb: WmsProvider.CreateAsync(String, String, Func(Of String, Task(Of Stream)), IUrlPersistentCache, String)
+- uid: Mapsui.Providers.Wms.WmsProvider.CreateAsync(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}},Mapsui.Cache.IUrlPersistentCache,System.String)
+  name: CreateAsync(string, string?, Func<string, Task<byte[]>>?, IUrlPersistentCache?, string?)
+  href: pages/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_CreateAsync_System_String_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_Byte_____Mapsui_Cache_IUrlPersistentCache_System_String_
+  commentId: M:Mapsui.Providers.Wms.WmsProvider.CreateAsync(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.Byte[]}},Mapsui.Cache.IUrlPersistentCache,System.String)
+  name.vb: CreateAsync(String, String, Func(Of String, Task(Of Byte())), IUrlPersistentCache, String)
+  fullName: Mapsui.Providers.Wms.WmsProvider.CreateAsync(string, string?, System.Func<string, System.Threading.Tasks.Task<byte[]>>?, Mapsui.Cache.IUrlPersistentCache?, string?)
+  fullName.vb: Mapsui.Providers.Wms.WmsProvider.CreateAsync(String, String, System.Func(Of String, System.Threading.Tasks.Task(Of Byte())), Mapsui.Cache.IUrlPersistentCache, String)
+  nameWithType: WmsProvider.CreateAsync(string, string?, Func<string, Task<byte[]>>?, IUrlPersistentCache?, string?)
+  nameWithType.vb: WmsProvider.CreateAsync(String, String, Func(Of String, Task(Of Byte())), IUrlPersistentCache, String)
 - uid: Mapsui.Providers.Wms.WmsProvider.CreateAsync*
   name: CreateAsync
   href: pages/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_CreateAsync_
