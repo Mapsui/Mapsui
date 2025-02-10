@@ -4,6 +4,7 @@ using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidgets;
 using SkiaSharp;
+using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
@@ -59,8 +60,20 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
 
         // To position the text within the backRect correct using the textRect's offset.
         var x = (float)(textBox.Envelope.MinX + paddingX);
-        var y = (float)(textBox.Envelope.MinY - textRect.Top + paddingY);
+        var y = (float)(((textBox.Envelope.MinY + textBox.Envelope.MaxY) / 2) - paddingY);
+
         Logger.Log(LogLevel.Information, $"TextBoxWidgetRenderer.DrawText: x={x}, y={y}");
-        canvas.DrawText(textBox.Text, x, y, skFont, textPaint);
+
+
+        //!!!canvas.DrawText(textBox.Text, x, y, skFont, textPaint);
+
+        var style = new Style
+        {
+            FontSize = (float)textBox.TextSize,
+            TextColor = textBox.TextColor.ToSkia(layerOpacity)
+        };
+        var textBlock = new TextBlock();
+        textBlock.AddText(textBox.Text, style);
+        textBlock.Paint(canvas, new SKPoint(x, y), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
     }
 }
