@@ -21,9 +21,8 @@ namespace Mapsui.Providers.Wfs.Utilities;
 /// <summary>
 /// This class provides an easy to use interface for HTTP-GET and HTTP-POST requests.
 /// </summary>
-public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisposable
+public class HttpClientUtil(IUrlPersistentCache? persistentCache = null)
 {
-
     private readonly Dictionary<string, string?> _requestHeaders = [];
     private byte[]? _postData;
     private string? _proxyUrl;
@@ -64,8 +63,6 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
         get => _credentials;
         set => _credentials = value;
     }
-
-
 
     /// <summary>
     /// Adds a HTTP header.
@@ -127,10 +124,10 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
 
             if (persistentCache != null)
             {
-                using var stream = await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                if (stream != null && _url != null)
+                using var cachedStream = await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                if (cachedStream != null && _url != null)
                 {
-                    bytes = StreamHelper.ReadFully(stream);
+                    bytes = StreamHelper.ReadFully(cachedStream);
                     persistentCache?.Add(_url, _postData, bytes);
                     return new MemoryStream(bytes);
                 }
@@ -138,7 +135,8 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
                 return null;
             }
 
-            return await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            using var stream = await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            return new MemoryStream(StreamHelper.ReadFully(stream));
 
         }
         catch (SecurityException ex)
@@ -180,10 +178,5 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
         _url = null;
         _postData = null;
         _requestHeaders.Clear();
-    }
-
-    public virtual void Dispose()
-    {
-
     }
 }
