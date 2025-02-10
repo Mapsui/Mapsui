@@ -1,3 +1,4 @@
+using System.IO;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -16,9 +17,8 @@ public static class TmsTileSourceBuilder
         IPersistentCache<byte[]>? persistentCache = null)
     {
         var urlPersistentCache = persistentCache as IUrlPersistentCache;
-#pragma warning disable IDISP001 // Dispose created
-        var stream = await urlPersistentCache.UrlCachedStreamAsync(urlToTileMapXml);
-#pragma warning restore IDISP001
+        var bytes = await urlPersistentCache.GetCachedBytesAsync(urlToTileMapXml);
+        using var stream = new MemoryStream(bytes);
 
         var tileSource = overrideTmsUrlWithUrlToTileMapXml
             ? TileMapParser.CreateTileSource(stream, urlToTileMapXml, persistentCache: persistentCache)

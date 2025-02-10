@@ -12,7 +12,7 @@
     <PackageId>Mapsui.Uno.WinUI</PackageId>
     <Description>Uno map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) uno.winui</PackageTags>
-    <IsPackable>true</IsPackable>    
+    <IsPackable>true</IsPackable>
 
     <!--
       UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
@@ -20,6 +20,7 @@
     -->
     <UnoFeatures>
     </UnoFeatures>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
@@ -45,11 +46,11 @@
   </ItemGroup>
 
   <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
+    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="SkiaSharp.Views.WinUI"/>
+    <PackageReference Include="SkiaSharp.Views.WinUI" />
   </ItemGroup>
 
   <ItemGroup>
