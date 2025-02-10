@@ -190,7 +190,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
         catch (Exception ex)
         {
-            Logger.Log(LogLevel.Error, ex.Message, ex);
+            Logger.Log(LogLevel.Error, $"Error in render loop", ex);
         }
     }
 
@@ -501,7 +501,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
 
-        map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+        if (HasSize())
+            map.Navigator.SetSize(ViewportWidth, ViewportHeight);
         SubscribeToMapEvents(map);
         Refresh();
     }
@@ -683,4 +684,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         OnMapInfo(CreateMapInfoEventArgs(position, worldPosition, tapType));
         return false;
     }
+
+    private bool HasSize() => ViewportWidth > 0 && ViewportHeight > 0;
 }

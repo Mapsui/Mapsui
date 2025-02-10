@@ -14,6 +14,7 @@ using Mapsui.Nts.Providers;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
+#pragma warning disable IDISP004
 
 namespace Mapsui.Rendering.Benchmarks;
 

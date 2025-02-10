@@ -21,9 +21,8 @@ namespace Mapsui.Providers.Wfs.Utilities;
 /// <summary>
 /// This class provides an easy to use interface for HTTP-GET and HTTP-POST requests.
 /// </summary>
-public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisposable
+public class HttpClientUtil(IUrlPersistentCache? persistentCache = null)
 {
-
     private readonly Dictionary<string, string?> _requestHeaders = [];
     private byte[]? _postData;
     private string? _proxyUrl;
@@ -64,8 +63,6 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
         get => _credentials;
         set => _credentials = value;
     }
-
-
 
     /// <summary>
     /// Adds a HTTP header.
@@ -113,12 +110,34 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
             httpClientHandler.SetCredentials(Credentials);
         }
 
-        // To do: Dispose:
-        HttpClient httpClient;
-
         try
         {
-            httpClient = new HttpClient(httpClientHandler);
+            using var httpClient = new HttpClient(httpClientHandler);
+            httpClient.Timeout = new TimeSpan(0, 0, 1, 30);
+
+            foreach (var header in _requestHeaders)
+            {
+                httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+            }
+
+            using var webResponse = await GetWebResponseAsync(httpClient).ConfigureAwait(false);
+
+            if (persistentCache != null)
+            {
+                using var cachedStream = await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                if (cachedStream != null && _url != null)
+                {
+                    bytes = StreamHelper.ReadFully(cachedStream);
+                    persistentCache?.Add(_url, _postData, bytes);
+                    return new MemoryStream(bytes);
+                }
+
+                return null;
+            }
+
+            using var stream = await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            return new MemoryStream(StreamHelper.ReadFully(stream));
+
         }
         catch (SecurityException ex)
         {
@@ -131,49 +150,24 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
             Logger.Log(LogLevel.Error, "An exception occurred while initializing a request to " + _url + ": " + ex.Message, ex);
             throw;
         }
-
-        httpClient.Timeout = new TimeSpan(0, 0, 1, 30);
-
-        try
-        {
-            foreach (var header in _requestHeaders)
-            {
-                httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
-            }
-
-            HttpResponseMessage webResponse;
-
-            /* HTTP POST */
-            if (_postData != null)
-            {
-                var httpContent = new ByteArrayContent(_postData);
-                webResponse = await httpClient.PostAsync(_url, httpContent);
-            }
-            /* HTTP GET */
-            else
-                webResponse = await httpClient.GetAsync(_url).ConfigureAwait(false);
-
-            if (persistentCache != null)
-            {
-                using var stream = await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                if (stream != null && _url != null)
-                {
-                    bytes = StreamHelper.ReadFully(stream);
-                    persistentCache?.Add(_url, _postData, bytes);
-                    return new MemoryStream(bytes);
-                }
-
-                return null;
-            }
-
-            return await webResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
-
-        }
         catch (Exception ex)
         {
             Logger.Log(LogLevel.Error, "An exception occurred during a HTTP request to " + _url + ": " + ex.Message, ex);
             throw;
         }
+    }
+
+    private async Task<HttpResponseMessage> GetWebResponseAsync(HttpClient httpClient)
+    {
+        /* HTTP POST */
+        if (_postData != null)
+        {
+            using var httpContent = new ByteArrayContent(_postData);
+            return await httpClient.PostAsync(_url, httpContent);
+        }
+        /* HTTP GET */
+        else
+            return await httpClient.GetAsync(_url).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -184,10 +178,5 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null) : IDisp
         _url = null;
         _postData = null;
         _requestHeaders.Clear();
-    }
-
-    public virtual void Dispose()
-    {
-
     }
 }

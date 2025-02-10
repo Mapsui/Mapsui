@@ -23,6 +23,8 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml;
 #endif
 
+#pragma warning disable Uno0001 // PointerWheelChanged is not implemented in Uno. Justification: This is not implemented in all platforms. Also see: https://github.com/unoplatform/uno/issues/15629
+
 namespace Mapsui.UI.WinUI;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
@@ -199,6 +201,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
     {
+        // Accessing ActualWidth and ActualHeight before SizeChange results in a com exception.
+        ViewportWidth = ActualWidth;
+        ViewportHeight = ActualHeight;
         Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
         SetViewportSize();
     }
@@ -270,8 +275,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
     }
 
-    private double ViewportWidth => ActualWidth;
-    private double ViewportHeight => ActualHeight;
+    private double ViewportWidth { get; set; }
+    private double ViewportHeight { get; set; }
 
     private double GetPixelDensity()
     {

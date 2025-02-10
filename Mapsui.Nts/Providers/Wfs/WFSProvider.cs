@@ -553,7 +553,7 @@ public class WFSProvider : IProvider, IDisposable
 
         // Configuration for GetFeature request */
         var config = new WFSClientHttpConfigurator(_textResources);
-        using var httpClientUtil = CreateHttpClientUtil();
+        var httpClientUtil = CreateHttpClientUtil();
         config.ConfigureForWfsGetFeatureRequest(httpClientUtil, _featureTypeInfo, _labels, bbox, _ogcFilter,
                                                 _getFeatureGetRequest);
 
@@ -739,7 +739,7 @@ public class WFSProvider : IProvider, IDisposable
         /* GetCapabilities request  /
         /***************************/
 
-        using var httpClientUtil = CreateHttpClientUtil();
+        var httpClientUtil = CreateHttpClientUtil();
         if (_featureTypeInfoQueryManager == null)
         {
             /* Initialize IXPathQueryManager with configured HttpClientUtil */
