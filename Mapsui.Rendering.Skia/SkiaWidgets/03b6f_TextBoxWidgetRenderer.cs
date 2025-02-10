@@ -61,6 +61,6 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         var x = (float)(textBox.Envelope.MinX + paddingX);
         var y = (float)(textBox.Envelope.MinY - textRect.Top + paddingY);
         Logger.Log(LogLevel.Information, $"TextBoxWidgetRenderer.DrawText: x={x}, y={y}");
-        canvas.DrawText(textBox.Text, x, y, skFont, textPaint);
+        canvas.DrawText(textBox.Text, 0, y, skFont, textPaint);
     }
 }
