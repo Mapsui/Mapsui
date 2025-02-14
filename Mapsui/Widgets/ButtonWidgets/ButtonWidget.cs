@@ -8,8 +8,7 @@ public class ButtonWidget : TextBoxWidget
     /// <summary>
     /// Event which is called if widget is touched
     /// </summary>
-    public Func<ButtonWidget, WidgetEventArgs, bool> Tapped = (s, e) => false;
-
+    public Func<ButtonWidget, WidgetEventArgs, bool> Tapped { get; set; } = (s, e) => false;
 
     /// <summary>
     /// Handle touch to Widget

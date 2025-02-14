@@ -43,6 +43,11 @@ public class Map : INotifyPropertyChanged, IDisposable
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
 
+    public Func<Map, MapEventArgs, bool> Tapped { get; set; } = (s, e) => false;
+    public Func<Map, MapEventArgs, bool> PointerPressed { get; set; } = (s, e) => false;
+    public Func<Map, MapEventArgs, bool> PointerMoved { get; set; } = (s, e) => false;
+    public Func<Map, MapEventArgs, bool> PointerReleased { get; set; } = (s, e) => false;
+
     private void Navigator_ViewportChanged(object? sender, ViewportChangedEventArgs e)
     {
         RefreshGraphics();
