@@ -98,7 +98,7 @@ internal class PictureRenderer
             {
                 ColorFilter = SKColorFilter.CreateBlendMode(blendModeColor.ToSkia(layerOpacity), SKBlendMode.SrcIn)
             };
-        };
+        }
 
         if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
         {
@@ -109,7 +109,7 @@ internal class PictureRenderer
             {
                 Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity))
             };
-        };
+        }
 
         dispose = false;
         return DefaultPaint;
