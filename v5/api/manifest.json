@@ -4372,26 +4372,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.UI.Blazor.MapControlComponent.yml",
-      "output": {
-        ".html": {
-          "relative_path": "pages/Mapsui.UI.Blazor.MapControlComponent.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.UI.Blazor._Imports.yml",
-      "output": {
-        ".html": {
-          "relative_path": "pages/Mapsui.UI.Blazor._Imports.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.UI.Blazor.yml",
       "output": {
         ".html": {

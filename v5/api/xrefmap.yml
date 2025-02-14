@@ -32603,44 +32603,6 @@ references:
   commentId: F:Mapsui.UI.Blazor.MapControl._viewGpu
   fullName: Mapsui.UI.Blazor.MapControl._viewGpu
   nameWithType: MapControl._viewGpu
-- uid: Mapsui.UI.Blazor.MapControlComponent
-  name: MapControlComponent
-  href: pages/Mapsui.UI.Blazor.MapControlComponent.html
-  commentId: T:Mapsui.UI.Blazor.MapControlComponent
-  fullName: Mapsui.UI.Blazor.MapControlComponent
-  nameWithType: MapControlComponent
-- uid: Mapsui.UI.Blazor.MapControlComponent.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
-  name: BuildRenderTree(RenderTreeBuilder)
-  href: pages/Mapsui.UI.Blazor.MapControlComponent.html#Mapsui_UI_Blazor_MapControlComponent_BuildRenderTree_Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder_
-  commentId: M:Mapsui.UI.Blazor.MapControlComponent.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
-  fullName: Mapsui.UI.Blazor.MapControlComponent.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
-  nameWithType: MapControlComponent.BuildRenderTree(RenderTreeBuilder)
-- uid: Mapsui.UI.Blazor.MapControlComponent.BuildRenderTree*
-  name: BuildRenderTree
-  href: pages/Mapsui.UI.Blazor.MapControlComponent.html#Mapsui_UI_Blazor_MapControlComponent_BuildRenderTree_
-  commentId: Overload:Mapsui.UI.Blazor.MapControlComponent.BuildRenderTree
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControlComponent.BuildRenderTree
-  nameWithType: MapControlComponent.BuildRenderTree
-- uid: Mapsui.UI.Blazor._Imports
-  name: _Imports
-  href: pages/Mapsui.UI.Blazor._Imports.html
-  commentId: T:Mapsui.UI.Blazor._Imports
-  fullName: Mapsui.UI.Blazor._Imports
-  nameWithType: _Imports
-- uid: Mapsui.UI.Blazor._Imports.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
-  name: BuildRenderTree(RenderTreeBuilder)
-  href: pages/Mapsui.UI.Blazor._Imports.html#Mapsui_UI_Blazor__Imports_BuildRenderTree_Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder_
-  commentId: M:Mapsui.UI.Blazor._Imports.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
-  fullName: Mapsui.UI.Blazor._Imports.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
-  nameWithType: _Imports.BuildRenderTree(RenderTreeBuilder)
-- uid: Mapsui.UI.Blazor._Imports.BuildRenderTree*
-  name: BuildRenderTree
-  href: pages/Mapsui.UI.Blazor._Imports.html#Mapsui_UI_Blazor__Imports_BuildRenderTree_
-  commentId: Overload:Mapsui.UI.Blazor._Imports.BuildRenderTree
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor._Imports.BuildRenderTree
-  nameWithType: _Imports.BuildRenderTree
 - uid: Mapsui.UI.DataChangedWeakEventManager
   name: DataChangedWeakEventManager
   href: pages/Mapsui.UI.DataChangedWeakEventManager.html
