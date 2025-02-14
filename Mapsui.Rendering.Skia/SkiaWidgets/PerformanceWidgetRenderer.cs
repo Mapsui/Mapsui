@@ -44,8 +44,8 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
 
         for (var i = 0; i < _textHeader.Length; i++)
         {
-            canvas.DrawText(_textHeader[i], (float)(rect.Left + 2), (float)(rect.Top + 2 * i + textSize * (i + 1)), font, textPaint);
-            canvas.DrawText(_text[i], (float)(rect.Right - 2 - font.MeasureText(_text[i], textPaint)), (float)(rect.Top + (2 + textSize) * (i + 1)), font, textPaint);
+            canvas.DrawText(_textHeader[i], (float)(rect.Left + 2), (float)(rect.Top + 2 * i + textSize * (i + 1)), SKTextAlign.Left, font, textPaint);
+            canvas.DrawText(_text[i], (float)(rect.Right - 2 - font.MeasureText(_text[i], textPaint)), (float)(rect.Top + (2 + textSize) * (i + 1)), SKTextAlign.Left, font, textPaint);
         }
     }
 }

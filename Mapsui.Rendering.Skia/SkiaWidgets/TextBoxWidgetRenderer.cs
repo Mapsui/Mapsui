@@ -61,6 +61,6 @@ public class TextBoxWidgetRenderer : ISkiaWidgetRenderer
         // To position the text within the backRect correct using the textRect's offset.
         canvas.DrawText(textBox.Text,
             (float)(textBox.Envelope.MinX - textRect.Left + paddingX),
-            (float)(textBox.Envelope.MinY - textRect.Top + paddingY), skFont, textPaint);
+            (float)(textBox.Envelope.MinY - textRect.Top + paddingY), SKTextAlign.Left, skFont, textPaint);
     }
 }

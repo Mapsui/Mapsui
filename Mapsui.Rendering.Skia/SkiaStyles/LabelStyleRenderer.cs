@@ -101,7 +101,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         canvas.Clear();
 
         DrawBackground(style, backRect, canvas, layerOpacity);
-        canvas.DrawText(text, -rect.Left + 3, -rect.Top + 3, skFont, paint);
+        canvas.DrawText(text, -rect.Left + 3, -rect.Top + 3, SKTextAlign.Left, skFont, paint);
         return image;
     }
 
@@ -234,15 +234,15 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 foreach (var line in lines)
                 {
                     if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center)
-                        target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, font, paintHalo);
+                        target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, SKTextAlign.Left, font, paintHalo);
                     else if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right)
-                        target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, font, paintHalo);
+                        target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paintHalo);
                     else
-                        target.DrawText(line.Value, left, drawRect.Top + line.Baseline, font, paintHalo);
+                        target.DrawText(line.Value, left, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paintHalo);
                 }
             }
             else
-                target.DrawText(text, drawRect.Left, drawRect.Top + baseline, font, paintHalo);
+                target.DrawText(text, drawRect.Left, drawRect.Top + baseline, SKTextAlign.Left, font, paintHalo);
         }
 
         if (lines != null)
@@ -251,15 +251,15 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             foreach (var line in lines)
             {
                 if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center)
-                    target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, font, paint);
+                    target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, SKTextAlign.Left, font, paint);
                 else if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right)
-                    target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, font, paint);
+                    target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paint);
                 else
-                    target.DrawText(line.Value, left, drawRect.Top + line.Baseline, font, paint);
+                    target.DrawText(line.Value, left, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paint);
             }
         }
         else
-            target.DrawText(text, drawRect.Left, drawRect.Top + baseline, font, paint);
+            target.DrawText(text, drawRect.Left, drawRect.Top + baseline, SKTextAlign.Left, font, paint);
     }
 
     private static float CalcHorizontalAlignment(LabelStyle.HorizontalAlignmentEnum horizontalAlignment)
