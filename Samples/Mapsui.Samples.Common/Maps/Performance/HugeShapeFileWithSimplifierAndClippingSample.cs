@@ -21,8 +21,8 @@ public class HugeShapeFileWithSimplifierAndClippingSample : IMapControlSample
     private static ILayer ShapeLayer1 = CreateShapeLayer("EZG_KB_LM.shp", "cache1");
     private static ILayer ShapeLayer2 = CreateShapeLayer("modell_ezgs_v02_ohneTalsperren_EPSG3857.shp", "cache2");
 
-    private IMapControl? _mapControl;
     private readonly Mapsui.Utilities.Performance _performance = new(10);
+    private IMapControl? _mapControl;
 
     public HugeShapeFileWithSimplifierAndClippingSample()
     {
@@ -32,7 +32,6 @@ public class HugeShapeFileWithSimplifierAndClippingSample : IMapControlSample
 
     public string Name => "Huge Shape File With Simplifier and Clipping";
     public string Category => "Performance";
-
 
     public static Map CreateMap()
     {
@@ -55,22 +54,6 @@ public class HugeShapeFileWithSimplifierAndClippingSample : IMapControlSample
         MapRenderer.RegisterWidgetRenderer(typeof(PerformanceWidget), new PerformanceWidgetRenderer());
     }
 
-    private PerformanceWidget CreatePerformanceWidget() => new(_performance)
-    {
-        HorizontalAlignment = HorizontalAlignment.Left,
-        VerticalAlignment = VerticalAlignment.Top,
-        Margin = new MRect(10),
-        TextSize = 12,
-        TextColor = Color.Black,
-        BackColor = Color.White,
-        Tapped = (s, e) =>
-        {
-            _mapControl?.Performance?.Clear();
-            _mapControl?.RefreshGraphics();
-            return true;
-        }
-    };
-
     private static ILayer CreateShapeLayer(string shapeName, string cacheName)
     {
         using var shapeFile = new Mapsui.Nts.Providers.Shapefile.ShapeFile(
@@ -78,10 +61,10 @@ public class HugeShapeFileWithSimplifierAndClippingSample : IMapControlSample
         { CRS = "EPSG:3857" };
 
         //option 1: with clipping
-        var provider = new GeometrySimplifyAndClippingProvider(shapeFile);
+        //var provider = new GeometrySimplifyAndClippingProvider(shapeFile);
 
         //option 2: without clipping
-        //var provider = new GeometrySimplifyProvider(shapeFile);
+        var provider = new GeometrySimplifyProvider(shapeFile);
 
         //var sqlitePersistentCache = new SqlitePersistentCache(cacheName);
         //sqlitePersistentCache.Clear();
@@ -123,5 +106,19 @@ public class HugeShapeFileWithSimplifierAndClippingSample : IMapControlSample
         });
     }
 
-
+    private PerformanceWidget CreatePerformanceWidget() => new(_performance)
+    {
+        HorizontalAlignment = HorizontalAlignment.Left,
+        VerticalAlignment = VerticalAlignment.Top,
+        Margin = new MRect(10),
+        TextSize = 12,
+        TextColor = Color.Black,
+        BackColor = Color.White,
+        Tapped = (s, e) =>
+        {
+            _mapControl?.Performance?.Clear();
+            _mapControl?.RefreshGraphics();
+            return true;
+        }
+    };
 }
