@@ -20,18 +20,15 @@ public class ViewportCenterOnAnimationSample : ISample
 
     public static Map CreateMap()
     {
-        string instructions = "Tap on the map to center on that location";
-
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
-
-        map.Widgets.Add(CreateTextBox(instructions));
-
-        map.Info += (s, e) =>
+        map.Widgets.Add(CreateTextBox("Tap on the map to center on that location"));
+        map.Tapped += (m, e) =>
         {
             // Animate to the new center.
-            map.Navigator.CenterOn(e.WorldPosition, 500, Easing.CubicOut);
+            m.Navigator.CenterOn(e.WorldPosition, 500, Easing.CubicOut);
+            return true;
         };
         return map;
     }

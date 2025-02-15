@@ -23,23 +23,24 @@ public class DynamicSvgStyleSample : ISample
     public Task<Map> CreateMapAsync()
     {
         var infoPosition = new MPoint(); // Use closure to keep track of the info click position
-
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(new MemoryLayer("Dynamic Svg Style")
-        {
-            Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 1000),
-            Style = CreateDynamicSvgStyle(() => infoPosition)
-        });
-
-        map.Info += (s, e) =>
+        map.Layers.Add(CreateLayerWithDynamicSvgStyle(infoPosition, map));
+        map.Tapped += (m, e) =>
         {
             infoPosition = e.WorldPosition; // Set the info position to use in the dynamic style
-            map.Layers.First().DataHasChanged(); // To notify the map that a redraw is needed.
+            m.Layers.First().DataHasChanged(); // To notify the map that a redraw is needed.
+            return true;
         };
-
         return Task.FromResult(map);
     }
+
+    private MemoryLayer CreateLayerWithDynamicSvgStyle(MPoint infoPosition, Map map) => new()
+    {
+        Name = "Dynamic Svg Style",
+        Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 1000),
+        Style = CreateDynamicSvgStyle(() => infoPosition)
+    };
 
     private IStyle CreateDynamicSvgStyle(Func<MPoint> getInfoPosition) // Use Func to make it get the latest clicked position
     {

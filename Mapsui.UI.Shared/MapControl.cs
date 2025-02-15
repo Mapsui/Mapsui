@@ -583,7 +583,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerPressed(ScreenPosition screenPosition, MPoint worldPosition, bool shiftPressed)
     {
-        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, TapType.Single, Map.Navigator.Viewport, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
         
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
@@ -594,9 +594,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnWidgetPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, bool leftButton, bool shiftPressed)
+    private bool OnWidgetPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, bool shiftPressed)
     {
-        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, leftButton, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
 
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
             if (widget.OnPointerMoved(Map.Navigator, eventArgs))
@@ -606,7 +606,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerReleased(ScreenPosition screenPosition, MPoint worldPosition, bool shiftPressed)
     {
-        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, 0, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, TapType.Single, Map.Navigator.Viewport, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
         
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
@@ -619,7 +619,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetTapped(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, bool shiftPressed)
     {
-        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, true, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, tapType, Map.Navigator.Viewport, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
 
         var touchedWidgets = WidgetInput.GetWidgetsAtPosition(screenPosition, Map);
         foreach (var widget in touchedWidgets)
@@ -632,45 +632,50 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return false;
     }
 
-    private bool OnMapPointerPressed(ReadOnlySpan<ScreenPosition> positions)
+    private bool OnPointerPressed(ReadOnlySpan<ScreenPosition> positions)
     {
         if (positions.Length != 1)
             return false;
 
         _flingTracker.Restart();
         _tapGestureTracker.Restart(positions[0]);
-        var screenPosition = positions[0]; 
-        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
-        return OnWidgetPointerPressed(screenPosition, worldPosition, GetShiftPressed());
-    }
-
-    private bool OnMapPointerMoved(ReadOnlySpan<ScreenPosition> positions, bool isHovering = false)
-    {
-        if (positions.Length != 1)
-            return false;
-
         var screenPosition = positions[0];
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
-        if (OnWidgetPointerMoved(screenPosition, worldPosition, !isHovering, GetShiftPressed()))
+        if (OnWidgetPointerPressed(screenPosition, worldPosition, GetShiftPressed()))
             return true;
-        //!!!if (OnPointerMoved(screenPosition, worldPosition, !isHovering, GetShiftPressed()))
-        //!!!    return true;
+        return OnMapPointerPressed(screenPosition, worldPosition);
+    }
+
+    private bool OnMapPointerMoved(ReadOnlySpan<ScreenPosition> screenPositions, bool isHovering = false)
+    {
+        if (screenPositions.Length != 1)
+            return false;
+
+        var screenPosition = screenPositions[0];
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        var tapType = isHovering ? TapType.None : TapType.Single;
+        if (OnWidgetPointerMoved(screenPosition, worldPosition, tapType, GetShiftPressed()))
+            return true;
+        if (OnMapPointerMoved(screenPosition, worldPosition, tapType))
+            return true;
         if (!isHovering)
             _flingTracker.AddEvent(screenPosition, DateTime.Now.Ticks);
         return false;
     }
 
-    private bool OnMapPointerReleased(ReadOnlySpan<ScreenPosition> positions)
+    private bool OnPointerReleased(ReadOnlySpan<ScreenPosition> screenPositions)
     {
-        if (positions.Length != 1)
-            return false;    
+        if (screenPositions.Length != 1)
+            return false;
 
         var handled = false;
-        var screenPosition = positions[0];
+        var screenPosition = screenPositions[0];
         var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
         if (OnWidgetPointerReleased(screenPosition, worldPosition, GetShiftPressed()))
             handled = true; // Set to handled but still handle tap in the next line
-        if (_tapGestureTracker.TapIfNeeded(positions[0], MaxTapGestureMovement * PixelDensity, OnMapTapped))
+        if (!handled && OnMapPointerReleased(screenPosition, worldPosition))
+            handled = true;
+        if (_tapGestureTracker.TapIfNeeded(screenPositions[0], MaxTapGestureMovement * PixelDensity, OnMapTapped))
             handled = true;
         if (UseFling)
             _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
@@ -678,15 +683,41 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return handled;
     }
 
-    private bool OnMapTapped(ScreenPosition position, TapType tapType)
+    private bool OnMapTapped(ScreenPosition screenPosition, TapType tapType)
     {
-        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(position);
-        if (OnWidgetTapped(position, worldPosition, tapType, GetShiftPressed()))
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        if (OnWidgetTapped(screenPosition, worldPosition, tapType, GetShiftPressed()))
             return true;
         if (Map is null)
             return false;
-        OnMapInfo(CreateMapInfoEventArgs(position, worldPosition, tapType));
+        if (OnMapTapped(screenPosition, tapType, worldPosition))
+            return true;
+        OnMapInfo(CreateMapInfoEventArgs(screenPosition, worldPosition, tapType));
         return false;
+    }
+
+    private bool OnMapPointerPressed(ScreenPosition screenPosition, MPoint worldPosition)
+    {
+        return Map.OnPointerPressed(new MapEventArgs(screenPosition, worldPosition, TapType.Single,
+            Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
+    }
+
+    private bool OnMapPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType)
+    {
+        return Map.OnPointerMoved(new MapEventArgs(screenPosition, worldPosition, tapType, 
+            Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
+    }
+
+    private bool OnMapPointerReleased(ScreenPosition screenPosition, MPoint worldPosition)
+    {
+        return Map.OnPointerReleased(new MapEventArgs(screenPosition, worldPosition, TapType.Single, 
+            Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
+    }
+
+    private bool OnMapTapped(ScreenPosition screenPosition, TapType tapType, MPoint worldPosition)
+    {
+        return Map.OnTapped(new MapEventArgs(screenPosition, worldPosition, tapType, 
+            Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
     }
 
     private bool HasSize() => ViewportWidth > 0 && ViewportHeight > 0;

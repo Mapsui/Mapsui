@@ -162,7 +162,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
             _manipulationTracker.Restart([position]);
 
-            if (OnMapPointerPressed([position]))
+            if (OnPointerPressed([position]))
                 return;
         });
     }
@@ -189,7 +189,7 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var position = e.ToScreenPosition(_clientRect);
-            OnMapPointerReleased([position]);
+            OnPointerReleased([position]);
         });
     }
 
@@ -235,7 +235,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
             _manipulationTracker.Restart(positions);
 
-            if (OnMapPointerPressed(positions))
+            if (OnPointerPressed(positions))
                 return;
         });
     }
@@ -263,7 +263,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (_lastMovePosition is null)
                 return;
             var position = _lastMovePosition.Value;
-            OnMapPointerReleased([position]);
+            OnPointerReleased([position]);
         });
     }
 

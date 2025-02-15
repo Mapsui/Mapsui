@@ -113,9 +113,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
+        var screenPosition = e.GetCurrentPoint(this).Position.ToScreenPosition();
 
-        if (OnMapPointerPressed([position]))
+        if (OnPointerPressed([screenPosition]))
             return;
     }
 
@@ -136,8 +136,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
-        OnMapPointerReleased([position]);
+        var screenPosition = e.GetCurrentPoint(this).Position.ToScreenPosition();
+        OnPointerReleased([screenPosition]);
     }
 
     private bool IsHovering(PointerRoutedEventArgs e)

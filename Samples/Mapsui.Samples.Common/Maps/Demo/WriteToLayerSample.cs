@@ -5,6 +5,7 @@ using Mapsui.Tiling;
 using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Demo;
@@ -16,20 +17,16 @@ public class WriteToLayerSample : ISample
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
-    public Task<Map> CreateMapAsync()
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    private static Map CreateMap()
     {
         var map = new Map();
-
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-
-        var layer = new GenericCollectionLayer<List<IFeature>>
+        map.Layers.Add(CreateGenericCollectionLayer());
+        map.Tapped += (m, e) =>
         {
-            Style = SymbolStyles.CreatePinStyle()
-        };
-        map.Layers.Add(layer);
-
-        map.Info += (s, e) =>
-        {
+            var layer = (GenericCollectionLayer<List<IFeature>>)m.Layers.First(l => l.Name == "GenericCollectionLayer");
             // Add a point to the layer using the Info position
             layer?.Features.Add(new GeometryFeature
             {
@@ -37,9 +34,17 @@ public class WriteToLayerSample : ISample
             });
             // To notify the map that a redraw is needed.
             layer?.DataHasChanged();
-            return;
+            return true;
         };
+        return map;
+    }
 
-        return Task.FromResult(map);
+    private static GenericCollectionLayer<List<IFeature>> CreateGenericCollectionLayer()
+    {
+        return new GenericCollectionLayer<List<IFeature>>
+        {
+            Name = "GenericCollectionLayer",
+            Style = SymbolStyles.CreatePinStyle()
+        };
     }
 }

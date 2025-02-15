@@ -111,10 +111,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlMouseDown(object? sender, MouseEventArgs e)
     {
-        var position = GetScreenPosition(e.Location);
-        _manipulationTracker.Restart([position]);
+        var screenPosition = GetScreenPosition(e.Location);
+        _manipulationTracker.Restart([screenPosition]);
 
-        OnMapPointerPressed([position]);
+        OnPointerPressed([screenPosition]);
     }
 
     private void MapControlMouseMove(object? sender, MouseEventArgs e)
@@ -131,8 +131,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlMouseUp(object? sender, MouseEventArgs e)
     {
-        var position = GetScreenPosition(e.Location);
-        OnMapPointerReleased([position]);
+        var screenPosition = GetScreenPosition(e.Location);
+        OnPointerReleased([screenPosition]);
     }
 
     private void MapControlMouseWheel(object? sender, MouseEventArgs e)

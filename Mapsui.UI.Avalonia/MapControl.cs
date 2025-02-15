@@ -84,7 +84,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (_positions.Count == 1) // Not sure if this check is necessary.
             _manipulationTracker.Restart(_positions.Values.ToArray());
 
-        if (OnMapPointerPressed(_positions.Values.ToArray()))
+        if (OnPointerPressed(_positions.Values.ToArray()))
             return;
 
         e.Pointer.Capture(this);
@@ -115,7 +115,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _positions.TryRemove(e.Pointer.Id, out _);
         var position = e.GetPosition(this).ToScreenPosition();
 
-        OnMapPointerReleased([position]);
+        OnPointerReleased([position]);
 
         e.Pointer.Capture(null);
     }

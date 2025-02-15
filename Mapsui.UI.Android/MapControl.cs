@@ -129,7 +129,7 @@ public partial class MapControl : ViewGroup, IMapControl
         {
             case MotionEventActions.Down:
                 _manipulationTracker.Restart(positions);
-                if (OnMapPointerPressed(positions))
+                if (OnPointerPressed(positions))
                     return;
                 break;
             case MotionEventActions.Move:
@@ -138,7 +138,7 @@ public partial class MapControl : ViewGroup, IMapControl
                 _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
                 break;
             case MotionEventActions.Up:
-                OnMapPointerReleased(positions);
+                OnPointerReleased(positions);
 
 
                 break;

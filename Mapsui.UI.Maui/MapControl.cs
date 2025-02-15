@@ -178,7 +178,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 if (_positions.Count == 1) // Not sure if this check is necessary.
                     _manipulationTracker.Restart(_positions.Values.ToArray());
 
-                if (OnMapPointerPressed(_positions.Values.ToArray()))
+                if (OnPointerPressed(_positions.Values.ToArray()))
                     return;
             }
             else if (e.ActionType == SKTouchAction.Moved)
@@ -207,7 +207,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 // Delete e.Id from _touches, because finger is released
                 _positions.Remove(e.Id, out var releasedTouch);
-                OnMapPointerReleased([position]);
+                OnPointerReleased([position]);
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {

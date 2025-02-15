@@ -45,7 +45,7 @@ public class MapInfoWidget : TextBoxWidget
         // Todo: Avoid Map in the constructor. Perhaps the event args should have a GetMapInfoAsync method
         _map = map;
         _layers = getMapInfoLayers;
-        _map.Info += Map_Info;
+        _map.Tapped += MapTapped;
 
         VerticalAlignment = VerticalAlignment.Bottom;
         HorizontalAlignment = HorizontalAlignment.Left;
@@ -56,15 +56,15 @@ public class MapInfoWidget : TextBoxWidget
         TextColor = Color.White;
     }
 
-    private void Map_Info(object? sender, MapInfoEventArgs a)
+    private bool MapTapped(Map map, MapEventArgs e)
     {
-        var mapInfo = a.GetMapInfo(_layers());
+        var mapInfo = e.GetMapInfo(_layers());
         Text = FeatureToText(mapInfo.Feature);
         _map.RefreshGraphics();
         // Try to load async data
         Catch.Exceptions(async () =>
         {
-            var info = await a.GetRemoteMapInfoAsync(_map.Layers.Where(t => t is ILayerFeatureInfo));
+            var info = await e.GetRemoteMapInfoAsync(_map.Layers.Where(t => t is ILayerFeatureInfo));
             var featureText = FeatureToText(info.Feature);
             if (!string.IsNullOrEmpty(featureText))
             {
@@ -72,6 +72,7 @@ public class MapInfoWidget : TextBoxWidget
                 _map.RefreshGraphics();
             }
         });
+        return true;
     }
 
     public Func<IFeature?, string> FeatureToText { get; set; } = (f) =>

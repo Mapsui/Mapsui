@@ -32,7 +32,7 @@ public static class EditManipulation
 
         var result = false;
 
-        if (!e.LeftButton)
+        if (e.TapType == TapType.None)
         {
             editManager.HoveringVertex(e.GetMapInfo([]));
             result = false;

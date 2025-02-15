@@ -4,12 +4,13 @@ using Mapsui.Styles;
 using System;
 using Mapsui.Widgets.BoxWidgets;
 using System.Collections.Generic;
+using Mapsui.Manipulations;
 
 namespace Mapsui.Widgets.InfoWidgets;
 
 public class RulerWidget(Map map) : BaseWidget
 {
-    public enum TapType
+    public enum RulerTapType
     {
         Down,
         Drag,
@@ -56,30 +57,30 @@ public class RulerWidget(Map map) : BaseWidget
 
     public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
     {
-        if (!e.LeftButton)
+        if (e.TapType == TapType.None)
             return false; // Not dragging.
 
         CurrentPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
         DistanceInKilometers = GetDistance(StartPosition, CurrentPosition);
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(e.LeftButton ? TapType.Drag : TapType.Hover));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(RulerTapType.Drag));
         _map.RefreshGraphics();
         return true;
     }
 
     public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
     {
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Up));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(RulerTapType.Up));
         _map.RefreshGraphics();
         return true;
     }
 
     public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        if (e.TapType == Manipulations.TapType.Single)
+        if (e.TapType == TapType.Single)
         {
             StartPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
             CurrentPosition = null;
-            DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Down));
+            DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(RulerTapType.Down));
             _map.RefreshGraphics();
         }
         return true;
@@ -123,8 +124,8 @@ public class RulerWidget(Map map) : BaseWidget
         return (startFeature, currentFeature);
     }
 
-    public class RulerWidgetUpdatedEventArgs(TapType tapType) : EventArgs
+    public class RulerWidgetUpdatedEventArgs(RulerTapType tapType) : EventArgs
     {
-        public TapType TapType { get; } = tapType;
+        public RulerTapType TapType { get; } = tapType;
     }
 }

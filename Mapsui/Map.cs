@@ -247,6 +247,26 @@ public class Map : INotifyPropertyChanged, IDisposable
         }
     }
 
+    public virtual bool OnTapped(MapEventArgs e)
+    {
+        return Tapped(this, e);
+    }
+
+    public virtual bool OnPointerPressed(MapEventArgs e)
+    {
+        return PointerPressed(this, e);
+    }
+
+    public virtual bool OnPointerMoved(MapEventArgs e)
+    {
+        return PointerMoved(this, e);
+    }
+
+    public virtual bool OnPointerReleased(MapEventArgs e)
+    {
+        return PointerReleased(this, e);
+    }
+
     private void LayersCollectionChanged(object sender, LayerCollectionChangedEventArgs args)
     {
         foreach (var layer in args.RemovedLayers ?? [])
