@@ -46,7 +46,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         _manipulationTracker.Restart([position]);
 
-        if (OnMapPointerPressed([position]))
+        if (OnPointerPressed([position]))
             return;
     }
 
@@ -57,7 +57,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         var isHovering = IsHovering(e);
         var position = e.Location.ToScreenPosition();
 
-        if (OnMapPointerMoved([position], isHovering))
+        if (OnPointerMoved([position], isHovering))
             return;
 
         if (!isHovering)
@@ -70,7 +70,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         SetCursorInDefaultMode();
         var position = e.Location.ToScreenPosition();
-        OnMapPointerReleased([position]);
+        OnPointerReleased([position]);
     }
 
     protected override void OnLoadComplete(EventArgs e)

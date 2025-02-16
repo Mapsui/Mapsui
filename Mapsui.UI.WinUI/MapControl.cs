@@ -113,9 +113,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
+        var screenPosition = e.GetCurrentPoint(this).Position.ToScreenPosition();
 
-        if (OnMapPointerPressed([position]))
+        if (OnPointerPressed([screenPosition]))
             return;
     }
 
@@ -128,7 +128,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return;
         var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
 
-        if (OnMapPointerMoved([position], true)) // Only for hover events
+        if (OnPointerMoved([position], true)) // Only for hover events
             return;
 
         RefreshGraphics(); // Todo: Figure out if we really need to refresh the graphics here. It might be better to only do this when the map is actually changed. In that case it should perhaps be done  in the users handler to OnMapPointerMoved
@@ -136,8 +136,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControl_PointerReleased(object sender, PointerRoutedEventArgs e)
     {
-        var position = e.GetCurrentPoint(this).Position.ToScreenPosition();
-        OnMapPointerReleased([position]);
+        var screenPosition = e.GetCurrentPoint(this).Position.ToScreenPosition();
+        OnPointerReleased([screenPosition]);
     }
 
     private bool IsHovering(PointerRoutedEventArgs e)
@@ -256,7 +256,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         var manipulation = ToManipulation(e);
 
-        if (OnMapPointerMoved([manipulation.Center]))
+        if (OnPointerMoved([manipulation.Center], false))
             return;
 
         Map.Navigator.Manipulate(ToManipulation(e));

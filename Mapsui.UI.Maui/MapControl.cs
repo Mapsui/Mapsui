@@ -178,7 +178,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 if (_positions.Count == 1) // Not sure if this check is necessary.
                     _manipulationTracker.Restart(_positions.Values.ToArray());
 
-                if (OnMapPointerPressed(_positions.Values.ToArray()))
+                if (OnPointerPressed(_positions.Values.ToArray()))
                     return;
             }
             else if (e.ActionType == SKTouchAction.Moved)
@@ -188,14 +188,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 if (isHovering)
                 {
                     // In case of hovering we need to send the current position which added to the _positions array
-                    if (OnMapPointerMoved([position], isHovering))
+                    if (OnPointerMoved([position], isHovering))
                         return;
                 }
                 else
                 {
                     _positions[e.Id] = position;
 
-                    if (OnMapPointerMoved(_positions.Values.ToArray(), isHovering))
+                    if (OnPointerMoved(_positions.Values.ToArray(), isHovering))
                         return;
 
                     _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
@@ -207,7 +207,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             {
                 // Delete e.Id from _touches, because finger is released
                 _positions.Remove(e.Id, out var releasedTouch);
-                OnMapPointerReleased([position]);
+                OnPointerReleased([position]);
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {

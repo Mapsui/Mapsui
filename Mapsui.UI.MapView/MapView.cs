@@ -553,7 +553,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
 
-                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Navigator.Viewport.ScreenToWorld(mapInfo.ScreenPosition).ToNative(), e.TapType);
+                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Navigator.Viewport.ScreenToWorld(mapInfo.ScreenPosition).ToNative(), e.GestureType);
 
                 PinClicked?.Invoke(this, pinArgs);
 
@@ -581,7 +581,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
             var calloutArgs = new CalloutClickedEventArgs(clickedCallout,
                 Map.Navigator.Viewport.ScreenToWorld(mapInfo.ScreenPosition).ToNative(),
-                new Point(mapInfo.ScreenPosition.X, mapInfo.ScreenPosition.Y), e.TapType);
+                new Point(mapInfo.ScreenPosition.X, mapInfo.ScreenPosition.Y), e.GestureType);
 
             clickedCallout?.HandleCalloutClicked(this, calloutArgs);
 
@@ -604,7 +604,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                     {
                         var drawableArgs = new DrawableClickedEventArgs(
                             Map.Navigator.Viewport.ScreenToWorld(mapInfo.ScreenPosition).ToNative(),
-                            new Point(mapInfo.ScreenPosition.X, mapInfo.ScreenPosition.Y), e.TapType);
+                            new Point(mapInfo.ScreenPosition.X, mapInfo.ScreenPosition.Y), e.GestureType);
 
                         drawable?.HandleClicked(drawableArgs);
 
@@ -621,7 +621,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         {
             var args = new DrawableClickedEventArgs(
                 Map.Navigator.Viewport.ScreenToWorld(mapInfo.ScreenPosition).ToNative(),
-                new Point(mapInfo.ScreenPosition.X, mapInfo.ScreenPosition.Y), e.TapType);
+                new Point(mapInfo.ScreenPosition.X, mapInfo.ScreenPosition.Y), e.GestureType);
 
             MyLocationLayer?.HandleClicked(args);
 
@@ -642,7 +642,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             var worldPosition = map.Navigator.Viewport.ScreenToWorld(screenPosition);
             var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, map.Navigator.Viewport, map.Layers);
             var mapInfoEventArgs = new MapInfoEventArgs(screenPosition, worldPosition,
-                e.TapType, map.Navigator.Viewport, handled, GetMapInfo, GetRemoteMapInfoAsync);
+                e.GestureType, map.Navigator.Viewport, handled, GetMapInfo, GetRemoteMapInfoAsync);
 
             HandlerInfo(mapInfoEventArgs);
 
@@ -651,7 +651,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             if (!handled)
             {
                 // if nothing else was hit, then we hit the map
-                var args = new MapClickedEventArgs(worldPosition.ToNative(), e.TapType);
+                var args = new MapClickedEventArgs(worldPosition.ToNative(), e.GestureType);
                 MapClicked?.Invoke(this, args);
 
                 if (args.Handled)

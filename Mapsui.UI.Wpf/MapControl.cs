@@ -123,7 +123,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var position = e.GetPosition(this).ToScreenPosition();
         _manipulationTracker.Restart([position]);
 
-        if (OnMapPointerPressed([position]))
+        if (OnPointerPressed([position]))
             return;
 
         CaptureMouse();
@@ -132,21 +132,21 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
         var position = e.GetPosition(this).ToScreenPosition();
-        OnMapPointerReleased([position]);
+        OnPointerReleased([position]);
         ReleaseMouseCapture();
     }
 
     private void MapControl_TouchDown(object? sender, TouchEventArgs e)
     {
         var position = e.GetTouchPoint(this).Position.ToScreenPosition();
-        if (OnMapPointerPressed([position]))
+        if (OnPointerPressed([position]))
             return;
     }
 
     private void MapControlTouchUp(object? sender, TouchEventArgs e)
     {
         var position = e.GetTouchPoint(this).Position.ToScreenPosition();
-        if (OnMapPointerReleased([position]))
+        if (OnPointerReleased([position]))
             return;
     }
 
@@ -168,7 +168,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var isHovering = IsHovering(e);
         var position = e.GetPosition(this).ToScreenPosition();
 
-        if (OnMapPointerMoved([position], isHovering))
+        if (OnPointerMoved([position], isHovering))
             return;
 
         if (!isHovering)

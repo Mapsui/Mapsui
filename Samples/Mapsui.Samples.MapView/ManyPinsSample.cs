@@ -38,9 +38,9 @@ public class ManyPinsSample : IMapViewSample
         foreach (var str in assembly.GetManifestResourceNames())
             System.Diagnostics.Debug.WriteLine(str);
 
-        switch (e?.TapType)
+        switch (e?.GestureType)
         {
-            case TapType.Single:
+            case GestureType.SingleTap:
                 var pin = new Pin(mapView)
                 {
                     Label = $"PinType.Pin {markerNum++}",
@@ -75,7 +75,7 @@ public class ManyPinsSample : IMapViewSample
                 mapView.Pins.Add(pin);
                 pin.ShowCallout();
                 break;
-            case TapType.Double:
+            case GestureType.DoubleTap:
                 foreach (var r in assembly.GetManifestResourceNames())
                     System.Diagnostics.Debug.WriteLine(r);
 
@@ -90,7 +90,7 @@ public class ManyPinsSample : IMapViewSample
                 });
                 break;
             default:
-                throw new Exception("Unknown TapType. This is bug in Mapsui.");
+                throw new Exception($"Unknown {nameof(GestureType)}. This is bug in Mapsui.");
         }
 
         return true;
