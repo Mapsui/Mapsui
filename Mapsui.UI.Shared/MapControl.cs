@@ -283,6 +283,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
     /// the layers that have IsMapInfoLayer set to true. 
     /// </summary>
+    /// <remarks>
+    /// The Map.Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
+    /// </remarks>
     public event EventHandler<MapInfoEventArgs>? Info;
 
     /// <summary>
@@ -698,6 +701,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnMapPointerPressed(ScreenPosition screenPosition, MPoint worldPosition)
     {
+        Logger.Log(LogLevel.Information, $"Map.PointerPressed");
+
         return Map.OnPointerPressed(new MapEventArgs(screenPosition, worldPosition, GestureType.Press,
             Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
     }
@@ -710,12 +715,15 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnMapPointerReleased(ScreenPosition screenPosition, MPoint worldPosition)
     {
+        Logger.Log(LogLevel.Information, $"Map.PointerReleased");
+
         return Map.OnPointerReleased(new MapEventArgs(screenPosition, worldPosition, GestureType.Release, 
             Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
     }
 
     private bool OnMapTapped(ScreenPosition screenPosition, GestureType gestureType, MPoint worldPosition)
     {
+        Logger.Log(LogLevel.Information, $"Map.Tapped. {nameof(GestureType)}: {gestureType}");
         return Map.OnTapped(new MapEventArgs(screenPosition, worldPosition, gestureType, 
             Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
     }
