@@ -53,7 +53,7 @@ public class CustomWidget : BaseWidget
     {
         base.OnTapped(navigator, e);
 
-        if (e.TapType == TapType.SingleTap)
+        if (e.GestureType == GestureType.SingleTap)
             Color = GenerateRandomColor();
         else
             Color = Mapsui.Styles.Color.Transparent;

@@ -27,7 +27,7 @@ public class ButtonWidgetSample : ISample
 
         map.Widgets.Add(CreateButtonWidget("Tap me", VerticalAlignment.Top, HorizontalAlignment.Left, (s, e) =>
         {
-            if (e.TapType == TapType.DoubleTap)
+            if (e.GestureType == GestureType.DoubleTap)
                 return false;
             s.Text = $"Tapped {++_tapCount} times";
             map.RefreshGraphics();
@@ -47,7 +47,7 @@ public class ButtonWidgetSample : ISample
         }));
         map.Widgets.Add(CreateButtonWidget("Double Tap me", VerticalAlignment.Bottom, HorizontalAlignment.Left, (s, e) =>
         {
-            if (e.TapType == TapType.SingleTap)
+            if (e.GestureType == GestureType.SingleTap)
                 return false;
             s.Text = $"Double Tapped {++_doubleTapCount} times";
             map.RefreshGraphics();

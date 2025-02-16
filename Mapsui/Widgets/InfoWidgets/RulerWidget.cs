@@ -49,30 +49,30 @@ public class RulerWidget(Map map) : BaseWidget
 
     public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
     {
-        if (e.TapType == TapType.Hover)
+        if (e.GestureType == GestureType.Hover)
             return false; // Not dragging.
 
         CurrentPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
         DistanceInKilometers = GetDistance(StartPosition, CurrentPosition);
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Drag));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Drag));
         _map.RefreshGraphics();
         return true;
     }
 
     public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
     {
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Release));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Release));
         _map.RefreshGraphics();
         return true;
     }
 
     public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        if (e.TapType == TapType.SingleTap)
+        if (e.GestureType == GestureType.SingleTap)
         {
             StartPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
             CurrentPosition = null;
-            DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.SingleTap));
+            DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.SingleTap));
             _map.RefreshGraphics();
         }
         return true;
@@ -116,8 +116,8 @@ public class RulerWidget(Map map) : BaseWidget
         return (startFeature, currentFeature);
     }
 
-    public class RulerWidgetUpdatedEventArgs(TapType tapType) : EventArgs
+    public class RulerWidgetUpdatedEventArgs(GestureType gestureType) : EventArgs
     {
-        public TapType TapType { get; } = tapType;
+        public GestureType GestureType { get; } = gestureType;
     }
 }

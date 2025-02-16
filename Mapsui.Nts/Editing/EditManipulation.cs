@@ -32,7 +32,7 @@ public static class EditManipulation
 
         var result = false;
 
-        if (e.TapType == TapType.Hover)
+        if (e.GestureType == GestureType.Hover)
         {
             editManager.HoveringVertex(e.GetMapInfo([]));
             result = false;
@@ -80,7 +80,7 @@ public static class EditManipulation
         if (editManager.EditMode == EditMode.Modify)
         {
             var mapInfo = e.GetMapInfo([editLayer]);
-            if (e.ShiftPressed || e.TapType == TapType.DoubleTap || e.TapType == TapType.LongPress)
+            if (e.ShiftPressed || e.GestureType == GestureType.DoubleTap || e.GestureType == GestureType.LongPress)
             {
                 return editManager.TryDeleteCoordinate(
                     mapInfo, editManager.VertexRadius);
@@ -93,9 +93,9 @@ public static class EditManipulation
         }
         else if (editManager.EditMode is EditMode.DrawingPolygon or EditMode.DrawingLine)
         {
-            if (e.ShiftPressed || e.TapType == TapType.DoubleTap || e.TapType == TapType.LongPress)
+            if (e.ShiftPressed || e.GestureType == GestureType.DoubleTap || e.GestureType == GestureType.LongPress)
             {
-                if (e.TapType != TapType.DoubleTap) // Add last vertex but not on a double tap because it is preceded by a single tap.
+                if (e.GestureType != GestureType.DoubleTap) // Add last vertex but not on a double tap because it is preceded by a single tap.
                     editManager.AddVertex(navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
                 return editManager.EndEdit();
             }
@@ -103,7 +103,7 @@ public static class EditManipulation
                 editManager.AddVertex(navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
         }
         else if (editManager.EditMode is EditMode.AddPoint or EditMode.AddLine or EditMode.AddPolygon)
-            if (e.TapType == TapType.SingleTap)
+            if (e.GestureType == GestureType.SingleTap)
                 editManager.AddVertex(navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
 
         if (editManager.SelectMode)
