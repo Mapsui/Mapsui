@@ -36,9 +36,9 @@ public class PinSample : IMapViewSample
             System.Diagnostics.Debug.WriteLine(str);
 
         var position = mapClickedArgs.Point;
-        switch (mapClickedArgs.TapType)
+        switch (mapClickedArgs.GestureType)
         {
-            case TapType.Single:
+            case GestureType.SingleTap:
                 var pin = new Pin(mapView)
                 {
                     Label = $"PinType.Pin {_markerNum++}",
@@ -81,7 +81,7 @@ public class PinSample : IMapViewSample
                 }
                 pin.Callout.CalloutClicked += (s, e) =>
                 {
-                    if (e.TapType == TapType.Double)
+                    if (e.GestureType == GestureType.DoubleTap)
                     {
                         // Double click on callout moves pin
                         var p = e.Callout?.Pin;
@@ -103,7 +103,7 @@ public class PinSample : IMapViewSample
                 mapView.Pins.Add(pin);
                 pin.ShowCallout();
                 break;
-            case TapType.Double:
+            case GestureType.DoubleTap:
                 var resourceName = "embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
                 mapView.Pins.Add(new Pin(mapView)
                 {

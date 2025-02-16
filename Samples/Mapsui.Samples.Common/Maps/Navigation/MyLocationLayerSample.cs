@@ -42,7 +42,7 @@ public class MyLocationLayerSample : ISample, IDisposable
 
         var points = CreatePoints(centerOfLondonOntario);
 
-        map.Info += (s, e) =>
+        map.Tapped += (m, e) =>
         {
             if (_count >= 20)
                 _count = 0;
@@ -55,6 +55,7 @@ public class MyLocationLayerSample : ISample, IDisposable
             _myLocationLayer.UpdateMySpeed(points[_count].Item4);
 
             _count++;
+            return true;
         };
 
         return Task.FromResult(map);

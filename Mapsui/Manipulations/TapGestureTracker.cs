@@ -3,13 +3,6 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Manipulations;
 
-public enum TapType
-{
-    Single,
-    Double,
-    Long
-}
-
 public class TapGestureTracker
 {
     private readonly double _maxTapDuration = 0.5;
@@ -23,7 +16,7 @@ public class TapGestureTracker
 
     /// <returns>Indicates if the event was handled. If it is handled the caller should not do any further
     /// handling. The implementation of the tap event determines if the event is handled.</returns>
-    public bool TapIfNeeded(ScreenPosition? tapEndPosition, double maxTapDistance, Func<ScreenPosition, TapType, bool> onTap)
+    public bool TapIfNeeded(ScreenPosition? tapEndPosition, double maxTapDistance, Func<ScreenPosition, GestureType, bool> onTapped)
     {
         if (_tapStartPosition is null) return false;
         if (tapEndPosition is null) return false; // Note, this uses the tapEndPosition parameter.
@@ -40,7 +33,7 @@ public class TapGestureTracker
                 var distanceToPreviousTap = tapEndPosition.Value.Distance(_previousTapPosition.Value);
                 _previousTapPosition = null;
                 if (duration < _maxTapDuration && distanceToPreviousTap < maxTapDistance) // This distance check is between this and the previous tap.
-                    return onTap(tapEndPosition.Value, TapType.Double); // Within wait period so fire.
+                    return onTapped(tapEndPosition.Value, GestureType.DoubleTap); // Within wait period so fire.
             }
             else
             {
@@ -49,7 +42,7 @@ public class TapGestureTracker
                 // If the second tap is within the wait period we should fire a double tap
                 // but not another single tap.
                 _ = StartWaitingForSecondTapAsync(); // Fire and forget
-                return onTap(tapEndPosition.Value, TapType.Single);
+                return onTapped(tapEndPosition.Value, GestureType.SingleTap);
             }
         }
         else
@@ -61,7 +54,7 @@ public class TapGestureTracker
                 && distance < maxTapDistance;
 
             if (isLongTap)
-                return onTap(tapEndPosition.Value, TapType.Long);
+                return onTapped(tapEndPosition.Value, GestureType.LongPress);
         }
         return false;
     }

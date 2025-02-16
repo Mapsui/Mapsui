@@ -162,7 +162,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
             _manipulationTracker.Restart([position]);
 
-            if (OnMapPointerPressed([position]))
+            if (OnPointerPressed([position]))
                 return;
         });
     }
@@ -174,7 +174,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var isHovering = !IsMouseButtonPressed(e);
             var position = e.ToScreenPosition(_clientRect);
 
-            if (OnMapPointerMoved([position], isHovering))
+            if (OnPointerMoved([position], isHovering))
                 return;
 
             if (!isHovering)
@@ -189,7 +189,7 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var position = e.ToScreenPosition(_clientRect);
-            OnMapPointerReleased([position]);
+            OnPointerReleased([position]);
         });
     }
 
@@ -235,7 +235,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
             _manipulationTracker.Restart(positions);
 
-            if (OnMapPointerPressed(positions))
+            if (OnPointerPressed(positions))
                 return;
         });
     }
@@ -248,7 +248,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (positions.Length == 1)
                 _lastMovePosition = positions[0]; // Workaround for missing touch-up location.
 
-            if (OnMapPointerMoved(positions))
+            if (OnPointerMoved(positions, false))
                 return;
 
 
@@ -263,7 +263,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (_lastMovePosition is null)
                 return;
             var position = _lastMovePosition.Value;
-            OnMapPointerReleased([position]);
+            OnPointerReleased([position]);
         });
     }
 

@@ -12,6 +12,7 @@ using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Topten.RichTextKit;
 using IStyle = Mapsui.Styles.IStyle;
 
@@ -34,29 +35,29 @@ public class CustomCalloutStyleSample : IMapControlSample
         MapRenderer.RegisterStyleRenderer(typeof(CustomCalloutStyle), new CustomCalloutStyleRenderer());
 
         var map = new Map();
-
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         var points = RandomPointsBuilder.GenerateRandomPoints(map.Extent, 25, 9898);
-        var calloutLayer = CreateCalloutLayer(CreateFeatures(points));
-        map.Layers.Add(calloutLayer);
+        map.Layers.Add(CreateCalloutLayer(CreateFeatures(points)));
 
         map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _customStyleLayerName));
-        map.Info += (s, e) => MapOnInfo(s, e, calloutLayer);
+        map.Tapped += MapTapped;
 
         return map;
     }
 
-    private static void MapOnInfo(object? sender, MapInfoEventArgs e, ILayer calloutLayer)
+    private static bool MapTapped(Map map, MapEventArgs e)
     {
-        var feature = e.GetMapInfo([calloutLayer]).Feature;
+        var feature = e.GetMapInfo(map.Layers.Where(l => l.Name == _customStyleLayerName)).Feature;
         if (feature is not null)
         {
             if (feature["show-callout"]?.ToString() == "true")
                 feature["show-callout"] = "false";
             else
                 feature["show-callout"] = "true";
+            return true;
         }
+        return false;
     }
 
     private static MemoryLayer CreateCalloutLayer(IEnumerable<IFeature> features) => new()
