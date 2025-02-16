@@ -5,9 +5,9 @@ namespace Mapsui.Widgets;
 /// <summary>
 /// Arguments for a touched event of a widget
 /// </summary>
-public class WidgetEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType getstureType, Viewport viewport,
+public class WidgetEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Viewport viewport,
     bool shiftPressed, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)
-    : BaseEventArgs(screenPosition, worldPosition, getstureType, viewport, getMapInfo, getRemoteMapInfoAsync)
+    : BaseEventArgs(screenPosition, worldPosition, gestureType, viewport, getMapInfo, getRemoteMapInfoAsync)
 {
     /// <summary>
     /// Shift key pressed while touching
