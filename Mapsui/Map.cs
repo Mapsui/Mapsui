@@ -7,7 +7,6 @@
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
-using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
@@ -43,9 +42,21 @@ public class Map : INotifyPropertyChanged, IDisposable
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
 
+    /// <summary>
+    /// Event that is triggered when the map is tapped. Can be a single tap, double tap or long press.
+    /// </summary>
     public Func<Map, MapEventArgs, bool> Tapped { get; set; } = (s, e) => false;
+    /// <summary>
+    /// Event that is triggered when on pointer down.
+    /// </summary>
     public Func<Map, MapEventArgs, bool> PointerPressed { get; set; } = (s, e) => false;
+    /// <summary>
+    /// Event that is triggered when on pointer move. Can be a drag or hover.
+    /// </summary>
     public Func<Map, MapEventArgs, bool> PointerMoved { get; set; } = (s, e) => false;
+    /// <summary>
+    /// Event that is triggered when on pointer up.
+    /// </summary>
     public Func<Map, MapEventArgs, bool> PointerReleased { get; set; } = (s, e) => false;
 
     private void Navigator_ViewportChanged(object? sender, ViewportChangedEventArgs e)
@@ -424,6 +435,5 @@ public class Map : INotifyPropertyChanged, IDisposable
         HorizontalAlignment = HorizontalAlignment.Stretch,
         BackColor = Color.Transparent,
         Opacity = 0.0f,
-        LogLevelFilter = LogLevel.Trace,
     };
 }
