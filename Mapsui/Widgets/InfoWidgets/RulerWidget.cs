@@ -10,14 +10,6 @@ namespace Mapsui.Widgets.InfoWidgets;
 
 public class RulerWidget(Map map) : BaseWidget
 {
-    public enum RulerTapType
-    {
-        Down,
-        Drag,
-        Hover,
-        Up
-    }
-
     private readonly Map _map = map;
 
     public Color Color { get; set; } = new Color(192, 30, 20, 255);
@@ -57,30 +49,30 @@ public class RulerWidget(Map map) : BaseWidget
 
     public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
     {
-        if (e.TapType == TapType.None)
+        if (e.TapType == TapType.Hover)
             return false; // Not dragging.
 
         CurrentPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
         DistanceInKilometers = GetDistance(StartPosition, CurrentPosition);
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(RulerTapType.Drag));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Drag));
         _map.RefreshGraphics();
         return true;
     }
 
     public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
     {
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(RulerTapType.Up));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Release));
         _map.RefreshGraphics();
         return true;
     }
 
     public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        if (e.TapType == TapType.Single)
+        if (e.TapType == TapType.SingleTap)
         {
             StartPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
             CurrentPosition = null;
-            DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(RulerTapType.Down));
+            DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.SingleTap));
             _map.RefreshGraphics();
         }
         return true;
@@ -124,8 +116,8 @@ public class RulerWidget(Map map) : BaseWidget
         return (startFeature, currentFeature);
     }
 
-    public class RulerWidgetUpdatedEventArgs(RulerTapType tapType) : EventArgs
+    public class RulerWidgetUpdatedEventArgs(TapType tapType) : EventArgs
     {
-        public RulerTapType TapType { get; } = tapType;
+        public TapType TapType { get; } = tapType;
     }
 }

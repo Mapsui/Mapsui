@@ -122,7 +122,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var isHovering = IsHovering(e);
         var position = GetScreenPosition(e.Location);
 
-        if (OnMapPointerMoved([position], isHovering))
+        if (OnPointerMoved([position], isHovering))
             return;
 
         if (!isHovering)

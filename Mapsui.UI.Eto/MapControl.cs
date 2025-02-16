@@ -57,7 +57,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         var isHovering = IsHovering(e);
         var position = e.Location.ToScreenPosition();
 
-        if (OnMapPointerMoved([position], isHovering))
+        if (OnPointerMoved([position], isHovering))
             return;
 
         if (!isHovering)

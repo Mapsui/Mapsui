@@ -40,7 +40,7 @@ public class ManyPinsSample : IMapViewSample
 
         switch (e?.TapType)
         {
-            case TapType.Single:
+            case TapType.SingleTap:
                 var pin = new Pin(mapView)
                 {
                     Label = $"PinType.Pin {markerNum++}",
@@ -75,7 +75,7 @@ public class ManyPinsSample : IMapViewSample
                 mapView.Pins.Add(pin);
                 pin.ShowCallout();
                 break;
-            case TapType.Double:
+            case TapType.DoubleTap:
                 foreach (var r in assembly.GetManifestResourceNames())
                     System.Diagnostics.Debug.WriteLine(r);
 

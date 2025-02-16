@@ -247,21 +247,25 @@ public class Map : INotifyPropertyChanged, IDisposable
         }
     }
 
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public virtual bool OnTapped(MapEventArgs e)
     {
         return Tapped(this, e);
     }
 
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public virtual bool OnPointerPressed(MapEventArgs e)
     {
         return PointerPressed(this, e);
     }
 
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public virtual bool OnPointerMoved(MapEventArgs e)
     {
         return PointerMoved(this, e);
     }
 
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public virtual bool OnPointerReleased(MapEventArgs e)
     {
         return PointerReleased(this, e);

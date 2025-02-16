@@ -5,10 +5,34 @@ namespace Mapsui.Manipulations;
 
 public enum TapType
 {
-    Single,
-    Double,
-    Long,
-    None
+    /// <summary>
+    /// First up after a down on nearly the same position.
+    /// </summary>
+    SingleTap,
+    /// <summary>
+    /// Two SingleTaps on nearly the same position within a certain time period.
+    /// </summary>
+    DoubleTap,
+    /// <summary>
+    /// // Previously down on nearly the same position during some specific period.
+    /// </summary>
+    LongPress,
+    /// <summary>
+    /// Previously up on other position.
+    /// </summary>
+    Hover,
+    /// <summary>
+    /// Previously down on other position.
+    /// </summary>
+    Drag,
+    /// <summary>
+    /// First up.
+    /// </summary>
+    Release,
+    /// <summary>
+    /// First down.
+    /// </summary>
+    Press,
 }
 
 public class TapGestureTracker
@@ -41,7 +65,7 @@ public class TapGestureTracker
                 var distanceToPreviousTap = tapEndPosition.Value.Distance(_previousTapPosition.Value);
                 _previousTapPosition = null;
                 if (duration < _maxTapDuration && distanceToPreviousTap < maxTapDistance) // This distance check is between this and the previous tap.
-                    return onTapped(tapEndPosition.Value, TapType.Double); // Within wait period so fire.
+                    return onTapped(tapEndPosition.Value, TapType.DoubleTap); // Within wait period so fire.
             }
             else
             {
@@ -50,7 +74,7 @@ public class TapGestureTracker
                 // If the second tap is within the wait period we should fire a double tap
                 // but not another single tap.
                 _ = StartWaitingForSecondTapAsync(); // Fire and forget
-                return onTapped(tapEndPosition.Value, TapType.Single);
+                return onTapped(tapEndPosition.Value, TapType.SingleTap);
             }
         }
         else
@@ -62,7 +86,7 @@ public class TapGestureTracker
                 && distance < maxTapDistance;
 
             if (isLongTap)
-                return onTapped(tapEndPosition.Value, TapType.Long);
+                return onTapped(tapEndPosition.Value, TapType.LongPress);
         }
         return false;
     }

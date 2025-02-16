@@ -97,13 +97,13 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         var position = e.GetPosition(this).ToScreenPosition();
         if (isHovering)
         {
-            if (OnMapPointerMoved([position], isHovering))
+            if (OnPointerMoved([position], isHovering))
                 return;
         }
         else
         {
             _positions[e.Pointer.Id] = position;
-            if (OnMapPointerMoved(_positions.Values.ToArray(), isHovering))
+            if (OnPointerMoved(_positions.Values.ToArray(), isHovering))
                 return;
             _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
         }

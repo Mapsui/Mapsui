@@ -168,7 +168,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var isHovering = IsHovering(e);
         var position = e.GetPosition(this).ToScreenPosition();
 
-        if (OnMapPointerMoved([position], isHovering))
+        if (OnPointerMoved([position], isHovering))
             return;
 
         if (!isHovering)

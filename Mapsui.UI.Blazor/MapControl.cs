@@ -174,7 +174,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var isHovering = !IsMouseButtonPressed(e);
             var position = e.ToScreenPosition(_clientRect);
 
-            if (OnMapPointerMoved([position], isHovering))
+            if (OnPointerMoved([position], isHovering))
                 return;
 
             if (!isHovering)
@@ -248,7 +248,7 @@ public partial class MapControl : ComponentBase, IMapControl
             if (positions.Length == 1)
                 _lastMovePosition = positions[0]; // Workaround for missing touch-up location.
 
-            if (OnMapPointerMoved(positions))
+            if (OnPointerMoved(positions, false))
                 return;
 
 

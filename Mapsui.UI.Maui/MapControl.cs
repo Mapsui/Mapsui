@@ -188,14 +188,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 if (isHovering)
                 {
                     // In case of hovering we need to send the current position which added to the _positions array
-                    if (OnMapPointerMoved([position], isHovering))
+                    if (OnPointerMoved([position], isHovering))
                         return;
                 }
                 else
                 {
                     _positions[e.Id] = position;
 
-                    if (OnMapPointerMoved(_positions.Values.ToArray(), isHovering))
+                    if (OnPointerMoved(_positions.Values.ToArray(), isHovering))
                         return;
 
                     _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
