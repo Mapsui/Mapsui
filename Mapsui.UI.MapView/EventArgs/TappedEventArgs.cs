@@ -6,12 +6,12 @@ namespace Mapsui.UI;
 public class TappedEventArgs : EventArgs
 {
     public ScreenPosition ScreenPosition { get; }
-    public TapType TapType { get; }
+    public GestureType GestureType { get; }
     public bool Handled { get; set; } = false;
 
-    public TappedEventArgs(ScreenPosition screenPosition, TapType tapType)
+    public TappedEventArgs(ScreenPosition screenPosition, GestureType gestureType)
     {
         ScreenPosition = screenPosition;
-        TapType = tapType;
+        GestureType = gestureType;
     }
 }

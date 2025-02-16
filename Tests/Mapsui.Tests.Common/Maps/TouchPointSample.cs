@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Mapsui.Extensions;
-using Mapsui.Samples.Common;
-using Mapsui.Styles;
-using System.Threading.Tasks;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
+using Mapsui.Samples.Common;
+using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Widgets;
 using Mapsui.Widgets.BoxWidgets;
-using Color = Mapsui.Styles.Color;
-using HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment;
-using VerticalAlignment = Mapsui.Widgets.VerticalAlignment;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 #pragma warning disable IDISP003
 #pragma warning disable IDISP001
 
@@ -21,7 +21,6 @@ public sealed class TouchPointSample : ISample, IDisposable
     private Map? _map;
     private TextBoxWidget? _label;
     private TextBoxWidget? _mousePosition;
-    private MemoryLayer? _clickMemoryLayer;
     public string Name => "Touch Point";
 
     public string Category => "Tests";
@@ -37,54 +36,54 @@ public sealed class TouchPointSample : ISample, IDisposable
         };
 
         _map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        var memoryLayer = CreateMemoryLayer(Color.Red);
+        var memoryLayer = CreateMemoryLayer("Layer", Color.Red);
         _map.Layers.Add(memoryLayer);
-        _clickMemoryLayer = CreateMemoryLayer(Color.Blue, 0.3d, false);
-        _map.Layers.Add(_clickMemoryLayer);
+        _map.Layers.Add(CreateMemoryLayer("Click Layer", Color.Blue, 0.3d, false));
         _label = CreateLabel(HorizontalAlignment.Center, VerticalAlignment.Top, "Not Selected");
         _map.Widgets.Add(_label);
         _mousePosition = CreateLabel(HorizontalAlignment.Center, VerticalAlignment.Bottom);
         _map.Widgets.Add(_mousePosition);
         memoryLayer.DataHasChanged();
-        _map.Info += (s, e) => MapControl_Info(s, e, memoryLayer);
+        _map.Tapped += MapTapped;
         return _map;
     }
 
-    private static MemoryLayer CreateMemoryLayer(Color color, double scale = 1, bool createdPoint = true)
+    private static MemoryLayer CreateMemoryLayer(string layerName, Color color, double scale = 1, bool createdPoint = true)
     {
-        var pinStyle = new SymbolStyle
-        {
-            SymbolType = SymbolType.Ellipse,
-            Fill = new Brush(color),
-            Outline = null,
-            SymbolScale = scale
-        };
-
         List<IFeature> features = createdPoint ? [new PointFeature(SphericalMercator.FromLonLat(new MPoint(0, 0)))] : [];
 
-        var memoryLayer = new MemoryLayer
+        return new MemoryLayer
         {
-            Name = "Key",
+            Name = layerName,
             Features = features,
-            Style = pinStyle
+            Style = CreatePinStyle(color, scale)
         };
-
-        return memoryLayer;
     }
 
-    private void MapControl_Info(object? sender, MapInfoEventArgs e, ILayer memoryLayer)
+    private static SymbolStyle CreatePinStyle(Color color, double scale) => new()
     {
-        var mapInfo = e.GetMapInfo([memoryLayer]);
+        SymbolType = SymbolType.Ellipse,
+        Fill = new Brush(color),
+        Outline = null,
+        SymbolScale = scale
+    };
+
+    private bool MapTapped(Map map, MapEventArgs e)
+    {
+        var mapInfo = e.GetMapInfo(map.Layers.Where(l => l.Name == "Layer"));
         _mousePosition!.Text = $"X: {Convert.ToInt32(mapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(mapInfo.ScreenPosition.Y)}";
         _mousePosition.NeedsRedraw = true;
-        var features = (List<IFeature>)_clickMemoryLayer!.Features;
+        var clickLayer = map.Layers.OfType<MemoryLayer>().First(l => l.Name == "Click Layer");
+        var features = (List<IFeature>)clickLayer.Features;
         features.Add(new PointFeature(mapInfo.WorldPosition.X, mapInfo.WorldPosition.Y));
-        _clickMemoryLayer.DataHasChanged();
+        clickLayer.DataHasChanged();
         if (mapInfo is { Feature: PointFeature, Layer: MemoryLayer })
         {
             _label!.Text = _label.Text == "Not Selected" ? "Selected" : "Not Selected";
             _label.NeedsRedraw = true;
+            return true;
         }
+        return false;
     }
 
     private static TextBoxWidget CreateLabel(
@@ -107,7 +106,6 @@ public sealed class TouchPointSample : ISample, IDisposable
 
     public void Dispose()
     {
-        _clickMemoryLayer?.Dispose();
         _map?.Dispose();
     }
 }

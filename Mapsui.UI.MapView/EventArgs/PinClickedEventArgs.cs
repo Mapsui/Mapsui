@@ -18,7 +18,7 @@ public sealed class PinClickedEventArgs : EventArgs
     /// <summary>
     /// Number of taps
     /// </summary>
-    public TapType TapType { get; }
+    public GestureType GestureType { get; }
 
     /// <summary>
     /// Flag, if this event was handled
@@ -26,10 +26,10 @@ public sealed class PinClickedEventArgs : EventArgs
     /// <value><c>true</c> if handled; otherwise, <c>false</c>.</value>
     public bool Handled { get; set; } = false;
 
-    internal PinClickedEventArgs(Pin pin, Position point, TapType tapType)
+    internal PinClickedEventArgs(Pin pin, Position point, GestureType gestureType)
     {
         Pin = pin;
         Point = point;
-        TapType = tapType;
+        GestureType = gestureType;
     }
 }

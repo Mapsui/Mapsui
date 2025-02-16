@@ -17,24 +17,26 @@ internal class SelectionStyleSample : ISample
     public string Name => "Selection";
     public string Category => "Styles";
 
-    public Task<Map> CreateMapAsync()
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
+
+    private static Map CreateMap()
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        var pointLayer = CreatePointLayer();
-        map.Layers.Add(pointLayer);
-        map.Info += (s, e) => ToggleSelected(e.GetMapInfo([pointLayer]).Feature);
-
+        map.Layers.Add(CreatePointLayer());
         map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Points"));
-
-        return Task.FromResult(map);
+        map.Tapped += MapTapped;
+        return map;
     }
 
-    private static void ToggleSelected(IFeature? feature)
+    private static bool MapTapped(Map map, MapEventArgs e)
     {
-        if (feature is null) return;
+        var feature = e.GetMapInfo(map.Layers.Where(l => l.Name == "Points")).Feature;
+        if (feature is null)
+            return false; ;
         if (feature["selected"] is null) feature["selected"] = "true";
         else feature["selected"] = null;
+        return true;
     }
 
     public static ILayer CreatePointLayer() => new Layer("Points")

@@ -67,6 +67,9 @@ public class LoggingWidget : TextBoxWidget
         if (!ShouldLog(Enabled, ShowLoggingInMap))
             return;
 
+        if (LogLevelFilter < level)
+            return;
+
         var entry = new LogEntry { LogLevel = level, FormattedLogLine = ToFormattedLogLine(level, description, exception) };
 
         _listOfLogEntries.Enqueue(entry);

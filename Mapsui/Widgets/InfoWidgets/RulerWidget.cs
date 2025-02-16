@@ -4,19 +4,12 @@ using Mapsui.Styles;
 using System;
 using Mapsui.Widgets.BoxWidgets;
 using System.Collections.Generic;
+using Mapsui.Manipulations;
 
 namespace Mapsui.Widgets.InfoWidgets;
 
 public class RulerWidget(Map map) : BaseWidget
 {
-    public enum TapType
-    {
-        Down,
-        Drag,
-        Hover,
-        Up
-    }
-
     private readonly Map _map = map;
 
     public Color Color { get; set; } = new Color(192, 30, 20, 255);
@@ -56,30 +49,30 @@ public class RulerWidget(Map map) : BaseWidget
 
     public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
     {
-        if (!e.LeftButton)
+        if (e.GestureType == GestureType.Hover)
             return false; // Not dragging.
 
         CurrentPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
         DistanceInKilometers = GetDistance(StartPosition, CurrentPosition);
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(e.LeftButton ? TapType.Drag : TapType.Hover));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Drag));
         _map.RefreshGraphics();
         return true;
     }
 
     public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
     {
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Up));
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Release));
         _map.RefreshGraphics();
         return true;
     }
 
     public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
     {
-        if (e.TapType == Manipulations.TapType.Single)
+        if (e.GestureType == GestureType.SingleTap)
         {
             StartPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
             CurrentPosition = null;
-            DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(TapType.Down));
+            DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.SingleTap));
             _map.RefreshGraphics();
         }
         return true;
@@ -123,8 +116,8 @@ public class RulerWidget(Map map) : BaseWidget
         return (startFeature, currentFeature);
     }
 
-    public class RulerWidgetUpdatedEventArgs(TapType tapType) : EventArgs
+    public class RulerWidgetUpdatedEventArgs(GestureType gestureType) : EventArgs
     {
-        public TapType TapType { get; } = tapType;
+        public GestureType GestureType { get; } = gestureType;
     }
 }

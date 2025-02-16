@@ -9,7 +9,7 @@ namespace Mapsui;
 public delegate Task<MapInfo> GetRemoteMapInfoAsyncDelegate(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers);
 public delegate MapInfo GetMapInfoDelegate(ScreenPosition screenPosition, IEnumerable<ILayer> layers);
 
-public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, Viewport viewport,
+public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Viewport viewport,
     GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync) : EventArgs
 {
     /// <summary>
@@ -25,7 +25,7 @@ public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, 
     /// <summary>
     /// Number of clicks on the Widget
     /// </summary>
-    public TapType TapType { get; } = tapType;
+    public GestureType GestureType { get; } = gestureType;
 
     /// <summary>
     /// Viewport of the map at the moment of the event

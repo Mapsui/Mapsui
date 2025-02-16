@@ -23,15 +23,14 @@ public class ViewportZoomAroundLocationAnimationSample : ISample
         var map = new Map { CRS = "EPSG:3857" };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
-
         map.Widgets.Add(CreateTextBox("Tap on the map to zoom in the location where you tapped. " +
             "The map will stay centered on the place where you tap."));
-
-        map.Info += (s, e) =>
+        map.Tapped += (m, e) =>
         {
             // Zoom in while keeping centerOfZoom at the same position. If you click somewhere to zoom in the mouse pointer
             // will still be above the same location in the map. This can be you used for mouse wheel zoom.
-            map.Navigator.ZoomTo(e.Viewport.Resolution * 0.5, e.ScreenPosition!, 500, Easing.CubicOut);
+            m.Navigator.ZoomTo(e.Viewport.Resolution * 0.5, e.ScreenPosition!, 500, Easing.CubicOut);
+            return true;
         };
         return map;
     }
