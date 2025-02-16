@@ -88,6 +88,7 @@
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
     <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">EventArgs</a></div>
     <div class="level2"><span class="xref">BaseEventArgs</span></div>
+      <div class="level3"><a class="xref" href="Mapsui.MapEventArgs.html">MapEventArgs</a></div>
       <div class="level3"><a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a></div>
       <div class="level3"><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></div>
   </div>
@@ -128,18 +129,18 @@
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.%23ctor(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.TapType%2CMapsui.Viewport%2CMapsui.GetMapInfoDelegate%2CMapsui.GetRemoteMapInfoAsyncDelegate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.%23ctor(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.GestureType%2CMapsui.Viewport%2CMapsui.GetMapInfoDelegate%2CMapsui.GetRemoteMapInfoAsyncDelegate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L12">View Source</a>
   </span>
   <a id="Mapsui_BaseEventArgs__ctor_" data-uid="Mapsui.BaseEventArgs.#ctor*"></a>
-  <h4 id="Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_" data-uid="Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)">BaseEventArgs(ScreenPosition, MPoint, TapType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)</h4>
+  <h4 id="Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_" data-uid="Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)">BaseEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, Viewport viewport, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)</code></pre>
+    <pre><code class="lang-csharp hljs">public BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Viewport viewport, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -162,8 +163,8 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Manipulations.TapType.html">TapType</a></td>
-        <td><span class="parametername">tapType</span></td>
+        <td><a class="xref" href="Mapsui.Manipulations.GestureType.html">GestureType</a></td>
+        <td><span class="parametername">gestureType</span></td>
         <td></td>
       </tr>
       <tr>
@@ -185,6 +186,37 @@
   </table>
   <h3 id="properties">Properties
 </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_GestureType.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.GestureType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L28">View Source</a>
+  </span>
+  <a id="Mapsui_BaseEventArgs_GestureType_" data-uid="Mapsui.BaseEventArgs.GestureType*"></a>
+  <h4 id="Mapsui_BaseEventArgs_GestureType" data-uid="Mapsui.BaseEventArgs.GestureType">GestureType</h4>
+  <div class="markdown level1 summary"><p>Number of clicks on the Widget</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GestureType GestureType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Manipulations.GestureType.html">GestureType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_GetMapInfo.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.GetMapInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
@@ -274,37 +306,6 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Mapsui.Manipulations.ScreenPosition.html">ScreenPosition</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_TapType.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.TapType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L28">View Source</a>
-  </span>
-  <a id="Mapsui_BaseEventArgs_TapType_" data-uid="Mapsui.BaseEventArgs.TapType*"></a>
-  <h4 id="Mapsui_BaseEventArgs_TapType" data-uid="Mapsui.BaseEventArgs.TapType">TapType</h4>
-  <div class="markdown level1 summary"><p>Number of clicks on the Widget</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TapType TapType { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.Manipulations.TapType.html">TapType</a></td>
         <td></td>
       </tr>
     </tbody>

@@ -100,7 +100,7 @@
       <a class="xref" href="Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_WorldPosition">BaseEventArgs.WorldPosition</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_TapType">BaseEventArgs.TapType</a>
+      <a class="xref" href="Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GestureType">BaseEventArgs.GestureType</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Viewport">BaseEventArgs.Viewport</a>
@@ -146,19 +146,19 @@
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_System_Boolean_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.WidgetEventArgs.%23ctor(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.TapType%2CMapsui.Viewport%2CSystem.Boolean%2CSystem.Boolean%2CMapsui.GetMapInfoDelegate%2CMapsui.GetRemoteMapInfoAsyncDelegate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.WidgetEventArgs.%23ctor(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.GestureType%2CMapsui.Viewport%2CSystem.Boolean%2CMapsui.GetMapInfoDelegate%2CMapsui.GetRemoteMapInfoAsyncDelegate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/WidgetEventArgs.cs/#L8">View Source</a>
   </span>
   <a id="Mapsui_Widgets_WidgetEventArgs__ctor_" data-uid="Mapsui.Widgets.WidgetEventArgs.#ctor*"></a>
-  <h4 id="Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_System_Boolean_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_" data-uid="Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,System.Boolean,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)">WidgetEventArgs(ScreenPosition, MPoint, TapType, Viewport, bool, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)</h4>
+  <h4 id="Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_" data-uid="Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)">WidgetEventArgs(ScreenPosition, MPoint, GestureType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)</h4>
   <div class="markdown level1 summary"><p>Arguments for a touched event of a widget</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WidgetEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType, Viewport viewport, bool leftButton, bool shiftPressed, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)</code></pre>
+    <pre><code class="lang-csharp hljs">public WidgetEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Viewport viewport, bool shiftPressed, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -181,18 +181,13 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Manipulations.TapType.html">TapType</a></td>
-        <td><span class="parametername">tapType</span></td>
+        <td><a class="xref" href="Mapsui.Manipulations.GestureType.html">GestureType</a></td>
+        <td><span class="parametername">gestureType</span></td>
         <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="Mapsui.Viewport.html">Viewport</a></td>
         <td><span class="parametername">viewport</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><span class="parametername">leftButton</span></td>
         <td></td>
       </tr>
       <tr>
@@ -216,41 +211,10 @@
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_WidgetEventArgs_LeftButton.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.WidgetEventArgs.LeftButton%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/WidgetEventArgs.cs/#L15">View Source</a>
-  </span>
-  <a id="Mapsui_Widgets_WidgetEventArgs_LeftButton_" data-uid="Mapsui.Widgets.WidgetEventArgs.LeftButton*"></a>
-  <h4 id="Mapsui_Widgets_WidgetEventArgs_LeftButton" data-uid="Mapsui.Widgets.WidgetEventArgs.LeftButton">LeftButton</h4>
-  <div class="markdown level1 summary"><p>Left button used while touching</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool LeftButton { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_WidgetEventArgs_ShiftPressed.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.WidgetEventArgs.ShiftPressed%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/WidgetEventArgs.cs/#L20">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/WidgetEventArgs.cs/#L15">View Source</a>
   </span>
   <a id="Mapsui_Widgets_WidgetEventArgs_ShiftPressed_" data-uid="Mapsui.Widgets.WidgetEventArgs.ShiftPressed*"></a>
   <h4 id="Mapsui_Widgets_WidgetEventArgs_ShiftPressed" data-uid="Mapsui.Widgets.WidgetEventArgs.ShiftPressed">ShiftPressed</h4>

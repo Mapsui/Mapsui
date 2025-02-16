@@ -4255,15 +4255,15 @@ references:
   commentId: T:Mapsui.BaseEventArgs
   fullName: Mapsui.BaseEventArgs
   nameWithType: BaseEventArgs
-- uid: Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name: BaseEventArgs(ScreenPosition, MPoint, TapType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
-  commentId: M:Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name.vb: New(ScreenPosition, MPoint, TapType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  fullName: Mapsui.BaseEventArgs.BaseEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  fullName.vb: Mapsui.BaseEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  nameWithType: BaseEventArgs.BaseEventArgs(ScreenPosition, MPoint, TapType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  nameWithType.vb: BaseEventArgs.New(ScreenPosition, MPoint, TapType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+- uid: Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: BaseEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.BaseEventArgs.BaseEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.BaseEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: BaseEventArgs.BaseEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: BaseEventArgs.New(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
 - uid: Mapsui.BaseEventArgs.#ctor*
   name: BaseEventArgs
   href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs__ctor_
@@ -4274,6 +4274,19 @@ references:
   fullName.vb: Mapsui.BaseEventArgs.New
   nameWithType: BaseEventArgs.BaseEventArgs
   nameWithType.vb: BaseEventArgs.New
+- uid: Mapsui.BaseEventArgs.GestureType
+  name: GestureType
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GestureType
+  commentId: P:Mapsui.BaseEventArgs.GestureType
+  fullName: Mapsui.BaseEventArgs.GestureType
+  nameWithType: BaseEventArgs.GestureType
+- uid: Mapsui.BaseEventArgs.GestureType*
+  name: GestureType
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GestureType_
+  commentId: Overload:Mapsui.BaseEventArgs.GestureType
+  isSpec: "True"
+  fullName: Mapsui.BaseEventArgs.GestureType
+  nameWithType: BaseEventArgs.GestureType
 - uid: Mapsui.BaseEventArgs.GetMapInfo
   name: GetMapInfo
   href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GetMapInfo
@@ -4313,19 +4326,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.BaseEventArgs.ScreenPosition
   nameWithType: BaseEventArgs.ScreenPosition
-- uid: Mapsui.BaseEventArgs.TapType
-  name: TapType
-  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_TapType
-  commentId: P:Mapsui.BaseEventArgs.TapType
-  fullName: Mapsui.BaseEventArgs.TapType
-  nameWithType: BaseEventArgs.TapType
-- uid: Mapsui.BaseEventArgs.TapType*
-  name: TapType
-  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_TapType_
-  commentId: Overload:Mapsui.BaseEventArgs.TapType
-  isSpec: "True"
-  fullName: Mapsui.BaseEventArgs.TapType
-  nameWithType: BaseEventArgs.TapType
 - uid: Mapsui.BaseEventArgs.Viewport
   name: Viewport
   href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Viewport
@@ -8804,12 +8804,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.MyLocationLayer.CalloutText
   nameWithType: MyLocationLayer.CalloutText
-- uid: Mapsui.Layers.MyLocationLayer.Clicked
-  name: Clicked
-  href: pages/Mapsui.Layers.MyLocationLayer.html#Mapsui_Layers_MyLocationLayer_Clicked
-  commentId: E:Mapsui.Layers.MyLocationLayer.Clicked
-  fullName: Mapsui.Layers.MyLocationLayer.Clicked
-  nameWithType: MyLocationLayer.Clicked
 - uid: Mapsui.Layers.MyLocationLayer.Direction
   name: Direction
   href: pages/Mapsui.Layers.MyLocationLayer.html#Mapsui_Layers_MyLocationLayer_Direction
@@ -8904,6 +8898,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.MyLocationLayer.ShowCallout
   nameWithType: MyLocationLayer.ShowCallout
+- uid: Mapsui.Layers.MyLocationLayer.Tapped
+  name: Tapped
+  href: pages/Mapsui.Layers.MyLocationLayer.html#Mapsui_Layers_MyLocationLayer_Tapped
+  commentId: E:Mapsui.Layers.MyLocationLayer.Tapped
+  fullName: Mapsui.Layers.MyLocationLayer.Tapped
+  nameWithType: MyLocationLayer.Tapped
 - uid: Mapsui.Layers.MyLocationLayer.UpdateAnimations
   name: UpdateAnimations()
   href: pages/Mapsui.Layers.MyLocationLayer.html#Mapsui_Layers_MyLocationLayer_UpdateAnimations
@@ -11043,6 +11043,54 @@ references:
   isSpec: "True"
   fullName: Mapsui.Manipulations.FlingTracker.Restart
   nameWithType: FlingTracker.Restart
+- uid: Mapsui.Manipulations.GestureType
+  name: GestureType
+  href: pages/Mapsui.Manipulations.GestureType.html
+  commentId: T:Mapsui.Manipulations.GestureType
+  fullName: Mapsui.Manipulations.GestureType
+  nameWithType: GestureType
+- uid: Mapsui.Manipulations.GestureType.DoubleTap
+  name: DoubleTap
+  href: pages/Mapsui.Manipulations.GestureType.html#Mapsui_Manipulations_GestureType_DoubleTap
+  commentId: F:Mapsui.Manipulations.GestureType.DoubleTap
+  fullName: Mapsui.Manipulations.GestureType.DoubleTap
+  nameWithType: GestureType.DoubleTap
+- uid: Mapsui.Manipulations.GestureType.Drag
+  name: Drag
+  href: pages/Mapsui.Manipulations.GestureType.html#Mapsui_Manipulations_GestureType_Drag
+  commentId: F:Mapsui.Manipulations.GestureType.Drag
+  fullName: Mapsui.Manipulations.GestureType.Drag
+  nameWithType: GestureType.Drag
+- uid: Mapsui.Manipulations.GestureType.Hover
+  name: Hover
+  href: pages/Mapsui.Manipulations.GestureType.html#Mapsui_Manipulations_GestureType_Hover
+  commentId: F:Mapsui.Manipulations.GestureType.Hover
+  fullName: Mapsui.Manipulations.GestureType.Hover
+  nameWithType: GestureType.Hover
+- uid: Mapsui.Manipulations.GestureType.LongPress
+  name: LongPress
+  href: pages/Mapsui.Manipulations.GestureType.html#Mapsui_Manipulations_GestureType_LongPress
+  commentId: F:Mapsui.Manipulations.GestureType.LongPress
+  fullName: Mapsui.Manipulations.GestureType.LongPress
+  nameWithType: GestureType.LongPress
+- uid: Mapsui.Manipulations.GestureType.Press
+  name: Press
+  href: pages/Mapsui.Manipulations.GestureType.html#Mapsui_Manipulations_GestureType_Press
+  commentId: F:Mapsui.Manipulations.GestureType.Press
+  fullName: Mapsui.Manipulations.GestureType.Press
+  nameWithType: GestureType.Press
+- uid: Mapsui.Manipulations.GestureType.Release
+  name: Release
+  href: pages/Mapsui.Manipulations.GestureType.html#Mapsui_Manipulations_GestureType_Release
+  commentId: F:Mapsui.Manipulations.GestureType.Release
+  fullName: Mapsui.Manipulations.GestureType.Release
+  nameWithType: GestureType.Release
+- uid: Mapsui.Manipulations.GestureType.SingleTap
+  name: SingleTap
+  href: pages/Mapsui.Manipulations.GestureType.html#Mapsui_Manipulations_GestureType_SingleTap
+  commentId: F:Mapsui.Manipulations.GestureType.SingleTap
+  fullName: Mapsui.Manipulations.GestureType.SingleTap
+  nameWithType: GestureType.SingleTap
 - uid: Mapsui.Manipulations.Manipulation
   name: Manipulation
   href: pages/Mapsui.Manipulations.Manipulation.html
@@ -11270,15 +11318,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Manipulations.TapGestureTracker.Restart
   nameWithType: TapGestureTracker.Restart
-- uid: Mapsui.Manipulations.TapGestureTracker.TapIfNeeded(System.Nullable{Mapsui.Manipulations.ScreenPosition},System.Double,System.Func{Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType,System.Boolean})
-  name: TapIfNeeded(ScreenPosition?, double, Func<ScreenPosition, TapType, bool>)
-  href: pages/Mapsui.Manipulations.TapGestureTracker.html#Mapsui_Manipulations_TapGestureTracker_TapIfNeeded_System_Nullable_Mapsui_Manipulations_ScreenPosition__System_Double_System_Func_Mapsui_Manipulations_ScreenPosition_Mapsui_Manipulations_TapType_System_Boolean__
-  commentId: M:Mapsui.Manipulations.TapGestureTracker.TapIfNeeded(System.Nullable{Mapsui.Manipulations.ScreenPosition},System.Double,System.Func{Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType,System.Boolean})
-  name.vb: TapIfNeeded(ScreenPosition?, Double, Func(Of ScreenPosition, TapType, Boolean))
-  fullName: Mapsui.Manipulations.TapGestureTracker.TapIfNeeded(Mapsui.Manipulations.ScreenPosition?, double, System.Func<Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.TapType, bool>)
-  fullName.vb: Mapsui.Manipulations.TapGestureTracker.TapIfNeeded(Mapsui.Manipulations.ScreenPosition?, Double, System.Func(Of Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.TapType, Boolean))
-  nameWithType: TapGestureTracker.TapIfNeeded(ScreenPosition?, double, Func<ScreenPosition, TapType, bool>)
-  nameWithType.vb: TapGestureTracker.TapIfNeeded(ScreenPosition?, Double, Func(Of ScreenPosition, TapType, Boolean))
+- uid: Mapsui.Manipulations.TapGestureTracker.TapIfNeeded(System.Nullable{Mapsui.Manipulations.ScreenPosition},System.Double,System.Func{Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.GestureType,System.Boolean})
+  name: TapIfNeeded(ScreenPosition?, double, Func<ScreenPosition, GestureType, bool>)
+  href: pages/Mapsui.Manipulations.TapGestureTracker.html#Mapsui_Manipulations_TapGestureTracker_TapIfNeeded_System_Nullable_Mapsui_Manipulations_ScreenPosition__System_Double_System_Func_Mapsui_Manipulations_ScreenPosition_Mapsui_Manipulations_GestureType_System_Boolean__
+  commentId: M:Mapsui.Manipulations.TapGestureTracker.TapIfNeeded(System.Nullable{Mapsui.Manipulations.ScreenPosition},System.Double,System.Func{Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.GestureType,System.Boolean})
+  name.vb: TapIfNeeded(ScreenPosition?, Double, Func(Of ScreenPosition, GestureType, Boolean))
+  fullName: Mapsui.Manipulations.TapGestureTracker.TapIfNeeded(Mapsui.Manipulations.ScreenPosition?, double, System.Func<Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.GestureType, bool>)
+  fullName.vb: Mapsui.Manipulations.TapGestureTracker.TapIfNeeded(Mapsui.Manipulations.ScreenPosition?, Double, System.Func(Of Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.GestureType, Boolean))
+  nameWithType: TapGestureTracker.TapIfNeeded(ScreenPosition?, double, Func<ScreenPosition, GestureType, bool>)
+  nameWithType.vb: TapGestureTracker.TapIfNeeded(ScreenPosition?, Double, Func(Of ScreenPosition, GestureType, Boolean))
 - uid: Mapsui.Manipulations.TapGestureTracker.TapIfNeeded*
   name: TapIfNeeded
   href: pages/Mapsui.Manipulations.TapGestureTracker.html#Mapsui_Manipulations_TapGestureTracker_TapIfNeeded_
@@ -11286,30 +11334,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Manipulations.TapGestureTracker.TapIfNeeded
   nameWithType: TapGestureTracker.TapIfNeeded
-- uid: Mapsui.Manipulations.TapType
-  name: TapType
-  href: pages/Mapsui.Manipulations.TapType.html
-  commentId: T:Mapsui.Manipulations.TapType
-  fullName: Mapsui.Manipulations.TapType
-  nameWithType: TapType
-- uid: Mapsui.Manipulations.TapType.Double
-  name: Double
-  href: pages/Mapsui.Manipulations.TapType.html#Mapsui_Manipulations_TapType_Double
-  commentId: F:Mapsui.Manipulations.TapType.Double
-  fullName: Mapsui.Manipulations.TapType.Double
-  nameWithType: TapType.Double
-- uid: Mapsui.Manipulations.TapType.Long
-  name: Long
-  href: pages/Mapsui.Manipulations.TapType.html#Mapsui_Manipulations_TapType_Long
-  commentId: F:Mapsui.Manipulations.TapType.Long
-  fullName: Mapsui.Manipulations.TapType.Long
-  nameWithType: TapType.Long
-- uid: Mapsui.Manipulations.TapType.Single
-  name: Single
-  href: pages/Mapsui.Manipulations.TapType.html#Mapsui_Manipulations_TapType_Single
-  commentId: F:Mapsui.Manipulations.TapType.Single
-  fullName: Mapsui.Manipulations.TapType.Single
-  nameWithType: TapType.Single
 - uid: Mapsui.Map
   name: Map
   href: pages/Mapsui.Map.html
@@ -11499,6 +11523,45 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.OnViewportSizeInitialized
   nameWithType: Map.OnViewportSizeInitialized
+- uid: Mapsui.Map.PointerMoved
+  name: PointerMoved
+  href: pages/Mapsui.Map.html#Mapsui_Map_PointerMoved
+  commentId: P:Mapsui.Map.PointerMoved
+  fullName: Mapsui.Map.PointerMoved
+  nameWithType: Map.PointerMoved
+- uid: Mapsui.Map.PointerMoved*
+  name: PointerMoved
+  href: pages/Mapsui.Map.html#Mapsui_Map_PointerMoved_
+  commentId: Overload:Mapsui.Map.PointerMoved
+  isSpec: "True"
+  fullName: Mapsui.Map.PointerMoved
+  nameWithType: Map.PointerMoved
+- uid: Mapsui.Map.PointerPressed
+  name: PointerPressed
+  href: pages/Mapsui.Map.html#Mapsui_Map_PointerPressed
+  commentId: P:Mapsui.Map.PointerPressed
+  fullName: Mapsui.Map.PointerPressed
+  nameWithType: Map.PointerPressed
+- uid: Mapsui.Map.PointerPressed*
+  name: PointerPressed
+  href: pages/Mapsui.Map.html#Mapsui_Map_PointerPressed_
+  commentId: Overload:Mapsui.Map.PointerPressed
+  isSpec: "True"
+  fullName: Mapsui.Map.PointerPressed
+  nameWithType: Map.PointerPressed
+- uid: Mapsui.Map.PointerReleased
+  name: PointerReleased
+  href: pages/Mapsui.Map.html#Mapsui_Map_PointerReleased
+  commentId: P:Mapsui.Map.PointerReleased
+  fullName: Mapsui.Map.PointerReleased
+  nameWithType: Map.PointerReleased
+- uid: Mapsui.Map.PointerReleased*
+  name: PointerReleased
+  href: pages/Mapsui.Map.html#Mapsui_Map_PointerReleased_
+  commentId: Overload:Mapsui.Map.PointerReleased
+  isSpec: "True"
+  fullName: Mapsui.Map.PointerReleased
+  nameWithType: Map.PointerReleased
 - uid: Mapsui.Map.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.Map.html#Mapsui_Map_PropertyChanged
@@ -11556,6 +11619,19 @@ references:
   commentId: E:Mapsui.Map.RefreshGraphicsRequest
   fullName: Mapsui.Map.RefreshGraphicsRequest
   nameWithType: Map.RefreshGraphicsRequest
+- uid: Mapsui.Map.Tapped
+  name: Tapped
+  href: pages/Mapsui.Map.html#Mapsui_Map_Tapped
+  commentId: P:Mapsui.Map.Tapped
+  fullName: Mapsui.Map.Tapped
+  nameWithType: Map.Tapped
+- uid: Mapsui.Map.Tapped*
+  name: Tapped
+  href: pages/Mapsui.Map.html#Mapsui_Map_Tapped_
+  commentId: Overload:Mapsui.Map.Tapped
+  isSpec: "True"
+  fullName: Mapsui.Map.Tapped
+  nameWithType: Map.Tapped
 - uid: Mapsui.Map.UpdateAnimations
   name: UpdateAnimations()
   href: pages/Mapsui.Map.html#Mapsui_Map_UpdateAnimations
@@ -11733,6 +11809,31 @@ references:
   isSpec: "True"
   fullName: Mapsui.MapBuilder.WithZoomButtons
   nameWithType: MapBuilder.WithZoomButtons
+- uid: Mapsui.MapEventArgs
+  name: MapEventArgs
+  href: pages/Mapsui.MapEventArgs.html
+  commentId: T:Mapsui.MapEventArgs
+  fullName: Mapsui.MapEventArgs
+  nameWithType: MapEventArgs
+- uid: Mapsui.MapEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: MapEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.MapEventArgs.html#Mapsui_MapEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.MapEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.MapEventArgs.MapEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.MapEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: MapEventArgs.MapEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: MapEventArgs.New(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+- uid: Mapsui.MapEventArgs.#ctor*
+  name: MapEventArgs
+  href: pages/Mapsui.MapEventArgs.html#Mapsui_MapEventArgs__ctor_
+  commentId: Overload:Mapsui.MapEventArgs.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mapsui.MapEventArgs.MapEventArgs
+  fullName.vb: Mapsui.MapEventArgs.New
+  nameWithType: MapEventArgs.MapEventArgs
+  nameWithType.vb: MapEventArgs.New
 - uid: Mapsui.MapInfo
   name: MapInfo
   href: pages/Mapsui.MapInfo.html
@@ -11868,15 +11969,15 @@ references:
   commentId: T:Mapsui.MapInfoEventArgs
   fullName: Mapsui.MapInfoEventArgs
   nameWithType: MapInfoEventArgs
-- uid: Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name: MapInfoEventArgs(ScreenPosition, MPoint, TapType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
-  commentId: M:Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name.vb: New(ScreenPosition, MPoint, TapType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, bool, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  fullName.vb: Mapsui.MapInfoEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, Boolean, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  nameWithType: MapInfoEventArgs.MapInfoEventArgs(ScreenPosition, MPoint, TapType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  nameWithType.vb: MapInfoEventArgs.New(ScreenPosition, MPoint, TapType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+- uid: Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: MapInfoEventArgs(ScreenPosition, MPoint, GestureType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, GestureType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, bool, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.MapInfoEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Boolean, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: MapInfoEventArgs.MapInfoEventArgs(ScreenPosition, MPoint, GestureType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: MapInfoEventArgs.New(ScreenPosition, MPoint, GestureType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
 - uid: Mapsui.MapInfoEventArgs.#ctor*
   name: MapInfoEventArgs
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_
@@ -34028,6 +34129,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.CalloutClickedEventArgs.Callout
   nameWithType: CalloutClickedEventArgs.Callout
+- uid: Mapsui.UI.Maui.CalloutClickedEventArgs.GestureType
+  name: GestureType
+  href: pages/Mapsui.UI.Maui.CalloutClickedEventArgs.html#Mapsui_UI_Maui_CalloutClickedEventArgs_GestureType
+  commentId: P:Mapsui.UI.Maui.CalloutClickedEventArgs.GestureType
+  fullName: Mapsui.UI.Maui.CalloutClickedEventArgs.GestureType
+  nameWithType: CalloutClickedEventArgs.GestureType
+- uid: Mapsui.UI.Maui.CalloutClickedEventArgs.GestureType*
+  name: GestureType
+  href: pages/Mapsui.UI.Maui.CalloutClickedEventArgs.html#Mapsui_UI_Maui_CalloutClickedEventArgs_GestureType_
+  commentId: Overload:Mapsui.UI.Maui.CalloutClickedEventArgs.GestureType
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.CalloutClickedEventArgs.GestureType
+  nameWithType: CalloutClickedEventArgs.GestureType
 - uid: Mapsui.UI.Maui.CalloutClickedEventArgs.Handled
   name: Handled
   href: pages/Mapsui.UI.Maui.CalloutClickedEventArgs.html#Mapsui_UI_Maui_CalloutClickedEventArgs_Handled
@@ -34067,19 +34181,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.CalloutClickedEventArgs.ScreenPoint
   nameWithType: CalloutClickedEventArgs.ScreenPoint
-- uid: Mapsui.UI.Maui.CalloutClickedEventArgs.TapType
-  name: TapType
-  href: pages/Mapsui.UI.Maui.CalloutClickedEventArgs.html#Mapsui_UI_Maui_CalloutClickedEventArgs_TapType
-  commentId: P:Mapsui.UI.Maui.CalloutClickedEventArgs.TapType
-  fullName: Mapsui.UI.Maui.CalloutClickedEventArgs.TapType
-  nameWithType: CalloutClickedEventArgs.TapType
-- uid: Mapsui.UI.Maui.CalloutClickedEventArgs.TapType*
-  name: TapType
-  href: pages/Mapsui.UI.Maui.CalloutClickedEventArgs.html#Mapsui_UI_Maui_CalloutClickedEventArgs_TapType_
-  commentId: Overload:Mapsui.UI.Maui.CalloutClickedEventArgs.TapType
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.CalloutClickedEventArgs.TapType
-  nameWithType: CalloutClickedEventArgs.TapType
 - uid: Mapsui.UI.Maui.Circle
   name: Circle
   href: pages/Mapsui.UI.Maui.Circle.html
@@ -34393,6 +34494,19 @@ references:
   commentId: T:Mapsui.UI.Maui.DrawableClickedEventArgs
   fullName: Mapsui.UI.Maui.DrawableClickedEventArgs
   nameWithType: DrawableClickedEventArgs
+- uid: Mapsui.UI.Maui.DrawableClickedEventArgs.GestureType
+  name: GestureType
+  href: pages/Mapsui.UI.Maui.DrawableClickedEventArgs.html#Mapsui_UI_Maui_DrawableClickedEventArgs_GestureType
+  commentId: P:Mapsui.UI.Maui.DrawableClickedEventArgs.GestureType
+  fullName: Mapsui.UI.Maui.DrawableClickedEventArgs.GestureType
+  nameWithType: DrawableClickedEventArgs.GestureType
+- uid: Mapsui.UI.Maui.DrawableClickedEventArgs.GestureType*
+  name: GestureType
+  href: pages/Mapsui.UI.Maui.DrawableClickedEventArgs.html#Mapsui_UI_Maui_DrawableClickedEventArgs_GestureType_
+  commentId: Overload:Mapsui.UI.Maui.DrawableClickedEventArgs.GestureType
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.DrawableClickedEventArgs.GestureType
+  nameWithType: DrawableClickedEventArgs.GestureType
 - uid: Mapsui.UI.Maui.DrawableClickedEventArgs.Handled
   name: Handled
   href: pages/Mapsui.UI.Maui.DrawableClickedEventArgs.html#Mapsui_UI_Maui_DrawableClickedEventArgs_Handled
@@ -34432,19 +34546,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.DrawableClickedEventArgs.ScreenPoint
   nameWithType: DrawableClickedEventArgs.ScreenPoint
-- uid: Mapsui.UI.Maui.DrawableClickedEventArgs.TapType
-  name: TapType
-  href: pages/Mapsui.UI.Maui.DrawableClickedEventArgs.html#Mapsui_UI_Maui_DrawableClickedEventArgs_TapType
-  commentId: P:Mapsui.UI.Maui.DrawableClickedEventArgs.TapType
-  fullName: Mapsui.UI.Maui.DrawableClickedEventArgs.TapType
-  nameWithType: DrawableClickedEventArgs.TapType
-- uid: Mapsui.UI.Maui.DrawableClickedEventArgs.TapType*
-  name: TapType
-  href: pages/Mapsui.UI.Maui.DrawableClickedEventArgs.html#Mapsui_UI_Maui_DrawableClickedEventArgs_TapType_
-  commentId: Overload:Mapsui.UI.Maui.DrawableClickedEventArgs.TapType
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.DrawableClickedEventArgs.TapType
-  nameWithType: DrawableClickedEventArgs.TapType
 - uid: Mapsui.UI.Maui.Extensions
   name: Mapsui.UI.Maui.Extensions
   href: pages/Mapsui.UI.Maui.Extensions.html
@@ -34633,15 +34734,15 @@ references:
   commentId: T:Mapsui.UI.Maui.MapClickedEventArgs
   fullName: Mapsui.UI.Maui.MapClickedEventArgs
   nameWithType: MapClickedEventArgs
-- uid: Mapsui.UI.Maui.MapClickedEventArgs.#ctor(Mapsui.UI.Maui.Position,Mapsui.Manipulations.TapType)
-  name: MapClickedEventArgs(Position, TapType)
-  href: pages/Mapsui.UI.Maui.MapClickedEventArgs.html#Mapsui_UI_Maui_MapClickedEventArgs__ctor_Mapsui_UI_Maui_Position_Mapsui_Manipulations_TapType_
-  commentId: M:Mapsui.UI.Maui.MapClickedEventArgs.#ctor(Mapsui.UI.Maui.Position,Mapsui.Manipulations.TapType)
-  name.vb: New(Position, TapType)
-  fullName: Mapsui.UI.Maui.MapClickedEventArgs.MapClickedEventArgs(Mapsui.UI.Maui.Position, Mapsui.Manipulations.TapType)
-  fullName.vb: Mapsui.UI.Maui.MapClickedEventArgs.New(Mapsui.UI.Maui.Position, Mapsui.Manipulations.TapType)
-  nameWithType: MapClickedEventArgs.MapClickedEventArgs(Position, TapType)
-  nameWithType.vb: MapClickedEventArgs.New(Position, TapType)
+- uid: Mapsui.UI.Maui.MapClickedEventArgs.#ctor(Mapsui.UI.Maui.Position,Mapsui.Manipulations.GestureType)
+  name: MapClickedEventArgs(Position, GestureType)
+  href: pages/Mapsui.UI.Maui.MapClickedEventArgs.html#Mapsui_UI_Maui_MapClickedEventArgs__ctor_Mapsui_UI_Maui_Position_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Maui.MapClickedEventArgs.#ctor(Mapsui.UI.Maui.Position,Mapsui.Manipulations.GestureType)
+  name.vb: New(Position, GestureType)
+  fullName: Mapsui.UI.Maui.MapClickedEventArgs.MapClickedEventArgs(Mapsui.UI.Maui.Position, Mapsui.Manipulations.GestureType)
+  fullName.vb: Mapsui.UI.Maui.MapClickedEventArgs.New(Mapsui.UI.Maui.Position, Mapsui.Manipulations.GestureType)
+  nameWithType: MapClickedEventArgs.MapClickedEventArgs(Position, GestureType)
+  nameWithType.vb: MapClickedEventArgs.New(Position, GestureType)
 - uid: Mapsui.UI.Maui.MapClickedEventArgs.#ctor*
   name: MapClickedEventArgs
   href: pages/Mapsui.UI.Maui.MapClickedEventArgs.html#Mapsui_UI_Maui_MapClickedEventArgs__ctor_
@@ -34652,6 +34753,19 @@ references:
   fullName.vb: Mapsui.UI.Maui.MapClickedEventArgs.New
   nameWithType: MapClickedEventArgs.MapClickedEventArgs
   nameWithType.vb: MapClickedEventArgs.New
+- uid: Mapsui.UI.Maui.MapClickedEventArgs.GestureType
+  name: GestureType
+  href: pages/Mapsui.UI.Maui.MapClickedEventArgs.html#Mapsui_UI_Maui_MapClickedEventArgs_GestureType
+  commentId: P:Mapsui.UI.Maui.MapClickedEventArgs.GestureType
+  fullName: Mapsui.UI.Maui.MapClickedEventArgs.GestureType
+  nameWithType: MapClickedEventArgs.GestureType
+- uid: Mapsui.UI.Maui.MapClickedEventArgs.GestureType*
+  name: GestureType
+  href: pages/Mapsui.UI.Maui.MapClickedEventArgs.html#Mapsui_UI_Maui_MapClickedEventArgs_GestureType_
+  commentId: Overload:Mapsui.UI.Maui.MapClickedEventArgs.GestureType
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapClickedEventArgs.GestureType
+  nameWithType: MapClickedEventArgs.GestureType
 - uid: Mapsui.UI.Maui.MapClickedEventArgs.Handled
   name: Handled
   href: pages/Mapsui.UI.Maui.MapClickedEventArgs.html#Mapsui_UI_Maui_MapClickedEventArgs_Handled
@@ -34678,19 +34792,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapClickedEventArgs.Point
   nameWithType: MapClickedEventArgs.Point
-- uid: Mapsui.UI.Maui.MapClickedEventArgs.TapType
-  name: TapType
-  href: pages/Mapsui.UI.Maui.MapClickedEventArgs.html#Mapsui_UI_Maui_MapClickedEventArgs_TapType
-  commentId: P:Mapsui.UI.Maui.MapClickedEventArgs.TapType
-  fullName: Mapsui.UI.Maui.MapClickedEventArgs.TapType
-  nameWithType: MapClickedEventArgs.TapType
-- uid: Mapsui.UI.Maui.MapClickedEventArgs.TapType*
-  name: TapType
-  href: pages/Mapsui.UI.Maui.MapClickedEventArgs.html#Mapsui_UI_Maui_MapClickedEventArgs_TapType_
-  commentId: Overload:Mapsui.UI.Maui.MapClickedEventArgs.TapType
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapClickedEventArgs.TapType
-  nameWithType: MapClickedEventArgs.TapType
 - uid: Mapsui.UI.Maui.MapControl
   name: MapControl
   href: pages/Mapsui.UI.Maui.MapControl.html
@@ -36255,6 +36356,19 @@ references:
   commentId: T:Mapsui.UI.Maui.PinClickedEventArgs
   fullName: Mapsui.UI.Maui.PinClickedEventArgs
   nameWithType: PinClickedEventArgs
+- uid: Mapsui.UI.Maui.PinClickedEventArgs.GestureType
+  name: GestureType
+  href: pages/Mapsui.UI.Maui.PinClickedEventArgs.html#Mapsui_UI_Maui_PinClickedEventArgs_GestureType
+  commentId: P:Mapsui.UI.Maui.PinClickedEventArgs.GestureType
+  fullName: Mapsui.UI.Maui.PinClickedEventArgs.GestureType
+  nameWithType: PinClickedEventArgs.GestureType
+- uid: Mapsui.UI.Maui.PinClickedEventArgs.GestureType*
+  name: GestureType
+  href: pages/Mapsui.UI.Maui.PinClickedEventArgs.html#Mapsui_UI_Maui_PinClickedEventArgs_GestureType_
+  commentId: Overload:Mapsui.UI.Maui.PinClickedEventArgs.GestureType
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.PinClickedEventArgs.GestureType
+  nameWithType: PinClickedEventArgs.GestureType
 - uid: Mapsui.UI.Maui.PinClickedEventArgs.Handled
   name: Handled
   href: pages/Mapsui.UI.Maui.PinClickedEventArgs.html#Mapsui_UI_Maui_PinClickedEventArgs_Handled
@@ -36294,19 +36408,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.PinClickedEventArgs.Point
   nameWithType: PinClickedEventArgs.Point
-- uid: Mapsui.UI.Maui.PinClickedEventArgs.TapType
-  name: TapType
-  href: pages/Mapsui.UI.Maui.PinClickedEventArgs.html#Mapsui_UI_Maui_PinClickedEventArgs_TapType
-  commentId: P:Mapsui.UI.Maui.PinClickedEventArgs.TapType
-  fullName: Mapsui.UI.Maui.PinClickedEventArgs.TapType
-  nameWithType: PinClickedEventArgs.TapType
-- uid: Mapsui.UI.Maui.PinClickedEventArgs.TapType*
-  name: TapType
-  href: pages/Mapsui.UI.Maui.PinClickedEventArgs.html#Mapsui_UI_Maui_PinClickedEventArgs_TapType_
-  commentId: Overload:Mapsui.UI.Maui.PinClickedEventArgs.TapType
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.PinClickedEventArgs.TapType
-  nameWithType: PinClickedEventArgs.TapType
 - uid: Mapsui.UI.Maui.PinType
   name: PinType
   href: pages/Mapsui.UI.Maui.PinType.html
@@ -37174,15 +37275,15 @@ references:
   commentId: T:Mapsui.UI.TappedEventArgs
   fullName: Mapsui.UI.TappedEventArgs
   nameWithType: TappedEventArgs
-- uid: Mapsui.UI.TappedEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType)
-  name: TappedEventArgs(ScreenPosition, TapType)
-  href: pages/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_Manipulations_TapType_
-  commentId: M:Mapsui.UI.TappedEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.TapType)
-  name.vb: New(ScreenPosition, TapType)
-  fullName: Mapsui.UI.TappedEventArgs.TappedEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.TapType)
-  fullName.vb: Mapsui.UI.TappedEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.TapType)
-  nameWithType: TappedEventArgs.TappedEventArgs(ScreenPosition, TapType)
-  nameWithType.vb: TappedEventArgs.New(ScreenPosition, TapType)
+- uid: Mapsui.UI.TappedEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.GestureType)
+  name: TappedEventArgs(ScreenPosition, GestureType)
+  href: pages/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.TappedEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.Manipulations.GestureType)
+  name.vb: New(ScreenPosition, GestureType)
+  fullName: Mapsui.UI.TappedEventArgs.TappedEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.GestureType)
+  fullName.vb: Mapsui.UI.TappedEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.Manipulations.GestureType)
+  nameWithType: TappedEventArgs.TappedEventArgs(ScreenPosition, GestureType)
+  nameWithType.vb: TappedEventArgs.New(ScreenPosition, GestureType)
 - uid: Mapsui.UI.TappedEventArgs.#ctor*
   name: TappedEventArgs
   href: pages/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs__ctor_
@@ -37193,6 +37294,19 @@ references:
   fullName.vb: Mapsui.UI.TappedEventArgs.New
   nameWithType: TappedEventArgs.TappedEventArgs
   nameWithType.vb: TappedEventArgs.New
+- uid: Mapsui.UI.TappedEventArgs.GestureType
+  name: GestureType
+  href: pages/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs_GestureType
+  commentId: P:Mapsui.UI.TappedEventArgs.GestureType
+  fullName: Mapsui.UI.TappedEventArgs.GestureType
+  nameWithType: TappedEventArgs.GestureType
+- uid: Mapsui.UI.TappedEventArgs.GestureType*
+  name: GestureType
+  href: pages/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs_GestureType_
+  commentId: Overload:Mapsui.UI.TappedEventArgs.GestureType
+  isSpec: "True"
+  fullName: Mapsui.UI.TappedEventArgs.GestureType
+  nameWithType: TappedEventArgs.GestureType
 - uid: Mapsui.UI.TappedEventArgs.Handled
   name: Handled
   href: pages/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs_Handled
@@ -37219,19 +37333,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.TappedEventArgs.ScreenPosition
   nameWithType: TappedEventArgs.ScreenPosition
-- uid: Mapsui.UI.TappedEventArgs.TapType
-  name: TapType
-  href: pages/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs_TapType
-  commentId: P:Mapsui.UI.TappedEventArgs.TapType
-  fullName: Mapsui.UI.TappedEventArgs.TapType
-  nameWithType: TappedEventArgs.TapType
-- uid: Mapsui.UI.TappedEventArgs.TapType*
-  name: TapType
-  href: pages/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs_TapType_
-  commentId: Overload:Mapsui.UI.TappedEventArgs.TapType
-  isSpec: "True"
-  fullName: Mapsui.UI.TappedEventArgs.TapType
-  nameWithType: TappedEventArgs.TapType
 - uid: Mapsui.UI.WinUI
   name: Mapsui.UI.WinUI
   href: pages/Mapsui.UI.WinUI.html
@@ -40665,7 +40766,14 @@ references:
 - uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
   name: Tapped
   href: pages/Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_Tapped
-  commentId: F:Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
+  commentId: P:Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
+  fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
+  nameWithType: ButtonWidget.Tapped
+- uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped*
+  name: Tapped
+  href: pages/Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_Tapped_
+  commentId: Overload:Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
+  isSpec: "True"
   fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
   nameWithType: ButtonWidget.Tapped
 - uid: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
@@ -41604,15 +41712,15 @@ references:
   commentId: T:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs
   fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs
   nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.#ctor(Mapsui.Widgets.InfoWidgets.RulerWidget.TapType)
-  name: RulerWidgetUpdatedEventArgs(TapType)
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs__ctor_Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_
-  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.#ctor(Mapsui.Widgets.InfoWidgets.RulerWidget.TapType)
-  name.vb: New(TapType)
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.RulerWidgetUpdatedEventArgs(Mapsui.Widgets.InfoWidgets.RulerWidget.TapType)
-  fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.New(Mapsui.Widgets.InfoWidgets.RulerWidget.TapType)
-  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.RulerWidgetUpdatedEventArgs(RulerWidget.TapType)
-  nameWithType.vb: RulerWidget.RulerWidgetUpdatedEventArgs.New(RulerWidget.TapType)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.#ctor(Mapsui.Manipulations.GestureType)
+  name: RulerWidgetUpdatedEventArgs(GestureType)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs__ctor_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.#ctor(Mapsui.Manipulations.GestureType)
+  name.vb: New(GestureType)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.RulerWidgetUpdatedEventArgs(Mapsui.Manipulations.GestureType)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.New(Mapsui.Manipulations.GestureType)
+  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.RulerWidgetUpdatedEventArgs(GestureType)
+  nameWithType.vb: RulerWidget.RulerWidgetUpdatedEventArgs.New(GestureType)
 - uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.#ctor*
   name: RulerWidgetUpdatedEventArgs
   href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs__ctor_
@@ -41623,19 +41731,19 @@ references:
   fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.New
   nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.RulerWidgetUpdatedEventArgs
   nameWithType.vb: RulerWidget.RulerWidgetUpdatedEventArgs.New
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
-  name: TapType
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs_TapType
-  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
-  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.TapType
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType*
-  name: TapType
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs_TapType_
-  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.GestureType
+  name: GestureType
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs_GestureType
+  commentId: P:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.GestureType
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.GestureType
+  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.GestureType
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.GestureType*
+  name: GestureType
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html#Mapsui_Widgets_InfoWidgets_RulerWidget_RulerWidgetUpdatedEventArgs_GestureType_
+  commentId: Overload:Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.GestureType
   isSpec: "True"
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.TapType
-  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.TapType
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.GestureType
+  nameWithType: RulerWidget.RulerWidgetUpdatedEventArgs.GestureType
 - uid: Mapsui.Widgets.InfoWidgets.RulerWidget.ShowInfoNextToRuler
   name: ShowInfoNextToRuler
   href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_ShowInfoNextToRuler
@@ -41678,36 +41786,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.StartPosition
   nameWithType: RulerWidget.StartPosition
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType
-  name: RulerWidget.TapType
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html
-  commentId: T:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType
-  nameWithType: RulerWidget.TapType
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Down
-  name: Down
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html#Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_Down
-  commentId: F:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Down
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Down
-  nameWithType: RulerWidget.TapType.Down
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Drag
-  name: Drag
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html#Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_Drag
-  commentId: F:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Drag
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Drag
-  nameWithType: RulerWidget.TapType.Drag
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Hover
-  name: Hover
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html#Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_Hover
-  commentId: F:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Hover
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Hover
-  nameWithType: RulerWidget.TapType.Hover
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Up
-  name: Up
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html#Mapsui_Widgets_InfoWidgets_RulerWidget_TapType_Up
-  commentId: F:Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Up
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.Up
-  nameWithType: RulerWidget.TapType.Up
 - uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
   name: ShowLoggingInMap
   href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html
@@ -42353,15 +42431,15 @@ references:
   commentId: T:Mapsui.Widgets.WidgetEventArgs
   fullName: Mapsui.Widgets.WidgetEventArgs
   nameWithType: WidgetEventArgs
-- uid: Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,System.Boolean,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name: WidgetEventArgs(ScreenPosition, MPoint, TapType, Viewport, bool, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_TapType_Mapsui_Viewport_System_Boolean_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
-  commentId: M:Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.TapType,Mapsui.Viewport,System.Boolean,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name.vb: New(ScreenPosition, MPoint, TapType, Viewport, Boolean, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  fullName: Mapsui.Widgets.WidgetEventArgs.WidgetEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, bool, bool, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  fullName.vb: Mapsui.Widgets.WidgetEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.TapType, Mapsui.Viewport, Boolean, Boolean, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  nameWithType: WidgetEventArgs.WidgetEventArgs(ScreenPosition, MPoint, TapType, Viewport, bool, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  nameWithType.vb: WidgetEventArgs.New(ScreenPosition, MPoint, TapType, Viewport, Boolean, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+- uid: Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: WidgetEventArgs(ScreenPosition, MPoint, GestureType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, GestureType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.Widgets.WidgetEventArgs.WidgetEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, bool, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.Widgets.WidgetEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Boolean, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: WidgetEventArgs.WidgetEventArgs(ScreenPosition, MPoint, GestureType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: WidgetEventArgs.New(ScreenPosition, MPoint, GestureType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
 - uid: Mapsui.Widgets.WidgetEventArgs.#ctor*
   name: WidgetEventArgs
   href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs__ctor_
@@ -42372,19 +42450,6 @@ references:
   fullName.vb: Mapsui.Widgets.WidgetEventArgs.New
   nameWithType: WidgetEventArgs.WidgetEventArgs
   nameWithType.vb: WidgetEventArgs.New
-- uid: Mapsui.Widgets.WidgetEventArgs.LeftButton
-  name: LeftButton
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_LeftButton
-  commentId: P:Mapsui.Widgets.WidgetEventArgs.LeftButton
-  fullName: Mapsui.Widgets.WidgetEventArgs.LeftButton
-  nameWithType: WidgetEventArgs.LeftButton
-- uid: Mapsui.Widgets.WidgetEventArgs.LeftButton*
-  name: LeftButton
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_LeftButton_
-  commentId: Overload:Mapsui.Widgets.WidgetEventArgs.LeftButton
-  isSpec: "True"
-  fullName: Mapsui.Widgets.WidgetEventArgs.LeftButton
-  nameWithType: WidgetEventArgs.LeftButton
 - uid: Mapsui.Widgets.WidgetEventArgs.ShiftPressed
   name: ShiftPressed
   href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs_ShiftPressed

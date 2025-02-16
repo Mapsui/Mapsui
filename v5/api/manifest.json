@@ -1442,6 +1442,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Manipulations.GestureType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Manipulations.GestureType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Manipulations.Manipulation.yml",
       "output": {
         ".html": {
@@ -1476,16 +1486,6 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Manipulations.TapGestureTracker.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Manipulations.TapType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "pages/Mapsui.Manipulations.TapType.html"
         }
       },
       "version": ""
@@ -1576,6 +1576,16 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.MapBuilder.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.MapEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.MapEventArgs.html"
         }
       },
       "version": ""
@@ -5276,16 +5286,6 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidgetUpdatedEventArgs.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.TapType.html"
         }
       },
       "version": ""
