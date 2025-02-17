@@ -40,10 +40,6 @@ public class DataChangedEventArgs : EventArgs
     {
     }
 
-    public DataChangedEventArgs(string layerName) : this(null, false, null, layerName)
-    {
-    }
-
     public DataChangedEventArgs(Exception? error, bool cancelled, object? info)
         : this(error, cancelled, info, string.Empty)
     {

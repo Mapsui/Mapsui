@@ -306,7 +306,11 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private float GetPixelDensity()
     {
-        return (float)(_canvas!.CanvasSize.Width / _canvas.ActualWidth);
+#if __WINUI__
+        return (float)(XamlRoot?.RasterizationScale ?? 1f);
+#else
+        return (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+#endif
     }
 
 #pragma warning disable IDISP023 // Don't use reference types in finalizer context

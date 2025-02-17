@@ -20,7 +20,7 @@ public class DelayerTests
         for (var i = 0; i < 1000; i++)
         {
             delayer.ExecuteDelayed(() => delayedCalls.Add(i));
-            await Task.Delay(10);
+            await Task.Delay(2);
         }
 
         // Assert

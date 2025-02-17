@@ -11,17 +11,19 @@ namespace Mapsui.Tests.Memory;
 public class MapControlTests
 {
     [Test]
+    [Ignore("This Test produced a Memory Leak because Dispose is not called")]
     public void MapIsAliveAfterUsage()
     {
+        // When this Test passes it means the Dispose needs to be called to avoid memory leaks
         var weak = CreateMapControl();
 
         GC.Collect();
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        // The MapControl is still alive because it is not disposed
-        Assert.That(weak.IsAlive, Is.True);
+        Assert.IsTrue(weak.IsAlive);
     }
+
 
     [Test]
     public void MapControlIsNotAliveAfterUsage()

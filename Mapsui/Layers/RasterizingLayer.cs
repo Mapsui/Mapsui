@@ -39,6 +39,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     /// <param name="renderFormat">render Format png is default and skp is skia picture</param>
     public RasterizingLayer(
         ILayer layer,
+        IRenderer renderer,
         int delayBeforeRasterize = 1000,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
@@ -101,7 +102,10 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 var features = new RasterFeature[1];
                 features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
                 _cache.PushRange(features);
-                OnDataChanged(new DataChangedEventArgs(Name));
+#if DEBUG
+                Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
+#endif
+                OnDataChanged(new DataChangedEventArgs());
 
                 if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher)
                     Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
