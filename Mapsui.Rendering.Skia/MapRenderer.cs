@@ -29,8 +29,6 @@ public class MapRenderer : IRenderer
     private readonly IRenderCache _renderCache = new RenderCache();
     private long _currentIteration;
 
-    private Stopwatch t = new Stopwatch();
-
     static MapRenderer()
     {
         DefaultRendererFactory.Create = () => new MapRenderer();
@@ -244,8 +242,6 @@ public class MapRenderer : IRenderer
     {
         try
         {
-            t.Start();
-            Debug.Print($"{t.Elapsed}");
             layers = layers.ToList();
 
             VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });

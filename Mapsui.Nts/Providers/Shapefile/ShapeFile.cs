@@ -485,6 +485,41 @@ public class ShapeFile : IProvider, IDisposable
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
+        var features1 = new List<GeometryFeature>();
+        return Task.FromResult((IEnumerable<IFeature>)features1);
+        lock (_syncRoot)
+        {
+            Open();
+            try
+            {
+                //Use the spatial index to get a list of features whose BoundingBox intersects bbox
+                var objectList = GetObjectIDsInViewPrivate(fetchInfo.Extent);
+                var features = new List<GeometryFeature>();
+
+                foreach (var index in objectList)
+                {
+                    var feature = _dbaseFile?.GetFeature(index, features);
+                    if (feature != null)
+                    {
+                        feature.Geometry = ReadGeometry(index);
+                        if (feature.Geometry?.EnvelopeInternal == null) continue;
+                        if (!feature.Geometry.EnvelopeInternal.Intersects(fetchInfo.Extent.ToEnvelope())) continue;
+                        if (FilterDelegate != null && !FilterDelegate(feature)) continue;
+                        features.Add(feature);
+                    }
+                }
+                return Task.FromResult((IEnumerable<IFeature>)features);
+            }
+            finally
+            {
+                Close();
+            }
+        }
+    }
+
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
+    public Task<IEnumerable<IFeature>> GetFeaturesAsync2(FetchInfo fetchInfo)
+    {
         lock (_syncRoot)
         {
             Open();
@@ -495,29 +530,16 @@ public class ShapeFile : IProvider, IDisposable
 
                 var features = new List<GeometryFeature>();
 
-                //LoadShapeCache(objectList, fetchInfo);
-
-                //foreach (var index in objectList)
-                //{
-                //    var feature = _dbaseFile?.GetFeature(index, features);
-                //    if (feature != null)
-                //    {
-                //        //feature.Geometry = ReadGeometry(index);
-                //        feature.Geometry = ReadGeometry3(index);
-                //        if (feature.Geometry?.EnvelopeInternal == null) continue;
-                //        if (!feature.Geometry.EnvelopeInternal.Intersects(fetchInfo.Extent.ToEnvelope())) continue;
-                //        if (FilterDelegate != null && !FilterDelegate(feature)) continue;
-                //        features.Add(feature);
-                //    }
-                //}
-
                 foreach (var index in objectList)
                 {
                     _shapeCache.TryGetValue(index, out var feature);
                     feature ??= CacheFeature(index, fetchInfo);
 
+                    //var feature = _dbaseFile?.GetFeature(index, features);
+
                     if (feature != null)
                     {
+                        //feature.Geometry = ReadGeometry(index);
                         if (feature.Geometry?.EnvelopeInternal == null) continue;
                         var envelope = fetchInfo.Extent.ToEnvelope();
                         if (!feature.Geometry.EnvelopeInternal.Intersects(envelope)) continue;
@@ -526,14 +548,14 @@ public class ShapeFile : IProvider, IDisposable
                         var envelopeGeometry = new GeometryFactory().ToGeometry(envelope);
                         Geometry geometry = feature.Geometry;
                         //clip geometry if it is not completely inside the envelope
-                        if (!envelopeGeometry.Contains(geometry))
-                        {
-                            ClipAndSimplify(fetchInfo, features, envelopeGeometry, geometry);
-                        }
-                        else
-                        {
-                            Simplify(fetchInfo, features, geometry);
-                        }
+                        //if (!envelopeGeometry.Contains(geometry))
+                        //{
+                        //    ClipAndSimplify(fetchInfo, features, envelopeGeometry, geometry);
+                        //}
+                        //else
+                        //{
+                        Simplify(fetchInfo, features, geometry);
+                        //}
                     }
                 }
 
@@ -611,26 +633,6 @@ public class ShapeFile : IProvider, IDisposable
         Simplify(fetchInfo, features, geometry);
 
         return geometry;
-    }
-
-    private static Polygon? CreatePolygon2(LinearRing[] rings)
-    {
-        if (rings == null || rings.Length == 0)
-            return null;
-
-        // The first ring is used as the exterior ring.
-        LinearRing exterior = rings[0];
-
-        // If there are more rings, they are used as interior holes.
-        if (rings.Length > 1)
-        {
-            LinearRing[] holes = rings.Skip(1).ToArray();
-            return new Polygon(exterior, holes);
-        }
-        else
-        {
-            return new Polygon(exterior);
-        }
     }
 
     private static Polygon? CreatePolygon(List<LinearRing> poly)
@@ -1084,236 +1086,6 @@ public class ShapeFile : IProvider, IDisposable
         }
 
         return null;
-    }
-
-    private void LoadShapeCache(Collection<uint> objectList, FetchInfo fetchInfo)
-    {
-        if (_shapeCache == null || _shapeCache.Count > 0) return; // Already loaded
-
-        var features = new List<GeometryFeature>();
-        foreach (var index in objectList)
-        {
-            var feature = _dbaseFile?.GetFeature(index, features);
-            if (feature != null)
-            {
-                try
-                {
-                    feature.Geometry = ReadGeometry(index);
-                }
-                catch (Exception e)
-                {
-                    continue;
-                }
-                if (feature.Geometry == null)
-                    continue;
-                if (feature.Geometry?.EnvelopeInternal == null) continue;
-                if (!feature.Geometry.EnvelopeInternal.Intersects(fetchInfo.Extent.ToEnvelope())) continue;
-                if (FilterDelegate != null && !FilterDelegate(feature)) continue;
-                features.Add(feature);
-
-                if (feature.Geometry is not null)
-                    _shapeCache[index] = feature;
-            }
-        }
-
-        //_brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); // Skip record number and content length
-        //var type = (ShapeType)_brShapeFile.ReadInt32(); //Shape type
-
-        //while (_brShapeFile.BaseStream.Position < _brShapeFile.BaseStream.Length)
-        //{
-        //    uint oid = GetNextOid(_brShapeFile); // Read OID from the file
-        //    var geometry = ReadGeometryFromFile(_brShapeFile);
-        //    if (geometry is not null)
-        //        _shapeCache[oid] = geometry;
-        //}
-    }
-
-    private uint GetNextOid(BinaryReader br)
-    {
-        // Read record number (4 bytes, big-endian)
-        byte[] recordNumberBytes = br.ReadBytes(4);
-        Array.Reverse(recordNumberBytes); // Convert to little-endian
-        uint oid = BitConverter.ToUInt32(recordNumberBytes, 0);
-
-        // Skip content length (4 bytes, big-endian)
-        br.BaseStream.Seek(4, SeekOrigin.Current);
-
-        return oid;
-    }
-
-    private Geometry? ReadGeometry3(uint oid)
-    {
-        //return _shapeCache.TryGetValue(oid, out var geometry) ? geometry : null;
-
-        return null;
-    }
-
-    private Geometry? ReadGeometryFromFile(BinaryReader br)
-    {
-        ShapeType type = (ShapeType)br.ReadInt32(); // Read shape type
-
-        if (type == ShapeType.Null)
-            return null;
-
-        if (type == ShapeType.Point || type == ShapeType.PointM || type == ShapeType.PointZ)
-        {
-            return new Point(br.ReadDouble(), br.ReadDouble());
-        }
-
-        if (type == ShapeType.Multipoint || type == ShapeType.MultiPointM || type == ShapeType.MultiPointZ)
-        {
-            br.BaseStream.Seek(32, SeekOrigin.Current); // Skip min/max box
-            int nPoints = br.ReadInt32();
-            if (nPoints == 0) return null;
-
-            List<Point> points = new();
-            for (int i = 0; i < nPoints; i++)
-                points.Add(new Point(br.ReadDouble(), br.ReadDouble()));
-
-            return new MultiPoint(points.ToArray());
-        }
-
-        if (type == ShapeType.PolyLine || type == ShapeType.Polygon ||
-            type == ShapeType.PolyLineM || type == ShapeType.PolygonM ||
-            type == ShapeType.PolyLineZ || type == ShapeType.PolygonZ)
-        {
-            br.BaseStream.Seek(32, SeekOrigin.Current); // Skip min/max box
-
-            int nParts = br.ReadInt32();
-            if (nParts == 0) return null;
-            int nPoints = br.ReadInt32();
-
-            int[] segments = new int[nParts + 1];
-            for (int i = 0; i < nParts; i++)
-                segments[i] = br.ReadInt32();
-            segments[nParts] = nPoints; // End of last segment
-
-            List<LinearRing> rings = new();
-            for (int ringId = 0; ringId < nParts; ringId++)
-            {
-                List<Coordinate> ring = new();
-                for (int i = segments[ringId]; i < segments[ringId + 1]; i++)
-                    ring.Add(new Coordinate(br.ReadDouble(), br.ReadDouble()));
-                rings.Add(new LinearRing(ring.ToArray()));
-            }
-
-            return CreatePolygon(rings);
-        }
-
-        throw new ApplicationException($"Unsupported shape type {type}");
-    }
-
-    /// <summary>
-    /// Reads and parses the geometry with ID 'oid' from the ShapeFile
-    /// </summary>
-    /// <remarks><see cref="FilterDelegate">Filtering</see> is not applied to this method</remarks>
-    /// <param name="oid">Object ID</param>
-    /// <returns>geometry</returns>
-    // ReSharper disable once CyclomaticComplexity // Fix when changes need to be made here
-    private Geometry? ReadGeometry2(uint oid)
-    {
-        if (_brShapeFile is null) return null;
-        _brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); // Skip record number and content length
-        var type = (ShapeType)_brShapeFile.ReadInt32(); //Shape type
-        if (type == ShapeType.Null)
-            return null;
-        if (_shapeType == ShapeType.Point || _shapeType == ShapeType.PointM || _shapeType == ShapeType.PointZ)
-            return new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
-        if (_shapeType == ShapeType.Multipoint || _shapeType == ShapeType.MultiPointM ||
-            _shapeType == ShapeType.MultiPointZ)
-        {
-            _brShapeFile.BaseStream.Seek(32 + _brShapeFile.BaseStream.Position, 0); // Skip min/max box
-            var nPoints = _brShapeFile.ReadInt32(); // Get the number of points
-            if (nPoints == 0)
-                return null;
-
-            var points = new List<Point>();
-            for (var i = 0; i < nPoints; i++)
-                points.Add(new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
-
-            return new MultiPoint(points.ToArray());
-        }
-        if (_shapeType == ShapeType.PolyLine || _shapeType == ShapeType.Polygon ||
-            _shapeType == ShapeType.PolyLineM || _shapeType == ShapeType.PolygonM ||
-            _shapeType == ShapeType.PolyLineZ || _shapeType == ShapeType.PolygonZ)
-        {
-            _brShapeFile.BaseStream.Seek(32 + _brShapeFile.BaseStream.Position, 0); // Skip min/max box
-
-            var nParts = _brShapeFile.ReadInt32(); // Get number of parts (segments)
-            if (nParts == 0)
-                return null;
-            var nPoints = _brShapeFile.ReadInt32(); // Get number of points
-
-            var segments = new int[nParts + 1];
-            //Read in the segment indexes
-            for (var b = 0; b < nParts; b++)
-                segments[b] = _brShapeFile.ReadInt32();
-            //add end point
-            segments[nParts] = nPoints;
-
-            if ((int)_shapeType % 10 == 3)
-            {
-                var lineStrings = new List<LineString>();
-                for (var lineId = 0; lineId < nParts; lineId++)
-                {
-                    var coordinates = new List<Coordinate>();
-                    for (var i = segments[lineId]; i < segments[lineId + 1]; i++)
-                        coordinates.Add(new Coordinate(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
-                    lineStrings.Add(new LineString(coordinates.ToArray()));
-                }
-                if (lineStrings.Count == 1)
-                    return lineStrings[0];
-                return new MultiLineString(lineStrings.ToArray());
-            }
-            else
-            {
-                // First read all the rings
-                var rings = new List<LinearRing>();
-                for (var ringId = 0; ringId < nParts; ringId++)
-                {
-                    var ring = new List<Coordinate>();
-                    for (var i = segments[ringId]; i < segments[ringId + 1]; i++)
-                        ring.Add(new Coordinate(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
-                    rings.Add(new LinearRing(ring.ToArray()));
-                }
-                var isCounterClockWise = new bool[rings.Count];
-                var polygonCount = 0;
-                for (var i = 0; i < rings.Count; i++)
-                {
-                    isCounterClockWise[i] = rings[i].IsCCW;
-                    if (!isCounterClockWise[i])
-                        polygonCount++;
-                }
-                if (polygonCount == 1) // We only have one polygon
-                {
-                    var p = CreatePolygon(rings);
-                    return p;
-                }
-                else
-                {
-                    var polygons = new List<Polygon>();
-                    var linearRings = new List<LinearRing> { rings[0] };
-
-                    for (var i = 1; i < rings.Count; i++)
-                        if (!isCounterClockWise[i])
-                        {
-                            // The !isCCW indicates this is an outerRing (or shell in NTS)
-                            // So the previous one is done and is added to the list. A new list of linear rings is created for the next polygon.
-                            var p1 = CreatePolygon(linearRings);
-                            if (p1 is not null) polygons.Add(p1);
-                            linearRings = new List<LinearRing> { rings[i] };
-                        }
-                        else
-                            linearRings.Add(rings[i]);
-                    var p = CreatePolygon(linearRings);
-                    if (p is not null) polygons.Add(p);
-
-                    return new MultiPolygon(polygons.ToArray());
-                }
-            }
-        }
-
-        throw new ApplicationException($"Shapefile type {_shapeType} not supported");
     }
 
     /// <summary>
