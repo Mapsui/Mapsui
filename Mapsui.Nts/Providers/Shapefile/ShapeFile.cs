@@ -156,7 +156,6 @@ public class ShapeFile : IProvider, IDisposable
 
     private readonly IProjectionCrs? _projectionCrs;
 
-    private readonly Dictionary<uint, GeometryFeature> _shapeCache = new();
     private MRect? _envelope;
 
     private int _featureCount;
@@ -660,6 +659,108 @@ public class ShapeFile : IProvider, IDisposable
     }
 
     /// <summary>
+    /// Forces a rebuild of the spatial index. If the instance of the ShapeFile provider
+    /// uses a file-based index the file is rewritten to disk.
+    /// </summary>
+    public void RebuildSpatialIndex()
+    {
+        if (_fileBasedIndex)
+        {
+            if (File.Exists(_filename + ".sidx"))
+                File.Delete(_filename + ".sidx");
+            {
+                _tree?.Dispose();
+                _tree = CreateSpatialIndexFromFile(_filename);
+            }
+        }
+        else
+        {
+            _tree?.Dispose();
+            _tree = CreateSpatialIndex();
+        }
+    }
+
+    /// <summary>
+    /// Gets a data row from the data source at the specified index belonging to the specified datatable
+    /// </summary>
+    /// <param name="rowId"></param>
+    /// <param name="features">Data table to feature should belong to.</param>
+    /// <returns></returns>
+    public GeometryFeature? GetFeature(uint rowId, List<GeometryFeature>? features = null)
+    {
+        lock (_syncRoot)
+        {
+            Open();
+
+            try
+            {
+                return GetFeaturePrivate(rowId, features);
+            }
+            finally
+            {
+                Close();
+            }
+        }
+    }
+
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
+    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    {
+        lock (_syncRoot)
+        {
+            Open();
+            try
+            {
+                //Use the spatial index to get a list of features whose BoundingBox intersects bbox
+                var objectList = GetObjectIDsInViewPrivate(fetchInfo.Extent);
+                var features = new List<GeometryFeature>();
+
+                foreach (var index in objectList)
+                {
+                    var feature = _dbaseFile?.GetFeature(index, features);
+                    if (feature != null)
+                    {
+                        feature.Geometry = ReadGeometry(index);
+                        if (feature.Geometry?.EnvelopeInternal == null) continue;
+                        if (!feature.Geometry.EnvelopeInternal.Intersects(fetchInfo.Extent.ToEnvelope())) continue;
+                        if (FilterDelegate != null && !FilterDelegate(feature)) continue;
+                        features.Add(feature);
+                    }
+                }
+                return Task.FromResult((IEnumerable<IFeature>)features);
+            }
+            finally
+            {
+                Close();
+            }
+        }
+    }
+
+    private static Polygon? CreatePolygon(List<LinearRing> poly)
+    {
+        if (poly.Count == 1)
+            return new Polygon(poly[0]);
+        if (poly.Count > 1)
+            return new Polygon(poly[0], poly.Skip(1).ToArray());
+        return null;
+    }
+
+    private void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                Close();
+                _envelope = null;
+                _tree?.Dispose();
+                _tree = null;
+            }
+            _disposed = true;
+        }
+    }
+
+    /// <summary>
     /// Opens the data source
     /// </summary>
     private void Open()
@@ -667,6 +768,60 @@ public class ShapeFile : IProvider, IDisposable
         // TODO:
         // Get a Connector.  The connector returned is guaranteed to be connected and ready to go.
         // Pooling.Connector connector = Pooling.ConnectorPool.ConnectorPoolManager.RequestConnector(this,true);
+
+        if (!_isOpen)
+        {
+            _fsShapeIndex?.Dispose();
+            _fsShapeIndex = new FileStream(_filename.Remove(_filename.Length - 4, 4) + ".shx", FileMode.Open, FileAccess.Read);
+            _brShapeIndex?.Dispose();
+            _brShapeIndex = new BinaryReader(_fsShapeIndex, Encoding.Unicode);
+            _fsShapeFile?.Dispose();
+            _fsShapeFile = new FileStream(_filename, FileMode.Open, FileAccess.Read);
+            _brShapeFile?.Dispose();
+            _brShapeFile = new BinaryReader(_fsShapeFile);
+            InitializeShape(_filename, _fileBasedIndex);
+            _dbaseFile?.Open();
+            _isOpen = true;
+        }
+    }
+
+    /// <summary>
+    /// Closes the data source
+    /// </summary>
+    private void Close()
+    {
+        if (!_disposed)
+            if (_isOpen)
+            {
+                _brShapeIndex?.Dispose();
+                _brShapeFile?.Dispose();
+                _fsShapeFile?.Dispose();
+                _fsShapeIndex?.Dispose();
+                _dbaseFile?.Dispose();
+                _isOpen = false;
+            }
+    }
+
+    private Collection<uint> GetObjectIDsInViewPrivate(MRect? bbox)
+    {
+        if (bbox == null)
+            return new Collection<uint>();
+        if (!_isOpen)
+            throw new ApplicationException("An attempt was made to read from a closed data source");
+        //Use the spatial index to get a list of features whose BoundingBox intersects bbox
+        return _tree!.Search(bbox);
+    }
+
+    private Geometry? GetGeometryPrivate(uint oid)
+    {
+        if (FilterDelegate != null) //Apply filtering
+        {
+            using var fdr = GetFeature(oid);
+            return fdr?.Geometry;
+        }
+
+        return ReadGeometry(oid);
+    }
 
         if (!_isOpen)
         {
@@ -1068,253 +1223,5 @@ public class ShapeFile : IProvider, IDisposable
             return null;
         }
         throw new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file");
-    }
-
-    private GeometryFeature? CacheFeature(uint index, FetchInfo fetchInfo)
-    {
-        var features = new List<GeometryFeature>();
-
-        var feature = _dbaseFile?.GetFeature(index, features);
-        if (feature != null)
-        {
-            feature.Geometry = ReadGeometry(index);
-            if (feature.Geometry?.EnvelopeInternal == null) return null;
-
-            _shapeCache[index] = feature;
-
-            return feature;
-        }
-
-        return null;
-    }
-
-    /// <summary>
-    /// Reads and parses the geometry with ID 'oid' from the ShapeFile
-    /// </summary>
-    /// <remarks><see cref="FilterDelegate">Filtering</see> is not applied to this method</remarks>
-    /// <param name="oid">Object ID</param>
-    /// <returns>geometry</returns>
-    // ReSharper disable once CyclomaticComplexity // Fix when changes need to be made here
-    private Geometry? ReadGeometryTest(uint oid)
-    {
-        if (_brShapeFile is null) return null;
-        _brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); // Skip record number and content length
-        var type = (ShapeType)_brShapeFile.ReadInt32(); //Shape type
-        if (type == ShapeType.Null)
-            return null;
-        if (_shapeType == ShapeType.Point || _shapeType == ShapeType.PointM || _shapeType == ShapeType.PointZ)
-            return new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
-        if (_shapeType == ShapeType.Multipoint || _shapeType == ShapeType.MultiPointM ||
-            _shapeType == ShapeType.MultiPointZ)
-        {
-            _brShapeFile.BaseStream.Seek(32 + _brShapeFile.BaseStream.Position, 0); // Skip min/max box
-            var nPoints = _brShapeFile.ReadInt32(); // Get the number of points
-            if (nPoints == 0)
-                return null;
-
-            var points = new List<Point>();
-            for (var i = 0; i < nPoints; i++)
-                points.Add(new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
-
-            return new MultiPoint(points.ToArray());
-        }
-        if (_shapeType == ShapeType.PolyLine || _shapeType == ShapeType.Polygon ||
-            _shapeType == ShapeType.PolyLineM || _shapeType == ShapeType.PolygonM ||
-            _shapeType == ShapeType.PolyLineZ || _shapeType == ShapeType.PolygonZ)
-        {
-            _brShapeFile.BaseStream.Seek(32 + _brShapeFile.BaseStream.Position, 0); // Skip min/max box
-
-            var nParts = _brShapeFile.ReadInt32(); // Get number of parts (segments)
-            if (nParts == 0)
-                return null;
-            var nPoints = _brShapeFile.ReadInt32(); // Get number of points
-
-            var segments = new int[nParts + 1];
-
-            //Read in the segment indexes
-            for (var b = 0; b < nParts; b++)
-                segments[b] = _brShapeFile.ReadInt32();
-            //add end point
-            segments[nParts] = nPoints;
-
-            int totalDoubleCount = 0;
-            for (int i = 0; i < nParts; i++)
-            {
-                // Number of coordinates in this ring:
-                int coordinateCount = segments[i + 1] - segments[i];
-                // Each coordinate has 2 doubles (x and y)
-                totalDoubleCount += coordinateCount * 2;
-            }
-
-            // Read all the required bytes at once
-            int byteCount = totalDoubleCount * sizeof(double);
-            byte[] buffer = _brShapeFile.ReadBytes(byteCount);
-
-            // Convert to a double array
-            double[] doubleBuffer = new double[totalDoubleCount];
-            Buffer.BlockCopy(buffer, 0, doubleBuffer, 0, byteCount);
-
-            // Process the buffered doubles
-            int currentIndex = 0;
-            var rings = new List<LinearRing>();
-
-            for (var ringId = 0; ringId < nParts; ringId++)
-            {
-                int coordCount = segments[ringId + 1] - segments[ringId];
-                var listCount = coordCount / 10 + 1;
-
-                if (listCount > 0 && listCount < 3)
-                    continue;
-
-                Coordinate[] coords = new Coordinate[listCount];
-
-                var index = 0;
-                for (int i = 0; i < coordCount; i++)
-                {
-                    if (i % 10 != 0)
-                        continue;
-
-                    //double x = doubleBuffer[currentIndex++];
-                    //double y = doubleBuffer[currentIndex++];
-                    //coords[i] = new Coordinate(x, y);
-
-                    double x = doubleBuffer[i];
-                    double y = doubleBuffer[i];
-                    coords[index++] = new Coordinate(x, y);
-                }
-
-                coords[listCount - 1] = coords[0]; // Close the ring
-                rings.Add(new LinearRing(coords));
-            }
-
-            // Continue processing the rings (e.g., determining if rings are counterclockwise)
-            var isCounterClockWise = new bool[rings.Count];
-            int polygonCount = 0;
-            for (var i = 0; i < rings.Count; i++)
-            {
-                isCounterClockWise[i] = rings[i].IsCCW;
-                if (!isCounterClockWise[i])
-                    polygonCount++;
-            }
-
-            if (rings.Count > 0) // We only have one polygon
-            {
-                var p = CreatePolygon(rings);
-                return p;
-            }
-            else
-            {
-                return null;
-            }
-
-            //if (polygonCount == 1) // We only have one polygon
-            //{
-            //    var p = CreatePolygon(rings);
-            //    return p;
-            //}
-            //else
-            //{
-            //    return null;
-            //}
-
-            ////Read in the segment indexes
-            //for (var b = 0; b < nParts; b++)
-            //    segments[b] = _brShapeFile.ReadInt32();
-            ////add end point
-            //segments[nParts] = nPoints;
-
-            //if ((int)_shapeType % 10 == 3)
-            //{
-            //    var lineStrings = new List<LineString>();
-            //    for (var lineId = 0; lineId < nParts; lineId++)
-            //    {
-            //        var coordinates = new List<Coordinate>();
-            //        for (var i = segments[lineId]; i < segments[lineId + 1]; i++)
-            //            coordinates.Add(new Coordinate(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
-            //        lineStrings.Add(new LineString(coordinates.ToArray()));
-            //    }
-            //    if (lineStrings.Count == 1)
-            //        return lineStrings[0];
-            //    return new MultiLineString(lineStrings.ToArray());
-            //}
-            //else
-            //{
-            //    // Allocate the rings array with the exact number of parts.
-            //    var rings = new LinearRing[nParts];
-
-            //    for (var ringId = 0; ringId < nParts; ringId++)
-            //    {
-            //        // Determine the number of coordinates in this ring.
-            //        int count = segments[ringId + 1] - segments[ringId];
-
-            //        // Allocate an array with the exact size.
-            //        var coords = new Coordinate[count];
-
-            //        // Populate the coordinates array directly.
-            //        for (var i = 0; i < count; i++)
-            //        {
-            //            // Read the doubles directly into the coordinate.
-            //            coords[i] = new Coordinate(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
-            //        }
-
-            //        // Create the LinearRing from the coordinates array.
-            //        rings[ringId] = new LinearRing(coords);
-            //    }
-
-            //    // Instead of storing all CCW booleans, just count the polygons directly.
-            //    int polygonCount = 0;
-            //    for (var i = 0; i < rings.Length; i++)
-            //    {
-            //        if (!rings[i].IsCCW)
-            //            polygonCount++;
-            //    }
-
-            //    //// First read all the rings
-            //    //var rings = new List<LinearRing>();
-            //    //for (var ringId = 0; ringId < nParts; ringId++)
-            //    //{
-            //    //    var ring = new List<Coordinate>();
-            //    //    for (var i = segments[ringId]; i < segments[ringId + 1]; i++)
-            //    //        ring.Add(new Coordinate(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
-            //    //    rings.Add(new LinearRing(ring.ToArray()));
-            //    //}
-            //    //var isCounterClockWise = new bool[rings.Count];
-            //    //var polygonCount = 0;
-            //    //for (var i = 0; i < rings.Count; i++)
-            //    //{
-            //    //    isCounterClockWise[i] = rings[i].IsCCW;
-            //    //    if (!isCounterClockWise[i])
-            //    //        polygonCount++;
-            //    //}
-            //    if (polygonCount == 1) // We only have one polygon
-            //    {
-            //        var p = CreatePolygon2(rings);
-            //        return p;
-            //    }
-            //    //else
-            //    //{
-            //    //    var polygons = new List<Polygon>();
-            //    //    var linearRings = new List<LinearRing> { rings[0] };
-
-            //    //    for (var i = 1; i < rings.Count; i++)
-            //    //        if (!isCounterClockWise[i])
-            //    //        {
-            //    //            // The !isCCW indicates this is an outerRing (or shell in NTS)
-            //    //            // So the previous one is done and is added to the list. A new list of linear rings is created for the next polygon.
-            //    //            var p1 = CreatePolygon(linearRings);
-            //    //            if (p1 is not null) polygons.Add(p1);
-            //    //            linearRings = new List<LinearRing> { rings[i] };
-            //    //        }
-            //    //        else
-            //    //            linearRings.Add(rings[i]);
-            //    //    var p = CreatePolygon(linearRings);
-            //    //    if (p is not null) polygons.Add(p);
-
-            //    //    return new MultiPolygon(polygons.ToArray());
-            //    //}
-            //}
-        }
-
-        throw new ApplicationException($"Shapefile type {_shapeType} not supported");
     }
 }
