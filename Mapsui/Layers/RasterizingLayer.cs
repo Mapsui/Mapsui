@@ -15,15 +15,14 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     private readonly ILayer _layer;
     private readonly float _pixelDensity;
     private readonly object _syncLock = new();
+    private readonly IRenderer _rasterizer = DefaultRendererFactory.Create();
+    private readonly Delayer _rasterizeDelayer = new();
+    private readonly RenderFormat _renderFormat;
     private bool _busy;
     private MSection? _currentSection;
     private bool _modified;
     private IEnumerable<IFeature>? _previousFeatures;
-    private readonly IRenderer _rasterizer = DefaultRendererFactory.Create();
     private FetchInfo? _fetchInfo;
-    public Delayer Delayer { get; } = new();
-    private readonly Delayer _rasterizeDelayer = new();
-    private readonly RenderFormat _renderFormat;
 
     /// <summary>
     ///     Creates a RasterizingLayer which rasterizes a layer for performance
@@ -39,7 +38,6 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     /// <param name="renderFormat">render Format png is default and skp is skia picture</param>
     public RasterizingLayer(
         ILayer layer,
-        IRenderer renderer,
         int delayBeforeRasterize = 1000,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
@@ -57,7 +55,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         Delayer.MillisecondsToWait = delayBeforeRasterize;
         Style = new RasterStyle(); // default raster style
     }
-
+    public Delayer Delayer { get; } = new();
     public override MRect? Extent => _layer.Extent;
 
     public ILayer SourceLayer => _layer;
@@ -102,10 +100,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 var features = new RasterFeature[1];
                 features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
                 _cache.PushRange(features);
-#if DEBUG
-                Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
-#endif
-                OnDataChanged(new DataChangedEventArgs());
+                OnDataChanged(new DataChangedEventArgs(Name));
 
                 if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher)
                     Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));

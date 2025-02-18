@@ -10,7 +10,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Mapsui.Layers;
@@ -20,8 +19,6 @@ using Mapsui.Nts.Providers.Shapefile.Indexing;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using NetTopologySuite.Geometries;
-using NetTopologySuite.Precision;
-using NetTopologySuite.Simplify;
 
 namespace Mapsui.Nts.Providers.Shapefile;
 
@@ -484,228 +481,6 @@ public class ShapeFile : IProvider, IDisposable
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        var features1 = new List<GeometryFeature>();
-        return Task.FromResult((IEnumerable<IFeature>)features1);
-        lock (_syncRoot)
-        {
-            Open();
-            try
-            {
-                //Use the spatial index to get a list of features whose BoundingBox intersects bbox
-                var objectList = GetObjectIDsInViewPrivate(fetchInfo.Extent);
-                var features = new List<GeometryFeature>();
-
-                foreach (var index in objectList)
-                {
-                    var feature = _dbaseFile?.GetFeature(index, features);
-                    if (feature != null)
-                    {
-                        feature.Geometry = ReadGeometry(index);
-                        if (feature.Geometry?.EnvelopeInternal == null) continue;
-                        if (!feature.Geometry.EnvelopeInternal.Intersects(fetchInfo.Extent.ToEnvelope())) continue;
-                        if (FilterDelegate != null && !FilterDelegate(feature)) continue;
-                        features.Add(feature);
-                    }
-                }
-                return Task.FromResult((IEnumerable<IFeature>)features);
-            }
-            finally
-            {
-                Close();
-            }
-        }
-    }
-
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync2(FetchInfo fetchInfo)
-    {
-        lock (_syncRoot)
-        {
-            Open();
-            try
-            {
-                //Use the spatial index to get a list of features whose BoundingBox intersects bbox
-                var objectList = GetObjectIDsInViewPrivate(fetchInfo.Extent);
-
-                var features = new List<GeometryFeature>();
-
-                foreach (var index in objectList)
-                {
-                    _shapeCache.TryGetValue(index, out var feature);
-                    feature ??= CacheFeature(index, fetchInfo);
-
-                    //var feature = _dbaseFile?.GetFeature(index, features);
-
-                    if (feature != null)
-                    {
-                        //feature.Geometry = ReadGeometry(index);
-                        if (feature.Geometry?.EnvelopeInternal == null) continue;
-                        var envelope = fetchInfo.Extent.ToEnvelope();
-                        if (!feature.Geometry.EnvelopeInternal.Intersects(envelope)) continue;
-                        if (FilterDelegate != null && !FilterDelegate(feature)) continue;
-
-                        var envelopeGeometry = new GeometryFactory().ToGeometry(envelope);
-                        Geometry geometry = feature.Geometry;
-                        //clip geometry if it is not completely inside the envelope
-                        //if (!envelopeGeometry.Contains(geometry))
-                        //{
-                        //    ClipAndSimplify(fetchInfo, features, envelopeGeometry, geometry);
-                        //}
-                        //else
-                        //{
-                        Simplify(fetchInfo, features, geometry);
-                        //}
-                    }
-                }
-
-                return Task.FromResult((IEnumerable<IFeature>)features);
-            }
-            catch (TopologyException e)
-            {
-                Close();
-
-                return null;
-            }
-            finally
-            {
-                Close();
-            }
-        }
-    }
-
-    private static void ClipAndSimplify(FetchInfo fetchInfo, List<GeometryFeature> features, Geometry envelopeGeometry, Geometry geometry)
-    {
-        if (geometry is Polygon)
-            ClipPolygonAndSimplify(geometry, envelopeGeometry, fetchInfo, features);
-        else if (geometry is MultiPolygon mp)
-        {
-            foreach (var polygon in mp)
-            {
-                ClipPolygonAndSimplify(polygon, envelopeGeometry, fetchInfo, features);
-            }
-        }
-        else
-        {
-            ClipGeometryAndSimplify(geometry, envelopeGeometry, fetchInfo, features);
-        }
-    }
-
-    private static Geometry Simplify(FetchInfo fetchInfo, List<GeometryFeature> features, Geometry geometry)
-    {
-        // Simplify the polygon using the Douglas-Peucker algorithm
-        geometry = DouglasPeuckerSimplifier.Simplify(geometry, fetchInfo.Resolution);
-        features.Add(new GeometryFeature(geometry));
-        return geometry;
-    }
-
-    private static Geometry ClipPolygonAndSimplify(Geometry geometry, Geometry envelopeGeometry, FetchInfo fetchInfo, List<GeometryFeature> features)
-    {
-        //if its a polygon use the boundary of the geometry to dont create a new polygon, instead create a line which lies inside the envelope
-        geometry = geometry.Boundary;
-        return ClipGeometryAndSimplify(geometry, envelopeGeometry, fetchInfo, features);
-    }
-
-    private static Geometry ClipGeometryAndSimplify(Geometry geometry, Geometry envelopeGeometry, FetchInfo fetchInfo, List<GeometryFeature> features)
-    {
-        try
-        {
-            geometry = geometry.Intersection(envelopeGeometry);
-        }
-        catch (TopologyException)
-        {
-            //This error indicates often that during the intersection operation (or any overlay operation),
-            //the algorithm found an intersection point that wasn’t “noded” (i.e. explicitly represented as a vertex) in one or both of your geometries.
-            //This is often due to precision issues or very close/overlapping coordinates that aren’t being recognized as nodes
-
-            // Create a PrecisionModel with a scale factor. For example, if you want to keep precision to the nearest meter:
-            var precisionModel = new PrecisionModel(1.0);
-            var reducer = new GeometryPrecisionReducer(precisionModel)
-            {
-                // Optionally remove collapsed components if needed.
-                RemoveCollapsedComponents = true
-            };
-
-            geometry = reducer.Reduce(geometry);
-            geometry = geometry.Intersection(envelopeGeometry);
-        }
-
-        Simplify(fetchInfo, features, geometry);
-
-        return geometry;
-    }
-
-    private static Polygon? CreatePolygon(List<LinearRing> poly)
-    {
-        if (poly.Count == 1)
-            return new Polygon(poly[0]);
-        if (poly.Count > 1)
-            return new Polygon(poly[0], poly.Skip(1).ToArray());
-        return null;
-    }
-
-    private void Dispose(bool disposing)
-    {
-        if (!_disposed)
-        {
-            if (disposing)
-            {
-                Close();
-                _envelope = null;
-                _tree?.Dispose();
-                _tree = null;
-            }
-            _disposed = true;
-        }
-    }
-
-    /// <summary>
-    /// Forces a rebuild of the spatial index. If the instance of the ShapeFile provider
-    /// uses a file-based index the file is rewritten to disk.
-    /// </summary>
-    public void RebuildSpatialIndex()
-    {
-        if (_fileBasedIndex)
-        {
-            if (File.Exists(_filename + ".sidx"))
-                File.Delete(_filename + ".sidx");
-            {
-                _tree?.Dispose();
-                _tree = CreateSpatialIndexFromFile(_filename);
-            }
-        }
-        else
-        {
-            _tree?.Dispose();
-            _tree = CreateSpatialIndex();
-        }
-    }
-
-    /// <summary>
-    /// Gets a data row from the data source at the specified index belonging to the specified datatable
-    /// </summary>
-    /// <param name="rowId"></param>
-    /// <param name="features">Data table to feature should belong to.</param>
-    /// <returns></returns>
-    public GeometryFeature? GetFeature(uint rowId, List<GeometryFeature>? features = null)
-    {
-        lock (_syncRoot)
-        {
-            Open();
-
-            try
-            {
-                return GetFeaturePrivate(rowId, features);
-            }
-            finally
-            {
-                Close();
-            }
-        }
-    }
-
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
-    {
         lock (_syncRoot)
         {
             Open();
@@ -821,62 +596,6 @@ public class ShapeFile : IProvider, IDisposable
         }
 
         return ReadGeometry(oid);
-    }
-
-        if (!_isOpen)
-        {
-            _fsShapeIndex?.Dispose();
-            _fsShapeIndex = new FileStream(_filename.Remove(_filename.Length - 4, 4) + ".shx", FileMode.Open, FileAccess.Read);
-            _brShapeIndex?.Dispose();
-            _brShapeIndex = new BinaryReader(_fsShapeIndex, Encoding.Unicode);
-            _fsShapeFile?.Dispose();
-            _fsShapeFile = new FileStream(_filename, FileMode.Open, FileAccess.Read);
-            _brShapeFile?.Dispose();
-            _brShapeFile = new BinaryReader(_fsShapeFile);
-            InitializeShape(_filename, _fileBasedIndex);
-            _dbaseFile?.Open();
-            _isOpen = true;
-
-            //LoadShapeCache();
-        }
-    }
-
-    /// <summary>
-    /// Closes the data source
-    /// </summary>
-    private void Close()
-    {
-        if (!_disposed)
-            if (_isOpen)
-            {
-                _brShapeIndex?.Dispose();
-                _brShapeFile?.Dispose();
-                _fsShapeFile?.Dispose();
-                _fsShapeIndex?.Dispose();
-                _dbaseFile?.Dispose();
-                _isOpen = false;
-            }
-    }
-
-    private Collection<uint> GetObjectIDsInViewPrivate(MRect? bbox)
-    {
-        if (bbox == null)
-            return new Collection<uint>();
-        if (!_isOpen)
-            throw new ApplicationException("An attempt was made to read from a closed data source");
-        //Use the spatial index to get a list of features whose BoundingBox intersects bbox
-        return _tree!.Search(bbox);
-    }
-
-    private Geometry? GetGeometryPrivate(uint oid)
-    {
-        if (FilterDelegate != null) //Apply filtering
-        {
-            using var fdr = GetFeature(oid);
-            return fdr?.Geometry;
-        }
-
-        return ReadGeometryTest(oid);
     }
 
     private void InitializeShape(string filename, bool fileBasedIndex)
@@ -1103,6 +822,13 @@ public class ShapeFile : IProvider, IDisposable
         }
     }
 
+    /// <summary>
+    /// Reads and parses the geometry with ID 'oid' from the ShapeFile
+    /// </summary>
+    /// <remarks><see cref="FilterDelegate">Filtering</see> is not applied to this method</remarks>
+    /// <param name="oid">Object ID</param>
+    /// <returns>geometry</returns>
+    // ReSharper disable once CyclomaticComplexity // Fix when changes need to be made here
     private Geometry? ReadGeometry(uint oid)
     {
         if (_brShapeFile is null) return null;
