@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
@@ -76,7 +77,7 @@ public class LayerThreadingTests
         {
             try
             {
-                await provider.GetFeaturesAsync(new FetchInfo(new MSection(new MRect(0, 0, 0, 0), 1)));
+                await provider.GetFeaturesAsync(new FetchInfo(new MSection(new MRect(0, 0, 0, 0), 1)), CancellationToken.None);
             }
             catch (Exception e)
             {
