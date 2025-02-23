@@ -5,7 +5,7 @@
           @ontouchstart=@OnTouchStart @ontouchmove=@OnTouchMove @ontouchend=@OnTouchEnd
           @onwheel="OnMouseWheel" 
      name="@_elementId" id="@_elementId">
-@if (!OperatingSystem.IsBrowser())
+@if (OperatingSystem.IsBrowser())
 {
     @if (MapControl.UseGPU)
     {
