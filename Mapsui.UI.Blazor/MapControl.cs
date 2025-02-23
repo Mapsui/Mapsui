@@ -62,7 +62,7 @@ public partial class MapControl : ComponentBase, IMapControl
     protected void LoadImage()
     {
         // Example: Load image data from an API or file
-        var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP);
+        var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85);
         if (newImageData.SequenceEqual(newImageData))
         {
             return;
