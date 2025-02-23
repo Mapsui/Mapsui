@@ -10,6 +10,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Security;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Cache;
 using Mapsui.Extensions;
@@ -74,10 +75,15 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null)
         _requestHeaders.Add(name, value);
     }
 
+    public async Task<Stream?> GetDataStreamAsync()
+    {
+        return await GetDataStreamAsync(CancellationToken.None).ConfigureAwait(false);
+    }
+
     /// <summary>
     /// Performs a HTTP-GET or HTTP-POST request and returns a data stream for reading.
     /// </summary>
-    public async Task<Stream?> GetDataStreamAsync()
+    public async Task<Stream?> GetDataStreamAsync(CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(_url))
             throw new Exception($"Property {nameof(Url)} was not set");
@@ -157,17 +163,32 @@ public class HttpClientUtil(IUrlPersistentCache? persistentCache = null)
         }
     }
 
-    private async Task<HttpResponseMessage> GetWebResponseAsync(HttpClient httpClient)
-    {
-        /* HTTP POST */
-        if (_postData != null)
-        {
-            using var httpContent = new ByteArrayContent(_postData);
-            return await httpClient.PostAsync(_url, httpContent);
-        }
-        /* HTTP GET */
-        else
-            return await httpClient.GetAsync(_url).ConfigureAwait(false);
+            HttpResponseMessage webResponse;
+
+            /* HTTP POST */
+            if (_postData != null)
+            {
+                var httpContent = new ByteArrayContent(_postData);
+                webResponse = await httpClient.PostAsync(_url, httpContent, cancellationToken);
+            }
+            /* HTTP GET */
+            else
+                webResponse = await httpClient.GetAsync(_url, cancellationToken).ConfigureAwait(false);
+
+            if (persistentCache != null)
+            {
+                await using var stream = await webResponse.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+                if (stream != null && _url != null)
+                {
+                    bytes = StreamHelper.ReadFully(stream);
+                    persistentCache?.Add(_url, _postData, bytes);
+                    return new MemoryStream(bytes);
+                }
+
+                return null;
+            }
+
+            return await webResponse.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>

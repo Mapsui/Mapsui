@@ -353,6 +353,7 @@ public class LayerCollection : IEnumerable<ILayer>
 
             counter++;
         }
+
         _entries.Enqueue(entryToInsert);
     }
 

@@ -13,7 +13,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Cache;
@@ -39,14 +41,14 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 {
     private string? _mimeType;
     private readonly Client? _wmsClient;
-    private Func<string, Task<byte[]>>? _getBytesAsync;
+    private Func<string, CancellationToken, Task<byte[]>>? _getBytesAsync;
     private readonly IUrlPersistentCache? _persistentCache;
     private static int[]? _axisOrder;
     private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     public static IUrlPersistentCache? DefaultCache { get; set; }
 
-    public WmsProvider(XmlDocument capabilities, Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null)
+    public WmsProvider(XmlDocument capabilities, Func<string, CancellationToken, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null)
         : this(new Client(capabilities, getBytesAsync), persistentCache: persistentCache ?? DefaultCache)
     {
         InitializeGetBytesAsyncMethod(getBytesAsync);
@@ -60,7 +62,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
     /// <param name="getBytesAsync">Download method, leave null for default</param>
     /// <param name="userAgent">user Agent</param>
-    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, CancellationToken, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
         var client = await Client.CreateAsync(url, wmsVersion, getBytesAsync, persistentCache: persistentCache ?? DefaultCache, userAgent);
         var provider = new WmsProvider(client, persistentCache: persistentCache ?? DefaultCache)
@@ -71,7 +73,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         return provider;
     }
 
-    private WmsProvider(Client wmsClient, Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null)
+    private WmsProvider(Client wmsClient, Func<string, CancellationToken, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null)
     {
         _persistentCache = persistentCache ?? DefaultCache;
         InitializeGetBytesAsyncMethod(getBytesAsync);
@@ -93,7 +95,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         StylesList = [];
     }
 
-    private void InitializeGetBytesAsyncMethod(Func<string, Task<byte[]>>? getBytesAsync)
+    private void InitializeGetBytesAsyncMethod(Func<string, CancellationToken, Task<byte[]>>? getBytesAsync)
     {
         _getBytesAsync = getBytesAsync ?? GetBytesAsync;
     }
@@ -330,6 +332,11 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
     public async Task<(bool Success, MRaster?)> TryGetMapAsync(MSection section)
     {
+        return await TryGetMapAsync(section, CancellationToken.None).ConfigureAwait(false);
+    }
+
+    public async Task<(bool Success, MRaster?)> TryGetMapAsync(MSection section, CancellationToken cancellationToken)
+    {
 
         int width;
         int height;
@@ -349,7 +356,6 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
         try
         {
-            var bytes = await _persistentCache.GetCachedBytesAsync(url, _getBytesAsync);
 
             if (section.Extent == null)
             {
@@ -489,16 +495,21 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         return legendUrls;
     }
 
-    public async IAsyncEnumerable<MemoryStream> GetLegendsAsync()
+    public IAsyncEnumerable<MemoryStream> GetLegendsAsync()
+    {
+        return GetLegendsAsync(CancellationToken.None);
+    }
+
+    public async IAsyncEnumerable<MemoryStream> GetLegendsAsync([EnumeratorCancellation] CancellationToken cancellationToken)
     {
         var urls = GetLegendRequestUrls();
 
         foreach (var url in urls)
         {
-            if (_getBytesAsync == null)
                 yield break;
 
-            var bytes = await _getBytesAsync(url);
+            await using var task = await _getStreamAsync(url, cancellationToken);
+            var bytes = StreamHelper.ReadFully(task);
             yield return new MemoryStream(bytes);
         }
     }
@@ -563,15 +574,15 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
-        var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
+        var (success, raster) = await TryGetMapAsync(fetchInfo.Section, cancellationToken);
         if (success)
             return [new RasterFeature(raster)];
         return [];
     }
 
-    private async Task<byte[]> GetBytesAsync(string url)
+    private async Task<byte[]> GetBytesAsync(string url, CancellationToken cancellationToken)
     {
         var handler = new HttpClientHandler();
         handler.SetCredentials(Credentials);
@@ -591,7 +602,7 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
             throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, got - {response.Content.Headers.ContentType?.MediaType}");
         }
 
-        using var result = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        using var result = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         return result.ToBytes();
     }
 
