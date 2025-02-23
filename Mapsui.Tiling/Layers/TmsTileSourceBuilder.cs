@@ -1,4 +1,5 @@
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -14,10 +15,11 @@ public static class TmsTileSourceBuilder
 {
     public static async Task<ITileSource> BuildAsync(string urlToTileMapXml,
         bool overrideTmsUrlWithUrlToTileMapXml,
+        CancellationToken cancellationToken,
         IPersistentCache<byte[]>? persistentCache = null)
     {
         var urlPersistentCache = persistentCache as IUrlPersistentCache;
-        var bytes = await urlPersistentCache.GetCachedBytesAsync(urlToTileMapXml);
+        var bytes = await urlPersistentCache.GetCachedBytesAsync(urlToTileMapXml, cancellationToken);
         using var stream = new MemoryStream(bytes);
 
         var tileSource = overrideTmsUrlWithUrlToTileMapXml

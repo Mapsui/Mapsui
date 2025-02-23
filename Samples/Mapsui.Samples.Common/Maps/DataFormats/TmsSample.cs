@@ -1,4 +1,5 @@
-﻿using BruTile.Cache;
+﻿using System.Threading;
+using BruTile.Cache;
 using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ public class TmsSample : ISample
     public static async Task<ILayer> CreateLayerAsync()
     {
         var url = "https://www.openbasiskaart.nl/mapcache/tms/1.0.0/osm@rd";
-        var tileSource = await TmsTileSourceBuilder.BuildAsync(url, true, DefaultCache);
+        var tileSource = await TmsTileSourceBuilder.BuildAsync(url, true, CancellationToken.None, DefaultCache);
 
         var tileLayer = new TileLayer(tileSource)
         {
