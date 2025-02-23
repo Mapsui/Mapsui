@@ -56,7 +56,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
     protected string ImageData =>
         _imagedata != null
-            ? $"data:image/png;base64,{Convert.ToBase64String(_imagedata)}"
+            ? $"data:image/webp;base64,{Convert.ToBase64String(_imagedata)}"
             : string.Empty;
 
     protected void LoadImage()
