@@ -12,7 +12,7 @@ namespace Mapsui;
 
 public class Navigator
 {
-    private Viewport _viewport = new(0, 0, 1, 0, 0, 0);
+    private Viewport _viewport = new();
     private IEnumerable<AnimationEntry<Viewport>> _animations = [];
     private readonly List<Action> _initialization = [];
     private MMinMax? _defaultZoomBounds;
@@ -115,7 +115,7 @@ public class Navigator
 
     public bool IsInitialized { get; private set; } = false;
 
-    public void Initialize()
+    private void Initialize()
     {
         if (!IsInitialized)
         {

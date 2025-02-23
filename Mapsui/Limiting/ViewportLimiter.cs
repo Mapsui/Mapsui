@@ -9,7 +9,11 @@ public class ViewportLimiter : IViewportLimiter
 
     private static Viewport LimitResolution(Viewport viewport, MMinMax? zoomBounds)
     {
-        if (zoomBounds is null) return viewport;
+        if (viewport.Resolution <= 0) // Only limit when the resolution has been set.
+            return viewport;
+
+        if (zoomBounds is null)
+            return viewport;
 
         if (zoomBounds.Min > viewport.Resolution) return viewport with { Resolution = zoomBounds.Min };
         if (zoomBounds.Max < viewport.Resolution) return viewport with { Resolution = zoomBounds.Max };

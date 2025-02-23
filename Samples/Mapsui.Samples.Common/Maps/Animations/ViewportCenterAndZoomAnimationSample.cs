@@ -22,13 +22,12 @@ public class ViewportCenterAndZoomAnimationSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
         map.Widgets.Add(CreateTextBox("Tap on the map to center on that location and zoom in on it"));
-
-        map.Info += (s, e) =>
+        map.Tapped += (m, e) =>
         {
             // Animate to the new center and new resolution
-            map.Navigator.CenterOnAndZoomTo(e.WorldPosition, e.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
+            m.Navigator.CenterOnAndZoomTo(e.WorldPosition, e.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
+            return true;
         };
-
         return map;
     }
 

@@ -7,7 +7,6 @@
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
-using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
@@ -42,6 +41,23 @@ public class Map : INotifyPropertyChanged, IDisposable
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
+
+    /// <summary>
+    /// Event that is triggered when the map is tapped. Can be a single tap, double tap or long press.
+    /// </summary>
+    public Func<Map, MapEventArgs, bool> Tapped { get; set; } = (s, e) => false;
+    /// <summary>
+    /// Event that is triggered when on pointer down.
+    /// </summary>
+    public Func<Map, MapEventArgs, bool> PointerPressed { get; set; } = (s, e) => false;
+    /// <summary>
+    /// Event that is triggered when on pointer move. Can be a drag or hover.
+    /// </summary>
+    public Func<Map, MapEventArgs, bool> PointerMoved { get; set; } = (s, e) => false;
+    /// <summary>
+    /// Event that is triggered when on pointer up.
+    /// </summary>
+    public Func<Map, MapEventArgs, bool> PointerReleased { get; set; } = (s, e) => false;
 
     private void Navigator_ViewportChanged(object? sender, ViewportChangedEventArgs e)
     {
@@ -159,6 +175,9 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
     /// the layers that have IsMapInfoLayer set to true. 
     /// </summary>
+    /// <remarks>
+    /// The Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
+    /// </remarks>
     public event EventHandler<MapInfoEventArgs>? Info;
 
     /// <summary>
@@ -240,6 +259,30 @@ public class Map : INotifyPropertyChanged, IDisposable
             if (layer is IAsyncDataFetcher asyncDataFetcher)
                 asyncDataFetcher.RefreshData(fetchInfo);
         }
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public virtual bool OnTapped(MapEventArgs e)
+    {
+        return Tapped(this, e);
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public virtual bool OnPointerPressed(MapEventArgs e)
+    {
+        return PointerPressed(this, e);
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public virtual bool OnPointerMoved(MapEventArgs e)
+    {
+        return PointerMoved(this, e);
+    }
+
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public virtual bool OnPointerReleased(MapEventArgs e)
+    {
+        return PointerReleased(this, e);
     }
 
     private void LayersCollectionChanged(object sender, LayerCollectionChangedEventArgs args)
@@ -396,6 +439,5 @@ public class Map : INotifyPropertyChanged, IDisposable
         HorizontalAlignment = HorizontalAlignment.Stretch,
         BackColor = Color.Transparent,
         Opacity = 0.0f,
-        LogLevelFilter = LogLevel.Trace,
     };
 }

@@ -31,25 +31,26 @@ public class SingleCalloutSample : ISample
         var map = new Map();
 
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        var pointLayer = CreatePointLayer();
-        map.Layers.Add(pointLayer);
+        map.Layers.Add(CreatePointLayer());
         map.Navigator.CenterOnAndZoomTo(map.Layers.Get(1).Extent!.Centroid, map.Navigator.Resolutions[5]);
-        map.Info += (s, e) => MapOnInfo(s, e, pointLayer);
+        map.Tapped += MapTapped;
 
         map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _calloutLayerName));
 
         return Task.FromResult(map);
     }
 
-    private static void MapOnInfo(object? sender, MapInfoEventArgs e, ILayer pointLayer)
+    private static bool MapTapped(Map map, MapEventArgs e)
     {
-        var mapInfo = e.GetMapInfo([pointLayer]);
+        var mapInfo = e.GetMapInfo(map.Layers.Where(l => l.Name == _calloutLayerName));
         var calloutStyle = mapInfo.Feature?.Styles.OfType<CalloutStyle>().FirstOrDefault();
         if (calloutStyle is not null)
         {
             calloutStyle.Enabled = !calloutStyle.Enabled;
             mapInfo.Layer?.DataHasChanged(); // To trigger a refresh of graphics.
+            return true;
         }
+        return false;
     }
 
     private static MemoryLayer CreatePointLayer()

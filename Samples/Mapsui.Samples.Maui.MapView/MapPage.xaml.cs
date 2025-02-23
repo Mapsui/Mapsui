@@ -101,13 +101,13 @@ public sealed partial class MapPage : ContentPage, IDisposable
     {
         if (e.Pin != null)
         {
-            if (e.TapType == TapType.Double)
+            if (e.GestureType == GestureType.DoubleTap)
             {
                 // Hide Pin when double click
                 //DisplayAlert($"Pin {e.Pin.Label}", $"Is at position {e.Pin.Position}", "Ok");
                 e.Pin.IsVisible = false;
             }
-            if (e.TapType == TapType.Single)
+            if (e.GestureType == GestureType.SingleTap)
                 if (e.Pin.Callout.IsVisible)
                     e.Pin.HideCallout();
                 else
