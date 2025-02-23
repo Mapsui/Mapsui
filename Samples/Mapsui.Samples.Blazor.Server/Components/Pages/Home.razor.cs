@@ -12,7 +12,7 @@ public partial class Home
 {
     private string? _sourceCodeUrl = null;
     private int _activeTab = 0;
-    private MapControl? _mapControl;
+    private MapControl _mapControl;
     private string? _categoryId;
     private string? _sampleId;
     private bool _render;

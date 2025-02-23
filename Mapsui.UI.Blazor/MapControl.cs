@@ -45,12 +45,14 @@ public partial class MapControl : ComponentBase, IMapControl
 
         _invalidate = () =>
         {
+#pragma warning disable CA1416
             if (_viewCpu != null)
                 _viewCpu.Invalidate();
             else if (_viewGpu != null)
                 _viewGpu?.Invalidate();
             else
                 LoadImage();
+#pragma warning restore CA1416            
         };
     }
 
@@ -64,10 +66,8 @@ public partial class MapControl : ComponentBase, IMapControl
         // Example: Load image data from an API or file
         var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85);
         if (newImageData.SequenceEqual(newImageData))
-        {
             return;
-        }
-        
+
         _imagedata = newImageData;
         StateHasChanged(); // Notify Blazor to re-render
     }
