@@ -1,5 +1,6 @@
 using Mapsui.Extensions;
 using Mapsui.Manipulations;
+using Mapsui.Rendering;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
@@ -36,22 +37,39 @@ public partial class MapControl : ComponentBase, IMapControl
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
                 : _interop;
 
+    private byte[]? _imagedata;
+
     public MapControl()
     {
         SharedConstructor();
 
         _invalidate = () =>
         {
-            if (!OperatingSystem.IsBrowser())
-                throw new InvalidOperationException("Only browser is supported");
-
             if (_viewCpu != null)
                 _viewCpu.Invalidate();
             else if (_viewGpu != null)
                 _viewGpu?.Invalidate();
             else
-                throw new InvalidOperationException("Both _viewCpu and _viewGpu are null");
+                LoadImage();
         };
+    }
+
+    protected string ImageData =>
+        _imagedata != null
+            ? $"data:image/png;base64,{Convert.ToBase64String(_imagedata)}"
+            : string.Empty;
+
+    protected void LoadImage()
+    {
+        // Example: Load image data from an API or file
+        var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP);
+        if (newImageData.SequenceEqual(newImageData))
+        {
+            return;
+        }
+        
+        _imagedata = newImageData;
+        StateHasChanged(); // Notify Blazor to re-render
     }
 
     protected override void OnInitialized()
