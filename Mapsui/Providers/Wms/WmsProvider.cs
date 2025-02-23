@@ -25,7 +25,6 @@ using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Rendering;
-using Mapsui.Utilities;
 
 namespace Mapsui.Providers.Wms;
 
@@ -42,17 +41,17 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 {
     private string? _mimeType;
     private readonly Client? _wmsClient;
-    private Func<string, CancellationToken, Task<Stream>>? _getStreamAsync;
+    private Func<string, CancellationToken, Task<byte[]>>? _getBytesAsync;
     private readonly IUrlPersistentCache? _persistentCache;
     private static int[]? _axisOrder;
     private readonly CrsAxisOrderRegistry _crsAxisOrderRegistry = new();
 
     public static IUrlPersistentCache? DefaultCache { get; set; }
 
-    public WmsProvider(XmlDocument capabilities, Func<string, CancellationToken, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
-        : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache ?? DefaultCache)
+    public WmsProvider(XmlDocument capabilities, Func<string, CancellationToken, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null)
+        : this(new Client(capabilities, getBytesAsync), persistentCache: persistentCache ?? DefaultCache)
     {
-        InitializeGetStreamAsyncMethod(getStreamAsync);
+        InitializeGetBytesAsyncMethod(getBytesAsync);
     }
 
     /// <summary>
@@ -61,23 +60,23 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     /// <param name="url">Url of WMS server</param>
     /// <param name="persistentCache"></param>
     /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
-    /// <param name="getStreamAsync">Download method, leave null for default</param>
+    /// <param name="getBytesAsync">Download method, leave null for default</param>
     /// <param name="userAgent">user Agent</param>
-    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, CancellationToken, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, CancellationToken, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
-        var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache ?? DefaultCache, userAgent);
+        var client = await Client.CreateAsync(url, wmsVersion, getBytesAsync, persistentCache: persistentCache ?? DefaultCache, userAgent);
         var provider = new WmsProvider(client, persistentCache: persistentCache ?? DefaultCache)
         {
             UserAgent = userAgent
         };
-        provider.InitializeGetStreamAsyncMethod(getStreamAsync);
+        provider.InitializeGetBytesAsyncMethod(getBytesAsync);
         return provider;
     }
 
-    private WmsProvider(Client wmsClient, Func<string, CancellationToken, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+    private WmsProvider(Client wmsClient, Func<string, CancellationToken, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null)
     {
         _persistentCache = persistentCache ?? DefaultCache;
-        InitializeGetStreamAsyncMethod(getStreamAsync);
+        InitializeGetBytesAsyncMethod(getBytesAsync);
         _wmsClient = wmsClient;
         TimeOut = 10000;
         ContinueOnError = true;
@@ -96,9 +95,9 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
         StylesList = [];
     }
 
-    private void InitializeGetStreamAsyncMethod(Func<string, CancellationToken, Task<Stream>>? getStreamAsync)
+    private void InitializeGetBytesAsyncMethod(Func<string, CancellationToken, Task<byte[]>>? getBytesAsync)
     {
-        _getStreamAsync = getStreamAsync ?? GetStreamAsync;
+        _getBytesAsync = getBytesAsync ?? GetBytesAsync;
     }
 
     /// <summary>
@@ -357,7 +356,6 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
         try
         {
-            var bytes = await _persistentCache.UrlCachedArrayAsync(url, cancellationToken, _getStreamAsync);
 
             if (section.Extent == null)
             {
@@ -508,7 +506,6 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
 
         foreach (var url in urls)
         {
-            if (cancellationToken.IsCancellationRequested || _getStreamAsync == null)
                 yield break;
 
             await using var task = await _getStreamAsync(url, cancellationToken);
@@ -581,19 +578,19 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
     {
         var (success, raster) = await TryGetMapAsync(fetchInfo.Section, cancellationToken);
         if (success)
-            return new[] { new RasterFeature(raster) };
+            return [new RasterFeature(raster)];
         return [];
     }
 
-    private async Task<Stream> GetStreamAsync(string url, CancellationToken cancellationToken)
+    private async Task<byte[]> GetBytesAsync(string url, CancellationToken cancellationToken)
     {
         var handler = new HttpClientHandler();
         handler.SetCredentials(Credentials);
 
-        var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+        using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent ?? "If you use Mapsui please specify a user-agent specific to your app");
-        var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpper() ?? "GET"), url);
-        var response = await client.SendAsync(req).ConfigureAwait(false);
+        using var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type?.ToUpper() ?? "GET"), url);
+        using var response = await client.SendAsync(req).ConfigureAwait(false);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -605,7 +602,8 @@ public class WmsProvider : IProvider, IProjectingProvider, ILayerFeatureInfo
             throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, got - {response.Content.Headers.ContentType?.MediaType}");
         }
 
-        return await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        using var result = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        return result.ToBytes();
     }
 
     public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition)

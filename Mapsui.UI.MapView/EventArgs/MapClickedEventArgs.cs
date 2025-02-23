@@ -13,7 +13,7 @@ public sealed class MapClickedEventArgs : EventArgs
     /// <summary>
     /// Number of taps
     /// </summary>
-    public TapType TapType { get; }
+    public GestureType GestureType { get; }
 
     /// <summary>
     /// Flag, if this event was handled
@@ -21,9 +21,9 @@ public sealed class MapClickedEventArgs : EventArgs
     /// <value><c>true</c> if handled; otherwise, <c>false</c>.</value>
     public bool Handled { get; set; } = false;
 
-    public MapClickedEventArgs(Position point, TapType tapType)
+    public MapClickedEventArgs(Position point, GestureType gestureType)
     {
         Point = point;
-        TapType = tapType;
+        GestureType = gestureType;
     }
 }

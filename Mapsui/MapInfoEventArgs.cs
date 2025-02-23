@@ -2,9 +2,9 @@
 
 namespace Mapsui;
 
-public class MapInfoEventArgs(ScreenPosition screenPosition, MPoint worldPosition, TapType tapType,
+public class MapInfoEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType,
     Viewport viewport, bool handled, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)
-        : BaseEventArgs(screenPosition, worldPosition, tapType, viewport, getMapInfo, getRemoteMapInfoAsync)
+        : BaseEventArgs(screenPosition, worldPosition, gestureType, viewport, getMapInfo, getRemoteMapInfoAsync)
 {
     /// <summary>
     /// If the interaction was handled by the event subscriber

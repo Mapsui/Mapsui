@@ -140,7 +140,7 @@ public partial class MapControl : UIView, IMapControl
             if (positions.Length == 1)
                 _manipulationTracker.Restart(positions);
 
-            if (OnMapPointerPressed(positions))
+            if (OnPointerPressed(positions))
                 return;
         });
     }
@@ -152,7 +152,7 @@ public partial class MapControl : UIView, IMapControl
             base.TouchesMoved(touches, e);
             var positions = GetScreenPositions(e, this);
 
-            if (OnMapPointerMoved(positions))
+            if (OnPointerMoved(positions, false))
                 return;
 
             _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
@@ -165,7 +165,7 @@ public partial class MapControl : UIView, IMapControl
         {
             base.TouchesEnded(touches, e);
             var positions = GetScreenPositions(e, this);
-            OnMapPointerReleased(positions);
+            OnPointerReleased(positions);
         });
     }
 

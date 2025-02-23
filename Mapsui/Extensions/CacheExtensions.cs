@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,31 +27,18 @@ public static class CacheExtensions
         if (bytes == null)
         {
             Logger.Log(LogLevel.Debug, $@"Load Url {url}");
-            Stream? response = null;
-            try
-            {
-#pragma warning disable IDISP001 // Dispose created                    
-                if (loadUrl != null)
-                {
-                    response = await loadUrl(url, cancellationToken).ConfigureAwait(false);
-                }
-                else
-                {
-                    var handler = new HttpClientHandler();
-                    using var httpClient = new HttpClient(handler);
-                    // https://github.com/xamarin/xamarin-android/issues/5264 use ConfigureAwait(false) for Network access
-                    response = await httpClient.GetStreamAsync(url, cancellationToken).ConfigureAwait(false);
-                }
-#pragma warning restore IDISP001
 
-                bytes = response.ToBytes();
-            }
-            finally
+            if (getBytesAsync != null)
             {
-                if (response != null)
-                {
-                    await response.DisposeAsync().ConfigureAwait(false);
-                }
+                bytes = await getBytesAsync(url, cancellationToken).ConfigureAwait(false);
+            }
+            else
+            {
+                using var handler = new HttpClientHandler();
+                using var httpClient = new HttpClient(handler);
+                // https://github.com/xamarin/xamarin-android/issues/5264 use ConfigureAwait(false) for Network access
+                await using var response = await httpClient.GetStreamAsync(url, cancellationToken).ConfigureAwait(false);
+                bytes = response.ToBytes();
             }
 
             Logger.Log(LogLevel.Debug, $@"Caching Url {url}");

@@ -20,7 +20,7 @@ public sealed class MainPage : ContentPage, IDisposable
         collectionView = CreateCollectionView(mainViewModel);
 
         BindingContext = mainViewModel;
-        mapControl.SetBinding(MapControl.MapProperty, new Binding(nameof(MainViewModel.Map)));
+        mapControl.Bind(MapControl.MapProperty, nameof(MainViewModel.Map));
 
         // Workaround. Samples need the MapControl in the current setup.
         mainViewModel.MapControl = mapControl;

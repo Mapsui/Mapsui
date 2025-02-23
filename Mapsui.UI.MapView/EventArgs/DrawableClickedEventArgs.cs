@@ -19,7 +19,7 @@ public sealed class DrawableClickedEventArgs : EventArgs
     /// <summary>
     /// Number of taps
     /// </summary>
-    public TapType TapType { get; }
+    public GestureType GestureType { get; }
 
     /// <summary>
     /// Flag, if this event was handled
@@ -27,10 +27,10 @@ public sealed class DrawableClickedEventArgs : EventArgs
     /// <value><c>true</c> if handled; otherwise, <c>false</c>.</value>
     public bool Handled { get; set; } = false;
 
-    internal DrawableClickedEventArgs(Position point, Point screenPoint, TapType tapType)
+    internal DrawableClickedEventArgs(Position point, Point screenPoint, GestureType gestureType)
     {
         Point = point;
         ScreenPoint = screenPoint;
-        TapType = tapType;
+        GestureType = gestureType;
     }
 }

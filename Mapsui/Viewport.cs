@@ -4,8 +4,10 @@
 
 namespace Mapsui;
 
-public record struct Viewport
+public readonly record struct Viewport
 {
+    public Viewport() : this(0, 0, 0, 0, 0, 0) { }
+
     public Viewport(double centerX, double centerY, double resolution, double rotation, double width, double height)
     {
         CenterX = centerX;

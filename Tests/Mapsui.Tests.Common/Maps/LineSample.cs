@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -30,18 +29,14 @@ public class LineSample : ISample
         return map;
     }
 
-    private static MemoryLayer CreateLayer()
+    private static MemoryLayer CreateLayer() => new()
     {
-        return new MemoryLayer
-        {
-            Style = null,
-            Features = CreateLineFeatures(),
-            Name = "Line"
-        };
-    }
+        Style = null,
+        Features = CreateLineFeatures(),
+        Name = "Line"
+    };
 
-    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
-    private static IEnumerable<IFeature> CreateLineFeatures()
+    private static List<IFeature> CreateLineFeatures()
     {
         var features = new List<IFeature>();
         var wktReader = new WKTReader();
@@ -102,7 +97,7 @@ public class LineSample : ISample
         feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red) { PenStyle = PenStyle.UserDefined, DashArray = new float[] { 6, 4, 12, 4, 2, 4, 12, 4 }, DashOffset = 15 } });
         features.Add(feature);
         feature = new GeometryFeature(wktReader.Read("LINESTRING (00000 9000000, 6000000 9000000)"));
-        feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red) { PenStyle = PenStyle.UserDefined, DashArray = new float[] { 6, 4, 12, 4, 2, 4, 12, 4 }, DashOffset = 20 } });
+        feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red) { PenStyle = PenStyle.UserDefined, DashArray = [6, 4, 12, 4, 2, 4, 12, 4], DashOffset = 20 } });
         features.Add(feature);
         feature = new GeometryFeature(wktReader.Read("LINESTRING (7000000 10000000, 13000000 10000000)"));
         feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Green) { PenStyle = PenStyle.LongDashDot } });

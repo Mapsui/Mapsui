@@ -127,7 +127,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
     /// <summary>
     /// This event is triggered whenever the MyLocation symbol or label is clicked.
     /// </summary>
-    public event EventHandler<MapInfoEventArgs>? Clicked;
+    public event EventHandler<MapEventArgs>? Tapped;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="T:Mapsui.Layers.MyLocationLayer"/> class
@@ -149,7 +149,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         ArgumentNullException.ThrowIfNull(map);
 
         _map = map;
-        _map.Info += HandleClicked;
+        _map.Tapped += MapTapped;
 
         Enabled = true;
 
@@ -497,12 +497,14 @@ public class MyLocationLayer : BaseLayer, IDisposable
         return modified;
     }
 
-    private void HandleClicked(object? sender, MapInfoEventArgs e)
+    private bool MapTapped(Map map, MapEventArgs e)
     {
         var mapInfo = e.GetMapInfo([this]);
         if (mapInfo.Feature != null && mapInfo.Feature.Equals(_feature))
         {
-            Clicked?.Invoke(this, e);
+            Tapped?.Invoke(this, e);
+            return true;
         }
+        return false;
     }
 }
