@@ -33,7 +33,7 @@ Try the quick-start for your favorite framework below.
         ```csharp
         builder
             .UseMauiApp<App>()
-            .UseSkiaSharp(true)
+            .UseSkiaSharp()
             .ConfigureFonts(fonts =>  
         ```
 
