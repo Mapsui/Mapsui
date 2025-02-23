@@ -23,7 +23,7 @@ public static class ImageSourceCacheInitializer
             return; // Don't start a thread if there are no bitmap paths to initialize.
         }
 
-        _fetchMachine.Start(async () =>
+        _fetchMachine.Start(async cancellationToken =>
         {
             foreach (var imageSource in imageSources)
             {

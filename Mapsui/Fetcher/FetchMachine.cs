@@ -1,26 +1,40 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher;
 
-public class FetchMachine
+public sealed class FetchMachine : IDisposable
 {
-    readonly Channel<Func<Task>> _queue = Channel.CreateUnbounded<Func<Task>>();
+    private readonly Channel<Func<CancellationToken, Task>> _queue = Channel.CreateUnbounded<Func<CancellationToken, Task>>();
+    private CancellationTokenSource _cancellationTokenSource;
 
     public FetchMachine(int numberOfWorkers = 4)
     {
+        _cancellationTokenSource = new CancellationTokenSource();
         for (var i = 0; i < numberOfWorkers; i++)
             _ = AddConsumerAsync(_queue);
     }
 
-    public void Start(Func<Task> action) => _queue.Writer.TryWrite(action);
+    public void Start(Func<CancellationToken, Task> action) => _queue.Writer.TryWrite(action);
 
-    public void Stop() { }
+    public void Stop()
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
+        _cancellationTokenSource = new CancellationTokenSource();
+    }
 
-    private static async Task AddConsumerAsync(Channel<Func<Task>> queue)
+    private async Task AddConsumerAsync(Channel<Func<CancellationToken, Task>> queue)
     {
         await foreach (var action in queue.Reader.ReadAllAsync().ConfigureAwait(false))
-            await action().ConfigureAwait(false);
+            await action(_cancellationTokenSource.Token).ConfigureAwait(false);
+    }
+
+    public void Dispose()
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
     }
 }

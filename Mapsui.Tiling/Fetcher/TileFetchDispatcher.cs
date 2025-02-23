@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -13,7 +14,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Tiling.Fetcher;
 
-public class TileFetchDispatcher : INotifyPropertyChanged
+public sealed class TileFetchDispatcher : INotifyPropertyChanged, IDisposable
 {
     private FetchInfo? _fetchInfo;
     private readonly object _lockRoot = new();
@@ -24,13 +25,13 @@ public class TileFetchDispatcher : INotifyPropertyChanged
     private readonly ConcurrentHashSet<TileIndex> _tilesThatFailed = [];
     private readonly ITileSchema? _tileSchema;
     private readonly FetchMachine _fetchMachine;
-    private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature;
+    private readonly Func<TileInfo, CancellationToken, Task<IFeature?>> _fetchTileAsFeature;
     private readonly int _fetchThreadCount = 4;
 
     public TileFetchDispatcher(
         ITileCache<IFeature?> tileCache,
         ITileSchema? tileSchema,
-        Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
+        Func<TileInfo, CancellationToken, Task<IFeature?>> fetchTileAsFeature,
         IDataFetchStrategy? dataFetchStrategy = null)
     {
         _tileCache = tileCache;
@@ -76,7 +77,7 @@ public class TileFetchDispatcher : INotifyPropertyChanged
                 {
                     var tileToFetch = tilesToFetch[i];
                     _tilesInProgress.Add(tileToFetch.Index);
-                    _fetchMachine.Start(() => FetchOnThreadAsync(tileToFetch));
+                    _fetchMachine.Start(cancellationToken => FetchOnThreadAsync(tileToFetch, cancellationToken));
                 }
             }
             Busy = _tilesInProgress.Count > 0 || tilesToFetch.Length > 0;
@@ -89,11 +90,11 @@ public class TileFetchDispatcher : INotifyPropertyChanged
         return Math.Min(tilesToFetch.Length, spaceLeftOnQueue);
     }
 
-    private async Task FetchOnThreadAsync(TileInfo tileInfo)
+    private async Task FetchOnThreadAsync(TileInfo tileInfo, CancellationToken cancellationToken)
     {
         try
         {
-            var feature = await _fetchTileAsFeature(tileInfo).ConfigureAwait(false);
+            var feature = await _fetchTileAsFeature(tileInfo, cancellationToken).ConfigureAwait(false);
             FetchCompleted(tileInfo, feature, null);
         }
         catch (Exception ex)
@@ -167,5 +168,10 @@ public class TileFetchDispatcher : INotifyPropertyChanged
         }
 
         return tilesToFetch.ToArray();
+    }
+
+    public void Dispose()
+    {
+        _fetchMachine.Dispose();
     }
 }

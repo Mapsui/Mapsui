@@ -25,7 +25,7 @@ public class FetchMachineTests
         // Arrange
         var tileSource = new CountingTileSource();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        using var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var expectedTiles = 64;
 
@@ -48,7 +48,7 @@ public class FetchMachineTests
         // Arrange
         var tileSource = new CountingTileSource();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        using var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var expectedTiles = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
@@ -75,7 +75,7 @@ public class FetchMachineTests
         // Arrange
         var tileSource = new NullTileSource();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        using var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
@@ -96,7 +96,7 @@ public class FetchMachineTests
         // Arrange
         var tileSource = new FailingTileSource();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        using var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
@@ -120,7 +120,7 @@ public class FetchMachineTests
         var tileSource = new SometimesFailingTileSource();
         var tileSchema = new GlobalSphericalMercator();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        using var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async (tileInfo, cancellationToken) => await TileToFeatureAsync(tileSource, tileInfo));
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));

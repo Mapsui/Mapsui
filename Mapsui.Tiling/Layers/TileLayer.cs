@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -48,7 +49,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
     public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
         IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
-        int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Task<IFeature?>>? fetchTileAsFeature = null)
+        int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, CancellationToken, Task<IFeature?>>? fetchTileAsFeature = null)
     {
         _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
         MemoryCache = new MemoryCache<IFeature?>(minTiles, maxTiles);
@@ -120,6 +121,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
         {
             MemoryCache.Dispose();
             _httpClient.Dispose();
+            _tileFetchDispatcher.Dispose();
         }
 
         base.Dispose(disposing);
@@ -146,11 +148,11 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
         OnDataChanged(new DataChangedEventArgs(ex, Name));
     }
 
-    private async Task<IFeature?> ToFeatureAsync(TileInfo tileInfo)
+    private async Task<IFeature?> ToFeatureAsync(TileInfo tileInfo, CancellationToken cancellationToken)
     {
         if (_tileSource is IHttpTileSource httpTileSource)
         {
-            var tileData = await httpTileSource.GetTileAsync(_httpClient, tileInfo).ConfigureAwait(false);
+            var tileData = await httpTileSource.GetTileAsync(_httpClient, tileInfo, cancellationToken).ConfigureAwait(false);
             var mRaster = ToRaster(tileInfo, tileData);
             return new RasterFeature(mRaster);
         }
