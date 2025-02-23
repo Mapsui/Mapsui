@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
@@ -104,7 +105,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => _fetchMachine.Start(cancellationToken => FetchAsync(fetchInfo, ++_refreshCounter)));
+        Delayer.ExecuteDelayed(() => _fetchMachine.Start(cancellationToken => FetchAsync(fetchInfo, ++_refreshCounter, cancellationToken)));
     }
 
     public override bool UpdateAnimations()
@@ -118,13 +119,13 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         return areAnimationsRunning;
     }
 
-    public async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter)
+    public async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter, CancellationToken cancellationToken)
     {
         fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
 
         try
         {
-            var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo).ConfigureAwait(false) : [];
+            var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo, cancellationToken).ConfigureAwait(false) : [];
             _cache = features.ToArray();
             if (_refreshCounter == refreshCounter)
                 Busy = false;

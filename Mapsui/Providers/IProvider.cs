@@ -4,6 +4,7 @@
 
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 
@@ -25,5 +26,10 @@ public interface IProvider
     /// <returns>BoundingBox</returns>
     MRect? GetExtent();
 
-    Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo);
+    Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    {
+        return GetFeaturesAsync(fetchInfo, CancellationToken.None);
+    }
+
+    Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken);
 }
