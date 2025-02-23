@@ -317,7 +317,7 @@ public class LayerCollection : IEnumerable<ILayer>
                 entry.Index = counter + 1;
 
             counter++;
-        };
+        }
     }
 
     private LayerEntry[] GetEntriesOfGroup(int group)
@@ -352,7 +352,8 @@ public class LayerCollection : IEnumerable<ILayer>
                 entry.Index = counter + 1;
 
             counter++;
-        };
+        }
+
         _entries.Enqueue(entryToInsert);
     }
 

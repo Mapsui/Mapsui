@@ -21,7 +21,7 @@ public static class FlingAnimation
         var duration = magnitudeOfV / 10;
 
         if (magnitudeOfV < 100 || duration < 16)
-            return animations; ;
+            return animations;
 
         if (duration > maxDuration)
             duration = maxDuration;

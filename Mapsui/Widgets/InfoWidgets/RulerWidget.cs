@@ -111,7 +111,7 @@ public class RulerWidget(Map map) : BaseWidget
         {
             result.Add(startFeature);
             StartPosition = startFeature?.Extent?.Centroid;
-        };
+        }
 
         var currentFeature = getFeaturesToSnapTo(CurrentPosition);
         if (currentFeature != null)
