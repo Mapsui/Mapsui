@@ -17,14 +17,19 @@
 
 	<ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Blazor" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
     <PackageReference Include="DotNext.Threading" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'=='net8.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)'=='net9.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Components" VersionOverride="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" VersionOverride="9.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" VersionOverride="9.0.2" />
   </ItemGroup>
 
   <!--target to remove System.Memory-->
