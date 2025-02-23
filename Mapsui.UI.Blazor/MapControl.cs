@@ -51,7 +51,7 @@ public partial class MapControl : ComponentBase, IMapControl
             else if (_viewGpu != null)
                 _viewGpu?.Invalidate();
             else
-                LoadImage();
+                InvalidateImage();
 #pragma warning restore CA1416            
         };
     }
@@ -61,7 +61,7 @@ public partial class MapControl : ComponentBase, IMapControl
             ? $"data:image/webp;base64,{Convert.ToBase64String(_imagedata)}"
             : string.Empty;
 
-    protected void LoadImage()
+    protected void InvalidateImage()
     {
         // Example: Load image data from an API or file
         var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85);
