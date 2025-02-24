@@ -14,7 +14,7 @@ public static class ImageSourceCacheTests
         // Arrange
         var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         var imageSourceCache = new ImageSourceCache();
-        await imageSourceCache.RegisterAsync(imageSource);
+        await imageSourceCache.TryRegisterAsync(imageSource);
 
         // Act
         imageSourceCache.Unregister(imageSource);
@@ -29,7 +29,7 @@ public static class ImageSourceCacheTests
         // Arrange
         var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         var imageSourceCache = new ImageSourceCache();
-        await imageSourceCache.RegisterAsync(imageSource);
+        await imageSourceCache.TryRegisterAsync(imageSource);
 
         // Act
         imageSourceCache.Unregister(imageSource);
@@ -44,7 +44,7 @@ public static class ImageSourceCacheTests
         // Arrange
         var imageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
         var imageSourceCache = new ImageSourceCache();
-        await imageSourceCache.RegisterAsync(imageSource);
+        await imageSourceCache.TryRegisterAsync(imageSource);
 
         // Act
         var stream = imageSourceCache.Get(imageSource);
@@ -60,7 +60,7 @@ public static class ImageSourceCacheTests
         // Arrange
         var examplePath = $"file://{AppContext.BaseDirectory}/Resources/example.tif";
         var imageSourceCache = new ImageSourceCache();
-        await imageSourceCache.RegisterAsync(examplePath);
+        await imageSourceCache.TryRegisterAsync(examplePath);
 
         // Act
         imageSourceCache.Unregister(examplePath);
@@ -75,7 +75,7 @@ public static class ImageSourceCacheTests
         // Arrange
         var examplePath = $"file://{AppContext.BaseDirectory}/Resources/example.tif";
         var imageSourceCache = new ImageSourceCache();
-        await imageSourceCache.RegisterAsync(examplePath);
+        await imageSourceCache.TryRegisterAsync(examplePath);
 
         // Act
         var bytes = imageSourceCache.Get(examplePath);
@@ -91,7 +91,7 @@ public static class ImageSourceCacheTests
         // Arrange
         var urlToMapsuiLogo = "https://mapsui.com/images/logo.svg";
         var imageSourceCache = new ImageSourceCache();
-        await imageSourceCache.RegisterAsync(urlToMapsuiLogo);
+        await imageSourceCache.TryRegisterAsync(urlToMapsuiLogo);
 
         // Act
         imageSourceCache.Unregister(urlToMapsuiLogo);
@@ -106,7 +106,7 @@ public static class ImageSourceCacheTests
         // Arrange
         var mapsuiLogo = "https://mapsui.com/images/logo.svg";
         var imageSourceCache = new ImageSourceCache();
-        await imageSourceCache.RegisterAsync(mapsuiLogo);
+        await imageSourceCache.TryRegisterAsync(mapsuiLogo);
 
         // Act
         var bytes = imageSourceCache.Get(mapsuiLogo);

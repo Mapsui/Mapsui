@@ -11,7 +11,7 @@ public enum GestureType
     /// </summary>
     DoubleTap,
     /// <summary>
-    /// // Previously down on nearly the same position during some specific period.
+    /// Previously down on nearly the same position during some specific period.
     /// </summary>
     LongPress,
     /// <summary>
