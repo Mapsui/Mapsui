@@ -26912,22 +26912,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.ImageSourceCache.Get
   nameWithType: ImageSourceCache.Get
-- uid: Mapsui.Styles.ImageSourceCache.RegisterAsync(System.String)
-  name: RegisterAsync(string)
-  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_RegisterAsync_System_String_
-  commentId: M:Mapsui.Styles.ImageSourceCache.RegisterAsync(System.String)
-  name.vb: RegisterAsync(String)
-  fullName: Mapsui.Styles.ImageSourceCache.RegisterAsync(string)
-  fullName.vb: Mapsui.Styles.ImageSourceCache.RegisterAsync(String)
-  nameWithType: ImageSourceCache.RegisterAsync(string)
-  nameWithType.vb: ImageSourceCache.RegisterAsync(String)
-- uid: Mapsui.Styles.ImageSourceCache.RegisterAsync*
-  name: RegisterAsync
-  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_RegisterAsync_
-  commentId: Overload:Mapsui.Styles.ImageSourceCache.RegisterAsync
+- uid: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(System.String)
+  name: TryRegisterAsync(string)
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_TryRegisterAsync_System_String_
+  commentId: M:Mapsui.Styles.ImageSourceCache.TryRegisterAsync(System.String)
+  name.vb: TryRegisterAsync(String)
+  fullName: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(string)
+  fullName.vb: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(String)
+  nameWithType: ImageSourceCache.TryRegisterAsync(string)
+  nameWithType.vb: ImageSourceCache.TryRegisterAsync(String)
+- uid: Mapsui.Styles.ImageSourceCache.TryRegisterAsync*
+  name: TryRegisterAsync
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_TryRegisterAsync_
+  commentId: Overload:Mapsui.Styles.ImageSourceCache.TryRegisterAsync
   isSpec: "True"
-  fullName: Mapsui.Styles.ImageSourceCache.RegisterAsync
-  nameWithType: ImageSourceCache.RegisterAsync
+  fullName: Mapsui.Styles.ImageSourceCache.TryRegisterAsync
+  nameWithType: ImageSourceCache.TryRegisterAsync
 - uid: Mapsui.Styles.ImageSourceCache.Unregister(System.String)
   name: Unregister(string)
   href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_Unregister_System_String_
