@@ -1,13 +1,13 @@
 {
   "sdk": {
     "allowPrerelease": false,
-    "version": "9.0.100",
-    "rollForward": "latestFeature"
+    "version": "9.0.200",
+    "rollForward": "disable"
   },
   "tools": {
     "allowPrerelease": false,
-    "dotnet": "9.0.100",
-    "rollForward": "latestFeature"
+    "dotnet": "9.0.200",
+    "rollForward": "disable"
   },
   "msbuild-sdks": {
     "Uno.Sdk": "5.5.56"
