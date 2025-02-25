@@ -93,7 +93,7 @@ public class SymbolStyleFeatureSizeTests
             ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
         };
 
-        await renderService.ImageSourceCache.RegisterAsync(symbolStyle.ImageSource);
+        await renderService.ImageSourceCache.TryRegisterAsync(symbolStyle.ImageSource);
 
         // Act
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
