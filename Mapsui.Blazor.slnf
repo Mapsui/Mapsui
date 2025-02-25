@@ -10,6 +10,7 @@
       "Mapsui.UI.Blazor\\Mapsui.UI.Blazor.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui\\Mapsui.csproj",
+      "Samples\\Mapsui.Samples.Blazor.Server\\Mapsui.Samples.Blazor.Server.csproj",
       "Samples\\Mapsui.Samples.Blazor\\Mapsui.Samples.Blazor.csproj",
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
       "Samples\\Mapsui.Samples.MapView\\Mapsui.Samples.MapView.shproj",
