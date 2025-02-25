@@ -17,7 +17,7 @@
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.2.2" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.2" />
     <PackageVersion Include="BenchmarkDotNet" Version="[0.13.9,1.0.0)" />
-    <PackageVersion Include="BitMiracle.LibTiff.NET" Version="[2.4.649,3.0.0)" />
+    <PackageVersion Include="BitMiracle.LibTiff.NET" Version="2.4.660" />
     <PackageVersion Include="BruTile" Version="[6.0.0-beta.4,7.0)" />
     <PackageVersion Include="BruTile.MbTiles" Version="[6.0.0-beta.4,7.0)" />
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
@@ -50,14 +50,14 @@
     <PackageVersion Include="Mapsui.Uno.WinUI" Version="5.0.0-beta.4" />
     <PackageVersion Include="Mapsui.WinUI" Version="5.0.0-beta.4" />
     <PackageVersion Include="Mapsui.Wpf" Version="5.0.0-beta.4" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components" Version="8.0.8" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="17.12.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[8.0.0,9.0.0)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components" Version="8.0.8" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="[6.2.14,7.0.0)" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="[2.6.2,3.0.0)" />
-    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.10.48,18.0.0)" />       
+    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="[17.10.48,18.0.0)" />
     <PackageVersion Include="NetTopologySuite" Version="[2.5.0,3.0.0)" />
     <PackageVersion Include="NetTopologySuite.IO.GeoJSON4STJ" Version="[4.0.0,5.0.0)" />
     <PackageVersion Include="NUnit" Version="4.3.2" />
