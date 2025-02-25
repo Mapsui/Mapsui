@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Features;
 using Mapsui.Layers;
@@ -164,7 +165,7 @@ public class GeoJsonProvider(string geoJson) : IProvider, IProviderExtended
     }
 
     /// <inheritdoc/>
-    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         var fetchExtent = fetchInfo.Extent.ToEnvelope();
         IEnumerable<IFeature> result = FeatureCollection.Query(fetchExtent);

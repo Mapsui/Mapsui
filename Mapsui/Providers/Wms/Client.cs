@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Cache;
@@ -150,7 +151,7 @@ public class Client
 
 
 
-    private readonly Func<string, Task<byte[]>> _getBytesAsync;
+    private readonly Func<string, CancellationToken, Task<byte[]>> _getBytesAsync;
     private string[]? _exceptionFormats;
     private Capabilities.WmsServiceDescription _serviceDescription;
     private readonly IUrlPersistentCache? _persistentCache;
@@ -209,7 +210,7 @@ public class Client
     /// <param name="getBytesAsync">Download method, leave null for default</param>
     /// <param name="persistentCache">persistent Cache</param>
     /// <param name="userAgent">user Agent</param>
-    public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    public static async Task<Client> CreateAsync(string url, CancellationToken cancellationToken, string? wmsVersion = null, Func<string, CancellationToken, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
         var client = new Client(getBytesAsync, persistentCache, userAgent);
 
@@ -224,7 +225,7 @@ public class Client
             strReq.AppendFormat("REQUEST=GetCapabilities&");
         if (!url.Contains("version=", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(wmsVersion))
             strReq.AppendFormat("VERSION={0}&", wmsVersion);
-        var xml = await client.GetRemoteXmlAsync(strReq.ToString().TrimEnd('&'));
+        var xml = await client.GetRemoteXmlAsync(strReq.ToString().TrimEnd('&'), cancellationToken);
         client.ParseCapabilities(xml);
         return client;
     }
@@ -234,14 +235,14 @@ public class Client
     /// </summary>
     /// <param name="getBytesAsync">Download method, leave null for default</param>
     /// <param name="persistentCache">persistent Cache</param>
-    private Client(Func<string, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
+    private Client(Func<string, CancellationToken, Task<byte[]>>? getBytesAsync = null, IUrlPersistentCache? persistentCache = null, string? userAgent = null)
     {
         _userAgent = userAgent;
         _persistentCache = persistentCache;
         _getBytesAsync = InitializeGetBytesAsyncMethod(getBytesAsync);
     }
 
-    public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<byte[]>>? getBytesAsync = null, string? userAgent = null)
+    public Client(XmlDocument capabilitiesXmlDocument, Func<string, CancellationToken, Task<byte[]>>? getBytesAsync = null, string? userAgent = null)
     {
         _userAgent = userAgent;
         _getBytesAsync = InitializeGetBytesAsyncMethod(getBytesAsync);
@@ -249,12 +250,12 @@ public class Client
         ParseCapabilities(capabilitiesXmlDocument);
     }
 
-    private Func<string, Task<byte[]>> InitializeGetBytesAsyncMethod(Func<string, Task<byte[]>>? getBytesAsync)
+    private Func<string, CancellationToken, Task<byte[]>> InitializeGetBytesAsyncMethod(Func<string, CancellationToken, Task<byte[]>>? getBytesAsync)
     {
         return getBytesAsync ?? GetBytesAsync;
     }
 
-    private async Task<byte[]> GetBytesAsync(string url)
+    private async Task<byte[]> GetBytesAsync(string url, CancellationToken cancellationToken)
     {
         var result = _persistentCache?.Find(url);
         if (result == null)
@@ -262,14 +263,14 @@ public class Client
             var handler = new HttpClientHandler();
             using var client = new HttpClient(handler);
             client.DefaultRequestHeaders.UserAgent.ParseAdd(_userAgent ?? "If you use BruTile please specify a user-agent specific to your app");
-            using var response = await client.GetAsync(url).ConfigureAwait(false);
+            using var response = await client.GetAsync(url, cancellationToken).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Unexpected response code: {response.StatusCode}");
             }
 
-            await using var readAsStreamAsync = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            await using var readAsStreamAsync = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
             result = readAsStreamAsync.ToBytes();
             _persistentCache?.Add(url, result);
         }
@@ -287,13 +288,13 @@ public class Client
     /// Downloads service description from WMS service
     /// </summary>
     /// <returns>XmlDocument from Url. Null if Url is empty or improper XmlDocument</returns>
-    private async Task<XmlDocument> GetRemoteXmlAsync(string url)
+    private async Task<XmlDocument> GetRemoteXmlAsync(string url, CancellationToken cancellationToken)
     {
         try
         {
             var doc = new XmlDocument { XmlResolver = null };
 
-            var bytes = await _getBytesAsync(url);
+            var bytes = await _getBytesAsync(url, cancellationToken);
             using var memoryStream = new MemoryStream(bytes);
             using var xmlReader = new XmlTextReader(memoryStream) { XmlResolver = null };
             doc.Load(xmlReader);
