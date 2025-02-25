@@ -25,11 +25,13 @@ public static class ImageSourceCacheInitializer
 
         _fetchMachine.Start(async cancellationToken =>
         {
+            var needsRefresh = false;
             foreach (var imageSource in imageSources)
             {
                 try
                 {
-                    await imageSourceCache.RegisterAsync(imageSource);
+                    if (await imageSourceCache.TryRegisterAsync(imageSource))
+                        needsRefresh = true;
                 }
                 catch (Exception ex)
                 {
@@ -37,7 +39,7 @@ public static class ImageSourceCacheInitializer
                     Logger.Log(LogLevel.Error, ex.Message, ex);
                 }
             }
-            doneInitializing(true);
+            doneInitializing(needsRefresh);
         });
     }
 
@@ -53,7 +55,7 @@ public static class ImageSourceCacheInitializer
         {
             try
             {
-                await imageSourceCache.RegisterAsync(imageSource);
+                await imageSourceCache.TryRegisterAsync(imageSource);
             }
             catch (Exception ex)
             {
