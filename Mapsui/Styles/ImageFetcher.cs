@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Logging;
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 namespace Mapsui.Styles;
 public static class ImageFetcher
 {
+    private static ConcurrentDictionary<string, Assembly>? _embeddedResources;
+
     public static async Task<byte[]> FetchBytesFromImageSourceAsync(string imageSource)
     {
         // Uri has a limitation of ~2000 bytes for URLs, so extract the scheme by hand
@@ -32,9 +34,10 @@ public static class ImageFetcher
     {
         try
         {
-            var assemblies = GetMatchingAssemblies(imageSource);
+            if (_embeddedResources is null)
+                _embeddedResources = LoadEmbeddedResourcePaths();
 
-            foreach (var assembly in assemblies)
+            if (_embeddedResources.TryGetValue(imageSource.Host, out var assembly))
             {
                 string[] resourceNames = assembly.GetManifestResourceNames();
                 var matchingResourceName = resourceNames.FirstOrDefault(r => r.Equals(imageSource.Host, StringComparison.InvariantCultureIgnoreCase));
@@ -45,7 +48,7 @@ public static class ImageFetcher
                     return stream.ToBytes();
                 }
             }
-            var allResourceNames = assemblies.SelectMany(a => a.GetManifestResourceNames()).ToList();
+            var allResourceNames = _embeddedResources.Keys.ToList();
             string listOfEmbeddedResources = string.Concat(allResourceNames.Select(n => '\n' + n)); // All resources should be on a new line.
             throw new Exception($"Could not find the embedded resource in the current assemblies. ImageSource: '{imageSource}'. Other embedded resources in matching assemblies: {listOfEmbeddedResources}");
         }
@@ -57,20 +60,21 @@ public static class ImageFetcher
         }
     }
 
-    static private List<Assembly> GetMatchingAssemblies(Uri imageSource)
+    private static ConcurrentDictionary<string, Assembly> LoadEmbeddedResourcePaths()
     {
-        var result = new List<Assembly>();
-        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        var result = new ConcurrentDictionary<string, Assembly>();
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+        foreach (var assembly in assemblies)
         {
-            var name = assembly.GetName().Name ?? throw new Exception($"Assembly name is null: '{assembly}'");
-            if (imageSource.Host.StartsWith(name, StringComparison.InvariantCultureIgnoreCase))
+            string[] resourceNames = assembly.GetManifestResourceNames();
+
+            foreach (var resourceName in resourceNames)
             {
-                result.Add(assembly);
+                if (!resourceName.EndsWith(".resources"))
+                    result.AddOrUpdate(resourceName.ToLower(), (r) => assembly, (r, a) => assembly);
             }
         }
-        if (!result.Any())
-            throw new Exception($"No matching assemblies found for url: '{imageSource}");
-
         return result;
     }
 
