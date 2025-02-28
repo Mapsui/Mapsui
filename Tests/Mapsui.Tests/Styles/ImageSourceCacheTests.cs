@@ -124,9 +124,9 @@ public static class ImageSourceCacheTests
         // Arrange
         var embedded = "embedded://Mapsui.Resources.Images.Pin.svg";
         var imageSourceCache = new ImageSourceCache();
-        await imageSourceCache.RegisterAsync(embedded);
+        await imageSourceCache.TryRegisterAsync(embedded);
 
-        await imageSourceCache.RegisterAsync(uri);
+        await imageSourceCache.TryRegisterAsync(uri);
 
         // Act
         var bytesEmbedded = imageSourceCache.Get(embedded);
@@ -148,9 +148,9 @@ public static class ImageSourceCacheTests
         // Arrange
         var file = $"file://{AppContext.BaseDirectory}/Resources/Images/image.png";
         var imageSourceCache = new ImageSourceCache();
-        await imageSourceCache.RegisterAsync(file);
+        await imageSourceCache.TryRegisterAsync(file);
 
-        await imageSourceCache.RegisterAsync(uri);
+        await imageSourceCache.TryRegisterAsync(uri);
 
         // Act
         var bytesFile = imageSourceCache.Get(file);
