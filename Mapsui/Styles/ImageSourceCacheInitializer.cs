@@ -17,7 +17,9 @@ public static class ImageSourceCacheInitializer
     {
         var imageSources = GetAllImageSources(viewport, layers, widgets);
 
-        if (imageSources.Count == 0)
+        var unregisteredImageSource = imageSourceCache.GetUnregisteredImageSources(imageSources);
+
+        if (unregisteredImageSource.Count == 0)
         {
             doneInitializing(false);
             return; // Don't start a thread if there are no bitmap paths to initialize.
@@ -26,7 +28,7 @@ public static class ImageSourceCacheInitializer
         _fetchMachine.Start(async () =>
         {
             var needsRefresh = false;
-            foreach (var imageSource in imageSources)
+            foreach (var imageSource in unregisteredImageSource)
             {
                 try
                 {

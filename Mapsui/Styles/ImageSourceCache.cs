@@ -1,4 +1,6 @@
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
@@ -26,6 +28,11 @@ public sealed class ImageSourceCache
         _register[imageSource.ToString()] = stream;
         return true;
     }
+
+    public List<string> GetUnregisteredImageSources(List<string> imageSources) =>
+        imageSources
+            .Where(imageSource => !_register.ContainsKey(imageSource))
+            .ToList();
 
     /// <summary>
     /// Get a image from the cache
