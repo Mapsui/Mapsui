@@ -24,8 +24,8 @@ public static class ImageFetcher
             "embedded" => LoadEmbeddedResourceFromPath(new Uri(imageSource)),
             "file" => LoadFromFileSystem(new Uri(imageSource)),
             "http" or "https" => await LoadFromUrlAsync(new Uri(imageSource)),
-            "svg-content" => LoadFromSvg(imageSource.Substring("svg-content://".Length)),
-            "base64-content" => LoadFromBase64(imageSource.Substring("base64-content://".Length)),
+            "svg-content" => LoadFromSvg(imageSource["svg-content://".Length..]),
+            "base64-content" => LoadFromBase64(imageSource["base64-content://".Length..]),
             _ => throw new ArgumentException($"Scheme '{scheme}' of '{imageSource}' is not supported"),
         };
     }
