@@ -36,7 +36,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, RenderService renderService)
+    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y,
+        SymbolStyle symbolStyle, RenderService renderService)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
