@@ -162,7 +162,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
         }
         else
         {
-            throw new NotImplementedException("ToFeatureAsync is not implemented for this type of TileSource");
+            throw new NotImplementedException($"ToFeatureAsync is not implemented for this TileSource type '{_tileSource.GetType()}'. Derive either from either '{nameof(IHttpTileSource)}' or '{nameof(ILocalTileSource)}'");
         }
     }
 
