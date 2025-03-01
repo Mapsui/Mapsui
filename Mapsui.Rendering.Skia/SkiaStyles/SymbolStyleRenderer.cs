@@ -43,11 +43,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
 
-        if (symbolStyle.ImageSource is null)
+        if (symbolStyle.Image?.SourceId is null)
             return false;
 
-        var image = renderService.DrawableImageCache.GetOrCreate(symbolStyle.ImageSource,
-            () => TryCreateDrawableImage(symbolStyle.ImageSource, renderService.ImageSourceCache));
+        var image = renderService.DrawableImageCache.GetOrCreate(symbolStyle.Image.SourceId,
+            () => TryCreateDrawableImage(symbolStyle.Image, renderService.ImageSourceCache));
         if (image == null)
             return false;
 
@@ -69,11 +69,11 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
             else
             {
-                if (symbolStyle.ImageSource is null)
+                if (symbolStyle.Image is null)
                     throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
                 if (renderService.DrawableImageCache.GetOrCreate(
-                        ToSpriteKey(symbolStyle.ImageSource, symbolStyle.BitmapRegion),
+                        ToSpriteKey(symbolStyle.Image.SourceId, symbolStyle.BitmapRegion),
                         () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.BitmapRegion)) is BitmapImage drawableImage)
                 {
                     BitmapRenderer.Draw(canvas, drawableImage.Image,
@@ -88,7 +88,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             if (symbolStyle.SvgFillColor.HasValue || symbolStyle.SvgStrokeColor.HasValue)
             {
-                var drawableImage = renderService.DrawableImageCache.GetOrCreate(ToModifiedSvgKey(symbolStyle.ImageSource, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor),
+                var key = ToModifiedSvgKey(symbolStyle.Image.SourceId, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
+                var drawableImage = renderService.DrawableImageCache.GetOrCreate(key,
                     () =>
                     {
                         using var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(svgImage.OriginalStream ?? throw new NullReferenceException("Original Stream is null"), symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
@@ -261,10 +262,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         switch (symbolStyle.SymbolType)
         {
             case SymbolType.Image:
-                if (symbolStyle.ImageSource is not null)
+                if (symbolStyle.Image is not null)
                 {
-                    var image = ((RenderService)renderService).DrawableImageCache.GetOrCreate(symbolStyle.ImageSource,
-                        () => TryCreateDrawableImage(symbolStyle.ImageSource, ((RenderService)renderService).ImageSourceCache));
+                    var image = ((RenderService)renderService).DrawableImageCache.GetOrCreate(symbolStyle.Image.SourceId,
+                        () => TryCreateDrawableImage(symbolStyle.Image, ((RenderService)renderService).ImageSourceCache));
                     if (image != null)
                         symbolSize = new Size(image.Width, image.Height);
                 }
@@ -300,9 +301,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         => $"{imageSource}?modifiedsvg=true,fill={fill?.ToString() ?? ""},stroke={stroke?.ToString() ?? ""}";
 
     // Todo: Figure out a better place for this method
-    public static IDrawableImage? TryCreateDrawableImage(string key, ImageSourceCache imageSourceCache)
+    public static IDrawableImage? TryCreateDrawableImage(Image image, ImageSourceCache imageSourceCache)
     {
-        var imageBytes = imageSourceCache.Get(key);
+        var imageBytes = imageSourceCache.Get(image);
         if (imageBytes == null)
             return null;
         var drawableImage = ImageHelper.ToDrawableImage(imageBytes);

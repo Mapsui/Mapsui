@@ -58,7 +58,7 @@ public class SvgSymbolSample : ISample
 
     private static SymbolStyle CreateSymbolStyle() => new()
     {
-        ImageSource = "embedded://mapsui.resources.images.pin.svg",
+        Image = "embedded://mapsui.resources.images.pin.svg",
         SvgFillColor = Color.FromRgba(0, 177, 0, 255),
         SvgStrokeColor = Color.FromRgba(32, 96, 32, 255),
     };

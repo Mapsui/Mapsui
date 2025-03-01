@@ -69,7 +69,7 @@ public static class SampleLayerExtensions
             {
                 new SymbolStyle
                 {
-                    ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
+                    Image = "embedded://Mapsui.Resources.Images.Pin.svg",
                     SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
                     SvgFillColor = Color.CornflowerBlue,
                     SvgStrokeColor = Color.Black,

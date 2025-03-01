@@ -16,6 +16,7 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>")]
     public static Map CreateMap()
     {
         var layer = new MemoryLayer
@@ -60,7 +61,7 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
 
         feature.Styles.Add(new SymbolStyle
         {
-            ImageSource = imageSource,
+            Image = imageSource,
             SymbolOffset = new Offset { Y = -24 },
             SymbolRotation = rotation,
             RotateWithMap = true,

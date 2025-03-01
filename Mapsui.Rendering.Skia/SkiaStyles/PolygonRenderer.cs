@@ -213,10 +213,10 @@ internal static class PolygonRenderer
 
     private static SKImage? GetImage(RenderService renderService, Brush brush)
     {
-        if (brush.ImageSource is null)
+        if (brush.Image is null)
             return null;
-        var drawableImage = renderService.DrawableImageCache.GetOrCreate(brush.ImageSource,
-            () => SymbolStyleRenderer.TryCreateDrawableImage(brush.ImageSource, renderService.ImageSourceCache));
+        var drawableImage = renderService.DrawableImageCache.GetOrCreate(brush.Image.SourceId,
+            () => SymbolStyleRenderer.TryCreateDrawableImage(brush.Image, renderService.ImageSourceCache));
         if (drawableImage == null)
             return null;
 
@@ -226,10 +226,10 @@ internal static class PolygonRenderer
                 return bitmapImage.Image;
             else
             {
-                if (brush.ImageSource is null)
+                if (brush.Image is null)
                     throw new Exception("If BitmapRegion is not null the ImageSource should be set.");
 
-                var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
+                var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(brush.Image.SourceId, brush.BitmapRegion);
                 var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, brush.BitmapRegion));
                 if (regionDrawableImage == null)
                     return null;

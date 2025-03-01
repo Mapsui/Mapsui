@@ -55,7 +55,7 @@ public class CustomSvgStyleSample : ISample
 
             return new SymbolStyle
             {
-                ImageSource = $"embedded://Mapsui.Samples.Common.Images.arrow.svg",
+                Image = "embedded://Mapsui.Samples.Common.Images.arrow.svg",
                 SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
                 SvgFillColor = GetTypeColor((int)f.Id % 4),
                 SvgStrokeColor = Color.Black,

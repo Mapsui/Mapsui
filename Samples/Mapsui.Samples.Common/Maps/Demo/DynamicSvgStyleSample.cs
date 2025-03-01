@@ -54,7 +54,7 @@ public class DynamicSvgStyleSample : ISample
 
             return new SymbolStyle
             {
-                ImageSource = imageSource,
+                Image = imageSource,
                 SymbolOffset = new RelativeOffset(0.0, 0.0),
                 // 1. Change scale based on the distance
                 SymbolScale = 0.25 + (0.25 * distanceBetweenZeroAndOne),

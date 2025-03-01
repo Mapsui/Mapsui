@@ -14,11 +14,11 @@ public class ImageButtonWidgetRenderer : ISkiaWidgetRenderer
     {
         var button = (ImageButtonWidget)widget;
 
-        if (button.ImageSource == null)
+        if (button.Image == null)
             throw new InvalidOperationException("ImageSource is not set");
 
-        var drawableImage = renderService.DrawableImageCache.GetOrCreate(button.ImageSource,
-            () => SymbolStyleRenderer.TryCreateDrawableImage(button.ImageSource, renderService.ImageSourceCache));
+        var drawableImage = renderService.DrawableImageCache.GetOrCreate(button.Image.SourceId,
+            () => SymbolStyleRenderer.TryCreateDrawableImage(button.Image, renderService.ImageSourceCache));
         if (drawableImage == null)
             return;
 
@@ -43,7 +43,7 @@ public class ImageButtonWidgetRenderer : ISkiaWidgetRenderer
         using var skPaint = new SKPaint { IsAntialias = true };
         if (drawableImage is BitmapImage bitmapImage)
         {
-            throw new Exception($"BitmapImage is not supported as {nameof(button.ImageSource)}  or {nameof(ImageButtonWidget)}");
+            throw new Exception($"BitmapImage is not supported as {nameof(button.Image.Source)}  or {nameof(ImageButtonWidget)}");
             // Todo: Implement this. It should have a tested sample. Perhaps in a separate ImageButtonWidgetSample. Things like scale and
             // rotation should be tested. Could be something like this:
             // BitmapRenderer.Draw(canvas, bitmapImage.Image,

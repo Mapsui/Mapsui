@@ -12,6 +12,13 @@ using System.Threading.Tasks;
 namespace Mapsui.Styles;
 public static class ImageFetcher
 {
+    public const string EmbeddedScheme = "embedded";
+    public const string FileScheme = "file";
+    public const string HttpScheme = "http";
+    public const string HttpsScheme = "https";
+    public const string SvgContentScheme = "svg-content";
+    public const string Base64ContentScheme = "base64-content";
+
     private static ConcurrentDictionary<string, Assembly>? _embeddedResources;
 
     public static async Task<byte[]> FetchBytesFromImageSourceAsync(string imageSource)
@@ -21,11 +28,11 @@ public static class ImageFetcher
 
         return scheme switch
         {
-            "embedded" => LoadEmbeddedResourceFromPath(new Uri(imageSource)),
-            "file" => LoadFromFileSystem(new Uri(imageSource)),
-            "http" or "https" => await LoadFromUrlAsync(new Uri(imageSource)),
-            "svg-content" => LoadFromSvg(imageSource["svg-content://".Length..]),
-            "base64-content" => LoadFromBase64(imageSource["base64-content://".Length..]),
+            EmbeddedScheme => LoadEmbeddedResourceFromPath(new Uri(imageSource)),
+            FileScheme => LoadFromFileSystem(new Uri(imageSource)),
+            HttpScheme or HttpsScheme => await LoadFromUrlAsync(new Uri(imageSource)),
+            SvgContentScheme => LoadFromSvg(imageSource[(SvgContentScheme.Length + 3)..]),
+            Base64ContentScheme => LoadFromBase64(imageSource[(Base64ContentScheme.Length + 3)..]),
             _ => throw new ArgumentException($"Scheme '{scheme}' of '{imageSource}' is not supported"),
         };
     }

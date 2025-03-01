@@ -494,7 +494,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                 Feature.Styles.Add(new SymbolStyle
                 {
                     // Not going to fix this: ImageSource = _bitmapId,
-                    ImageSource = imageSource,
+                    Image = imageSource,
                     SymbolScale = Scale,
                     SymbolRotation = Rotation,
                     RotateWithMap = RotateWithMap,

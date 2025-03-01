@@ -20,7 +20,9 @@ public class PolygonTestSample : ISample
     {
         var imageSource = "embedded://mapsui.tests.common.resources.images.avion_silhouette.png";
 
+#pragma warning disable IDISP001 // Dispose created
         var layer = CreateLayer(imageSource);
+#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {
@@ -34,17 +36,17 @@ public class PolygonTestSample : ISample
         return map;
     }
 
-    private static MemoryLayer CreateLayer(string imageSource)
+    private static MemoryLayer CreateLayer(Image image)
     {
         return new MemoryLayer
         {
-            Features = CreatePolygonProvider(imageSource),
+            Features = CreatePolygonProvider(image),
             Name = "Polygon"
         };
     }
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
-    public static IEnumerable<IFeature> CreatePolygonProvider(string imageSource)
+    public static IEnumerable<IFeature> CreatePolygonProvider(Image image)
     {
         var wktReader = new WKTReader();
         var features = new List<IFeature>();
@@ -58,7 +60,7 @@ public class PolygonTestSample : ISample
         feature.Styles.Add(new VectorStyle
         {
             Enabled = true,
-            Fill = CreateBrush(new Color(255, 0, 0, 120), FillStyle.BitmapRotated, imageSource),
+            Fill = CreateBrush(new Color(255, 0, 0, 120), FillStyle.BitmapRotated, image),
             Outline = CreatePen(new Color(255, 255, 0), 2, PenStyle.DashDot),
             Line = null
         });
@@ -185,12 +187,12 @@ public class PolygonTestSample : ISample
         return features;
     }
 
-    private static Brush CreateBrush(Color color, FillStyle fillStyle, string? imageSource = null)
+    private static Brush CreateBrush(Color color, FillStyle fillStyle, Image? image = null)
     {
-        if (imageSource is not null && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
+        if (image is not null && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
             fillStyle = FillStyle.Bitmap;
 
-        return new Brush { FillStyle = fillStyle, ImageSource = imageSource, Color = color };
+        return new Brush { FillStyle = fillStyle, Image = image, Color = color };
     }
 
     private static Pen CreatePen(Color color, int width, PenStyle penStyle)

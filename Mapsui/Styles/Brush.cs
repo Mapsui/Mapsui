@@ -4,9 +4,9 @@ using System;
 
 namespace Mapsui.Styles;
 
-public class Brush : IHasImageSource
+public class Brush : IHasImage
 {
-    private string? _imageSource;
+    private Image? _image;
 
     public Brush()
     {
@@ -32,20 +32,20 @@ public class Brush : IHasImageSource
     public Color? Background { get; set; }
 
     /// <summary>
-    /// If a bitmap is used as <see cref="ImageSource"/> the <see cref="BitmapRegion"/> can be used to specific a 
-    /// subregion that will be used as image symbol. This way the  <see cref="ImageSource"/> can be used as an 'atlas'
+    /// If a bitmap is used as <see cref="Image"/> the <see cref="BitmapRegion"/> can be used to specific a 
+    /// subregion that will be used as image symbol. This way the  <see cref="Image"/> can be used as an 'atlas'
     /// for 'sprites', which is a common mechanism in 2D gaming engines This will not affect SVGs.
     /// </summary>
     public BitmapRegion? BitmapRegion { get; set; }
 
-    public string? ImageSource
+    public Image? Image
     {
-        get => _imageSource;
+        get => _image;
         set
         {
-            ValidateImageSource(value);
-            _imageSource = value;
-            if (_imageSource != null)
+            _image = value;
+
+            if (_image != null)
             {
                 if (!(FillStyle is FillStyle.Bitmap or FillStyle.BitmapRotated))
                 {
@@ -85,12 +85,12 @@ public class Brush : IHasImageSource
         if (brush == null)
             return false;
 
-        return _imageSource == brush._imageSource && Equals(Color, brush.Color) && Equals(Background, brush.Background) && FillStyle == brush.FillStyle;
+        return _image == brush._image && Equals(Color, brush.Color) && Equals(Background, brush.Background) && FillStyle == brush.FillStyle;
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(_imageSource, Color, Background, FillStyle);
+        return HashCode.Combine(_image, Color, Background, FillStyle);
     }
 
     public static bool operator ==(Brush? brush1, Brush? brush2)
@@ -101,13 +101,5 @@ public class Brush : IHasImageSource
     public static bool operator !=(Brush? brush1, Brush? brush2)
     {
         return !Equals(brush1, brush2);
-    }
-
-    private static void ValidateImageSource(string? imageSource)
-    {
-        if (imageSource is null)
-            return;
-        // Will throw a UriFormatException exception if the imageSource is not a valid Uri
-        _ = new Uri(imageSource);
     }
 }
