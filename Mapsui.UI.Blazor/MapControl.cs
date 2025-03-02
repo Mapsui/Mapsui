@@ -62,9 +62,10 @@ public partial class MapControl : ComponentBase, IMapControl
             ? $"data:image/webp;base64,{Convert.ToBase64String(_imagedata)}"
             : string.Empty;
 
-    protected void InvalidateImage()
+    protected async void InvalidateImage()
     {
         // Example: Load image data from an API or file
+        var imageDimensions = await Interop.GetElementDimensions(_img);
         var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85,
             widgets: Map.Widgets);
         if (newImageData.SequenceEqual(newImageData))
