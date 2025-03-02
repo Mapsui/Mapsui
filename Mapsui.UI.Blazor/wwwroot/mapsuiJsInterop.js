@@ -40,8 +40,6 @@ export function getElementDimensions(element) {
     const rect = element.getBoundingClientRect();
     return {
         width: rect.width,
-        height: rect.height,
-        top: rect.top,
-        left: rect.left
+        height: rect.height        
     };
 }

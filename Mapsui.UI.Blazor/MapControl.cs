@@ -39,6 +39,7 @@ public partial class MapControl : ComponentBase, IMapControl
                 : _interop;
 
     private byte[]? _imagedata;
+    private Dimensions? _dimensions;
 
     public MapControl()
     {
@@ -70,9 +71,8 @@ public partial class MapControl : ComponentBase, IMapControl
             if (_img == null || Interop == null)
                 return;
 
-            var imageDimensions = await Interop.GetElementDimensions(_img.Value);
             var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85,
-                widgets: Map.Widgets, imageDimensions.Width, imageDimensions.Height);
+                widgets: Map.Widgets, ViewportWidth, ViewportHeight);
             if (newImageData.SequenceEqual(newImageData))
                 return;
 
@@ -122,6 +122,19 @@ public partial class MapControl : ComponentBase, IMapControl
         }
 
         CommonDrawControl(canvas);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_img != null && Interop != null)
+        {
+            var newDimensions = await Interop.GetElementDimensions(_img.Value);
+            if (_dimensions != newDimensions)
+            {
+                _dimensions = newDimensions;
+                StateHasChanged(); // Update UI with dimensions    
+            }
+        }
     }
 
     private void OnLoadComplete()
@@ -225,6 +238,13 @@ public partial class MapControl : ComponentBase, IMapControl
         return _pixelDensityFromInterop;
     }
 
+    [JSInvokable]
+    public void HandleResize(double width, double height)
+    {
+        _dimensions = new Dimensions { Width = width, Height = height };
+        StateHasChanged();
+    }
+
     public void Dispose()
     {
         Dispose(true);
@@ -239,8 +259,8 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    private double ViewportWidth => _canvasSize?.Width ?? 0;
-    private double ViewportHeight => _canvasSize?.Height ?? 0;
+    private double ViewportWidth => _canvasSize?.Width ?? _dimensions?.Width ?? 0;
+    private double ViewportHeight => _canvasSize?.Height ?? _dimensions?.Height ?? 0;
 
     public string? Cursor { get; set; }
 

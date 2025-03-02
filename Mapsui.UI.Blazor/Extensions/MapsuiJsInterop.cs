@@ -56,9 +56,9 @@ public sealed class MapsuiJsInterop : IAsyncDisposable
         return await module.InvokeAsync<double>(@"getPixelDensity");
     }
 
-    public async ValueTask<ElementDimensions> GetElementDimensions(ElementReference element)
+    public async ValueTask<Dimensions> GetElementDimensions(ElementReference element)
     {
         var module = await _moduleTask.WithCancellation(CancellationToken.None);
-        return await module.InvokeAsync<ElementDimensions>(@"getElementDimensions", element);
+        return await module.InvokeAsync<Dimensions>(@"getElementDimensions", element);
     }
 }
