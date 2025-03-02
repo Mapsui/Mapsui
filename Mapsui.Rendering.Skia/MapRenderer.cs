@@ -99,7 +99,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     {
         try
         {
-            width ??=  viewport.Width;
+            width ??= viewport.Width;
             height ??= viewport.Height;
 
             var imageInfo = new SKImageInfo((int)Math.Round(width.Value * pixelDensity), (int)Math.Round(height.Value * pixelDensity),
