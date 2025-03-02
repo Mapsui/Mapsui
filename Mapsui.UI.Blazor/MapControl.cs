@@ -14,6 +14,7 @@ public partial class MapControl : ComponentBase, IMapControl
 {
     protected SKCanvasView? _viewCpu;
     protected SKGLView? _viewGpu;
+    protected ElementReference? _img;
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;

@@ -94,14 +94,15 @@ public sealed class MapRenderer : IRenderer, IDisposable
     }
 
     public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
-        Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
+        Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100,
+        double? width = null, double? height = null)
     {
         try
         {
-            var width = viewport.Width;
-            var height = viewport.Height;
+            width ??=  viewport.Width;
+            height ??= viewport.Height;
 
-            var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
+            var imageInfo = new SKImageInfo((int)Math.Round(width.Value * pixelDensity), (int)Math.Round(height.Value * pixelDensity),
                 SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
             MemoryStream memoryStream = new MemoryStream();
