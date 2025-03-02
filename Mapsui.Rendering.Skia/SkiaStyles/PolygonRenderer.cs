@@ -211,7 +211,7 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(RenderService renderService, Brush brush)
+    private static SKImage? GetImage(RenderService renderService, Image image)
     {
         if (brush.Image is null)
             return null;
@@ -222,15 +222,15 @@ internal static class PolygonRenderer
 
         if (drawableImage is BitmapImage bitmapImage)
         {
-            if (brush.BitmapRegion is null)
+            if (brush.Image.BitmapRegion is null)
                 return bitmapImage.Image;
             else
             {
                 if (brush.Image is null)
                     throw new Exception("If BitmapRegion is not null the ImageSource should be set.");
 
-                var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(brush.Image.SourceId, brush.BitmapRegion);
-                var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, brush.BitmapRegion));
+                var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(brush.Image.SourceId, brush.Image.BitmapRegion);
+                var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, brush.Image.BitmapRegion));
                 if (regionDrawableImage == null)
                     return null;
                 if (regionDrawableImage is BitmapImage regionBitmapImage)

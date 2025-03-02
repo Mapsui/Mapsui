@@ -493,15 +493,17 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                 Feature.Styles.Clear();
                 Feature.Styles.Add(new SymbolStyle
                 {
-                    // Not going to fix this: ImageSource = _bitmapId,
-                    Image = imageSource,
+                    Image = new Image
+                    {
+                        Source = imageSource,
+                        BlendModeColor = blendColorMode,
+                    },
                     SymbolScale = Scale,
                     SymbolRotation = Rotation,
                     RotateWithMap = RotateWithMap,
                     SymbolOffset = new Offset(Anchor.X, Anchor.Y),
                     Opacity = 1 - Transparency,
                     Enabled = IsVisible,
-                    BlendModeColor = blendColorMode,
                 });
             }
         }

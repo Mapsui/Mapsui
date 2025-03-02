@@ -43,8 +43,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
 
-        if (symbolStyle.Image?.SourceId is null)
-            return false;
+        if (symbolStyle.Image is null)
+            throw new Exception("SymbolStyle.Image should not be null in the DrawImage render method");
 
         var image = renderService.DrawableImageCache.GetOrCreate(symbolStyle.Image.SourceId,
             () => TryCreateDrawableImage(symbolStyle.Image, renderService.ImageSourceCache));
@@ -59,69 +59,54 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         if (image is BitmapImage bitmapImage)
         {
-            if (symbolStyle.BitmapRegion is null) // It is an ordinary bitmap.
+            if (symbolStyle.Image.BitmapRegion is not null) // Get image for region if specified
             {
-                BitmapRenderer.Draw(canvas, bitmapImage.Image,
-                    (float)destinationX, (float)destinationY,
-                    rotation,
-                    (float)offset.X, (float)offset.Y,
-                    opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                var key = ToSpriteKey(symbolStyle.Image.SourceId, symbolStyle.Image.BitmapRegion);
+                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.Image.BitmapRegion)) is BitmapImage bitmapRegionImage)
+                    bitmapImage = bitmapRegionImage;
             }
-            else
-            {
-                if (symbolStyle.Image is null)
-                    throw new Exception("If Sprite parameters are specified a ImageSource is required.");
 
-                if (renderService.DrawableImageCache.GetOrCreate(
-                        ToSpriteKey(symbolStyle.Image.SourceId, symbolStyle.BitmapRegion),
-                        () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.BitmapRegion)) is BitmapImage drawableImage)
-                {
-                    BitmapRenderer.Draw(canvas, drawableImage.Image,
-                        (float)destinationX, (float)destinationY,
-                        rotation,
-                        (float)offset.X, (float)offset.Y,
-                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
-                }
-            }
+            BitmapRenderer.Draw(canvas, bitmapImage.Image,
+                (float)destinationX, (float)destinationY,
+                rotation,
+                (float)offset.X, (float)offset.Y,
+                opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+
         }
         else if (image is SvgImage svgImage)
         {
-            if (symbolStyle.SvgFillColor.HasValue || symbolStyle.SvgStrokeColor.HasValue)
+            if (symbolStyle.Image.SvgFillColor.HasValue || symbolStyle.Image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
             {
-                var key = ToModifiedSvgKey(symbolStyle.Image.SourceId, symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
-                var drawableImage = renderService.DrawableImageCache.GetOrCreate(key,
-                    () =>
-                    {
-                        using var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(svgImage.OriginalStream ?? throw new NullReferenceException("Original Stream is null"), symbolStyle.SvgFillColor, symbolStyle.SvgStrokeColor);
-#pragma warning disable IDISP001
-#pragma warning disable IDISP004
-                        var skSvg = new SKSvg();
-                        modifiedSvgStream.Position = 0;
-                        skSvg.Load(modifiedSvgStream);
-#pragma warning restore IDISP001                        
-#pragma warning restore IDISP004
-                        if (skSvg.Picture is null)
-                            throw new Exception("Failed to load modified SVG picture.");
-                        return new SvgImage(skSvg.Picture);
-                    });
+                var key = ToModifiedSvgKey(symbolStyle.Image.SourceId, symbolStyle.Image.SvgFillColor, symbolStyle.Image.SvgStrokeColor);
+                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(symbolStyle.Image, svgImage)) is SvgImage customColoredSvgImage)
+                    svgImage = customColoredSvgImage;
+            }
 
-                PictureRenderer.Draw(canvas, ((SvgImage?)drawableImage)?.Picture,
-                    (float)destinationX, (float)destinationY,
-                    rotation,
-                    (float)offset.X, (float)offset.Y,
-                    opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
-            }
-            else
-            {
-                PictureRenderer.Draw(canvas, svgImage.Picture,
-                    (float)destinationX, (float)destinationY,
-                    rotation,
-                    (float)offset.X, (float)offset.Y,
-                    opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
-            }
+            PictureRenderer.Draw(canvas, svgImage.Picture,
+                (float)destinationX, (float)destinationY,
+                rotation,
+                (float)offset.X, (float)offset.Y,
+                opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.Image.BlendModeColor);
+
         }
 
         return true;
+    }
+
+    private static SvgImage CreateCustomColoredSvg(Image image, SvgImage originalSvgImage)
+    {
+        var originalStream = originalSvgImage.OriginalStream ?? throw new NullReferenceException("Original Stream is null");
+        using var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(originalStream, image.SvgFillColor, image.SvgStrokeColor);
+#pragma warning disable IDISP001
+#pragma warning disable IDISP004
+        var skSvg = new SKSvg();
+        modifiedSvgStream.Position = 0;
+        skSvg.Load(modifiedSvgStream);
+#pragma warning restore IDISP001
+#pragma warning restore IDISP004
+        if (skSvg.Picture is null)
+            throw new Exception("Failed to load modified SVG picture.");
+        return new SvgImage(skSvg.Picture);
     }
 
     private static BitmapImage CreateBitmapImageForRegion(BitmapImage bitmapImage, BitmapRegion sprite)

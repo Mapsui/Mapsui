@@ -80,30 +80,6 @@ public class SymbolStyle : VectorStyle, IHasImage
     /// </summary>
     public bool SymbolOffsetRotatesWithMap { get; set; }
 
-    /// <summary>
-    /// When BlendModeColor is set a BitmapType.Picture (e.g. used for SVG) will be 
-    /// drawn in the BlendModeColor ignoring the colors of the Picture itself.
-    /// </summary>
-    public Color? BlendModeColor { get; set; }
-
-    /// <summary>
-    /// Option to override the fill color of the SVG image. This is useful if you want to change the color of the SVG 
-    /// source image. Note that each different color used will add an new object to the image cache.
-    /// </summary>
-    public Color? SvgFillColor { get; set; }
-
-    /// <summary>
-    /// Option to override the stroke color of the SVG image. This is useful if you want to change the color of the SVG 
-    /// source image. Note that each different color used will add an new object to the image cache.
-    /// </summary>
-    public Color? SvgStrokeColor { get; set; }
-
-    /// <summary>
-    /// Sets the sprite parameters used to specify which part of the image
-    /// symbol should be used. This only applies if a ImageSource is set.
-    /// </summary>
-    public BitmapRegion? BitmapRegion { get; set; }
-
     public override bool Equals(object? obj)
     {
         if (!(obj is SymbolStyle style))
@@ -155,8 +131,7 @@ public class SymbolStyle : VectorStyle, IHasImage
             SymbolRotation.GetHashCode() ^
             UnitType.GetHashCode() ^
             SymbolType.GetHashCode() ^
-            BlendModeColor?.GetHashCode() ?? 0 ^
-            base.GetHashCode();
+            base.GetHashCode() ?? 0;
     }
 
     public static bool operator ==(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)

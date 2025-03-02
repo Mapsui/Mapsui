@@ -31,13 +31,6 @@ public class Brush : IHasImage
     // field is itself a background in many cases. This is confusing
     public Color? Background { get; set; }
 
-    /// <summary>
-    /// If a bitmap is used as <see cref="Image"/> the <see cref="BitmapRegion"/> can be used to specific a 
-    /// subregion that will be used as image symbol. This way the  <see cref="Image"/> can be used as an 'atlas'
-    /// for 'sprites', which is a common mechanism in 2D gaming engines This will not affect SVGs.
-    /// </summary>
-    public BitmapRegion? BitmapRegion { get; set; }
-
     public Image? Image
     {
         get => _image;

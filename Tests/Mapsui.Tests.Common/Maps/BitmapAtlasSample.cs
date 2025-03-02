@@ -16,7 +16,9 @@ public class BitmapAtlasSample : ISample
 
     public static Map CreateMap()
     {
+#pragma warning disable IDISP001 // Dispose created
         var layer = CreateLayer();
+#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {
@@ -49,32 +51,32 @@ public class BitmapAtlasSample : ISample
         var spriteDentist15 = new BitmapRegion(147, 64, 21, 21);
         var spritePedestrianPolygon = new BitmapRegion(0, 0, 64, 64);
 
-        return new List<IFeature>
-        {
+        return
+        [
             new PointFeature(new MPoint(256, 124))
             {
                 Styles = [new SymbolStyle { Image = atlasImageSource}]
             },
             new PointFeature(new MPoint(20, 280))
             {
-                Styles = [new SymbolStyle { Image = atlasImageSource, BitmapRegion = spriteAmusementPark15}]
+                Styles = [new SymbolStyle { Image = new Image { Source = atlasImageSource, BitmapRegion = spriteAmusementPark15 } }]
             },
             new PointFeature(new MPoint(60, 280))
             {
-                Styles = [new SymbolStyle { Image = atlasImageSource, BitmapRegion = spriteClothingStore15}]
+                Styles = [new SymbolStyle {Image = new Image { Source = atlasImageSource, BitmapRegion = spriteClothingStore15 } }]
             },
             new PointFeature(new MPoint(100, 280))
             {
-                Styles = [new SymbolStyle { Image = atlasImageSource, BitmapRegion = spriteDentist15}]
+                Styles = [new SymbolStyle {Image = new Image { Source = atlasImageSource, BitmapRegion = spriteDentist15 } }]
             },
             new PointFeature(new MPoint(180, 300))
             {
-                Styles = [new SymbolStyle { Image = atlasImageSource, BitmapRegion = spritePedestrianPolygon}]
+                Styles = [new SymbolStyle {Image = new Image { Source = atlasImageSource, BitmapRegion = spritePedestrianPolygon } }]
             },
             new PointFeature(new MPoint(380, 280))
             {
                 Styles = [new SymbolStyle { Image = svgTigerImageSource, SymbolScale = 0.1}]
             }
-        };
+        ];
     }
 }
