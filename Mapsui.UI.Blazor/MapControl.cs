@@ -78,7 +78,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
             _imagedata = newImageData;
             StateHasChanged(); // Notify Blazor to re-render
-        }
+        });
     }
 
     protected override void OnInitialized()
