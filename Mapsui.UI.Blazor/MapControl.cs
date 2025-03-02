@@ -62,20 +62,23 @@ public partial class MapControl : ComponentBase, IMapControl
             ? $"data:image/webp;base64,{Convert.ToBase64String(_imagedata)}"
             : string.Empty;
 
-    protected async void InvalidateImage()
+    protected void InvalidateImage()
     {
-        // Example: Load image data from an API or file
-        if (_img == null || Interop == null)
-            return;
-        
-        var imageDimensions = await Interop.GetElementDimensions(_img.Value);
-        var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85,
-            widgets: Map.Widgets, imageDimensions.Width, imageDimensions.Height);
-        if (newImageData.SequenceEqual(newImageData))
-            return;
+        Catch.Exceptions(async () =>
+        {
+            // Example: Load image data from an API or file
+            if (_img == null || Interop == null)
+                return;
 
-        _imagedata = newImageData;
-        StateHasChanged(); // Notify Blazor to re-render
+            var imageDimensions = await Interop.GetElementDimensions(_img.Value);
+            var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85,
+                widgets: Map.Widgets, imageDimensions.Width, imageDimensions.Height);
+            if (newImageData.SequenceEqual(newImageData))
+                return;
+
+            _imagedata = newImageData;
+            StateHasChanged(); // Notify Blazor to re-render
+        }
     }
 
     protected override void OnInitialized()
