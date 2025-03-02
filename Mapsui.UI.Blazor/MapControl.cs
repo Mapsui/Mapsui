@@ -65,7 +65,8 @@ public partial class MapControl : ComponentBase, IMapControl
     protected void InvalidateImage()
     {
         // Example: Load image data from an API or file
-        var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85);
+        var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85,
+            widgets: Map.Widgets);
         if (newImageData.SequenceEqual(newImageData))
             return;
 

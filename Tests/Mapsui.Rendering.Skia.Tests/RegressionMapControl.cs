@@ -12,6 +12,7 @@ using Mapsui.UI;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
+using Mapsui.Widgets;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
@@ -86,7 +87,8 @@ public sealed class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
+    public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100,
+        IEnumerable<IWidget>? widgets = null, double? width = null, double? height = null)
     {
         throw new NotImplementedException();
     }

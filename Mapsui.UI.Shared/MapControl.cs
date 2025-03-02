@@ -540,9 +540,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100,
-        double? width = null, double? height = null)
+        IEnumerable<IWidget>? widgets = null, double? width = null, double? height = null)
     {
-        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity, renderFormat: renderFormat, quality: quality, width:width, height: height);
+        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity, renderFormat: renderFormat, quality: quality, widgets: widgets, width:width, height: height);
         return stream.ToArray();
     }
 

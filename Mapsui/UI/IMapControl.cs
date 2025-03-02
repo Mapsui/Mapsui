@@ -4,6 +4,7 @@ using Mapsui.Layers;
 using Mapsui.Manipulations;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
+using Mapsui.Widgets;
 
 namespace Mapsui.UI;
 
@@ -59,7 +60,7 @@ public interface IMapControl : IDisposable
     /// <param name="quality">default quality is 90 is applicable for webp and jpg</param>
     /// <returns>Byte array with snapshot in png format. If there are any problems than returns null.</returns>
     byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100,
-        double? width = null, double? height = null);
+        IEnumerable<IWidget>? widgets = null, double? width = null, double? height = null);
 
     Performance? Performance { get; set; }
 }
