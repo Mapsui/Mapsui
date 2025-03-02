@@ -58,7 +58,8 @@ public interface IMapControl : IDisposable
     /// <param name="renderFormat">render format</param>
     /// <param name="quality">default quality is 90 is applicable for webp and jpg</param>
     /// <returns>Byte array with snapshot in png format. If there are any problems than returns null.</returns>
-    byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100);
+    byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100,
+        double? width = null, double? height = null);
 
     Performance? Performance { get; set; }
 }
