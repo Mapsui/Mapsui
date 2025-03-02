@@ -65,9 +65,12 @@ public partial class MapControl : ComponentBase, IMapControl
     protected async void InvalidateImage()
     {
         // Example: Load image data from an API or file
-        var imageDimensions = await Interop.GetElementDimensions(_img);
+        if (_img == null || Interop == null)
+            return;
+        
+        var imageDimensions = await Interop.GetElementDimensions(_img.Value);
         var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85,
-            widgets: Map.Widgets);
+            widgets: Map.Widgets, imageDimensions.Width, imageDimensions.Height);
         if (newImageData.SequenceEqual(newImageData))
             return;
 
