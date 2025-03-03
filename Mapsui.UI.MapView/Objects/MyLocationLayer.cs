@@ -165,7 +165,7 @@ public class MyLocationLayer : BaseLayer
         _locStyle = new SymbolStyle
         {
             Enabled = true,
-            Image = _stillImageSource,
+            Image = new ResourceImage { Source = _stillImageSource },
             SymbolScale = Scale,
             SymbolRotation = Direction,
             Offset = new Offset(0, 0),
