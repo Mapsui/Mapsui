@@ -22503,105 +22503,105 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.Images.IDrawableImage.Width
   nameWithType: IDrawableImage.Width
-- uid: Mapsui.Rendering.Skia.Images.SvgImage
-  name: SvgImage
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html
-  commentId: T:Mapsui.Rendering.Skia.Images.SvgImage
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage
-  nameWithType: SvgImage
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.#ctor(SkiaSharp.SKPicture)
-  name: SvgImage(SKPicture)
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage__ctor_SkiaSharp_SKPicture_
-  commentId: M:Mapsui.Rendering.Skia.Images.SvgImage.#ctor(SkiaSharp.SKPicture)
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage
+  name: SvgDrawableImage
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html
+  commentId: T:Mapsui.Rendering.Skia.Images.SvgDrawableImage
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage
+  nameWithType: SvgDrawableImage
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.#ctor(SkiaSharp.SKPicture)
+  name: SvgDrawableImage(SKPicture)
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage__ctor_SkiaSharp_SKPicture_
+  commentId: M:Mapsui.Rendering.Skia.Images.SvgDrawableImage.#ctor(SkiaSharp.SKPicture)
   name.vb: New(SKPicture)
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.SvgImage(SkiaSharp.SKPicture)
-  fullName.vb: Mapsui.Rendering.Skia.Images.SvgImage.New(SkiaSharp.SKPicture)
-  nameWithType: SvgImage.SvgImage(SKPicture)
-  nameWithType.vb: SvgImage.New(SKPicture)
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.#ctor(System.Byte[])
-  name: SvgImage(byte[])
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage__ctor_System_Byte___
-  commentId: M:Mapsui.Rendering.Skia.Images.SvgImage.#ctor(System.Byte[])
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.SvgDrawableImage(SkiaSharp.SKPicture)
+  fullName.vb: Mapsui.Rendering.Skia.Images.SvgDrawableImage.New(SkiaSharp.SKPicture)
+  nameWithType: SvgDrawableImage.SvgDrawableImage(SKPicture)
+  nameWithType.vb: SvgDrawableImage.New(SKPicture)
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.#ctor(System.Byte[])
+  name: SvgDrawableImage(byte[])
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage__ctor_System_Byte___
+  commentId: M:Mapsui.Rendering.Skia.Images.SvgDrawableImage.#ctor(System.Byte[])
   name.vb: New(Byte())
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.SvgImage(byte[])
-  fullName.vb: Mapsui.Rendering.Skia.Images.SvgImage.New(Byte())
-  nameWithType: SvgImage.SvgImage(byte[])
-  nameWithType.vb: SvgImage.New(Byte())
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.#ctor*
-  name: SvgImage
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage__ctor_
-  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgImage.#ctor
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.SvgDrawableImage(byte[])
+  fullName.vb: Mapsui.Rendering.Skia.Images.SvgDrawableImage.New(Byte())
+  nameWithType: SvgDrawableImage.SvgDrawableImage(byte[])
+  nameWithType.vb: SvgDrawableImage.New(Byte())
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.#ctor*
+  name: SvgDrawableImage
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage__ctor_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgDrawableImage.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.SvgImage
-  fullName.vb: Mapsui.Rendering.Skia.Images.SvgImage.New
-  nameWithType: SvgImage.SvgImage
-  nameWithType.vb: SvgImage.New
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.Dispose
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.SvgDrawableImage
+  fullName.vb: Mapsui.Rendering.Skia.Images.SvgDrawableImage.New
+  nameWithType: SvgDrawableImage.SvgDrawableImage
+  nameWithType.vb: SvgDrawableImage.New
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Dispose
   name: Dispose()
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_Dispose
-  commentId: M:Mapsui.Rendering.Skia.Images.SvgImage.Dispose
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.Dispose()
-  nameWithType: SvgImage.Dispose()
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.Dispose*
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_Dispose
+  commentId: M:Mapsui.Rendering.Skia.Images.SvgDrawableImage.Dispose
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Dispose()
+  nameWithType: SvgDrawableImage.Dispose()
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Dispose*
   name: Dispose
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_Dispose_
-  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgImage.Dispose
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_Dispose_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgDrawableImage.Dispose
   isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.Dispose
-  nameWithType: SvgImage.Dispose
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.Height
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Dispose
+  nameWithType: SvgDrawableImage.Dispose
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Height
   name: Height
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_Height
-  commentId: P:Mapsui.Rendering.Skia.Images.SvgImage.Height
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.Height
-  nameWithType: SvgImage.Height
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.Height*
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_Height
+  commentId: P:Mapsui.Rendering.Skia.Images.SvgDrawableImage.Height
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Height
+  nameWithType: SvgDrawableImage.Height
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Height*
   name: Height
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_Height_
-  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgImage.Height
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_Height_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgDrawableImage.Height
   isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.Height
-  nameWithType: SvgImage.Height
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.OriginalStream
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Height
+  nameWithType: SvgDrawableImage.Height
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.OriginalStream
   name: OriginalStream
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_OriginalStream
-  commentId: P:Mapsui.Rendering.Skia.Images.SvgImage.OriginalStream
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.OriginalStream
-  nameWithType: SvgImage.OriginalStream
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.OriginalStream*
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_OriginalStream
+  commentId: P:Mapsui.Rendering.Skia.Images.SvgDrawableImage.OriginalStream
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.OriginalStream
+  nameWithType: SvgDrawableImage.OriginalStream
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.OriginalStream*
   name: OriginalStream
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_OriginalStream_
-  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgImage.OriginalStream
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_OriginalStream_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgDrawableImage.OriginalStream
   isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.OriginalStream
-  nameWithType: SvgImage.OriginalStream
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.Picture
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.OriginalStream
+  nameWithType: SvgDrawableImage.OriginalStream
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Picture
   name: Picture
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_Picture
-  commentId: P:Mapsui.Rendering.Skia.Images.SvgImage.Picture
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.Picture
-  nameWithType: SvgImage.Picture
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.Picture*
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_Picture
+  commentId: P:Mapsui.Rendering.Skia.Images.SvgDrawableImage.Picture
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Picture
+  nameWithType: SvgDrawableImage.Picture
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Picture*
   name: Picture
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_Picture_
-  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgImage.Picture
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_Picture_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgDrawableImage.Picture
   isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.Picture
-  nameWithType: SvgImage.Picture
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.Width
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Picture
+  nameWithType: SvgDrawableImage.Picture
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Width
   name: Width
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_Width
-  commentId: P:Mapsui.Rendering.Skia.Images.SvgImage.Width
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.Width
-  nameWithType: SvgImage.Width
-- uid: Mapsui.Rendering.Skia.Images.SvgImage.Width*
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_Width
+  commentId: P:Mapsui.Rendering.Skia.Images.SvgDrawableImage.Width
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Width
+  nameWithType: SvgDrawableImage.Width
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Width*
   name: Width
-  href: pages/Mapsui.Rendering.Skia.Images.SvgImage.html#Mapsui_Rendering_Skia_Images_SvgImage_Width_
-  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgImage.Width
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage_Width_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.SvgDrawableImage.Width
   isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.Images.SvgImage.Width
-  nameWithType: SvgImage.Width
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.Width
+  nameWithType: SvgDrawableImage.Width
 - uid: Mapsui.Rendering.Skia.LabelStyleRenderer
   name: LabelStyleRenderer
   href: pages/Mapsui.Rendering.Skia.LabelStyleRenderer.html
@@ -23389,6 +23389,38 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw
   nameWithType: SymbolStyleRenderer.Draw
+- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas,SkiaSharp.SKImage,System.Single)
+  name: DrawSKImage(SKCanvas, SKImage, float)
+  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSKImage_SkiaSharp_SKCanvas_SkiaSharp_SKImage_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas,SkiaSharp.SKImage,System.Single)
+  name.vb: DrawSKImage(SKCanvas, SKImage, Single)
+  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas, SkiaSharp.SKImage, float)
+  fullName.vb: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas, SkiaSharp.SKImage, Single)
+  nameWithType: SymbolStyleRenderer.DrawSKImage(SKCanvas, SKImage, float)
+  nameWithType.vb: SymbolStyleRenderer.DrawSKImage(SKCanvas, SKImage, Single)
+- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage*
+  name: DrawSKImage
+  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSKImage_
+  commentId: Overload:Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage
+  nameWithType: SymbolStyleRenderer.DrawSKImage
+- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas,SkiaSharp.SKPicture,System.Single,System.Nullable{Mapsui.Styles.Color})
+  name: DrawSKPicture(SKCanvas, SKPicture, float, Color?)
+  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSKPicture_SkiaSharp_SKCanvas_SkiaSharp_SKPicture_System_Single_System_Nullable_Mapsui_Styles_Color__
+  commentId: M:Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas,SkiaSharp.SKPicture,System.Single,System.Nullable{Mapsui.Styles.Color})
+  name.vb: DrawSKPicture(SKCanvas, SKPicture, Single, Color?)
+  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas, SkiaSharp.SKPicture, float, Mapsui.Styles.Color?)
+  fullName.vb: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas, SkiaSharp.SKPicture, Single, Mapsui.Styles.Color?)
+  nameWithType: SymbolStyleRenderer.DrawSKPicture(SKCanvas, SKPicture, float, Color?)
+  nameWithType.vb: SymbolStyleRenderer.DrawSKPicture(SKCanvas, SKPicture, Single, Color?)
+- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture*
+  name: DrawSKPicture
+  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSKPicture_
+  commentId: Overload:Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture
+  nameWithType: SymbolStyleRenderer.DrawSKPicture
 - uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawXY(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,System.Double,System.Double,Mapsui.Styles.SymbolStyle,Mapsui.Rendering.Skia.Cache.RenderService)
   name: DrawXY(SKCanvas, Viewport, ILayer, double, double, SymbolStyle, RenderService)
   href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawXY_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_System_Double_System_Double_Mapsui_Styles_SymbolStyle_Mapsui_Rendering_Skia_Cache_RenderService_
@@ -23418,38 +23450,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.FeatureSize
   nameWithType: SymbolStyleRenderer.FeatureSize
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToModifiedSvgKey(System.String,System.Nullable{Mapsui.Styles.Color},System.Nullable{Mapsui.Styles.Color})
-  name: ToModifiedSvgKey(string, Color?, Color?)
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_ToModifiedSvgKey_System_String_System_Nullable_Mapsui_Styles_Color__System_Nullable_Mapsui_Styles_Color__
-  commentId: M:Mapsui.Rendering.Skia.SymbolStyleRenderer.ToModifiedSvgKey(System.String,System.Nullable{Mapsui.Styles.Color},System.Nullable{Mapsui.Styles.Color})
-  name.vb: ToModifiedSvgKey(String, Color?, Color?)
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToModifiedSvgKey(string, Mapsui.Styles.Color?, Mapsui.Styles.Color?)
-  fullName.vb: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToModifiedSvgKey(String, Mapsui.Styles.Color?, Mapsui.Styles.Color?)
-  nameWithType: SymbolStyleRenderer.ToModifiedSvgKey(string, Color?, Color?)
-  nameWithType.vb: SymbolStyleRenderer.ToModifiedSvgKey(String, Color?, Color?)
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToModifiedSvgKey*
-  name: ToModifiedSvgKey
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_ToModifiedSvgKey_
-  commentId: Overload:Mapsui.Rendering.Skia.SymbolStyleRenderer.ToModifiedSvgKey
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToModifiedSvgKey
-  nameWithType: SymbolStyleRenderer.ToModifiedSvgKey
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToSpriteKey(System.String,Mapsui.Styles.BitmapRegion)
-  name: ToSpriteKey(string, BitmapRegion)
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_ToSpriteKey_System_String_Mapsui_Styles_BitmapRegion_
-  commentId: M:Mapsui.Rendering.Skia.SymbolStyleRenderer.ToSpriteKey(System.String,Mapsui.Styles.BitmapRegion)
-  name.vb: ToSpriteKey(String, BitmapRegion)
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToSpriteKey(string, Mapsui.Styles.BitmapRegion)
-  fullName.vb: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToSpriteKey(String, Mapsui.Styles.BitmapRegion)
-  nameWithType: SymbolStyleRenderer.ToSpriteKey(string, BitmapRegion)
-  nameWithType.vb: SymbolStyleRenderer.ToSpriteKey(String, BitmapRegion)
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToSpriteKey*
-  name: ToSpriteKey
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_ToSpriteKey_
-  commentId: Overload:Mapsui.Rendering.Skia.SymbolStyleRenderer.ToSpriteKey
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToSpriteKey
-  nameWithType: SymbolStyleRenderer.ToSpriteKey
 - uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image,Mapsui.Styles.ImageSourceCache)
   name: TryCreateDrawableImage(Image, ImageSourceCache)
   href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_TryCreateDrawableImage_Mapsui_Styles_Image_Mapsui_Styles_ImageSourceCache_
@@ -26884,6 +26884,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.Image.BlendModeColor
   nameWithType: Image.BlendModeColor
+- uid: Mapsui.Styles.Image.GetSourceIdForBitmapRegion
+  name: GetSourceIdForBitmapRegion()
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_GetSourceIdForBitmapRegion
+  commentId: M:Mapsui.Styles.Image.GetSourceIdForBitmapRegion
+  fullName: Mapsui.Styles.Image.GetSourceIdForBitmapRegion()
+  nameWithType: Image.GetSourceIdForBitmapRegion()
+- uid: Mapsui.Styles.Image.GetSourceIdForBitmapRegion*
+  name: GetSourceIdForBitmapRegion
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_GetSourceIdForBitmapRegion_
+  commentId: Overload:Mapsui.Styles.Image.GetSourceIdForBitmapRegion
+  isSpec: "True"
+  fullName: Mapsui.Styles.Image.GetSourceIdForBitmapRegion
+  nameWithType: Image.GetSourceIdForBitmapRegion
+- uid: Mapsui.Styles.Image.GetSourceIdForSvgWithCustomColors
+  name: GetSourceIdForSvgWithCustomColors()
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_GetSourceIdForSvgWithCustomColors
+  commentId: M:Mapsui.Styles.Image.GetSourceIdForSvgWithCustomColors
+  fullName: Mapsui.Styles.Image.GetSourceIdForSvgWithCustomColors()
+  nameWithType: Image.GetSourceIdForSvgWithCustomColors()
+- uid: Mapsui.Styles.Image.GetSourceIdForSvgWithCustomColors*
+  name: GetSourceIdForSvgWithCustomColors
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_GetSourceIdForSvgWithCustomColors_
+  commentId: Overload:Mapsui.Styles.Image.GetSourceIdForSvgWithCustomColors
+  isSpec: "True"
+  fullName: Mapsui.Styles.Image.GetSourceIdForSvgWithCustomColors
+  nameWithType: Image.GetSourceIdForSvgWithCustomColors
 - uid: Mapsui.Styles.Image.Source
   name: Source
   href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_Source

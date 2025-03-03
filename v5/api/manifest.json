@@ -3222,10 +3222,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Rendering.Skia.Images.SvgImage.yml",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.yml",
       "output": {
         ".html": {
-          "relative_path": "pages/Mapsui.Rendering.Skia.Images.SvgImage.html"
+          "relative_path": "pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html"
         }
       },
       "version": ""
