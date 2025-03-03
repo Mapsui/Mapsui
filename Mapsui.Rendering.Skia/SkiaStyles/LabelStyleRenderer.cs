@@ -27,7 +27,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var offsetX = style.Offset is RelativeOffset ? image.Width * style.Offset.X : style.Offset.X;
         var offsetY = style.Offset is RelativeOffset ? image.Height * style.Offset.Y : style.Offset.Y;
 
-        if (image is BitmapImage bitmapImage)
+        if (image is BitmapDrawableImage bitmapImage)
             BitmapRenderer.Draw(canvas, bitmapImage.Image, (int)Math.Round(x), (int)Math.Round(y),
                 offsetX: (float)offsetX, offsetY: (float)-offsetY,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
@@ -83,7 +83,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         using var paintHolder = vectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
-        return new BitmapImage(CreateLabelAsImage(style, valueTuple.Text, font, paint, layerOpacity));
+        return new BitmapDrawableImage(CreateLabelAsImage(style, valueTuple.Text, font, paint, layerOpacity));
     }
 
     private static SKImage CreateLabelAsImage(LabelStyle style, string? text, SKFont skFont, SKPaint paint, float layerOpacity)
@@ -431,7 +431,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
 
-        var offset = labelStyle.Offset.CalcOffset(drawRect.Width, drawRect.Height);
+        var offset = labelStyle.Offset.Combine(labelStyle.RelativeOffset.GetAbsoluteOffset(drawRect.Width, drawRect.Height));
 
         // Pythagoras for maximal distance
         var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);

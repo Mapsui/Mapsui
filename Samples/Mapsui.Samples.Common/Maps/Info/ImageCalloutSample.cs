@@ -25,7 +25,7 @@ public class ImageCalloutSample : ISample
     private static readonly Random _random = new(1);
 
     public string Name => "Image Callout";
-    public string Category => "Info";
+    public string Category => "MapInfo";
 
     private const string _pointLayerName = "Point with callout";
 
@@ -86,7 +86,7 @@ public class ImageCalloutSample : ISample
     private static CalloutStyle CreateCalloutStyle(string imageSource) => new()
     {
         BalloonDefinition = CreateBalloonDefinition(),
-        ImageSource = imageSource,
+        Image = imageSource,
         Type = CalloutType.Image,
         Enabled = false
     };

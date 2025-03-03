@@ -4,20 +4,20 @@ using Svg.Skia;
 
 namespace Mapsui.Rendering.Skia.Images;
 
-public sealed class SvgImage : IDrawableImage
+public sealed class SvgDrawableImage : IDrawableImage
 {
     private bool _disposed;
     private readonly SKSvg? _skSvg;
     private readonly SKPicture? _picture;
 
-    public SvgImage(byte[] bytes)
+    public SvgDrawableImage(byte[] bytes)
     {
         _skSvg = bytes.LoadSvg();
         // Perhaps we should dispose the SKSvg but I fear this will dispose the SKSvg.Picture as well. Todo: investigate
         OriginalStream = bytes;
     }
 
-    public SvgImage(SKPicture picture)
+    public SvgDrawableImage(SKPicture picture)
     {
         _picture = picture;
     }

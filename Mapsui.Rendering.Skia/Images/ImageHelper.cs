@@ -7,7 +7,7 @@ internal static class ImageHelper
     public static IDrawableImage ToDrawableImage(byte[] bytes)
     {
         if (bytes.IsSvg())
-            return new SvgImage(bytes);
-        return new BitmapImage(bytes);
+            return new SvgDrawableImage(bytes);
+        return new BitmapDrawableImage(bytes);
     }
 }
