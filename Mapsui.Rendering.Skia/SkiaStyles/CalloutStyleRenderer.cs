@@ -37,8 +37,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         var drawableImage = (SvgDrawableImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCallout,
             () => new SvgDrawableImage(calloutStyle.BalloonDefinition.CreateCallout(contentDrawableImage.Picture)))!;
 
-        // Calc offset (relative or absolute)
-        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);
+        var offset = calloutStyle.Offset.Combine(calloutStyle.RelativeOffset.GetAbsoluteOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height));
 
         var rotation = (float)calloutStyle.SymbolRotation;
 
@@ -47,14 +46,14 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             if (calloutStyle.RotateWithMap)
                 rotation += (float)viewport.Rotation;
             if (calloutStyle.SymbolOffsetRotatesWithMap)
-                symbolOffset = new Offset(symbolOffset.ToPoint().Rotate(-viewport.Rotation));
+                offset = new Offset(offset.ToPoint().Rotate(-viewport.Rotation));
         }
 
         // Save state of the canvas, so we could move and rotate the canvas
         canvas.Save();
 
         // Move 0/0 to the Anchor point of Callout
-        canvas.Translate((float)(x - symbolOffset.X), (float)(y - symbolOffset.Y));
+        canvas.Translate((float)(x - offset.X), (float)(y - offset.Y));
         canvas.Scale((float)calloutStyle.SymbolScale, (float)calloutStyle.SymbolScale);
 
         // 0/0 are assumed at center of image, but Picture has 0/0 at left top position

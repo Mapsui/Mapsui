@@ -60,7 +60,7 @@ public class DynamicSvgStyleSample : ISample
                     Source = imageSource,
                     BlendModeColor = ToColor(distanceBetweenZeroAndOne) // 3. Use BlendModeColor to change the color of the svg
                 },
-                SymbolOffset = new RelativeOffset(0.0, 0.0),
+                RelativeOffset = new RelativeOffset(0.0, 0.0),
                 // 1. Change scale based on the distance
                 SymbolScale = 0.25 + (0.25 * distanceBetweenZeroAndOne),
                 // 2. Change angle pointing to the info click position

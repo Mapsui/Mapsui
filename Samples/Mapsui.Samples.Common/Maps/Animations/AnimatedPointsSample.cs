@@ -47,7 +47,7 @@ public sealed class AnimatedPointsSample : ISample, IDisposable
     {
         Image = "embedded://Mapsui.Samples.Common.Images.arrow.svg",
         SymbolScale = 0.5,
-        SymbolOffset = new RelativeOffset(0.0, 0.5),
+        RelativeOffset = new RelativeOffset(0.0, 0.5),
         Opacity = 0.5f,
         SymbolRotation = (double)feature["rotation"]!
     };

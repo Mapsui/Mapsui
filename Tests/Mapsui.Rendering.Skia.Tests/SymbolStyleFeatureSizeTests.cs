@@ -44,7 +44,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolStyle = new SymbolStyle
         {
             SymbolType = SymbolType.Rectangle,
-            SymbolOffset = new Offset(2, 0),
+            Offset = new Offset(2, 0),
         };
 
         using var renderService = new RenderService();
@@ -59,7 +59,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolStyle = new SymbolStyle
         {
             SymbolType = SymbolType.Rectangle,
-            SymbolOffset = new Offset(0, 2),
+            Offset = new Offset(0, 2),
         };
 
         using var renderService = new RenderService();
@@ -74,7 +74,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolStyle = new SymbolStyle
         {
             SymbolType = SymbolType.Rectangle,
-            SymbolOffset = new Offset(2, 2),
+            Offset = new Offset(2, 2),
         };
 
         using var renderService = new RenderService();

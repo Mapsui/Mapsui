@@ -40,15 +40,17 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (rotation != 0)
             canvas.RotateDegrees((float)rotation);
 
+        canvas.Translate((float)symbolStyle.Offset.X, (float)-symbolStyle.Offset.Y);
+
         if (symbolStyle.Image is Image sourceImage)
-            DrawSourceImage(canvas, sourceImage, symbolStyle.SymbolOffset, renderService, opacity);
+            DrawSourceImage(canvas, sourceImage, symbolStyle.RelativeOffset, renderService, opacity);
         else
             DrawBuiltInImage(canvas, symbolStyle, renderService.VectorCache, opacity);
 
         canvas.Restore();
     }
 
-    private static void DrawSourceImage(SKCanvas canvas, Image image, Offset symbolOffset, RenderService renderService, float opacity)
+    private static void DrawSourceImage(SKCanvas canvas, Image image, RelativeOffset symbolOffset, RenderService renderService, float opacity)
     {
         canvas.Save();
 
@@ -60,9 +62,9 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (drawableImage == null)
             return;
 
-        var offset = symbolOffset.CalcOffset(drawableImage.Width, drawableImage.Height); // Offset can be relative to the size so that is why Width and Height is needed.
+        var offset = symbolOffset.GetAbsoluteOffset(drawableImage.Width, drawableImage.Height); // Offset can be relative to the size so that is why Width and Height is needed.
 
-        canvas.Translate((float)offset.X, (float)-offset.Y);
+        canvas.Translate((float)offset.X, -(float)offset.Y);
 
         if (drawableImage is BitmapDrawableImage bitmapImage)
         {
@@ -153,7 +155,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         canvas.Save();
 
-        var offset = symbolStyle.SymbolOffset.CalcOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
+        var offset = symbolStyle.RelativeOffset.GetAbsoluteOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
         canvas.Translate((float)offset.X, (float)-offset.Y);
 
         using var path = vectorCache.GetOrCreate(symbolStyle.SymbolType, CreatePath);
@@ -287,7 +289,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         size = Math.Max(size, SymbolStyle.DefaultWidth); // if defaultWith is larger take this.
 
         // Calc offset (relative or absolute)
-        var offset = symbolStyle.SymbolOffset.CalcOffset(symbolSize.Width, symbolSize.Height);
+        var offset = symbolStyle.Offset.Combine(symbolStyle.RelativeOffset.GetAbsoluteOffset(symbolSize.Width, symbolSize.Height));
 
         // Pythagoras for maximal distance
         var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);

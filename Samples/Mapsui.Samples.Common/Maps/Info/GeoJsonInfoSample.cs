@@ -22,7 +22,7 @@ public class GeoJsonInfoSample : ISample
     }
 
     public string Name => "GeoJson Info";
-    public string Category => "Info";
+    public string Category => "MapInfo";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 

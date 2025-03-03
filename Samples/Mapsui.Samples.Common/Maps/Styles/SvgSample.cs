@@ -54,6 +54,6 @@ public class SvgSample : ISample
     {
         Image = "embedded://Mapsui.Samples.Common.Images.Pin.svg",
         SymbolScale = 0.5,
-        SymbolOffset = new RelativeOffset(0.0, 0.5)
+        RelativeOffset = new RelativeOffset(0.0, 0.5)
     };
 }

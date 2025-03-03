@@ -501,7 +501,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                     SymbolScale = Scale,
                     SymbolRotation = Rotation,
                     RotateWithMap = RotateWithMap,
-                    SymbolOffset = new Offset(Anchor.X, Anchor.Y),
+                    Offset = new Offset(Anchor.X, Anchor.Y),
                     Opacity = 1 - Transparency,
                     Enabled = IsVisible,
                 });
@@ -539,7 +539,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                 break;
             case nameof(Anchor):
                 if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
+                    ((SymbolStyle)Feature.Styles.First()).Offset = new Offset(Anchor.X, Anchor.Y);
                 break;
             case nameof(Rotation):
                 if (Feature != null)

@@ -431,7 +431,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         var drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
 
-        var offset = labelStyle.Offset.CalcOffset(drawRect.Width, drawRect.Height);
+        var offset = labelStyle.Offset.Combine(labelStyle.RelativeOffset.GetAbsoluteOffset(drawRect.Width, drawRect.Height));
 
         // Pythagoras for maximal distance
         var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);

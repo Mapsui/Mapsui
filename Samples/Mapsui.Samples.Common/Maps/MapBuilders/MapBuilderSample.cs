@@ -75,7 +75,7 @@ public static class SampleLayerExtensions
                         SvgFillColor = Color.CornflowerBlue,
                         SvgStrokeColor = Color.Black,
                     },
-                    SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
+                    RelativeOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
                     SymbolScale = 1,
                 },
                 new ThemeStyle(f =>
@@ -83,7 +83,7 @@ public static class SampleLayerExtensions
                     return new CalloutStyle()
                     {
                         Enabled = enabledFromFeature(f),
-                        SymbolOffset = new Offset(0, 52),
+                        Offset = new Offset(0, 52),
                         TitleFont = { FontFamily = null, Size = 24, Italic = false, Bold = true },
                         TitleFontColor = Color.Black,
                         Type = CalloutType.Single,
