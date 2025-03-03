@@ -147,13 +147,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var skImage = GetSKImage(skiaRenderService, brush.Image ?? throw new Exception("Image can not be null when FillStyle is Bitmap"));
+                    var skImage = GetSKImage(skiaRenderService, brush.Image);
                     if (skImage != null)
                         paintFill.Shader = skImage.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var skRotatedImage = GetSKImage(skiaRenderService, brush.Image ?? throw new Exception("Image can not be null when FillStyle is BitmapRotated"));
+                    var skRotatedImage = GetSKImage(skiaRenderService, brush.Image);
                     if (skRotatedImage != null)
                         paintFill.Shader = skRotatedImage.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -211,29 +211,32 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetSKImage(RenderService renderService, Image image)
+    private static SKImage? GetSKImage(RenderService renderService, IImage image)
     {
-        if (image is null)
-            return null;
-        var drawableImage = renderService.DrawableImageCache.GetOrCreate(image.SourceId,
-            () => SymbolStyleRenderer.TryCreateDrawableImage(image, renderService.ImageSourceCache));
-        if (drawableImage == null)
-            return null;
-
-        if (drawableImage is BitmapDrawableImage bitmapImage)
+        if (image is ResourceImage resourceImage)
         {
-            if (image.BitmapRegion is null)
-                return bitmapImage.Image;
-
-            var imageRegionKey = image.GetSourceIdForBitmapRegion();
-            var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, image.BitmapRegion));
-            if (regionDrawableImage == null)
+            var drawableImage = renderService.DrawableImageCache.GetOrCreate(resourceImage.SourceId,
+                () => SymbolStyleRenderer.TryCreateDrawableImage(resourceImage, renderService.ImageSourceCache));
+            if (drawableImage == null)
                 return null;
-            if (regionDrawableImage is BitmapDrawableImage regionBitmapImage)
-                return regionBitmapImage.Image;
+
+            if (drawableImage is BitmapDrawableImage bitmapImage)
+            {
+                if (resourceImage.BitmapRegion is null)
+                    return bitmapImage.Image;
+
+                var imageRegionKey = resourceImage.GetSourceIdForBitmapRegion();
+                var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, resourceImage.BitmapRegion));
+                if (regionDrawableImage == null)
+                    return null;
+                if (regionDrawableImage is BitmapDrawableImage regionBitmapImage)
+                    return regionBitmapImage.Image;
+                throw new Exception("Only bitmaps are is supported for polygon fill.");
+            }
             throw new Exception("Only bitmaps are is supported for polygon fill.");
         }
-        throw new Exception("Only bitmaps are is supported for polygon fill.");
+        else
+            throw new ArgumentException($"Only {nameof(ResourceImage)} is supported for polygon fill.");
     }
 
     private static BitmapDrawableImage CreateBitmapImage(SKImage skImage, BitmapRegion bitmapRegion)

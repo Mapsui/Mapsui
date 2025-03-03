@@ -2,5 +2,5 @@
 
 public interface IHasImage
 {
-    public Image? Image { get; }
+    public IImage Image { get; }
 }

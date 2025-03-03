@@ -57,12 +57,12 @@ public class BitmapSymbolInCollectionSample : ISample
             new GeometryFeature
             {
                 Geometry = new GeometryCollection([new Point(50, 100)]),
-                Styles = [new SymbolStyle { Image = circleImageSource }]
+                Styles = [new SymbolStyle { Image = new ResourceImage { Source = circleImageSource } }]
             },
             new GeometryFeature
             {
                 Geometry = new GeometryCollection([new Point(100, 50)]),
-                Styles = [new SymbolStyle { Image = checkeredIconImageSource }]
+                Styles = [new SymbolStyle { Image = new ResourceImage { Source = checkeredIconImageSource } }]
             },
             new GeometryFeature
             {

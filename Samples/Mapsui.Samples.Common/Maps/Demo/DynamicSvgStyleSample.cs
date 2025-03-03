@@ -55,7 +55,7 @@ public class DynamicSvgStyleSample : ISample
 
             return new SymbolStyle
             {
-                Image = new Image
+                Image = new ResourceImage
                 {
                     Source = imageSource,
                     BlendModeColor = ToColor(distanceBetweenZeroAndOne) // 3. Use BlendModeColor to change the color of the svg

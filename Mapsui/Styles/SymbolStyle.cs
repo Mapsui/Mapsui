@@ -27,12 +27,12 @@ public class SymbolStyle : VectorStyle, IHasImage
 
     public UnitType UnitType { get; set; }
 
-    private Image? _image;
+    private IImage _image = new BuiltInImage();
 
     /// <summary>
     /// Path to the the image to display during rendering. This can be url, file path or embedded resource.
     /// </summary>
-    public Image? Image
+    public IImage Image
     {
         get => _image;
         set

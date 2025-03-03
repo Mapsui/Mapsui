@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace Mapsui.Styles;
 
-public class Image
+public class ResourceImage : IImage
 {
     private string _source = string.Empty;
     // Note, this is a static field and in the current implementation this dictionary can only grow, not shrink.
@@ -40,13 +40,6 @@ public class Image
     public Color? SvgStrokeColor { get; set; }
 
     /// <summary>
-    /// This allows for the automatic conversion of a string to an Image object. This was added to make the creation 
-    /// code simpler.
-    /// </summary>
-    /// <param name="source"></param>
-    public static implicit operator Image(string source) => new() { Source = source };
-
-    /// <summary>
     /// When BlendModeColor is set a BitmapType.Picture (e.g. used for SVG) will be 
     /// drawn in the BlendModeColor ignoring the colors of the Picture itself.
     /// </summary>
@@ -54,7 +47,7 @@ public class Image
 
     /// <summary>
     /// The <see cref="BitmapRegion"/> can be used to specific a 
-    /// subregion that will be used as image symbol. This way the  <see cref="Image"/> can be used as an 'atlas'
+    /// subregion that will be used as image symbol. This way the  <see cref="ResourceImage"/> can be used as an 'atlas'
     /// for 'sprites', which is a common mechanism in 2D gaming engines BitmapRegion can not be applied to SVGs.
     /// </summary>
     public BitmapRegion? BitmapRegion { get; set; }

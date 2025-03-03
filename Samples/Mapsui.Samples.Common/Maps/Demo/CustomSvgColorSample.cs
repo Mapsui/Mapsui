@@ -55,7 +55,7 @@ public class CustomSvgStyleSample : ISample
 
             return new SymbolStyle
             {
-                Image = new Image
+                Image = new ResourceImage
                 {
                     Source = "embedded://Mapsui.Samples.Common.Images.arrow.svg",
                     SvgFillColor = GetTypeColor((int)f.Id % 4),

@@ -59,7 +59,7 @@ public static class ImageSourceCacheTests
     public static async Task AddAndRemoveUriFileRegisterAsync()
     {
         // Arrange
-        Image examplePath = $"file://{AppContext.BaseDirectory}/Resources/example.tif";
+        ResourceImage examplePath = new ResourceImage { Source = $"file://{AppContext.BaseDirectory}/Resources/example.tif" };
         var imageSourceCache = new ImageSourceCache();
         await imageSourceCache.TryRegisterAsync(examplePath);
 
@@ -74,7 +74,7 @@ public static class ImageSourceCacheTests
     public static async Task AddUriFileRegisterAsync()
     {
         // Arrange
-        Image examplePath = $"file://{AppContext.BaseDirectory}/Resources/example.tif";
+        ResourceImage examplePath = $"file://{AppContext.BaseDirectory}/Resources/example.tif";
         var imageSourceCache = new ImageSourceCache();
         await imageSourceCache.TryRegisterAsync(examplePath);
 
@@ -90,7 +90,7 @@ public static class ImageSourceCacheTests
     public static async Task AddAndRemoveUriHttpsRegisterAsync()
     {
         // Arrange
-        Image urlToMapsuiLogo = "https://mapsui.com/images/logo.svg";
+        ResourceImage urlToMapsuiLogo = "https://mapsui.com/images/logo.svg";
         var imageSourceCache = new ImageSourceCache();
         await imageSourceCache.TryRegisterAsync(urlToMapsuiLogo);
 
@@ -105,7 +105,7 @@ public static class ImageSourceCacheTests
     public static async Task AddUriHttpsRegisterAsync()
     {
         // Arrange
-        Image mapsuiLogo = "https://mapsui.com/images/logo.svg";
+        ResourceImage mapsuiLogo = "https://mapsui.com/images/logo.svg";
         var imageSourceCache = new ImageSourceCache();
         await imageSourceCache.TryRegisterAsync(mapsuiLogo);
 
@@ -124,8 +124,8 @@ public static class ImageSourceCacheTests
         // Arrange
         var imageSourceCache = new ImageSourceCache();
 
-        Image referenceImageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
-        Image uriImage = uriSource;
+        ResourceImage referenceImageSource = "embedded://Mapsui.Resources.Images.Pin.svg";
+        ResourceImage uriImage = uriSource;
         await imageSourceCache.TryRegisterAsync(referenceImageSource);
         var referenceBytes = imageSourceCache.Get(referenceImageSource);
 
@@ -148,8 +148,8 @@ public static class ImageSourceCacheTests
     public static async Task CheckUriImageRegisterAsync(string uri)
     {
         // Arrange
-        Image fileImage = $"file://{AppContext.BaseDirectory}/Resources/Images/image.png";
-        Image uriImage = uri;
+        ResourceImage fileImage = $"file://{AppContext.BaseDirectory}/Resources/Images/image.png";
+        ResourceImage uriImage = uri;
         var imageSourceCache = new ImageSourceCache();
         await imageSourceCache.TryRegisterAsync(fileImage);
 

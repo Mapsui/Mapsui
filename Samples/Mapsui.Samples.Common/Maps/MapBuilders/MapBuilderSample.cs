@@ -69,7 +69,7 @@ public static class SampleLayerExtensions
             {
                 new SymbolStyle
                 {
-                    Image = new Image
+                    Image = new ResourceImage
                     {
                         Source = "embedded://Mapsui.Resources.Images.Pin.svg",
                         SvgFillColor = Color.CornflowerBlue,

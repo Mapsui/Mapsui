@@ -74,7 +74,7 @@ public class ButtonWidgetSample : ISample
     private static ImageButtonWidget CreateImageButtonWidget(VerticalAlignment verticalAlignment,
         HorizontalAlignment horizontalAlignment, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
         {
-            Image = "embedded://Mapsui.Resources.Images.MyLocationStill.svg",
+            Image = new ResourceImage { Source = "embedded://Mapsui.Resources.Images.MyLocationStill.svg" },
             VerticalAlignment = verticalAlignment,
             HorizontalAlignment = horizontalAlignment,
             Margin = new MRect(30),

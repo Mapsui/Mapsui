@@ -90,10 +90,10 @@ public class SymbolStyleFeatureSizeTests
         using var renderService = new RenderService();
         var symbolStyle = new SymbolStyle
         {
-            Image = "embedded://Mapsui.Resources.Images.Pin.svg",
+            Image = new ResourceImage { Source = "embedded://Mapsui.Resources.Images.Pin.svg" },
         };
 
-        await renderService.ImageSourceCache.TryRegisterAsync(symbolStyle.Image);
+        await renderService.ImageSourceCache.TryRegisterAsync((ResourceImage)symbolStyle.Image);
 
         // Act
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);

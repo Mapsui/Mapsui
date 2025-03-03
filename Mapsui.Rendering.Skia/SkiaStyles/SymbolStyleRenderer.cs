@@ -42,15 +42,15 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         canvas.Translate((float)symbolStyle.Offset.X, (float)-symbolStyle.Offset.Y);
 
-        if (symbolStyle.Image is Image sourceImage)
-            DrawSourceImage(canvas, sourceImage, symbolStyle.RelativeOffset, renderService, opacity);
+        if (symbolStyle.Image is ResourceImage resourceImage)
+            DrawSourceImage(canvas, resourceImage, symbolStyle.RelativeOffset, renderService, opacity);
         else
             DrawBuiltInImage(canvas, symbolStyle, renderService.VectorCache, opacity);
 
         canvas.Restore();
     }
 
-    private static void DrawSourceImage(SKCanvas canvas, Image image, RelativeOffset symbolOffset, RenderService renderService, float opacity)
+    private static void DrawSourceImage(SKCanvas canvas, ResourceImage image, RelativeOffset symbolOffset, RenderService renderService, float opacity)
     {
         canvas.Save();
 
@@ -129,7 +129,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return paint;
     }
 
-    private static SvgDrawableImage CreateCustomColoredSvg(Image image, SvgDrawableImage originalSvgImage)
+    private static SvgDrawableImage CreateCustomColoredSvg(ResourceImage image, SvgDrawableImage originalSvgImage)
     {
         var originalStream = originalSvgImage.OriginalStream ?? throw new NullReferenceException("Original Stream is null");
         using var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(originalStream, image.SvgFillColor, image.SvgStrokeColor);
@@ -267,10 +267,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         switch (symbolStyle.SymbolType)
         {
             case SymbolType.Image:
-                if (symbolStyle.Image is not null)
+                if (symbolStyle.Image is ResourceImage resourceImage)
                 {
-                    var image = ((RenderService)renderService).DrawableImageCache.GetOrCreate(symbolStyle.Image.SourceId,
-                        () => TryCreateDrawableImage(symbolStyle.Image, ((RenderService)renderService).ImageSourceCache));
+                    var image = ((RenderService)renderService).DrawableImageCache.GetOrCreate(resourceImage.SourceId,
+                        () => TryCreateDrawableImage(resourceImage, ((RenderService)renderService).ImageSourceCache));
                     if (image != null)
                         symbolSize = new Size(image.Width, image.Height);
                 }
@@ -301,7 +301,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
     // Todo: Figure out a better place for this method
-    public static IDrawableImage? TryCreateDrawableImage(Image image, ImageSourceCache imageSourceCache)
+    public static IDrawableImage? TryCreateDrawableImage(ResourceImage image, ImageSourceCache imageSourceCache)
     {
         var imageBytes = imageSourceCache.Get(image);
         if (imageBytes == null)

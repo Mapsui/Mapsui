@@ -37,12 +37,12 @@ public class ImageButtonWidget : BoxWidget, IHasImage
         }
     }
 
-    private Image? _image;
+    private IImage _image = new NoImage();
 
     /// <summary>
     /// The image to show as button
     /// </summary>
-    public Image? Image
+    public IImage Image
     {
         get => _image;
         set

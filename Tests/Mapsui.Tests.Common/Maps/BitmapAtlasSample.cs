@@ -55,27 +55,27 @@ public class BitmapAtlasSample : ISample
         [
             new PointFeature(new MPoint(256, 124))
             {
-                Styles = [new SymbolStyle { Image = atlasImageSource}]
+                Styles = [new SymbolStyle { Image = new ResourceImage { Source = atlasImageSource } }]
             },
             new PointFeature(new MPoint(20, 280))
             {
-                Styles = [new SymbolStyle { Image = new Image { Source = atlasImageSource, BitmapRegion = spriteAmusementPark15 } }]
+                Styles = [new SymbolStyle { Image = new ResourceImage { Source = atlasImageSource, BitmapRegion = spriteAmusementPark15 } }]
             },
             new PointFeature(new MPoint(60, 280))
             {
-                Styles = [new SymbolStyle {Image = new Image { Source = atlasImageSource, BitmapRegion = spriteClothingStore15 } }]
+                Styles = [new SymbolStyle {Image = new ResourceImage { Source = atlasImageSource, BitmapRegion = spriteClothingStore15 } }]
             },
             new PointFeature(new MPoint(100, 280))
             {
-                Styles = [new SymbolStyle {Image = new Image { Source = atlasImageSource, BitmapRegion = spriteDentist15 } }]
+                Styles = [new SymbolStyle {Image = new ResourceImage { Source = atlasImageSource, BitmapRegion = spriteDentist15 } }]
             },
             new PointFeature(new MPoint(180, 300))
             {
-                Styles = [new SymbolStyle {Image = new Image { Source = atlasImageSource, BitmapRegion = spritePedestrianPolygon } }]
+                Styles = [new SymbolStyle {Image = new ResourceImage { Source = atlasImageSource, BitmapRegion = spritePedestrianPolygon } }]
             },
             new PointFeature(new MPoint(380, 280))
             {
-                Styles = [new SymbolStyle { Image = svgTigerImageSource, SymbolScale = 0.1}]
+                Styles = [new SymbolStyle { Image = new ResourceImage { Source = svgTigerImageSource }, SymbolScale = 0.1}]
             }
         ];
     }

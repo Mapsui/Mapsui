@@ -69,36 +69,37 @@ public static class ImageSourceCacheInitializer
         return await Task.FromResult(true);
     }
 
-    private static List<Image> GetAllImageSources(Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets)
+    private static List<ResourceImage> GetAllImageSources(Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets)
     {
-        var result = new List<Image>();
+        var result = new List<ResourceImage>();
         VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, l, s, f, o, i) =>
         {
             // Get ImageSource directly from Styles
-            if (s is IHasImage imageSource)
+            if (s is IHasImage styleWithImage)
             {
-                if (imageSource.Image is not null)
-                    result.Add(imageSource.Image);
+                if (styleWithImage.Image is ResourceImage resourceImage)
+                    result.Add(resourceImage);
             }
 
             // Get ImageSource from Brushes
             if (s is SymbolStyle symbolStyle)
             {
-                if (symbolStyle.Fill is IHasImage fillImageSource)
-                    if (fillImageSource.Image is not null)
-                        result.Add(fillImageSource.Image);
+                if (symbolStyle.Fill is IHasImage fillWithImage)
+                    if (fillWithImage.Image is ResourceImage resourceImage)
+                        result.Add(resourceImage);
             }
             else if (s is VectorStyle vectorStyle)
             {
-                if (vectorStyle.Fill is IHasImage fillImageSource)
-                    if (fillImageSource.Image is not null)
-                        result.Add(fillImageSource.Image);
+                if (vectorStyle.Fill is IHasImage fillWithImage)
+                    if (fillWithImage.Image is ResourceImage resourceImage)
+                        result.Add(resourceImage);
             }
         });
 
         foreach (var widget in widgets)
-            if (widget is IHasImage { Image: not null } imageSource)
-                result.Add(imageSource.Image);
+            if (widget is IHasImage widgetWithImage)
+                if (widgetWithImage.Image is ResourceImage resourceImage)
+                    result.Add(resourceImage);
 
         return result;
     }

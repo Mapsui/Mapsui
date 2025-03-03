@@ -493,7 +493,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                 Feature.Styles.Clear();
                 Feature.Styles.Add(new SymbolStyle
                 {
-                    Image = new Image
+                    Image = new ResourceImage
                     {
                         Source = imageSource,
                         BlendModeColor = blendColorMode,

@@ -86,7 +86,7 @@ public class CustomCalloutStyleSample : IMapControlSample
 
     private static SymbolStyle CreatePinSymbol() => new()
     {
-        Image = new Image
+        Image = new ResourceImage
         {
             Source = "embedded://Mapsui.Resources.Images.pin.svg",
             SvgFillColor = Color.FromString("#4193CF"),

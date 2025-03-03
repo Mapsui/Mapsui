@@ -6,7 +6,7 @@ namespace Mapsui.Styles;
 
 public class Brush : IHasImage
 {
-    private Image? _image;
+    private IImage _image = new NoImage();
 
     public Brush()
     {
@@ -31,7 +31,7 @@ public class Brush : IHasImage
     // field is itself a background in many cases. This is confusing
     public Color? Background { get; set; }
 
-    public Image? Image
+    public IImage Image
     {
         get => _image;
         set

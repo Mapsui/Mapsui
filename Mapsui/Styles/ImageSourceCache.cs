@@ -18,7 +18,7 @@ public sealed class ImageSourceCache
     /// <param name="image"></param>
     /// <returns>If true a new image was registered and a refresh is needed. If false the image
     /// was already registered and no refresh is needed.</returns>
-    public async Task<bool> TryRegisterAsync(Image image)
+    public async Task<bool> TryRegisterAsync(ResourceImage image)
     {
         var key = image.SourceId;
         if (_register.ContainsKey(key))
@@ -29,7 +29,7 @@ public sealed class ImageSourceCache
         return true;
     }
 
-    public List<Image> GetUnregisteredImageSources(List<Image> images)
+    public List<ResourceImage> GetUnregisteredImageSources(List<ResourceImage> images)
     {
         var result = images
             .Where(i => !_register.ContainsKey(i.SourceId))
@@ -42,7 +42,7 @@ public sealed class ImageSourceCache
     /// </summary>
     /// <param name="image"></param>
     /// <returns></returns>
-    public byte[]? Get(Image image)
+    public byte[]? Get(ResourceImage image)
     {
         _register.TryGetValue(image.SourceId, out var val);
         return val;
@@ -51,7 +51,7 @@ public sealed class ImageSourceCache
     /// <summary>
     /// Unregister a image from the cache
     /// </summary>
-    public byte[]? Unregister(Image image)
+    public byte[]? Unregister(ResourceImage image)
     {
         _register.TryRemove(image.SourceId, out var val);
         return val;

@@ -18,10 +18,10 @@ public class PolygonTestSample : ISample
 
     public static Map CreateMap()
     {
-        var imageSource = "embedded://mapsui.tests.common.resources.images.avion_silhouette.png";
+        var image = new ResourceImage { Source = "embedded://mapsui.tests.common.resources.images.avion_silhouette.png" };
 
 #pragma warning disable IDISP001 // Dispose created
-        var layer = CreateLayer(imageSource);
+        var layer = CreateLayer(image);
 #pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
@@ -36,7 +36,7 @@ public class PolygonTestSample : ISample
         return map;
     }
 
-    private static MemoryLayer CreateLayer(Image image)
+    private static MemoryLayer CreateLayer(ResourceImage image)
     {
         return new MemoryLayer
         {
@@ -46,7 +46,7 @@ public class PolygonTestSample : ISample
     }
 
     [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
-    public static IEnumerable<IFeature> CreatePolygonProvider(Image image)
+    public static IEnumerable<IFeature> CreatePolygonProvider(ResourceImage image)
     {
         var wktReader = new WKTReader();
         var features = new List<IFeature>();
@@ -187,7 +187,7 @@ public class PolygonTestSample : ISample
         return features;
     }
 
-    private static Brush CreateBrush(Color color, FillStyle fillStyle, Image? image = null)
+    private static Brush CreateBrush(Color color, FillStyle fillStyle, ResourceImage? image = null)
     {
         if (image is not null && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
             fillStyle = FillStyle.Bitmap;

@@ -91,12 +91,17 @@ public class SymbolsSample : ISample
 
     private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { Image = embeddedResourcePath, SymbolScale = scale, Offset = new Offset(0, 32) };
+        return new SymbolStyle
+        {
+            Image = new ResourceImage { Source = embeddedResourcePath },
+            SymbolScale = scale,
+            Offset = new Offset(0, 32),
+        };
     }
 
     private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { Image = embeddedResourcePath, SymbolScale = scale, RelativeOffset = new RelativeOffset(0.0, 0.5) };
+        return new SymbolStyle { Image = new ResourceImage { Source = embeddedResourcePath }, SymbolScale = scale, RelativeOffset = new RelativeOffset(0.0, 0.5) };
     }
 
     private static PointFeature CreatePointWithStackedStyles() => new(new MPoint(5000000, -5000000))

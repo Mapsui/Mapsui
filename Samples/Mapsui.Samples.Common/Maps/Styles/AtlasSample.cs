@@ -59,7 +59,7 @@ public class AtlasSample : ISample
 
     private static SymbolStyle CreateSymbolStyle(int x, int y) => new()
     {
-        Image = new Image
+        Image = new ResourceImage
         {
             Source = "embedded://mapsui.samples.common.images.osm-liberty.png",
             BitmapRegion = new BitmapRegion(x, y, 21, 21),

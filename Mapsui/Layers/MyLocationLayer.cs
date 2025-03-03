@@ -49,7 +49,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
             if (_isMoving != value)
             {
                 _isMoving = value;
-                _locStyle.Image = _isMoving ? _movingImageSource : _stillImageSource;
+                _locStyle.Image = new ResourceImage { Source = _isMoving ? _movingImageSource : _stillImageSource };
             }
         }
     }
@@ -161,7 +161,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _locStyle = new SymbolStyle
         {
             Enabled = true,
-            Image = _stillImageSource,
+            Image = new ResourceImage { Source = _stillImageSource },
             SymbolScale = Scale,
             SymbolRotation = Direction,
             Offset = new Offset(0, 0),
@@ -171,7 +171,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
         _dirStyle = new SymbolStyle
         {
             Enabled = false,
-            Image = _directionImageSource,
+            Image = new ResourceImage { Source = _directionImageSource },
             SymbolScale = 0.2,
             SymbolRotation = 0,
             Offset = new Offset(0, 0),

@@ -4,7 +4,7 @@ public static class SymbolStyles
 {
     public static SymbolStyle CreatePinStyle(Color? fillColor = null, Color? strokeColor = null, double symbolScale = 1.0) => new()
     {
-        Image = new Image
+        Image = new ResourceImage
         {
             Source = "embedded://Mapsui.Resources.Images.Pin.svg",
             SvgFillColor = fillColor ?? Color.FromArgb(255, 57, 115, 199),
