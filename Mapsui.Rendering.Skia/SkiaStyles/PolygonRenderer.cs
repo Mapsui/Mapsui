@@ -229,7 +229,7 @@ internal static class PolygonRenderer
                 if (image is null)
                     throw new Exception("If BitmapRegion is not null the ImageSource should be set.");
 
-                var imageRegionKey = SymbolStyleRenderer.GetSourceIdForBitmapRegion(image.SourceId, image.BitmapRegion);
+                var imageRegionKey = Image.GetSourceIdForBitmapRegion(image.SourceId, image.BitmapRegion);
                 var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, image.BitmapRegion));
                 if (regionDrawableImage == null)
                     return null;
