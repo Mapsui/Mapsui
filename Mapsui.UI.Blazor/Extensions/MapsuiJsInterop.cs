@@ -1,4 +1,5 @@
 using DotNext.Threading;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace Mapsui.UI.Blazor.Extensions;
@@ -53,5 +54,11 @@ public sealed class MapsuiJsInterop : IAsyncDisposable
     {
         var module = await _moduleTask.WithCancellation(CancellationToken.None);
         return await module.InvokeAsync<double>(@"getPixelDensity");
+    }
+
+    public async ValueTask<Dimensions> GetElementDimensions(ElementReference element)
+    {
+        var module = await _moduleTask.WithCancellation(CancellationToken.None);
+        return await module.InvokeAsync<Dimensions>(@"getElementDimensions", element);
     }
 }

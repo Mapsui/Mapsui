@@ -1,22 +1,30 @@
 ﻿@inherits MapControl
 
 <div @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown 
-     @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove 
-     @ontouchstart=@OnTouchStart @ontouchmove=@OnTouchMove @ontouchend=@OnTouchEnd
-     @onwheel="OnMouseWheel" 
+          @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove 
+          @ontouchstart=@OnTouchStart @ontouchmove=@OnTouchMove @ontouchend=@OnTouchEnd
+          @onwheel="OnMouseWheel" 
      name="@_elementId" id="@_elementId">
-@if (MapControl.UseGPU)
+@if (OperatingSystem.IsBrowser())
 {
+    @if (MapControl.UseGPU)
+    {
         <SkiaSharp.Views.Blazor.SKGLView
-        @ref="_viewGpu"
-        OnPaintSurface="OnPaintSurfaceGPU" 
-        IgnorePixelScaling="true" />
+            @ref="_viewGpu"
+            OnPaintSurface="OnPaintSurfaceGPU"
+            IgnorePixelScaling="true"/>
+    }
+    else
+    {
+        <SkiaSharp.Views.Blazor.SKCanvasView
+            @ref="_viewCpu"
+            OnPaintSurface="OnPaintSurfaceCPU"
+            IgnorePixelScaling="true"/>
+    }
 }
 else
 {
-        <SkiaSharp.Views.Blazor.SKCanvasView 
-        @ref="_viewCpu"
-        OnPaintSurface="OnPaintSurfaceCPU" 
-        IgnorePixelScaling="true" />}
+        <img @ref="_img" src="@ImageData" alt="Map Image" />
+}
 </div>
 

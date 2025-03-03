@@ -35,3 +35,11 @@ export function disableTouch(elementId) {
 export function getPixelDensity() {
     return window.devicePixelRatio || 1;
 };
+
+export function getElementDimensions(element) {
+    const rect = element.getBoundingClientRect();
+    return {
+        width: rect.width,
+        height: rect.height        
+    };
+}

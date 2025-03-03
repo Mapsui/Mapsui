@@ -1,5 +1,6 @@
 using Mapsui.Extensions;
 using Mapsui.Manipulations;
+using Mapsui.Rendering;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
@@ -13,6 +14,7 @@ public partial class MapControl : ComponentBase, IMapControl
 {
     protected SKCanvasView? _viewCpu;
     protected SKGLView? _viewGpu;
+    protected ElementReference? _img;
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
@@ -36,22 +38,47 @@ public partial class MapControl : ComponentBase, IMapControl
                 ? _interop ??= new MapsuiJsInterop(JsRuntime)
                 : _interop;
 
+    private byte[]? _imagedata;
+    private Dimensions? _dimensions;
+
     public MapControl()
     {
         SharedConstructor();
 
         _invalidate = () =>
         {
-            if (!OperatingSystem.IsBrowser())
-                throw new InvalidOperationException("Only browser is supported");
-
+#pragma warning disable CA1416
             if (_viewCpu != null)
                 _viewCpu.Invalidate();
             else if (_viewGpu != null)
                 _viewGpu?.Invalidate();
             else
-                throw new InvalidOperationException("Both _viewCpu and _viewGpu are null");
+                InvalidateImage();
+#pragma warning restore CA1416            
         };
+    }
+
+    protected string ImageData =>
+        _imagedata != null
+            ? $"data:image/webp;base64,{Convert.ToBase64String(_imagedata)}"
+            : string.Empty;
+
+    protected void InvalidateImage()
+    {
+        Catch.Exceptions(async () =>
+        {
+            // Example: Load image data from an API or file
+            if (_img == null || Interop == null)
+                return;
+
+            var newImageData = GetSnapshot(Map.Layers, RenderFormat.WebP, 85,
+                widgets: Map.Widgets, ViewportWidth, ViewportHeight);
+            if (newImageData.SequenceEqual(newImageData))
+                return;
+
+            _imagedata = newImageData;
+            StateHasChanged(); // Notify Blazor to re-render
+        });
     }
 
     protected override void OnInitialized()
@@ -95,6 +122,19 @@ public partial class MapControl : ComponentBase, IMapControl
         }
 
         CommonDrawControl(canvas);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_img != null && Interop != null)
+        {
+            var newDimensions = await Interop.GetElementDimensions(_img.Value);
+            if (_dimensions != newDimensions)
+            {
+                _dimensions = newDimensions;
+                StateHasChanged(); // Update UI with dimensions    
+            }
+        }
     }
 
     private void OnLoadComplete()
@@ -198,6 +238,13 @@ public partial class MapControl : ComponentBase, IMapControl
         return _pixelDensityFromInterop;
     }
 
+    [JSInvokable]
+    public void HandleResize(double width, double height)
+    {
+        _dimensions = new Dimensions { Width = width, Height = height };
+        StateHasChanged();
+    }
+
     public void Dispose()
     {
         Dispose(true);
@@ -212,8 +259,8 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    private double ViewportWidth => _canvasSize?.Width ?? 0;
-    private double ViewportHeight => _canvasSize?.Height ?? 0;
+    private double ViewportWidth => _canvasSize?.Width ?? _dimensions?.Width ?? 0;
+    private double ViewportHeight => _canvasSize?.Height ?? _dimensions?.Height ?? 0;
 
     public string? Cursor { get; set; }
 
