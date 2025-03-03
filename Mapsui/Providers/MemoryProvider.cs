@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 
@@ -49,7 +50,7 @@ public class MemoryProvider : IProvider
     }
 
 
-    public virtual Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public virtual Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(fetchInfo);
         ArgumentNullException.ThrowIfNull(fetchInfo.Extent);

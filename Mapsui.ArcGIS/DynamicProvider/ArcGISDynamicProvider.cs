@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.ArcGIS.Extensions;
 using Mapsui.Cache;
@@ -95,7 +96,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
         set => _crs = value;
     }
 
-    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo, CancellationToken cancellationToken)
     {
         //If there are no layers (probably not initialized) return nothing
         if (ArcGisDynamicCapabilities.layers == null)
