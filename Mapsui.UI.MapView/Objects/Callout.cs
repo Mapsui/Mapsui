@@ -577,7 +577,7 @@ public class Callout : IFeatureProvider, INotifyPropertyChanged
             Feature.Styles.Add(style);
         }
 
-        style.SymbolOffset = new Offset(Anchor.X, Anchor.Y);
+        style.Offset = new Offset(Anchor.X, Anchor.Y);
         style.SymbolOffsetRotatesWithMap = _pin.RotateWithMap;
         style.RotateWithMap = RotateWithMap;
         style.Rotation = (float)Rotation;

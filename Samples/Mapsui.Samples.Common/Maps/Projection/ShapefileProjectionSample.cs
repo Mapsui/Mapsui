@@ -105,8 +105,8 @@ public class ShapefileProjectionSample : ISample
         // Cities below 1.000.000 gets the smallest symbol.
         // Cities with more than 5.000.000 the largest symbol.
         var imageSource = "embedded://Mapsui.Samples.Common.Images.icon.png";
-        var cityMin = new SymbolStyle { ImageSource = imageSource, SymbolScale = 0.5f };
-        var cityMax = new SymbolStyle { ImageSource = imageSource, SymbolScale = 1f };
+        var cityMin = new SymbolStyle { Image = imageSource, SymbolScale = 0.5f };
+        var cityMax = new SymbolStyle { Image = imageSource, SymbolScale = 1f };
         return new GradientTheme("POPULATION", 1000000, 5000000, cityMin, cityMax);
     }
 

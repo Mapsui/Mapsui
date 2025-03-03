@@ -78,7 +78,7 @@ public class PointsSample : ISample
     {
         var imageSource = "embedded://Mapsui.Samples.Common.Images.home.png"; // Designed by Freepik http://www.freepik.com
         var bitmapHeight = 176; // To set the offset correct we need to know the bitmap height
-        return new SymbolStyle { ImageSource = imageSource, SymbolScale = 0.20, SymbolOffset = new Offset(0, bitmapHeight * 0.5) };
+        return new SymbolStyle { Image = imageSource, SymbolScale = 0.20, Offset = new Offset(0, bitmapHeight * 0.5) };
     }
 }
 

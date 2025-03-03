@@ -18,12 +18,14 @@ public class BitmapSymbolInCollectionSample : ISample
 
     public static Map CreateMap()
     {
+#pragma warning disable IDISP001 // Dispose created
         var layer = new MemoryLayer
         {
             Style = null,
             Features = CreateFeatures(),
             Name = "Points with bitmaps"
         };
+#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {
@@ -55,12 +57,12 @@ public class BitmapSymbolInCollectionSample : ISample
             new GeometryFeature
             {
                 Geometry = new GeometryCollection([new Point(50, 100)]),
-                Styles = [new SymbolStyle { ImageSource = circleImageSource }]
+                Styles = [new SymbolStyle { Image = circleImageSource }]
             },
             new GeometryFeature
             {
                 Geometry = new GeometryCollection([new Point(100, 50)]),
-                Styles = [new SymbolStyle { ImageSource = checkeredIconImageSource }]
+                Styles = [new SymbolStyle { Image = checkeredIconImageSource }]
             },
             new GeometryFeature
             {

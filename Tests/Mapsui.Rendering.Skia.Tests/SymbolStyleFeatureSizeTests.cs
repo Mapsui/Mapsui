@@ -44,7 +44,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolStyle = new SymbolStyle
         {
             SymbolType = SymbolType.Rectangle,
-            SymbolOffset = new Offset(2, 0),
+            Offset = new Offset(2, 0),
         };
 
         using var renderService = new RenderService();
@@ -59,7 +59,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolStyle = new SymbolStyle
         {
             SymbolType = SymbolType.Rectangle,
-            SymbolOffset = new Offset(0, 2),
+            Offset = new Offset(0, 2),
         };
 
         using var renderService = new RenderService();
@@ -74,7 +74,7 @@ public class SymbolStyleFeatureSizeTests
         var symbolStyle = new SymbolStyle
         {
             SymbolType = SymbolType.Rectangle,
-            SymbolOffset = new Offset(2, 2),
+            Offset = new Offset(2, 2),
         };
 
         using var renderService = new RenderService();
@@ -90,10 +90,10 @@ public class SymbolStyleFeatureSizeTests
         using var renderService = new RenderService();
         var symbolStyle = new SymbolStyle
         {
-            ImageSource = "embedded://Mapsui.Resources.Images.Pin.svg",
+            Image = "embedded://Mapsui.Resources.Images.Pin.svg",
         };
 
-        await renderService.ImageSourceCache.TryRegisterAsync(symbolStyle.ImageSource);
+        await renderService.ImageSourceCache.TryRegisterAsync(symbolStyle.Image);
 
         // Act
         var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);

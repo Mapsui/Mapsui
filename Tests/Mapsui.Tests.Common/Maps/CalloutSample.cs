@@ -86,7 +86,7 @@ public class CalloutSample : ISample
             Type = CalloutType.Detail,
             MaxWidth = 120,
             Enabled = true,
-            SymbolOffset = new Offset(0, SymbolStyle.DefaultHeight * 1f),
+            Offset = new Offset(0, SymbolStyle.DefaultHeight * 1f),
             BalloonDefinition = new CalloutBalloonDefinition
             {
                 RectRadius = 10,

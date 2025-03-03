@@ -35,15 +35,9 @@ public class Offset
         return new MPoint(X, Y);
     }
 
-    /// <summary>
-    /// Calculate the real offset respecting width and height
-    /// </summary>
-    /// <param name="width">Width of the symbol</param>
-    /// <param name="height">Height of the symbol</param>
-    /// <returns>Calculated offset</returns>
-    public virtual Offset CalcOffset(double width, double height)
+    public Offset Combine(Offset offset)
     {
-        return this;
+        return new Offset(X + offset.X, Y + offset.Y);
     }
 
     public override bool Equals(object? obj)
