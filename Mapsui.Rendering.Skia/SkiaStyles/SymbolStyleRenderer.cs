@@ -47,43 +47,41 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         canvas.Translate((float)destinationX, (float)destinationY);
         canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
 
-        if (symbolStyle.Image is null)
-            throw new Exception("SymbolStyle.Image should not be null in the DrawImage render method");
-
-        var image = renderService.DrawableImageCache.GetOrCreate(symbolStyle.Image.SourceId,
-            () => TryCreateDrawableImage(symbolStyle.Image, renderService.ImageSourceCache));
-        if (image == null)
-            return false;
-
-        // Calc offset (relative or absolute)
-        var offset = symbolStyle.SymbolOffset.CalcOffset(image.Width, image.Height);
-
         var rotation = symbolStyle.SymbolRotation;
         if (symbolStyle.RotateWithMap)
             rotation += viewport.Rotation;
         if (rotation != 0)
             canvas.RotateDegrees((float)rotation);
 
+        if (symbolStyle.Image is null)
+            throw new Exception("SymbolStyle.Image should not be null in the DrawImage render method");
+
+        var drawableImage = renderService.DrawableImageCache.GetOrCreate(symbolStyle.Image.SourceId,
+            () => TryCreateDrawableImage(symbolStyle.Image, renderService.ImageSourceCache));
+        if (drawableImage == null)
+            return false;
+
+        var offset = symbolStyle.SymbolOffset.CalcOffset(drawableImage.Width, drawableImage.Height); // Offset can be relative to the size so that is why Width and Height is needed.
         canvas.Translate((float)offset.X, (float)-offset.Y);
 
-        if (image is BitmapImage bitmapImage)
+        if (drawableImage is BitmapDrawableImage bitmapImage)
         {
             if (symbolStyle.Image.BitmapRegion is not null) // Get image for region if specified
             {
                 var key = symbolStyle.Image.GetSourceIdForBitmapRegion();
-                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.Image.BitmapRegion)) is BitmapImage bitmapRegionImage)
+                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.Image.BitmapRegion)) is BitmapDrawableImage bitmapRegionImage)
                     bitmapImage = bitmapRegionImage;
             }
 
             DrawSKImage(canvas, bitmapImage.Image, opacity);
 
         }
-        else if (image is SvgImage svgImage)
+        else if (drawableImage is SvgDrawableImage svgImage)
         {
             if (symbolStyle.Image.SvgFillColor.HasValue || symbolStyle.Image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
             {
                 var key = symbolStyle.Image.GetSourceIdForSvgWithCustomColors();
-                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(symbolStyle.Image, svgImage)) is SvgImage customColoredSvgImage)
+                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(symbolStyle.Image, svgImage)) is SvgDrawableImage customColoredSvgImage)
                     svgImage = customColoredSvgImage;
             }
 
@@ -132,7 +130,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return paint;
     }
 
-    private static SvgImage CreateCustomColoredSvg(Image image, SvgImage originalSvgImage)
+    private static SvgDrawableImage CreateCustomColoredSvg(Image image, SvgDrawableImage originalSvgImage)
     {
         var originalStream = originalSvgImage.OriginalStream ?? throw new NullReferenceException("Original Stream is null");
         using var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(originalStream, image.SvgFillColor, image.SvgStrokeColor);
@@ -145,12 +143,12 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 #pragma warning restore IDISP004
         if (skSvg.Picture is null)
             throw new Exception("Failed to load modified SVG picture.");
-        return new SvgImage(skSvg.Picture);
+        return new SvgDrawableImage(skSvg.Picture);
     }
 
-    private static BitmapImage CreateBitmapImageForRegion(BitmapImage bitmapImage, BitmapRegion sprite)
+    private static BitmapDrawableImage CreateBitmapImageForRegion(BitmapDrawableImage bitmapImage, BitmapRegion sprite)
     {
-        return new BitmapImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
+        return new BitmapDrawableImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
     }
 
     private static bool DrawSymbol(SKCanvas canvas, Viewport viewport,
@@ -160,16 +158,14 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         canvas.Translate((float)destinationX, (float)destinationY);
         canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
 
-        var offset = symbolStyle.SymbolOffset.CalcOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
-
-        canvas.Translate((float)offset.X, (float)-offset.Y);
-
         var rotation = symbolStyle.SymbolRotation;
         if (symbolStyle.RotateWithMap)
             rotation += viewport.Rotation;
         if (rotation != 0)
             canvas.RotateDegrees((float)rotation);
 
+        var offset = symbolStyle.SymbolOffset.CalcOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
+        canvas.Translate((float)offset.X, (float)-offset.Y);
 
         using var path = vectorCache.GetOrCreate(symbolStyle.SymbolType, CreatePath);
         if (symbolStyle.Fill.IsVisible())
