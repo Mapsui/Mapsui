@@ -40,8 +40,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
     }
 
-    private static bool DrawImage(SKCanvas canvas, Viewport viewport,
-        SymbolStyle symbolStyle, RenderService renderService, float opacity, double destinationX, double destinationY)
+    private static bool DrawImage(SKCanvas canvas, Viewport viewport, SymbolStyle symbolStyle,
+        RenderService renderService, float opacity, double destinationX, double destinationY)
     {
         canvas.Save();
         canvas.Translate((float)destinationX, (float)destinationY);
@@ -151,8 +151,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return new BitmapDrawableImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
     }
 
-    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport,
-        SymbolStyle symbolStyle, VectorCache vectorCache, float opacity, double destinationX, double destinationY)
+    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, SymbolStyle symbolStyle,
+        VectorCache vectorCache, float opacity, double destinationX, double destinationY)
     {
         canvas.Save();
         canvas.Translate((float)destinationX, (float)destinationY);
