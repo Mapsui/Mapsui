@@ -61,7 +61,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             if (symbolStyle.Image.BitmapRegion is not null) // Get image for region if specified
             {
-                var key = Image.GetSourceIdForBitmapRegion(symbolStyle.Image.SourceId, symbolStyle.Image.BitmapRegion);
+                var key = symbolStyle.Image.GetSourceIdForBitmapRegion();
                 if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.Image.BitmapRegion)) is BitmapImage bitmapRegionImage)
                     bitmapImage = bitmapRegionImage;
             }
@@ -77,7 +77,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             if (symbolStyle.Image.SvgFillColor.HasValue || symbolStyle.Image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
             {
-                var key = Image.GetSourceIdForSvgWithCustomColors(symbolStyle.Image.SourceId, symbolStyle.Image.SvgFillColor, symbolStyle.Image.SvgStrokeColor);
+                var key = symbolStyle.Image.GetSourceIdForSvgWithCustomColors();
                 if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(symbolStyle.Image, svgImage)) is SvgImage customColoredSvgImage)
                     svgImage = customColoredSvgImage;
             }
