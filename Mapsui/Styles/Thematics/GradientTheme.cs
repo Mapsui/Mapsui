@@ -126,7 +126,7 @@ public class GradientTheme : Style, IThemeStyle
         var fraction = Fraction(value, instance.Min, instance.Max);
 
         result.Image = (fraction > 0.5) ? min.Image : max.Image;
-        result.SymbolOffset = fraction > 0.5 ? min.SymbolOffset ?? new Offset() : max.SymbolOffset ?? new Offset();
+        result.Offset = fraction > 0.5 ? min.Offset ?? new Offset() : max.Offset ?? new Offset();
         // We don't interpolate the offset but let it follow the symbol instead
         result.SymbolScale = InterpolateDouble(min.SymbolScale, max.SymbolScale, fraction);
 

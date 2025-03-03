@@ -62,7 +62,7 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
         feature.Styles.Add(new SymbolStyle
         {
             Image = imageSource,
-            SymbolOffset = new Offset { Y = -24 },
+            Offset = new Offset { Y = -24 },
             SymbolRotation = rotation,
             RotateWithMap = true,
         });

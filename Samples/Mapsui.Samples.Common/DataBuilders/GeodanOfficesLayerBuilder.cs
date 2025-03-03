@@ -18,7 +18,7 @@ public class GeodanOfficesLayerBuilder
             Style = new SymbolStyle
             {
                 Image = imageSource,
-                SymbolOffset = new Offset { Y = 64 },
+                Offset = new Offset { Y = 64 },
                 SymbolScale = 0.25
             },
             Name = "Geodan Offices"

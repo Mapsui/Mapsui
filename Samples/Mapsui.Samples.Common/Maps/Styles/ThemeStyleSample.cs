@@ -103,7 +103,7 @@ public class ThemeStyleSample : ISample
     private static SymbolStyle CreateCityStyle() => new()
     {
         Image = "embedded://Mapsui.Samples.Common.Images.location.png",
-        SymbolOffset = new Offset { Y = 64 },
+        Offset = new Offset { Y = 64 },
         SymbolScale = 0.25
     };
 }

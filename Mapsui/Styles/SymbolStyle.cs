@@ -66,6 +66,9 @@ public class SymbolStyle : VectorStyle, IHasImage
     /// </remarks>
     public double SymbolScale { get; set; } = 1.0;
 
+    [Obsolete("Use Offset or RelativeOffset instead", true)]
+    public Offset SymbolOffset { get; set; } = new Offset();
+
     /// <summary>
     ///     Gets or sets the offset in pixels of the symbol.
     /// </summary>
@@ -73,7 +76,12 @@ public class SymbolStyle : VectorStyle, IHasImage
     ///     The symbol offset is scaled with the <see cref="SymbolScale" /> property and refers to the offset of
     ///     <see cref="SymbolScale" />=1.0.
     /// </remarks>
-    public Offset SymbolOffset { get; set; } = new Offset(0, 0);
+    public Offset Offset { get; set; } = new Offset();
+
+    /// <summary>
+    /// Offset of the symbol in units relative to the size of the symbol. When X = 0 and Y = 0 it will be centered.
+    /// </summary>
+    public RelativeOffset RelativeOffset { get; set; } = new RelativeOffset();
 
     /// <summary>
     /// Should SymbolOffset position rotate with map
@@ -98,10 +106,10 @@ public class SymbolStyle : VectorStyle, IHasImage
         if (!SymbolScale.Equals(SymbolScale))
             return false;
 
-        if ((SymbolOffset == null) ^ (symbolStyle.SymbolOffset == null))
+        if ((Offset == null) ^ (symbolStyle.Offset == null))
             return false;
 
-        if ((SymbolOffset != null) && !SymbolOffset.Equals(symbolStyle.SymbolOffset))
+        if ((Offset != null) && !Offset.Equals(symbolStyle.Offset))
             return false;
 
         if (Math.Abs(SymbolRotation - symbolStyle.SymbolRotation) > Constants.Epsilon)
@@ -127,7 +135,7 @@ public class SymbolStyle : VectorStyle, IHasImage
         return
             Image?.GetHashCode() ^
             SymbolScale.GetHashCode() ^
-            SymbolOffset.GetHashCode() ^
+            Offset.GetHashCode() ^
             SymbolRotation.GetHashCode() ^
             UnitType.GetHashCode() ^
             SymbolType.GetHashCode() ^

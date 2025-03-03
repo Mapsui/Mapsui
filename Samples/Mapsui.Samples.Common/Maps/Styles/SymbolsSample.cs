@@ -67,17 +67,17 @@ public class SymbolsSample : ISample
 
     private static IEnumerable<IStyle> CreateDiverseStyles()
     {
-        const int diameter = 16;
-        return new List<IStyle>
-        {
-            new SymbolStyle {SymbolScale = 0.8, SymbolOffset = new Offset(0, 0), SymbolType = SymbolType.Rectangle},
-            new SymbolStyle {SymbolScale = 0.6, SymbolOffset = new Offset(diameter, diameter), SymbolType = SymbolType.Rectangle, Fill = new Brush(Color.Red)},
-            new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(diameter, -diameter), SymbolType = SymbolType.Rectangle},
-            new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(-diameter, -diameter), SymbolType = SymbolType.Rectangle},
-            new SymbolStyle {SymbolScale = 0.8, SymbolOffset = new Offset(0, 0)},
-            new SymbolStyle {SymbolScale = 1.2, SymbolOffset = new Offset(diameter, 0)},
-            new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(0, diameter)},
-            new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(diameter, diameter)},
+        const int radius = 16;
+        return
+        [
+            new SymbolStyle {SymbolScale = 0.8, Offset = new Offset(0, 0), SymbolType = SymbolType.Rectangle},
+            new SymbolStyle {SymbolScale = 0.6, Offset = new Offset(radius, radius), SymbolType = SymbolType.Rectangle, Fill = new Brush(Color.Red)},
+            new SymbolStyle {SymbolScale = 1, Offset = new Offset(radius, -radius), SymbolType = SymbolType.Rectangle},
+            new SymbolStyle {SymbolScale = 1, Offset = new Offset(-radius, -radius), SymbolType = SymbolType.Rectangle},
+            new SymbolStyle {SymbolScale = 0.8, Offset = new Offset(0, 0)},
+            new SymbolStyle {SymbolScale = 1.2, Offset = new Offset(radius, 0)},
+            new SymbolStyle {SymbolScale = 1, Offset = new Offset(0, radius)},
+            new SymbolStyle {SymbolScale = 1, Offset = new Offset(radius, radius)},
             CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.7),
             CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.8),
             CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.9),
@@ -86,17 +86,17 @@ public class SymbolsSample : ISample
             CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Pin.svg", 0.8),
             CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05),
             CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.1),
-        };
+        ];
     }
 
     private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { Image = embeddedResourcePath, SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
+        return new SymbolStyle { Image = embeddedResourcePath, SymbolScale = scale, Offset = new Offset(0, 32) };
     }
 
     private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { Image = embeddedResourcePath, SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
+        return new SymbolStyle { Image = embeddedResourcePath, SymbolScale = scale, RelativeOffset = new RelativeOffset(0.0, 0.5) };
     }
 
     private static PointFeature CreatePointWithStackedStyles() => new(new MPoint(5000000, -5000000))

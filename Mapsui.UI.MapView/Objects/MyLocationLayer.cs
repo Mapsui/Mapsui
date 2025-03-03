@@ -165,7 +165,7 @@ public class MyLocationLayer : BaseLayer
             Image = _stillImageSource,
             SymbolScale = Scale,
             SymbolRotation = Direction,
-            SymbolOffset = new Offset(0, 0),
+            Offset = new Offset(0, 0),
             Opacity = 1,
         };
 
@@ -175,7 +175,7 @@ public class MyLocationLayer : BaseLayer
             Image = _directionImageSource,
             SymbolScale = 0.2,
             SymbolRotation = 0,
-            SymbolOffset = new Offset(0, 0),
+            Offset = new Offset(0, 0),
             Opacity = 1,
         };
         _coStyle = new CalloutStyle
@@ -184,7 +184,7 @@ public class MyLocationLayer : BaseLayer
             Type = CalloutType.Single,
             Title = "",
             TitleFontColor = Color.Black,
-            SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
+            Offset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
             MaxWidth = 300,
             RotateWithMap = true,
             SymbolOffsetRotatesWithMap = true,

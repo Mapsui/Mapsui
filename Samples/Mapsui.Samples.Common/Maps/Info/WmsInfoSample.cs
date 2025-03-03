@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps.Info;
 public class WmsInfoSample : ISample
 {
     public string Name => "Wms Info";
-    public string Category => "Info";
+    public string Category => "MapInfo";
 
     private const string _mapInfoLayerName = "Windsnelheden (PDOK)";
 

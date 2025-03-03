@@ -92,7 +92,7 @@ public class CustomCalloutStyleSample : IMapControlSample
             SvgFillColor = Color.FromString("#4193CF"),
             SvgStrokeColor = Color.DimGrey,
         },
-        SymbolOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.        
+        RelativeOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.        
     };
 }
 

@@ -10,7 +10,7 @@ public static class SymbolStyles
             SvgFillColor = fillColor ?? Color.FromArgb(255, 57, 115, 199),
             SvgStrokeColor = strokeColor ?? Color.FromArgb(210, 245, 245, 245),
         },
-        SymbolOffset = new RelativeOffset(0.0, 0.5),
+        RelativeOffset = new RelativeOffset(0.0, 0.5),
         SymbolScale = symbolScale,
     };
 }
