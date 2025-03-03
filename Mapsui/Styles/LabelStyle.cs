@@ -153,9 +153,16 @@ public class LabelStyle : Style
     public Pen? Halo { get; set; }
 
     /// <summary>
-    /// Specifies relative position of labels with respect to objects label point
+    /// Specifies the position of labels with respect to objects label point
     /// </summary>
     public Offset Offset { get; set; }
+
+    /// <summary>
+    /// Specifies the position of labels with respect to objects label point relative to the size of the label.
+    /// Where X = 0.0 and Y = 0.0 would center the label and X = 0.5 and Y = 0.5 will have the label on the bottom right.
+    /// be drawn with the bottom left corner at the label point.
+    /// </summary>
+    public RelativeOffset RelativeOffset { get; set; } = new();
 
     /// <summary>
     /// Gets or sets whether Collision Detection is enabled for the labels.

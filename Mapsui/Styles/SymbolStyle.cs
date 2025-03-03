@@ -18,7 +18,7 @@ public enum UnitType
     WorldUnit
 }
 
-public class SymbolStyle : VectorStyle, IHasImageSource
+public class SymbolStyle : VectorStyle, IHasImage
 {
     public static double DefaultWidth { get; set; } = 32;
     public static double DefaultHeight { get; set; } = 32;
@@ -27,23 +27,19 @@ public class SymbolStyle : VectorStyle, IHasImageSource
 
     public UnitType UnitType { get; set; }
 
-    private string? _imageSource;
+    private Image? _image;
 
     /// <summary>
     /// Path to the the image to display during rendering. This can be url, file path or embedded resource.
     /// </summary>
-    public string? ImageSource
+    public Image? Image
     {
-        get => _imageSource;
+        get => _image;
         set
         {
-            if (value != null)
-                ValidateImageSource(value);
-            _imageSource = value;
-            if (value != null)
-            {
+            _image = value;
+            if (_image != null)
                 SymbolType = SymbolType.Image;
-            }
         }
     }
 
@@ -70,6 +66,9 @@ public class SymbolStyle : VectorStyle, IHasImageSource
     /// </remarks>
     public double SymbolScale { get; set; } = 1.0;
 
+    [Obsolete("Use Offset or RelativeOffset instead", true)]
+    public Offset SymbolOffset { get; set; } = new Offset();
+
     /// <summary>
     ///     Gets or sets the offset in pixels of the symbol.
     /// </summary>
@@ -77,36 +76,17 @@ public class SymbolStyle : VectorStyle, IHasImageSource
     ///     The symbol offset is scaled with the <see cref="SymbolScale" /> property and refers to the offset of
     ///     <see cref="SymbolScale" />=1.0.
     /// </remarks>
-    public Offset SymbolOffset { get; set; } = new Offset(0, 0);
+    public Offset Offset { get; set; } = new Offset();
+
+    /// <summary>
+    /// Offset of the symbol in units relative to the size of the symbol. When X = 0 and Y = 0 it will be centered.
+    /// </summary>
+    public RelativeOffset RelativeOffset { get; set; } = new RelativeOffset();
 
     /// <summary>
     /// Should SymbolOffset position rotate with map
     /// </summary>
     public bool SymbolOffsetRotatesWithMap { get; set; }
-
-    /// <summary>
-    /// When BlendModeColor is set a BitmapType.Picture (e.g. used for SVG) will be 
-    /// drawn in the BlendModeColor ignoring the colors of the Picture itself.
-    /// </summary>
-    public Color? BlendModeColor { get; set; }
-
-    /// <summary>
-    /// Option to override the fill color of the SVG image. This is useful if you want to change the color of the SVG 
-    /// source image. Note that each different color used will add an new object to the image cache.
-    /// </summary>
-    public Color? SvgFillColor { get; set; }
-
-    /// <summary>
-    /// Option to override the stroke color of the SVG image. This is useful if you want to change the color of the SVG 
-    /// source image. Note that each different color used will add an new object to the image cache.
-    /// </summary>
-    public Color? SvgStrokeColor { get; set; }
-
-    /// <summary>
-    /// Sets the sprite parameters used to specify which part of the image
-    /// symbol should be used. This only applies if a ImageSource is set.
-    /// </summary>
-    public BitmapRegion? BitmapRegion { get; set; }
 
     public override bool Equals(object? obj)
     {
@@ -126,10 +106,10 @@ public class SymbolStyle : VectorStyle, IHasImageSource
         if (!SymbolScale.Equals(SymbolScale))
             return false;
 
-        if ((SymbolOffset == null) ^ (symbolStyle.SymbolOffset == null))
+        if ((Offset == null) ^ (symbolStyle.Offset == null))
             return false;
 
-        if ((SymbolOffset != null) && !SymbolOffset.Equals(symbolStyle.SymbolOffset))
+        if ((Offset != null) && !Offset.Equals(symbolStyle.Offset))
             return false;
 
         if (Math.Abs(SymbolRotation - symbolStyle.SymbolRotation) > Constants.Epsilon)
@@ -141,7 +121,7 @@ public class SymbolStyle : VectorStyle, IHasImageSource
         if (SymbolType != symbolStyle.SymbolType)
             return false;
 
-        if (ImageSource != symbolStyle.ImageSource)
+        if (Image != symbolStyle.Image)
             return false;
 
         if (Math.Abs(Opacity - symbolStyle.Opacity) > Constants.Epsilon)
@@ -153,14 +133,13 @@ public class SymbolStyle : VectorStyle, IHasImageSource
     public override int GetHashCode()
     {
         return
-            ImageSource?.GetHashCode() ^
+            Image?.GetHashCode() ^
             SymbolScale.GetHashCode() ^
-            SymbolOffset.GetHashCode() ^
+            Offset.GetHashCode() ^
             SymbolRotation.GetHashCode() ^
             UnitType.GetHashCode() ^
             SymbolType.GetHashCode() ^
-            BlendModeColor?.GetHashCode() ?? 0 ^
-            base.GetHashCode();
+            base.GetHashCode() ?? 0;
     }
 
     public static bool operator ==(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)
@@ -171,11 +150,5 @@ public class SymbolStyle : VectorStyle, IHasImageSource
     public static bool operator !=(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)
     {
         return !Equals(symbolStyle1, symbolStyle2);
-    }
-
-    private static void ValidateImageSource(string imageSource)
-    {
-        // Will throw a UriFormatException exception if the imageSource is not a valid Uri
-        _ = new Uri(imageSource);
     }
 }

@@ -6,23 +6,34 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Mapsui.Styles;
 public static class ImageFetcher
 {
+    public const string EmbeddedScheme = "embedded";
+    public const string FileScheme = "file";
+    public const string HttpScheme = "http";
+    public const string HttpsScheme = "https";
+    public const string SvgContentScheme = "svg-content";
+    public const string Base64ContentScheme = "base64-content";
+
     private static ConcurrentDictionary<string, Assembly>? _embeddedResources;
 
     public static async Task<byte[]> FetchBytesFromImageSourceAsync(string imageSource)
     {
-        var imageSourceUrl = new Uri(imageSource);
+        // Uri has a limitation of ~2000 bytes for URLs, so extract the scheme by hand
+        var scheme = imageSource.Substring(0, imageSource.IndexOf(':'));
 
-        return imageSourceUrl.Scheme switch
+        return scheme switch
         {
-            "embedded" => LoadEmbeddedResourceFromPath(imageSourceUrl),
-            "file" => LoadFromFileSystem(imageSourceUrl),
-            "http" or "https" => await LoadFromUrlAsync(imageSourceUrl),
-            _ => throw new ArgumentException($"Scheme is not supported '{imageSourceUrl.Scheme}' of '{imageSource}'"),
+            EmbeddedScheme => LoadEmbeddedResourceFromPath(new Uri(imageSource)),
+            FileScheme => LoadFromFileSystem(new Uri(imageSource)),
+            HttpScheme or HttpsScheme => await LoadFromUrlAsync(new Uri(imageSource)),
+            SvgContentScheme => LoadFromSvg(imageSource[(SvgContentScheme.Length + 3)..]),
+            Base64ContentScheme => LoadFromBase64(imageSource[(Base64ContentScheme.Length + 3)..]),
+            _ => throw new ArgumentException($"Scheme '{scheme}' of '{imageSource}' is not supported"),
         };
     }
 
@@ -102,6 +113,34 @@ public static class ImageFetcher
         catch (Exception ex)
         {
             var message = $"Could not load resource from file '{imageSource}' : '{ex.Message}'";
+            Logger.Log(LogLevel.Error, message, ex);
+            throw new Exception(message, ex);
+        }
+    }
+
+    private static byte[] LoadFromSvg(string imageSource)
+    {
+        try
+        {
+            return Encoding.UTF8.GetBytes(imageSource);
+        }
+        catch (Exception ex)
+        {
+            var message = $"Could not load svg from string '{imageSource}' : '{ex.Message}'";
+            Logger.Log(LogLevel.Error, message, ex);
+            throw new Exception(message, ex);
+        }
+    }
+
+    private static byte[] LoadFromBase64(string imageSource)
+    {
+        try
+        {
+            return Convert.FromBase64String(imageSource);
+        }
+        catch (Exception ex)
+        {
+            var message = $"Could not load resource from base64 encoded string '{imageSource}' : '{ex.Message}'";
             Logger.Log(LogLevel.Error, message, ex);
             throw new Exception(message, ex);
         }

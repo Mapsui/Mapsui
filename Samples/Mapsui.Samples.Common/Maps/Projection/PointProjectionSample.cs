@@ -70,8 +70,8 @@ public class PointProjectionSample : ISample
 
         return new SymbolStyle
         {
-            ImageSource = imageSource,
-            SymbolOffset = new Offset { Y = 64 },
+            Image = imageSource,
+            Offset = new Offset { Y = 64 },
             SymbolScale = 0.25,
             Opacity = 0.5f
         };

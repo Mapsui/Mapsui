@@ -2,17 +2,17 @@
 
 namespace Mapsui.Rendering.Skia.Images;
 
-internal sealed class BitmapImage : IDrawableImage
+internal sealed class BitmapDrawableImage : IDrawableImage
 {
     private bool _disposed;
     private readonly SKImage _image;
 
-    public BitmapImage(SKImage image)
+    public BitmapDrawableImage(SKImage image)
     {
         _image = image;
     }
 
-    public BitmapImage(byte[] bytes)
+    public BitmapDrawableImage(byte[] bytes)
     {
         using var skData = SKData.CreateCopy(bytes);
         _image = SKImage.FromEncodedData(skData);

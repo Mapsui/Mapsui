@@ -50,7 +50,7 @@ public class MyLocationLayer : BaseLayer
             if (_isMoving != value)
             {
                 _isMoving = value;
-                _locStyle.ImageSource = _isMoving ? _movingImageSource : _stillImageSource;
+                _locStyle.Image = _isMoving ? _movingImageSource : _stillImageSource;
             }
         }
     }
@@ -162,20 +162,20 @@ public class MyLocationLayer : BaseLayer
         _locStyle = new SymbolStyle
         {
             Enabled = true,
-            ImageSource = _stillImageSource,
+            Image = _stillImageSource,
             SymbolScale = Scale,
             SymbolRotation = Direction,
-            SymbolOffset = new Offset(0, 0),
+            Offset = new Offset(0, 0),
             Opacity = 1,
         };
 
         _dirStyle = new SymbolStyle
         {
             Enabled = false,
-            ImageSource = _directionImageSource,
+            Image = _directionImageSource,
             SymbolScale = 0.2,
             SymbolRotation = 0,
-            SymbolOffset = new Offset(0, 0),
+            Offset = new Offset(0, 0),
             Opacity = 1,
         };
         _coStyle = new CalloutStyle
@@ -184,7 +184,7 @@ public class MyLocationLayer : BaseLayer
             Type = CalloutType.Single,
             Title = "",
             TitleFontColor = Color.Black,
-            SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
+            Offset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
             MaxWidth = 300,
             RotateWithMap = true,
             SymbolOffsetRotatesWithMap = true,

@@ -70,6 +70,7 @@ internal class PictureRenderer
 
         canvas.Restore();
     }
+
     private static float DetermineHorizontalAlignmentCorrection(
         LabelStyle.HorizontalAlignmentEnum horizontalAlignment, float width)
     {

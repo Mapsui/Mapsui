@@ -16,6 +16,7 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>")]
     public static Map CreateMap()
     {
         var layer = new MemoryLayer
@@ -37,20 +38,17 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
         return map;
     }
 
-    private static IEnumerable<IFeature> CreateProviderWithRotatedBitmapSymbols()
-    {
-        return new List<IFeature>
+    private static List<IFeature> CreateProviderWithRotatedBitmapSymbols() =>
+    [
+        new GeometryFeature
         {
-            new GeometryFeature
-            {
-                Geometry = new Point(75, 75),
-                Styles = new[] {new SymbolStyle {Fill = new Brush(Color.Red)}}
-            }, // for reference
-            CreateFeatureWithRotatedBitmapSymbol(75, 125, 90),
-            CreateFeatureWithRotatedBitmapSymbol(125, 125, 180),
-            CreateFeatureWithRotatedBitmapSymbol(125, 75, 270)
-        };
-    }
+            Geometry = new Point(75, 75),
+            Styles = [new SymbolStyle { Fill = new Brush(Color.Red) }]
+        }, // for reference
+        CreateFeatureWithRotatedBitmapSymbol(75, 125, 90),
+        CreateFeatureWithRotatedBitmapSymbol(125, 125, 180),
+        CreateFeatureWithRotatedBitmapSymbol(125, 75, 270)
+    ];
 
     private static GeometryFeature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
     {
@@ -60,8 +58,8 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
 
         feature.Styles.Add(new SymbolStyle
         {
-            ImageSource = imageSource,
-            SymbolOffset = new Offset { Y = -24 },
+            Image = imageSource,
+            Offset = new Offset { Y = -24 },
             SymbolRotation = rotation,
             RotateWithMap = true,
         });

@@ -32,13 +32,12 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         // The CalloutStyleRenderer creates an SKPicture for rendering. We store inside an SvgImage and put it in the image cache, but it is actually
         // just a drawable like any other. We probably should use the general cache instead.
 
-        var contentDrawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCalloutContent,
-            () => new SvgImage(CreateCalloutContent(calloutStyle, renderService)))!;
-        var drawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCallout,
-            () => new SvgImage(calloutStyle.BalloonDefinition.CreateCallout(contentDrawableImage.Picture)))!;
+        var contentDrawableImage = (SvgDrawableImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCalloutContent,
+            () => new SvgDrawableImage(CreateCalloutContent(calloutStyle, renderService)))!;
+        var drawableImage = (SvgDrawableImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCallout,
+            () => new SvgDrawableImage(calloutStyle.BalloonDefinition.CreateCallout(contentDrawableImage.Picture)))!;
 
-        // Calc offset (relative or absolute)
-        var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);
+        var offset = calloutStyle.Offset.Combine(calloutStyle.RelativeOffset.GetAbsoluteOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height));
 
         var rotation = (float)calloutStyle.SymbolRotation;
 
@@ -47,14 +46,14 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             if (calloutStyle.RotateWithMap)
                 rotation += (float)viewport.Rotation;
             if (calloutStyle.SymbolOffsetRotatesWithMap)
-                symbolOffset = new Offset(symbolOffset.ToPoint().Rotate(-viewport.Rotation));
+                offset = new Offset(offset.ToPoint().Rotate(-viewport.Rotation));
         }
 
         // Save state of the canvas, so we could move and rotate the canvas
         canvas.Save();
 
         // Move 0/0 to the Anchor point of Callout
-        canvas.Translate((float)(x - symbolOffset.X), (float)(y - symbolOffset.Y));
+        canvas.Translate((float)(x - offset.X), (float)(y - offset.Y));
         canvas.Scale((float)calloutStyle.SymbolScale, (float)calloutStyle.SymbolScale);
 
         // 0/0 are assumed at center of image, but Picture has 0/0 at left top position
@@ -76,21 +75,21 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// </summary>
     public static SKPicture CreateCalloutContent(CalloutStyle callout, RenderService renderService)
     {
-        if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
+        if (callout.Type == CalloutType.Image && callout.Image is not null)
         {
             using var recorder = new SKPictureRecorder();
-            var image = renderService.DrawableImageCache.GetOrCreate(callout.ImageSource,
-                () => SymbolStyleRenderer.TryCreateDrawableImage(callout.ImageSource, renderService.ImageSourceCache));
+            var image = renderService.DrawableImageCache.GetOrCreate(callout.Image.SourceId,
+                () => SymbolStyleRenderer.TryCreateDrawableImage(callout.Image, renderService.ImageSourceCache));
             if (image is null)
             {
-                Logger.Log(LogLevel.Error, $"Image not found: {callout.ImageSource}");
+                Logger.Log(LogLevel.Error, $"Image not found: {callout.Image.Source}");
                 return recorder.EndRecording();
             }
             using var canvas = recorder.BeginRecording(new SKRect(0, 0, image.Width, image.Height));
             using var paint = new SKPaint();
-            if (image is BitmapImage bitmapImage)
+            if (image is BitmapDrawableImage bitmapImage)
                 canvas.DrawImage(bitmapImage.Image, 0, 0, paint);
-            else if (image is SvgImage svgImage)
+            else if (image is SvgDrawableImage svgImage)
                 canvas.DrawPicture(svgImage.Picture, paint);
             return recorder.EndRecording();
         }

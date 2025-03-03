@@ -353,12 +353,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         {
             if (MyLocationFollow)
             {
-                _mapMyLocationButton!.ImageSource = "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg";
+                _mapMyLocationButton!.Image = "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg";
                 Map.Navigator.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
             }
             else
             {
-                _mapMyLocationButton!.ImageSource = "embedded://Mapsui.UI.Maui.Resources.Images.LocationNoCenter.svg";
+                _mapMyLocationButton!.Image = "embedded://Mapsui.UI.Maui.Resources.Images.LocationNoCenter.svg";
             }
 
             Refresh();
@@ -804,7 +804,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private ImageButtonWidget CreateButton(
         float x, float y, string imageSource, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
         {
-            ImageSource = imageSource,
+            Image = imageSource,
             HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
             VerticalAlignment = Widgets.VerticalAlignment.Absolute,
             Position = new MPoint(x, y),

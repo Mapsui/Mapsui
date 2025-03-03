@@ -239,13 +239,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
             canvas.Save();
             // We have a special renderer, so try, if it could draw this
             var styleRenderer = (ISkiaStyleRenderer)renderer;
-            var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderService, iteration);
+            styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderService, iteration);
             // Restore old canvas
             canvas.Restore();
-            // Was it drawn?
-            if (result)
-                // Yes, special style renderer drawn correct
-                return;
         }
     }
 

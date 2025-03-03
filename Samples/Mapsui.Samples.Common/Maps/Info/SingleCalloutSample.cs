@@ -22,7 +22,7 @@ namespace Mapsui.Samples.Common.Maps.Info;
 public class SingleCalloutSample : ISample
 {
     public string Name => "Single Callout";
-    public string Category => "Info";
+    public string Category => "MapInfo";
 
     private const string _calloutLayerName = "Cities with callouts";
 
@@ -91,7 +91,7 @@ public class SingleCalloutSample : ISample
             TitleFontColor = Color.Gray,
             MaxWidth = 120,
             Enabled = false,
-            SymbolOffset = new Offset(0, SymbolStyle.DefaultHeight * 1f),
+            Offset = new Offset(0, SymbolStyle.DefaultHeight * 1f),
             BalloonDefinition = new CalloutBalloonDefinition
             {
                 RectRadius = 10,

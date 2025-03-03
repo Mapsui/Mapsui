@@ -12,6 +12,7 @@
 		<None Remove="Resources\capabilities_1_3_0.xml" />
 		<None Remove="Resources\example.tfw" />
 		<None Remove="Resources\example.tif" />
+		<None Remove="Resources\Images\image.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -58,6 +59,9 @@
 		</Content>
 		<Content Include="Resources\example.tif">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Resources\Images\image.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Resources\Images\Pin.svg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
