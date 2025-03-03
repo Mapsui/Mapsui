@@ -13,6 +13,8 @@ namespace Mapsui.Rendering.Skia;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
+    private static SKSamplingOptions _skSamplingOptions = new(SKFilterMode.Linear, SKMipmapMode.None);
+
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         var symbolStyle = (SymbolStyle)style;
@@ -23,77 +25,109 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-
-    public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, RenderService renderService)
-    {
-        if (symbolStyle.SymbolType == SymbolType.Image)
-        {
-            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService);
-        }
-        else
-        {
-            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderService.VectorCache);
-        }
-    }
-
-    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y,
-        SymbolStyle symbolStyle, RenderService renderService)
+    public static void DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, RenderService renderService)
     {
         var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
-
         var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
 
-        if (symbolStyle.Image is null)
+        canvas.Save();
+        canvas.Translate((float)destinationX, (float)destinationY);
+        canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
+
+        var rotation = symbolStyle.SymbolRotation;
+        if (symbolStyle.RotateWithMap)
+            rotation += viewport.Rotation;
+        if (rotation != 0)
+            canvas.RotateDegrees((float)rotation);
+
+        if (symbolStyle.Image is Image sourceImage)
+            DrawSourceImage(canvas, sourceImage, symbolStyle.SymbolOffset, renderService, opacity);
+        else
+            DrawBuiltInImage(canvas, symbolStyle, renderService.VectorCache, opacity);
+
+        canvas.Restore();
+    }
+
+    private static void DrawSourceImage(SKCanvas canvas, Image image, Offset symbolOffset, RenderService renderService, float opacity)
+    {
+        canvas.Save();
+
+        if (image is null)
             throw new Exception("SymbolStyle.Image should not be null in the DrawImage render method");
 
-        var image = renderService.DrawableImageCache.GetOrCreate(symbolStyle.Image.SourceId,
-            () => TryCreateDrawableImage(symbolStyle.Image, renderService.ImageSourceCache));
-        if (image == null)
-            return false;
+        var drawableImage = renderService.DrawableImageCache.GetOrCreate(image.SourceId,
+            () => TryCreateDrawableImage(image, renderService.ImageSourceCache));
+        if (drawableImage == null)
+            return;
 
-        // Calc offset (relative or absolute)
-        var offset = symbolStyle.SymbolOffset.CalcOffset(image.Width, image.Height);
+        var offset = symbolOffset.CalcOffset(drawableImage.Width, drawableImage.Height); // Offset can be relative to the size so that is why Width and Height is needed.
 
-        var rotation = (float)symbolStyle.SymbolRotation;
-        if (symbolStyle.RotateWithMap) rotation += (float)viewport.Rotation;
+        canvas.Translate((float)offset.X, (float)-offset.Y);
 
-        if (image is BitmapImage bitmapImage)
+        if (drawableImage is BitmapDrawableImage bitmapImage)
         {
-            if (symbolStyle.Image.BitmapRegion is not null) // Get image for region if specified
+            if (image.BitmapRegion is not null) // Get image for region if specified
             {
-                var key = ToSpriteKey(symbolStyle.Image.SourceId, symbolStyle.Image.BitmapRegion);
-                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.Image.BitmapRegion)) is BitmapImage bitmapRegionImage)
+                var key = image.GetSourceIdForBitmapRegion();
+                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, image.BitmapRegion)) is BitmapDrawableImage bitmapRegionImage)
                     bitmapImage = bitmapRegionImage;
             }
 
-            BitmapRenderer.Draw(canvas, bitmapImage.Image,
-                (float)destinationX, (float)destinationY,
-                rotation,
-                (float)offset.X, (float)offset.Y,
-                opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+            DrawSKImage(canvas, bitmapImage.Image, opacity);
 
         }
-        else if (image is SvgImage svgImage)
+        else if (drawableImage is SvgDrawableImage svgImage)
         {
-            if (symbolStyle.Image.SvgFillColor.HasValue || symbolStyle.Image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
+            if (image.SvgFillColor.HasValue || image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
             {
-                var key = ToModifiedSvgKey(symbolStyle.Image.SourceId, symbolStyle.Image.SvgFillColor, symbolStyle.Image.SvgStrokeColor);
-                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(symbolStyle.Image, svgImage)) is SvgImage customColoredSvgImage)
+                var key = image.GetSourceIdForSvgWithCustomColors();
+                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(image, svgImage)) is SvgDrawableImage customColoredSvgImage)
                     svgImage = customColoredSvgImage;
             }
 
-            PictureRenderer.Draw(canvas, svgImage.Picture,
-                (float)destinationX, (float)destinationY,
-                rotation,
-                (float)offset.X, (float)offset.Y,
-                opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.Image.BlendModeColor);
-
+            DrawSKPicture(canvas, svgImage.Picture, opacity, image.BlendModeColor);
         }
-
-        return true;
+        canvas.Restore();
     }
 
-    private static SvgImage CreateCustomColoredSvg(Image image, SvgImage originalSvgImage)
+    public static void DrawSKImage(SKCanvas canvas, SKImage bitmap, float opacity)
+    {
+        using var paint = new SKPaint { Color = new SKColor(255, 255, 255, (byte)(255 * opacity)) };
+
+        var halfWidth = bitmap.Width >> 1;
+        var halfHeight = bitmap.Height >> 1;
+
+        var rect = new SKRect(-halfWidth, -halfHeight, halfWidth, halfHeight);
+
+        canvas.DrawImage(bitmap, rect, _skSamplingOptions, paint);
+    }
+
+    public static void DrawSKPicture(SKCanvas canvas, SKPicture picture, float opacity, Color? blendModeColor)
+    {
+        using var skPaint = CreatePaintForSKPicture(opacity, blendModeColor);
+
+        var halfWidth = picture.CullRect.Width / 2;
+        var halfHeight = picture.CullRect.Height / 2;
+
+        var matrix = SKMatrix.CreateTranslation(-halfWidth, -halfHeight);
+
+        canvas.DrawPicture(picture, in matrix, skPaint);
+    }
+
+    private static SKPaint CreatePaintForSKPicture(float opacity, Color? blendModeColor)
+    {
+        var paint = new SKPaint();
+
+        if (blendModeColor is not null)
+            paint.ColorFilter = SKColorFilter.CreateBlendMode(blendModeColor.ToSkia(opacity), SKBlendMode.SrcIn);
+
+        if (Math.Abs(opacity - 1) > Utilities.Constants.Epsilon)
+            paint.Color = new SKColor(255, 255, 255, (byte)(255 * opacity));
+
+        return paint;
+    }
+
+    private static SvgDrawableImage CreateCustomColoredSvg(Image image, SvgDrawableImage originalSvgImage)
     {
         var originalStream = originalSvgImage.OriginalStream ?? throw new NullReferenceException("Original Stream is null");
         using var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(originalStream, image.SvgFillColor, image.SvgStrokeColor);
@@ -106,35 +140,21 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 #pragma warning restore IDISP004
         if (skSvg.Picture is null)
             throw new Exception("Failed to load modified SVG picture.");
-        return new SvgImage(skSvg.Picture);
+        return new SvgDrawableImage(skSvg.Picture);
     }
 
-    private static BitmapImage CreateBitmapImageForRegion(BitmapImage bitmapImage, BitmapRegion sprite)
+    private static BitmapDrawableImage CreateBitmapImageForRegion(BitmapDrawableImage bitmapImage, BitmapRegion sprite)
     {
-        return new BitmapImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
+        return new BitmapDrawableImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
     }
 
-    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, VectorCache vectorCache)
+    private static void DrawBuiltInImage(SKCanvas canvas, SymbolStyle symbolStyle, VectorCache vectorCache,
+        float opacity)
     {
-        var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
-
-        var (destX, destY) = viewport.WorldToScreenXY(x, y);
-
         canvas.Save();
 
-        canvas.Translate((float)destX, (float)destY);
-        canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
-
         var offset = symbolStyle.SymbolOffset.CalcOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
-
         canvas.Translate((float)offset.X, (float)-offset.Y);
-
-        if (symbolStyle.SymbolRotation != 0)
-        {
-            var rotation = symbolStyle.SymbolRotation;
-            if (symbolStyle.RotateWithMap) rotation += viewport.Rotation;
-            canvas.RotateDegrees((float)rotation);
-        }
 
         using var path = vectorCache.GetOrCreate(symbolStyle.SymbolType, CreatePath);
         if (symbolStyle.Fill.IsVisible())
@@ -150,8 +170,6 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         }
 
         canvas.Restore();
-
-        return true;
     }
 
     private static SKPath CreatePath(SymbolType symbolType)
@@ -279,11 +297,6 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         return size;
     }
-
-    public static string ToSpriteKey(string imageSource, BitmapRegion bitmapRegion)
-        => $"{imageSource}?sprite=true,x={bitmapRegion.X},y={bitmapRegion.Y},width={bitmapRegion.Width},height={bitmapRegion.Height}";
-    public static string ToModifiedSvgKey(string imageSource, Color? fill, Color? stroke)
-        => $"{imageSource}?modifiedsvg=true,fill={fill?.ToString() ?? ""},stroke={stroke?.ToString() ?? ""}";
 
     // Todo: Figure out a better place for this method
     public static IDrawableImage? TryCreateDrawableImage(Image image, ImageSourceCache imageSourceCache)

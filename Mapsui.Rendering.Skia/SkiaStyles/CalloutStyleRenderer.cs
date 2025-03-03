@@ -32,10 +32,10 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         // The CalloutStyleRenderer creates an SKPicture for rendering. We store inside an SvgImage and put it in the image cache, but it is actually
         // just a drawable like any other. We probably should use the general cache instead.
 
-        var contentDrawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCalloutContent,
-            () => new SvgImage(CreateCalloutContent(calloutStyle, renderService)))!;
-        var drawableImage = (SvgImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCallout,
-            () => new SvgImage(calloutStyle.BalloonDefinition.CreateCallout(contentDrawableImage.Picture)))!;
+        var contentDrawableImage = (SvgDrawableImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCalloutContent,
+            () => new SvgDrawableImage(CreateCalloutContent(calloutStyle, renderService)))!;
+        var drawableImage = (SvgDrawableImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCallout,
+            () => new SvgDrawableImage(calloutStyle.BalloonDefinition.CreateCallout(contentDrawableImage.Picture)))!;
 
         // Calc offset (relative or absolute)
         var symbolOffset = calloutStyle.SymbolOffset.CalcOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height);
@@ -88,9 +88,9 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
             }
             using var canvas = recorder.BeginRecording(new SKRect(0, 0, image.Width, image.Height));
             using var paint = new SKPaint();
-            if (image is BitmapImage bitmapImage)
+            if (image is BitmapDrawableImage bitmapImage)
                 canvas.DrawImage(bitmapImage.Image, 0, 0, paint);
-            else if (image is SvgImage svgImage)
+            else if (image is SvgDrawableImage svgImage)
                 canvas.DrawPicture(svgImage.Picture, paint);
             return recorder.EndRecording();
         }

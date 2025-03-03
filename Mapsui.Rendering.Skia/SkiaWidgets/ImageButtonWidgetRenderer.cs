@@ -41,7 +41,7 @@ public class ImageButtonWidgetRenderer : ISkiaWidgetRenderer
 
 
         using var skPaint = new SKPaint { IsAntialias = true };
-        if (drawableImage is BitmapImage bitmapImage)
+        if (drawableImage is BitmapDrawableImage bitmapImage)
         {
             throw new Exception($"BitmapImage is not supported as {nameof(button.Image.Source)}  or {nameof(ImageButtonWidget)}");
             // Todo: Implement this. It should have a tested sample. Perhaps in a separate ImageButtonWidgetSample. Things like scale and
@@ -49,7 +49,7 @@ public class ImageButtonWidgetRenderer : ISkiaWidgetRenderer
             // BitmapRenderer.Draw(canvas, bitmapImage.Image,
             //    (float)button.Envelope.Centroid.X, (float)button.Envelope.Centroid.Y, (float)button.Rotation);
         }
-        else if (drawableImage is SvgImage svgImage)
+        else if (drawableImage is SvgDrawableImage svgImage)
         {
             // Rotate picture
             var matrix = SKMatrix.CreateRotationDegrees((float)button.Rotation, drawableImage.Width / 2f, drawableImage.Height / 2f);

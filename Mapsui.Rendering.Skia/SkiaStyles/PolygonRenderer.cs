@@ -220,30 +220,25 @@ internal static class PolygonRenderer
         if (drawableImage == null)
             return null;
 
-        if (drawableImage is BitmapImage bitmapImage)
+        if (drawableImage is BitmapDrawableImage bitmapImage)
         {
             if (image.BitmapRegion is null)
                 return bitmapImage.Image;
-            else
-            {
-                if (image is null)
-                    throw new Exception("If BitmapRegion is not null the ImageSource should be set.");
 
-                var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(image.SourceId, image.BitmapRegion);
-                var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, image.BitmapRegion));
-                if (regionDrawableImage == null)
-                    return null;
-                if (regionDrawableImage is BitmapImage regionBitmapImage)
-                    return regionBitmapImage.Image;
-                throw new Exception("Only bitmaps are is supported for polygon fill.");
-            }
+            var imageRegionKey = image.GetSourceIdForBitmapRegion();
+            var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, image.BitmapRegion));
+            if (regionDrawableImage == null)
+                return null;
+            if (regionDrawableImage is BitmapDrawableImage regionBitmapImage)
+                return regionBitmapImage.Image;
+            throw new Exception("Only bitmaps are is supported for polygon fill.");
         }
         throw new Exception("Only bitmaps are is supported for polygon fill.");
     }
 
-    private static BitmapImage CreateBitmapImage(SKImage skImage, BitmapRegion bitmapRegion)
+    private static BitmapDrawableImage CreateBitmapImage(SKImage skImage, BitmapRegion bitmapRegion)
     {
-        return new BitmapImage(skImage.Subset(new SKRectI(bitmapRegion.X, bitmapRegion.Y,
+        return new BitmapDrawableImage(skImage.Subset(new SKRectI(bitmapRegion.X, bitmapRegion.Y,
             bitmapRegion.X + bitmapRegion.Width, bitmapRegion.Y + bitmapRegion.Height)));
     }
 }

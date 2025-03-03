@@ -59,6 +59,14 @@ public class Image
     /// </summary>
     public BitmapRegion? BitmapRegion { get; set; }
 
+    public string GetSourceIdForBitmapRegion()
+    {
+        ArgumentNullException.ThrowIfNull(BitmapRegion);
+        return $"{SourceId}?sprite=true,x={BitmapRegion.X},y={BitmapRegion.Y},width={BitmapRegion.Width},height={BitmapRegion.Height}";
+    }
+    public string GetSourceIdForSvgWithCustomColors()
+        => $"{SourceId}?modifiedsvg=true,fill={SvgFillColor?.ToString() ?? ""},stroke={SvgStrokeColor?.ToString() ?? ""}";
+
     private static void ValidateUriSchema(string imageSource)
     {
         var scheme = imageSource.Substring(0, imageSource.IndexOf(':'));
