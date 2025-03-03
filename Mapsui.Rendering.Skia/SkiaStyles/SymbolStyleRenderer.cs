@@ -23,25 +23,27 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-
     public static bool DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, RenderService renderService)
     {
+        var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
+        var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
+
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
-            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService);
+            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService, opacity, (float)destinationX, (float)destinationY);
         }
         else
         {
-            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderService.VectorCache);
+            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderService.VectorCache, opacity, (float)destinationX, (float)destinationY);
         }
     }
 
     private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y,
-        SymbolStyle symbolStyle, RenderService renderService)
+        SymbolStyle symbolStyle, RenderService renderService, float opacity, float destinationX, float destinationY)
     {
-        var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
+        canvas.Save();
 
-        var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
+        canvas.Translate(destinationX, destinationY);
 
         if (symbolStyle.Image is null)
             throw new Exception("SymbolStyle.Image should not be null in the DrawImage render method");
@@ -67,9 +69,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
 
             BitmapRenderer.Draw(canvas, bitmapImage.Image,
-                (float)destinationX, (float)destinationY,
-                rotation,
-                (float)offset.X, (float)offset.Y,
+                0, 0, rotation, (float)offset.X, (float)offset.Y,
                 opacity: opacity, scale: (float)symbolStyle.SymbolScale);
 
         }
@@ -83,12 +83,12 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
 
             PictureRenderer.Draw(canvas, svgImage.Picture,
-                (float)destinationX, (float)destinationY,
-                rotation,
-                (float)offset.X, (float)offset.Y,
+                0, 0, rotation, (float)offset.X, (float)offset.Y,
                 opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.Image.BlendModeColor);
 
         }
+
+        canvas.Restore();
 
         return true;
     }
@@ -114,15 +114,12 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return new BitmapImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
     }
 
-    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, VectorCache vectorCache)
+    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y,
+        SymbolStyle symbolStyle, VectorCache vectorCache, float opacity, float destinationX, float destinationY)
     {
-        var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
-
-        var (destX, destY) = viewport.WorldToScreenXY(x, y);
-
         canvas.Save();
 
-        canvas.Translate((float)destX, (float)destY);
+        canvas.Translate(destinationX, destinationY);
         canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
 
         var offset = symbolStyle.SymbolOffset.CalcOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
