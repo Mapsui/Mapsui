@@ -27420,6 +27420,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.LabelStyle.Offset
   nameWithType: LabelStyle.Offset
+- uid: Mapsui.Styles.LabelStyle.RelativeOffset
+  name: RelativeOffset
+  href: pages/Mapsui.Styles.LabelStyle.html#Mapsui_Styles_LabelStyle_RelativeOffset
+  commentId: P:Mapsui.Styles.LabelStyle.RelativeOffset
+  fullName: Mapsui.Styles.LabelStyle.RelativeOffset
+  nameWithType: LabelStyle.RelativeOffset
+- uid: Mapsui.Styles.LabelStyle.RelativeOffset*
+  name: RelativeOffset
+  href: pages/Mapsui.Styles.LabelStyle.html#Mapsui_Styles_LabelStyle_RelativeOffset_
+  commentId: Overload:Mapsui.Styles.LabelStyle.RelativeOffset
+  isSpec: "True"
+  fullName: Mapsui.Styles.LabelStyle.RelativeOffset
+  nameWithType: LabelStyle.RelativeOffset
 - uid: Mapsui.Styles.LabelStyle.Text
   name: Text
   href: pages/Mapsui.Styles.LabelStyle.html#Mapsui_Styles_LabelStyle_Text
@@ -27535,22 +27548,19 @@ references:
   fullName.vb: Mapsui.Styles.Offset.New
   nameWithType: Offset.Offset
   nameWithType.vb: Offset.New
-- uid: Mapsui.Styles.Offset.CalcOffset(System.Double,System.Double)
-  name: CalcOffset(double, double)
-  href: pages/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_CalcOffset_System_Double_System_Double_
-  commentId: M:Mapsui.Styles.Offset.CalcOffset(System.Double,System.Double)
-  name.vb: CalcOffset(Double, Double)
-  fullName: Mapsui.Styles.Offset.CalcOffset(double, double)
-  fullName.vb: Mapsui.Styles.Offset.CalcOffset(Double, Double)
-  nameWithType: Offset.CalcOffset(double, double)
-  nameWithType.vb: Offset.CalcOffset(Double, Double)
-- uid: Mapsui.Styles.Offset.CalcOffset*
-  name: CalcOffset
-  href: pages/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_CalcOffset_
-  commentId: Overload:Mapsui.Styles.Offset.CalcOffset
+- uid: Mapsui.Styles.Offset.Combine(Mapsui.Styles.Offset)
+  name: Combine(Offset)
+  href: pages/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Combine_Mapsui_Styles_Offset_
+  commentId: M:Mapsui.Styles.Offset.Combine(Mapsui.Styles.Offset)
+  fullName: Mapsui.Styles.Offset.Combine(Mapsui.Styles.Offset)
+  nameWithType: Offset.Combine(Offset)
+- uid: Mapsui.Styles.Offset.Combine*
+  name: Combine
+  href: pages/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Combine_
+  commentId: Overload:Mapsui.Styles.Offset.Combine
   isSpec: "True"
-  fullName: Mapsui.Styles.Offset.CalcOffset
-  nameWithType: Offset.CalcOffset
+  fullName: Mapsui.Styles.Offset.Combine
+  nameWithType: Offset.Combine
 - uid: Mapsui.Styles.Offset.Equals(Mapsui.Styles.Offset)
   name: Equals(Offset?)
   href: pages/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_Mapsui_Styles_Offset_
@@ -28064,15 +28074,15 @@ references:
   fullName.vb: Mapsui.Styles.RelativeOffset.New(Mapsui.MPoint)
   nameWithType: RelativeOffset.RelativeOffset(MPoint)
   nameWithType.vb: RelativeOffset.New(MPoint)
-- uid: Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.Offset)
-  name: RelativeOffset(Offset)
-  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset__ctor_Mapsui_Styles_Offset_
-  commentId: M:Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.Offset)
-  name.vb: New(Offset)
-  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset(Mapsui.Styles.Offset)
-  fullName.vb: Mapsui.Styles.RelativeOffset.New(Mapsui.Styles.Offset)
-  nameWithType: RelativeOffset.RelativeOffset(Offset)
-  nameWithType.vb: RelativeOffset.New(Offset)
+- uid: Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.RelativeOffset)
+  name: RelativeOffset(RelativeOffset)
+  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset__ctor_Mapsui_Styles_RelativeOffset_
+  commentId: M:Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.RelativeOffset)
+  name.vb: New(RelativeOffset)
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset(Mapsui.Styles.RelativeOffset)
+  fullName.vb: Mapsui.Styles.RelativeOffset.New(Mapsui.Styles.RelativeOffset)
+  nameWithType: RelativeOffset.RelativeOffset(RelativeOffset)
+  nameWithType.vb: RelativeOffset.New(RelativeOffset)
 - uid: Mapsui.Styles.RelativeOffset.#ctor(System.Double,System.Double)
   name: RelativeOffset(double, double)
   href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset__ctor_System_Double_System_Double_
@@ -28092,22 +28102,48 @@ references:
   fullName.vb: Mapsui.Styles.RelativeOffset.New
   nameWithType: RelativeOffset.RelativeOffset
   nameWithType.vb: RelativeOffset.New
-- uid: Mapsui.Styles.RelativeOffset.CalcOffset(System.Double,System.Double)
-  name: CalcOffset(double, double)
-  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset_CalcOffset_System_Double_System_Double_
-  commentId: M:Mapsui.Styles.RelativeOffset.CalcOffset(System.Double,System.Double)
-  name.vb: CalcOffset(Double, Double)
-  fullName: Mapsui.Styles.RelativeOffset.CalcOffset(double, double)
-  fullName.vb: Mapsui.Styles.RelativeOffset.CalcOffset(Double, Double)
-  nameWithType: RelativeOffset.CalcOffset(double, double)
-  nameWithType.vb: RelativeOffset.CalcOffset(Double, Double)
-- uid: Mapsui.Styles.RelativeOffset.CalcOffset*
-  name: CalcOffset
-  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset_CalcOffset_
-  commentId: Overload:Mapsui.Styles.RelativeOffset.CalcOffset
+- uid: Mapsui.Styles.RelativeOffset.GetAbsoluteOffset(System.Double,System.Double)
+  name: GetAbsoluteOffset(double, double)
+  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset_GetAbsoluteOffset_System_Double_System_Double_
+  commentId: M:Mapsui.Styles.RelativeOffset.GetAbsoluteOffset(System.Double,System.Double)
+  name.vb: GetAbsoluteOffset(Double, Double)
+  fullName: Mapsui.Styles.RelativeOffset.GetAbsoluteOffset(double, double)
+  fullName.vb: Mapsui.Styles.RelativeOffset.GetAbsoluteOffset(Double, Double)
+  nameWithType: RelativeOffset.GetAbsoluteOffset(double, double)
+  nameWithType.vb: RelativeOffset.GetAbsoluteOffset(Double, Double)
+- uid: Mapsui.Styles.RelativeOffset.GetAbsoluteOffset*
+  name: GetAbsoluteOffset
+  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset_GetAbsoluteOffset_
+  commentId: Overload:Mapsui.Styles.RelativeOffset.GetAbsoluteOffset
   isSpec: "True"
-  fullName: Mapsui.Styles.RelativeOffset.CalcOffset
-  nameWithType: RelativeOffset.CalcOffset
+  fullName: Mapsui.Styles.RelativeOffset.GetAbsoluteOffset
+  nameWithType: RelativeOffset.GetAbsoluteOffset
+- uid: Mapsui.Styles.RelativeOffset.X
+  name: X
+  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset_X
+  commentId: P:Mapsui.Styles.RelativeOffset.X
+  fullName: Mapsui.Styles.RelativeOffset.X
+  nameWithType: RelativeOffset.X
+- uid: Mapsui.Styles.RelativeOffset.X*
+  name: X
+  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset_X_
+  commentId: Overload:Mapsui.Styles.RelativeOffset.X
+  isSpec: "True"
+  fullName: Mapsui.Styles.RelativeOffset.X
+  nameWithType: RelativeOffset.X
+- uid: Mapsui.Styles.RelativeOffset.Y
+  name: Y
+  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset_Y
+  commentId: P:Mapsui.Styles.RelativeOffset.Y
+  fullName: Mapsui.Styles.RelativeOffset.Y
+  nameWithType: RelativeOffset.Y
+- uid: Mapsui.Styles.RelativeOffset.Y*
+  name: Y
+  href: pages/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset_Y_
+  commentId: Overload:Mapsui.Styles.RelativeOffset.Y
+  isSpec: "True"
+  fullName: Mapsui.Styles.RelativeOffset.Y
+  nameWithType: RelativeOffset.Y
 - uid: Mapsui.Styles.Size
   name: Size
   href: pages/Mapsui.Styles.Size.html
@@ -28543,6 +28579,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.SymbolStyle.Image
   nameWithType: SymbolStyle.Image
+- uid: Mapsui.Styles.SymbolStyle.Offset
+  name: Offset
+  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Offset
+  commentId: P:Mapsui.Styles.SymbolStyle.Offset
+  fullName: Mapsui.Styles.SymbolStyle.Offset
+  nameWithType: SymbolStyle.Offset
+- uid: Mapsui.Styles.SymbolStyle.Offset*
+  name: Offset
+  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Offset_
+  commentId: Overload:Mapsui.Styles.SymbolStyle.Offset
+  isSpec: "True"
+  fullName: Mapsui.Styles.SymbolStyle.Offset
+  nameWithType: SymbolStyle.Offset
+- uid: Mapsui.Styles.SymbolStyle.RelativeOffset
+  name: RelativeOffset
+  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_RelativeOffset
+  commentId: P:Mapsui.Styles.SymbolStyle.RelativeOffset
+  fullName: Mapsui.Styles.SymbolStyle.RelativeOffset
+  nameWithType: SymbolStyle.RelativeOffset
+- uid: Mapsui.Styles.SymbolStyle.RelativeOffset*
+  name: RelativeOffset
+  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_RelativeOffset_
+  commentId: Overload:Mapsui.Styles.SymbolStyle.RelativeOffset
+  isSpec: "True"
+  fullName: Mapsui.Styles.SymbolStyle.RelativeOffset
+  nameWithType: SymbolStyle.RelativeOffset
 - uid: Mapsui.Styles.SymbolStyle.RotateWithMap
   name: RotateWithMap
   href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_RotateWithMap

@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class RelativeOffset ">
     
-    <meta name="description" content="Relative offset of an image to the center of the source. The unit of measure is the width or height of an image. So in case of an an offset of (0.5, 0.5) the symbol will be moved half the width of the image to the right and half the height of the image to the top. So the bottom left point of the image will be on the location.">
+    <meta name="description" content="Offset relative to the size of the item to which it applies. The unit of measure is the width or height of an image. A relative offset of X = 0, and Y = 0 will be centered. An offset of (0.5, 0.5) the symbol will be moved half the width of the image to the right and half the height of the image to the top. So the bottom left point of the image will be on the location.">
       <link rel="shortcut icon" href="../images/favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,9 +81,9 @@
 
 
   <h1 id="Mapsui_Styles_RelativeOffset" data-uid="Mapsui.Styles.RelativeOffset" class="text-break">Class RelativeOffset</h1>
-  <div class="markdown level0 summary"><p>Relative offset of an image to the center of the source. The unit of measure
-is the width or height of an image. So in case of an an offset of (0.5, 0.5)
-the symbol will be moved half the width of the image to the right and half the
+  <div class="markdown level0 summary"><p>Offset relative to the size of the item to which it applies. The unit of measure
+is the width or height of an image. A relative offset of X = 0, and Y = 0 will be centered.
+An offset of (0.5, 0.5) the symbol will be moved half the width of the image to the right and half the
 height of the image to the top. So the bottom left point of the image will be on
 the location.</p>
 </div>
@@ -91,31 +91,18 @@ the location.</p>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-    <div class="level1"><a class="xref" href="Mapsui.Styles.Offset.html">Offset</a></div>
-    <div class="level2"><span class="xref">RelativeOffset</span></div>
+    <div class="level1"><span class="xref">RelativeOffset</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_X">Offset.X</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Y">Offset.Y</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_ToPoint">Offset.ToPoint()</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_System_Object_">Offset.Equals(object)</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_Mapsui_Styles_Offset_">Offset.Equals(Offset)</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_GetHashCode">Offset.GetHashCode()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
@@ -134,7 +121,7 @@ the location.</p>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Styles_RelativeOffset_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class RelativeOffset : Offset</code></pre>
+    <pre><code class="lang-csharp hljs">public class RelativeOffset</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
@@ -158,7 +145,7 @@ the location.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_RelativeOffset__ctor_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.RelativeOffset.%23ctor(Mapsui.MPoint)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/RelativeOffset.cs/#L18">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/RelativeOffset.cs/#L22">View Source</a>
   </span>
   <a id="Mapsui_Styles_RelativeOffset__ctor_" data-uid="Mapsui.Styles.RelativeOffset.#ctor*"></a>
   <h4 id="Mapsui_Styles_RelativeOffset__ctor_Mapsui_MPoint_" data-uid="Mapsui.Styles.RelativeOffset.#ctor(Mapsui.MPoint)">RelativeOffset(MPoint)</h4>
@@ -187,18 +174,18 @@ the location.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_RelativeOffset__ctor_Mapsui_Styles_Offset_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.RelativeOffset.%23ctor(Mapsui.Styles.Offset)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_RelativeOffset__ctor_Mapsui_Styles_RelativeOffset_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.RelativeOffset.%23ctor(Mapsui.Styles.RelativeOffset)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/RelativeOffset.cs/#L16">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/RelativeOffset.cs/#L20">View Source</a>
   </span>
   <a id="Mapsui_Styles_RelativeOffset__ctor_" data-uid="Mapsui.Styles.RelativeOffset.#ctor*"></a>
-  <h4 id="Mapsui_Styles_RelativeOffset__ctor_Mapsui_Styles_Offset_" data-uid="Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.Offset)">RelativeOffset(Offset)</h4>
+  <h4 id="Mapsui_Styles_RelativeOffset__ctor_Mapsui_Styles_RelativeOffset_" data-uid="Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.RelativeOffset)">RelativeOffset(RelativeOffset)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RelativeOffset(Offset offset)</code></pre>
+    <pre><code class="lang-csharp hljs">public RelativeOffset(RelativeOffset offset)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -211,7 +198,7 @@ the location.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.Styles.Offset.html">Offset</a></td>
+        <td><a class="xref" href="Mapsui.Styles.RelativeOffset.html">RelativeOffset</a></td>
         <td><span class="parametername">offset</span></td>
         <td></td>
       </tr>
@@ -254,23 +241,85 @@ the location.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_RelativeOffset_X.md&amp;value=---%0Auid%3A%20Mapsui.Styles.RelativeOffset.X%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/RelativeOffset.cs/#L24">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_RelativeOffset_X_" data-uid="Mapsui.Styles.RelativeOffset.X*"></a>
+  <h4 id="Mapsui_Styles_RelativeOffset_X" data-uid="Mapsui.Styles.RelativeOffset.X">X</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double X { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_RelativeOffset_Y.md&amp;value=---%0Auid%3A%20Mapsui.Styles.RelativeOffset.Y%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/RelativeOffset.cs/#L25">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_RelativeOffset_Y_" data-uid="Mapsui.Styles.RelativeOffset.Y*"></a>
+  <h4 id="Mapsui_Styles_RelativeOffset_Y" data-uid="Mapsui.Styles.RelativeOffset.Y">Y</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Y { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_RelativeOffset_CalcOffset_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.RelativeOffset.CalcOffset(System.Double%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_RelativeOffset_GetAbsoluteOffset_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.RelativeOffset.GetAbsoluteOffset(System.Double%2CSystem.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/RelativeOffset.cs/#L26">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/RelativeOffset.cs/#L33">View Source</a>
   </span>
-  <a id="Mapsui_Styles_RelativeOffset_CalcOffset_" data-uid="Mapsui.Styles.RelativeOffset.CalcOffset*"></a>
-  <h4 id="Mapsui_Styles_RelativeOffset_CalcOffset_System_Double_System_Double_" data-uid="Mapsui.Styles.RelativeOffset.CalcOffset(System.Double,System.Double)">CalcOffset(double, double)</h4>
+  <a id="Mapsui_Styles_RelativeOffset_GetAbsoluteOffset_" data-uid="Mapsui.Styles.RelativeOffset.GetAbsoluteOffset*"></a>
+  <h4 id="Mapsui_Styles_RelativeOffset_GetAbsoluteOffset_System_Double_System_Double_" data-uid="Mapsui.Styles.RelativeOffset.GetAbsoluteOffset(System.Double,System.Double)">GetAbsoluteOffset(double, double)</h4>
   <div class="markdown level1 summary"><p>Calculate the real offset respecting width and height</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override Offset CalcOffset(double width, double height)</code></pre>
+    <pre><code class="lang-csharp hljs">public Offset GetAbsoluteOffset(double width, double height)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -312,8 +361,6 @@ the location.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_CalcOffset_System_Double_System_Double_">Offset.CalcOffset(double, double)</a></div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="Mapsui.Extensions.DisposableExtension.html#Mapsui_Extensions_DisposableExtension_DisposeIfDisposable_System_Object_">DisposableExtension.DisposeIfDisposable(object?)</a>
