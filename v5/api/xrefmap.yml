@@ -23450,15 +23450,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.ToSpriteKey
   nameWithType: SymbolStyleRenderer.ToSpriteKey
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(System.String,Mapsui.Styles.ImageSourceCache)
-  name: TryCreateDrawableImage(string, ImageSourceCache)
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_TryCreateDrawableImage_System_String_Mapsui_Styles_ImageSourceCache_
-  commentId: M:Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(System.String,Mapsui.Styles.ImageSourceCache)
-  name.vb: TryCreateDrawableImage(String, ImageSourceCache)
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(string, Mapsui.Styles.ImageSourceCache)
-  fullName.vb: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(String, Mapsui.Styles.ImageSourceCache)
-  nameWithType: SymbolStyleRenderer.TryCreateDrawableImage(string, ImageSourceCache)
-  nameWithType.vb: SymbolStyleRenderer.TryCreateDrawableImage(String, ImageSourceCache)
+- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image,Mapsui.Styles.ImageSourceCache)
+  name: TryCreateDrawableImage(Image, ImageSourceCache)
+  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_TryCreateDrawableImage_Mapsui_Styles_Image_Mapsui_Styles_ImageSourceCache_
+  commentId: M:Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image,Mapsui.Styles.ImageSourceCache)
+  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image, Mapsui.Styles.ImageSourceCache)
+  nameWithType: SymbolStyleRenderer.TryCreateDrawableImage(Image, ImageSourceCache)
 - uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage*
   name: TryCreateDrawableImage
   href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_TryCreateDrawableImage_
@@ -23831,19 +23828,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.Brush.Background
   nameWithType: Brush.Background
-- uid: Mapsui.Styles.Brush.BitmapRegion
-  name: BitmapRegion
-  href: pages/Mapsui.Styles.Brush.html#Mapsui_Styles_Brush_BitmapRegion
-  commentId: P:Mapsui.Styles.Brush.BitmapRegion
-  fullName: Mapsui.Styles.Brush.BitmapRegion
-  nameWithType: Brush.BitmapRegion
-- uid: Mapsui.Styles.Brush.BitmapRegion*
-  name: BitmapRegion
-  href: pages/Mapsui.Styles.Brush.html#Mapsui_Styles_Brush_BitmapRegion_
-  commentId: Overload:Mapsui.Styles.Brush.BitmapRegion
-  isSpec: "True"
-  fullName: Mapsui.Styles.Brush.BitmapRegion
-  nameWithType: Brush.BitmapRegion
 - uid: Mapsui.Styles.Brush.Color
   name: Color
   href: pages/Mapsui.Styles.Brush.html#Mapsui_Styles_Brush_Color
@@ -23908,19 +23892,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.Brush.GetHashCode
   nameWithType: Brush.GetHashCode
-- uid: Mapsui.Styles.Brush.ImageSource
-  name: ImageSource
-  href: pages/Mapsui.Styles.Brush.html#Mapsui_Styles_Brush_ImageSource
-  commentId: P:Mapsui.Styles.Brush.ImageSource
-  fullName: Mapsui.Styles.Brush.ImageSource
-  nameWithType: Brush.ImageSource
-- uid: Mapsui.Styles.Brush.ImageSource*
-  name: ImageSource
-  href: pages/Mapsui.Styles.Brush.html#Mapsui_Styles_Brush_ImageSource_
-  commentId: Overload:Mapsui.Styles.Brush.ImageSource
+- uid: Mapsui.Styles.Brush.Image
+  name: Image
+  href: pages/Mapsui.Styles.Brush.html#Mapsui_Styles_Brush_Image
+  commentId: P:Mapsui.Styles.Brush.Image
+  fullName: Mapsui.Styles.Brush.Image
+  nameWithType: Brush.Image
+- uid: Mapsui.Styles.Brush.Image*
+  name: Image
+  href: pages/Mapsui.Styles.Brush.html#Mapsui_Styles_Brush_Image_
+  commentId: Overload:Mapsui.Styles.Brush.Image
   isSpec: "True"
-  fullName: Mapsui.Styles.Brush.ImageSource
-  nameWithType: Brush.ImageSource
+  fullName: Mapsui.Styles.Brush.Image
+  nameWithType: Brush.Image
 - uid: Mapsui.Styles.Brush.op_Equality(Mapsui.Styles.Brush,Mapsui.Styles.Brush)
   name: operator ==(Brush?, Brush?)
   href: pages/Mapsui.Styles.Brush.html#Mapsui_Styles_Brush_op_Equality_Mapsui_Styles_Brush_Mapsui_Styles_Brush_
@@ -26785,25 +26769,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.IFeatureSize.NeedsFeature
   nameWithType: IFeatureSize.NeedsFeature
-- uid: Mapsui.Styles.IHasImageSource
-  name: IHasImageSource
-  href: pages/Mapsui.Styles.IHasImageSource.html
-  commentId: T:Mapsui.Styles.IHasImageSource
-  fullName: Mapsui.Styles.IHasImageSource
-  nameWithType: IHasImageSource
-- uid: Mapsui.Styles.IHasImageSource.ImageSource
-  name: ImageSource
-  href: pages/Mapsui.Styles.IHasImageSource.html#Mapsui_Styles_IHasImageSource_ImageSource
-  commentId: P:Mapsui.Styles.IHasImageSource.ImageSource
-  fullName: Mapsui.Styles.IHasImageSource.ImageSource
-  nameWithType: IHasImageSource.ImageSource
-- uid: Mapsui.Styles.IHasImageSource.ImageSource*
-  name: ImageSource
-  href: pages/Mapsui.Styles.IHasImageSource.html#Mapsui_Styles_IHasImageSource_ImageSource_
-  commentId: Overload:Mapsui.Styles.IHasImageSource.ImageSource
+- uid: Mapsui.Styles.IHasImage
+  name: IHasImage
+  href: pages/Mapsui.Styles.IHasImage.html
+  commentId: T:Mapsui.Styles.IHasImage
+  fullName: Mapsui.Styles.IHasImage
+  nameWithType: IHasImage
+- uid: Mapsui.Styles.IHasImage.Image
+  name: Image
+  href: pages/Mapsui.Styles.IHasImage.html#Mapsui_Styles_IHasImage_Image
+  commentId: P:Mapsui.Styles.IHasImage.Image
+  fullName: Mapsui.Styles.IHasImage.Image
+  nameWithType: IHasImage.Image
+- uid: Mapsui.Styles.IHasImage.Image*
+  name: Image
+  href: pages/Mapsui.Styles.IHasImage.html#Mapsui_Styles_IHasImage_Image_
+  commentId: Overload:Mapsui.Styles.IHasImage.Image
   isSpec: "True"
-  fullName: Mapsui.Styles.IHasImageSource.ImageSource
-  nameWithType: IHasImageSource.ImageSource
+  fullName: Mapsui.Styles.IHasImage.Image
+  nameWithType: IHasImage.Image
 - uid: Mapsui.Styles.IStyle
   name: IStyle
   href: pages/Mapsui.Styles.IStyle.html
@@ -26868,12 +26852,114 @@ references:
   commentId: T:Mapsui.Styles.IStyleRenderer
   fullName: Mapsui.Styles.IStyleRenderer
   nameWithType: IStyleRenderer
+- uid: Mapsui.Styles.Image
+  name: Image
+  href: pages/Mapsui.Styles.Image.html
+  commentId: T:Mapsui.Styles.Image
+  fullName: Mapsui.Styles.Image
+  nameWithType: Image
+- uid: Mapsui.Styles.Image.BitmapRegion
+  name: BitmapRegion
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_BitmapRegion
+  commentId: P:Mapsui.Styles.Image.BitmapRegion
+  fullName: Mapsui.Styles.Image.BitmapRegion
+  nameWithType: Image.BitmapRegion
+- uid: Mapsui.Styles.Image.BitmapRegion*
+  name: BitmapRegion
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_BitmapRegion_
+  commentId: Overload:Mapsui.Styles.Image.BitmapRegion
+  isSpec: "True"
+  fullName: Mapsui.Styles.Image.BitmapRegion
+  nameWithType: Image.BitmapRegion
+- uid: Mapsui.Styles.Image.BlendModeColor
+  name: BlendModeColor
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_BlendModeColor
+  commentId: P:Mapsui.Styles.Image.BlendModeColor
+  fullName: Mapsui.Styles.Image.BlendModeColor
+  nameWithType: Image.BlendModeColor
+- uid: Mapsui.Styles.Image.BlendModeColor*
+  name: BlendModeColor
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_BlendModeColor_
+  commentId: Overload:Mapsui.Styles.Image.BlendModeColor
+  isSpec: "True"
+  fullName: Mapsui.Styles.Image.BlendModeColor
+  nameWithType: Image.BlendModeColor
+- uid: Mapsui.Styles.Image.Source
+  name: Source
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_Source
+  commentId: P:Mapsui.Styles.Image.Source
+  fullName: Mapsui.Styles.Image.Source
+  nameWithType: Image.Source
+- uid: Mapsui.Styles.Image.Source*
+  name: Source
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_Source_
+  commentId: Overload:Mapsui.Styles.Image.Source
+  isSpec: "True"
+  fullName: Mapsui.Styles.Image.Source
+  nameWithType: Image.Source
+- uid: Mapsui.Styles.Image.SvgFillColor
+  name: SvgFillColor
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_SvgFillColor
+  commentId: P:Mapsui.Styles.Image.SvgFillColor
+  fullName: Mapsui.Styles.Image.SvgFillColor
+  nameWithType: Image.SvgFillColor
+- uid: Mapsui.Styles.Image.SvgFillColor*
+  name: SvgFillColor
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_SvgFillColor_
+  commentId: Overload:Mapsui.Styles.Image.SvgFillColor
+  isSpec: "True"
+  fullName: Mapsui.Styles.Image.SvgFillColor
+  nameWithType: Image.SvgFillColor
+- uid: Mapsui.Styles.Image.SvgStrokeColor
+  name: SvgStrokeColor
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_SvgStrokeColor
+  commentId: P:Mapsui.Styles.Image.SvgStrokeColor
+  fullName: Mapsui.Styles.Image.SvgStrokeColor
+  nameWithType: Image.SvgStrokeColor
+- uid: Mapsui.Styles.Image.SvgStrokeColor*
+  name: SvgStrokeColor
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_SvgStrokeColor_
+  commentId: Overload:Mapsui.Styles.Image.SvgStrokeColor
+  isSpec: "True"
+  fullName: Mapsui.Styles.Image.SvgStrokeColor
+  nameWithType: Image.SvgStrokeColor
+- uid: Mapsui.Styles.Image.op_Implicit(System.String)~Mapsui.Styles.Image
+  name: implicit operator Image(string)
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_op_Implicit_System_String__Mapsui_Styles_Image
+  commentId: M:Mapsui.Styles.Image.op_Implicit(System.String)~Mapsui.Styles.Image
+  name.vb: CType(String)
+  fullName: Mapsui.Styles.Image.implicit operator Mapsui.Styles.Image(string)
+  fullName.vb: Mapsui.Styles.Image.CType(String)
+  nameWithType: Image.implicit operator Image(string)
+  nameWithType.vb: Image.CType(String)
+- uid: Mapsui.Styles.Image.op_Implicit*
+  name: implicit operator
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_op_Implicit_
+  commentId: Overload:Mapsui.Styles.Image.op_Implicit
+  isSpec: "True"
+  name.vb: CType
+  fullName: Mapsui.Styles.Image.implicit operator
+  fullName.vb: Mapsui.Styles.Image.CType
+  nameWithType: Image.implicit operator
+  nameWithType.vb: Image.CType
 - uid: Mapsui.Styles.ImageFetcher
   name: ImageFetcher
   href: pages/Mapsui.Styles.ImageFetcher.html
   commentId: T:Mapsui.Styles.ImageFetcher
   fullName: Mapsui.Styles.ImageFetcher
   nameWithType: ImageFetcher
+- uid: Mapsui.Styles.ImageFetcher.Base64ContentScheme
+  name: Base64ContentScheme
+  href: pages/Mapsui.Styles.ImageFetcher.html#Mapsui_Styles_ImageFetcher_Base64ContentScheme
+  commentId: F:Mapsui.Styles.ImageFetcher.Base64ContentScheme
+  fullName: Mapsui.Styles.ImageFetcher.Base64ContentScheme
+  nameWithType: ImageFetcher.Base64ContentScheme
+- uid: Mapsui.Styles.ImageFetcher.EmbeddedScheme
+  name: EmbeddedScheme
+  href: pages/Mapsui.Styles.ImageFetcher.html#Mapsui_Styles_ImageFetcher_EmbeddedScheme
+  commentId: F:Mapsui.Styles.ImageFetcher.EmbeddedScheme
+  fullName: Mapsui.Styles.ImageFetcher.EmbeddedScheme
+  nameWithType: ImageFetcher.EmbeddedScheme
 - uid: Mapsui.Styles.ImageFetcher.FetchBytesFromImageSourceAsync(System.String)
   name: FetchBytesFromImageSourceAsync(string)
   href: pages/Mapsui.Styles.ImageFetcher.html#Mapsui_Styles_ImageFetcher_FetchBytesFromImageSourceAsync_System_String_
@@ -26890,21 +26976,42 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.ImageFetcher.FetchBytesFromImageSourceAsync
   nameWithType: ImageFetcher.FetchBytesFromImageSourceAsync
+- uid: Mapsui.Styles.ImageFetcher.FileScheme
+  name: FileScheme
+  href: pages/Mapsui.Styles.ImageFetcher.html#Mapsui_Styles_ImageFetcher_FileScheme
+  commentId: F:Mapsui.Styles.ImageFetcher.FileScheme
+  fullName: Mapsui.Styles.ImageFetcher.FileScheme
+  nameWithType: ImageFetcher.FileScheme
+- uid: Mapsui.Styles.ImageFetcher.HttpScheme
+  name: HttpScheme
+  href: pages/Mapsui.Styles.ImageFetcher.html#Mapsui_Styles_ImageFetcher_HttpScheme
+  commentId: F:Mapsui.Styles.ImageFetcher.HttpScheme
+  fullName: Mapsui.Styles.ImageFetcher.HttpScheme
+  nameWithType: ImageFetcher.HttpScheme
+- uid: Mapsui.Styles.ImageFetcher.HttpsScheme
+  name: HttpsScheme
+  href: pages/Mapsui.Styles.ImageFetcher.html#Mapsui_Styles_ImageFetcher_HttpsScheme
+  commentId: F:Mapsui.Styles.ImageFetcher.HttpsScheme
+  fullName: Mapsui.Styles.ImageFetcher.HttpsScheme
+  nameWithType: ImageFetcher.HttpsScheme
+- uid: Mapsui.Styles.ImageFetcher.SvgContentScheme
+  name: SvgContentScheme
+  href: pages/Mapsui.Styles.ImageFetcher.html#Mapsui_Styles_ImageFetcher_SvgContentScheme
+  commentId: F:Mapsui.Styles.ImageFetcher.SvgContentScheme
+  fullName: Mapsui.Styles.ImageFetcher.SvgContentScheme
+  nameWithType: ImageFetcher.SvgContentScheme
 - uid: Mapsui.Styles.ImageSourceCache
   name: ImageSourceCache
   href: pages/Mapsui.Styles.ImageSourceCache.html
   commentId: T:Mapsui.Styles.ImageSourceCache
   fullName: Mapsui.Styles.ImageSourceCache
   nameWithType: ImageSourceCache
-- uid: Mapsui.Styles.ImageSourceCache.Get(System.String)
-  name: Get(string)
-  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_Get_System_String_
-  commentId: M:Mapsui.Styles.ImageSourceCache.Get(System.String)
-  name.vb: Get(String)
-  fullName: Mapsui.Styles.ImageSourceCache.Get(string)
-  fullName.vb: Mapsui.Styles.ImageSourceCache.Get(String)
-  nameWithType: ImageSourceCache.Get(string)
-  nameWithType.vb: ImageSourceCache.Get(String)
+- uid: Mapsui.Styles.ImageSourceCache.Get(Mapsui.Styles.Image)
+  name: Get(Image)
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_Get_Mapsui_Styles_Image_
+  commentId: M:Mapsui.Styles.ImageSourceCache.Get(Mapsui.Styles.Image)
+  fullName: Mapsui.Styles.ImageSourceCache.Get(Mapsui.Styles.Image)
+  nameWithType: ImageSourceCache.Get(Image)
 - uid: Mapsui.Styles.ImageSourceCache.Get*
   name: Get
   href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_Get_
@@ -26912,15 +27019,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.ImageSourceCache.Get
   nameWithType: ImageSourceCache.Get
-- uid: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(System.String)
-  name: TryRegisterAsync(string)
-  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_TryRegisterAsync_System_String_
-  commentId: M:Mapsui.Styles.ImageSourceCache.TryRegisterAsync(System.String)
-  name.vb: TryRegisterAsync(String)
-  fullName: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(string)
-  fullName.vb: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(String)
-  nameWithType: ImageSourceCache.TryRegisterAsync(string)
-  nameWithType.vb: ImageSourceCache.TryRegisterAsync(String)
+- uid: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List{Mapsui.Styles.Image})
+  name: GetUnregisteredImageSources(List<Image>)
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_GetUnregisteredImageSources_System_Collections_Generic_List_Mapsui_Styles_Image__
+  commentId: M:Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List{Mapsui.Styles.Image})
+  name.vb: GetUnregisteredImageSources(List(Of Image))
+  fullName: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List<Mapsui.Styles.Image>)
+  fullName.vb: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List(Of Mapsui.Styles.Image))
+  nameWithType: ImageSourceCache.GetUnregisteredImageSources(List<Image>)
+  nameWithType.vb: ImageSourceCache.GetUnregisteredImageSources(List(Of Image))
+- uid: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources*
+  name: GetUnregisteredImageSources
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_GetUnregisteredImageSources_
+  commentId: Overload:Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources
+  isSpec: "True"
+  fullName: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources
+  nameWithType: ImageSourceCache.GetUnregisteredImageSources
+- uid: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(Mapsui.Styles.Image)
+  name: TryRegisterAsync(Image)
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_TryRegisterAsync_Mapsui_Styles_Image_
+  commentId: M:Mapsui.Styles.ImageSourceCache.TryRegisterAsync(Mapsui.Styles.Image)
+  fullName: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(Mapsui.Styles.Image)
+  nameWithType: ImageSourceCache.TryRegisterAsync(Image)
 - uid: Mapsui.Styles.ImageSourceCache.TryRegisterAsync*
   name: TryRegisterAsync
   href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_TryRegisterAsync_
@@ -26928,15 +27048,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.ImageSourceCache.TryRegisterAsync
   nameWithType: ImageSourceCache.TryRegisterAsync
-- uid: Mapsui.Styles.ImageSourceCache.Unregister(System.String)
-  name: Unregister(string)
-  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_Unregister_System_String_
-  commentId: M:Mapsui.Styles.ImageSourceCache.Unregister(System.String)
-  name.vb: Unregister(String)
-  fullName: Mapsui.Styles.ImageSourceCache.Unregister(string)
-  fullName.vb: Mapsui.Styles.ImageSourceCache.Unregister(String)
-  nameWithType: ImageSourceCache.Unregister(string)
-  nameWithType.vb: ImageSourceCache.Unregister(String)
+- uid: Mapsui.Styles.ImageSourceCache.Unregister(Mapsui.Styles.Image)
+  name: Unregister(Image)
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_Unregister_Mapsui_Styles_Image_
+  commentId: M:Mapsui.Styles.ImageSourceCache.Unregister(Mapsui.Styles.Image)
+  fullName: Mapsui.Styles.ImageSourceCache.Unregister(Mapsui.Styles.Image)
+  nameWithType: ImageSourceCache.Unregister(Image)
 - uid: Mapsui.Styles.ImageSourceCache.Unregister*
   name: Unregister
   href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_Unregister_
@@ -28323,32 +28440,6 @@ references:
   commentId: T:Mapsui.Styles.SymbolStyle
   fullName: Mapsui.Styles.SymbolStyle
   nameWithType: SymbolStyle
-- uid: Mapsui.Styles.SymbolStyle.BitmapRegion
-  name: BitmapRegion
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_BitmapRegion
-  commentId: P:Mapsui.Styles.SymbolStyle.BitmapRegion
-  fullName: Mapsui.Styles.SymbolStyle.BitmapRegion
-  nameWithType: SymbolStyle.BitmapRegion
-- uid: Mapsui.Styles.SymbolStyle.BitmapRegion*
-  name: BitmapRegion
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_BitmapRegion_
-  commentId: Overload:Mapsui.Styles.SymbolStyle.BitmapRegion
-  isSpec: "True"
-  fullName: Mapsui.Styles.SymbolStyle.BitmapRegion
-  nameWithType: SymbolStyle.BitmapRegion
-- uid: Mapsui.Styles.SymbolStyle.BlendModeColor
-  name: BlendModeColor
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_BlendModeColor
-  commentId: P:Mapsui.Styles.SymbolStyle.BlendModeColor
-  fullName: Mapsui.Styles.SymbolStyle.BlendModeColor
-  nameWithType: SymbolStyle.BlendModeColor
-- uid: Mapsui.Styles.SymbolStyle.BlendModeColor*
-  name: BlendModeColor
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_BlendModeColor_
-  commentId: Overload:Mapsui.Styles.SymbolStyle.BlendModeColor
-  isSpec: "True"
-  fullName: Mapsui.Styles.SymbolStyle.BlendModeColor
-  nameWithType: SymbolStyle.BlendModeColor
 - uid: Mapsui.Styles.SymbolStyle.DefaultHeight
   name: DefaultHeight
   href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_DefaultHeight
@@ -28413,19 +28504,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.SymbolStyle.GetHashCode
   nameWithType: SymbolStyle.GetHashCode
-- uid: Mapsui.Styles.SymbolStyle.ImageSource
-  name: ImageSource
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_ImageSource
-  commentId: P:Mapsui.Styles.SymbolStyle.ImageSource
-  fullName: Mapsui.Styles.SymbolStyle.ImageSource
-  nameWithType: SymbolStyle.ImageSource
-- uid: Mapsui.Styles.SymbolStyle.ImageSource*
-  name: ImageSource
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_ImageSource_
-  commentId: Overload:Mapsui.Styles.SymbolStyle.ImageSource
+- uid: Mapsui.Styles.SymbolStyle.Image
+  name: Image
+  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Image
+  commentId: P:Mapsui.Styles.SymbolStyle.Image
+  fullName: Mapsui.Styles.SymbolStyle.Image
+  nameWithType: SymbolStyle.Image
+- uid: Mapsui.Styles.SymbolStyle.Image*
+  name: Image
+  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Image_
+  commentId: Overload:Mapsui.Styles.SymbolStyle.Image
   isSpec: "True"
-  fullName: Mapsui.Styles.SymbolStyle.ImageSource
-  nameWithType: SymbolStyle.ImageSource
+  fullName: Mapsui.Styles.SymbolStyle.Image
+  nameWithType: SymbolStyle.Image
 - uid: Mapsui.Styles.SymbolStyle.RotateWithMap
   name: RotateWithMap
   href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_RotateWithMap
@@ -28439,32 +28530,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.SymbolStyle.RotateWithMap
   nameWithType: SymbolStyle.RotateWithMap
-- uid: Mapsui.Styles.SymbolStyle.SvgFillColor
-  name: SvgFillColor
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SvgFillColor
-  commentId: P:Mapsui.Styles.SymbolStyle.SvgFillColor
-  fullName: Mapsui.Styles.SymbolStyle.SvgFillColor
-  nameWithType: SymbolStyle.SvgFillColor
-- uid: Mapsui.Styles.SymbolStyle.SvgFillColor*
-  name: SvgFillColor
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SvgFillColor_
-  commentId: Overload:Mapsui.Styles.SymbolStyle.SvgFillColor
-  isSpec: "True"
-  fullName: Mapsui.Styles.SymbolStyle.SvgFillColor
-  nameWithType: SymbolStyle.SvgFillColor
-- uid: Mapsui.Styles.SymbolStyle.SvgStrokeColor
-  name: SvgStrokeColor
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SvgStrokeColor
-  commentId: P:Mapsui.Styles.SymbolStyle.SvgStrokeColor
-  fullName: Mapsui.Styles.SymbolStyle.SvgStrokeColor
-  nameWithType: SymbolStyle.SvgStrokeColor
-- uid: Mapsui.Styles.SymbolStyle.SvgStrokeColor*
-  name: SvgStrokeColor
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SvgStrokeColor_
-  commentId: Overload:Mapsui.Styles.SymbolStyle.SvgStrokeColor
-  isSpec: "True"
-  fullName: Mapsui.Styles.SymbolStyle.SvgStrokeColor
-  nameWithType: SymbolStyle.SvgStrokeColor
 - uid: Mapsui.Styles.SymbolStyle.SymbolOffset
   name: SymbolOffset
   href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SymbolOffset
@@ -40833,19 +40898,19 @@ references:
   fullName.vb: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.New
   nameWithType: ImageButtonWidget.ImageButtonWidget
   nameWithType.vb: ImageButtonWidget.New
-- uid: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.ImageSource
-  name: ImageSource
-  href: pages/Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ImageButtonWidget_ImageSource
-  commentId: P:Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.ImageSource
-  fullName: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.ImageSource
-  nameWithType: ImageButtonWidget.ImageSource
-- uid: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.ImageSource*
-  name: ImageSource
-  href: pages/Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ImageButtonWidget_ImageSource_
-  commentId: Overload:Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.ImageSource
+- uid: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Image
+  name: Image
+  href: pages/Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ImageButtonWidget_Image
+  commentId: P:Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Image
+  fullName: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Image
+  nameWithType: ImageButtonWidget.Image
+- uid: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Image*
+  name: Image
+  href: pages/Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ImageButtonWidget_Image_
+  commentId: Overload:Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Image
   isSpec: "True"
-  fullName: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.ImageSource
-  nameWithType: ImageButtonWidget.ImageSource
+  fullName: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Image
+  nameWithType: ImageButtonWidget.Image
 - uid: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
   name: OnTapped(Navigator, WidgetEventArgs)
   href: pages/Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ImageButtonWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_

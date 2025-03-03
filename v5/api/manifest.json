@@ -3612,10 +3612,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Styles.IHasImageSource.yml",
+      "source_relative_path": "pages/Mapsui.Styles.IHasImage.yml",
       "output": {
         ".html": {
-          "relative_path": "pages/Mapsui.Styles.IHasImageSource.html"
+          "relative_path": "pages/Mapsui.Styles.IHasImage.html"
         }
       },
       "version": ""
@@ -3636,6 +3636,16 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Styles.IStyleRenderer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Styles.Image.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Styles.Image.html"
         }
       },
       "version": ""
