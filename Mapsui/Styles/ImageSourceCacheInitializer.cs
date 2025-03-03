@@ -17,7 +17,9 @@ public static class ImageSourceCacheInitializer
     {
         var imageSources = GetAllImageSources(viewport, layers, widgets);
 
-        if (imageSources.Count == 0)
+        var unregisteredImageSource = imageSourceCache.GetUnregisteredImageSources(imageSources);
+
+        if (unregisteredImageSource.Count == 0)
         {
             doneInitializing(false);
             return; // Don't start a thread if there are no bitmap paths to initialize.
@@ -26,7 +28,7 @@ public static class ImageSourceCacheInitializer
         _fetchMachine.Start(async () =>
         {
             var needsRefresh = false;
-            foreach (var imageSource in imageSources)
+            foreach (var imageSource in unregisteredImageSource)
             {
                 try
                 {
@@ -67,36 +69,36 @@ public static class ImageSourceCacheInitializer
         return await Task.FromResult(true);
     }
 
-    private static List<string> GetAllImageSources(Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets)
+    private static List<Image> GetAllImageSources(Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets)
     {
-        var result = new List<string>();
+        var result = new List<Image>();
         VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, l, s, f, o, i) =>
         {
             // Get ImageSource directly from Styles
-            if (s is IHasImageSource imageSource)
+            if (s is IHasImage imageSource)
             {
-                if (imageSource.ImageSource is not null)
-                    result.Add(imageSource.ImageSource);
+                if (imageSource.Image is not null)
+                    result.Add(imageSource.Image);
             }
 
             // Get ImageSource from Brushes
             if (s is SymbolStyle symbolStyle)
             {
-                if (symbolStyle.Fill is IHasImageSource fillImageSource)
-                    if (fillImageSource.ImageSource is not null)
-                        result.Add(fillImageSource.ImageSource);
+                if (symbolStyle.Fill is IHasImage fillImageSource)
+                    if (fillImageSource.Image is not null)
+                        result.Add(fillImageSource.Image);
             }
             else if (s is VectorStyle vectorStyle)
             {
-                if (vectorStyle.Fill is IHasImageSource fillImageSource)
-                    if (fillImageSource.ImageSource is not null)
-                        result.Add(fillImageSource.ImageSource);
+                if (vectorStyle.Fill is IHasImage fillImageSource)
+                    if (fillImageSource.Image is not null)
+                        result.Add(fillImageSource.Image);
             }
         });
 
         foreach (var widget in widgets)
-            if (widget is IHasImageSource { ImageSource: not null } imageSource)
-                result.Add(imageSource.ImageSource);
+            if (widget is IHasImage { Image: not null } imageSource)
+                result.Add(imageSource.Image);
 
         return result;
     }

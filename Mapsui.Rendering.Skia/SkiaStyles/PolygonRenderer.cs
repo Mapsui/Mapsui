@@ -147,18 +147,18 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var image = GetImage(skiaRenderService, brush);
-                    if (image != null)
-                        paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
+                    var skImage = GetSKImage(skiaRenderService, brush.Image ?? throw new Exception("Image can not be null when FillStyle is Bitmap"));
+                    if (skImage != null)
+                        paintFill.Shader = skImage.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    image = GetImage(skiaRenderService, brush);
-                    if (image != null)
-                        paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
+                    var skRotatedImage = GetSKImage(skiaRenderService, brush.Image ?? throw new Exception("Image can not be null when FillStyle is BitmapRotated"));
+                    if (skRotatedImage != null)
+                        paintFill.Shader = skRotatedImage.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
                             SKMatrix.CreateRotation((float)(rotation * Math.PI / 180.0f),
-                                image.Width >> 1, image.Height >> 1));
+                                skRotatedImage.Width >> 1, skRotatedImage.Height >> 1));
                     break;
                 default:
                     paintFill.PathEffect = null;
@@ -211,26 +211,26 @@ internal static class PolygonRenderer
         return paintStroke;
     }
 
-    private static SKImage? GetImage(RenderService renderService, Brush brush)
+    private static SKImage? GetSKImage(RenderService renderService, Image image)
     {
-        if (brush.ImageSource is null)
+        if (image is null)
             return null;
-        var drawableImage = renderService.DrawableImageCache.GetOrCreate(brush.ImageSource,
-            () => SymbolStyleRenderer.TryCreateDrawableImage(brush.ImageSource, renderService.ImageSourceCache));
+        var drawableImage = renderService.DrawableImageCache.GetOrCreate(image.SourceId,
+            () => SymbolStyleRenderer.TryCreateDrawableImage(image, renderService.ImageSourceCache));
         if (drawableImage == null)
             return null;
 
         if (drawableImage is BitmapImage bitmapImage)
         {
-            if (brush.BitmapRegion is null)
+            if (image.BitmapRegion is null)
                 return bitmapImage.Image;
             else
             {
-                if (brush.ImageSource is null)
+                if (image is null)
                     throw new Exception("If BitmapRegion is not null the ImageSource should be set.");
 
-                var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(brush.ImageSource.ToString(), brush.BitmapRegion);
-                var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, brush.BitmapRegion));
+                var imageRegionKey = SymbolStyleRenderer.ToSpriteKey(image.SourceId, image.BitmapRegion);
+                var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, image.BitmapRegion));
                 if (regionDrawableImage == null)
                     return null;
                 if (regionDrawableImage is BitmapImage regionBitmapImage)

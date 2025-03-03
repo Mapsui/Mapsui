@@ -76,14 +76,14 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
     /// </summary>
     public static SKPicture CreateCalloutContent(CalloutStyle callout, RenderService renderService)
     {
-        if (callout.Type == CalloutType.Image && callout.ImageSource is not null)
+        if (callout.Type == CalloutType.Image && callout.Image is not null)
         {
             using var recorder = new SKPictureRecorder();
-            var image = renderService.DrawableImageCache.GetOrCreate(callout.ImageSource,
-                () => SymbolStyleRenderer.TryCreateDrawableImage(callout.ImageSource, renderService.ImageSourceCache));
+            var image = renderService.DrawableImageCache.GetOrCreate(callout.Image.SourceId,
+                () => SymbolStyleRenderer.TryCreateDrawableImage(callout.Image, renderService.ImageSourceCache));
             if (image is null)
             {
-                Logger.Log(LogLevel.Error, $"Image not found: {callout.ImageSource}");
+                Logger.Log(LogLevel.Error, $"Image not found: {callout.Image.Source}");
                 return recorder.EndRecording();
             }
             using var canvas = recorder.BeginRecording(new SKRect(0, 0, image.Width, image.Height));

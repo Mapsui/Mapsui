@@ -86,10 +86,13 @@ public class CustomCalloutStyleSample : IMapControlSample
 
     private static SymbolStyle CreatePinSymbol() => new()
     {
-        ImageSource = $"embedded://Mapsui.Resources.Images.pin.svg",
-        SymbolOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.
-        SvgFillColor = Color.FromString("#4193CF"),
-        SvgStrokeColor = Color.DimGrey,
+        Image = new Image
+        {
+            Source = "embedded://Mapsui.Resources.Images.pin.svg",
+            SvgFillColor = Color.FromString("#4193CF"),
+            SvgStrokeColor = Color.DimGrey,
+        },
+        SymbolOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.        
     };
 }
 

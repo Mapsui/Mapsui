@@ -86,7 +86,7 @@ public class ImageCalloutSample : ISample
     private static CalloutStyle CreateCalloutStyle(string imageSource) => new()
     {
         BalloonDefinition = CreateBalloonDefinition(),
-        ImageSource = imageSource,
+        Image = imageSource,
         Type = CalloutType.Image,
         Enabled = false
     };

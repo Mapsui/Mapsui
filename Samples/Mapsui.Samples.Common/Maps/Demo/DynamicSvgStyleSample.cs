@@ -22,48 +22,51 @@ public class DynamicSvgStyleSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
-        var infoPosition = new MPoint(); // Use closure to keep track of the info click position
+        var tapPosition = new MPoint();
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(CreateLayerWithDynamicSvgStyle(infoPosition, map));
+        map.Layers.Add(CreateLayerWithDynamicSvgStyle(() => tapPosition, map)); // Use 'closure capture' to keep a reference to the tapPosition.
         map.Tapped += (m, e) =>
         {
-            infoPosition = e.WorldPosition; // Set the info position to use in the dynamic style
-            m.Layers.First().DataHasChanged(); // To notify the map that a redraw is needed.
+            tapPosition = e.WorldPosition; // Assign a new tap position to modify the dynamic style.
+            m.Layers.First().DataHasChanged(); // Notify that the map needs to be redraw.
             return true;
         };
         return Task.FromResult(map);
     }
 
-    private MemoryLayer CreateLayerWithDynamicSvgStyle(MPoint infoPosition, Map map) => new()
+    private MemoryLayer CreateLayerWithDynamicSvgStyle(Func<MPoint> getTapPosition, Map map) => new()
     {
         Name = "Dynamic Svg Style",
         Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 1000),
-        Style = CreateDynamicSvgStyle(() => infoPosition)
+        Style = CreateDynamicSvgStyle(getTapPosition)
     };
 
-    private IStyle CreateDynamicSvgStyle(Func<MPoint> getInfoPosition) // Use Func to make it get the latest clicked position
+    private ThemeStyle CreateDynamicSvgStyle(Func<MPoint> getTapPosition) // Use Func to make it get the latest clicked position
     {
         var imageSource = "embedded://Mapsui.Samples.Common.Images.arrow.svg";
 
         return new ThemeStyle((f) =>
         {
+            var tapPosition = getTapPosition();
             var featurePoint = ((PointFeature)f).Point;
-            var distance = Algorithms.Distance(getInfoPosition(), featurePoint);
+            var distance = Algorithms.Distance(tapPosition, featurePoint);
             var distanceBetweenZeroAndOne = Math.Min(distance / circumferenceOfTheEarth, 1);
 
             return new SymbolStyle
             {
-                ImageSource = imageSource,
+                Image = new Image
+                {
+                    Source = imageSource,
+                    BlendModeColor = ToColor(distanceBetweenZeroAndOne) // 3. Use BlendModeColor to change the color of the svg
+                },
                 SymbolOffset = new RelativeOffset(0.0, 0.0),
                 // 1. Change scale based on the distance
                 SymbolScale = 0.25 + (0.25 * distanceBetweenZeroAndOne),
                 // 2. Change angle pointing to the info click position
-                SymbolRotation = -CalculateAngle(getInfoPosition(), featurePoint) - 90,
+                SymbolRotation = -CalculateAngle(tapPosition, featurePoint) - 90,
                 RotateWithMap = true,
                 Opacity = 0.9f,
-                // 3. Use BlendModeColor to change the color of the svg
-                BlendModeColor = ToColor(distanceBetweenZeroAndOne)
             };
         });
     }

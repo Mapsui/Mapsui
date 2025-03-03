@@ -52,7 +52,7 @@ public class SvgSample : ISample
 
     private static SymbolStyle CreateSvgStyle() => new()
     {
-        ImageSource = "embedded://Mapsui.Samples.Common.Images.Pin.svg",
+        Image = "embedded://Mapsui.Samples.Common.Images.Pin.svg",
         SymbolScale = 0.5,
         SymbolOffset = new RelativeOffset(0.0, 0.5)
     };
