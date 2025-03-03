@@ -13,6 +13,8 @@ namespace Mapsui.Rendering.Skia;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
+    private static SKSamplingOptions _skSamplingOptions = new(SKFilterMode.Linear, SKMipmapMode.None);
+
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         var symbolStyle = (SymbolStyle)style;
@@ -73,9 +75,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     bitmapImage = bitmapRegionImage;
             }
 
-            BitmapRenderer.Draw(canvas, bitmapImage.Image,
-                0, 0, 0, 0, 0,
-                opacity: opacity);
+            DrawSKImage(canvas, bitmapImage.Image, opacity);
 
         }
         else if (image is SvgImage svgImage)
@@ -88,12 +88,24 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
 
             DrawSKPicture(canvas, svgImage.Picture, opacity, symbolStyle.Image.BlendModeColor);
-
         }
 
         canvas.Restore();
 
         return true;
+    }
+
+    public static void DrawSKImage(SKCanvas canvas, SKImage bitmap, float opacity)
+    {
+        var halfWidth = bitmap.Width >> 1;
+        var halfHeight = bitmap.Height >> 1;
+
+        using var paint = new SKPaint
+        {
+            Color = new SKColor(255, 255, 255, (byte)(255 * opacity))
+        };
+
+        canvas.DrawImage(bitmap, -halfWidth, -halfHeight, _skSamplingOptions, paint);
     }
 
     public static void DrawSKPicture(SKCanvas canvas, SKPicture picture, float opacity, Color? blendModeColor)
