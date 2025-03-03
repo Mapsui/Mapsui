@@ -104,7 +104,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => _fetchMachine.Start(() => FetchAsync(fetchInfo, ++_refreshCounter)));
+        Delayer.ExecuteDelayed(() => _fetchMachine.Start(cancellationToken => FetchAsync(fetchInfo, ++_refreshCounter)));
     }
 
     public override bool UpdateAnimations()
