@@ -61,7 +61,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             if (symbolStyle.Image.BitmapRegion is not null) // Get image for region if specified
             {
-                var key = ToSpriteKey(symbolStyle.Image.SourceId, symbolStyle.Image.BitmapRegion);
+                var key = GetSourceIdForBitmapRegion(symbolStyle.Image.SourceId, symbolStyle.Image.BitmapRegion);
                 if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, symbolStyle.Image.BitmapRegion)) is BitmapImage bitmapRegionImage)
                     bitmapImage = bitmapRegionImage;
             }
@@ -77,7 +77,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         {
             if (symbolStyle.Image.SvgFillColor.HasValue || symbolStyle.Image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
             {
-                var key = ToModifiedSvgKey(symbolStyle.Image.SourceId, symbolStyle.Image.SvgFillColor, symbolStyle.Image.SvgStrokeColor);
+                var key = GetSourceIdForSvgWithCustomColors(symbolStyle.Image.SourceId, symbolStyle.Image.SvgFillColor, symbolStyle.Image.SvgStrokeColor);
                 if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(symbolStyle.Image, svgImage)) is SvgImage customColoredSvgImage)
                     svgImage = customColoredSvgImage;
             }
@@ -280,10 +280,10 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return size;
     }
 
-    public static string ToSpriteKey(string imageSource, BitmapRegion bitmapRegion)
-        => $"{imageSource}?sprite=true,x={bitmapRegion.X},y={bitmapRegion.Y},width={bitmapRegion.Width},height={bitmapRegion.Height}";
-    public static string ToModifiedSvgKey(string imageSource, Color? fill, Color? stroke)
-        => $"{imageSource}?modifiedsvg=true,fill={fill?.ToString() ?? ""},stroke={stroke?.ToString() ?? ""}";
+    public static string GetSourceIdForBitmapRegion(string sourceId, BitmapRegion bitmapRegion)
+        => $"{sourceId}?sprite=true,x={bitmapRegion.X},y={bitmapRegion.Y},width={bitmapRegion.Width},height={bitmapRegion.Height}";
+    public static string GetSourceIdForSvgWithCustomColors(string sourceId, Color? fill, Color? stroke)
+        => $"{sourceId}?modifiedsvg=true,fill={fill?.ToString() ?? ""},stroke={stroke?.ToString() ?? ""}";
 
     // Todo: Figure out a better place for this method
     public static IDrawableImage? TryCreateDrawableImage(Image image, ImageSourceCache imageSourceCache)
