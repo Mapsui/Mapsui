@@ -17,8 +17,8 @@ public class GeodanOfficesLayerBuilder
             Features = new[] { geodanAmsterdam, geodanDenBosch }.ToFeatures(),
             Style = new SymbolStyle
             {
-                ImageSource = imageSource,
-                SymbolOffset = new Offset { Y = 64 },
+                Image = imageSource,
+                Offset = new Offset { Y = 64 },
                 SymbolScale = 0.25
             },
             Name = "Geodan Offices"

@@ -7,7 +7,7 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// <summary>
 /// Widget that shows a button with an icon
 /// </summary>
-public class ImageButtonWidget : BoxWidget, IHasImageSource
+public class ImageButtonWidget : BoxWidget, IHasImage
 {
     public ImageButtonWidget() : base()
     {
@@ -37,20 +37,20 @@ public class ImageButtonWidget : BoxWidget, IHasImageSource
         }
     }
 
-    private string? _imageSource;
+    private Image? _image;
 
     /// <summary>
     /// The image to show as button
     /// </summary>
-    public string? ImageSource
+    public Image? Image
     {
-        get => _imageSource;
+        get => _image;
         set
         {
-            if (_imageSource == value)
+            if (_image == value)
                 return;
 
-            _imageSource = value;
+            _image = value;
             Invalidate();
         }
     }

@@ -55,10 +55,13 @@ public class CustomSvgStyleSample : ISample
 
             return new SymbolStyle
             {
-                ImageSource = $"embedded://Mapsui.Samples.Common.Images.arrow.svg",
-                SymbolOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
-                SvgFillColor = GetTypeColor((int)f.Id % 4),
-                SvgStrokeColor = Color.Black,
+                Image = new Image
+                {
+                    Source = "embedded://Mapsui.Samples.Common.Images.arrow.svg",
+                    SvgFillColor = GetTypeColor((int)f.Id % 4),
+                    SvgStrokeColor = Color.Black,
+                },
+                RelativeOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
                 SymbolScale = 0.5,
                 SymbolRotation = -CalculateAngle(new MPoint(0, 0), featurePosition) - 90, // Let them point to the center of hte map
                 RotateWithMap = true,

@@ -1,21 +1,28 @@
 ﻿namespace Mapsui.Styles;
 
 /// <summary>
-/// Relative offset of an image to the center of the source. The unit of measure
-/// is the width or height of an image. So in case of an an offset of (0.5, 0.5) 
-/// the symbol will be moved half the width of the image to the right and half the 
+/// Offset relative to the size of the item to which it applies. The unit of measure
+/// is the width or height of an image. A relative offset of X = 0, and Y = 0 will be centered.
+/// An offset of (0.5, 0.5) the symbol will be moved half the width of the image to the right and half the 
 /// height of the image to the top. So the bottom left point of the image will be on
 /// the location.
 /// </summary>
-public class RelativeOffset : Offset
+public class RelativeOffset
 {
     public RelativeOffset() { }
 
-    public RelativeOffset(double x, double y) : base(x, y) { }
+    public RelativeOffset(double x, double y)
+    {
+        X = x;
+        Y = y;
+    }
 
-    public RelativeOffset(Offset offset) : base(offset) { }
+    public RelativeOffset(RelativeOffset offset) : this(offset.X, offset.Y) { }
 
-    public RelativeOffset(MPoint point) : base(point) { }
+    public RelativeOffset(MPoint point) : this(point.X, point.Y) { }
+
+    public double X { get; set; } = 0;
+    public double Y { get; set; } = 0;
 
     /// <summary>
     /// Calculate the real offset respecting width and height
@@ -23,7 +30,7 @@ public class RelativeOffset : Offset
     /// <param name="width">Width of the symbol</param>
     /// <param name="height">Height of the symbol</param>
     /// <returns>Calculated offset</returns>
-    public override Offset CalcOffset(double width, double height)
+    public Offset GetAbsoluteOffset(double width, double height)
     {
         return new Offset(width * X, height * Y);
     }
