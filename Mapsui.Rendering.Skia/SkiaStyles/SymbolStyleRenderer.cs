@@ -30,20 +30,21 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
-            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService, opacity, (float)destinationX, (float)destinationY);
+            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService, opacity, destinationX, destinationY);
         }
         else
         {
-            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderService.VectorCache, opacity, (float)destinationX, (float)destinationY);
+            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderService.VectorCache, opacity, destinationX, destinationY);
         }
     }
 
     private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y,
-        SymbolStyle symbolStyle, RenderService renderService, float opacity, float destinationX, float destinationY)
+        SymbolStyle symbolStyle, RenderService renderService, float opacity, double destinationX, double destinationY)
     {
         canvas.Save();
+        canvas.Translate((float)destinationX, (float)destinationY);
+        canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
 
-        canvas.Translate(destinationX, destinationY);
 
         if (symbolStyle.Image is null)
             throw new Exception("SymbolStyle.Image should not be null in the DrawImage render method");
@@ -56,8 +57,13 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         // Calc offset (relative or absolute)
         var offset = symbolStyle.SymbolOffset.CalcOffset(image.Width, image.Height);
 
-        var rotation = (float)symbolStyle.SymbolRotation;
-        if (symbolStyle.RotateWithMap) rotation += (float)viewport.Rotation;
+        var rotation = symbolStyle.SymbolRotation;
+        if (symbolStyle.RotateWithMap)
+            rotation += viewport.Rotation;
+        if (rotation != 0)
+            canvas.RotateDegrees((float)rotation);
+
+        canvas.Translate((float)offset.X, (float)-offset.Y);
 
         if (image is BitmapImage bitmapImage)
         {
@@ -69,8 +75,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
 
             BitmapRenderer.Draw(canvas, bitmapImage.Image,
-                0, 0, rotation, (float)offset.X, (float)offset.Y,
-                opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                0, 0, 0, 0, 0,
+                opacity: opacity);
 
         }
         else if (image is SvgImage svgImage)
@@ -83,8 +89,8 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             }
 
             PictureRenderer.Draw(canvas, svgImage.Picture,
-                0, 0, rotation, (float)offset.X, (float)offset.Y,
-                opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.Image.BlendModeColor);
+                0, 0, 0, 0, 0,
+                opacity: opacity, blendModeColor: symbolStyle.Image.BlendModeColor);
 
         }
 
@@ -115,23 +121,22 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     }
 
     private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y,
-        SymbolStyle symbolStyle, VectorCache vectorCache, float opacity, float destinationX, float destinationY)
+        SymbolStyle symbolStyle, VectorCache vectorCache, float opacity, double destinationX, double destinationY)
     {
         canvas.Save();
-
-        canvas.Translate(destinationX, destinationY);
+        canvas.Translate((float)destinationX, (float)destinationY);
         canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
 
         var offset = symbolStyle.SymbolOffset.CalcOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
 
         canvas.Translate((float)offset.X, (float)-offset.Y);
 
-        if (symbolStyle.SymbolRotation != 0)
-        {
-            var rotation = symbolStyle.SymbolRotation;
-            if (symbolStyle.RotateWithMap) rotation += viewport.Rotation;
+        var rotation = symbolStyle.SymbolRotation;
+        if (symbolStyle.RotateWithMap)
+            rotation += viewport.Rotation;
+        if (rotation != 0)
             canvas.RotateDegrees((float)rotation);
-        }
+
 
         using var path = vectorCache.GetOrCreate(symbolStyle.SymbolType, CreatePath);
         if (symbolStyle.Fill.IsVisible())
