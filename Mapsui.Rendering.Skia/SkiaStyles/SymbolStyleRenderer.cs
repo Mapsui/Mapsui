@@ -100,12 +100,14 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var halfWidth = bitmap.Width >> 1;
         var halfHeight = bitmap.Height >> 1;
 
+        var rect = new SKRect(-halfWidth, -halfHeight, halfWidth, halfHeight);
+
         using var paint = new SKPaint
         {
             Color = new SKColor(255, 255, 255, (byte)(255 * opacity))
         };
 
-        canvas.DrawImage(bitmap, -halfWidth, -halfHeight, _skSamplingOptions, paint);
+        canvas.DrawImage(bitmap, rect, _skSamplingOptions, paint);
     }
 
     public static void DrawSKPicture(SKCanvas canvas, SKPicture picture, float opacity, Color? blendModeColor)
