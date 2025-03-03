@@ -26,6 +26,18 @@
     <None Remove="GeoData\World\countries.shp" />
     <None Remove="GeoData\World\countries.shp.sidx" />
     <None Remove="GeoData\World\countries.shx" />
+    <None Remove="GeoData\World\EZG_KB_LM.dbf" />
+    <None Remove="GeoData\World\EZG_KB_LM.prj" />
+    <None Remove="GeoData\World\EZG_KB_LM.shp" />
+    <None Remove="GeoData\World\EZG_KB_LM.shp.sidx" />
+    <None Remove="GeoData\World\EZG_KB_LM.shp.sqlite" />
+    <None Remove="GeoData\World\EZG_KB_LM.shx" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.dbf" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.prj" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp.sidx" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp.sqlite" />
+    <None Remove="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shx" />
     <None Remove="GeoData\World\rivers.dbf" />
     <None Remove="GeoData\World\rivers.prj" />
     <None Remove="GeoData\World\rivers.shp" />
@@ -111,6 +123,42 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GeoData\World\countries.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.shp.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\EZG_KB_LM.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shp.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\modell_ezgs_v02_ohneTalsperren_EPSG3857.shx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GeoData\World\rivers.dbf">
