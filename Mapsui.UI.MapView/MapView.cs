@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
+using Mapsui.Styles;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -353,12 +354,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         {
             if (MyLocationFollow)
             {
-                _mapMyLocationButton!.Image = "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg";
+                _mapMyLocationButton!.Image = new ResourceImage { Source = "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg" };
                 Map.Navigator.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
             }
             else
             {
-                _mapMyLocationButton!.Image = "embedded://Mapsui.UI.Maui.Resources.Images.LocationNoCenter.svg";
+                _mapMyLocationButton!.Image = new ResourceImage { Source = "embedded://Mapsui.UI.Maui.Resources.Images.LocationNoCenter.svg" };
             }
 
             Refresh();
@@ -804,7 +805,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private ImageButtonWidget CreateButton(
         float x, float y, string imageSource, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
         {
-            Image = imageSource,
+            Image = new ResourceImage { Source = imageSource },
             HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
             VerticalAlignment = Widgets.VerticalAlignment.Absolute,
             Position = new MPoint(x, y),
