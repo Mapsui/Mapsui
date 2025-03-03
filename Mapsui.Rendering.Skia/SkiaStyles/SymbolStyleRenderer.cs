@@ -30,21 +30,20 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         if (symbolStyle.SymbolType == SymbolType.Image)
         {
-            return DrawImage(canvas, viewport, layer, x, y, symbolStyle, renderService, opacity, destinationX, destinationY);
+            return DrawImage(canvas, viewport, symbolStyle, renderService, opacity, destinationX, destinationY);
         }
         else
         {
-            return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle, renderService.VectorCache, opacity, destinationX, destinationY);
+            return DrawSymbol(canvas, viewport, symbolStyle, renderService.VectorCache, opacity, destinationX, destinationY);
         }
     }
 
-    private static bool DrawImage(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y,
+    private static bool DrawImage(SKCanvas canvas, Viewport viewport,
         SymbolStyle symbolStyle, RenderService renderService, float opacity, double destinationX, double destinationY)
     {
         canvas.Save();
         canvas.Translate((float)destinationX, (float)destinationY);
         canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
-
 
         if (symbolStyle.Image is null)
             throw new Exception("SymbolStyle.Image should not be null in the DrawImage render method");
@@ -88,7 +87,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                     svgImage = customColoredSvgImage;
             }
 
-            DrawSKPicture(canvas, svgImage.Picture, 0, 0, 0, 0, 0, opacity: opacity, blendModeColor: symbolStyle.Image.BlendModeColor);
+            DrawSKPicture(canvas, svgImage.Picture, opacity, symbolStyle.Image.BlendModeColor);
 
         }
 
@@ -97,100 +96,29 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-
-    public static void DrawSKPicture(SKCanvas canvas, SKPicture? picture, float x, float y, float rotation = 0,
-        float offsetX = 0, float offsetY = 0,
-        LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-        LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-        float opacity = 1f,
-        float scale = 1f,
-        Color? blendModeColor = null)
+    public static void DrawSKPicture(SKCanvas canvas, SKPicture picture, float opacity, Color? blendModeColor)
     {
-        if (picture == null)
-            return;
+        using var skPaint = CreatePaintForSKPicture(opacity, blendModeColor);
 
-        canvas.Save();
+        var halfWidth = picture.CullRect.Width / 2;
+        var halfHeight = picture.CullRect.Height / 2;
 
-        canvas.Translate(x, y);
-        if (rotation != 0)
-            canvas.RotateDegrees(rotation, 0, 0);
-        canvas.Scale(scale, scale);
-
-        var width = picture.CullRect.Width;
-        var height = picture.CullRect.Height;
-
-        x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, width);
-        y = -offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, height);
-
-        var halfWidth = width / 2;
-        var halfHeight = height / 2;
-
-        var rect = new SKRect(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight);
-
-        Draw(canvas, picture, rect, opacity, blendModeColor);
-
-        canvas.Restore();
-    }
-
-    public static void Draw(SKCanvas canvas, SKPicture picture, SKRect rect, float layerOpacity = 1f, Color? blendModeColor = null)
-    {
-        using var skPaint = GetPaint(layerOpacity, blendModeColor);
-
-        var scaleX = rect.Width / picture.CullRect.Width;
-        var scaleY = rect.Height / picture.CullRect.Height;
-
-        SKMatrix matrix;
-        if (scaleX == 1 && scaleY == 1)
-        {
-            matrix = SKMatrix.CreateTranslation(rect.Left, rect.Top);
-        }
-        else
-        {
-            matrix = SKMatrix.CreateScaleTranslation(scaleX, scaleY, rect.Left, rect.Top);
-        }
+        var matrix = SKMatrix.CreateTranslation(-halfWidth, -halfHeight);
 
         canvas.DrawPicture(picture, in matrix, skPaint);
     }
 
-    private static float DetermineHorizontalAlignmentCorrection(
-        LabelStyle.HorizontalAlignmentEnum horizontalAlignment, float width)
+    private static SKPaint CreatePaintForSKPicture(float opacity, Color? blendModeColor)
     {
-        if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Left) return width / 2;
-        if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return -(width / 2);
-        return 0; // center
-    }
+        var paint = new SKPaint();
 
-    private static float DetermineVerticalAlignmentCorrection(
-        LabelStyle.VerticalAlignmentEnum verticalAlignment, float height)
-    {
-        if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Top) return -(height / 2);
-        if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height / 2;
-        return 0; // center
-    }
-
-    private static SKPaint GetPaint(float layerOpacity, Color? blendModeColor)
-    {
         if (blendModeColor is not null)
-        {
-            // Unfortunately when blendModeColor is set we need to create a new SKPaint for
-            // possible individually different color arguments. 
-            return new SKPaint
-            {
-                ColorFilter = SKColorFilter.CreateBlendMode(blendModeColor.ToSkia(layerOpacity), SKBlendMode.SrcIn)
-            };
-        }
+            paint.ColorFilter = SKColorFilter.CreateBlendMode(blendModeColor.ToSkia(opacity), SKBlendMode.SrcIn);
 
-        if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
-        {
-            // Unfortunately when opacity is set we need to create a new SKPaint for
-            // possible individually different opacity arguments. 
-            return new SKPaint
-            {
-                Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity))
-            };
-        }
+        if (Math.Abs(opacity - 1) > Utilities.Constants.Epsilon)
+            paint.Color = new SKColor(255, 255, 255, (byte)(255 * opacity));
 
-        return new SKPaint();
+        return paint;
     }
 
     private static SvgImage CreateCustomColoredSvg(Image image, SvgImage originalSvgImage)
@@ -214,7 +142,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return new BitmapImage(bitmapImage.Image.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width, sprite.Y + sprite.Height)));
     }
 
-    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y,
+    private static bool DrawSymbol(SKCanvas canvas, Viewport viewport,
         SymbolStyle symbolStyle, VectorCache vectorCache, float opacity, double destinationX, double destinationY)
     {
         canvas.Save();
