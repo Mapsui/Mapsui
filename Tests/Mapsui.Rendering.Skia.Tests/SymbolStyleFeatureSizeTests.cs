@@ -88,7 +88,7 @@ public class SymbolStyleFeatureSizeTests
     {
         // Arrange
         using var renderService = new RenderService();
-        var symbolStyle = new SymbolStyle
+        var symbolStyle = new ImageStyle
         {
             Image = "embedded://Mapsui.Resources.Images.Pin.svg",
         };
@@ -96,7 +96,7 @@ public class SymbolStyleFeatureSizeTests
         await renderService.ImageSourceCache.TryRegisterAsync(symbolStyle.Image);
 
         // Act
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
+        var size = ImageStyleRenderer.FeatureSize(symbolStyle, renderService);
 
         // Assert
         Assert.That(size, Is.EqualTo(56));

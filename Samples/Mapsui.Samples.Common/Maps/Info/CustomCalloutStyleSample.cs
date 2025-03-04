@@ -84,7 +84,7 @@ public class CustomCalloutStyleSample : IMapControlSample
         return features;
     }
 
-    private static SymbolStyle CreatePinSymbol() => new()
+    private static ImageStyle CreatePinSymbol() => new()
     {
         Image = new Image
         {

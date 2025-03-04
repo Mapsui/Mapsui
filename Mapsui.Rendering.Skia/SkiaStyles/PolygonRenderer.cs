@@ -216,7 +216,7 @@ internal static class PolygonRenderer
         if (image is null)
             return null;
         var drawableImage = renderService.DrawableImageCache.GetOrCreate(image.SourceId,
-            () => SymbolStyleRenderer.TryCreateDrawableImage(image, renderService.ImageSourceCache));
+            () => ImageStyleRenderer.TryCreateDrawableImage(image, renderService.ImageSourceCache));
         if (drawableImage == null)
             return null;
 

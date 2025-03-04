@@ -491,7 +491,7 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
             {
                 // We only want to have one style
                 Feature.Styles.Clear();
-                Feature.Styles.Add(new SymbolStyle
+                Feature.Styles.Add(new ImageStyle
                 {
                     Image = new Image
                     {

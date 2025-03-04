@@ -64,11 +64,11 @@ public class PointProjectionSample : ISample
     }
 
 
-    private static SymbolStyle CreateCityStyle()
+    private static ImageStyle CreateCityStyle()
     {
         var imageSource = "embedded://Mapsui.Samples.Common.Images.location.png";
 
-        return new SymbolStyle
+        return new ImageStyle
         {
             Image = imageSource,
             Offset = new Offset { Y = 64 },
