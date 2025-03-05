@@ -12151,6 +12151,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.MouseWheelZoom
   nameWithType: Navigator.MouseWheelZoom
+- uid: Mapsui.Navigator.MouseWheelZoomContinuous(System.Double,Mapsui.Manipulations.ScreenPosition)
+  name: MouseWheelZoomContinuous(double, ScreenPosition)
+  href: pages/Mapsui.Navigator.html#Mapsui_Navigator_MouseWheelZoomContinuous_System_Double_Mapsui_Manipulations_ScreenPosition_
+  commentId: M:Mapsui.Navigator.MouseWheelZoomContinuous(System.Double,Mapsui.Manipulations.ScreenPosition)
+  name.vb: MouseWheelZoomContinuous(Double, ScreenPosition)
+  fullName: Mapsui.Navigator.MouseWheelZoomContinuous(double, Mapsui.Manipulations.ScreenPosition)
+  fullName.vb: Mapsui.Navigator.MouseWheelZoomContinuous(Double, Mapsui.Manipulations.ScreenPosition)
+  nameWithType: Navigator.MouseWheelZoomContinuous(double, ScreenPosition)
+  nameWithType.vb: Navigator.MouseWheelZoomContinuous(Double, ScreenPosition)
+- uid: Mapsui.Navigator.MouseWheelZoomContinuous*
+  name: MouseWheelZoomContinuous
+  href: pages/Mapsui.Navigator.html#Mapsui_Navigator_MouseWheelZoomContinuous_
+  commentId: Overload:Mapsui.Navigator.MouseWheelZoomContinuous
+  isSpec: "True"
+  fullName: Mapsui.Navigator.MouseWheelZoomContinuous
+  nameWithType: Navigator.MouseWheelZoomContinuous
 - uid: Mapsui.Navigator.OverridePanBounds
   name: OverridePanBounds
   href: pages/Mapsui.Navigator.html#Mapsui_Navigator_OverridePanBounds
@@ -31065,6 +31081,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.ClearTouchState
   nameWithType: MapControl.ClearTouchState
+- uid: Mapsui.UI.Avalonia.MapControl.ContinuousMouseWheelZoomStepSize
+  name: ContinuousMouseWheelZoomStepSize
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_ContinuousMouseWheelZoomStepSize
+  commentId: P:Mapsui.UI.Avalonia.MapControl.ContinuousMouseWheelZoomStepSize
+  fullName: Mapsui.UI.Avalonia.MapControl.ContinuousMouseWheelZoomStepSize
+  nameWithType: MapControl.ContinuousMouseWheelZoomStepSize
+- uid: Mapsui.UI.Avalonia.MapControl.ContinuousMouseWheelZoomStepSize*
+  name: ContinuousMouseWheelZoomStepSize
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_ContinuousMouseWheelZoomStepSize_
+  commentId: Overload:Mapsui.UI.Avalonia.MapControl.ContinuousMouseWheelZoomStepSize
+  isSpec: "True"
+  fullName: Mapsui.UI.Avalonia.MapControl.ContinuousMouseWheelZoomStepSize
+  nameWithType: MapControl.ContinuousMouseWheelZoomStepSize
 - uid: Mapsui.UI.Avalonia.MapControl.Dispose
   name: Dispose()
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_Dispose
@@ -31431,6 +31460,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.UpdateInterval
   nameWithType: MapControl.UpdateInterval
+- uid: Mapsui.UI.Avalonia.MapControl.UseContinuousMouseWheelZoom
+  name: UseContinuousMouseWheelZoom
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_UseContinuousMouseWheelZoom
+  commentId: P:Mapsui.UI.Avalonia.MapControl.UseContinuousMouseWheelZoom
+  fullName: Mapsui.UI.Avalonia.MapControl.UseContinuousMouseWheelZoom
+  nameWithType: MapControl.UseContinuousMouseWheelZoom
+- uid: Mapsui.UI.Avalonia.MapControl.UseContinuousMouseWheelZoom*
+  name: UseContinuousMouseWheelZoom
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_UseContinuousMouseWheelZoom_
+  commentId: Overload:Mapsui.UI.Avalonia.MapControl.UseContinuousMouseWheelZoom
+  isSpec: "True"
+  fullName: Mapsui.UI.Avalonia.MapControl.UseContinuousMouseWheelZoom
+  nameWithType: MapControl.UseContinuousMouseWheelZoom
 - uid: Mapsui.UI.Avalonia.MapControl.UseFling
   name: UseFling
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_UseFling
@@ -32451,6 +32493,19 @@ references:
   fullName.vb: Mapsui.UI.Blazor.MapControl.New
   nameWithType: MapControl.MapControl
   nameWithType.vb: MapControl.New
+- uid: Mapsui.UI.Blazor.MapControl.ContinuousMouseWheelZoomStepSize
+  name: ContinuousMouseWheelZoomStepSize
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ContinuousMouseWheelZoomStepSize
+  commentId: P:Mapsui.UI.Blazor.MapControl.ContinuousMouseWheelZoomStepSize
+  fullName: Mapsui.UI.Blazor.MapControl.ContinuousMouseWheelZoomStepSize
+  nameWithType: MapControl.ContinuousMouseWheelZoomStepSize
+- uid: Mapsui.UI.Blazor.MapControl.ContinuousMouseWheelZoomStepSize*
+  name: ContinuousMouseWheelZoomStepSize
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ContinuousMouseWheelZoomStepSize_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.ContinuousMouseWheelZoomStepSize
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.ContinuousMouseWheelZoomStepSize
+  nameWithType: MapControl.ContinuousMouseWheelZoomStepSize
 - uid: Mapsui.UI.Blazor.MapControl.Cursor
   name: Cursor
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Cursor
@@ -33000,6 +33055,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.UpdateInterval
   nameWithType: MapControl.UpdateInterval
+- uid: Mapsui.UI.Blazor.MapControl.UseContinuousMouseWheelZoom
+  name: UseContinuousMouseWheelZoom
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_UseContinuousMouseWheelZoom
+  commentId: P:Mapsui.UI.Blazor.MapControl.UseContinuousMouseWheelZoom
+  fullName: Mapsui.UI.Blazor.MapControl.UseContinuousMouseWheelZoom
+  nameWithType: MapControl.UseContinuousMouseWheelZoom
+- uid: Mapsui.UI.Blazor.MapControl.UseContinuousMouseWheelZoom*
+  name: UseContinuousMouseWheelZoom
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_UseContinuousMouseWheelZoom_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.UseContinuousMouseWheelZoom
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.UseContinuousMouseWheelZoom
+  nameWithType: MapControl.UseContinuousMouseWheelZoom
 - uid: Mapsui.UI.Blazor.MapControl.UseFling
   name: UseFling
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_UseFling
