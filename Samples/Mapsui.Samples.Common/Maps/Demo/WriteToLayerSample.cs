@@ -44,7 +44,7 @@ public class WriteToLayerSample : ISample
         return new GenericCollectionLayer<List<IFeature>>
         {
             Name = "GenericCollectionLayer",
-            Style = SymbolStyles.CreatePinStyle()
+            Style = ImageStyles.CreatePinStyle()
         };
     }
 }

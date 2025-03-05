@@ -15,7 +15,7 @@ public class MouseWheelAnimation
     public double GetResolution(int mouseWheelDelta, double currentResolution, MMinMax? zoomBounds, IReadOnlyList<double> resolutions)
     {
         // If an animation is already running don't start from the current resolution, but from the 
-        // destination resolution of the previous animation. This way the consequetive mouse wheel
+        // destination resolution of the previous animation. This way the consecutive mouse wheel
         // ticks add up which allows for fast zooming to a detailed level.
         if (IsAnimating())
             currentResolution = _destinationResolution;

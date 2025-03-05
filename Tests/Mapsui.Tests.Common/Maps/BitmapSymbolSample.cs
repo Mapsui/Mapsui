@@ -50,11 +50,11 @@ public class BitmapSymbolSample : ISample
             },
             new PointFeature(new MPoint(50, 100))
             {
-                Styles = [new SymbolStyle { Image = circleImageSource }]
+                Styles = [new ImageStyle { Image = circleImageSource }]
             },
             new PointFeature(new MPoint(100, 50))
             {
-                Styles = [new SymbolStyle { Image = checkeredImageSource }]
+                Styles = [new ImageStyle { Image = checkeredImageSource }]
             },
             new PointFeature(new MPoint(100, 100))
             {

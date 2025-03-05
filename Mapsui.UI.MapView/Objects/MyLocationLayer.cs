@@ -26,8 +26,8 @@ public class MyLocationLayer : BaseLayer
 {
     private MapView _mapView;
     private readonly GeometryFeature _feature;
-    private readonly SymbolStyle _locStyle;  // style for the location indicator
-    private readonly SymbolStyle _dirStyle;  // style for the view-direction indicator
+    private readonly ImageStyle _locStyle;  // style for the location indicator
+    private readonly ImageStyle _dirStyle;  // style for the view-direction indicator
     private readonly CalloutStyle _coStyle;  // style for the callout
 
     private static readonly string _movingImageSource = "embedded://Mapsui.Resources.Images.MyLocationMoving.svg";
@@ -159,7 +159,7 @@ public class MyLocationLayer : BaseLayer
             ["Label"] = "MyLocation moving",
         };
 
-        _locStyle = new SymbolStyle
+        _locStyle = new ImageStyle
         {
             Enabled = true,
             Image = _stillImageSource,
@@ -169,7 +169,7 @@ public class MyLocationLayer : BaseLayer
             Opacity = 1,
         };
 
-        _dirStyle = new SymbolStyle
+        _dirStyle = new ImageStyle
         {
             Enabled = false,
             Image = _directionImageSource,

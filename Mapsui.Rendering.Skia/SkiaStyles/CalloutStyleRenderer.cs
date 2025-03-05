@@ -79,7 +79,7 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         {
             using var recorder = new SKPictureRecorder();
             var image = renderService.DrawableImageCache.GetOrCreate(callout.Image.SourceId,
-                () => SymbolStyleRenderer.TryCreateDrawableImage(callout.Image, renderService.ImageSourceCache));
+                () => ImageStyleRenderer.TryCreateDrawableImage(callout.Image, renderService.ImageSourceCache));
             if (image is null)
             {
                 Logger.Log(LogLevel.Error, $"Image not found: {callout.Image.Source}");

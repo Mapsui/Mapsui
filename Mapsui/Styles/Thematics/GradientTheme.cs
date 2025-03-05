@@ -88,7 +88,7 @@ public class GradientTheme : Style, IThemeStyle
         {
             (LabelStyle minLabelStyle, LabelStyle maxLabelStyle)
                 => ToInterpolatedLabelStyle(minLabelStyle, maxLabelStyle, attr, this),
-            (SymbolStyle minSymbolStyle, SymbolStyle maxSymbolStyle)
+            (ImageStyle minSymbolStyle, ImageStyle maxSymbolStyle)
                 => ToInterpolatedSymbolStyle(minSymbolStyle, maxSymbolStyle, attr, this),
             (VectorStyle minVectorStyle, VectorStyle maxVectorStyle)
                 => ToInterpolatedVectorStyle(minVectorStyle, maxVectorStyle, attr, this),
@@ -119,9 +119,9 @@ public class GradientTheme : Style, IThemeStyle
         return result;
     }
 
-    private static SymbolStyle ToInterpolatedSymbolStyle(SymbolStyle min, SymbolStyle max, double value, GradientTheme instance)
+    private static ImageStyle ToInterpolatedSymbolStyle(ImageStyle min, ImageStyle max, double value, GradientTheme instance)
     {
-        var result = new SymbolStyle();
+        var result = new ImageStyle();
 
         var fraction = Fraction(value, instance.Min, instance.Max);
 

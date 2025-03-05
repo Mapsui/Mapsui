@@ -43,7 +43,7 @@ public sealed class AnimatedPointsSample : ISample, IDisposable
 
     private static ThemeStyle CreatePointStyle() => new(CreateSvgArrowStyle);
 
-    private static SymbolStyle CreateSvgArrowStyle(IFeature feature) => new()
+    private static ImageStyle CreateSvgArrowStyle(IFeature feature) => new()
     {
         Image = "embedded://Mapsui.Samples.Common.Images.arrow.svg",
         SymbolScale = 0.5,

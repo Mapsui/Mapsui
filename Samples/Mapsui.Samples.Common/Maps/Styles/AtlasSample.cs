@@ -57,7 +57,7 @@ public class AtlasSample : ISample
         }).ToList();
     }
 
-    private static SymbolStyle CreateSymbolStyle(int x, int y) => new()
+    private static ImageStyle CreateSymbolStyle(int x, int y) => new()
     {
         Image = new Image
         {

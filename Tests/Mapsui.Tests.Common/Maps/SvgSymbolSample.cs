@@ -56,7 +56,7 @@ public class SvgSymbolSample : ISample
         }
     ];
 
-    private static SymbolStyle CreateSymbolStyle() => new()
+    private static ImageStyle CreateSymbolStyle() => new()
     {
         Image = new Image
         {

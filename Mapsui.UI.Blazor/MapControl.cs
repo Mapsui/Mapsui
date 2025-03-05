@@ -54,6 +54,17 @@ public partial class MapControl : ComponentBase, IMapControl
         };
     }
 
+    /// <summary>
+    /// This enables an alternative mouse wheel method where the step size on each mouse wheel event can be configured
+    /// by setting the ContinuousMouseWheelZoomStepSize.
+    /// </summary>
+    public bool UseContinuousMouseWheelZoom { get; set; } = false;
+    /// <summary>
+    /// The size of the mouse wheel steps used when UseContinuousMouseWheelZoom = true. The default is 0.1. A step 
+    /// size of 1 would doubling or halving the scale of the map on each event.    
+    /// </summary>
+    public double ContinuousMouseWheelZoomStepSize { get; set; } = 0.1;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -108,9 +119,18 @@ public partial class MapControl : ComponentBase, IMapControl
 
     protected void OnMouseWheel(WheelEventArgs e)
     {
-        var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-        var mousePosition = e.ToScreenPosition(_clientRect);
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
+        if (UseContinuousMouseWheelZoom)
+        {
+            var stepSize = ContinuousMouseWheelZoomStepSize;
+            var scaleFactor = Math.Pow(2, e.DeltaY > 0 ? stepSize : -stepSize);
+            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToScreenPosition(_clientRect));
+        }
+        else
+        {
+            var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
+            var mousePosition = e.ToScreenPosition(_clientRect);
+            Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
+        }
     }
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
