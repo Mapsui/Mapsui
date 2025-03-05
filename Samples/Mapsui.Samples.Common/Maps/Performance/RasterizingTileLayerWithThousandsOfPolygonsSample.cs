@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers;
@@ -38,7 +39,7 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
         _map = new Map();
         _map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
         _map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer()));
-        var home = Mercator.FromLonLat(0, 0);
+        var home = SphericalMercator.FromLonLat(0, 0).ToMPoint();
         _map.Navigator.CenterOnAndZoomTo(home, _map.Navigator.Resolutions[9]);
         _map.Widgets.Enqueue(new ButtonWidget
         {
