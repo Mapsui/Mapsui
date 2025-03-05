@@ -123,7 +123,7 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var stepSize = ContinuousMouseWheelZoomStepSize;
             var scaleFactor = Math.Pow(2, e.DeltaY > 0 ? stepSize : -stepSize);
-            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToLocation(_clientRect));
+            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToScreenPosition(_clientRect));
         }
         else
         {
