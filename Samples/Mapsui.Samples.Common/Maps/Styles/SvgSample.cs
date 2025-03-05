@@ -50,7 +50,7 @@ public class SvgSample : ISample
         });
     }
 
-    private static SymbolStyle CreateSvgStyle() => new()
+    private static ImageStyle CreateSvgStyle() => new()
     {
         Image = "embedded://Mapsui.Samples.Common.Images.Pin.svg",
         SymbolScale = 0.5,

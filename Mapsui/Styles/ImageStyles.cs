@@ -1,8 +1,8 @@
 ﻿namespace Mapsui.Styles;
 
-public static class SymbolStyles
+public static class ImageStyles
 {
-    public static SymbolStyle CreatePinStyle(Color? fillColor = null, Color? strokeColor = null, double symbolScale = 1.0) => new()
+    public static ImageStyle CreatePinStyle(Color? fillColor = null, Color? strokeColor = null, double symbolScale = 1.0) => new()
     {
         Image = new Image
         {

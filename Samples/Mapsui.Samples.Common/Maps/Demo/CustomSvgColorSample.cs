@@ -53,7 +53,7 @@ public class CustomSvgStyleSample : ISample
             var distance = Algorithms.Distance(new MPoint(0, 0), featurePosition);
             var distanceBetweenZeroAndOne = Math.Min(distance / _circumferenceOfTheEarth, 1);
 
-            return new SymbolStyle
+            return new ImageStyle
             {
                 Image = new Image
                 {

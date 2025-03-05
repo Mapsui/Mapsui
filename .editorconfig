@@ -258,6 +258,7 @@ dotnet_diagnostic.CA1512.severity = silent # CA1512: Use ArgumentOutOfRangeExcep
 dotnet_diagnostic.IDE0059.severity = warning # IDE0059: Unnecessary assignment of a value
 dotnet_diagnostic.CA2208.severity = silent # CA2208: Instantiate argument exceptions correctly
 dotnet_diagnostic.VSTHRD200.severity = warning # VSTHRD200: Use "Async" suffix for async methods 
+dotnet_diagnostic.CS0184.severity = error # CS0184: 'is' expression's given expression is never of the provided type
 
 # Spelling
 spelling_exclusion_path = spelling_exclusion.txt
@@ -292,3 +293,4 @@ dotnet_diagnostic.IDISP026.severity = error
 
 # An alternative to IDISPXXX is to enable CA2000:
 # dotnet_diagnostic.CA2000.severity = error
+

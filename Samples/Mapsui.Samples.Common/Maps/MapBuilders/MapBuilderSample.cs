@@ -67,7 +67,7 @@ public static class SampleLayerExtensions
         {
             Styles =
             {
-                new SymbolStyle
+                new ImageStyle
                 {
                     Image = new Image
                     {

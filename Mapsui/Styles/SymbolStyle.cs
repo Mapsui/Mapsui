@@ -9,7 +9,6 @@ public enum SymbolType
     Ellipse,
     Rectangle,
     Triangle,
-    Image
 }
 
 public enum UnitType
@@ -18,7 +17,7 @@ public enum UnitType
     WorldUnit
 }
 
-public class SymbolStyle : VectorStyle, IHasImage
+public class SymbolStyle : VectorStyle, IPointStyle
 {
     public static double DefaultWidth { get; set; } = 32;
     public static double DefaultHeight { get; set; } = 32;
@@ -26,22 +25,6 @@ public class SymbolStyle : VectorStyle, IHasImage
     public SymbolType SymbolType { get; set; }
 
     public UnitType UnitType { get; set; }
-
-    private Image? _image;
-
-    /// <summary>
-    /// Path to the the image to display during rendering. This can be url, file path or embedded resource.
-    /// </summary>
-    public Image? Image
-    {
-        get => _image;
-        set
-        {
-            _image = value;
-            if (_image != null)
-                SymbolType = SymbolType.Image;
-        }
-    }
 
     /// <summary>
     /// Gets or sets the rotation of the symbol in degrees (clockwise is positive)
@@ -121,9 +104,6 @@ public class SymbolStyle : VectorStyle, IHasImage
         if (SymbolType != symbolStyle.SymbolType)
             return false;
 
-        if (Image != symbolStyle.Image)
-            return false;
-
         if (Math.Abs(Opacity - symbolStyle.Opacity) > Constants.Epsilon)
             return false;
 
@@ -133,13 +113,12 @@ public class SymbolStyle : VectorStyle, IHasImage
     public override int GetHashCode()
     {
         return
-            Image?.GetHashCode() ^
             SymbolScale.GetHashCode() ^
             Offset.GetHashCode() ^
             SymbolRotation.GetHashCode() ^
             UnitType.GetHashCode() ^
             SymbolType.GetHashCode() ^
-            base.GetHashCode() ?? 0;
+            base.GetHashCode();
     }
 
     public static bool operator ==(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)

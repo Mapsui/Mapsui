@@ -59,7 +59,7 @@ public class SingleCalloutSample : ISample
         {
             Name = _calloutLayerName,
             Features = new MemoryProvider(GetCitiesFromEmbeddedResource()).Features,
-            Style = SymbolStyles.CreatePinStyle(symbolScale: 0.7),
+            Style = ImageStyles.CreatePinStyle(symbolScale: 0.7),
         };
     }
 

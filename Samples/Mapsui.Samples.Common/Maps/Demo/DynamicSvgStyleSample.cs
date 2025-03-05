@@ -53,7 +53,7 @@ public class DynamicSvgStyleSample : ISample
             var distance = Algorithms.Distance(tapPosition, featurePoint);
             var distanceBetweenZeroAndOne = Math.Min(distance / circumferenceOfTheEarth, 1);
 
-            return new SymbolStyle
+            return new ImageStyle
             {
                 Image = new Image
                 {
