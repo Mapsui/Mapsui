@@ -22465,6 +22465,102 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.Functions.ClippingFunctions.ReducePointsToClipRect
   nameWithType: ClippingFunctions.ReducePointsToClipRect
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer
+  name: ImageStyleRenderer
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html
+  commentId: T:Mapsui.Rendering.Skia.ImageStyleRenderer
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer
+  nameWithType: ImageStyleRenderer
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.Skia.Cache.RenderService,System.Int64)
+  name: Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, RenderService, long)
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_Skia_Cache_RenderService_System_Int64_
+  commentId: M:Mapsui.Rendering.Skia.ImageStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.Skia.Cache.RenderService,System.Int64)
+  name.vb: Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, RenderService, Long)
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.Skia.Cache.RenderService, long)
+  fullName.vb: Mapsui.Rendering.Skia.ImageStyleRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.Skia.Cache.RenderService, Long)
+  nameWithType: ImageStyleRenderer.Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, RenderService, long)
+  nameWithType.vb: ImageStyleRenderer.Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, RenderService, Long)
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.Draw*
+  name: Draw
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_Draw_
+  commentId: Overload:Mapsui.Rendering.Skia.ImageStyleRenderer.Draw
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.Draw
+  nameWithType: ImageStyleRenderer.Draw
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas,SkiaSharp.SKImage,System.Single)
+  name: DrawSKImage(SKCanvas, SKImage, float)
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_DrawSKImage_SkiaSharp_SKCanvas_SkiaSharp_SKImage_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas,SkiaSharp.SKImage,System.Single)
+  name.vb: DrawSKImage(SKCanvas, SKImage, Single)
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas, SkiaSharp.SKImage, float)
+  fullName.vb: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas, SkiaSharp.SKImage, Single)
+  nameWithType: ImageStyleRenderer.DrawSKImage(SKCanvas, SKImage, float)
+  nameWithType.vb: ImageStyleRenderer.DrawSKImage(SKCanvas, SKImage, Single)
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKImage*
+  name: DrawSKImage
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_DrawSKImage_
+  commentId: Overload:Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKImage
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKImage
+  nameWithType: ImageStyleRenderer.DrawSKImage
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas,SkiaSharp.SKPicture,System.Single,System.Nullable{Mapsui.Styles.Color})
+  name: DrawSKPicture(SKCanvas, SKPicture, float, Color?)
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_DrawSKPicture_SkiaSharp_SKCanvas_SkiaSharp_SKPicture_System_Single_System_Nullable_Mapsui_Styles_Color__
+  commentId: M:Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas,SkiaSharp.SKPicture,System.Single,System.Nullable{Mapsui.Styles.Color})
+  name.vb: DrawSKPicture(SKCanvas, SKPicture, Single, Color?)
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas, SkiaSharp.SKPicture, float, Mapsui.Styles.Color?)
+  fullName.vb: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas, SkiaSharp.SKPicture, Single, Mapsui.Styles.Color?)
+  nameWithType: ImageStyleRenderer.DrawSKPicture(SKCanvas, SKPicture, float, Color?)
+  nameWithType.vb: ImageStyleRenderer.DrawSKPicture(SKCanvas, SKPicture, Single, Color?)
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKPicture*
+  name: DrawSKPicture
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_DrawSKPicture_
+  commentId: Overload:Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKPicture
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawSKPicture
+  nameWithType: ImageStyleRenderer.DrawSKPicture
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawXY(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,System.Double,System.Double,Mapsui.Styles.ImageStyle,Mapsui.Rendering.Skia.Cache.RenderService)
+  name: DrawXY(SKCanvas, Viewport, ILayer, double, double, ImageStyle, RenderService)
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_DrawXY_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_System_Double_System_Double_Mapsui_Styles_ImageStyle_Mapsui_Rendering_Skia_Cache_RenderService_
+  commentId: M:Mapsui.Rendering.Skia.ImageStyleRenderer.DrawXY(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,System.Double,System.Double,Mapsui.Styles.ImageStyle,Mapsui.Rendering.Skia.Cache.RenderService)
+  name.vb: DrawXY(SKCanvas, Viewport, ILayer, Double, Double, ImageStyle, RenderService)
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawXY(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Layers.ILayer, double, double, Mapsui.Styles.ImageStyle, Mapsui.Rendering.Skia.Cache.RenderService)
+  fullName.vb: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawXY(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Layers.ILayer, Double, Double, Mapsui.Styles.ImageStyle, Mapsui.Rendering.Skia.Cache.RenderService)
+  nameWithType: ImageStyleRenderer.DrawXY(SKCanvas, Viewport, ILayer, double, double, ImageStyle, RenderService)
+  nameWithType.vb: ImageStyleRenderer.DrawXY(SKCanvas, Viewport, ILayer, Double, Double, ImageStyle, RenderService)
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawXY*
+  name: DrawXY
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_DrawXY_
+  commentId: Overload:Mapsui.Rendering.Skia.ImageStyleRenderer.DrawXY
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.DrawXY
+  nameWithType: ImageStyleRenderer.DrawXY
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.FeatureSize(Mapsui.Styles.ImageStyle,Mapsui.Rendering.IRenderService)
+  name: FeatureSize(ImageStyle, IRenderService)
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_FeatureSize_Mapsui_Styles_ImageStyle_Mapsui_Rendering_IRenderService_
+  commentId: M:Mapsui.Rendering.Skia.ImageStyleRenderer.FeatureSize(Mapsui.Styles.ImageStyle,Mapsui.Rendering.IRenderService)
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.FeatureSize(Mapsui.Styles.ImageStyle, Mapsui.Rendering.IRenderService)
+  nameWithType: ImageStyleRenderer.FeatureSize(ImageStyle, IRenderService)
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.FeatureSize*
+  name: FeatureSize
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_FeatureSize_
+  commentId: Overload:Mapsui.Rendering.Skia.ImageStyleRenderer.FeatureSize
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.FeatureSize
+  nameWithType: ImageStyleRenderer.FeatureSize
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image,Mapsui.Styles.ImageSourceCache)
+  name: TryCreateDrawableImage(Image, ImageSourceCache)
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_TryCreateDrawableImage_Mapsui_Styles_Image_Mapsui_Styles_ImageSourceCache_
+  commentId: M:Mapsui.Rendering.Skia.ImageStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image,Mapsui.Styles.ImageSourceCache)
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image, Mapsui.Styles.ImageSourceCache)
+  nameWithType: ImageStyleRenderer.TryCreateDrawableImage(Image, ImageSourceCache)
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.TryCreateDrawableImage*
+  name: TryCreateDrawableImage
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_TryCreateDrawableImage_
+  commentId: Overload:Mapsui.Rendering.Skia.ImageStyleRenderer.TryCreateDrawableImage
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.TryCreateDrawableImage
+  nameWithType: ImageStyleRenderer.TryCreateDrawableImage
 - uid: Mapsui.Rendering.Skia.Images
   name: Mapsui.Rendering.Skia.Images
   href: pages/Mapsui.Rendering.Skia.Images.html
@@ -23389,38 +23485,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw
   nameWithType: SymbolStyleRenderer.Draw
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas,SkiaSharp.SKImage,System.Single)
-  name: DrawSKImage(SKCanvas, SKImage, float)
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSKImage_SkiaSharp_SKCanvas_SkiaSharp_SKImage_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas,SkiaSharp.SKImage,System.Single)
-  name.vb: DrawSKImage(SKCanvas, SKImage, Single)
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas, SkiaSharp.SKImage, float)
-  fullName.vb: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage(SkiaSharp.SKCanvas, SkiaSharp.SKImage, Single)
-  nameWithType: SymbolStyleRenderer.DrawSKImage(SKCanvas, SKImage, float)
-  nameWithType.vb: SymbolStyleRenderer.DrawSKImage(SKCanvas, SKImage, Single)
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage*
-  name: DrawSKImage
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSKImage_
-  commentId: Overload:Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKImage
-  nameWithType: SymbolStyleRenderer.DrawSKImage
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas,SkiaSharp.SKPicture,System.Single,System.Nullable{Mapsui.Styles.Color})
-  name: DrawSKPicture(SKCanvas, SKPicture, float, Color?)
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSKPicture_SkiaSharp_SKCanvas_SkiaSharp_SKPicture_System_Single_System_Nullable_Mapsui_Styles_Color__
-  commentId: M:Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas,SkiaSharp.SKPicture,System.Single,System.Nullable{Mapsui.Styles.Color})
-  name.vb: DrawSKPicture(SKCanvas, SKPicture, Single, Color?)
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas, SkiaSharp.SKPicture, float, Mapsui.Styles.Color?)
-  fullName.vb: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture(SkiaSharp.SKCanvas, SkiaSharp.SKPicture, Single, Mapsui.Styles.Color?)
-  nameWithType: SymbolStyleRenderer.DrawSKPicture(SKCanvas, SKPicture, float, Color?)
-  nameWithType.vb: SymbolStyleRenderer.DrawSKPicture(SKCanvas, SKPicture, Single, Color?)
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture*
-  name: DrawSKPicture
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSKPicture_
-  commentId: Overload:Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSKPicture
-  nameWithType: SymbolStyleRenderer.DrawSKPicture
 - uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawXY(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,System.Double,System.Double,Mapsui.Styles.SymbolStyle,Mapsui.Rendering.Skia.Cache.RenderService)
   name: DrawXY(SKCanvas, Viewport, ILayer, double, double, SymbolStyle, RenderService)
   href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawXY_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_System_Double_System_Double_Mapsui_Styles_SymbolStyle_Mapsui_Rendering_Skia_Cache_RenderService_
@@ -23450,19 +23514,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.FeatureSize
   nameWithType: SymbolStyleRenderer.FeatureSize
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image,Mapsui.Styles.ImageSourceCache)
-  name: TryCreateDrawableImage(Image, ImageSourceCache)
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_TryCreateDrawableImage_Mapsui_Styles_Image_Mapsui_Styles_ImageSourceCache_
-  commentId: M:Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image,Mapsui.Styles.ImageSourceCache)
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage(Mapsui.Styles.Image, Mapsui.Styles.ImageSourceCache)
-  nameWithType: SymbolStyleRenderer.TryCreateDrawableImage(Image, ImageSourceCache)
-- uid: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage*
-  name: TryCreateDrawableImage
-  href: pages/Mapsui.Rendering.Skia.SymbolStyleRenderer.html#Mapsui_Rendering_Skia_SymbolStyleRenderer_TryCreateDrawableImage_
-  commentId: Overload:Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.SymbolStyleRenderer.TryCreateDrawableImage
-  nameWithType: SymbolStyleRenderer.TryCreateDrawableImage
 - uid: Mapsui.Rendering.Skia.Tiling
   name: Mapsui.Rendering.Skia.Tiling
   href: pages/Mapsui.Rendering.Skia.Tiling.html
@@ -23637,6 +23688,103 @@ references:
   commentId: N:Mapsui.Styles
   fullName: Mapsui.Styles
   nameWithType: Mapsui.Styles
+- uid: Mapsui.Styles.BasePointStyle
+  name: BasePointStyle
+  href: pages/Mapsui.Styles.BasePointStyle.html
+  commentId: T:Mapsui.Styles.BasePointStyle
+  fullName: Mapsui.Styles.BasePointStyle
+  nameWithType: BasePointStyle
+- uid: Mapsui.Styles.BasePointStyle.Offset
+  name: Offset
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_Offset
+  commentId: P:Mapsui.Styles.BasePointStyle.Offset
+  fullName: Mapsui.Styles.BasePointStyle.Offset
+  nameWithType: BasePointStyle.Offset
+- uid: Mapsui.Styles.BasePointStyle.Offset*
+  name: Offset
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_Offset_
+  commentId: Overload:Mapsui.Styles.BasePointStyle.Offset
+  isSpec: "True"
+  fullName: Mapsui.Styles.BasePointStyle.Offset
+  nameWithType: BasePointStyle.Offset
+- uid: Mapsui.Styles.BasePointStyle.RelativeOffset
+  name: RelativeOffset
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_RelativeOffset
+  commentId: P:Mapsui.Styles.BasePointStyle.RelativeOffset
+  fullName: Mapsui.Styles.BasePointStyle.RelativeOffset
+  nameWithType: BasePointStyle.RelativeOffset
+- uid: Mapsui.Styles.BasePointStyle.RelativeOffset*
+  name: RelativeOffset
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_RelativeOffset_
+  commentId: Overload:Mapsui.Styles.BasePointStyle.RelativeOffset
+  isSpec: "True"
+  fullName: Mapsui.Styles.BasePointStyle.RelativeOffset
+  nameWithType: BasePointStyle.RelativeOffset
+- uid: Mapsui.Styles.BasePointStyle.RotateWithMap
+  name: RotateWithMap
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_RotateWithMap
+  commentId: P:Mapsui.Styles.BasePointStyle.RotateWithMap
+  fullName: Mapsui.Styles.BasePointStyle.RotateWithMap
+  nameWithType: BasePointStyle.RotateWithMap
+- uid: Mapsui.Styles.BasePointStyle.RotateWithMap*
+  name: RotateWithMap
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_RotateWithMap_
+  commentId: Overload:Mapsui.Styles.BasePointStyle.RotateWithMap
+  isSpec: "True"
+  fullName: Mapsui.Styles.BasePointStyle.RotateWithMap
+  nameWithType: BasePointStyle.RotateWithMap
+- uid: Mapsui.Styles.BasePointStyle.SymbolOffset
+  name: SymbolOffset
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolOffset
+  commentId: P:Mapsui.Styles.BasePointStyle.SymbolOffset
+  fullName: Mapsui.Styles.BasePointStyle.SymbolOffset
+  nameWithType: BasePointStyle.SymbolOffset
+- uid: Mapsui.Styles.BasePointStyle.SymbolOffset*
+  name: SymbolOffset
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolOffset_
+  commentId: Overload:Mapsui.Styles.BasePointStyle.SymbolOffset
+  isSpec: "True"
+  fullName: Mapsui.Styles.BasePointStyle.SymbolOffset
+  nameWithType: BasePointStyle.SymbolOffset
+- uid: Mapsui.Styles.BasePointStyle.SymbolOffsetRotatesWithMap
+  name: SymbolOffsetRotatesWithMap
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolOffsetRotatesWithMap
+  commentId: P:Mapsui.Styles.BasePointStyle.SymbolOffsetRotatesWithMap
+  fullName: Mapsui.Styles.BasePointStyle.SymbolOffsetRotatesWithMap
+  nameWithType: BasePointStyle.SymbolOffsetRotatesWithMap
+- uid: Mapsui.Styles.BasePointStyle.SymbolOffsetRotatesWithMap*
+  name: SymbolOffsetRotatesWithMap
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolOffsetRotatesWithMap_
+  commentId: Overload:Mapsui.Styles.BasePointStyle.SymbolOffsetRotatesWithMap
+  isSpec: "True"
+  fullName: Mapsui.Styles.BasePointStyle.SymbolOffsetRotatesWithMap
+  nameWithType: BasePointStyle.SymbolOffsetRotatesWithMap
+- uid: Mapsui.Styles.BasePointStyle.SymbolRotation
+  name: SymbolRotation
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolRotation
+  commentId: P:Mapsui.Styles.BasePointStyle.SymbolRotation
+  fullName: Mapsui.Styles.BasePointStyle.SymbolRotation
+  nameWithType: BasePointStyle.SymbolRotation
+- uid: Mapsui.Styles.BasePointStyle.SymbolRotation*
+  name: SymbolRotation
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolRotation_
+  commentId: Overload:Mapsui.Styles.BasePointStyle.SymbolRotation
+  isSpec: "True"
+  fullName: Mapsui.Styles.BasePointStyle.SymbolRotation
+  nameWithType: BasePointStyle.SymbolRotation
+- uid: Mapsui.Styles.BasePointStyle.SymbolScale
+  name: SymbolScale
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolScale
+  commentId: P:Mapsui.Styles.BasePointStyle.SymbolScale
+  fullName: Mapsui.Styles.BasePointStyle.SymbolScale
+  nameWithType: BasePointStyle.SymbolScale
+- uid: Mapsui.Styles.BasePointStyle.SymbolScale*
+  name: SymbolScale
+  href: pages/Mapsui.Styles.BasePointStyle.html#Mapsui_Styles_BasePointStyle_SymbolScale_
+  commentId: Overload:Mapsui.Styles.BasePointStyle.SymbolScale
+  isSpec: "True"
+  fullName: Mapsui.Styles.BasePointStyle.SymbolScale
+  nameWithType: BasePointStyle.SymbolScale
 - uid: Mapsui.Styles.BaseStyle
   name: BaseStyle
   href: pages/Mapsui.Styles.BaseStyle.html
@@ -24111,32 +24259,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.CalloutStyle.BalloonDefinition
   nameWithType: CalloutStyle.BalloonDefinition
-- uid: Mapsui.Styles.CalloutStyle.DefaultHeight
-  name: DefaultHeight
-  href: pages/Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_DefaultHeight
-  commentId: P:Mapsui.Styles.CalloutStyle.DefaultHeight
-  fullName: Mapsui.Styles.CalloutStyle.DefaultHeight
-  nameWithType: CalloutStyle.DefaultHeight
-- uid: Mapsui.Styles.CalloutStyle.DefaultHeight*
-  name: DefaultHeight
-  href: pages/Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_DefaultHeight_
-  commentId: Overload:Mapsui.Styles.CalloutStyle.DefaultHeight
-  isSpec: "True"
-  fullName: Mapsui.Styles.CalloutStyle.DefaultHeight
-  nameWithType: CalloutStyle.DefaultHeight
-- uid: Mapsui.Styles.CalloutStyle.DefaultWidth
-  name: DefaultWidth
-  href: pages/Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_DefaultWidth
-  commentId: P:Mapsui.Styles.CalloutStyle.DefaultWidth
-  fullName: Mapsui.Styles.CalloutStyle.DefaultWidth
-  nameWithType: CalloutStyle.DefaultWidth
-- uid: Mapsui.Styles.CalloutStyle.DefaultWidth*
-  name: DefaultWidth
-  href: pages/Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_DefaultWidth_
-  commentId: Overload:Mapsui.Styles.CalloutStyle.DefaultWidth
-  isSpec: "True"
-  fullName: Mapsui.Styles.CalloutStyle.DefaultWidth
-  nameWithType: CalloutStyle.DefaultWidth
 - uid: Mapsui.Styles.CalloutStyle.ImageIdOfCallout
   name: ImageIdOfCallout
   href: pages/Mapsui.Styles.CalloutStyle.html#Mapsui_Styles_CalloutStyle_ImageIdOfCallout
@@ -26788,6 +26910,103 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.IHasImage.Image
   nameWithType: IHasImage.Image
+- uid: Mapsui.Styles.IPointStyle
+  name: IPointStyle
+  href: pages/Mapsui.Styles.IPointStyle.html
+  commentId: T:Mapsui.Styles.IPointStyle
+  fullName: Mapsui.Styles.IPointStyle
+  nameWithType: IPointStyle
+- uid: Mapsui.Styles.IPointStyle.Offset
+  name: Offset
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_Offset
+  commentId: P:Mapsui.Styles.IPointStyle.Offset
+  fullName: Mapsui.Styles.IPointStyle.Offset
+  nameWithType: IPointStyle.Offset
+- uid: Mapsui.Styles.IPointStyle.Offset*
+  name: Offset
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_Offset_
+  commentId: Overload:Mapsui.Styles.IPointStyle.Offset
+  isSpec: "True"
+  fullName: Mapsui.Styles.IPointStyle.Offset
+  nameWithType: IPointStyle.Offset
+- uid: Mapsui.Styles.IPointStyle.RelativeOffset
+  name: RelativeOffset
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_RelativeOffset
+  commentId: P:Mapsui.Styles.IPointStyle.RelativeOffset
+  fullName: Mapsui.Styles.IPointStyle.RelativeOffset
+  nameWithType: IPointStyle.RelativeOffset
+- uid: Mapsui.Styles.IPointStyle.RelativeOffset*
+  name: RelativeOffset
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_RelativeOffset_
+  commentId: Overload:Mapsui.Styles.IPointStyle.RelativeOffset
+  isSpec: "True"
+  fullName: Mapsui.Styles.IPointStyle.RelativeOffset
+  nameWithType: IPointStyle.RelativeOffset
+- uid: Mapsui.Styles.IPointStyle.RotateWithMap
+  name: RotateWithMap
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_RotateWithMap
+  commentId: P:Mapsui.Styles.IPointStyle.RotateWithMap
+  fullName: Mapsui.Styles.IPointStyle.RotateWithMap
+  nameWithType: IPointStyle.RotateWithMap
+- uid: Mapsui.Styles.IPointStyle.RotateWithMap*
+  name: RotateWithMap
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_RotateWithMap_
+  commentId: Overload:Mapsui.Styles.IPointStyle.RotateWithMap
+  isSpec: "True"
+  fullName: Mapsui.Styles.IPointStyle.RotateWithMap
+  nameWithType: IPointStyle.RotateWithMap
+- uid: Mapsui.Styles.IPointStyle.SymbolOffset
+  name: SymbolOffset
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_SymbolOffset
+  commentId: P:Mapsui.Styles.IPointStyle.SymbolOffset
+  fullName: Mapsui.Styles.IPointStyle.SymbolOffset
+  nameWithType: IPointStyle.SymbolOffset
+- uid: Mapsui.Styles.IPointStyle.SymbolOffset*
+  name: SymbolOffset
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_SymbolOffset_
+  commentId: Overload:Mapsui.Styles.IPointStyle.SymbolOffset
+  isSpec: "True"
+  fullName: Mapsui.Styles.IPointStyle.SymbolOffset
+  nameWithType: IPointStyle.SymbolOffset
+- uid: Mapsui.Styles.IPointStyle.SymbolOffsetRotatesWithMap
+  name: SymbolOffsetRotatesWithMap
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_SymbolOffsetRotatesWithMap
+  commentId: P:Mapsui.Styles.IPointStyle.SymbolOffsetRotatesWithMap
+  fullName: Mapsui.Styles.IPointStyle.SymbolOffsetRotatesWithMap
+  nameWithType: IPointStyle.SymbolOffsetRotatesWithMap
+- uid: Mapsui.Styles.IPointStyle.SymbolOffsetRotatesWithMap*
+  name: SymbolOffsetRotatesWithMap
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_SymbolOffsetRotatesWithMap_
+  commentId: Overload:Mapsui.Styles.IPointStyle.SymbolOffsetRotatesWithMap
+  isSpec: "True"
+  fullName: Mapsui.Styles.IPointStyle.SymbolOffsetRotatesWithMap
+  nameWithType: IPointStyle.SymbolOffsetRotatesWithMap
+- uid: Mapsui.Styles.IPointStyle.SymbolRotation
+  name: SymbolRotation
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_SymbolRotation
+  commentId: P:Mapsui.Styles.IPointStyle.SymbolRotation
+  fullName: Mapsui.Styles.IPointStyle.SymbolRotation
+  nameWithType: IPointStyle.SymbolRotation
+- uid: Mapsui.Styles.IPointStyle.SymbolRotation*
+  name: SymbolRotation
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_SymbolRotation_
+  commentId: Overload:Mapsui.Styles.IPointStyle.SymbolRotation
+  isSpec: "True"
+  fullName: Mapsui.Styles.IPointStyle.SymbolRotation
+  nameWithType: IPointStyle.SymbolRotation
+- uid: Mapsui.Styles.IPointStyle.SymbolScale
+  name: SymbolScale
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_SymbolScale
+  commentId: P:Mapsui.Styles.IPointStyle.SymbolScale
+  fullName: Mapsui.Styles.IPointStyle.SymbolScale
+  nameWithType: IPointStyle.SymbolScale
+- uid: Mapsui.Styles.IPointStyle.SymbolScale*
+  name: SymbolScale
+  href: pages/Mapsui.Styles.IPointStyle.html#Mapsui_Styles_IPointStyle_SymbolScale_
+  commentId: Overload:Mapsui.Styles.IPointStyle.SymbolScale
+  isSpec: "True"
+  fullName: Mapsui.Styles.IPointStyle.SymbolScale
+  nameWithType: IPointStyle.SymbolScale
 - uid: Mapsui.Styles.IStyle
   name: IStyle
   href: pages/Mapsui.Styles.IStyle.html
@@ -27125,6 +27344,47 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewportAsync
   nameWithType: ImageSourceCacheInitializer.FetchImagesInViewportAsync
+- uid: Mapsui.Styles.ImageStyle
+  name: ImageStyle
+  href: pages/Mapsui.Styles.ImageStyle.html
+  commentId: T:Mapsui.Styles.ImageStyle
+  fullName: Mapsui.Styles.ImageStyle
+  nameWithType: ImageStyle
+- uid: Mapsui.Styles.ImageStyle.Image
+  name: Image
+  href: pages/Mapsui.Styles.ImageStyle.html#Mapsui_Styles_ImageStyle_Image
+  commentId: P:Mapsui.Styles.ImageStyle.Image
+  fullName: Mapsui.Styles.ImageStyle.Image
+  nameWithType: ImageStyle.Image
+- uid: Mapsui.Styles.ImageStyle.Image*
+  name: Image
+  href: pages/Mapsui.Styles.ImageStyle.html#Mapsui_Styles_ImageStyle_Image_
+  commentId: Overload:Mapsui.Styles.ImageStyle.Image
+  isSpec: "True"
+  fullName: Mapsui.Styles.ImageStyle.Image
+  nameWithType: ImageStyle.Image
+- uid: Mapsui.Styles.ImageStyles
+  name: ImageStyles
+  href: pages/Mapsui.Styles.ImageStyles.html
+  commentId: T:Mapsui.Styles.ImageStyles
+  fullName: Mapsui.Styles.ImageStyles
+  nameWithType: ImageStyles
+- uid: Mapsui.Styles.ImageStyles.CreatePinStyle(System.Nullable{Mapsui.Styles.Color},System.Nullable{Mapsui.Styles.Color},System.Double)
+  name: CreatePinStyle(Color?, Color?, double)
+  href: pages/Mapsui.Styles.ImageStyles.html#Mapsui_Styles_ImageStyles_CreatePinStyle_System_Nullable_Mapsui_Styles_Color__System_Nullable_Mapsui_Styles_Color__System_Double_
+  commentId: M:Mapsui.Styles.ImageStyles.CreatePinStyle(System.Nullable{Mapsui.Styles.Color},System.Nullable{Mapsui.Styles.Color},System.Double)
+  name.vb: CreatePinStyle(Color?, Color?, Double)
+  fullName: Mapsui.Styles.ImageStyles.CreatePinStyle(Mapsui.Styles.Color?, Mapsui.Styles.Color?, double)
+  fullName.vb: Mapsui.Styles.ImageStyles.CreatePinStyle(Mapsui.Styles.Color?, Mapsui.Styles.Color?, Double)
+  nameWithType: ImageStyles.CreatePinStyle(Color?, Color?, double)
+  nameWithType.vb: ImageStyles.CreatePinStyle(Color?, Color?, Double)
+- uid: Mapsui.Styles.ImageStyles.CreatePinStyle*
+  name: CreatePinStyle
+  href: pages/Mapsui.Styles.ImageStyles.html#Mapsui_Styles_ImageStyles_CreatePinStyle_
+  commentId: Overload:Mapsui.Styles.ImageStyles.CreatePinStyle
+  isSpec: "True"
+  fullName: Mapsui.Styles.ImageStyles.CreatePinStyle
+  nameWithType: ImageStyles.CreatePinStyle
 - uid: Mapsui.Styles.LabelStyle
   name: LabelStyle
   href: pages/Mapsui.Styles.LabelStyle.html
@@ -28566,19 +28826,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.SymbolStyle.GetHashCode
   nameWithType: SymbolStyle.GetHashCode
-- uid: Mapsui.Styles.SymbolStyle.Image
-  name: Image
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Image
-  commentId: P:Mapsui.Styles.SymbolStyle.Image
-  fullName: Mapsui.Styles.SymbolStyle.Image
-  nameWithType: SymbolStyle.Image
-- uid: Mapsui.Styles.SymbolStyle.Image*
-  name: Image
-  href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Image_
-  commentId: Overload:Mapsui.Styles.SymbolStyle.Image
-  isSpec: "True"
-  fullName: Mapsui.Styles.SymbolStyle.Image
-  nameWithType: SymbolStyle.Image
 - uid: Mapsui.Styles.SymbolStyle.Offset
   name: Offset
   href: pages/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_Offset
@@ -28734,28 +28981,6 @@ references:
   fullName.vb: Mapsui.Styles.SymbolStyle.<>
   nameWithType: SymbolStyle.operator !=
   nameWithType.vb: SymbolStyle.<>
-- uid: Mapsui.Styles.SymbolStyles
-  name: SymbolStyles
-  href: pages/Mapsui.Styles.SymbolStyles.html
-  commentId: T:Mapsui.Styles.SymbolStyles
-  fullName: Mapsui.Styles.SymbolStyles
-  nameWithType: SymbolStyles
-- uid: Mapsui.Styles.SymbolStyles.CreatePinStyle(System.Nullable{Mapsui.Styles.Color},System.Nullable{Mapsui.Styles.Color},System.Double)
-  name: CreatePinStyle(Color?, Color?, double)
-  href: pages/Mapsui.Styles.SymbolStyles.html#Mapsui_Styles_SymbolStyles_CreatePinStyle_System_Nullable_Mapsui_Styles_Color__System_Nullable_Mapsui_Styles_Color__System_Double_
-  commentId: M:Mapsui.Styles.SymbolStyles.CreatePinStyle(System.Nullable{Mapsui.Styles.Color},System.Nullable{Mapsui.Styles.Color},System.Double)
-  name.vb: CreatePinStyle(Color?, Color?, Double)
-  fullName: Mapsui.Styles.SymbolStyles.CreatePinStyle(Mapsui.Styles.Color?, Mapsui.Styles.Color?, double)
-  fullName.vb: Mapsui.Styles.SymbolStyles.CreatePinStyle(Mapsui.Styles.Color?, Mapsui.Styles.Color?, Double)
-  nameWithType: SymbolStyles.CreatePinStyle(Color?, Color?, double)
-  nameWithType.vb: SymbolStyles.CreatePinStyle(Color?, Color?, Double)
-- uid: Mapsui.Styles.SymbolStyles.CreatePinStyle*
-  name: CreatePinStyle
-  href: pages/Mapsui.Styles.SymbolStyles.html#Mapsui_Styles_SymbolStyles_CreatePinStyle_
-  commentId: Overload:Mapsui.Styles.SymbolStyles.CreatePinStyle
-  isSpec: "True"
-  fullName: Mapsui.Styles.SymbolStyles.CreatePinStyle
-  nameWithType: SymbolStyles.CreatePinStyle
 - uid: Mapsui.Styles.SymbolType
   name: SymbolType
   href: pages/Mapsui.Styles.SymbolType.html
@@ -28768,12 +28993,6 @@ references:
   commentId: F:Mapsui.Styles.SymbolType.Ellipse
   fullName: Mapsui.Styles.SymbolType.Ellipse
   nameWithType: SymbolType.Ellipse
-- uid: Mapsui.Styles.SymbolType.Image
-  name: Image
-  href: pages/Mapsui.Styles.SymbolType.html#Mapsui_Styles_SymbolType_Image
-  commentId: F:Mapsui.Styles.SymbolType.Image
-  fullName: Mapsui.Styles.SymbolType.Image
-  nameWithType: SymbolType.Image
 - uid: Mapsui.Styles.SymbolType.Rectangle
   name: Rectangle
   href: pages/Mapsui.Styles.SymbolType.html#Mapsui_Styles_SymbolType_Rectangle

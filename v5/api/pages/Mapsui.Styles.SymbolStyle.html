@@ -89,12 +89,11 @@
     <div class="level1"><a class="xref" href="Mapsui.Styles.Style.html">Style</a></div>
     <div class="level2"><a class="xref" href="Mapsui.Styles.VectorStyle.html">VectorStyle</a></div>
     <div class="level3"><span class="xref">SymbolStyle</span></div>
-      <div class="level4"><a class="xref" href="Mapsui.Styles.CalloutStyle.html">CalloutStyle</a></div>
   </div>
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a></div>
-    <div><a class="xref" href="Mapsui.Styles.IHasImage.html">IHasImage</a></div>
+    <div><a class="xref" href="Mapsui.Styles.IPointStyle.html">IPointStyle</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -145,7 +144,7 @@
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Styles_SymbolStyle_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SymbolStyle : VectorStyle, IStyle, IHasImage</code></pre>
+    <pre><code class="lang-csharp hljs">public class SymbolStyle : VectorStyle, IStyle, IPointStyle</code></pre>
   </div>
   <h3 id="properties">Properties
 </h3>
@@ -154,7 +153,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_DefaultHeight.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.DefaultHeight%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L24">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L23">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_DefaultHeight_" data-uid="Mapsui.Styles.SymbolStyle.DefaultHeight*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_DefaultHeight" data-uid="Mapsui.Styles.SymbolStyle.DefaultHeight">DefaultHeight</h4>
@@ -184,7 +183,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_DefaultWidth.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.DefaultWidth%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L23">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L22">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_DefaultWidth_" data-uid="Mapsui.Styles.SymbolStyle.DefaultWidth*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_DefaultWidth" data-uid="Mapsui.Styles.SymbolStyle.DefaultWidth">DefaultWidth</h4>
@@ -211,41 +210,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_Image.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.Image%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L35">View Source</a>
-  </span>
-  <a id="Mapsui_Styles_SymbolStyle_Image_" data-uid="Mapsui.Styles.SymbolStyle.Image*"></a>
-  <h4 id="Mapsui_Styles_SymbolStyle_Image" data-uid="Mapsui.Styles.SymbolStyle.Image">Image</h4>
-  <div class="markdown level1 summary"><p>Path to the the image to display during rendering. This can be url, file path or embedded resource.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Image? Image { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.Styles.Image.html">Image</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_Offset.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.Offset%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L79">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L62">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_Offset_" data-uid="Mapsui.Styles.SymbolStyle.Offset*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_Offset" data-uid="Mapsui.Styles.SymbolStyle.Offset">Offset</h4>
@@ -280,7 +248,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_RelativeOffset.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.RelativeOffset%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L84">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L67">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_RelativeOffset_" data-uid="Mapsui.Styles.SymbolStyle.RelativeOffset*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_RelativeOffset" data-uid="Mapsui.Styles.SymbolStyle.RelativeOffset">RelativeOffset</h4>
@@ -311,7 +279,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_RotateWithMap.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.RotateWithMap%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L58">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L41">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_RotateWithMap_" data-uid="Mapsui.Styles.SymbolStyle.RotateWithMap*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_RotateWithMap" data-uid="Mapsui.Styles.SymbolStyle.RotateWithMap">RotateWithMap</h4>
@@ -346,7 +314,7 @@ This mode is not supported in the WPF renderer.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_SymbolOffset.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.SymbolOffset%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L69">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L52">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_SymbolOffset_" data-uid="Mapsui.Styles.SymbolStyle.SymbolOffset*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_SymbolOffset" data-uid="Mapsui.Styles.SymbolStyle.SymbolOffset">SymbolOffset</h4>
@@ -377,7 +345,7 @@ public Offset SymbolOffset { get; set; }</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_SymbolOffsetRotatesWithMap.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.SymbolOffsetRotatesWithMap%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L89">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L72">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_SymbolOffsetRotatesWithMap_" data-uid="Mapsui.Styles.SymbolStyle.SymbolOffsetRotatesWithMap*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_SymbolOffsetRotatesWithMap" data-uid="Mapsui.Styles.SymbolStyle.SymbolOffsetRotatesWithMap">SymbolOffsetRotatesWithMap</h4>
@@ -408,7 +376,7 @@ public Offset SymbolOffset { get; set; }</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_SymbolRotation.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.SymbolRotation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L49">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L32">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_SymbolRotation_" data-uid="Mapsui.Styles.SymbolStyle.SymbolRotation*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_SymbolRotation" data-uid="Mapsui.Styles.SymbolStyle.SymbolRotation">SymbolRotation</h4>
@@ -439,7 +407,7 @@ public Offset SymbolOffset { get; set; }</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_SymbolScale.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.SymbolScale%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L67">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L50">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_SymbolScale_" data-uid="Mapsui.Styles.SymbolStyle.SymbolScale*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_SymbolScale" data-uid="Mapsui.Styles.SymbolStyle.SymbolScale">SymbolScale</h4>
@@ -474,7 +442,7 @@ of the original image</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_SymbolType.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.SymbolType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L26">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L25">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_SymbolType_" data-uid="Mapsui.Styles.SymbolStyle.SymbolType*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_SymbolType" data-uid="Mapsui.Styles.SymbolStyle.SymbolType">SymbolType</h4>
@@ -504,7 +472,7 @@ of the original image</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_UnitType.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.UnitType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L28">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L27">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_UnitType_" data-uid="Mapsui.Styles.SymbolStyle.UnitType*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_UnitType" data-uid="Mapsui.Styles.SymbolStyle.UnitType">UnitType</h4>
@@ -536,7 +504,7 @@ of the original image</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_Equals_Mapsui_Styles_SymbolStyle_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.Equals(Mapsui.Styles.SymbolStyle)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L98">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L81">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_Equals_" data-uid="Mapsui.Styles.SymbolStyle.Equals*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_Equals_Mapsui_Styles_SymbolStyle_" data-uid="Mapsui.Styles.SymbolStyle.Equals(Mapsui.Styles.SymbolStyle)">Equals(SymbolStyle?)</h4>
@@ -583,7 +551,7 @@ of the original image</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.Equals(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L91">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L74">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_Equals_" data-uid="Mapsui.Styles.SymbolStyle.Equals*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_Equals_System_Object_" data-uid="Mapsui.Styles.SymbolStyle.Equals(System.Object)">Equals(object?)</h4>
@@ -635,7 +603,7 @@ of the original image</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_GetHashCode.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.GetHashCode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L133">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L113">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_GetHashCode_" data-uid="Mapsui.Styles.SymbolStyle.GetHashCode*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_GetHashCode" data-uid="Mapsui.Styles.SymbolStyle.GetHashCode">GetHashCode()</h4>
@@ -671,7 +639,7 @@ of the original image</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_op_Equality_Mapsui_Styles_SymbolStyle_Mapsui_Styles_SymbolStyle_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.op_Equality(Mapsui.Styles.SymbolStyle%2CMapsui.Styles.SymbolStyle)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L145">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L124">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_op_Equality_" data-uid="Mapsui.Styles.SymbolStyle.op_Equality*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_op_Equality_Mapsui_Styles_SymbolStyle_Mapsui_Styles_SymbolStyle_" data-uid="Mapsui.Styles.SymbolStyle.op_Equality(Mapsui.Styles.SymbolStyle,Mapsui.Styles.SymbolStyle)">operator ==(SymbolStyle?, SymbolStyle?)</h4>
@@ -723,7 +691,7 @@ of the original image</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle_op_Inequality_Mapsui_Styles_SymbolStyle_Mapsui_Styles_SymbolStyle_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle.op_Inequality(Mapsui.Styles.SymbolStyle%2CMapsui.Styles.SymbolStyle)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L150">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L129">View Source</a>
   </span>
   <a id="Mapsui_Styles_SymbolStyle_op_Inequality_" data-uid="Mapsui.Styles.SymbolStyle.op_Inequality*"></a>
   <h4 id="Mapsui_Styles_SymbolStyle_op_Inequality_Mapsui_Styles_SymbolStyle_Mapsui_Styles_SymbolStyle_" data-uid="Mapsui.Styles.SymbolStyle.op_Inequality(Mapsui.Styles.SymbolStyle,Mapsui.Styles.SymbolStyle)">operator !=(SymbolStyle?, SymbolStyle?)</h4>
@@ -775,7 +743,7 @@ of the original image</p>
       <a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a>
   </div>
   <div>
-      <a class="xref" href="Mapsui.Styles.IHasImage.html">IHasImage</a>
+      <a class="xref" href="Mapsui.Styles.IPointStyle.html">IPointStyle</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
@@ -799,7 +767,7 @@ of the original image</p>
                     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_SymbolStyle.md&amp;value=---%0Auid%3A%20Mapsui.Styles.SymbolStyle%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L21" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/SymbolStyle.cs/#L20" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -3212,6 +3212,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.ImageStyleRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Rendering.Skia.Images.IDrawableImage.yml",
       "output": {
         ".html": {
@@ -3512,6 +3522,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Styles.BasePointStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Styles.BasePointStyle.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Styles.BaseStyle.yml",
       "output": {
         ".html": {
@@ -3622,6 +3642,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Styles.IPointStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Styles.IPointStyle.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Styles.IStyle.yml",
       "output": {
         ".html": {
@@ -3676,6 +3706,26 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Styles.ImageSourceCacheInitializer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Styles.ImageStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Styles.ImageStyle.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Styles.ImageStyles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Styles.ImageStyles.html"
         }
       },
       "version": ""
@@ -3836,16 +3886,6 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Styles.SymbolStyle.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Styles.SymbolStyles.yml",
-      "output": {
-        ".html": {
-          "relative_path": "pages/Mapsui.Styles.SymbolStyles.html"
         }
       },
       "version": ""
