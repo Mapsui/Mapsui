@@ -24,12 +24,11 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         using var holder = vectorCache.GetOrCreate((style, text, layerOpacity), CreateLabelAsBitmap);
         var image = holder.Instance;
-        var offsetX = style.Offset is RelativeOffset ? image.Width * style.Offset.X : style.Offset.X;
-        var offsetY = style.Offset is RelativeOffset ? image.Height * style.Offset.Y : style.Offset.Y;
+        var offset = style.Offset.Combine(style.RelativeOffset.GetAbsoluteOffset(image.Width, image.Height));
 
         if (image is BitmapDrawableImage bitmapImage)
             BitmapRenderer.Draw(canvas, bitmapImage.Image, (int)Math.Round(x), (int)Math.Round(y),
-                offsetX: (float)offsetX, offsetY: (float)-offsetY,
+                offsetX: (float)offset.X, offsetY: (float)-offset.Y,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         else
             throw new InvalidOperationException("Unexpected drawable image type");
@@ -208,12 +207,11 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var horizontalAlign = CalcHorizontalAlignment(style.HorizontalAlignment);
         var verticalAlign = CalcVerticalAlignment(style.VerticalAlignment);
 
-        var offsetX = style.Offset is RelativeOffset ? drawRect.Width * style.Offset.X : style.Offset.X;
-        var offsetY = style.Offset is RelativeOffset ? drawRect.Height * style.Offset.Y : style.Offset.Y;
+        var offset = style.Offset.Combine(style.RelativeOffset.GetAbsoluteOffset(drawRect.Width, drawRect.Height));
 
         drawRect.Offset(
-            x - drawRect.Width * horizontalAlign + (float)offsetX,
-            y - drawRect.Height * verticalAlign + (float)offsetY);
+            x - drawRect.Width * horizontalAlign + (float)offset.X,
+            y - drawRect.Height * verticalAlign + (float)offset.Y);
 
         // If style has a background color, than draw background rectangle
         if (style.BackColor != null)
