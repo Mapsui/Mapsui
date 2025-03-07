@@ -26,8 +26,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
 {
     private readonly RenderService _renderService;
     private long _currentIteration;
-    private static readonly Dictionary<Type, IWidgetRenderer> _widgetRenderers = new Dictionary<Type, IWidgetRenderer>();
-    private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = new Dictionary<Type, IStyleRenderer>();
+    private static readonly Dictionary<Type, IWidgetRenderer> _widgetRenderers = [];
+    private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
+    private static readonly Dictionary<string, PointStyleRenderer.PointStyleDrawer> _pointStyleRenderers = [];
 
     static MapRenderer()
     {
@@ -44,13 +45,14 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public ImageSourceCache ImageSourceCache => _renderService.ImageSourceCache;
 
-    private void InitRenderer()
+    private static void InitRenderer()
     {
         _styleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
         _styleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
         _styleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
         _styleRenderers[typeof(SymbolStyle)] = new SymbolStyleRenderer();
         _styleRenderers[typeof(ImageStyle)] = new ImageStyleRenderer();
+        _styleRenderers[typeof(CustomPointStyle)] = new CustomPointStyleRenderer();
         _styleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
 
         _widgetRenderers[typeof(TextBoxWidget)] = new TextBoxWidgetRenderer();
@@ -63,8 +65,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
         _widgetRenderers[typeof(RulerWidget)] = new RulerWidgetRenderer();
     }
 
-    public MapRenderer() : this(10000)
-    { }
+    public MapRenderer() : this(10000) { }
 
     public MapRenderer(int vectorCacheCapacity)
     {
@@ -191,6 +192,17 @@ public sealed class MapRenderer : IRenderer, IDisposable
         return false;
     }
 
+    public static bool TryGetPointStyleRenderer(string rendererName, [NotNullWhen(true)] out PointStyleRenderer.PointStyleDrawer? pointStyleDrawer)
+    {
+        if (_pointStyleRenderers.TryGetValue(rendererName, out var outPointStyleDrawer))
+        {
+            pointStyleDrawer = outPointStyleDrawer;
+            return true;
+        }
+        pointStyleDrawer = null;
+        return false;
+    }
+
     public static void RegisterStyleRenderer(Type type, IStyleRenderer renderer)
     {
         _styleRenderers[type] = renderer;
@@ -199,6 +211,11 @@ public sealed class MapRenderer : IRenderer, IDisposable
     public static void RegisterWidgetRenderer(Type type, IWidgetRenderer renderer)
     {
         _widgetRenderers[type] = renderer;
+    }
+
+    public static void RegisterPointStyleRenderer(string rendererName, PointStyleRenderer.PointStyleDrawer renderer)
+    {
+        _pointStyleRenderers[rendererName] = renderer;
     }
 
     private void RenderTo(Viewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,

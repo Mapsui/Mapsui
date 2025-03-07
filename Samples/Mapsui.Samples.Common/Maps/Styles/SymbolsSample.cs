@@ -27,15 +27,12 @@ public class SymbolsSample : ISample
         return Task.FromResult(map);
     }
 
-    private static ILayer CreateStylesLayer(MRect? envelope)
+    private static ILayer CreateStylesLayer(MRect? envelope) => new MemoryLayer
     {
-        return new MemoryLayer
-        {
-            Name = "Styles Layer",
-            Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
-            Style = null,
-        };
-    }
+        Name = "Styles Layer",
+        Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
+        Style = null,
+    };
 
     private static IEnumerable<IFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
     {
@@ -50,7 +47,7 @@ public class SymbolsSample : ISample
             };
 
             feature.Styles.Add(styles[counter]);
-            feature.Styles.Add(SmalleDot());
+            feature.Styles.Add(CreateSmallDotStyle());
             features.Add(feature);
             counter++;
             if (counter == styles.Count) counter = 0;
@@ -60,10 +57,8 @@ public class SymbolsSample : ISample
         return features;
     }
 
-    private static IStyle SmalleDot()
-    {
-        return new SymbolStyle { SymbolScale = 0.2, Fill = new Brush(new Color(40, 40, 40)) };
-    }
+    private static SymbolStyle CreateSmallDotStyle() =>
+        new() { SymbolScale = 0.2, Fill = new Brush(new Color(40, 40, 40)) };
 
     private static IEnumerable<IStyle> CreateDiverseStyles()
     {
