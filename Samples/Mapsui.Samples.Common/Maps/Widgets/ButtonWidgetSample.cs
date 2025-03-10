@@ -29,7 +29,8 @@ public class ButtonWidgetSample : ISample
         {
             if (e.GestureType == GestureType.DoubleTap)
                 return false;
-            s.Text = $"Tapped {++_tapCount} times";
+            var button = (ButtonWidget)s;
+            button.Text = $"Tapped {++_tapCount} times";
             map.RefreshGraphics();
             return false;
         }));
@@ -41,7 +42,8 @@ public class ButtonWidgetSample : ISample
         }));
         map.Widgets.Add(CreateButtonWidget("Hello!", VerticalAlignment.Bottom, HorizontalAlignment.Right, (s, e) =>
         {
-            s.Text = $"{s.Text}!";
+            var button = (ButtonWidget)s;
+            button.Text = $"{button.Text}!";
             map.RefreshGraphics();
             return false;
         }));
@@ -49,7 +51,8 @@ public class ButtonWidgetSample : ISample
         {
             if (e.GestureType == GestureType.SingleTap)
                 return false;
-            s.Text = $"Double Tapped {++_doubleTapCount} times";
+            var button = (ButtonWidget)s;
+            button.Text = $"Double Tapped {++_doubleTapCount} times";
             map.RefreshGraphics();
             return false;
         }));
@@ -58,7 +61,7 @@ public class ButtonWidgetSample : ISample
     }
 
     private static ButtonWidget CreateButtonWidget(string text, VerticalAlignment verticalAlignment,
-        HorizontalAlignment horizontalAlignment, Func<ButtonWidget, WidgetEventArgs, bool> tapped) => new()
+        HorizontalAlignment horizontalAlignment, Func<IWidget, WidgetEventArgs, bool> tapped) => new()
         {
             Text = text,
             VerticalAlignment = verticalAlignment,
@@ -72,7 +75,7 @@ public class ButtonWidgetSample : ISample
         };
 
     private static ImageButtonWidget CreateImageButtonWidget(VerticalAlignment verticalAlignment,
-        HorizontalAlignment horizontalAlignment, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
+        HorizontalAlignment horizontalAlignment, Func<IWidget, WidgetEventArgs, bool> tapped) => new()
         {
             Image = "embedded://Mapsui.Resources.Images.MyLocationStill.svg",
             VerticalAlignment = verticalAlignment,

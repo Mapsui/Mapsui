@@ -8,10 +8,8 @@ using Mapsui.Manipulations;
 
 namespace Mapsui.Widgets.InfoWidgets;
 
-public class RulerWidget(Map map) : BaseWidget
+public class RulerWidget() : BaseWidget
 {
-    private readonly Map _map = map;
-
     public Color Color { get; set; } = new Color(192, 30, 20, 255);
     public Color ColorOfBeginAndEndDots { get; set; } = new Color(192, 30, 20, 128);
     public MPoint? StartPosition { get; internal set; }
@@ -39,41 +37,41 @@ public class RulerWidget(Map map) : BaseWidget
 
     public event EventHandler<RulerWidgetUpdatedEventArgs>? DistanceUpdated = null;
 
-    public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
+    public override bool OnPointerPressed(WidgetEventArgs e)
     {
         CurrentPosition = null;
-        StartPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
-        _map.RefreshGraphics();
+        StartPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
+        e.Map.RefreshGraphics();
         return true;
     }
 
-    public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
+    public override bool OnPointerMoved(WidgetEventArgs e)
     {
         if (e.GestureType == GestureType.Hover)
             return false; // Not dragging.
 
-        CurrentPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
+        CurrentPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
         DistanceInKilometers = GetDistance(StartPosition, CurrentPosition);
         DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Drag));
-        _map.RefreshGraphics();
+        e.Map.RefreshGraphics();
         return true;
     }
 
-    public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
+    public override bool OnPointerReleased(WidgetEventArgs e)
     {
         DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Release));
-        _map.RefreshGraphics();
+        e.Map.RefreshGraphics();
         return true;
     }
 
-    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
+    public override bool OnTapped(WidgetEventArgs e)
     {
         if (e.GestureType == GestureType.SingleTap)
         {
-            StartPosition = _map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
+            StartPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
             CurrentPosition = null;
             DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.SingleTap));
-            _map.RefreshGraphics();
+            e.Map.RefreshGraphics();
         }
         return true;
     }

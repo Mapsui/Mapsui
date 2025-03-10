@@ -591,7 +591,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            if (widget.OnPointerPressed(Map.Navigator, eventArgs))
+            if (widget.OnPointerPressed(eventArgs))
                 return true;
         }
         return false;
@@ -602,7 +602,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, gestureType, Map, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
 
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
-            if (widget.OnPointerMoved(Map.Navigator, eventArgs))
+            if (widget.OnPointerMoved(eventArgs))
                 return true;
         return false;
     }
@@ -614,7 +614,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
             Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
-            if (widget.OnPointerReleased(Map.Navigator, eventArgs))
+            if (widget.OnPointerReleased(eventArgs))
                 return true;
         }
         return false;
@@ -628,7 +628,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         foreach (var widget in touchedWidgets)
         {
             Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} {nameof(GestureType)}: {gestureType} KeyState: {shiftPressed}");
-            if (widget.OnTapped(Map.Navigator, eventArgs))
+            if (widget.OnTapped(eventArgs))
                 return true;
         }
 

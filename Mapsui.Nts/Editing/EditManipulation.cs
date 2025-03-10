@@ -64,7 +64,7 @@ public static class EditManipulation
         return false;
     }
 
-    public static bool OnTapped(Navigator navigator, WidgetEventArgs e, EditManager editManager)
+    public static bool OnTapped(WidgetEventArgs e, EditManager editManager)
     {
         var editLayer = editManager.Layer;
         if (editLayer == null)
@@ -96,15 +96,15 @@ public static class EditManipulation
             if (e.ShiftPressed || e.GestureType == GestureType.DoubleTap || e.GestureType == GestureType.LongPress)
             {
                 if (e.GestureType != GestureType.DoubleTap) // Add last vertex but not on a double tap because it is preceded by a single tap.
-                    editManager.AddVertex(navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
+                    editManager.AddVertex(e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
                 return editManager.EndEdit();
             }
             else
-                editManager.AddVertex(navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
+                editManager.AddVertex(e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
         }
         else if (editManager.EditMode is EditMode.AddPoint or EditMode.AddLine or EditMode.AddPolygon)
             if (e.GestureType == GestureType.SingleTap)
-                editManager.AddVertex(navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
+                editManager.AddVertex(e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition).ToCoordinate());
 
         if (editManager.SelectMode)
         {

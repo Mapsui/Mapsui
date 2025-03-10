@@ -124,11 +124,9 @@ public class ZoomInOutWidget : BaseWidget
         }
     }
 
-    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
+    public override bool OnTapped(WidgetEventArgs e)
     {
-        var result = base.OnTapped(navigator, e);
-
-        if (result)
+        if (base.OnTapped(e))
             return true;
 
         if (Envelope == null)
@@ -137,11 +135,11 @@ public class ZoomInOutWidget : BaseWidget
         if (Orientation == Orientation.Vertical && e.ScreenPosition.Y < Envelope.MinY + Envelope.Height * 0.5 ||
             Orientation == Orientation.Horizontal && e.ScreenPosition.X < Envelope.MinX + Envelope.Width * 0.5)
         {
-            navigator.ZoomIn(500);
+            e.Map.Navigator.ZoomIn(500);
         }
         else
         {
-            navigator.ZoomOut(500);
+            e.Map.Navigator.ZoomOut(500);
         }
 
         return true;

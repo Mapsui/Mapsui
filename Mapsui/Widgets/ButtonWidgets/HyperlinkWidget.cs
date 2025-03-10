@@ -25,9 +25,9 @@ public class HyperlinkWidget : ButtonWidget
         }
     }
 
-    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
+    public override bool OnTapped(WidgetEventArgs e)
     {
-        if (base.OnTapped(navigator, e))
+        if (base.OnTapped(e))
             return true; // The user could override the behavior in the Tapped event.
 
         if (Url is null)
