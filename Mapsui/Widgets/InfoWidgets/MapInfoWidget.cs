@@ -72,7 +72,7 @@ public class MapInfoWidget : TextBoxWidget
                 _map.RefreshGraphics();
             }
         });
-        return true;
+        return false;
     }
 
     public Func<IFeature?, string> FeatureToText { get; set; } = (f) =>
