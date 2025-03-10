@@ -70,7 +70,7 @@ public static class ImageFetcher
     private static ConcurrentDictionary<string, Assembly> LoadEmbeddedResourcePaths()
     {
         var result = new ConcurrentDictionary<string, Assembly>();
-        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic);
 
         foreach (var assembly in assemblies)
         {
