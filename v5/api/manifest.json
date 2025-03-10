@@ -3302,10 +3302,40 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.CustomPointStyleRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.CustomPointStyleRenderer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.yml",
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.html"
         }
       },
       "version": ""
@@ -3596,6 +3626,16 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Styles.Color.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Styles.CustomPointStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Styles.CustomPointStyle.html"
         }
       },
       "version": ""
