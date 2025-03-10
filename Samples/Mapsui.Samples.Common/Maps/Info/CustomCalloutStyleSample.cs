@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 public class CustomCalloutStyleSample : IMapControlSample
 {
     public string Name => "Custom Callout Style";
-    public string Category => "Info";
+    public string Category => "MapInfo";
 
     private const string _customStyleLayerName = "Custom Callout Layer";
 

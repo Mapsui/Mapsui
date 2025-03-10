@@ -8,13 +8,13 @@ internal class BitmapRenderer
 {
     // The field below is static for performance. Effect has not been measured.
     // Note that the default FilterQuality is None. Setting it explicitly to Low increases the quality.
-    private static readonly SKPaint DefaultPaint = new();
-    private static readonly SKSamplingOptions DefaultSamplingOptions = new(SKFilterMode.Linear, SKMipmapMode.None);
+    private static readonly SKPaint _defaultPaint = new();
+    private static readonly SKSamplingOptions _defaultSamplingOptions = new(SKFilterMode.Linear, SKMipmapMode.None);
 
     public static void Draw(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity = 1f)
     {
         var skPaint = GetPaint(layerOpacity, out var dispose);
-        canvas.DrawImage(bitmap, rect, DefaultSamplingOptions, skPaint);
+        canvas.DrawImage(bitmap, rect, _defaultSamplingOptions, skPaint);
         if (dispose)
             skPaint.Dispose();
     }
@@ -81,6 +81,6 @@ internal class BitmapRenderer
             };
         }
         dispose = false;
-        return DefaultPaint;
+        return _defaultPaint;
     }
 }

@@ -11,60 +11,49 @@ namespace Mapsui.Rendering.Skia;
 
 public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 {
+    public static void DrawStatic(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, IPointStyle pointStyle, RenderService renderService)
+    {
+        var opacity = (float)(layer.Opacity * pointStyle.Opacity);
+        PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, pointStyle, renderService, opacity, DrawSymbolStyle);
+    }
+
     public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
     {
         var symbolStyle = (SymbolStyle)style;
         feature.CoordinateVisitor((x, y, setter) =>
         {
-            DrawXY(canvas, viewport, layer, x, y, symbolStyle, renderService);
+            var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
+            PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, symbolStyle, renderService, opacity, DrawSymbolStyle);
         });
         return true;
     }
 
-    public static void DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, RenderService renderService)
+    private static void DrawSymbolStyle(SKCanvas canvas, IPointStyle pointStyle, RenderService renderService, float opacity)
     {
-        var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
-        var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
-
-        canvas.Save();
-        canvas.Translate((float)destinationX, (float)destinationY);
-        canvas.Scale((float)symbolStyle.SymbolScale, (float)symbolStyle.SymbolScale);
-
-        var rotation = symbolStyle.SymbolRotation;
-        if (symbolStyle.RotateWithMap)
-            rotation += viewport.Rotation;
-        if (rotation != 0)
-            canvas.RotateDegrees((float)rotation);
-
-        canvas.Translate((float)symbolStyle.Offset.X, (float)-symbolStyle.Offset.Y);
-
-        DrawSymbolType(canvas, symbolStyle, renderService.VectorCache, opacity);
-
-        canvas.Restore();
-    }
-
-    private static void DrawSymbolType(SKCanvas canvas, SymbolStyle symbolStyle, VectorCache vectorCache,
-        float opacity)
-    {
-        canvas.Save();
-
-        var offset = symbolStyle.RelativeOffset.GetAbsoluteOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
-        canvas.Translate((float)offset.X, (float)-offset.Y);
-
-        using var path = vectorCache.GetOrCreate(symbolStyle.SymbolType, CreatePath);
-        if (symbolStyle.Fill.IsVisible())
+        if (pointStyle is SymbolStyle symbolStyle)
         {
-            using var fillPaint = vectorCache.GetOrCreate((symbolStyle.Fill!, opacity), CreateFillPaint);
-            canvas.DrawPath(path, fillPaint);
-        }
+            canvas.Save();
 
-        if (symbolStyle.Outline.IsVisible())
-        {
-            using var linePaint = vectorCache.GetOrCreate((symbolStyle.Outline!, opacity), CreateLinePaint);
-            canvas.DrawPath(path, linePaint);
-        }
+            var offset = symbolStyle.RelativeOffset.GetAbsoluteOffset(SymbolStyle.DefaultWidth, SymbolStyle.DefaultWidth);
+            canvas.Translate((float)offset.X, (float)-offset.Y);
 
-        canvas.Restore();
+            using var path = renderService.VectorCache.GetOrCreate(symbolStyle.SymbolType, CreatePath);
+            if (symbolStyle.Fill.IsVisible())
+            {
+                using var fillPaint = renderService.VectorCache.GetOrCreate((symbolStyle.Fill!, opacity), CreateFillPaint);
+                canvas.DrawPath(path, fillPaint);
+            }
+
+            if (symbolStyle.Outline.IsVisible())
+            {
+                using var linePaint = renderService.VectorCache.GetOrCreate((symbolStyle.Outline!, opacity), CreateLinePaint);
+                canvas.DrawPath(path, linePaint);
+            }
+
+            canvas.Restore();
+        }
+        else
+            throw new ArgumentException($"Expected {nameof(SymbolStyle)} but got {pointStyle?.GetType().Name}");
     }
 
     private static SKPath CreatePath(SymbolType symbolType)

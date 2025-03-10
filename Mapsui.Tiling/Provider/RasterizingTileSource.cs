@@ -1,21 +1,19 @@
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Tiling.Extensions;
-using Attribution = BruTile.Attribution;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui.Tiling.Provider;
 
@@ -180,8 +178,6 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
                         }
                     }
                 }
-                else
-                    Logger.Log(LogLevel.Warning, $"No StyleRenderer found for {style.GetType()}");
             }
 
             result = ConvertToCoordinates(tempSize, section.Resolution);

@@ -1,5 +1,4 @@
-﻿using Mapsui.Extensions;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.Images;
@@ -20,76 +19,52 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var symbolStyle = (ImageStyle)style;
         feature.CoordinateVisitor((x, y, setter) =>
         {
-            DrawXY(canvas, viewport, layer, x, y, symbolStyle, renderService);
+            var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
+            PointStyleRenderer.DrawPointStyle(canvas, viewport, x, y, symbolStyle, renderService, opacity, DrawImageStyle);
         });
         return true;
     }
 
-    public static void DrawXY(SKCanvas canvas, Viewport viewport, ILayer layer, double x, double y, ImageStyle imageStyle, RenderService renderService)
+    private static void DrawImageStyle(SKCanvas canvas, IPointStyle pointStyle, RenderService renderService, float opacity)
     {
-        if (imageStyle.Image is null)
-            return;
-
-        var opacity = (float)(layer.Opacity * imageStyle.Opacity);
-        var (destinationX, destinationY) = viewport.WorldToScreenXY(x, y);
-
-        canvas.Save();
-        canvas.Translate((float)destinationX, (float)destinationY);
-        canvas.Scale((float)imageStyle.SymbolScale, (float)imageStyle.SymbolScale);
-
-        var rotation = imageStyle.SymbolRotation;
-        if (imageStyle.RotateWithMap)
-            rotation += viewport.Rotation;
-        if (rotation != 0)
-            canvas.RotateDegrees((float)rotation);
-
-        canvas.Translate((float)imageStyle.Offset.X, (float)-imageStyle.Offset.Y);
-
-        DrawSourceImage(canvas, imageStyle.Image, imageStyle.RelativeOffset, renderService, opacity);
-
-        canvas.Restore();
-    }
-
-    private static void DrawSourceImage(SKCanvas canvas, Image image, RelativeOffset symbolOffset, RenderService renderService, float opacity)
-    {
-        canvas.Save();
-
-        if (image is null)
-            throw new Exception("SymbolStyle.Image should not be null in the DrawImage render method");
-
-        var drawableImage = renderService.DrawableImageCache.GetOrCreate(image.SourceId,
-            () => TryCreateDrawableImage(image, renderService.ImageSourceCache));
-        if (drawableImage == null)
-            return;
-
-        var offset = symbolOffset.GetAbsoluteOffset(drawableImage.Width, drawableImage.Height); // Offset can be relative to the size so that is why Width and Height is needed.
-
-        canvas.Translate((float)offset.X, -(float)offset.Y);
-
-        if (drawableImage is BitmapDrawableImage bitmapImage)
+        if (pointStyle is ImageStyle imageStyle)
         {
-            if (image.BitmapRegion is not null) // Get image for region if specified
+            var image = imageStyle.Image ?? throw new ArgumentNullException(nameof(imageStyle.Image));
+            var drawableImage = renderService.DrawableImageCache.GetOrCreate(image.SourceId,
+                () => TryCreateDrawableImage(image, renderService.ImageSourceCache));
+            if (drawableImage == null)
+                return;
+
+            var offset = pointStyle.RelativeOffset.GetAbsoluteOffset(drawableImage.Width, drawableImage.Height); // Offset can be relative to the size so that is why Width and Height is needed.
+
+            canvas.Translate((float)offset.X, -(float)offset.Y);
+
+            if (drawableImage is BitmapDrawableImage bitmapImage)
             {
-                var key = image.GetSourceIdForBitmapRegion();
-                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, image.BitmapRegion)) is BitmapDrawableImage bitmapRegionImage)
-                    bitmapImage = bitmapRegionImage;
+                if (image.BitmapRegion is not null) // Get image for region if specified
+                {
+                    var key = image.GetSourceIdForBitmapRegion();
+                    if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, image.BitmapRegion)) is BitmapDrawableImage bitmapRegionImage)
+                        bitmapImage = bitmapRegionImage;
+                }
+
+                DrawSKImage(canvas, bitmapImage.Image, opacity);
+
             }
-
-            DrawSKImage(canvas, bitmapImage.Image, opacity);
-
-        }
-        else if (drawableImage is SvgDrawableImage svgImage)
-        {
-            if (image.SvgFillColor.HasValue || image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
+            else if (drawableImage is SvgDrawableImage svgImage)
             {
-                var key = image.GetSourceIdForSvgWithCustomColors();
-                if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(image, svgImage)) is SvgDrawableImage customColoredSvgImage)
-                    svgImage = customColoredSvgImage;
-            }
+                if (image.SvgFillColor.HasValue || image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
+                {
+                    var key = image.GetSourceIdForSvgWithCustomColors();
+                    if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(image, svgImage)) is SvgDrawableImage customColoredSvgImage)
+                        svgImage = customColoredSvgImage;
+                }
 
-            DrawSKPicture(canvas, svgImage.Picture, opacity, image.BlendModeColor);
+                DrawSKPicture(canvas, svgImage.Picture, opacity, image.BlendModeColor);
+            }
         }
-        canvas.Restore();
+        else
+            throw new Exception("Parameter pointStyle is not an ImageStyle");
     }
 
     public static void DrawSKImage(SKCanvas canvas, SKImage bitmap, float opacity)

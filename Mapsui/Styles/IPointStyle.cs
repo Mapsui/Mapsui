@@ -1,6 +1,6 @@
 ﻿namespace Mapsui.Styles;
 
-public interface IPointStyle
+public interface IPointStyle : IStyle
 {
     Offset Offset { get; set; }
     RelativeOffset RelativeOffset { get; set; }
