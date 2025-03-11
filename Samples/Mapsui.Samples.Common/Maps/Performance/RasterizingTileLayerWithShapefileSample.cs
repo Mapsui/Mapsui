@@ -59,7 +59,7 @@ public class ShapefileTileSample : ISample
         map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource)));
         map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
         map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
-        var home = SphericalMercator.FromLonLat(15, 54).ToMPoint();
+        var home = SphericalMercator.FromLonLat(15, 53.817).ToMPoint();
         map.Navigator.CenterOnAndZoomTo(home, map.Navigator.Resolutions[5]);
 
         return map;
