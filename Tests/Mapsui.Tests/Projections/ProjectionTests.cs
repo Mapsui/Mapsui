@@ -44,8 +44,9 @@ public class ProjectionTests
         ClassicAssert.AreEqual(expectedCoordinateCount, enumeration.Count());
     }
 
-    [Test]
-    public void CoordinateProjectionTest()
+    [TestCase("EPSG:3857")]
+    [TestCase("EPSG:3395")]
+    public void CoordinateProjectionTest(string crs)
     {
         // arrange
         var multiPolygon = (MultiPolygon)_wktReader.Read("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
@@ -54,7 +55,7 @@ public class ProjectionTests
         var projection = new Projection();
 
         // act
-        projection.Project("EPSG:4326", "EPSG:3857", feature);
+        projection.Project("EPSG:4326", crs, feature);
 
         // assert
         var coordinates = multiPolygon.Coordinates.ToList();
@@ -67,8 +68,9 @@ public class ProjectionTests
         }
     }
 
-    [Test]
-    public void CoordinateNtsProjectionTest()
+    [TestCase("EPSG:3857")]
+    [TestCase("EPSG:3395")]
+    public void CoordinateNtsProjectionTest(string crs)
     {
         // arrange
         var multiPolygon = (MultiPolygon)_wktReader.Read("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
@@ -77,7 +79,7 @@ public class ProjectionTests
         var projection = new DotSpatialProjection();
 
         // act
-        projection.Project("EPSG:4326", "EPSG:3857", feature);
+        projection.Project("EPSG:4326", crs, feature);
 
         // assert
         var coordinates = multiPolygon.Coordinates.ToList();
