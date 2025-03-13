@@ -1342,6 +1342,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Logging.Logger.LoggerSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Logging.Logger.LoggerSettings.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Logging.Logger.yml",
       "output": {
         ".html": {

@@ -4255,15 +4255,15 @@ references:
   commentId: T:Mapsui.BaseEventArgs
   fullName: Mapsui.BaseEventArgs
   nameWithType: BaseEventArgs
-- uid: Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name: BaseEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
-  commentId: M:Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name.vb: New(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  fullName: Mapsui.BaseEventArgs.BaseEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  fullName.vb: Mapsui.BaseEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  nameWithType: BaseEventArgs.BaseEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  nameWithType.vb: BaseEventArgs.New(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+- uid: Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: BaseEventArgs(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Map_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.BaseEventArgs.BaseEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Map, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.BaseEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Map, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: BaseEventArgs.BaseEventArgs(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: BaseEventArgs.New(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
 - uid: Mapsui.BaseEventArgs.#ctor*
   name: BaseEventArgs
   href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs__ctor_
@@ -4313,6 +4313,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.BaseEventArgs.GetRemoteMapInfoAsync
   nameWithType: BaseEventArgs.GetRemoteMapInfoAsync
+- uid: Mapsui.BaseEventArgs.Map
+  name: Map
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Map
+  commentId: P:Mapsui.BaseEventArgs.Map
+  fullName: Mapsui.BaseEventArgs.Map
+  nameWithType: BaseEventArgs.Map
+- uid: Mapsui.BaseEventArgs.Map*
+  name: Map
+  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Map_
+  commentId: Overload:Mapsui.BaseEventArgs.Map
+  isSpec: "True"
+  fullName: Mapsui.BaseEventArgs.Map
+  nameWithType: BaseEventArgs.Map
 - uid: Mapsui.BaseEventArgs.ScreenPosition
   name: ScreenPosition
   href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_ScreenPosition
@@ -4326,19 +4339,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.BaseEventArgs.ScreenPosition
   nameWithType: BaseEventArgs.ScreenPosition
-- uid: Mapsui.BaseEventArgs.Viewport
-  name: Viewport
-  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Viewport
-  commentId: P:Mapsui.BaseEventArgs.Viewport
-  fullName: Mapsui.BaseEventArgs.Viewport
-  nameWithType: BaseEventArgs.Viewport
-- uid: Mapsui.BaseEventArgs.Viewport*
-  name: Viewport
-  href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Viewport_
-  commentId: Overload:Mapsui.BaseEventArgs.Viewport
-  isSpec: "True"
-  fullName: Mapsui.BaseEventArgs.Viewport
-  nameWithType: BaseEventArgs.Viewport
 - uid: Mapsui.BaseEventArgs.WorldPosition
   name: WorldPosition
   href: pages/Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_WorldPosition
@@ -9680,6 +9680,38 @@ references:
   isSpec: "True"
   fullName: Mapsui.Logging.Logger.LogDelegate
   nameWithType: Logger.LogDelegate
+- uid: Mapsui.Logging.Logger.LoggerSettings
+  name: Logger.LoggerSettings
+  href: pages/Mapsui.Logging.Logger.LoggerSettings.html
+  commentId: T:Mapsui.Logging.Logger.LoggerSettings
+  fullName: Mapsui.Logging.Logger.LoggerSettings
+  nameWithType: Logger.LoggerSettings
+- uid: Mapsui.Logging.Logger.LoggerSettings.LogMapEvents
+  name: LogMapEvents
+  href: pages/Mapsui.Logging.Logger.LoggerSettings.html#Mapsui_Logging_Logger_LoggerSettings_LogMapEvents
+  commentId: P:Mapsui.Logging.Logger.LoggerSettings.LogMapEvents
+  fullName: Mapsui.Logging.Logger.LoggerSettings.LogMapEvents
+  nameWithType: Logger.LoggerSettings.LogMapEvents
+- uid: Mapsui.Logging.Logger.LoggerSettings.LogMapEvents*
+  name: LogMapEvents
+  href: pages/Mapsui.Logging.Logger.LoggerSettings.html#Mapsui_Logging_Logger_LoggerSettings_LogMapEvents_
+  commentId: Overload:Mapsui.Logging.Logger.LoggerSettings.LogMapEvents
+  isSpec: "True"
+  fullName: Mapsui.Logging.Logger.LoggerSettings.LogMapEvents
+  nameWithType: Logger.LoggerSettings.LogMapEvents
+- uid: Mapsui.Logging.Logger.Settings
+  name: Settings
+  href: pages/Mapsui.Logging.Logger.html#Mapsui_Logging_Logger_Settings
+  commentId: P:Mapsui.Logging.Logger.Settings
+  fullName: Mapsui.Logging.Logger.Settings
+  nameWithType: Logger.Settings
+- uid: Mapsui.Logging.Logger.Settings*
+  name: Settings
+  href: pages/Mapsui.Logging.Logger.html#Mapsui_Logging_Logger_Settings_
+  commentId: Overload:Mapsui.Logging.Logger.Settings
+  isSpec: "True"
+  fullName: Mapsui.Logging.Logger.Settings
+  nameWithType: Logger.Settings
 - uid: Mapsui.MBoxFit
   name: MBoxFit
   href: pages/Mapsui.MBoxFit.html
@@ -11815,15 +11847,15 @@ references:
   commentId: T:Mapsui.MapEventArgs
   fullName: Mapsui.MapEventArgs
   nameWithType: MapEventArgs
-- uid: Mapsui.MapEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name: MapEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  href: pages/Mapsui.MapEventArgs.html#Mapsui_MapEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
-  commentId: M:Mapsui.MapEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name.vb: New(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  fullName: Mapsui.MapEventArgs.MapEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  fullName.vb: Mapsui.MapEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  nameWithType: MapEventArgs.MapEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  nameWithType.vb: MapEventArgs.New(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+- uid: Mapsui.MapEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: MapEventArgs(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.MapEventArgs.html#Mapsui_MapEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Map_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.MapEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.MapEventArgs.MapEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Map, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.MapEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Map, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: MapEventArgs.MapEventArgs(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: MapEventArgs.New(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
 - uid: Mapsui.MapEventArgs.#ctor*
   name: MapEventArgs
   href: pages/Mapsui.MapEventArgs.html#Mapsui_MapEventArgs__ctor_
@@ -11969,15 +12001,15 @@ references:
   commentId: T:Mapsui.MapInfoEventArgs
   fullName: Mapsui.MapInfoEventArgs
   nameWithType: MapInfoEventArgs
-- uid: Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name: MapInfoEventArgs(ScreenPosition, MPoint, GestureType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
-  commentId: M:Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name.vb: New(ScreenPosition, MPoint, GestureType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, bool, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  fullName.vb: Mapsui.MapInfoEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Boolean, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  nameWithType: MapInfoEventArgs.MapInfoEventArgs(ScreenPosition, MPoint, GestureType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  nameWithType.vb: MapInfoEventArgs.New(ScreenPosition, MPoint, GestureType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+- uid: Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: MapInfoEventArgs(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Map_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.MapInfoEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.MapInfoEventArgs.MapInfoEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Map, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.MapInfoEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Map, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: MapInfoEventArgs.MapInfoEventArgs(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: MapInfoEventArgs.New(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
 - uid: Mapsui.MapInfoEventArgs.#ctor*
   name: MapInfoEventArgs
   href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs__ctor_
@@ -11988,19 +12020,6 @@ references:
   fullName.vb: Mapsui.MapInfoEventArgs.New
   nameWithType: MapInfoEventArgs.MapInfoEventArgs
   nameWithType.vb: MapInfoEventArgs.New
-- uid: Mapsui.MapInfoEventArgs.Handled
-  name: Handled
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_Handled
-  commentId: P:Mapsui.MapInfoEventArgs.Handled
-  fullName: Mapsui.MapInfoEventArgs.Handled
-  nameWithType: MapInfoEventArgs.Handled
-- uid: Mapsui.MapInfoEventArgs.Handled*
-  name: Handled
-  href: pages/Mapsui.MapInfoEventArgs.html#Mapsui_MapInfoEventArgs_Handled_
-  commentId: Overload:Mapsui.MapInfoEventArgs.Handled
-  isSpec: "True"
-  fullName: Mapsui.MapInfoEventArgs.Handled
-  nameWithType: MapInfoEventArgs.Handled
 - uid: Mapsui.Navigator
   name: Navigator
   href: pages/Mapsui.Navigator.html
@@ -13056,12 +13075,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Nts.Editing.EditManipulation.OnPointerReleased
   nameWithType: EditManipulation.OnPointerReleased
-- uid: Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
-  name: OnTapped(Navigator, WidgetEventArgs, EditManager)
-  href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_Mapsui_Nts_Editing_EditManager_
-  commentId: M:Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
-  fullName: Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs, Mapsui.Nts.Editing.EditManager)
-  nameWithType: EditManipulation.OnTapped(Navigator, WidgetEventArgs, EditManager)
+- uid: Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
+  name: OnTapped(WidgetEventArgs, EditManager)
+  href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnTapped_Mapsui_Widgets_WidgetEventArgs_Mapsui_Nts_Editing_EditManager_
+  commentId: M:Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Widgets.WidgetEventArgs,Mapsui.Nts.Editing.EditManager)
+  fullName: Mapsui.Nts.Editing.EditManipulation.OnTapped(Mapsui.Widgets.WidgetEventArgs, Mapsui.Nts.Editing.EditManager)
+  nameWithType: EditManipulation.OnTapped(WidgetEventArgs, EditManager)
 - uid: Mapsui.Nts.Editing.EditManipulation.OnTapped*
   name: OnTapped
   href: pages/Mapsui.Nts.Editing.EditManipulation.html#Mapsui_Nts_Editing_EditManipulation_OnTapped_
@@ -15088,12 +15107,12 @@ references:
   fullName.vb: Mapsui.Nts.Widgets.EditingWidget.New
   nameWithType: EditingWidget.EditingWidget
   nameWithType.vb: EditingWidget.New
-- uid: Mapsui.Nts.Widgets.EditingWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerMoved(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Nts.Widgets.EditingWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Nts.Widgets.EditingWidget.OnPointerMoved(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: EditingWidget.OnPointerMoved(Navigator, WidgetEventArgs)
+- uid: Mapsui.Nts.Widgets.EditingWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerMoved(WidgetEventArgs)
+  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Nts.Widgets.EditingWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Nts.Widgets.EditingWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: EditingWidget.OnPointerMoved(WidgetEventArgs)
 - uid: Mapsui.Nts.Widgets.EditingWidget.OnPointerMoved*
   name: OnPointerMoved
   href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnPointerMoved_
@@ -15101,12 +15120,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Nts.Widgets.EditingWidget.OnPointerMoved
   nameWithType: EditingWidget.OnPointerMoved
-- uid: Mapsui.Nts.Widgets.EditingWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerPressed(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Nts.Widgets.EditingWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Nts.Widgets.EditingWidget.OnPointerPressed(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: EditingWidget.OnPointerPressed(Navigator, WidgetEventArgs)
+- uid: Mapsui.Nts.Widgets.EditingWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerPressed(WidgetEventArgs)
+  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnPointerPressed_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Nts.Widgets.EditingWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Nts.Widgets.EditingWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: EditingWidget.OnPointerPressed(WidgetEventArgs)
 - uid: Mapsui.Nts.Widgets.EditingWidget.OnPointerPressed*
   name: OnPointerPressed
   href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnPointerPressed_
@@ -15114,12 +15133,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Nts.Widgets.EditingWidget.OnPointerPressed
   nameWithType: EditingWidget.OnPointerPressed
-- uid: Mapsui.Nts.Widgets.EditingWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerReleased(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Nts.Widgets.EditingWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Nts.Widgets.EditingWidget.OnPointerReleased(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: EditingWidget.OnPointerReleased(Navigator, WidgetEventArgs)
+- uid: Mapsui.Nts.Widgets.EditingWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerReleased(WidgetEventArgs)
+  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnPointerReleased_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Nts.Widgets.EditingWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Nts.Widgets.EditingWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: EditingWidget.OnPointerReleased(WidgetEventArgs)
 - uid: Mapsui.Nts.Widgets.EditingWidget.OnPointerReleased*
   name: OnPointerReleased
   href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnPointerReleased_
@@ -15127,12 +15146,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Nts.Widgets.EditingWidget.OnPointerReleased
   nameWithType: EditingWidget.OnPointerReleased
-- uid: Mapsui.Nts.Widgets.EditingWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Nts.Widgets.EditingWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Nts.Widgets.EditingWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: EditingWidget.OnTapped(Navigator, WidgetEventArgs)
+- uid: Mapsui.Nts.Widgets.EditingWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  name: OnTapped(WidgetEventArgs)
+  href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Nts.Widgets.EditingWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Nts.Widgets.EditingWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: EditingWidget.OnTapped(WidgetEventArgs)
 - uid: Mapsui.Nts.Widgets.EditingWidget.OnTapped*
   name: OnTapped
   href: pages/Mapsui.Nts.Widgets.EditingWidget.html#Mapsui_Nts_Widgets_EditingWidget_OnTapped_
@@ -41047,12 +41066,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.BaseWidget.NeedsRedraw
   nameWithType: BaseWidget.NeedsRedraw
-- uid: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerMoved(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: BaseWidget.OnPointerMoved(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerMoved(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: BaseWidget.OnPointerMoved(WidgetEventArgs)
 - uid: Mapsui.Widgets.BaseWidget.OnPointerMoved*
   name: OnPointerMoved
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_
@@ -41060,12 +41079,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.BaseWidget.OnPointerMoved
   nameWithType: BaseWidget.OnPointerMoved
-- uid: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerPressed(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: BaseWidget.OnPointerPressed(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerPressed(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: BaseWidget.OnPointerPressed(WidgetEventArgs)
 - uid: Mapsui.Widgets.BaseWidget.OnPointerPressed*
   name: OnPointerPressed
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerPressed_
@@ -41073,12 +41092,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.BaseWidget.OnPointerPressed
   nameWithType: BaseWidget.OnPointerPressed
-- uid: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerReleased(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: BaseWidget.OnPointerReleased(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerReleased(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: BaseWidget.OnPointerReleased(WidgetEventArgs)
 - uid: Mapsui.Widgets.BaseWidget.OnPointerReleased*
   name: OnPointerReleased
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerReleased_
@@ -41086,12 +41105,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.BaseWidget.OnPointerReleased
   nameWithType: BaseWidget.OnPointerReleased
-- uid: Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: BaseWidget.OnTapped(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  name: OnTapped(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.BaseWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: BaseWidget.OnTapped(WidgetEventArgs)
 - uid: Mapsui.Widgets.BaseWidget.OnTapped*
   name: OnTapped
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnTapped_
@@ -41099,6 +41118,45 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.BaseWidget.OnTapped
   nameWithType: BaseWidget.OnTapped
+- uid: Mapsui.Widgets.BaseWidget.PointerMoved
+  name: PointerMoved
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerMoved
+  commentId: P:Mapsui.Widgets.BaseWidget.PointerMoved
+  fullName: Mapsui.Widgets.BaseWidget.PointerMoved
+  nameWithType: BaseWidget.PointerMoved
+- uid: Mapsui.Widgets.BaseWidget.PointerMoved*
+  name: PointerMoved
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerMoved_
+  commentId: Overload:Mapsui.Widgets.BaseWidget.PointerMoved
+  isSpec: "True"
+  fullName: Mapsui.Widgets.BaseWidget.PointerMoved
+  nameWithType: BaseWidget.PointerMoved
+- uid: Mapsui.Widgets.BaseWidget.PointerPressed
+  name: PointerPressed
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerPressed
+  commentId: P:Mapsui.Widgets.BaseWidget.PointerPressed
+  fullName: Mapsui.Widgets.BaseWidget.PointerPressed
+  nameWithType: BaseWidget.PointerPressed
+- uid: Mapsui.Widgets.BaseWidget.PointerPressed*
+  name: PointerPressed
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerPressed_
+  commentId: Overload:Mapsui.Widgets.BaseWidget.PointerPressed
+  isSpec: "True"
+  fullName: Mapsui.Widgets.BaseWidget.PointerPressed
+  nameWithType: BaseWidget.PointerPressed
+- uid: Mapsui.Widgets.BaseWidget.PointerReleased
+  name: PointerReleased
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerReleased
+  commentId: P:Mapsui.Widgets.BaseWidget.PointerReleased
+  fullName: Mapsui.Widgets.BaseWidget.PointerReleased
+  nameWithType: BaseWidget.PointerReleased
+- uid: Mapsui.Widgets.BaseWidget.PointerReleased*
+  name: PointerReleased
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerReleased_
+  commentId: Overload:Mapsui.Widgets.BaseWidget.PointerReleased
+  isSpec: "True"
+  fullName: Mapsui.Widgets.BaseWidget.PointerReleased
+  nameWithType: BaseWidget.PointerReleased
 - uid: Mapsui.Widgets.BaseWidget.Position
   name: Position
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Position
@@ -41112,6 +41170,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.BaseWidget.Position
   nameWithType: BaseWidget.Position
+- uid: Mapsui.Widgets.BaseWidget.Tapped
+  name: Tapped
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Tapped
+  commentId: P:Mapsui.Widgets.BaseWidget.Tapped
+  fullName: Mapsui.Widgets.BaseWidget.Tapped
+  nameWithType: BaseWidget.Tapped
+- uid: Mapsui.Widgets.BaseWidget.Tapped*
+  name: Tapped
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Tapped_
+  commentId: Overload:Mapsui.Widgets.BaseWidget.Tapped
+  isSpec: "True"
+  fullName: Mapsui.Widgets.BaseWidget.Tapped
+  nameWithType: BaseWidget.Tapped
 - uid: Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
   name: UpdateEnvelope(double, double, double, double)
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_UpdateEnvelope_System_Double_System_Double_System_Double_System_Double_
@@ -41275,44 +41346,18 @@ references:
   commentId: T:Mapsui.Widgets.ButtonWidgets.ButtonWidget
   fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget
   nameWithType: ButtonWidget
-- uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: ButtonWidget.OnTapped(Navigator, WidgetEventArgs)
-- uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped*
-  name: OnTapped
-  href: pages/Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_OnTapped_
-  commentId: Overload:Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped
-  isSpec: "True"
-  fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget.OnTapped
-  nameWithType: ButtonWidget.OnTapped
-- uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
-  name: Tapped
-  href: pages/Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_Tapped
-  commentId: P:Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
-  fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
-  nameWithType: ButtonWidget.Tapped
-- uid: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped*
-  name: Tapped
-  href: pages/Mapsui.Widgets.ButtonWidgets.ButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ButtonWidget_Tapped_
-  commentId: Overload:Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
-  isSpec: "True"
-  fullName: Mapsui.Widgets.ButtonWidgets.ButtonWidget.Tapped
-  nameWithType: ButtonWidget.Tapped
 - uid: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
   name: HyperlinkWidget
   href: pages/Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.html
   commentId: T:Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
   fullName: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget
   nameWithType: HyperlinkWidget
-- uid: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.html#Mapsui_Widgets_ButtonWidgets_HyperlinkWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: HyperlinkWidget.OnTapped(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  name: OnTapped(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.html#Mapsui_Widgets_ButtonWidgets_HyperlinkWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: HyperlinkWidget.OnTapped(WidgetEventArgs)
 - uid: Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.OnTapped*
   name: OnTapped
   href: pages/Mapsui.Widgets.ButtonWidgets.HyperlinkWidget.html#Mapsui_Widgets_ButtonWidgets_HyperlinkWidget_OnTapped_
@@ -41371,19 +41416,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Image
   nameWithType: ImageButtonWidget.Image
-- uid: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ImageButtonWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: ImageButtonWidget.OnTapped(Navigator, WidgetEventArgs)
-- uid: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.OnTapped*
-  name: OnTapped
-  href: pages/Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ImageButtonWidget_OnTapped_
-  commentId: Overload:Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.OnTapped
-  isSpec: "True"
-  fullName: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.OnTapped
-  nameWithType: ImageButtonWidget.OnTapped
 - uid: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Padding
   name: Padding
   href: pages/Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ImageButtonWidget_Padding
@@ -41410,12 +41442,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Rotation
   nameWithType: ImageButtonWidget.Rotation
-- uid: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Tapped
-  name: Tapped
-  href: pages/Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.html#Mapsui_Widgets_ButtonWidgets_ImageButtonWidget_Tapped
-  commentId: F:Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Tapped
-  fullName: Mapsui.Widgets.ButtonWidgets.ImageButtonWidget.Tapped
-  nameWithType: ImageButtonWidget.Tapped
 - uid: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget
   name: ZoomInOutWidget
   href: pages/Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.html
@@ -41435,12 +41461,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.BackColor
   nameWithType: ZoomInOutWidget.BackColor
-- uid: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.html#Mapsui_Widgets_ButtonWidgets_ZoomInOutWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: ZoomInOutWidget.OnTapped(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  name: OnTapped(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.html#Mapsui_Widgets_ButtonWidgets_ZoomInOutWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: ZoomInOutWidget.OnTapped(WidgetEventArgs)
 - uid: Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.OnTapped*
   name: OnTapped
   href: pages/Mapsui.Widgets.ButtonWidgets.ZoomInOutWidget.html#Mapsui_Widgets_ButtonWidgets_ZoomInOutWidget_OnTapped_
@@ -41659,12 +41685,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.IWidget.NeedsRedraw
   nameWithType: IWidget.NeedsRedraw
-- uid: Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerMoved(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: IWidget.OnPointerMoved(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerMoved(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: IWidget.OnPointerMoved(WidgetEventArgs)
 - uid: Mapsui.Widgets.IWidget.OnPointerMoved*
   name: OnPointerMoved
   href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerMoved_
@@ -41672,12 +41698,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.IWidget.OnPointerMoved
   nameWithType: IWidget.OnPointerMoved
-- uid: Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerPressed(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: IWidget.OnPointerPressed(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerPressed(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerPressed_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.IWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: IWidget.OnPointerPressed(WidgetEventArgs)
 - uid: Mapsui.Widgets.IWidget.OnPointerPressed*
   name: OnPointerPressed
   href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerPressed_
@@ -41685,12 +41711,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.IWidget.OnPointerPressed
   nameWithType: IWidget.OnPointerPressed
-- uid: Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerReleased(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: IWidget.OnPointerReleased(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerReleased(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerReleased_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.IWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: IWidget.OnPointerReleased(WidgetEventArgs)
 - uid: Mapsui.Widgets.IWidget.OnPointerReleased*
   name: OnPointerReleased
   href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerReleased_
@@ -41698,12 +41724,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.IWidget.OnPointerReleased
   nameWithType: IWidget.OnPointerReleased
-- uid: Mapsui.Widgets.IWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.IWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.IWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: IWidget.OnTapped(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.IWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  name: OnTapped(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.IWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.IWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: IWidget.OnTapped(WidgetEventArgs)
 - uid: Mapsui.Widgets.IWidget.OnTapped*
   name: OnTapped
   href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnTapped_
@@ -42006,12 +42032,12 @@ references:
   fullName.vb: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.New
   nameWithType: MouseCoordinatesWidget.MouseCoordinatesWidget
   nameWithType.vb: MouseCoordinatesWidget.New
-- uid: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerMoved(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.html#Mapsui_Widgets_InfoWidgets_MouseCoordinatesWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.OnPointerMoved(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: MouseCoordinatesWidget.OnPointerMoved(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerMoved(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.html#Mapsui_Widgets_InfoWidgets_MouseCoordinatesWidget_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: MouseCoordinatesWidget.OnPointerMoved(WidgetEventArgs)
 - uid: Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.OnPointerMoved*
   name: OnPointerMoved
   href: pages/Mapsui.Widgets.InfoWidgets.MouseCoordinatesWidget.html#Mapsui_Widgets_InfoWidgets_MouseCoordinatesWidget_OnPointerMoved_
@@ -42063,15 +42089,15 @@ references:
   commentId: T:Mapsui.Widgets.InfoWidgets.RulerWidget
   fullName: Mapsui.Widgets.InfoWidgets.RulerWidget
   nameWithType: RulerWidget
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.#ctor(Mapsui.Map)
-  name: RulerWidget(Map)
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget__ctor_Mapsui_Map_
-  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.#ctor(Mapsui.Map)
-  name.vb: New(Map)
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidget(Mapsui.Map)
-  fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.New(Mapsui.Map)
-  nameWithType: RulerWidget.RulerWidget(Map)
-  nameWithType.vb: RulerWidget.New(Map)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.#ctor
+  name: RulerWidget()
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget__ctor
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.#ctor
+  name.vb: New()
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.RulerWidget()
+  fullName.vb: Mapsui.Widgets.InfoWidgets.RulerWidget.New()
+  nameWithType: RulerWidget.RulerWidget()
+  nameWithType.vb: RulerWidget.New()
 - uid: Mapsui.Widgets.InfoWidgets.RulerWidget.#ctor*
   name: RulerWidget
   href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget__ctor_
@@ -42166,12 +42192,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.IsActive
   nameWithType: RulerWidget.IsActive
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerMoved(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerMoved_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: RulerWidget.OnPointerMoved(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerMoved(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: RulerWidget.OnPointerMoved(WidgetEventArgs)
 - uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved*
   name: OnPointerMoved
   href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerMoved_
@@ -42179,12 +42205,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved
   nameWithType: RulerWidget.OnPointerMoved
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerPressed(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerPressed_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: RulerWidget.OnPointerPressed(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerPressed(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerPressed_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: RulerWidget.OnPointerPressed(WidgetEventArgs)
 - uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed*
   name: OnPointerPressed
   href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerPressed_
@@ -42192,12 +42218,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerPressed
   nameWithType: RulerWidget.OnPointerPressed
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnPointerReleased(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerReleased_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: RulerWidget.OnPointerReleased(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  name: OnPointerReleased(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerReleased_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: RulerWidget.OnPointerReleased(WidgetEventArgs)
 - uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased*
   name: OnPointerReleased
   href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerReleased_
@@ -42205,12 +42231,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased
   nameWithType: RulerWidget.OnPointerReleased
-- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: RulerWidget.OnTapped(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  name: OnTapped(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: RulerWidget.OnTapped(WidgetEventArgs)
 - uid: Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped*
   name: OnTapped
   href: pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html#Mapsui_Widgets_InfoWidgets_RulerWidget_OnTapped_
@@ -42384,12 +42410,12 @@ references:
   fullName.vb: Mapsui.Widgets.MapTappedWidget.New
   nameWithType: MapTappedWidget.MapTappedWidget
   nameWithType.vb: MapTappedWidget.New
-- uid: Mapsui.Widgets.MapTappedWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(Navigator, WidgetEventArgs)
-  href: pages/Mapsui.Widgets.MapTappedWidget.html#Mapsui_Widgets_MapTappedWidget_OnTapped_Mapsui_Navigator_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.MapTappedWidget.OnTapped(Mapsui.Navigator,Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.MapTappedWidget.OnTapped(Mapsui.Navigator, Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: MapTappedWidget.OnTapped(Navigator, WidgetEventArgs)
+- uid: Mapsui.Widgets.MapTappedWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  name: OnTapped(WidgetEventArgs)
+  href: pages/Mapsui.Widgets.MapTappedWidget.html#Mapsui_Widgets_MapTappedWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_
+  commentId: M:Mapsui.Widgets.MapTappedWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  fullName: Mapsui.Widgets.MapTappedWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
+  nameWithType: MapTappedWidget.OnTapped(WidgetEventArgs)
 - uid: Mapsui.Widgets.MapTappedWidget.OnTapped*
   name: OnTapped
   href: pages/Mapsui.Widgets.MapTappedWidget.html#Mapsui_Widgets_MapTappedWidget_OnTapped_
@@ -42956,15 +42982,15 @@ references:
   commentId: T:Mapsui.Widgets.WidgetEventArgs
   fullName: Mapsui.Widgets.WidgetEventArgs
   nameWithType: WidgetEventArgs
-- uid: Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name: WidgetEventArgs(ScreenPosition, MPoint, GestureType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
-  commentId: M:Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
-  name.vb: New(ScreenPosition, MPoint, GestureType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  fullName: Mapsui.Widgets.WidgetEventArgs.WidgetEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, bool, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  fullName.vb: Mapsui.Widgets.WidgetEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Viewport, Boolean, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
-  nameWithType: WidgetEventArgs.WidgetEventArgs(ScreenPosition, MPoint, GestureType, Viewport, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
-  nameWithType.vb: WidgetEventArgs.New(ScreenPosition, MPoint, GestureType, Viewport, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+- uid: Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name: WidgetEventArgs(ScreenPosition, MPoint, GestureType, Map, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Map_System_Boolean_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_
+  commentId: M:Mapsui.Widgets.WidgetEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,System.Boolean,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)
+  name.vb: New(ScreenPosition, MPoint, GestureType, Map, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  fullName: Mapsui.Widgets.WidgetEventArgs.WidgetEventArgs(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Map, bool, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  fullName.vb: Mapsui.Widgets.WidgetEventArgs.New(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType, Mapsui.Map, Boolean, Mapsui.GetMapInfoDelegate, Mapsui.GetRemoteMapInfoAsyncDelegate)
+  nameWithType: WidgetEventArgs.WidgetEventArgs(ScreenPosition, MPoint, GestureType, Map, bool, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
+  nameWithType.vb: WidgetEventArgs.New(ScreenPosition, MPoint, GestureType, Map, Boolean, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)
 - uid: Mapsui.Widgets.WidgetEventArgs.#ctor*
   name: WidgetEventArgs
   href: pages/Mapsui.Widgets.WidgetEventArgs.html#Mapsui_Widgets_WidgetEventArgs__ctor_

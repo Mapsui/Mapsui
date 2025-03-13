@@ -87,13 +87,17 @@
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
     <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">EventArgs</a></div>
-    <div class="level2"><span class="xref">BaseEventArgs</span></div>
-      <div class="level3"><a class="xref" href="Mapsui.MapEventArgs.html">MapEventArgs</a></div>
-      <div class="level3"><a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a></div>
-      <div class="level3"><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></div>
+    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.handledeventargs">HandledEventArgs</a></div>
+    <div class="level3"><span class="xref">BaseEventArgs</span></div>
+      <div class="level4"><a class="xref" href="Mapsui.MapEventArgs.html">MapEventArgs</a></div>
+      <div class="level4"><a class="xref" href="Mapsui.MapInfoEventArgs.html">MapInfoEventArgs</a></div>
+      <div class="level4"><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.handledeventargs.handled">HandledEventArgs.Handled</a>
+    </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">EventArgs.Empty</a>
     </div>
@@ -123,24 +127,24 @@
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_BaseEventArgs_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class BaseEventArgs : EventArgs</code></pre>
+    <pre><code class="lang-csharp hljs">public class BaseEventArgs : HandledEventArgs</code></pre>
   </div>
   <h3 id="constructors">Constructors
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.%23ctor(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.GestureType%2CMapsui.Viewport%2CMapsui.GetMapInfoDelegate%2CMapsui.GetRemoteMapInfoAsyncDelegate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Map_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.%23ctor(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.GestureType%2CMapsui.Map%2CMapsui.GetMapInfoDelegate%2CMapsui.GetRemoteMapInfoAsyncDelegate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L12">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L13">View Source</a>
   </span>
   <a id="Mapsui_BaseEventArgs__ctor_" data-uid="Mapsui.BaseEventArgs.#ctor*"></a>
-  <h4 id="Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_" data-uid="Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)">BaseEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)</h4>
+  <h4 id="Mapsui_BaseEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Map_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_" data-uid="Mapsui.BaseEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)">BaseEventArgs(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Viewport viewport, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)</code></pre>
+    <pre><code class="lang-csharp hljs">public BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Map map, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -168,8 +172,8 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Viewport.html">Viewport</a></td>
-        <td><span class="parametername">viewport</span></td>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
+        <td><span class="parametername">map</span></td>
         <td></td>
       </tr>
       <tr>
@@ -191,7 +195,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_GestureType.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.GestureType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L28">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L29">View Source</a>
   </span>
   <a id="Mapsui_BaseEventArgs_GestureType_" data-uid="Mapsui.BaseEventArgs.GestureType*"></a>
   <h4 id="Mapsui_BaseEventArgs_GestureType" data-uid="Mapsui.BaseEventArgs.GestureType">GestureType</h4>
@@ -222,7 +226,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_GetMapInfo.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.GetMapInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L38">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L39">View Source</a>
   </span>
   <a id="Mapsui_BaseEventArgs_GetMapInfo_" data-uid="Mapsui.BaseEventArgs.GetMapInfo*"></a>
   <h4 id="Mapsui_BaseEventArgs_GetMapInfo" data-uid="Mapsui.BaseEventArgs.GetMapInfo">GetMapInfo</h4>
@@ -253,7 +257,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_GetRemoteMapInfoAsync.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.GetRemoteMapInfoAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L43">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L44">View Source</a>
   </span>
   <a id="Mapsui_BaseEventArgs_GetRemoteMapInfoAsync_" data-uid="Mapsui.BaseEventArgs.GetRemoteMapInfoAsync*"></a>
   <h4 id="Mapsui_BaseEventArgs_GetRemoteMapInfoAsync" data-uid="Mapsui.BaseEventArgs.GetRemoteMapInfoAsync">GetRemoteMapInfoAsync</h4>
@@ -281,10 +285,41 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_Map.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.Map%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L34">View Source</a>
+  </span>
+  <a id="Mapsui_BaseEventArgs_Map_" data-uid="Mapsui.BaseEventArgs.Map*"></a>
+  <h4 id="Mapsui_BaseEventArgs_Map" data-uid="Mapsui.BaseEventArgs.Map">Map</h4>
+  <div class="markdown level1 summary"><p>The map from which the event was triggered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Map Map { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_ScreenPosition.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.ScreenPosition%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L18">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L19">View Source</a>
   </span>
   <a id="Mapsui_BaseEventArgs_ScreenPosition_" data-uid="Mapsui.BaseEventArgs.ScreenPosition*"></a>
   <h4 id="Mapsui_BaseEventArgs_ScreenPosition" data-uid="Mapsui.BaseEventArgs.ScreenPosition">ScreenPosition</h4>
@@ -312,41 +347,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_Viewport.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.Viewport%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L33">View Source</a>
-  </span>
-  <a id="Mapsui_BaseEventArgs_Viewport_" data-uid="Mapsui.BaseEventArgs.Viewport*"></a>
-  <h4 id="Mapsui_BaseEventArgs_Viewport" data-uid="Mapsui.BaseEventArgs.Viewport">Viewport</h4>
-  <div class="markdown level1 summary"><p>Viewport of the map at the moment of the event</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Viewport Viewport { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.Viewport.html">Viewport</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs_WorldPosition.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs.WorldPosition%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L23">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L24">View Source</a>
   </span>
   <a id="Mapsui_BaseEventArgs_WorldPosition_" data-uid="Mapsui.BaseEventArgs.WorldPosition*"></a>
   <h4 id="Mapsui_BaseEventArgs_WorldPosition" data-uid="Mapsui.BaseEventArgs.WorldPosition">WorldPosition</h4>
@@ -388,7 +392,7 @@
                     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_BaseEventArgs.md&amp;value=---%0Auid%3A%20Mapsui.BaseEventArgs%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L12" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/BaseEventArgs.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

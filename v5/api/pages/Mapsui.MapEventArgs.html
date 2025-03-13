@@ -87,8 +87,9 @@
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
     <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">EventArgs</a></div>
-    <div class="level2"><a class="xref" href="Mapsui.BaseEventArgs.html">BaseEventArgs</a></div>
-    <div class="level3"><span class="xref">MapEventArgs</span></div>
+    <div class="level2"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.handledeventargs">HandledEventArgs</a></div>
+    <div class="level3"><a class="xref" href="Mapsui.BaseEventArgs.html">BaseEventArgs</a></div>
+    <div class="level4"><span class="xref">MapEventArgs</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -102,13 +103,16 @@
       <a class="xref" href="Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GestureType">BaseEventArgs.GestureType</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Viewport">BaseEventArgs.Viewport</a>
+      <a class="xref" href="Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_Map">BaseEventArgs.Map</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GetMapInfo">BaseEventArgs.GetMapInfo</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.BaseEventArgs.html#Mapsui_BaseEventArgs_GetRemoteMapInfoAsync">BaseEventArgs.GetRemoteMapInfoAsync</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.handledeventargs.handled">HandledEventArgs.Handled</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs.empty">EventArgs.Empty</a>
@@ -145,18 +149,18 @@
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_MapEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_.md&amp;value=---%0Auid%3A%20Mapsui.MapEventArgs.%23ctor(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.GestureType%2CMapsui.Viewport%2CMapsui.GetMapInfoDelegate%2CMapsui.GetRemoteMapInfoAsyncDelegate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_MapEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Map_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_.md&amp;value=---%0Auid%3A%20Mapsui.MapEventArgs.%23ctor(Mapsui.Manipulations.ScreenPosition%2CMapsui.MPoint%2CMapsui.Manipulations.GestureType%2CMapsui.Map%2CMapsui.GetMapInfoDelegate%2CMapsui.GetRemoteMapInfoAsyncDelegate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/MapEventArgs.cs/#L7">View Source</a>
   </span>
   <a id="Mapsui_MapEventArgs__ctor_" data-uid="Mapsui.MapEventArgs.#ctor*"></a>
-  <h4 id="Mapsui_MapEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Viewport_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_" data-uid="Mapsui.MapEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Viewport,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)">MapEventArgs(ScreenPosition, MPoint, GestureType, Viewport, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)</h4>
+  <h4 id="Mapsui_MapEventArgs__ctor_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_Mapsui_Map_Mapsui_GetMapInfoDelegate_Mapsui_GetRemoteMapInfoAsyncDelegate_" data-uid="Mapsui.MapEventArgs.#ctor(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType,Mapsui.Map,Mapsui.GetMapInfoDelegate,Mapsui.GetRemoteMapInfoAsyncDelegate)">MapEventArgs(ScreenPosition, MPoint, GestureType, Map, GetMapInfoDelegate, GetRemoteMapInfoAsyncDelegate)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MapEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Viewport viewport, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)</code></pre>
+    <pre><code class="lang-csharp hljs">public MapEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Map map, GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -184,8 +188,8 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Viewport.html">Viewport</a></td>
-        <td><span class="parametername">viewport</span></td>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
+        <td><span class="parametername">map</span></td>
         <td></td>
       </tr>
       <tr>
