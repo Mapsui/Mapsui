@@ -14,6 +14,7 @@ public enum LogLevel
 
 public static class Logger
 {
+    public static LoggerSettings Settings { get; } = new LoggerSettings();
     public static Action<LogLevel, string, Exception?>? LogDelegate
     {
         get;
@@ -46,6 +47,11 @@ public static class Logger
                 Debug.WriteLine(message);
                 break;
         }
+    }
+
+    public class LoggerSettings
+    {
+        public static bool LogMapEvents { get; set; }
     }
 }
 

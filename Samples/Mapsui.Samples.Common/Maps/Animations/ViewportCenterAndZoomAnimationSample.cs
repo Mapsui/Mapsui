@@ -25,7 +25,7 @@ public class ViewportCenterAndZoomAnimationSample : ISample
         map.Tapped += (m, e) =>
         {
             // Animate to the new center and new resolution
-            m.Navigator.CenterOnAndZoomTo(e.WorldPosition, e.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
+            m.Navigator.CenterOnAndZoomTo(e.WorldPosition, e.Map.Navigator.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
             return true;
         };
         return map;

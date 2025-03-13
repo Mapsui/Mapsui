@@ -30,7 +30,7 @@ public class RulerWidgetSample : ISample
         };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(CreateTextBox("Drag on the map to see the ruler widget in action."));
-        map.Widgets.Add(new RulerWidget(map) { IsActive = true }); // Active on startup. You need to set this value from a button in our own application.
+        map.Widgets.Add(new RulerWidget() { IsActive = true }); // Active on startup. You need to set this value from a button in our own application.
         return map;
     }
 

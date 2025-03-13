@@ -633,7 +633,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private bool HandlerTap(WidgetEventArgs e)
     {
-        var handled = false;
         var screenPosition = e.ScreenPosition;
 
         var map = Map;
@@ -642,11 +641,11 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             var worldPosition = map.Navigator.Viewport.ScreenToWorld(screenPosition);
             var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, map.Navigator.Viewport, map.Layers);
             var mapInfoEventArgs = new MapInfoEventArgs(screenPosition, worldPosition,
-                e.GestureType, map.Navigator.Viewport, handled, GetMapInfo, GetRemoteMapInfoAsync);
+                e.GestureType, map, GetMapInfo, GetRemoteMapInfoAsync);
 
             HandlerInfo(mapInfoEventArgs);
 
-            handled = mapInfoEventArgs.Handled;
+            var handled = mapInfoEventArgs.Handled;
 
             if (!handled)
             {
@@ -667,7 +666,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             }
         }
 
-        return handled;
+        return false;
     }
 
     private void HandlerPinPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -802,7 +801,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     }
 
     private ImageButtonWidget CreateButton(
-        float x, float y, string imageSource, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
+        float x, float y, string imageSource, Func<IWidget, WidgetEventArgs, bool> tapped) => new()
         {
             Image = imageSource,
             HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,

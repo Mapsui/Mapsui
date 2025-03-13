@@ -49,9 +49,9 @@ public class CustomWidget : BaseWidget
 
     public Color? Color { get; set; }
 
-    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
+    public override bool OnTapped(WidgetEventArgs e)
     {
-        base.OnTapped(navigator, e);
+        base.OnTapped(e);
 
         if (e.GestureType == GestureType.SingleTap)
             Color = GenerateRandomColor();

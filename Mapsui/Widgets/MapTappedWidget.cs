@@ -13,9 +13,9 @@ public class MapTappedWidget : InputOnlyWidget // Derived from InputOnlyWidget b
         InputAreaType = InputAreaType.Map;
     }
 
-    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
+    public override bool OnTapped(WidgetEventArgs e)
     {
-        var result = base.OnTapped(navigator, e);
+        var result = base.OnTapped(e);
         if (!result)
         {
             result = _handlerTap(e);

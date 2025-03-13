@@ -16,9 +16,9 @@ public class MouseCoordinatesWidget : TextBoxWidget
         Text = "Mouse Position";
     }
 
-    public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
+    public override bool OnPointerMoved(WidgetEventArgs e)
     {
-        var worldPosition = navigator.Viewport.ScreenToWorld(e.ScreenPosition);
+        var worldPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
         // update the Mouse position
         Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
         return false;

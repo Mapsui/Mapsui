@@ -57,32 +57,28 @@ public interface IWidget
     /// <summary>
     /// Function, which handles the widget tapped event
     /// </summary>
-    /// <param name="navigator">Navigator of MapControl</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnTapped(Navigator navigator, WidgetEventArgs e);
+    bool OnTapped(WidgetEventArgs e);
 
     /// <summary>
     /// Function, which handles the widget pointer pressed event
     /// </summary>
-    /// <param name="navigator">Navigator of MapControl</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnPointerPressed(Navigator navigator, WidgetEventArgs e);
+    bool OnPointerPressed(WidgetEventArgs e);
 
     /// <summary>
     /// Function, which handles the widget pointer moved event
     /// </summary>
-    /// <param name="navigator">Navigator of MapControl</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnPointerMoved(Navigator navigator, WidgetEventArgs e);
+    bool OnPointerMoved(WidgetEventArgs e);
 
     /// <summary>
     /// Function, which handles the widget pointer released event
     /// </summary>
-    /// <param name="navigator">Navigator of MapControl</param>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnPointerReleased(Navigator navigator, WidgetEventArgs e);
+    bool OnPointerReleased(WidgetEventArgs e);
 }

@@ -154,6 +154,28 @@ public abstract class BaseWidget : IWidget
 
     public bool InputTransparent { get; init; }
 
+    /// <summary>
+    /// Event which is called if widget is tapped.
+    /// </summary>
+    public Func<IWidget, WidgetEventArgs, bool> Tapped { get; set; } = (s, e) => false;
+
+    /// <summary>
+    /// Event which is called if widget is pressed.
+    /// </summary>
+    public Func<IWidget, WidgetEventArgs, bool> PointerPressed { get; set; } = (s, e) => false;
+
+    /// <summary>
+    /// Event which is called if widget is moved.
+    /// </summary>
+    public Func<IWidget, WidgetEventArgs, bool> PointerMoved { get; set; } = (s, e) => false;
+
+    /// <summary>
+    /// Event which is called if widget is released.
+    /// </summary>
+    public Func<IWidget, WidgetEventArgs, bool> PointerReleased { get; set; } = (s, e) => false;
+
+
+
     public void UpdateEnvelope(double maxWidth, double maxHeight, double screenWidth, double screenHeight)
     {
         var minX = CalculatePositionX(0, screenWidth, maxWidth);
@@ -170,27 +192,27 @@ public abstract class BaseWidget : IWidget
     }
 
     /// <inheritdoc/>
-    public virtual bool OnTapped(Navigator navigator, WidgetEventArgs e)
+    public virtual bool OnTapped(WidgetEventArgs e)
     {
-        return false;
+        return Tapped(this, e);
     }
 
     /// <inheritdoc/>
-    public virtual bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
+    public virtual bool OnPointerPressed(WidgetEventArgs e)
     {
-        return false;
+        return PointerPressed(this, e);
     }
 
     /// <inheritdoc/>
-    public virtual bool OnPointerMoved(Navigator navigator, WidgetEventArgs e)
+    public virtual bool OnPointerMoved(WidgetEventArgs e)
     {
-        return false;
+        return PointerMoved(this, e);
     }
 
     /// <inheritdoc/>
-    public virtual bool OnPointerReleased(Navigator navigator, WidgetEventArgs e)
+    public virtual bool OnPointerReleased(WidgetEventArgs e)
     {
-        return false;
+        return PointerReleased(this, e);
     }
 
     private double CalculatePositionX(double left, double right, double width) => HorizontalAlignment switch

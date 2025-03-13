@@ -1,6 +1,5 @@
 ﻿using Mapsui.Styles;
 using Mapsui.Widgets.BoxWidgets;
-using System;
 
 namespace Mapsui.Widgets.ButtonWidgets;
 
@@ -13,11 +12,6 @@ public class ImageButtonWidget : BoxWidget, IHasImage
     {
         BackColor = Color.Transparent;
     }
-
-    /// <summary>
-    /// Event handler which is called, when the button is touched
-    /// </summary>
-    public Func<ImageButtonWidget, WidgetEventArgs, bool> Tapped = (s, e) => false;
 
     private MRect _padding = new(0);
 
@@ -70,10 +64,5 @@ public class ImageButtonWidget : BoxWidget, IHasImage
             _rotation = value;
             Invalidate();
         }
-    }
-
-    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
-    {
-        return Tapped(this, e);
     }
 }
