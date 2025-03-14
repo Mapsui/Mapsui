@@ -155,26 +155,44 @@ public abstract class BaseWidget : IWidget
     public bool InputTransparent { get; init; }
 
     /// <summary>
+    /// This is an init only property to allow Tapped event initialization within an expression body method.
+    /// </summary>
+    public EventHandler<WidgetEventArgs>? WithTappedEvent { init { Tapped += value; } }
+
+    /// <summary>
+    /// This is an init only property to allow PointerPressed event initialization within an expression body method.
+    /// </summary>
+    public EventHandler<WidgetEventArgs>? WithPointerPressedEvent { init { PointerPressed += value; } }
+
+    /// <summary>
+    /// This is an init only property to allow PointerMoved event initialization within an expression body method.
+    /// </summary>
+    public EventHandler<WidgetEventArgs>? WithPointerMovedEvent { init { PointerMoved += value; } }
+
+    /// <summary>
+    /// This is an init only property to allow PointerReleased event initialization within an expression body method.
+    /// </summary>
+    public EventHandler<WidgetEventArgs>? WithPointerReleased { init { PointerReleased += value; } }
+
+    /// <summary>
     /// Event which is called if widget is tapped.
     /// </summary>
-    public Func<IWidget, WidgetEventArgs, bool> Tapped { get; set; } = (s, e) => false;
+    public event EventHandler<WidgetEventArgs>? Tapped;
 
     /// <summary>
     /// Event which is called if widget is pressed.
     /// </summary>
-    public Func<IWidget, WidgetEventArgs, bool> PointerPressed { get; set; } = (s, e) => false;
+    public event EventHandler<WidgetEventArgs>? PointerPressed;
 
     /// <summary>
     /// Event which is called if widget is moved.
     /// </summary>
-    public Func<IWidget, WidgetEventArgs, bool> PointerMoved { get; set; } = (s, e) => false;
+    public event EventHandler<WidgetEventArgs>? PointerMoved;
 
     /// <summary>
     /// Event which is called if widget is released.
     /// </summary>
-    public Func<IWidget, WidgetEventArgs, bool> PointerReleased { get; set; } = (s, e) => false;
-
-
+    public event EventHandler<WidgetEventArgs>? PointerReleased;
 
     public void UpdateEnvelope(double maxWidth, double maxHeight, double screenWidth, double screenHeight)
     {
@@ -192,27 +210,27 @@ public abstract class BaseWidget : IWidget
     }
 
     /// <inheritdoc/>
-    public virtual bool OnTapped(WidgetEventArgs e)
+    public virtual void OnTapped(WidgetEventArgs e)
     {
-        return Tapped(this, e);
+        Tapped?.Invoke(this, e);
     }
 
     /// <inheritdoc/>
-    public virtual bool OnPointerPressed(WidgetEventArgs e)
+    public virtual void OnPointerPressed(WidgetEventArgs e)
     {
-        return PointerPressed(this, e);
+        PointerPressed?.Invoke(this, e);
     }
 
     /// <inheritdoc/>
-    public virtual bool OnPointerMoved(WidgetEventArgs e)
+    public virtual void OnPointerMoved(WidgetEventArgs e)
     {
-        return PointerMoved(this, e);
+        PointerMoved?.Invoke(this, e);
     }
 
     /// <inheritdoc/>
-    public virtual bool OnPointerReleased(WidgetEventArgs e)
+    public virtual void OnPointerReleased(WidgetEventArgs e)
     {
-        return PointerReleased(this, e);
+        PointerReleased?.Invoke(this, e);
     }
 
     private double CalculatePositionX(double left, double right, double width) => HorizontalAlignment switch

@@ -49,7 +49,7 @@ public class CustomWidget : BaseWidget
 
     public Color? Color { get; set; }
 
-    public override bool OnTapped(WidgetEventArgs e)
+    public override void OnTapped(WidgetEventArgs e)
     {
         base.OnTapped(e);
 
@@ -57,7 +57,6 @@ public class CustomWidget : BaseWidget
             Color = GenerateRandomColor();
         else
             Color = Mapsui.Styles.Color.Transparent;
-        return false;
     }
 
     public static Color GenerateRandomColor()

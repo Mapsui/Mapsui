@@ -1,4 +1,6 @@
-﻿namespace Mapsui.Widgets;
+﻿using System;
+
+namespace Mapsui.Widgets;
 
 public interface IWidget
 {
@@ -55,30 +57,50 @@ public interface IWidget
     bool InputTransparent { get; init; }
 
     /// <summary>
+    /// Event which is called if widget is tapped.
+    /// </summary>
+    event EventHandler<WidgetEventArgs>? Tapped;
+
+    /// <summary>
+    /// Event which is called if widget is pressed.
+    /// </summary>
+    event EventHandler<WidgetEventArgs>? PointerPressed;
+
+    /// <summary>
+    /// Event which is called if widget is moved.
+    /// </summary>
+    event EventHandler<WidgetEventArgs>? PointerMoved;
+
+    /// <summary>
+    /// Event which is called if widget is released.
+    /// </summary>
+    event EventHandler<WidgetEventArgs>? PointerReleased;
+
+    /// <summary>
     /// Function, which handles the widget tapped event
     /// </summary>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnTapped(WidgetEventArgs e);
+    void OnTapped(WidgetEventArgs e);
 
     /// <summary>
     /// Function, which handles the widget pointer pressed event
     /// </summary>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnPointerPressed(WidgetEventArgs e);
+    void OnPointerPressed(WidgetEventArgs e);
 
     /// <summary>
     /// Function, which handles the widget pointer moved event
     /// </summary>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnPointerMoved(WidgetEventArgs e);
+    void OnPointerMoved(WidgetEventArgs e);
 
     /// <summary>
     /// Function, which handles the widget pointer released event
     /// </summary>
     /// <param name="e">Arguments for this widget touch</param>
     /// <returns>True, if the Widget had handled the touch event</returns>
-    bool OnPointerReleased(WidgetEventArgs e);
+    void OnPointerReleased(WidgetEventArgs e);
 }

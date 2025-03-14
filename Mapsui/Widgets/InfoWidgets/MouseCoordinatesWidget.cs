@@ -16,11 +16,10 @@ public class MouseCoordinatesWidget : TextBoxWidget
         Text = "Mouse Position";
     }
 
-    public override bool OnPointerMoved(WidgetEventArgs e)
+    public override void OnPointerMoved(WidgetEventArgs e)
     {
         var worldPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
         // update the Mouse position
         Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
-        return false;
     }
 }
