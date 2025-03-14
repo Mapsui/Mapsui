@@ -68,9 +68,9 @@ public class NavigatorTests
         navigator.SetSize(10, 10);
 
         // Save changes to old viewport
-        navigator.ViewportChanged += (sender, args) =>
+        navigator.ViewportChanged += (s, e) =>
         {
-            oldViewport = args.OldViewport;
+            oldViewport = e.OldViewport;
         };
 
         // Test size change

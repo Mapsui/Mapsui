@@ -45,19 +45,19 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// <summary>
     /// Event that is triggered when the map is tapped. Can be a single tap, double tap or long press.
     /// </summary>
-    public Func<Map, MapEventArgs, bool> Tapped { get; set; } = (s, e) => false;
+    public event EventHandler<MapEventArgs>? Tapped;
     /// <summary>
     /// Event that is triggered when on pointer down.
     /// </summary>
-    public Func<Map, MapEventArgs, bool> PointerPressed { get; set; } = (s, e) => false;
+    public event EventHandler<MapEventArgs>? PointerPressed;
     /// <summary>
     /// Event that is triggered when on pointer move. Can be a drag or hover.
     /// </summary>
-    public Func<Map, MapEventArgs, bool> PointerMoved { get; set; } = (s, e) => false;
+    public event EventHandler<MapEventArgs>? PointerMoved;
     /// <summary>
     /// Event that is triggered when on pointer up.
     /// </summary>
-    public Func<Map, MapEventArgs, bool> PointerReleased { get; set; } = (s, e) => false;
+    public event EventHandler<MapEventArgs>? PointerReleased;
 
     private void Navigator_ViewportChanged(object? sender, ViewportChangedEventArgs e)
     {
@@ -262,27 +262,27 @@ public class Map : INotifyPropertyChanged, IDisposable
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public virtual bool OnTapped(MapEventArgs e)
+    public virtual void OnTapped(MapEventArgs e)
     {
-        return Tapped(this, e);
+        Tapped?.Invoke(this, e);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public virtual bool OnPointerPressed(MapEventArgs e)
+    public virtual void OnPointerPressed(MapEventArgs e)
     {
-        return PointerPressed(this, e);
+        PointerPressed?.Invoke(this, e);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public virtual bool OnPointerMoved(MapEventArgs e)
+    public virtual void OnPointerMoved(MapEventArgs e)
     {
-        return PointerMoved(this, e);
+        PointerMoved?.Invoke(this, e);
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public virtual bool OnPointerReleased(MapEventArgs e)
+    public virtual void OnPointerReleased(MapEventArgs e)
     {
-        return PointerReleased(this, e);
+        PointerReleased?.Invoke(this, e);
     }
 
     private void LayersCollectionChanged(object sender, LayerCollectionChangedEventArgs args)

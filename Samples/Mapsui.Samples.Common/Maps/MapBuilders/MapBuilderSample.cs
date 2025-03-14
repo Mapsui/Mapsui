@@ -46,9 +46,8 @@ public static class SampleMapBuilderExtensions
             if (e.GetMapInfo([layer]).Feature?.Data is UserData data)
             {
                 data.CalloutEnabled = !data.CalloutEnabled;
-                return true;
+                e.Handled = true;
             }
-            return false;
         };
 
         layer.WithPinAndCallout(

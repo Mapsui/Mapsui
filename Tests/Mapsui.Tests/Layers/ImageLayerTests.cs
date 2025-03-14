@@ -40,9 +40,9 @@ public class ImageLayerTests
         using var waitHandle = new AutoResetEvent(false);
         Exception? exception = null;
 
-        imageLayer.DataChanged += (_, args) =>
+        imageLayer.DataChanged += (s, e) =>
         {
-            exception = args.Error;
+            exception = e.Error;
             waitHandle.Go();
         };
 

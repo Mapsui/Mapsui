@@ -46,18 +46,17 @@ public class CustomCalloutStyleSample : IMapControlSample
         return map;
     }
 
-    private static bool MapTapped(Map map, MapEventArgs e)
+    private static void MapTapped(object? s, MapEventArgs e)
     {
-        var feature = e.GetMapInfo(map.Layers.Where(l => l.Name == _customStyleLayerName)).Feature;
+        var feature = e.GetMapInfo(e.Map.Layers.Where(l => l.Name == _customStyleLayerName)).Feature;
         if (feature is not null)
         {
             if (feature["show-callout"]?.ToString() == "true")
                 feature["show-callout"] = "false";
             else
                 feature["show-callout"] = "true";
-            return true;
+            e.Handled = true;
         }
-        return false;
     }
 
     private static MemoryLayer CreateCalloutLayer(IEnumerable<IFeature> features) => new()

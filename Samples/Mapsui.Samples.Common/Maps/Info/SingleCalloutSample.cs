@@ -40,17 +40,16 @@ public class SingleCalloutSample : ISample
         return Task.FromResult(map);
     }
 
-    private static bool MapTapped(Map map, MapEventArgs e)
+    private static void MapTapped(object? s, MapEventArgs e)
     {
-        var mapInfo = e.GetMapInfo(map.Layers.Where(l => l.Name == _calloutLayerName));
+        var mapInfo = e.GetMapInfo(e.Map.Layers.Where(l => l.Name == _calloutLayerName));
         var calloutStyle = mapInfo.Feature?.Styles.OfType<CalloutStyle>().FirstOrDefault();
         if (calloutStyle is not null)
         {
             calloutStyle.Enabled = !calloutStyle.Enabled;
             mapInfo.Layer?.DataHasChanged(); // To trigger a refresh of graphics.
-            return true;
+            e.Handled = true;
         }
-        return false;
     }
 
     private static MemoryLayer CreatePointLayer()

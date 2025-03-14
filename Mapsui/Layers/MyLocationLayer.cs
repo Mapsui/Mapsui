@@ -497,14 +497,13 @@ public class MyLocationLayer : BaseLayer, IDisposable
         return modified;
     }
 
-    private bool MapTapped(Map map, MapEventArgs e)
+    private void MapTapped(object? s, MapEventArgs e)
     {
         var mapInfo = e.GetMapInfo([this]);
         if (mapInfo.Feature != null && mapInfo.Feature.Equals(_feature))
         {
             Tapped?.Invoke(this, e);
-            return true;
+            e.Handled = true;
         }
-        return false;
     }
 }

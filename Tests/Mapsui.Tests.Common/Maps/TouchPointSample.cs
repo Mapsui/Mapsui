@@ -68,12 +68,12 @@ public sealed class TouchPointSample : ISample, IDisposable
         SymbolScale = scale
     };
 
-    private bool MapTapped(Map map, MapEventArgs e)
+    private void MapTapped(object? s, MapEventArgs e)
     {
-        var mapInfo = e.GetMapInfo(map.Layers.Where(l => l.Name == "Layer"));
+        var mapInfo = e.GetMapInfo(e.Map.Layers.Where(l => l.Name == "Layer"));
         _mousePosition!.Text = $"X: {Convert.ToInt32(mapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(mapInfo.ScreenPosition.Y)}";
         _mousePosition.NeedsRedraw = true;
-        var clickLayer = map.Layers.OfType<MemoryLayer>().First(l => l.Name == "Click Layer");
+        var clickLayer = e.Map.Layers.OfType<MemoryLayer>().First(l => l.Name == "Click Layer");
         var features = (List<IFeature>)clickLayer.Features;
         features.Add(new PointFeature(mapInfo.WorldPosition.X, mapInfo.WorldPosition.Y));
         clickLayer.DataHasChanged();
@@ -81,9 +81,8 @@ public sealed class TouchPointSample : ISample, IDisposable
         {
             _label!.Text = _label.Text == "Not Selected" ? "Selected" : "Not Selected";
             _label.NeedsRedraw = true;
-            return true;
+            e.Handled = true;
         }
-        return false;
     }
 
     private static TextBoxWidget CreateLabel(

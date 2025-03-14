@@ -650,10 +650,10 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             if (!handled)
             {
                 // if nothing else was hit, then we hit the map
-                var args = new MapClickedEventArgs(worldPosition.ToNative(), e.GestureType);
-                MapClicked?.Invoke(this, args);
+                var eventArgs = new MapClickedEventArgs(worldPosition.ToNative(), e.GestureType);
+                MapClicked?.Invoke(this, eventArgs);
 
-                if (args.Handled)
+                if (e.Handled)
                 {
                     handled = true;
                     return handled;
