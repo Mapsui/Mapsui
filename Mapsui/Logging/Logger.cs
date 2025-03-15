@@ -52,7 +52,7 @@ public static class Logger
     public class LoggerSettings
     {
         public bool LogMapEvents { get; set; }
-        public bool LogWidgetEvents { get; set; } = true;
+        public bool LogWidgetEvents { get; set; }
     }
 }
 
