@@ -23,6 +23,5 @@ internal class SphericalMercatorTests
         var distanceInKilometer = Haversine.Distance(inLon, inLat, outLon, outLat);
         var distanceInCentimeter = distanceInKilometer * 100000;
         ClassicAssert.Less(distanceInCentimeter, 1);
-        Assert.That(distanceInCentimeter, Is.LessThan(1));
     }
 }
