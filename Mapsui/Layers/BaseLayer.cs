@@ -211,9 +211,9 @@ public abstract class BaseLayer : ILayer
         _eventMangerPropertyChanged?.RaiseEvent(this, new PropertyChangedEventArgs(name));
     }
 
-    protected void OnDataChanged(DataChangedEventArgs args)
+    protected void OnDataChanged(DataChangedEventArgs e)
     {
-        DataChanged?.Invoke(this, args);
+        DataChanged?.Invoke(this, e);
     }
 
     protected virtual void Dispose(bool disposing)

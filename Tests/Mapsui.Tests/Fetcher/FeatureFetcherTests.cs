@@ -30,9 +30,9 @@ public class FeatureFetcherTests
         // Because we use weak references for the PropertyChanged event handler it can get
         // garbage collected if use a lambda directly assigned to the layer.PropertyChanged.
         // So we need to create the variable below to prevent garbage collection.
-        PropertyChangedEventHandler propertyChanged = (_, args) =>
+        PropertyChangedEventHandler propertyChanged = (s, e) =>
         {
-            if (args.PropertyName == nameof(Layer.Busy))
+            if (e.PropertyName == nameof(Layer.Busy))
             {
                 notifications.Add(layer.Busy);
             }

@@ -25,18 +25,20 @@ public class HyperlinkWidget : ButtonWidget
         }
     }
 
-    public override bool OnTapped(WidgetEventArgs e)
+    public override void OnTapped(WidgetEventArgs e)
     {
-        if (base.OnTapped(e))
-            return true; // The user could override the behavior in the Tapped event.
+        base.OnTapped(e);
+        if (e.Handled)
+            return;
 
         if (Url is null)
         {
             Logger.Log(LogLevel.Warning, "HyperlinkWidget: URL is not set");
-            return true;
+            e.Handled = true;
+            return;
         }
 
         PlatformUtilities.OpenInBrowser(Url);
-        return true;
+        e.Handled = true;
     }
 }

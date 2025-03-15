@@ -87,7 +87,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         var orientationSensor = SimpleOrientationSensor.GetDefault();
         if (orientationSensor != null)
-            orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(() => Refresh());
+            orientationSensor.OrientationChanged += (s, e) => RunOnUIThread(() => Refresh());
     }
 
     private void MapControl_KeyUp(object sender, KeyRoutedEventArgs e)

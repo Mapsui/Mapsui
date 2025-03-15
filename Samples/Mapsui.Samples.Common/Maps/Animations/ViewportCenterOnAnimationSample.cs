@@ -24,11 +24,11 @@ public class ViewportCenterOnAnimationSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
         map.Widgets.Add(CreateTextBox("Tap on the map to center on that location"));
-        map.Tapped += (m, e) =>
+        map.Tapped += (s, e) =>
         {
             // Animate to the new center.
-            m.Navigator.CenterOn(e.WorldPosition, 500, Easing.CubicOut);
-            return true;
+            e.Map.Navigator.CenterOn(e.WorldPosition, 500, Easing.CubicOut);
+            e.Handled = true;
         };
         return map;
     }

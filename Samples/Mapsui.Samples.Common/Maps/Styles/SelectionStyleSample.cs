@@ -29,14 +29,14 @@ internal class SelectionStyleSample : ISample
         return map;
     }
 
-    private static bool MapTapped(Map map, MapEventArgs e)
+    private static void MapTapped(object? s, MapEventArgs e)
     {
-        var feature = e.GetMapInfo(map.Layers.Where(l => l.Name == "Points")).Feature;
+        var feature = e.GetMapInfo(e.Map.Layers.Where(l => l.Name == "Points")).Feature;
         if (feature is null)
-            return false; ;
+            return; ;
         if (feature["selected"] is null) feature["selected"] = "true";
         else feature["selected"] = null;
-        return true;
+        e.Handled = true;
     }
 
     public static ILayer CreatePointLayer() => new Layer("Points")

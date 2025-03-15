@@ -60,11 +60,11 @@ public class PerformanceWidgetSample : IMapControlSample
         TextSize = 12,
         TextColor = Color.Black,
         BackColor = Color.White,
-        Tapped = (s, e) =>
+        WithTappedEvent = (s, e) =>
         {
             _mapControl?.Performance?.Clear();
             _mapControl?.RefreshGraphics();
-            return true;
+            e.Handled = true;
         }
     };
 }

@@ -111,7 +111,7 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Delete",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             if (_editManager.SelectMode)
             {
@@ -120,8 +120,7 @@ public class EditingSample : IMapControlSample
                     _editManager.Layer?.TryRemove(selectedFeature);
                 _mapControl?.RefreshGraphics();
             }
-
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -135,10 +134,10 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Select (for delete)",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             _editManager.SelectMode = !_editManager.SelectMode;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -152,10 +151,10 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "None",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             _editManager.EditMode = EditMode.None;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -169,10 +168,10 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Scale",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             _editManager.EditMode = EditMode.Scale;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -186,10 +185,10 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Rotate",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             _editManager.EditMode = EditMode.Rotate;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -203,10 +202,10 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Modify",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             _editManager.EditMode = EditMode.Modify;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -220,14 +219,14 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Add Polygon",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? [];
             foreach (var feature in features)
                 feature.Modified();
-            _tempFeatures = new List<IFeature>(features);
+            _tempFeatures = [.. features];
             _editManager.EditMode = EditMode.AddPolygon;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -241,14 +240,14 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Add Line",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? [];
             foreach (var feature in features)
                 feature.Modified();
-            _tempFeatures = new List<IFeature>(features);
+            _tempFeatures = [.. features];
             _editManager.EditMode = EditMode.AddLine;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -262,14 +261,14 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Add Point",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? [];
             foreach (var feature in features)
                 feature.Modified();
-            _tempFeatures = new List<IFeature>(features);
+            _tempFeatures = [.. features];
             _editManager.EditMode = EditMode.AddPoint;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -292,7 +291,7 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Cancel",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             if (_targetLayer != null && _tempFeatures != null)
             {
@@ -306,7 +305,7 @@ public class EditingSample : IMapControlSample
             _mapControl?.RefreshGraphics();
             _editManager.EditMode = EditMode.None;
             _tempFeatures = null;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -320,20 +319,20 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Load",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             var features = _targetLayer?.GetFeatures().Copy() ?? [];
 
             foreach (var feature in features)
                 feature.Modified();
 
-            _tempFeatures = new List<IFeature>(features);
+            _tempFeatures = [.. features];
 
             _editManager.Layer?.AddRange(features);
             _targetLayer?.Clear();
 
             _mapControl?.RefreshGraphics();
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -347,13 +346,13 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Save",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             _targetLayer?.AddRange(_editManager.Layer?.GetFeatures().Copy() ?? []);
             _editManager.Layer?.Clear();
 
             _mapControl?.RefreshGraphics();
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -367,10 +366,10 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Layer 3",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 3") as WritableLayer;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -384,10 +383,10 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Layer 2",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 2") as WritableLayer;
-            return true;
+            e.Handled = true;
         }
     };
 
@@ -401,10 +400,10 @@ public class EditingSample : IMapControlSample
         VerticalAlignment = VerticalAlignment.Absolute,
         Text = "Layer 1",
         BackColor = Color.LightGray,
-        Tapped = (_, e) =>
+        WithTappedEvent = (_, e) =>
         {
             _targetLayer = map.Layers.FirstOrDefault(f => f.Name == "Layer 1") as WritableLayer;
-            return true;
+            e.Handled = true;
         }
     };
 

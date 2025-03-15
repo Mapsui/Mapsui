@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers;
@@ -38,20 +39,20 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
         _map = new Map();
         _map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
         _map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer()));
-        var home = Mercator.FromLonLat(0, 0);
+        var home = SphericalMercator.FromLonLat(0, 0).ToMPoint();
         _map.Navigator.CenterOnAndZoomTo(home, _map.Navigator.Resolutions[9]);
         _map.Widgets.Enqueue(new ButtonWidget
         {
             Text = "Change Color",
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
-            Tapped = ChangeColor
+            WithTappedEvent = ChangeColor
         });
 
         return _map;
     }
 
-    private bool ChangeColor(object? sender, WidgetEventArgs e)
+    private void ChangeColor(object? sender, WidgetEventArgs e)
     {
         var layer = (_map?.Layers)?.First(f => f is RasterizingTileLayer) as RasterizingTileLayer;
         var random = new Random();
@@ -62,7 +63,6 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
             Fill = new Brush(color),
         };
         layer.ClearCache();
-        return false;
     }
 
     public static ILayer CreatePolygonLayer()

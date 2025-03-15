@@ -26,7 +26,7 @@ public class WriteToLayerSample : ISample
         map.Layers.Add(CreateGenericCollectionLayer());
         map.Tapped += (m, e) =>
         {
-            var layer = (GenericCollectionLayer<List<IFeature>>)m.Layers.First(l => l.Name == "GenericCollectionLayer");
+            var layer = (GenericCollectionLayer<List<IFeature>>)e.Map.Layers.First(l => l.Name == "GenericCollectionLayer");
             // Add a point to the layer using the Info position
             layer?.Features.Add(new GeometryFeature
             {
@@ -34,7 +34,7 @@ public class WriteToLayerSample : ISample
             });
             // To notify the map that a redraw is needed.
             layer?.DataHasChanged();
-            return true;
+            e.Handled = true;
         };
         return map;
     }

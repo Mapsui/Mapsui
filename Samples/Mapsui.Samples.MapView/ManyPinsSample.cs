@@ -132,11 +132,11 @@ public class ManyPinsSample : IMapViewSample
         ArgumentNullException.ThrowIfNull(mapControl.Performance);
         return new PerformanceWidget(mapControl.Performance)
         {
-            Tapped = (sender, args) =>
+            WithTappedEvent = (s, e) =>
             {
                 mapControl?.Performance.Clear();
                 mapControl?.RefreshGraphics();
-                return true;
+                e.Handled = true;
             }
         };
     }
