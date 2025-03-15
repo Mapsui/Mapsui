@@ -13,14 +13,12 @@ public class MapTappedWidget : InputOnlyWidget // Derived from InputOnlyWidget b
         InputAreaType = InputAreaType.Map;
     }
 
-    public override bool OnTapped(WidgetEventArgs e)
+    public override void OnTapped(WidgetEventArgs e)
     {
-        var result = base.OnTapped(e);
-        if (!result)
-        {
-            result = _handlerTap(e);
-        }
+        base.OnTapped(e);
+        if (e.Handled)
+            return;
 
-        return result;
+        _handlerTap(e);
     }
 }

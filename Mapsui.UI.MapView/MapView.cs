@@ -650,10 +650,10 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             if (!handled)
             {
                 // if nothing else was hit, then we hit the map
-                var args = new MapClickedEventArgs(worldPosition.ToNative(), e.GestureType);
-                MapClicked?.Invoke(this, args);
+                var eventArgs = new MapClickedEventArgs(worldPosition.ToNative(), e.GestureType);
+                MapClicked?.Invoke(this, eventArgs);
 
-                if (args.Handled)
+                if (e.Handled)
                 {
                     handled = true;
                     return handled;
@@ -781,19 +781,19 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void CreateButtons()
     {
-        _mapZoomInButton ??= CreateButton(0, 0, "embedded://Mapsui.UI.Maui.Images.ZoomIn.svg", (s, e) => { Map.Navigator.ZoomIn(); return true; });
+        _mapZoomInButton ??= CreateButton(0, 0, "embedded://Mapsui.UI.Maui.Images.ZoomIn.svg", (s, e) => { Map.Navigator.ZoomIn(); e.Handled = true; });
         _mapZoomInButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomInButton);
 
-        _mapZoomOutButton ??= CreateButton(0, 40, "embedded://Mapsui.UI.Maui.Images.ZoomOut.svg", (s, e) => { Map.Navigator.ZoomOut(); return true; });
+        _mapZoomOutButton ??= CreateButton(0, 40, "embedded://Mapsui.UI.Maui.Images.ZoomOut.svg", (s, e) => { Map.Navigator.ZoomOut(); e.Handled = true; });
         _mapZoomOutButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomOutButton);
 
-        _mapMyLocationButton ??= CreateButton(0, 88, "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg", (s, e) => { MyLocationFollow = true; return true; });
+        _mapMyLocationButton ??= CreateButton(0, 88, "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg", (s, e) => { MyLocationFollow = true; e.Handled = true; });
         _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
         Map!.Widgets.Add(_mapMyLocationButton);
 
-        _mapNorthingButton ??= CreateButton(0, 136, "embedded://Mapsui.UI.Maui.Images.RotationZero.svg", (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); return true; });
+        _mapNorthingButton ??= CreateButton(0, 136, "embedded://Mapsui.UI.Maui.Images.RotationZero.svg", (s, e) => { RunOnUIThread(() => { Map.Navigator.RotateTo(0); e.Handled = true; }); });
         _mapNorthingButton.Enabled = IsNorthingButtonVisible;
         Map!.Widgets.Add(_mapNorthingButton);
 
@@ -801,7 +801,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     }
 
     private ImageButtonWidget CreateButton(
-        float x, float y, string imageSource, Func<IWidget, WidgetEventArgs, bool> tapped) => new()
+        float x, float y, string imageSource, EventHandler<WidgetEventArgs> tapped) => new()
         {
             Image = imageSource,
             HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
@@ -811,7 +811,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             Height = ButtonSize,
             Rotation = 0,
             Enabled = true,
-            Tapped = tapped
+            WithTappedEvent = tapped
         };
 
     protected override void Dispose(bool disposing)

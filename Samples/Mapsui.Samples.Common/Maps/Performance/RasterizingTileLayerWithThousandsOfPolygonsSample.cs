@@ -46,13 +46,13 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
             Text = "Change Color",
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Top,
-            Tapped = ChangeColor
+            WithTappedEvent = ChangeColor
         });
 
         return _map;
     }
 
-    private bool ChangeColor(object? sender, WidgetEventArgs e)
+    private void ChangeColor(object? sender, WidgetEventArgs e)
     {
         var layer = (_map?.Layers)?.First(f => f is RasterizingTileLayer) as RasterizingTileLayer;
         var random = new Random();
@@ -63,7 +63,6 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
             Fill = new Brush(color),
         };
         layer.ClearCache();
-        return false;
     }
 
     public static ILayer CreatePolygonLayer()

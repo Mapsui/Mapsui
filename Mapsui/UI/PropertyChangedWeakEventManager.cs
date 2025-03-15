@@ -7,12 +7,12 @@ namespace Mapsui.UI;
 // Custom event manager for demonstration purposes
 public class PropertyChangedWeakEventManager : MWeakEventManager
 {
-    public void RaiseEvent(object source, PropertyChangedEventArgs args)
+    public void RaiseEvent(object source, PropertyChangedEventArgs e)
     {
-        RaiseEvent(source, source, args);
+        RaiseEvent(source, source, e);
     }
 
-    public void RaiseEvent(object source, object? sender, PropertyChangedEventArgs args)
+    public void RaiseEvent(object source, object? sender, PropertyChangedEventArgs e)
     {
         if (EventHandlers.TryGetValue(source, out var handlers))
         {
@@ -21,7 +21,7 @@ public class PropertyChangedWeakEventManager : MWeakEventManager
             {
                 if (weakRef is { IsAlive: true, Target: PropertyChangedEventHandler handler })
                 {
-                    handler(sender, args);
+                    handler(sender, e);
                 }
                 else
                 {

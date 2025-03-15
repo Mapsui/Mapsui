@@ -23,11 +23,11 @@ public class ViewportFlyToAnimationSample : ISample
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
         map.Widgets.Add(CreateTextBox("Tap on the map to fly to that location. The fly-to animation zooms out and then in."));
-        map.Tapped += (m, e) =>
+        map.Tapped += (s, e) =>
         {
             // 'FlyTo' is a specific navigation that moves to a new center while moving in and out.
-            m.Navigator.FlyTo(e.WorldPosition, e.Map.Navigator.Viewport.Resolution * 1.5, 500);
-            return true;
+            e.Map.Navigator.FlyTo(e.WorldPosition, e.Map.Navigator.Viewport.Resolution * 1.5, 500);
+            e.Handled = true;
         };
         return map;
     }

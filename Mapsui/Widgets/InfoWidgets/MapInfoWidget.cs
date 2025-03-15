@@ -56,7 +56,7 @@ public class MapInfoWidget : TextBoxWidget
         TextColor = Color.White;
     }
 
-    private bool MapTapped(Map map, MapEventArgs e)
+    private void MapTapped(object? s, MapEventArgs e)
     {
         var mapInfo = e.GetMapInfo(_layers());
         Text = FeatureToText(mapInfo.Feature);
@@ -72,7 +72,6 @@ public class MapInfoWidget : TextBoxWidget
                 _map.RefreshGraphics();
             }
         });
-        return false;
     }
 
     public Func<IFeature?, string> FeatureToText { get; set; } = (f) =>

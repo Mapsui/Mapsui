@@ -26,11 +26,11 @@ public class DynamicSvgStyleSample : ISample
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateLayerWithDynamicSvgStyle(() => tapPosition, map)); // Use 'closure capture' to keep a reference to the tapPosition.
-        map.Tapped += (m, e) =>
+        map.Tapped += (s, e) =>
         {
             tapPosition = e.WorldPosition; // Assign a new tap position to modify the dynamic style.
-            m.Layers.First().DataHasChanged(); // Notify that the map needs to be redraw.
-            return true;
+            e.Map.Layers.First().DataHasChanged(); // Notify that the map needs to be redraw.
+            e.Handled = true;
         };
         return Task.FromResult(map);
     }
