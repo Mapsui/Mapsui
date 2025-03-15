@@ -2519,6 +2519,11 @@
     "title": "Class Bearings",
     "keywords": "Class Bearings Inheritance object Bearings Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Mapsui.Utilities Assembly: Mapsui.dll Syntax public class Bearings Methods | Edit this page View Source CalculateBearing(double, double, double, double) Declaration public static double CalculateBearing(double fromLat, double fromLon, double toLat, double toLon) Parameters Type Name Description double fromLat double fromLon double toLat double toLon Returns Type Description double Extension Methods DisposableExtension.DisposeIfDisposable(object?)"
   },
+  "pages/Mapsui.Utilities.Caster.html": {
+    "href": "pages/Mapsui.Utilities.Caster.html",
+    "title": "Class Caster",
+    "keywords": "Class Caster Inheritance object Caster Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Mapsui.Utilities Assembly: Mapsui.dll Syntax public static class Caster Methods | Edit this page View Source TryCastOrThrow<T>(object?) Declaration public static T TryCastOrThrow<T>(object? obj) where T : class Parameters Type Name Description object obj Returns Type Description T Type Parameters Name Description T"
+  },
   "pages/Mapsui.Utilities.ConcurrentHashSet-1.html": {
     "href": "pages/Mapsui.Utilities.ConcurrentHashSet-1.html",
     "title": "Class ConcurrentHashSet<T>",
@@ -2582,7 +2587,7 @@
   "pages/Mapsui.Utilities.html": {
     "href": "pages/Mapsui.Utilities.html",
     "title": "Namespace Mapsui.Utilities",
-    "keywords": "Namespace Mapsui.Utilities Classes Algorithms Bearings ConcurrentHashSet<T> Represents a thread-safe hash-based unique collection. Constants EmbeddedResourceLoader Haversine ObservableRangeCollection<T> Implementation of a dynamic data collection based on generic Collection<T>, implementing INotifyCollectionChanged to notify listeners when items get added, removed or the whole list is refreshed. Performance PlatformUtilities Runtime StreamHelper TransformationAlgorithms Version Version information helper class ZoomHelper"
+    "keywords": "Namespace Mapsui.Utilities Classes Algorithms Bearings Caster ConcurrentHashSet<T> Represents a thread-safe hash-based unique collection. Constants EmbeddedResourceLoader Haversine ObservableRangeCollection<T> Implementation of a dynamic data collection based on generic Collection<T>, implementing INotifyCollectionChanged to notify listeners when items get added, removed or the whole list is refreshed. Performance PlatformUtilities Runtime StreamHelper TransformationAlgorithms Version Version information helper class ZoomHelper"
   },
   "pages/Mapsui.Viewport.html": {
     "href": "pages/Mapsui.Viewport.html",

@@ -39776,6 +39776,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Bearings.CalculateBearing
   nameWithType: Bearings.CalculateBearing
+- uid: Mapsui.Utilities.Caster
+  name: Caster
+  href: pages/Mapsui.Utilities.Caster.html
+  commentId: T:Mapsui.Utilities.Caster
+  fullName: Mapsui.Utilities.Caster
+  nameWithType: Caster
+- uid: Mapsui.Utilities.Caster.TryCastOrThrow*
+  name: TryCastOrThrow
+  href: pages/Mapsui.Utilities.Caster.html#Mapsui_Utilities_Caster_TryCastOrThrow_
+  commentId: Overload:Mapsui.Utilities.Caster.TryCastOrThrow
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Caster.TryCastOrThrow
+  nameWithType: Caster.TryCastOrThrow
+- uid: Mapsui.Utilities.Caster.TryCastOrThrow``1(System.Object)
+  name: TryCastOrThrow<T>(object?)
+  href: pages/Mapsui.Utilities.Caster.html#Mapsui_Utilities_Caster_TryCastOrThrow__1_System_Object_
+  commentId: M:Mapsui.Utilities.Caster.TryCastOrThrow``1(System.Object)
+  name.vb: TryCastOrThrow(Of T)(Object)
+  fullName: Mapsui.Utilities.Caster.TryCastOrThrow<T>(object?)
+  fullName.vb: Mapsui.Utilities.Caster.TryCastOrThrow(Of T)(Object)
+  nameWithType: Caster.TryCastOrThrow<T>(object?)
+  nameWithType.vb: Caster.TryCastOrThrow(Of T)(Object)
 - uid: Mapsui.Utilities.ConcurrentHashSet`1
   name: ConcurrentHashSet<T>
   href: pages/Mapsui.Utilities.ConcurrentHashSet-1.html

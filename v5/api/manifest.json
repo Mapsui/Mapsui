@@ -5052,6 +5052,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Utilities.Caster.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Utilities.Caster.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Utilities.ConcurrentHashSet-1.yml",
       "output": {
         ".html": {
