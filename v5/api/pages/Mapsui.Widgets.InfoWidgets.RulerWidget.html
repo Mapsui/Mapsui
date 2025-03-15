@@ -129,6 +129,18 @@
       <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_InputTransparent">BaseWidget.InputTransparent</a>
     </div>
     <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithTappedEvent">BaseWidget.WithTappedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithPointerPressedEvent">BaseWidget.WithPointerPressedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithPointerMovedEvent">BaseWidget.WithPointerMovedEvent</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithPointerReleased">BaseWidget.WithPointerReleased</a>
+    </div>
+    <div>
       <a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Tapped">BaseWidget.Tapped</a>
     </div>
     <div>
@@ -443,7 +455,7 @@ other widget.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L48">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L49">View Source</a>
   </span>
   <a id="Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerMoved_" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved*"></a>
   <h4 id="Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)">OnPointerMoved(WidgetEventArgs)</h4>
@@ -452,7 +464,7 @@ other widget.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool OnPointerMoved(WidgetEventArgs e)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void OnPointerMoved(WidgetEventArgs e)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -468,22 +480,6 @@ other widget.</p>
         <td><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></td>
         <td><span class="parametername">e</span></td>
         <td><p>Arguments for this widget touch</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><p>True, if the Widget had handled the touch event</p>
 </td>
       </tr>
     </tbody>
@@ -504,7 +500,7 @@ other widget.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool OnPointerPressed(WidgetEventArgs e)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void OnPointerPressed(WidgetEventArgs e)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -520,22 +516,6 @@ other widget.</p>
         <td><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></td>
         <td><span class="parametername">e</span></td>
         <td><p>Arguments for this widget touch</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><p>True, if the Widget had handled the touch event</p>
 </td>
       </tr>
     </tbody>
@@ -547,7 +527,7 @@ other widget.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerReleased_Mapsui_Widgets_WidgetEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L60">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L62">View Source</a>
   </span>
   <a id="Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerReleased_" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased*"></a>
   <h4 id="Mapsui_Widgets_InfoWidgets_RulerWidget_OnPointerReleased_Mapsui_Widgets_WidgetEventArgs_" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.OnPointerReleased(Mapsui.Widgets.WidgetEventArgs)">OnPointerReleased(WidgetEventArgs)</h4>
@@ -556,7 +536,7 @@ other widget.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool OnPointerReleased(WidgetEventArgs e)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void OnPointerReleased(WidgetEventArgs e)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -572,22 +552,6 @@ other widget.</p>
         <td><a class="xref" href="Mapsui.Widgets.WidgetEventArgs.html">WidgetEventArgs</a></td>
         <td><span class="parametername">e</span></td>
         <td><p>Arguments for this widget touch</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><p>True, if the Widget had handled the touch event</p>
 </td>
       </tr>
     </tbody>
@@ -599,7 +563,7 @@ other widget.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_RulerWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L67">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L70">View Source</a>
   </span>
   <a id="Mapsui_Widgets_InfoWidgets_RulerWidget_OnTapped_" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped*"></a>
   <h4 id="Mapsui_Widgets_InfoWidgets_RulerWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)">OnTapped(WidgetEventArgs)</h4>
@@ -608,7 +572,7 @@ other widget.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool OnTapped(WidgetEventArgs e)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void OnTapped(WidgetEventArgs e)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -628,22 +592,6 @@ other widget.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><p>True, if the Widget had handled the touch event</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_">BaseWidget.OnTapped(WidgetEventArgs)</a></div>
   <span class="small pull-right mobile-hide">
@@ -651,7 +599,7 @@ other widget.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_RulerWidget_Reset.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.RulerWidget.Reset%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L79">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L83">View Source</a>
   </span>
   <a id="Mapsui_Widgets_InfoWidgets_RulerWidget_Reset_" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.Reset*"></a>
   <h4 id="Mapsui_Widgets_InfoWidgets_RulerWidget_Reset" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.Reset">Reset()</h4>
@@ -666,7 +614,7 @@ other widget.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Widgets_InfoWidgets_RulerWidget_SnapToFeature_System_Func_Mapsui_MPoint_Mapsui_IFeature__.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature(System.Func%7BMapsui.MPoint%2CMapsui.IFeature%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L96">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Widgets/InfoWidgets/RulerWidget.cs/#L100">View Source</a>
   </span>
   <a id="Mapsui_Widgets_InfoWidgets_RulerWidget_SnapToFeature_" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature*"></a>
   <h4 id="Mapsui_Widgets_InfoWidgets_RulerWidget_SnapToFeature_System_Func_Mapsui_MPoint_Mapsui_IFeature__" data-uid="Mapsui.Widgets.InfoWidgets.RulerWidget.SnapToFeature(System.Func{Mapsui.MPoint,Mapsui.IFeature})">SnapToFeature(Func&lt;MPoint?, IFeature?&gt;)</h4>

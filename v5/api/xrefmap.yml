@@ -11558,40 +11558,19 @@ references:
 - uid: Mapsui.Map.PointerMoved
   name: PointerMoved
   href: pages/Mapsui.Map.html#Mapsui_Map_PointerMoved
-  commentId: P:Mapsui.Map.PointerMoved
-  fullName: Mapsui.Map.PointerMoved
-  nameWithType: Map.PointerMoved
-- uid: Mapsui.Map.PointerMoved*
-  name: PointerMoved
-  href: pages/Mapsui.Map.html#Mapsui_Map_PointerMoved_
-  commentId: Overload:Mapsui.Map.PointerMoved
-  isSpec: "True"
+  commentId: E:Mapsui.Map.PointerMoved
   fullName: Mapsui.Map.PointerMoved
   nameWithType: Map.PointerMoved
 - uid: Mapsui.Map.PointerPressed
   name: PointerPressed
   href: pages/Mapsui.Map.html#Mapsui_Map_PointerPressed
-  commentId: P:Mapsui.Map.PointerPressed
-  fullName: Mapsui.Map.PointerPressed
-  nameWithType: Map.PointerPressed
-- uid: Mapsui.Map.PointerPressed*
-  name: PointerPressed
-  href: pages/Mapsui.Map.html#Mapsui_Map_PointerPressed_
-  commentId: Overload:Mapsui.Map.PointerPressed
-  isSpec: "True"
+  commentId: E:Mapsui.Map.PointerPressed
   fullName: Mapsui.Map.PointerPressed
   nameWithType: Map.PointerPressed
 - uid: Mapsui.Map.PointerReleased
   name: PointerReleased
   href: pages/Mapsui.Map.html#Mapsui_Map_PointerReleased
-  commentId: P:Mapsui.Map.PointerReleased
-  fullName: Mapsui.Map.PointerReleased
-  nameWithType: Map.PointerReleased
-- uid: Mapsui.Map.PointerReleased*
-  name: PointerReleased
-  href: pages/Mapsui.Map.html#Mapsui_Map_PointerReleased_
-  commentId: Overload:Mapsui.Map.PointerReleased
-  isSpec: "True"
+  commentId: E:Mapsui.Map.PointerReleased
   fullName: Mapsui.Map.PointerReleased
   nameWithType: Map.PointerReleased
 - uid: Mapsui.Map.PropertyChanged
@@ -11654,14 +11633,7 @@ references:
 - uid: Mapsui.Map.Tapped
   name: Tapped
   href: pages/Mapsui.Map.html#Mapsui_Map_Tapped
-  commentId: P:Mapsui.Map.Tapped
-  fullName: Mapsui.Map.Tapped
-  nameWithType: Map.Tapped
-- uid: Mapsui.Map.Tapped*
-  name: Tapped
-  href: pages/Mapsui.Map.html#Mapsui_Map_Tapped_
-  commentId: Overload:Mapsui.Map.Tapped
-  isSpec: "True"
+  commentId: E:Mapsui.Map.Tapped
   fullName: Mapsui.Map.Tapped
   nameWithType: Map.Tapped
 - uid: Mapsui.Map.UpdateAnimations
@@ -41133,40 +41105,19 @@ references:
 - uid: Mapsui.Widgets.BaseWidget.PointerMoved
   name: PointerMoved
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerMoved
-  commentId: P:Mapsui.Widgets.BaseWidget.PointerMoved
-  fullName: Mapsui.Widgets.BaseWidget.PointerMoved
-  nameWithType: BaseWidget.PointerMoved
-- uid: Mapsui.Widgets.BaseWidget.PointerMoved*
-  name: PointerMoved
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerMoved_
-  commentId: Overload:Mapsui.Widgets.BaseWidget.PointerMoved
-  isSpec: "True"
+  commentId: E:Mapsui.Widgets.BaseWidget.PointerMoved
   fullName: Mapsui.Widgets.BaseWidget.PointerMoved
   nameWithType: BaseWidget.PointerMoved
 - uid: Mapsui.Widgets.BaseWidget.PointerPressed
   name: PointerPressed
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerPressed
-  commentId: P:Mapsui.Widgets.BaseWidget.PointerPressed
-  fullName: Mapsui.Widgets.BaseWidget.PointerPressed
-  nameWithType: BaseWidget.PointerPressed
-- uid: Mapsui.Widgets.BaseWidget.PointerPressed*
-  name: PointerPressed
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerPressed_
-  commentId: Overload:Mapsui.Widgets.BaseWidget.PointerPressed
-  isSpec: "True"
+  commentId: E:Mapsui.Widgets.BaseWidget.PointerPressed
   fullName: Mapsui.Widgets.BaseWidget.PointerPressed
   nameWithType: BaseWidget.PointerPressed
 - uid: Mapsui.Widgets.BaseWidget.PointerReleased
   name: PointerReleased
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerReleased
-  commentId: P:Mapsui.Widgets.BaseWidget.PointerReleased
-  fullName: Mapsui.Widgets.BaseWidget.PointerReleased
-  nameWithType: BaseWidget.PointerReleased
-- uid: Mapsui.Widgets.BaseWidget.PointerReleased*
-  name: PointerReleased
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_PointerReleased_
-  commentId: Overload:Mapsui.Widgets.BaseWidget.PointerReleased
-  isSpec: "True"
+  commentId: E:Mapsui.Widgets.BaseWidget.PointerReleased
   fullName: Mapsui.Widgets.BaseWidget.PointerReleased
   nameWithType: BaseWidget.PointerReleased
 - uid: Mapsui.Widgets.BaseWidget.Position
@@ -41185,14 +41136,7 @@ references:
 - uid: Mapsui.Widgets.BaseWidget.Tapped
   name: Tapped
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Tapped
-  commentId: P:Mapsui.Widgets.BaseWidget.Tapped
-  fullName: Mapsui.Widgets.BaseWidget.Tapped
-  nameWithType: BaseWidget.Tapped
-- uid: Mapsui.Widgets.BaseWidget.Tapped*
-  name: Tapped
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Tapped_
-  commentId: Overload:Mapsui.Widgets.BaseWidget.Tapped
-  isSpec: "True"
+  commentId: E:Mapsui.Widgets.BaseWidget.Tapped
   fullName: Mapsui.Widgets.BaseWidget.Tapped
   nameWithType: BaseWidget.Tapped
 - uid: Mapsui.Widgets.BaseWidget.UpdateEnvelope(System.Double,System.Double,System.Double,System.Double)
@@ -41237,6 +41181,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.BaseWidget.Width
   nameWithType: BaseWidget.Width
+- uid: Mapsui.Widgets.BaseWidget.WithPointerMovedEvent
+  name: WithPointerMovedEvent
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithPointerMovedEvent
+  commentId: P:Mapsui.Widgets.BaseWidget.WithPointerMovedEvent
+  fullName: Mapsui.Widgets.BaseWidget.WithPointerMovedEvent
+  nameWithType: BaseWidget.WithPointerMovedEvent
+- uid: Mapsui.Widgets.BaseWidget.WithPointerMovedEvent*
+  name: WithPointerMovedEvent
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithPointerMovedEvent_
+  commentId: Overload:Mapsui.Widgets.BaseWidget.WithPointerMovedEvent
+  isSpec: "True"
+  fullName: Mapsui.Widgets.BaseWidget.WithPointerMovedEvent
+  nameWithType: BaseWidget.WithPointerMovedEvent
+- uid: Mapsui.Widgets.BaseWidget.WithPointerPressedEvent
+  name: WithPointerPressedEvent
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithPointerPressedEvent
+  commentId: P:Mapsui.Widgets.BaseWidget.WithPointerPressedEvent
+  fullName: Mapsui.Widgets.BaseWidget.WithPointerPressedEvent
+  nameWithType: BaseWidget.WithPointerPressedEvent
+- uid: Mapsui.Widgets.BaseWidget.WithPointerPressedEvent*
+  name: WithPointerPressedEvent
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithPointerPressedEvent_
+  commentId: Overload:Mapsui.Widgets.BaseWidget.WithPointerPressedEvent
+  isSpec: "True"
+  fullName: Mapsui.Widgets.BaseWidget.WithPointerPressedEvent
+  nameWithType: BaseWidget.WithPointerPressedEvent
+- uid: Mapsui.Widgets.BaseWidget.WithPointerReleased
+  name: WithPointerReleased
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithPointerReleased
+  commentId: P:Mapsui.Widgets.BaseWidget.WithPointerReleased
+  fullName: Mapsui.Widgets.BaseWidget.WithPointerReleased
+  nameWithType: BaseWidget.WithPointerReleased
+- uid: Mapsui.Widgets.BaseWidget.WithPointerReleased*
+  name: WithPointerReleased
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithPointerReleased_
+  commentId: Overload:Mapsui.Widgets.BaseWidget.WithPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.Widgets.BaseWidget.WithPointerReleased
+  nameWithType: BaseWidget.WithPointerReleased
+- uid: Mapsui.Widgets.BaseWidget.WithTappedEvent
+  name: WithTappedEvent
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithTappedEvent
+  commentId: P:Mapsui.Widgets.BaseWidget.WithTappedEvent
+  fullName: Mapsui.Widgets.BaseWidget.WithTappedEvent
+  nameWithType: BaseWidget.WithTappedEvent
+- uid: Mapsui.Widgets.BaseWidget.WithTappedEvent*
+  name: WithTappedEvent
+  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_WithTappedEvent_
+  commentId: Overload:Mapsui.Widgets.BaseWidget.WithTappedEvent
+  isSpec: "True"
+  fullName: Mapsui.Widgets.BaseWidget.WithTappedEvent
+  nameWithType: BaseWidget.WithTappedEvent
 - uid: Mapsui.Widgets.BoxWidgets
   name: Mapsui.Widgets.BoxWidgets
   href: pages/Mapsui.Widgets.BoxWidgets.html
@@ -41749,6 +41745,24 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.IWidget.OnTapped
   nameWithType: IWidget.OnTapped
+- uid: Mapsui.Widgets.IWidget.PointerMoved
+  name: PointerMoved
+  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_PointerMoved
+  commentId: E:Mapsui.Widgets.IWidget.PointerMoved
+  fullName: Mapsui.Widgets.IWidget.PointerMoved
+  nameWithType: IWidget.PointerMoved
+- uid: Mapsui.Widgets.IWidget.PointerPressed
+  name: PointerPressed
+  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_PointerPressed
+  commentId: E:Mapsui.Widgets.IWidget.PointerPressed
+  fullName: Mapsui.Widgets.IWidget.PointerPressed
+  nameWithType: IWidget.PointerPressed
+- uid: Mapsui.Widgets.IWidget.PointerReleased
+  name: PointerReleased
+  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_PointerReleased
+  commentId: E:Mapsui.Widgets.IWidget.PointerReleased
+  fullName: Mapsui.Widgets.IWidget.PointerReleased
+  nameWithType: IWidget.PointerReleased
 - uid: Mapsui.Widgets.IWidget.Position
   name: Position
   href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Position
@@ -41762,6 +41776,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.IWidget.Position
   nameWithType: IWidget.Position
+- uid: Mapsui.Widgets.IWidget.Tapped
+  name: Tapped
+  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Tapped
+  commentId: E:Mapsui.Widgets.IWidget.Tapped
+  fullName: Mapsui.Widgets.IWidget.Tapped
+  nameWithType: IWidget.Tapped
 - uid: Mapsui.Widgets.IWidget.VerticalAlignment
   name: VerticalAlignment
   href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_VerticalAlignment
