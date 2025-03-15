@@ -9,7 +9,7 @@ Mapsui.Logging.Logger.LogDelegate += (level, message, ex) =>
 };
 ```
 
-### Forward Mapsui logging to ILogger
+## Forward Mapsui logging to ILogger
 
 This is an example of how to forward Mapsui logging to the de facto standard ```Microsoft.Extensions.Logging.ILogger```. If you have configured a logger in your app, like serilog for instance, you would get Mapsui log messages in that log file.
 ```csharp
@@ -34,14 +34,35 @@ This is an example of how to forward Mapsui logging to the de facto standard ```
     }
 ```
 
-### Show logging in the map
+## Show logging in the map
 
-It is possible to show all Mapsui logging in the map. By default this shows only if the debugger is attached. In most 
-scenarios this is what you want and you don't have to change anything for a release of your app. You could change the 
-logging behavior by setting the static `LoggingWidget.ShowLoggingInMap` to `Yes`, `No` or `ShowOnlyInDebugMode` (the 
-default). 
+It is possible to show all Mapsui logging in the map. There are three possible configurations *Yes*, *No*, and *ShowOnlyInDebugMode*. 
+That last one is the default and it means that the logging will show if the debugger is attached and not when it is not attached
+(Note, that this is not the same thing as building in Debug or Release mode, you can run either build with or without the debugger 
+attached). **In most scenarios this is what you want and you don't have to change anything for a release of your app**. 
+
+In some cases you want to enable it for the released app. For instance if you need to debug something that happens only with the released app. 
+In that case you can set the static LoggingWidget.ShowLoggingInMap field to Yes:
+```csharp
+LoggingWidget.ShowLoggingInMap = ShowLoggingInMap.Yes;
+```
+
+In other cases you want to disable it when debugging. For instance if you want to see how things look when the app is released.
+In that case you can set the static LoggingWidget.ShowLoggingInMap field to No:
+```csharp
+LoggingWidget.ShowLoggingInMap = ShowLoggingInMap.No;
+```
 
 Logging in the map is implemented through the LoggingWidget which is added by default to the Map class. Usually you
 can just leave it there. If you remove or disable it no logging will be shown in the map.
 
-If you have two maps in your app both will show all Mapsui logging.
+The logging settings are global, so if you have two maps in your app both will be affected by the ShowLoggingInMap 
+setting.
+
+### Logging of Map and Widget pointer events
+It is possible to enable logging of the Map and/or Widget pointer events by chaging the settings of the static Logger:
+```csharp
+Logger.Settings.LogMapEvents = true;
+Logger.Settings.LogWidgetEvents = true;
+```
+This is especially useful if you are trying to get widgets to work, or are developing your own widget.
