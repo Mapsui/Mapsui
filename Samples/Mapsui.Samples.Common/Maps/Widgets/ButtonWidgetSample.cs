@@ -3,6 +3,7 @@ using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using System;
@@ -29,7 +30,7 @@ public class ButtonWidgetSample : ISample
         {
             if (e.GestureType == GestureType.DoubleTap)
                 return;
-            var button = s as ButtonWidget ?? throw new InvalidCastException($"Expected {nameof(ButtonWidget)}");
+            var button = Caster.TryCastOrThrow<ButtonWidget>(s);
             button.Text = $"Tapped {++_tapCount} times";
             map.RefreshGraphics();
         }));
@@ -40,7 +41,7 @@ public class ButtonWidgetSample : ISample
         }));
         map.Widgets.Add(CreateButtonWidget("Hello!", VerticalAlignment.Bottom, HorizontalAlignment.Right, (s, e) =>
         {
-            var button = s as ButtonWidget ?? throw new InvalidCastException($"Expected {nameof(ButtonWidget)}");
+            var button = Caster.TryCastOrThrow<ButtonWidget>(s);
             button.Text = $"{button.Text}!";
             map.RefreshGraphics();
         }));
@@ -48,7 +49,7 @@ public class ButtonWidgetSample : ISample
         {
             if (e.GestureType == GestureType.SingleTap)
                 return;
-            var button = s as ButtonWidget ?? throw new InvalidCastException($"Expected {nameof(ButtonWidget)}");
+            var button = Caster.TryCastOrThrow<ButtonWidget>(s);
             button.Text = $"Double Tapped {++_doubleTapCount} times";
             map.RefreshGraphics();
         }));
