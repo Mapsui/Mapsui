@@ -15576,6 +15576,12 @@ references:
   commentId: T:Mapsui.Projections.Mercator
   fullName: Mapsui.Projections.Mercator
   nameWithType: Mercator
+- uid: Mapsui.Projections.Mercator.FromLonLat(Mapsui.MPoint)
+  name: FromLonLat(MPoint)
+  href: pages/Mapsui.Projections.Mercator.html#Mapsui_Projections_Mercator_FromLonLat_Mapsui_MPoint_
+  commentId: M:Mapsui.Projections.Mercator.FromLonLat(Mapsui.MPoint)
+  fullName: Mapsui.Projections.Mercator.FromLonLat(Mapsui.MPoint)
+  nameWithType: Mercator.FromLonLat(MPoint)
 - uid: Mapsui.Projections.Mercator.FromLonLat(System.Double,System.Double)
   name: FromLonLat(double, double)
   href: pages/Mapsui.Projections.Mercator.html#Mapsui_Projections_Mercator_FromLonLat_System_Double_System_Double_
@@ -15592,6 +15598,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Projections.Mercator.FromLonLat
   nameWithType: Mercator.FromLonLat
+- uid: Mapsui.Projections.Mercator.ToLonLat(Mapsui.MPoint)
+  name: ToLonLat(MPoint)
+  href: pages/Mapsui.Projections.Mercator.html#Mapsui_Projections_Mercator_ToLonLat_Mapsui_MPoint_
+  commentId: M:Mapsui.Projections.Mercator.ToLonLat(Mapsui.MPoint)
+  fullName: Mapsui.Projections.Mercator.ToLonLat(Mapsui.MPoint)
+  nameWithType: Mercator.ToLonLat(MPoint)
 - uid: Mapsui.Projections.Mercator.ToLonLat(System.Double,System.Double)
   name: ToLonLat(double, double)
   href: pages/Mapsui.Projections.Mercator.html#Mapsui_Projections_Mercator_ToLonLat_System_Double_System_Double_
