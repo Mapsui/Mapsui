@@ -667,7 +667,7 @@
   "pages/Mapsui.Logging.Logger.LoggerSettings.html": {
     "href": "pages/Mapsui.Logging.Logger.LoggerSettings.html",
     "title": "Class Logger.LoggerSettings",
-    "keywords": "Class Logger.LoggerSettings Inheritance object Logger.LoggerSettings Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Mapsui.Logging Assembly: Mapsui.dll Syntax public class Logger.LoggerSettings Properties | Edit this page View Source LogMapEvents Declaration public static bool LogMapEvents { get; set; } Property Value Type Description bool Extension Methods DisposableExtension.DisposeIfDisposable(object?)"
+    "keywords": "Class Logger.LoggerSettings Inheritance object Logger.LoggerSettings Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Mapsui.Logging Assembly: Mapsui.dll Syntax public class Logger.LoggerSettings Properties | Edit this page View Source LogMapEvents Declaration public bool LogMapEvents { get; set; } Property Value Type Description bool | Edit this page View Source LogWidgetEvents Declaration public bool LogWidgetEvents { get; set; } Property Value Type Description bool Extension Methods DisposableExtension.DisposeIfDisposable(object?)"
   },
   "pages/Mapsui.Logging.Logger.html": {
     "href": "pages/Mapsui.Logging.Logger.html",

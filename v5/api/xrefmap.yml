@@ -9699,6 +9699,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Logging.Logger.LoggerSettings.LogMapEvents
   nameWithType: Logger.LoggerSettings.LogMapEvents
+- uid: Mapsui.Logging.Logger.LoggerSettings.LogWidgetEvents
+  name: LogWidgetEvents
+  href: pages/Mapsui.Logging.Logger.LoggerSettings.html#Mapsui_Logging_Logger_LoggerSettings_LogWidgetEvents
+  commentId: P:Mapsui.Logging.Logger.LoggerSettings.LogWidgetEvents
+  fullName: Mapsui.Logging.Logger.LoggerSettings.LogWidgetEvents
+  nameWithType: Logger.LoggerSettings.LogWidgetEvents
+- uid: Mapsui.Logging.Logger.LoggerSettings.LogWidgetEvents*
+  name: LogWidgetEvents
+  href: pages/Mapsui.Logging.Logger.LoggerSettings.html#Mapsui_Logging_Logger_LoggerSettings_LogWidgetEvents_
+  commentId: Overload:Mapsui.Logging.Logger.LoggerSettings.LogWidgetEvents
+  isSpec: "True"
+  fullName: Mapsui.Logging.Logger.LoggerSettings.LogWidgetEvents
+  nameWithType: Logger.LoggerSettings.LogWidgetEvents
 - uid: Mapsui.Logging.Logger.Settings
   name: Settings
   href: pages/Mapsui.Logging.Logger.html#Mapsui_Logging_Logger_Settings

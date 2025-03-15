@@ -357,6 +357,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Show logging in the map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging-of-map-and-widget-pointer-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logging of Map and Widget pointer events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -872,6 +887,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Show logging in the map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging-of-map-and-widget-pointer-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logging of Map and Widget pointer events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -906,7 +936,7 @@
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="c1">// todo: Forward to your own logger</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">};</span>
 </span></code></pre></div>
-<h3 id="forward-mapsui-logging-to-ilogger">Forward Mapsui logging to ILogger</h3>
+<h2 id="forward-mapsui-logging-to-ilogger">Forward Mapsui logging to ILogger</h2>
 <p>This is an example of how to forward Mapsui logging to the de facto standard <code>Microsoft.Extensions.Logging.ILogger</code>. If you have configured a logger in your app, like serilog for instance, you would get Mapsui log messages in that log file.
 <div class="language-csharp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">AttachMapsuiLogging</span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="n">IServiceProvider</span><span class="w"> </span><span class="n">serviceProvider</span><span class="p">)</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="p">{</span>
@@ -928,14 +958,29 @@
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">        </span><span class="p">};</span>
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div></p>
-<h3 id="show-logging-in-the-map">Show logging in the map</h3>
-<p>It is possible to show all Mapsui logging in the map. By default this shows only if the debugger is attached. In most 
-scenarios this is what you want and you don't have to change anything for a release of your app. You could change the 
-logging behavior by setting the static <code>LoggingWidget.ShowLoggingInMap</code> to <code>Yes</code>, <code>No</code> or <code>ShowOnlyInDebugMode</code> (the 
-default). </p>
+<h2 id="show-logging-in-the-map">Show logging in the map</h2>
+<p>It is possible to show all Mapsui logging in the map. There are three possible configurations <em>Yes</em>, <em>No</em>, and <em>ShowOnlyInDebugMode</em>. 
+That last one is the default and it means that the logging will show if the debugger is attached and not when it is not attached
+(Note, that this is not the same thing as building in Debug or Release mode, you can run either build with or without the debugger 
+attached). <strong>In most scenarios this is what you want and you don't have to change anything for a release of your app</strong>. </p>
+<p>In some cases you want to enable it for the released app. For instance if you need to debug something that happens only with the released app. 
+In that case you can set the static LoggingWidget.ShowLoggingInMap field to Yes:
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">LoggingWidget</span><span class="p">.</span><span class="n">ShowLoggingInMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShowLoggingInMap</span><span class="p">.</span><span class="n">Yes</span><span class="p">;</span>
+</span></code></pre></div></p>
+<p>In other cases you want to disable it when debugging. For instance if you want to see how things look when the app is released.
+In that case you can set the static LoggingWidget.ShowLoggingInMap field to No:
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">LoggingWidget</span><span class="p">.</span><span class="n">ShowLoggingInMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShowLoggingInMap</span><span class="p">.</span><span class="n">No</span><span class="p">;</span>
+</span></code></pre></div></p>
 <p>Logging in the map is implemented through the LoggingWidget which is added by default to the Map class. Usually you
 can just leave it there. If you remove or disable it no logging will be shown in the map.</p>
-<p>If you have two maps in your app both will show all Mapsui logging.</p>
+<p>The logging settings are global, so if you have two maps in your app both will be affected by the ShowLoggingInMap 
+setting.</p>
+<h3 id="logging-of-map-and-widget-pointer-events">Logging of Map and Widget pointer events</h3>
+<p>It is possible to enable logging of the Map and/or Widget pointer events by chaging the settings of the static Logger:
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Logger</span><span class="p">.</span><span class="n">Settings</span><span class="p">.</span><span class="n">LogMapEvents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">Logger</span><span class="p">.</span><span class="n">Settings</span><span class="p">.</span><span class="n">LogWidgetEvents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+</span></code></pre></div>
+This is especially useful if you are trying to get widgets to work, or are developing your own widget.</p>
 
 
 
