@@ -51,7 +51,8 @@ public static class Logger
 
     public class LoggerSettings
     {
-        public static bool LogMapEvents { get; set; }
+        public bool LogMapEvents { get; set; }
+        public bool LogWidgetEvents { get; set; }
     }
 }
 
