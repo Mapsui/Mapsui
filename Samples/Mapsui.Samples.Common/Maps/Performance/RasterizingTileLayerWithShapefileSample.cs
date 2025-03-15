@@ -9,6 +9,7 @@ using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Layers;
 using System.IO;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -58,7 +59,7 @@ public class ShapefileTileSample : ISample
         map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource)));
         map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
         map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
-        var home = Mercator.FromLonLat(15, 54);
+        var home = SphericalMercator.FromLonLat(15, 53.817).ToMPoint();
         map.Navigator.CenterOnAndZoomTo(home, map.Navigator.Resolutions[5]);
 
         return map;
