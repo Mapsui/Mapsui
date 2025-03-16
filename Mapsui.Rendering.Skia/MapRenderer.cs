@@ -28,7 +28,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     private long _currentIteration;
     private static readonly Dictionary<Type, IWidgetRenderer> _widgetRenderers = [];
     private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
-    private static readonly Dictionary<string, PointStyleRenderer.PointStyleDrawer> _pointStyleRenderers = [];
+    private static readonly Dictionary<string, PointStyleRenderer.RenderHandler> _pointStyleRenderers = [];
 
     static MapRenderer()
     {
@@ -192,14 +192,14 @@ public sealed class MapRenderer : IRenderer, IDisposable
         return false;
     }
 
-    public static bool TryGetPointStyleRenderer(string rendererName, [NotNullWhen(true)] out PointStyleRenderer.PointStyleDrawer? pointStyleDrawer)
+    public static bool TryGetPointStyleRenderer(string rendererName, [NotNullWhen(true)] out PointStyleRenderer.RenderHandler? renderHandler)
     {
-        if (_pointStyleRenderers.TryGetValue(rendererName, out var outPointStyleDrawer))
+        if (_pointStyleRenderers.TryGetValue(rendererName, out var outRenderHandler))
         {
-            pointStyleDrawer = outPointStyleDrawer;
+            renderHandler = outRenderHandler;
             return true;
         }
-        pointStyleDrawer = null;
+        renderHandler = null;
         return false;
     }
 
@@ -213,9 +213,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
         _widgetRenderers[type] = renderer;
     }
 
-    public static void RegisterPointStyleRenderer(string rendererName, PointStyleRenderer.PointStyleDrawer renderer)
+    public static void RegisterPointStyleRenderer(string rendererName, PointStyleRenderer.RenderHandler rendererHandler)
     {
-        _pointStyleRenderers[rendererName] = renderer;
+        _pointStyleRenderers[rendererName] = rendererHandler;
     }
 
     private void RenderTo(Viewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
