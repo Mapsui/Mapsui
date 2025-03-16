@@ -60,7 +60,7 @@ The logging settings are global, so if you have two maps in your app both will b
 setting.
 
 ### Logging of Map and Widget pointer events
-It is possible to enable logging of the Map and/or Widget pointer events by chaging the settings of the static Logger:
+It is possible to enable logging of the Map and/or Widget pointer events by changing the settings of the static Logger:
 ```csharp
 Logger.Settings.LogMapEvents = true;
 Logger.Settings.LogWidgetEvents = true;
