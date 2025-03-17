@@ -8,6 +8,7 @@ using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using System;
@@ -38,6 +39,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         BackColor = Color.White;
         Layers = [];
         Widgets.Add(CreateLoggingWidget());
+        Widgets.Add(CreatePerformanceWidget(this));
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
@@ -160,6 +162,13 @@ public class Map : INotifyPropertyChanged, IDisposable
     }
 
     /// <summary>
+    /// Handles all manipulations of the map viewport
+    /// </summary>
+    public Navigator Navigator { get; private set; } = new Navigator();
+
+    public Performance Performance { get; } = new Performance();
+
+    /// <summary>
     /// Called whenever a property changed
     /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -179,11 +188,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// The Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
     /// </remarks>
     public event EventHandler<MapInfoEventArgs>? Info;
-
-    /// <summary>
-    /// Handles all manipulations of the map viewport
-    /// </summary>
-    public Navigator Navigator { get; private set; } = new Navigator();
 
     private void Navigator_RefreshDataRequest(object? sender, EventArgs e)
     {
@@ -438,5 +442,21 @@ public class Map : INotifyPropertyChanged, IDisposable
         HorizontalAlignment = HorizontalAlignment.Stretch,
         BackColor = Color.Transparent,
         Opacity = 0.0f,
+    };
+
+    private static PerformanceWidget CreatePerformanceWidget(Map map) => new(map.Performance)
+    {
+        HorizontalAlignment = HorizontalAlignment.Right,
+        VerticalAlignment = VerticalAlignment.Bottom,
+        Margin = new MRect(10, 60),
+        TextSize = 12,
+        TextColor = Color.Black,
+        BackColor = Color.White,
+        WithTappedEvent = (s, e) =>
+        {
+            map.Performance.Clear();
+            map.RefreshGraphics();
+            e.Handled = true;
+        }
     };
 }

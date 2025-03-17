@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Mapsui.Layers;
 using Mapsui.Manipulations;
 using Mapsui.Rendering;
-using Mapsui.Utilities;
 
 namespace Mapsui.UI;
 
@@ -59,6 +58,4 @@ public interface IMapControl : IDisposable
     /// <param name="quality">default quality is 90 is applicable for webp and jpg</param>
     /// <returns>Byte array with snapshot in png format. If there are any problems than returns null.</returns>
     byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100);
-
-    Performance? Performance { get; set; }
 }

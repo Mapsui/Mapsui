@@ -29,7 +29,6 @@ public sealed class RegressionMapControl : IMapControl
     public double ReSnapRotationDegrees { get; set; }
     public IRenderer Renderer { get; }
     public float PixelDensity => 1;
-    public Performance? Performance { get; set; }
     public double ScreenWidth { get; private set; }
     public double ScreenHeight { get; private set; }
 
