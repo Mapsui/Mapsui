@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets;
 
 public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
 {
-    private readonly string[] _textHeader = { "Last", "Mean", "Frames", "Min", "Max", "Count", "Dropped" };
+    private readonly string[] _textHeader = { "Frames", "Last", "Mean", "Min", "Max", "Count", "Dropped" };
     private readonly string[] _text = new string[7];
 
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService, float layerOpacity)
@@ -30,9 +30,9 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
 
         performanceWidget.UpdateEnvelope(width, height, viewport.Width, viewport.Height);
 
-        _text[0] = performanceWidget.Performance.LastDrawingTime.ToString("0.000 ms");
-        _text[1] = performanceWidget.Performance.Mean.ToString("0.000 ms");
-        _text[2] = performanceWidget.Performance.FPS.ToString("0 fps");
+        _text[0] = performanceWidget.Performance.FPS.ToString("0 fps");
+        _text[1] = performanceWidget.Performance.LastDrawingTime.ToString("0.000 ms");
+        _text[2] = performanceWidget.Performance.Mean.ToString("0.000 ms");
         _text[3] = performanceWidget.Performance.Min.ToString("0.000 ms");
         _text[4] = performanceWidget.Performance.Max.ToString("0.000 ms");
         _text[5] = performanceWidget.Performance.Count.ToString("0");
