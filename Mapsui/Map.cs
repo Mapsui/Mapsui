@@ -394,7 +394,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     public IEnumerable<IWidget> GetWidgetsOfMapAndLayers()
     {
         return Widgets.Concat(Layers.Where(l => l.Enabled).Select(l => l.Attribution))
-            .Where(a => a != null && a.Enabled).ToList();
+            .Where(a => a != null && a.Enabled).ToArray();
     }
 
     /// <summary>

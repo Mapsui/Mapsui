@@ -14,6 +14,9 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService, float layerOpacity)
     {
         var performanceWidget = (PerformanceWidget)widget;
+        if (!performanceWidget.Performance.GetIsActive())
+            return;
+
         var textSize = performanceWidget.TextSize;
 
         using var font = new SKFont() { Size = (float)textSize };

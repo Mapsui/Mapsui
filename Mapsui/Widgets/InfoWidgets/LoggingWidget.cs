@@ -7,24 +7,6 @@ using System.Text;
 
 namespace Mapsui.Widgets.InfoWidgets;
 
-public enum ShowLoggingInMap
-{
-    /// <summary>
-    /// Show logging in the map. Note, this only has effect if LoggingWidget.Enabled == true.
-    /// </summary>
-    Yes,
-    /// <summary>
-    /// Show logging in the map only if the debugger is attached. Note, this is independent of a debug build.
-    /// You can attach a debugger to a release build and it will show logging, or run a debug build without
-    /// a debugger attached and it won't show logging.
-    /// </summary>
-    ShowOnlyInDebugMode,
-    /// <summary>
-    /// Never show logging in the map.
-    /// </summary>
-    No,
-}
-
 /// <summary>
 /// Widget which shows log entries
 /// </summary>
@@ -56,8 +38,7 @@ public class LoggingWidget : TextBoxWidget
     /// Global setting to control logging in the map. Note, that there will never be logging in the map if the 
     /// Enabled field of the logging widget is false.
     /// </summary>
-    public static ShowLoggingInMap ShowLoggingInMap { get; set; }
-        = ShowLoggingInMap.ShowOnlyInDebugMode;
+    public static ActiveMode ShowLoggingInMap { get; set; } = ActiveMode.OnlyInDebugMode;
 
     /// <summary>
     ///  Event handler for logging
@@ -198,13 +179,13 @@ public class LoggingWidget : TextBoxWidget
         }
     }
 
-    private static bool ShouldLog(bool enabled, ShowLoggingInMap showLoggingInMap) =>
+    private static bool ShouldLog(bool enabled, ActiveMode showLoggingInMap) =>
         enabled && showLoggingInMap switch
         {
-            ShowLoggingInMap.Yes => true,
-            ShowLoggingInMap.No => false,
-            ShowLoggingInMap.ShowOnlyInDebugMode => System.Diagnostics.Debugger.IsAttached,
-            _ => throw new NotSupportedException(nameof(InfoWidgets.ShowLoggingInMap))
+            ActiveMode.Yes => true,
+            ActiveMode.No => false,
+            ActiveMode.OnlyInDebugMode => System.Diagnostics.Debugger.IsAttached,
+            _ => throw new NotSupportedException(nameof(ActiveMode))
         };
 
     private string ToString(LogLevel logLevel) => logLevel switch
