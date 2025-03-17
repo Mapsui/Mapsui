@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui.Rendering;
 
@@ -14,7 +14,7 @@ public static class VisibleFeatureIterator
     private static readonly object _iterationLock = new();
 
     public static void IterateLayers(Viewport viewport, IEnumerable<ILayer> layers, long iteration,
-        Action<Viewport, ILayer, IStyle, IFeature, float, long> callback)
+        Action<Viewport, ILayer, IStyle, IFeature, float, long> callback, Action<ILayer>? customLayerRendererCallback = null)
     {
         foreach (var layer in layers)
         {
@@ -26,7 +26,10 @@ public static class VisibleFeatureIterator
             // TODO: find out which Caching path causes this. Because when the caching is disabled it works.
             lock (_iterationLock)
             {
-                IterateLayer(viewport, layer, iteration, callback);
+                if (layer.CustomLayerRendererName is not null && customLayerRendererCallback is not null)
+                    customLayerRendererCallback(layer);
+                else
+                    IterateLayer(viewport, layer, iteration, callback);
             }
         }
     }
