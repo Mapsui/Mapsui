@@ -82,8 +82,16 @@ public class MapInfoWidget : TextBoxWidget
 
         result.Append("Info: ");
         foreach (var field in f.Fields)
-            result.Append($"{field}: {f[field]} - ");
+            result.Append($"{field}: {f[field]} | ");
+        result.Append($"{GetCoordinateString(f)}");
         result.Remove(result.Length - 2, 2);
         return result.ToString();
     };
+
+    private static string GetCoordinateString(IFeature f)
+    {
+        var builder = new StringBuilder();
+        f.CoordinateVisitor((x, y, setter) => builder.Append($"{x.ToString("f2")} {y.ToString("f2")} | ")); ;
+        return builder.ToString();
+    }
 }
