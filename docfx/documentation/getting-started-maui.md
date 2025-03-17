@@ -15,7 +15,7 @@ IMPORTANT: In MauiProgram.cs add **.UseSkiaSharp()** to the builder like this:
 ```csharp
 builder
   .UseMauiApp<App>()
-  .UseSkiaSharp(true)
+  .UseSkiaSharp()
   .ConfigureFonts(fonts =>  
 ```
 
