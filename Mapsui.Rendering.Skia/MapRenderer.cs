@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -19,6 +13,12 @@ using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.InfoWidgets;
 using Mapsui.Widgets.ScaleBar;
 using SkiaSharp;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Linq;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -29,6 +29,7 @@ public sealed class MapRenderer : IRenderer, IDisposable
     private static readonly Dictionary<Type, IWidgetRenderer> _widgetRenderers = [];
     private static readonly Dictionary<Type, IStyleRenderer> _styleRenderers = [];
     private static readonly Dictionary<string, PointStyleRenderer.RenderHandler> _pointStyleRenderers = [];
+    private static readonly Dictionary<string, CustomLayerRenderer.RenderHandler> _layerRenderers = [];
 
     static MapRenderer()
     {
@@ -218,6 +219,11 @@ public sealed class MapRenderer : IRenderer, IDisposable
         _pointStyleRenderers[rendererName] = rendererHandler;
     }
 
+    public static void RegisterLayerRenderer(string rendererName, CustomLayerRenderer.RenderHandler rendererHandler)
+    {
+        _layerRenderers[rendererName] = rendererHandler;
+    }
+
     private void RenderTo(Viewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
         IEnumerable<IWidget>? widgets, SKCanvas skCanvas)
     {
@@ -235,9 +241,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
     {
         try
         {
-            layers = layers.ToList();
-
-            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, o, i));
+            VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration,
+                (v, l, s, f, o, i) => RenderFeature(canvas, v, l, s, f, o, i),
+                (l) => CustomLayerRendererCallback(canvas, viewport, l));
 
             _currentIteration++;
         }
@@ -245,6 +251,14 @@ public sealed class MapRenderer : IRenderer, IDisposable
         {
             Logger.Log(LogLevel.Error, $"Unexpected error in skia renderer", exception);
         }
+    }
+
+    private void CustomLayerRendererCallback(SKCanvas canvas, Viewport viewport, ILayer layer)
+    {
+        if (_layerRenderers.TryGetValue(layer.CustomLayerRendererName!, out var layerRenderer))
+            CustomLayerRenderer.RenderLayer(canvas, viewport, layer, _renderService, layerRenderer);
+        else
+            throw new Exception($"Layer renderer not found for {layer.GetType().Name}");
     }
 
     private void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)

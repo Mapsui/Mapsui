@@ -1,12 +1,12 @@
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Widgets.ButtonWidgets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
-using Mapsui.UI;
 
 namespace Mapsui.Layers;
 
@@ -195,6 +195,9 @@ public abstract class BaseLayer : ILayer
 
     /// <inheritdoc/>
     public virtual Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; set; } = (feature) => feature;
+
+    /// <inheritdoc />
+    public string? CustomLayerRendererName { get; set; }
 
     public void DataHasChanged()
     {
