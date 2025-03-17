@@ -80,7 +80,7 @@ public class MapInfoWidget : TextBoxWidget
 
         var result = new StringBuilder();
 
-        result.Append("Info: ");
+        result.Append("MapInfo: ");
         foreach (var field in f.Fields)
             result.Append($"{field}: {f[field]} | ");
         result.Append($"{GetCoordinateString(f)}");
