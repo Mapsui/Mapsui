@@ -3,8 +3,8 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using NUnit.Framework;
-using System.Collections.Generic;
 using NUnit.Framework.Legacy;
+using System.Collections.Generic;
 
 namespace Mapsui.Tests.Rendering;
 
@@ -20,14 +20,14 @@ internal class VisibleFeatureIteratorTests
         var vectorStyle2 = new VectorStyle();
         using var memoryLayer = new MemoryLayer { Style = new ThemeStyle(f => new StyleCollection { Styles = { vectorStyle1, vectorStyle2 } }) };
         var feature = new PointFeature(0, 0);
-        memoryLayer.Features = new List<IFeature> { feature };
+        memoryLayer.Features = [feature];
         var result = new Dictionary<IFeature, List<IStyle>>();
 
         // Act
         VisibleFeatureIterator.IterateLayers(viewport, [memoryLayer], 0, (v, l, s, f, o, i) =>
         {
-            if (result.ContainsKey(f))
-                result[f].Add(s);
+            if (result.TryGetValue(f, out var value))
+                value.Add(s);
             else
                 result[f] = [s];
         });
