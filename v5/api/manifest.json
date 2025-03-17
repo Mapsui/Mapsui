@@ -3012,6 +3012,26 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.CustomLayerRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Rendering.Skia.CustomLayerRenderer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.yml",
       "output": {
         ".html": {
@@ -3332,10 +3352,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer.yml",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer.html"
+          "relative_path": "pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler.html"
         }
       },
       "version": ""

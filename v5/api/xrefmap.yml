@@ -7118,6 +7118,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.BaseLayer.Busy
   nameWithType: BaseLayer.Busy
+- uid: Mapsui.Layers.BaseLayer.CustomLayerRendererName
+  name: CustomLayerRendererName
+  href: pages/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_CustomLayerRendererName
+  commentId: P:Mapsui.Layers.BaseLayer.CustomLayerRendererName
+  fullName: Mapsui.Layers.BaseLayer.CustomLayerRendererName
+  nameWithType: BaseLayer.CustomLayerRendererName
+- uid: Mapsui.Layers.BaseLayer.CustomLayerRendererName*
+  name: CustomLayerRendererName
+  href: pages/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_CustomLayerRendererName_
+  commentId: Overload:Mapsui.Layers.BaseLayer.CustomLayerRendererName
+  isSpec: "True"
+  fullName: Mapsui.Layers.BaseLayer.CustomLayerRendererName
+  nameWithType: BaseLayer.CustomLayerRendererName
 - uid: Mapsui.Layers.BaseLayer.DataChanged
   name: DataChanged
   href: pages/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataChanged
@@ -7695,6 +7708,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ILayer.Busy
   nameWithType: ILayer.Busy
+- uid: Mapsui.Layers.ILayer.CustomLayerRendererName
+  name: CustomLayerRendererName
+  href: pages/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_CustomLayerRendererName
+  commentId: P:Mapsui.Layers.ILayer.CustomLayerRendererName
+  fullName: Mapsui.Layers.ILayer.CustomLayerRendererName
+  nameWithType: ILayer.CustomLayerRendererName
+- uid: Mapsui.Layers.ILayer.CustomLayerRendererName*
+  name: CustomLayerRendererName
+  href: pages/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_CustomLayerRendererName_
+  commentId: Overload:Mapsui.Layers.ILayer.CustomLayerRendererName
+  isSpec: "True"
+  fullName: Mapsui.Layers.ILayer.CustomLayerRendererName
+  nameWithType: ILayer.CustomLayerRendererName
 - uid: Mapsui.Layers.ILayer.DataChanged
   name: DataChanged
   href: pages/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_DataChanged
@@ -22010,6 +22036,31 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.CalloutStyleRenderer.Draw
   nameWithType: CalloutStyleRenderer.Draw
+- uid: Mapsui.Rendering.Skia.CustomLayerRenderer
+  name: CustomLayerRenderer
+  href: pages/Mapsui.Rendering.Skia.CustomLayerRenderer.html
+  commentId: T:Mapsui.Rendering.Skia.CustomLayerRenderer
+  fullName: Mapsui.Rendering.Skia.CustomLayerRenderer
+  nameWithType: CustomLayerRenderer
+- uid: Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler
+  name: CustomLayerRenderer.RenderHandler
+  href: pages/Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler.html
+  commentId: T:Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler
+  fullName: Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler
+  nameWithType: CustomLayerRenderer.RenderHandler
+- uid: Mapsui.Rendering.Skia.CustomLayerRenderer.RenderLayer(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Skia.Cache.RenderService,Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler)
+  name: RenderLayer(SKCanvas, Viewport, ILayer, RenderService, RenderHandler)
+  href: pages/Mapsui.Rendering.Skia.CustomLayerRenderer.html#Mapsui_Rendering_Skia_CustomLayerRenderer_RenderLayer_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_Rendering_Skia_Cache_RenderService_Mapsui_Rendering_Skia_CustomLayerRenderer_RenderHandler_
+  commentId: M:Mapsui.Rendering.Skia.CustomLayerRenderer.RenderLayer(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Skia.Cache.RenderService,Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler)
+  fullName: Mapsui.Rendering.Skia.CustomLayerRenderer.RenderLayer(SkiaSharp.SKCanvas, Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.Rendering.Skia.Cache.RenderService, Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler)
+  nameWithType: CustomLayerRenderer.RenderLayer(SKCanvas, Viewport, ILayer, RenderService, CustomLayerRenderer.RenderHandler)
+- uid: Mapsui.Rendering.Skia.CustomLayerRenderer.RenderLayer*
+  name: RenderLayer
+  href: pages/Mapsui.Rendering.Skia.CustomLayerRenderer.html#Mapsui_Rendering_Skia_CustomLayerRenderer_RenderLayer_
+  commentId: Overload:Mapsui.Rendering.Skia.CustomLayerRenderer.RenderLayer
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.CustomLayerRenderer.RenderLayer
+  nameWithType: CustomLayerRenderer.RenderLayer
 - uid: Mapsui.Rendering.Skia.Extensions
   name: Mapsui.Rendering.Skia.Extensions
   href: pages/Mapsui.Rendering.Skia.Extensions.html
@@ -22876,15 +22927,31 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.ImageSourceCache
   nameWithType: MapRenderer.ImageSourceCache
-- uid: Mapsui.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer(System.String,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer)
-  name: RegisterPointStyleRenderer(string, PointStyleDrawer)
-  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RegisterPointStyleRenderer_System_String_Mapsui_Rendering_Skia_SkiaStyles_PointStyleRenderer_PointStyleDrawer_
-  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer(System.String,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer)
-  name.vb: RegisterPointStyleRenderer(String, PointStyleDrawer)
-  fullName: Mapsui.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer(string, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer)
-  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer(String, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer)
-  nameWithType: MapRenderer.RegisterPointStyleRenderer(string, PointStyleRenderer.PointStyleDrawer)
-  nameWithType.vb: MapRenderer.RegisterPointStyleRenderer(String, PointStyleRenderer.PointStyleDrawer)
+- uid: Mapsui.Rendering.Skia.MapRenderer.RegisterLayerRenderer(System.String,Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler)
+  name: RegisterLayerRenderer(string, RenderHandler)
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RegisterLayerRenderer_System_String_Mapsui_Rendering_Skia_CustomLayerRenderer_RenderHandler_
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RegisterLayerRenderer(System.String,Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler)
+  name.vb: RegisterLayerRenderer(String, RenderHandler)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RegisterLayerRenderer(string, Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.RegisterLayerRenderer(String, Mapsui.Rendering.Skia.CustomLayerRenderer.RenderHandler)
+  nameWithType: MapRenderer.RegisterLayerRenderer(string, CustomLayerRenderer.RenderHandler)
+  nameWithType.vb: MapRenderer.RegisterLayerRenderer(String, CustomLayerRenderer.RenderHandler)
+- uid: Mapsui.Rendering.Skia.MapRenderer.RegisterLayerRenderer*
+  name: RegisterLayerRenderer
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RegisterLayerRenderer_
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.RegisterLayerRenderer
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RegisterLayerRenderer
+  nameWithType: MapRenderer.RegisterLayerRenderer
+- uid: Mapsui.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer(System.String,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler)
+  name: RegisterPointStyleRenderer(string, RenderHandler)
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RegisterPointStyleRenderer_System_String_Mapsui_Rendering_Skia_SkiaStyles_PointStyleRenderer_RenderHandler_
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer(System.String,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler)
+  name.vb: RegisterPointStyleRenderer(String, RenderHandler)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer(string, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer(String, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler)
+  nameWithType: MapRenderer.RegisterPointStyleRenderer(string, PointStyleRenderer.RenderHandler)
+  nameWithType.vb: MapRenderer.RegisterPointStyleRenderer(String, PointStyleRenderer.RenderHandler)
 - uid: Mapsui.Rendering.Skia.MapRenderer.RegisterPointStyleRenderer*
   name: RegisterPointStyleRenderer
   href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RegisterPointStyleRenderer_
@@ -22963,15 +23030,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream
   nameWithType: MapRenderer.RenderToBitmapStream
-- uid: Mapsui.Rendering.Skia.MapRenderer.TryGetPointStyleRenderer(System.String,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer@)
-  name: TryGetPointStyleRenderer(string, out PointStyleDrawer?)
-  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_TryGetPointStyleRenderer_System_String_Mapsui_Rendering_Skia_SkiaStyles_PointStyleRenderer_PointStyleDrawer__
-  commentId: M:Mapsui.Rendering.Skia.MapRenderer.TryGetPointStyleRenderer(System.String,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer@)
-  name.vb: TryGetPointStyleRenderer(String, PointStyleDrawer)
-  fullName: Mapsui.Rendering.Skia.MapRenderer.TryGetPointStyleRenderer(string, out Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer?)
-  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.TryGetPointStyleRenderer(String, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer)
-  nameWithType: MapRenderer.TryGetPointStyleRenderer(string, out PointStyleRenderer.PointStyleDrawer?)
-  nameWithType.vb: MapRenderer.TryGetPointStyleRenderer(String, PointStyleRenderer.PointStyleDrawer)
+- uid: Mapsui.Rendering.Skia.MapRenderer.TryGetPointStyleRenderer(System.String,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler@)
+  name: TryGetPointStyleRenderer(string, out RenderHandler?)
+  href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_TryGetPointStyleRenderer_System_String_Mapsui_Rendering_Skia_SkiaStyles_PointStyleRenderer_RenderHandler__
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.TryGetPointStyleRenderer(System.String,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler@)
+  name.vb: TryGetPointStyleRenderer(String, RenderHandler)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.TryGetPointStyleRenderer(string, out Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler?)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.TryGetPointStyleRenderer(String, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler)
+  nameWithType: MapRenderer.TryGetPointStyleRenderer(string, out PointStyleRenderer.RenderHandler?)
+  nameWithType.vb: MapRenderer.TryGetPointStyleRenderer(String, PointStyleRenderer.RenderHandler)
 - uid: Mapsui.Rendering.Skia.MapRenderer.TryGetPointStyleRenderer*
   name: TryGetPointStyleRenderer
   href: pages/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_TryGetPointStyleRenderer_
@@ -23205,15 +23272,15 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer
   fullName: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer
   nameWithType: PointStyleRenderer
-- uid: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle(SkiaSharp.SKCanvas,Mapsui.Viewport,System.Double,System.Double,Mapsui.Styles.IPointStyle,Mapsui.Rendering.Skia.Cache.RenderService,System.Single,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer)
-  name: DrawPointStyle(SKCanvas, Viewport, double, double, IPointStyle, RenderService, float, PointStyleDrawer)
-  href: pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.html#Mapsui_Rendering_Skia_SkiaStyles_PointStyleRenderer_DrawPointStyle_SkiaSharp_SKCanvas_Mapsui_Viewport_System_Double_System_Double_Mapsui_Styles_IPointStyle_Mapsui_Rendering_Skia_Cache_RenderService_System_Single_Mapsui_Rendering_Skia_SkiaStyles_PointStyleRenderer_PointStyleDrawer_
-  commentId: M:Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle(SkiaSharp.SKCanvas,Mapsui.Viewport,System.Double,System.Double,Mapsui.Styles.IPointStyle,Mapsui.Rendering.Skia.Cache.RenderService,System.Single,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer)
-  name.vb: DrawPointStyle(SKCanvas, Viewport, Double, Double, IPointStyle, RenderService, Single, PointStyleDrawer)
-  fullName: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle(SkiaSharp.SKCanvas, Mapsui.Viewport, double, double, Mapsui.Styles.IPointStyle, Mapsui.Rendering.Skia.Cache.RenderService, float, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer)
-  fullName.vb: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle(SkiaSharp.SKCanvas, Mapsui.Viewport, Double, Double, Mapsui.Styles.IPointStyle, Mapsui.Rendering.Skia.Cache.RenderService, Single, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer)
-  nameWithType: PointStyleRenderer.DrawPointStyle(SKCanvas, Viewport, double, double, IPointStyle, RenderService, float, PointStyleRenderer.PointStyleDrawer)
-  nameWithType.vb: PointStyleRenderer.DrawPointStyle(SKCanvas, Viewport, Double, Double, IPointStyle, RenderService, Single, PointStyleRenderer.PointStyleDrawer)
+- uid: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle(SkiaSharp.SKCanvas,Mapsui.Viewport,System.Double,System.Double,Mapsui.Styles.IPointStyle,Mapsui.Rendering.Skia.Cache.RenderService,System.Single,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler)
+  name: DrawPointStyle(SKCanvas, Viewport, double, double, IPointStyle, RenderService, float, RenderHandler)
+  href: pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.html#Mapsui_Rendering_Skia_SkiaStyles_PointStyleRenderer_DrawPointStyle_SkiaSharp_SKCanvas_Mapsui_Viewport_System_Double_System_Double_Mapsui_Styles_IPointStyle_Mapsui_Rendering_Skia_Cache_RenderService_System_Single_Mapsui_Rendering_Skia_SkiaStyles_PointStyleRenderer_RenderHandler_
+  commentId: M:Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle(SkiaSharp.SKCanvas,Mapsui.Viewport,System.Double,System.Double,Mapsui.Styles.IPointStyle,Mapsui.Rendering.Skia.Cache.RenderService,System.Single,Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler)
+  name.vb: DrawPointStyle(SKCanvas, Viewport, Double, Double, IPointStyle, RenderService, Single, RenderHandler)
+  fullName: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle(SkiaSharp.SKCanvas, Mapsui.Viewport, double, double, Mapsui.Styles.IPointStyle, Mapsui.Rendering.Skia.Cache.RenderService, float, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler)
+  fullName.vb: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle(SkiaSharp.SKCanvas, Mapsui.Viewport, Double, Double, Mapsui.Styles.IPointStyle, Mapsui.Rendering.Skia.Cache.RenderService, Single, Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler)
+  nameWithType: PointStyleRenderer.DrawPointStyle(SKCanvas, Viewport, double, double, IPointStyle, RenderService, float, PointStyleRenderer.RenderHandler)
+  nameWithType.vb: PointStyleRenderer.DrawPointStyle(SKCanvas, Viewport, Double, Double, IPointStyle, RenderService, Single, PointStyleRenderer.RenderHandler)
 - uid: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle*
   name: DrawPointStyle
   href: pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.html#Mapsui_Rendering_Skia_SkiaStyles_PointStyleRenderer_DrawPointStyle_
@@ -23221,12 +23288,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.DrawPointStyle
   nameWithType: PointStyleRenderer.DrawPointStyle
-- uid: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer
-  name: PointStyleRenderer.PointStyleDrawer
-  href: pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer.html
-  commentId: T:Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer
-  fullName: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.PointStyleDrawer
-  nameWithType: PointStyleRenderer.PointStyleDrawer
+- uid: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler
+  name: PointStyleRenderer.RenderHandler
+  href: pages/Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler.html
+  commentId: T:Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler
+  fullName: Mapsui.Rendering.Skia.SkiaStyles.PointStyleRenderer.RenderHandler
+  nameWithType: PointStyleRenderer.RenderHandler
 - uid: Mapsui.Rendering.Skia.SkiaWidgets
   name: Mapsui.Rendering.Skia.SkiaWidgets
   href: pages/Mapsui.Rendering.Skia.SkiaWidgets.html
@@ -23710,15 +23777,15 @@ references:
   commentId: T:Mapsui.Rendering.VisibleFeatureIterator
   fullName: Mapsui.Rendering.VisibleFeatureIterator
   nameWithType: VisibleFeatureIterator
-- uid: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int64,System.Action{Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.Styles.IStyle,Mapsui.IFeature,System.Single,System.Int64})
-  name: IterateLayers(Viewport, IEnumerable<ILayer>, long, Action<Viewport, ILayer, IStyle, IFeature, float, long>)
-  href: pages/Mapsui.Rendering.VisibleFeatureIterator.html#Mapsui_Rendering_VisibleFeatureIterator_IterateLayers_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int64_System_Action_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_Styles_IStyle_Mapsui_IFeature_System_Single_System_Int64__
-  commentId: M:Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int64,System.Action{Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.Styles.IStyle,Mapsui.IFeature,System.Single,System.Int64})
-  name.vb: IterateLayers(Viewport, IEnumerable(Of ILayer), Long, Action(Of Viewport, ILayer, IStyle, IFeature, Single, Long))
-  fullName: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, long, System.Action<Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.Styles.IStyle, Mapsui.IFeature, float, long>)
-  fullName.vb: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Long, System.Action(Of Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.Styles.IStyle, Mapsui.IFeature, Single, Long))
-  nameWithType: VisibleFeatureIterator.IterateLayers(Viewport, IEnumerable<ILayer>, long, Action<Viewport, ILayer, IStyle, IFeature, float, long>)
-  nameWithType.vb: VisibleFeatureIterator.IterateLayers(Viewport, IEnumerable(Of ILayer), Long, Action(Of Viewport, ILayer, IStyle, IFeature, Single, Long))
+- uid: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int64,System.Action{Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.Styles.IStyle,Mapsui.IFeature,System.Single,System.Int64},System.Action{Mapsui.Layers.ILayer})
+  name: IterateLayers(Viewport, IEnumerable<ILayer>, long, Action<Viewport, ILayer, IStyle, IFeature, float, long>, Action<ILayer>?)
+  href: pages/Mapsui.Rendering.VisibleFeatureIterator.html#Mapsui_Rendering_VisibleFeatureIterator_IterateLayers_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int64_System_Action_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_Styles_IStyle_Mapsui_IFeature_System_Single_System_Int64__System_Action_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int64,System.Action{Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.Styles.IStyle,Mapsui.IFeature,System.Single,System.Int64},System.Action{Mapsui.Layers.ILayer})
+  name.vb: IterateLayers(Viewport, IEnumerable(Of ILayer), Long, Action(Of Viewport, ILayer, IStyle, IFeature, Single, Long), Action(Of ILayer))
+  fullName: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, long, System.Action<Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.Styles.IStyle, Mapsui.IFeature, float, long>, System.Action<Mapsui.Layers.ILayer>?)
+  fullName.vb: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Long, System.Action(Of Mapsui.Viewport, Mapsui.Layers.ILayer, Mapsui.Styles.IStyle, Mapsui.IFeature, Single, Long), System.Action(Of Mapsui.Layers.ILayer))
+  nameWithType: VisibleFeatureIterator.IterateLayers(Viewport, IEnumerable<ILayer>, long, Action<Viewport, ILayer, IStyle, IFeature, float, long>, Action<ILayer>?)
+  nameWithType.vb: VisibleFeatureIterator.IterateLayers(Viewport, IEnumerable(Of ILayer), Long, Action(Of Viewport, ILayer, IStyle, IFeature, Single, Long), Action(Of ILayer))
 - uid: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers*
   name: IterateLayers
   href: pages/Mapsui.Rendering.VisibleFeatureIterator.html#Mapsui_Rendering_VisibleFeatureIterator_IterateLayers_
