@@ -535,39 +535,39 @@ public class Pin : IFeatureProvider, INotifyPropertyChanged
                 break;
             case nameof(Transparency):
                 if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).Opacity = 1 - Transparency;
+                    ((IPointStyle)Feature.Styles.First()).Opacity = 1 - Transparency;
                 break;
             case nameof(Anchor):
                 if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).Offset = new Offset(Anchor.X, Anchor.Y);
+                    ((IPointStyle)Feature.Styles.First()).Offset = new Offset(Anchor.X, Anchor.Y);
                 break;
             case nameof(Rotation):
                 if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).SymbolRotation = Rotation;
+                    ((IPointStyle)Feature.Styles.First()).SymbolRotation = Rotation;
                 break;
             case nameof(RotateWithMap):
                 if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).RotateWithMap = RotateWithMap;
+                    ((IPointStyle)Feature.Styles.First()).RotateWithMap = RotateWithMap;
                 break;
             case nameof(IsVisible):
                 if (!IsVisible)
                     HideCallout();
                 if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).Enabled = IsVisible;
+                    ((IPointStyle)Feature.Styles.First()).Enabled = IsVisible;
                 break;
             case nameof(MinVisible):
                 // TODO: Update callout MinVisble too
                 if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).MinVisible = MinVisible;
+                    ((IPointStyle)Feature.Styles.First()).MinVisible = MinVisible;
                 break;
             case nameof(MaxVisible):
                 // TODO: Update callout MaxVisble too
                 if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
+                    ((IPointStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
                 break;
             case nameof(Scale):
                 if (Feature != null)
-                    ((SymbolStyle)Feature.Styles.First()).SymbolScale = Scale;
+                    ((IPointStyle)Feature.Styles.First()).SymbolScale = Scale;
                 break;
             case nameof(Type):
             case nameof(Color):
