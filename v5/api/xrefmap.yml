@@ -11594,6 +11594,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.OnViewportSizeInitialized
   nameWithType: Map.OnViewportSizeInitialized
+- uid: Mapsui.Map.Performance
+  name: Performance
+  href: pages/Mapsui.Map.html#Mapsui_Map_Performance
+  commentId: P:Mapsui.Map.Performance
+  fullName: Mapsui.Map.Performance
+  nameWithType: Map.Performance
+- uid: Mapsui.Map.Performance*
+  name: Performance
+  href: pages/Mapsui.Map.html#Mapsui_Map_Performance_
+  commentId: Overload:Mapsui.Map.Performance
+  isSpec: "True"
+  fullName: Mapsui.Map.Performance
+  nameWithType: Map.Performance
 - uid: Mapsui.Map.PointerMoved
   name: PointerMoved
   href: pages/Mapsui.Map.html#Mapsui_Map_PointerMoved
@@ -30965,19 +30978,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Android.MapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Performance
-  commentId: P:Mapsui.UI.Android.MapControl.Performance
-  fullName: Mapsui.UI.Android.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.Android.MapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Performance
-  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.Android.MapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PixelDensity
@@ -31450,19 +31450,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Avalonia.MapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_Performance
-  commentId: P:Mapsui.UI.Avalonia.MapControl.Performance
-  fullName: Mapsui.UI.Avalonia.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.Avalonia.MapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.Avalonia.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.Avalonia.MapControl.Performance
-  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.Avalonia.MapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_PixelDensity
@@ -33058,19 +33045,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Blazor.MapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Performance
-  commentId: P:Mapsui.UI.Blazor.MapControl.Performance
-  fullName: Mapsui.UI.Blazor.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.Blazor.MapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.Blazor.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControl.Performance
-  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.Blazor.MapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_PixelDensity
@@ -33716,19 +33690,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Eto.MapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Performance
-  commentId: P:Mapsui.UI.Eto.MapControl.Performance
-  fullName: Mapsui.UI.Eto.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.Eto.MapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.Eto.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.Eto.MapControl.Performance
-  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.Eto.MapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_PixelDensity
@@ -33993,19 +33954,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.OpenInBrowser
   nameWithType: IMapControl.OpenInBrowser
-- uid: Mapsui.UI.IMapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Performance
-  commentId: P:Mapsui.UI.IMapControl.Performance
-  fullName: Mapsui.UI.IMapControl.Performance
-  nameWithType: IMapControl.Performance
-- uid: Mapsui.UI.IMapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Performance_
-  commentId: Overload:Mapsui.UI.IMapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.Performance
-  nameWithType: IMapControl.Performance
 - uid: Mapsui.UI.IMapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_PixelDensity
@@ -35649,19 +35597,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Maui.MapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_Performance
-  commentId: P:Mapsui.UI.Maui.MapControl.Performance
-  fullName: Mapsui.UI.Maui.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.Maui.MapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.Maui.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapControl.Performance
-  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.Maui.MapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_PixelDensity
@@ -38237,19 +38172,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.WinUI.MapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_Performance
-  commentId: P:Mapsui.UI.WinUI.MapControl.Performance
-  fullName: Mapsui.UI.WinUI.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.WinUI.MapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.WinUI.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.WinUI.MapControl.Performance
-  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.WinUI.MapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_PixelDensity
@@ -38648,19 +38570,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.WindowsForms.MapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_Performance
-  commentId: P:Mapsui.UI.WindowsForms.MapControl.Performance
-  fullName: Mapsui.UI.WindowsForms.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.WindowsForms.MapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.WindowsForms.MapControl.Performance
-  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.WindowsForms.MapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_PixelDensity
@@ -39064,19 +38973,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Wpf.MapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Performance
-  commentId: P:Mapsui.UI.Wpf.MapControl.Performance
-  fullName: Mapsui.UI.Wpf.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.Wpf.MapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.Performance
-  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.Wpf.MapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_PixelDensity
@@ -39484,19 +39380,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.iOS.MapControl.Performance
-  name: Performance
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Performance
-  commentId: P:Mapsui.UI.iOS.MapControl.Performance
-  fullName: Mapsui.UI.iOS.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.iOS.MapControl.Performance*
-  name: Performance
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.Performance
-  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.iOS.MapControl.PixelDensity
   name: PixelDensity
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_PixelDensity
@@ -40528,6 +40411,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Performance.FPS
   nameWithType: Performance.FPS
+- uid: Mapsui.Utilities.Performance.GetIsActive
+  name: GetIsActive()
+  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_GetIsActive
+  commentId: M:Mapsui.Utilities.Performance.GetIsActive
+  fullName: Mapsui.Utilities.Performance.GetIsActive()
+  nameWithType: Performance.GetIsActive()
+- uid: Mapsui.Utilities.Performance.GetIsActive*
+  name: GetIsActive
+  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_GetIsActive_
+  commentId: Overload:Mapsui.Utilities.Performance.GetIsActive
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Performance.GetIsActive
+  nameWithType: Performance.GetIsActive
+- uid: Mapsui.Utilities.Performance.IsActive
+  name: IsActive
+  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_IsActive
+  commentId: P:Mapsui.Utilities.Performance.IsActive
+  fullName: Mapsui.Utilities.Performance.IsActive
+  nameWithType: Performance.IsActive
+- uid: Mapsui.Utilities.Performance.IsActive*
+  name: IsActive
+  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_IsActive_
+  commentId: Overload:Mapsui.Utilities.Performance.IsActive
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Performance.IsActive
+  nameWithType: Performance.IsActive
 - uid: Mapsui.Utilities.Performance.LastDrawingTime
   name: LastDrawingTime
   href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_LastDrawingTime
@@ -40996,6 +40905,30 @@ references:
   commentId: N:Mapsui.Widgets
   fullName: Mapsui.Widgets
   nameWithType: Mapsui.Widgets
+- uid: Mapsui.Widgets.ActiveMode
+  name: ActiveMode
+  href: pages/Mapsui.Widgets.ActiveMode.html
+  commentId: T:Mapsui.Widgets.ActiveMode
+  fullName: Mapsui.Widgets.ActiveMode
+  nameWithType: ActiveMode
+- uid: Mapsui.Widgets.ActiveMode.No
+  name: No
+  href: pages/Mapsui.Widgets.ActiveMode.html#Mapsui_Widgets_ActiveMode_No
+  commentId: F:Mapsui.Widgets.ActiveMode.No
+  fullName: Mapsui.Widgets.ActiveMode.No
+  nameWithType: ActiveMode.No
+- uid: Mapsui.Widgets.ActiveMode.OnlyInDebugMode
+  name: OnlyInDebugMode
+  href: pages/Mapsui.Widgets.ActiveMode.html#Mapsui_Widgets_ActiveMode_OnlyInDebugMode
+  commentId: F:Mapsui.Widgets.ActiveMode.OnlyInDebugMode
+  fullName: Mapsui.Widgets.ActiveMode.OnlyInDebugMode
+  nameWithType: ActiveMode.OnlyInDebugMode
+- uid: Mapsui.Widgets.ActiveMode.Yes
+  name: Yes
+  href: pages/Mapsui.Widgets.ActiveMode.html#Mapsui_Widgets_ActiveMode_Yes
+  commentId: F:Mapsui.Widgets.ActiveMode.Yes
+  fullName: Mapsui.Widgets.ActiveMode.Yes
+  nameWithType: ActiveMode.Yes
 - uid: Mapsui.Widgets.Alignment
   name: Alignment
   href: pages/Mapsui.Widgets.Alignment.html
@@ -42471,30 +42404,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.InfoWidgets.RulerWidget.StartPosition
   nameWithType: RulerWidget.StartPosition
-- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
-  name: ShowLoggingInMap
-  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html
-  commentId: T:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
-  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap
-  nameWithType: ShowLoggingInMap
-- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.No
-  name: No
-  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html#Mapsui_Widgets_InfoWidgets_ShowLoggingInMap_No
-  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.No
-  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.No
-  nameWithType: ShowLoggingInMap.No
-- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.ShowOnlyInDebugMode
-  name: ShowOnlyInDebugMode
-  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html#Mapsui_Widgets_InfoWidgets_ShowLoggingInMap_ShowOnlyInDebugMode
-  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.ShowOnlyInDebugMode
-  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.ShowOnlyInDebugMode
-  nameWithType: ShowLoggingInMap.ShowOnlyInDebugMode
-- uid: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Yes
-  name: Yes
-  href: pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html#Mapsui_Widgets_InfoWidgets_ShowLoggingInMap_Yes
-  commentId: F:Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Yes
-  fullName: Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.Yes
-  nameWithType: ShowLoggingInMap.Yes
 - uid: Mapsui.Widgets.InputAreaType
   name: InputAreaType
   href: pages/Mapsui.Widgets.InputAreaType.html

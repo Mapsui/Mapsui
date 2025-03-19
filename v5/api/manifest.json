@@ -5232,6 +5232,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Widgets.ActiveMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Widgets.ActiveMode.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Widgets.Alignment.yml",
       "output": {
         ".html": {
@@ -5426,16 +5436,6 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Widgets.InfoWidgets.RulerWidget.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.yml",
-      "output": {
-        ".html": {
-          "relative_path": "pages/Mapsui.Widgets.InfoWidgets.ShowLoggingInMap.html"
         }
       },
       "version": ""

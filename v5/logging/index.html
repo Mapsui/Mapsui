@@ -959,17 +959,17 @@
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="p">}</span>
 </span></code></pre></div></p>
 <h2 id="show-logging-in-the-map">Show logging in the map</h2>
-<p>It is possible to show all Mapsui logging in the map. There are three possible configurations <em>Yes</em>, <em>No</em>, and <em>ShowOnlyInDebugMode</em>. 
+<p>It is possible to show all Mapsui logging in the map. There are three possible configurations <em>Yes</em>, <em>No</em>, and <em>OnlyInDebugMode</em>. 
 That last one is the default and it means that the logging will show if the debugger is attached and not when it is not attached
 (Note, that this is not the same thing as building in Debug or Release mode, you can run either build with or without the debugger 
 attached). <strong>In most scenarios this is what you want and you don't have to change anything for a release of your app</strong>. </p>
 <p>In some cases you want to enable it for the released app. For instance if you need to debug something that happens only with the released app. 
 In that case you can set the static LoggingWidget.ShowLoggingInMap field to Yes:
-<div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">LoggingWidget</span><span class="p">.</span><span class="n">ShowLoggingInMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShowLoggingInMap</span><span class="p">.</span><span class="n">Yes</span><span class="p">;</span>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">LoggingWidget</span><span class="p">.</span><span class="n">ShowLoggingInMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ActiveMode</span><span class="p">.</span><span class="n">Yes</span><span class="p">;</span>
 </span></code></pre></div></p>
 <p>In other cases you want to disable it when debugging. For instance if you want to see how things look when the app is released.
 In that case you can set the static LoggingWidget.ShowLoggingInMap field to No:
-<div class="language-csharp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">LoggingWidget</span><span class="p">.</span><span class="n">ShowLoggingInMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShowLoggingInMap</span><span class="p">.</span><span class="n">No</span><span class="p">;</span>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">LoggingWidget</span><span class="p">.</span><span class="n">ShowLoggingInMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ActiveMode</span><span class="p">.</span><span class="n">No</span><span class="p">;</span>
 </span></code></pre></div></p>
 <p>Logging in the map is implemented through the LoggingWidget which is added by default to the Map class. Usually you
 can just leave it there. If you remove or disable it no logging will be shown in the map.</p>
