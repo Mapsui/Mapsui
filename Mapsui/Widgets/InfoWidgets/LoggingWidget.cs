@@ -45,7 +45,7 @@ public class LoggingWidget : TextBoxWidget
     /// </summary>
     public void Log(LogLevel level, string description, Exception? exception)
     {
-        if (!ShouldLog(Enabled, ShowLoggingInMap))
+        if (!GetIsActive(Enabled, ShowLoggingInMap))
             return;
 
         if (LogLevelFilter < level)
@@ -179,8 +179,8 @@ public class LoggingWidget : TextBoxWidget
         }
     }
 
-    private static bool ShouldLog(bool enabled, ActiveMode showLoggingInMap) =>
-        enabled && showLoggingInMap switch
+    private static bool GetIsActive(bool enabled, ActiveMode activeMode) =>
+        enabled && activeMode switch
         {
             ActiveMode.Yes => true,
             ActiveMode.No => false,
