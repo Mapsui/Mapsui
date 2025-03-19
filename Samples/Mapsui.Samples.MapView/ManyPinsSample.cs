@@ -1,13 +1,10 @@
-﻿using Mapsui.Extensions;
-using Mapsui.Manipulations;
-using Mapsui.Rendering.Skia;
+﻿using Mapsui.Manipulations;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Maui;
 using Mapsui.Utilities;
-using Mapsui.Widgets.InfoWidgets;
 using System.Diagnostics;
 using System.Reflection;
 using Color = Microsoft.Maui.Graphics.Color;
@@ -26,17 +23,13 @@ public class ManyPinsSample : IMapViewSample
 
     public bool UpdateLocation => true;
 
-    public bool OnTap(object? sender, EventArgs args)
+    public bool OnTap(object? s, MapClickedEventArgs e)
     {
-        var mapView = sender as UI.Maui.MapView;
-        var e = args as MapClickedEventArgs;
-
-        if (mapView == null)
-            return false;
+        var mapView = Caster.TryCastOrThrow<UI.Maui.MapView>(s);
 
         var assembly = typeof(AllSamples).GetTypeInfo().Assembly;
         foreach (var str in assembly.GetManifestResourceNames())
-            System.Diagnostics.Debug.WriteLine(str);
+            Debug.WriteLine(str);
 
         switch (e?.GestureType)
         {
@@ -100,19 +93,13 @@ public class ManyPinsSample : IMapViewSample
     {
         mapControl.Map = OsmSample.CreateMap();
 
-        if (mapControl.Performance == null)
-            mapControl.Performance = new Performance();
-
-        mapControl.Map.Widgets.Add(CreatePerformanceWidget(mapControl));
-        MapRenderer.RegisterWidgetRenderer(typeof(PerformanceWidget), new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer());
-
         ((UI.Maui.MapView)mapControl).UniqueCallout = true;
 
         var sw = new Stopwatch();
         sw.Start();
 
         // Add 1000 pins
-        var list = new System.Collections.Generic.List<Pin>();
+        var list = new List<Pin>();
         for (var i = 0; i < 1000; i++)
         {
             list.Add(CreatePin(i));
@@ -125,20 +112,6 @@ public class ManyPinsSample : IMapViewSample
         _ = sw.Elapsed;
 
         sw.Stop();
-    }
-
-    private static PerformanceWidget CreatePerformanceWidget(IMapControl mapControl)
-    {
-        ArgumentNullException.ThrowIfNull(mapControl.Performance);
-        return new PerformanceWidget(mapControl.Performance)
-        {
-            WithTappedEvent = (s, e) =>
-            {
-                mapControl?.Performance.Clear();
-                mapControl?.RefreshGraphics();
-                e.Handled = true;
-            }
-        };
     }
 
     private Pin CreatePin(int num)

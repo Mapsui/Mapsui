@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Widgets;
+using System;
 using System.Collections.Generic;
 
 namespace Mapsui.Utilities;
@@ -59,6 +60,8 @@ public class Performance
     /// </summary>
     public int Dropped { get; set; }
 
+    public ActiveMode IsActive { get; set; } = ActiveMode.OnlyInDebugMode;
+
     /// <summary>
     /// Time be used for the last drawing
     /// </summary>
@@ -101,6 +104,9 @@ public class Performance
     /// <param name="time"></param>
     public void Add(double time)
     {
+        if (!GetIsActive())
+            return;
+
         _sum = _sum - _drawingTimes[_pos] + time;
         _drawingTimes[_pos++] = time;
         _count++;
@@ -134,4 +140,13 @@ public class Performance
 
         Dropped = 0;
     }
+
+    public bool GetIsActive() =>
+        IsActive switch
+        {
+            ActiveMode.Yes => true,
+            ActiveMode.No => false,
+            ActiveMode.OnlyInDebugMode => System.Diagnostics.Debugger.IsAttached,
+            _ => throw new NotSupportedException(nameof(IsActive))
+        };
 }

@@ -2,10 +2,6 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Tests.Helpers;
@@ -16,8 +12,13 @@ using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.UI;
+using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
@@ -59,7 +60,7 @@ public class MapLiveTests
             Logger.LogDelegate = ConsoleLog;
             // At the moment of writing this comment we do not have logging in the map. To compare
             // images we disable it for now. Perhaps we want logging to be part of the test image in some cases.
-            LoggingWidget.ShowLoggingInMap = ShowLoggingInMap.No;
+            LoggingWidget.ShowLoggingInMap = ActiveMode.No;
             ConsoleLog(LogLevel.Debug, $"Start MapLiveTest {sample.GetType().Name}", null);
             await TestSampleAsync(sample).ConfigureAwait(false);
         }

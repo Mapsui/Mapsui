@@ -136,7 +136,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _stopwatch.Stop();
 
         // If we are interested in performance measurements, we save the new drawing time
-        _performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
+        Map.Performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
 
         // End drawing
         _drawing = false;
@@ -154,19 +154,20 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             // In MAUI if you use binding there is an event where the new value is null even though
             // the current value en the value you are binding to are not null. Perhaps this should be
             // considered a bug.
-            if (Map is null) return;
+            if (Map is null) 
+                return;
 
             // Check, if we have to redraw the screen
 
-            if (Map?.UpdateAnimations() == true)
+            if (Map.UpdateAnimations() == true)
                 _refresh = true;
 
             // seems that this could be null sometimes
-            if (Map?.Navigator?.UpdateAnimations() ?? false)
+            if (Map.Navigator?.UpdateAnimations() ?? false)
                 _refresh = true;
 
             // Check if widgets need refresh
-            if (!_refresh && (Map?.Widgets?.Any(w => w.NeedsRedraw) ?? false))
+            if (!_refresh && (Map.Widgets?.Any(w => w.NeedsRedraw) ?? false))
                 _refresh = true;
 
             if (!_refresh)
@@ -174,9 +175,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
             if (_drawing)
             {
-                if (_performance != null)
-                    _performance.Dropped++;
-
+                Map.Performance.Dropped++;
                 return;
             }
 
@@ -246,28 +245,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             {
                 _updateInterval = value;
                 StartUpdates();
-            }
-        }
-    }
-
-    private Performance? _performance;
-
-    /// <summary>
-    /// Object to save performance information about the drawing of the map
-    /// </summary>
-    /// <remarks>
-    /// If this is null, no performance information is saved.
-    /// </remarks>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
-    public Performance? Performance
-    {
-        get => _performance;
-        set
-        {
-            if (_performance != value)
-            {
-                _performance = value;
-                OnPropertyChanged();
             }
         }
     }

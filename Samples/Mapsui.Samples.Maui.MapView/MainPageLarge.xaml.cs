@@ -19,7 +19,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     }
 
     readonly IEnumerable<ISampleBase> _allSamples;
-    Func<object?, EventArgs, bool>? _clicker;
+    Func<object?, MapClickedEventArgs, bool>? _clicker;
     private CancellationTokenSource? _gpsCancelation;
     private bool _updateLocation;
 

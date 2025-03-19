@@ -1,48 +1,42 @@
 ﻿using BruTile.Predefined;
-using Mapsui.Extensions;
-using Mapsui.Rendering.Skia;
-using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
-using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
 
-public class PerformanceWidgetSample : IMapControlSample
+public class PerformanceWidgetSample : ISample
 {
-    private IMapControl? _mapControl;
-    private readonly Mapsui.Utilities.Performance _performance = new(10);
-
     public string Name => "PerformanceWidget";
-
     public string Category => "Widgets";
 
-    public void Setup(IMapControl mapControl)
+    public Task<Map> CreateMapAsync()
     {
-        _mapControl = mapControl;
-        mapControl.Map = CreateMap();
-        var widget = CreatePerformanceWidget();
-        mapControl.Map.Widgets.Add(widget);
-        mapControl.Performance = _performance;
-        MapRenderer.RegisterWidgetRenderer(typeof(PerformanceWidget), new PerformanceWidgetRenderer());
+        return Task.FromResult(CreateMap());
     }
 
     public static Map CreateMap()
     {
         var map = new Map();
 
-        map.Layers.Add(CreateLayer());
+        map.Layers.Add(CreateBingTileLayer());
         map.Navigator.CenterOnAndZoomTo(new MPoint(1059114.80157058, 5179580.75916194), map.Navigator.Resolutions[14]);
         map.BackColor = Color.FromString("#000613");
+
+        // The PerformanceWidget is created as part of the map.
+        var performanceWidget = map.Widgets.OfType<PerformanceWidget>().First();
+        performanceWidget.Performance.IsActive = Mapsui.Widgets.ActiveMode.Yes; // The default in ActiveMode.OnlyInDebugMode which is usually the best option. This is just to show how to change it.
+        performanceWidget.BackColor = Color.FromRgba(255, 255, 32, 32);
+        performanceWidget.Opacity = 1;
 
         return map;
     }
 
-    private static TileLayer CreateLayer()
+    private static TileLayer CreateBingTileLayer()
     {
         var apiKey = "Enter your api key here"; // Contact Microsoft about how to use this
         var tileSource = KnownTileSources.Create(KnownTileSource.BingHybrid, apiKey, BingHybrid.DefaultCache);
@@ -51,20 +45,4 @@ public class PerformanceWidgetSample : IMapControlSample
             Name = "Bing Aerial",
         };
     }
-
-    private PerformanceWidget CreatePerformanceWidget() => new(_performance)
-    {
-        HorizontalAlignment = HorizontalAlignment.Left,
-        VerticalAlignment = VerticalAlignment.Top,
-        Margin = new MRect(10),
-        TextSize = 12,
-        TextColor = Color.Black,
-        BackColor = Color.White,
-        WithTappedEvent = (s, e) =>
-        {
-            _mapControl?.Performance?.Clear();
-            _mapControl?.RefreshGraphics();
-            e.Handled = true;
-        }
-    };
 }
