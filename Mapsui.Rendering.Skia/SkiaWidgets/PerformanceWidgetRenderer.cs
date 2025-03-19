@@ -21,7 +21,7 @@ public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
 
         using var font = new SKFont() { Size = (float)textSize };
         using var textPaint = new SKPaint { Color = performanceWidget.TextColor.ToSkia() };
-        using var backgroundPaint = new SKPaint { Color = performanceWidget.BackColor.ToSkia().WithAlpha((byte)(255.0f * performanceWidget.Opacity)), Style = SKPaintStyle.Fill, };
+        using var backgroundPaint = new SKPaint { Color = performanceWidget.BackColor.ToSkia().WithAlpha((byte)(performanceWidget.BackColor?.A ?? 255 * performanceWidget.Opacity)), Style = SKPaintStyle.Fill, };
 
         var widthHeader = 0f;
 
