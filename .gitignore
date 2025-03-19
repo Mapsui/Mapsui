@@ -33,6 +33,8 @@ packages/
 
 .vs/
 
+.mono/
+
 Release/
 
 *.ncrunchproject
