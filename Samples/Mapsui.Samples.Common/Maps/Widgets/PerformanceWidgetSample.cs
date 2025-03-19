@@ -29,7 +29,7 @@ public class PerformanceWidgetSample : ISample
 
         // The PerformanceWidget is created as part of the map.
         var performanceWidget = map.Widgets.OfType<PerformanceWidget>().First();
-        performanceWidget.Performance.IsActive = Mapsui.Widgets.ActiveMode.Yes; // The PerformanceWidget is default in ActiveMode.OnlyInDebugMode which is usually the best option. This is just to show how to change it.
+        performanceWidget.Performance.IsActive = Mapsui.Widgets.ActiveMode.Yes; // The default in ActiveMode.OnlyInDebugMode which is usually the best option. This is just to show how to change it.
         performanceWidget.BackColor = Color.FromRgba(255, 255, 32, 32);
         performanceWidget.Opacity = 1;
 
