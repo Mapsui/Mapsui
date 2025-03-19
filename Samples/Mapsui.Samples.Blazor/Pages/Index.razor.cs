@@ -3,6 +3,7 @@ using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.UI.Blazor;
+using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using Microsoft.AspNetCore.Components;
 
@@ -60,7 +61,7 @@ public partial class Index
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        LoggingWidget.ShowLoggingInMap = ShowLoggingInMap.Yes; // To show logging in release mode
+        LoggingWidget.ShowLoggingInMap = ActiveMode.Yes; // To show logging in release mode
         FillComboBoxWithCategories();
     }
 
