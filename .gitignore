@@ -21,6 +21,9 @@
 
 *.userprefs
 
+*.orig
+*.rej
+
 Mapsui.Rendering.Android/obj/
 
 Samples/Mapsui.Samples.Silverlight.Web/ClientBin
