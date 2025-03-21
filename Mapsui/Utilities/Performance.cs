@@ -14,17 +14,6 @@ public class Performance
     private double _min, _max;
     private double _sum;
 
-    public Performance(int maxValues = 20)
-    {
-        if (maxValues <= 0)
-            throw new ArgumentException("maxValues must not be equal or less 0");
-
-        _maxValues = maxValues;
-        _drawingTimes = new double[_maxValues];
-
-        Clear();
-    }
-
     /// <summary>
     /// Counter for number of redraws of map
     /// </summary>
@@ -96,6 +85,17 @@ public class Performance
 
             return result;
         }
+    }
+
+    public Performance(int maxValues = 20)
+    {
+        if (maxValues <= 0)
+            throw new ArgumentException("maxValues must not be equal or less 0");
+
+        _maxValues = maxValues;
+        _drawingTimes = new double[_maxValues];
+
+        Clear();
     }
 
     /// <summary>
