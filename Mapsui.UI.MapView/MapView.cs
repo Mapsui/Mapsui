@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
+using Mapsui.Manipulations;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -39,11 +40,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly ObservableRangeCollection<Pin> _pins = [];
     private readonly ObservableRangeCollection<Drawable> _drawables = [];
     private readonly ObservableRangeCollection<Callout> _callouts = [];
-    private readonly MapTappedWidget _mapTappedWidget;
 
     public MapView()
     {
-        _mapTappedWidget = new MapTappedWidget(HandlerTap);
         MyLocationFollow = false;
 
         IsClippedToBounds = true;
@@ -62,7 +61,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         // Add MapView layers to Map
         AddLayers();
-        AddWidgets();
 
         // Add some events to _mapControl.Map.Layers
         Map.Layers.Changed += HandleLayersChanged;
@@ -339,6 +337,15 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         return _pins.GetEnumerator();
     }
 
+    protected override bool OnMapTapped(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
+    {
+        if (base.OnMapTapped(screenPosition, worldPosition, gestureType))
+            return true;
+
+        return HandlerTap(new MapEventArgs(screenPosition, worldPosition, gestureType, Map, GetMapInfo,
+            GetRemoteMapInfoAsync));
+    }
+
     protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
         base.OnPropertyChanged(propertyName);
@@ -416,7 +423,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 // Readd them, so that they always on top
                 AddLayers();
-                AddWidgets();
 
                 // Remove widget buttons and readd them
                 RemoveButtons();
@@ -631,7 +637,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         }
     }
 
-    private bool HandlerTap(WidgetEventArgs e)
+    private bool HandlerTap(MapEventArgs e)
     {
         var screenPosition = e.ScreenPosition;
 
@@ -707,14 +713,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         // Add MapView layers
         Map?.Layers.Add([_mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer]);
-    }
-
-    /// <summary> Add Default Widgets </summary>
-    private void AddWidgets()
-    {
-        if (Map != null && !Map.Widgets.Contains(this._mapTappedWidget))
-            // Add MapView widgets
-            Map.Widgets.Add(this._mapTappedWidget);
     }
 
     /// <summary>
