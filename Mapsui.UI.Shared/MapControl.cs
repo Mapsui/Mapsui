@@ -626,7 +626,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             return true;
         if (Map is null)
             return false;
-        if (OnMapTapped(screenPosition, gestureType, worldPosition))
+        if (OnMapTapped(screenPosition, worldPosition, gestureType))
             return true;
         OnMapInfo(CreateMapInfoEventArgs(screenPosition, worldPosition, gestureType));
         return false;
@@ -683,7 +683,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return handled;
     }
 
-    private bool OnMapTapped(ScreenPosition screenPosition, GestureType gestureType, MPoint worldPosition)
+    protected virtual bool OnMapTapped(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
     {
         if (Logger.Settings.LogMapEvents)
             Logger.Log(LogLevel.Information, $"{nameof(OnMapTapped)} - {nameof(GestureType)}: {gestureType}");
@@ -695,7 +695,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return eventArgs.Handled;
     }
 
-    private bool OnMapPointerPressed(ScreenPosition screenPosition, MPoint worldPosition)
+    protected virtual bool OnMapPointerPressed(ScreenPosition screenPosition, MPoint worldPosition)
     {
         if (Logger.Settings.LogMapEvents)
             Logger.Log(LogLevel.Information, $"{nameof(OnMapPointerPressed)}");
@@ -707,7 +707,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return eventArgs.Handled;
     }
 
-    private bool OnMapPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
+    protected virtual bool OnMapPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
     {
         var eventArgs = new MapEventArgs(screenPosition, worldPosition, gestureType,
             Map, GetMapInfo, GetRemoteMapInfoAsync);
@@ -716,7 +716,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return eventArgs.Handled;
     }
 
-    private bool OnMapPointerReleased(ScreenPosition screenPosition, MPoint worldPosition)
+    protected virtual bool OnMapPointerReleased(ScreenPosition screenPosition, MPoint worldPosition)
     {
         if (Logger.Settings.LogMapEvents)
             Logger.Log(LogLevel.Information, $"{nameof(OnMapPointerReleased)}");
