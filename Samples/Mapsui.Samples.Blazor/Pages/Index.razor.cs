@@ -3,6 +3,7 @@ using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.UI.Blazor;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using Microsoft.AspNetCore.Components;
@@ -62,6 +63,7 @@ public partial class Index
     {
         base.OnInitialized();
         LoggingWidget.ShowLoggingInMap = ActiveMode.Yes; // To show logging in release mode
+        Performance.DefaultIsActive = ActiveMode.Yes; // To show performance in release mode
         FillComboBoxWithCategories();
     }
 
