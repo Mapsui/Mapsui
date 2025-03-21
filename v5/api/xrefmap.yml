@@ -40372,6 +40372,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Performance.Count
   nameWithType: Performance.Count
+- uid: Mapsui.Utilities.Performance.DefaultIsActive
+  name: DefaultIsActive
+  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_DefaultIsActive
+  commentId: P:Mapsui.Utilities.Performance.DefaultIsActive
+  fullName: Mapsui.Utilities.Performance.DefaultIsActive
+  nameWithType: Performance.DefaultIsActive
+- uid: Mapsui.Utilities.Performance.DefaultIsActive*
+  name: DefaultIsActive
+  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_DefaultIsActive_
+  commentId: Overload:Mapsui.Utilities.Performance.DefaultIsActive
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Performance.DefaultIsActive
+  nameWithType: Performance.DefaultIsActive
 - uid: Mapsui.Utilities.Performance.DrawingTimes
   name: DrawingTimes
   href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_DrawingTimes
