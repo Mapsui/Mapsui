@@ -14,16 +14,7 @@ public class Performance
     private double _min, _max;
     private double _sum;
 
-    public Performance(int maxValues = 20)
-    {
-        if (maxValues <= 0)
-            throw new ArgumentException("maxValues must not be equal or less 0");
-
-        _maxValues = maxValues;
-        _drawingTimes = new double[_maxValues];
-
-        Clear();
-    }
+    public static ActiveMode DefaultIsActive { get; set; } = ActiveMode.OnlyInDebugMode;
 
     /// <summary>
     /// Counter for number of redraws of map
@@ -60,7 +51,7 @@ public class Performance
     /// </summary>
     public int Dropped { get; set; }
 
-    public ActiveMode IsActive { get; set; } = ActiveMode.OnlyInDebugMode;
+    public ActiveMode IsActive { get; set; } = DefaultIsActive;
 
     /// <summary>
     /// Time be used for the last drawing
@@ -96,6 +87,17 @@ public class Performance
 
             return result;
         }
+    }
+
+    public Performance(int maxValues = 20)
+    {
+        if (maxValues <= 0)
+            throw new ArgumentException("maxValues must not be equal or less 0");
+
+        _maxValues = maxValues;
+        _drawingTimes = new double[_maxValues];
+
+        Clear();
     }
 
     /// <summary>
