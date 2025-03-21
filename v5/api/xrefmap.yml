@@ -22567,6 +22567,22 @@ references:
   commentId: T:Mapsui.Rendering.Skia.ImageStyleRenderer
   fullName: Mapsui.Rendering.Skia.ImageStyleRenderer
   nameWithType: ImageStyleRenderer
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.ConvertPictureToImage(SkiaSharp.SKPicture,System.Int32,System.Int32)
+  name: ConvertPictureToImage(SKPicture, int, int)
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_ConvertPictureToImage_SkiaSharp_SKPicture_System_Int32_System_Int32_
+  commentId: M:Mapsui.Rendering.Skia.ImageStyleRenderer.ConvertPictureToImage(SkiaSharp.SKPicture,System.Int32,System.Int32)
+  name.vb: ConvertPictureToImage(SKPicture, Integer, Integer)
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.ConvertPictureToImage(SkiaSharp.SKPicture, int, int)
+  fullName.vb: Mapsui.Rendering.Skia.ImageStyleRenderer.ConvertPictureToImage(SkiaSharp.SKPicture, Integer, Integer)
+  nameWithType: ImageStyleRenderer.ConvertPictureToImage(SKPicture, int, int)
+  nameWithType.vb: ImageStyleRenderer.ConvertPictureToImage(SKPicture, Integer, Integer)
+- uid: Mapsui.Rendering.Skia.ImageStyleRenderer.ConvertPictureToImage*
+  name: ConvertPictureToImage
+  href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_ConvertPictureToImage_
+  commentId: Overload:Mapsui.Rendering.Skia.ImageStyleRenderer.ConvertPictureToImage
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.ImageStyleRenderer.ConvertPictureToImage
+  nameWithType: ImageStyleRenderer.ConvertPictureToImage
 - uid: Mapsui.Rendering.Skia.ImageStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.Viewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.Skia.Cache.RenderService,System.Int64)
   name: Draw(SKCanvas, Viewport, ILayer, IFeature, IStyle, RenderService, long)
   href: pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html#Mapsui_Rendering_Skia_ImageStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_Viewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_Skia_Cache_RenderService_System_Int64_
@@ -22694,6 +22710,15 @@ references:
   fullName.vb: Mapsui.Rendering.Skia.Images.SvgDrawableImage.New(SkiaSharp.SKPicture)
   nameWithType: SvgDrawableImage.SvgDrawableImage(SKPicture)
   nameWithType.vb: SvgDrawableImage.New(SKPicture)
+- uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.#ctor(Svg.Skia.SKSvg)
+  name: SvgDrawableImage(SKSvg)
+  href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage__ctor_Svg_Skia_SKSvg_
+  commentId: M:Mapsui.Rendering.Skia.Images.SvgDrawableImage.#ctor(Svg.Skia.SKSvg)
+  name.vb: New(SKSvg)
+  fullName: Mapsui.Rendering.Skia.Images.SvgDrawableImage.SvgDrawableImage(Svg.Skia.SKSvg)
+  fullName.vb: Mapsui.Rendering.Skia.Images.SvgDrawableImage.New(Svg.Skia.SKSvg)
+  nameWithType: SvgDrawableImage.SvgDrawableImage(SKSvg)
+  nameWithType.vb: SvgDrawableImage.New(SKSvg)
 - uid: Mapsui.Rendering.Skia.Images.SvgDrawableImage.#ctor(System.Byte[])
   name: SvgDrawableImage(byte[])
   href: pages/Mapsui.Rendering.Skia.Images.SvgDrawableImage.html#Mapsui_Rendering_Skia_Images_SvgDrawableImage__ctor_System_Byte___
