@@ -653,7 +653,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
                 var eventArgs = new MapClickedEventArgs(worldPosition.ToNative(), e.GestureType);
                 MapClicked?.Invoke(this, eventArgs);
 
-                if (e.Handled)
+                if (eventArgs.Handled)
                 {
                     handled = true;
                     return handled;

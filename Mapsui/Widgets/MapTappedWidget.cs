@@ -19,6 +19,7 @@ public class MapTappedWidget : InputOnlyWidget // Derived from InputOnlyWidget b
         if (e.Handled)
             return;
 
-        _handlerTap(e);
+        if (_handlerTap(e))
+            e.Handled = true;
     }
 }
