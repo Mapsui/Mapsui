@@ -30930,6 +30930,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.OnMapInfo
   nameWithType: MapControl.OnMapInfo
+- uid: Mapsui.UI.Android.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Android.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Android.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Android.MapControl.OnMapPointerMoved*
+  name: OnMapPointerMoved
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnMapPointerMoved_
+  commentId: Overload:Mapsui.UI.Android.MapControl.OnMapPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.OnMapPointerMoved
+  nameWithType: MapControl.OnMapPointerMoved
+- uid: Mapsui.UI.Android.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerPressed(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Android.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Android.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerPressed(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Android.MapControl.OnMapPointerPressed*
+  name: OnMapPointerPressed
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnMapPointerPressed_
+  commentId: Overload:Mapsui.UI.Android.MapControl.OnMapPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.OnMapPointerPressed
+  nameWithType: MapControl.OnMapPointerPressed
+- uid: Mapsui.UI.Android.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerReleased(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Android.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Android.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerReleased(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Android.MapControl.OnMapPointerReleased*
+  name: OnMapPointerReleased
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnMapPointerReleased_
+  commentId: Overload:Mapsui.UI.Android.MapControl.OnMapPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.OnMapPointerReleased
+  nameWithType: MapControl.OnMapPointerReleased
+- uid: Mapsui.UI.Android.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Android.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Android.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Android.MapControl.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnMapTapped_
+  commentId: Overload:Mapsui.UI.Android.MapControl.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.OnMapTapped
+  nameWithType: MapControl.OnMapTapped
 - uid: Mapsui.UI.Android.MapControl.OnPropertyChanged(System.String)
   name: OnPropertyChanged(string)
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnPropertyChanged_System_String_
@@ -31412,6 +31464,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.OnMapInfo
   nameWithType: MapControl.OnMapInfo
+- uid: Mapsui.UI.Avalonia.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Avalonia.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Avalonia.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Avalonia.MapControl.OnMapPointerMoved*
+  name: OnMapPointerMoved
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_OnMapPointerMoved_
+  commentId: Overload:Mapsui.UI.Avalonia.MapControl.OnMapPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.UI.Avalonia.MapControl.OnMapPointerMoved
+  nameWithType: MapControl.OnMapPointerMoved
+- uid: Mapsui.UI.Avalonia.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerPressed(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Avalonia.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Avalonia.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerPressed(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Avalonia.MapControl.OnMapPointerPressed*
+  name: OnMapPointerPressed
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_OnMapPointerPressed_
+  commentId: Overload:Mapsui.UI.Avalonia.MapControl.OnMapPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.UI.Avalonia.MapControl.OnMapPointerPressed
+  nameWithType: MapControl.OnMapPointerPressed
+- uid: Mapsui.UI.Avalonia.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerReleased(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Avalonia.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Avalonia.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerReleased(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Avalonia.MapControl.OnMapPointerReleased*
+  name: OnMapPointerReleased
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_OnMapPointerReleased_
+  commentId: Overload:Mapsui.UI.Avalonia.MapControl.OnMapPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.UI.Avalonia.MapControl.OnMapPointerReleased
+  nameWithType: MapControl.OnMapPointerReleased
+- uid: Mapsui.UI.Avalonia.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Avalonia.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Avalonia.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Avalonia.MapControl.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_OnMapTapped_
+  commentId: Overload:Mapsui.UI.Avalonia.MapControl.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.Avalonia.MapControl.OnMapTapped
+  nameWithType: MapControl.OnMapTapped
 - uid: Mapsui.UI.Avalonia.MapControl.OnPropertyChanged(Avalonia.AvaloniaPropertyChangedEventArgs)
   name: OnPropertyChanged(AvaloniaPropertyChangedEventArgs)
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_OnPropertyChanged_Avalonia_AvaloniaPropertyChangedEventArgs_
@@ -32883,6 +32987,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.OnMapInfo
   nameWithType: MapControl.OnMapInfo
+- uid: Mapsui.UI.Blazor.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Blazor.MapControl.OnMapPointerMoved*
+  name: OnMapPointerMoved
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMapPointerMoved_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnMapPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapPointerMoved
+  nameWithType: MapControl.OnMapPointerMoved
+- uid: Mapsui.UI.Blazor.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerPressed(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerPressed(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Blazor.MapControl.OnMapPointerPressed*
+  name: OnMapPointerPressed
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMapPointerPressed_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnMapPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapPointerPressed
+  nameWithType: MapControl.OnMapPointerPressed
+- uid: Mapsui.UI.Blazor.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerReleased(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerReleased(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Blazor.MapControl.OnMapPointerReleased*
+  name: OnMapPointerReleased
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMapPointerReleased_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnMapPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapPointerReleased
+  nameWithType: MapControl.OnMapPointerReleased
+- uid: Mapsui.UI.Blazor.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Blazor.MapControl.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMapTapped_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.OnMapTapped
+  nameWithType: MapControl.OnMapTapped
 - uid: Mapsui.UI.Blazor.MapControl.OnMouseDown(Microsoft.AspNetCore.Components.Web.MouseEventArgs)
   name: OnMouseDown(MouseEventArgs)
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnMouseDown_Microsoft_AspNetCore_Components_Web_MouseEventArgs_
@@ -33580,6 +33736,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.OnMapInfo
   nameWithType: MapControl.OnMapInfo
+- uid: Mapsui.UI.Eto.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Eto.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Eto.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Eto.MapControl.OnMapPointerMoved*
+  name: OnMapPointerMoved
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMapPointerMoved_
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnMapPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.UI.Eto.MapControl.OnMapPointerMoved
+  nameWithType: MapControl.OnMapPointerMoved
+- uid: Mapsui.UI.Eto.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerPressed(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Eto.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Eto.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerPressed(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Eto.MapControl.OnMapPointerPressed*
+  name: OnMapPointerPressed
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMapPointerPressed_
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnMapPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.UI.Eto.MapControl.OnMapPointerPressed
+  nameWithType: MapControl.OnMapPointerPressed
+- uid: Mapsui.UI.Eto.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerReleased(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Eto.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Eto.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerReleased(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Eto.MapControl.OnMapPointerReleased*
+  name: OnMapPointerReleased
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMapPointerReleased_
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnMapPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.UI.Eto.MapControl.OnMapPointerReleased
+  nameWithType: MapControl.OnMapPointerReleased
+- uid: Mapsui.UI.Eto.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Eto.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Eto.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Eto.MapControl.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMapTapped_
+  commentId: Overload:Mapsui.UI.Eto.MapControl.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.Eto.MapControl.OnMapTapped
+  nameWithType: MapControl.OnMapTapped
 - uid: Mapsui.UI.Eto.MapControl.OnMouseDown(Eto.Forms.MouseEventArgs)
   name: OnMouseDown(MouseEventArgs)
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_OnMouseDown_Eto_Forms_MouseEventArgs_
@@ -35552,6 +35760,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.OnMapInfo
   nameWithType: MapControl.OnMapInfo
+- uid: Mapsui.UI.Maui.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Maui.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Maui.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Maui.MapControl.OnMapPointerMoved*
+  name: OnMapPointerMoved
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_OnMapPointerMoved_
+  commentId: Overload:Mapsui.UI.Maui.MapControl.OnMapPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapControl.OnMapPointerMoved
+  nameWithType: MapControl.OnMapPointerMoved
+- uid: Mapsui.UI.Maui.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerPressed(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Maui.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Maui.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerPressed(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Maui.MapControl.OnMapPointerPressed*
+  name: OnMapPointerPressed
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_OnMapPointerPressed_
+  commentId: Overload:Mapsui.UI.Maui.MapControl.OnMapPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapControl.OnMapPointerPressed
+  nameWithType: MapControl.OnMapPointerPressed
+- uid: Mapsui.UI.Maui.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerReleased(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Maui.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Maui.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerReleased(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Maui.MapControl.OnMapPointerReleased*
+  name: OnMapPointerReleased
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_OnMapPointerReleased_
+  commentId: Overload:Mapsui.UI.Maui.MapControl.OnMapPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapControl.OnMapPointerReleased
+  nameWithType: MapControl.OnMapPointerReleased
+- uid: Mapsui.UI.Maui.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Maui.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Maui.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Maui.MapControl.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_OnMapTapped_
+  commentId: Overload:Mapsui.UI.Maui.MapControl.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapControl.OnMapTapped
+  nameWithType: MapControl.OnMapTapped
 - uid: Mapsui.UI.Maui.MapControl.OnParentSet
   name: OnParentSet()
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_OnParentSet
@@ -36295,6 +36555,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapView.MyLocationLayer
   nameWithType: MapView.MyLocationLayer
+- uid: Mapsui.UI.Maui.MapView.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Maui.MapView.html#Mapsui_UI_Maui_MapView_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Maui.MapView.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Maui.MapView.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapView.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Maui.MapView.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.Maui.MapView.html#Mapsui_UI_Maui_MapView_OnMapTapped_
+  commentId: Overload:Mapsui.UI.Maui.MapView.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapView.OnMapTapped
+  nameWithType: MapView.OnMapTapped
 - uid: Mapsui.UI.Maui.MapView.OnPropertyChanged(System.String)
   name: OnPropertyChanged(string)
   href: pages/Mapsui.UI.Maui.MapView.html#Mapsui_UI_Maui_MapView_OnPropertyChanged_System_String_
@@ -38140,6 +38413,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.OnMapInfo
   nameWithType: MapControl.OnMapInfo
+- uid: Mapsui.UI.WinUI.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.WinUI.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.WinUI.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.WinUI.MapControl.OnMapPointerMoved*
+  name: OnMapPointerMoved
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_OnMapPointerMoved_
+  commentId: Overload:Mapsui.UI.WinUI.MapControl.OnMapPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.UI.WinUI.MapControl.OnMapPointerMoved
+  nameWithType: MapControl.OnMapPointerMoved
+- uid: Mapsui.UI.WinUI.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerPressed(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.WinUI.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.WinUI.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerPressed(ScreenPosition, MPoint)
+- uid: Mapsui.UI.WinUI.MapControl.OnMapPointerPressed*
+  name: OnMapPointerPressed
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_OnMapPointerPressed_
+  commentId: Overload:Mapsui.UI.WinUI.MapControl.OnMapPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.UI.WinUI.MapControl.OnMapPointerPressed
+  nameWithType: MapControl.OnMapPointerPressed
+- uid: Mapsui.UI.WinUI.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerReleased(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.WinUI.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.WinUI.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerReleased(ScreenPosition, MPoint)
+- uid: Mapsui.UI.WinUI.MapControl.OnMapPointerReleased*
+  name: OnMapPointerReleased
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_OnMapPointerReleased_
+  commentId: Overload:Mapsui.UI.WinUI.MapControl.OnMapPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.UI.WinUI.MapControl.OnMapPointerReleased
+  nameWithType: MapControl.OnMapPointerReleased
+- uid: Mapsui.UI.WinUI.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.WinUI.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.WinUI.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.WinUI.MapControl.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_OnMapTapped_
+  commentId: Overload:Mapsui.UI.WinUI.MapControl.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.WinUI.MapControl.OnMapTapped
+  nameWithType: MapControl.OnMapTapped
 - uid: Mapsui.UI.WinUI.MapControl.OnPropertyChanged(System.String)
   name: OnPropertyChanged(string)
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_OnPropertyChanged_System_String_
@@ -38538,6 +38863,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.OnMapInfo
   nameWithType: MapControl.OnMapInfo
+- uid: Mapsui.UI.WindowsForms.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.WindowsForms.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.WindowsForms.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.WindowsForms.MapControl.OnMapPointerMoved*
+  name: OnMapPointerMoved
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_OnMapPointerMoved_
+  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.OnMapPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.UI.WindowsForms.MapControl.OnMapPointerMoved
+  nameWithType: MapControl.OnMapPointerMoved
+- uid: Mapsui.UI.WindowsForms.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerPressed(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.WindowsForms.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.WindowsForms.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerPressed(ScreenPosition, MPoint)
+- uid: Mapsui.UI.WindowsForms.MapControl.OnMapPointerPressed*
+  name: OnMapPointerPressed
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_OnMapPointerPressed_
+  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.OnMapPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.UI.WindowsForms.MapControl.OnMapPointerPressed
+  nameWithType: MapControl.OnMapPointerPressed
+- uid: Mapsui.UI.WindowsForms.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerReleased(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.WindowsForms.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.WindowsForms.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerReleased(ScreenPosition, MPoint)
+- uid: Mapsui.UI.WindowsForms.MapControl.OnMapPointerReleased*
+  name: OnMapPointerReleased
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_OnMapPointerReleased_
+  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.OnMapPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.UI.WindowsForms.MapControl.OnMapPointerReleased
+  nameWithType: MapControl.OnMapPointerReleased
+- uid: Mapsui.UI.WindowsForms.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.WindowsForms.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.WindowsForms.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.WindowsForms.MapControl.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_OnMapTapped_
+  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.WindowsForms.MapControl.OnMapTapped
+  nameWithType: MapControl.OnMapTapped
 - uid: Mapsui.UI.WindowsForms.MapControl.OnPropertyChanged(System.String)
   name: OnPropertyChanged(string)
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_OnPropertyChanged_System_String_
@@ -38941,6 +39318,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.OnMapInfo
   nameWithType: MapControl.OnMapInfo
+- uid: Mapsui.UI.Wpf.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Wpf.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Wpf.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Wpf.MapControl.OnMapPointerMoved*
+  name: OnMapPointerMoved
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnMapPointerMoved_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.OnMapPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.OnMapPointerMoved
+  nameWithType: MapControl.OnMapPointerMoved
+- uid: Mapsui.UI.Wpf.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerPressed(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Wpf.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Wpf.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerPressed(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Wpf.MapControl.OnMapPointerPressed*
+  name: OnMapPointerPressed
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnMapPointerPressed_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.OnMapPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.OnMapPointerPressed
+  nameWithType: MapControl.OnMapPointerPressed
+- uid: Mapsui.UI.Wpf.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerReleased(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Wpf.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.Wpf.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerReleased(ScreenPosition, MPoint)
+- uid: Mapsui.UI.Wpf.MapControl.OnMapPointerReleased*
+  name: OnMapPointerReleased
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnMapPointerReleased_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.OnMapPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.OnMapPointerReleased
+  nameWithType: MapControl.OnMapPointerReleased
+- uid: Mapsui.UI.Wpf.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.Wpf.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.Wpf.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.Wpf.MapControl.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnMapTapped_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.OnMapTapped
+  nameWithType: MapControl.OnMapTapped
 - uid: Mapsui.UI.Wpf.MapControl.OnPropertyChanged(System.String)
   name: OnPropertyChanged(string)
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnPropertyChanged_System_String_
@@ -39348,6 +39777,58 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.OnMapInfo
   nameWithType: MapControl.OnMapInfo
+- uid: Mapsui.UI.iOS.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OnMapPointerMoved_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.iOS.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.iOS.MapControl.OnMapPointerMoved(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapPointerMoved(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.iOS.MapControl.OnMapPointerMoved*
+  name: OnMapPointerMoved
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OnMapPointerMoved_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.OnMapPointerMoved
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.OnMapPointerMoved
+  nameWithType: MapControl.OnMapPointerMoved
+- uid: Mapsui.UI.iOS.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerPressed(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OnMapPointerPressed_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.iOS.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.iOS.MapControl.OnMapPointerPressed(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerPressed(ScreenPosition, MPoint)
+- uid: Mapsui.UI.iOS.MapControl.OnMapPointerPressed*
+  name: OnMapPointerPressed
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OnMapPointerPressed_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.OnMapPointerPressed
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.OnMapPointerPressed
+  nameWithType: MapControl.OnMapPointerPressed
+- uid: Mapsui.UI.iOS.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  name: OnMapPointerReleased(ScreenPosition, MPoint)
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OnMapPointerReleased_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.iOS.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint)
+  fullName: Mapsui.UI.iOS.MapControl.OnMapPointerReleased(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint)
+  nameWithType: MapControl.OnMapPointerReleased(ScreenPosition, MPoint)
+- uid: Mapsui.UI.iOS.MapControl.OnMapPointerReleased*
+  name: OnMapPointerReleased
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OnMapPointerReleased_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.OnMapPointerReleased
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.OnMapPointerReleased
+  nameWithType: MapControl.OnMapPointerReleased
+- uid: Mapsui.UI.iOS.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  name: OnMapTapped(ScreenPosition, MPoint, GestureType)
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OnMapTapped_Mapsui_Manipulations_ScreenPosition_Mapsui_MPoint_Mapsui_Manipulations_GestureType_
+  commentId: M:Mapsui.UI.iOS.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition,Mapsui.MPoint,Mapsui.Manipulations.GestureType)
+  fullName: Mapsui.UI.iOS.MapControl.OnMapTapped(Mapsui.Manipulations.ScreenPosition, Mapsui.MPoint, Mapsui.Manipulations.GestureType)
+  nameWithType: MapControl.OnMapTapped(ScreenPosition, MPoint, GestureType)
+- uid: Mapsui.UI.iOS.MapControl.OnMapTapped*
+  name: OnMapTapped
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OnMapTapped_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.OnMapTapped
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.OnMapTapped
+  nameWithType: MapControl.OnMapTapped
 - uid: Mapsui.UI.iOS.MapControl.OnPropertyChanged(System.String)
   name: OnPropertyChanged(string)
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OnPropertyChanged_System_String_
@@ -42441,44 +42922,6 @@ references:
   commentId: T:Mapsui.Widgets.InputOnlyWidget
   fullName: Mapsui.Widgets.InputOnlyWidget
   nameWithType: InputOnlyWidget
-- uid: Mapsui.Widgets.MapTappedWidget
-  name: MapTappedWidget
-  href: pages/Mapsui.Widgets.MapTappedWidget.html
-  commentId: T:Mapsui.Widgets.MapTappedWidget
-  fullName: Mapsui.Widgets.MapTappedWidget
-  nameWithType: MapTappedWidget
-- uid: Mapsui.Widgets.MapTappedWidget.#ctor(System.Func{Mapsui.Widgets.WidgetEventArgs,System.Boolean})
-  name: MapTappedWidget(Func<WidgetEventArgs, bool>)
-  href: pages/Mapsui.Widgets.MapTappedWidget.html#Mapsui_Widgets_MapTappedWidget__ctor_System_Func_Mapsui_Widgets_WidgetEventArgs_System_Boolean__
-  commentId: M:Mapsui.Widgets.MapTappedWidget.#ctor(System.Func{Mapsui.Widgets.WidgetEventArgs,System.Boolean})
-  name.vb: New(Func(Of WidgetEventArgs, Boolean))
-  fullName: Mapsui.Widgets.MapTappedWidget.MapTappedWidget(System.Func<Mapsui.Widgets.WidgetEventArgs, bool>)
-  fullName.vb: Mapsui.Widgets.MapTappedWidget.New(System.Func(Of Mapsui.Widgets.WidgetEventArgs, Boolean))
-  nameWithType: MapTappedWidget.MapTappedWidget(Func<WidgetEventArgs, bool>)
-  nameWithType.vb: MapTappedWidget.New(Func(Of WidgetEventArgs, Boolean))
-- uid: Mapsui.Widgets.MapTappedWidget.#ctor*
-  name: MapTappedWidget
-  href: pages/Mapsui.Widgets.MapTappedWidget.html#Mapsui_Widgets_MapTappedWidget__ctor_
-  commentId: Overload:Mapsui.Widgets.MapTappedWidget.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: Mapsui.Widgets.MapTappedWidget.MapTappedWidget
-  fullName.vb: Mapsui.Widgets.MapTappedWidget.New
-  nameWithType: MapTappedWidget.MapTappedWidget
-  nameWithType.vb: MapTappedWidget.New
-- uid: Mapsui.Widgets.MapTappedWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
-  name: OnTapped(WidgetEventArgs)
-  href: pages/Mapsui.Widgets.MapTappedWidget.html#Mapsui_Widgets_MapTappedWidget_OnTapped_Mapsui_Widgets_WidgetEventArgs_
-  commentId: M:Mapsui.Widgets.MapTappedWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
-  fullName: Mapsui.Widgets.MapTappedWidget.OnTapped(Mapsui.Widgets.WidgetEventArgs)
-  nameWithType: MapTappedWidget.OnTapped(WidgetEventArgs)
-- uid: Mapsui.Widgets.MapTappedWidget.OnTapped*
-  name: OnTapped
-  href: pages/Mapsui.Widgets.MapTappedWidget.html#Mapsui_Widgets_MapTappedWidget_OnTapped_
-  commentId: Overload:Mapsui.Widgets.MapTappedWidget.OnTapped
-  isSpec: "True"
-  fullName: Mapsui.Widgets.MapTappedWidget.OnTapped
-  nameWithType: MapTappedWidget.OnTapped
 - uid: Mapsui.Widgets.Orientation
   name: Orientation
   href: pages/Mapsui.Widgets.Orientation.html
