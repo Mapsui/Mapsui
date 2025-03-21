@@ -56,11 +56,14 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 if (image.SvgFillColor.HasValue || image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
                 {
                     var key = image.GetSourceIdForSvgWithCustomColors();
-                    if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(image, svgImage)) is SvgDrawableImage customColoredSvgImage)
-                        svgImage = customColoredSvgImage;
+                    var coloredDrawableImage = renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(image, svgImage));
+                    if (coloredDrawableImage is SvgDrawableImage customColoredSvgImage)
+                        DrawSKPicture(canvas, customColoredSvgImage.Picture, opacity, image.BlendModeColor);
+                    else if (coloredDrawableImage is BitmapDrawableImage coloredBitmap)
+                        DrawSKImage(canvas, coloredBitmap.Image, opacity);
                 }
-
-                DrawSKPicture(canvas, svgImage.Picture, opacity, image.BlendModeColor);
+                else
+                    DrawSKPicture(canvas, svgImage.Picture, opacity, image.BlendModeColor);
             }
         }
         else
@@ -104,20 +107,42 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return paint;
     }
 
-    private static SvgDrawableImage CreateCustomColoredSvg(Image image, SvgDrawableImage originalSvgImage)
+    private static IDrawableImage CreateCustomColoredSvg(Image image, SvgDrawableImage originalSvgImage)
     {
         var originalStream = originalSvgImage.OriginalStream ?? throw new NullReferenceException("Original Stream is null");
         using var modifiedSvgStream = SvgColorModifier.GetModifiedSvg(originalStream, image.SvgFillColor, image.SvgStrokeColor);
-#pragma warning disable IDISP001
-#pragma warning disable IDISP004
+#pragma warning disable IDISP004 // SvgDrawableImage will be responsible for disposing.
         var skSvg = new SKSvg();
         modifiedSvgStream.Position = 0;
         skSvg.Load(modifiedSvgStream);
-#pragma warning restore IDISP001
 #pragma warning restore IDISP004
         if (skSvg.Picture is null)
             throw new Exception("Failed to load modified SVG picture.");
-        return new SvgDrawableImage(skSvg.Picture);
+        if (image.RasterizeSvg)
+        {
+            if (image.BlendModeColor is not null)
+                throw new NotSupportedException("BlendModeColor is not supported for rasterized SVGs.");
+            var result = new BitmapDrawableImage(ConvertPictureToImage(skSvg.Picture, (int)skSvg.Picture.CullRect.Width, (int)skSvg.Picture.CullRect.Height));
+            skSvg.Dispose(); // If we rasterize the SVG we don't need the SKSvg and its SKPicture anymore
+            return result;
+        }
+        return new SvgDrawableImage(skSvg);
+    }
+
+    public static SKImage ConvertPictureToImage(SKPicture picture, int width, int height)
+    {
+        // Create a surface with the given size
+        using var surface = SKSurface.Create(new SKImageInfo(width, height));
+        var canvas = surface.Canvas;
+
+        // Clear the canvas (optional)
+        canvas.Clear(SKColors.Transparent);
+
+        // Draw the SKPicture onto the canvas
+        canvas.DrawPicture(picture);
+
+        // Convert surface to image
+        return surface.Snapshot();
     }
 
     private static BitmapDrawableImage CreateBitmapImageForRegion(BitmapDrawableImage bitmapImage, BitmapRegion sprite)

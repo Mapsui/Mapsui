@@ -12,7 +12,8 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class SvgSample : ISample
 {
-    public string Name => "Svg";
+    private static readonly int _numberOfSvgs = 2000;
+    public string Name => $"Many SVGs ({_numberOfSvgs})";
     public string Category => "Styles";
 
     public Task<Map> CreateMapAsync()
@@ -32,7 +33,7 @@ public class SvgSample : ISample
         return new MemoryLayer
         {
             Name = "Svg Layer",
-            Features = CreateSvgFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 2000)),
+            Features = CreateSvgFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, _numberOfSvgs)),
             Style = null,
         };
     }
