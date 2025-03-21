@@ -1,15 +1,16 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
+using Mapsui.Widgets.BoxWidgets;
+using Mapsui.Widgets.ButtonWidgets;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
-using Mapsui.Styles;
-using System.Diagnostics.CodeAnalysis;
-using Mapsui.Widgets.BoxWidgets;
-using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Common.Maps.Demo;
 
@@ -25,14 +26,30 @@ public class CustomSvgStyleSample : ISample
 
     public Task<Map> CreateMapAsync()
     {
+        bool _rasterizeSvg = false;
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new MemoryLayer("Custom Svg Style")
         {
-            Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 100).ToList(),
-            Style = CreateDynamicSvgStyle()
+            Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 1000).ToList(),
+            Style = CreateDynamicSvgStyle(() => _rasterizeSvg)
         });
         map.Widgets.Add(CreateTextBox(Description));
+        map.Widgets.Add(new ButtonWidget
+        {
+            Text = "Tap to toggle rasterizing",
+            Margin = new MRect(10),
+            CornerRadius = 3,
+            BackColor = new Color(0, 123, 255),
+            TextColor = Color.White,
+            Padding = new MRect(4),
+            VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Bottom,
+            HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Left,
+            WithTappedEvent = (s, e) =>
+            {
+                _rasterizeSvg = !_rasterizeSvg;
+            }
+        });
 
         return Task.FromResult(map);
     }
@@ -45,7 +62,7 @@ public class CustomSvgStyleSample : ISample
         Margin = new MRect(10),
     };
 
-    private static ThemeStyle CreateDynamicSvgStyle()
+    private static ThemeStyle CreateDynamicSvgStyle(Func<bool> rasterizeSvg) // Use func to get reference to _rasterizeSvg
     {
         return new ThemeStyle((f) =>
         {
@@ -59,7 +76,8 @@ public class CustomSvgStyleSample : ISample
                 {
                     Source = "embedded://Mapsui.Samples.Common.Images.arrow.svg",
                     SvgFillColor = GetTypeColor((int)f.Id % 4),
-                    SvgStrokeColor = Color.Black,
+                    SvgStrokeColor = rasterizeSvg() ? Color.FromRgba(16, 16, 16, 255) : Color.FromRgba(17, 17, 17, 255), // Use slightly different color to make sure bitmap and svg get different cache keys. This is a hack for the purpose of this sample. You do not need this in your own app.
+                    RasterizeSvg = rasterizeSvg(),
                 },
                 RelativeOffset = new RelativeOffset(0.0, 0.5), // The point at the bottom should be at the location
                 SymbolScale = 0.5,
