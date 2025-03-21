@@ -14,6 +14,8 @@ public class Performance
     private double _min, _max;
     private double _sum;
 
+    public static ActiveMode DefaultIsActive { get; set; } = ActiveMode.OnlyInDebugMode;
+
     /// <summary>
     /// Counter for number of redraws of map
     /// </summary>
@@ -49,7 +51,7 @@ public class Performance
     /// </summary>
     public int Dropped { get; set; }
 
-    public ActiveMode IsActive { get; set; } = ActiveMode.OnlyInDebugMode;
+    public ActiveMode IsActive { get; set; } = DefaultIsActive;
 
     /// <summary>
     /// Time be used for the last drawing
