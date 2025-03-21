@@ -34,6 +34,7 @@ csharp_style_var_elsewhere = true:silent
 csharp_style_prefer_primary_constructors = true:suggestion
 csharp_style_prefer_local_over_anonymous_function = true:suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:warning
+csharp_style_unused_value_expression_statement_preference = unused_local_variable # IDE0058: Value is never used
 csharp_prefer_static_local_function = true:suggestion
 
 [*.csproj]
@@ -293,4 +294,4 @@ dotnet_diagnostic.IDISP026.severity = error
 
 # An alternative to IDISPXXX is to enable CA2000:
 # dotnet_diagnostic.CA2000.severity = error
-
+dotnet_diagnostic.IDE0058.severity = suggestion # IDE0058: Value is never used
