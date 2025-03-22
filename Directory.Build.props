@@ -21,7 +21,7 @@
     <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	  <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
-    <MauiVersion>9.0.10</MauiVersion>
+    <MauiVersion>9.0.50</MauiVersion>
   </PropertyGroup>
 
 	<!--Package Icon Include -->
