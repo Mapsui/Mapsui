@@ -40,6 +40,13 @@ public class Image
     public Color? SvgStrokeColor { get; set; }
 
     /// <summary>
+    /// When set to true an SVG image will be rasterized to a bitmap. This can improve performance but could affect 
+    /// the quality.
+    /// </summary>
+    [EditorBrowsable(EditorBrowsableState.Never)] // Experimental feature
+    public bool RasterizeSvg { get; set; }
+
+    /// <summary>
     /// This allows for the automatic conversion of a string to an Image object. This was added to make the creation 
     /// code simpler.
     /// </summary>

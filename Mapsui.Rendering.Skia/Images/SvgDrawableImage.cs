@@ -2,6 +2,9 @@
 using SkiaSharp;
 using Svg.Skia;
 
+#pragma warning disable IDISP008 // SvgDrawableImage is responsible for disposing
+#pragma warning disable IDISP007 // SvgDrawableImage is responsible for disposing
+
 namespace Mapsui.Rendering.Skia.Images;
 
 public sealed class SvgDrawableImage : IDrawableImage
@@ -17,9 +20,22 @@ public sealed class SvgDrawableImage : IDrawableImage
         OriginalStream = bytes;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SvgDrawableImage"/> class with the specified SKPicture.
+    /// </summary>
+    /// <param name="picture">The SKPicture to be used for the image. SvgDrawableImage will dispose it.</param>
     public SvgDrawableImage(SKPicture picture)
     {
         _picture = picture;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SvgDrawableImage"/> class with the specified SKPicture.
+    /// </summary>
+    /// <param name="skSvg">The SKSvg to be used for the image. SvgDrawableImage will dispose it. </param>
+    public SvgDrawableImage(SKSvg skSvg)
+    {
+        _skSvg = skSvg;
     }
 
     public SKPicture Picture => _skSvg?.Picture is null ? _picture! : _skSvg.Picture!;
@@ -31,12 +47,8 @@ public sealed class SvgDrawableImage : IDrawableImage
     {
         if (_disposed)
             return;
-
         _skSvg?.Dispose();
-#pragma warning disable IDISP007
         _picture?.Dispose();
-#pragma warning restore IDISP007
-
         _disposed = true;
     }
 }
