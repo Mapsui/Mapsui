@@ -931,7 +931,7 @@ Use the static <code>MapRenderer.RegisterWidgetRenderer(...)</code> method for r
 <h2 id="list-of-changes-in-the-order-that-they-were-applied">List of changes in the order that they were applied.</h2>
 <ul>
 <li>Removed <code>RectFeature</code>. Instead of <code>new RectFeature(myRect)</code> use <code>new GeometryFeature(myRect.ToPolygon())</code></li>
-<li>Removed all events from the MAUI MapControl except for MapInfo. Use gesture recognizers instead.</li>
+<li>Removed the existing events that were specific to the MAUI MapControl. Alternatives: Use the shared <code>MapControl</code> events: MapTapped, MapPointerPressed, MapPointerMoved, MapPointerReleased, or the events on the <code>Map</code>: Tapped, PointerPressed, PointerMoved, PointerReleased.</li>
 <li>Introduced PinchState to replace separate <em>center</em>, <em>radius</em> and <em>angle</em> fields and used in o.a. the Map.Navigator.Pinch method.</li>
 <li>Moved UnSnapRotationDegrees and UnSnapRotationDegrees properties from MapControl to MapControl.Map.Navigator.</li>
 <li>Rename Microsoft.Maui.Graphics.Color ToNative(this Styles.Color color) to ToMaui.</li>
