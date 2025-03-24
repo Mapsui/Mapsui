@@ -89,6 +89,23 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #endif
     public bool UseFling { get; set; } = true;
 
+    /// <summary>
+    /// Event that is triggered when the map is tapped. Can be a single tap, double tap or long press.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapTapped;
+    /// <summary>
+    /// Event that is triggered when on pointer down.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapPointerPressed;
+    /// <summary>
+    /// Event that is triggered when on pointer move. Can be a drag or hover.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapPointerMoved;
+    /// <summary>
+    /// Event that is triggered when on pointer up.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapPointerReleased;
+
     private void SharedConstructor()
     {
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
@@ -691,6 +708,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var eventArgs = new MapEventArgs(screenPosition, worldPosition, gestureType, Map, GetMapInfo,
             GetRemoteMapInfoAsync);
         Map.OnTapped(eventArgs);
+        if (!eventArgs.Handled)
+            MapTapped?.Invoke(this, eventArgs);
 
         return eventArgs.Handled;
     }
@@ -703,6 +722,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var eventArgs = new MapEventArgs(screenPosition, worldPosition, GestureType.Press, Map, GetMapInfo, 
             GetRemoteMapInfoAsync);
         Map.OnPointerPressed(eventArgs);
+        if (!eventArgs.Handled)
+            MapPointerPressed?.Invoke(this, eventArgs);
 
         return eventArgs.Handled;
     }
@@ -712,6 +733,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var eventArgs = new MapEventArgs(screenPosition, worldPosition, gestureType,
             Map, GetMapInfo, GetRemoteMapInfoAsync);
         Map.OnPointerMoved(eventArgs);
+        if (!eventArgs.Handled)
+            MapPointerMoved?.Invoke(this, eventArgs);
 
         return eventArgs.Handled;
     }
@@ -724,6 +747,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var eventArgs = new MapEventArgs(screenPosition, worldPosition, GestureType.Release, Map, GetMapInfo, 
             GetRemoteMapInfoAsync);
         Map.OnPointerReleased(eventArgs);
+        if (!eventArgs.Handled)
+            MapPointerReleased?.Invoke(this, eventArgs);
 
         return eventArgs.Handled;
     }
