@@ -30913,6 +30913,30 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.MapControl_Touch
   nameWithType: MapControl.MapControl_Touch
+- uid: Mapsui.UI.Android.MapControl.MapPointerMoved
+  name: MapPointerMoved
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_MapPointerMoved
+  commentId: E:Mapsui.UI.Android.MapControl.MapPointerMoved
+  fullName: Mapsui.UI.Android.MapControl.MapPointerMoved
+  nameWithType: MapControl.MapPointerMoved
+- uid: Mapsui.UI.Android.MapControl.MapPointerPressed
+  name: MapPointerPressed
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_MapPointerPressed
+  commentId: E:Mapsui.UI.Android.MapControl.MapPointerPressed
+  fullName: Mapsui.UI.Android.MapControl.MapPointerPressed
+  nameWithType: MapControl.MapPointerPressed
+- uid: Mapsui.UI.Android.MapControl.MapPointerReleased
+  name: MapPointerReleased
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_MapPointerReleased
+  commentId: E:Mapsui.UI.Android.MapControl.MapPointerReleased
+  fullName: Mapsui.UI.Android.MapControl.MapPointerReleased
+  nameWithType: MapControl.MapPointerReleased
+- uid: Mapsui.UI.Android.MapControl.MapTapped
+  name: MapTapped
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_MapTapped
+  commentId: E:Mapsui.UI.Android.MapControl.MapTapped
+  fullName: Mapsui.UI.Android.MapControl.MapTapped
+  nameWithType: MapControl.MapTapped
 - uid: Mapsui.UI.Android.MapControl.MaxTapGestureMovement
   name: MaxTapGestureMovement
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_MaxTapGestureMovement
@@ -31457,12 +31481,36 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.Avalonia.MapControl.MapPointerMoved
+  name: MapPointerMoved
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_MapPointerMoved
+  commentId: E:Mapsui.UI.Avalonia.MapControl.MapPointerMoved
+  fullName: Mapsui.UI.Avalonia.MapControl.MapPointerMoved
+  nameWithType: MapControl.MapPointerMoved
+- uid: Mapsui.UI.Avalonia.MapControl.MapPointerPressed
+  name: MapPointerPressed
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_MapPointerPressed
+  commentId: E:Mapsui.UI.Avalonia.MapControl.MapPointerPressed
+  fullName: Mapsui.UI.Avalonia.MapControl.MapPointerPressed
+  nameWithType: MapControl.MapPointerPressed
+- uid: Mapsui.UI.Avalonia.MapControl.MapPointerReleased
+  name: MapPointerReleased
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_MapPointerReleased
+  commentId: E:Mapsui.UI.Avalonia.MapControl.MapPointerReleased
+  fullName: Mapsui.UI.Avalonia.MapControl.MapPointerReleased
+  nameWithType: MapControl.MapPointerReleased
 - uid: Mapsui.UI.Avalonia.MapControl.MapProperty
   name: MapProperty
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_MapProperty
   commentId: F:Mapsui.UI.Avalonia.MapControl.MapProperty
   fullName: Mapsui.UI.Avalonia.MapControl.MapProperty
   nameWithType: MapControl.MapProperty
+- uid: Mapsui.UI.Avalonia.MapControl.MapTapped
+  name: MapTapped
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_MapTapped
+  commentId: E:Mapsui.UI.Avalonia.MapControl.MapTapped
+  fullName: Mapsui.UI.Avalonia.MapControl.MapTapped
+  nameWithType: MapControl.MapTapped
 - uid: Mapsui.UI.Avalonia.MapControl.MaxTapGestureMovement
   name: MaxTapGestureMovement
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_MaxTapGestureMovement
@@ -32934,6 +32982,30 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.Blazor.MapControl.MapPointerMoved
+  name: MapPointerMoved
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_MapPointerMoved
+  commentId: E:Mapsui.UI.Blazor.MapControl.MapPointerMoved
+  fullName: Mapsui.UI.Blazor.MapControl.MapPointerMoved
+  nameWithType: MapControl.MapPointerMoved
+- uid: Mapsui.UI.Blazor.MapControl.MapPointerPressed
+  name: MapPointerPressed
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_MapPointerPressed
+  commentId: E:Mapsui.UI.Blazor.MapControl.MapPointerPressed
+  fullName: Mapsui.UI.Blazor.MapControl.MapPointerPressed
+  nameWithType: MapControl.MapPointerPressed
+- uid: Mapsui.UI.Blazor.MapControl.MapPointerReleased
+  name: MapPointerReleased
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_MapPointerReleased
+  commentId: E:Mapsui.UI.Blazor.MapControl.MapPointerReleased
+  fullName: Mapsui.UI.Blazor.MapControl.MapPointerReleased
+  nameWithType: MapControl.MapPointerReleased
+- uid: Mapsui.UI.Blazor.MapControl.MapTapped
+  name: MapTapped
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_MapTapped
+  commentId: E:Mapsui.UI.Blazor.MapControl.MapTapped
+  fullName: Mapsui.UI.Blazor.MapControl.MapTapped
+  nameWithType: MapControl.MapTapped
 - uid: Mapsui.UI.Blazor.MapControl.MaxTapGestureMovement
   name: MaxTapGestureMovement
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_MaxTapGestureMovement
@@ -33657,6 +33729,30 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.Eto.MapControl.MapPointerMoved
+  name: MapPointerMoved
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_MapPointerMoved
+  commentId: E:Mapsui.UI.Eto.MapControl.MapPointerMoved
+  fullName: Mapsui.UI.Eto.MapControl.MapPointerMoved
+  nameWithType: MapControl.MapPointerMoved
+- uid: Mapsui.UI.Eto.MapControl.MapPointerPressed
+  name: MapPointerPressed
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_MapPointerPressed
+  commentId: E:Mapsui.UI.Eto.MapControl.MapPointerPressed
+  fullName: Mapsui.UI.Eto.MapControl.MapPointerPressed
+  nameWithType: MapControl.MapPointerPressed
+- uid: Mapsui.UI.Eto.MapControl.MapPointerReleased
+  name: MapPointerReleased
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_MapPointerReleased
+  commentId: E:Mapsui.UI.Eto.MapControl.MapPointerReleased
+  fullName: Mapsui.UI.Eto.MapControl.MapPointerReleased
+  nameWithType: MapControl.MapPointerReleased
+- uid: Mapsui.UI.Eto.MapControl.MapTapped
+  name: MapTapped
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_MapTapped
+  commentId: E:Mapsui.UI.Eto.MapControl.MapTapped
+  fullName: Mapsui.UI.Eto.MapControl.MapTapped
+  nameWithType: MapControl.MapTapped
 - uid: Mapsui.UI.Eto.MapControl.MaxTapGestureMovement
   name: MaxTapGestureMovement
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_MaxTapGestureMovement
@@ -35753,12 +35849,36 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.Maui.MapControl.MapPointerMoved
+  name: MapPointerMoved
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_MapPointerMoved
+  commentId: E:Mapsui.UI.Maui.MapControl.MapPointerMoved
+  fullName: Mapsui.UI.Maui.MapControl.MapPointerMoved
+  nameWithType: MapControl.MapPointerMoved
+- uid: Mapsui.UI.Maui.MapControl.MapPointerPressed
+  name: MapPointerPressed
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_MapPointerPressed
+  commentId: E:Mapsui.UI.Maui.MapControl.MapPointerPressed
+  fullName: Mapsui.UI.Maui.MapControl.MapPointerPressed
+  nameWithType: MapControl.MapPointerPressed
+- uid: Mapsui.UI.Maui.MapControl.MapPointerReleased
+  name: MapPointerReleased
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_MapPointerReleased
+  commentId: E:Mapsui.UI.Maui.MapControl.MapPointerReleased
+  fullName: Mapsui.UI.Maui.MapControl.MapPointerReleased
+  nameWithType: MapControl.MapPointerReleased
 - uid: Mapsui.UI.Maui.MapControl.MapProperty
   name: MapProperty
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_MapProperty
   commentId: F:Mapsui.UI.Maui.MapControl.MapProperty
   fullName: Mapsui.UI.Maui.MapControl.MapProperty
   nameWithType: MapControl.MapProperty
+- uid: Mapsui.UI.Maui.MapControl.MapTapped
+  name: MapTapped
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_MapTapped
+  commentId: E:Mapsui.UI.Maui.MapControl.MapTapped
+  fullName: Mapsui.UI.Maui.MapControl.MapTapped
+  nameWithType: MapControl.MapTapped
 - uid: Mapsui.UI.Maui.MapControl.MaxTapGestureMovement
   name: MaxTapGestureMovement
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_MaxTapGestureMovement
@@ -38412,6 +38532,30 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.WinUI.MapControl.MapPointerMoved
+  name: MapPointerMoved
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_MapPointerMoved
+  commentId: E:Mapsui.UI.WinUI.MapControl.MapPointerMoved
+  fullName: Mapsui.UI.WinUI.MapControl.MapPointerMoved
+  nameWithType: MapControl.MapPointerMoved
+- uid: Mapsui.UI.WinUI.MapControl.MapPointerPressed
+  name: MapPointerPressed
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_MapPointerPressed
+  commentId: E:Mapsui.UI.WinUI.MapControl.MapPointerPressed
+  fullName: Mapsui.UI.WinUI.MapControl.MapPointerPressed
+  nameWithType: MapControl.MapPointerPressed
+- uid: Mapsui.UI.WinUI.MapControl.MapPointerReleased
+  name: MapPointerReleased
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_MapPointerReleased
+  commentId: E:Mapsui.UI.WinUI.MapControl.MapPointerReleased
+  fullName: Mapsui.UI.WinUI.MapControl.MapPointerReleased
+  nameWithType: MapControl.MapPointerReleased
+- uid: Mapsui.UI.WinUI.MapControl.MapTapped
+  name: MapTapped
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_MapTapped
+  commentId: E:Mapsui.UI.WinUI.MapControl.MapTapped
+  fullName: Mapsui.UI.WinUI.MapControl.MapTapped
+  nameWithType: MapControl.MapTapped
 - uid: Mapsui.UI.WinUI.MapControl.MaxTapGestureMovement
   name: MaxTapGestureMovement
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_MaxTapGestureMovement
@@ -38862,6 +39006,30 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.WindowsForms.MapControl.MapPointerMoved
+  name: MapPointerMoved
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_MapPointerMoved
+  commentId: E:Mapsui.UI.WindowsForms.MapControl.MapPointerMoved
+  fullName: Mapsui.UI.WindowsForms.MapControl.MapPointerMoved
+  nameWithType: MapControl.MapPointerMoved
+- uid: Mapsui.UI.WindowsForms.MapControl.MapPointerPressed
+  name: MapPointerPressed
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_MapPointerPressed
+  commentId: E:Mapsui.UI.WindowsForms.MapControl.MapPointerPressed
+  fullName: Mapsui.UI.WindowsForms.MapControl.MapPointerPressed
+  nameWithType: MapControl.MapPointerPressed
+- uid: Mapsui.UI.WindowsForms.MapControl.MapPointerReleased
+  name: MapPointerReleased
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_MapPointerReleased
+  commentId: E:Mapsui.UI.WindowsForms.MapControl.MapPointerReleased
+  fullName: Mapsui.UI.WindowsForms.MapControl.MapPointerReleased
+  nameWithType: MapControl.MapPointerReleased
+- uid: Mapsui.UI.WindowsForms.MapControl.MapTapped
+  name: MapTapped
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_MapTapped
+  commentId: E:Mapsui.UI.WindowsForms.MapControl.MapTapped
+  fullName: Mapsui.UI.WindowsForms.MapControl.MapTapped
+  nameWithType: MapControl.MapTapped
 - uid: Mapsui.UI.WindowsForms.MapControl.MaxTapGestureMovement
   name: MaxTapGestureMovement
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_MaxTapGestureMovement
@@ -39317,6 +39485,30 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.Wpf.MapControl.MapPointerMoved
+  name: MapPointerMoved
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_MapPointerMoved
+  commentId: E:Mapsui.UI.Wpf.MapControl.MapPointerMoved
+  fullName: Mapsui.UI.Wpf.MapControl.MapPointerMoved
+  nameWithType: MapControl.MapPointerMoved
+- uid: Mapsui.UI.Wpf.MapControl.MapPointerPressed
+  name: MapPointerPressed
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_MapPointerPressed
+  commentId: E:Mapsui.UI.Wpf.MapControl.MapPointerPressed
+  fullName: Mapsui.UI.Wpf.MapControl.MapPointerPressed
+  nameWithType: MapControl.MapPointerPressed
+- uid: Mapsui.UI.Wpf.MapControl.MapPointerReleased
+  name: MapPointerReleased
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_MapPointerReleased
+  commentId: E:Mapsui.UI.Wpf.MapControl.MapPointerReleased
+  fullName: Mapsui.UI.Wpf.MapControl.MapPointerReleased
+  nameWithType: MapControl.MapPointerReleased
+- uid: Mapsui.UI.Wpf.MapControl.MapTapped
+  name: MapTapped
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_MapTapped
+  commentId: E:Mapsui.UI.Wpf.MapControl.MapTapped
+  fullName: Mapsui.UI.Wpf.MapControl.MapTapped
+  nameWithType: MapControl.MapTapped
 - uid: Mapsui.UI.Wpf.MapControl.MaxTapGestureMovement
   name: MaxTapGestureMovement
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_MaxTapGestureMovement
@@ -39776,6 +39968,30 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.iOS.MapControl.MapPointerMoved
+  name: MapPointerMoved
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_MapPointerMoved
+  commentId: E:Mapsui.UI.iOS.MapControl.MapPointerMoved
+  fullName: Mapsui.UI.iOS.MapControl.MapPointerMoved
+  nameWithType: MapControl.MapPointerMoved
+- uid: Mapsui.UI.iOS.MapControl.MapPointerPressed
+  name: MapPointerPressed
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_MapPointerPressed
+  commentId: E:Mapsui.UI.iOS.MapControl.MapPointerPressed
+  fullName: Mapsui.UI.iOS.MapControl.MapPointerPressed
+  nameWithType: MapControl.MapPointerPressed
+- uid: Mapsui.UI.iOS.MapControl.MapPointerReleased
+  name: MapPointerReleased
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_MapPointerReleased
+  commentId: E:Mapsui.UI.iOS.MapControl.MapPointerReleased
+  fullName: Mapsui.UI.iOS.MapControl.MapPointerReleased
+  nameWithType: MapControl.MapPointerReleased
+- uid: Mapsui.UI.iOS.MapControl.MapTapped
+  name: MapTapped
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_MapTapped
+  commentId: E:Mapsui.UI.iOS.MapControl.MapTapped
+  fullName: Mapsui.UI.iOS.MapControl.MapTapped
+  nameWithType: MapControl.MapTapped
 - uid: Mapsui.UI.iOS.MapControl.MaxTapGestureMovement
   name: MaxTapGestureMovement
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_MaxTapGestureMovement
