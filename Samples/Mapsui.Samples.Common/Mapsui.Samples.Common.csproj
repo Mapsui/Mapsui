@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <None Remove="GeoData\GeoJson\countries.geojson" />
+    <None Remove="GeoData\MbTiles\zurich.mbtiles" />
     <None Remove="GeoData\TrueMarble\0\0\0.png" />
     <None Remove="GeoData\TrueMarble\1\0\0.png" />
     <None Remove="GeoData\TrueMarble\1\0\1.png" />
@@ -68,6 +69,7 @@
     <EmbeddedResource Include="GeoData\MbTiles\world.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\MbTiles\zurich.mbtiles" />
     <EmbeddedResource Include="GeoData\TrueMarble\0\0\0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -156,6 +158,7 @@
     <PackageReference Include="BruTile" />
     <PackageReference Include="System.Text.Json" />
     <PackageReference Include="BruTile.MbTiles" />
+    <PackageReference Include="VexTile.TileSource.Mvt" />
   </ItemGroup>
 
   <ItemGroup>

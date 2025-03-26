@@ -83,5 +83,6 @@
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
     <PackageVersion Include="System.Text.Json" Version="9.0.0" />
+    <PackageVersion Include="VexTile.TileSource.Mvt" Version="1.0.1" />
   </ItemGroup>
 </Project>
