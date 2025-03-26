@@ -89,6 +89,21 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #endif
     public bool UseFling { get; set; } = true;
 
+    public float PixelDensity => (float)GetPixelDensity();
+
+    /// <summary>
+    /// Renderer that is used from this MapControl
+    /// </summary>
+    public IRenderer Renderer => _renderer;
+
+    /// <summary>
+    /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+    /// the layers that have IsMapInfoLayer set to true. 
+    /// </summary>
+    /// <remarks>
+    /// The Map.Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
+    /// </remarks>
+    public event EventHandler<MapInfoEventArgs>? Info;
     /// <summary>
     /// Event that is triggered when the map is tapped. Can be a single tap, double tap or long press.
     /// </summary>
@@ -265,22 +280,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
         }
     }
-
-    public float PixelDensity => (float)GetPixelDensity();
-
-    /// <summary>
-    /// Renderer that is used from this MapControl
-    /// </summary>
-    public IRenderer Renderer => _renderer;
-
-    /// <summary>
-    /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
-    /// the layers that have IsMapInfoLayer set to true. 
-    /// </summary>
-    /// <remarks>
-    /// The Map.Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
-    /// </remarks>
-    public event EventHandler<MapInfoEventArgs>? Info;
 
     /// <summary>
     /// Called whenever a property is changed

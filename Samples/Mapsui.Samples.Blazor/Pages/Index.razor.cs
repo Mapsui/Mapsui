@@ -18,9 +18,12 @@ public partial class Index
     private string? _categoryId;
     private string? _sampleId;
     private bool _render;
-    public List<string> Samples { get; set; } = new();
-    public List<ISampleBase> MapSamples { get; set; } = new();
-    public List<string> Categories { get; set; } = new();
+    public List<string> Samples { get; set; } = [];
+    public List<ISampleBase> MapSamples { get; set; } = [];
+    public List<string> Categories { get; set; } = [];
+
+    [Parameter] public string? CategoryInRoute { get; set; }
+    [Parameter] public string? SampleInRoute { get; set; }
 
     [Parameter]
     [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
@@ -35,7 +38,6 @@ public partial class Index
             }
 
             _categoryId = value;
-            FillSamples();
         }
     }
 
@@ -65,6 +67,40 @@ public partial class Index
         LoggingWidget.ShowLoggingInMap = ActiveMode.Yes; // To show logging in release mode
         Performance.DefaultIsActive = ActiveMode.Yes; // To show performance in release mode
         FillComboBoxWithCategories();
+        CategoryId = Categories[0];
+
+        if (IsCategoryInRoute())
+        {
+            CategoryId = CategoryInRoute;
+            FillSamples();
+            ThrowIfSampleIsNotInRouteOrDoesNotExist();
+            SampleId = SampleInRoute;
+        }
+        else
+        {
+            CategoryId = Categories[0]; // Set a default category
+            FillSamples();
+            SampleId = MapSamples.FirstOrDefault()?.Name;
+        }
+    }
+
+    private bool IsCategoryInRoute()
+    {
+        if (!string.IsNullOrEmpty(CategoryInRoute))
+        {
+            if (!Categories.Contains(CategoryInRoute))
+                throw new Exception($"Category '{CategoryInRoute}' does not exist. Choose from: '{string.Join(',', Categories)}'");
+            return true;
+        }
+        return false;
+    }
+
+    private void ThrowIfSampleIsNotInRouteOrDoesNotExist()
+    {
+        if (string.IsNullOrEmpty(SampleInRoute))
+            throw new Exception("If a category is specified the sample also needs to be specified.");
+        if (!Samples.Contains(SampleInRoute))
+            throw new Exception($"The sample `{SampleInRoute}` does not exist. Choose from: '{string.Join(',', Samples)}'");
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -95,10 +131,6 @@ public partial class Index
         {
             Categories.Add(category);
         }
-
-        CategoryId = Categories[0];
-
-        FillSamples();
     }
 
     private void FillSamples()
@@ -108,7 +140,6 @@ public partial class Index
         MapSamples.Clear();
         Samples.AddRange(list.Select(f => f.Name));
         MapSamples.AddRange(list);
-        SampleId = MapSamples.FirstOrDefault()?.Name;
     }
 
     private void FillMap()
