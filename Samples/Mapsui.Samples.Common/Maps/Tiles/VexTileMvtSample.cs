@@ -68,7 +68,7 @@ public class RasterizedVectorTilesSample : ISample
         public Task<byte[]?> GetTileAsync(TileInfo tileInfo)
         {
             var canvas = new SkiaCanvas();
-            return TileRendererFactory.RenderAsync(_style, canvas, tileInfo.Index.Col, tileInfo.Index.Row, tileInfo.Index.Level);
+            return TileRendererFactory.RenderAsync(_style, canvas, tileInfo.Index.Col, (int)Schema.GetMatrixHeight(tileInfo.Index.Level) - tileInfo.Index.Row - 1, tileInfo.Index.Level);
         }
     }
 }
