@@ -1,6 +1,9 @@
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Devices;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
@@ -9,10 +12,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices;
-using Microsoft.Maui.Graphics;
 
 namespace Mapsui.UI.Maui;
 
@@ -21,16 +20,18 @@ namespace Mapsui.UI.Maui;
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
-    public static bool UseGPU = true;
+    public static bool UseGPU = false;
 
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
     private readonly ConcurrentDictionary<long, ScreenPosition> _positions = new();
-    private Size _oldSize;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
     private Page? _page;
     private Element? _element;
+
+    private double ViewportWidth { get; set; }
+    private double ViewportHeight { get; set; }
 
     public MapControl()
     {
@@ -72,12 +73,18 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _canvasView.PaintSurface += OnPaintSurface;
             view = _canvasView;
         }
-        view.PropertyChanged += View_PropertyChanged;
+        view.SizeChanged += View_SizeChanged;
         Content = view;
     }
 
-    private double ViewportWidth => Width; // Used in shared code
-    private double ViewportHeight => Height; // Used in shared code
+    private void View_SizeChanged(object? sender, EventArgs e)
+    {
+        ViewportWidth = Width;
+        ViewportHeight = Height;
+
+        ClearTouchState();
+        SetViewportSize();
+    }
 
     private static void InitTouchesReset(MapControl mapControl)
     {
@@ -139,31 +146,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
     }
 
-    private void View_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        switch (e.PropertyName)
-        {
-            case nameof(Width):
-            case nameof(Height):
-                var newSize = new Size(Width, Height);
-
-                if (newSize.Width > 0 && newSize.Height > 0 && _oldSize != newSize)
-                {
-                    _oldSize = newSize;
-                    // Maui Workaround because the OnSizeChanged Events don't fire.
-                    // Maybe this is a Bug and will be fixed in later versions.
-                    OnSizeChanged(this, EventArgs.Empty);
-                }
-
-                break;
-        }
-    }
-
-    private void OnSizeChanged(object? sender, EventArgs e)
-    {
-        ClearTouchState();
-        SetViewportSize();
-    }
 
     private void OnTouch(object? sender, SKTouchEventArgs e)
     {
