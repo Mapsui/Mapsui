@@ -30,11 +30,11 @@ jobs:
       uses: NuGet/setup-nuget@v1.1.1
       with:
         nuget-version: latest
-    # .Net 8 update
-    - name: Setup .NET 8 SDK
+    - name: Setup .NET SDKs
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
+           6.0.x
            8.0.4xx
          include-prerelease: false
     # Android SDK Install
@@ -148,17 +148,11 @@ jobs:
       uses: maxim-lobanov/setup-xcode@v1
       with:
          xcode-version: '16'
-    - name: Setup .NET 6 SDK
+    - name: Setup .NET SDKs
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
            6.0.x
-         include-prerelease: false
-    # .Net 8 update
-    - name: Setup .NET 8 SDK
-      uses: actions/setup-dotnet@v3
-      with:
-         dotnet-version: |
            8.0.4xx
          include-prerelease: false
     - name: install maui macos android ios maccatalyst wasm-tools
