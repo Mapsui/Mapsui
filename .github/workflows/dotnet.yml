@@ -42,6 +42,7 @@ jobs:
       uses: android-actions/setup-android@v3
       with:
         cmdline-tools-version: '8512546'
+        packages: 'tools platform-tools platforms;android-34 platforms;android-33'
     - name: install android wasm-tools wasm-tools-net7
       run: dotnet workload install android wasm-tools wasm-tools-net7
     - name: Restore dependencies Mapsui.Linux
