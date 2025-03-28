@@ -15,7 +15,7 @@ public class Delayer
     // if the method on the queue is not in progress yet the new call will replace the waiting one.
     // This is to avoid requests of an outdated extent.
     private readonly Channel<Func<Task>> _queue = Channel.CreateBounded<Func<Task>>(
-        new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest });
+        new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest, AllowSynchronousContinuations = true, SingleReader = true });
 
     public Delayer() => _ = AddConsumerAsync(_queue);
 
