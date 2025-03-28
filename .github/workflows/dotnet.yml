@@ -71,8 +71,7 @@ jobs:
         path: Artifacts/*.nupkg
 
   macBuildLegacy:
-    # macos-latest is currently macos-13
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
     - uses: actions/checkout@v3
       with:
@@ -127,7 +126,6 @@ jobs:
         path: Artifacts/*.nupkg
 
   macBuild:
-    # macos-latest is currently macos-13
     runs-on: macos-14
     steps:
     - uses: actions/checkout@v3
