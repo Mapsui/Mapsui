@@ -6450,22 +6450,35 @@ references:
   fullName.vb: Mapsui.Fetcher.FetchMachine.New
   nameWithType: FetchMachine.FetchMachine
   nameWithType.vb: FetchMachine.New
-- uid: Mapsui.Fetcher.FetchMachine.Start(System.Func{System.Threading.Tasks.Task})
-  name: Start(Func<Task>)
-  href: pages/Mapsui.Fetcher.FetchMachine.html#Mapsui_Fetcher_FetchMachine_Start_System_Func_System_Threading_Tasks_Task__
-  commentId: M:Mapsui.Fetcher.FetchMachine.Start(System.Func{System.Threading.Tasks.Task})
-  name.vb: Start(Func(Of Task))
-  fullName: Mapsui.Fetcher.FetchMachine.Start(System.Func<System.Threading.Tasks.Task>)
-  fullName.vb: Mapsui.Fetcher.FetchMachine.Start(System.Func(Of System.Threading.Tasks.Task))
-  nameWithType: FetchMachine.Start(Func<Task>)
-  nameWithType.vb: FetchMachine.Start(Func(Of Task))
-- uid: Mapsui.Fetcher.FetchMachine.Start*
-  name: Start
-  href: pages/Mapsui.Fetcher.FetchMachine.html#Mapsui_Fetcher_FetchMachine_Start_
-  commentId: Overload:Mapsui.Fetcher.FetchMachine.Start
+- uid: Mapsui.Fetcher.FetchMachine.Enqueue(System.Func{System.Threading.Tasks.Task})
+  name: Enqueue(Func<Task>)
+  href: pages/Mapsui.Fetcher.FetchMachine.html#Mapsui_Fetcher_FetchMachine_Enqueue_System_Func_System_Threading_Tasks_Task__
+  commentId: M:Mapsui.Fetcher.FetchMachine.Enqueue(System.Func{System.Threading.Tasks.Task})
+  name.vb: Enqueue(Func(Of Task))
+  fullName: Mapsui.Fetcher.FetchMachine.Enqueue(System.Func<System.Threading.Tasks.Task>)
+  fullName.vb: Mapsui.Fetcher.FetchMachine.Enqueue(System.Func(Of System.Threading.Tasks.Task))
+  nameWithType: FetchMachine.Enqueue(Func<Task>)
+  nameWithType.vb: FetchMachine.Enqueue(Func(Of Task))
+- uid: Mapsui.Fetcher.FetchMachine.Enqueue*
+  name: Enqueue
+  href: pages/Mapsui.Fetcher.FetchMachine.html#Mapsui_Fetcher_FetchMachine_Enqueue_
+  commentId: Overload:Mapsui.Fetcher.FetchMachine.Enqueue
   isSpec: "True"
-  fullName: Mapsui.Fetcher.FetchMachine.Start
-  nameWithType: FetchMachine.Start
+  fullName: Mapsui.Fetcher.FetchMachine.Enqueue
+  nameWithType: FetchMachine.Enqueue
+- uid: Mapsui.Fetcher.FetchMachine.NumberOfWorkers
+  name: NumberOfWorkers
+  href: pages/Mapsui.Fetcher.FetchMachine.html#Mapsui_Fetcher_FetchMachine_NumberOfWorkers
+  commentId: P:Mapsui.Fetcher.FetchMachine.NumberOfWorkers
+  fullName: Mapsui.Fetcher.FetchMachine.NumberOfWorkers
+  nameWithType: FetchMachine.NumberOfWorkers
+- uid: Mapsui.Fetcher.FetchMachine.NumberOfWorkers*
+  name: NumberOfWorkers
+  href: pages/Mapsui.Fetcher.FetchMachine.html#Mapsui_Fetcher_FetchMachine_NumberOfWorkers_
+  commentId: Overload:Mapsui.Fetcher.FetchMachine.NumberOfWorkers
+  isSpec: "True"
+  fullName: Mapsui.Fetcher.FetchMachine.NumberOfWorkers
+  nameWithType: FetchMachine.NumberOfWorkers
 - uid: Mapsui.Fetcher.FetchMachine.Stop
   name: Stop()
   href: pages/Mapsui.Fetcher.FetchMachine.html#Mapsui_Fetcher_FetchMachine_Stop
@@ -12294,6 +12307,44 @@ references:
   commentId: E:Mapsui.Navigator.RefreshDataRequest
   fullName: Mapsui.Navigator.RefreshDataRequest
   nameWithType: Navigator.RefreshDataRequest
+- uid: Mapsui.Navigator.RefreshDataRequestEventArgs
+  name: Navigator.RefreshDataRequestEventArgs
+  href: pages/Mapsui.Navigator.RefreshDataRequestEventArgs.html
+  commentId: T:Mapsui.Navigator.RefreshDataRequestEventArgs
+  fullName: Mapsui.Navigator.RefreshDataRequestEventArgs
+  nameWithType: Navigator.RefreshDataRequestEventArgs
+- uid: Mapsui.Navigator.RefreshDataRequestEventArgs.#ctor(Mapsui.ChangeType)
+  name: RefreshDataRequestEventArgs(ChangeType)
+  href: pages/Mapsui.Navigator.RefreshDataRequestEventArgs.html#Mapsui_Navigator_RefreshDataRequestEventArgs__ctor_Mapsui_ChangeType_
+  commentId: M:Mapsui.Navigator.RefreshDataRequestEventArgs.#ctor(Mapsui.ChangeType)
+  name.vb: New(ChangeType)
+  fullName: Mapsui.Navigator.RefreshDataRequestEventArgs.RefreshDataRequestEventArgs(Mapsui.ChangeType)
+  fullName.vb: Mapsui.Navigator.RefreshDataRequestEventArgs.New(Mapsui.ChangeType)
+  nameWithType: Navigator.RefreshDataRequestEventArgs.RefreshDataRequestEventArgs(ChangeType)
+  nameWithType.vb: Navigator.RefreshDataRequestEventArgs.New(ChangeType)
+- uid: Mapsui.Navigator.RefreshDataRequestEventArgs.#ctor*
+  name: RefreshDataRequestEventArgs
+  href: pages/Mapsui.Navigator.RefreshDataRequestEventArgs.html#Mapsui_Navigator_RefreshDataRequestEventArgs__ctor_
+  commentId: Overload:Mapsui.Navigator.RefreshDataRequestEventArgs.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mapsui.Navigator.RefreshDataRequestEventArgs.RefreshDataRequestEventArgs
+  fullName.vb: Mapsui.Navigator.RefreshDataRequestEventArgs.New
+  nameWithType: Navigator.RefreshDataRequestEventArgs.RefreshDataRequestEventArgs
+  nameWithType.vb: Navigator.RefreshDataRequestEventArgs.New
+- uid: Mapsui.Navigator.RefreshDataRequestEventArgs.ChangeType
+  name: ChangeType
+  href: pages/Mapsui.Navigator.RefreshDataRequestEventArgs.html#Mapsui_Navigator_RefreshDataRequestEventArgs_ChangeType
+  commentId: P:Mapsui.Navigator.RefreshDataRequestEventArgs.ChangeType
+  fullName: Mapsui.Navigator.RefreshDataRequestEventArgs.ChangeType
+  nameWithType: Navigator.RefreshDataRequestEventArgs.ChangeType
+- uid: Mapsui.Navigator.RefreshDataRequestEventArgs.ChangeType*
+  name: ChangeType
+  href: pages/Mapsui.Navigator.RefreshDataRequestEventArgs.html#Mapsui_Navigator_RefreshDataRequestEventArgs_ChangeType_
+  commentId: Overload:Mapsui.Navigator.RefreshDataRequestEventArgs.ChangeType
+  isSpec: "True"
+  fullName: Mapsui.Navigator.RefreshDataRequestEventArgs.ChangeType
+  nameWithType: Navigator.RefreshDataRequestEventArgs.ChangeType
 - uid: Mapsui.Navigator.Resolutions
   name: Resolutions
   href: pages/Mapsui.Navigator.html#Mapsui_Navigator_Resolutions
@@ -22663,6 +22714,92 @@ references:
   commentId: N:Mapsui.Rendering.Skia.Images
   fullName: Mapsui.Rendering.Skia.Images
   nameWithType: Mapsui.Rendering.Skia.Images
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage
+  name: BitmapDrawableImage
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html
+  commentId: T:Mapsui.Rendering.Skia.Images.BitmapDrawableImage
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage
+  nameWithType: BitmapDrawableImage
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.#ctor(SkiaSharp.SKImage)
+  name: BitmapDrawableImage(SKImage)
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage__ctor_SkiaSharp_SKImage_
+  commentId: M:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.#ctor(SkiaSharp.SKImage)
+  name.vb: New(SKImage)
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.BitmapDrawableImage(SkiaSharp.SKImage)
+  fullName.vb: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.New(SkiaSharp.SKImage)
+  nameWithType: BitmapDrawableImage.BitmapDrawableImage(SKImage)
+  nameWithType.vb: BitmapDrawableImage.New(SKImage)
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.#ctor(System.Byte[])
+  name: BitmapDrawableImage(byte[])
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage__ctor_System_Byte___
+  commentId: M:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.#ctor(System.Byte[])
+  name.vb: New(Byte())
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.BitmapDrawableImage(byte[])
+  fullName.vb: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.New(Byte())
+  nameWithType: BitmapDrawableImage.BitmapDrawableImage(byte[])
+  nameWithType.vb: BitmapDrawableImage.New(Byte())
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.#ctor*
+  name: BitmapDrawableImage
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage__ctor_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.BitmapDrawableImage
+  fullName.vb: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.New
+  nameWithType: BitmapDrawableImage.BitmapDrawableImage
+  nameWithType.vb: BitmapDrawableImage.New
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Dispose
+  name: Dispose()
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage_Dispose
+  commentId: M:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Dispose
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Dispose()
+  nameWithType: BitmapDrawableImage.Dispose()
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Dispose*
+  name: Dispose
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage_Dispose_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Dispose
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Dispose
+  nameWithType: BitmapDrawableImage.Dispose
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Height
+  name: Height
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage_Height
+  commentId: P:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Height
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Height
+  nameWithType: BitmapDrawableImage.Height
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Height*
+  name: Height
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage_Height_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Height
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Height
+  nameWithType: BitmapDrawableImage.Height
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Image
+  name: Image
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage_Image
+  commentId: P:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Image
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Image
+  nameWithType: BitmapDrawableImage.Image
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Image*
+  name: Image
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage_Image_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Image
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Image
+  nameWithType: BitmapDrawableImage.Image
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Width
+  name: Width
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage_Width
+  commentId: P:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Width
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Width
+  nameWithType: BitmapDrawableImage.Width
+- uid: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Width*
+  name: Width
+  href: pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html#Mapsui_Rendering_Skia_Images_BitmapDrawableImage_Width_
+  commentId: Overload:Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Width
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.Images.BitmapDrawableImage.Width
+  nameWithType: BitmapDrawableImage.Width
 - uid: Mapsui.Rendering.Skia.Images.IDrawableImage
   name: IDrawableImage
   href: pages/Mapsui.Rendering.Skia.Images.IDrawableImage.html
@@ -30035,13 +30172,13 @@ references:
   fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher
   nameWithType: TileFetchDispatcher
 - uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher.#ctor(BruTile.Cache.ITileCache{Mapsui.IFeature},BruTile.ITileSchema,System.Func{BruTile.TileInfo,System.Threading.Tasks.Task{Mapsui.IFeature}},Mapsui.Tiling.Fetcher.IDataFetchStrategy)
-  name: TileFetchDispatcher(ITileCache<IFeature?>, ITileSchema?, Func<TileInfo, Task<IFeature?>>, IDataFetchStrategy?)
+  name: TileFetchDispatcher(ITileCache<IFeature?>, ITileSchema, Func<TileInfo, Task<IFeature?>>, IDataFetchStrategy?)
   href: pages/Mapsui.Tiling.Fetcher.TileFetchDispatcher.html#Mapsui_Tiling_Fetcher_TileFetchDispatcher__ctor_BruTile_Cache_ITileCache_Mapsui_IFeature__BruTile_ITileSchema_System_Func_BruTile_TileInfo_System_Threading_Tasks_Task_Mapsui_IFeature___Mapsui_Tiling_Fetcher_IDataFetchStrategy_
   commentId: M:Mapsui.Tiling.Fetcher.TileFetchDispatcher.#ctor(BruTile.Cache.ITileCache{Mapsui.IFeature},BruTile.ITileSchema,System.Func{BruTile.TileInfo,System.Threading.Tasks.Task{Mapsui.IFeature}},Mapsui.Tiling.Fetcher.IDataFetchStrategy)
   name.vb: New(ITileCache(Of IFeature), ITileSchema, Func(Of TileInfo, Task(Of IFeature)), IDataFetchStrategy)
-  fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher.TileFetchDispatcher(BruTile.Cache.ITileCache<Mapsui.IFeature?>, BruTile.ITileSchema?, System.Func<BruTile.TileInfo, System.Threading.Tasks.Task<Mapsui.IFeature?>>, Mapsui.Tiling.Fetcher.IDataFetchStrategy?)
+  fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher.TileFetchDispatcher(BruTile.Cache.ITileCache<Mapsui.IFeature?>, BruTile.ITileSchema, System.Func<BruTile.TileInfo, System.Threading.Tasks.Task<Mapsui.IFeature?>>, Mapsui.Tiling.Fetcher.IDataFetchStrategy?)
   fullName.vb: Mapsui.Tiling.Fetcher.TileFetchDispatcher.New(BruTile.Cache.ITileCache(Of Mapsui.IFeature), BruTile.ITileSchema, System.Func(Of BruTile.TileInfo, System.Threading.Tasks.Task(Of Mapsui.IFeature)), Mapsui.Tiling.Fetcher.IDataFetchStrategy)
-  nameWithType: TileFetchDispatcher.TileFetchDispatcher(ITileCache<IFeature?>, ITileSchema?, Func<TileInfo, Task<IFeature?>>, IDataFetchStrategy?)
+  nameWithType: TileFetchDispatcher.TileFetchDispatcher(ITileCache<IFeature?>, ITileSchema, Func<TileInfo, Task<IFeature?>>, IDataFetchStrategy?)
   nameWithType.vb: TileFetchDispatcher.New(ITileCache(Of IFeature), ITileSchema, Func(Of TileInfo, Task(Of IFeature)), IDataFetchStrategy)
 - uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher.#ctor*
   name: TileFetchDispatcher
@@ -30072,19 +30209,6 @@ references:
   commentId: E:Mapsui.Tiling.Fetcher.TileFetchDispatcher.DataChanged
   fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher.DataChanged
   nameWithType: TileFetchDispatcher.DataChanged
-- uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher.FetchNextTiles
-  name: FetchNextTiles()
-  href: pages/Mapsui.Tiling.Fetcher.TileFetchDispatcher.html#Mapsui_Tiling_Fetcher_TileFetchDispatcher_FetchNextTiles
-  commentId: M:Mapsui.Tiling.Fetcher.TileFetchDispatcher.FetchNextTiles
-  fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher.FetchNextTiles()
-  nameWithType: TileFetchDispatcher.FetchNextTiles()
-- uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher.FetchNextTiles*
-  name: FetchNextTiles
-  href: pages/Mapsui.Tiling.Fetcher.TileFetchDispatcher.html#Mapsui_Tiling_Fetcher_TileFetchDispatcher_FetchNextTiles_
-  commentId: Overload:Mapsui.Tiling.Fetcher.TileFetchDispatcher.FetchNextTiles
-  isSpec: "True"
-  fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher.FetchNextTiles
-  nameWithType: TileFetchDispatcher.FetchNextTiles
 - uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher.MaxTilesInOneRequest
   name: MaxTilesInOneRequest
   href: pages/Mapsui.Tiling.Fetcher.TileFetchDispatcher.html#Mapsui_Tiling_Fetcher_TileFetchDispatcher_MaxTilesInOneRequest
@@ -30130,6 +30254,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher.RefreshData
   nameWithType: TileFetchDispatcher.RefreshData
+- uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher.StartFetching
+  name: StartFetching()
+  href: pages/Mapsui.Tiling.Fetcher.TileFetchDispatcher.html#Mapsui_Tiling_Fetcher_TileFetchDispatcher_StartFetching
+  commentId: M:Mapsui.Tiling.Fetcher.TileFetchDispatcher.StartFetching
+  fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher.StartFetching()
+  nameWithType: TileFetchDispatcher.StartFetching()
+- uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher.StartFetching*
+  name: StartFetching
+  href: pages/Mapsui.Tiling.Fetcher.TileFetchDispatcher.html#Mapsui_Tiling_Fetcher_TileFetchDispatcher_StartFetching_
+  commentId: Overload:Mapsui.Tiling.Fetcher.TileFetchDispatcher.StartFetching
+  isSpec: "True"
+  fullName: Mapsui.Tiling.Fetcher.TileFetchDispatcher.StartFetching
+  nameWithType: TileFetchDispatcher.StartFetching
 - uid: Mapsui.Tiling.Fetcher.TileFetchDispatcher.StopFetching
   name: StopFetching()
   href: pages/Mapsui.Tiling.Fetcher.TileFetchDispatcher.html#Mapsui_Tiling_Fetcher_TileFetchDispatcher_StopFetching

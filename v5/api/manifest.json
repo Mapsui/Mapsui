@@ -1622,6 +1622,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Navigator.RefreshDataRequestEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Navigator.RefreshDataRequestEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Navigator.ViewportChangedEventHandler.yml",
       "output": {
         ".html": {
@@ -3246,6 +3256,16 @@
       "output": {
         ".html": {
           "relative_path": "pages/Mapsui.Rendering.Skia.ImageStyleRenderer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Rendering.Skia.Images.BitmapDrawableImage.html"
         }
       },
       "version": ""

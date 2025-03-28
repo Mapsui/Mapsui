@@ -125,7 +125,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Fetcher_FetchMachine__ctor_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.FetchMachine.%23ctor(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Fetcher/FetchMachine.cs/#L11">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Fetcher/FetchMachine.cs/#L13">View Source</a>
   </span>
   <a id="Mapsui_Fetcher_FetchMachine__ctor_" data-uid="Mapsui.Fetcher.FetchMachine.#ctor*"></a>
   <h4 id="Mapsui_Fetcher_FetchMachine__ctor_System_Int32_" data-uid="Mapsui.Fetcher.FetchMachine.#ctor(System.Int32)">FetchMachine(int)</h4>
@@ -152,22 +152,54 @@
       </tr>
     </tbody>
   </table>
-  <h3 id="methods">Methods
+  <h3 id="properties">Properties
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Fetcher_FetchMachine_Start_System_Func_System_Threading_Tasks_Task__.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.FetchMachine.Start(System.Func%7BSystem.Threading.Tasks.Task%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Fetcher_FetchMachine_NumberOfWorkers.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.FetchMachine.NumberOfWorkers%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Fetcher/FetchMachine.cs/#L17">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Fetcher/FetchMachine.cs/#L11">View Source</a>
   </span>
-  <a id="Mapsui_Fetcher_FetchMachine_Start_" data-uid="Mapsui.Fetcher.FetchMachine.Start*"></a>
-  <h4 id="Mapsui_Fetcher_FetchMachine_Start_System_Func_System_Threading_Tasks_Task__" data-uid="Mapsui.Fetcher.FetchMachine.Start(System.Func{System.Threading.Tasks.Task})">Start(Func&lt;Task&gt;)</h4>
+  <a id="Mapsui_Fetcher_FetchMachine_NumberOfWorkers_" data-uid="Mapsui.Fetcher.FetchMachine.NumberOfWorkers*"></a>
+  <h4 id="Mapsui_Fetcher_FetchMachine_NumberOfWorkers" data-uid="Mapsui.Fetcher.FetchMachine.NumberOfWorkers">NumberOfWorkers</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Start(Func&lt;Task&gt; action)</code></pre>
+    <pre><code class="lang-csharp hljs">public int NumberOfWorkers { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Fetcher_FetchMachine_Enqueue_System_Func_System_Threading_Tasks_Task__.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.FetchMachine.Enqueue(System.Func%7BSystem.Threading.Tasks.Task%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Fetcher/FetchMachine.cs/#L20">View Source</a>
+  </span>
+  <a id="Mapsui_Fetcher_FetchMachine_Enqueue_" data-uid="Mapsui.Fetcher.FetchMachine.Enqueue*"></a>
+  <h4 id="Mapsui_Fetcher_FetchMachine_Enqueue_System_Func_System_Threading_Tasks_Task__" data-uid="Mapsui.Fetcher.FetchMachine.Enqueue(System.Func{System.Threading.Tasks.Task})">Enqueue(Func&lt;Task&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Enqueue(Func&lt;Task&gt; action)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -191,7 +223,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Fetcher_FetchMachine_Stop.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.FetchMachine.Stop%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Fetcher/FetchMachine.cs/#L19">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Fetcher/FetchMachine.cs/#L22">View Source</a>
   </span>
   <a id="Mapsui_Fetcher_FetchMachine_Stop_" data-uid="Mapsui.Fetcher.FetchMachine.Stop*"></a>
   <h4 id="Mapsui_Fetcher_FetchMachine_Stop" data-uid="Mapsui.Fetcher.FetchMachine.Stop">Stop()</h4>
