@@ -189,9 +189,9 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    private void Navigator_RefreshDataRequest(object? sender, EventArgs e)
+    private void Navigator_RefreshDataRequest(object? sender, Navigator.RefreshDataRequestEventArgs e)
     {
-        RefreshData(ChangeType.Discrete);
+        RefreshData(e.ChangeType);
     }
 
     /// <summary>

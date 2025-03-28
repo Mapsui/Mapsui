@@ -26,7 +26,7 @@ public class Navigator
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
     /// is made and after an animation has completed.
     /// </summary>
-    public event EventHandler? RefreshDataRequest;
+    public event EventHandler<RefreshDataRequestEventArgs>? RefreshDataRequest;
     public event ViewportChangedEventHandler? ViewportChanged;
 
     /// <summary>
@@ -524,7 +524,7 @@ public class Navigator
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
         InitializeIfNeeded();
-        OnRefreshDataRequest();
+        OnRefreshDataRequest(ChangeType.Discrete);
     }
 
     private void InitializeIfNeeded()
@@ -533,9 +533,11 @@ public class Navigator
             Initialize();
     }
 
-    private void OnRefreshDataRequest()
+    private void OnRefreshDataRequest(ChangeType changeType)
     {
-        RefreshDataRequest?.Invoke(this, EventArgs.Empty);
+        // At the moment we refresh the data on each RefreshDataRequest. Instead we should  always
+        // refresh on ChangeType.Discrete, and do throttled requests on ChangeType.Continuous.
+        RefreshDataRequest?.Invoke(this, new RefreshDataRequestEventArgs(changeType));
     }
 
     private void ClearAnimations()
@@ -561,7 +563,7 @@ public class Navigator
         if (_animations.All(a => a.Done))
         {
             ClearAnimations();
-            OnRefreshDataRequest();
+            OnRefreshDataRequest(ChangeType.Discrete);
         }
         var animationResult = Animation.UpdateAnimations(Viewport, _animations);
 
@@ -570,7 +572,7 @@ public class Navigator
         if (ShouldAnimationsBeHaltedBecauseOfLimiting(animationResult.State, Viewport))
         {
             ClearAnimations();
-            OnRefreshDataRequest();
+            OnRefreshDataRequest(ChangeType.Discrete);
             return false; // Not running
         }
 
@@ -665,12 +667,15 @@ public class Navigator
         {
             ClearAnimations();
             SetViewportWithLimit(viewport);
-            OnRefreshDataRequest();
+            OnRefreshDataRequest(ChangeType.Discrete);
         }
         else
         {
+            // If an animation was already started we do a data refresh for the viewport 
+            // at this point. Not entirely sure if there could be too many consecutive animations
+            // started to overload to the data refresh.
             if (_animations.Any())
-                OnRefreshDataRequest();
+                OnRefreshDataRequest(ChangeType.Continuous);
             _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
         }
     }
@@ -734,5 +739,10 @@ public class Navigator
             _defaultPanBounds = value;
             InitializeIfNeeded();
         }
+    }
+
+    public class RefreshDataRequestEventArgs(ChangeType changeType) : EventArgs
+    {
+        public ChangeType ChangeType { get; } = changeType;
     }
 }
