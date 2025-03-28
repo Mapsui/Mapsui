@@ -12,7 +12,7 @@ public class FetchMachine
 
     public FetchMachine(int numberOfWorkers = 4)
     {
-        NumberOfWorkers = 4;
+        NumberOfWorkers = numberOfWorkers;
         for (var i = 0; i < numberOfWorkers; i++)
             _ = AddConsumerAsync(_channel);
     }
