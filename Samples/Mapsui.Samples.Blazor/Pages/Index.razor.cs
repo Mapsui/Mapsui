@@ -22,8 +22,8 @@ public partial class Index
     public List<ISampleBase> MapSamples { get; set; } = [];
     public List<string> Categories { get; set; } = [];
 
-    [Parameter] public string? CategoryInRoute { get; set; }
-    [Parameter] public string? SampleInRoute { get; set; }
+    [Parameter][SupplyParameterFromQuery] public string? Category { get; set; }
+    [Parameter][SupplyParameterFromQuery] public string? Sample { get; set; }
 
     [Parameter]
     [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
@@ -38,6 +38,8 @@ public partial class Index
             }
 
             _categoryId = value;
+            if (!IsCategoryInRoute())
+                FillSamples();
         }
     }
 
@@ -54,7 +56,7 @@ public partial class Index
             }
 
             _sampleId = value;
-            Sample = MapSamples.FirstOrDefault(f => f.Name == SampleId);
+            SampleBase = MapSamples.FirstOrDefault(f => f.Name == SampleId);
             FillMap();
         }
     }
@@ -71,10 +73,10 @@ public partial class Index
 
         if (IsCategoryInRoute())
         {
-            CategoryId = CategoryInRoute;
+            CategoryId = Category;
             FillSamples();
             ThrowIfSampleIsNotInRouteOrDoesNotExist();
-            SampleId = SampleInRoute;
+            SampleId = Sample;
         }
         else
         {
@@ -86,10 +88,10 @@ public partial class Index
 
     private bool IsCategoryInRoute()
     {
-        if (!string.IsNullOrEmpty(CategoryInRoute))
+        if (!string.IsNullOrEmpty(Category))
         {
-            if (!Categories.Contains(CategoryInRoute))
-                throw new Exception($"Category '{CategoryInRoute}' does not exist. Choose from: '{string.Join(',', Categories)}'");
+            if (!Categories.Contains(Category))
+                throw new Exception($"Category '{Category}' does not exist. Choose from: '{string.Join(',', Categories)}'");
             return true;
         }
         return false;
@@ -97,10 +99,10 @@ public partial class Index
 
     private void ThrowIfSampleIsNotInRouteOrDoesNotExist()
     {
-        if (string.IsNullOrEmpty(SampleInRoute))
+        if (string.IsNullOrEmpty(Sample))
             throw new Exception("If a category is specified the sample also needs to be specified.");
-        if (!Samples.Contains(SampleInRoute))
-            throw new Exception($"The sample `{SampleInRoute}` does not exist. Choose from: '{string.Join(',', Samples)}'");
+        if (!Samples.Contains(Sample))
+            throw new Exception($"The sample `{Sample}` does not exist. Choose from: '{string.Join(',', Samples)}'");
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -110,6 +112,10 @@ public partial class Index
         {
             _render = false;
             FillMap();
+            if (_mapControl != null)
+            {
+                _mapControl.UseContinuousMouseWheelZoom = true;
+            }
         }
     }
 
@@ -146,9 +152,9 @@ public partial class Index
     {
         Catch.Exceptions(async () =>
         {
-            if (Sample != null && _mapControl != null)
+            if (SampleBase != null && _mapControl != null)
             {
-                var sample = Sample;
+                var sample = SampleBase;
                 Title = sample.Name;
                 await sample.SetupAsync(_mapControl);
                 _sourceCodeUrl = $@"../codesamples/{sample.GetType().Name}.html";
@@ -156,5 +162,5 @@ public partial class Index
         });
     }
 
-    public ISampleBase? Sample { get; set; }
+    public ISampleBase? SampleBase { get; set; }
 }
