@@ -24,9 +24,9 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
                 return false;
 
             if (style is not RasterStyle)
-                return false;
+                throw new ArgumentException("Excepted a RasterStyle in the RasterStyleRenderer");
 
-            var tileCache = (TileCache)renderService.TileCache;
+            var tileCache = renderService.TileCache;
             tileCache.UpdateCache(currentIteration);
 
             var tile = tileCache.GetOrCreate(raster, currentIteration);
