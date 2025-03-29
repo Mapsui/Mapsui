@@ -1,4 +1,4 @@
-﻿@page "/{CategoryInRoute?}/{SampleInRoute?}"
+﻿@page "/"
 
 <PageTitle>Mapsui</PageTitle>
    <div class="form-group row">
@@ -27,9 +27,6 @@
         </InputSelect>
     </div>
 </div>
-
-<p>Category in route: @CategoryInRoute</p>
-<p>Category in route: @SampleInRoute</p>
 
 <div class="tabs">
     <div class="tab @(_activeTab == 0 ? "active" : "")" @onclick="(() => SetActiveTab(0))">Map</div>
