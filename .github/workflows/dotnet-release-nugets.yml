@@ -6,7 +6,7 @@ on:
       release_nugets:
         description: 'release to nuget.org'
         required: true
-        type: boolean 
+        type: boolean
 
 jobs:
   build:
@@ -30,12 +30,12 @@ jobs:
       with:
         nuget-version: latest
 
-    # .Net update     
+    # .Net update
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           8.0.x
+           8.0.4xx
          include-prerelease: false
 
     # Android SDK Install
@@ -43,6 +43,7 @@ jobs:
       uses: android-actions/setup-android@v3
       with:
         cmdline-tools-version: '8512546'
+        packages: 'tools platform-tools platforms;android-34 platforms;android-33'
 
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.1
@@ -57,7 +58,7 @@ jobs:
 
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6 wasm-tools-net7
-      
+
     - name: Restore
       run: dotnet restore ${{ env.SOLUTION }}
 
@@ -66,27 +67,27 @@ jobs:
 
     - name: Test
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
-      
+
     - name: Pack Uno UWP
       run: |
-        msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:restore /p:Configuration=Release 
+        msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:restore /p:Configuration=Release
         msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:pack /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${{ github.workspace }}/nugets"
 
     - name: Pack Xamarin Forms
       run: |
-        msbuild Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /t:restore /p:Configuration=Release 
+        msbuild Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /t:restore /p:Configuration=Release
         msbuild Mapsui.UI.Forms/Mapsui.UI.Forms.csproj /t:pack /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${{ github.workspace }}/nugets"
-     
+
     - name: Pack
       run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} -o nugets
 
     - name: Upload nugets
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
       # Upload the 'nugets' folder as artifact
         name: packages
         path: nugets/*.nupkg
 
     - name: Release NuGets
-      if: ${{ inputs.release_nugets }} 
+      if: ${{ inputs.release_nugets }}
       run: nuget push "nugets\**\*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_APIKEY}}
