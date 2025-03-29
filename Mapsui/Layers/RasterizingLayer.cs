@@ -117,7 +117,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         // Use a larger extent so that symbols partially outside of the extent are included
         var biggerBox = box.Grow(resolution * SymbolSize * 0.5);
 
-        return features.Where(f => f.Raster != null && f.Raster.Intersects(biggerBox)).ToList();
+        return features.Where(f => f.Raster != null && f.Raster.Extent.Intersects(biggerBox)).ToList();
     }
 
     public void AbortFetch()
