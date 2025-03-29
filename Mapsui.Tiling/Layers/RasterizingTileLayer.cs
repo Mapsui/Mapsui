@@ -61,7 +61,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
         Name = layer.Name;
         SourceLayer.DataChanged += (s, e) =>
         {
-            ClearCache();
+            ClearCache(); // It would cause less flicker if we could invalidate the tiles so that they could still be used by the renderer but would be replaced by the fetcher.
             DataHasChanged();
             if (_currentExtent != null && _currentResolution != null)
             {
