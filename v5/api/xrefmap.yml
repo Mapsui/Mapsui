@@ -10431,6 +10431,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRaster.Data
   nameWithType: MRaster.Data
+- uid: Mapsui.MRaster.Extent
+  name: Extent
+  href: pages/Mapsui.MRaster.html#Mapsui_MRaster_Extent
+  commentId: P:Mapsui.MRaster.Extent
+  fullName: Mapsui.MRaster.Extent
+  nameWithType: MRaster.Extent
+- uid: Mapsui.MRaster.Extent*
+  name: Extent
+  href: pages/Mapsui.MRaster.html#Mapsui_MRaster_Extent_
+  commentId: Overload:Mapsui.MRaster.Extent
+  isSpec: "True"
+  fullName: Mapsui.MRaster.Extent
+  nameWithType: MRaster.Extent
 - uid: Mapsui.MRaster.TickFetched
   name: TickFetched
   href: pages/Mapsui.MRaster.html#Mapsui_MRaster_TickFetched
