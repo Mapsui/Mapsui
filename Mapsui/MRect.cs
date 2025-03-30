@@ -7,13 +7,12 @@ public class MRect : IEquatable<MRect>
 {
     public MPoint Max { get; }
     public MPoint Min { get; }
+    public MPoint Centroid { get; }
 
     public double MaxX => Max.X;
     public double MaxY => Max.Y;
     public double MinX => Min.X;
     public double MinY => Min.Y;
-
-    public MPoint Centroid => new(Min.X + Width * 0.5, Min.Y + Height * 0.5);
 
     public double Width => Max.X - Min.X;
     public double Height => Max.Y - Min.Y;
@@ -23,16 +22,21 @@ public class MRect : IEquatable<MRect>
     public double Top => Max.Y;
     public double Right => Max.X;
 
-    public MPoint TopLeft => new(Left, Top);
-    public MPoint TopRight => new(Right, Top);
-    public MPoint BottomLeft => new(Left, Bottom);
-    public MPoint BottomRight => new(Right, Bottom);
+    // Creates an MPoint with the coordinates of the top left corner of the rectangle
+    public MPoint GetTopLeft() => new(Left, Top);
+    // Creates an MPoint with the coordinates of the top right corner of the rectangle
+    public MPoint GetTopRight() => new(Right, Top);
+    // Creates an MPoint with the coordinates of the bottom left corner of the rectangle
+    public MPoint GetBottomLeft() => new(Left, Bottom);
+    // Creates an MPoint with the coordinates of the bottom right corner of the rectangle
+    public MPoint GetBottomRight() => new(Right, Bottom);
 
     public MRect(double minX, double minY, double maxX, double maxY)
     {
         Min = new MPoint(minX, minY);
         Max = new MPoint(maxX, maxY);
         SwapMinAndMaxIfNeeded();
+        Centroid = new(Min.X + Width * 0.5, Min.Y + Height * 0.5);
     }
 
     public MRect(double value) : this(value, value, value, value) { }
@@ -56,8 +60,9 @@ public class MRect : IEquatable<MRect>
 
         if (Min == null) throw new ArgumentException("Empty Collection", nameof(rects));
         if (Max == null) throw new ArgumentException("Empty Collection", nameof(rects));
-    }
 
+        Centroid = new(Min.X + Width * 0.5, Min.Y + Height * 0.5);
+    }
 
     /// <summary>
     ///     Returns the vertices in clockwise order from bottom left around to bottom right
@@ -66,10 +71,10 @@ public class MRect : IEquatable<MRect>
     {
         get
         {
-            yield return BottomLeft;
-            yield return TopLeft;
-            yield return TopRight;
-            yield return BottomRight;
+            yield return GetBottomLeft();
+            yield return GetTopLeft();
+            yield return GetTopRight();
+            yield return GetBottomRight();
         }
     }
 
@@ -199,7 +204,7 @@ public class MRect : IEquatable<MRect>
     /// <returns>Returns the string</returns>
     public override string ToString()
     {
-        return $"BL: {BottomLeft}  TR: {TopRight}";
+        return $"Min: {Min}  Max: {Max}";
     }
 
     public override bool Equals(object? obj)
