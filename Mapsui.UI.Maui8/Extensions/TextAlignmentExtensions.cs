@@ -6,10 +6,10 @@ namespace Mapsui.UI.Maui.Extensions;
 public static class TextAlignmentExtensions
 {
     /// <summary>
-    /// Convert Microsoft.Maui.TextAlignment to Mapsui/RichTextKit.Styles.Color
+    /// Convert Microsoft.Maui.TextAlignment to Mapsui.Widgets.Alignment
     /// </summary>
     /// <param name="textAlignment">TextAlignment in Microsoft.Maui format</param>
-    /// <returns>TextAlignment in Mapsui/RichTextKit format</returns>
+    /// <returns>Alignment value in Mapsui.Widgets format</returns>
     public static Alignment ToMapsui(this TextAlignment textAlignment)
     {
         return textAlignment switch
