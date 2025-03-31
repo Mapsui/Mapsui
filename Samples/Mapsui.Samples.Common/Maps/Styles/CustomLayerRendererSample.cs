@@ -62,6 +62,6 @@ public class CustomLayerRendererSample : ISample
     }
 
     private static PointFeature[] CreateFeatures(MRect envelope, int count) =>
-        [.. RandomPointsBuilder.GenerateRandomPoints(envelope, count, new Random(934))
-        .Select(p => new PointFeature(p))];
+        RandomPointsBuilder.GenerateRandomPoints(envelope, count, new Random(934))
+            .Select(p => new PointFeature(p)).ToArray();
 }

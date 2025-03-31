@@ -113,7 +113,7 @@ public class Map : INotifyPropertyChanged, IDisposable
                 }
             }
 
-            _oldWidgets = [.. Widgets];
+            _oldWidgets = Widgets.ToArray();
 
             foreach (var widget in Widgets)
             {
@@ -328,7 +328,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     private static MMinMax? GetMinMaxResolution(IEnumerable<double>? resolutions)
     {
         if (resolutions == null || !resolutions.Any()) return null;
-        resolutions = [.. resolutions.OrderByDescending(r => r)];
+        resolutions = resolutions.OrderByDescending(r => r).ToArray();
         var mostZoomedOut = resolutions.First();
         var mostZoomedIn = resolutions.Last() * 0.5; // Divide by two to allow one extra level to zoom-in
         return new MMinMax(mostZoomedOut, mostZoomedIn);
@@ -365,7 +365,7 @@ public class Map : INotifyPropertyChanged, IDisposable
             }
         }
 
-        return [.. items.Select(i => i.Value).OrderByDescending(i => i)];
+        return items.Select(i => i.Value).OrderByDescending(i => i).ToArray();
     }
 
     private void LayerPropertyChanged(object? sender, PropertyChangedEventArgs e)

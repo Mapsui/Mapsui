@@ -1,6 +1,7 @@
 ﻿using Mapsui.Styles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Mapsui.Layers;
@@ -40,7 +41,7 @@ public abstract class BaseFeature : IFeature
 
     private void Copy(BaseFeature baseFeature)
     {
-        Styles = [.. baseFeature.Styles];
+        Styles = baseFeature.Styles.ToArray();
         foreach (var field in baseFeature.Fields)
             this[field] = baseFeature[field];
     }
