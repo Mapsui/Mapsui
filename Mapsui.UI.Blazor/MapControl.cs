@@ -71,6 +71,13 @@ public partial class MapControl : ComponentBase, IMapControl
         RefreshGraphics();
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+            await InitializingInteropAsync();
+    }
+
     protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
     {
         // the the canvas and properties
