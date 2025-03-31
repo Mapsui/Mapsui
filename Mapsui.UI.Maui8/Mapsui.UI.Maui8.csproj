@@ -10,6 +10,7 @@
     <Description>Mapsui.Maui - Library for mapping for Maui 8</Description>
     <PackageTags>$(PackageTags) maui</PackageTags>
 		<IsPackable>true</IsPackable>
+    <RootNamespace>Mapsui.UI.Maui</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +30,14 @@
     <None Remove="Images\**" />
     <None Remove="Objects\**" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Mapsui.UI.Maui\Extensions\ColorExtensions.cs" Link="Extensions\ColorExtensions.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\Extensions\TextAlignmentExtensions.cs" Link="Extensions\TextAlignmentExtensions.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\MapControl.cs" Link="MapControl.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\Utils\KnownColor.cs" Link="Utils\KnownColor.cs" />
+  </ItemGroup>
  
   <ItemGroup>
     <PackageReference Include="SkiaSharp" />
@@ -45,6 +54,11 @@
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
