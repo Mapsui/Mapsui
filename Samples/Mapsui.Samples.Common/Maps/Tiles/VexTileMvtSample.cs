@@ -20,7 +20,7 @@ public class RasterizedVectorTilesSample : ISample
         MbTilesDeployer.CopyEmbeddedResourceToFile("zurich.mbtiles");
     }
     public string Name => "Rasterized Vector Tiles";
-    public string Category => "1";
+    public string Category => "Tiles";
     public Task<Map> CreateMapAsync()
     {
         return Task.FromResult(CreateMap());
