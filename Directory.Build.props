@@ -1,7 +1,6 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <Version>5.0.0-beta.4</Version>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Copyright>Copyright © Mapsui Developers 2018-$([System.DateTime]::Now.ToString(yyyy))</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -21,7 +20,8 @@
     <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	  <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
-    <MauiVersion>9.0.10</MauiVersion>
+    <MauiVersion>9.0.50</MauiVersion>
+    <Maui8Version>8.0.100</Maui8Version>
   </PropertyGroup>
 
 	<!--Package Icon Include -->

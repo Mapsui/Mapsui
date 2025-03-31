@@ -57,6 +57,7 @@ jobs:
       with:
          dotnet-version: |
            9.0.202
+           8.0.407
     # Open JDK
     - name: Install Open JDK 11
       uses: actions/setup-java@v4
@@ -125,6 +126,7 @@ jobs:
       with:
          dotnet-version: |
            9.0.202
+           8.0.407
     - name: install workloads maui macos android ios maccatalyst wasm-tools wasm-tools-net8
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
     - name: install Uno.Check 1.26.1
@@ -196,6 +198,7 @@ jobs:
       with:
          dotnet-version: |
            9.0.202
+           8.0.407
     # Java Sdk install 11
     - name: Install Open JDK 11
       uses: actions/setup-java@v4

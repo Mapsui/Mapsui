@@ -34,6 +34,7 @@ jobs:
       with:
          dotnet-version: |
            9.0.202
+           8.0.407
 
     # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag

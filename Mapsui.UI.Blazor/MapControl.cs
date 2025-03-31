@@ -75,9 +75,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
-        {
             await InitializingInteropAsync();
-        }
     }
 
     protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
