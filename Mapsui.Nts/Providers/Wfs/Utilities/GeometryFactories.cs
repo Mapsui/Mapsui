@@ -433,7 +433,7 @@ internal class LineStringFactory : GeometryFactory
                     (GeometryReader = GetSubReaderOf(FeatureReader, labelValues, lineStringNode, CoordinatesNode)) !=
                     null)
                 {
-                    Geometries.Add(new LineString([.. ParseCoordinates(GeometryReader)]));
+                    Geometries.Add(new LineString(ParseCoordinates(GeometryReader).ToArray()));
                     geometryFound = true;
                 }
                 if (geometryFound) features.Add(AddLabel(labelValues, Geometries[^1]));
@@ -511,19 +511,19 @@ internal class PolygonFactory : GeometryFactory
                     XmlReader? outerBoundaryReader;
                     if ((outerBoundaryReader = GetSubReaderOf(
                             GeometryReader, null, outerBoundaryNodeAlt, linearRingNode, CoordinatesNode)) != null)
-                        exteriorRing = new LinearRing([.. ParseCoordinates(outerBoundaryReader)]);
+                        exteriorRing = new LinearRing(ParseCoordinates(outerBoundaryReader).ToArray());
 
                     var holes = new List<LinearRing>();
                     XmlReader? innerBoundariesReader;
                     while ((innerBoundariesReader = GetSubReaderOf(
                                GeometryReader, null, innerBoundaryNodeAlt, linearRingNode, CoordinatesNode)) != null)
                         holes.Add(
-                            new LinearRing([.. ParseCoordinates(innerBoundariesReader)]));
+                            new LinearRing(ParseCoordinates(innerBoundariesReader).ToArray()));
 
                     if (exteriorRing is not null)
                     {
                         if (holes.Any())
-                            Geometries.Add(new Polygon(exteriorRing, [.. holes]));
+                            Geometries.Add(new Polygon(exteriorRing, holes.ToArray()));
                         else
                             Geometries.Add(new Polygon(exteriorRing));
                         geometryFound = true;
