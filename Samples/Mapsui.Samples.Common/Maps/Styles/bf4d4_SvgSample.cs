@@ -14,7 +14,7 @@ public class SvgSample : ISample
 {
     private static readonly int _numberOfSvgs = 2000;
     public string Name => $"Many SVGs ({_numberOfSvgs})";
-    public string Category => "Styles";
+    public string Category => "Style";
 
     public Task<Map> CreateMapAsync()
     {
