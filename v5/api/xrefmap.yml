@@ -8767,6 +8767,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.MemoryLayer.Features
   nameWithType: MemoryLayer.Features
+- uid: Mapsui.Layers.MemoryLayer.FeaturesWereModified
+  name: FeaturesWereModified()
+  href: pages/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_FeaturesWereModified
+  commentId: M:Mapsui.Layers.MemoryLayer.FeaturesWereModified
+  fullName: Mapsui.Layers.MemoryLayer.FeaturesWereModified()
+  nameWithType: MemoryLayer.FeaturesWereModified()
+- uid: Mapsui.Layers.MemoryLayer.FeaturesWereModified*
+  name: FeaturesWereModified
+  href: pages/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_FeaturesWereModified_
+  commentId: Overload:Mapsui.Layers.MemoryLayer.FeaturesWereModified
+  isSpec: "True"
+  fullName: Mapsui.Layers.MemoryLayer.FeaturesWereModified
+  nameWithType: MemoryLayer.FeaturesWereModified
 - uid: Mapsui.Layers.MemoryLayer.GetFeatures(Mapsui.MRect,System.Double)
   name: GetFeatures(MRect?, double)
   href: pages/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_GetFeatures_Mapsui_MRect_System_Double_
@@ -9948,6 +9961,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.Equals
   nameWithType: MPoint.Equals
+- uid: Mapsui.MPoint.GetExtent
+  name: GetExtent()
+  href: pages/Mapsui.MPoint.html#Mapsui_MPoint_GetExtent
+  commentId: M:Mapsui.MPoint.GetExtent
+  fullName: Mapsui.MPoint.GetExtent()
+  nameWithType: MPoint.GetExtent()
+- uid: Mapsui.MPoint.GetExtent*
+  name: GetExtent
+  href: pages/Mapsui.MPoint.html#Mapsui_MPoint_GetExtent_
+  commentId: Overload:Mapsui.MPoint.GetExtent
+  isSpec: "True"
+  fullName: Mapsui.MPoint.GetExtent
+  nameWithType: MPoint.GetExtent
 - uid: Mapsui.MPoint.GetHashCode
   name: GetHashCode()
   href: pages/Mapsui.MPoint.html#Mapsui_MPoint_GetHashCode
@@ -9961,19 +9987,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.GetHashCode
   nameWithType: MPoint.GetHashCode
-- uid: Mapsui.MPoint.MRect
-  name: MRect
-  href: pages/Mapsui.MPoint.html#Mapsui_MPoint_MRect
-  commentId: P:Mapsui.MPoint.MRect
-  fullName: Mapsui.MPoint.MRect
-  nameWithType: MPoint.MRect
-- uid: Mapsui.MPoint.MRect*
-  name: MRect
-  href: pages/Mapsui.MPoint.html#Mapsui_MPoint_MRect_
-  commentId: Overload:Mapsui.MPoint.MRect
-  isSpec: "True"
-  fullName: Mapsui.MPoint.MRect
-  nameWithType: MPoint.MRect
 - uid: Mapsui.MPoint.Offset(System.Double,System.Double)
   name: Offset(double, double)
   href: pages/Mapsui.MPoint.html#Mapsui_MPoint_Offset_System_Double_System_Double_
@@ -10531,32 +10544,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.Bottom
   nameWithType: MRect.Bottom
-- uid: Mapsui.MRect.BottomLeft
-  name: BottomLeft
-  href: pages/Mapsui.MRect.html#Mapsui_MRect_BottomLeft
-  commentId: P:Mapsui.MRect.BottomLeft
-  fullName: Mapsui.MRect.BottomLeft
-  nameWithType: MRect.BottomLeft
-- uid: Mapsui.MRect.BottomLeft*
-  name: BottomLeft
-  href: pages/Mapsui.MRect.html#Mapsui_MRect_BottomLeft_
-  commentId: Overload:Mapsui.MRect.BottomLeft
-  isSpec: "True"
-  fullName: Mapsui.MRect.BottomLeft
-  nameWithType: MRect.BottomLeft
-- uid: Mapsui.MRect.BottomRight
-  name: BottomRight
-  href: pages/Mapsui.MRect.html#Mapsui_MRect_BottomRight
-  commentId: P:Mapsui.MRect.BottomRight
-  fullName: Mapsui.MRect.BottomRight
-  nameWithType: MRect.BottomRight
-- uid: Mapsui.MRect.BottomRight*
-  name: BottomRight
-  href: pages/Mapsui.MRect.html#Mapsui_MRect_BottomRight_
-  commentId: Overload:Mapsui.MRect.BottomRight
-  isSpec: "True"
-  fullName: Mapsui.MRect.BottomRight
-  nameWithType: MRect.BottomRight
 - uid: Mapsui.MRect.Centroid
   name: Centroid
   href: pages/Mapsui.MRect.html#Mapsui_MRect_Centroid
@@ -10652,6 +10639,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.GetArea
   nameWithType: MRect.GetArea
+- uid: Mapsui.MRect.GetBottomLeft
+  name: GetBottomLeft()
+  href: pages/Mapsui.MRect.html#Mapsui_MRect_GetBottomLeft
+  commentId: M:Mapsui.MRect.GetBottomLeft
+  fullName: Mapsui.MRect.GetBottomLeft()
+  nameWithType: MRect.GetBottomLeft()
+- uid: Mapsui.MRect.GetBottomLeft*
+  name: GetBottomLeft
+  href: pages/Mapsui.MRect.html#Mapsui_MRect_GetBottomLeft_
+  commentId: Overload:Mapsui.MRect.GetBottomLeft
+  isSpec: "True"
+  fullName: Mapsui.MRect.GetBottomLeft
+  nameWithType: MRect.GetBottomLeft
+- uid: Mapsui.MRect.GetBottomRight
+  name: GetBottomRight()
+  href: pages/Mapsui.MRect.html#Mapsui_MRect_GetBottomRight
+  commentId: M:Mapsui.MRect.GetBottomRight
+  fullName: Mapsui.MRect.GetBottomRight()
+  nameWithType: MRect.GetBottomRight()
+- uid: Mapsui.MRect.GetBottomRight*
+  name: GetBottomRight
+  href: pages/Mapsui.MRect.html#Mapsui_MRect_GetBottomRight_
+  commentId: Overload:Mapsui.MRect.GetBottomRight
+  isSpec: "True"
+  fullName: Mapsui.MRect.GetBottomRight
+  nameWithType: MRect.GetBottomRight
 - uid: Mapsui.MRect.GetHashCode
   name: GetHashCode()
   href: pages/Mapsui.MRect.html#Mapsui_MRect_GetHashCode
@@ -10665,6 +10678,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.GetHashCode
   nameWithType: MRect.GetHashCode
+- uid: Mapsui.MRect.GetTopLeft
+  name: GetTopLeft()
+  href: pages/Mapsui.MRect.html#Mapsui_MRect_GetTopLeft
+  commentId: M:Mapsui.MRect.GetTopLeft
+  fullName: Mapsui.MRect.GetTopLeft()
+  nameWithType: MRect.GetTopLeft()
+- uid: Mapsui.MRect.GetTopLeft*
+  name: GetTopLeft
+  href: pages/Mapsui.MRect.html#Mapsui_MRect_GetTopLeft_
+  commentId: Overload:Mapsui.MRect.GetTopLeft
+  isSpec: "True"
+  fullName: Mapsui.MRect.GetTopLeft
+  nameWithType: MRect.GetTopLeft
+- uid: Mapsui.MRect.GetTopRight
+  name: GetTopRight()
+  href: pages/Mapsui.MRect.html#Mapsui_MRect_GetTopRight
+  commentId: M:Mapsui.MRect.GetTopRight
+  fullName: Mapsui.MRect.GetTopRight()
+  nameWithType: MRect.GetTopRight()
+- uid: Mapsui.MRect.GetTopRight*
+  name: GetTopRight
+  href: pages/Mapsui.MRect.html#Mapsui_MRect_GetTopRight_
+  commentId: Overload:Mapsui.MRect.GetTopRight
+  isSpec: "True"
+  fullName: Mapsui.MRect.GetTopRight
+  nameWithType: MRect.GetTopRight
 - uid: Mapsui.MRect.Grow(System.Double)
   name: Grow(double)
   href: pages/Mapsui.MRect.html#Mapsui_MRect_Grow_System_Double_
@@ -10897,32 +10936,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.Top
   nameWithType: MRect.Top
-- uid: Mapsui.MRect.TopLeft
-  name: TopLeft
-  href: pages/Mapsui.MRect.html#Mapsui_MRect_TopLeft
-  commentId: P:Mapsui.MRect.TopLeft
-  fullName: Mapsui.MRect.TopLeft
-  nameWithType: MRect.TopLeft
-- uid: Mapsui.MRect.TopLeft*
-  name: TopLeft
-  href: pages/Mapsui.MRect.html#Mapsui_MRect_TopLeft_
-  commentId: Overload:Mapsui.MRect.TopLeft
-  isSpec: "True"
-  fullName: Mapsui.MRect.TopLeft
-  nameWithType: MRect.TopLeft
-- uid: Mapsui.MRect.TopRight
-  name: TopRight
-  href: pages/Mapsui.MRect.html#Mapsui_MRect_TopRight
-  commentId: P:Mapsui.MRect.TopRight
-  fullName: Mapsui.MRect.TopRight
-  nameWithType: MRect.TopRight
-- uid: Mapsui.MRect.TopRight*
-  name: TopRight
-  href: pages/Mapsui.MRect.html#Mapsui_MRect_TopRight_
-  commentId: Overload:Mapsui.MRect.TopRight
-  isSpec: "True"
-  fullName: Mapsui.MRect.TopRight
-  nameWithType: MRect.TopRight
 - uid: Mapsui.MRect.Vertices
   name: Vertices
   href: pages/Mapsui.MRect.html#Mapsui_MRect_Vertices
