@@ -10,7 +10,7 @@ public class Image
     // Note, this is a static field and in the current implementation this dictionary can only grow, not shrink.
     // The idea is that the application holds a limited number of these resources. If the users needs to create
     // different images all the time something else has to be used, like the CustomStyleRenderer.
-    private static readonly ConcurrentDictionary<string, string> _uriToKey = [];
+    public static ConcurrentDictionary<string, string> SourceToSourceId { get; } = [];
 
     public required string Source
     {
@@ -20,7 +20,7 @@ public class Image
             ArgumentNullException.ThrowIfNull(value);
             ValidateUriSchema(value);
             _source = value;
-            SourceId = _uriToKey.GetOrAdd(_source, (k) => Guid.NewGuid().ToString());
+            SourceId = SourceToSourceId.GetOrAdd(_source, (k) => Guid.NewGuid().ToString());
         }
     }
 

@@ -42,7 +42,7 @@ internal class MapRendererTests
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_symbolstyle.png";
         using var mapRenderer = new MapRenderer();
-        _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(mapRenderer.ImageSourceCache, viewport, map.Layers, map.Widgets);
+        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
@@ -63,7 +63,7 @@ internal class MapRendererTests
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_in_collection_with_symbolstyle.png";
         using var mapRenderer = new MapRenderer();
-        _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(mapRenderer.ImageSourceCache, viewport, map.Layers, map.Widgets);
+        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
@@ -84,7 +84,7 @@ internal class MapRendererTests
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_svgsymbolstyle.png";
         using var mapRenderer = new MapRenderer();
-        _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(mapRenderer.ImageSourceCache, viewport, map.Layers, map.Widgets);
+        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
@@ -105,7 +105,7 @@ internal class MapRendererTests
         var viewport = new Viewport(256, 200, 1, 0, 512, 400);
         const string fileName = "bitmap_atlas.png";
         using var mapRenderer = new MapRenderer();
-        _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(mapRenderer.ImageSourceCache, viewport, map.Layers, map.Widgets);
+        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
@@ -126,7 +126,7 @@ internal class MapRendererTests
         var viewport = map.Extent!.Multiply(4).ToViewport(200);
         const string fileName = "bitmap_symbol.png";
         using var mapRenderer = new MapRenderer();
-        _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(mapRenderer.ImageSourceCache, viewport, map.Layers, map.Widgets);
+        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
@@ -185,7 +185,7 @@ internal class MapRendererTests
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "polygon.png";
         using var mapRenderer = new MapRenderer();
-        _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(mapRenderer.ImageSourceCache, viewport, map.Layers, map.Widgets);
+        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
         using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
