@@ -107,7 +107,7 @@ public sealed class ImageSourceCache
 
     private List<KeyValuePair<string, string>> GetUnregisteredImageSources(IEnumerable<KeyValuePair<string, string>> sourceIds)
     {
-        return [.. sourceIds.Where(i => !_register.ContainsKey(i.Value))];
+        return sourceIds.Where(i => !_register.ContainsKey(i.Value)).ToList();
     }
 
 }
