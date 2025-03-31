@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
     <DefineConstants>__MAUI__</DefineConstants>
     <NoWarn>NU1703</NoWarn>
-    <PackageId>Mapsui.Maui</PackageId>
-    <Description>Mapsui.Maui - Library for mapping for Maui</Description>
+    <PackageId>Mapsui.Maui8</PackageId>
+    <Description>Mapsui.Maui - Library for mapping for Maui 8</Description>
     <PackageTags>$(PackageTags) maui</PackageTags>
 		<IsPackable>true</IsPackable>
   </PropertyGroup>
@@ -36,8 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(Maui8Version)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="$(Maui8Version)" />
   </ItemGroup>
 
   <ItemGroup>

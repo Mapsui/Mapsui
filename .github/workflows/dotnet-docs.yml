@@ -43,6 +43,7 @@ jobs:
       with:
          dotnet-version: |
            9.0.202
+           8.0.407
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8 
     - name: Run DocFx
