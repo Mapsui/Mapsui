@@ -2,20 +2,23 @@ using System;
 
 namespace Mapsui;
 
-public class MRaster : MRect
+public class MRaster
 {
-    public MRaster(MRaster raster) : base(raster.Min.X, raster.Min.Y, raster.Max.X, raster.Max.Y)
+    public byte[] Data { get; }
+    public long TickFetched { get; }
+    public MRect Extent { get; }
+
+    public MRaster(MRaster raster)
     {
         Data = raster.Data;
         TickFetched = raster.TickFetched;
+        Extent = raster.Extent.Copy();
     }
 
-    public MRaster(byte[] data, MRect rect) : base(rect)
+    public MRaster(byte[] data, MRect extent)
     {
         Data = data;
         TickFetched = DateTime.Now.Ticks;
+        Extent = extent.Copy();
     }
-
-    public byte[] Data { get; }
-    public long TickFetched { get; }
 }

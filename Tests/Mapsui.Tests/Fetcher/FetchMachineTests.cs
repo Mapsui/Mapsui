@@ -20,7 +20,7 @@ public class FetchMachineTests
     // a hang in some rare cases.
 
     [Test]
-    public void TileFetcherShouldRequestAllTilesJustOnes()
+    public async Task TileFetcherShouldRequestAllTilesJustOnesAsync()
     {
         // Arrange
         var tileSource = new CountingTileSource();
@@ -35,7 +35,7 @@ public class FetchMachineTests
         // Get all tiles of level 3
         fetchDispatcher.RefreshData(fetchInfo);
         // Assert
-        while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+        while (fetchDispatcher.Busy) { await Task.Delay(10); }
 
         ClassicAssert.AreEqual(expectedTiles, tileSource.CountByTile.Keys.Count);
         ClassicAssert.AreEqual(expectedTiles, tileSource.CountByTile.Values.Sum());

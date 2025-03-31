@@ -114,7 +114,7 @@ public class LoggingWidget : TextBoxWidget
         }
     }
 
-    private int _maxNumberOfLogEntriesToKeep = 100;
+    private int _maxNumberOfLogEntriesToKeep = 10;
 
     public int MaxNumberOfLogEntriesToKeep
     {

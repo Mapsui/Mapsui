@@ -2,7 +2,7 @@
 
 namespace Mapsui.Rendering.Skia.Images;
 
-internal sealed class BitmapDrawableImage : IDrawableImage
+public sealed class BitmapDrawableImage : IDrawableImage
 {
     private bool _disposed;
     private readonly SKImage _image;
