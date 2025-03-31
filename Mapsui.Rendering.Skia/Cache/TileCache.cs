@@ -30,6 +30,7 @@ public sealed class TileCache : IDisposable
         {
             // Create
             var entry = ToTileCacheEntry(raster.Data);
+            entry.IterationUsed = currentIteration;
             _tileCache[raster] = entry;
             return _tileCache[raster];
         }

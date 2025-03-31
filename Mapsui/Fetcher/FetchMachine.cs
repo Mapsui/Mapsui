@@ -6,17 +6,21 @@ namespace Mapsui.Fetcher;
 
 public class FetchMachine
 {
-    readonly Channel<Func<Task>> _queue = Channel.CreateUnbounded<Func<Task>>();
+    readonly Channel<Func<Task>> _channel = Channel.CreateUnbounded<Func<Task>>(new UnboundedChannelOptions { AllowSynchronousContinuations = true, SingleReader = false });
+
+    public int NumberOfWorkers { get; }
 
     public FetchMachine(int numberOfWorkers = 4)
     {
+        NumberOfWorkers = numberOfWorkers;
         for (var i = 0; i < numberOfWorkers; i++)
-            _ = AddConsumerAsync(_queue);
+            _ = AddConsumerAsync(_channel);
     }
 
-    public void Start(Func<Task> action) => _queue.Writer.TryWrite(action);
+    public void Enqueue(Func<Task> action) => _channel.Writer.TryWrite(action);
 
     public void Stop() { }
+
 
     private static async Task AddConsumerAsync(Channel<Func<Task>> queue)
     {

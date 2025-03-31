@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 
 internal class SelectionStyleSample : ISample
 {
-    public string Name => "Selection";
+    public string Name => "Select a feature";
     public string Category => "Styles";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
@@ -33,51 +33,40 @@ internal class SelectionStyleSample : ISample
     {
         var feature = e.GetMapInfo(e.Map.Layers.Where(l => l.Name == "Points")).Feature;
         if (feature is null)
-            return; ;
-        if (feature["selected"] is null) feature["selected"] = "true";
-        else feature["selected"] = null;
+            return;
+
+        if (feature.Data is SomeModel featureData)
+            featureData.IsSelected = !featureData.IsSelected;
+
         e.Handled = true;
     }
 
     public static ILayer CreatePointLayer() => new Layer("Points")
     {
-        DataSource = new MemoryProvider(CreatePoints().Select(p => new PointFeature(p))),
+        DataSource = new MemoryProvider(CreatePoints().Select(p => new PointFeature(p) { Data = new SomeModel() })),
         Style = CreateStyle(),
     };
 
-    private static IStyle CreateStyle()
+    private static ThemeStyle CreateStyle() => new(static f =>
     {
-        return new ThemeStyle(f =>
+        var selected = (f.Data as SomeModel)?.IsSelected ?? false;
+        return new StyleCollection
         {
-            if (f["selected"]?.ToString() == "true")
+            Styles =
+            {
+                CreateSelectionSymbol(selected),
+                CreateSymbol()
+            }
+        };
+    });
 
-                return new StyleCollection
-                {
-                    Styles = {
-                    // With the StyleCollection you can use the same symbol as when not selected but 
-                    // put something in the background to indicate it is selected.
-                    CreateSelectionSymbol(),
-                    CreateSymbol()
-                    }
-                };
+    private static SymbolStyle CreateSelectionSymbol(bool enabled) =>
+        new() { Fill = new Brush(Color.Orange), SymbolScale = 1.2, Enabled = enabled };
 
-            return CreateSymbol();
-        });
-    }
+    private static SymbolStyle CreateSymbol() =>
+        new() { Fill = new Brush(new Color(150, 150, 30)) };
 
-    private static SymbolStyle CreateSelectionSymbol()
-    {
-        return new SymbolStyle { Fill = new Brush(Color.Orange), SymbolScale = 1.2 };
-    }
-
-    private static SymbolStyle CreateSymbol()
-    {
-        return new SymbolStyle { Fill = new Brush(new Color(150, 150, 30)) };
-    }
-
-    private static MPoint[] CreatePoints()
-    {
-        return new[] {
+    private static MPoint[] CreatePoints() => [
         new MPoint(0, 0),
         new MPoint(9000000, 0),
         new MPoint(9000000, 9000000),
@@ -85,6 +74,11 @@ internal class SelectionStyleSample : ISample
         new MPoint(-9000000, 0),
         new MPoint(-9000000, -9000000),
         new MPoint(0, -9000000),
-    };
+    ];
+
+    // This could be some class in your own app domain that you want to visualize in Mapsui.
+    private record SomeModel()
+    {
+        public bool IsSelected { get; set; }
     }
 }

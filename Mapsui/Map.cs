@@ -31,6 +31,8 @@ public class Map : INotifyPropertyChanged, IDisposable
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
 
+    public FetchMachine FetchMachine { get; } = new FetchMachine();
+
     /// <summary>
     /// Initializes a new map
     /// </summary>
@@ -189,9 +191,9 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    private void Navigator_RefreshDataRequest(object? sender, EventArgs e)
+    private void Navigator_RefreshDataRequest(object? sender, Navigator.RefreshDataRequestEventArgs e)
     {
-        RefreshData(ChangeType.Discrete);
+        RefreshData(e.ChangeType);
     }
 
     /// <summary>

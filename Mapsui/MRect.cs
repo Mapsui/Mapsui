@@ -5,6 +5,29 @@ namespace Mapsui;
 
 public class MRect : IEquatable<MRect>
 {
+    public MPoint Max { get; }
+    public MPoint Min { get; }
+
+    public double MaxX => Max.X;
+    public double MaxY => Max.Y;
+    public double MinX => Min.X;
+    public double MinY => Min.Y;
+
+    public MPoint Centroid => new(Min.X + Width * 0.5, Min.Y + Height * 0.5);
+
+    public double Width => Max.X - Min.X;
+    public double Height => Max.Y - Min.Y;
+
+    public double Bottom => Min.Y;
+    public double Left => Min.X;
+    public double Top => Max.Y;
+    public double Right => Max.X;
+
+    public MPoint TopLeft => new(Left, Top);
+    public MPoint TopRight => new(Right, Top);
+    public MPoint BottomLeft => new(Left, Bottom);
+    public MPoint BottomRight => new(Right, Bottom);
+
     public MRect(double minX, double minY, double maxX, double maxY)
     {
         Min = new MPoint(minX, minY);
@@ -22,8 +45,8 @@ public class MRect : IEquatable<MRect>
     {
         foreach (var rect in rects)
         {
-            if (Min is null) Min = rect.Min.Copy();
-            if (Max is null) Max = rect.Max.Copy();
+            Min ??= rect.Min.Copy();
+            Max ??= rect.Max.Copy();
 
             Min.X = Math.Min(Min.X, rect.Min.X);
             Min.Y = Math.Min(Min.Y, rect.Min.Y);
@@ -35,28 +58,6 @@ public class MRect : IEquatable<MRect>
         if (Max == null) throw new ArgumentException("Empty Collection", nameof(rects));
     }
 
-    public MPoint Max { get; }
-    public MPoint Min { get; }
-
-    public double MaxX => Max.X;
-    public double MaxY => Max.Y;
-    public double MinX => Min.X;
-    public double MinY => Min.Y;
-
-    public MPoint Centroid => new MPoint(Min.X + Width * 0.5, Min.Y + Height * 0.5);
-
-    public double Width => Max.X - Min.X;
-    public double Height => Max.Y - Min.Y;
-
-    public double Bottom => Min.Y;
-    public double Left => Min.X;
-    public double Top => Max.Y;
-    public double Right => Max.X;
-
-    public MPoint TopLeft => new MPoint(Left, Top);
-    public MPoint TopRight => new MPoint(Right, Top);
-    public MPoint BottomLeft => new MPoint(Left, Bottom);
-    public MPoint BottomRight => new MPoint(Right, Bottom);
 
     /// <summary>
     ///     Returns the vertices in clockwise order from bottom left around to bottom right
@@ -129,7 +130,6 @@ public class MRect : IEquatable<MRect>
         return grownBox;
     }
 
-
     public bool Intersects(MRect? rect)
     {
         if (rect is null) return false;
@@ -193,18 +193,6 @@ public class MRect : IEquatable<MRect>
         return quad.Rotate(degrees, center.X, center.Y);
     }
 
-    private void SwapMinAndMaxIfNeeded()
-    {
-        if (Min.X > Max.X)
-        {
-            (Min.X, Max.X) = (Max.X, Min.X);
-        }
-        if (Min.Y > Max.Y)
-        {
-            (Min.Y, Max.Y) = (Max.Y, Min.Y);
-        }
-    }
-
     /// <summary>
     ///     Returns a string representation of the vertices from bottom-left and top-right
     /// </summary>
@@ -250,5 +238,17 @@ public class MRect : IEquatable<MRect>
     public static bool operator !=(MRect? left, MRect? right)
     {
         return !Equals(left, right);
+    }
+
+    private void SwapMinAndMaxIfNeeded()
+    {
+        if (Min.X > Max.X)
+        {
+            (Min.X, Max.X) = (Max.X, Min.X);
+        }
+        if (Min.Y > Max.Y)
+        {
+            (Min.Y, Max.Y) = (Max.Y, Min.Y);
+        }
     }
 }

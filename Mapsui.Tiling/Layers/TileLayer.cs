@@ -55,7 +55,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
         Style = new RasterStyle();
         Attribution.Text = _tileSource.Attribution.Text;
         Attribution.Url = _tileSource.Attribution.Url;
-        _extent = _tileSource.Schema?.Extent.ToMRect();
+        _extent = _tileSource.Schema.Extent.ToMRect();
         dataFetchStrategy ??= new DataFetchStrategy(3);
         _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
         _minExtraTiles = minExtraTiles;

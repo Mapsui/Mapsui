@@ -20,6 +20,7 @@ using Mapsui.Manipulations;
 using Mapsui.Styles;
 using System.Threading.Tasks;
 using LogLevel = Mapsui.Logging.LogLevel;
+
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -89,6 +90,38 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #endif
     public bool UseFling { get; set; } = true;
 
+    public float PixelDensity => (float)GetPixelDensity();
+
+    /// <summary>
+    /// Renderer that is used from this MapControl
+    /// </summary>
+    public IRenderer Renderer => _renderer;
+
+    /// <summary>
+    /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+    /// the layers that have IsMapInfoLayer set to true. 
+    /// </summary>
+    /// <remarks>
+    /// The Map.Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
+    /// </remarks>
+    public event EventHandler<MapInfoEventArgs>? Info;
+    /// <summary>
+    /// Event that is triggered when the map is tapped. Can be a single tap, double tap or long press.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapTapped;
+    /// <summary>
+    /// Event that is triggered when on pointer down.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapPointerPressed;
+    /// <summary>
+    /// Event that is triggered when on pointer move. Can be a drag or hover.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapPointerMoved;
+    /// <summary>
+    /// Event that is triggered when on pointer up.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapPointerReleased;
+
     private void SharedConstructor()
     {
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
@@ -123,13 +156,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         // All requested updates up to this point will be handled by this redraw
         _refresh = false;
 
-        // Start initializing symbol styles and refresh to trigger another render loop.
-        InitializeSymbolStyles((needRefresh) => 
-            { 
-                if (needRefresh) 
-                    RefreshGraphics(); 
-            }); 
-
+        // Fetch the image data for all image sources and call RefreshGraphics if new images were loaded.
+        _renderer.ImageSourceCache.FetchAllImageData(Mapsui.Styles.Image.SourceToSourceId, Map.FetchMachine, RefreshGraphics);
+        
         Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
 
         // Stop stopwatch after drawing control
@@ -143,10 +172,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         _invalidated = false;
     }
 
-    public void InitializeSymbolStyles(Action<bool> doneInitializing) =>
-        ImageSourceCacheInitializer.FetchImagesInViewport(_renderer.ImageSourceCache, Map.Navigator.Viewport, 
-            Map.Layers, Map.Widgets, doneInitializing);
-    
     private void InvalidateTimerCallback(object? state)
     {
         try
@@ -248,22 +273,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             }
         }
     }
-
-    public float PixelDensity => (float)GetPixelDensity();
-
-    /// <summary>
-    /// Renderer that is used from this MapControl
-    /// </summary>
-    public IRenderer Renderer => _renderer;
-
-    /// <summary>
-    /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
-    /// the layers that have IsMapInfoLayer set to true. 
-    /// </summary>
-    /// <remarks>
-    /// The Map.Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
-    /// </remarks>
-    public event EventHandler<MapInfoEventArgs>? Info;
 
     /// <summary>
     /// Called whenever a property is changed
@@ -691,6 +700,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var eventArgs = new MapEventArgs(screenPosition, worldPosition, gestureType, Map, GetMapInfo,
             GetRemoteMapInfoAsync);
         Map.OnTapped(eventArgs);
+        if (!eventArgs.Handled)
+            MapTapped?.Invoke(this, eventArgs);
 
         return eventArgs.Handled;
     }
@@ -703,6 +714,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var eventArgs = new MapEventArgs(screenPosition, worldPosition, GestureType.Press, Map, GetMapInfo, 
             GetRemoteMapInfoAsync);
         Map.OnPointerPressed(eventArgs);
+        if (!eventArgs.Handled)
+            MapPointerPressed?.Invoke(this, eventArgs);
 
         return eventArgs.Handled;
     }
@@ -712,6 +725,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var eventArgs = new MapEventArgs(screenPosition, worldPosition, gestureType,
             Map, GetMapInfo, GetRemoteMapInfoAsync);
         Map.OnPointerMoved(eventArgs);
+        if (!eventArgs.Handled)
+            MapPointerMoved?.Invoke(this, eventArgs);
 
         return eventArgs.Handled;
     }
@@ -724,6 +739,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var eventArgs = new MapEventArgs(screenPosition, worldPosition, GestureType.Release, Map, GetMapInfo, 
             GetRemoteMapInfoAsync);
         Map.OnPointerReleased(eventArgs);
+        if (!eventArgs.Handled)
+            MapPointerReleased?.Invoke(this, eventArgs);
 
         return eventArgs.Handled;
     }

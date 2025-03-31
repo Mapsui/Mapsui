@@ -95,8 +95,7 @@ public class MapRegressionTests
                 // act
                 using var mapRenderer = CreateMapRenderer(mapControl);
                 {
-                    _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(mapRenderer.ImageSourceCache,
-                        map.Navigator.Viewport, map.Layers, map.Widgets);
+                    _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
                     using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
