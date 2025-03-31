@@ -35,7 +35,7 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
         return _provider.GetExtent();
     }
 
-    private static IEnumerable<IFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
+    private static List<IFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
         IEnumerable<IFeature>? features, Pen line, Brush? fill)
     {
         if (features == null)
@@ -68,7 +68,7 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
                     offsetY = CalculateOffsetY(offsetY, textHeight);
 
                     var labelText = labelStyle.GetLabelText(pointFeature);
-                    var labelFeature = CreateLabelFeature(position, labelStyle, offsetY, labelText);
+                    var labelFeature = CreateFeatureWithLabel(position, labelStyle, offsetY, labelText);
 
                     result.Add(labelFeature);
                 }
@@ -92,35 +92,30 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
         return new MPoint(cluster.Box.Centroid.X, minY);
     }
 
-    private static IFeature CreateLabelFeature(MPoint position, LabelStyle labelStyle, double offsetY,
-        string? text)
+    private static PointFeature CreateFeatureWithLabel(MPoint position, LabelStyle labelStyle, double offsetY, string? text) => new(position)
     {
-        return new PointFeature(position)
-        {
-            Styles = new[]
+        Styles =
+        [
+            new LabelStyle(labelStyle)
             {
-                new LabelStyle(labelStyle)
-                {
-                    Offset = {Y = offsetY},
-                    LabelMethod = _ => text
-                }
+                Offset = {Y = offsetY},
+                LabelMethod = _ => text
             }
-        };
-    }
+        ]
+    };
 
-    private static IFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
-        Brush? fill)
+    private static GeometryFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line, Brush? fill)
     {
         return new GeometryFeature(GrowBox(cluster.Box, resolution).ToPolygon())
         {
-            Styles = new[]
-            {
+            Styles =
+            [
                 new VectorStyle
                 {
                     Outline = line,
                     Fill = fill
                 }
-            }
+            ]
         };
     }
 
