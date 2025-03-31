@@ -29,9 +29,14 @@ public class MPoint : IEquatable<MPoint>
     }
 
     public double X { get; set; }
+
     public double Y { get; set; }
 
-    public MRect MRect => new MRect(X, Y, X, Y);
+    // Creates an MRect with the point as both the minimum and maximum
+    public MRect GetExtent()
+    {
+        return new MRect(X, Y, X, Y);
+    }
 
     public MPoint Copy()
     {

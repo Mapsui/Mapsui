@@ -15,26 +15,47 @@ namespace Mapsui.Layers;
 /// <param name="layerName">Name to use for layer</param>
 public class MemoryLayer(string layerName) : BaseLayer(layerName)
 {
+    private IEnumerable<IFeature> _features = [];
+    private IFeature[] _localFeatures = [];
+    private MRect? _extent;
+
     /// <summary>
     /// Create a new layer
     /// </summary>
     public MemoryLayer() : this(nameof(MemoryLayer)) { }
 
-    public IEnumerable<IFeature> Features { get; set; } = [];
+    public IEnumerable<IFeature> Features
+    {
+        get => _features;
+        set
+        {
+            _features = value;
+            FeaturesWereModified();
+        }
+    }
+
+    public void FeaturesWereModified()
+    {
+        _localFeatures = _features.ToArray();
+        _extent = _localFeatures.GetExtent();
+    }
 
     public override IEnumerable<IFeature> GetFeatures(MRect? rect, double resolution)
     {
-        // Safeguard in case BoundingBox is null, most likely due to no features in layer
-        if (rect == null) { return []; }
+        if (rect == null)
+            yield break;
 
         var biggerRect = rect.Grow(
                 SymbolStyle.DefaultWidth * 2 * resolution,
                 SymbolStyle.DefaultHeight * 2 * resolution);
-
-        return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
+        foreach (var feature in _localFeatures)
+        {
+            if (feature?.Extent?.Intersects(biggerRect) == true)
+                yield return feature;
+        }
     }
 
-    public override Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; set; } = (features) => features.OrderBy(f => f.Id);
+    public override Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; set; } = (_localFeatures) => _localFeatures.OrderBy(f => f.Id);
 
-    public override MRect? Extent => Features.GetExtent();
+    public override MRect? Extent => _extent;
 }

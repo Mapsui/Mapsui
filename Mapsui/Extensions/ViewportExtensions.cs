@@ -36,18 +36,18 @@ public static class ViewportExtensions
         // rotated.
         var screenPoints = new List<ScreenPosition>
         {
-            viewport.WorldToScreen(rect.BottomLeft),
-            viewport.WorldToScreen(rect.BottomRight),
-            viewport.WorldToScreen(rect.TopRight),
-            viewport.WorldToScreen(rect.TopLeft)
+            viewport.WorldToScreen(rect.GetBottomLeft()),
+            viewport.WorldToScreen(rect.GetBottomRight()),
+            viewport.WorldToScreen(rect.GetTopRight()),
+            viewport.WorldToScreen(rect.GetTopLeft())
         };
 
-        var minx = screenPoints.Select(p => p.X).Min();
-        var miny = screenPoints.Select(p => p.Y).Min();
-        var maxx = screenPoints.Select(p => p.X).Max();
-        var maxy = screenPoints.Select(p => p.Y).Max();
+        var minX = screenPoints.Select(p => p.X).Min();
+        var minY = screenPoints.Select(p => p.Y).Min();
+        var maxX = screenPoints.Select(p => p.X).Max();
+        var maxY = screenPoints.Select(p => p.Y).Max();
 
-        return new MRect(minx, miny, maxx, maxy);
+        return new MRect(minX, minY, maxX, maxY);
     }
 
     /// <summary>

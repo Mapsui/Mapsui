@@ -250,6 +250,7 @@ insert_final_newline = true
 dotnet_style_prefer_compound_assignment = true:suggestion
 dotnet_code_quality_unused_parameters = all:suggestion
 dotnet_style_collection_initializer = true:suggestion
+dotnet_style_prefer_collection_expression = never # IDE0305: Simplify collection initialization
 
 ### dotnet_diagnostic
 dotnet_diagnostic.CS1591.severity = silent # CS1591: Missing XML comment for publicly visible type or member

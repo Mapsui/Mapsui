@@ -28,17 +28,14 @@ public class SvgSample : ISample
         return Task.FromResult(map);
     }
 
-    private static ILayer CreateSvgLayer(MRect? envelope)
+    private static MemoryLayer CreateSvgLayer(MRect? envelope) => new()
     {
-        return new MemoryLayer
-        {
-            Name = "Svg Layer",
-            Features = CreateSvgFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, _numberOfSvgs)),
-            Style = null,
-        };
-    }
+        Name = "Svg Layer",
+        Features = CreateSvgFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, _numberOfSvgs)),
+        Style = null,
+    };
 
-    private static IEnumerable<IFeature> CreateSvgFeatures(IEnumerable<MPoint> randomPoints)
+    private static IFeature[] CreateSvgFeatures(IEnumerable<MPoint> randomPoints)
     {
         var counter = 0;
 
@@ -48,7 +45,7 @@ public class SvgSample : ISample
             feature.Styles.Add(CreateSvgStyle());
             counter++;
             return feature;
-        });
+        }).ToArray();
     }
 
     private static ImageStyle CreateSvgStyle() => new()

@@ -11,11 +11,11 @@ public static class MRectExtensions
 
     public static Polygon ToPolygon(this MRect rect)
     {
-        return new Polygon(new LinearRing(new[] {
-            rect.TopLeft.ToCoordinate(),
-            rect.TopRight.ToCoordinate(),
-            rect.BottomRight.ToCoordinate(),
-            rect.BottomLeft.ToCoordinate(),
-            rect.TopLeft.ToCoordinate() }));
+        return new Polygon(new LinearRing([
+            rect.GetTopLeft().ToCoordinate(),
+            rect.GetTopRight().ToCoordinate(),
+            rect.GetBottomRight().ToCoordinate(),
+            rect.GetBottomLeft().ToCoordinate(),
+            rect.GetTopLeft().ToCoordinate() ]));
     }
 }

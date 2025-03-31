@@ -426,7 +426,7 @@ public class Client
             var rootLayer = layers[0];
             rootLayer.Name = "__auto_generated_root_layer__";
             rootLayer.Title = "";
-            rootLayer.ChildLayers = [.. layers];
+            rootLayer.ChildLayers = layers.ToArray();
             _layer = rootLayer;
         }
         else
@@ -663,7 +663,7 @@ public class Client
         var crsList = new List<string>();
 
         if (_nsmgr == null)
-            return [.. crsList];
+            return crsList.ToArray();
 
         using var xnlSrs = xmlLayer.SelectNodes("sm:SRS", _nsmgr);
         if (xnlSrs != null)
@@ -679,6 +679,6 @@ public class Client
                 crsList.Add(xnlCrs[i]?.InnerText ?? string.Empty);
         }
 
-        return [.. crsList];
+        return crsList.ToArray();
     }
 }

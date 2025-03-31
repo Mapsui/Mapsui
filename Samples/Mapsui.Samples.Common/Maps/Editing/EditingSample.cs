@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -24,7 +23,7 @@ public class EditingSample : IMapControlSample
     private EditManager _editManager = new();
     private WritableLayer? _targetLayer;
     private IMapControl? _mapControl;
-    private List<IFeature>? _tempFeatures;
+    private IFeature[]? _tempFeatures;
 
     public string Name => "Editing";
     public string Category => "Editing";
@@ -224,7 +223,7 @@ public class EditingSample : IMapControlSample
             var features = _targetLayer?.GetFeatures().Copy() ?? [];
             foreach (var feature in features)
                 feature.Modified();
-            _tempFeatures = [.. features];
+            _tempFeatures = features.ToArray();
             _editManager.EditMode = EditMode.AddPolygon;
             e.Handled = true;
         }
@@ -245,7 +244,7 @@ public class EditingSample : IMapControlSample
             var features = _targetLayer?.GetFeatures().Copy() ?? [];
             foreach (var feature in features)
                 feature.Modified();
-            _tempFeatures = [.. features];
+            _tempFeatures = features.ToArray();
             _editManager.EditMode = EditMode.AddLine;
             e.Handled = true;
         }
@@ -266,7 +265,7 @@ public class EditingSample : IMapControlSample
             var features = _targetLayer?.GetFeatures().Copy() ?? [];
             foreach (var feature in features)
                 feature.Modified();
-            _tempFeatures = [.. features];
+            _tempFeatures = features.ToArray();
             _editManager.EditMode = EditMode.AddPoint;
             e.Handled = true;
         }
@@ -326,7 +325,7 @@ public class EditingSample : IMapControlSample
             foreach (var feature in features)
                 feature.Modified();
 
-            _tempFeatures = [.. features];
+            _tempFeatures = features.ToArray();
 
             _editManager.Layer?.AddRange(features);
             _targetLayer?.Clear();
