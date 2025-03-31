@@ -13,10 +13,10 @@
 
   <!--Release enable all Performance-->
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <WasmNativeStrip>false</WasmNativeStrip>
+    <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
     <RunAOTCompilation>false</RunAOTCompilation>
     <WasmStripILAfterAOT>false</WasmStripILAfterAOT>
-    <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
-    <BlazorWebAssemblyEnableLinking>false</BlazorWebAssemblyEnableLinking>
     <!--<RunAOTCompilation>true</RunAOTCompilation>-->
     <!--<WasmStripILAfterAOT>true</WasmStripILAfterAOT>-->
   </PropertyGroup>
