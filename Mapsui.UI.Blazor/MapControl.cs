@@ -77,7 +77,6 @@ public partial class MapControl : ComponentBase, IMapControl
         if (firstRender)
         {
             await InitializingInteropAsync();
-            _ = UpdateBoundingRectAsync();
         }
     }
 
