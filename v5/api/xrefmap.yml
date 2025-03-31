@@ -33180,6 +33180,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.MoveModifier
   nameWithType: MapControl.MoveModifier
+- uid: Mapsui.UI.Blazor.MapControl.OnAfterRenderAsync(System.Boolean)
+  name: OnAfterRenderAsync(bool)
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnAfterRenderAsync_System_Boolean_
+  commentId: M:Mapsui.UI.Blazor.MapControl.OnAfterRenderAsync(System.Boolean)
+  name.vb: OnAfterRenderAsync(Boolean)
+  fullName: Mapsui.UI.Blazor.MapControl.OnAfterRenderAsync(bool)
+  fullName.vb: Mapsui.UI.Blazor.MapControl.OnAfterRenderAsync(Boolean)
+  nameWithType: MapControl.OnAfterRenderAsync(bool)
+  nameWithType.vb: MapControl.OnAfterRenderAsync(Boolean)
+- uid: Mapsui.UI.Blazor.MapControl.OnAfterRenderAsync*
+  name: OnAfterRenderAsync
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnAfterRenderAsync_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.OnAfterRenderAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.OnAfterRenderAsync
+  nameWithType: MapControl.OnAfterRenderAsync
 - uid: Mapsui.UI.Blazor.MapControl.OnInitialized
   name: OnInitialized()
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_OnInitialized
