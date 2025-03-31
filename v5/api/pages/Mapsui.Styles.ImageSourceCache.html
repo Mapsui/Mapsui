@@ -120,10 +120,100 @@
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_ImageSourceCache_FetchAllImageData_System_Collections_Concurrent_ConcurrentDictionary_System_String_System_String__Mapsui_Fetcher_FetchMachine_System_Action_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.ImageSourceCache.FetchAllImageData(System.Collections.Concurrent.ConcurrentDictionary%7BSystem.String%2CSystem.String%7D%2CMapsui.Fetcher.FetchMachine%2CSystem.Action)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L53">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_ImageSourceCache_FetchAllImageData_" data-uid="Mapsui.Styles.ImageSourceCache.FetchAllImageData*"></a>
+  <h4 id="Mapsui_Styles_ImageSourceCache_FetchAllImageData_System_Collections_Concurrent_ConcurrentDictionary_System_String_System_String__Mapsui_Fetcher_FetchMachine_System_Action_" data-uid="Mapsui.Styles.ImageSourceCache.FetchAllImageData(System.Collections.Concurrent.ConcurrentDictionary{System.String,System.String},Mapsui.Fetcher.FetchMachine,System.Action)">FetchAllImageData(ConcurrentDictionary&lt;string, string&gt;, FetchMachine, Action)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FetchAllImageData(ConcurrentDictionary&lt;string, string&gt; sourceToSourceId, FetchMachine fetchMachine, Action refreshGraphics)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentdictionary-2">ConcurrentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">sourceToSourceId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Fetcher.FetchMachine.html">FetchMachine</a></td>
+        <td><span class="parametername">fetchMachine</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></td>
+        <td><span class="parametername">refreshGraphics</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_ImageSourceCache_FetchAllImageDataAsync_System_Collections_Concurrent_ConcurrentDictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync(System.Collections.Concurrent.ConcurrentDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L87">View Source</a>
+  </span>
+  <a id="Mapsui_Styles_ImageSourceCache_FetchAllImageDataAsync_" data-uid="Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync*"></a>
+  <h4 id="Mapsui_Styles_ImageSourceCache_FetchAllImageDataAsync_System_Collections_Concurrent_ConcurrentDictionary_System_String_System_String__" data-uid="Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync(System.Collections.Concurrent.ConcurrentDictionary{System.String,System.String})">FetchAllImageDataAsync(ConcurrentDictionary&lt;string, string&gt;)</h4>
+  <div class="markdown level1 summary"><p>This variant is currently only used in tests. By awaiting the method the user can be sure that the images are loaded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;bool&gt; FetchAllImageDataAsync(ConcurrentDictionary&lt;string, string&gt; sourceToSourceId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.concurrent.concurrentdictionary-2">ConcurrentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</td>
+        <td><span class="parametername">sourceToSourceId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_ImageSourceCache_Get_Mapsui_Styles_Image_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.ImageSourceCache.Get(Mapsui.Styles.Image)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L45">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L38">View Source</a>
   </span>
   <a id="Mapsui_Styles_ImageSourceCache_Get_" data-uid="Mapsui.Styles.ImageSourceCache.Get*"></a>
   <h4 id="Mapsui_Styles_ImageSourceCache_Get_Mapsui_Styles_Image_" data-uid="Mapsui.Styles.ImageSourceCache.Get(Mapsui.Styles.Image)">Get(Image)</h4>
@@ -168,66 +258,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_ImageSourceCache_GetUnregisteredImageSources_System_Collections_Generic_List_Mapsui_Styles_Image__.md&amp;value=---%0Auid%3A%20Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List%7BMapsui.Styles.Image%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_ImageSourceCache_TryRegisterAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.ImageSourceCache.TryRegisterAsync(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L32">View Source</a>
-  </span>
-  <a id="Mapsui_Styles_ImageSourceCache_GetUnregisteredImageSources_" data-uid="Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources*"></a>
-  <h4 id="Mapsui_Styles_ImageSourceCache_GetUnregisteredImageSources_System_Collections_Generic_List_Mapsui_Styles_Image__" data-uid="Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List{Mapsui.Styles.Image})">GetUnregisteredImageSources(List&lt;Image&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;Image&gt; GetUnregisteredImageSources(List&lt;Image&gt; images)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Mapsui.Styles.Image.html">Image</a>&gt;</td>
-        <td><span class="parametername">images</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Mapsui.Styles.Image.html">Image</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_ImageSourceCache_TryRegisterAsync_Mapsui_Styles_Image_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.ImageSourceCache.TryRegisterAsync(Mapsui.Styles.Image)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L21">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L23">View Source</a>
   </span>
   <a id="Mapsui_Styles_ImageSourceCache_TryRegisterAsync_" data-uid="Mapsui.Styles.ImageSourceCache.TryRegisterAsync*"></a>
-  <h4 id="Mapsui_Styles_ImageSourceCache_TryRegisterAsync_Mapsui_Styles_Image_" data-uid="Mapsui.Styles.ImageSourceCache.TryRegisterAsync(Mapsui.Styles.Image)">TryRegisterAsync(Image)</h4>
+  <h4 id="Mapsui_Styles_ImageSourceCache_TryRegisterAsync_System_String_System_String_" data-uid="Mapsui.Styles.ImageSourceCache.TryRegisterAsync(System.String,System.String)">TryRegisterAsync(string, string)</h4>
   <div class="markdown level1 summary"><p>Register an image for drawing</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;bool&gt; TryRegisterAsync(Image image)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;bool&gt; TryRegisterAsync(string sourceId, string source)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -240,8 +283,13 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.Styles.Image.html">Image</a></td>
-        <td><span class="parametername">image</span></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">sourceId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">source</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -268,7 +316,7 @@ was already registered and no refresh is needed.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_ImageSourceCache_Unregister_Mapsui_Styles_Image_.md&amp;value=---%0Auid%3A%20Mapsui.Styles.ImageSourceCache.Unregister(Mapsui.Styles.Image)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L54">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L47">View Source</a>
   </span>
   <a id="Mapsui_Styles_ImageSourceCache_Unregister_" data-uid="Mapsui.Styles.ImageSourceCache.Unregister*"></a>
   <h4 id="Mapsui_Styles_ImageSourceCache_Unregister_Mapsui_Styles_Image_" data-uid="Mapsui.Styles.ImageSourceCache.Unregister(Mapsui.Styles.Image)">Unregister(Image)</h4>
@@ -327,7 +375,7 @@ was already registered and no refresh is needed.</p>
                     <a href="https://github.com/Mapsui/Mapsui/new/main/apiSpec/new?filename=Mapsui_Styles_ImageSourceCache.md&amp;value=---%0Auid%3A%20Mapsui.Styles.ImageSourceCache%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L11" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/main/Mapsui/Styles/ImageSourceCache.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

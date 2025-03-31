@@ -11549,6 +11549,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Extent
   nameWithType: Map.Extent
+- uid: Mapsui.Map.FetchMachine
+  name: FetchMachine
+  href: pages/Mapsui.Map.html#Mapsui_Map_FetchMachine
+  commentId: P:Mapsui.Map.FetchMachine
+  fullName: Mapsui.Map.FetchMachine
+  nameWithType: Map.FetchMachine
+- uid: Mapsui.Map.FetchMachine*
+  name: FetchMachine
+  href: pages/Mapsui.Map.html#Mapsui_Map_FetchMachine_
+  commentId: Overload:Mapsui.Map.FetchMachine
+  isSpec: "True"
+  fullName: Mapsui.Map.FetchMachine
+  nameWithType: Map.FetchMachine
 - uid: Mapsui.Map.GetWidgetsOfMapAndLayers
   name: GetWidgetsOfMapAndLayers()
   href: pages/Mapsui.Map.html#Mapsui_Map_GetWidgetsOfMapAndLayers
@@ -27514,6 +27527,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.Image.Source
   nameWithType: Image.Source
+- uid: Mapsui.Styles.Image.SourceToSourceId
+  name: SourceToSourceId
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_SourceToSourceId
+  commentId: P:Mapsui.Styles.Image.SourceToSourceId
+  fullName: Mapsui.Styles.Image.SourceToSourceId
+  nameWithType: Image.SourceToSourceId
+- uid: Mapsui.Styles.Image.SourceToSourceId*
+  name: SourceToSourceId
+  href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_SourceToSourceId_
+  commentId: Overload:Mapsui.Styles.Image.SourceToSourceId
+  isSpec: "True"
+  fullName: Mapsui.Styles.Image.SourceToSourceId
+  nameWithType: Image.SourceToSourceId
 - uid: Mapsui.Styles.Image.SvgFillColor
   name: SvgFillColor
   href: pages/Mapsui.Styles.Image.html#Mapsui_Styles_Image_SvgFillColor
@@ -27623,6 +27649,38 @@ references:
   commentId: T:Mapsui.Styles.ImageSourceCache
   fullName: Mapsui.Styles.ImageSourceCache
   nameWithType: ImageSourceCache
+- uid: Mapsui.Styles.ImageSourceCache.FetchAllImageData(System.Collections.Concurrent.ConcurrentDictionary{System.String,System.String},Mapsui.Fetcher.FetchMachine,System.Action)
+  name: FetchAllImageData(ConcurrentDictionary<string, string>, FetchMachine, Action)
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_FetchAllImageData_System_Collections_Concurrent_ConcurrentDictionary_System_String_System_String__Mapsui_Fetcher_FetchMachine_System_Action_
+  commentId: M:Mapsui.Styles.ImageSourceCache.FetchAllImageData(System.Collections.Concurrent.ConcurrentDictionary{System.String,System.String},Mapsui.Fetcher.FetchMachine,System.Action)
+  name.vb: FetchAllImageData(ConcurrentDictionary(Of String, String), FetchMachine, Action)
+  fullName: Mapsui.Styles.ImageSourceCache.FetchAllImageData(System.Collections.Concurrent.ConcurrentDictionary<string, string>, Mapsui.Fetcher.FetchMachine, System.Action)
+  fullName.vb: Mapsui.Styles.ImageSourceCache.FetchAllImageData(System.Collections.Concurrent.ConcurrentDictionary(Of String, String), Mapsui.Fetcher.FetchMachine, System.Action)
+  nameWithType: ImageSourceCache.FetchAllImageData(ConcurrentDictionary<string, string>, FetchMachine, Action)
+  nameWithType.vb: ImageSourceCache.FetchAllImageData(ConcurrentDictionary(Of String, String), FetchMachine, Action)
+- uid: Mapsui.Styles.ImageSourceCache.FetchAllImageData*
+  name: FetchAllImageData
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_FetchAllImageData_
+  commentId: Overload:Mapsui.Styles.ImageSourceCache.FetchAllImageData
+  isSpec: "True"
+  fullName: Mapsui.Styles.ImageSourceCache.FetchAllImageData
+  nameWithType: ImageSourceCache.FetchAllImageData
+- uid: Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync(System.Collections.Concurrent.ConcurrentDictionary{System.String,System.String})
+  name: FetchAllImageDataAsync(ConcurrentDictionary<string, string>)
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_FetchAllImageDataAsync_System_Collections_Concurrent_ConcurrentDictionary_System_String_System_String__
+  commentId: M:Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync(System.Collections.Concurrent.ConcurrentDictionary{System.String,System.String})
+  name.vb: FetchAllImageDataAsync(ConcurrentDictionary(Of String, String))
+  fullName: Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync(System.Collections.Concurrent.ConcurrentDictionary<string, string>)
+  fullName.vb: Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync(System.Collections.Concurrent.ConcurrentDictionary(Of String, String))
+  nameWithType: ImageSourceCache.FetchAllImageDataAsync(ConcurrentDictionary<string, string>)
+  nameWithType.vb: ImageSourceCache.FetchAllImageDataAsync(ConcurrentDictionary(Of String, String))
+- uid: Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync*
+  name: FetchAllImageDataAsync
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_FetchAllImageDataAsync_
+  commentId: Overload:Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync
+  isSpec: "True"
+  fullName: Mapsui.Styles.ImageSourceCache.FetchAllImageDataAsync
+  nameWithType: ImageSourceCache.FetchAllImageDataAsync
 - uid: Mapsui.Styles.ImageSourceCache.Get(Mapsui.Styles.Image)
   name: Get(Image)
   href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_Get_Mapsui_Styles_Image_
@@ -27636,28 +27694,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.ImageSourceCache.Get
   nameWithType: ImageSourceCache.Get
-- uid: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List{Mapsui.Styles.Image})
-  name: GetUnregisteredImageSources(List<Image>)
-  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_GetUnregisteredImageSources_System_Collections_Generic_List_Mapsui_Styles_Image__
-  commentId: M:Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List{Mapsui.Styles.Image})
-  name.vb: GetUnregisteredImageSources(List(Of Image))
-  fullName: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List<Mapsui.Styles.Image>)
-  fullName.vb: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources(System.Collections.Generic.List(Of Mapsui.Styles.Image))
-  nameWithType: ImageSourceCache.GetUnregisteredImageSources(List<Image>)
-  nameWithType.vb: ImageSourceCache.GetUnregisteredImageSources(List(Of Image))
-- uid: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources*
-  name: GetUnregisteredImageSources
-  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_GetUnregisteredImageSources_
-  commentId: Overload:Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources
-  isSpec: "True"
-  fullName: Mapsui.Styles.ImageSourceCache.GetUnregisteredImageSources
-  nameWithType: ImageSourceCache.GetUnregisteredImageSources
-- uid: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(Mapsui.Styles.Image)
-  name: TryRegisterAsync(Image)
-  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_TryRegisterAsync_Mapsui_Styles_Image_
-  commentId: M:Mapsui.Styles.ImageSourceCache.TryRegisterAsync(Mapsui.Styles.Image)
-  fullName: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(Mapsui.Styles.Image)
-  nameWithType: ImageSourceCache.TryRegisterAsync(Image)
+- uid: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(System.String,System.String)
+  name: TryRegisterAsync(string, string)
+  href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_TryRegisterAsync_System_String_System_String_
+  commentId: M:Mapsui.Styles.ImageSourceCache.TryRegisterAsync(System.String,System.String)
+  name.vb: TryRegisterAsync(String, String)
+  fullName: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(string, string)
+  fullName.vb: Mapsui.Styles.ImageSourceCache.TryRegisterAsync(String, String)
+  nameWithType: ImageSourceCache.TryRegisterAsync(string, string)
+  nameWithType.vb: ImageSourceCache.TryRegisterAsync(String, String)
 - uid: Mapsui.Styles.ImageSourceCache.TryRegisterAsync*
   name: TryRegisterAsync
   href: pages/Mapsui.Styles.ImageSourceCache.html#Mapsui_Styles_ImageSourceCache_TryRegisterAsync_
@@ -27678,44 +27723,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.ImageSourceCache.Unregister
   nameWithType: ImageSourceCache.Unregister
-- uid: Mapsui.Styles.ImageSourceCacheInitializer
-  name: ImageSourceCacheInitializer
-  href: pages/Mapsui.Styles.ImageSourceCacheInitializer.html
-  commentId: T:Mapsui.Styles.ImageSourceCacheInitializer
-  fullName: Mapsui.Styles.ImageSourceCacheInitializer
-  nameWithType: ImageSourceCacheInitializer
-- uid: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewport(Mapsui.Styles.ImageSourceCache,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},System.Action{System.Boolean})
-  name: FetchImagesInViewport(ImageSourceCache, Viewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Action<bool>)
-  href: pages/Mapsui.Styles.ImageSourceCacheInitializer.html#Mapsui_Styles_ImageSourceCacheInitializer_FetchImagesInViewport_Mapsui_Styles_ImageSourceCache_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__System_Action_System_Boolean__
-  commentId: M:Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewport(Mapsui.Styles.ImageSourceCache,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},System.Action{System.Boolean})
-  name.vb: FetchImagesInViewport(ImageSourceCache, Viewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Action(Of Boolean))
-  fullName: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewport(Mapsui.Styles.ImageSourceCache, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>, System.Action<bool>)
-  fullName.vb: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewport(Mapsui.Styles.ImageSourceCache, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget), System.Action(Of Boolean))
-  nameWithType: ImageSourceCacheInitializer.FetchImagesInViewport(ImageSourceCache, Viewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Action<bool>)
-  nameWithType.vb: ImageSourceCacheInitializer.FetchImagesInViewport(ImageSourceCache, Viewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Action(Of Boolean))
-- uid: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewport*
-  name: FetchImagesInViewport
-  href: pages/Mapsui.Styles.ImageSourceCacheInitializer.html#Mapsui_Styles_ImageSourceCacheInitializer_FetchImagesInViewport_
-  commentId: Overload:Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewport
-  isSpec: "True"
-  fullName: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewport
-  nameWithType: ImageSourceCacheInitializer.FetchImagesInViewport
-- uid: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewportAsync(Mapsui.Styles.ImageSourceCache,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget})
-  name: FetchImagesInViewportAsync(ImageSourceCache, Viewport, IEnumerable<ILayer>, IEnumerable<IWidget>)
-  href: pages/Mapsui.Styles.ImageSourceCacheInitializer.html#Mapsui_Styles_ImageSourceCacheInitializer_FetchImagesInViewportAsync_Mapsui_Styles_ImageSourceCache_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__
-  commentId: M:Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewportAsync(Mapsui.Styles.ImageSourceCache,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget})
-  name.vb: FetchImagesInViewportAsync(ImageSourceCache, Viewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget))
-  fullName: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewportAsync(Mapsui.Styles.ImageSourceCache, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>)
-  fullName.vb: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewportAsync(Mapsui.Styles.ImageSourceCache, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget))
-  nameWithType: ImageSourceCacheInitializer.FetchImagesInViewportAsync(ImageSourceCache, Viewport, IEnumerable<ILayer>, IEnumerable<IWidget>)
-  nameWithType.vb: ImageSourceCacheInitializer.FetchImagesInViewportAsync(ImageSourceCache, Viewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget))
-- uid: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewportAsync*
-  name: FetchImagesInViewportAsync
-  href: pages/Mapsui.Styles.ImageSourceCacheInitializer.html#Mapsui_Styles_ImageSourceCacheInitializer_FetchImagesInViewportAsync_
-  commentId: Overload:Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewportAsync
-  isSpec: "True"
-  fullName: Mapsui.Styles.ImageSourceCacheInitializer.FetchImagesInViewportAsync
-  nameWithType: ImageSourceCacheInitializer.FetchImagesInViewportAsync
 - uid: Mapsui.Styles.ImageStyle
   name: ImageStyle
   href: pages/Mapsui.Styles.ImageStyle.html
@@ -31018,22 +31025,6 @@ references:
   commentId: E:Mapsui.UI.Android.MapControl.Info
   fullName: Mapsui.UI.Android.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.Android.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name: InitializeSymbolStyles(Action<bool>)
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_InitializeSymbolStyles_System_Action_System_Boolean__
-  commentId: M:Mapsui.UI.Android.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name.vb: InitializeSymbolStyles(Action(Of Boolean))
-  fullName: Mapsui.UI.Android.MapControl.InitializeSymbolStyles(System.Action<bool>)
-  fullName.vb: Mapsui.UI.Android.MapControl.InitializeSymbolStyles(System.Action(Of Boolean))
-  nameWithType: MapControl.InitializeSymbolStyles(Action<bool>)
-  nameWithType.vb: MapControl.InitializeSymbolStyles(Action(Of Boolean))
-- uid: Mapsui.UI.Android.MapControl.InitializeSymbolStyles*
-  name: InitializeSymbolStyles
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_InitializeSymbolStyles_
-  commentId: Overload:Mapsui.UI.Android.MapControl.InitializeSymbolStyles
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.InitializeSymbolStyles
-  nameWithType: MapControl.InitializeSymbolStyles
 - uid: Mapsui.UI.Android.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Map
@@ -31602,22 +31593,6 @@ references:
   commentId: E:Mapsui.UI.Avalonia.MapControl.Info
   fullName: Mapsui.UI.Avalonia.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.Avalonia.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name: InitializeSymbolStyles(Action<bool>)
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_InitializeSymbolStyles_System_Action_System_Boolean__
-  commentId: M:Mapsui.UI.Avalonia.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name.vb: InitializeSymbolStyles(Action(Of Boolean))
-  fullName: Mapsui.UI.Avalonia.MapControl.InitializeSymbolStyles(System.Action<bool>)
-  fullName.vb: Mapsui.UI.Avalonia.MapControl.InitializeSymbolStyles(System.Action(Of Boolean))
-  nameWithType: MapControl.InitializeSymbolStyles(Action<bool>)
-  nameWithType.vb: MapControl.InitializeSymbolStyles(Action(Of Boolean))
-- uid: Mapsui.UI.Avalonia.MapControl.InitializeSymbolStyles*
-  name: InitializeSymbolStyles
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_InitializeSymbolStyles_
-  commentId: Overload:Mapsui.UI.Avalonia.MapControl.InitializeSymbolStyles
-  isSpec: "True"
-  fullName: Mapsui.UI.Avalonia.MapControl.InitializeSymbolStyles
-  nameWithType: MapControl.InitializeSymbolStyles
 - uid: Mapsui.UI.Avalonia.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_Map
@@ -33103,22 +33078,6 @@ references:
   commentId: E:Mapsui.UI.Blazor.MapControl.Info
   fullName: Mapsui.UI.Blazor.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.Blazor.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name: InitializeSymbolStyles(Action<bool>)
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_InitializeSymbolStyles_System_Action_System_Boolean__
-  commentId: M:Mapsui.UI.Blazor.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name.vb: InitializeSymbolStyles(Action(Of Boolean))
-  fullName: Mapsui.UI.Blazor.MapControl.InitializeSymbolStyles(System.Action<bool>)
-  fullName.vb: Mapsui.UI.Blazor.MapControl.InitializeSymbolStyles(System.Action(Of Boolean))
-  nameWithType: MapControl.InitializeSymbolStyles(Action<bool>)
-  nameWithType.vb: MapControl.InitializeSymbolStyles(Action(Of Boolean))
-- uid: Mapsui.UI.Blazor.MapControl.InitializeSymbolStyles*
-  name: InitializeSymbolStyles
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_InitializeSymbolStyles_
-  commentId: Overload:Mapsui.UI.Blazor.MapControl.InitializeSymbolStyles
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControl.InitializeSymbolStyles
-  nameWithType: MapControl.InitializeSymbolStyles
 - uid: Mapsui.UI.Blazor.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Map
@@ -33850,22 +33809,6 @@ references:
   commentId: E:Mapsui.UI.Eto.MapControl.Info
   fullName: Mapsui.UI.Eto.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.Eto.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name: InitializeSymbolStyles(Action<bool>)
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_InitializeSymbolStyles_System_Action_System_Boolean__
-  commentId: M:Mapsui.UI.Eto.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name.vb: InitializeSymbolStyles(Action(Of Boolean))
-  fullName: Mapsui.UI.Eto.MapControl.InitializeSymbolStyles(System.Action<bool>)
-  fullName.vb: Mapsui.UI.Eto.MapControl.InitializeSymbolStyles(System.Action(Of Boolean))
-  nameWithType: MapControl.InitializeSymbolStyles(Action<bool>)
-  nameWithType.vb: MapControl.InitializeSymbolStyles(Action(Of Boolean))
-- uid: Mapsui.UI.Eto.MapControl.InitializeSymbolStyles*
-  name: InitializeSymbolStyles
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_InitializeSymbolStyles_
-  commentId: Overload:Mapsui.UI.Eto.MapControl.InitializeSymbolStyles
-  isSpec: "True"
-  fullName: Mapsui.UI.Eto.MapControl.InitializeSymbolStyles
-  nameWithType: MapControl.InitializeSymbolStyles
 - uid: Mapsui.UI.Eto.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Map
@@ -35970,22 +35913,6 @@ references:
   commentId: E:Mapsui.UI.Maui.MapControl.Info
   fullName: Mapsui.UI.Maui.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.Maui.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name: InitializeSymbolStyles(Action<bool>)
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_InitializeSymbolStyles_System_Action_System_Boolean__
-  commentId: M:Mapsui.UI.Maui.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name.vb: InitializeSymbolStyles(Action(Of Boolean))
-  fullName: Mapsui.UI.Maui.MapControl.InitializeSymbolStyles(System.Action<bool>)
-  fullName.vb: Mapsui.UI.Maui.MapControl.InitializeSymbolStyles(System.Action(Of Boolean))
-  nameWithType: MapControl.InitializeSymbolStyles(Action<bool>)
-  nameWithType.vb: MapControl.InitializeSymbolStyles(Action(Of Boolean))
-- uid: Mapsui.UI.Maui.MapControl.InitializeSymbolStyles*
-  name: InitializeSymbolStyles
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_InitializeSymbolStyles_
-  commentId: Overload:Mapsui.UI.Maui.MapControl.InitializeSymbolStyles
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapControl.InitializeSymbolStyles
-  nameWithType: MapControl.InitializeSymbolStyles
 - uid: Mapsui.UI.Maui.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_Map
@@ -38653,22 +38580,6 @@ references:
   commentId: E:Mapsui.UI.WinUI.MapControl.Info
   fullName: Mapsui.UI.WinUI.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.WinUI.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name: InitializeSymbolStyles(Action<bool>)
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_InitializeSymbolStyles_System_Action_System_Boolean__
-  commentId: M:Mapsui.UI.WinUI.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name.vb: InitializeSymbolStyles(Action(Of Boolean))
-  fullName: Mapsui.UI.WinUI.MapControl.InitializeSymbolStyles(System.Action<bool>)
-  fullName.vb: Mapsui.UI.WinUI.MapControl.InitializeSymbolStyles(System.Action(Of Boolean))
-  nameWithType: MapControl.InitializeSymbolStyles(Action<bool>)
-  nameWithType.vb: MapControl.InitializeSymbolStyles(Action(Of Boolean))
-- uid: Mapsui.UI.WinUI.MapControl.InitializeSymbolStyles*
-  name: InitializeSymbolStyles
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_InitializeSymbolStyles_
-  commentId: Overload:Mapsui.UI.WinUI.MapControl.InitializeSymbolStyles
-  isSpec: "True"
-  fullName: Mapsui.UI.WinUI.MapControl.InitializeSymbolStyles
-  nameWithType: MapControl.InitializeSymbolStyles
 - uid: Mapsui.UI.WinUI.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_Map
@@ -39127,22 +39038,6 @@ references:
   commentId: E:Mapsui.UI.WindowsForms.MapControl.Info
   fullName: Mapsui.UI.WindowsForms.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.WindowsForms.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name: InitializeSymbolStyles(Action<bool>)
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_InitializeSymbolStyles_System_Action_System_Boolean__
-  commentId: M:Mapsui.UI.WindowsForms.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name.vb: InitializeSymbolStyles(Action(Of Boolean))
-  fullName: Mapsui.UI.WindowsForms.MapControl.InitializeSymbolStyles(System.Action<bool>)
-  fullName.vb: Mapsui.UI.WindowsForms.MapControl.InitializeSymbolStyles(System.Action(Of Boolean))
-  nameWithType: MapControl.InitializeSymbolStyles(Action<bool>)
-  nameWithType.vb: MapControl.InitializeSymbolStyles(Action(Of Boolean))
-- uid: Mapsui.UI.WindowsForms.MapControl.InitializeSymbolStyles*
-  name: InitializeSymbolStyles
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_InitializeSymbolStyles_
-  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.InitializeSymbolStyles
-  isSpec: "True"
-  fullName: Mapsui.UI.WindowsForms.MapControl.InitializeSymbolStyles
-  nameWithType: MapControl.InitializeSymbolStyles
 - uid: Mapsui.UI.WindowsForms.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_Map
@@ -39606,22 +39501,6 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.Info
   fullName: Mapsui.UI.Wpf.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.Wpf.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name: InitializeSymbolStyles(Action<bool>)
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_InitializeSymbolStyles_System_Action_System_Boolean__
-  commentId: M:Mapsui.UI.Wpf.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name.vb: InitializeSymbolStyles(Action(Of Boolean))
-  fullName: Mapsui.UI.Wpf.MapControl.InitializeSymbolStyles(System.Action<bool>)
-  fullName.vb: Mapsui.UI.Wpf.MapControl.InitializeSymbolStyles(System.Action(Of Boolean))
-  nameWithType: MapControl.InitializeSymbolStyles(Action<bool>)
-  nameWithType.vb: MapControl.InitializeSymbolStyles(Action(Of Boolean))
-- uid: Mapsui.UI.Wpf.MapControl.InitializeSymbolStyles*
-  name: InitializeSymbolStyles
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_InitializeSymbolStyles_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.InitializeSymbolStyles
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.InitializeSymbolStyles
-  nameWithType: MapControl.InitializeSymbolStyles
 - uid: Mapsui.UI.Wpf.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Map
@@ -40076,22 +39955,6 @@ references:
   commentId: E:Mapsui.UI.iOS.MapControl.Info
   fullName: Mapsui.UI.iOS.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.iOS.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name: InitializeSymbolStyles(Action<bool>)
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_InitializeSymbolStyles_System_Action_System_Boolean__
-  commentId: M:Mapsui.UI.iOS.MapControl.InitializeSymbolStyles(System.Action{System.Boolean})
-  name.vb: InitializeSymbolStyles(Action(Of Boolean))
-  fullName: Mapsui.UI.iOS.MapControl.InitializeSymbolStyles(System.Action<bool>)
-  fullName.vb: Mapsui.UI.iOS.MapControl.InitializeSymbolStyles(System.Action(Of Boolean))
-  nameWithType: MapControl.InitializeSymbolStyles(Action<bool>)
-  nameWithType.vb: MapControl.InitializeSymbolStyles(Action(Of Boolean))
-- uid: Mapsui.UI.iOS.MapControl.InitializeSymbolStyles*
-  name: InitializeSymbolStyles
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_InitializeSymbolStyles_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.InitializeSymbolStyles
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.InitializeSymbolStyles
-  nameWithType: MapControl.InitializeSymbolStyles
 - uid: Mapsui.UI.iOS.MapControl.LayoutMarginsDidChange
   name: LayoutMarginsDidChange()
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_LayoutMarginsDidChange

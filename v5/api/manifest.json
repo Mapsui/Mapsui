@@ -3792,16 +3792,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Styles.ImageSourceCacheInitializer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "pages/Mapsui.Styles.ImageSourceCacheInitializer.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Styles.ImageStyle.yml",
       "output": {
         ".html": {
