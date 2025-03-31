@@ -67,6 +67,9 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         {
             var renderer = GetRenderer();
             (MSection section, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
+            // We need to fetch all images at this point because in here we use a different renderer with a different cache.
+            // Perhaps a better solution is to work with one cache that is attached to the Map.
+            _ = await renderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
             using var stream = renderer.RenderToBitmapStream(ToViewport(section), [renderLayer], pixelDensity: _pixelDensity, renderFormat: _renderFormat);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
