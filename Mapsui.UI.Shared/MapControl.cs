@@ -423,21 +423,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var mapControl = (MapControl)bindable;
         mapControl.AfterSetMap((Map)newValue);
     }
-
-
+    
     public Map Map
     {
-        get
-        {
-            if (GetValue(MapProperty) is not Map map)
-            {
-                _map ??= new DisposableWrapper<Map>(new Map(), true);
-                map = _map.WrappedObject;
-                SetValue(MapProperty, map);
-            }
-
-            return map;
-        }
+        get => (Map)GetValue(MapProperty);
         set => SetValue(MapProperty, value);
     }
 
