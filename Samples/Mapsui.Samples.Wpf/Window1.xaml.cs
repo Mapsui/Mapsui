@@ -24,7 +24,6 @@ public partial class Window1
         InitializeComponent();
 
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-        MapControl.Map.Navigator.RotationLock = false;
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
@@ -90,6 +89,6 @@ public partial class Window1
     private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-        MapControl.Map.Navigator.RotateTo(percent * 360);
+        MapControl.Map?.Navigator.RotateTo(percent * 360);
     }
 }

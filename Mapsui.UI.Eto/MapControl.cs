@@ -61,7 +61,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
             return;
 
         if (!isHovering)
-            _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+            if (Map is Map map)
+                _manipulationTracker.Manipulate([position], map.Navigator.Manipulate);
     }
 
     protected override void OnMouseUp(MouseEventArgs e)
@@ -87,7 +88,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         var mouseWheelDelta = (int)e.Delta.Height;
         var mousePosition = e.Location.ToScreenPosition();
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
+        Map?.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
     }
 
     protected override void OnSizeChanged(EventArgs e)
@@ -109,11 +110,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
     protected override void Dispose(bool disposing)
     {
-        if (disposing)
-        {
-            _map?.Dispose();
-        }
-
 #pragma warning disable IDISP023 // Don't use reference types in finalizer context
         CommonDispose(disposing);
 #pragma warning restore IDISP023 // Don't use reference types in finalizer context

@@ -107,7 +107,7 @@ public partial class MapControl : UIView, IMapControl
         MultipleTouchEnabled = true;
         UserInteractionEnabled = true;
 
-        Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+        Map?.Navigator.SetSize(ViewportWidth, ViewportHeight);
     }
 
     private void OnPaintSurface(object? sender, SKPaintMetalSurfaceEventArgs args)
@@ -155,7 +155,8 @@ public partial class MapControl : UIView, IMapControl
             if (OnPointerMoved(positions, false))
                 return;
 
-            _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
+            if (Map is Map map)
+                _manipulationTracker.Manipulate(positions, map.Navigator.Manipulate);
         });
     }
 
@@ -240,7 +241,6 @@ public partial class MapControl : UIView, IMapControl
     {
         if (disposing)
         {
-            _map?.Dispose();
             Unsubscribe();
             _metalCanvas?.Dispose();
             _canvas?.Dispose();

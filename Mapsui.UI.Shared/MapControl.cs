@@ -327,11 +327,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <param name="map">Map, to which events to unsubscribe</param>
     private void UnsubscribeFromMapEvents(Map map)
     {
-        var localMap = map;
-        localMap.DataChanged -= Map_DataChanged;
-        localMap.PropertyChanged -= Map_PropertyChanged;
-        localMap.RefreshGraphicsRequest -= Map_RefreshGraphicsRequest;
-        localMap.AbortFetch();
+        map.DataChanged -= Map_DataChanged;
+        map.PropertyChanged -= Map_PropertyChanged;
+        map.RefreshGraphicsRequest -= Map_RefreshGraphicsRequest;
+        map.AbortFetch();
     }
 
     public void Refresh(ChangeType changeType = ChangeType.Discrete)
@@ -370,7 +369,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(Map_DataChanged)}", exception);
         }
     }
-    // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
     private void Map_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
@@ -400,11 +398,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
 
-    // ReSharper restore RedundantNameQualifier
-#pragma warning disable IDISP002 // Is Disposed in Common Dispose
-    private DisposableWrapper<Map>? _map;
-#pragma warning restore IDISP002
-
+    private Map? _map;
 #if __MAUI__
 
     public static readonly BindableProperty MapProperty = BindableProperty.Create(nameof(Map),
@@ -415,14 +409,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         object oldValue, object newValue)
     {
         var mapControl = (MapControl)bindable;
-        mapControl.BeforeSetMap();
+        mapControl.BeforeSetMap((Map?)oldValue);
     }
 
     private static void MapPropertyChanged(BindableObject bindable,
         object oldValue, object newValue)
     {
         var mapControl = (MapControl)bindable;
-        mapControl.AfterSetMap((Map)newValue);
+        mapControl.AfterSetMap((Map?)newValue);
     }
     
     public Map? Map
@@ -443,46 +437,38 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Browsable(false)]
 #endif
-    public Map Map
+
+    public Map? Map
     {
         get
         {
-            if (_map == null)
-            {
-                _map = new DisposableWrapper<Map>(new Map(), true);
-                AfterSetMap(_map.WrappedObject);
-                OnPropertyChanged();
-            }
-
-            return _map.WrappedObject;
+            return _map;
         }
         set
         {
-            if (value is null) throw new ArgumentNullException(nameof(value));
-
-            BeforeSetMap();
-            _map?.Dispose();
-            _map = new DisposableWrapper<Map>(value, false);
+            if (_map is not null)
+                BeforeSetMap(_map);
+            _map = value;
             AfterSetMap(value);
             OnPropertyChanged();
         }
     }
 #endif
 
-    private void BeforeSetMap()
+    private void BeforeSetMap(Map? map)
     {
-        if (Map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
-
-        UnsubscribeFromMapEvents(Map);
+        if (map is not null)
+            UnsubscribeFromMapEvents(map);
     }
 
     private void AfterSetMap(Map? map)
     {
-        if (map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
-
-        if (HasSize())
-            map.Navigator.SetSize(ViewportWidth, ViewportHeight);
-        SubscribeToMapEvents(map);
+        if (map is not null)
+        {
+            if (HasSize())
+                map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+            SubscribeToMapEvents(map);
+        }
         Refresh();
     }
 
@@ -561,8 +547,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             _invalidateTimer?.Dispose();
             _invalidateTimer = null;
             _renderer.Dispose();
-            _map?.Dispose();
-            _map = null;
         }
         _invalidateTimer = null;
     }

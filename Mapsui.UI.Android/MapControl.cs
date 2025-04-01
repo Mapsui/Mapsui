@@ -135,7 +135,9 @@ public partial class MapControl : ViewGroup, IMapControl
             case MotionEventActions.Move:
                 if (OnPointerMoved(positions, false))
                     return;
-                _manipulationTracker.Manipulate(positions, Map.Navigator.Manipulate);
+
+                if (Map is Map map)
+                    _manipulationTracker.Manipulate(positions, map.Navigator.Manipulate);
                 break;
             case MotionEventActions.Up:
                 OnPointerReleased(positions);
@@ -233,7 +235,6 @@ public partial class MapControl : ViewGroup, IMapControl
     {
         if (disposing)
         {
-            _map?.Dispose();
             _mainLooperHandler?.Dispose();
             _canvas?.Dispose();
         }

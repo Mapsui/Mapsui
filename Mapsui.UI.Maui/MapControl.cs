@@ -285,11 +285,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _listeners?.Remove(weakReference);
         }
 
-        if (disposing)
-        {
-            Map?.Dispose();
-        }
-
         if (_element != null)
         {
             _element.ParentChanged -= Element_ParentChanged;
