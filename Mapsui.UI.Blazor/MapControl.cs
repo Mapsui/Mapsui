@@ -6,6 +6,7 @@ using Microsoft.JSInterop;
 using SkiaSharp;
 using SkiaSharp.Views.Blazor;
 using Microsoft.AspNetCore.Components;
+using System;
 
 namespace Mapsui.UI.Blazor;
 
@@ -157,9 +158,16 @@ public partial class MapControl : ComponentBase, IMapControl
             throw new ArgumentException("Interop is null");
         }
 
-        await Interop.DisableMouseWheelAsync(_elementId);
-        await Interop.DisableTouchAsync(_elementId);
-        _pixelDensityFromInterop = await Interop.GetPixelDensityAsync();
+        try 
+        {
+            await Interop.DisableMouseWheelAsync(_elementId);
+            await Interop.DisableTouchAsync(_elementId);
+            _pixelDensityFromInterop = await Interop.GetPixelDensityAsync();
+        }
+        catch (Exception ex)
+        {
+             Console.WriteLine("An exception occurred in InitializingInteropAsync");
+        }
     }
 
     private void OnSizeChanged()
