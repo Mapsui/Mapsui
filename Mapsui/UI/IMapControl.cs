@@ -10,7 +10,7 @@ public interface IMapControl : IDisposable
 {
     event EventHandler<MapInfoEventArgs> Info;
 
-    Map Map { get; set; }
+    Map? Map { get; set; }
 
     void RefreshGraphics();
 

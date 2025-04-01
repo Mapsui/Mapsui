@@ -225,6 +225,9 @@ public class MyLocationLayer : BaseLayer
                 _animationMyLocation = null;
             }
 
+            if (_mapView.Map is not Map map)
+                return;
+
             if (animated)
             {
                 // Save values for new animation
@@ -233,9 +236,9 @@ public class MyLocationLayer : BaseLayer
                 var deltaLat = _animationMyLocationEnd.Latitude - _animationMyLocationStart.Latitude;
                 var deltaLon = _animationMyLocationEnd.Longitude - _animationMyLocationStart.Longitude;
 
-                if (_mapView.Map.Navigator.Viewport.ToExtent() is not null)
+                if (map.Navigator.Viewport.ToExtent() is not null)
                 {
-                    var fetchInfo = new FetchInfo(_mapView.Map.Navigator.Viewport.ToSection(), _mapView.Map?.CRS,
+                    var fetchInfo = new FetchInfo(map.Navigator.Viewport.ToSection(), map.CRS,
                         ChangeType.Discrete);
                     _animationMyLocation = new AnimationEntry<MapView>(
                         _animationMyLocationStart,
@@ -249,7 +252,7 @@ public class MyLocationLayer : BaseLayer
                                 _animationMyLocationStart.Longitude + deltaLon * v));
                             // Update viewport
                             if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
-                                mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
+                                map.Navigator.CenterOn(MyLocation.ToMapsui());
                             // Refresh map
                             if (mapView.MyLocationEnabled && modified)
                                 mapView.Refresh();
@@ -257,13 +260,13 @@ public class MyLocationLayer : BaseLayer
                         },
                         final: (mapView, entry) =>
                         {
-                            mapView.Map.RefreshData(fetchInfo);
+                            mapView.Map?.RefreshData(fetchInfo);
                             if (MyLocation != _animationMyLocationEnd)
                             {
                                 InternalUpdateMyLocation(_animationMyLocationEnd);
 
                                 if (mapView.MyLocationFollow && mapView.MyLocationEnabled)
-                                    mapView.Map.Navigator.CenterOn(MyLocation.ToMapsui());
+                                    mapView.Map?.Navigator.CenterOn(MyLocation.ToMapsui());
 
                                 // Refresh map
                                 if (mapView.MyLocationEnabled)

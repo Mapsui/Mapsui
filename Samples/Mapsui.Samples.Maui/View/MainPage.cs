@@ -7,23 +7,24 @@ namespace Mapsui.Samples.Maui.View;
 
 public sealed class MainPage : ContentPage, IDisposable
 {
-    readonly CollectionView collectionView;
-    readonly Picker categoryPicker;
-    readonly MapControl mapControl = new MapControl();
-    const int menuItemWidth = 220;
+    readonly CollectionView _collectionView;
+    readonly Picker _categoryPicker;
+    readonly MapControl _mapControl = new();
+    const int _menuItemWidth = 220;
 
     public MainPage(MainViewModel mainViewModel)
     {
-        mapControl.Map.Navigator.RotationLock = false;
-
-        categoryPicker = CreatePicker(mainViewModel);
-        collectionView = CreateCollectionView(mainViewModel);
+        _categoryPicker = CreatePicker(mainViewModel);
+        _collectionView = CreateCollectionView(mainViewModel);
 
         BindingContext = mainViewModel;
-        mapControl.Bind(MapControl.MapProperty, nameof(MainViewModel.Map));
+        _mapControl.Bind(MapControl.MapProperty, nameof(MainViewModel.Map));
+
+        if (_mapControl.Map is Map map)
+            map.Navigator.RotationLock = false;
 
         // Workaround. Samples need the MapControl in the current setup.
-        mainViewModel.MapControl = mapControl;
+        mainViewModel.MapControl = _mapControl;
 
         Content = new Grid
         {
@@ -36,19 +37,19 @@ public sealed class MainPage : ContentPage, IDisposable
             {
                 new ScrollView()
                 {
-                    WidthRequest = menuItemWidth + 40,
+                    WidthRequest = _menuItemWidth + 40,
                     Content = new VerticalStackLayout()
                     {
-                        WidthRequest = menuItemWidth + 20,
+                        WidthRequest = _menuItemWidth + 20,
                         Spacing = 20,
                         Children =
                         {
-                            categoryPicker,
-                            collectionView
+                            _categoryPicker,
+                            _collectionView
                         }
                     }
                 }.Column(0).Padding(10),
-                mapControl.Column(1)
+                _mapControl.Column(1)
             }
         };
     }
@@ -57,7 +58,7 @@ public sealed class MainPage : ContentPage, IDisposable
     {
         return new Picker
         {
-            WidthRequest = menuItemWidth,
+            WidthRequest = _menuItemWidth,
             ItemsSource = mainViewModel.Categories
         }
         .Bind(Picker.SelectedItemProperty, nameof(mainViewModel.SelectedCategory))
@@ -83,7 +84,7 @@ public sealed class MainPage : ContentPage, IDisposable
         {
             Padding = 10,
             Margin = new Thickness(2, 2),
-            WidthRequest = menuItemWidth,
+            WidthRequest = _menuItemWidth,
             Content = new Label
             {
             }.Bind(Label.TextProperty, nameof(ISample.Name))
@@ -92,6 +93,6 @@ public sealed class MainPage : ContentPage, IDisposable
 
     public void Dispose()
     {
-        mapControl.Dispose();
+        _mapControl.Dispose();
     }
 }

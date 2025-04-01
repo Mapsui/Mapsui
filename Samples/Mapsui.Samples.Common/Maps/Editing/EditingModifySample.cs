@@ -10,6 +10,6 @@ public class EditingModifySample : IMapControlSample
     public void Setup(IMapControl mapControl)
     {
         var editManager = EditingSample.InitEditMode(mapControl, EditMode.Modify);
-        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
+        mapControl.Map?.Navigator.ZoomToBox(editManager.GetGrownExtent());
     }
 }

@@ -167,7 +167,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
                 mapView?.MyLocationLayer.UpdateMyLocation(new Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {
-                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Map.Navigator.Viewport.Rotation ?? 0);
+                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Map?.Navigator.Viewport.Rotation ?? 0);
                 }
 
                 if (e.Speed != null)
@@ -184,7 +184,7 @@ public sealed partial class MapPage : ContentPage, IDisposable
 
     private void Compass_ReadingChanged(object? sender, CompassChangedEventArgs e)
     {
-        mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Map.Navigator.Viewport.Rotation, false);
+        mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Map?.Navigator.Viewport.Rotation ?? 0, false);
     }
 
     public void Dispose()

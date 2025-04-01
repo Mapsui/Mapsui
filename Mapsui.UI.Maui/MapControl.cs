@@ -180,7 +180,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                     if (OnPointerMoved(_positions.Values.ToArray(), isHovering))
                         return;
 
-                    _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+                    if (Map is Map map)
+                        _manipulationTracker.Manipulate(_positions.Values.ToArray(), map.Navigator.Manipulate);
                 }
 
                 RefreshGraphics();
@@ -246,7 +247,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private ScreenPosition GetScreenPosition(SKPoint point) => new ScreenPosition(point.X / PixelDensity, point.Y / PixelDensity);
 
     private void OnZoomInOrOut(int mouseWheelDelta, ScreenPosition currentMousePosition)
-        => Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
+        => Map?.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
 
     /// <summary>
     /// Public functions
