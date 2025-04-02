@@ -165,7 +165,7 @@ public partial class MapControl : ComponentBase, IMapControl
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An exception occurred in InitializingInteropAsync: {ex} ");
+            Console.WriteLine($"An exception occurred in InitializingInteropAsync: {ex}");
         }
     }
 

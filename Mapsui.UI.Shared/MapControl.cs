@@ -125,6 +125,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private void SharedConstructor()
     {
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
+        Map = new Map();
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
         _invalidateTimer = new (InvalidateTimerCallback, null, Timeout.Infinite, 16);
@@ -424,20 +425,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         mapControl.AfterSetMap((Map)newValue);
     }
 
-
     public Map Map
     {
-        get
-        {
-            if (GetValue(MapProperty) is not Map map)
-            {
-                _map ??= new DisposableWrapper<Map>(new Map(), true);
-                map = _map.WrappedObject;
-                SetValue(MapProperty, map);
-            }
-
-            return map;
-        }
+        get => (Map)GetValue(MapProperty);
         set => SetValue(MapProperty, value);
     }
 
@@ -548,10 +538,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void SetViewportSize()
     {
-        var hadSize = Map.Navigator.Viewport.HasSize();
-        Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
-        if (!hadSize && Map.Navigator.Viewport.HasSize()) Map.OnViewportSizeInitialized();
-        Refresh();
+        if (Map is Map map)
+        {
+            var hadSize = map.Navigator.Viewport.HasSize();
+            map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+            if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
+            Refresh();
+        }
     }
 
     private void CommonDispose(bool disposing)
