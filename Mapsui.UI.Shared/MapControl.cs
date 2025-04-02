@@ -125,6 +125,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private void SharedConstructor()
     {
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
+        Map = new Map();
         // Create timer for invalidating the control
         _invalidateTimer?.Dispose();
         _invalidateTimer = new (InvalidateTimerCallback, null, Timeout.Infinite, 16);
@@ -423,7 +424,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         var mapControl = (MapControl)bindable;
         mapControl.AfterSetMap((Map)newValue);
     }
-    
+
     public Map Map
     {
         get => (Map)GetValue(MapProperty);
