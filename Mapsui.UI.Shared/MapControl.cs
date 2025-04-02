@@ -537,10 +537,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void SetViewportSize()
     {
-        var hadSize = Map.Navigator.Viewport.HasSize();
-        Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
-        if (!hadSize && Map.Navigator.Viewport.HasSize()) Map.OnViewportSizeInitialized();
-        Refresh();
+        if (Map is Map map)
+        {
+            var hadSize = map.Navigator.Viewport.HasSize();
+            map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+            if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
+            Refresh();
+        }
     }
 
     private void CommonDispose(bool disposing)
