@@ -163,7 +163,7 @@ public partial class MapControl : ComponentBase, IMapControl
             await Interop.DisableTouchAsync(_elementId);
             _pixelDensityFromInterop = await Interop.GetPixelDensityAsync();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Console.WriteLine("An exception occurred in InitializingInteropAsync");
         }
