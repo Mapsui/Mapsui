@@ -213,14 +213,13 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
                 mapView?.MyLocationLayer.UpdateMyLocation(new Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {
-                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Map.Navigator.Viewport.Rotation ?? 0);
+                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Map?.Navigator.Viewport.Rotation ?? 0);
                 }
 
                 if (e.Speed != null)
                 {
                     mapView?.MyLocationLayer.UpdateMySpeed(e.Speed.Value);
                 }
-
             })!;
         }
         catch (Exception ex)

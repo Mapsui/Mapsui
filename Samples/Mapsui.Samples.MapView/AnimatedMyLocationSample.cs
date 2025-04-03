@@ -30,7 +30,7 @@ public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
         _mapView.MyLocationFollow = true;
 
         _mapView.MyLocationLayer.UpdateMyLocation(_newLocation);
-        _mapView.Map.Navigator.CenterOn(_newLocation.ToMapsui());
+        _mapView.Map?.Navigator.CenterOn(_newLocation.ToMapsui());
 
         Catch.TaskRun(RunTimerAsync);
     }

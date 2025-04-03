@@ -116,7 +116,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             _positions[e.Pointer.Id] = position;
             if (OnPointerMoved(_positions.Values.ToArray(), isHovering))
                 return;
-            _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+            if (Map is Map map)
+                _manipulationTracker.Manipulate(_positions.Values.ToArray(), map.Navigator.Manipulate);
         }
         RefreshGraphics();
     }
@@ -142,7 +143,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         {
             var stepSize = ContinuousMouseWheelZoomStepSize;
             var scaleFactor = Math.Pow(2, e.Delta.Y > 0 ? -stepSize : stepSize);
-            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.GetPosition(this).ToScreenPosition());
+            Map?.Navigator.MouseWheelZoomContinuous(scaleFactor, e.GetPosition(this).ToScreenPosition());
         }
         else
         {
@@ -154,7 +155,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             int delta = Math.Sign(_mouseWheelPos);
             _mouseWheelPos -= delta;
 
-            Map.Navigator.MouseWheelZoom(delta, e.GetPosition(this).ToScreenPosition());
+            Map?.Navigator.MouseWheelZoom(delta, e.GetPosition(this).ToScreenPosition());
         }
     }
 
@@ -249,7 +250,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         if (disposing)
         {
             _drawOperation?.Dispose();
-            Map?.Dispose();
         }
 
         CommonDispose(disposing);

@@ -27,8 +27,7 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
-        MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-        MapControl.Map.Navigator.RotationLock = false;
+        MapControl.Map?.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
@@ -91,6 +90,6 @@ public sealed partial class MainWindow : Window
     private void RotationSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-        MapControl.Map.Navigator.RotateTo(percent * 360);
+        MapControl.Map?.Navigator.RotateTo(percent * 360);
     }
 }
