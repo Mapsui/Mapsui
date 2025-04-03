@@ -11,6 +11,7 @@ namespace Mapsui.UI.Blazor;
 
 public partial class MapControl : ComponentBase, IMapControl
 {
+    public ScreenPosition? _lastMovePosition; // Workaround for missing touch position on touch-up.
     protected SKCanvasView? _viewCpu;
     protected SKGLView? _viewGpu;
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
@@ -20,7 +21,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
-    public ScreenPosition? _lastMovePosition; // Workaround for missing touch position on touch-up.
+    private bool _firstTime = true;
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
@@ -126,17 +127,20 @@ public partial class MapControl : ComponentBase, IMapControl
 
     protected void OnMouseWheel(WheelEventArgs e)
     {
+        if (Map is not Map map)
+            return;
+
         if (UseContinuousMouseWheelZoom)
         {
             var stepSize = ContinuousMouseWheelZoomStepSize;
             var scaleFactor = Math.Pow(2, e.DeltaY > 0 ? stepSize : -stepSize);
-            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToScreenPosition(_clientRect));
+            map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToScreenPosition(_clientRect));
         }
         else
         {
             var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
             var mousePosition = e.ToScreenPosition(_clientRect);
-            Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
+            map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
         }
     }
 
@@ -205,6 +209,9 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
+            if (Map is not Map map)
+                return;
+
             var isHovering = !IsMouseButtonPressed(e);
             var position = e.ToScreenPosition(_clientRect);
 
@@ -212,7 +219,7 @@ public partial class MapControl : ComponentBase, IMapControl
                 return;
 
             if (!isHovering)
-                _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
+                _manipulationTracker.Manipulate([position], map.Navigator.Manipulate);
         });
     }
 
@@ -278,6 +285,9 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
+            if (Map is not Map map)
+                return;
+
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
             if (positions.Length == 1)
                 _lastMovePosition = positions[0]; // Workaround for missing touch-up location.
@@ -286,7 +296,7 @@ public partial class MapControl : ComponentBase, IMapControl
                 return;
 
 
-            _manipulationTracker.Manipulate(positions.ToArray(), Map.Navigator.Manipulate);
+            _manipulationTracker.Manipulate(positions.ToArray(), map.Navigator.Manipulate);
         });
     }
 
