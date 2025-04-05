@@ -41,7 +41,7 @@ public abstract class BaseFeature : IFeature
 
     private void Copy(BaseFeature baseFeature)
     {
-        Styles = baseFeature.Styles.ToArray();
+        Styles = baseFeature.Styles.ToList();
         foreach (var field in baseFeature.Fields)
             this[field] = baseFeature[field];
     }
