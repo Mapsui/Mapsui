@@ -41,7 +41,7 @@ public abstract class BaseFeature : IFeature
 
     private void Copy(BaseFeature baseFeature)
     {
-        Styles = baseFeature.Styles.ToList();
+        Styles = baseFeature.Styles.ToList(); // Styles is an ICollection, we need ToList instead of ToArray to prevent a NotSupportedException on Styles.Clear();
         foreach (var field in baseFeature.Fields)
             this[field] = baseFeature[field];
     }
