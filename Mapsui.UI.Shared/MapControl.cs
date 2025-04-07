@@ -370,7 +370,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(Map_DataChanged)}", exception);
         }
     }
-    // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
     private void Map_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
@@ -556,10 +555,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </summary>
     private void TrySetViewportSize()
     {
-        if (Map is Map map && Dimensions is Dimensions display)
+        if (Map is Map map && Dimensions is Dimensions dimensions)
         {
             var hadSize = map.Navigator.Viewport.HasSize();
-            map.Navigator.SetSize(display.Width, display.Height);
+            map.Navigator.SetSize(dimensions.Width, dimensions.Height);
             if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
             Refresh();
         }
