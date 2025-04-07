@@ -3,9 +3,8 @@ using AndroidX.AppCompat.App;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.UI.Android;
-using Mapsui.Samples.Common.Maps.DataFormats;
 using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.UI.Android;
 
 namespace Mapsui.Samples.Droid;
 
