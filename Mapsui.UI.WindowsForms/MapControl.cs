@@ -74,7 +74,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlResize(object? sender, EventArgs e)
     {
-        SetViewportSize();
+        TrySetViewportSize();
     }
 
     private double ViewportWidth => Width;
@@ -101,10 +101,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void PaintSurface(SKCanvas canvas)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
 
         CommonDrawControl(canvas);
     }
@@ -170,9 +170,11 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         return new ScreenPosition(position.X, position.Y);
     }
 
-    public double GetPixelDensity()
+    public float? GetPixelDensityFromFramework()
     {
-        return (UseGPU ? _glView!.CanvasSize.Width : _canvasView!.CanvasSize.Width) / Width;
+        if (Width <= 0)
+            return null;
+        return (float)(UseGPU ? _glView!.CanvasSize.Width : _canvasView!.CanvasSize.Width) / Width;
     }
 
     protected override void Dispose(bool disposing)

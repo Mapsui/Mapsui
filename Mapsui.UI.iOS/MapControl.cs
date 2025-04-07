@@ -112,21 +112,21 @@ public partial class MapControl : UIView, IMapControl
 
     private void OnPaintSurface(object? sender, SKPaintMetalSurfaceEventArgs args)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
         var canvas = args.Surface.Canvas;
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
         CommonDrawControl(canvas);
     }
 
     private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
         var canvas = args.Surface.Canvas;
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
         CommonDrawControl(canvas);
     }
 
@@ -207,7 +207,7 @@ public partial class MapControl : UIView, IMapControl
             }
 
             base.Frame = value;
-            SetViewportSize();
+            TrySetViewportSize();
             OnPropertyChanged();
         }
     }
@@ -218,7 +218,7 @@ public partial class MapControl : UIView, IMapControl
         if (_metalCanvas == null || _canvas == null) return;
 
         base.LayoutMarginsDidChange();
-        SetViewportSize();
+        TrySetViewportSize();
     }
 
     public void OpenInBrowser(string url)
@@ -272,12 +272,12 @@ public partial class MapControl : UIView, IMapControl
         }
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensityFromFramework()
     {
         InitializeCanvas();
         return UseGPU
-            ? (double)_metalCanvas!.ContentScaleFactor
-            : (double)_canvas!.ContentScaleFactor;
+            ? (float)_metalCanvas!.ContentScaleFactor
+            : (float)_canvas!.ContentScaleFactor;
     }
 
     private static bool GetShiftPressed() => false;

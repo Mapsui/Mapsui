@@ -78,8 +78,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         switch (change.Property.Name)
         {
             case nameof(Bounds):
-                // Size changed
-                MapControlSizeChanged();
+                TrySetViewportSize();
                 break;
         }
     }
@@ -177,12 +176,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlInitialized(object? sender, EventArgs eventArgs)
     {
-        SetViewportSize();
-    }
-
-    private void MapControlSizeChanged()
-    {
-        SetViewportSize();
+        TrySetViewportSize();
     }
 
     private static void RunOnUIThread(Action action)
@@ -207,9 +201,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private double ViewportWidth => Bounds.Width;
     private double ViewportHeight => Bounds.Height;
 
-    private double GetPixelDensity()
+    public float? GetPixelDensityFromFramework()
     {
-        return VisualRoot?.RenderScaling ?? 1d;
+        return (float?)VisualRoot?.RenderScaling;
     }
 
     private sealed class MapsuiCustomDrawOperation(Rect bounds, MapControl mapControl) : ICustomDrawOperation

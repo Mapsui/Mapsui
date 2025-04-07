@@ -84,7 +84,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         _size = new Size(Width, Height);
         ClearTouchState();
-        SetViewportSize();
+        TrySetViewportSize();
     }
 
     private static void InitTouchesReset(MapControl mapControl)
@@ -152,7 +152,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Catch.Exceptions(() =>
         {
             e.Handled = true;
-            var position = GetScreenPosition(e.Location);
+            if (GetPixelDensity() is not float pixelDensity)
+                return;
+            var position = GetScreenPosition(e.Location, pixelDensity);
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
@@ -235,15 +237,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void PaintSurface(SKCanvas canvas)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
 
         CommonDrawControl(canvas);
     }
 
-    private ScreenPosition GetScreenPosition(SKPoint point) => new ScreenPosition(point.X / PixelDensity, point.Y / PixelDensity);
+    private ScreenPosition GetScreenPosition(SKPoint point, float pixelDensity) =>
+        new(point.X / pixelDensity, point.Y / pixelDensity);
 
     private void OnZoomInOrOut(int mouseWheelDelta, ScreenPosition currentMousePosition)
         => Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
@@ -309,13 +312,14 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Dispose(false);
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensityFromFramework()
     {
-        if (Width <= 0) return 0;
+        if (Width <= 0)
+            return null;
 
         return UseGPU
-            ? _glView!.CanvasSize.Width / Width
-            : _canvasView!.CanvasSize.Width / Width;
+            ? (float)(_glView!.CanvasSize.Width / Width)
+            : (float)(_canvasView!.CanvasSize.Width / Width);
     }
 
     private static bool GetShiftPressed() => false; // Work in progress: https://github.com/dotnet/maui/issues/16202

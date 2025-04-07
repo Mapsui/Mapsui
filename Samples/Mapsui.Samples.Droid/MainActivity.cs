@@ -30,7 +30,6 @@ public class MainActivity : AppCompatActivity
         SetSupportActionBar(toolbar);
 
         _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol) ?? throw new NullReferenceException();
-        _mapControl.Map = MbTilesSample.CreateMap();
         _mapControl.Map.Navigator.RotationLock = true;
 
         var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Mapsui.Layers;
 using Mapsui.Manipulations;
 using Mapsui.Rendering;
@@ -25,9 +26,15 @@ public interface IMapControl : IDisposable
     void OpenInBrowser(string url);  // Todo: Perhaps remove. This is only to force the platform specific implementation
 
     /// <summary>
-    /// The number of pixel per device independent unit
+    /// Returns the number of pixels per device independent unit
     /// </summary>
-    float PixelDensity { get; }
+    float? GetPixelDensity();
+
+    /// <summary>
+    /// Returns the number of pixels per device independent unit from the UI framework.
+    /// </summary>
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    float? GetPixelDensityFromFramework();
 
     /// <summary>
     /// Converts coordinates in pixels to device independent units (or DIP or DP).

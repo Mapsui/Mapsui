@@ -16,7 +16,7 @@ public partial class MapControl : ComponentBase, IMapControl
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
-    private double _pixelDensityFromInterop = 1;
+    private float? _pixelDensityFromInterop;
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
@@ -119,7 +119,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(async () =>
         {
-            SetViewportSize();
+            TrySetViewportSize();
             await InitializingInteropAsync();
         });
     }
@@ -161,7 +161,7 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             await Interop.DisableMouseWheelAsync(_elementId);
             await Interop.DisableTouchAsync(_elementId);
-            _pixelDensityFromInterop = await Interop.GetPixelDensityAsync();
+            _pixelDensityFromInterop = (float)await Interop.GetPixelDensityAsync();
         }
         catch (Exception ex)
         {
@@ -171,7 +171,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
     private void OnSizeChanged()
     {
-        SetViewportSize();
+        TrySetViewportSize();
         _ = UpdateBoundingRectAsync();
     }
 
@@ -227,7 +227,7 @@ public partial class MapControl : ComponentBase, IMapControl
         });
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensityFromFramework()
     {
         return _pixelDensityFromInterop;
     }

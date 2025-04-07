@@ -64,8 +64,7 @@ public class RenderToBitmapPerformance
         mapControl.Map = CreateMap(renderFormat);
 
         // fetch data first time
-        var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS);
-        mapControl.Map.RefreshData(fetchInfo);
+        mapControl.Map.RefreshData();
         mapControl.Map.Layers.WaitForLoadingAsync().Wait();
 
         return mapControl;

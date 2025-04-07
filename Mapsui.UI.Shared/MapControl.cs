@@ -72,6 +72,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
     private static bool _firstRender = true;
+    private float? _pixelDensity; // Pixel density has to be retrieved from the UI framework and is not know during the startup phase.
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -89,8 +90,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     [DefaultValue(true)] // Fix WOF1000 Error
 #endif
     public bool UseFling { get; set; } = true;
-
-    public float PixelDensity => (float)GetPixelDensity();
 
     /// <summary>
     /// Renderer that is used from this MapControl
@@ -171,6 +170,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         // End drawing
         _drawing = false;
         _invalidated = false;
+    }
+
+    public float? GetPixelDensity()
+    {
+        return (_pixelDensity is null)
+            ? _pixelDensity = GetPixelDensityFromFramework() // Try to get it from the UI framework as long as it is zero.
+            : _pixelDensity;
     }
 
     private void InvalidateTimerCallback(object? state)
@@ -478,9 +484,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void AfterSetMap(Map? map)
     {
-        if (map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
+        if (map is null) 
+            return; // Although the Map property can not null the map argument can null during initializing and binding.
 
-        if (HasSize())
+        if (HasSize() && GetPixelDensity() is not null)
             map.Navigator.SetSize(ViewportWidth, ViewportHeight);
         SubscribeToMapEvents(map);
         Refresh();
@@ -489,15 +496,21 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <inheritdoc />
     public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
     {
+        if (GetPixelDensity() is not float pixelDensity)
+            throw new Exception("PixelDensity is not initialized");
+
         return new MPoint(
-            coordinateInDeviceIndependentUnits.X * PixelDensity,
-            coordinateInDeviceIndependentUnits.Y * PixelDensity);
+            coordinateInDeviceIndependentUnits.X * pixelDensity,
+            coordinateInDeviceIndependentUnits.Y * pixelDensity);
     }
 
     /// <inheritdoc />
     public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
     {
-        return new MPoint(coordinateInPixels.X / PixelDensity, coordinateInPixels.Y / PixelDensity);
+        if (GetPixelDensity() is not float pixelDensity)
+            throw new Exception("PixelDensity is not initialized");
+
+        return new MPoint(coordinateInPixels.X / pixelDensity, coordinateInPixels.Y / pixelDensity);
     }
 
     /// <summary>
@@ -517,7 +530,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
-        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity, renderFormat: renderFormat, quality: quality);
+        if (GetPixelDensity() is not float pixelDensity)
+            throw new Exception("PixelDensity is not initialized");
+
+        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality);
         return stream.ToArray();
     }
 
@@ -536,8 +552,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
     }
 
-    private void SetViewportSize()
+    private void TrySetViewportSize()
     {
+        if (GetPixelDensity() is null)
+            return;
+        if (!HasSize())
+            return;
+
         if (Map is Map map)
         {
             var hadSize = map.Navigator.Viewport.HasSize();
@@ -669,6 +690,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (screenPositions.Length != 1)
             return false;
+        if (GetPixelDensity() is not float pixelDensity)
+            return false;
 
         var handled = false;
         var screenPosition = screenPositions[0];
@@ -677,7 +700,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             handled = true; // Set to handled but still handle tap in the next line
         if (!handled && OnMapPointerReleased(screenPosition, worldPosition))
             handled = true;
-        if (_tapGestureTracker.TapIfNeeded(screenPositions[0], MaxTapGestureMovement * PixelDensity, OnTapped))
+        if (_tapGestureTracker.TapIfNeeded(screenPositions[0], MaxTapGestureMovement * pixelDensity, OnTapped))
             handled = true;
         if (UseFling)
             _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));

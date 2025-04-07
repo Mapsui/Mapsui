@@ -84,7 +84,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlLoaded(object sender, RoutedEventArgs e)
     {
-        SetViewportSize();
+        TrySetViewportSize();
         Focusable = true;
     }
 
@@ -102,7 +102,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         ViewportHeight = ActualHeight;
 
         Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
-        SetViewportSize();
+        TrySetViewportSize();
     }
 
     private void MapControlMouseLeave(object sender, MouseEventArgs e)
@@ -213,19 +213,20 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void SKElementOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
+
         var canvas = args.Surface.Canvas;
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
         CommonDrawControl(canvas);
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensityFromFramework()
     {
-        var presentationSource = PresentationSource.FromVisual(this)
-            ?? throw new Exception("PresentationSource is null");
-        var compositionTarget = presentationSource.CompositionTarget
-            ?? throw new Exception("CompositionTarget is null");
+        if (PresentationSource.FromVisual(this) is not PresentationSource presentationSource)
+            return null;
+        if (presentationSource.CompositionTarget is not CompositionTarget compositionTarget)
+            return null;
 
         var matrix = compositionTarget.TransformToDevice;
 
@@ -234,7 +235,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (dpiX != dpiY) throw new ArgumentException();
 
-        return dpiX;
+        return (float?)dpiX;
     }
 
     protected virtual void Dispose(bool disposing)
