@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using Mapsui.Layers;
 using Mapsui.Manipulations;
 using Mapsui.Rendering;
@@ -30,24 +29,10 @@ public interface IMapControl : IDisposable
     /// </summary>
     float? GetPixelDensity();
 
-    /// <summary>
-    /// Returns the number of pixels per device independent unit from the UI framework.
-    /// </summary>
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    float? GetPixelDensityFromFramework();
-
-    /// <summary>
-    /// Converts coordinates in pixels to device independent units (or DIP or DP).
-    /// </summary>
-    /// <param name="coordinateInPixels">Coordinate in pixels</param>
-    /// <returns>Coordinate in device independent units (or DIP or DP)</returns>
+    [Obsolete("Use MapControl.Dimensions.ToCoordinateInRawPixels instead", true)]
     MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels);
 
-    /// <summary>
-    /// Converts coordinates in device independent units (or DIP or DP) to pixels.
-    /// </summary>
-    /// <param name="coordinateInDeviceIndependentUnits">Coordinate in device independent units (or DIP or DP)</param>
-    /// <returns>Coordinate in pixels</returns>
+    [Obsolete("Use MapControl.Dimensions.ToCoordinateInDeviceIndependentUnits", true)]
     MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits);
 
     /// <summary>

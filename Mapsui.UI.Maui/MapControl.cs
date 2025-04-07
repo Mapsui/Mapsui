@@ -12,7 +12,6 @@ using System.Linq;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
-using Microsoft.Maui.Graphics;
 
 namespace Mapsui.UI.Maui;
 
@@ -26,15 +25,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
     private readonly ConcurrentDictionary<long, ScreenPosition> _positions = new();
-    private Size _size;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
     private Page? _page;
     private Element? _element;
-
-    private double ViewportWidth => _size.Width; // Used in shared code. Getting the this.Width too early can cause malfunctioning.
-    private double ViewportHeight => _size.Height; // Used in shared code. Getting the this.Height too early can cause malfunctioning.
-
 
     public MapControl()
     {
@@ -82,9 +76,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void View_SizeChanged(object? sender, EventArgs e)
     {
-        _size = new Size(Width, Height);
         ClearTouchState();
-        TrySetViewportSize();
+        TrySetDimensions(Width, Height);
     }
 
     private static void InitTouchesReset(MapControl mapControl)
@@ -312,7 +305,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Dispose(false);
     }
 
-    public float? GetPixelDensityFromFramework()
+    public float? GetPixelDensity()
     {
         if (Width <= 0)
             return null;

@@ -107,7 +107,7 @@ public partial class MapControl : UIView, IMapControl
         MultipleTouchEnabled = true;
         UserInteractionEnabled = true;
 
-        Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+        TrySetDimensions(GetWidth(), GetHeight());
     }
 
     private void OnPaintSurface(object? sender, SKPaintMetalSurfaceEventArgs args)
@@ -207,7 +207,7 @@ public partial class MapControl : UIView, IMapControl
             }
 
             base.Frame = value;
-            TrySetViewportSize();
+            TrySetDimensions(GetWidth(), GetHeight());
             OnPropertyChanged();
         }
     }
@@ -218,7 +218,7 @@ public partial class MapControl : UIView, IMapControl
         if (_metalCanvas == null || _canvas == null) return;
 
         base.LayoutMarginsDidChange();
-        TrySetViewportSize();
+        TrySetDimensions(GetWidth(), GetHeight());
     }
 
     public void OpenInBrowser(string url)
@@ -250,29 +250,23 @@ public partial class MapControl : UIView, IMapControl
         CommonDispose(disposing);
     }
 
-    private double ViewportWidth
+    private double GetWidth()
     {
-        get
-        {
-            InitializeCanvas();
-            return UseGPU
-                ? _metalCanvas!.Frame.Width
-                : _canvas!.Frame.Width;
-        }
+        InitializeCanvas();
+        return UseGPU
+            ? _metalCanvas!.Frame.Width
+            : _canvas!.Frame.Width;
     }
 
-    private double ViewportHeight
+    private double GetHeight()
     {
-        get
-        {
-            InitializeCanvas();
-            return UseGPU
-                ? _metalCanvas!.Frame.Height
-                : _canvas!.Frame.Height;
-        }
+        InitializeCanvas();
+        return UseGPU
+            ? _metalCanvas!.Frame.Height
+            : _canvas!.Frame.Height;
     }
 
-    public float? GetPixelDensityFromFramework()
+    public float? GetPixelDensity()
     {
         InitializeCanvas();
         return UseGPU

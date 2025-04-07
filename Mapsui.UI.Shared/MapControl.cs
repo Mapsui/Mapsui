@@ -72,7 +72,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
     private static bool _firstRender = true;
-    private float? _pixelDensity; // Pixel density has to be retrieved from the UI framework and is not know during the startup phase.
+
+    public Dimensions? Dimensions;
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -170,13 +171,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         // End drawing
         _drawing = false;
         _invalidated = false;
-    }
-
-    public float? GetPixelDensity()
-    {
-        return (_pixelDensity is null)
-            ? _pixelDensity = GetPixelDensityFromFramework() // Try to get it from the UI framework as long as it is zero.
-            : _pixelDensity;
     }
 
     private void InvalidateTimerCallback(object? state)
@@ -484,33 +478,23 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void AfterSetMap(Map? map)
     {
-        if (map is null) 
+        if (map is null)
             return; // Although the Map property can not null the map argument can null during initializing and binding.
-
-        if (HasSize() && GetPixelDensity() is not null)
-            map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+        TrySetViewportSize();
         SubscribeToMapEvents(map);
         Refresh();
     }
 
-    /// <inheritdoc />
+    [Obsolete("Use MapControl.Dimensions.ToCoordinateInRawPixels instead", true)]
     public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
     {
-        if (GetPixelDensity() is not float pixelDensity)
-            throw new Exception("PixelDensity is not initialized");
-
-        return new MPoint(
-            coordinateInDeviceIndependentUnits.X * pixelDensity,
-            coordinateInDeviceIndependentUnits.Y * pixelDensity);
+        throw new NotImplementedException();
     }
 
-    /// <inheritdoc />
+    [Obsolete("Use MapControl.Dimensions.ToCoordinateInDeviceIndependentUnits", true)]
     public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
     {
-        if (GetPixelDensity() is not float pixelDensity)
-            throw new Exception("PixelDensity is not initialized");
-
-        return new MPoint(coordinateInPixels.X / pixelDensity, coordinateInPixels.Y / pixelDensity);
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -552,17 +536,30 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
     }
 
-    private void TrySetViewportSize()
+    private void TrySetDimensions(double width, double height)
     {
-        if (GetPixelDensity() is null)
+        if (width <= 0)
             return;
-        if (!HasSize())
+        if (height <= 0)
             return;
 
-        if (Map is Map map)
+        if (GetPixelDensity() is float pixelDensity)
+        {
+            Dimensions = new Dimensions(width, height, pixelDensity);
+        }
+
+        TrySetViewportSize();
+    }
+
+    /// <summary>
+    /// Tries to set the size of the MapControl.Map.Viewport.
+    /// </summary>
+    private void TrySetViewportSize()
+    {
+        if (Map is Map map && Dimensions is Dimensions display)
         {
             var hadSize = map.Navigator.Viewport.HasSize();
-            map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+            map.Navigator.SetSize(display.Width, display.Height);
             if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
             Refresh();
         }
@@ -760,6 +757,4 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         return eventArgs.Handled;
     }
-
-    private bool HasSize() => ViewportWidth > 0 && ViewportHeight > 0;
 }

@@ -74,11 +74,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlResize(object? sender, EventArgs e)
     {
-        TrySetViewportSize();
+        TrySetDimensions(Width, Height);
     }
-
-    private double ViewportWidth => Width;
-    private double ViewportHeight => Height;
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
     {
@@ -170,7 +167,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         return new ScreenPosition(position.X, position.Y);
     }
 
-    public float? GetPixelDensityFromFramework()
+    public float? GetPixelDensity()
     {
         if (Width <= 0)
             return null;

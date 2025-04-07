@@ -207,7 +207,7 @@ public class Map : INotifyPropertyChanged, IDisposable
 
     public void RefreshData(Viewport viewport)
     {
-        RefreshData(viewport: viewport);
+        RefreshData(ChangeType.Discrete, viewport);
     }
 
     /// <summary>

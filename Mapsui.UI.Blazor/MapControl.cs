@@ -109,7 +109,7 @@ public partial class MapControl : ComponentBase, IMapControl
         if (_canvasSize?.Width != info.Width || _canvasSize?.Height != info.Height)
         {
             _canvasSize = info;
-            OnSizeChanged();
+            OnSizeChanged(info);
         }
 
         CommonDrawControl(canvas);
@@ -119,7 +119,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(async () =>
         {
-            TrySetViewportSize();
+            TrySetDimensions(_canvasSize?.Width ?? 0, _canvasSize?.Height ?? 0);
             await InitializingInteropAsync();
         });
     }
@@ -169,9 +169,9 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    private void OnSizeChanged()
+    private void OnSizeChanged(SKImageInfo skImageInfo)
     {
-        TrySetViewportSize();
+        TrySetDimensions(skImageInfo.Width, skImageInfo.Height);
         _ = UpdateBoundingRectAsync();
     }
 
@@ -227,7 +227,7 @@ public partial class MapControl : ComponentBase, IMapControl
         });
     }
 
-    public float? GetPixelDensityFromFramework()
+    public float? GetPixelDensity()
     {
         return _pixelDensityFromInterop;
     }
@@ -245,9 +245,6 @@ public partial class MapControl : ComponentBase, IMapControl
             CommonDispose(true);
         }
     }
-
-    private double ViewportWidth => _canvasSize?.Width ?? 0;
-    private double ViewportHeight => _canvasSize?.Height ?? 0;
 
     public string? Cursor { get; set; }
 

@@ -40,15 +40,13 @@ public partial class MapControl : ViewGroup, IMapControl
 
     private void LocalConstructor()
     {
-        _invalidate = () => { RunOnUIThread(RefreshGraphicsWithTryCatch); };
+        _invalidate = () => RunOnUIThread(RefreshGraphicsWithTryCatch);
 
         SetBackgroundColor(Color.Transparent);
         _canvas?.Dispose();
         _canvas = RenderMode == SkiaRenderMode.Software ? StartSoftwareRenderMode() : StartHardwareRenderMode();
         _mainLooperHandler?.Dispose();
         _mainLooperHandler = new Handler(Looper.MainLooper!);
-
-        TrySetViewportSize();
 
         // Pointer events
         Touch += MapControl_Touch;
@@ -95,7 +93,13 @@ public partial class MapControl : ViewGroup, IMapControl
     protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
     {
         base.OnSizeChanged(width, height, oldWidth, oldHeight);
-        TrySetViewportSize();
+        if (GetPixelDensity() is float pixelDensity)
+        {
+            // In android the width and height are in pixels. The MapControl needs the size in device independent units.
+            TrySetDimensions(
+                ToDeviceIndependentUnits(width, pixelDensity),
+                ToDeviceIndependentUnits(height, pixelDensity));
+        }
     }
 
     private void RunOnUIThread(Action action)
@@ -193,10 +197,13 @@ public partial class MapControl : ViewGroup, IMapControl
         view.Left = l;
         view.Right = r;
 
-        ViewportWidth = ToDeviceIndependentUnits(view.Width);
-        ViewportHeight = ToDeviceIndependentUnits(view.Height);
-
-        TrySetViewportSize();
+        if (GetPixelDensity() is float pixelDensity)
+        {
+            // In android the width and height are in pixels. The MapControl needs the size in device independent units.
+            TrySetDimensions(
+                ToDeviceIndependentUnits(view.Width, pixelDensity),
+                ToDeviceIndependentUnits(view.Height, pixelDensity));
+        }
 
         Refresh();
     }
@@ -227,22 +234,14 @@ public partial class MapControl : ViewGroup, IMapControl
         base.Dispose(disposing);
     }
 
-    private double ViewportWidth { get; set; }
-    private double ViewportHeight { get; set; }
-
     /// <summary>
     /// In native Android touch positions are in pixels whereas the canvas needs
     /// to be drawn in device independent units (otherwise labels on raster tiles will be unreadable
     /// and symbols will be too small). This method converts pixels to device independent units.
     /// </summary>
     /// <returns>The pixels given as input translated to device independent units.</returns>
-    private double ToDeviceIndependentUnits(int pixelCoordinate)
-    {
-        if (GetPixelDensity() is not float pixelDensity)
-            throw new Exception("PixelDensity is not initialized");
-
-        return pixelCoordinate / pixelDensity;
-    }
+    private static double ToDeviceIndependentUnits(int pixelCoordinate, float pixelDensity) =>
+        pixelCoordinate / pixelDensity;
 
     private SKCanvasView StartSoftwareRenderMode()
     {
@@ -280,7 +279,7 @@ public partial class MapControl : ViewGroup, IMapControl
         }
     }
 
-    public float? GetPixelDensityFromFramework()
+    public float? GetPixelDensity()
     {
         return Resources?.DisplayMetrics?.Density;
     }

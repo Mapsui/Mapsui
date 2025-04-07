@@ -196,16 +196,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlLoaded(object sender, RoutedEventArgs e)
     {
-        TrySetViewportSize();
+        TrySetDimensions(ActualWidth, ActualHeight);
     }
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
     {
         // Accessing ActualWidth and ActualHeight before SizeChange results in a com exception.
-        ViewportWidth = ActualWidth;
-        ViewportHeight = ActualHeight;
         Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
-        TrySetViewportSize();
+        TrySetDimensions(ActualWidth, ActualHeight);
     }
 
     private void RunOnUIThread(Action action)
@@ -275,10 +273,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
     }
 
-    private double ViewportWidth { get; set; }
-    private double ViewportHeight { get; set; }
-
-    public float? GetPixelDensityFromFramework()
+    public float? GetPixelDensity()
     {
         var canvasWidth = UseGPU ? _canvasGpu!.CanvasSize.Width : _canvas!.CanvasSize.Width;
         var canvasActualWidth = UseGPU ? _canvasGpu!.ActualWidth : _canvas!.ActualWidth;

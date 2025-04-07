@@ -78,7 +78,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         switch (change.Property.Name)
         {
             case nameof(Bounds):
-                TrySetViewportSize();
+                TrySetDimensions(Bounds.Width, Bounds.Height);
                 break;
         }
     }
@@ -176,7 +176,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlInitialized(object? sender, EventArgs eventArgs)
     {
-        TrySetViewportSize();
+        TrySetDimensions(Bounds.Width, Bounds.Height);
     }
 
     private static void RunOnUIThread(Action action)
@@ -198,10 +198,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         });
     }
 
-    private double ViewportWidth => Bounds.Width;
-    private double ViewportHeight => Bounds.Height;
-
-    public float? GetPixelDensityFromFramework()
+    public float? GetPixelDensity()
     {
         return (float?)VisualRoot?.RenderScaling;
     }

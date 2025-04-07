@@ -18,7 +18,12 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         SharedConstructor();
         _invalidate = () => RunOnUIThread(Invalidate);
-        SizeChanged += (s, e) => TrySetViewportSize();
+        SizeChanged += MapControl_SizeChanged; ;
+    }
+
+    private void MapControl_SizeChanged(object? sender, EventArgs e)
+    {
+        TrySetDimensions(Width, Height);
     }
 
     public Cursor MoveCursor { get; set; } = Cursors.Move;
@@ -26,8 +31,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
     public Keys MoveModifier { get; set; } = Keys.None;
     public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
     public Keys ZoomModifier { get; set; } = Keys.Control;
-    private double ViewportWidth => Width;
-    private double ViewportHeight => Height;
 
     public void OpenInBrowser(string url)
     {
@@ -77,7 +80,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnLoadComplete(e);
 
-        TrySetViewportSize();
+        TrySetDimensions(Width, Height);
         CanFocus = true;
     }
 
@@ -94,7 +97,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnSizeChanged(e);
 
-        TrySetViewportSize();
+        TrySetDimensions(Width, Height);
     }
 
     protected override void OnPaint(SKPaintEventArgs e)
@@ -134,7 +137,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         _shiftPressed = e.Shift;
     }
 
-    public float? GetPixelDensityFromFramework()
+    public float? GetPixelDensity()
     {
         var center = PointToScreen(Location + Size / 2);
         return Screen.FromPoint(center).LogicalPixelSize;
