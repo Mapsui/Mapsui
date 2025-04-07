@@ -33,7 +33,7 @@ public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
         return map;
     }
 
-    private static MemoryLayer CreateRandomPointLayer()
+    private static ObservableMemoryLayer<MPoint> CreateRandomPointLayer()
     {
         var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
         var observableCollection = new ObservableCollection<MPoint>();
