@@ -101,5 +101,6 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                 // do nothing
                 break;
         }
+        FeaturesWereModified();
     }
 }
