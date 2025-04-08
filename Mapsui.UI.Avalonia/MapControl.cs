@@ -71,11 +71,11 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
         => (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
 
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
-        base.OnPropertyChanged(change);
+        base.OnPropertyChanged(e);
 
-        switch (change.Property.Name)
+        switch (e.Property.Name)
         {
             case nameof(Bounds):
                 TrySetDimensions(Bounds.Width, Bounds.Height);
@@ -174,7 +174,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         context.Custom(_drawOperation);
     }
 
-    private void MapControlInitialized(object? sender, EventArgs eventArgs)
+    private void MapControlInitialized(object? s, EventArgs e)
     {
         TrySetDimensions(Bounds.Width, Bounds.Height);
     }
