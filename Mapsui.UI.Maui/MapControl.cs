@@ -49,11 +49,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             };
             // Events
             _glView.Touch += OnTouch;
-            _invalidate = () =>
-            {
-                // The line below sometimes has a null reference exception on application close.
-                RunOnUIThread(() => _glView.InvalidateSurface());
-            };
+            _invalidate = () => RunOnUIThread(() => _glView.InvalidateSurface()); // This line below sometimes has a null reference exception on application close.
             _glView.PaintSurface += OnGLPaintSurface;
             view = _glView;
         }
@@ -66,7 +62,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             };
             // Events
             _canvasView.Touch += OnTouch;
-            _invalidate = () => { RunOnUIThread(() => _canvasView.InvalidateSurface()); };
+            _invalidate = () => RunOnUIThread(() => _canvasView.InvalidateSurface());
             _canvasView.PaintSurface += OnPaintSurface;
             view = _canvasView;
         }
@@ -310,9 +306,15 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (Width <= 0)
             return null;
 
-        return UseGPU
-            ? (float)(_glView!.CanvasSize.Width / Width)
-            : (float)(_canvasView!.CanvasSize.Width / Width);
+        if (GetSkiaWidth() <= 0)
+            return null;
+
+        return (float)(GetSkiaWidth() / Width);
+    }
+
+    private double GetSkiaWidth()
+    {
+        return _glView?.CanvasSize.Width ?? _canvasView!.CanvasSize.Width;
     }
 
     private static bool GetShiftPressed() => false; // Work in progress: https://github.com/dotnet/maui/issues/16202
