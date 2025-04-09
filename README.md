@@ -8,6 +8,9 @@ Below is a table with the nuget packages for all the supported UI frameworks. Th
 ## Samples
 After going through the guickstart you should look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/samples/). Each sample has an accompaning 'source code' tab you can use to build your own version. 
 
+## Samples V5
+Mapsui V5  has it's own sample website [here](https://mapsui.com/v5/samples).
+
 ## Documentation
 The documentation can be found at [mapsui.com](https://mapsui.com).
 
