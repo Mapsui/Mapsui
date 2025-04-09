@@ -8,6 +8,9 @@ namespace Mapsui;
 /// </summary>
 public class MPoint : IEquatable<MPoint>
 {
+    public double X { get; set; }
+    public double Y { get; set; }
+
     public MPoint() : this(0, 0) { }
 
     public MPoint(double x, double y)
@@ -26,16 +29,6 @@ public class MPoint : IEquatable<MPoint>
     {
         X = point.X;
         Y = point.Y;
-    }
-
-    public double X { get; set; }
-
-    public double Y { get; set; }
-
-    // Creates an MRect with the point as both the minimum and maximum
-    public MRect GetExtent()
-    {
-        return new MRect(X, Y, X, Y);
     }
 
     public MPoint Copy()

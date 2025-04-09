@@ -10,13 +10,13 @@ public class PointFeature : BaseFeature, IFeature
     public PointFeature(PointFeature pointFeature) : base(pointFeature)
     {
         Point = new MPoint(pointFeature.Point);
-        Extent = Point.GetExtent();
+        Extent = new MRect(Point.X, Point.Y);
     }
 
     public PointFeature(MPoint point)
     {
         Point = point ?? throw new ArgumentNullException(nameof(point));
-        Extent = Point.GetExtent();
+        Extent = new MRect(Point.X, Point.Y);
     }
 
     public PointFeature(double x, double y) : this(new MPoint(x, y))
@@ -49,6 +49,8 @@ public class PointFeature : BaseFeature, IFeature
             Extent.Min.Y = y;
             Extent.Max.X = x;
             Extent.Max.Y = y;
+            Extent.Centroid.X = x;
+            Extent.Centroid.Y = y;
         });
     }
 
