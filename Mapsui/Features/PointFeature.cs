@@ -45,6 +45,10 @@ public class PointFeature : BaseFeature, IFeature
         {
             Point.X = x;
             Point.Y = y;
+            Extent.Min.X = x;
+            Extent.Min.Y = y;
+            Extent.Max.X = x;
+            Extent.Max.Y = y;
         });
     }
 
