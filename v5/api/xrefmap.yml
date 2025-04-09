@@ -9961,19 +9961,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.Equals
   nameWithType: MPoint.Equals
-- uid: Mapsui.MPoint.GetExtent
-  name: GetExtent()
-  href: pages/Mapsui.MPoint.html#Mapsui_MPoint_GetExtent
-  commentId: M:Mapsui.MPoint.GetExtent
-  fullName: Mapsui.MPoint.GetExtent()
-  nameWithType: MPoint.GetExtent()
-- uid: Mapsui.MPoint.GetExtent*
-  name: GetExtent
-  href: pages/Mapsui.MPoint.html#Mapsui_MPoint_GetExtent_
-  commentId: Overload:Mapsui.MPoint.GetExtent
-  isSpec: "True"
-  fullName: Mapsui.MPoint.GetExtent
-  nameWithType: MPoint.GetExtent
 - uid: Mapsui.MPoint.GetHashCode
   name: GetHashCode()
   href: pages/Mapsui.MPoint.html#Mapsui_MPoint_GetHashCode
