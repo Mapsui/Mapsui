@@ -29,7 +29,7 @@ public class RulerWidgetSample : ISample
         };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Widgets.Add(new RulerWidget() { IsActive = true }); // Active on startup. You need to set this value from a button in our own application.
-        map.Widgets.Add(CreateTextBox("Drag on the map to see the ruler widget in action."));
+        map.Widgets.Add(CreateInstructionTextBox("Drag on the map to see the ruler widget in action."));
         map.Widgets.Add(CreateToggleButton());
         return map;
     }
@@ -52,7 +52,7 @@ public class RulerWidgetSample : ISample
         }
     };
 
-    private static TextBoxWidget CreateTextBox(string text) => new()
+    private static TextBoxWidget CreateInstructionTextBox(string text) => new()
     {
         Text = text,
         TextSize = 16,
