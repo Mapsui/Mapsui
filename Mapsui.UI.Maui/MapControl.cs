@@ -49,7 +49,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             };
             // Events
             _glView.Touch += OnTouch;
-            _invalidate = () => RunOnUIThread(() => _glView.InvalidateSurface()); // This line below sometimes has a null reference exception on application close.
+            _invalidate = () => RunOnUIThread(() => _glView.InvalidateSurface()); // This line sometimes has a null reference exception on application close.
             _glView.PaintSurface += OnGLPaintSurface;
             view = _glView;
         }
