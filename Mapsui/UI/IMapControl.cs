@@ -36,7 +36,7 @@ public interface IMapControl : IDisposable
     /// <returns>Coordinate in device independent units (or DIP or DP)</returns>
     MPoint ToCoordinateInDeviceIndependentUnits(MPoint coordinateInPixels)
     {
-        var pixelDensity = GetPixelDensity() ?? throw new Exception("Pixel density is not known yet.");
+        var pixelDensity = GetPixelDensity() ?? throw new InvalidOperationException("Pixel density is not known yet.");
         return new MPoint(coordinateInPixels.X / pixelDensity, coordinateInPixels.Y / pixelDensity);
     }
 
@@ -47,7 +47,7 @@ public interface IMapControl : IDisposable
     /// <returns>Coordinate in raw pixels</returns>
     MPoint ToCoordinateInRawPixels(MPoint coordinateInDeviceIndependentUnits)
     {
-        var pixelDensity = GetPixelDensity() ?? throw new Exception("Pixel density is not known yet.");
+        var pixelDensity = GetPixelDensity() ?? throw new InvalidOperationException("Pixel density is not known yet.");
         return new MPoint(
             coordinateInDeviceIndependentUnits.X * pixelDensity,
             coordinateInDeviceIndependentUnits.Y * pixelDensity);
