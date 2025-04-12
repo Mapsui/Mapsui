@@ -218,7 +218,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             using var lease = leaseFeature.Lease();
             var canvas = lease.SkCanvas;
             canvas.Save();
-            mapControl.CommonDrawControl(canvas);
+            mapControl.SharedDraw(canvas);
             canvas.Restore();
         }
 
@@ -243,7 +243,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             Map?.Dispose();
         }
 
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     public virtual void Dispose()

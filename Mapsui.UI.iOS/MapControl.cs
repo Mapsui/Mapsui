@@ -117,7 +117,7 @@ public partial class MapControl : UIView, IMapControl
 
         var canvas = args.Surface.Canvas;
         canvas.Scale(pixelDensity, pixelDensity);
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
@@ -127,7 +127,7 @@ public partial class MapControl : UIView, IMapControl
 
         var canvas = args.Surface.Canvas;
         canvas.Scale(pixelDensity, pixelDensity);
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     public override void TouchesBegan(NSSet touches, UIEvent? e)
@@ -247,7 +247,7 @@ public partial class MapControl : UIView, IMapControl
             base.Dispose(disposing);
         }
 
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     private double GetWidth()

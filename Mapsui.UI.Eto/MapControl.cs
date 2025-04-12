@@ -107,7 +107,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         var canvas = e.Surface.Canvas;
         canvas.Scale(pixelDensity, pixelDensity);
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     protected override void Dispose(bool disposing)
@@ -118,7 +118,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         }
 
 #pragma warning disable IDISP023 // Don't use reference types in finalizer context
-        CommonDispose(disposing);
+        SharedDispose(disposing);
 #pragma warning restore IDISP023 // Don't use reference types in finalizer context
 
         base.Dispose(disposing);

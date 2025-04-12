@@ -61,7 +61,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     public SkiaRenderMode RenderMode
@@ -119,7 +119,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     public void MapControl_Touch(object? sender, TouchEventArgs args)
@@ -227,7 +227,7 @@ public partial class MapControl : ViewGroup, IMapControl
             _mainLooperHandler?.Dispose();
             _canvas?.Dispose();
         }
-        CommonDispose(disposing);
+        SharedDispose(disposing);
 
         base.Dispose(disposing);
     }

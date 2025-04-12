@@ -112,7 +112,7 @@ public partial class MapControl : ComponentBase, IMapControl
             OnSizeChanged(info);
         }
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private void OnLoadComplete()
@@ -242,7 +242,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         if (disposing)
         {
-            CommonDispose(true);
+            SharedDispose(true);
         }
     }
 

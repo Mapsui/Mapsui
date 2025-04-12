@@ -65,7 +65,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _timestampStartDraw;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
-#pragma warning disable IDISP002 // Is disposed in CommonDispose
+#pragma warning disable IDISP002 // Is disposed in SharedDispose
     private readonly IRenderer _renderer = new MapRenderer();
 #pragma warning restore IDISP002
     private readonly TapGestureTracker _tapGestureTracker = new();
@@ -170,7 +170,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
 
-    private protected void CommonDrawControl(object canvas)
+    private protected void SharedDraw(object canvas)
     {
         if (Renderer is null) 
             return;
@@ -350,7 +350,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     // ReSharper restore RedundantNameQualifier
-#pragma warning disable IDISP002 // Is Disposed in Common Dispose
+#pragma warning disable IDISP002 // Is Disposed in SharedDispose
     private DisposableWrapper<Map>? _map;
 #pragma warning restore IDISP002
 
@@ -490,7 +490,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
 
-    private void CommonDispose(bool disposing)
+    private void SharedDispose(bool disposing)
     {
         if (disposing)
         {

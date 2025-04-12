@@ -231,7 +231,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private ScreenPosition GetScreenPosition(SKPoint point, float pixelDensity) =>
@@ -293,7 +293,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _page = null;
         }
 
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     ~MapControl()

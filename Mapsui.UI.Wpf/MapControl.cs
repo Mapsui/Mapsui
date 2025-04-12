@@ -211,7 +211,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         var canvas = args.Surface.Canvas;
         canvas.Scale(pixelDensity, pixelDensity);
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     public float? GetPixelDensity()
@@ -233,7 +233,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     public void Dispose()

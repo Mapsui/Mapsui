@@ -103,7 +103,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private void MapControlMouseDown(object? sender, MouseEventArgs e)
@@ -184,7 +184,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _disposed = true;
         if (disposing)
         {
-            CommonDispose(disposing);
+            SharedDispose(disposing);
 
             _glView?.Dispose();
             _canvasView?.Dispose();

@@ -230,7 +230,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private void CanvasGpu_PaintSurface(object? sender, SKPaintGLSurfaceEventArgs e)
@@ -242,7 +242,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
@@ -287,7 +287,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #if !HAS_UNO
     protected virtual void Dispose(bool disposing)
     {
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     public void Dispose()
@@ -298,7 +298,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #elif HAS_UNO && __IOS__ // on ios don't dispose _canvas, _canvasGPU, _selectRectangle, base class 
     protected new virtual void Dispose(bool disposing)
     {
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     public new void Dispose()
@@ -310,14 +310,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     protected new virtual void Dispose(bool disposing)
     {
         CommonUnoDispose(disposing);
-        CommonDispose(disposing);
+        SharedDispose(disposing);
         base.Dispose(disposing);
     }
 #else
     protected virtual void Dispose(bool disposing)
     {
         CommonUnoDispose(disposing);
-        CommonDispose(disposing);
+        SharedDispose(disposing);
         base.Dispose();
     }
 #endif
