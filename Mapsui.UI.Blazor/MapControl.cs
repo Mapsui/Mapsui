@@ -16,7 +16,7 @@ public partial class MapControl : ComponentBase, IMapControl
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
-    private double _pixelDensityFromInterop = 1;
+    private float? _pixelDensityFromInterop;
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
@@ -109,17 +109,17 @@ public partial class MapControl : ComponentBase, IMapControl
         if (_canvasSize?.Width != info.Width || _canvasSize?.Height != info.Height)
         {
             _canvasSize = info;
-            OnSizeChanged();
+            OnSizeChanged(info);
         }
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private void OnLoadComplete()
     {
         Catch.Exceptions(async () =>
         {
-            SetViewportSize();
+            SharedOnSizeChanged(_canvasSize?.Width ?? 0, _canvasSize?.Height ?? 0);
             await InitializingInteropAsync();
         });
     }
@@ -161,7 +161,7 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             await Interop.DisableMouseWheelAsync(_elementId);
             await Interop.DisableTouchAsync(_elementId);
-            _pixelDensityFromInterop = await Interop.GetPixelDensityAsync();
+            _pixelDensityFromInterop = (float)await Interop.GetPixelDensityAsync();
         }
         catch (Exception ex)
         {
@@ -169,9 +169,9 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    private void OnSizeChanged()
+    private void OnSizeChanged(SKImageInfo skImageInfo)
     {
-        SetViewportSize();
+        SharedOnSizeChanged(skImageInfo.Width, skImageInfo.Height);
         _ = UpdateBoundingRectAsync();
     }
 
@@ -227,7 +227,7 @@ public partial class MapControl : ComponentBase, IMapControl
         });
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensity()
     {
         return _pixelDensityFromInterop;
     }
@@ -242,12 +242,9 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         if (disposing)
         {
-            CommonDispose(true);
+            SharedDispose(true);
         }
     }
-
-    private double ViewportWidth => _canvasSize?.Width ?? 0;
-    private double ViewportHeight => _canvasSize?.Height ?? 0;
 
     public string? Cursor { get; set; }
 

@@ -21,7 +21,9 @@ public class RasterizingLayerWithLineStringSample : IMapControlSample
 
     public void Setup(IMapControl mapControl)
     {
-        mapControl.Map = CreateMap(mapControl.PixelDensity);
+        // PixelDensity is not always known at startup. The RasterizingLayer should be initialized later.
+        var pixelDensity = mapControl.GetPixelDensity() ?? 1;
+        mapControl.Map = CreateMap(pixelDensity);
     }
 
     public static Map CreateMap(float pixelDensity)

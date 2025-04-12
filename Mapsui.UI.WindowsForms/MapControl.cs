@@ -9,7 +9,7 @@ namespace Mapsui.UI.WindowsForms;
 
 public partial class MapControl : UserControl, IMapControl, IDisposable
 {
-    public static bool UseGPU = true;
+    public static bool UseGPU = false;
 
     private readonly SKGLControl? _glView;
     private readonly SKControl? _canvasView;
@@ -74,11 +74,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlResize(object? sender, EventArgs e)
     {
-        SetViewportSize();
+        SharedOnSizeChanged(Width, Height);
     }
-
-    private double ViewportWidth => Width;
-    private double ViewportHeight => Height;
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
     {
@@ -101,12 +98,12 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void PaintSurface(SKCanvas canvas)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private void MapControlMouseDown(object? sender, MouseEventArgs e)
@@ -170,9 +167,11 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         return new ScreenPosition(position.X, position.Y);
     }
 
-    public double GetPixelDensity()
+    public float? GetPixelDensity()
     {
-        return (UseGPU ? _glView!.CanvasSize.Width : _canvasView!.CanvasSize.Width) / Width;
+        if (Width <= 0)
+            return null;
+        return (float)(UseGPU ? _glView!.CanvasSize.Width : _canvasView!.CanvasSize.Width) / Width;
     }
 
     protected override void Dispose(bool disposing)
@@ -185,7 +184,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         _disposed = true;
         if (disposing)
         {
-            CommonDispose(disposing);
+            SharedDispose(disposing);
 
             _glView?.Dispose();
             _canvasView?.Dispose();

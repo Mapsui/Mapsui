@@ -196,16 +196,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlLoaded(object sender, RoutedEventArgs e)
     {
-        SetViewportSize();
+        SharedOnSizeChanged(ActualWidth, ActualHeight);
     }
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
     {
         // Accessing ActualWidth and ActualHeight before SizeChange results in a com exception.
-        ViewportWidth = ActualWidth;
-        ViewportHeight = ActualHeight;
         Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
-        SetViewportSize();
+        SharedOnSizeChanged(ActualWidth, ActualHeight);
     }
 
     private void RunOnUIThread(Action action)
@@ -225,26 +223,26 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void Canvas_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
         var canvas = e.Surface.Canvas;
 
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private void CanvasGpu_PaintSurface(object? sender, SKPaintGLSurfaceEventArgs e)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
         var canvas = e.Surface.Canvas;
 
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
@@ -275,15 +273,13 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
     }
 
-    private double ViewportWidth { get; set; }
-    private double ViewportHeight { get; set; }
-
-    private double GetPixelDensity()
+    public float? GetPixelDensity()
     {
-        if (UseGPU)
-            return _canvasGpu!.CanvasSize.Width / _canvasGpu.ActualWidth;
-
-        return _canvas!.CanvasSize.Width / _canvas.ActualWidth;
+        var canvasWidth = UseGPU ? _canvasGpu!.CanvasSize.Width : _canvas!.CanvasSize.Width;
+        var canvasActualWidth = UseGPU ? _canvasGpu!.ActualWidth : _canvas!.ActualWidth;
+        if (canvasWidth <= 0 || canvasActualWidth <= 0)
+            return null;
+        return (float)(canvasWidth / canvasActualWidth);
     }
 
     private bool GetShiftPressed() => _shiftPressed;
@@ -291,7 +287,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #if !HAS_UNO
     protected virtual void Dispose(bool disposing)
     {
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     public void Dispose()
@@ -302,7 +298,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 #elif HAS_UNO && __IOS__ // on ios don't dispose _canvas, _canvasGPU, _selectRectangle, base class 
     protected new virtual void Dispose(bool disposing)
     {
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     public new void Dispose()
@@ -314,14 +310,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     protected new virtual void Dispose(bool disposing)
     {
         CommonUnoDispose(disposing);
-        CommonDispose(disposing);
+        SharedDispose(disposing);
         base.Dispose(disposing);
     }
 #else
     protected virtual void Dispose(bool disposing)
     {
         CommonUnoDispose(disposing);
-        CommonDispose(disposing);
+        SharedDispose(disposing);
         base.Dispose();
     }
 #endif

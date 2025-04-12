@@ -47,9 +47,10 @@ public class ImageLayerTests
         };
 
         var fetchInfo = new FetchInfo(new MSection(new MRect(-1, -1, 0, 0), 1), null, ChangeType.Discrete);
+        var viewport = new Viewport(-0.5, -0.5, 1, 0, 1, 1);
 
         // act
-        map.RefreshData(fetchInfo);
+        map.RefreshData(viewport);
 
         // assert
         waitHandle.WaitOne();

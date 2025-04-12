@@ -65,11 +65,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _timestampStartDraw;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
-#pragma warning disable IDISP002 // Is disposed in CommonDispose
+#pragma warning disable IDISP002 // Is disposed in SharedDispose
     private readonly IRenderer _renderer = new MapRenderer();
 #pragma warning restore IDISP002
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
+    private double _sharedWidth;
+    private double _sharedHeight;
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -87,8 +89,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     [DefaultValue(true)] // Fix WOF1000 Error
 #endif
     public bool UseFling { get; set; } = true;
-
-    public float PixelDensity => (float)GetPixelDensity();
 
     /// <summary>
     /// Renderer that is used from this MapControl
@@ -170,14 +170,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
 
-    private static int GetAdditionalTimeToDelay(int timestampStartDraw, int minimumTimeBetweenStartOfDrawCall)
-    {
-        var timeSinceLastDraw = Environment.TickCount - timestampStartDraw;
-        var additionalTimeToDelay = Math.Max(minimumTimeBetweenStartOfDrawCall - timeSinceLastDraw, 0);
-        return additionalTimeToDelay;
-    }
-
-    private protected void CommonDrawControl(object canvas)
+    private protected void SharedDraw(object canvas)
     {
         if (Renderer is null) 
             return;
@@ -205,6 +198,20 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // If we are interested in performance measurements, we save the new drawing time
         Map.Performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
+    }
+
+    private static int GetAdditionalTimeToDelay(int timestampStartDraw, int minimumTimeBetweenStartOfDrawCall)
+    {
+        var timeSinceLastDraw = Environment.TickCount - timestampStartDraw;
+        var additionalTimeToDelay = Math.Max(minimumTimeBetweenStartOfDrawCall - timeSinceLastDraw, 0);
+        return additionalTimeToDelay;
+    }
+
+    private void SharedOnSizeChanged(double width, double height)
+    {
+        _sharedWidth = width;
+        _sharedHeight = height;
+        TryUpdateViewportSize();
     }
 
     /// <summary>
@@ -313,7 +320,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(Map_DataChanged)}", exception);
         }
     }
-    // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
     private void Map_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
@@ -344,7 +350,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     // ReSharper restore RedundantNameQualifier
-#pragma warning disable IDISP002 // Is Disposed in Common Dispose
+#pragma warning disable IDISP002 // Is Disposed in SharedDispose
     private DisposableWrapper<Map>? _map;
 #pragma warning restore IDISP002
 
@@ -421,26 +427,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void AfterSetMap(Map? map)
     {
-        if (map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
-
-        if (HasSize())
-            map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+        if (map is null)
+            return; // Although the Map property can not null the map argument can null during initializing and binding.
+        TryUpdateViewportSize();
         SubscribeToMapEvents(map);
         Refresh();
-    }
-
-    /// <inheritdoc />
-    public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
-    {
-        return new MPoint(
-            coordinateInDeviceIndependentUnits.X * PixelDensity,
-            coordinateInDeviceIndependentUnits.Y * PixelDensity);
-    }
-
-    /// <inheritdoc />
-    public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
-    {
-        return new MPoint(coordinateInPixels.X / PixelDensity, coordinateInPixels.Y / PixelDensity);
     }
 
     /// <summary>
@@ -460,7 +451,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
-        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity, renderFormat: renderFormat, quality: quality);
+        if (GetPixelDensity() is not float pixelDensity)
+            throw new Exception("PixelDensity is not initialized");
+
+        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality);
         return stream.ToArray();
     }
 
@@ -479,18 +473,24 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
     }
 
-    private void SetViewportSize()
+    /// <summary>
+    /// Tries to set the size of the MapControl.Map.Viewport.
+    /// </summary>
+    private void TryUpdateViewportSize()
     {
+        if (_sharedWidth <= 0 || _sharedHeight <= 0)
+            return;
+
         if (Map is Map map)
         {
             var hadSize = map.Navigator.Viewport.HasSize();
-            map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+            map.Navigator.SetSize(_sharedWidth, _sharedHeight);
             if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
             Refresh();
         }
     }
 
-    private void CommonDispose(bool disposing)
+    private void SharedDispose(bool disposing)
     {
         if (disposing)
         {
@@ -609,6 +609,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (screenPositions.Length != 1)
             return false;
+        if (GetPixelDensity() is not float pixelDensity)
+            return false;
 
         var handled = false;
         var screenPosition = screenPositions[0];
@@ -617,7 +619,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             handled = true; // Set to handled but still handle tap in the next line
         if (!handled && OnMapPointerReleased(screenPosition, worldPosition))
             handled = true;
-        if (_tapGestureTracker.TapIfNeeded(screenPositions[0], MaxTapGestureMovement * PixelDensity, OnTapped))
+        if (_tapGestureTracker.TapIfNeeded(screenPositions[0], MaxTapGestureMovement * pixelDensity, OnTapped))
             handled = true;
         if (UseFling)
             _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
@@ -677,6 +679,4 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         return eventArgs.Handled;
     }
-
-    private bool HasSize() => ViewportWidth > 0 && ViewportHeight > 0;
 }
