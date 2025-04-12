@@ -31304,35 +31304,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Android.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(bool)
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.Android.MapControl.StartUpdates(System.Boolean)
-  name.vb: StartUpdates(Boolean)
-  fullName: Mapsui.UI.Android.MapControl.StartUpdates(bool)
-  fullName.vb: Mapsui.UI.Android.MapControl.StartUpdates(Boolean)
-  nameWithType: MapControl.StartUpdates(bool)
-  nameWithType.vb: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.Android.MapControl.StartUpdates*
-  name: StartUpdates
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.Android.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.Android.MapControl.StopUpdates
-  name: StopUpdates()
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.Android.MapControl.StopUpdates
-  fullName: Mapsui.UI.Android.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.Android.MapControl.StopUpdates*
-  name: StopUpdates
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.Android.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
 - uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
@@ -31372,19 +31343,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.Android.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.Android.MapControl.UpdateInterval
-  fullName: Mapsui.UI.Android.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.Android.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.Android.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
 - uid: Mapsui.UI.Android.MapControl.UseFling
   name: UseFling
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_UseFling
@@ -31836,35 +31794,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Avalonia.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(bool)
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.Avalonia.MapControl.StartUpdates(System.Boolean)
-  name.vb: StartUpdates(Boolean)
-  fullName: Mapsui.UI.Avalonia.MapControl.StartUpdates(bool)
-  fullName.vb: Mapsui.UI.Avalonia.MapControl.StartUpdates(Boolean)
-  nameWithType: MapControl.StartUpdates(bool)
-  nameWithType.vb: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.Avalonia.MapControl.StartUpdates*
-  name: StartUpdates
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.Avalonia.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Avalonia.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.Avalonia.MapControl.StopUpdates
-  name: StopUpdates()
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.Avalonia.MapControl.StopUpdates
-  fullName: Mapsui.UI.Avalonia.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.Avalonia.MapControl.StopUpdates*
-  name: StopUpdates
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.Avalonia.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Avalonia.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
 - uid: Mapsui.UI.Avalonia.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
@@ -31904,19 +31833,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.Avalonia.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.Avalonia.MapControl.UpdateInterval
-  fullName: Mapsui.UI.Avalonia.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.Avalonia.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.Avalonia.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.Avalonia.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
 - uid: Mapsui.UI.Avalonia.MapControl.UseContinuousMouseWheelZoom
   name: UseContinuousMouseWheelZoom
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_UseContinuousMouseWheelZoom
@@ -33494,35 +33410,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Blazor.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(bool)
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.Blazor.MapControl.StartUpdates(System.Boolean)
-  name.vb: StartUpdates(Boolean)
-  fullName: Mapsui.UI.Blazor.MapControl.StartUpdates(bool)
-  fullName.vb: Mapsui.UI.Blazor.MapControl.StartUpdates(Boolean)
-  nameWithType: MapControl.StartUpdates(bool)
-  nameWithType.vb: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.Blazor.MapControl.StartUpdates*
-  name: StartUpdates
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.Blazor.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.Blazor.MapControl.StopUpdates
-  name: StopUpdates()
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.Blazor.MapControl.StopUpdates
-  fullName: Mapsui.UI.Blazor.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.Blazor.MapControl.StopUpdates*
-  name: StopUpdates
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.Blazor.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
 - uid: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
@@ -33562,19 +33449,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.Blazor.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.Blazor.MapControl.UpdateInterval
-  fullName: Mapsui.UI.Blazor.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.Blazor.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.Blazor.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
 - uid: Mapsui.UI.Blazor.MapControl.UseContinuousMouseWheelZoom
   name: UseContinuousMouseWheelZoom
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_UseContinuousMouseWheelZoom
@@ -34199,35 +34073,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Eto.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(bool)
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.Eto.MapControl.StartUpdates(System.Boolean)
-  name.vb: StartUpdates(Boolean)
-  fullName: Mapsui.UI.Eto.MapControl.StartUpdates(bool)
-  fullName.vb: Mapsui.UI.Eto.MapControl.StartUpdates(Boolean)
-  nameWithType: MapControl.StartUpdates(bool)
-  nameWithType.vb: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.Eto.MapControl.StartUpdates*
-  name: StartUpdates
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.Eto.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Eto.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.Eto.MapControl.StopUpdates
-  name: StopUpdates()
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.Eto.MapControl.StopUpdates
-  fullName: Mapsui.UI.Eto.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.Eto.MapControl.StopUpdates*
-  name: StopUpdates
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.Eto.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Eto.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
 - uid: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
@@ -34267,19 +34112,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.Eto.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.Eto.MapControl.UpdateInterval
-  fullName: Mapsui.UI.Eto.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.Eto.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.Eto.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.Eto.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
 - uid: Mapsui.UI.Eto.MapControl.UseFling
   name: UseFling
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_UseFling
@@ -36179,35 +36011,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.RunOnUIThread
   nameWithType: MapControl.RunOnUIThread
-- uid: Mapsui.UI.Maui.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(bool)
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.Maui.MapControl.StartUpdates(System.Boolean)
-  name.vb: StartUpdates(Boolean)
-  fullName: Mapsui.UI.Maui.MapControl.StartUpdates(bool)
-  fullName.vb: Mapsui.UI.Maui.MapControl.StartUpdates(Boolean)
-  nameWithType: MapControl.StartUpdates(bool)
-  nameWithType.vb: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.Maui.MapControl.StartUpdates*
-  name: StartUpdates
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.Maui.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.Maui.MapControl.StopUpdates
-  name: StopUpdates()
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.Maui.MapControl.StopUpdates
-  fullName: Mapsui.UI.Maui.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.Maui.MapControl.StopUpdates*
-  name: StopUpdates
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.Maui.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
 - uid: Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
@@ -36247,19 +36050,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.Maui.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.Maui.MapControl.UpdateInterval
-  fullName: Mapsui.UI.Maui.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.Maui.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.Maui.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
 - uid: Mapsui.UI.Maui.MapControl.UseFling
   name: UseFling
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_UseFling
@@ -38814,35 +38604,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.WinUI.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(bool)
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.WinUI.MapControl.StartUpdates(System.Boolean)
-  name.vb: StartUpdates(Boolean)
-  fullName: Mapsui.UI.WinUI.MapControl.StartUpdates(bool)
-  fullName.vb: Mapsui.UI.WinUI.MapControl.StartUpdates(Boolean)
-  nameWithType: MapControl.StartUpdates(bool)
-  nameWithType.vb: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.WinUI.MapControl.StartUpdates*
-  name: StartUpdates
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.WinUI.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.WinUI.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.WinUI.MapControl.StopUpdates
-  name: StopUpdates()
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.WinUI.MapControl.StopUpdates
-  fullName: Mapsui.UI.WinUI.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.WinUI.MapControl.StopUpdates*
-  name: StopUpdates
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.WinUI.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.WinUI.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
 - uid: Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
@@ -38882,19 +38643,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.WinUI.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.WinUI.MapControl.UpdateInterval
-  fullName: Mapsui.UI.WinUI.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.WinUI.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.WinUI.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.WinUI.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
 - uid: Mapsui.UI.WinUI.MapControl.UseFling
   name: UseFling
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_UseFling
@@ -39272,35 +39020,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.WindowsForms.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(bool)
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.WindowsForms.MapControl.StartUpdates(System.Boolean)
-  name.vb: StartUpdates(Boolean)
-  fullName: Mapsui.UI.WindowsForms.MapControl.StartUpdates(bool)
-  fullName.vb: Mapsui.UI.WindowsForms.MapControl.StartUpdates(Boolean)
-  nameWithType: MapControl.StartUpdates(bool)
-  nameWithType.vb: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.WindowsForms.MapControl.StartUpdates*
-  name: StartUpdates
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.WindowsForms.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.WindowsForms.MapControl.StopUpdates
-  name: StopUpdates()
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.WindowsForms.MapControl.StopUpdates
-  fullName: Mapsui.UI.WindowsForms.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.WindowsForms.MapControl.StopUpdates*
-  name: StopUpdates
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.WindowsForms.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
 - uid: Mapsui.UI.WindowsForms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
@@ -39340,19 +39059,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.WindowsForms.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.WindowsForms.MapControl.UpdateInterval
-  fullName: Mapsui.UI.WindowsForms.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.WindowsForms.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.WindowsForms.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
 - uid: Mapsui.UI.WindowsForms.MapControl.UseFling
   name: UseFling
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_UseFling
@@ -39735,35 +39441,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Wpf.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(bool)
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.Wpf.MapControl.StartUpdates(System.Boolean)
-  name.vb: StartUpdates(Boolean)
-  fullName: Mapsui.UI.Wpf.MapControl.StartUpdates(bool)
-  fullName.vb: Mapsui.UI.Wpf.MapControl.StartUpdates(Boolean)
-  nameWithType: MapControl.StartUpdates(bool)
-  nameWithType.vb: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.Wpf.MapControl.StartUpdates*
-  name: StartUpdates
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.Wpf.MapControl.StopUpdates
-  name: StopUpdates()
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.Wpf.MapControl.StopUpdates
-  fullName: Mapsui.UI.Wpf.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.Wpf.MapControl.StopUpdates*
-  name: StopUpdates
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
 - uid: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
@@ -39803,19 +39480,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.Wpf.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.Wpf.MapControl.UpdateInterval
-  fullName: Mapsui.UI.Wpf.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.Wpf.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
 - uid: Mapsui.UI.Wpf.MapControl.UseFling
   name: UseFling
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_UseFling
@@ -40202,35 +39866,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.iOS.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(bool)
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.iOS.MapControl.StartUpdates(System.Boolean)
-  name.vb: StartUpdates(Boolean)
-  fullName: Mapsui.UI.iOS.MapControl.StartUpdates(bool)
-  fullName.vb: Mapsui.UI.iOS.MapControl.StartUpdates(Boolean)
-  nameWithType: MapControl.StartUpdates(bool)
-  nameWithType.vb: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.iOS.MapControl.StartUpdates*
-  name: StartUpdates
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.iOS.MapControl.StopUpdates
-  name: StopUpdates()
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.iOS.MapControl.StopUpdates
-  fullName: Mapsui.UI.iOS.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.iOS.MapControl.StopUpdates*
-  name: StopUpdates
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
 - uid: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
@@ -40318,19 +39953,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.iOS.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.iOS.MapControl.UpdateInterval
-  fullName: Mapsui.UI.iOS.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.iOS.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
 - uid: Mapsui.UI.iOS.MapControl.UseFling
   name: UseFling
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_UseFling
@@ -40468,6 +40090,38 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Algorithms.RotateClockwiseRadians
   nameWithType: Algorithms.RotateClockwiseRadians
+- uid: Mapsui.Utilities.AsyncCounterEvent
+  name: AsyncCounterEvent
+  href: pages/Mapsui.Utilities.AsyncCounterEvent.html
+  commentId: T:Mapsui.Utilities.AsyncCounterEvent
+  fullName: Mapsui.Utilities.AsyncCounterEvent
+  nameWithType: AsyncCounterEvent
+- uid: Mapsui.Utilities.AsyncCounterEvent.Set
+  name: Set()
+  href: pages/Mapsui.Utilities.AsyncCounterEvent.html#Mapsui_Utilities_AsyncCounterEvent_Set
+  commentId: M:Mapsui.Utilities.AsyncCounterEvent.Set
+  fullName: Mapsui.Utilities.AsyncCounterEvent.Set()
+  nameWithType: AsyncCounterEvent.Set()
+- uid: Mapsui.Utilities.AsyncCounterEvent.Set*
+  name: Set
+  href: pages/Mapsui.Utilities.AsyncCounterEvent.html#Mapsui_Utilities_AsyncCounterEvent_Set_
+  commentId: Overload:Mapsui.Utilities.AsyncCounterEvent.Set
+  isSpec: "True"
+  fullName: Mapsui.Utilities.AsyncCounterEvent.Set
+  nameWithType: AsyncCounterEvent.Set
+- uid: Mapsui.Utilities.AsyncCounterEvent.WaitAsync
+  name: WaitAsync()
+  href: pages/Mapsui.Utilities.AsyncCounterEvent.html#Mapsui_Utilities_AsyncCounterEvent_WaitAsync
+  commentId: M:Mapsui.Utilities.AsyncCounterEvent.WaitAsync
+  fullName: Mapsui.Utilities.AsyncCounterEvent.WaitAsync()
+  nameWithType: AsyncCounterEvent.WaitAsync()
+- uid: Mapsui.Utilities.AsyncCounterEvent.WaitAsync*
+  name: WaitAsync
+  href: pages/Mapsui.Utilities.AsyncCounterEvent.html#Mapsui_Utilities_AsyncCounterEvent_WaitAsync_
+  commentId: Overload:Mapsui.Utilities.AsyncCounterEvent.WaitAsync
+  isSpec: "True"
+  fullName: Mapsui.Utilities.AsyncCounterEvent.WaitAsync
+  nameWithType: AsyncCounterEvent.WaitAsync
 - uid: Mapsui.Utilities.Bearings
   name: Bearings
   href: pages/Mapsui.Utilities.Bearings.html
@@ -41149,19 +40803,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Performance.DrawingTimes
   nameWithType: Performance.DrawingTimes
-- uid: Mapsui.Utilities.Performance.Dropped
-  name: Dropped
-  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_Dropped
-  commentId: P:Mapsui.Utilities.Performance.Dropped
-  fullName: Mapsui.Utilities.Performance.Dropped
-  nameWithType: Performance.Dropped
-- uid: Mapsui.Utilities.Performance.Dropped*
-  name: Dropped
-  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_Dropped_
-  commentId: Overload:Mapsui.Utilities.Performance.Dropped
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Performance.Dropped
-  nameWithType: Performance.Dropped
 - uid: Mapsui.Utilities.Performance.FPS
   name: FPS
   href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_FPS
