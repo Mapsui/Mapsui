@@ -306,13 +306,13 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         if (Width <= 0)
             return null;
 
-        if (GetSkiaWidth() <= 0)
+        if (GetCanvasWidth() <= 0)
             return null;
 
-        return (float)(GetSkiaWidth() / Width);
+        return (float)(GetCanvasWidth() / Width);
     }
 
-    private double GetSkiaWidth()
+    private double GetCanvasWidth()
     {
         return _glView?.CanvasSize.Width ?? _canvasView!.CanvasSize.Width;
     }
