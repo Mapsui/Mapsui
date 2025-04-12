@@ -196,14 +196,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlLoaded(object sender, RoutedEventArgs e)
     {
-        TrySetDimensions(ActualWidth, ActualHeight);
+        SharedOnSizeChanged(ActualWidth, ActualHeight);
     }
 
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
     {
         // Accessing ActualWidth and ActualHeight before SizeChange results in a com exception.
         Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
-        TrySetDimensions(ActualWidth, ActualHeight);
+        SharedOnSizeChanged(ActualWidth, ActualHeight);
     }
 
     private void RunOnUIThread(Action action)

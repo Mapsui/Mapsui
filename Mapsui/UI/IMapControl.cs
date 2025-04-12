@@ -29,11 +29,29 @@ public interface IMapControl : IDisposable
     /// </summary>
     float? GetPixelDensity();
 
-    [Obsolete("Use MapControl.Dimensions.ToCoordinateInRawPixels instead", true)]
-    MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels);
+    /// <summary>
+    /// Converts coordinates in raw pixels to device independent units (or DIP or DP).
+    /// </summary>
+    /// <param name="coordinateInPixels">Coordinate in pixels</param>
+    /// <returns>Coordinate in device independent units (or DIP or DP)</returns>
+    MPoint ToCoordinateInDeviceIndependentUnits(MPoint coordinateInPixels)
+    {
+        var pixelDensity = GetPixelDensity() ?? throw new Exception("Pixel density is not known yet.");
+        return new MPoint(coordinateInPixels.X / pixelDensity, coordinateInPixels.Y / pixelDensity);
+    }
 
-    [Obsolete("Use MapControl.Dimensions.ToCoordinateInDeviceIndependentUnits", true)]
-    MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits);
+    /// <summary>
+    /// Converts coordinates in device independent units (or DIP or DP) to raw pixels.
+    /// </summary>
+    /// <param name="coordinateInDeviceIndependentUnits">Coordinate in device independent units (or DIP or DP)</param>
+    /// <returns>Coordinate in raw pixels</returns>
+    MPoint ToCoordinateInRawPixels(MPoint coordinateInDeviceIndependentUnits)
+    {
+        var pixelDensity = GetPixelDensity() ?? throw new Exception("Pixel density is not known yet.");
+        return new MPoint(
+            coordinateInDeviceIndependentUnits.X * pixelDensity,
+            coordinateInDeviceIndependentUnits.Y * pixelDensity);
+    }
 
     /// <summary>
     /// Check, if a feature at a given screen position is hit.

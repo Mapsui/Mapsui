@@ -23,7 +23,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
     private void MapControl_SizeChanged(object? sender, EventArgs e)
     {
-        TrySetDimensions(Width, Height);
+        SharedOnSizeChanged(Width, Height);
     }
 
     public Cursor MoveCursor { get; set; } = Cursors.Move;
@@ -80,7 +80,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnLoadComplete(e);
 
-        TrySetDimensions(Width, Height);
+        SharedOnSizeChanged(Width, Height);
         CanFocus = true;
     }
 
@@ -97,7 +97,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnSizeChanged(e);
 
-        TrySetDimensions(Width, Height);
+        SharedOnSizeChanged(Width, Height);
     }
 
     protected override void OnPaint(SKPaintEventArgs e)

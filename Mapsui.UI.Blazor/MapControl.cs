@@ -119,7 +119,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(async () =>
         {
-            TrySetDimensions(_canvasSize?.Width ?? 0, _canvasSize?.Height ?? 0);
+            SharedOnSizeChanged(_canvasSize?.Width ?? 0, _canvasSize?.Height ?? 0);
             await InitializingInteropAsync();
         });
     }
@@ -171,7 +171,7 @@ public partial class MapControl : ComponentBase, IMapControl
 
     private void OnSizeChanged(SKImageInfo skImageInfo)
     {
-        TrySetDimensions(skImageInfo.Width, skImageInfo.Height);
+        SharedOnSizeChanged(skImageInfo.Width, skImageInfo.Height);
         _ = UpdateBoundingRectAsync();
     }
 

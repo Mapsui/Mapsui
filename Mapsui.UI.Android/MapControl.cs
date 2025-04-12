@@ -93,13 +93,13 @@ public partial class MapControl : ViewGroup, IMapControl
     protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
     {
         base.OnSizeChanged(width, height, oldWidth, oldHeight);
-        if (GetPixelDensity() is float pixelDensity)
+        if (GetPixelDensity() is float pixelDensity) // In android the width and height are in pixels. The MapControl needs the size in device independent units. That is why we need PixelDensity here
         {
-            // In android the width and height are in pixels. The MapControl needs the size in device independent units.
-            TrySetDimensions(
+            SharedOnSizeChanged(
                 ToDeviceIndependentUnits(width, pixelDensity),
                 ToDeviceIndependentUnits(height, pixelDensity));
         }
+        Refresh();
     }
 
     private void RunOnUIThread(Action action)
@@ -197,14 +197,12 @@ public partial class MapControl : ViewGroup, IMapControl
         view.Left = l;
         view.Right = r;
 
-        if (GetPixelDensity() is float pixelDensity)
+        if (GetPixelDensity() is float pixelDensity)  // In android the width and height are in pixels. The MapControl needs the size in device independent units. That is why we need PixelDensity here
         {
-            // In android the width and height are in pixels. The MapControl needs the size in device independent units.
-            TrySetDimensions(
+            SharedOnSizeChanged(
                 ToDeviceIndependentUnits(view.Width, pixelDensity),
                 ToDeviceIndependentUnits(view.Height, pixelDensity));
         }
-
         Refresh();
     }
 

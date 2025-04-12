@@ -95,16 +95,4 @@ public sealed class RegressionMapControl : IMapControl
     {
         throw new NotImplementedException();
     }
-
-    [Obsolete("Use MapControl.Dimensions.ToCoordinateInRawPixels instead", true)]
-    public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
-    {
-        throw new NotImplementedException();
-    }
-
-    [Obsolete("Use MapControl.Dimensions.ToCoordinateInDeviceIndependentUnits", true)]
-    public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
-    {
-        throw new NotImplementedException();
-    }
 }

@@ -74,7 +74,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlResize(object? sender, EventArgs e)
     {
-        TrySetDimensions(Width, Height);
+        SharedOnSizeChanged(Width, Height);
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)

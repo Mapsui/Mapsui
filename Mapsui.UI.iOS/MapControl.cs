@@ -107,7 +107,7 @@ public partial class MapControl : UIView, IMapControl
         MultipleTouchEnabled = true;
         UserInteractionEnabled = true;
 
-        TrySetDimensions(GetWidth(), GetHeight());
+        SharedOnSizeChanged(GetWidth(), GetHeight());
     }
 
     private void OnPaintSurface(object? sender, SKPaintMetalSurfaceEventArgs args)
@@ -207,7 +207,7 @@ public partial class MapControl : UIView, IMapControl
             }
 
             base.Frame = value;
-            TrySetDimensions(GetWidth(), GetHeight());
+            SharedOnSizeChanged(GetWidth(), GetHeight());
             OnPropertyChanged();
         }
     }
@@ -218,7 +218,7 @@ public partial class MapControl : UIView, IMapControl
         if (_metalCanvas == null || _canvas == null) return;
 
         base.LayoutMarginsDidChange();
-        TrySetDimensions(GetWidth(), GetHeight());
+        SharedOnSizeChanged(GetWidth(), GetHeight());
     }
 
     public void OpenInBrowser(string url)

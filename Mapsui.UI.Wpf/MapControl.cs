@@ -98,7 +98,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         // Accessing ActualWidth and ActualHeight before size changed causes an exception, so we need to do it here.
         Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
-        TrySetDimensions(ActualWidth, ActualHeight);
+        SharedOnSizeChanged(ActualWidth, ActualHeight);
     }
 
     private void MapControlMouseLeave(object sender, MouseEventArgs e)

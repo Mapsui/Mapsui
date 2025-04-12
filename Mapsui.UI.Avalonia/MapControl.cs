@@ -78,7 +78,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         switch (e.Property.Name)
         {
             case nameof(Bounds):
-                TrySetDimensions(Bounds.Width, Bounds.Height);
+                SharedOnSizeChanged(Bounds.Width, Bounds.Height);
                 break;
         }
     }
@@ -176,7 +176,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControlInitialized(object? s, EventArgs e)
     {
-        TrySetDimensions(Bounds.Width, Bounds.Height);
+        SharedOnSizeChanged(Bounds.Width, Bounds.Height);
     }
 
     private static void RunOnUIThread(Action action)

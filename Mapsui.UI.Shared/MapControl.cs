@@ -70,8 +70,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #pragma warning restore IDISP002
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
-
-    public Dimensions? Dimensions;
+    private double _sharedWidth;
+    private double _sharedHeight;
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -170,13 +170,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
 
-    private static int GetAdditionalTimeToDelay(int timestampStartDraw, int minimumTimeBetweenStartOfDrawCall)
-    {
-        var timeSinceLastDraw = Environment.TickCount - timestampStartDraw;
-        var additionalTimeToDelay = Math.Max(minimumTimeBetweenStartOfDrawCall - timeSinceLastDraw, 0);
-        return additionalTimeToDelay;
-    }
-
     private protected void CommonDrawControl(object canvas)
     {
         if (Renderer is null) 
@@ -205,6 +198,20 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // If we are interested in performance measurements, we save the new drawing time
         Map.Performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
+    }
+
+    private static int GetAdditionalTimeToDelay(int timestampStartDraw, int minimumTimeBetweenStartOfDrawCall)
+    {
+        var timeSinceLastDraw = Environment.TickCount - timestampStartDraw;
+        var additionalTimeToDelay = Math.Max(minimumTimeBetweenStartOfDrawCall - timeSinceLastDraw, 0);
+        return additionalTimeToDelay;
+    }
+
+    private void SharedOnSizeChanged(double width, double height)
+    {
+        _sharedWidth = width;
+        _sharedHeight = height;
+        TryUpdateViewportSize();
     }
 
     /// <summary>
@@ -422,21 +429,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (map is null)
             return; // Although the Map property can not null the map argument can null during initializing and binding.
-        TrySetViewportSize();
+        TryUpdateViewportSize();
         SubscribeToMapEvents(map);
         Refresh();
-    }
-
-    [Obsolete("Use MapControl.Dimensions.ToCoordinateInRawPixels instead", true)]
-    public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
-    {
-        throw new NotImplementedException();
-    }
-
-    [Obsolete("Use MapControl.Dimensions.ToCoordinateInDeviceIndependentUnits", true)]
-    public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
-    {
-        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -478,30 +473,18 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
     }
 
-    private void TrySetDimensions(double width, double height)
-    {
-        if (width <= 0)
-            return;
-        if (height <= 0)
-            return;
-
-        if (GetPixelDensity() is float pixelDensity)
-        {
-            Dimensions = new Dimensions(width, height, pixelDensity);
-        }
-
-        TrySetViewportSize();
-    }
-
     /// <summary>
     /// Tries to set the size of the MapControl.Map.Viewport.
     /// </summary>
-    private void TrySetViewportSize()
+    private void TryUpdateViewportSize()
     {
-        if (Map is Map map && Dimensions is Dimensions dimensions)
+        if (_sharedWidth <= 0 || _sharedHeight <= 0)
+            return;
+
+        if (Map is Map map)
         {
             var hadSize = map.Navigator.Viewport.HasSize();
-            map.Navigator.SetSize(dimensions.Width, dimensions.Height);
+            map.Navigator.SetSize(_sharedWidth, _sharedHeight);
             if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
             Refresh();
         }

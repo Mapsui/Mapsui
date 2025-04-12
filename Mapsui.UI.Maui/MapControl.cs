@@ -73,7 +73,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private void View_SizeChanged(object? sender, EventArgs e)
     {
         ClearTouchState();
-        TrySetDimensions(Width, Height);
+        SharedOnSizeChanged(Width, Height);
     }
 
     private static void InitTouchesReset(MapControl mapControl)
