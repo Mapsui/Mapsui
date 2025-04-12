@@ -123,7 +123,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private void SharedConstructor()
     {
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
-        Map = new Map();
         System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance); // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
         _timestampStartDraw = Environment.TickCount;
         Catch.TaskRun(InvalidateLoopAsync);
