@@ -11683,18 +11683,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Refresh
   nameWithType: Map.Refresh
-- uid: Mapsui.Map.RefreshData(Mapsui.ChangeType)
-  name: RefreshData(ChangeType)
-  href: pages/Mapsui.Map.html#Mapsui_Map_RefreshData_Mapsui_ChangeType_
-  commentId: M:Mapsui.Map.RefreshData(Mapsui.ChangeType)
-  fullName: Mapsui.Map.RefreshData(Mapsui.ChangeType)
-  nameWithType: Map.RefreshData(ChangeType)
-- uid: Mapsui.Map.RefreshData(Mapsui.Layers.FetchInfo)
-  name: RefreshData(FetchInfo)
-  href: pages/Mapsui.Map.html#Mapsui_Map_RefreshData_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Map.RefreshData(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Map.RefreshData(Mapsui.Layers.FetchInfo)
-  nameWithType: Map.RefreshData(FetchInfo)
+- uid: Mapsui.Map.RefreshData(Mapsui.ChangeType,System.Nullable{Mapsui.Viewport})
+  name: RefreshData(ChangeType, Viewport?)
+  href: pages/Mapsui.Map.html#Mapsui_Map_RefreshData_Mapsui_ChangeType_System_Nullable_Mapsui_Viewport__
+  commentId: M:Mapsui.Map.RefreshData(Mapsui.ChangeType,System.Nullable{Mapsui.Viewport})
+  fullName: Mapsui.Map.RefreshData(Mapsui.ChangeType, Mapsui.Viewport?)
+  nameWithType: Map.RefreshData(ChangeType, Viewport?)
+- uid: Mapsui.Map.RefreshData(Mapsui.Viewport)
+  name: RefreshData(Viewport)
+  href: pages/Mapsui.Map.html#Mapsui_Map_RefreshData_Mapsui_Viewport_
+  commentId: M:Mapsui.Map.RefreshData(Mapsui.Viewport)
+  fullName: Mapsui.Map.RefreshData(Mapsui.Viewport)
+  nameWithType: Map.RefreshData(Viewport)
 - uid: Mapsui.Map.RefreshData*
   name: RefreshData
   href: pages/Mapsui.Map.html#Mapsui_Map_RefreshData_
@@ -30987,6 +30987,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Android.MapControl.GetPixelDensity
+  name: GetPixelDensity()
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetPixelDensity
+  commentId: M:Mapsui.UI.Android.MapControl.GetPixelDensity
+  fullName: Mapsui.UI.Android.MapControl.GetPixelDensity()
+  nameWithType: MapControl.GetPixelDensity()
+- uid: Mapsui.UI.Android.MapControl.GetPixelDensity*
+  name: GetPixelDensity
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetPixelDensity_
+  commentId: Overload:Mapsui.UI.Android.MapControl.GetPixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.GetPixelDensity
+  nameWithType: MapControl.GetPixelDensity
 - uid: Mapsui.UI.Android.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
@@ -31220,19 +31233,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Android.MapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.Android.MapControl.PixelDensity
-  fullName: Mapsui.UI.Android.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.Android.MapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.Android.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
 - uid: Mapsui.UI.Android.MapControl.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PropertyChanged
@@ -31304,32 +31304,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Android.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Android.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.Android.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.Android.MapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.Android.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.Android.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Unsubscribe
@@ -31513,6 +31487,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Avalonia.MapControl.GetPixelDensity
+  name: GetPixelDensity()
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_GetPixelDensity
+  commentId: M:Mapsui.UI.Avalonia.MapControl.GetPixelDensity
+  fullName: Mapsui.UI.Avalonia.MapControl.GetPixelDensity()
+  nameWithType: MapControl.GetPixelDensity()
+- uid: Mapsui.UI.Avalonia.MapControl.GetPixelDensity*
+  name: GetPixelDensity
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_GetPixelDensity_
+  commentId: Overload:Mapsui.UI.Avalonia.MapControl.GetPixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.Avalonia.MapControl.GetPixelDensity
+  nameWithType: MapControl.GetPixelDensity
 - uid: Mapsui.UI.Avalonia.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
@@ -31710,19 +31697,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Avalonia.MapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.Avalonia.MapControl.PixelDensity
-  fullName: Mapsui.UI.Avalonia.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.Avalonia.MapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.Avalonia.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.Avalonia.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
 - uid: Mapsui.UI.Avalonia.MapControl.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_PropertyChanged
@@ -31794,32 +31768,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Avalonia.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Avalonia.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.Avalonia.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.Avalonia.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Avalonia.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Avalonia.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Avalonia.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Avalonia.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.Avalonia.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.Avalonia.MapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.Avalonia.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.Avalonia.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.Avalonia.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_Unsubscribe
@@ -32956,6 +32904,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Blazor.MapControl.GetPixelDensity
+  name: GetPixelDensity()
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetPixelDensity
+  commentId: M:Mapsui.UI.Blazor.MapControl.GetPixelDensity
+  fullName: Mapsui.UI.Blazor.MapControl.GetPixelDensity()
+  nameWithType: MapControl.GetPixelDensity()
+- uid: Mapsui.UI.Blazor.MapControl.GetPixelDensity*
+  name: GetPixelDensity
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetPixelDensity_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.GetPixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.GetPixelDensity
+  nameWithType: MapControl.GetPixelDensity
 - uid: Mapsui.UI.Blazor.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
@@ -33339,19 +33300,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Blazor.MapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.Blazor.MapControl.PixelDensity
-  fullName: Mapsui.UI.Blazor.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.Blazor.MapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.Blazor.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
 - uid: Mapsui.UI.Blazor.MapControl.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_PropertyChanged
@@ -33410,32 +33358,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Blazor.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Blazor.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.Blazor.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.Blazor.MapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.Blazor.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.Blazor.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Unsubscribe
@@ -33661,6 +33583,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Eto.MapControl.GetPixelDensity
+  name: GetPixelDensity()
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetPixelDensity
+  commentId: M:Mapsui.UI.Eto.MapControl.GetPixelDensity
+  fullName: Mapsui.UI.Eto.MapControl.GetPixelDensity()
+  nameWithType: MapControl.GetPixelDensity()
+- uid: Mapsui.UI.Eto.MapControl.GetPixelDensity*
+  name: GetPixelDensity
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetPixelDensity_
+  commentId: Overload:Mapsui.UI.Eto.MapControl.GetPixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.Eto.MapControl.GetPixelDensity
+  nameWithType: MapControl.GetPixelDensity
 - uid: Mapsui.UI.Eto.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
@@ -34002,19 +33937,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Eto.MapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.Eto.MapControl.PixelDensity
-  fullName: Mapsui.UI.Eto.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.Eto.MapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.Eto.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.Eto.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
 - uid: Mapsui.UI.Eto.MapControl.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_PropertyChanged
@@ -34073,32 +33995,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Eto.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Eto.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Eto.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.Eto.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.Eto.MapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.Eto.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.Eto.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.Eto.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Unsubscribe
@@ -34173,6 +34069,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.GetMapInfo
   nameWithType: IMapControl.GetMapInfo
+- uid: Mapsui.UI.IMapControl.GetPixelDensity
+  name: GetPixelDensity()
+  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetPixelDensity
+  commentId: M:Mapsui.UI.IMapControl.GetPixelDensity
+  fullName: Mapsui.UI.IMapControl.GetPixelDensity()
+  nameWithType: IMapControl.GetPixelDensity()
+- uid: Mapsui.UI.IMapControl.GetPixelDensity*
+  name: GetPixelDensity
+  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetPixelDensity_
+  commentId: Overload:Mapsui.UI.IMapControl.GetPixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.GetPixelDensity
+  nameWithType: IMapControl.GetPixelDensity
 - uid: Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.RenderFormat,System.Int32)
   name: GetSnapshot(IEnumerable<ILayer>?, RenderFormat, int)
   href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_RenderFormat_System_Int32_
@@ -34224,19 +34133,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.OpenInBrowser
   nameWithType: IMapControl.OpenInBrowser
-- uid: Mapsui.UI.IMapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_PixelDensity
-  commentId: P:Mapsui.UI.IMapControl.PixelDensity
-  fullName: Mapsui.UI.IMapControl.PixelDensity
-  nameWithType: IMapControl.PixelDensity
-- uid: Mapsui.UI.IMapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.IMapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.PixelDensity
-  nameWithType: IMapControl.PixelDensity
 - uid: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
   name: Refresh(ChangeType)
   href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Refresh_Mapsui_ChangeType_
@@ -34289,32 +34185,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.Renderer
   nameWithType: IMapControl.Renderer
-- uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: IMapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.IMapControl.ToDeviceIndependentUnits
+- uid: Mapsui.UI.IMapControl.ToCoordinateInDeviceIndependentUnits(Mapsui.MPoint)
+  name: ToCoordinateInDeviceIndependentUnits(MPoint)
+  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToCoordinateInDeviceIndependentUnits_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.IMapControl.ToCoordinateInDeviceIndependentUnits(Mapsui.MPoint)
+  fullName: Mapsui.UI.IMapControl.ToCoordinateInDeviceIndependentUnits(Mapsui.MPoint)
+  nameWithType: IMapControl.ToCoordinateInDeviceIndependentUnits(MPoint)
+- uid: Mapsui.UI.IMapControl.ToCoordinateInDeviceIndependentUnits*
+  name: ToCoordinateInDeviceIndependentUnits
+  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToCoordinateInDeviceIndependentUnits_
+  commentId: Overload:Mapsui.UI.IMapControl.ToCoordinateInDeviceIndependentUnits
   isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.ToDeviceIndependentUnits
-  nameWithType: IMapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.IMapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: IMapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.IMapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.IMapControl.ToPixels
+  fullName: Mapsui.UI.IMapControl.ToCoordinateInDeviceIndependentUnits
+  nameWithType: IMapControl.ToCoordinateInDeviceIndependentUnits
+- uid: Mapsui.UI.IMapControl.ToCoordinateInRawPixels(Mapsui.MPoint)
+  name: ToCoordinateInRawPixels(MPoint)
+  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToCoordinateInRawPixels_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.IMapControl.ToCoordinateInRawPixels(Mapsui.MPoint)
+  fullName: Mapsui.UI.IMapControl.ToCoordinateInRawPixels(Mapsui.MPoint)
+  nameWithType: IMapControl.ToCoordinateInRawPixels(MPoint)
+- uid: Mapsui.UI.IMapControl.ToCoordinateInRawPixels*
+  name: ToCoordinateInRawPixels
+  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToCoordinateInRawPixels_
+  commentId: Overload:Mapsui.UI.IMapControl.ToCoordinateInRawPixels
   isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.ToPixels
-  nameWithType: IMapControl.ToPixels
+  fullName: Mapsui.UI.IMapControl.ToCoordinateInRawPixels
+  nameWithType: IMapControl.ToCoordinateInRawPixels
 - uid: Mapsui.UI.IMapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Unsubscribe
@@ -35723,6 +35619,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Maui.MapControl.GetPixelDensity
+  name: GetPixelDensity()
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_GetPixelDensity
+  commentId: M:Mapsui.UI.Maui.MapControl.GetPixelDensity
+  fullName: Mapsui.UI.Maui.MapControl.GetPixelDensity()
+  nameWithType: MapControl.GetPixelDensity()
+- uid: Mapsui.UI.Maui.MapControl.GetPixelDensity*
+  name: GetPixelDensity
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_GetPixelDensity_
+  commentId: Overload:Mapsui.UI.Maui.MapControl.GetPixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapControl.GetPixelDensity
+  nameWithType: MapControl.GetPixelDensity
 - uid: Mapsui.UI.Maui.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
@@ -35927,19 +35836,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Maui.MapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.Maui.MapControl.PixelDensity
-  fullName: Mapsui.UI.Maui.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.Maui.MapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.Maui.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
 - uid: Mapsui.UI.Maui.MapControl.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_PropertyChanged
@@ -36011,32 +35907,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.RunOnUIThread
   nameWithType: MapControl.RunOnUIThread
-- uid: Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Maui.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Maui.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.Maui.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.Maui.MapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.Maui.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.Maui.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_Unsubscribe
@@ -38348,6 +38218,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.WinUI.MapControl.GetPixelDensity
+  name: GetPixelDensity()
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_GetPixelDensity
+  commentId: M:Mapsui.UI.WinUI.MapControl.GetPixelDensity
+  fullName: Mapsui.UI.WinUI.MapControl.GetPixelDensity()
+  nameWithType: MapControl.GetPixelDensity()
+- uid: Mapsui.UI.WinUI.MapControl.GetPixelDensity*
+  name: GetPixelDensity
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_GetPixelDensity_
+  commentId: Overload:Mapsui.UI.WinUI.MapControl.GetPixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.WinUI.MapControl.GetPixelDensity
+  nameWithType: MapControl.GetPixelDensity
 - uid: Mapsui.UI.WinUI.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
@@ -38533,19 +38416,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.WinUI.MapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.WinUI.MapControl.PixelDensity
-  fullName: Mapsui.UI.WinUI.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.WinUI.MapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.WinUI.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.WinUI.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
 - uid: Mapsui.UI.WinUI.MapControl.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_PropertyChanged
@@ -38604,32 +38474,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.WinUI.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.WinUI.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.WinUI.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.WinUI.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.WinUI.MapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.WinUI.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.WinUI.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.WinUI.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_Unsubscribe
@@ -38949,19 +38793,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.WindowsForms.MapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.WindowsForms.MapControl.PixelDensity
-  fullName: Mapsui.UI.WindowsForms.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.WindowsForms.MapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.WindowsForms.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
 - uid: Mapsui.UI.WindowsForms.MapControl.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_PropertyChanged
@@ -39020,32 +38851,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.WindowsForms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.WindowsForms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.WindowsForms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.WindowsForms.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.WindowsForms.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.WindowsForms.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.WindowsForms.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.WindowsForms.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.WindowsForms.MapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.WindowsForms.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.WindowsForms.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_Unsubscribe
@@ -39185,6 +38990,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Wpf.MapControl.GetPixelDensity
+  name: GetPixelDensity()
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetPixelDensity
+  commentId: M:Mapsui.UI.Wpf.MapControl.GetPixelDensity
+  fullName: Mapsui.UI.Wpf.MapControl.GetPixelDensity()
+  nameWithType: MapControl.GetPixelDensity()
+- uid: Mapsui.UI.Wpf.MapControl.GetPixelDensity*
+  name: GetPixelDensity
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetPixelDensity_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.GetPixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.GetPixelDensity
+  nameWithType: MapControl.GetPixelDensity
 - uid: Mapsui.UI.Wpf.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
@@ -39370,19 +39188,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.Wpf.MapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.Wpf.MapControl.PixelDensity
-  fullName: Mapsui.UI.Wpf.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.Wpf.MapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
 - uid: Mapsui.UI.Wpf.MapControl.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_PropertyChanged
@@ -39441,32 +39246,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Wpf.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Wpf.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.Wpf.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.Wpf.MapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.Wpf.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Unsubscribe
@@ -39597,6 +39376,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.iOS.MapControl.GetPixelDensity
+  name: GetPixelDensity()
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetPixelDensity
+  commentId: M:Mapsui.UI.iOS.MapControl.GetPixelDensity
+  fullName: Mapsui.UI.iOS.MapControl.GetPixelDensity()
+  nameWithType: MapControl.GetPixelDensity()
+- uid: Mapsui.UI.iOS.MapControl.GetPixelDensity*
+  name: GetPixelDensity
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetPixelDensity_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.GetPixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.GetPixelDensity
+  nameWithType: MapControl.GetPixelDensity
 - uid: Mapsui.UI.iOS.MapControl.GetRemoteMapInfoAsync(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetRemoteMapInfoAsync(ScreenPosition, Viewport, IEnumerable<ILayer>)
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetRemoteMapInfoAsync_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
@@ -39795,19 +39587,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.OpenInBrowser
   nameWithType: MapControl.OpenInBrowser
-- uid: Mapsui.UI.iOS.MapControl.PixelDensity
-  name: PixelDensity
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.iOS.MapControl.PixelDensity
-  fullName: Mapsui.UI.iOS.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.iOS.MapControl.PixelDensity*
-  name: PixelDensity
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
 - uid: Mapsui.UI.iOS.MapControl.PropertyChanged
   name: PropertyChanged
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_PropertyChanged
@@ -39866,32 +39645,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.iOS.MapControl.ToPixels*
-  name: ToPixels
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.iOS.MapControl.TouchesBegan(Foundation.NSSet,UIKit.UIEvent)
   name: TouchesBegan(NSSet, UIEvent?)
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_TouchesBegan_Foundation_NSSet_UIKit_UIEvent_
