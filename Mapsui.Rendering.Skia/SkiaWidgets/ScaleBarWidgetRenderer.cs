@@ -83,7 +83,7 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
 
         if (!points.Any()) throw new NotImplementedException($"A {nameof(ScaleBarWidget)} can not be drawn without line positions");
 
-        var envelop = new MRect(points.Select(p => p.GetExtent()));
+        var envelop = new MRect(points.Select(p => new MRect(p.X, p.Y)));
         envelop = envelop.Grow(scaleBar.StrokeWidthHalo * 0.5f * scaleBar.Scale);
 
         // Draw text
