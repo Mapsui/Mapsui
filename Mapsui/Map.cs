@@ -40,7 +40,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
-        Widgets.Add(CreateLoggingWidget());
+        Widgets.Add(CreateLoggingWidget(RefreshGraphics));
         Widgets.Add(CreatePerformanceWidget(this));
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
@@ -440,7 +440,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         return areAnimationsRunning;
     }
 
-    private static LoggingWidget CreateLoggingWidget() => new()
+    private static LoggingWidget CreateLoggingWidget(Action refreshGraphics) => new(refreshGraphics)
     {
         Margin = new MRect(10),
         VerticalAlignment = VerticalAlignment.Stretch,

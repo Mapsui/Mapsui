@@ -72,7 +72,7 @@ public sealed class TouchPointSample : ISample, IDisposable
     {
         var mapInfo = e.GetMapInfo(e.Map.Layers.Where(l => l.Name == "Layer"));
         _mousePosition!.Text = $"X: {Convert.ToInt32(mapInfo.ScreenPosition.X)}, Y: {Convert.ToInt32(mapInfo.ScreenPosition.Y)}";
-        _mousePosition.NeedsRedraw = true;
+        e.Map.RefreshGraphics();
         var clickLayer = e.Map.Layers.OfType<MemoryLayer>().First(l => l.Name == "Click Layer");
         var features = (List<IFeature>)clickLayer.Features;
         features.Add(new PointFeature(mapInfo.WorldPosition.X, mapInfo.WorldPosition.Y));
@@ -80,7 +80,7 @@ public sealed class TouchPointSample : ISample, IDisposable
         if (mapInfo is { Feature: PointFeature, Layer: MemoryLayer })
         {
             _label!.Text = _label.Text == "Not Selected" ? "Selected" : "Not Selected";
-            _label.NeedsRedraw = true;
+            e.Map.RefreshGraphics();
             e.Handled = true;
         }
     }

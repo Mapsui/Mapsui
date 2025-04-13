@@ -57,67 +57,29 @@ public class ScaleBarWidget : BaseWidget
         HorizontalAlignment = _defaultScaleBarHorizontalAlignment;
         VerticalAlignment = _defaultScaleBarVerticalAlignment;
 
-        _maxWidth = 100;
+        MaxWidth = 100;
         Height = 100;
-        _textAlignment = _defaultScaleBarAlignment;
-        _scaleBarMode = _defaultScaleBarMode;
+        TextAlignment = _defaultScaleBarAlignment;
+        ScaleBarMode = _defaultScaleBarMode;
 
-        _unitConverter = MetricUnitConverter.Instance;
+        UnitConverter = MetricUnitConverter.Instance;
     }
-
-    private double _maxWidth;
 
     /// <summary>
     /// Maximum usable width for scalebar. The real used width could be less, because we 
     /// want only integers as text.
     /// </summary>
-    public double MaxWidth
-    {
-        get => _maxWidth;
-        set
-        {
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (_maxWidth == value)
-                return;
-
-            _maxWidth = value;
-            Invalidate();
-        }
-    }
-
-    private Color _textColor = new(0, 0, 0);
+    public double MaxWidth { get; set; }
 
     /// <summary>
     /// Foreground color of scalebar and text
     /// </summary>
-    public Color TextColor
-    {
-        get => _textColor;
-        set
-        {
-            if (_textColor == value)
-                return;
-            _textColor = value;
-            Invalidate();
-        }
-    }
-
-    private Color _haloColor = new(255, 255, 255);
+    public Color TextColor { get; set; } = new(0, 0, 0);
 
     /// <summary>
     /// Halo color of scalebar and text, so that it is better visible
     /// </summary>
-    public Color Halo
-    {
-        get => _haloColor;
-        set
-        {
-            if (_haloColor == value)
-                return;
-            _haloColor = value;
-            Invalidate();
-        }
-    }
+    public Color Halo { get; set; } = new(255, 255, 255);
 
     public double Scale { get; } = 1;
 
@@ -136,105 +98,36 @@ public class ScaleBarWidget : BaseWidget
     /// </summary>
     public double TickLength { get; set; } = 3;
 
-    private Alignment _textAlignment;
-
     /// <summary>
     /// Alignment of text of scalebar
     /// </summary>
-    public Alignment TextAlignment
-    {
-        get => _textAlignment;
-        set
-        {
-            if (_textAlignment == value)
-                return;
-
-            _textAlignment = value;
-            Invalidate();
-        }
-    }
+    public Alignment TextAlignment { get; set; }
 
     /// <summary>
     /// Margin between end of tick and text
     /// </summary>
     public static double TextMargin => 1;
 
-    private Font? _font = _defaultFont;
-
     /// <summary>
     /// Font to use for drawing text
     /// </summary>
-    public Font? Font
-    {
-        get => _font ?? _defaultFont;
-        set
-        {
-            if (_font == value)
-                return;
-
-            _font = value;
-            Invalidate();
-        }
-    }
-
-    private IUnitConverter _unitConverter;
+    public Font? Font { get; set; }
 
     /// <summary>
     /// Normal unit converter for upper text. Default is MetricUnitConverter.
     /// </summary>
-    public IUnitConverter UnitConverter
-    {
-        get => _unitConverter;
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            if (_unitConverter == value)
-                return;
-
-            _unitConverter = value;
-            Invalidate();
-        }
-    }
-
-    private IUnitConverter? _secondaryUnitConverter;
+    public IUnitConverter UnitConverter { get; set; }
 
     /// <summary>
     /// Secondary unit converter for lower text if ScaleBarMode is Both. Default is ImperialUnitConverter.
     /// </summary>
-    public IUnitConverter? SecondaryUnitConverter
-    {
-        get => _secondaryUnitConverter;
-        set
-        {
-            if (_secondaryUnitConverter == value)
-            {
-                return;
-            }
-
-            _secondaryUnitConverter = value;
-            Invalidate();
-        }
-    }
-
-    private ScaleBarMode _scaleBarMode;
+    public IUnitConverter? SecondaryUnitConverter { get; set; }
 
     /// <summary>
     /// ScaleBarMode of scalebar. Could be Single to show only one or Both for showing two units.
     /// </summary>
-    public ScaleBarMode ScaleBarMode
-    {
-        get => _scaleBarMode;
-        set
-        {
-            if (_scaleBarMode == value)
-            {
-                return;
-            }
+    public ScaleBarMode ScaleBarMode { get; set; }
 
-            _scaleBarMode = value;
-            Invalidate();
-        }
-    }
 
     /// <summary>
     /// Draw a rectangle around the scale bar for testing
@@ -287,15 +180,15 @@ public class ScaleBarWidget : BaseWidget
 
         var maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
 
-        UpdateEnvelope(_maxWidth, Height, viewport.Width, viewport.Height);
+        UpdateEnvelope(MaxWidth, Height, viewport.Width, viewport.Height);
 
         var posX = (float)(Envelope?.MinX ?? 0.0);
         var posY = (float)(Envelope?.MinY ?? 0.0);
 
         var left = posX + stroke * 0.5f * Scale;
-        var right = posX + _maxWidth - stroke * 0.5f * Scale;
-        var center1 = posX + (_maxWidth - scaleBarLength1) / 2;
-        var center2 = posX + (_maxWidth - scaleBarLength2) / 2;
+        var right = posX + MaxWidth - stroke * 0.5f * Scale;
+        var center1 = posX + (MaxWidth - scaleBarLength1) / 2;
+        var center2 = posX + (MaxWidth - scaleBarLength2) / 2;
         // Top position is Y in the middle of scale bar line
         var top = posY + (drawNoSecondScaleBar ? Height - stroke * 0.5f * Scale : Height * 0.5f);
 
@@ -395,14 +288,14 @@ public class ScaleBarWidget : BaseWidget
     {
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
-        UpdateEnvelope(_maxWidth, Height, viewport.Width, viewport.Height);
+        UpdateEnvelope(MaxWidth, Height, viewport.Width, viewport.Height);
 
         var posX = Envelope?.MinX ?? 0.0;
         var posY = Envelope?.MinY ?? 0.0;
 
         var left = posX + (stroke + TextMargin) * Scale;
-        var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize1.Width;
-        var right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - textSize2.Width;
+        var right1 = posX + MaxWidth - (stroke + TextMargin) * Scale - textSize1.Width;
+        var right2 = posX + MaxWidth - (stroke + TextMargin) * Scale - textSize2.Width;
         var top = posY;
         var bottom = posY + Height - textSize2.Height;
 
