@@ -32,6 +32,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public MapControl()
     {
+        UseGPU = !IsMaui9();
         SharedConstructor();
 
         View view;
@@ -68,6 +69,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
         view.SizeChanged += View_SizeChanged;
         Content = view;
+    }
+
+    private bool IsMaui9()
+    {
+        var frameworkDescription = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+        return frameworkDescription.Contains(".NET 9");
     }
 
     private void View_SizeChanged(object? sender, EventArgs e)
