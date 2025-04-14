@@ -365,7 +365,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             }
             else
             {
-                _mapMyLocationButton!.Image = "embedded://Mapsui.UI.Maui.Resources.Images.LocationNoCenter.svg";
+                _mapMyLocationButton!.Image = "embedded://Mapsui.UI.Maui.Images.LocationNoCenter.svg";
             }
 
             Refresh();
