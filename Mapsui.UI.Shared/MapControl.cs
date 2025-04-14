@@ -134,11 +134,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         while (_isRunning)
         {
             // What is happening here?
-            // Always wait for the previous Draw to finish, so there are no dropped frames. This is a way to adapt to the Draw duration.
-            // When done always wait for some small duration, currently 8 ms, so that the process is never 100% busy drawing.
-            // Then
-            // - either wait until the start of the previous Draw is 16 ms ago. The previous delay is taken into account, so the wait will be max 8 ms (16 - 8) with the current settings..
-            // - Or start right away if it is already more then 16 ms ago.
+            // - Always wait for the previous draw to finish, so there are no dropped frames anymore. By waiting the
+            // loop update frequency can adapt to longer drawing durations.
+            // - After that always wait for 8 ms so that the process is never 100% busy drawing.
+            // - Then depending on how long drawing took we either don't wait (when 16 ms have already passed)
+            // or wait until the start of the previous draw is 16 ms ago. The previous delay is taken into account
+            // so the wait will be between 0 and 8 ms depending on how long the previous draw took.
+            // - Then wait for _needsRefresh to be Set. If it was already Set it won't wait.
 
             await _isDrawingDone.WaitAsync(); // Wait for previous Draw to finish.
             await Task.Delay(_minimumTimeBetweenInvalidates).ConfigureAwait(false); // Always wait at least some period in between Draw and Invalidate calls.
