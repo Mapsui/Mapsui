@@ -58,10 +58,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private int _minimumTimeBetweenInvalidates = 8;
     // The minimum time in between the start of two draw calls in ms
     private int _minimumTimeBetweenStartOfDrawCall = 16;
-    private AsyncCounterEvent signalThatDrawingIsDone = new();
+    private readonly AsyncAutoResetEvent _isDrawingDone = new();
+    private readonly AsyncAutoResetEvent _needsRefresh = new ();
     private static bool _firstDraw = true;
     private bool _isRunning = true;
-    private bool _needsRefresh = true;
     private int _timestampStartDraw;
     // Stopwatch for measuring drawing times
     private readonly System.Diagnostics.Stopwatch _stopwatch = new();
@@ -140,27 +140,29 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             // - either wait until the start of the previous Draw is 16 ms ago. The previous delay is taken into account, so the wait will be max 8 ms (16 - 8) with the current settings..
             // - Or start right away if it is already more then 16 ms ago.
 
-            await signalThatDrawingIsDone.WaitAsync(); // Wait for previous Draw to finish.
+            await _isDrawingDone.WaitAsync(); // Wait for previous Draw to finish.
             await Task.Delay(_minimumTimeBetweenInvalidates).ConfigureAwait(false); // Always wait at least some period in between Draw and Invalidate calls.
             await Task.Delay(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)).ConfigureAwait(false); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall
+            await _needsRefresh.WaitAsync();
 
-            if (Map is Map map)
-            {
-                if (map.UpdateAnimations() == true) // Are there animations running on the Map
-                    _needsRefresh = true;
+            _invalidate?.Invoke();
 
-                if (map.Navigator.UpdateAnimations()) // Are there animations running on the Navigator
-                    _needsRefresh = true;
-            }
-
-            if (_needsRefresh)
-            {
-                _invalidate?.Invoke();
-                _needsRefresh = false;
-            }
-            else
-                signalThatDrawingIsDone.Set(); // No new Draw is started so the loop should not wait for it to end.
+            if (UpdateAnimations(Map)) 
+                _needsRefresh.Set(); // While animating trigger another loop.
         }
+    }
+
+    // Returns true if there are active animations.
+    private static bool UpdateAnimations(Map? map)
+    {
+        if (map is Map localMap)
+        {
+            if (localMap.UpdateAnimations()) // Are there animations running on the Map
+                return true;
+            if (localMap.Navigator.UpdateAnimations()) // Are there animations running on the Navigator
+                return true;
+        }
+        return false;
     }
 
     private protected void SharedDraw(object canvas)
@@ -186,7 +188,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         
         Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
 
-        signalThatDrawingIsDone.Set();
+        _isDrawingDone.Set();
         _stopwatch.Stop();
 
         // If we are interested in performance measurements, we save the new drawing time
@@ -284,7 +286,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public void RefreshGraphics()
     {
-        _needsRefresh = true;
+        _needsRefresh.Set();
     }
 
     private void Map_DataChanged(object? sender, DataChangedEventArgs? e)

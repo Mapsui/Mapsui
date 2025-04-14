@@ -405,7 +405,7 @@ public class Navigator
     /// <param name="duration">Duration for animation in milliseconds.</param>
     public void FlyTo(MPoint center, double maxResolution, long duration = 500)
     {
-        _animations = FlyToAnimation.Create(Viewport, center, maxResolution, duration);
+        SetViewportAnimations(FlyToAnimation.Create(Viewport, center, maxResolution, duration));
     }
 
     /// <summary>
@@ -441,7 +441,7 @@ public class Navigator
         if (PanLock)
             return;
 
-        _animations = FlingAnimation.Create(velocityX, velocityY, maxDuration);
+        SetViewportAnimations(FlingAnimation.Create(velocityX, velocityY, maxDuration));
     }
 
     public void Manipulate(Manipulation? manipulation)
@@ -582,6 +582,7 @@ public class Navigator
     public void SetViewportAnimations(List<AnimationEntry<Viewport>> animations)
     {
         _animations = animations;
+        OnViewportChanged(Viewport); // Call OnViewportChanged with current Viewport to trigger the invalidate loop so animations will be updated.
     }
 
     private void SetViewportWithLimit(Viewport viewport)
@@ -676,7 +677,7 @@ public class Navigator
             // started to overload to the data refresh.
             if (_animations.Any())
                 OnRefreshDataRequest(ChangeType.Continuous);
-            _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
+            SetViewportAnimations(ViewportAnimation.Create(Viewport, viewport, duration, easing));
         }
     }
 
