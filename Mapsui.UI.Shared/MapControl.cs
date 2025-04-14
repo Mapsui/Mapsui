@@ -143,10 +143,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             // so the wait will be between 0 and 8 ms depending on how long the previous draw took.
             // - Then wait for _needsRefresh to be Set. If it was already Set it won't wait.
 
-            await _isDrawingDone.WaitAsync(); // Wait for previous Draw to finish.
+            await _isDrawingDone.WaitAsync().ConfigureAwait(false); // Wait for previous Draw to finish.
             await Task.Delay(_minimumTimeBetweenInvalidates).ConfigureAwait(false); // Always wait at least some period in between Draw and Invalidate calls.
             await Task.Delay(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)).ConfigureAwait(false); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall.
-            await _needsRefresh.WaitAsync(); // Wait if there was no call to _needsRefresh.Set() yet.
+            await _needsRefresh.WaitAsync().ConfigureAwait(false); // Wait if there was no call to _needsRefresh.Set() yet.
 
             var isAnimating = UpdateAnimations(Map);
             
