@@ -139,7 +139,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             // - After that always wait for 8 ms so that the process is never 100% busy drawing, even when drawing 
             // takes long.
             // - Then depending on how long drawing took we either don't wait (when 16 ms have already passed)
-            // or wait until the start of the previous draw is 16 ms ago. The previous delay is taken into account
+            // or wait until 16 ms have elapsed since the previous start of drawing. The previous delay is taken into account
             // so the wait will be between 0 and 8 ms depending on how long the previous draw took.
             // - Then wait for _needsRefresh to be Set. If it was already Set it won't wait.
 
