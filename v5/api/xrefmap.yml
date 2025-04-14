@@ -41201,22 +41201,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.BaseWidget.InputTransparent
   nameWithType: BaseWidget.InputTransparent
-- uid: Mapsui.Widgets.BaseWidget.Invalidate(System.String)
-  name: Invalidate(string)
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Invalidate_System_String_
-  commentId: M:Mapsui.Widgets.BaseWidget.Invalidate(System.String)
-  name.vb: Invalidate(String)
-  fullName: Mapsui.Widgets.BaseWidget.Invalidate(string)
-  fullName.vb: Mapsui.Widgets.BaseWidget.Invalidate(String)
-  nameWithType: BaseWidget.Invalidate(string)
-  nameWithType.vb: BaseWidget.Invalidate(String)
-- uid: Mapsui.Widgets.BaseWidget.Invalidate*
-  name: Invalidate
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Invalidate_
-  commentId: Overload:Mapsui.Widgets.BaseWidget.Invalidate
-  isSpec: "True"
-  fullName: Mapsui.Widgets.BaseWidget.Invalidate
-  nameWithType: BaseWidget.Invalidate
 - uid: Mapsui.Widgets.BaseWidget.Margin
   name: Margin
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_Margin
@@ -41230,19 +41214,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.BaseWidget.Margin
   nameWithType: BaseWidget.Margin
-- uid: Mapsui.Widgets.BaseWidget.NeedsRedraw
-  name: NeedsRedraw
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_NeedsRedraw
-  commentId: P:Mapsui.Widgets.BaseWidget.NeedsRedraw
-  fullName: Mapsui.Widgets.BaseWidget.NeedsRedraw
-  nameWithType: BaseWidget.NeedsRedraw
-- uid: Mapsui.Widgets.BaseWidget.NeedsRedraw*
-  name: NeedsRedraw
-  href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_NeedsRedraw_
-  commentId: Overload:Mapsui.Widgets.BaseWidget.NeedsRedraw
-  isSpec: "True"
-  fullName: Mapsui.Widgets.BaseWidget.NeedsRedraw
-  nameWithType: BaseWidget.NeedsRedraw
 - uid: Mapsui.Widgets.BaseWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
   name: OnPointerMoved(WidgetEventArgs)
   href: pages/Mapsui.Widgets.BaseWidget.html#Mapsui_Widgets_BaseWidget_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_
@@ -41873,19 +41844,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.IWidget.Margin
   nameWithType: IWidget.Margin
-- uid: Mapsui.Widgets.IWidget.NeedsRedraw
-  name: NeedsRedraw
-  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_NeedsRedraw
-  commentId: P:Mapsui.Widgets.IWidget.NeedsRedraw
-  fullName: Mapsui.Widgets.IWidget.NeedsRedraw
-  nameWithType: IWidget.NeedsRedraw
-- uid: Mapsui.Widgets.IWidget.NeedsRedraw*
-  name: NeedsRedraw
-  href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_NeedsRedraw_
-  commentId: Overload:Mapsui.Widgets.IWidget.NeedsRedraw
-  isSpec: "True"
-  fullName: Mapsui.Widgets.IWidget.NeedsRedraw
-  nameWithType: IWidget.NeedsRedraw
 - uid: Mapsui.Widgets.IWidget.OnPointerMoved(Mapsui.Widgets.WidgetEventArgs)
   name: OnPointerMoved(WidgetEventArgs)
   href: pages/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_OnPointerMoved_Mapsui_Widgets_WidgetEventArgs_
@@ -42019,15 +41977,15 @@ references:
   commentId: T:Mapsui.Widgets.InfoWidgets.LoggingWidget
   fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget
   nameWithType: LoggingWidget
-- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor
-  name: LoggingWidget()
-  href: pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget__ctor
-  commentId: M:Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor
-  name.vb: New()
-  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LoggingWidget()
-  fullName.vb: Mapsui.Widgets.InfoWidgets.LoggingWidget.New()
-  nameWithType: LoggingWidget.LoggingWidget()
-  nameWithType.vb: LoggingWidget.New()
+- uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor(System.Action)
+  name: LoggingWidget(Action)
+  href: pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget__ctor_System_Action_
+  commentId: M:Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor(System.Action)
+  name.vb: New(Action)
+  fullName: Mapsui.Widgets.InfoWidgets.LoggingWidget.LoggingWidget(System.Action)
+  fullName.vb: Mapsui.Widgets.InfoWidgets.LoggingWidget.New(System.Action)
+  nameWithType: LoggingWidget.LoggingWidget(Action)
+  nameWithType.vb: LoggingWidget.New(Action)
 - uid: Mapsui.Widgets.InfoWidgets.LoggingWidget.#ctor*
   name: LoggingWidget
   href: pages/Mapsui.Widgets.InfoWidgets.LoggingWidget.html#Mapsui_Widgets_InfoWidgets_LoggingWidget__ctor_
