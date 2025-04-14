@@ -147,10 +147,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             await Task.Delay(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)).ConfigureAwait(false); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall
             await _needsRefresh.WaitAsync();
 
-            _invalidate?.Invoke();
-
             if (UpdateAnimations(Map)) 
-                _needsRefresh.Set(); // While animating trigger another loop.
+                _needsRefresh.Set(); // While still animating trigger another loop. We want to update the animations before drawing. The next loop will wait for the current draw to finish.
+            
+            _invalidate?.Invoke();
         }
     }
 
