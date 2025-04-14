@@ -49,6 +49,7 @@ public class RulerWidgetSample : ISample
         {
             var rulerWidget = e.Map.Widgets.OfType<RulerWidget>().Single();
             rulerWidget.IsActive = !rulerWidget.IsActive;
+            e.Map.RefreshGraphics();
         }
     };
 

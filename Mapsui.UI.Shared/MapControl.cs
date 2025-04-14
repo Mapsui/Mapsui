@@ -151,13 +151,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
                 if (map.Navigator.UpdateAnimations()) // Are there animations running on the Navigator
                     _needsRefresh = true;
-
-                if (map.Widgets.Any(w => w.NeedsRedraw)) // Do the widgets require a redraw
-                {
-                    var w = (map.Widgets.Where(w => w.NeedsRedraw).FirstOrDefault());
-                    Console.WriteLine(w);
-                    _needsRefresh = true;
-                }
             }
 
             if (_needsRefresh)

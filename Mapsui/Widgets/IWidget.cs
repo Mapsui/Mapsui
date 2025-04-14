@@ -45,11 +45,6 @@ public interface IWidget
     bool Enabled { get; set; }
 
     /// <summary>
-    /// Flag for redrawing widget in the next drawing cycle
-    /// </summary>
-    bool NeedsRedraw { get; set; }
-
-    /// <summary>
     /// Type of area used for  manipulation (e.g. touch, mouse) input events.
     /// </summary>
     InputAreaType InputAreaType { get; }

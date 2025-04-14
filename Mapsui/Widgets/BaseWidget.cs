@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets;
 
 public abstract class BaseWidget : IWidget
 {
-    private HorizontalAlignment _horizontalAlignment = HorizontalAlignment.Right;
-
     /// <summary>
     /// Type of area to use for touch events. The default is WidgetArea. This needs to be set to 
     /// 'Map' in the constructor if widget want to receive manipulation events from all over the map.
@@ -16,141 +13,42 @@ public abstract class BaseWidget : IWidget
     /// <summary>
     /// Horizontal alignment of Widget
     /// </summary>
-    public HorizontalAlignment HorizontalAlignment
-    {
-        get => _horizontalAlignment;
-        set
-        {
-            if (_horizontalAlignment == value)
-                return;
-            _horizontalAlignment = value;
-            Invalidate();
-        }
-    }
-
-    private VerticalAlignment _verticalAlignment { get; set; } = VerticalAlignment.Bottom;
+    public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Right;
 
     /// <summary>
     /// Vertical alignment of Widget
     /// </summary>
-    public VerticalAlignment VerticalAlignment
-    {
-        get => _verticalAlignment;
-        set
-        {
-            if (_verticalAlignment == value)
-                return;
-            _verticalAlignment = value;
-            Invalidate();
-        }
-    }
-
-    private MRect _margin = new MRect(2);
+    public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Bottom;
 
     /// <summary>
     /// Margin outside of the widget
     /// </summary>
-    public MRect Margin
-    {
-        get => _margin;
-        set
-        {
-            if (_margin == value)
-                return;
-            _margin = value;
-            Invalidate();
-        }
-    }
-
-    private MPoint _position = new MPoint(0, 0);
+    public MRect Margin { get; set; } = new(2);
 
     /// <summary>
     /// Position for absolute alignment
     /// </summary>
-    public MPoint Position
-    {
-        get => _position;
-        set
-        {
-            if (_position.Equals(value))
-                return;
-            _position = value;
-            Invalidate();
-        }
-    }
-
-    private double _width;
+    public MPoint Position { get; set; } = new MPoint(0, 0);
 
     /// <summary>
     /// Width of Widget
     /// </summary>
-    public double Width
-    {
-        get => _width;
-        set
-        {
-            if (_width == value)
-                return;
-            _width = value;
-            Invalidate();
-        }
-    }
-
-    private double _height;
+    public double Width { get; set; }
 
     /// <summary>
     /// Height of Widget
     /// </summary>
-    public double Height
-    {
-        get => _height;
-        set
-        {
-            if (_height == value)
-                return;
-            _height = value;
-            Invalidate();
-        }
-    }
-
-    private MRect? _envelope;
+    public double Height { get; set; }
 
     /// <summary>
     /// Envelope of Widget
     /// </summary>
-    public MRect? Envelope
-    {
-        get => _envelope;
-        set
-        {
-            if (_envelope == value)
-                return;
-            _envelope = value;
-            Invalidate();
-        }
-    }
-
-    private bool _enabled = true;
+    public MRect? Envelope { get; set; }
 
     /// <summary>
     /// Is Widget visible on screen
     /// </summary>
-    public bool Enabled
-    {
-        get => _enabled;
-        set
-        {
-            if (_enabled == value)
-                return;
-            _enabled = value;
-            Invalidate();
-        }
-    }
-
-    /// <summary>
-    /// Flag for redrawing widget in the next drawing cycle
-    /// </summary>
-    public bool NeedsRedraw { get; set; } = false;
+    public bool Enabled { get; set; } = true;
 
     public bool InputTransparent { get; init; }
 
@@ -202,11 +100,6 @@ public abstract class BaseWidget : IWidget
         var maxY = VerticalAlignment == VerticalAlignment.Stretch ? screenHeight - Margin.Bottom : minY + maxHeight;
 
         Envelope = new MRect(minX, minY, maxX, maxY);
-    }
-
-    public virtual void Invalidate([CallerMemberName] string name = "")
-    {
-        NeedsRedraw = true;
     }
 
     /// <inheritdoc/>
