@@ -111,7 +111,7 @@ public class ScaleBarWidget : BaseWidget
     /// <summary>
     /// Font to use for drawing text
     /// </summary>
-    public Font? Font { get; set; }
+    public Font? Font { get; set; } = _defaultFont;
 
     /// <summary>
     /// Normal unit converter for upper text. Default is MetricUnitConverter.
