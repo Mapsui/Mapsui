@@ -238,8 +238,6 @@ public class MyLocationLayer : BaseLayer
 
                 if (map.Navigator.Viewport.ToExtent() is not null)
                 {
-                    var fetchInfo = new FetchInfo(map.Navigator.Viewport.ToSection(), map.CRS,
-                        ChangeType.Discrete);
                     _animationMyLocation = new AnimationEntry<MapView>(
                         _animationMyLocationStart,
                         _animationMyLocationEnd,
@@ -260,7 +258,7 @@ public class MyLocationLayer : BaseLayer
                         },
                         final: (mapView, entry) =>
                         {
-                            mapView.Map?.RefreshData(fetchInfo);
+                            mapView.Map?.RefreshData();
                             if (MyLocation != _animationMyLocationEnd)
                             {
                                 InternalUpdateMyLocation(_animationMyLocationEnd);

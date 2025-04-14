@@ -107,27 +107,27 @@ public partial class MapControl : UIView, IMapControl
         MultipleTouchEnabled = true;
         UserInteractionEnabled = true;
 
-        Map?.Navigator.SetSize(ViewportWidth, ViewportHeight);
+        SharedOnSizeChanged(GetWidth(), GetHeight());
     }
 
     private void OnPaintSurface(object? sender, SKPaintMetalSurfaceEventArgs args)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
         var canvas = args.Surface.Canvas;
-        canvas.Scale(PixelDensity, PixelDensity);
-        CommonDrawControl(canvas);
+        canvas.Scale(pixelDensity, pixelDensity);
+        SharedDraw(canvas);
     }
 
     private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
         var canvas = args.Surface.Canvas;
-        canvas.Scale(PixelDensity, PixelDensity);
-        CommonDrawControl(canvas);
+        canvas.Scale(pixelDensity, pixelDensity);
+        SharedDraw(canvas);
     }
 
     public override void TouchesBegan(NSSet touches, UIEvent? e)
@@ -208,7 +208,7 @@ public partial class MapControl : UIView, IMapControl
             }
 
             base.Frame = value;
-            SetViewportSize();
+            SharedOnSizeChanged(GetWidth(), GetHeight());
             OnPropertyChanged();
         }
     }
@@ -219,7 +219,7 @@ public partial class MapControl : UIView, IMapControl
         if (_metalCanvas == null || _canvas == null) return;
 
         base.LayoutMarginsDidChange();
-        SetViewportSize();
+        SharedOnSizeChanged(GetWidth(), GetHeight());
     }
 
     public void OpenInBrowser(string url)
@@ -247,37 +247,31 @@ public partial class MapControl : UIView, IMapControl
             base.Dispose(disposing);
         }
 
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
-    private double ViewportWidth
-    {
-        get
-        {
-            InitializeCanvas();
-            return UseGPU
-                ? _metalCanvas!.Frame.Width
-                : _canvas!.Frame.Width;
-        }
-    }
-
-    private double ViewportHeight
-    {
-        get
-        {
-            InitializeCanvas();
-            return UseGPU
-                ? _metalCanvas!.Frame.Height
-                : _canvas!.Frame.Height;
-        }
-    }
-
-    private double GetPixelDensity()
+    private double GetWidth()
     {
         InitializeCanvas();
         return UseGPU
-            ? (double)_metalCanvas!.ContentScaleFactor
-            : (double)_canvas!.ContentScaleFactor;
+            ? _metalCanvas!.Frame.Width
+            : _canvas!.Frame.Width;
+    }
+
+    private double GetHeight()
+    {
+        InitializeCanvas();
+        return UseGPU
+            ? _metalCanvas!.Frame.Height
+            : _canvas!.Frame.Height;
+    }
+
+    public float? GetPixelDensity()
+    {
+        InitializeCanvas();
+        return UseGPU
+            ? (float)_metalCanvas!.ContentScaleFactor
+            : (float)_canvas!.ContentScaleFactor;
     }
 
     private static bool GetShiftPressed() => false;

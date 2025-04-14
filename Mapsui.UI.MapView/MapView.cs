@@ -696,8 +696,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         if (map.Navigator.Viewport.ToExtent() is not null)
         {
-            var fetchInfo = new FetchInfo(map.Navigator.Viewport.ToSection(), map.CRS, ChangeType.Continuous);
-            map.RefreshData(fetchInfo);
+            Map?.RefreshData(ChangeType.Continuous);
         }
 
         // Repaint map, because something could have changed
@@ -711,8 +710,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         if (map.Navigator.Viewport.ToExtent() is not null)
         {
-            var fetchInfo = new FetchInfo(map.Navigator.Viewport.ToSection(), map.CRS, ChangeType.Continuous);
-            map.RefreshData(fetchInfo);
+            Map?.RefreshData(ChangeType.Continuous);
         }
 
         // Repaint map, because something could have changed

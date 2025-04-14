@@ -40,7 +40,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
     private void LocalConstructor()
     {
-        _invalidate = () => { RunOnUIThread(RefreshGraphicsWithTryCatch); };
+        _invalidate = () => RunOnUIThread(RefreshGraphicsWithTryCatch);
 
         SetBackgroundColor(Color.Transparent);
         _canvas?.Dispose();
@@ -48,22 +48,20 @@ public partial class MapControl : ViewGroup, IMapControl
         _mainLooperHandler?.Dispose();
         _mainLooperHandler = new Handler(Looper.MainLooper!);
 
-        SetViewportSize(); // todo: check if size is available, perhaps we need a load event
-
         // Pointer events
         Touch += MapControl_Touch;
     }
 
     private void CanvasOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
         var canvas = args.Surface.Canvas;
 
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     public SkiaRenderMode RenderMode
@@ -95,7 +93,13 @@ public partial class MapControl : ViewGroup, IMapControl
     protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
     {
         base.OnSizeChanged(width, height, oldWidth, oldHeight);
-        SetViewportSize();
+        if (GetPixelDensity() is float pixelDensity) // In android the width and height are in pixels. The MapControl needs the size in device independent units. That is why we need PixelDensity here
+        {
+            SharedOnSizeChanged(
+                ToDeviceIndependentUnits(width, pixelDensity),
+                ToDeviceIndependentUnits(height, pixelDensity));
+        }
+        Refresh();
     }
 
     private void RunOnUIThread(Action action)
@@ -108,22 +112,24 @@ public partial class MapControl : ViewGroup, IMapControl
 
     private void CanvasOnPaintSurfaceGL(object? sender, SKPaintGLSurfaceEventArgs args)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
         var canvas = args.Surface.Canvas;
 
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
     public void MapControl_Touch(object? sender, TouchEventArgs args)
     {
         if (args.Event is null)
             return;
+        if (GetPixelDensity() is not float pixelDensity)
+            return;
 
-        var positions = GetScreenPositions(args.Event, this, PixelDensity);
+        var positions = GetScreenPositions(args.Event, this, pixelDensity);
 
         switch (args.Event.Action)
         {
@@ -141,8 +147,6 @@ public partial class MapControl : ViewGroup, IMapControl
                 break;
             case MotionEventActions.Up:
                 OnPointerReleased(positions);
-
-
                 break;
         }
     }
@@ -160,28 +164,6 @@ public partial class MapControl : ViewGroup, IMapControl
             result[i] = new ScreenPosition(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
                 .ToDeviceIndependentUnits(pixelDensity);
         return result;
-    }
-
-    /// <summary>
-    /// Gets the screen position in device independent units relative to the MapControl.
-    /// </summary>
-    /// <param name="motionEvent"></param>
-    /// <param name="view"></param>
-    /// <returns></returns>
-    private ScreenPosition GetScreenPosition(MotionEvent motionEvent, View view)
-    {
-        return GetScreenPositionInPixels(motionEvent, view).ToDeviceIndependentUnits(PixelDensity);
-    }
-
-    /// <summary>
-    /// Gets the screen position in pixels relative to the MapControl.
-    /// </summary>
-    /// <param name="motionEvent"></param>
-    /// <param name="view"></param>
-    /// <returns></returns>
-    private static ScreenPosition GetScreenPositionInPixels(MotionEvent motionEvent, View view)
-    {
-        return new ScreenPosition(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top);
     }
 
     private void RefreshGraphicsWithTryCatch()
@@ -207,7 +189,7 @@ public partial class MapControl : ViewGroup, IMapControl
         SetBounds(_canvas, l, t, r, b);
     }
 
-    private static void SetBounds(View? view, int l, int t, int r, int b)
+    private void SetBounds(View? view, int l, int t, int r, int b)
     {
         if (view == null)
             return;
@@ -216,6 +198,14 @@ public partial class MapControl : ViewGroup, IMapControl
         view.Bottom = b;
         view.Left = l;
         view.Right = r;
+
+        if (GetPixelDensity() is float pixelDensity)  // In android the width and height are in pixels. The MapControl needs the size in device independent units. That is why we need PixelDensity here
+        {
+            SharedOnSizeChanged(
+                ToDeviceIndependentUnits(view.Width, pixelDensity),
+                ToDeviceIndependentUnits(view.Height, pixelDensity));
+        }
+        Refresh();
     }
 
     public void OpenInBrowser(string url)
@@ -238,13 +228,10 @@ public partial class MapControl : ViewGroup, IMapControl
             _mainLooperHandler?.Dispose();
             _canvas?.Dispose();
         }
-        CommonDispose(disposing);
+        SharedDispose(disposing);
 
         base.Dispose(disposing);
     }
-
-    private double ViewportWidth => ToDeviceIndependentUnits(Width);
-    private double ViewportHeight => ToDeviceIndependentUnits(Height);
 
     /// <summary>
     /// In native Android touch positions are in pixels whereas the canvas needs
@@ -252,10 +239,8 @@ public partial class MapControl : ViewGroup, IMapControl
     /// and symbols will be too small). This method converts pixels to device independent units.
     /// </summary>
     /// <returns>The pixels given as input translated to device independent units.</returns>
-    private double ToDeviceIndependentUnits(int pixelCoordinate)
-    {
-        return pixelCoordinate / PixelDensity;
-    }
+    private static double ToDeviceIndependentUnits(int pixelCoordinate, float pixelDensity) =>
+        pixelCoordinate / pixelDensity;
 
     private SKCanvasView StartSoftwareRenderMode()
     {
@@ -293,9 +278,9 @@ public partial class MapControl : ViewGroup, IMapControl
         }
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensity()
     {
-        return Resources?.DisplayMetrics?.Density ?? 0d;
+        return Resources?.DisplayMetrics?.Density;
     }
 
     private static bool GetShiftPressed() => false;

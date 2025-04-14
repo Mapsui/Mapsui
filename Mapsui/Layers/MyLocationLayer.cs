@@ -27,8 +27,8 @@ public class MyLocationLayer : BaseLayer, IDisposable
     private static readonly string _stillImageSource = "embedded://Mapsui.Resources.Images.MyLocationStill.svg";
     private static readonly string _directionImageSource = "embedded://Mapsui.Resources.Images.MyLocationDir.svg";
 
-    private MPoint? _animationMyLocationStart;
-    private MPoint? _animationMyLocationEnd;
+    private MPoint? _animationStart;
+    private MPoint? _animationEnd;
 
     private readonly ConcurrentHashSet<AnimationEntry<Map>> _animations = [];
     private readonly List<IFeature> _features;
@@ -226,15 +226,16 @@ public class MyLocationLayer : BaseLayer, IDisposable
             if (animated)
             {
                 // Save values for new animation
-                _animationMyLocationStart = MyLocation;
-                _animationMyLocationEnd = newLocation;
-                var deltaX = _animationMyLocationEnd.X - _animationMyLocationStart.X;
-                var deltaY = _animationMyLocationEnd.Y - _animationMyLocationStart.Y;
+                _animationStart = MyLocation;
+                _animationEnd = newLocation;
+                var deltaX = _animationEnd.X - _animationStart.X;
+                var deltaY = _animationEnd.Y - _animationStart.Y;
 
                 if (_map.Navigator.Viewport.ToExtent() is not null)
                 {
-                    // Refresh the destination viewport at the start of the animation so it has time to load.
-                    _map.RefreshData(CreateDestinationFetchInfo(_map, _animationMyLocationEnd));
+                    // Refresh the end viewport at the start of the animation so it has time to load.
+                    var endViewport = _map.Navigator.Viewport with { CenterX = _animationEnd.X, CenterY = _animationEnd.Y };
+                    _map.RefreshData(endViewport);
 
                     _animationMyLocation = new AnimationEntry<Map>(
                         MyLocation,
@@ -243,14 +244,14 @@ public class MyLocationLayer : BaseLayer, IDisposable
                         animationEnd: 1,
                         tick: (map, entry, v) =>
                         {
-                            var modified = InternalUpdateMyLocation(new MPoint(_animationMyLocationStart.X + deltaX * v, _animationMyLocationStart.Y + deltaY * v));
+                            var modified = InternalUpdateMyLocation(new MPoint(_animationStart.X + deltaX * v, _animationStart.Y + deltaY * v));
                             return new AnimationResult<Map>(map, true);
                         },
                         final: (map, entry) =>
                         {
-                            if (!MyLocation.Equals(_animationMyLocationEnd))
+                            if (!MyLocation.Equals(_animationEnd))
                             {
-                                InternalUpdateMyLocation(_animationMyLocationEnd);
+                                InternalUpdateMyLocation(_animationEnd);
                             }
 
                             return new AnimationResult<Map>(map, false);
@@ -262,7 +263,7 @@ public class MyLocationLayer : BaseLayer, IDisposable
                     // Update viewport
                     if (_isCentered)
                     {
-                        _map?.Navigator.CenterOn(_animationMyLocationEnd, 1000, Easing.Linear);
+                        _map?.Navigator.CenterOn(_animationEnd, 1000, Easing.Linear);
                     }
                 }
             }
@@ -277,12 +278,6 @@ public class MyLocationLayer : BaseLayer, IDisposable
                 }
             }
         }
-    }
-
-    private static FetchInfo CreateDestinationFetchInfo(Map map, MPoint destination)
-    {
-        var destinationViewport = map.Navigator.Viewport with { CenterX = destination.X, CenterY = destination.Y };
-        return new FetchInfo(destinationViewport.ToSection(), map.CRS, ChangeType.Discrete);
     }
 
     /// <summary>

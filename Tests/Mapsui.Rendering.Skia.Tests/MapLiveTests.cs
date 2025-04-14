@@ -134,7 +134,6 @@ public class MapLiveTests
         await TestSampleAsync(sample);
     }
 
-
     private static async Task DisplayMapAsync(IMapControl mapControl)
     {
         await mapControl.WaitForLoadingAsync().ConfigureAwait(false);
