@@ -136,7 +136,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             // What is happening here?
             // - Always wait for the previous draw to finish, so there are no dropped frames anymore. By waiting the
             // loop update frequency can adapt to longer drawing durations.
-            // - After that always wait for 8 ms so that the process is never 100% busy drawing.
+            // - After that always wait for 8 ms so that the process is never 100% busy drawing, even when drawing 
+            // takes long.
             // - Then depending on how long drawing took we either don't wait (when 16 ms have already passed)
             // or wait until the start of the previous draw is 16 ms ago. The previous delay is taken into account
             // so the wait will be between 0 and 8 ms depending on how long the previous draw took.
@@ -144,8 +145,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
             await _isDrawingDone.WaitAsync(); // Wait for previous Draw to finish.
             await Task.Delay(_minimumTimeBetweenInvalidates).ConfigureAwait(false); // Always wait at least some period in between Draw and Invalidate calls.
-            await Task.Delay(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)).ConfigureAwait(false); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall
-            await _needsRefresh.WaitAsync();
+            await Task.Delay(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)).ConfigureAwait(false); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall.
+            await _needsRefresh.WaitAsync(); // Wait if there was no call to _needsRefresh.Set() yet.
 
             if (UpdateAnimations(Map)) 
                 _needsRefresh.Set(); // While still animating trigger another loop. We want to update the animations before drawing. The next loop will wait for the current draw to finish.
