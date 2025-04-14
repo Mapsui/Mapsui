@@ -148,24 +148,26 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             await Task.Delay(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)).ConfigureAwait(false); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall.
             await _needsRefresh.WaitAsync(); // Wait if there was no call to _needsRefresh.Set() yet.
 
-            if (UpdateAnimations(Map)) 
-                _needsRefresh.Set(); // While still animating trigger another loop. We want to update the animations before drawing. The next loop will wait for the current draw to finish.
+            var isAnimating = UpdateAnimations(Map);
             
             _invalidate?.Invoke();
+
+            if (isAnimating)
+                _needsRefresh.Set(); // While still animating trigger another loop. 
         }
     }
 
-    // Returns true if there are active animations.
     private static bool UpdateAnimations(Map? map)
     {
+        var isAnimating = false;
         if (map is Map localMap)
         {
-            if (localMap.UpdateAnimations()) // Are there animations running on the Map
-                return true;
-            if (localMap.Navigator.UpdateAnimations()) // Are there animations running on the Navigator
-                return true;
+            if (localMap.UpdateAnimations()) // Update animations on the Map
+                isAnimating = true;
+            if (localMap.Navigator.UpdateAnimations()) // Update animations on the Navigator
+                isAnimating = true;
         }
-        return false;
+        return isAnimating; // Returns true if there are active animations.
     }
 
     private protected void SharedDraw(object canvas)
