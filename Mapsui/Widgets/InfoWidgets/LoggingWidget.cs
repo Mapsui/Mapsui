@@ -32,7 +32,7 @@ public class LoggingWidget : TextBoxWidget
         Width = 250;
         Height = 142;
         InputTransparent = true;
-        _refreshGraphics = refreshGraphics;
+        _weakReferenceToRefreshGraphics = new WeakReference<Action>(refreshGraphics);
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public class LoggingWidget : TextBoxWidget
             _listOfLogEntries.TryDequeue(out var _);
         }
 
-        _refreshGraphics();
+        RefreshGraphics(_weakReferenceToRefreshGraphics);
     }
 
     private string ToFormattedLogLine(LogLevel level, string description, Exception? exception)
@@ -90,11 +90,17 @@ public class LoggingWidget : TextBoxWidget
             _listOfLogEntries.TryDequeue(out var _);
         }
 
-        _refreshGraphics();
+        RefreshGraphics(_weakReferenceToRefreshGraphics);
+    }
+
+    private static void RefreshGraphics(WeakReference<Action> refreshGraphics)
+    {
+        if (refreshGraphics.TryGetTarget(out var target))
+            target?.Invoke();
     }
 
     private readonly ConcurrentQueue<LogEntry> _listOfLogEntries;
-    private readonly Action _refreshGraphics;
+    private readonly WeakReference<Action> _weakReferenceToRefreshGraphics;
 
     public ConcurrentQueue<LogEntry> ListOfLogEntries => _listOfLogEntries;
 
@@ -109,7 +115,7 @@ public class LoggingWidget : TextBoxWidget
     /// <summary>
     /// Color for errors
     /// </summary>
-    public Color ErrorTextColor = Color.Red;
+    public Color ErrorTextColor { get; set; } = Color.Red;
 
     /// <summary>
     /// Color for warnings
