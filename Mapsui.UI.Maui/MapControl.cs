@@ -49,7 +49,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             };
             // Events
             _glView.Touch += OnTouch;
-            _invalidate = () => RunOnUIThread(() => _glView.InvalidateSurface()); // This line sometimes has a null reference exception on application close.
             _glView.PaintSurface += OnGLPaintSurface;
             view = _glView;
         }
@@ -62,12 +61,21 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             };
             // Events
             _canvasView.Touch += OnTouch;
-            _invalidate = () => RunOnUIThread(() => _canvasView.InvalidateSurface());
             _canvasView.PaintSurface += OnPaintSurface;
             view = _canvasView;
         }
         view.SizeChanged += View_SizeChanged;
         Content = view;
+    }
+
+    public void InvalidateCanvas()
+    {
+        if (_glView is SKGLView glView)
+            RunOnUIThread(glView.InvalidateSurface);
+        else if (_canvasView is SKCanvasView canvasView)
+            RunOnUIThread(canvasView.InvalidateSurface);
+        else
+            throw new InvalidOperationException("Neither SKGLView nor SKCanvasView is initialized.");
     }
 
     private static bool IsMaui9()
@@ -237,7 +245,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     private ScreenPosition GetScreenPosition(SKPoint point, float pixelDensity) =>

@@ -35,13 +35,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             // Use GPU backend
             _glView = new SKGLControl();
             // Events
-            _invalidate = () =>
-            {
-                if (!_glView.IsHandleCreated)
-                    return;
-
-                Invoke(() => _glView.Invalidate());
-            };
             _glView.PaintSurface += OnGLPaintSurface;
             view = _glView;
         }
@@ -50,13 +43,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             // Use CPU backend
             _canvasView = new SKControl();
             // Events
-            _invalidate = () =>
-            {
-                if (!_canvasView.IsHandleCreated)
-                    return;
-
-                Invoke(() => _canvasView.Invalidate());
-            };
             _canvasView.PaintSurface += OnPaintSurface;
             view = _canvasView;
         }
@@ -70,6 +56,24 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         view.Dock = DockStyle.Fill;
 
         Controls.Add(view);
+    }
+
+    public void InvalidateCanvas()
+    {
+        if (_glView is SKGLControl glView)
+        {
+            if (!_glView.IsHandleCreated)
+                return;
+            Invoke(glView.Invalidate);
+        }
+        else if (_canvasView is SKControl canvasView)
+        {
+            if (!canvasView.IsHandleCreated)
+                return;
+            Invoke(_canvasView.Invalidate);
+        }
+        else
+            throw new InvalidOperationException("Neither the SKGLControl nor the SKControl is initialized.");
     }
 
     private void MapControlResize(object? sender, EventArgs e)
@@ -103,7 +107,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     private void MapControlMouseDown(object? sender, MouseEventArgs e)

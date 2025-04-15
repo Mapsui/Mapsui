@@ -52,26 +52,13 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
-    // Action to call for a redraw of the control
-    private protected Action? _invalidate;
-    // The minimum time in between invalidate calls in ms.
-    private int _minimumTimeBetweenInvalidates = 8;
-    // The minimum time in between the start of two draw calls in ms
-    private int _minimumTimeBetweenStartOfDrawCall = 16;
-    private readonly AsyncAutoResetEvent _isDrawingDone = new();
-    private readonly AsyncAutoResetEvent _needsRefresh = new ();
-    private static bool _firstDraw = true;
-    private bool _isRunning = true;
-    private int _timestampStartDraw;
-    // Stopwatch for measuring drawing times
-    private readonly System.Diagnostics.Stopwatch _stopwatch = new();
-#pragma warning disable IDISP002 // Is disposed in SharedDispose
-    private readonly IRenderer _renderer = new MapRenderer();
-#pragma warning restore IDISP002
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
     private double _sharedWidth;
     private double _sharedHeight;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    private RenderController _renderController;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -89,11 +76,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     [DefaultValue(true)] // Fix WOF1000 Error
 #endif
     public bool UseFling { get; set; } = true;
-
-    /// <summary>
-    /// Renderer that is used from this MapControl
-    /// </summary>
-    public IRenderer Renderer => _renderer;
 
     /// <summary>
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
@@ -125,86 +107,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
         Map = new Map();
         System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance); // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
-        _timestampStartDraw = Environment.TickCount;
-        Catch.TaskRun(InvalidateLoopAsync);
-    }
-
-    private async Task InvalidateLoopAsync()
-    {
-        while (_isRunning)
-        {
-            // What is happening here?
-            // - Always wait for the previous draw to finish, so there are no dropped frames anymore. By waiting the
-            // loop update frequency can adapt to longer drawing durations.
-            // - After that always wait for 8 ms so that the process is never 100% busy drawing, even when drawing 
-            // takes long.
-            // - Then depending on how long drawing took we either don't wait (when 16 ms have already passed)
-            // or wait until 16 ms have elapsed since the previous start of drawing. The previous delay is taken into account
-            // so the wait will be between 0 and 8 ms depending on how long the previous draw took.
-            // - Then wait for _needsRefresh to be Set. If it was already Set it won't wait.
-
-            await _isDrawingDone.WaitAsync().ConfigureAwait(false); // Wait for previous Draw to finish.
-            await Task.Delay(_minimumTimeBetweenInvalidates).ConfigureAwait(false); // Always wait at least some period in between Draw and Invalidate calls.
-            await Task.Delay(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)).ConfigureAwait(false); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall.
-            await _needsRefresh.WaitAsync().ConfigureAwait(false); // Wait if there was no call to _needsRefresh.Set() yet.
-
-            var isAnimating = UpdateAnimations(Map);
-            
-            _invalidate?.Invoke();
-
-            if (isAnimating)
-                _needsRefresh.Set(); // While still animating trigger another loop. 
-        }
-    }
-
-    private static bool UpdateAnimations(Map? map)
-    {
-        var isAnimating = false;
-        if (map is Map localMap)
-        {
-            if (localMap.UpdateAnimations()) // Update animations on the Map
-                isAnimating = true;
-            if (localMap.Navigator.UpdateAnimations()) // Update animations on the Navigator
-                isAnimating = true;
-        }
-        return isAnimating; // Returns true if there are active animations.
-    }
-
-    private protected void SharedDraw(object canvas)
-    {
-        if (Renderer is null) 
-            return;
-        if (Map is null) 
-            return;
-        if (!Map.Navigator.Viewport.HasSize()) 
-            return;
-
-        if (_firstDraw)
-        {
-            _firstDraw = false;
-            Logger.Log(LogLevel.Information, $"First call to the Mapsui renderer");
-        }
-
-        // Start stopwatch before updating animations and drawing control
-        _stopwatch.Restart();
-        _timestampStartDraw = Environment.TickCount;
-        // Fetch the image data for all image sources and call RefreshGraphics if new images were loaded.
-        _renderer.ImageSourceCache.FetchAllImageData(Mapsui.Styles.Image.SourceToSourceId, Map.FetchMachine, RefreshGraphics);
-        
-        Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
-
-        _isDrawingDone.Set();
-        _stopwatch.Stop();
-
-        // If we are interested in performance measurements, we save the new drawing time
-        Map.Performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
-    }
-
-    private static int GetAdditionalTimeToDelay(int timestampStartDraw, int minimumTimeBetweenStartOfDrawCall)
-    {
-        var timeSinceLastDraw = Environment.TickCount - timestampStartDraw;
-        var additionalTimeToDelay = Math.Max(minimumTimeBetweenStartOfDrawCall - timeSinceLastDraw, 0);
-        return additionalTimeToDelay;
+        _renderController = new(() => Map, InvalidateCanvas);
     }
 
     private void SharedOnSizeChanged(double width, double height)
@@ -222,7 +125,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public void ForceUpdate()
     {
-        _invalidate?.Invoke();
+        InvalidateCanvas();
     }
 
     /// <summary>
@@ -291,7 +194,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public void RefreshGraphics()
     {
-        _needsRefresh.Set();
+        _renderController?.RefreshGraphics();
     }
 
     private void Map_DataChanged(object? sender, DataChangedEventArgs? e)
@@ -454,7 +357,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (GetPixelDensity() is not float pixelDensity)
             throw new Exception("PixelDensity is not initialized");
 
-        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality);
+        using var stream = _renderController.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality);
         return stream.ToArray();
     }
 
@@ -465,7 +368,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
     {
-        return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
+        return _renderController.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
     }
 
     protected Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers)
@@ -494,9 +397,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (disposing)
         {
-            _isRunning = false;
             Unsubscribe();
-            _renderer.Dispose();
             _map?.Dispose();
             _map = null;
         }
