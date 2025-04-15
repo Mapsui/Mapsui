@@ -1,44 +1,49 @@
-﻿using System.Threading.Tasks;
+﻿using Mapsui.Logging;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Mapsui.Utilities;
 
-public class AsyncCounterEvent
+
+public class AsyncAutoResetEvent(bool initialState = false)
 {
-    private int _signalCount = 0;
-    private TaskCompletionSource<bool>? _waiter = null;
+    private static readonly Task _completed = Task.FromResult(true);
+    private readonly Queue<TaskCompletionSource<bool>> _waits = new();
+    private bool _letThrough = initialState;
 
     public Task WaitAsync()
     {
-        lock (this)
+        lock (_waits)
         {
-            if (_signalCount > 0)
+            if (_letThrough) // Let this one through
             {
-                _signalCount--;
-                return Task.CompletedTask;
+                _letThrough = false; // But let the next one wait.
+                return _completed;
             }
-
-            if (_waiter == null || _waiter.Task.IsCompleted)
-                _waiter = new(TaskCreationOptions.RunContinuationsAsynchronously);
-
-#pragma warning disable VSTHRD003 // Avoid awaiting foreign Tasks
-            return _waiter.Task;
-#pragma warning restore VSTHRD003 // Avoid awaiting foreign Tasks
+            else // Wait 
+            {
+                var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+                _waits.Enqueue(tcs);
+                return tcs.Task;
+            }
         }
     }
 
     public void Set()
     {
-        lock (this)
+        TaskCompletionSource<bool>? toRelease = null;
+        lock (_waits)
         {
-            if (_waiter != null && !_waiter.Task.IsCompleted)
+            if (_waits.Count > 0) // If one was waiting, let it through but the next one will have to wait.
             {
-                _waiter.SetResult(true);
-                _waiter = null;
+                if (_waits.Count > 1)
+                    Logger.Log(LogLevel.Error, "More than one thread is waiting for the AsyncAutoResetEvent. It was not intended for this use.");
+                toRelease = _waits.Dequeue(); // Let this one through.
+                _letThrough = false; // Let the next one wait.
             }
-            else
-            {
-                _signalCount++;
-            }
+            else if (!_letThrough) // If no one was waiting let the next one through.
+                _letThrough = true;
         }
+        toRelease?.SetResult(true);
     }
 }
