@@ -39843,38 +39843,57 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Algorithms.RotateClockwiseRadians
   nameWithType: Algorithms.RotateClockwiseRadians
-- uid: Mapsui.Utilities.AsyncCounterEvent
-  name: AsyncCounterEvent
-  href: pages/Mapsui.Utilities.AsyncCounterEvent.html
-  commentId: T:Mapsui.Utilities.AsyncCounterEvent
-  fullName: Mapsui.Utilities.AsyncCounterEvent
-  nameWithType: AsyncCounterEvent
-- uid: Mapsui.Utilities.AsyncCounterEvent.Set
+- uid: Mapsui.Utilities.AsyncAutoResetEvent
+  name: AsyncAutoResetEvent
+  href: pages/Mapsui.Utilities.AsyncAutoResetEvent.html
+  commentId: T:Mapsui.Utilities.AsyncAutoResetEvent
+  fullName: Mapsui.Utilities.AsyncAutoResetEvent
+  nameWithType: AsyncAutoResetEvent
+- uid: Mapsui.Utilities.AsyncAutoResetEvent.#ctor(System.Boolean)
+  name: AsyncAutoResetEvent(bool)
+  href: pages/Mapsui.Utilities.AsyncAutoResetEvent.html#Mapsui_Utilities_AsyncAutoResetEvent__ctor_System_Boolean_
+  commentId: M:Mapsui.Utilities.AsyncAutoResetEvent.#ctor(System.Boolean)
+  name.vb: New(Boolean)
+  fullName: Mapsui.Utilities.AsyncAutoResetEvent.AsyncAutoResetEvent(bool)
+  fullName.vb: Mapsui.Utilities.AsyncAutoResetEvent.New(Boolean)
+  nameWithType: AsyncAutoResetEvent.AsyncAutoResetEvent(bool)
+  nameWithType.vb: AsyncAutoResetEvent.New(Boolean)
+- uid: Mapsui.Utilities.AsyncAutoResetEvent.#ctor*
+  name: AsyncAutoResetEvent
+  href: pages/Mapsui.Utilities.AsyncAutoResetEvent.html#Mapsui_Utilities_AsyncAutoResetEvent__ctor_
+  commentId: Overload:Mapsui.Utilities.AsyncAutoResetEvent.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mapsui.Utilities.AsyncAutoResetEvent.AsyncAutoResetEvent
+  fullName.vb: Mapsui.Utilities.AsyncAutoResetEvent.New
+  nameWithType: AsyncAutoResetEvent.AsyncAutoResetEvent
+  nameWithType.vb: AsyncAutoResetEvent.New
+- uid: Mapsui.Utilities.AsyncAutoResetEvent.Set
   name: Set()
-  href: pages/Mapsui.Utilities.AsyncCounterEvent.html#Mapsui_Utilities_AsyncCounterEvent_Set
-  commentId: M:Mapsui.Utilities.AsyncCounterEvent.Set
-  fullName: Mapsui.Utilities.AsyncCounterEvent.Set()
-  nameWithType: AsyncCounterEvent.Set()
-- uid: Mapsui.Utilities.AsyncCounterEvent.Set*
+  href: pages/Mapsui.Utilities.AsyncAutoResetEvent.html#Mapsui_Utilities_AsyncAutoResetEvent_Set
+  commentId: M:Mapsui.Utilities.AsyncAutoResetEvent.Set
+  fullName: Mapsui.Utilities.AsyncAutoResetEvent.Set()
+  nameWithType: AsyncAutoResetEvent.Set()
+- uid: Mapsui.Utilities.AsyncAutoResetEvent.Set*
   name: Set
-  href: pages/Mapsui.Utilities.AsyncCounterEvent.html#Mapsui_Utilities_AsyncCounterEvent_Set_
-  commentId: Overload:Mapsui.Utilities.AsyncCounterEvent.Set
+  href: pages/Mapsui.Utilities.AsyncAutoResetEvent.html#Mapsui_Utilities_AsyncAutoResetEvent_Set_
+  commentId: Overload:Mapsui.Utilities.AsyncAutoResetEvent.Set
   isSpec: "True"
-  fullName: Mapsui.Utilities.AsyncCounterEvent.Set
-  nameWithType: AsyncCounterEvent.Set
-- uid: Mapsui.Utilities.AsyncCounterEvent.WaitAsync
+  fullName: Mapsui.Utilities.AsyncAutoResetEvent.Set
+  nameWithType: AsyncAutoResetEvent.Set
+- uid: Mapsui.Utilities.AsyncAutoResetEvent.WaitAsync
   name: WaitAsync()
-  href: pages/Mapsui.Utilities.AsyncCounterEvent.html#Mapsui_Utilities_AsyncCounterEvent_WaitAsync
-  commentId: M:Mapsui.Utilities.AsyncCounterEvent.WaitAsync
-  fullName: Mapsui.Utilities.AsyncCounterEvent.WaitAsync()
-  nameWithType: AsyncCounterEvent.WaitAsync()
-- uid: Mapsui.Utilities.AsyncCounterEvent.WaitAsync*
+  href: pages/Mapsui.Utilities.AsyncAutoResetEvent.html#Mapsui_Utilities_AsyncAutoResetEvent_WaitAsync
+  commentId: M:Mapsui.Utilities.AsyncAutoResetEvent.WaitAsync
+  fullName: Mapsui.Utilities.AsyncAutoResetEvent.WaitAsync()
+  nameWithType: AsyncAutoResetEvent.WaitAsync()
+- uid: Mapsui.Utilities.AsyncAutoResetEvent.WaitAsync*
   name: WaitAsync
-  href: pages/Mapsui.Utilities.AsyncCounterEvent.html#Mapsui_Utilities_AsyncCounterEvent_WaitAsync_
-  commentId: Overload:Mapsui.Utilities.AsyncCounterEvent.WaitAsync
+  href: pages/Mapsui.Utilities.AsyncAutoResetEvent.html#Mapsui_Utilities_AsyncAutoResetEvent_WaitAsync_
+  commentId: Overload:Mapsui.Utilities.AsyncAutoResetEvent.WaitAsync
   isSpec: "True"
-  fullName: Mapsui.Utilities.AsyncCounterEvent.WaitAsync
-  nameWithType: AsyncCounterEvent.WaitAsync
+  fullName: Mapsui.Utilities.AsyncAutoResetEvent.WaitAsync
+  nameWithType: AsyncAutoResetEvent.WaitAsync
 - uid: Mapsui.Utilities.Bearings
   name: Bearings
   href: pages/Mapsui.Utilities.Bearings.html

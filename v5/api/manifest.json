@@ -5072,10 +5072,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "pages/Mapsui.Utilities.AsyncCounterEvent.yml",
+      "source_relative_path": "pages/Mapsui.Utilities.AsyncAutoResetEvent.yml",
       "output": {
         ".html": {
-          "relative_path": "pages/Mapsui.Utilities.AsyncCounterEvent.html"
+          "relative_path": "pages/Mapsui.Utilities.AsyncAutoResetEvent.html"
         }
       },
       "version": ""
