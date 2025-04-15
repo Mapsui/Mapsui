@@ -12,6 +12,6 @@ public class EditingRotateSample : IMapControlSample
     public void Setup(IMapControl mapControl)
     {
         var editManager = EditingSample.InitEditMode(mapControl, EditMode.Rotate);
-        mapControl.Map.Navigator.ZoomToBox(editManager.GetGrownExtent());
+        mapControl.Map?.Navigator.ZoomToBox(editManager.GetGrownExtent());
     }
 }

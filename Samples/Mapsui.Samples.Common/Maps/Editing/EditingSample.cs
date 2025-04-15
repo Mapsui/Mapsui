@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -22,17 +23,22 @@ public class EditingSample : IMapControlSample
 {
     private EditManager _editManager = new();
     private WritableLayer? _targetLayer;
-    private IMapControl? _mapControl;
+    private Map? _map;
     private IFeature[]? _tempFeatures;
 
     public string Name => "Editing";
     public string Category => "Editing";
     public void Setup(IMapControl mapControl)
     {
-        _editManager = InitEditMode(mapControl, EditMode.Modify);
-        mapControl.Map.Navigator.ZoomToBox(_editManager.GetGrownExtent());
-        InitEditWidgets(mapControl.Map);
-        _mapControl = mapControl;
+        if (mapControl.Map is Map map)
+        {
+            _editManager = InitEditMode(mapControl, EditMode.Modify);
+            map.Navigator.ZoomToBox(_editManager.GetGrownExtent());
+            InitEditWidgets(map);
+            _map = map;
+        }
+        else
+            throw new ArgumentNullException(nameof(mapControl.Map));
     }
 
     public static EditManager InitEditMode(IMapControl mapControl, EditMode editMode)
@@ -117,7 +123,7 @@ public class EditingSample : IMapControlSample
                 var selectedFeatures = _editManager.Layer?.GetFeatures().Where(f => (bool?)f["Selected"] == true) ?? [];
                 foreach (var selectedFeature in selectedFeatures)
                     _editManager.Layer?.TryRemove(selectedFeature);
-                _mapControl?.RefreshGraphics();
+                _map?.RefreshGraphics();
             }
             e.Handled = true;
         }
@@ -297,11 +303,11 @@ public class EditingSample : IMapControlSample
                 _targetLayer.Clear();
                 _targetLayer.AddRange(_tempFeatures.Copy());
                 _targetLayer.DataHasChanged();
-                _mapControl?.RefreshGraphics();
+                _map?.RefreshGraphics();
             }
 
             _editManager.Layer?.Clear();
-            _mapControl?.RefreshGraphics();
+            _map?.RefreshGraphics();
             _editManager.EditMode = EditMode.None;
             _tempFeatures = null;
             e.Handled = true;
@@ -330,7 +336,7 @@ public class EditingSample : IMapControlSample
             _editManager.Layer?.AddRange(features);
             _targetLayer?.Clear();
 
-            _mapControl?.RefreshGraphics();
+            _map?.RefreshGraphics();
             e.Handled = true;
         }
     };
@@ -350,7 +356,7 @@ public class EditingSample : IMapControlSample
             _targetLayer?.AddRange(_editManager.Layer?.GetFeatures().Copy() ?? []);
             _editManager.Layer?.Clear();
 
-            _mapControl?.RefreshGraphics();
+            _map?.RefreshGraphics();
             e.Handled = true;
         }
     };
