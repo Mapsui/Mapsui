@@ -74,7 +74,7 @@ jobs:
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip androidemulator
+      run: uno-check -v --ci --non-interactive --fix --skip androidemulator --dotnet 9.0.202
     - name: Restore dependencies
       run: dotnet restore Mapsui.Linux.slnf
     - name: Build Mapsui.Linux.slnf
@@ -132,11 +132,11 @@ jobs:
     - name: install Uno.Check 1.26.1
       run: dotnet tool install --global Uno.Check --version 1.26.1
     - name: install Android SDK 34
-      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator  
+      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --dotnet 9.0.202
     - name: Install newest Uno Check
       run: dotnet tool update -g uno.check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator    
+      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --dotnet 9.0.202
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Build        
@@ -214,7 +214,7 @@ jobs:
     - name: Install Uno Check
       run: dotnet tool install -g Uno.Check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy
+      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.202
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.sln  
     - name: Run dotnet format
