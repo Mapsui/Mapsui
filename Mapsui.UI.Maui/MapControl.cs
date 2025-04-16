@@ -25,7 +25,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
     private readonly ConcurrentDictionary<long, PointerRecording> _positions = new();
-    private Size _size;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
     private Page? _page;
@@ -39,9 +38,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     /// period of dangling ghost touches. You might want to tweak this value to your needs.
     /// </summary>
     public TimeSpan IsStaleTimeSpan { get; set; } = TimeSpan.FromMilliseconds(500); // Even with a value of 100 I never see removal of a valid event, so I assume 500 is save. And perhaps it could be set even lower because if a valid event is removed sometimes I don't notice any change in the UI.
-
-    private double ViewportWidth => _size.Width; // Used in shared code. Getting the this.Width too early can cause malfunctioning.
-    private double ViewportHeight => _size.Height; // Used in shared code. Getting the this.Height too early can cause malfunctioning.
 
     public MapControl()
     {
