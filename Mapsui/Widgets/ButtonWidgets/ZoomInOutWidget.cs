@@ -22,107 +22,35 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// </summary>
 public class ZoomInOutWidget : BaseWidget
 {
-    private double _size = 40;
-
     /// <summary>
     /// Width and height of buttons
     /// </summary>
-    public double Size
-    {
-        get => _size;
-        set
-        {
-            if (_size == value)
-                return;
-            _size = value;
-            Invalidate();
-        }
-    }
-
-    private Orientation _orientation = Orientation.Vertical;
+    public double Size { get; set; } = 40;
 
     /// <summary>
     /// Orientation of buttons
     /// </summary>
-    public Orientation Orientation
-    {
-        get => _orientation;
-        set
-        {
-            if (_orientation == value)
-                return;
-            _orientation = value;
-            Invalidate();
-        }
-    }
-
-    private Color _strokeColor = new(192, 192, 192);
+    public Orientation Orientation { get; set; } = Orientation.Vertical;
 
     /// <summary>
     /// Color of button frames
     /// </summary>
-    public Color StrokeColor
-    {
-        get => _strokeColor;
-        set
-        {
-            if (_strokeColor == value)
-                return;
-            _strokeColor = value;
-            Invalidate();
-        }
-    }
-
-    private Color _textColor = new(192, 192, 192);
+    public Color StrokeColor { get; set; } = new(192, 192, 192);
 
     /// <summary>
     /// Color of "+" and "-" sign
     /// </summary>
-    public Color TextColor
-    {
-        get => _textColor;
-        set
-        {
-            if (_textColor == value)
-                return;
-            _textColor = value;
-            Invalidate();
-        }
-    }
-
-    private Color _backColor = new(224, 224, 224);
+    public Color TextColor { get; set; } = new(192, 192, 192);
 
     /// <summary>
     /// Color of background
     /// </summary>
-    public Color BackColor
-    {
-        get => _backColor;
-        set
-        {
-            if (_backColor == value)
-                return;
-            _backColor = value;
-            Invalidate();
-        }
-    }
-
-    private double _opacity = 0.8f;
+    public Color BackColor { get; set; } = new(224, 224, 224);
 
     /// <summary>
     /// Opacity of background, frame and signs
     /// </summary>
-    public double Opacity
-    {
-        get => _opacity;
-        set
-        {
-            if (_opacity == value)
-                return;
-            _opacity = value;
-            Invalidate();
-        }
-    }
+    public double Opacity { get; set; } = 0.8f;
 
     public override void OnTapped(WidgetEventArgs e)
     {

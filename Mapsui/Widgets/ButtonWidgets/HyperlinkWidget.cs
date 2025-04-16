@@ -8,22 +8,10 @@ namespace Mapsui.Widgets.ButtonWidgets;
 /// </summary>
 public class HyperlinkWidget : ButtonWidget
 {
-    private string? _url = string.Empty;
-
     /// <summary>
     /// URL to open when Widget is clicked
     /// </summary>
-    public string? Url
-    {
-        get => _url;
-        set
-        {
-            if (_url == value)
-                return;
-            _url = value ?? string.Empty;
-            Invalidate();
-        }
-    }
+    public string? Url { get; set; } = string.Empty;
 
     public override void OnTapped(WidgetEventArgs e)
     {

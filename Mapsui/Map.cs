@@ -40,7 +40,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
-        Widgets.Add(CreateLoggingWidget());
+        Widgets.Add(CreateLoggingWidget(RefreshGraphics));
         Widgets.Add(CreatePerformanceWidget(this));
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
@@ -205,18 +205,30 @@ public class Map : INotifyPropertyChanged, IDisposable
         RefreshGraphics();
     }
 
+    public void RefreshData(Viewport viewport)
+    {
+        RefreshData(ChangeType.Discrete, viewport);
+    }
+
     /// <summary>
     /// Refresh data of Map, but don't paint it
     /// </summary>
-    public void RefreshData(ChangeType changeType = ChangeType.Discrete)
+    public void RefreshData(ChangeType changeType = ChangeType.Discrete, Viewport? viewport = null)
     {
-        if (Navigator.Viewport.ToExtent() is null)
+        var localViewport = viewport ?? Navigator.Viewport;
+
+        if (localViewport.ToExtent() is null)
             return;
-        if (Navigator.Viewport.ToExtent().GetArea() <= 0)
+        if (localViewport.ToExtent().GetArea() <= 0)
             return;
 
-        var fetchInfo = new FetchInfo(Navigator.Viewport.ToSection(), CRS, changeType);
-        RefreshData(fetchInfo);
+        var fetchInfo = new FetchInfo(localViewport.ToSection(), CRS, changeType);
+
+        foreach (var layer in _layers.ToList())
+        {
+            if (layer is IAsyncDataFetcher asyncDataFetcher)
+                asyncDataFetcher.RefreshData(fetchInfo);
+        }
     }
 
     public void RefreshGraphics()
@@ -255,15 +267,6 @@ public class Map : INotifyPropertyChanged, IDisposable
         foreach (var layer in _layers)
         {
             if (layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
-        }
-    }
-
-    public void RefreshData(FetchInfo fetchInfo)
-    {
-        foreach (var layer in _layers.ToList())
-        {
-            if (layer is IAsyncDataFetcher asyncDataFetcher)
-                asyncDataFetcher.RefreshData(fetchInfo);
         }
     }
 
@@ -437,7 +440,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         return areAnimationsRunning;
     }
 
-    private static LoggingWidget CreateLoggingWidget() => new()
+    private static LoggingWidget CreateLoggingWidget(Action refreshGraphics) => new(refreshGraphics)
     {
         Margin = new MRect(10),
         VerticalAlignment = VerticalAlignment.Stretch,

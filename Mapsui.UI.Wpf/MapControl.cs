@@ -84,7 +84,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void MapControlLoaded(object sender, RoutedEventArgs e)
     {
-        SetViewportSize();
         Focusable = true;
     }
 
@@ -98,11 +97,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
     {
         // Accessing ActualWidth and ActualHeight before size changed causes an exception, so we need to do it here.
-        ViewportWidth = ActualWidth;
-        ViewportHeight = ActualHeight;
-
         Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
-        SetViewportSize();
+        SharedOnSizeChanged(ActualWidth, ActualHeight);
     }
 
     private void MapControlMouseLeave(object sender, MouseEventArgs e)
@@ -175,9 +171,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _manipulationTracker.Manipulate([position], Map.Navigator.Manipulate);
     }
 
-    private double ViewportWidth { get; set; }
-    private double ViewportHeight { get; set; }
-
     private static void OnManipulationInertiaStarting(object? sender, ManipulationInertiaStartingEventArgs e)
     {
         e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
@@ -213,19 +206,20 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void SKElementOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
+
         var canvas = args.Surface.Canvas;
-        canvas.Scale(PixelDensity, PixelDensity);
-        CommonDrawControl(canvas);
+        canvas.Scale(pixelDensity, pixelDensity);
+        SharedDraw(canvas);
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensity()
     {
-        var presentationSource = PresentationSource.FromVisual(this)
-            ?? throw new Exception("PresentationSource is null");
-        var compositionTarget = presentationSource.CompositionTarget
-            ?? throw new Exception("CompositionTarget is null");
+        if (PresentationSource.FromVisual(this) is not PresentationSource presentationSource)
+            return null;
+        if (presentationSource.CompositionTarget is not CompositionTarget compositionTarget)
+            return null;
 
         var matrix = compositionTarget.TransformToDevice;
 
@@ -234,12 +228,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (dpiX != dpiY) throw new ArgumentException();
 
-        return dpiX;
+        return (float?)dpiX;
     }
 
     protected virtual void Dispose(bool disposing)
     {
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     public void Dispose()

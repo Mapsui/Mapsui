@@ -37,38 +37,11 @@ public class RulerWidget() : BaseWidget
 
     public event EventHandler<RulerWidgetUpdatedEventArgs>? DistanceUpdated = null;
 
-    public override void OnPointerPressed(WidgetEventArgs e)
-    {
-        CurrentPosition = null;
-        StartPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
-        e.Map.RefreshGraphics();
-        e.Handled = true;
-        return;
-    }
-
-    public override void OnPointerMoved(WidgetEventArgs e)
-    {
-        if (e.GestureType == GestureType.Hover)
-            return; // Not dragging.
-
-        CurrentPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
-        DistanceInKilometers = GetDistance(StartPosition, CurrentPosition);
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Drag));
-        e.Map.RefreshGraphics();
-        e.Handled = true;
-        return;
-    }
-
-    public override void OnPointerReleased(WidgetEventArgs e)
-    {
-        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Release));
-        e.Map.RefreshGraphics();
-        e.Handled = true;
-        return;
-    }
-
     public override void OnTapped(WidgetEventArgs e)
     {
+        if (!IsActive)
+            return;
+
         if (e.GestureType == GestureType.SingleTap)
         {
             StartPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
@@ -77,7 +50,42 @@ public class RulerWidget() : BaseWidget
             e.Map.RefreshGraphics();
         }
         e.Handled = true;
-        return;
+    }
+
+    public override void OnPointerPressed(WidgetEventArgs e)
+    {
+        if (!IsActive)
+            return;
+
+        CurrentPosition = null;
+        StartPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
+        e.Map.RefreshGraphics();
+        e.Handled = true;
+    }
+
+    public override void OnPointerMoved(WidgetEventArgs e)
+    {
+        if (!IsActive)
+            return;
+
+        if (e.GestureType == GestureType.Hover)
+            return; // Not dragging.
+
+        CurrentPosition = e.Map.Navigator.Viewport.ScreenToWorld(e.ScreenPosition);
+        DistanceInKilometers = GetDistance(StartPosition, CurrentPosition);
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Drag));
+        e.Map.RefreshGraphics();
+        e.Handled = true;
+    }
+
+    public override void OnPointerReleased(WidgetEventArgs e)
+    {
+        if (!IsActive)
+            return;
+
+        DistanceUpdated?.Invoke(this, new RulerWidgetUpdatedEventArgs(GestureType.Release));
+        e.Map.RefreshGraphics();
+        e.Handled = true;
     }
 
     public void Reset()

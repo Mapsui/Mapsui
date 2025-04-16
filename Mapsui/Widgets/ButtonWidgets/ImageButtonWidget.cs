@@ -13,56 +13,18 @@ public class ImageButtonWidget : BoxWidget, IHasImage
         BackColor = Color.Transparent;
     }
 
-    private MRect _padding = new(0);
-
     /// <summary>
     /// Padding left and right for icon inside the Widget
     /// </summary>
-    public MRect Padding
-    {
-        get => _padding;
-        set
-        {
-            if (_padding == value)
-                return;
-
-            _padding = value;
-            Invalidate();
-        }
-    }
-
-    private Image? _image;
+    public MRect Padding { get; set; } = new(0);
 
     /// <summary>
     /// The image to show as button
     /// </summary>
-    public Image? Image
-    {
-        get => _image;
-        set
-        {
-            if (_image == value)
-                return;
-
-            _image = value;
-            Invalidate();
-        }
-    }
-
-    private double _rotation;
+    public Image? Image { get; set; }
 
     /// <summary>
     /// Rotation of the SVG image
     /// </summary>
-    public double Rotation
-    {
-        get => _rotation;
-        set
-        {
-            if (_rotation == value)
-                return;
-            _rotation = value;
-            Invalidate();
-        }
-    }
+    public double Rotation { get; set; }
 }

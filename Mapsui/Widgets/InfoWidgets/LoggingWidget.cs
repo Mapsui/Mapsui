@@ -22,7 +22,7 @@ public class LoggingWidget : TextBoxWidget
         public string FormattedLogLine;
     }
 
-    public LoggingWidget()
+    public LoggingWidget(Action refreshGraphics)
     {
         _listOfLogEntries = new ConcurrentQueue<LogEntry>();
 
@@ -32,6 +32,7 @@ public class LoggingWidget : TextBoxWidget
         Width = 250;
         Height = 142;
         InputTransparent = true;
+        _weakReferenceToRefreshGraphics = new WeakReference<Action>(refreshGraphics);
     }
 
     /// <summary>
@@ -55,12 +56,12 @@ public class LoggingWidget : TextBoxWidget
 
         _listOfLogEntries.Enqueue(entry);
 
-        while (_listOfLogEntries.Count > _maxNumberOfLogEntriesToKeep)
+        while (_listOfLogEntries.Count > MaxNumberOfLogEntriesToKeep)
         {
             _listOfLogEntries.TryDequeue(out var _);
         }
 
-        Invalidate(nameof(Text));
+        RefreshGraphics(_weakReferenceToRefreshGraphics);
     }
 
     private string ToFormattedLogLine(LogLevel level, string description, Exception? exception)
@@ -89,95 +90,42 @@ public class LoggingWidget : TextBoxWidget
             _listOfLogEntries.TryDequeue(out var _);
         }
 
-        Invalidate(nameof(Text));
+        RefreshGraphics(_weakReferenceToRefreshGraphics);
+    }
+
+    private static void RefreshGraphics(WeakReference<Action> refreshGraphics)
+    {
+        if (refreshGraphics.TryGetTarget(out var target))
+            target?.Invoke();
     }
 
     private readonly ConcurrentQueue<LogEntry> _listOfLogEntries;
+    private readonly WeakReference<Action> _weakReferenceToRefreshGraphics;
 
     public ConcurrentQueue<LogEntry> ListOfLogEntries => _listOfLogEntries;
-
-    private LogLevel _logLevelFilter = LogLevel.Information;
 
     /// <summary>
     /// Filter for LogLevel
     /// Only this or higher levels are printed
     /// </summary>
-    public LogLevel LogLevelFilter
-    {
-        get => _logLevelFilter;
-        set
-        {
-            if (_logLevelFilter == value)
-                return;
-            _logLevelFilter = value;
-            Invalidate();
-        }
-    }
+    public LogLevel LogLevelFilter { get; set; } = LogLevel.Information;
 
-    private int _maxNumberOfLogEntriesToKeep = 10;
-
-    public int MaxNumberOfLogEntriesToKeep
-    {
-        get => _maxNumberOfLogEntriesToKeep;
-        set
-        {
-            if (_maxNumberOfLogEntriesToKeep == value)
-                return;
-            _maxNumberOfLogEntriesToKeep = value;
-            Invalidate();
-        }
-    }
-
-    private Color _errorTextColor = Color.Red;
+    public int MaxNumberOfLogEntriesToKeep { get; set; } = 10;
 
     /// <summary>
     /// Color for errors
     /// </summary>
-    public Color ErrorTextColor
-    {
-        get => _errorTextColor;
-        set
-        {
-            if (_errorTextColor == value)
-                return;
-            _errorTextColor = value;
-            Invalidate();
-        }
-    }
-
-    private Color _warningTextColor = Color.Orange;
+    public Color ErrorTextColor { get; set; } = Color.Red;
 
     /// <summary>
     /// Color for warnings
     /// </summary>
-    public Color WarningTextColor
-    {
-        get => _warningTextColor;
-        set
-        {
-            if (_warningTextColor == value)
-                return;
-            _warningTextColor = value;
-            Invalidate();
-        }
-    }
-
-    private Color _informationTextColor = Color.Black;
+    public Color WarningTextColor { get; set; } = Color.Orange;
 
     /// <summary>
     /// Color for information text
     /// </summary>
-    public Color InformationTextColor
-    {
-        get => _informationTextColor;
-        set
-        {
-            if (_informationTextColor == value)
-                return;
-            _informationTextColor = value;
-            Invalidate();
-        }
-    }
+    public Color InformationTextColor { get; set; } = Color.Black;
 
     private static bool GetIsActive(bool enabled, ActiveMode activeMode) =>
         enabled && activeMode switch

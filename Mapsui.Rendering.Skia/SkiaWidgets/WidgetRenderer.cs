@@ -42,9 +42,6 @@ public static class WidgetRenderer
             }
 
             ((ISkiaWidgetRenderer)renderer).Draw(canvas, viewport, widget, renderService, layerOpacity);
-
-            // Widget is redrawn
-            widget.NeedsRedraw = false;
         }
     }
 }

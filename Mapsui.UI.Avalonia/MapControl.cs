@@ -71,15 +71,14 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
         => (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
 
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
-        base.OnPropertyChanged(change);
+        base.OnPropertyChanged(e);
 
-        switch (change.Property.Name)
+        switch (e.Property.Name)
         {
             case nameof(Bounds):
-                // Size changed
-                MapControlSizeChanged();
+                SharedOnSizeChanged(Bounds.Width, Bounds.Height);
                 break;
         }
     }
@@ -175,14 +174,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         context.Custom(_drawOperation);
     }
 
-    private void MapControlInitialized(object? sender, EventArgs eventArgs)
+    private void MapControlInitialized(object? s, EventArgs e)
     {
-        SetViewportSize();
-    }
-
-    private void MapControlSizeChanged()
-    {
-        SetViewportSize();
+        SharedOnSizeChanged(Bounds.Width, Bounds.Height);
     }
 
     private static void RunOnUIThread(Action action)
@@ -204,12 +198,9 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         });
     }
 
-    private double ViewportWidth => Bounds.Width;
-    private double ViewportHeight => Bounds.Height;
-
-    private double GetPixelDensity()
+    public float? GetPixelDensity()
     {
-        return VisualRoot?.RenderScaling ?? 1d;
+        return (float?)VisualRoot?.RenderScaling;
     }
 
     private sealed class MapsuiCustomDrawOperation(Rect bounds, MapControl mapControl) : ICustomDrawOperation
@@ -227,7 +218,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             using var lease = leaseFeature.Lease();
             var canvas = lease.SkCanvas;
             canvas.Save();
-            mapControl.CommonDrawControl(canvas);
+            mapControl.SharedDraw(canvas);
             canvas.Restore();
         }
 
@@ -252,7 +243,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             Map?.Dispose();
         }
 
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     public virtual void Dispose()

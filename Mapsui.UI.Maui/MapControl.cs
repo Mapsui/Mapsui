@@ -12,7 +12,6 @@ using System.Linq;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
-using Microsoft.Maui.Graphics;
 
 namespace Mapsui.UI.Maui;
 
@@ -63,11 +62,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             };
             // Events
             _glView.Touch += OnTouch;
-            _invalidate = () =>
-            {
-                // The line below sometimes has a null reference exception on application close.
-                RunOnUIThread(() => _glView.InvalidateSurface());
-            };
+            _invalidate = () => RunOnUIThread(() => _glView.InvalidateSurface()); // This line sometimes has a null reference exception on application close.
             _glView.PaintSurface += OnGLPaintSurface;
             view = _glView;
         }
@@ -80,7 +75,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             };
             // Events
             _canvasView.Touch += OnTouch;
-            _invalidate = () => { RunOnUIThread(() => _canvasView.InvalidateSurface()); };
+            _invalidate = () => RunOnUIThread(() => _canvasView.InvalidateSurface());
             _canvasView.PaintSurface += OnPaintSurface;
             view = _canvasView;
         }
@@ -96,9 +91,8 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void View_SizeChanged(object? sender, EventArgs e)
     {
-        _size = new Size(Width, Height);
         ClearTouchState();
-        SetViewportSize();
+        SharedOnSizeChanged(Width, Height);
     }
 
     private static void InitTouchesReset(MapControl mapControl)
@@ -166,8 +160,11 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Catch.Exceptions(() =>
         {
             e.Handled = true;
+
+            if (GetPixelDensity() is not float pixelDensity)
+                return;
             RemoveStale(_positions, IsStaleTimeSpan.TotalMilliseconds);
-            var position = GetScreenPosition(e.Location);
+            var position = GetScreenPosition(e.Location, pixelDensity);
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
@@ -262,15 +259,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private void PaintSurface(SKCanvas canvas)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
-        canvas.Scale(PixelDensity, PixelDensity);
+        canvas.Scale(pixelDensity, pixelDensity);
 
-        CommonDrawControl(canvas);
+        SharedDraw(canvas);
     }
 
-    private ScreenPosition GetScreenPosition(SKPoint point) => new ScreenPosition(point.X / PixelDensity, point.Y / PixelDensity);
+    private ScreenPosition GetScreenPosition(SKPoint point, float pixelDensity) =>
+        new(point.X / pixelDensity, point.Y / pixelDensity);
 
     private void OnZoomInOrOut(int mouseWheelDelta, ScreenPosition currentMousePosition)
         => Map.Navigator.MouseWheelZoom(mouseWheelDelta, currentMousePosition);
@@ -328,7 +326,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _page = null;
         }
 
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     ~MapControl()
@@ -336,13 +334,20 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Dispose(false);
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensity()
     {
-        if (Width <= 0) return 0;
+        if (Width <= 0)
+            return null;
 
-        return UseGPU
-            ? _glView!.CanvasSize.Width / Width
-            : _canvasView!.CanvasSize.Width / Width;
+        if (GetCanvasWidth() <= 0)
+            return null;
+
+        return (float)(GetCanvasWidth() / Width);
+    }
+
+    private double GetCanvasWidth()
+    {
+        return _glView?.CanvasSize.Width ?? _canvasView!.CanvasSize.Width;
     }
 
     private static bool GetShiftPressed() => false; // Work in progress: https://github.com/dotnet/maui/issues/16202

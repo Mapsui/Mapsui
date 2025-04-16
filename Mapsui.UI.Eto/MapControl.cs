@@ -18,7 +18,12 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         SharedConstructor();
         _invalidate = () => RunOnUIThread(Invalidate);
-        SizeChanged += (s, e) => SetViewportSize();
+        SizeChanged += MapControl_SizeChanged; ;
+    }
+
+    private void MapControl_SizeChanged(object? sender, EventArgs e)
+    {
+        SharedOnSizeChanged(Width, Height);
     }
 
     public Cursor MoveCursor { get; set; } = Cursors.Move;
@@ -26,8 +31,6 @@ public partial class MapControl : SkiaDrawable, IMapControl
     public Keys MoveModifier { get; set; } = Keys.None;
     public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
     public Keys ZoomModifier { get; set; } = Keys.Control;
-    private double ViewportWidth => Width;
-    private double ViewportHeight => Height;
 
     public void OpenInBrowser(string url)
     {
@@ -77,7 +80,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnLoadComplete(e);
 
-        SetViewportSize();
+        SharedOnSizeChanged(Width, Height);
         CanFocus = true;
     }
 
@@ -94,17 +97,17 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         base.OnSizeChanged(e);
 
-        SetViewportSize();
+        SharedOnSizeChanged(Width, Height);
     }
 
     protected override void OnPaint(SKPaintEventArgs e)
     {
-        if (PixelDensity <= 0)
+        if (GetPixelDensity() is not float pixelDensity)
             return;
 
         var canvas = e.Surface.Canvas;
-        canvas.Scale(PixelDensity, PixelDensity);
-        CommonDrawControl(canvas);
+        canvas.Scale(pixelDensity, pixelDensity);
+        SharedDraw(canvas);
     }
 
     protected override void Dispose(bool disposing)
@@ -115,7 +118,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         }
 
 #pragma warning disable IDISP023 // Don't use reference types in finalizer context
-        CommonDispose(disposing);
+        SharedDispose(disposing);
 #pragma warning restore IDISP023 // Don't use reference types in finalizer context
 
         base.Dispose(disposing);
@@ -134,7 +137,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
         _shiftPressed = e.Shift;
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensity()
     {
         var center = PointToScreen(Location + Size / 2);
         return Screen.FromPoint(center).LogicalPixelSize;
