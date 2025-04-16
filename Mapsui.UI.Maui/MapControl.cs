@@ -21,7 +21,7 @@ namespace Mapsui.UI.Maui;
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
-    public static bool UseGPU = true;
+    public static bool UseGPU = !IsMaui9();
 
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
@@ -78,6 +78,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
         view.SizeChanged += View_SizeChanged;
         Content = view;
+    }
+
+    private static bool IsMaui9()
+    {
+        var frameworkDescription = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+        return frameworkDescription.Contains(".NET 9");
     }
 
     private void View_SizeChanged(object? sender, EventArgs e)
