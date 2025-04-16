@@ -25,16 +25,24 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
-    private readonly ConcurrentDictionary<long, ScreenPosition> _positions = new();
+    private readonly ConcurrentDictionary<long, PointerRecording> _positions = new();
     private Size _size;
     private static List<WeakReference<MapControl>>? _listeners;
     private readonly ManipulationTracker _manipulationTracker = new();
     private Page? _page;
     private Element? _element;
 
+    /// <summary>
+    /// If finger position is not updated during the IsStaleTimeSpan period, the touch event is considered stale and is removed.
+    /// Touch input is not always reliable. This could be because of bugs in SkiaSharp, WinUI, iOS or Android, MAUI, 
+    /// in hardware drivers, or hardware. To work around this we remove the touch events if they did not change after 
+    /// some period. Making this period too short could remove valid events, making it too long would result in a longer 
+    /// period of dangling ghost touches. You might want to tweak this value to your needs.
+    /// </summary>
+    public TimeSpan IsStaleTimeSpan { get; set; } = TimeSpan.FromMilliseconds(500); // Even with a value of 100 I never see removal of a valid event, so I assume 500 is save. And perhaps it could be set even lower because if a valid event is removed sometimes I don't notice any change in the UI.
+
     private double ViewportWidth => _size.Width; // Used in shared code. Getting the this.Width too early can cause malfunctioning.
     private double ViewportHeight => _size.Height; // Used in shared code. Getting the this.Height too early can cause malfunctioning.
-
 
     public MapControl()
     {
@@ -158,15 +166,16 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         Catch.Exceptions(() =>
         {
             e.Handled = true;
+            RemoveStale(_positions, IsStaleTimeSpan.TotalMilliseconds);
             var position = GetScreenPosition(e.Location);
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
-                _positions[e.Id] = position;
+                _positions[e.Id] = new PointerRecording(position, Environment.TickCount);
                 if (_positions.Count == 1) // Not sure if this check is necessary.
-                    _manipulationTracker.Restart(_positions.Values.ToArray());
+                    _manipulationTracker.Restart(_positions.Values.Select(p => p.ScreenPosition).ToArray());
 
-                if (OnPointerPressed(_positions.Values.ToArray()))
+                if (OnPointerPressed(_positions.Values.Select(p => p.ScreenPosition).ToArray()))
                     return;
             }
             else if (e.ActionType == SKTouchAction.Moved)
@@ -181,12 +190,12 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 }
                 else
                 {
-                    _positions[e.Id] = position;
+                    _positions[e.Id] = new PointerRecording(position, Environment.TickCount);
 
-                    if (OnPointerMoved(_positions.Values.ToArray(), isHovering))
+                    if (OnPointerMoved(_positions.Values.Select(p => p.ScreenPosition).ToArray(), isHovering))
                         return;
 
-                    _manipulationTracker.Manipulate(_positions.Values.ToArray(), Map.Navigator.Manipulate);
+                    _manipulationTracker.Manipulate(_positions.Values.Select(p => p.ScreenPosition).ToArray(), Map.Navigator.Manipulate);
                 }
 
                 RefreshGraphics();
@@ -218,6 +227,18 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 OnZoomInOrOut(e.WheelDelta, position);
             }
         });
+    }
+
+    private static void RemoveStale(ConcurrentDictionary<long, PointerRecording> positions, double totalMilliseconds)
+    {
+        var currentTickCount = Environment.TickCount;
+        foreach (var position in positions)
+        {
+            if (currentTickCount - position.Value.timestamp > totalMilliseconds)
+            {
+                _ = positions.TryRemove(position.Key, out _);
+            }
+        }
     }
 
     private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
@@ -386,5 +407,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
 
         return GetPage(element.Parent);
+    }
+
+    private record struct PointerRecording(ScreenPosition ScreenPosition, int timestamp)
+    {
     }
 }
