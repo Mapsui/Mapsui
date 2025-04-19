@@ -35670,6 +35670,19 @@ references:
   commentId: E:Mapsui.UI.Maui.MapControl.Info
   fullName: Mapsui.UI.Maui.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.Maui.MapControl.IsStaleTimeSpan
+  name: IsStaleTimeSpan
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_IsStaleTimeSpan
+  commentId: P:Mapsui.UI.Maui.MapControl.IsStaleTimeSpan
+  fullName: Mapsui.UI.Maui.MapControl.IsStaleTimeSpan
+  nameWithType: MapControl.IsStaleTimeSpan
+- uid: Mapsui.UI.Maui.MapControl.IsStaleTimeSpan*
+  name: IsStaleTimeSpan
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_IsStaleTimeSpan_
+  commentId: Overload:Mapsui.UI.Maui.MapControl.IsStaleTimeSpan
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapControl.IsStaleTimeSpan
+  nameWithType: MapControl.IsStaleTimeSpan
 - uid: Mapsui.UI.Maui.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_Map
