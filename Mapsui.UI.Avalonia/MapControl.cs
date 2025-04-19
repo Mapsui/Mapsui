@@ -8,6 +8,7 @@ using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Manipulations;
+using Mapsui.Rendering;
 using Mapsui.UI.Avalonia.Extensions;
 using System;
 using System.Collections.Concurrent;
@@ -29,8 +30,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     {
         SharedConstructor();
 
-        _invalidate = () => { RunOnUIThread(InvalidateVisual); };
-
         Initialized += MapControlInitialized;
 
         // Pointer events
@@ -48,6 +47,11 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         ClipToBounds = true;
     }
 
+    public void InvalidateCanvas()
+    {
+        RunOnUIThread(InvalidateVisual);
+    }
+
     /// <summary>
     /// This enables an alternative mouse wheel method where the step size on each mouse wheel event can be configured
     /// by setting the ContinuousMouseWheelZoomStepSize.
@@ -60,7 +64,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     public double ContinuousMouseWheelZoomStepSize { get; set; } = 0.1;
 
     public static readonly DirectProperty<MapControl, Map> MapProperty =
-    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
+        AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
 
     /// <summary> Clears the Touch State. Should only be called if the touch state seems out of sync 
     /// in a certain situation.</summary>
@@ -169,7 +173,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     public override void Render(DrawingContext context)
     {
-        _drawOperation ??= new MapsuiCustomDrawOperation(new Rect(0, 0, Bounds.Width, Bounds.Height), this);
+        _drawOperation ??= new MapsuiCustomDrawOperation(new Rect(0, 0, Bounds.Width, Bounds.Height), _renderController);
         _drawOperation.Bounds = new Rect(0, 0, Bounds.Width, Bounds.Height);
         context.Custom(_drawOperation);
     }
@@ -203,8 +207,10 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         return (float?)VisualRoot?.RenderScaling;
     }
 
-    private sealed class MapsuiCustomDrawOperation(Rect bounds, MapControl mapControl) : ICustomDrawOperation
+    private sealed class MapsuiCustomDrawOperation(Rect bounds, RenderController? renderController) : ICustomDrawOperation
     {
+        private readonly RenderController? _renderController = renderController;
+
         public void Dispose()
         {
             // No-op
@@ -218,7 +224,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             using var lease = leaseFeature.Lease();
             var canvas = lease.SkCanvas;
             canvas.Save();
-            mapControl.SharedDraw(canvas);
+            _renderController?.Render(canvas);
             canvas.Restore();
         }
 

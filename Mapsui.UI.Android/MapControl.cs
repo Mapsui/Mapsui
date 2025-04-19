@@ -38,10 +38,14 @@ public partial class MapControl : ViewGroup, IMapControl
         LocalConstructor();
     }
 
+
+    public void InvalidateCanvas()
+    {
+        RunOnUIThread(RefreshGraphicsWithTryCatch);
+    }
+
     private void LocalConstructor()
     {
-        _invalidate = () => RunOnUIThread(RefreshGraphicsWithTryCatch);
-
         SetBackgroundColor(Color.Transparent);
         _canvas?.Dispose();
         _canvas = RenderMode == SkiaRenderMode.Software ? StartSoftwareRenderMode() : StartHardwareRenderMode();
@@ -61,7 +65,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     public SkiaRenderMode RenderMode
@@ -119,7 +123,7 @@ public partial class MapControl : ViewGroup, IMapControl
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     public void MapControl_Touch(object? sender, TouchEventArgs args)

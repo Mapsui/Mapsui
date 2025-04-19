@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Utilities;
 
-
 public class AsyncAutoResetEvent(bool initialState = false)
 {
     private static readonly Task _completed = Task.FromResult(true);

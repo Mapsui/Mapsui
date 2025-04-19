@@ -17,8 +17,12 @@ public partial class MapControl : SkiaDrawable, IMapControl
     public MapControl()
     {
         SharedConstructor();
-        _invalidate = () => RunOnUIThread(Invalidate);
         SizeChanged += MapControl_SizeChanged; ;
+    }
+
+    public void InvalidateCanvas()
+    {
+        RunOnUIThread(Invalidate);
     }
 
     private void MapControl_SizeChanged(object? sender, EventArgs e)
@@ -107,7 +111,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         var canvas = e.Surface.Canvas;
         canvas.Scale(pixelDensity, pixelDensity);
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     protected override void Dispose(bool disposing)

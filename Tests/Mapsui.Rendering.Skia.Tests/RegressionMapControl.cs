@@ -50,6 +50,8 @@ public sealed class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
+    public void InvalidateCanvas() { }
+
     public void RefreshData(ChangeType changeType = ChangeType.Discrete)
     {
         throw new NotImplementedException();
