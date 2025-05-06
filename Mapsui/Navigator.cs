@@ -121,12 +121,9 @@ public class Navigator
         {
             IsInitialized = true;
 
-            if (_initialization.Count == 0)
-            {
-                ZoomToPanBounds();
-                return;
-            }
+            ZoomToBox(PanBounds, MBoxFit.Fill);
 
+            // Actions could either modify the current state (after ZoomToBox above) or override the current state.
             foreach (var action in _initialization)
             {
                 action();
