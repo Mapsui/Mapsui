@@ -64,9 +64,9 @@ public class MapRegressionTests
             new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Causes a crash on the CI server. Perhaps a memory issue.
             new WfsGeometryFilterSample(), //  Causes a crash on the CI server. Perhaps a memory issue.
             new WmsBasilicataSample(), // Times out
-            new WmsGebcoSample(),
-            new WmsOpenSeaSample(),
-            new WmtsZurichSample(),
+            new WmsGebcoSample(), // Not sure what the problem is
+            new WmsOpenSeaSample(),  // Times out
+            new WmtsZurichSample(),  // Times out
         ];
 
     [Test]
