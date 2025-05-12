@@ -127,6 +127,8 @@ jobs:
          dotnet-version: |
            9.0.203
            8.0.407
+    - name: Set MSBuildEnableWorkloadResolver
+      run: echo "MSBuildEnableWorkloadResolver=true" >> $GITHUB_ENV
     - name: install workloads maui macos android ios maccatalyst wasm-tools wasm-tools-net8
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
     - name: install Uno.Check 1.26.1
