@@ -19,6 +19,7 @@ public class Navigator
     private MRect? _defaultPanBounds;
     private MMinMax? _overrideZoomBounds;
     private MRect? _overridePanBounds;
+    private bool _isInitializing = false;
 
     public delegate void ViewportChangedEventHandler(object sender, ViewportChangedEventArgs e);
 
@@ -115,13 +116,14 @@ public class Navigator
 
     public bool IsInitialized { get; private set; } = false;
 
-    private void Initialize()
+    private void Initialize(MRect extent)
     {
         if (!IsInitialized)
         {
+            _isInitializing = true;
             IsInitialized = true;
 
-            ZoomToBox(PanBounds, MBoxFit.Fill);
+            _viewport = CreateViewportForExtent(extent);
 
             // Actions could either modify the current state (after ZoomToBox above) or override the current state.
             foreach (var action in _initialization)
@@ -130,6 +132,9 @@ public class Navigator
             }
 
             _initialization.Clear();
+            _isInitializing = false;
+
+            OnViewportChanged(_viewport);
         }
     }
 
@@ -197,6 +202,15 @@ public class Navigator
             box.Width, box.Height, Viewport.Width, Viewport.Height, boxFit);
 
         CenterOnAndZoomTo(box.Centroid, resolution, duration, easing);
+    }
+
+    private Viewport CreateViewportForExtent(MRect extent)
+    {
+        var resolution = ZoomHelper.CalculateResolutionForWorldSize(
+            extent.Width, extent.Height, Viewport.Width, Viewport.Height, MBoxFit.Fill);
+
+        return Limit(_viewport with { CenterX = extent.Centroid.X, CenterY = extent.Centroid.Y, Resolution = resolution });
+
     }
 
     /// <summary>
@@ -527,7 +541,7 @@ public class Navigator
     private void InitializeIfNeeded()
     {
         if (ShouldInitialize())
-            Initialize();
+            Initialize(PanBounds ?? throw new Exception("PanBounds is null. This should not be possible when initializing."));
     }
 
     private void OnRefreshDataRequest(ChangeType changeType)
@@ -610,7 +624,14 @@ public class Navigator
     {
         var limitedViewport = Limiter.Limit(goalViewport, PanBounds, ZoomBounds);
 
-        limitedViewport = LimitXYProportionalToResolution(Viewport, goalViewport, limitedViewport);
+        // Note after a quite long debug session: Because of this call below a Viewport update can have a different
+        // result depending on the previous state. This is very confusing if you simply want to zoom to a certain
+        // extent. It was created for a specific use case: When zoom in or out with mouse wheel and then hit
+        // the zoom limit. I don't know if it helps or hinders pinch zoom. This logic should move to the mouse wheel
+        // part of the code and should be called in a core method like Limit.
+
+        if (_isInitializing)
+            limitedViewport = LimitXYProportionalToResolution(Viewport, goalViewport, limitedViewport);
 
         return limitedViewport;
     }
@@ -621,6 +642,9 @@ public class Navigator
         // From a users experience perspective we want the x/y change to be limited to the same degree
         // as the resolution. This is to prevent the situation where you zoom out while hitting the zoom bounds
         // and you see no change in resolution, but you will see a change in pan.
+
+        if (originalViewport.Resolution <= 0)
+            return goalViewport;
 
         var resolutionLimiting = CalculateResolutionLimiting(
             originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
@@ -709,7 +733,7 @@ public class Navigator
 
     private bool ShouldInitialize() => !IsInitialized && CanInitialize();
 
-    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null; // Should we check on ZoomBounds too?
+    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null;
 
     internal int GetAnimationsCount => _animations.Count();
 

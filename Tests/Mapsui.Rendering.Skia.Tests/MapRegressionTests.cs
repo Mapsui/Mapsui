@@ -10,12 +10,8 @@ using Mapsui.Samples.Common.Maps.DataFormats;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Samples.Common.Maps.Info;
-using Mapsui.Samples.Common.Maps.Performance;
 using Mapsui.Samples.Common.Maps.Special;
-using Mapsui.Samples.Common.Maps.WFS;
 using Mapsui.Samples.Common.Maps.Widgets;
-using Mapsui.Samples.Common.Maps.WMS;
-using Mapsui.Samples.Common.Maps.WMTS;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Widgets;
@@ -61,12 +57,6 @@ public class MapRegressionTests
             new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
             new CustomSvgStyleSample(), // Is currently not functioning and should be fixed with a redesign.
             new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
-            new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Causes a crash on the CI server. Perhaps a memory issue.
-            new WfsGeometryFilterSample(), //  Causes a crash on the CI server. Perhaps a memory issue.
-            new WmsBasilicataSample(), // Times out
-            new WmsGebcoSample(), // Not sure what the problem is
-            new WmsOpenSeaSample(),  // Times out
-            new WmtsZurichSample(),  // Times out
         ];
 
     [Test]
