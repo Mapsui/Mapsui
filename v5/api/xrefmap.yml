@@ -21530,6 +21530,105 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.MapInfoRecord.Style
   nameWithType: MapInfoRecord.Style
+- uid: Mapsui.Rendering.RenderController
+  name: RenderController
+  href: pages/Mapsui.Rendering.RenderController.html
+  commentId: T:Mapsui.Rendering.RenderController
+  fullName: Mapsui.Rendering.RenderController
+  nameWithType: RenderController
+- uid: Mapsui.Rendering.RenderController.#ctor(System.Func{Mapsui.Map},System.Action)
+  name: RenderController(Func<Map?>, Action)
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController__ctor_System_Func_Mapsui_Map__System_Action_
+  commentId: M:Mapsui.Rendering.RenderController.#ctor(System.Func{Mapsui.Map},System.Action)
+  name.vb: New(Func(Of Map), Action)
+  fullName: Mapsui.Rendering.RenderController.RenderController(System.Func<Mapsui.Map?>, System.Action)
+  fullName.vb: Mapsui.Rendering.RenderController.New(System.Func(Of Mapsui.Map), System.Action)
+  nameWithType: RenderController.RenderController(Func<Map?>, Action)
+  nameWithType.vb: RenderController.New(Func(Of Map), Action)
+- uid: Mapsui.Rendering.RenderController.#ctor*
+  name: RenderController
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController__ctor_
+  commentId: Overload:Mapsui.Rendering.RenderController.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mapsui.Rendering.RenderController.RenderController
+  fullName.vb: Mapsui.Rendering.RenderController.New
+  nameWithType: RenderController.RenderController
+  nameWithType.vb: RenderController.New
+- uid: Mapsui.Rendering.RenderController.Dispose
+  name: Dispose()
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_Dispose
+  commentId: M:Mapsui.Rendering.RenderController.Dispose
+  fullName: Mapsui.Rendering.RenderController.Dispose()
+  nameWithType: RenderController.Dispose()
+- uid: Mapsui.Rendering.RenderController.Dispose*
+  name: Dispose
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_Dispose_
+  commentId: Overload:Mapsui.Rendering.RenderController.Dispose
+  isSpec: "True"
+  fullName: Mapsui.Rendering.RenderController.Dispose
+  nameWithType: RenderController.Dispose
+- uid: Mapsui.Rendering.RenderController.GetMapInfo(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  name: GetMapInfo(ScreenPosition, Viewport, IEnumerable<ILayer>, int)
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_GetMapInfo_Mapsui_Manipulations_ScreenPosition_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
+  commentId: M:Mapsui.Rendering.RenderController.GetMapInfo(Mapsui.Manipulations.ScreenPosition,Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  name.vb: GetMapInfo(ScreenPosition, Viewport, IEnumerable(Of ILayer), Integer)
+  fullName: Mapsui.Rendering.RenderController.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, int)
+  fullName.vb: Mapsui.Rendering.RenderController.GetMapInfo(Mapsui.Manipulations.ScreenPosition, Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Integer)
+  nameWithType: RenderController.GetMapInfo(ScreenPosition, Viewport, IEnumerable<ILayer>, int)
+  nameWithType.vb: RenderController.GetMapInfo(ScreenPosition, Viewport, IEnumerable(Of ILayer), Integer)
+- uid: Mapsui.Rendering.RenderController.GetMapInfo*
+  name: GetMapInfo
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_GetMapInfo_
+  commentId: Overload:Mapsui.Rendering.RenderController.GetMapInfo
+  isSpec: "True"
+  fullName: Mapsui.Rendering.RenderController.GetMapInfo
+  nameWithType: RenderController.GetMapInfo
+- uid: Mapsui.Rendering.RenderController.RefreshGraphics
+  name: RefreshGraphics()
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_RefreshGraphics
+  commentId: M:Mapsui.Rendering.RenderController.RefreshGraphics
+  fullName: Mapsui.Rendering.RenderController.RefreshGraphics()
+  nameWithType: RenderController.RefreshGraphics()
+- uid: Mapsui.Rendering.RenderController.RefreshGraphics*
+  name: RefreshGraphics
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_RefreshGraphics_
+  commentId: Overload:Mapsui.Rendering.RenderController.RefreshGraphics
+  isSpec: "True"
+  fullName: Mapsui.Rendering.RenderController.RefreshGraphics
+  nameWithType: RenderController.RefreshGraphics
+- uid: Mapsui.Rendering.RenderController.Render(System.Object)
+  name: Render(object)
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_Render_System_Object_
+  commentId: M:Mapsui.Rendering.RenderController.Render(System.Object)
+  name.vb: Render(Object)
+  fullName: Mapsui.Rendering.RenderController.Render(object)
+  fullName.vb: Mapsui.Rendering.RenderController.Render(Object)
+  nameWithType: RenderController.Render(object)
+  nameWithType.vb: RenderController.Render(Object)
+- uid: Mapsui.Rendering.RenderController.Render*
+  name: Render
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_Render_
+  commentId: Overload:Mapsui.Rendering.RenderController.Render
+  isSpec: "True"
+  fullName: Mapsui.Rendering.RenderController.Render
+  nameWithType: RenderController.Render
+- uid: Mapsui.Rendering.RenderController.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Nullable{Mapsui.Styles.Color},System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat,System.Int32)
+  name: RenderToBitmapStream(Viewport, IEnumerable<ILayer>, Color?, float, IEnumerable<IWidget>?, RenderFormat, int)
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_RenderToBitmapStream_Mapsui_Viewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Nullable_Mapsui_Styles_Color__System_Single_System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Rendering_RenderFormat_System_Int32_
+  commentId: M:Mapsui.Rendering.RenderController.RenderToBitmapStream(Mapsui.Viewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Nullable{Mapsui.Styles.Color},System.Single,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Rendering.RenderFormat,System.Int32)
+  name.vb: RenderToBitmapStream(Viewport, IEnumerable(Of ILayer), Color?, Single, IEnumerable(Of IWidget), RenderFormat, Integer)
+  fullName: Mapsui.Rendering.RenderController.RenderToBitmapStream(Mapsui.Viewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color?, float, System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>?, Mapsui.Rendering.RenderFormat, int)
+  fullName.vb: Mapsui.Rendering.RenderController.RenderToBitmapStream(Mapsui.Viewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color?, Single, System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Rendering.RenderFormat, Integer)
+  nameWithType: RenderController.RenderToBitmapStream(Viewport, IEnumerable<ILayer>, Color?, float, IEnumerable<IWidget>?, RenderFormat, int)
+  nameWithType.vb: RenderController.RenderToBitmapStream(Viewport, IEnumerable(Of ILayer), Color?, Single, IEnumerable(Of IWidget), RenderFormat, Integer)
+- uid: Mapsui.Rendering.RenderController.RenderToBitmapStream*
+  name: RenderToBitmapStream
+  href: pages/Mapsui.Rendering.RenderController.html#Mapsui_Rendering_RenderController_RenderToBitmapStream_
+  commentId: Overload:Mapsui.Rendering.RenderController.RenderToBitmapStream
+  isSpec: "True"
+  fullName: Mapsui.Rendering.RenderController.RenderToBitmapStream
+  nameWithType: RenderController.RenderToBitmapStream
 - uid: Mapsui.Rendering.RenderException
   name: RenderException
   href: pages/Mapsui.Rendering.RenderException.html
@@ -31038,6 +31137,19 @@ references:
   commentId: E:Mapsui.UI.Android.MapControl.Info
   fullName: Mapsui.UI.Android.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.Android.MapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.Android.MapControl.InvalidateCanvas
+  fullName: Mapsui.UI.Android.MapControl.InvalidateCanvas()
+  nameWithType: MapControl.InvalidateCanvas()
+- uid: Mapsui.UI.Android.MapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.Android.MapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.InvalidateCanvas
+  nameWithType: MapControl.InvalidateCanvas
 - uid: Mapsui.UI.Android.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Map
@@ -31291,19 +31403,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.RenderMode
   nameWithType: MapControl.RenderMode
-- uid: Mapsui.UI.Android.MapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Renderer
-  commentId: P:Mapsui.UI.Android.MapControl.Renderer
-  fullName: Mapsui.UI.Android.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Android.MapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.Android.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Unsubscribe
@@ -31538,6 +31637,19 @@ references:
   commentId: E:Mapsui.UI.Avalonia.MapControl.Info
   fullName: Mapsui.UI.Avalonia.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.Avalonia.MapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.Avalonia.MapControl.InvalidateCanvas
+  fullName: Mapsui.UI.Avalonia.MapControl.InvalidateCanvas()
+  nameWithType: MapControl.InvalidateCanvas()
+- uid: Mapsui.UI.Avalonia.MapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.Avalonia.MapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.Avalonia.MapControl.InvalidateCanvas
+  nameWithType: MapControl.InvalidateCanvas
 - uid: Mapsui.UI.Avalonia.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_Map
@@ -31755,19 +31867,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Avalonia.MapControl.Render
   nameWithType: MapControl.Render
-- uid: Mapsui.UI.Avalonia.MapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_Renderer
-  commentId: P:Mapsui.UI.Avalonia.MapControl.Renderer
-  fullName: Mapsui.UI.Avalonia.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Avalonia.MapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.Avalonia.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.Avalonia.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.Avalonia.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Avalonia.MapControl.html#Mapsui_UI_Avalonia_MapControl_Unsubscribe
@@ -32955,6 +33054,19 @@ references:
   commentId: E:Mapsui.UI.Blazor.MapControl.Info
   fullName: Mapsui.UI.Blazor.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.Blazor.MapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.Blazor.MapControl.InvalidateCanvas
+  fullName: Mapsui.UI.Blazor.MapControl.InvalidateCanvas()
+  nameWithType: MapControl.InvalidateCanvas()
+- uid: Mapsui.UI.Blazor.MapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.Blazor.MapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.MapControl.InvalidateCanvas
+  nameWithType: MapControl.InvalidateCanvas
 - uid: Mapsui.UI.Blazor.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Map
@@ -33345,19 +33457,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Blazor.MapControl.RefreshGraphics
   nameWithType: MapControl.RefreshGraphics
-- uid: Mapsui.UI.Blazor.MapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Renderer
-  commentId: P:Mapsui.UI.Blazor.MapControl.Renderer
-  fullName: Mapsui.UI.Blazor.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Blazor.MapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.Blazor.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.Blazor.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.Blazor.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Blazor.MapControl.html#Mapsui_UI_Blazor_MapControl_Unsubscribe
@@ -33634,6 +33733,19 @@ references:
   commentId: E:Mapsui.UI.Eto.MapControl.Info
   fullName: Mapsui.UI.Eto.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.Eto.MapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.Eto.MapControl.InvalidateCanvas
+  fullName: Mapsui.UI.Eto.MapControl.InvalidateCanvas()
+  nameWithType: MapControl.InvalidateCanvas()
+- uid: Mapsui.UI.Eto.MapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.Eto.MapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.Eto.MapControl.InvalidateCanvas
+  nameWithType: MapControl.InvalidateCanvas
 - uid: Mapsui.UI.Eto.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Map
@@ -33982,19 +34094,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Eto.MapControl.RefreshGraphics
   nameWithType: MapControl.RefreshGraphics
-- uid: Mapsui.UI.Eto.MapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Renderer
-  commentId: P:Mapsui.UI.Eto.MapControl.Renderer
-  fullName: Mapsui.UI.Eto.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Eto.MapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.Eto.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.Eto.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.Eto.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Eto.MapControl.html#Mapsui_UI_Eto_MapControl_Unsubscribe
@@ -34104,6 +34203,19 @@ references:
   commentId: E:Mapsui.UI.IMapControl.Info
   fullName: Mapsui.UI.IMapControl.Info
   nameWithType: IMapControl.Info
+- uid: Mapsui.UI.IMapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.IMapControl.InvalidateCanvas
+  fullName: Mapsui.UI.IMapControl.InvalidateCanvas()
+  nameWithType: IMapControl.InvalidateCanvas()
+- uid: Mapsui.UI.IMapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.IMapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.InvalidateCanvas
+  nameWithType: IMapControl.InvalidateCanvas
 - uid: Mapsui.UI.IMapControl.Map
   name: Map
   href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Map
@@ -34172,19 +34284,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.RefreshGraphics
   nameWithType: IMapControl.RefreshGraphics
-- uid: Mapsui.UI.IMapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Renderer
-  commentId: P:Mapsui.UI.IMapControl.Renderer
-  fullName: Mapsui.UI.IMapControl.Renderer
-  nameWithType: IMapControl.Renderer
-- uid: Mapsui.UI.IMapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Renderer_
-  commentId: Overload:Mapsui.UI.IMapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.Renderer
-  nameWithType: IMapControl.Renderer
 - uid: Mapsui.UI.IMapControl.ToCoordinateInDeviceIndependentUnits(Mapsui.MPoint)
   name: ToCoordinateInDeviceIndependentUnits(MPoint)
   href: pages/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToCoordinateInDeviceIndependentUnits_Mapsui_MPoint_
@@ -35670,6 +35769,19 @@ references:
   commentId: E:Mapsui.UI.Maui.MapControl.Info
   fullName: Mapsui.UI.Maui.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.Maui.MapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.Maui.MapControl.InvalidateCanvas
+  fullName: Mapsui.UI.Maui.MapControl.InvalidateCanvas()
+  nameWithType: MapControl.InvalidateCanvas()
+- uid: Mapsui.UI.Maui.MapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.Maui.MapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.Maui.MapControl.InvalidateCanvas
+  nameWithType: MapControl.InvalidateCanvas
 - uid: Mapsui.UI.Maui.MapControl.IsStaleTimeSpan
   name: IsStaleTimeSpan
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_IsStaleTimeSpan
@@ -35894,19 +36006,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Maui.MapControl.RefreshGraphics
   nameWithType: MapControl.RefreshGraphics
-- uid: Mapsui.UI.Maui.MapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_Renderer
-  commentId: P:Mapsui.UI.Maui.MapControl.Renderer
-  fullName: Mapsui.UI.Maui.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Maui.MapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.Maui.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.Maui.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.Maui.MapControl.RunOnUIThread(System.Action)
   name: RunOnUIThread(Action)
   href: pages/Mapsui.UI.Maui.MapControl.html#Mapsui_UI_Maui_MapControl_RunOnUIThread_System_Action_
@@ -38282,6 +38381,19 @@ references:
   commentId: E:Mapsui.UI.WinUI.MapControl.Info
   fullName: Mapsui.UI.WinUI.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.WinUI.MapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.WinUI.MapControl.InvalidateCanvas
+  fullName: Mapsui.UI.WinUI.MapControl.InvalidateCanvas()
+  nameWithType: MapControl.InvalidateCanvas()
+- uid: Mapsui.UI.WinUI.MapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.WinUI.MapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.WinUI.MapControl.InvalidateCanvas
+  nameWithType: MapControl.InvalidateCanvas
 - uid: Mapsui.UI.WinUI.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_Map
@@ -38474,19 +38586,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WinUI.MapControl.RefreshGraphics
   nameWithType: MapControl.RefreshGraphics
-- uid: Mapsui.UI.WinUI.MapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_Renderer
-  commentId: P:Mapsui.UI.WinUI.MapControl.Renderer
-  fullName: Mapsui.UI.WinUI.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.WinUI.MapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.WinUI.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.WinUI.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.WinUI.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.WinUI.MapControl.html#Mapsui_UI_WinUI_MapControl_Unsubscribe
@@ -38659,6 +38758,19 @@ references:
   commentId: E:Mapsui.UI.WindowsForms.MapControl.Info
   fullName: Mapsui.UI.WindowsForms.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.WindowsForms.MapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.WindowsForms.MapControl.InvalidateCanvas
+  fullName: Mapsui.UI.WindowsForms.MapControl.InvalidateCanvas()
+  nameWithType: MapControl.InvalidateCanvas()
+- uid: Mapsui.UI.WindowsForms.MapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.WindowsForms.MapControl.InvalidateCanvas
+  nameWithType: MapControl.InvalidateCanvas
 - uid: Mapsui.UI.WindowsForms.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_Map
@@ -38851,19 +38963,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.WindowsForms.MapControl.RefreshGraphics
   nameWithType: MapControl.RefreshGraphics
-- uid: Mapsui.UI.WindowsForms.MapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_Renderer
-  commentId: P:Mapsui.UI.WindowsForms.MapControl.Renderer
-  fullName: Mapsui.UI.WindowsForms.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.WindowsForms.MapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.WindowsForms.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.WindowsForms.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.WindowsForms.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.WindowsForms.MapControl.html#Mapsui_UI_WindowsForms_MapControl_Unsubscribe
@@ -39054,6 +39153,19 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.Info
   fullName: Mapsui.UI.Wpf.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.Wpf.MapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.Wpf.MapControl.InvalidateCanvas
+  fullName: Mapsui.UI.Wpf.MapControl.InvalidateCanvas()
+  nameWithType: MapControl.InvalidateCanvas()
+- uid: Mapsui.UI.Wpf.MapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.InvalidateCanvas
+  nameWithType: MapControl.InvalidateCanvas
 - uid: Mapsui.UI.Wpf.MapControl.Map
   name: Map
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Map
@@ -39246,19 +39358,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.RefreshGraphics
   nameWithType: MapControl.RefreshGraphics
-- uid: Mapsui.UI.Wpf.MapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Renderer
-  commentId: P:Mapsui.UI.Wpf.MapControl.Renderer
-  fullName: Mapsui.UI.Wpf.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Wpf.MapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.Wpf.MapControl.Unsubscribe
   name: Unsubscribe()
   href: pages/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Unsubscribe
@@ -39440,6 +39539,19 @@ references:
   commentId: E:Mapsui.UI.iOS.MapControl.Info
   fullName: Mapsui.UI.iOS.MapControl.Info
   nameWithType: MapControl.Info
+- uid: Mapsui.UI.iOS.MapControl.InvalidateCanvas
+  name: InvalidateCanvas()
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_InvalidateCanvas
+  commentId: M:Mapsui.UI.iOS.MapControl.InvalidateCanvas
+  fullName: Mapsui.UI.iOS.MapControl.InvalidateCanvas()
+  nameWithType: MapControl.InvalidateCanvas()
+- uid: Mapsui.UI.iOS.MapControl.InvalidateCanvas*
+  name: InvalidateCanvas
+  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_InvalidateCanvas_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.InvalidateCanvas
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.InvalidateCanvas
+  nameWithType: MapControl.InvalidateCanvas
 - uid: Mapsui.UI.iOS.MapControl.LayoutMarginsDidChange
   name: LayoutMarginsDidChange()
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_LayoutMarginsDidChange
@@ -39645,19 +39757,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.RefreshGraphics
   nameWithType: MapControl.RefreshGraphics
-- uid: Mapsui.UI.iOS.MapControl.Renderer
-  name: Renderer
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Renderer
-  commentId: P:Mapsui.UI.iOS.MapControl.Renderer
-  fullName: Mapsui.UI.iOS.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.iOS.MapControl.Renderer*
-  name: Renderer
-  href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.iOS.MapControl.TouchesBegan(Foundation.NSSet,UIKit.UIEvent)
   name: TouchesBegan(NSSet, UIEvent?)
   href: pages/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_TouchesBegan_Foundation_NSSet_UIKit_UIEvent_

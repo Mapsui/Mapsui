@@ -2902,6 +2902,16 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "pages/Mapsui.Rendering.RenderController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "pages/Mapsui.Rendering.RenderController.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "pages/Mapsui.Rendering.RenderException.yml",
       "output": {
         ".html": {
