@@ -39,19 +39,19 @@ public partial class MapControl : ComponentBase, IMapControl
     public MapControl()
     {
         SharedConstructor();
+    }
 
-        _invalidate = () =>
-        {
-            if (!OperatingSystem.IsBrowser())
-                throw new InvalidOperationException("Only browser is supported");
+    public void InvalidateCanvas()
+    {
+        if (!OperatingSystem.IsBrowser())
+            throw new InvalidOperationException("Only browser is supported");
 
-            if (_viewCpu != null)
-                _viewCpu.Invalidate();
-            else if (_viewGpu != null)
-                _viewGpu?.Invalidate();
-            else
-                throw new InvalidOperationException("Both _viewCpu and _viewGpu are null");
-        };
+        if (_viewCpu != null)
+            _viewCpu.Invalidate();
+        else if (_viewGpu != null)
+            _viewGpu?.Invalidate();
+        else
+            throw new InvalidOperationException("Both _viewCpu and _viewGpu are null");
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ public partial class MapControl : ComponentBase, IMapControl
             OnSizeChanged(info);
         }
 
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     private void OnLoadComplete()

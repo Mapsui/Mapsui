@@ -52,14 +52,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         if (UseGPU)
         {
             _canvasGpu = CreateGpuRenderTarget();
-            _invalidate = () => RunOnUIThread(() => _canvasGpu.Invalidate());
             Children.Add(_canvasGpu);
             _canvasGpu.PaintSurface += CanvasGpu_PaintSurface;
         }
         else
         {
             _canvas = CreateRenderTarget();
-            _invalidate = () => RunOnUIThread(() => _canvas.Invalidate());
             Children.Add(_canvas);
             _canvas.PaintSurface += Canvas_PaintSurface;
         }
@@ -88,6 +86,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         var orientationSensor = SimpleOrientationSensor.GetDefault();
         if (orientationSensor != null)
             orientationSensor.OrientationChanged += (s, e) => RunOnUIThread(() => Refresh());
+    }
+
+    public void InvalidateCanvas()
+    {
+        if (_canvasGpu is not null)
+            RunOnUIThread(_canvasGpu.Invalidate);
+        else if (_canvas is not null)
+            RunOnUIThread(_canvas.Invalidate);
+        else
+            throw new Exception("No canvas was assigned. This is unexpected.");
     }
 
     private void MapControl_KeyUp(object sender, KeyRoutedEventArgs e)
@@ -230,7 +238,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     private void CanvasGpu_PaintSurface(object? sender, SKPaintGLSurfaceEventArgs e)
@@ -242,7 +250,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         canvas.Scale(pixelDensity, pixelDensity);
 
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)

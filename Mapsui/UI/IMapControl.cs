@@ -20,8 +20,6 @@ public interface IMapControl : IDisposable
 
     void Unsubscribe();
 
-    IRenderer Renderer { get; }
-
     void OpenInBrowser(string url);  // Todo: Perhaps remove. This is only to force the platform specific implementation
 
     /// <summary>
@@ -68,4 +66,6 @@ public interface IMapControl : IDisposable
     /// <param name="quality">default quality is 90 is applicable for webp and jpg</param>
     /// <returns>Byte array with snapshot in png format. If there are any problems than returns null.</returns>
     byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100);
+
+    void InvalidateCanvas();
 }
