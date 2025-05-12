@@ -11,8 +11,6 @@ public class ViewportLimiterKeepWithinExtentTests
     public void TestRestrictZoom()
     {
         // arrange
-        var navigator = new Navigator();
-
         var viewport1 = new Viewport(12.61510114915, 41.8676902329, 0.014662864685125001, 0, 800, 600);
         var viewport2 = new Viewport(12.61510114915, 41.8676902329, 0.017492343139666661, 0, 800, 600);
 
