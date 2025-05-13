@@ -12,6 +12,7 @@ using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Samples.Common.Maps.Info;
 using Mapsui.Samples.Common.Maps.Performance;
 using Mapsui.Samples.Common.Maps.Special;
+using Mapsui.Samples.Common.Maps.WFS;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Samples.Common.Maps.WMS;
 using Mapsui.Styles;
@@ -61,6 +62,7 @@ public class MapRegressionTests
             new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
             new WmsBasilicataSample(), // Times out,
             new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
+            new WfsGeometryFilterSample(), // Crashes on the build server.
         ];
 
     [Test]
