@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 public class OsmSample : ISample
 {
     public string Name => "OpenStreetMap";
-    public string Category => "1";
+    public string Category => "Demo";
 
     public Task<Map> CreateMapAsync()
     {
