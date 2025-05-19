@@ -12089,6 +12089,25 @@ references:
   commentId: T:Mapsui.Navigator
   fullName: Mapsui.Navigator
   nameWithType: Navigator
+- uid: Mapsui.Navigator.#ctor
+  name: Navigator()
+  href: pages/Mapsui.Navigator.html#Mapsui_Navigator__ctor
+  commentId: M:Mapsui.Navigator.#ctor
+  name.vb: New()
+  fullName: Mapsui.Navigator.Navigator()
+  fullName.vb: Mapsui.Navigator.New()
+  nameWithType: Navigator.Navigator()
+  nameWithType.vb: Navigator.New()
+- uid: Mapsui.Navigator.#ctor*
+  name: Navigator
+  href: pages/Mapsui.Navigator.html#Mapsui_Navigator__ctor_
+  commentId: Overload:Mapsui.Navigator.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Mapsui.Navigator.Navigator
+  fullName.vb: Mapsui.Navigator.New
+  nameWithType: Navigator.Navigator
+  nameWithType.vb: Navigator.New
 - uid: Mapsui.Navigator.CenterOn(Mapsui.MPoint,System.Int64,Mapsui.Animations.Easing)
   name: CenterOn(MPoint, long, Easing?)
   href: pages/Mapsui.Navigator.html#Mapsui_Navigator_CenterOn_Mapsui_MPoint_System_Int64_Mapsui_Animations_Easing_
