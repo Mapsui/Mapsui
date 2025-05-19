@@ -2,6 +2,7 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -42,30 +43,14 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
             if (viewport.IsRotated())
             {
-                var priorMatrix = canvas.TotalMatrix;
-
-                var matrix = CreateRotationMatrix(viewport, extent, priorMatrix);
-
-                canvas.SetMatrix(matrix);
-
+                canvas.SetMatrix(CreateRotationMatrix(viewport, extent, canvas.TotalMatrix));
                 var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
-
-                if (tile.SKObject is SKImage skImage)
-                    BitmapRenderer.Draw(canvas, skImage, destination, opacity);
-                else if (tile.SKObject is SKPicture skPicture)
-                    PictureRenderer.Draw(canvas, skPicture, destination, opacity);
-                else
-                    throw new InvalidOperationException("Unknown tile type");
-
-                canvas.SetMatrix(priorMatrix);
+                DrawRaster(canvas, opacity, tile, destination, (RasterStyle)style);
             }
             else
             {
                 var destination = WorldToScreen(viewport, extent);
-                if (tile.SKObject is SKImage skImage)
-                    BitmapRenderer.Draw(canvas, skImage, RoundToPixel(destination), opacity);
-                else if (tile.SKObject is SKPicture skPicture)
-                    PictureRenderer.Draw(canvas, skPicture, RoundToPixel(destination), opacity);
+                DrawRaster(canvas, opacity, tile, destination, (RasterStyle)style);
             }
 
             canvas.Restore();
@@ -76,6 +61,23 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
         }
 
         return true;
+    }
+
+    private static void DrawRaster(SKCanvas canvas, float opacity, Tiling.TileCacheEntry tile, SKRect destination, RasterStyle rasterStyle)
+    {
+        if (rasterStyle.Outline != null)
+        {
+            var halfStrokeWidth = (float)rasterStyle.Outline.Width / 2;
+            destination.Inflate(-halfStrokeWidth, -halfStrokeWidth);
+            using var paint = new SKPaint { Color = rasterStyle.Outline.Color.ToSkia(), StrokeWidth = (float)rasterStyle.Outline.Width, IsStroke = true };
+            canvas.DrawRect(destination, paint);
+        }
+        if (tile.SKObject is SKImage skImage)
+            BitmapRenderer.Draw(canvas, skImage, destination, opacity);
+        else if (tile.SKObject is SKPicture skPicture)
+            PictureRenderer.Draw(canvas, skPicture, destination, opacity);
+        else
+            throw new InvalidOperationException("Unknown tile type");
     }
 
     private static SKMatrix CreateRotationMatrix(Viewport viewport, MRect rect, SKMatrix priorMatrix)
