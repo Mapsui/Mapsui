@@ -15,16 +15,15 @@ public class KeepWithinExtentSample : ISample
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
-        var panBounds = GetLimitsOfMadagaskar();
+        var panBounds = GetLimitsOfMadagascar();
         map.Layers.Add(KeepCenterInMapSample.CreatePanBoundsLayer(panBounds));
         map.Navigator.Limiter = new ViewportLimiterKeepWithinExtent();
         map.Navigator.RotationLock = true;
         map.Navigator.OverridePanBounds = panBounds;
-        map.Navigator.ZoomToBox(panBounds);
         return Task.FromResult(map);
     }
 
-    private static MRect GetLimitsOfMadagaskar()
+    private static MRect GetLimitsOfMadagascar()
     {
         var (minX, minY) = SphericalMercator.FromLonLat(41.8, -27.2);
         var (maxX, maxY) = SphericalMercator.FromLonLat(52.5, -11.6);

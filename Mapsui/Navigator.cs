@@ -14,7 +14,7 @@ public class Navigator
 {
     private Viewport _viewport = new();
     private IEnumerable<AnimationEntry<Viewport>> _animations = [];
-    private readonly List<Action> _initialization = [];
+    private readonly List<Action> _initialization;
     private MMinMax? _defaultZoomBounds;
     private MRect? _defaultPanBounds;
     private MMinMax? _overrideZoomBounds;
@@ -115,24 +115,26 @@ public class Navigator
 
     public bool IsInitialized { get; private set; } = false;
 
-    private void Initialize()
+    public Navigator()
+    {
+        _initialization = new List<Action> { () => ZoomToPanBounds() };
+    }
+
+    private void Initialize(MRect extent)
     {
         if (!IsInitialized)
         {
             IsInitialized = true;
 
-            if (_initialization.Count == 0)
-            {
-                ZoomToPanBounds();
-                return;
-            }
-
+            // Actions could either modify the current state (after ZoomToBox above) or override the current state.
             foreach (var action in _initialization)
             {
                 action();
             }
 
             _initialization.Clear();
+
+            OnViewportChanged(_viewport);
         }
     }
 
@@ -530,7 +532,7 @@ public class Navigator
     private void InitializeIfNeeded()
     {
         if (ShouldInitialize())
-            Initialize();
+            Initialize(PanBounds ?? throw new Exception("PanBounds is null. This should not be possible when initializing."));
     }
 
     private void OnRefreshDataRequest(ChangeType changeType)
@@ -625,6 +627,9 @@ public class Navigator
         // as the resolution. This is to prevent the situation where you zoom out while hitting the zoom bounds
         // and you see no change in resolution, but you will see a change in pan.
 
+        if (originalViewport.Resolution <= 0)
+            return goalViewport;
+
         var resolutionLimiting = CalculateResolutionLimiting(
             originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
 
@@ -712,7 +717,7 @@ public class Navigator
 
     private bool ShouldInitialize() => !IsInitialized && CanInitialize();
 
-    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null; // Should we check on ZoomBounds too?
+    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null;
 
     internal int GetAnimationsCount => _animations.Count();
 
