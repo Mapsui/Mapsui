@@ -28807,6 +28807,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.RasterStyle.Opacity
   nameWithType: RasterStyle.Opacity
+- uid: Mapsui.Styles.RasterStyle.Outline
+  name: Outline
+  href: pages/Mapsui.Styles.RasterStyle.html#Mapsui_Styles_RasterStyle_Outline
+  commentId: P:Mapsui.Styles.RasterStyle.Outline
+  fullName: Mapsui.Styles.RasterStyle.Outline
+  nameWithType: RasterStyle.Outline
+- uid: Mapsui.Styles.RasterStyle.Outline*
+  name: Outline
+  href: pages/Mapsui.Styles.RasterStyle.html#Mapsui_Styles_RasterStyle_Outline_
+  commentId: Overload:Mapsui.Styles.RasterStyle.Outline
+  isSpec: "True"
+  fullName: Mapsui.Styles.RasterStyle.Outline
+  nameWithType: RasterStyle.Outline
 - uid: Mapsui.Styles.RelativeOffset
   name: RelativeOffset
   href: pages/Mapsui.Styles.RelativeOffset.html
