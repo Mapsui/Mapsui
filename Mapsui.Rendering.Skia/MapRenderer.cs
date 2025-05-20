@@ -284,13 +284,9 @@ public sealed class MapRenderer : IRenderer, IDisposable
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
     {
-        // Todo: Use margin to increase the pixel area
-        // Todo: Select on style instead of layer
-
         var mapInfoLayers = layers
             .Select(l => l is ISourceLayer sl and not ILayerFeatureInfo ? sl.SourceLayer : l)
             .ToList();
-
 
         var list = new ConcurrentQueue<List<MapInfoRecord>>();
         var mapInfo = new MapInfo(screenPosition, viewport.ScreenToWorld(screenPosition), viewport.Resolution);
