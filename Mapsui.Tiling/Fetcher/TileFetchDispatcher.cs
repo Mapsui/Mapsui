@@ -7,6 +7,7 @@ using Mapsui.Logging;
 using Mapsui.Tiling.Extensions;
 using Mapsui.Utilities;
 using System;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ public class TileFetchDispatcher(
     private readonly object _lockRoot = new();
     private bool _busy;
     private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
-    private ConcurrentHashSet<TileInfo> _tilesToFetch = [];
+    private ConcurrentQueue<TileInfo> _tilesToFetch = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesThatFailed = [];
     private readonly FetchMachine _fetchMachine = new(4);
@@ -52,17 +53,11 @@ public class TileFetchDispatcher(
         // want to fetch tiles that are not needed anymore.
         while (_tilesInProgress.Count < _fetchMachine.NumberOfWorkers)
         {
-            lock (_lockRoot)
-            {
-                var tileToFetch = _tilesToFetch.FirstOrDefault();
-                if (tileToFetch is null)
-                    break;
-                if (!_tilesToFetch.TryRemove(tileToFetch))
-                    return; // Return if it was already removed. Should not happen with a lock.
-                if (!_tilesInProgress.Add(tileToFetch.Index))
-                    Logger.Log(LogLevel.Warning, "Could not add the tile index to the tiles in progress list. This was not expected");
-                _fetchMachine.Enqueue(() => FetchOnThreadAsync(tileToFetch));
-            }
+            if (!_tilesToFetch.TryDequeue(out var tileToFetch))
+                return;
+            if (!_tilesInProgress.Add(tileToFetch.Index))
+                Logger.Log(LogLevel.Warning, "Could not add the tile index to the tiles in progress list. This was not expected");
+            _fetchMachine.Enqueue(() => FetchOnThreadAsync(tileToFetch));
         }
     }
 
@@ -126,7 +121,7 @@ public class TileFetchDispatcher(
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private ConcurrentHashSet<TileInfo> GetTilesToFetch(FetchInfo fetchInfo, ITileSchema tileSchema)
+    private ConcurrentQueue<TileInfo> GetTilesToFetch(FetchInfo fetchInfo, ITileSchema tileSchema)
     {
         if (fetchInfo is null || tileSchema is null)
             return [];
@@ -150,11 +145,11 @@ public class TileFetchDispatcher(
             tilesToFetch = tilesToFetch.Take(MaxTilesInOneRequest).ToList();
         }
 
-        var hashSet = new ConcurrentHashSet<TileInfo>();
+        var queue = new ConcurrentQueue<TileInfo>();
 
         foreach (var tile in tilesToFetch)
-            _ = hashSet.Add(tile);
+            queue.Add(tile);
 
-        return hashSet;
+        return queue;
     }
 }
