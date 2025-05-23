@@ -20,6 +20,7 @@ using Mapsui.Manipulations;
 using Mapsui.Styles;
 using System.Threading.Tasks;
 using LogLevel = Mapsui.Logging.LogLevel;
+using System.Diagnostics;
 
 #if __MAUI__
 using Microsoft.Maui.Controls;
@@ -55,16 +56,16 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // Action to call for a redraw of the control
     private protected Action? _invalidate;
     // The minimum time in between invalidate calls in ms.
-    private int _minimumTimeBetweenInvalidates = 8;
+    private int _minimumTimeBetweenInvalidates = 4;
     // The minimum time in between the start of two draw calls in ms
-    private int _minimumTimeBetweenStartOfDrawCall = 16;
-    private readonly AsyncAutoResetEvent _isDrawingDone = new();
-    private readonly AsyncAutoResetEvent _needsRefresh = new ();
+    private int _minimumTimeBetweenStartOfDrawCall = 8;
+    private readonly AutoResetEvent _isDrawingDone = new(true);
+    private readonly AsyncAutoResetEvent _needsRefresh = new(true);
     private static bool _firstDraw = true;
     private bool _isRunning = true;
-    private int _timestampStartDraw;
+    private long _timestampStartDraw;
     // Stopwatch for measuring drawing times
-    private readonly System.Diagnostics.Stopwatch _stopwatch = new();
+    private readonly Stopwatch _stopwatch = new();
 #pragma warning disable IDISP002 // Is disposed in SharedDispose
     private readonly IRenderer _renderer = new MapRenderer();
 #pragma warning restore IDISP002
@@ -125,7 +126,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
         Map = new Map();
         System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance); // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
-        _timestampStartDraw = Environment.TickCount;
+        _timestampStartDraw = GetTimestampInMilliseconds();
         Catch.TaskRun(InvalidateLoopAsync);
     }
 
@@ -143,9 +144,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             // so the wait will be between 0 and 8 ms depending on how long the previous draw took.
             // - Then wait for _needsRefresh to be Set. If it was already Set it won't wait.
 
-            await _isDrawingDone.WaitAsync().ConfigureAwait(false); // Wait for previous Draw to finish.
-            await Task.Delay(_minimumTimeBetweenInvalidates).ConfigureAwait(false); // Always wait at least some period in between Draw and Invalidate calls.
-            await Task.Delay(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)).ConfigureAwait(false); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall.
+            _isDrawingDone.WaitOne(); // Wait for previous Draw to finish.
+            Thread.Sleep(_minimumTimeBetweenInvalidates); // Wait at least some period in between Draw and Invalidate calls.
+            Thread.Sleep(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)); // Wait at least some period in between Draw and Invalidate calls.
             await _needsRefresh.WaitAsync().ConfigureAwait(false); // Wait if there was no call to _needsRefresh.Set() yet.
 
             var isAnimating = UpdateAnimations(Map);
@@ -172,11 +173,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private protected void SharedDraw(object canvas)
     {
-        if (Renderer is null) 
+        if (Renderer is null)
             return;
-        if (Map is null) 
+        if (Map is null)
             return;
-        if (!Map.Navigator.Viewport.HasSize()) 
+        if (!Map.Navigator.Viewport.HasSize())
             return;
 
         if (_firstDraw)
@@ -187,10 +188,10 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         // Start stopwatch before updating animations and drawing control
         _stopwatch.Restart();
-        _timestampStartDraw = Environment.TickCount;
+        _timestampStartDraw = GetTimestampInMilliseconds();
         // Fetch the image data for all image sources and call RefreshGraphics if new images were loaded.
         _renderer.ImageSourceCache.FetchAllImageData(Mapsui.Styles.Image.SourceToSourceId, Map.FetchMachine, RefreshGraphics);
-        
+
         Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
 
         _isDrawingDone.Set();
@@ -200,11 +201,20 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         Map.Performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
     }
 
-    private static int GetAdditionalTimeToDelay(int timestampStartDraw, int minimumTimeBetweenStartOfDrawCall)
+    private static int GetTimestampInMilliseconds()
     {
-        var timeSinceLastDraw = Environment.TickCount - timestampStartDraw;
+        return (int)(Stopwatch.GetTimestamp() * 1000.0 / Stopwatch.Frequency);
+    }
+
+    private static int GetAdditionalTimeToDelay(long timestampStartDraw, int minimumTimeBetweenStartOfDrawCall)
+    {
+        var timeSinceLastDraw = GetTimestampInMilliseconds() - timestampStartDraw;
         var additionalTimeToDelay = Math.Max(minimumTimeBetweenStartOfDrawCall - timeSinceLastDraw, 0);
-        return additionalTimeToDelay;
+        if (additionalTimeToDelay == 0)
+        {
+            Console.WriteLine($"No additional time to delay. Time since last draw: {timeSinceLastDraw} ms");
+        }
+        return (int)additionalTimeToDelay;
     }
 
     private void SharedOnSizeChanged(double width, double height)
