@@ -137,11 +137,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             // What is happening here?
             // - Always wait for the previous draw to finish, so there are no dropped frames anymore. By waiting the
             // loop update frequency can adapt to longer drawing durations.
-            // - After that always wait for 8 ms so that the process is never 100% busy drawing, even when drawing 
+            // - After that always wait for 4 ms so that the process is never 100% busy drawing, even when drawing 
             // takes long.
-            // - Then depending on how long drawing took we either don't wait (when 16 ms have already passed)
+            // - Then depending on how long drawing took we either don't wait (when 8 ms have already passed)
             // or wait until 16 ms have elapsed since the previous start of drawing. The previous delay is taken into account
-            // so the wait will be between 0 and 8 ms depending on how long the previous draw took.
+            // so the wait will be between 0 and 4 ms depending on how long the previous draw took.
             // - Then wait for _needsRefresh to be Set. If it was already Set it won't wait.
 
             _isDrawingDone.WaitOne(); // Wait for previous Draw to finish.
