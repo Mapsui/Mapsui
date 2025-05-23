@@ -183,8 +183,8 @@ public class Map : INotifyPropertyChanged, IDisposable
     public event EventHandler? RefreshGraphicsRequest;
 
     /// <summary>
-    /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
-    /// the layers that have IsMapInfoLayer set to true. 
+    /// Called whenever the map is tapped. The MapInfoEventArgs contain a GetMapInfo method that can be called to 
+    /// retrieve information on the features that were tapped.
     /// </summary>
     /// <remarks>
     /// The Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
