@@ -23,12 +23,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         SharedConstructor();
 
-        _invalidate = () =>
-        {
-            if (Dispatcher.CheckAccess()) InvalidateCanvas();
-            else RunOnUIThread(InvalidateCanvas);
-        };
-
         Children.Add(SkiaCanvas);
 
         SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
@@ -55,6 +49,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         RefreshGraphics();
     }
 
+    public void InvalidateCanvas()
+    {
+        if (Dispatcher.CheckAccess()) SkiaCanvas.InvalidateVisual();
+        else RunOnUIThread(SkiaCanvas.InvalidateVisual);
+    }
+
     private static Rectangle CreateSelectRectangle() => new()
     {
         Fill = new SolidColorBrush(Colors.Red),
@@ -76,11 +76,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         VerticalAlignment = VerticalAlignment.Stretch,
         HorizontalAlignment = HorizontalAlignment.Stretch
     };
-
-    internal void InvalidateCanvas()
-    {
-        SkiaCanvas.InvalidateVisual();
-    }
 
     private void MapControlLoaded(object sender, RoutedEventArgs e)
     {
@@ -211,7 +206,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         var canvas = args.Surface.Canvas;
         canvas.Scale(pixelDensity, pixelDensity);
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     public float? GetPixelDensity()

@@ -73,6 +73,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly FlingTracker _flingTracker = new();
     private double _sharedWidth;
     private double _sharedHeight;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    private RenderController _renderController;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -90,11 +93,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     [DefaultValue(true)] // Fix WOF1000 Error
 #endif
     public bool UseFling { get; set; } = true;
-
-    /// <summary>
-    /// Renderer that is used from this MapControl
-    /// </summary>
-    public IRenderer Renderer => _renderer;
 
     /// <summary>
     /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
@@ -232,7 +230,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public void ForceUpdate()
     {
-        _invalidate?.Invoke();
+        InvalidateCanvas();
     }
 
     /// <summary>
@@ -301,7 +299,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public void RefreshGraphics()
     {
-        _needsRefresh.Set();
+        _renderController?.RefreshGraphics();
     }
 
     private void Map_DataChanged(object? sender, DataChangedEventArgs? e)
@@ -464,7 +462,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (GetPixelDensity() is not float pixelDensity)
             throw new Exception("PixelDensity is not initialized");
 
-        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality);
+        using var stream = _renderController.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality);
         return stream.ToArray();
     }
 
@@ -475,7 +473,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
     {
-        return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
+        return _renderController.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
     }
 
     protected Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers)
@@ -504,9 +502,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (disposing)
         {
-            _isRunning = false;
             Unsubscribe();
-            _renderer.Dispose();
             _map?.Dispose();
             _map = null;
         }

@@ -13,6 +13,7 @@ public partial class MapControl : UIView, IMapControl
     private SKCanvasView? _canvas;
     private bool _canvasInitialized;
     private readonly ManipulationTracker _manipulationTracker = new();
+    public static bool UseGPU { get; set; } = true;
 
     public MapControl(CGRect frame)
         : base(frame)
@@ -28,8 +29,14 @@ public partial class MapControl : UIView, IMapControl
         LocalConstructor();
     }
 
-    public static bool UseGPU { get; set; } = true;
-
+    public void InvalidateCanvas()
+    {
+        RunOnUIThread(() =>
+        {
+            SetNeedsDisplay();
+            _metalCanvas?.SetNeedsDisplay();
+        });
+    }
 
     private void InitializeCanvas()
     {
@@ -53,14 +60,7 @@ public partial class MapControl : UIView, IMapControl
     {
         InitializeCanvas();
 
-        _invalidate = () =>
-        {
-            RunOnUIThread(() =>
-            {
-                SetNeedsDisplay();
-                _metalCanvas?.SetNeedsDisplay();
-            });
-        };
+
 
         BackgroundColor = UIColor.White;
 
@@ -117,7 +117,7 @@ public partial class MapControl : UIView, IMapControl
 
         var canvas = args.Surface.Canvas;
         canvas.Scale(pixelDensity, pixelDensity);
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
@@ -127,7 +127,7 @@ public partial class MapControl : UIView, IMapControl
 
         var canvas = args.Surface.Canvas;
         canvas.Scale(pixelDensity, pixelDensity);
-        SharedDraw(canvas);
+        _renderController?.Render(canvas);
     }
 
     public override void TouchesBegan(NSSet touches, UIEvent? e)

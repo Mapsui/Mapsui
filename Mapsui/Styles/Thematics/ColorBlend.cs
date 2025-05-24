@@ -5,6 +5,7 @@
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
 using System;
+using System.Linq;
 
 namespace Mapsui.Styles.Thematics;
 
@@ -13,6 +14,8 @@ namespace Mapsui.Styles.Thematics;
 /// </summary>
 public class ColorBlend
 {
+    private static int _rainbow7ColorCount = 7;
+
     /// <summary>
     /// Gets or sets an array of colors that represents the colors to use at corresponding positions along a gradient.
     /// </summary>
@@ -76,28 +79,8 @@ public class ColorBlend
         var blue = (int)Math.Round((Colors[i - 1].B * (1 - frac) + Colors[i].B * frac));
         var alpha = (int)Math.Round((Colors[i - 1].A * (1 - frac) + Colors[i].A * frac));
 
-        return new Color { A = alpha, R = red, G = green, B = blue }; //Not sure how to assign in case of equal naming
-
+        return new Color { A = alpha, R = red, G = green, B = blue }; // Not sure how to assign in case of equal naming
     }
-
-
-    ///// <summary>
-    ///// Converts the color blend to a gradient brush
-    ///// </summary>
-    ///// <param name="rectangle"></param>
-    ///// <param name="angle"></param>
-    ///// <returns></returns>
-    //public System.Drawing.Drawing2D.LinearGradientBrush ToBrush(Rectangle rectangle, double angle)
-    //{
-    //    LinearGradientBrush br = new LinearGradientBrush(rectangle, Color.Black, Color.Black, angle, true);
-    //    System.Drawing.Drawing2D.ColorBlend cb = new System.Drawing.Drawing2D.ColorBlend();
-    //    cb.Colors = _Colors;
-    //    cb.Positions = _Positions;
-    //    br.InterpolationColors = cb;
-    //    return br;
-    //}
-
-
 
     /// <summary>
     /// Gets a linear gradient scale with seven colors making a rainbow from red to violet.
@@ -106,25 +89,19 @@ public class ColorBlend
     /// Colors span the following with an interval of 1/6:
     /// { Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet }
     /// </remarks>
-    public static ColorBlend Rainbow7
+    public static ColorBlend Rainbow7 => new()
     {
-        get
-        {
-            var cb = new ColorBlend { Positions = new double[7] };
-            var i = 0;
-            for (double f = 0; f <= 1; f += 1.0f / 6)
-                cb.Positions[i++] = f;
-            cb.Colors = [
-                Color.Red,
-                Color.Orange,
-                Color.Yellow,
-                Color.Green,
-                Color.Blue,
-                Color.Indigo,
-                Color.Violet];
-            return cb;
-        }
-    }
+        Positions = Enumerable.Range(0, _rainbow7ColorCount).Select(i => (double)i / (_rainbow7ColorCount - 1)).ToArray(),
+        Colors = [
+            Color.Red,
+            Color.Orange,
+            Color.Yellow,
+            Color.Green,
+            Color.Blue,
+            Color.Indigo,
+            Color.Violet
+        ]
+    };
 
     /// <summary>
     /// Gets a linear gradient scale with five colors making a rainbow from red to blue.
@@ -133,8 +110,8 @@ public class ColorBlend
     /// Colors span the following with an interval of 0.25:
     /// { Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue }
     /// </remarks>
-    public static ColorBlend Rainbow5
-        => new([Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue], [0, 0.25, 0.5, 0.75, 1]);
+    public static ColorBlend Rainbow5 =>
+        new([Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue], [0, 0.25, 0.5, 0.75, 1]);
 
     /// <summary>
     /// Gets a linear gradient scale from black to white
@@ -176,24 +153,17 @@ public class ColorBlend
     /// </summary>
     public static ColorBlend BlueToRed => new([Color.Blue, Color.Red], [0.0, 1.0]);
 
-
-
     /// <summary>
     /// Creates a linear gradient scale from two colors
     /// </summary>
     /// <param name="fromColor"></param>
     /// <param name="toColor"></param>
     /// <returns></returns>
-    public static ColorBlend TwoColors(Color fromColor, Color toColor)
-    {
-        return new ColorBlend([fromColor, toColor], [0.0, 1.0]);
-    }
+    public static ColorBlend TwoColors(Color fromColor, Color toColor) => new([fromColor, toColor], [0.0, 1.0]);
 
     /// <summary>
     /// Creates a linear gradient scale from three colors
     /// </summary>
-    public static ColorBlend ThreeColors(Color fromColor, Color middleColor, Color toColor)
-    {
-        return new ColorBlend([fromColor, middleColor, toColor], [0, 0.5, 1]);
-    }
+    public static ColorBlend ThreeColors(Color fromColor, Color middleColor, Color toColor) =>
+        new([fromColor, middleColor, toColor], [0, 0.5, 1]);
 }
