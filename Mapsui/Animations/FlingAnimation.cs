@@ -6,7 +6,7 @@ namespace Mapsui.Animations;
 
 public static class FlingAnimation
 {
-    public static List<AnimationEntry<Viewport>> Create(double velocityX, double velocityY, long maxDuration)
+    public static List<AnimationEntry<Viewport>> Create(double velocityX, double velocityY, long maxDuration, Action refreshData)
     {
         var animations = new List<AnimationEntry<Viewport>>();
 
@@ -32,13 +32,20 @@ public static class FlingAnimation
             animationStart: 0,
             animationEnd: 1,
             easing: Easing.SinIn,
-            tick: FlingTick
+            tick: FlingTick,
+            final: (v, a) => CenterFinal(v, a, refreshData)
         );
         animations.Add(entry);
 
         Animation.Start(animations, (long)duration);
 
         return animations;
+    }
+
+    private static AnimationResult<Viewport> CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry, Action refreshData)
+    {
+        refreshData(); // Fling was not calling refresh when done. Fixed it this way. I think it should not be the responsibility of the animation to call refresh. Not sure how to fix that atm.
+        return new AnimationResult<Viewport>(viewport, false);
     }
 
     private static AnimationResult<Viewport> FlingTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)

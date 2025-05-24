@@ -443,7 +443,7 @@ public class Navigator
         if (PanLock)
             return;
 
-        SetViewportAnimations(FlingAnimation.Create(velocityX, velocityY, maxDuration));
+        SetViewportAnimations(FlingAnimation.Create(velocityX, velocityY, maxDuration, () => OnRefreshDataRequest(ChangeType.Discrete)));
     }
 
     public void Manipulate(Manipulation? manipulation)
