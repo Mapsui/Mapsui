@@ -119,7 +119,7 @@ jobs:
     - name: Set up Xcode 16
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '16'          
+        xcode-version: '16.3'          
     # .Net 9 update     
     - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
@@ -131,8 +131,8 @@ jobs:
       run: echo "MSBuildEnableWorkloadResolver=true" >> $GITHUB_ENV
     - name: install workloads maui macos android ios maccatalyst wasm-tools wasm-tools-net8
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
-    - name: install Uno.Check 1.26.1
-      run: dotnet tool install --global Uno.Check --version 1.26.1
+    - name: install Uno.Check 
+      run: dotnet tool install --global Uno.Check --version 1.31.7
     - name: install Android SDK 34
       run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --dotnet 9.0.203
     - name: Install newest Uno Check
