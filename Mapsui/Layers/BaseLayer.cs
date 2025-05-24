@@ -1,7 +1,6 @@
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Styles;
-using Mapsui.UI;
 using Mapsui.Widgets.ButtonWidgets;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,6 @@ namespace Mapsui.Layers;
 
 public abstract class BaseLayer : ILayer
 {
-    private PropertyChangedWeakEventManager? _eventMangerPropertyChanged;
     private static int _instanceCounter;
     private bool _busy;
     private bool _enabled;
@@ -57,15 +55,7 @@ public abstract class BaseLayer : ILayer
     /// <summary>
     /// Called whenever a property changed
     /// </summary>
-    public event PropertyChangedEventHandler? PropertyChanged
-    {
-        add
-        {
-            _eventMangerPropertyChanged ??= new();
-            _eventMangerPropertyChanged.AddListener(this, value);
-        }
-        remove => _eventMangerPropertyChanged?.RemoveListener(this, value);
-    }
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <inheritdoc />
     public event DataChangedEventHandler? DataChanged;
@@ -209,9 +199,9 @@ public abstract class BaseLayer : ILayer
         return Name;
     }
 
-    protected virtual void OnPropertyChanged(string name)
+    protected virtual void OnPropertyChanged(string propertyName)
     {
-        _eventMangerPropertyChanged?.RaiseEvent(this, new PropertyChangedEventArgs(name));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     protected void OnDataChanged(DataChangedEventArgs e)
