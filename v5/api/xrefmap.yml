@@ -472,15 +472,15 @@ references:
   commentId: T:Mapsui.Animations.FlingAnimation
   fullName: Mapsui.Animations.FlingAnimation
   nameWithType: FlingAnimation
-- uid: Mapsui.Animations.FlingAnimation.Create(System.Double,System.Double,System.Int64)
-  name: Create(double, double, long)
-  href: pages/Mapsui.Animations.FlingAnimation.html#Mapsui_Animations_FlingAnimation_Create_System_Double_System_Double_System_Int64_
-  commentId: M:Mapsui.Animations.FlingAnimation.Create(System.Double,System.Double,System.Int64)
-  name.vb: Create(Double, Double, Long)
-  fullName: Mapsui.Animations.FlingAnimation.Create(double, double, long)
-  fullName.vb: Mapsui.Animations.FlingAnimation.Create(Double, Double, Long)
-  nameWithType: FlingAnimation.Create(double, double, long)
-  nameWithType.vb: FlingAnimation.Create(Double, Double, Long)
+- uid: Mapsui.Animations.FlingAnimation.Create(System.Double,System.Double,System.Int64,System.Action)
+  name: Create(double, double, long, Action)
+  href: pages/Mapsui.Animations.FlingAnimation.html#Mapsui_Animations_FlingAnimation_Create_System_Double_System_Double_System_Int64_System_Action_
+  commentId: M:Mapsui.Animations.FlingAnimation.Create(System.Double,System.Double,System.Int64,System.Action)
+  name.vb: Create(Double, Double, Long, Action)
+  fullName: Mapsui.Animations.FlingAnimation.Create(double, double, long, System.Action)
+  fullName.vb: Mapsui.Animations.FlingAnimation.Create(Double, Double, Long, System.Action)
+  nameWithType: FlingAnimation.Create(double, double, long, Action)
+  nameWithType.vb: FlingAnimation.Create(Double, Double, Long, Action)
 - uid: Mapsui.Animations.FlingAnimation.Create*
   name: Create
   href: pages/Mapsui.Animations.FlingAnimation.html#Mapsui_Animations_FlingAnimation_Create_
@@ -38096,37 +38096,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
   nameWithType: MyLocationLayer.ViewingDirection
-- uid: Mapsui.UI.PropertyChangedWeakEventManager
-  name: PropertyChangedWeakEventManager
-  href: pages/Mapsui.UI.PropertyChangedWeakEventManager.html
-  commentId: T:Mapsui.UI.PropertyChangedWeakEventManager
-  fullName: Mapsui.UI.PropertyChangedWeakEventManager
-  nameWithType: PropertyChangedWeakEventManager
-- uid: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.ComponentModel.PropertyChangedEventArgs)
-  name: RaiseEvent(object, PropertyChangedEventArgs)
-  href: pages/Mapsui.UI.PropertyChangedWeakEventManager.html#Mapsui_UI_PropertyChangedWeakEventManager_RaiseEvent_System_Object_System_ComponentModel_PropertyChangedEventArgs_
-  commentId: M:Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.ComponentModel.PropertyChangedEventArgs)
-  name.vb: RaiseEvent(Object, PropertyChangedEventArgs)
-  fullName: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(object, System.ComponentModel.PropertyChangedEventArgs)
-  fullName.vb: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(Object, System.ComponentModel.PropertyChangedEventArgs)
-  nameWithType: PropertyChangedWeakEventManager.RaiseEvent(object, PropertyChangedEventArgs)
-  nameWithType.vb: PropertyChangedWeakEventManager.RaiseEvent(Object, PropertyChangedEventArgs)
-- uid: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.Object,System.ComponentModel.PropertyChangedEventArgs)
-  name: RaiseEvent(object, object?, PropertyChangedEventArgs)
-  href: pages/Mapsui.UI.PropertyChangedWeakEventManager.html#Mapsui_UI_PropertyChangedWeakEventManager_RaiseEvent_System_Object_System_Object_System_ComponentModel_PropertyChangedEventArgs_
-  commentId: M:Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(System.Object,System.Object,System.ComponentModel.PropertyChangedEventArgs)
-  name.vb: RaiseEvent(Object, Object, PropertyChangedEventArgs)
-  fullName: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(object, object?, System.ComponentModel.PropertyChangedEventArgs)
-  fullName.vb: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent(Object, Object, System.ComponentModel.PropertyChangedEventArgs)
-  nameWithType: PropertyChangedWeakEventManager.RaiseEvent(object, object?, PropertyChangedEventArgs)
-  nameWithType.vb: PropertyChangedWeakEventManager.RaiseEvent(Object, Object, PropertyChangedEventArgs)
-- uid: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent*
-  name: RaiseEvent
-  href: pages/Mapsui.UI.PropertyChangedWeakEventManager.html#Mapsui_UI_PropertyChangedWeakEventManager_RaiseEvent_
-  commentId: Overload:Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent
-  isSpec: "True"
-  fullName: Mapsui.UI.PropertyChangedWeakEventManager.RaiseEvent
-  nameWithType: PropertyChangedWeakEventManager.RaiseEvent
 - uid: Mapsui.UI.TappedEventArgs
   name: TappedEventArgs
   href: pages/Mapsui.UI.TappedEventArgs.html
