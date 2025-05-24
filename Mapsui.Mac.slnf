@@ -19,7 +19,6 @@
       "Samples\\Avalonia\\Mapsui.Samples.Avalonia.Desktop\\Mapsui.Samples.Avalonia.Desktop.csproj",
       "Samples\\Avalonia\\Mapsui.Samples.Avalonia\\Mapsui.Samples.Avalonia.csproj",
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
-      "Samples\\Mapsui.Samples.Droid\\Mapsui.Samples.Droid.csproj",
       "Samples\\Mapsui.Samples.Eto\\Mapsui.Samples.Eto.csproj",
       "Samples\\Mapsui.Samples.MapView\\Mapsui.Samples.MapView.shproj",
       "Samples\\Mapsui.Samples.Maui.MapView\\Mapsui.Samples.Maui.MapView.csproj",
