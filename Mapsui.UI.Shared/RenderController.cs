@@ -9,7 +9,9 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 #pragma warning restore IDE0005 // Using directive is unnecessary.
 
@@ -21,11 +23,11 @@ public sealed class RenderController : IDisposable
     // Action to call for a redraw of the control
     private readonly Action? _invalidateCanvas;
     // The minimum time in between invalidate calls in ms.
-    private readonly int _minimumTimeBetweenInvalidates = 8;
+    private readonly int _minimumTimeBetweenInvalidates = 4;
     // The minimum time in between the start of two draw calls in ms
-    private readonly int _minimumTimeBetweenStartOfDrawCall = 16;
-    private readonly AsyncAutoResetEvent _isDrawingDone = new();
-    private readonly AsyncAutoResetEvent _needsRefresh = new();
+    private readonly int _minimumTimeBetweenStartOfDrawCall = 8;
+    private readonly AutoResetEvent _isDrawingDone = new(true);
+    private readonly AsyncAutoResetEvent _needsRefresh = new(true);
     private static bool _firstDraw = true;
     private bool _isRunning = true;
     private int _timestampStartDraw;
@@ -40,7 +42,7 @@ public sealed class RenderController : IDisposable
     {
         _getMap = getMap; // Using a callback to get the Map instead of a pointer because the Map field change later on.
         _invalidateCanvas = InvalidateCanvas;
-        _timestampStartDraw = Environment.TickCount;
+        _timestampStartDraw = GetTimestampInMilliseconds();
         Catch.TaskRun(InvalidateLoopAsync);
     }
 
@@ -85,9 +87,9 @@ public sealed class RenderController : IDisposable
             // so the wait will be between 0 and 8 ms depending on how long the previous draw took.
             // - Then wait for _needsRefresh to be Set. If it was already Set it won't wait.
 
-            await _isDrawingDone.WaitAsync().ConfigureAwait(false); // Wait for previous Draw to finish.
-            await Task.Delay(_minimumTimeBetweenInvalidates).ConfigureAwait(false); // Always wait at least some period in between Draw and Invalidate calls.
-            await Task.Delay(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)).ConfigureAwait(false); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall.
+            _isDrawingDone.WaitOne(); // Wait for previous Draw to finish.
+            Thread.Sleep(_minimumTimeBetweenInvalidates); // Always wait at least some period in between Draw and Invalidate calls.
+            Thread.Sleep(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall.
             await _needsRefresh.WaitAsync().ConfigureAwait(false); // Wait if there was no call to _needsRefresh.Set() yet.
 
             var isAnimating = UpdateAnimations(_getMap());
@@ -116,7 +118,7 @@ public sealed class RenderController : IDisposable
 
         // Start stopwatch before updating animations and drawing control
         _stopwatch.Restart();
-        _timestampStartDraw = Environment.TickCount;
+        _timestampStartDraw = GetTimestampInMilliseconds();
         // Fetch the image data for all image sources and call RefreshGraphics if new images were loaded.
         _renderer.ImageSourceCache.FetchAllImageData(Mapsui.Styles.Image.SourceToSourceId, map.FetchMachine, RefreshGraphics);
 
@@ -129,9 +131,14 @@ public sealed class RenderController : IDisposable
         map.Performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
     }
 
+    private static int GetTimestampInMilliseconds()
+    {
+        return (int)(Stopwatch.GetTimestamp() * 1000.0 / Stopwatch.Frequency);
+    }
+
     private static int GetAdditionalTimeToDelay(int timestampStartDraw, int minimumTimeBetweenStartOfDrawCall)
     {
-        var timeSinceLastDraw = Environment.TickCount - timestampStartDraw;
+        var timeSinceLastDraw = GetTimestampInMilliseconds() - timestampStartDraw;
         var additionalTimeToDelay = Math.Max(minimumTimeBetweenStartOfDrawCall - timeSinceLastDraw, 0);
         return additionalTimeToDelay;
     }
