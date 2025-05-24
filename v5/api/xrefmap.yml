@@ -40823,6 +40823,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Performance.Min
   nameWithType: Performance.Min
+- uid: Mapsui.Utilities.Performance.RunningFps
+  name: RunningFps
+  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_RunningFps
+  commentId: P:Mapsui.Utilities.Performance.RunningFps
+  fullName: Mapsui.Utilities.Performance.RunningFps
+  nameWithType: Performance.RunningFps
+- uid: Mapsui.Utilities.Performance.RunningFps*
+  name: RunningFps
+  href: pages/Mapsui.Utilities.Performance.html#Mapsui_Utilities_Performance_RunningFps_
+  commentId: Overload:Mapsui.Utilities.Performance.RunningFps
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Performance.RunningFps
+  nameWithType: Performance.RunningFps
 - uid: Mapsui.Utilities.PlatformUtilities
   name: PlatformUtilities
   href: pages/Mapsui.Utilities.PlatformUtilities.html
