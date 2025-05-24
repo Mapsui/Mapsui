@@ -67,7 +67,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     // Stopwatch for measuring drawing times
     private readonly Stopwatch _stopwatch = new();
 #pragma warning disable IDISP002 // Is disposed in SharedDispose
-    private readonly IRenderer _renderer = new MapRenderer();
+    private readonly MapRenderer _renderer = new();
 #pragma warning restore IDISP002
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
@@ -171,8 +171,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private protected void SharedDraw(object canvas)
     {
-        if (Renderer is null)
-            return;
         if (Map is null)
             return;
         if (!Map.Navigator.Viewport.HasSize())
@@ -190,7 +188,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         // Fetch the image data for all image sources and call RefreshGraphics if new images were loaded.
         _renderer.ImageSourceCache.FetchAllImageData(Mapsui.Styles.Image.SourceToSourceId, Map.FetchMachine, RefreshGraphics);
 
-        Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
+        _renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
 
         _isDrawingDone.Set();
         _stopwatch.Stop();
