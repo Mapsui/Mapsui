@@ -15,10 +15,6 @@ permissions:
 jobs:
   build-and-publish-website:
     runs-on: windows-latest
-    # Environment for GitHub Pages deployment
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
         
 #Begin install mkdocs        
@@ -57,18 +53,10 @@ jobs:
     - name: Build Blazor Website Sample
       shell: pwsh
       run: ./Scripts/BuildSamplesWebsite.ps1     
-    
-    # Configure GitHub Pages
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-    
-    # Upload artifact
-    - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3
+    - name: Upload artifact
+      uses: peaceiris/actions-gh-pages@v4
       with:
-        path: ./website
-    
-    # Deploy to GitHub Pages
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./website
+        destination_dir: v5
+        keep_files: true
