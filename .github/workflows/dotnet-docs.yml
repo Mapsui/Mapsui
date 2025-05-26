@@ -52,7 +52,23 @@ jobs:
       # build blazor samples to website/samples/
     - name: Build Blazor Website Sample
       shell: pwsh
-      run: ./Scripts/BuildSamplesWebsite.ps1     
+      run: ./Scripts/BuildSamplesWebsite.ps1   
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@v4
+      with:
+        ref: gh-pages
+        path: gh-pages
+    - name: Commit and push deletion
+      run: |
+        cd gh-pages
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add -A
+        git commit -m "Clean v5 folder before redeploy" || echo "Nothing to commit"
+        git push
+    - name: Clean old v5 content
+      run: |
+        rm -rf gh-pages/v5
     - name: Upload artifact
       uses: peaceiris/actions-gh-pages@v4
       with:
