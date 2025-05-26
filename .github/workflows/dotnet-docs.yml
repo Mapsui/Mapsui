@@ -58,6 +58,9 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
+    - name: Clean old v5 content
+      run: |
+        rm -rf gh-pages/v5
     - name: Commit and push deletion
       run: |
         cd gh-pages
@@ -66,9 +69,6 @@ jobs:
         git add -A
         git commit -m "Clean v5 folder before redeploy" || echo "Nothing to commit"
         git push
-    - name: Clean old v5 content
-      run: |
-        rm -rf gh-pages/v5
     - name: Upload artifact
       uses: peaceiris/actions-gh-pages@v4
       with:
