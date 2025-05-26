@@ -51,8 +51,8 @@ public partial class Window1
 
     private void FillComboBoxWithCategories()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Tests.Common.Samples.Register();
+        Common.Samples.Register();
 
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
         foreach (var category in categories)
