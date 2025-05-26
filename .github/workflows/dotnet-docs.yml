@@ -62,6 +62,7 @@ jobs:
       run: |
         rm -rf gh-pages/v5
     - name: Commit and push deletion
+      shell: bash
       run: |
         cd gh-pages
         git config user.name "github-actions[bot]"
