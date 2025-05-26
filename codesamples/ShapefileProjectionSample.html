@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<pre><code class="lang-csharp" name="Main" title="ShapefileProjectionSample">using System.IO;
+using System.Threading.Tasks;
+using Mapsui.Extensions;
+using Mapsui.Extensions.Projections;
+using Mapsui.Layers;
+using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.Tiling.Layers;
+using Mapsui.UI;
+
+namespace Mapsui.Samples.Common.Maps.Projection;
+
+public class ShapefileProjectionSample : ISample
+{
+    static ShapefileProjectionSample()
+    {
+        ShapeFilesDeployer.CopyEmbeddedResourceToFile(&quot;countries.shp&quot;);
+        ShapeFilesDeployer.CopyEmbeddedResourceToFile(&quot;cities.shp&quot;);
+    }
+
+    public string Name =&gt; &quot;Shapefile with Projection&quot;;
+    public string Category =&gt; &quot;Projection&quot;;
+
+    public Task&lt;Map&gt; CreateMapAsync() =&gt; Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map()
+        {
+            CRS = &quot;EPSG:3857&quot;, // The Map CRS needs to be set
+        };
+
+#pragma warning disable IDISP001 // Dispose created
+#pragma warning disable IDISP004 // Don't ignore created IDisposable 
+        var dotSpatialProjection = new DotSpatialProjection();
+        var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, &quot;countries.shp&quot;);
+        var countrySource = new ShapeFile(countriesPath, true, true, dotSpatialProjection);
+        var countryProjected = new ProjectingProvider(countrySource, dotSpatialProjection)
+        {
+            CRS = &quot;EPSG:3857&quot;
+        };
+
+        var citiesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, &quot;cities.shp&quot;);
+        var citySource = new ShapeFile(citiesPath, true, true, dotSpatialProjection);
+        var cityProjected = new ProjectingProvider(citySource, dotSpatialProjection)
+        {
+            CRS = &quot;EPSG:3857&quot;
+        };
+
+        map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(countryProjected)));
+        map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(cityProjected)));
+        map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(countryProjected)));
+        map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(cityProjected)));
+#pragma warning restore IDISP001 // Dispose created
+#pragma warning restore IDISP004 // Dispose created
+        return map;
+    }
+
+    private static ILayer CreateCountryLayer(IProvider countrySource)
+    {
+        return new Layer
+        {
+            Name = &quot;Countries&quot;,
+            DataSource = countrySource,
+            Style = CreateCountryTheme()
+        };
+    }
+
+    private static ILayer CreateCityLayer(IProvider citySource)
+    {
+        return new Layer
+        {
+            Name = &quot;Cities&quot;,
+            DataSource = citySource,
+            Style = CreateCityTheme()
+        };
+    }
+
+    private static ILayer CreateCountryLabelLayer(IProvider countryProvider)
+    {
+        return new Layer(&quot;Country labels&quot;)
+        {
+            DataSource = countryProvider,
+            Enabled = true,
+            MaxVisible = double.MaxValue,
+            MinVisible = double.MinValue,
+            Style = CreateCountryLabelTheme()
+        };
+    }
+
+    private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
+    {
+        return new Layer(&quot;City labels&quot;)
+        {
+            DataSource = citiesProvider,
+            Enabled = true,
+            Style = CreateCityLabelStyle()
+        };
+    }
+
+    private static IThemeStyle CreateCityTheme()
+    {
+        // Scaling city icons based on city population.
+        // Cities below 1.000.000 gets the smallest symbol.
+        // Cities with more than 5.000.000 the largest symbol.
+        var bitmapId = typeof(ShapefileProjectionSample).LoadBitmapId(@&quot;Images.icon.png&quot;);
+        var cityMin = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.5f };
+        var cityMax = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 1f };
+        return new GradientTheme(&quot;POPULATION&quot;, 1000000, 5000000, cityMin, cityMax);
+    }
+
+    private static IThemeStyle CreateCountryTheme()
+    {
+        // Set a gradient theme on the countries layer, based on Population density
+        // First create two styles that specify min and max styles
+        // In this case we will just use the default values and override the fill-colors
+        // using a color blender. If different line-widths, line- and fill-colors where used
+        // in the min and max styles, these would automatically get linearly interpolated.
+        var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+        var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+
+        // Create theme using a density from 0 (min) to 400 (max)
+        return new GradientTheme(&quot;POPDENS&quot;, 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
+    }
+
+    private static LabelStyle CreateCityLabelStyle()
+    {
+        return new LabelStyle
+        {
+            ForeColor = Color.Black,
+            BackColor = new Brush { Color = Color.Orange },
+            Font = new Font { FontFamily = &quot;GenericSerif&quot;, Size = 11 },
+            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+            Offset = new Offset { X = 0, Y = 0 },
+            Halo = new Pen { Color = Color.Yellow, Width = 2 },
+            CollisionDetection = true,
+            LabelColumn = &quot;NAME&quot;
+        };
+    }
+
+    private static GradientTheme CreateCountryLabelTheme()
+    {
+        // Lets scale the labels so that big countries have larger texts as well
+        var backColor = new Brush { Color = new Color(255, 255, 255, 128) };
+
+        var lblMin = new LabelStyle
+        {
+            ForeColor = Color.Black,
+            BackColor = backColor,
+            Font = new Font { FontFamily = &quot;GenericSerif&quot;, Size = 6 },
+            LabelColumn = &quot;NAME&quot;
+        };
+
+        var lblMax = new LabelStyle
+        {
+            ForeColor = Color.Blue,
+            BackColor = backColor,
+            Font = new Font { FontFamily = &quot;GenericSerif&quot;, Size = 9 },
+            LabelColumn = &quot;NAME&quot;
+        };
+
+        return new GradientTheme(&quot;POPDENS&quot;, 0, 400, lblMin, lblMax);
+    }
+}
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/develop/4.1/docfx/codesamples/ShapefileProjectionSample.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

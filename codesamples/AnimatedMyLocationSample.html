@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<pre><code class="lang-csharp" name="Main" title="AnimatedMyLocationSample">#if NET6_0_OR_GREATER
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Mapsui.Extensions;
+using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Maps.Demo;
+using Mapsui.UI;
+#if __MAUI__
+using Mapsui.UI.Maui;
+#else
+using Mapsui.UI.Forms;
+#endif
+
+#if __MAUI__
+namespace Mapsui.Samples.Maui;
+#else
+namespace Mapsui.Samples.Forms;
+#endif
+
+public sealed class AnimatedMyLocationSample : IMapViewSample, IDisposable
+{
+    private readonly PeriodicTimer _timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+    private Position _newLocation;
+    private MapView? _mapView;
+
+    public string Name =&gt; &quot;Animated MyLocation Sample&quot;;
+
+    public string Category =&gt; &quot;MapView&quot;;
+
+    public void Setup(IMapControl mapControl)
+    {
+        // 54°54′24″N 25°19′12″E Center of Europe
+        _newLocation = new Position(54.5424, 25.1912);
+
+        _mapView = (MapView)mapControl;
+        var map = OsmSample.CreateMap();
+        map.Home = n =&gt; n.CenterOnAndZoomTo(_newLocation.ToMapsui(), n.Resolutions[14]);
+        mapControl.Map = map;
+
+        _mapView.MyLocationLayer.IsMoving = true;
+        _mapView.MyLocationEnabled = true;
+        _mapView.MyLocationFollow = true;
+        _mapView.UseDoubleTap = true;
+
+        _mapView.MyLocationLayer.UpdateMyLocation(_newLocation);
+        _mapView.Map.Navigator.CenterOn(_newLocation.ToMapsui());
+
+        Catch.TaskRun(RunTimerAsync);
+    }
+
+    public bool UpdateLocation =&gt; false;
+    public bool OnClick(object? sender, EventArgs args)
+    {
+        return true; 
+    }
+
+    private async Task RunTimerAsync()
+    {
+        while(true)
+        {
+            await _timer.WaitForNextTickAsync();
+
+            _newLocation = new (_newLocation.Latitude + 0.00005, _newLocation.Longitude + 0.00005);                                
+
+            _mapView?.MyLocationLayer.UpdateMyLocation(_newLocation, true);
+            _mapView?.MyLocationLayer.UpdateMyDirection(_mapView.MyLocationLayer.Direction + 10, 0, true);
+            _mapView?.MyLocationLayer.UpdateMyViewDirection(_mapView.MyLocationLayer.ViewingDirection + 10, 0, true);
+        }
+    }
+
+    public void Dispose()
+    {
+        _timer.Dispose();
+    }
+}
+#endif
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/develop/4.1/docfx/codesamples/AnimatedMyLocationSample.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

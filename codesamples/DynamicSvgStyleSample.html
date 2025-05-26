@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<pre><code class="lang-csharp" name="Main" title="DynamicSvgStyleSample">using Mapsui.Layers;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Samples.Common.Maps.Styles;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.Tiling;
+using Mapsui.Utilities;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Demo;
+
+public class DynamicSvgStyleSample : ISample
+{
+    public string Name =&gt; &quot;Dynamic Svg Style&quot;;
+    public string Category =&gt; &quot;Styles&quot;;
+
+    private string Description =&gt; &quot;Tab or click in the map to see the change in symbols. This sample shows you can &quot; +
+        &quot;change the size, rotation and color (using BlendModeColor) of a single SVG resource if you use a ThemeStyle&quot;;
+
+    private const double circumferenceOfTheEarth = 40075017;
+
+    public Task&lt;Map&gt; CreateMapAsync()
+    {
+        var infoPosition = new MPoint(); // Use closure to keep track of the info click position
+
+        var map = new Map();
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(new MemoryLayer(&quot;Dynamic Svg Style&quot;)
+        {
+            Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 1000),
+            Style = CreateDynamicSvgStyle(() =&gt; infoPosition)
+        });
+
+        map.Info += (s, e) =&gt;
+        {
+            if (e.MapInfo?.WorldPosition == null) return;
+            infoPosition = e.MapInfo.WorldPosition; // Set the info position to use in the dynamic style
+            map.Layers.First().DataHasChanged(); // To notify the map that a redraw is needed.
+        };
+
+        return Task.FromResult(map);
+    }
+
+    private IStyle CreateDynamicSvgStyle(Func&lt;MPoint&gt; getInfoPosition) // Use Func to make it get the latest clicked position
+    {
+        var bitmapId = typeof(SvgSample).LoadSvgId(&quot;Images.arrow.svg&quot;);
+
+        return new ThemeStyle((f) =&gt;
+        {
+            var featurePoint = ((PointFeature)f).Point;
+            var distance = Algorithms.Distance(getInfoPosition(), featurePoint);
+            var distanceBetweenZeroAndOne = Math.Min(distance / circumferenceOfTheEarth, 1);
+
+            return new SymbolStyle
+            {
+                BitmapId = bitmapId,
+                SymbolOffset = new RelativeOffset(0.0, 0.0),
+                // 1. Change scale based on the distance
+                SymbolScale = 0.25 + (0.25 * distanceBetweenZeroAndOne),
+                // 2. Change angle pointing to the info click position
+                SymbolRotation = -CalculateAngle(getInfoPosition(), featurePoint) - 90,
+                RotateWithMap = true,
+                Opacity = 0.9f,
+                // 3. Use BlendModeColor to change the color of the svg
+                BlendModeColor = ToColor(distanceBetweenZeroAndOne)
+            };
+        });
+    }
+
+    private static Color ToColor(double distanceBetweenZeroAndOne)
+    {
+        // Just improvising a bit with the color gradient.
+        var red = 32;
+        var green = 200 - (int)(distanceBetweenZeroAndOne * 200);
+        var blue = 32;
+        return Color.FromArgb(255, red, green, blue);
+    }
+
+    private double CalculateAngle(MPoint point1, MPoint point2)
+    {
+        // Use Atan2 for angle
+        var radians = Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
+
+        // Radians into degrees
+        return radians * (180 / Math.PI);
+    }
+}
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/develop/4.1/docfx/codesamples/DynamicSvgStyleSample.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

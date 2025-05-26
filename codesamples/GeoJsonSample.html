@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<pre><code class="lang-csharp" name="Main" title="GeoJsonSample">using Mapsui.Layers;
+using Mapsui.Nts.Providers;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.Utilities;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.Tiling.Layers;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
+#pragma warning disable IDISP001 // Dispose created
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
+namespace Mapsui.Samples.Common.Maps.DataFormats;
+
+public class GeoJsonSample : ISample
+{
+    private static readonly MRect _extent = new(-2066786, 3982655, 3558942, 7705420);
+
+    static GeoJsonSample()
+    {
+        GeoJsonDeployer.CopyEmbeddedResourceToFile(&quot;cities.geojson&quot;);
+        GeoJsonDeployer.CopyEmbeddedResourceToFile(&quot;countries.geojson&quot;);
+    }
+
+    public string Name =&gt; &quot;13 GeoJson&quot;;
+    public string Category =&gt; &quot;Data Formats&quot;;
+
+    public Task&lt;Map&gt; CreateMapAsync() =&gt; Task.FromResult(CreateMap());
+
+    public static Map CreateMap()
+    {
+        var map = new Map();
+        map.Home = (n) =&gt; n.ZoomToBox(_extent);
+        map.BackColor = new Color(55, 84, 162);
+        map.Layers.Add(CountriesLayerBuilder.CreateCountriesLayer());
+        map.Layers.Add(CitiesLayerBuilder.CreateCitiesLayer());
+        return map;
+    }
+}
+
+internal static class CountriesLayerBuilder
+{
+    private static readonly string[] _euroZoneCountries = new string[] {
+        &quot;Austria&quot;,&quot;Belgium&quot;, &quot;Croatia&quot;, &quot;Cyprus&quot;, &quot;Estonia&quot;, &quot;Finland&quot;, &quot;France&quot;, &quot;Germany&quot;, &quot;Greece&quot;, &quot;Ireland&quot;,
+        &quot;Italy&quot;, &quot;Latvia&quot;, &quot;Lithuania&quot;, &quot;Luxembourg&quot;, &quot;Malta&quot;, &quot;the Netherlands&quot;, &quot;Portugal&quot;, &quot;Slovakia&quot;, &quot;Slovenia&quot;, &quot;Spain&quot;
+    };
+    private static readonly VectorStyle _euroStyle = new()
+    {
+        Fill = new Brush(new Color(245, 245, 242)),
+        Outline = new Pen(new Color(55, 84, 162), 2),
+    };
+    private static readonly VectorStyle _nonEuroStyle = new()
+    {
+        Fill = new Brush(new Color(86, 109, 176)),
+        Outline = new Pen(new Color(55, 84, 162), 2),
+    };    
+
+    public static RasterizingTileLayer CreateCountriesLayer() =&gt; new(CreateCountriesGeoJsonLayer());
+
+    private static Layer CreateCountriesGeoJsonLayer()
+        =&gt; new(&quot;Countries&quot;)
+        {
+            DataSource = CreateCountriesProvider(),
+            Style = new StyleCollection
+            {
+                Styles =
+                {
+                    CreateCountriesStyle(),
+                    new CalloutStyle()
+                }
+            }
+        };
+
+    private static ProjectingProvider CreateCountriesProvider()
+    {
+        var path = Path.Combine(GeoJsonDeployer.GeoJsonLocation, &quot;countries.geojson&quot;);
+        var provider = new GeoJsonProvider(path) { CRS = &quot;EPSG:4326&quot; }; // The ProjectingProvider needs to know the source CRS (EPSG:4326)
+        return new ProjectingProvider(provider) { CRS = &quot;EPSG:3857&quot; }; // The ProjectingProvider needs to know the target CRS (EPSG:3857)
+    }
+
+    private static IStyle CreateCountriesStyle()
+        =&gt; new ThemeStyle((f) =&gt;
+        {
+            // With a ThemeStyle it is possible to create a specific style for each feature
+            var name = f[&quot;name&quot;] as string ?? throw new Exception(&quot;Feature should have name field&quot;);
+            return IsInEuroZone(name) ? _euroStyle : _nonEuroStyle;
+        });
+
+    private static bool IsInEuroZone(string name) =&gt; _euroZoneCountries.Contains(name);
+
+}
+
+internal static class CitiesLayerBuilder
+{
+    public static Layer CreateCitiesLayer() =&gt; CreateCitiesLabelLayer();
+
+    private static Layer CreateCitiesLabelLayer()
+        =&gt; new(&quot;Cities labels&quot;)
+        {
+            DataSource = CreateCitiesProvider(),
+            Style = CreateCitiesLabelStyle()
+        };
+
+    private static ProjectingProvider CreateCitiesProvider()
+    {
+        var path = Path.Combine(GeoJsonDeployer.GeoJsonLocation, &quot;cities.geojson&quot;);
+        var provider = new GeoJsonProvider(path) { CRS = &quot;EPSG:4326&quot; }; // The ProjectingProvider needs to know the source CRS (EPSG:4326)
+        return new ProjectingProvider(provider) { CRS = &quot;EPSG:3857&quot; }; // The ProjectingProvider needs to know the target CRS (EPSG:3857)
+    }
+
+    private static LabelStyle CreateCitiesLabelStyle()
+        =&gt; new()
+        {
+            ForeColor = Color.Black,
+            BackColor = new Brush(new Color(245, 245, 242)),
+            LabelColumn = &quot;city&quot;,
+        };
+}
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/develop/4.1/docfx/codesamples/GeoJsonSample.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

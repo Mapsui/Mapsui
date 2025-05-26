@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title> </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content=" ">
+    
+    
+      <link rel="shortcut icon" href="../images/favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<pre><code class="lang-csharp" name="Main" title="SymbolAnimationSample">using Mapsui.Animations;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using Mapsui.UI;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Mapsui.Samples.Common.Maps.Animations;
+
+public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
+{
+    private Layer? _animationLayer;
+    private static bool _repeat = true;
+    public string Name =&gt; &quot;Animated Symbols&quot;;
+    public string Category =&gt; &quot;Animations&quot;;
+
+    public Task&lt;Map&gt; CreateMapAsync() =&gt; Task.FromResult(CreateMap());
+
+    public Map CreateMap()
+    {
+        var map = new Map();
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateLayer());
+        _animationLayer = (Layer)map.Layers.Last();
+        return map;
+    }
+
+    public static ILayer CreateLayer()
+    {
+        var style = new SymbolStyle() { Fill = new Brush(Color.Red), SymbolScale = 1 };
+
+        var layer = new Layer(&quot;Points&quot;)
+        {
+            DataSource = new MemoryProvider(CreatePoints(style)),
+            SymbolStyle = style
+        };
+
+        var animations = CreateAnimationsForSymbolStyle(style);
+        layer.Animations.Add(() =&gt; Animation.UpdateAnimations(style, animations).IsRunning);
+
+        return layer;
+
+    }
+
+    private static List&lt;PointFeature&gt; CreatePoints(IStyle style)
+    {
+        var result = new List&lt;PointFeature&gt;
+        {
+            CreatePoint(1000000, 1000000, style),
+            CreatePoint(9000000, 1000000, style),
+            CreatePoint(9000000, 9000000, style),
+            CreatePoint(1000000, 9000000, style)
+        };
+
+        return result;
+    }
+
+    private static List&lt;AnimationEntry&lt;SymbolStyle&gt;&gt; CreateAnimationsForSymbolStyle(SymbolStyle style)
+    {
+        var animations = new List&lt;AnimationEntry&lt;SymbolStyle&gt;&gt;();
+
+        var entry1 = new AnimationEntry&lt;SymbolStyle&gt;(
+            start: style.SymbolScale,
+            end: style.SymbolScale * 2,
+            animationStart: 0,
+            animationEnd: .5,
+            easing: Easing.SinInOut,
+            repeat: _repeat,
+            tick: (symbolStyle, e, v) =&gt; { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult&lt;SymbolStyle&gt;(style, true); },
+            final: (symbolStyle, e) =&gt; { style.SymbolScale = (double)e.End; return new AnimationResult&lt;SymbolStyle&gt;(style, true); }
+        );
+        animations.Add(entry1);
+
+        var entry2 = new AnimationEntry&lt;SymbolStyle&gt;(
+            start: style.SymbolScale * 2,
+            end: style.SymbolScale,
+            animationStart: .5,
+            animationEnd: 1,
+            easing: Easing.SinInOut,
+            repeat: _repeat,
+            tick: (symbolStyle, e, v) =&gt; { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); return new AnimationResult&lt;SymbolStyle&gt;(style, true); },
+            final: (symbolStyle, e) =&gt; { style.SymbolScale = (double)e.End; return new AnimationResult&lt;SymbolStyle&gt;(style, true); }
+        );
+        animations.Add(entry2);
+
+        var entry3 = new AnimationEntry&lt;SymbolStyle&gt;(
+            start: Color.Black,
+            end: Color.Red,
+            animationStart: 0,
+            animationEnd: 1,
+            easing: Easing.SinInOut,
+            tick: (symbolStyle, e, v) =&gt;
+            {
+                var start = (Color)e.Start;
+                var end = (Color)e.End;
+                if (symbolStyle.Fill != null)
+                {
+                    symbolStyle.Fill.Color = new Color(
+                        (int)(start.R * (1.0 - v) + end.R * v),
+                        (int)(start.G * (1.0 - v) + end.G * v),
+                        (int)(start.B * (1.0 - v) + end.B * v));
+                }
+                return new AnimationResult&lt;SymbolStyle&gt;(symbolStyle, true);
+            },
+            final: (symbolStyle, e) =&gt;
+            {
+                if (symbolStyle.Fill != null)
+                {
+                    symbolStyle.Fill.Color = (Color)e.End;
+                }
+                return new AnimationResult&lt;SymbolStyle&gt;(symbolStyle, true);
+            }
+
+        );
+        animations.Add(entry3);
+
+        Animation.Start(animations, 1000); // This should not be necessary
+
+        return animations;
+    }
+
+    private static PointFeature CreatePoint(double x, double y, IStyle style)
+    {
+        var result = new PointFeature(new MPoint(x, y));
+        result.Styles.Add(style);
+        return result;
+    }
+
+    public async Task InitializeTestAsync(IMapControl mapControl)
+    {
+        if (_animationLayer == null)
+            return;
+
+        while (_animationLayer.UpdateAnimations())
+        {
+            await Task.Delay(10).ConfigureAwait(true);
+        }
+    }
+
+    public void PrepareTest()
+    {
+        _repeat = false;
+    }
+}
+</code></pre>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/develop/4.1/docfx/codesamples/SymbolAnimationSample.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
