@@ -53,15 +53,16 @@ jobs:
     - name: Build Blazor Website Sample
       shell: pwsh
       run: ./Scripts/BuildSamplesWebsite.ps1   
-    - name: Checkout gh-pages branch
+    - name: Checkout gh-pages branch to delete v5 folder
       uses: actions/checkout@v4
       with:
         ref: gh-pages
         path: gh-pages
-    - name: Clean old v5 content
+    - name: Delete v5 folder
+      shell: bash
       run: |
         rm -rf gh-pages/v5
-    - name: Commit and push deletion
+    - name: Push gh-pages branch with v5 folder deleted
       shell: bash
       run: |
         cd gh-pages
