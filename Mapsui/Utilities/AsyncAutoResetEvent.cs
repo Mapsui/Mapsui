@@ -6,11 +6,11 @@ namespace Mapsui.Utilities;
 
 public class AsyncAutoResetEvent(bool initialState = false)
 {
-    private static readonly Task _completed = Task.FromResult(true);
+    private static readonly ValueTask<bool> _completed = new(true);
     private readonly Queue<TaskCompletionSource<bool>> _waits = new();
     private bool _letThrough = initialState;
 
-    public Task WaitAsync()
+    public ValueTask<bool> WaitAsync()
     {
         lock (_waits)
         {
@@ -23,7 +23,7 @@ public class AsyncAutoResetEvent(bool initialState = false)
             {
                 var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
                 _waits.Enqueue(tcs);
-                return tcs.Task;
+                return new ValueTask<bool>(tcs.Task);
             }
         }
     }
