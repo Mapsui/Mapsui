@@ -26,13 +26,13 @@ public sealed class RenderController : IDisposable
     private readonly int _minimumTimeBetweenInvalidates = 4;
     // The minimum time in between the start of two draw calls in ms
     private readonly int _minimumTimeBetweenStartOfDrawCall = 8;
-    private readonly AutoResetEvent _isDrawingDone = new(true);
+    private readonly AsyncAutoResetEvent _isDrawingDone = new(true);
     private readonly AsyncAutoResetEvent _needsRefresh = new(true);
     private static bool _firstDraw = true;
     private bool _isRunning = true;
     private int _timestampStartDraw;
     // Stopwatch for measuring drawing times
-    private readonly System.Diagnostics.Stopwatch _stopwatch = new();
+    private readonly Stopwatch _stopwatch = new();
 #pragma warning disable IDISP002 // Is disposed in SharedDispose
     private readonly IRenderer _renderer = new MapRenderer();
 #pragma warning restore IDISP002
@@ -87,7 +87,7 @@ public sealed class RenderController : IDisposable
             // so the wait will be between 0 and 8 ms depending on how long the previous draw took.
             // - Then wait for _needsRefresh to be Set. If it was already Set it won't wait.
 
-            _isDrawingDone.WaitOne(); // Wait for previous Draw to finish.
+            await _isDrawingDone.WaitAsync().ConfigureAwait(false); // Wait for previous Draw to finish.
             Thread.Sleep(_minimumTimeBetweenInvalidates); // Always wait at least some period in between Draw and Invalidate calls.
             Thread.Sleep(GetAdditionalTimeToDelay(_timestampStartDraw, _minimumTimeBetweenStartOfDrawCall)); // Wait to enforce the _minimumTimeBetweenStartOfDrawCall.
             await _needsRefresh.WaitAsync().ConfigureAwait(false); // Wait if there was no call to _needsRefresh.Set() yet.
