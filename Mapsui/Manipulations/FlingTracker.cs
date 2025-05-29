@@ -13,7 +13,6 @@ public class FlingTracker
     public static double MaxVelocity { get; set; } = 4000.0;   // When testing on WPF 4000 felt okay. Not sure if this is a good value in general.
     public static double MinVelocity { get; set; } = 1000.0;
 
-
     public FlingTracker()
     {
         _events = [];
