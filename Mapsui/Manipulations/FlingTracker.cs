@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Logging;
+using System;
 using System.Collections.Generic;
 
 namespace Mapsui.Manipulations;
@@ -7,9 +8,11 @@ public class FlingTracker
 {
     private const int _maxSize = 50;
     private const long _maxTicks = 200 * 10000;  // Use only events from the last 200 ms
-    private const double _maxVelocity = 4000.0;   // When testing on WPF 4000 felt okay. Not sure if this is a good value in general.
-
     private readonly Queue<(double x, double y, long time)> _events;
+
+    public static double MaxVelocity { get; set; } = 4000.0;   // When testing on WPF 4000 felt okay. Not sure if this is a good value in general.
+    public static double MinVelocity { get; set; } = 1000.0;
+
 
     public FlingTracker()
     {
@@ -33,7 +36,7 @@ public class FlingTracker
         _events.Clear();
     }
 
-    private (double vx, double vy) CalcVelocity(long now)
+    private (double vx, double vy, double v) CalcVelocity(long now)
     {
         double distanceX = 0;
         double distanceY = 0;
@@ -42,7 +45,7 @@ public class FlingTracker
         var eventsArray = eventQueue.ToArray();
 
         if (eventsArray.Length == 0)
-            return (0, 0);
+            return (0, 0, 0);
 
         (_, _, var firstTime) = eventsArray[0];
 
@@ -66,32 +69,54 @@ public class FlingTracker
 
         var totalTime = finalTime - firstTime;
 
-        return (distanceX / totalTime, distanceY / totalTime);
+        var vx = distanceX / totalTime;
+        var vy = distanceY / totalTime;
+        var v = Math.Sqrt(vx * vx + vy * vy);
+        return (vx, vy, v);
     }
 
     public void FlingIfNeeded(Action<double, double> onFling)
     {
-        var (velocityX, velocityY) = CalcVelocity(DateTime.Now.Ticks);
+        var (velocityX, velocityY, velocity) = CalcVelocity(DateTime.Now.Ticks);
 
-        // Only fling if the velocity is above a threshold (e.g., 200)
-        if (Math.Abs(velocityX) <= 200 && Math.Abs(velocityY) <= 200)
+        // Only fling if the velocity is above a threshold.
+        if (velocity <= MinVelocity)
+        {
+            if (Logger.Settings.LogFlingEvents)
+                Logger.Log(LogLevel.Information, $"FlingTracker: Do not fling because the velocity of {velocity:F0} is lower than the min velocity {MinVelocity:F0}.");
             return;
+        }
 
         // In some cases overloading of the app can cause incorrect velocity values which 
         // could result in extreme speeds. Therefor we limit the velocity to a maximum value.
-        (velocityX, velocityY) = LimitVelocity(velocityX, velocityY, _maxVelocity);
+        if (velocity > MaxVelocity && velocity > 0)
+        {
+            if (Logger.Settings.LogFlingEvents)
+                Logger.Log(LogLevel.Information, $"FlingTracker: Limiting velocity from {velocity:F0} to {MaxVelocity:F0}.");
+            var scale = MaxVelocity / velocity;
+            velocityX *= scale;
+            velocityY *= scale;
+        }
+        else
+        {
+            if (Logger.Settings.LogFlingEvents)
+                Logger.Log(LogLevel.Information, $"FlingTracker: Fling with velocity {velocity:F0}.");
+        }
 
         onFling(velocityX, velocityY);
     }
 
-    private static (double vx, double vy) LimitVelocity(double vx, double vy, double maxVelocity)
+    private static (double vx, double vy) LimitVelocity(double velocityX, double velocityY, double velocity, double maxVelocity)
     {
-        var magnitude = Math.Sqrt(vx * vx + vy * vy);
-        if (magnitude > maxVelocity && magnitude > 0)
+        if (velocity > maxVelocity && velocity > 0)
         {
-            var scale = maxVelocity / magnitude;
-            return (vx * scale, vy * scale);
+            if (Logger.Settings.LogFlingEvents)
+                Logger.Log(LogLevel.Information, $"FlingTracker: Limiting velocity from {velocity:F0} to {maxVelocity:F0}.");
+            var scale = maxVelocity / velocity;
+            return (velocityX * scale, velocityY * scale);
         }
-        return (vx, vy);
+        if (Logger.Settings.LogFlingEvents)
+            Logger.Log(LogLevel.Information, $"FlingTracker: Fling with velocity {velocity:F0}.");
+        return (velocityX, velocityY);
     }
 }

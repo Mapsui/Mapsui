@@ -53,6 +53,7 @@ public static class Logger
     {
         public bool LogMapEvents { get; set; }
         public bool LogWidgetEvents { get; set; }
+        public bool LogFlingEvents { get; set; };
     }
 }
 
