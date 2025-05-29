@@ -104,18 +104,4 @@ public class FlingTracker
 
         onFling(velocityX, velocityY);
     }
-
-    private static (double vx, double vy) LimitVelocity(double velocityX, double velocityY, double velocity, double maxVelocity)
-    {
-        if (velocity > maxVelocity && velocity > 0)
-        {
-            if (Logger.Settings.LogFlingEvents)
-                Logger.Log(LogLevel.Information, $"FlingTracker: Limiting velocity from {velocity:F0} to {maxVelocity:F0}.");
-            var scale = maxVelocity / velocity;
-            return (velocityX * scale, velocityY * scale);
-        }
-        if (Logger.Settings.LogFlingEvents)
-            Logger.Log(LogLevel.Information, $"FlingTracker: Fling with velocity {velocity:F0}.");
-        return (velocityX, velocityY);
-    }
 }
