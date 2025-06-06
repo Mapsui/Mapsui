@@ -29,6 +29,9 @@ public class MemoryLayer(string layerName) : BaseLayer(layerName)
         get => _features;
         set
         {
+            if (value is null)
+                throw new ArgumentNullException(nameof(Features), $"{nameof(Features)} collection cannot be null.");
+
             _features = value;
             FeaturesWereModified();
         }
