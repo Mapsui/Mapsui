@@ -11,14 +11,13 @@ public class ObservableMemoryLayer<T> : MemoryLayer
     where T : class
 {
     private ObservableCollection<T>? _observableCollection;
-    private readonly ConcurrentHashSet<IFeature> _shadowCollection;
+    private readonly ConcurrentHashSet<IFeature> _shadowCollection = new ConcurrentHashSet<IFeature>();
     private readonly Func<T, IFeature?> _getFeature;
 
     public ObservableMemoryLayer(Func<T, IFeature?> getFeature, string? name = null) : base(
         name ?? nameof(ObservableMemoryLayer<T>))
     {
         _getFeature = getFeature;
-        _shadowCollection = new ConcurrentHashSet<IFeature>();
         base.Features = _shadowCollection;
     }
 
