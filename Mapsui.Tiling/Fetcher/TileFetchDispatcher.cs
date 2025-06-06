@@ -10,38 +10,55 @@ using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Mapsui.Tiling.Fetcher;
 
-public class TileFetchDispatcher(
-    ITileCache<IFeature?> tileCache,
-    ITileSchema tileSchema,
-    Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
-    IDataFetchStrategy? dataFetchStrategy = null) : INotifyPropertyChanged
+public class TileFetchDispatcher
 {
-    private readonly object _lockRoot = new();
     private bool _busy;
-    private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
+    private readonly IDataFetchStrategy _dataFetchStrategy;
     private ConcurrentQueue<TileInfo> _tilesToFetch = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesThatFailed = [];
     private readonly FetchMachine _fetchMachine = new(4);
+    private readonly ITileCache<IFeature?> _tileCache;
+    private readonly ITileSchema _tileSchema;
+    private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature;
+    private readonly Channel<FetchInfo> _refreshQueue = Channel.CreateBounded<FetchInfo>(
+        new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest, AllowSynchronousContinuations = false, SingleReader = true });
 
     public int NumberTilesNeeded { get; private set; }
-
     public static int MaxTilesInOneRequest { get; set; } = 128;
 
     public event EventHandler<Exception?>? DataChanged;
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    public TileFetchDispatcher(
+        ITileCache<IFeature?> tileCache,
+        ITileSchema tileSchema,
+        Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
+        IDataFetchStrategy? dataFetchStrategy = null)
+    {
+        _tileCache = tileCache;
+        _tileSchema = tileSchema;
+        _fetchTileAsFeature = fetchTileAsFeature;
+        _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
+        _ = Task.Run(ProcessRefreshDataAsync);
+    }
+
     public void RefreshData(FetchInfo fetchInfo)
     {
-        lock (_lockRoot)
+        _ = _refreshQueue.Writer.WriteAsync(fetchInfo);
+    }
+
+    private async Task ProcessRefreshDataAsync()
+    {
+        await foreach (var fetchInfo in _refreshQueue.Reader.ReadAllAsync().ConfigureAwait(false))
         {
             _tilesThatFailed.Clear(); // Try them again on new refresh data event.
-            // GetTilesToFetch can be fairly expensive. It is assumed that the call to RefreshData is throttled in case of dragging and animations.
-            _tilesToFetch = GetTilesToFetch(fetchInfo, tileSchema);
+            _tilesToFetch = GetTilesToFetch(fetchInfo, _tileSchema);
             StartFetching();
         }
     }
@@ -70,7 +87,7 @@ public class TileFetchDispatcher(
     {
         try
         {
-            var feature = await fetchTileAsFeature(tileInfo).ConfigureAwait(false);
+            var feature = await _fetchTileAsFeature(tileInfo).ConfigureAwait(false);
             FetchCompleted(tileInfo, feature, null);
         }
         catch (Exception ex)
@@ -88,7 +105,7 @@ public class TileFetchDispatcher(
                 Logger.Log(LogLevel.Warning, "Could not add the tile index to the failed tiles list. This was not expected");
         }
         else
-            tileCache.Add(tileInfo.Index, feature);
+            _tileCache.Add(tileInfo.Index, feature);
 
         if (!_tilesInProgress.TryRemove(tileInfo.Index))
             Logger.Log(LogLevel.Warning, "Could not remove the tile index to the in-progress tiles list. This was not expected");
@@ -131,7 +148,7 @@ public class TileFetchDispatcher(
         NumberTilesNeeded = tilesToCoverViewport.Count;
 
         var tilesToFetch = tilesToCoverViewport.Where(t =>
-            tileCache.Find(t.Index) == null
+            _tileCache.Find(t.Index) == null
             && !_tilesInProgress.Contains(t.Index)
             && !_tilesThatFailed.Contains(t.Index));
 
