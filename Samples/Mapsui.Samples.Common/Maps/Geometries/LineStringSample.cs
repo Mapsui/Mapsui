@@ -47,8 +47,8 @@ public class LineStringSample : ISample
         return new VectorStyle
         {
             Fill = null,
-            Outline = null,
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
+            Outline = { Color = Color.Black, Width = 1 },
             Line = { Color = Color.YellowGreen, Width = 4 }
         };
     }
