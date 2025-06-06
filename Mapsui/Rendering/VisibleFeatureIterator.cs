@@ -11,8 +11,6 @@ namespace Mapsui.Rendering;
 
 public static class VisibleFeatureIterator
 {
-    private static readonly object _iterationLock = new();
-
     public static void IterateLayers(Viewport viewport, IEnumerable<ILayer> layers, long iteration,
         Action<Viewport, ILayer, IStyle, IFeature, float, long> callback, Action<ILayer>? customLayerRendererCallback = null)
     {
@@ -22,15 +20,10 @@ public static class VisibleFeatureIterator
             if (layer.MinVisible > viewport.Resolution) continue;
             if (layer.MaxVisible < viewport.Resolution) continue;
 
-            // somehow it crashes when more then one iteration or rendering is done in parallel 
-            // TODO: find out which Caching path causes this. Because when the caching is disabled it works.
-            lock (_iterationLock)
-            {
-                if (layer.CustomLayerRendererName is not null && customLayerRendererCallback is not null)
-                    customLayerRendererCallback(layer);
-                else
-                    IterateLayer(viewport, layer, iteration, callback);
-            }
+            if (layer.CustomLayerRendererName is not null && customLayerRendererCallback is not null)
+                customLayerRendererCallback(layer);
+            else
+                IterateLayer(viewport, layer, iteration, callback);
         }
     }
 
