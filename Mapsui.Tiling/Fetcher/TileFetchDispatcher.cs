@@ -50,6 +50,9 @@ public class TileFetchDispatcher
 
     public void RefreshData(FetchInfo fetchInfo)
     {
+        // Set Busy to true immediately, so that the caller can immediately start waiting for it to go back to false.
+        // Not sure if this is the best solution. It will often go to true and back to false without doing something.
+        Busy = true;
         _ = _refreshQueue.Writer.WriteAsync(fetchInfo);
     }
 
