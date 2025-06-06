@@ -19,6 +19,8 @@ public class Navigator
     private MRect? _defaultPanBounds;
     private MMinMax? _overrideZoomBounds;
     private MRect? _overridePanBounds;
+    private object _initializationLock = new();
+    private bool _suppressNotifications = true;
 
     public delegate void ViewportChangedEventHandler(object sender, ViewportChangedEventArgs e);
 
@@ -122,19 +124,24 @@ public class Navigator
 
     private void Initialize(MRect extent)
     {
-        if (!IsInitialized)
+        lock (_initializationLock)
         {
-            IsInitialized = true;
-
-            // Actions could either modify the current state (after ZoomToBox above) or override the current state.
-            foreach (var action in _initialization)
+            if (!IsInitialized)
             {
-                action();
+                IsInitialized = true;
+
+                // Actions could either modify the current state (after ZoomToBox above) or override the current state.
+                foreach (var action in _initialization)
+                {
+                    action();
+                }
+
+                _initialization.Clear();
+
+                _suppressNotifications = false;
+                OnViewportChanged(_viewport);
+                OnRefreshDataRequest(ChangeType.Discrete);
             }
-
-            _initialization.Clear();
-
-            OnViewportChanged(_viewport);
         }
     }
 
@@ -537,6 +544,9 @@ public class Navigator
 
     private void OnRefreshDataRequest(ChangeType changeType)
     {
+        if (_suppressNotifications)
+            return;
+
         // At the moment we refresh the data on each RefreshDataRequest. Instead we should  always
         // refresh on ChangeType.Discrete, and do throttled requests on ChangeType.Continuous.
         RefreshDataRequest?.Invoke(this, new RefreshDataRequestEventArgs(changeType));
@@ -556,6 +566,9 @@ public class Navigator
     /// <param name="oldViewport">Name of property that changed</param>
     private void OnViewportChanged(Viewport oldViewport)
     {
+        if (_suppressNotifications)
+            return;
+
         ViewportChanged?.Invoke(this, new ViewportChangedEventArgs(oldViewport));
     }
 
