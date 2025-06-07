@@ -7,23 +7,11 @@
 /// height of the image to the top. So the bottom left point of the image will be on
 /// the location.
 /// </summary>
-public class RelativeOffset
+public readonly record struct RelativeOffset(double X = 0, double Y = 0)
 {
-    public RelativeOffset() { }
-
-    public RelativeOffset(double x, double y)
-    {
-        X = x;
-        Y = y;
-    }
-
+    public RelativeOffset() : this(0, 0) { }
     public RelativeOffset(RelativeOffset offset) : this(offset.X, offset.Y) { }
-
     public RelativeOffset(MPoint point) : this(point.X, point.Y) { }
-
-    public double X { get; set; } = 0;
-    public double Y { get; set; } = 0;
-
     /// <summary>
     /// Calculate the real offset respecting width and height
     /// </summary>
