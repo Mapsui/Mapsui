@@ -19,7 +19,7 @@ public class Navigator
     private MRect? _defaultPanBounds;
     private MMinMax? _overrideZoomBounds;
     private MRect? _overridePanBounds;
-    private object _initializationLock = new();
+    private readonly object _initializationLock = new();
     private bool _suppressNotifications = true;
 
     public delegate void ViewportChangedEventHandler(object sender, ViewportChangedEventArgs e);
