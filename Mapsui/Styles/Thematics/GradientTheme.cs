@@ -76,7 +76,7 @@ public class GradientTheme : Style, IThemeStyle
     /// </summary>
     /// <param name="row">Feature</param>
     /// <returns>A <see cref="IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
-    public IStyle? GetStyle(IFeature row)
+    public IStyle? GetStyle(IFeature row, Viewport _)
     {
         double attr;
         try { attr = Convert.ToDouble(row[ColumnName]); }

@@ -44,7 +44,7 @@ public static class VisibleFeatureIterator
             {
                 if (layerStyle is IThemeStyle themeStyle)
                 {
-                    var stylesFromThemeStyle = themeStyle.GetStyle(feature).GetStylesToApply(viewport.Resolution);
+                    var stylesFromThemeStyle = themeStyle.GetStyle(feature, viewport).GetStylesToApply(viewport.Resolution);
                     foreach (var styleFromThemeStyle in stylesFromThemeStyle)
                     {
                         callback(viewport, layer, styleFromThemeStyle, feature, (float)layer.Opacity, iteration);
