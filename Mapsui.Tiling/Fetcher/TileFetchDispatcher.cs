@@ -20,16 +20,15 @@ public class TileFetchDispatcher(
     Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
     IDataFetchStrategy? dataFetchStrategy = null) : INotifyPropertyChanged
 {
-    private readonly object _lockRoot = new();
     private bool _busy;
     private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
     private ConcurrentQueue<TileInfo> _tilesToFetch = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesThatFailed = [];
     private readonly FetchMachine _fetchMachine = new(4);
+    private readonly MessageBox<FetchInfo> _latestFetchInfo = new();
 
     public int NumberTilesNeeded { get; private set; }
-
     public static int MaxTilesInOneRequest { get; set; } = 128;
 
     public event EventHandler<Exception?>? DataChanged;
@@ -37,13 +36,22 @@ public class TileFetchDispatcher(
 
     public void RefreshData(FetchInfo fetchInfo)
     {
-        lock (_lockRoot)
+        // Set Busy to true immediately, so that the caller can immediately start waiting for it to go back to false.
+        // Not sure if this is the best solution. It will often go to true and back to false without doing something.
+        Busy = true;
+        _latestFetchInfo.Put(fetchInfo);
+        _fetchMachine.Enqueue(ProcessRefreshDataAsync); // Calculations are done on the FetchMachine.
+    }
+
+    private Task ProcessRefreshDataAsync()
+    {
+        if (_latestFetchInfo.TryTake(out var fetchInfo))
         {
             _tilesThatFailed.Clear(); // Try them again on new refresh data event.
-            // GetTilesToFetch can be fairly expensive. It is assumed that the call to RefreshData is throttled in case of dragging and animations.
             _tilesToFetch = GetTilesToFetch(fetchInfo, tileSchema);
             StartFetching();
         }
+        return Task.CompletedTask; // To make it async because that allows for an easy way to enqueue.
     }
 
     public void StartFetching()
@@ -63,7 +71,7 @@ public class TileFetchDispatcher(
 
     private bool GetBusy()
     {
-        return _tilesToFetch.Count > 0 || _tilesInProgress.Count > 0;
+        return !_tilesToFetch.IsEmpty || _tilesInProgress.Count > 0;
     }
 
     private async Task FetchOnThreadAsync(TileInfo tileInfo)

@@ -42,6 +42,16 @@ public class EditManager
         if (EditMode == EditMode.DrawingLine)
         {
             _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove the last vertex, because it is the hover vertex
+
+            if (_addInfo.Vertices.Count < 2) // If there are not enough vertices, do not add the feature
+            {
+                // And reset it back to the previous state.
+                Layer?.TryRemove(_addInfo.Feature);
+                _addInfo.Reset();
+                EditMode = EditMode.AddLine;
+                return false;
+            }
+
             _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
 
             _addInfo.Feature = null;
