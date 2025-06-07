@@ -14,9 +14,9 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
 {
     private const int _symbolSize = 32; // todo: determine margin by symbol size
     private const int _boxMargin = _symbolSize / 2;
-
     private readonly IProvider _provider = provider;
     private readonly LabelStyle _labelStyle = labelStyle;
+    private const double _clusterMargin = 50;
 
     public string? CRS { get; set; }
 
@@ -41,7 +41,7 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
         if (features == null)
             return [];
 
-        var margin = fetchInfo.Resolution * LabelMarginFactor;
+        var margin = fetchInfo.Resolution * _clusterMargin;
         var clusters = ClusterFeatures(fetchInfo, features, margin, labelStyle);
 
         const int textHeight = 18;
