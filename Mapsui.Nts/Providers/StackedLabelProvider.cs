@@ -41,7 +41,7 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
         if (features == null)
             return [];
 
-        var margin = fetchInfo.Resolution * 50;
+        var margin = fetchInfo.Resolution * LabelMarginFactor;
         var clusters = ClusterFeatures(fetchInfo, features, margin, labelStyle);
 
         const int textHeight = 18;
