@@ -26,9 +26,6 @@ public class TileFetchDispatcher(
     private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesThatFailed = [];
     private readonly FetchMachine _fetchMachine = new(4);
-    private readonly ITileCache<IFeature?> _tileCache = tileCache;
-    private readonly ITileSchema _tileSchema = tileSchema;
-    private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature = fetchTileAsFeature;
     private readonly MessageBox<FetchInfo> _latestFetchInfo = new();
 
     public int NumberTilesNeeded { get; private set; }
@@ -51,7 +48,7 @@ public class TileFetchDispatcher(
         if (_latestFetchInfo.TryTake(out var fetchInfo))
         {
             _tilesThatFailed.Clear(); // Try them again on new refresh data event.
-            _tilesToFetch = GetTilesToFetch(fetchInfo, _tileSchema);
+            _tilesToFetch = GetTilesToFetch(fetchInfo, tileSchema);
             StartFetching();
         }
         return Task.CompletedTask; // To make it async because that allows for an easy way to enqueue.
@@ -81,7 +78,7 @@ public class TileFetchDispatcher(
     {
         try
         {
-            var feature = await _fetchTileAsFeature(tileInfo).ConfigureAwait(false);
+            var feature = await fetchTileAsFeature(tileInfo).ConfigureAwait(false);
             FetchCompleted(tileInfo, feature, null);
         }
         catch (Exception ex)
@@ -99,7 +96,7 @@ public class TileFetchDispatcher(
                 Logger.Log(LogLevel.Warning, "Could not add the tile index to the failed tiles list. This was not expected");
         }
         else
-            _tileCache.Add(tileInfo.Index, feature);
+            tileCache.Add(tileInfo.Index, feature);
 
         if (!_tilesInProgress.TryRemove(tileInfo.Index))
             Logger.Log(LogLevel.Warning, "Could not remove the tile index to the in-progress tiles list. This was not expected");
@@ -142,7 +139,7 @@ public class TileFetchDispatcher(
         NumberTilesNeeded = tilesToCoverViewport.Count;
 
         var tilesToFetch = tilesToCoverViewport.Where(t =>
-            _tileCache.Find(t.Index) == null
+            tileCache.Find(t.Index) == null
             && !_tilesInProgress.Contains(t.Index)
             && !_tilesThatFailed.Contains(t.Index));
 
