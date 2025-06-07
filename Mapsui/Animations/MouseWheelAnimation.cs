@@ -6,7 +6,7 @@ namespace Mapsui.Animations;
 
 public class MouseWheelAnimation
 {
-    private int _tickCount = int.MinValue;
+    private long _tickCount = long.MinValue;
     private double _destinationResolution;
 
     public int Duration { get; set; } = 600;
@@ -34,14 +34,14 @@ public class MouseWheelAnimation
         }
 
         // TickCount is fast https://stackoverflow.com/a/4075602/85325
-        _tickCount = Environment.TickCount;
+        _tickCount = Environment.TickCount64;
 
         return _destinationResolution;
     }
 
     private bool IsAnimating()
     {
-        var tickProgress = Environment.TickCount - _tickCount;
+        var tickProgress = Environment.TickCount64 - _tickCount;
         return tickProgress >= 0 && tickProgress < Duration;
     }
 }

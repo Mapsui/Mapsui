@@ -172,7 +172,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
-                _positions[e.Id] = new PointerRecording(position, Environment.TickCount);
+                _positions[e.Id] = new PointerRecording(position, Environment.TickCount64);
                 if (_positions.Count == 1) // Not sure if this check is necessary.
                     _manipulationTracker.Restart(_positions.Values.Select(p => p.ScreenPosition).ToArray());
 
@@ -191,7 +191,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                 }
                 else
                 {
-                    _positions[e.Id] = new PointerRecording(position, Environment.TickCount);
+                    _positions[e.Id] = new PointerRecording(position, Environment.TickCount64);
 
                     if (OnPointerMoved(_positions.Values.Select(p => p.ScreenPosition).ToArray(), isHovering))
                         return;
@@ -232,10 +232,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private static void RemoveStale(ConcurrentDictionary<long, PointerRecording> positions, double totalMilliseconds)
     {
-        var currentTickCount = Environment.TickCount;
+        var currentTickCount = Environment.TickCount64;
         foreach (var position in positions)
         {
-            if (currentTickCount - position.Value.timestamp > totalMilliseconds)
+            if (currentTickCount - position.Value.Timestamp > totalMilliseconds)
             {
                 _ = positions.TryRemove(position.Key, out _);
             }
@@ -418,7 +418,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         return GetPage(element.Parent);
     }
 
-    private record struct PointerRecording(ScreenPosition ScreenPosition, int timestamp)
+    private record struct PointerRecording(ScreenPosition ScreenPosition, long Timestamp)
     {
     }
 }

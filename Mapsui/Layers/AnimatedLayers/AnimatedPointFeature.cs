@@ -31,7 +31,7 @@ internal class AnimatedPointFeature : PointFeature
         Point.X = Start.X;
         Point.Y = Start.Y;
 
-        _startTime = Environment.TickCount;
+        _startTime = Environment.TickCount64;
     }
 
     public bool UpdateAnimation(int duration, Easing easing, double distanceThreshold)
@@ -54,7 +54,7 @@ internal class AnimatedPointFeature : PointFeature
 
     private static double CalculateProgress(long startTime, int animationDuration, Easing easing)
     {
-        var currentTime = Environment.TickCount;
+        var currentTime = Environment.TickCount64;
         var elapsedTime = currentTime - startTime;
         return easing.Ease(elapsedTime / (float)animationDuration);
     }
