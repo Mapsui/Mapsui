@@ -16,7 +16,7 @@ public class DynamicSymbolScaleStyleSample : ISample
     private const double _level3 = 8000.0;
 
     public string Name => "Dynamic Symbol Scale Style";
-    public string Category => "1";
+    public string Category => "Styles";
 
     public Task<Map> CreateMapAsync()
     {
