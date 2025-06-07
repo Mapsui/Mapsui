@@ -18,7 +18,7 @@ public class TileFetchDispatcher(
     ITileCache<IFeature?> tileCache,
     ITileSchema tileSchema,
     Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
-    IDataFetchStrategy? dataFetchStrategy = null)
+    IDataFetchStrategy? dataFetchStrategy = null) : INotifyPropertyChanged
 {
     private bool _busy;
     private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
