@@ -10,24 +10,26 @@ using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Mapsui.Tiling.Fetcher;
 
-public class TileFetchDispatcher
+public class TileFetchDispatcher(
+    ITileCache<IFeature?> tileCache,
+    ITileSchema tileSchema,
+    Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
+    IDataFetchStrategy? dataFetchStrategy = null)
 {
     private bool _busy;
-    private readonly IDataFetchStrategy _dataFetchStrategy;
+    private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
     private ConcurrentQueue<TileInfo> _tilesToFetch = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = [];
     private readonly ConcurrentHashSet<TileIndex> _tilesThatFailed = [];
     private readonly FetchMachine _fetchMachine = new(4);
-    private readonly ITileCache<IFeature?> _tileCache;
-    private readonly ITileSchema _tileSchema;
-    private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature;
-    private readonly Channel<FetchInfo> _refreshQueue = Channel.CreateBounded<FetchInfo>(
-        new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest, AllowSynchronousContinuations = false, SingleReader = true });
+    private readonly ITileCache<IFeature?> _tileCache = tileCache;
+    private readonly ITileSchema _tileSchema = tileSchema;
+    private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature = fetchTileAsFeature;
+    private readonly MessageBox<FetchInfo> _latestFetchInfo = new();
 
     public int NumberTilesNeeded { get; private set; }
     public static int MaxTilesInOneRequest { get; set; } = 128;
@@ -35,35 +37,24 @@ public class TileFetchDispatcher
     public event EventHandler<Exception?>? DataChanged;
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public TileFetchDispatcher(
-        ITileCache<IFeature?> tileCache,
-        ITileSchema tileSchema,
-        Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
-        IDataFetchStrategy? dataFetchStrategy = null)
-    {
-        _tileCache = tileCache;
-        _tileSchema = tileSchema;
-        _fetchTileAsFeature = fetchTileAsFeature;
-        _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
-        _ = Task.Run(ProcessRefreshDataAsync);
-    }
-
     public void RefreshData(FetchInfo fetchInfo)
     {
         // Set Busy to true immediately, so that the caller can immediately start waiting for it to go back to false.
         // Not sure if this is the best solution. It will often go to true and back to false without doing something.
         Busy = true;
-        _ = _refreshQueue.Writer.WriteAsync(fetchInfo);
+        _latestFetchInfo.Put(fetchInfo);
+        _fetchMachine.Enqueue(ProcessRefreshDataAsync); // Calculations are done on the FetchMachine.
     }
 
-    private async Task ProcessRefreshDataAsync()
+    private Task ProcessRefreshDataAsync()
     {
-        await foreach (var fetchInfo in _refreshQueue.Reader.ReadAllAsync().ConfigureAwait(false))
+        if (_latestFetchInfo.TryTake(out var fetchInfo))
         {
             _tilesThatFailed.Clear(); // Try them again on new refresh data event.
             _tilesToFetch = GetTilesToFetch(fetchInfo, _tileSchema);
             StartFetching();
         }
+        return Task.CompletedTask; // To make it async because that allows for an easy way to enqueue.
     }
 
     public void StartFetching()
@@ -83,7 +74,7 @@ public class TileFetchDispatcher
 
     private bool GetBusy()
     {
-        return _tilesToFetch.Count > 0 || _tilesInProgress.Count > 0;
+        return !_tilesToFetch.IsEmpty || _tilesInProgress.Count > 0;
     }
 
     private async Task FetchOnThreadAsync(TileInfo tileInfo)
