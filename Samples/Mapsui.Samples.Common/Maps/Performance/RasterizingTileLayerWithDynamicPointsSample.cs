@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps.Performance;
 public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
 {
     public string Name => "RasterizingTileLayer with Dynamic Points";
-    public string Category => "1";
+    public string Category => "Performance";
 
     public void Setup(IMapControl mapControl)
     {
