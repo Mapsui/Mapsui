@@ -23,7 +23,7 @@ public class FeatureFetcherTests
         {
             DataSource = new MemoryProvider(GenerateRandomPoints(extent, 25))
         };
-        layer.Delayer.MillisecondsBetweenCalls = 0;
+        layer.FetchingPostponedInMilliseconds = 0;
 
         var notifications = new List<bool>();
 
