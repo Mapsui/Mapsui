@@ -1,5 +1,3 @@
-// ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
-
 using System;
 
 namespace Mapsui.Styles;

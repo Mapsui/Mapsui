@@ -1,7 +1,6 @@
 using System;
 using Mapsui.Utilities;
 
-// ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
 namespace Mapsui.Styles;
 
 public enum SymbolType
