@@ -1,29 +1,50 @@
 # Rendering Tests
 
-Mapsui has a way of testing rendering where a Map state is rendered to a bitmap. This bitmap is then compared to the original images which are stored as resource in the repository. This is thus a kind of regresssion test (1). If there are differences between these images the test will fail. If this is the case the developer needs to visually inspect the generated images (2). If the generated image is as expected and the original is not then the original needs to be overwritten. 
+Mapsui has rendering tests where images are generated and compared to reference images that are stored as file in the repository. They are regression tests but executed by our unit test framework. If there are too many differences the test will fail. 
 
-1. Regression tests 
-2. Visual inspection.
+### Fix code or update image?
+If a test fails the developer needs to decide whether to:
+- Accept the changes because the generated image is as intended.
+- Change the code because the generated image is not as intended.
 
-The regression tests are useful during refactoring when you expect no changes. When you are working on changes in the rendered output the regression tests will fail but the visual inspection of the output is still useful to check if this is as intended.
+To make this decision the developer needs to visually inspect the generated images. This can be done in two ways.
 
-## 1. Regression tests 
+#### Look at the new version in one of the samples apps
+In most cases you would first look at the samples if the new image makes any sense. Every rendering test that can fail corresponds a sample. You need to look at the name of the failed test in the log to figure out which sample it is. For instance:
+
+```
+Failed TestSampleAsync(Mapsui.Tests.Common.Maps.LineSample) [4 s]
+```
+Is the file `LineSample.cs`. If you open that file you will see it is named `Line` and in category `Tests`.
+
+#### Compare the generated images
 
 The generated images are written to:
 
-    {test project folder}\bin\Debug\net6.0\Resources\Images\Generated
+    {Mapsui.sln folder}\Tests\Mapsui.Rendering.Skia.Tests\bin\Debug\net9.0\Resources\Images\GeneratedRegression
 
-Those will be compared to the original images that were deployed in the build located here:
+You will need to compare those to the the original ones that have been copied to this folder as part of the build:
 
-    {test project folder}\bin\Debug\net6.0\Resources\Images\Original\
+    {Mapsui.sln folder}\Tests\Mapsui.Rendering.Skia.Tests\bin\Debug\net9.0\Resources\Images\OriginalRegression
 
+Such a folder would look like this:
+
+![image](https://user-images.githubusercontent.com/963462/139462183-cf8126ba-8dc5-4c17-b107-11752196dd19.png)
+
+
+
+### Update the image
 If after code changes there are expected changes in the generated files they should be committed to git so they need to be copied to:
 
-    {test project folder}\Resources\Images\Original\
+    {Mapsui.sln folder}\Tests\Mapsui.Rendering.Skia.Tests\Resources\Images\OriginalRegression
     
-This can be done with a script: ```scripts\test-image-copier.cmd```. 
+My way of working is like this. I copy all original files over the original files with this command:
+```ps
+PS> .\Scripts\CopyGeneratedImagesOverOriginalImages.ps1
+```
+Then there will be many git changes because smaller differences are accepted. You need to revert all files that did not cause a test fail, because we want to reduce the number of changes in our git history, especialy regarding binary files.
 
-Note, only commit changes to git if the file that is modified relates to a failed test. There are many tiny changes in the files which are ignored by the tests. In that case we do not want to alter the file to avoid too many changes and avoid growth in size of the repository.
+
 
 ## 2. Visual inspection
 
@@ -31,7 +52,7 @@ There tests can be inspected in two ways.
 1. In the WPF sample there is a 'Tests' category, that shows an interactive version of the test sample.
 2. In the output folder (see above) the generated images can be viewed. Currently this folder looks like this:
 
-![image](https://user-images.githubusercontent.com/963462/139462183-cf8126ba-8dc5-4c17-b107-11752196dd19.png)
+
 
 
 
