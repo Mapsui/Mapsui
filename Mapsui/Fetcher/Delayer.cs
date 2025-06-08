@@ -9,7 +9,7 @@ namespace Mapsui.Fetcher;
 /// </summary>
 public class Delayer
 {
-    private long? _ticksPreviousCall;
+    private long? _ticksPreviousCall = Environment.TickCount64; // Todo: Let it be null and change the callers to specify initial wait or not.
 
     // The Channel has a capacity of just one and if full will drop the oldest, so that
     // if the method on the queue is not in progress yet the new call will replace the waiting one.
