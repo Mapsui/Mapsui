@@ -6,7 +6,7 @@ namespace Mapsui.Fetcher;
 
 public class FetchMachine
 {
-    readonly Channel<Func<Task>> _channel = Channel.CreateUnbounded<Func<Task>>(new UnboundedChannelOptions { AllowSynchronousContinuations = true, SingleReader = false });
+    readonly Channel<Func<Task>> _channel = Channel.CreateUnbounded<Func<Task>>(new UnboundedChannelOptions { AllowSynchronousContinuations = false, SingleReader = false });
 
     public int NumberOfWorkers { get; }
 
