@@ -78,7 +78,7 @@ public class Image
     {
         var indexOfColon = imageSource.IndexOf(':');
         if (indexOfColon < 0)
-            throw new ArgumentException($"The {nameof(imageSource)} should start with one of the supported uri schemes.");
+            throw new ArgumentException($"Invalid image source: '{imageSource}'. It should start with one of the supported URI schemes.");
         var scheme = imageSource.Substring(0, indexOfColon);
         _ = scheme switch
         {
