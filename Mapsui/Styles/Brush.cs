@@ -26,9 +26,6 @@ public class Brush : IHasImage
 
     public Color? Color { get; set; }
 
-    // todo: 
-    // Perhaps rename to something like SecondaryColor. The 'Color' 
-    // field is itself a background in many cases. This is confusing
     public Color? Background { get; set; }
 
     public Image? Image
