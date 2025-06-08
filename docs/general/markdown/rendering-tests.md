@@ -4,6 +4,7 @@ Mapsui has rendering tests where images are generated and compared to reference 
 
 ### Fix the code or update the image?
 If a test fails the developer needs to decide whether to:
+
 - Accept the changes because the generated image is as intended.
 - Change the code because the generated image is not as intended.
 
