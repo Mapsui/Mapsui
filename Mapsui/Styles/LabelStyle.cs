@@ -99,7 +99,7 @@ public class LabelStyle : Style
     public LabelStyle(LabelStyle labelStyle)
     {
         Font = new Font(labelStyle.Font);
-        Offset = new Offset(labelStyle.Offset);
+        Offset = labelStyle.Offset;
         CollisionDetection = false;
         ForeColor = new Color(labelStyle.ForeColor);
         BackColor = (labelStyle.BackColor == null) ? null : new Brush(labelStyle.BackColor);
