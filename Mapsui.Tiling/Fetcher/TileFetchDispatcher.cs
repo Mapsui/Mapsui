@@ -14,7 +14,6 @@ public class TileFetchDispatcher(
     Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
     IDataFetchStrategy? dataFetchStrategy = null) : INotifyPropertyChanged
 {
-    private readonly object _lockRoot = new();
     private bool _busy;
     private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
     private readonly FetchMachine _fetchMachine = new(4);
@@ -28,12 +27,22 @@ public class TileFetchDispatcher(
 
     public void RefreshData(FetchInfo fetchInfo)
     {
-        lock (_lockRoot)
+        // Set Busy to true immediately, so that the caller can immediately start waiting for it to go back to false.
+        // Not sure if this is the best solution. It will often go to true and back to false without doing something.
+        Busy = true;
+        _latestFetchInfo.Put(fetchInfo);
+        _fetchMachine.Enqueue(ProcessRefreshDataAsync); // Calculations are done on the FetchMachine.
+    }
+
+    private Task ProcessRefreshDataAsync()
+    {
+        if (_latestFetchInfo.TryTake(out var fetchInfo))
         {
             NumberTilesNeeded = _fetchTracker.Update(fetchInfo, tileSchema, _dataFetchStrategy, tileCache);
 
             StartFetching();
         }
+        return Task.CompletedTask; // To make it async because that allows for an easy way to enqueue.
     }
 
     public void StartFetching()
