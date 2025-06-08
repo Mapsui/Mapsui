@@ -9,13 +9,13 @@ namespace Mapsui.Fetcher;
 /// </summary>
 public class Delayer
 {
-    private int _ticksPreviousCall = 0;
+    private long? _ticksPreviousCall = Environment.TickCount64; // Todo: Let it be null and change the callers to specify initial wait or not.
 
     // The Channel has a capacity of just one and if full will drop the oldest, so that
     // if the method on the queue is not in progress yet the new call will replace the waiting one.
     // This is to avoid requests of an outdated extent.
     private readonly Channel<Func<Task>> _queue = Channel.CreateBounded<Func<Task>>(
-        new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest, AllowSynchronousContinuations = true, SingleReader = true });
+        new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest });
 
     public Delayer() => _ = AddConsumerAsync(_queue);
 
@@ -56,12 +56,15 @@ public class Delayer
 
     private async Task CallAsync(Func<Task> action)
     {
-        if (MillisecondsBeforeCall > 0)
-            await Task.Delay(MillisecondsBeforeCall).ConfigureAwait(false);
-        var ticksToWait = Math.Max(MillisecondsBetweenCalls - (Environment.TickCount - _ticksPreviousCall), 0);
-        if (ticksToWait > 0)
-            await Task.Delay(ticksToWait).ConfigureAwait(false);
+        if (_ticksPreviousCall is not null) // Only wait if there was a previous call
+        {
+            if (MillisecondsBeforeCall > 0)
+                await Task.Delay(MillisecondsBeforeCall).ConfigureAwait(false);
+            var ticksToWait = (int)Math.Max(MillisecondsBetweenCalls - (Environment.TickCount64 - _ticksPreviousCall.Value), 0);
+            if (ticksToWait > 0)
+                await Task.Delay(ticksToWait).ConfigureAwait(false);
+        }
         await action().ConfigureAwait(false);
-        _ticksPreviousCall = Environment.TickCount;
+        _ticksPreviousCall = Environment.TickCount64;
     }
 }
