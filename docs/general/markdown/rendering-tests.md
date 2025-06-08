@@ -1,21 +1,23 @@
 # Rendering Tests
 
-Mapsui has rendering tests where images are generated and compared to reference images that are stored as file in the repository. They are regression tests but executed by our unit test framework. If there are too many differences the test will fail. 
+Mapsui has rendering tests where images are generated and compared to reference images that are stored as file in the repository. They are regression tests but executed by our unit test framework. The images are compared pixel by pixel. If there are too many differences the test will fail. 
 
-### Fix code or update image?
+### Fix the code or update the image?
 If a test fails the developer needs to decide whether to:
 - Accept the changes because the generated image is as intended.
 - Change the code because the generated image is not as intended.
 
 To make this decision the developer needs to visually inspect the generated images. This can be done in two ways.
 
-#### Look at the new version in one of the samples apps
-In most cases you would first look at the samples if the new image makes any sense. Every rendering test that can fail corresponds a sample. You need to look at the name of the failed test in the log to figure out which sample it is. For instance:
+#### Inspect the sample in the app
+Every rendering test that can fail corresponds a sample. You can view any sample by running one of the sample apps (we have one for each platform). Even if you have not seen the reference image you can often spot a mistake by looking at the sample, it can be an obvious bug.  
+
+You need to know the name and the category of the sample. For this you need to look at the error of the failed test. Which could be:
 
 ```
 Failed TestSampleAsync(Mapsui.Tests.Common.Maps.LineSample) [4 s]
 ```
-Is the file `LineSample.cs`. If you open that file you will see it is named `Line` and in category `Tests`.
+In this case the sample is in the file `LineSample.cs`. If you open that file you will see it is named `Line` and in category `Tests`.
 
 #### Compare the generated images
 
@@ -42,17 +44,4 @@ My way of working is like this. I copy all original files over the original file
 ```ps
 PS> .\Scripts\CopyGeneratedImagesOverOriginalImages.ps1
 ```
-Then there will be many git changes because smaller differences are accepted. You need to revert all files that did not cause a test fail, because we want to reduce the number of changes in our git history, especialy regarding binary files.
-
-
-
-## 2. Visual inspection
-
-There tests can be inspected in two ways. 
-1. In the WPF sample there is a 'Tests' category, that shows an interactive version of the test sample.
-2. In the output folder (see above) the generated images can be viewed. Currently this folder looks like this:
-
-
-
-
-
+Then there will be many git changes because smaller differences have been accepted by the tests in the past. You need to revert all files that did not cause a test to fail. This is because we want to reduce the number of changes in our git history, especialy if they are binary files.
