@@ -69,9 +69,9 @@ public class FetchTracker
         lock (_lock)
         {
             if (!_tilesInProgress.TryRemove(index))
-                Logger.Log(LogLevel.Warning, "Could not remove the tile index to the in-progress tiles list. This was not expected");
+                Logger.Log(LogLevel.Error, "Could not remove the tile index to the in-progress tiles list. This was not expected");
             if (!_tilesThatFailed.Add(index))
-                Logger.Log(LogLevel.Warning, "Could not add the tile index to the failed tiles list. This was not expected");
+                Logger.Log(LogLevel.Error, "Could not add the tile index to the failed tiles list. This was not expected");
         }
     }
 
@@ -80,7 +80,7 @@ public class FetchTracker
         lock (_lock)
         {
             if (!_tilesInProgress.TryRemove(index))
-                Logger.Log(LogLevel.Warning, "Could not remove the tile index to the in-progress tiles list. This was not expected");
+                Logger.Log(LogLevel.Error, "Could not remove the tile index to the in-progress tiles list. This was not expected");
         }
     }
 
@@ -96,7 +96,12 @@ public class FetchTracker
             if (_tilesToFetch.TryDequeue(out tileInfo))
             {
                 if (!_tilesInProgress.Add(tileInfo.Index))
-                    Logger.Log(LogLevel.Warning, "Could not add the tile index to the tiles in progress list. This was not expected");
+                {
+                    Logger.Log(LogLevel.Error, "Could not add the tile index to the tiles in-progress list. This was not expected");
+                    _tilesToFetch.Enqueue(tileInfo); // Revert the dequeue operation
+                    tileInfo = null; // Clear the output parameter
+                    return false;
+                }
                 return true;
             }
             return false;
