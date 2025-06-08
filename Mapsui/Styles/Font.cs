@@ -1,3 +1,5 @@
+using System;
+
 namespace Mapsui.Styles;
 
 public class Font
@@ -68,6 +70,9 @@ public class Font
 
         }
     }
+
+    [Obsolete("There is no need to indicate invalidation", true)]
+    public bool Invalidated { get; set; }
 
     public override string ToString()
     {
