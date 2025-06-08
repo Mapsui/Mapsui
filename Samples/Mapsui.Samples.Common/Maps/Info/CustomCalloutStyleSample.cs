@@ -13,8 +13,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Topten.RichTextKit;
-using IStyle = Mapsui.Styles.IStyle;
+using RTK = Topten.RichTextKit;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
@@ -95,7 +94,7 @@ public class CustomCalloutStyleSample : IMapControlSample
     };
 }
 
-public class CustomCalloutStyle : BaseStyle { }
+public class CustomCalloutStyle : Style { }
 
 public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
 {
@@ -148,10 +147,10 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         var subtitleFontColor = Color.Gray;
         var maxWidth = 120;
 
-        var styleSubtitle = new Topten.RichTextKit.Style();
-        var styleTitle = new Topten.RichTextKit.Style();
-        var textBlockTitle = new TextBlock();
-        var textBlockSubtitle = new TextBlock();
+        var styleSubtitle = new RTK.Style();
+        var styleTitle = new RTK.Style();
+        var textBlockTitle = new RTK.TextBlock();
+        var textBlockSubtitle = new RTK.TextBlock();
 
         styleSubtitle.FontFamily = subtitleFont.FontFamily;
         styleSubtitle.FontSize = (float)subtitleFont.Size;
@@ -184,8 +183,8 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         using var recorder = new SKPictureRecorder();
         using var canvas = recorder.BeginRecording(new SKRect(0, 0, width, height));
         // Draw text to canvas
-        textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-        textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+        textBlockTitle.Paint(canvas, new RTK.TextPaintOptions() { Edging = SKFontEdging.Antialias });
+        textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight), new RTK.TextPaintOptions() { Edging = SKFontEdging.Antialias });
         return recorder.EndRecording();
     }
 }
