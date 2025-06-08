@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Fetcher;
-//using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 
@@ -20,9 +19,12 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     private bool _modified;
     private readonly IRenderer _rasterizer = DefaultRendererFactory.Create();
     private FetchInfo? _fetchInfo;
-    public Delayer Delayer { get; } = new();
     private readonly Delayer _rasterizeDelayer = new();
     private readonly RenderFormat _renderFormat;
+    private const int _minimumDelay = 1000;
+    private readonly int _delayBetweenCalls;
+
+    public Delayer Delayer { get; } = new();
 
     /// <summary>
     ///     Creates a RasterizingLayer which rasterizes a layer for performance
@@ -42,13 +44,12 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         _renderFormat = renderFormat;
         _renderFormat = renderFormat;
         _layer = layer;
+        _delayBetweenCalls = delayBeforeRasterize;
         Name = layer.Name;
         if (rasterizer != null) _rasterizer = rasterizer;
         _cache = new ConcurrentStack<RasterFeature>();
         _pixelDensity = pixelDensity;
         _layer.DataChanged += LayerOnDataChanged;
-        Delayer.MillisecondsBeforeCall = 1000;
-        Delayer.MillisecondsBetweenCalls = delayBeforeRasterize;
         Style = new RasterStyle(); // default raster style
     }
 
@@ -66,8 +67,8 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
 
         _modified = true;
 
-        // Will start immediately if it is not currently waiting. This well be in most cases.
-        _rasterizeDelayer.ExecuteDelayed(Rasterize);
+        // Will start immediately if there was no call _delayBetweenCalls milliseconds before and if not ChangeType.Continuous.
+        _rasterizeDelayer.ExecuteDelayed(Rasterize, _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
     }
 
     private void Rasterize()
@@ -97,7 +98,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 OnDataChanged(new DataChangedEventArgs(Name));
 
                 if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher)
-                    Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
+                    Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo), _delayBetweenCalls, 0);
             }
             finally
             {
@@ -141,9 +142,9 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
             // Explicitly set the change type to discrete for rasterization
             _fetchInfo = new FetchInfo(fetchInfo.Section, fetchInfo.CRS);
             if (_layer is IAsyncDataFetcher asyncDataFetcher)
-                Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
+                Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo), _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
             else
-                Delayer.ExecuteDelayed(Rasterize);
+                Delayer.ExecuteDelayed(Rasterize, _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
         }
     }
 

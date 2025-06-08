@@ -26,6 +26,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     private IFeature[] _cache = [];
     private readonly FetchMachine _fetchMachine = new();
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
+    private int _delayBetweenCalls;
 
     public List<Func<bool>> Animations { get; } = [];
     public Delayer Delayer { get; } = new();
@@ -40,8 +41,8 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     /// </summary>
     public int FetchingPostponedInMilliseconds
     {
-        get => Delayer.MillisecondsBetweenCalls;
-        set => Delayer.MillisecondsBetweenCalls = value;
+        get => _delayBetweenCalls;
+        set => _delayBetweenCalls = value;
     }
 
     /// <summary>
@@ -104,7 +105,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => _fetchMachine.Enqueue(() => FetchAsync(fetchInfo, ++_refreshCounter)));
+        Delayer.ExecuteDelayed(() => _fetchMachine.Enqueue(() => FetchAsync(fetchInfo, ++_refreshCounter)), _delayBetweenCalls, 0);
     }
 
     public override bool UpdateAnimations()

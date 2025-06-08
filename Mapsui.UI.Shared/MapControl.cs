@@ -389,7 +389,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             var hadSize = map.Navigator.Viewport.HasSize();
             map.Navigator.SetSize(_sharedWidth, _sharedHeight);
             if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
-            Refresh();
         }
     }
 
