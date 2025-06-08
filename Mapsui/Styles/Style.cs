@@ -10,7 +10,7 @@ namespace Mapsui.Styles;
 /// <summary>
 ///     Defines a style used for rendering vector data
 /// </summary>
-public class Style : IStyle
+public abstract class Style : IStyle
 {
     public Style()
     {
