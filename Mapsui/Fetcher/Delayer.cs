@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Logging;
+using System;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
@@ -55,16 +56,26 @@ public class Delayer
 
     private async Task CallAsync(Func<Task> action, int delayBetweenCalls, int minimumDelay)
     {
-        if (minimumDelay > 0)
-            await Task.Delay(minimumDelay).ConfigureAwait(false);
-        if (_ticksPreviousCall is not null) // Only wait if there was a previous call
+        try
         {
-            var millisecondsPassedSinceLastCall = Environment.TickCount64 - _ticksPreviousCall.Value;
-            var ticksToWait = (int)Math.Max(delayBetweenCalls - millisecondsPassedSinceLastCall, 0);
-            if (ticksToWait > 0)
-                await Task.Delay(ticksToWait).ConfigureAwait(false);
+            if (minimumDelay > 0)
+                await Task.Delay(minimumDelay).ConfigureAwait(false);
+            if (_ticksPreviousCall is not null) // Only wait if there was a previous call
+            {
+                var millisecondsPassedSinceLastCall = Environment.TickCount64 - _ticksPreviousCall.Value;
+                var ticksToWait = (int)Math.Max(delayBetweenCalls - millisecondsPassedSinceLastCall, 0);
+                if (ticksToWait > 0)
+                    await Task.Delay(ticksToWait).ConfigureAwait(false);
+            }
+            await action().ConfigureAwait(false);
         }
-        await action().ConfigureAwait(false);
-        _ticksPreviousCall = Environment.TickCount64;
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, $"Error in delayed action: {ex.Message}");
+        }
+        finally
+        {
+            _ticksPreviousCall = Environment.TickCount64;
+        }
     }
 }
