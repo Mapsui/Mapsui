@@ -38,43 +38,4 @@ public abstract class Style : IStyle
     ///     Gets or sets the objects base opacity
     /// </summary>
     public float Opacity { get; set; }
-
-    public override bool Equals(object? obj)
-    {
-        if (!(obj is Style style))
-            return false;
-        return Equals(style);
-    }
-
-    public bool Equals(Style? style)
-    {
-        if (style == null)
-            return false;
-
-        if (MinVisible != style.MinVisible)
-            return false;
-
-        if (MaxVisible != style.MaxVisible)
-            return false;
-
-        if (Enabled != style.Enabled)
-            return false;
-
-        return true;
-    }
-
-    public override int GetHashCode()
-    {
-        return MinVisible.GetHashCode() ^ MaxVisible.GetHashCode() ^ Enabled.GetHashCode() ^ Opacity.GetHashCode();
-    }
-
-    public static bool operator ==(Style? style1, Style? style2)
-    {
-        return Equals(style1, style2);
-    }
-
-    public static bool operator !=(Style? style1, Style? style2)
-    {
-        return !Equals(style1, style2);
-    }
 }

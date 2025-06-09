@@ -25,17 +25,6 @@ internal class VectorStyleTests
     }
 
     [Test]
-    public void Equals_ReturnsTrue_ForIdenticalStyles()
-    {
-        var style1 = new VectorStyle();
-        var style2 = new VectorStyle();
-
-        Assert.That(style1.Equals(style2), Is.True);
-        Assert.That(style1 == style2, Is.True);
-        Assert.That(style1 != style2, Is.False);
-    }
-
-    [Test]
     public void Equals_ReturnsFalse_ForDifferentLine()
     {
         var style1 = new VectorStyle();
@@ -62,15 +51,6 @@ internal class VectorStyleTests
         var style2 = new VectorStyle { Fill = new Brush(Color.Red) };
 
         Assert.That(style1.Equals(style2), Is.False);
-    }
-
-    [Test]
-    public void GetHashCode_IsEqual_ForIdenticalStyles()
-    {
-        var style1 = new VectorStyle();
-        var style2 = new VectorStyle();
-
-        Assert.That(style1.GetHashCode(), Is.EqualTo(style2.GetHashCode()));
     }
 
     [Test]
