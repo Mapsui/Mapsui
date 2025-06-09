@@ -94,6 +94,7 @@ public class Pen
             return hashCode;
         }
     }
+
     public Pen(Pen pen)
     {
         Color = pen.Color;
