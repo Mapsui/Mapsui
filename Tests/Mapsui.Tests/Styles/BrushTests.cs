@@ -74,15 +74,15 @@ internal class BrushTests
         var image = new Image { Source = "file://test.png" };
         var brush1 = new Brush
         {
-            Color = Color.Red,
-            Background = Color.Blue,
+            Color = new Color(255, 0, 0),
+            Background = new Color(0, 0, 255),
             FillStyle = FillStyle.Bitmap,
             Image = image
         };
         var brush2 = new Brush
         {
-            Color = Color.Red,
-            Background = Color.Blue,
+            Color = new Color(255, 0, 0),
+            Background = new Color(0, 0, 255),
             FillStyle = FillStyle.Bitmap,
             Image = image
         };
