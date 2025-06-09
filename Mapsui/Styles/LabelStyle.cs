@@ -100,18 +100,19 @@ public class LabelStyle : Style
     {
         Font = new Font(labelStyle.Font);
         Offset = new Offset(labelStyle.Offset);
-        CollisionDetection = false;
+        RelativeOffset = labelStyle.RelativeOffset != null ? new RelativeOffset(labelStyle.RelativeOffset) : new RelativeOffset();
+        CollisionDetection = labelStyle.CollisionDetection;
         ForeColor = new Color(labelStyle.ForeColor);
-        BackColor = (labelStyle.BackColor == null) ? null : new Brush(labelStyle.BackColor);
-        HorizontalAlignment = HorizontalAlignmentEnum.Center;
-        VerticalAlignment = VerticalAlignmentEnum.Center;
+        BackColor = labelStyle.BackColor == null ? null : new Brush(labelStyle.BackColor);
+        HorizontalAlignment = labelStyle.HorizontalAlignment;
+        VerticalAlignment = labelStyle.VerticalAlignment;
         MaxWidth = labelStyle.MaxWidth;
         WordWrap = labelStyle.WordWrap;
         LineHeight = labelStyle.LineHeight;
         Text = labelStyle.Text;
         LabelColumn = labelStyle.LabelColumn;
         LabelMethod = labelStyle.LabelMethod;
-        Halo = labelStyle.Halo;
+        Halo = labelStyle.Halo; // Consider deep copying if Pen is mutable
         BorderColor = labelStyle.BorderColor;
         BorderThickness = labelStyle.BorderThickness;
         CornerRounding = labelStyle.CornerRounding;
