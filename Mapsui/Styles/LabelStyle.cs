@@ -112,7 +112,7 @@ public class LabelStyle : BaseStyle
         Text = labelStyle.Text;
         LabelColumn = labelStyle.LabelColumn;
         LabelMethod = labelStyle.LabelMethod;
-        Halo = labelStyle.Halo; // Consider deep copying if Pen is mutable
+        Halo = labelStyle.Halo != null ? new Pen(labelStyle.Halo) : null;
         BorderColor = labelStyle.BorderColor;
         BorderThickness = labelStyle.BorderThickness;
         CornerRounding = labelStyle.CornerRounding;
