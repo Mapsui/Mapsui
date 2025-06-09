@@ -76,7 +76,10 @@ public class Image
 
     private static void ValidateUriSchema(string imageSource)
     {
-        var scheme = imageSource.Substring(0, imageSource.IndexOf(':'));
+        var indexOfColon = imageSource.IndexOf(':');
+        if (indexOfColon < 0)
+            throw new ArgumentException($"Invalid image source: '{imageSource}'. It should start with one of the supported URI schemes.");
+        var scheme = imageSource.Substring(0, indexOfColon);
         _ = scheme switch
         {
             ImageFetcher.SvgContentScheme => true, // We have to allow an invalid uri scheme

@@ -98,7 +98,7 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
         [
             new LabelStyle(labelStyle)
             {
-                Offset = {Y = offsetY},
+                Offset = { Y = offsetY },
                 LabelMethod = _ => text
             }
         ]

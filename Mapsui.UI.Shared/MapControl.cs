@@ -57,7 +57,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private double _sharedWidth;
     private double _sharedHeight;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
-    private RenderController _renderController;
+    private RenderController? _renderController;
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     /// <summary>
@@ -357,7 +357,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (GetPixelDensity() is not float pixelDensity)
             throw new Exception("PixelDensity is not initialized");
 
-        using var stream = _renderController.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality);
+        using var stream = _renderController?.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality)
+             ?? throw new ArgumentNullException(nameof(_renderController));
         return stream.ToArray();
     }
 
@@ -368,7 +369,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
     {
-        return _renderController.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
+        return _renderController?.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers)
+            ?? throw new ArgumentNullException(nameof(_renderController));
     }
 
     protected Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers)
