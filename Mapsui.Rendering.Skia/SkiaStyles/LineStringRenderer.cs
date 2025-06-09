@@ -32,8 +32,11 @@ public static class LineStringRenderer
         {
             using var path = renderService.VectorCache.GetOrCreate((feature.Id, position, extent, rotation, lineWidth), ToPath);
 
+            // If the Outline property is set and has a width greater than 0, draw the outline first.
             if (vectorStyle.Outline?.Width > 0)
             {
+                // The width is calculated as the sum of the outline width and the line width, if both are defined.
+                // For the caching callback to work, the calculated width must be passed to the CreateSkPaint method.
                 var width = vectorStyle.Outline.Width + vectorStyle.Outline.Width + vectorStyle.Line?.Width ?? 1;
                 using var paintOutline = renderService.VectorCache.GetOrCreate((vectorStyle.Outline, (float?)width, opacity), CreateSkPaint);
                 canvas.DrawPath(path, paintOutline);

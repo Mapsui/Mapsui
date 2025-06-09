@@ -44,7 +44,12 @@ public class ProjectionTestSample : ISample
         return new MemoryLayer("Center of Amsterdam")
         {
             Features = new List<IFeature> { new PointFeature(new MPoint(545465.50488704059, 6866697.0250906311)) },
-            Style = new SymbolStyle { Fill = new Brush { Color = Color.Black }, SymbolScale = 0.5 }
+            Style = new SymbolStyle
+            {
+                SymbolScale = 0.5,
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.Black)
+            }
         };
     }
 
@@ -59,7 +64,12 @@ public class ProjectionTestSample : ISample
         {
             Features = features.Project("EPSG:4326", "EPSG:3857"),
             Name = "WGS84 Geometries",
-            Opacity = 0.5
+            Opacity = 0.5,
+            Style = new VectorStyle
+            {
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            }
         };
     }
 }
