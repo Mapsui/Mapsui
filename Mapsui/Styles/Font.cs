@@ -1,3 +1,5 @@
+using System;
+
 namespace Mapsui.Styles;
 
 public class Font
@@ -26,7 +28,6 @@ public class Font
             if (value != _fontFamily)
             {
                 _fontFamily = value;
-                Invalidated = true;
             }
 
         }
@@ -40,7 +41,6 @@ public class Font
             if (value != _size)
             {
                 _size = value;
-                Invalidated = true;
             }
 
         }
@@ -54,7 +54,6 @@ public class Font
             if (value != _italic)
             {
                 _italic = value;
-                Invalidated = true;
             }
 
         }
@@ -67,12 +66,12 @@ public class Font
             if (value != _bold)
             {
                 _bold = value;
-                Invalidated = true;
             }
 
         }
     }
 
+    [Obsolete("There is no need to indicate invalidation", true)]
     public bool Invalidated { get; set; }
 
     public override string ToString()

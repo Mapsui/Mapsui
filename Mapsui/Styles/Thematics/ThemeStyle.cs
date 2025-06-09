@@ -2,7 +2,7 @@ using System;
 
 namespace Mapsui.Styles.Thematics;
 
-public class ThemeStyle : Style, IThemeStyle
+public class ThemeStyle : BaseStyle, IThemeStyle
 {
     private readonly Func<IFeature, Viewport, IStyle?> _method;
 
