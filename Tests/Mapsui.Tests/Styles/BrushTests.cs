@@ -149,6 +149,12 @@ internal class BrushTests
     [Test]
     public void Brush_MutatingManyAfterDictionaryInsert_BreaksLookupOften()
     {
+        // This was added to test the ReSharper warning NonReadonlyMemberInGetHashCode, documented here:
+        // https://www.jetbrains.com/help/resharper/NonReadonlyMemberInGetHashCode.html
+        // The test failed to show any problem, but there probably still is, it could for instance have an impact on
+        // performance. For now there is no reason to change the implementations of the style primitives, but at some
+        // point we might all want to convert them to immutable records.
+
         var rand = new Random(42);
         var dict = new Dictionary<Brush, string>();
         var brushes = new List<Brush>();
