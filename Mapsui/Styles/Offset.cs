@@ -6,9 +6,7 @@ public class Offset(double x, double y)
     public double Y { get; set; } = y;
 
     public Offset() : this(0, 0) { }
-
     public Offset(Offset offset) : this(offset.X, offset.Y) { }
-
     public Offset(MPoint point) : this(point.X, point.Y) { }
 
     public MPoint ToPoint() => new(X, Y);
