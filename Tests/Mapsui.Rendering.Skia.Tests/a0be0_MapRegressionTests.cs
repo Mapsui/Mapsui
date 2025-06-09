@@ -128,7 +128,7 @@ public class MapRegressionTests
                         else
                         {
                             ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995),
-                                $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
+                                $"Fail in SAMPLE '{sample.Name}' in CATEGORY '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
                         }
                     }
                     else
