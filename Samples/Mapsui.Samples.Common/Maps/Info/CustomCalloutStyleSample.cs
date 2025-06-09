@@ -94,7 +94,7 @@ public class CustomCalloutStyleSample : IMapControlSample
     };
 }
 
-public class CustomCalloutStyle : Style { }
+public class CustomCalloutStyle : BaseStyle { }
 
 public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
 {

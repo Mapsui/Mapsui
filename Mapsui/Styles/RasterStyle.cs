@@ -1,6 +1,6 @@
 ﻿namespace Mapsui.Styles;
 
-public class RasterStyle : Style
+public class RasterStyle : BaseStyle
 {
     public Pen? Outline { get; set; }
 }

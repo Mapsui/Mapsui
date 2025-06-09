@@ -104,6 +104,4 @@ public class Pen
     {
         return !Equals(pen1, pen2);
     }
-
-
 }

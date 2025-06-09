@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-public class CustomStyle : Style
+public class CustomStyle : BaseStyle
 {
     public CustomStyle() => Opacity = 0.7f;
 }

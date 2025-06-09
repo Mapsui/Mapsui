@@ -11,7 +11,7 @@ namespace Mapsui.Styles;
 /// <summary>
 /// Defines a style used for rendering labels
 /// </summary>
-public class LabelStyle : Style
+public class LabelStyle : BaseStyle
 {
     /// <summary>
     /// Label text alignment

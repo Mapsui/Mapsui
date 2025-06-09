@@ -1,6 +1,6 @@
 namespace Mapsui.Styles;
 
-public class VectorStyle : Style
+public class VectorStyle : BaseStyle
 {
     public VectorStyle()
     {
