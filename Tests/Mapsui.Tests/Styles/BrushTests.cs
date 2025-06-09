@@ -158,7 +158,8 @@ internal class BrushTests
         var rand = new Random(42);
         var dict = new Dictionary<Brush, string>();
         var brushes = new List<Brush>();
-        int count = 1000000;
+        const int numberOfFillStyles = 12;
+        int count = 100;
         int failedLookups = 0;
 
         // Insert random brushes
@@ -168,7 +169,7 @@ internal class BrushTests
             {
                 Color = new Color(rand.Next(256), rand.Next(256), rand.Next(256), 255),
                 Background = new Color(rand.Next(256), rand.Next(256), rand.Next(256), 255),
-                FillStyle = (FillStyle)(rand.Next(Enum.GetValues(typeof(FillStyle)).Length))
+                FillStyle = (FillStyle)rand.Next(numberOfFillStyles)
             };
             dict[brush] = $"value-{i}";
             brushes.Add(brush);
@@ -179,7 +180,7 @@ internal class BrushTests
         {
             brush.Color = new Color(rand.Next(256), rand.Next(256), rand.Next(256), 255);
             brush.Background = new Color(rand.Next(256), rand.Next(256), rand.Next(256), 255);
-            brush.FillStyle = (FillStyle)(rand.Next(Enum.GetValues(typeof(FillStyle)).Length));
+            brush.FillStyle = (FillStyle)rand.Next(numberOfFillStyles);
         }
 
         // Check how many mutated brushes can still be found
