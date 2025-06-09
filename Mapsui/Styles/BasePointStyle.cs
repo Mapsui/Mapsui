@@ -2,7 +2,7 @@
 
 namespace Mapsui.Styles;
 
-public abstract class BasePointStyle : Style, IPointStyle
+public abstract class BasePointStyle : BaseStyle, IPointStyle
 {
     /// <summary>
     /// Gets or sets the rotation of the symbol in degrees (clockwise is positive)

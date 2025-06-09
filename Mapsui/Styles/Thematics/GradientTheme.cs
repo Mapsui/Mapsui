@@ -11,7 +11,7 @@ namespace Mapsui.Styles.Thematics;
 /// <summary>
 /// The GradientTheme class defines a gradient color thematic rendering of features based by a numeric attribute.
 /// </summary>
-public class GradientTheme : Style, IThemeStyle
+public class GradientTheme : BaseStyle, IThemeStyle
 {
     /// <summary>
     /// Gets or sets the column name from where to get the attribute value

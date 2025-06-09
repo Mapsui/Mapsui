@@ -1,10 +1,6 @@
 ﻿namespace Mapsui.Styles;
 
-public class RasterStyle : IStyle
+public class RasterStyle : BaseStyle
 {
-    public double MinVisible { get; set; } = 0;
-    public double MaxVisible { get; set; } = double.MaxValue;
-    public bool Enabled { get; set; } = true;
-    public float Opacity { get; set; } = 1.0f;
     public Pen? Outline { get; set; }
 }
