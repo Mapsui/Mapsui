@@ -441,7 +441,12 @@ public class EditingSample : IMapControlSample
         }
     };
 
-    private static SymbolStyle CreateStyleToShowTheVertices() => new() { SymbolScale = 0.5 };
+    private static SymbolStyle CreateStyleToShowTheVertices() => new()
+    {
+        Outline = new Pen(Color.Gray, 1f),
+        Fill = new Brush(Color.White),
+        SymbolScale = 0.5
+    };
 
     private static VectorStyle CreateEditLayerBasicStyle() => new()
     {

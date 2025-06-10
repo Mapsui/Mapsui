@@ -55,7 +55,12 @@ public class WfsPointsSample : ISample
     {
         return new Layer("Laser Points")
         {
-            Style = new SymbolStyle { Fill = new Brush(Color.Red), SymbolScale = 1 },
+            Style = new SymbolStyle
+            {
+                SymbolScale = 1,
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.Red)
+            },
             DataSource = provider,
         };
     }

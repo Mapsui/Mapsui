@@ -12,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Demo;
@@ -142,7 +141,7 @@ public class InfoLayersSample : ISample, ISampleTest
     {
         SymbolScale = 0.8,
         Fill = new Brush(new Color(213, 234, 194)),
-        Outline = { Color = Color.Gray, Width = 1 }
+        Outline = new Pen(Color.Gray, 1f),
     };
 
     public async Task InitializeTestAsync(IMapControl mapControl)

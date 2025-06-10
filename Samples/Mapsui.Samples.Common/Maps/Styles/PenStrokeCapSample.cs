@@ -51,7 +51,8 @@ public class PenStrokeCapSample : ISample
                 {
                     new VectorStyle
                     {
-                        Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Butt, StrokeJoin = StrokeJoin.Miter}
+                        Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Butt, StrokeJoin = StrokeJoin.Miter},
+                        Outline = null
                     }
                 },
             },
@@ -68,7 +69,8 @@ public class PenStrokeCapSample : ISample
                 {
                     new VectorStyle
                     {
-                        Line = new Pen(Color.Red) {PenStrokeCap = PenStrokeCap.Square}
+                        Line = new Pen(Color.Red) {PenStrokeCap = PenStrokeCap.Square},
+                        Outline = null
                     }
                 },
             },
@@ -85,7 +87,8 @@ public class PenStrokeCapSample : ISample
                 {
                     new VectorStyle
                     {
-                        Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Round, StrokeJoin = StrokeJoin.Round}
+                        Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Round, StrokeJoin = StrokeJoin.Round},
+                        Outline = null
                     }
                 },
             },
@@ -102,7 +105,8 @@ public class PenStrokeCapSample : ISample
                 {
                     new VectorStyle
                     {
-                        Line = new Pen(Color.Red) {PenStrokeCap = PenStrokeCap.Square}
+                        Line = new Pen(Color.Red) {PenStrokeCap = PenStrokeCap.Square},
+                        Outline = null
                     }
                 },
             },
@@ -119,7 +123,8 @@ public class PenStrokeCapSample : ISample
                 {
                     new VectorStyle
                     {
-                        Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Square, StrokeJoin = StrokeJoin.Bevel}
+                        Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Square, StrokeJoin = StrokeJoin.Bevel},
+                        Outline = null
                     }
                 },
             },
@@ -136,7 +141,8 @@ public class PenStrokeCapSample : ISample
                 {
                     new VectorStyle
                     {
-                        Line = new Pen(Color.Red) {PenStrokeCap = PenStrokeCap.Square}
+                        Line = new Pen(Color.Red) {PenStrokeCap = PenStrokeCap.Square},
+                        Outline = null
                     }
                 },
             }

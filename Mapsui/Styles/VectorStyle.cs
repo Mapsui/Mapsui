@@ -4,10 +4,8 @@ public class VectorStyle : BaseStyle
 {
     public VectorStyle()
     {
-        Outline = new Pen { Color = Color.Gray, Width = 1 };
-        Line = new Pen { Color = Color.Black, Width = 1 };
-        Fill = new Brush { Color = Color.White };
     }
+
     /// <summary>
     /// Line style for line geometries
     /// </summary>
