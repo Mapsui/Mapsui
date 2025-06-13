@@ -8,8 +8,8 @@ namespace Mapsui.Layers;
 
 public abstract class BaseFeature : IFeature
 {
-    // last used feature id
-    private static long _currentFeatureId;
+    private static long _currentFeatureId; // last used feature id
+    private readonly Dictionary<string, object?> _dictionary = [];
 
     protected BaseFeature(long id)
     {
@@ -45,8 +45,6 @@ public abstract class BaseFeature : IFeature
         foreach (var field in baseFeature.Fields)
             this[field] = baseFeature[field];
     }
-
-    private readonly Dictionary<string, object?> _dictionary = [];
 
     /// <inheritdoc />
     public ICollection<IStyle> Styles { get; set; } = [];
