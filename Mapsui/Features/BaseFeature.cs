@@ -8,8 +8,8 @@ namespace Mapsui.Layers;
 
 public abstract class BaseFeature : IFeature
 {
-    // last used feature id
-    private static long _currentFeatureId;
+    private static long _currentFeatureId; // last used feature id
+    private readonly Dictionary<string, object?> _dictionary = [];
 
     protected BaseFeature(long id)
     {
@@ -21,14 +21,6 @@ public abstract class BaseFeature : IFeature
         Id = NextId();
     }
 
-    private static long NextId()
-    {
-        return Interlocked.Increment(ref _currentFeatureId);
-    }
-
-    /// <inheritdoc />
-    public long Id { get; private set; }
-
     protected BaseFeature(BaseFeature baseFeature) : this()
     {
         Copy(baseFeature);
@@ -39,14 +31,8 @@ public abstract class BaseFeature : IFeature
         Copy(baseFeature);
     }
 
-    private void Copy(BaseFeature baseFeature)
-    {
-        Styles = baseFeature.Styles.ToList(); // Styles is an ICollection, we need ToList instead of ToArray to prevent a NotSupportedException on Styles.Clear();
-        foreach (var field in baseFeature.Fields)
-            this[field] = baseFeature[field];
-    }
-
-    private readonly Dictionary<string, object?> _dictionary = [];
+    /// <inheritdoc />
+    public long Id { get; private set; }
 
     /// <inheritdoc />
     public ICollection<IStyle> Styles { get; set; } = [];
@@ -67,6 +53,20 @@ public abstract class BaseFeature : IFeature
         set => _dictionary[key] = value;
     }
 
+    private static long NextId()
+    {
+        return Interlocked.Increment(ref _currentFeatureId);
+    }
+
+    private void Copy(BaseFeature baseFeature)
+    {
+        Id = baseFeature.Id; // Copy the Id to maintain the same identity. If one of the copies is updated Modified() needs to be called.
+        Styles = baseFeature.Styles.ToList(); // Styles is an ICollection, we need ToList instead of ToArray to prevent a NotSupportedException on Styles.Clear();
+        foreach (var field in baseFeature.Fields)
+            this[field] = baseFeature[field];
+        Data = baseFeature.Data;
+    }
+
     /// <inheritdoc />
     virtual public void Modified()
     {
@@ -79,5 +79,4 @@ public abstract class BaseFeature : IFeature
 
     /// <inheritdoc />
     public abstract object Clone();
-
 }
