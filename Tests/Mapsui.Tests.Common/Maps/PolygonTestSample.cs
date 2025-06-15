@@ -41,7 +41,13 @@ public class PolygonTestSample : ISample
         return new MemoryLayer
         {
             Features = CreatePolygonProvider(image),
-            Name = "Polygon"
+            Name = "Polygon",
+            Style = new VectorStyle()
+            {
+                Outline = new Pen(Color.Gray, 1f),
+                Line = new Pen(Color.Black, 1f),
+                Fill = new Brush(Color.White)
+            }
         };
     }
 

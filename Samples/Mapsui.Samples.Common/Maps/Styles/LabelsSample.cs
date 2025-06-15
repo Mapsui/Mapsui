@@ -21,7 +21,17 @@ public class LabelsSample : ISample
         return Task.FromResult(map);
     }
 
-    public static MemoryLayer CreateLayer() => new() { Name = "Points with labels", Features = CreateFeatures() };
+    public static MemoryLayer CreateLayer() => new()
+    {
+        Name = "Points with labels",
+        Features = CreateFeatures(),
+        Style = new VectorStyle
+        {
+            Outline = new Pen(Color.Gray, 1f),
+            Line = new Pen(Color.Black, 1f),
+            Fill = new Brush(Color.White)
+        }
+    };
 
     private static List<IFeature> CreateFeatures() => [
         CreateFeatureWithDefaultStyle(),

@@ -11,17 +11,9 @@ internal class VectorStyleTests
     {
         var style = new VectorStyle();
 
-        Assert.That(style.Line, Is.Not.Null);
-        Assert.That(style.Outline, Is.Not.Null);
-        Assert.That(style.Fill, Is.Not.Null);
-
-        Assert.That(style.Line!.Color, Is.EqualTo(Color.Black));
-        Assert.That(style.Line.Width, Is.EqualTo(1));
-
-        Assert.That(style.Outline!.Color, Is.EqualTo(Color.Gray));
-        Assert.That(style.Outline.Width, Is.EqualTo(1));
-
-        Assert.That(style.Fill!.Color, Is.EqualTo(Color.White));
+        Assert.That(style.Line, Is.Null);
+        Assert.That(style.Outline, Is.Null);
+        Assert.That(style.Fill, Is.Null);
     }
 
     [Test]
