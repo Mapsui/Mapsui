@@ -1,5 +1,4 @@
 using Android.Runtime;
-using Com.Nostra13.Universalimageloader.Core;
 
 namespace Mapsui.Samples.Uno.WinUI.Droid;
 
