@@ -41,8 +41,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public MapControl()
     {
-        SharedConstructor();
-
         // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
         //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
         //else RunOnUIThread(() => _canvas?.Invalidate());
@@ -61,6 +59,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             Children.Add(_canvas);
             _canvas.PaintSurface += Canvas_PaintSurface;
         }
+
+        // The Canvas needs to be first set before calling the Shared Constructor or else it crashes in the InvalidateCanvas
+        SharedConstructor();
 
         Children.Add(_selectRectangle);
 
@@ -320,6 +321,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         SharedDispose(disposing);
         base.Dispose();
     }
+
     public new void Dispose()
     {
         Dispose(true);
