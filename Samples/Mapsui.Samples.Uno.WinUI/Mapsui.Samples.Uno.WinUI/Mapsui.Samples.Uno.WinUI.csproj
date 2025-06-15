@@ -29,7 +29,8 @@
       https://aka.platform.uno/singleproject-features
     -->
     <UnoFeatures>
-    </UnoFeatures>
+      SkiaRenderer;
+		</UnoFeatures>
   </PropertyGroup>
 
   <!--workaround for Uno.Resizetizer uses a newer skiasharp version then maui resizetizer -->
