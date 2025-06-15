@@ -314,21 +314,12 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         GC.SuppressFinalize(this);
     }
 #else
-#if __ANDROID__
-    protected new virtual void Dispose(bool disposing)
-    {
-        CommonUnoDispose(disposing);
-        SharedDispose(disposing);
-        base.Dispose(disposing);
-    }
-#else
     protected virtual void Dispose(bool disposing)
     {
         CommonUnoDispose(disposing);
         SharedDispose(disposing);
         base.Dispose();
     }
-#endif
     public new void Dispose()
     {
         Dispose(true);
