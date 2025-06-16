@@ -41,6 +41,14 @@
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI"/>
   </ItemGroup>
 
+  <!--workaround for Uno.Resizetizer uses a newer skiasharp version then maui resizetizer -->
+  <ItemGroup>
+    <PackageReference Include="Uno.Resizetizer" VersionOverride="1.8.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
   <!--https://github.com/dotnet/runtime/issues/109289#issuecomment-2448960065-->
   <Target Name="Issue109289_Workaround" AfterTargets="_BrowserWasmWriteRspForLinking" Condition="'$(TargetFramework)' == 'net9.0-browserwasm'">
     <ItemGroup>
