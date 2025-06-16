@@ -41,8 +41,6 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     public MapControl()
     {
-        SharedConstructor();
-
         View view;
 
         BackgroundColor = KnownColor.White;
@@ -75,6 +73,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         }
         view.SizeChanged += View_SizeChanged;
         Content = view;
+        SharedConstructor();
     }
 
     public void InvalidateCanvas()

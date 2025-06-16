@@ -18,15 +18,15 @@ public partial class MapControl : UIView, IMapControl
     public MapControl(CGRect frame)
         : base(frame)
     {
-        SharedConstructor();
         LocalConstructor();
+        SharedConstructor();
     }
 
     [Preserve]
     public MapControl(IntPtr handle) : base(handle) // Used when initialized from storyboard
     {
-        SharedConstructor();
         LocalConstructor();
+        SharedConstructor();
     }
 
     public void InvalidateCanvas()
