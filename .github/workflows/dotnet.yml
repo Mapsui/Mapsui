@@ -218,13 +218,13 @@ jobs:
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.203
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.sln  
+      run: dotnet restore Mapsui.slnx  
     - name: Run dotnet format
       run: |
-        dotnet format whitespace Mapsui.sln --verbosity normal --verify-no-changes
-        dotnet format style Mapsui.sln --verbosity normal --verify-no-changes
+        dotnet format whitespace Mapsui.slnx --verbosity normal --verify-no-changes
+        dotnet format style Mapsui.slnx --verbosity normal --verify-no-changes
         # The analyzers still have errors be we are close to fixing all of them
-        # dotnet format  analyzers  Mapsui.sln --verbosity normal --verify-no-changes
+        # dotnet format  analyzers  Mapsui.slnx --verbosity normal --verify-no-changes
     # Test Build
     - name: Mapsui.Nts.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Nts.Tests/Mapsui.Nts.Tests.csproj
@@ -245,7 +245,7 @@ jobs:
       run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net9.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll --blame-hang-timeout:60s
     # Release Build
     - name: Build nuget packages
-      run: dotnet pack Mapsui.sln --configuration Release /p:Version=$(git describe --tags) -o Artifacts
+      run: dotnet pack Mapsui.slnx --configuration Release /p:Version=$(git describe --tags) -o Artifacts
     - name: Cleanup
       run: git clean -fx -d -e Artifacts
     # Change Project References to nuget package references in samples    
@@ -254,7 +254,7 @@ jobs:
       run: |
        ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.sln  
+      run: dotnet restore Mapsui.slnx  
     # Samples Build 
     - name: Mapsui.Samples
       run: dotnet build --no-restore --configuration Debug Mapsui.sln
