@@ -24,11 +24,11 @@ In this case the sample is in the file `LineSample.cs`. If you open that file yo
 
 The generated images are written to:
 
-    {Mapsui.sln folder}\Tests\Mapsui.Rendering.Skia.Tests\bin\Debug\net9.0\Resources\Images\GeneratedRegression
+    {Mapsui.slnx folder}\Tests\Mapsui.Rendering.Skia.Tests\bin\Debug\net9.0\Resources\Images\GeneratedRegression
 
 You will need to compare those to the the original ones that have been copied to this folder as part of the build:
 
-    {Mapsui.sln folder}\Tests\Mapsui.Rendering.Skia.Tests\bin\Debug\net9.0\Resources\Images\OriginalRegression
+    {Mapsui.slnx folder}\Tests\Mapsui.Rendering.Skia.Tests\bin\Debug\net9.0\Resources\Images\OriginalRegression
 
 Such a folder would look like this:
 
@@ -39,7 +39,7 @@ Such a folder would look like this:
 ### Update the image
 If after code changes there are expected changes in the generated files they should be committed to git so they need to be copied to:
 
-    {Mapsui.sln folder}\Tests\Mapsui.Rendering.Skia.Tests\Resources\Images\OriginalRegression
+    {Mapsui.slnx folder}\Tests\Mapsui.Rendering.Skia.Tests\Resources\Images\OriginalRegression
     
 My way of working is like this. I copy all original files over the original files with this command:
 ```ps

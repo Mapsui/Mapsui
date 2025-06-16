@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "Mapsui.sln",
+    "path": "Mapsui.slnx",
     "projects": [
       "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
       "Mapsui.Extensions\\Mapsui.Extensions.csproj",
