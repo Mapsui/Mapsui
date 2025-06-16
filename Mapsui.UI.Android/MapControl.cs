@@ -27,15 +27,15 @@ public partial class MapControl : ViewGroup, IMapControl
     public MapControl(Context context, IAttributeSet attrs) :
         base(context, attrs)
     {
-        SharedConstructor();
         LocalConstructor();
+        SharedConstructor();
     }
 
     public MapControl(Context context, IAttributeSet attrs, int defStyle) :
         base(context, attrs, defStyle)
     {
-        SharedConstructor();
         LocalConstructor();
+        SharedConstructor();
     }
 
 

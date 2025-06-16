@@ -21,8 +21,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 #endif
     public MapControl()
     {
-        SharedConstructor();
-
         Control view;
 
         Dock = DockStyle.Fill;
@@ -56,6 +54,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         view.Dock = DockStyle.Fill;
 
         Controls.Add(view);
+
+        SharedConstructor();
     }
 
     public void InvalidateCanvas()
