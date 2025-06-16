@@ -96,7 +96,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     }
 
     /// <inheritdoc />
-    public void RefreshData(FetchInfo fetchInfo)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>>? fetch = null)
     {
         if (!Enabled) return;
         if (MinVisible > fetchInfo.Resolution) return;

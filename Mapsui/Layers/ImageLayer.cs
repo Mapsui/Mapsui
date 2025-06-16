@@ -104,7 +104,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         // not implemented for ImageLayer
     }
 
-    public void RefreshData(FetchInfo fetchInfo)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>>? fetch = null)
     {
         if (!Enabled) return;
         // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.

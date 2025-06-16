@@ -227,7 +227,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         foreach (var layer in _layers.ToList())
         {
             if (layer is IAsyncDataFetcher asyncDataFetcher)
-                asyncDataFetcher.RefreshData(fetchInfo);
+                asyncDataFetcher.RefreshData(fetchInfo, FetchMachine.Enqueue);
         }
     }
 

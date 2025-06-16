@@ -93,7 +93,6 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     /// <inheritdoc />
     public void AbortFetch()
     {
-        _tileFetchDispatcher.StopFetching();
     }
 
     /// <inheritdoc />
@@ -103,14 +102,16 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     }
 
     /// <inheritdoc />
-    public void RefreshData(FetchInfo fetchInfo)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>>? fetch = null)
     {
         if (Enabled
             && fetchInfo.Extent?.GetArea() > 0
             && MaxVisible >= fetchInfo.Resolution
             && MinVisible <= fetchInfo.Resolution)
         {
-            _tileFetchDispatcher.RefreshData(fetchInfo);
+            if (fetch is null)
+                throw new Exception("Fetch action cannot be null for the TileLayer.");
+            _tileFetchDispatcher.RefreshData(fetchInfo, fetch);
         }
     }
 
