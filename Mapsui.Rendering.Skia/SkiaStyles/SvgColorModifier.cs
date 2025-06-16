@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using Svg;
-using Svg.Model;
 
 namespace Mapsui.Styles;
 
@@ -14,7 +13,7 @@ public static class SvgColorModifier
         var svgStrokeColor = (System.Drawing.Color?)strokeColor;
 
         using var memoryStream = new MemoryStream(bytes);
-        var svgDocument = SvgExtensions.Open(memoryStream) ?? throw new Exception("Could not open stream as svg");
+        var svgDocument = SvgDocument.Open<SvgDocument>(memoryStream) ?? throw new Exception("Could not open stream as svg");
 
         var elements = GetAllElements(svgDocument.Children);
         foreach (var element in elements)
