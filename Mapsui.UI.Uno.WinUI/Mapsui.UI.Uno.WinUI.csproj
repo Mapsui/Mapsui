@@ -19,7 +19,8 @@
       https://aka.platform.uno/singleproject-features
     -->
     <UnoFeatures>
-    </UnoFeatures>
+			SkiaRenderer;
+		</UnoFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
