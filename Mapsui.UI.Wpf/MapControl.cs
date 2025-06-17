@@ -21,8 +21,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public MapControl()
     {
-        SharedConstructor();
-
         Children.Add(SkiaCanvas);
 
         SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
@@ -46,6 +44,9 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         IsManipulationEnabled = true;
 
         SkiaCanvas.Visibility = Visibility.Visible;
+
+        SharedConstructor();
+
         RefreshGraphics();
     }
 
