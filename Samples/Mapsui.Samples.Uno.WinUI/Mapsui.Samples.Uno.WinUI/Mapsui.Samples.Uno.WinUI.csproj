@@ -39,6 +39,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
+    <PackageReference Include="SkiaSharp.Skottie" />
 	</ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
