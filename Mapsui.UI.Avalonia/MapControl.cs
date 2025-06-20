@@ -28,8 +28,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     public MapControl()
     {
-        SharedConstructor();
-
         Initialized += MapControlInitialized;
 
         // Pointer events
@@ -45,6 +43,8 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         KeyUp += (s, e) => _shiftPressed = GetShiftPressed(e.KeyModifiers);
 
         ClipToBounds = true;
+
+        SharedConstructor();
     }
 
     public void InvalidateCanvas()
