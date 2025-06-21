@@ -20,18 +20,38 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     {
         _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
         if (_dataSource is IDynamic dynamic)
-            dynamic.DataChanged += (s, e) =>
-            {
-                Catch.Exceptions(async () =>
-                {
-                    await UpdateDataAsync();
-                    DataHasChanged();
-                });
-            };
-
-        // Todo: There should be a assignable function to find the previous feature, so the user has all flexibility
-        IdField = "ID";
+            dynamic.DataChanged += Dynamic_DataChanged;
     }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (disposing)
+        {
+            if (_dataSource is IDynamic dynamic)
+            {
+                dynamic.DataChanged -= Dynamic_DataChanged;
+            }
+        }
+    }
+
+    private void Dynamic_DataChanged(object? sender, EventArgs e)
+    {
+        if (_fetchInfo is FetchInfo fetchInfo)
+        {
+            UpdateFeatures(fetchInfo);
+        }
+    }
+
+    private void UpdateFeatures(FetchInfo fetchInfo)
+    {
+        Catch.Exceptions(async () =>
+        {
+            await UpdateFeaturesAsync(fetchInfo);
+            DataHasChanged();
+        });
+    }
+
 
     /// <summary>
     /// When the distance between the current and the previous position is larger
@@ -39,7 +59,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     /// The default is Double.MaxValue
     /// </summary>
     public double DistanceThreshold { get; set; } = double.MaxValue;
-    public string IdField { get; set; }
+    public string IdField { get; set; } = "ID";
 
     /// <summary>
     /// The period of which the animation should move from the previous position to the new position.
@@ -52,12 +72,9 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     /// </summary>
     public Easing Easing { get; set; } = Easing.CubicOut;
 
-
-    public async Task UpdateDataAsync()
+    private async Task UpdateFeaturesAsync(FetchInfo fetchInfo)
     {
-        if (_fetchInfo is null) return;
-
-        var features = await _dataSource.GetFeaturesAsync(_fetchInfo);
+        var features = await _dataSource.GetFeaturesAsync(fetchInfo);
         SetAnimationTarget(features.Cast<PointFeature>());
         OnDataChanged(new DataChangedEventArgs(Name));
     }
@@ -81,8 +98,8 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
         }
     }
 
-    private static AnimatedPointFeature? FindPrevious(IEnumerable<AnimatedPointFeature>? features, IFeature feature,
-    string idField)
+    private static AnimatedPointFeature? FindPrevious(IEnumerable<AnimatedPointFeature>? features,
+        PointFeature feature, string idField)
     {
         // There is no guarantee the idField is set since the features are added by the user. Things do not crash
         // right now because AnimatedPointSample a feature is created with an "ID" field. This is an unresolved
@@ -99,6 +116,9 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
 
     public void RefreshData(FetchInfo fetchInfo)
     {
+        if (_fetchInfo is null) // On the first call _fetchInfo is null and we should initialize the features.
+            UpdateFeatures(fetchInfo);
+
         _fetchInfo = fetchInfo;
     }
 

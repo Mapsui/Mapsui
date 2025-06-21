@@ -8,6 +8,7 @@ public class VectorStyle : BaseStyle
         Line = new Pen { Color = Color.Black, Width = 1 };
         Fill = new Brush { Color = Color.White };
     }
+
     /// <summary>
     /// Line style for line geometries
     /// </summary>
