@@ -52,8 +52,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     /// </summary>
     public Easing Easing { get; set; } = Easing.CubicOut;
 
-
-    public async Task UpdateDataAsync()
+    private async Task UpdateDataAsync()
     {
         if (_fetchInfo is null) return;
 
@@ -97,7 +96,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
         return _features;
     }
 
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> fetch)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
     {
         _fetchInfo = fetchInfo;
     }

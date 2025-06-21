@@ -94,7 +94,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     }
 
     /// <inheritdoc />
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> fetch)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
     {
         if (!Enabled) return;
         if (MinVisible > fetchInfo.Resolution) return;
@@ -103,7 +103,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => fetch(() => FetchAsync(fetchInfo, ++_refreshCounter)), _delayBetweenCalls, 0);
+        Delayer.ExecuteDelayed(() => enqueueFetch(() => FetchAsync(fetchInfo, ++_refreshCounter)), _delayBetweenCalls, 0);
     }
 
     public override bool UpdateAnimations()

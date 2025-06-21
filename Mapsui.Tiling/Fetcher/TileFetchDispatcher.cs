@@ -24,50 +24,50 @@ public class TileFetchDispatcher(
     public event EventHandler<Exception?>? DataChanged;
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueue)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
     {
         // Set Busy to true immediately, so that the caller can immediately start waiting for it to go back to false.
         // Not sure if this is the best solution. It will often go to true and back to false without doing something.
         Busy = true;
         _latestFetchInfo.Put(fetchInfo);
-        enqueue?.Invoke(() => ProcessRefreshDataAsync(enqueue)); // Calculations are done on the FetchMachine.
+        enqueueFetch?.Invoke(() => ProcessRefreshDataAsync(enqueueFetch)); // Calculations are done on the FetchMachine.
     }
 
-    private Task ProcessRefreshDataAsync(Action<Func<Task>> enqueue)
+    private Task ProcessRefreshDataAsync(Action<Func<Task>> enqueueFetch)
     {
         if (_latestFetchInfo.TryTake(out var fetchInfo))
         {
             NumberTilesNeeded = _fetchTracker.Update(fetchInfo, tileSchema, _dataFetchStrategy, tileCache);
 
-            StartFetching(enqueue);
+            StartFetching(enqueueFetch);
         }
         return Task.CompletedTask; // To make it async because that allows for an easy way to enqueue.
     }
 
-    private void StartFetching(Action<Func<Task>> enqueue)
+    private void StartFetching(Action<Func<Task>> enqueueFetch)
     {
         Busy = !_fetchTracker.IsDone();
         // We want to keep a limited number of tiles in progress because the extent could change again and we do not
         // want to fetch tiles that are not needed anymore.
         while (_fetchTracker.TryTake(out var tileToFetch, DefaultNumberOfSimultaneousThreads))
-            enqueue(() => FetchOnThreadAsync(tileToFetch, enqueue));
+            enqueueFetch(() => FetchOnThreadAsync(tileToFetch, enqueueFetch));
     }
 
-    private async Task FetchOnThreadAsync(TileInfo tileInfo, Action<Func<Task>> enqueue)
+    private async Task FetchOnThreadAsync(TileInfo tileInfo, Action<Func<Task>> enqueueFetch)
     {
         try
         {
             var feature = await fetchTileAsFeature(tileInfo).ConfigureAwait(false);
-            FetchCompleted(tileInfo, enqueue, feature, null);
+            FetchCompleted(tileInfo, enqueueFetch, feature, null);
         }
         catch (Exception ex)
         {
             // The exception is returned to the caller and should be logged there.
-            FetchCompleted(tileInfo, enqueue, null, ex);
+            FetchCompleted(tileInfo, enqueueFetch, null, ex);
         }
     }
 
-    private void FetchCompleted(TileInfo tileInfo, Action<Func<Task>> enqueue, IFeature? feature, Exception? exception)
+    private void FetchCompleted(TileInfo tileInfo, Action<Func<Task>> enqueueFetch, IFeature? feature, Exception? exception)
     {
         if (exception != null)
         {
@@ -82,7 +82,7 @@ public class TileFetchDispatcher(
         Busy = !_fetchTracker.IsDone();
         DataChanged?.Invoke(this, exception);
 
-        StartFetching(enqueue);
+        StartFetching(enqueueFetch);
     }
 
     public bool Busy

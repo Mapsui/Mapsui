@@ -102,16 +102,16 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     }
 
     /// <inheritdoc />
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> fetch)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
     {
         if (Enabled
             && fetchInfo.Extent?.GetArea() > 0
             && MaxVisible >= fetchInfo.Resolution
             && MinVisible <= fetchInfo.Resolution)
         {
-            if (fetch is null)
+            if (enqueueFetch is null)
                 throw new Exception("Fetch action cannot be null for the TileLayer.");
-            _tileFetchDispatcher.RefreshData(fetchInfo, fetch);
+            _tileFetchDispatcher.RefreshData(fetchInfo, enqueueFetch);
         }
     }
 

@@ -58,7 +58,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         // not implemented for ImageLayer
     }
 
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> fetch)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
     {
         if (!Enabled) return;
         // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.
@@ -69,7 +69,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
             return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => fetch!(() => FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks)), _delayBetweenCalls, 0);
+        Delayer.ExecuteDelayed(() => enqueueFetch!(() => FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks)), _delayBetweenCalls, 0);
     }
 
     private async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter, IProvider dataSource, long timeRequested)

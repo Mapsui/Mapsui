@@ -28,7 +28,7 @@ public interface IAsyncDataFetcher
     /// implementation could ignore it. Example: During dragging a map a WMS layer would not want
     /// to fetch data, only on the drag end.
     /// <param name="fetchInfo">FetchInfo</param>
-    void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> fetch);
+    void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch);
 }
 
 public delegate void DataChangedEventHandler(object sender, DataChangedEventArgs e);
