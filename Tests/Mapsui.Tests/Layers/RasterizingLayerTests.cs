@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using BruTile.Predefined;
+using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Providers;
@@ -39,9 +40,10 @@ public class RasterizingLayerTests
         };
 
         var fetchInfo = new FetchInfo(new MSection(box, resolution), null, ChangeType.Discrete);
+        var fetchMachine = new FetchMachine();
 
         // act
-        layer.RefreshData(fetchInfo);
+        layer.RefreshData(fetchInfo, fetchMachine.Enqueue);
 
         // assert
         waitHandle.WaitOne();

@@ -31,7 +31,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
 
-    public FetchMachine FetchMachine { get; } = new FetchMachine();
+    public FetchMachine FetchMachine { get; } = new(16);
 
     /// <summary>
     /// Initializes a new map

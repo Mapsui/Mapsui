@@ -102,7 +102,7 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     }
 
     /// <inheritdoc />
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>>? fetch = null)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> fetch)
     {
         if (Enabled
             && fetchInfo.Extent?.GetArea() > 0

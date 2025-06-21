@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
+using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Tests.Fetcher.Providers;
 using Mapsui.Tiling.Extensions;
@@ -26,6 +27,7 @@ public class FetchMachineTests
         var tileSource = new CountingTileSource();
         using var cache = new MemoryCache<IFeature?>();
         var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchMachine = new FetchMachine();
         var level = 3;
         var expectedTiles = 64;
 
@@ -33,7 +35,7 @@ public class FetchMachineTests
 
         // Act
         // Get all tiles of level 3
-        fetchDispatcher.RefreshData(fetchInfo);
+        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
         // Assert
         while (fetchDispatcher.Busy) { await Task.Delay(10); }
 
@@ -52,13 +54,14 @@ public class FetchMachineTests
         var level = 3;
         var expectedTiles = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
+        var fetchMachine = new FetchMachine();
 
         // Act
-        fetchDispatcher.RefreshData(fetchInfo);
+        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
         var countAfterFirstTry = tileSource.CountByTile.Keys.Count;
         // do it again
-        fetchDispatcher.RefreshData(fetchInfo);
+        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Assert
@@ -79,11 +82,13 @@ public class FetchMachineTests
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
+        var fetchMachine = new FetchMachine();
+
         // Act
-        fetchDispatcher.RefreshData(fetchInfo);
+        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
         // do it again
-        fetchDispatcher.RefreshData(fetchInfo);
+        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Assert
@@ -100,13 +105,14 @@ public class FetchMachineTests
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
+        var fetchMachine = new FetchMachine();
 
         // Act
-        fetchDispatcher.RefreshData(fetchInfo);
+        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Act again
-        fetchDispatcher.RefreshData(fetchInfo);
+        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Assert
@@ -124,15 +130,16 @@ public class FetchMachineTests
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
+        var fetchMachine = new FetchMachine();
 
         // Act
-        fetchDispatcher.RefreshData(fetchInfo);
+        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         var tileCountAfterFirstBatch = tileSource.TotalCount;
 
         // Act again
-        fetchDispatcher.RefreshData(fetchInfo);
+        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
         while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
         // Assert

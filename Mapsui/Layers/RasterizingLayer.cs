@@ -24,6 +24,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     private readonly RenderFormat _renderFormat;
     private const int _minimumDelay = 1000;
     private readonly int _delayBetweenCalls;
+    private readonly FetchMachine _fetchMachine = new();
 
     public Delayer Delayer { get; } = new();
 
@@ -99,7 +100,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 OnDataChanged(new DataChangedEventArgs(Name));
 
                 if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher)
-                    Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo), _delayBetweenCalls, 0);
+                    Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo, _fetchMachine.Enqueue), _delayBetweenCalls, 0);
             }
             finally
             {
@@ -127,7 +128,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
     }
 
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>>? fetch = null)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> fetch)
     {
         if (fetchInfo.Extent == null)
             return;
@@ -143,7 +144,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
             // Explicitly set the change type to discrete for rasterization
             _fetchInfo = new FetchInfo(fetchInfo.Section, fetchInfo.CRS);
             if (_layer is IAsyncDataFetcher asyncDataFetcher)
-                Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo), _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
+                Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo, fetch), _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
             else
                 Delayer.ExecuteDelayed(Rasterize, _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
         }

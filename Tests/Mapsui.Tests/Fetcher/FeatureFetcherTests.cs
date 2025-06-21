@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
@@ -40,9 +41,10 @@ public class FeatureFetcherTests
 
         layer.PropertyChanged += propertyChanged;
         var fetchInfo = new FetchInfo(new MSection(extent, 1), null, ChangeType.Discrete);
+        var fetchMachine = new FetchMachine();
 
         // Act
-        layer.RefreshData(fetchInfo);
+        layer.RefreshData(fetchInfo, fetchMachine.Enqueue);
 
         // Assert
         await Task.Run(async () =>

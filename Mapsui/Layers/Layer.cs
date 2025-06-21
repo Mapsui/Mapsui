@@ -24,7 +24,6 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();
     private IFeature[] _cache = [];
-    private readonly FetchMachine _fetchMachine = new();
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
     private int _delayBetweenCalls;
 
@@ -86,7 +85,6 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     /// <inheritdoc />
     public void AbortFetch()
     {
-        _fetchMachine.Stop();
     }
 
     /// <inheritdoc />
@@ -96,7 +94,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     }
 
     /// <inheritdoc />
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>>? fetch = null)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> fetch)
     {
         if (!Enabled) return;
         if (MinVisible > fetchInfo.Resolution) return;
@@ -105,7 +103,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => _fetchMachine.Enqueue(() => FetchAsync(fetchInfo, ++_refreshCounter)), _delayBetweenCalls, 0);
+        Delayer.ExecuteDelayed(() => fetch(() => FetchAsync(fetchInfo, ++_refreshCounter)), _delayBetweenCalls, 0);
     }
 
     public override bool UpdateAnimations()

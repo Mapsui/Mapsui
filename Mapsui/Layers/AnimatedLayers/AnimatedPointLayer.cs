@@ -97,7 +97,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
         return _features;
     }
 
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>>? fetch = null)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> fetch)
     {
         _fetchInfo = fetchInfo;
     }
