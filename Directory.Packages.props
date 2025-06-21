@@ -6,16 +6,16 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Avalonia" Version="11.2.2" />
-    <PackageVersion Include="Avalonia.Skia" Version="11.2.2" />
-    <PackageVersion Include="Avalonia.Desktop" Version="11.2.2" />
-    <PackageVersion Include="Avalonia.Browser" Version="11.2.2" />
-    <PackageVersion Include="Avalonia.Android" Version="11.2.2" />
-    <PackageVersion Include="Avalonia.iOS" Version="11.2.2" />
-    <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.2" />
-    <PackageVersion Include="Avalonia.ReactiveUI" Version="11.2.2" />
-    <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.2.2" />
-    <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.2" />
+    <PackageVersion Include="Avalonia" Version="11.3.1" />
+    <PackageVersion Include="Avalonia.Skia" Version="11.3.1" />
+    <PackageVersion Include="Avalonia.Desktop" Version="11.3.1" />
+    <PackageVersion Include="Avalonia.Browser" Version="11.3.1" />
+    <PackageVersion Include="Avalonia.Android" Version="11.3.1" />
+    <PackageVersion Include="Avalonia.iOS" Version="11.3.1" />
+    <PackageVersion Include="Avalonia.Diagnostics" Version="11.3.1" />
+    <PackageVersion Include="Avalonia.ReactiveUI" Version="11.3.1" />
+    <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.3.1" />
+    <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.3.1" />
     <PackageVersion Include="BenchmarkDotNet" Version="[0.13.9,1.0.0)" />
     <PackageVersion Include="BitMiracle.LibTiff.NET" Version="2.4.660" />
     <PackageVersion Include="BruTile" Version="[6.0.0-beta.4,7.0)" />
@@ -83,6 +83,6 @@
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
     <PackageVersion Include="System.Text.Json" Version="9.0.0" />
-    <PackageVersion Include="VexTile.TileSource.Mvt" Version="1.0.1" />
+    <PackageVersion Include="VexTile.TileSource.Mvt" Version="1.0.2" />
   </ItemGroup>
 </Project>
