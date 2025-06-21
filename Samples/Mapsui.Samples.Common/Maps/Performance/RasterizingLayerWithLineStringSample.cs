@@ -9,7 +9,6 @@ using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
-#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps.Performance;
@@ -80,13 +79,13 @@ public class RasterizingLayerWithLineStringSample : IMapControlSample
         {
             Opacity = 0.5f,
             Line = new Pen(Color.White, 10f),
+            Outline = null
         };
 
         var vs = new VectorStyle
         {
-            Fill = null,
-            Outline = null,
-            Line = { Color = Color.Red, Width = 5f }
+            Line = new Pen(Color.Red, 5f),
+            Outline = null
         };
 
         feature.Styles.Add(vsout);

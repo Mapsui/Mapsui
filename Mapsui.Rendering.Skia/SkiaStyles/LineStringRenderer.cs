@@ -27,20 +27,32 @@ public static class LineStringRenderer
         var extent = viewport.ToExtent();
         var rotation = viewport.Rotation;
         var lineWidth = (float)(vectorStyle.Line?.Width ?? 1f);
+
         if (vectorStyle.Line.IsVisible())
         {
-            using var paint = renderService.VectorCache.GetOrCreate((vectorStyle.Line, opacity), CreateSkPaint);
             using var path = renderService.VectorCache.GetOrCreate((feature.Id, position, extent, rotation, lineWidth), ToPath);
-            canvas.DrawPath(path, paint);
+
+            // If the Outline property is set and has a width greater than 0, draw the outline first.
+            if (vectorStyle.Outline?.Width > 0)
+            {
+                // The width is calculated as the sum of the outline width and the line width, if both are defined.
+                // For the caching callback to work, the calculated width must be passed to the CreateSkPaint method.
+                var width = vectorStyle.Outline.Width + vectorStyle.Outline.Width + vectorStyle.Line?.Width ?? 1;
+                using var paintOutline = renderService.VectorCache.GetOrCreate((vectorStyle.Outline, (float?)width, opacity), CreateSkPaint);
+                canvas.DrawPath(path, paintOutline);
+            }
+
+            using var paintLine = renderService.VectorCache.GetOrCreate((vectorStyle.Line, (float?)null, opacity), CreateSkPaint);
+            canvas.DrawPath(path, paintLine);
         }
     }
 
-    private static SKPaint CreateSkPaint((Pen? pen, float opacity) valueTuple)
+    private static SKPaint CreateSkPaint((Pen? pen, float? width, float opacity) valueTuple)
     {
         var pen = valueTuple.pen;
         var opacity = valueTuple.opacity;
 
-        float lineWidth = 1;
+        float lineWidth = valueTuple.width ?? 1;
         var lineColor = new Color();
 
         var strokeCap = PenStrokeCap.Butt;
@@ -52,7 +64,7 @@ public static class LineStringRenderer
 
         if (pen != null)
         {
-            lineWidth = (float)pen.Width;
+            lineWidth = valueTuple.width ?? (float)pen.Width;
             lineColor = pen.Color;
             strokeCap = pen.PenStrokeCap;
             strokeJoin = pen.StrokeJoin;

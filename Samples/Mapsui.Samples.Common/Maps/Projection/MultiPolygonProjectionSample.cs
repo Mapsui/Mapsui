@@ -60,7 +60,13 @@ public class MultiPolygonProjectionSample : ISample
         return new Layer
         {
             DataSource = dataSource,
-            Name = "WGS84 Geometries"
+            Name = "WGS84 Geometries",
+            Style = new VectorStyle
+            {
+                Outline = new Pen(Color.Gray, 1f),
+                Line = new Pen(Color.Black, 1f),
+                Fill = new Brush(Color.White)
+            }
         };
     }
 }
