@@ -52,7 +52,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposa
             features.Add(new PointFeature(point)
             {
                 ["ID"] = countAsString,
-                ["rotation"] = AngleOf(point, FindPreviousPosition(countAsString, previousFeatures), random) - 90
+                ["rotation"] = (AngleOf(point, FindPreviousPosition(countAsString, previousFeatures), random) - 90 + 360) % 360
             });
         }
 
