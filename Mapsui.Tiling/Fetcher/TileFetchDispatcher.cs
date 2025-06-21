@@ -13,7 +13,7 @@ public class TileFetchDispatcher(
     Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
     IDataFetchStrategy? dataFetchStrategy = null) : INotifyPropertyChanged
 {
-    public static int DefaultNumberOfSimultaneousThreads = 4;
+    public static int DefaultNumberOfSimultaneousThreads { get; set; } = 4;
     private bool _busy;
     private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
     private readonly MessageBox<FetchInfo> _latestFetchInfo = new();
