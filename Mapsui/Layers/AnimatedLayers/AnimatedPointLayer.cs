@@ -23,17 +23,18 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
             dynamic.DataChanged += Dynamic_DataChanged;
     }
 
-    public void Dispose()
+    protected override void Dispose(bool disposing)
     {
-        if (!_disposed)
+        base.Dispose(disposing);
+        if (disposing)
         {
             if (_dataSource is IDynamic dynamic)
             {
                 dynamic.DataChanged -= Dynamic_DataChanged;
             }
-            _disposed = true;
         }
     }
+
     private void Dynamic_DataChanged(object? sender, EventArgs e)
     {
         if (_fetchInfo is FetchInfo fetchInfo)
