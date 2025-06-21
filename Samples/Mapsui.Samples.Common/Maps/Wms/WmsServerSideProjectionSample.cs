@@ -13,7 +13,7 @@ public class WmsServerSideProjectionSample : ISample
     public string Name => "WMS Server Side Projection";
     public string Category => "WMS";
 
-    private const string _mapInfoLayerName = "Windspeed in ESPG:3857 (PDOK) ";
+    private const string _mapInfoLayerName = "Windspeed in EPSG:3857 (PDOK) ";
 
     public async Task<Map> CreateMapAsync()
     {
