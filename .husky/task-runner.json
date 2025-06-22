@@ -8,7 +8,7 @@
       "args": [
         "format",
         "whitespace",
-        "Mapsui.sln",
+        "Mapsui.slnx",
         "--include",
         "${staged}"
       ]
