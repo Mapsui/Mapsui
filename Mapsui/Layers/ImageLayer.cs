@@ -69,7 +69,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
             return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => enqueueFetch!(() => FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks)), _delayBetweenCalls, 0);
+        Delayer.ExecuteDelayed(() => enqueueFetch(() => FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks)), _delayBetweenCalls, 0);
     }
 
     private async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter, IProvider dataSource, long timeRequested)
