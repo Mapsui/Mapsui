@@ -530,10 +530,14 @@ public class Navigator
 
     public void SetSize(double width, double height)
     {
+        if (Viewport.Width == width && Viewport.Height == height)
+            return; // No change in size, no need to update.
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
+        var wasInitialized = IsInitialized;
         InitializeIfNeeded();
-        OnRefreshDataRequest(ChangeType.Discrete);
+        if (wasInitialized) // Workaround to prevent double data refresh: Only call when it was already initialized because if it is not then it will be called in Initialize().
+            OnRefreshDataRequest(ChangeType.Discrete);
     }
 
     private void InitializeIfNeeded()
