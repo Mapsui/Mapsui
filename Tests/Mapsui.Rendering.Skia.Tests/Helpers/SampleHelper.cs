@@ -33,7 +33,6 @@ internal static class SampleHelper
         }
 
         await mapControl.WaitForLoadingAsync();
-        mapControl.Map.RefreshData();
 
         return mapControl;
     }
