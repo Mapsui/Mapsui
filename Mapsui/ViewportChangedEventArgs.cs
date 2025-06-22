@@ -1,13 +1,20 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace Mapsui;
 
 public class ViewportChangedEventArgs : PropertyChangedEventArgs
 {
-    public ViewportChangedEventArgs(Viewport oldViewport) : base(nameof(Viewport))
+    public ViewportChangedEventArgs(Viewport previousViewport, Viewport viewport) : base(nameof(Viewport))
     {
-        OldViewport = oldViewport;
+        PreviousViewport = previousViewport;
+        Viewport = viewport;
     }
 
-    public Viewport OldViewport { get; }
+    [Obsolete("Use PreviousViewport")]
+    public Viewport OldViewport => PreviousViewport;
+
+    public Viewport PreviousViewport { get; }
+
+    public Viewport Viewport { get; init; } = new Viewport();
 }

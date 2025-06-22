@@ -52,7 +52,12 @@ public class StackedLabelsTestSample : ISample
         return new MemoryLayer
         {
             Features = features,
-            Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(new Color { A = 128, R = 8, G = 20, B = 192 }) }
+            Style = new SymbolStyle
+            {
+                SymbolScale = 1,
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(new Color { A = 128, R = 8, G = 20, B = 192 })
+            }
         };
     }
 }

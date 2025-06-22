@@ -60,6 +60,7 @@ public class RasterizingLayerWithPointsSample : IMapControlSample
             Style = new SymbolStyle
             {
                 SymbolType = SymbolType.Triangle,
+                Outline = new Pen(Color.Gray, 1f),
                 Fill = new Brush(Color.Red)
             }
         };

@@ -50,7 +50,11 @@ public class WfsSample : ISample
     {
         return new Layer(layerName)
         {
-            Style = new VectorStyle { Fill = new Brush { Color = Color.FromArgb(192, 255, 0, 0) } },
+            Style = new VectorStyle()
+            {
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.FromArgb(192, 255, 0, 0))
+            },
             DataSource = provider,
         };
     }

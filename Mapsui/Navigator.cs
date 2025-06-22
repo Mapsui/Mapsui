@@ -111,7 +111,7 @@ public class Navigator
             if (_viewport == value) return;
             var oldViewport = _viewport;
             _viewport = value;
-            OnViewportChanged(oldViewport);
+            OnViewportChanged(oldViewport, _viewport);
         }
     }
 
@@ -139,7 +139,7 @@ public class Navigator
                 _initialization.Clear();
 
                 _suppressNotifications = false;
-                OnViewportChanged(_viewport);
+                OnViewportChanged(_viewport, _viewport);
                 OnRefreshDataRequest(ChangeType.Discrete);
             }
         }
@@ -564,12 +564,12 @@ public class Navigator
     /// Property change event
     /// </summary>
     /// <param name="oldViewport">Name of property that changed</param>
-    private void OnViewportChanged(Viewport oldViewport)
+    private void OnViewportChanged(Viewport oldViewport, Viewport viewport)
     {
         if (_suppressNotifications)
             return;
 
-        ViewportChanged?.Invoke(this, new ViewportChangedEventArgs(oldViewport));
+        ViewportChanged?.Invoke(this, new ViewportChangedEventArgs(oldViewport, viewport));
     }
 
     public bool UpdateAnimations()
@@ -597,7 +597,7 @@ public class Navigator
     public void SetViewportAnimations(List<AnimationEntry<Viewport>> animations)
     {
         _animations = animations;
-        OnViewportChanged(Viewport); // Call OnViewportChanged with current Viewport to trigger the invalidate loop so animations will be updated.
+        OnViewportChanged(Viewport, Viewport); // Call OnViewportChanged with current Viewport to trigger the invalidate loop so animations will be updated.
     }
 
     private void SetViewportWithLimit(Viewport viewport)

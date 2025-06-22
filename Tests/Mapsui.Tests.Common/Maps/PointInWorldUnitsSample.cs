@@ -53,7 +53,15 @@ public class PointInWorldUnitsSample : ISample
     {
         return new PointFeature(new MPoint(x, y))
         {
-            Styles = new List<IStyle> { new SymbolStyle { UnitType = unitType } }
+            Styles = new List<IStyle>
+            {
+                new SymbolStyle
+                {
+                    UnitType = unitType,
+                    Outline = new Pen(Color.Gray, 1f),
+                    Fill = new Brush(Color.White)
+                }
+            }
         };
     }
 }

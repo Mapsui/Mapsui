@@ -29,7 +29,6 @@ public partial class Window1
         CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
         FillComboBoxWithCategories();
-        FillListWithSamples();
     }
 
     private void FillListWithSamples()

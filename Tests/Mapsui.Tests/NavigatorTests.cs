@@ -60,7 +60,8 @@ public class NavigatorTests
     [Test]
     public void ViewportChangedTest()
     {
-        Viewport oldViewport = new();
+        Viewport previousViewport = new();
+        Viewport currentViewport = new();
 
         var navigator = new Navigator();
         // Set PanBound and Size so that the viewport is initialized before the test.
@@ -70,32 +71,37 @@ public class NavigatorTests
         // Save changes to old viewport
         navigator.ViewportChanged += (s, e) =>
         {
-            oldViewport = e.OldViewport;
+            previousViewport = e.PreviousViewport;
+            currentViewport = e.Viewport;
         };
 
         // Test size change
-        var viewport = navigator.Viewport;
+        var previous = navigator.Viewport;
         navigator.SetSize(100, 100);
-        ClassicAssert.AreEqual(oldViewport, viewport);
-        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
+        ClassicAssert.AreEqual(previousViewport, previous);
+        ClassicAssert.AreEqual(currentViewport, navigator.Viewport);
+        ClassicAssert.AreNotEqual(previousViewport, currentViewport);
 
         // Test center change
-        viewport = navigator.Viewport;
+        previous = navigator.Viewport;
         navigator.CenterOn(10, 20);
-        ClassicAssert.AreEqual(oldViewport, viewport);
-        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
+        ClassicAssert.AreEqual(previousViewport, previous);
+        ClassicAssert.AreEqual(currentViewport, navigator.Viewport);
+        ClassicAssert.AreNotEqual(previousViewport, currentViewport);
 
         // Test resolution change
-        viewport = navigator.Viewport;
+        previous = navigator.Viewport;
         navigator.ZoomTo(10);
-        ClassicAssert.AreEqual(oldViewport, viewport);
-        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
+        ClassicAssert.AreEqual(previousViewport, previous);
+        ClassicAssert.AreEqual(currentViewport, navigator.Viewport);
+        ClassicAssert.AreNotEqual(previousViewport, currentViewport);
 
         // Test rotation change
-        viewport = navigator.Viewport;
+        previous = navigator.Viewport;
         navigator.RotateTo(10);
-        ClassicAssert.AreEqual(oldViewport, viewport);
-        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
+        ClassicAssert.AreEqual(previousViewport, previous);
+        ClassicAssert.AreEqual(currentViewport, navigator.Viewport);
+        ClassicAssert.AreNotEqual(previousViewport, currentViewport);
     }
 
     [Test]
