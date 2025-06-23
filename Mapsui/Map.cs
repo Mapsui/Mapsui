@@ -16,6 +16,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 
 namespace Mapsui;
 
@@ -228,6 +229,17 @@ public class Map : INotifyPropertyChanged, IDisposable
         {
             if (layer is IAsyncDataFetcher asyncDataFetcher)
                 asyncDataFetcher.RefreshData(fetchInfo, FetchMachine.Enqueue);
+        }
+
+        FetchData(fetchInfo);
+    }
+
+    public void FetchData(FetchInfo fetchInfo)
+    {
+        foreach (var layer in _layers.ToList())
+        {
+            if (layer is ILayerDataFetcher dataFetcher)
+                _ = dataFetcher.FetchAsync(fetchInfo, CancellationToken.None);
         }
     }
 

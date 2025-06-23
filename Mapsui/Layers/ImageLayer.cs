@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
@@ -15,12 +16,13 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IDisposable, ILayer, ILayerFeatureInfo
+public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvider>, IDisposable, ILayer, ILayerFeatureInfo
 {
     private IEnumerable<IFeature> _cache = [];
     private IProvider? _dataSource;
-    private int _delayBetweenCalls = 0;
+    private readonly int _delayBetweenCalls = 0;
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
+    private readonly Throttler _throttler = new();
 
     public ImageLayer()
     {
@@ -31,8 +33,6 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
     {
         Name = layerName;
     }
-
-    public Delayer Delayer { get; } = new();
 
     public IProvider? DataSource
     {
@@ -53,12 +53,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         return _cache;
     }
 
-    public void AbortFetch()
-    {
-        // not implemented for ImageLayer
-    }
-
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
+    public async Task FetchAsync(FetchInfo fetchInfo, CancellationToken cancelationToken)
     {
         if (!Enabled) return;
         // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.
@@ -69,7 +64,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
             return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => enqueueFetch(() => FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks)), _delayBetweenCalls, 0);
+        await _throttler.ExecuteAsync(() => FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks), _delayBetweenCalls);
     }
 
     private async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter, IProvider dataSource, long timeRequested)

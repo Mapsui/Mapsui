@@ -1,5 +1,6 @@
 ﻿using BruTile;
 using BruTile.Cache;
+using Mapsui.Fetcher;
 using Mapsui.Layers;
 using System;
 using System.ComponentModel;
@@ -29,7 +30,7 @@ public class TileFetchDispatcher(
         // Set Busy to true immediately, so that the caller can immediately start waiting for it to go back to false.
         // Not sure if this is the best solution. It will often go to true and back to false without doing something.
         Busy = true;
-        _latestFetchInfo.Put(fetchInfo);
+        _latestFetchInfo.Overwrite(fetchInfo);
         enqueueFetch?.Invoke(() => ProcessRefreshDataAsync(enqueueFetch)); // Calculations are done on the FetchMachine.
     }
 

@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Tiling.Fetcher;
+﻿namespace Mapsui.Fetcher;
 
 using System.Threading;
 
@@ -14,7 +14,7 @@ public class MessageBox<T> where T : class
     /// <summary>
     /// Sets the message, replacing any previous one.
     /// </summary>
-    public void Put(T message)
+    public void Overwrite(T message)
     {
         _ = Interlocked.Exchange(ref _message, message);
     }
