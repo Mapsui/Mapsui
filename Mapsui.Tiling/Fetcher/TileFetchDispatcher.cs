@@ -17,7 +17,7 @@ public class TileFetchDispatcher(
     public static int DefaultNumberOfSimultaneousThreads { get; set; } = 4;
     private bool _busy;
     private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
-    private readonly MessageBox<FetchInfo> _latestFetchInfo = new();
+    private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
     private readonly FetchTracker _fetchTracker = new();
 
     public int NumberTilesNeeded { get; private set; }

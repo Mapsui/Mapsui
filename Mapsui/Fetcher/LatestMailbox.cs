@@ -3,11 +3,10 @@
 using System.Threading;
 
 /// <summary>
-/// Message box that only preserves the latest message, overwriting what was there before.
-/// Locking is used to make sure a message can only be taken once so that it is only processed once.
+/// A bounded mailbox with a capacity of one in which a new message overwrites the existing message.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class MessageBox<T> where T : class
+public class LatestMailbox<T> where T : class
 {
     private T? _message;
 

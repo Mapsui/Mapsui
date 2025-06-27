@@ -10,7 +10,7 @@ namespace Mapsui.Fetcher;
 public class Throttler
 {
     private long? _ticksPreviousCall;
-    private readonly MessageBox<Func<Task>> _messageBox = new();
+    private readonly LatestMailbox<Func<Task>> _mailbox = new();
 
     /// <summary>
     /// Schedules the specified asynchronous function to be executed after a minimum delay,
@@ -21,7 +21,7 @@ public class Throttler
     /// <param name="delayBetweenCalls">The minimum number of milliseconds between two executions.</param>
     public async Task ExecuteAsync(Func<Task> func, int delayBetweenCalls)
     {
-        _messageBox.Overwrite(func);
+        _mailbox.Overwrite(func);
         await CallAsync(delayBetweenCalls).ConfigureAwait(false);
     }
 
@@ -34,7 +34,7 @@ public class Throttler
     /// <param name="delayBetweenCalls">The minimum number of milliseconds between two executions.</param>
     public async Task ExecuteAsync(Action action, int delayBetweenCalls)
     {
-        _messageBox.Overwrite(async () => { action(); await Task.CompletedTask.ConfigureAwait(false); });
+        _mailbox.Overwrite(async () => { action(); await Task.CompletedTask.ConfigureAwait(false); });
         await CallAsync(delayBetweenCalls);
     }
 
@@ -42,7 +42,7 @@ public class Throttler
     {
         try
         {
-            while (_messageBox.TryTake(out var action))
+            while (_mailbox.TryTake(out var action))
             {
                 // If there are multiple actions queued, we only execute the last one.
                 // The previous ones will be discarded.
