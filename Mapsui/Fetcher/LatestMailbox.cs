@@ -3,26 +3,38 @@
 using System.Threading;
 
 /// <summary>
-/// A bounded mailbox with a capacity of one in which a new message overwrites the existing message.
+/// A thread-safe mailbox that always holds at most one message of type <typeparamref name="T"/>.
+/// When a new message is added, it overwrites any existing message.
+/// This is useful in scenarios where only the most recent message is relevant,
+/// such as UI or viewport updates, and outdated messages should be ignored.
 /// </summary>
-/// <typeparam name="T"></typeparam>
+/// <typeparam name="T">The type of message to store. Must be a reference type.</typeparam>
 public class LatestMailbox<T> where T : class
 {
     private T? _message;
 
     /// <summary>
-    /// Sets the message, replacing any previous one.
+    /// Stores the specified message in the mailbox, replacing any previous message.
+    /// If a message was already present, it is discarded and replaced by the new one.
     /// </summary>
+    /// <param name="message">The message to store. Cannot be null.</param>
     public void Overwrite(T message)
     {
         _ = Interlocked.Exchange(ref _message, message);
     }
 
     /// <summary>
-    /// Tries to get the message. If successful, clears the stored message.
+    /// Attempts to retrieve and remove the current message from the mailbox.
+    /// If a message is present, it is returned and the mailbox is cleared.
+    /// If no message is present, returns false.
     /// </summary>
-    /// <param name="message">The message if one was present.</param>
-    /// <returns>True if a message was retrieved; false otherwise.</returns>
+    /// <param name="message">
+    /// When this method returns, contains the message retrieved from the mailbox,
+    /// or null if the mailbox was empty.
+    /// </param>
+    /// <returns>
+    /// True if a message was present and retrieved; false if the mailbox was empty.
+    /// </returns>
     public bool TryTake(out T message)
     {
         var temp = Interlocked.Exchange(ref _message, null);
