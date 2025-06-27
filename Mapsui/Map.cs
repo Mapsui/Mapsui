@@ -16,6 +16,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 
 namespace Mapsui;
 
@@ -31,7 +32,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
 
-    public FetchMachine FetchMachine { get; } = new FetchMachine();
+    public FetchMachine FetchMachine { get; } = new(16);
 
     /// <summary>
     /// Initializes a new map
@@ -227,7 +228,18 @@ public class Map : INotifyPropertyChanged, IDisposable
         foreach (var layer in _layers.ToList())
         {
             if (layer is IAsyncDataFetcher asyncDataFetcher)
-                asyncDataFetcher.RefreshData(fetchInfo);
+                asyncDataFetcher.RefreshData(fetchInfo, FetchMachine.Enqueue);
+        }
+
+        FetchData(fetchInfo);
+    }
+
+    public void FetchData(FetchInfo fetchInfo)
+    {
+        foreach (var layer in _layers.ToList())
+        {
+            if (layer is ILayerDataFetcher dataFetcher)
+                _ = dataFetcher.FetchAsync(fetchInfo, CancellationToken.None);
         }
     }
 
