@@ -1,10 +1,12 @@
 ﻿using Mapsui.Layers;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher;
 
 public interface ILayerDataFetcher
 {
-    public Task FetchAsync(FetchInfo fetchInfo, CancellationToken cancelationToken);
+    public int Id { get; }
+    public bool NeedsFetch { get; }
+    public Task FetchAsync();
+    public void ViewportChanged(FetchInfo fetchInfo);
 }

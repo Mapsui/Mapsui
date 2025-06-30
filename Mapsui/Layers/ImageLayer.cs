@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
@@ -20,14 +19,15 @@ public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvid
 {
     private IEnumerable<IFeature> _cache = [];
     private IProvider? _dataSource;
-    private readonly int _delayBetweenCalls = 0;
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
-    private readonly Throttler _throttler = new();
+    private LatestMailbox<FetchInfo> _fetchInfoMailbox = new();
 
     public ImageLayer()
     {
         Style = new RasterStyle();
     }
+
+    public bool NeedsFetch => !_fetchInfoMailbox.IsEmpty;
 
     public ImageLayer(string layerName) : this()
     {
@@ -53,24 +53,32 @@ public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvid
         return _cache;
     }
 
-    public async Task FetchAsync(FetchInfo fetchInfo, CancellationToken cancelationToken)
+    public void ViewportChanged(FetchInfo fetchInfo)
     {
-        if (!Enabled) return;
-        // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.
-        if (fetchInfo.ChangeType == ChangeType.Continuous) return;
+        _fetchInfoMailbox.Overwrite(fetchInfo);
+        Busy = true;
+    }
 
-        var dataSource = DataSource;
-        if (dataSource is null)
+    public async Task FetchAsync()
+    {
+        if (!Enabled)
             return;
 
-        Busy = true;
-        await _throttler.ExecuteAsync(() => FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks), _delayBetweenCalls);
+        while (_fetchInfoMailbox.TryTake(out var fetchInfo))
+        {
+            if (fetchInfo.ChangeType == ChangeType.Continuous) return;
+
+            var dataSource = DataSource;
+            if (dataSource is null)
+                return;
+
+            Busy = true;
+            await FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks);
+        }
     }
 
     private async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter, IProvider dataSource, long timeRequested)
     {
-        Busy = true;
-
         try
         {
             _cache = await dataSource.GetFeaturesAsync(fetchInfo);

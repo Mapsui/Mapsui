@@ -16,7 +16,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading;
 
 namespace Mapsui;
 
@@ -31,6 +30,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     private LayerCollection _layers = [];
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
+    private readonly LayerFetcher _layerFetcher;
 
     public FetchMachine FetchMachine { get; } = new(16);
 
@@ -41,6 +41,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
+        _layerFetcher = new LayerFetcher(Layers);
         Widgets.Add(CreateLoggingWidget(RefreshGraphics));
         Widgets.Add(CreatePerformanceWidget(this));
         Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
@@ -231,16 +232,8 @@ public class Map : INotifyPropertyChanged, IDisposable
                 asyncDataFetcher.RefreshData(fetchInfo, FetchMachine.Enqueue);
         }
 
-        FetchData(fetchInfo);
-    }
-
-    public void FetchData(FetchInfo fetchInfo)
-    {
-        foreach (var layer in _layers.ToList())
-        {
-            if (layer is ILayerDataFetcher dataFetcher)
-                _ = dataFetcher.FetchAsync(fetchInfo, CancellationToken.None);
-        }
+        if (changeType == ChangeType.Discrete)
+            _layerFetcher.ViewportChanged(fetchInfo);
     }
 
     public void RefreshGraphics()

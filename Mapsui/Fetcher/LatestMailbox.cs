@@ -13,6 +13,8 @@ public class LatestMailbox<T> where T : class
 {
     private T? _message;
 
+    public bool IsEmpty => _message is null;
+
     /// <summary>
     /// Stores the specified message in the mailbox, replacing any previous message.
     /// If a message was already present, it is discarded and replaced by the new one.
