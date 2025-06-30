@@ -59,12 +59,12 @@ public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvid
         Busy = true;
     }
 
-    public FetchRequest[] GetFetchRequests(int fetchesInProgressCount)
+    public FetchRequest[] GetFetchRequests(int activeFetches)
     {
         if (!Enabled)
             return [];
 
-        if (fetchesInProgressCount > 0) // Allow only one fetch in progress for this layer type.
+        if (activeFetches > 0) // Allow only one fetch in progress for this layer type.
             return [];
 
         return [new FetchRequest(Id, FetchAsync)];
