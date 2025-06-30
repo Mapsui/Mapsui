@@ -8,7 +8,7 @@ namespace Mapsui.Fetcher;
 public class LayerFetcher(IEnumerable<ILayer> Layers)
 {
     private readonly int _maxConcurrent = 16;
-    private readonly Dictionary<int, Task> _activeRequests = new();
+    private readonly Dictionary<long, FetchRequest> _activeRequests = new();
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
 
     public void ViewportChanged(FetchInfo fetchInfo)
@@ -28,19 +28,26 @@ public class LayerFetcher(IEnumerable<ILayer> Layers)
 
     public void UpdateFetches()
     {
-        foreach (var layer in Layers.OfType<ILayerDataFetcher>().Where(l => l.NeedsFetch))
+        foreach (var layer in Layers.OfType<ILayerDataFetcher>())
         {
             if (_activeRequests.Count >= _maxConcurrent)
                 return;
-            if (_activeRequests.ContainsKey(layer.Id))
-                continue;
 
-            _activeRequests[layer.Id] = Task.Run(async () =>
+            var fetchesInProgressCount = _activeRequests.Count(kvp => kvp.Value.LayerId == layer.Id);
+
+            var fetchRequests = layer.GetFetchRequests(fetchesInProgressCount);
+
+            foreach (var fetchRequest in fetchRequests)
             {
-                await layer.FetchAsync();
-                _activeRequests.Remove(layer.Id);
-                UpdateFetches(); // After one fetch completes we check if we can start more.
-            });
+                _activeRequests[fetchRequest.RequestId] = fetchRequest;
+                _ = Task.Run(async () =>
+                {
+                    await fetchRequest.FetchFunc();
+                    _ = _activeRequests.Remove(fetchRequest.RequestId);
+                    UpdateFetches(); // After one fetch completes we check if we can start more.
+                }).ConfigureAwait(false);
+            }
+
         }
     }
 }

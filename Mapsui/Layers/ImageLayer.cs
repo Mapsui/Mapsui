@@ -59,11 +59,19 @@ public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvid
         Busy = true;
     }
 
-    public async Task FetchAsync()
+    public FetchRequest[] GetFetchRequests(int fetchesInProgressCount)
     {
         if (!Enabled)
-            return;
+            return [];
 
+        if (fetchesInProgressCount > 0) // Allow only one fetch in progress for this layer type.
+            return [];
+
+        return [new FetchRequest(Id, FetchAsync)];
+    }
+
+    private async Task FetchAsync()
+    {
         while (_fetchInfoMailbox.TryTake(out var fetchInfo))
         {
             if (fetchInfo.ChangeType == ChangeType.Continuous) return;
