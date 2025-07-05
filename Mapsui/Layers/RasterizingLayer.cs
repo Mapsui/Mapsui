@@ -2,13 +2,14 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
+public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
 {
     private readonly ConcurrentStack<RasterFeature> _cache;
     private readonly ILayer _layer;
@@ -16,13 +17,15 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     private readonly object _syncLock = new();
     private bool _busy;
     private MSection? _currentSection;
-    private bool _modified;
     private readonly IRenderer _rasterizer = DefaultRendererFactory.Create();
     private FetchInfo? _fetchInfo;
     private readonly Delayer _rasterizeDelayer = new();
     private readonly RenderFormat _renderFormat;
     private const int _minimumDelay = 1000;
     private readonly int _delayBetweenCalls;
+    private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
+
+    public event EventHandler<Navigator.RefreshDataRequestEventArgs>? RefreshDataRequest;
 
     public Delayer Delayer { get; } = new();
 
@@ -65,18 +68,15 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         if (MaxVisible < _fetchInfo.Resolution) return;
         if (_busy) return;
 
-        _modified = true;
-
         // Will start immediately if there was no call _delayBetweenCalls milliseconds before and if not ChangeType.Continuous.
-        _rasterizeDelayer.ExecuteDelayed(Rasterize, _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
+        _rasterizeDelayer.ExecuteDelayed(RasterizeAsync, _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
     }
 
-    private void Rasterize()
+    private async Task RasterizeAsync()
     {
         if (!Enabled) return;
         if (_busy) return;
         _busy = true;
-        _modified = false;
 
         lock (_syncLock)
         {
@@ -96,15 +96,13 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
                 _cache.PushRange(features);
                 OnDataChanged(new DataChangedEventArgs(Name));
-
-                if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher)
-                    Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo), _delayBetweenCalls, 0);
             }
             finally
             {
                 _busy = false;
             }
         }
+        await Task.CompletedTask;
     }
 
     public static double SymbolSize { get; set; } = 64;
@@ -126,7 +124,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
     }
 
-    public void RefreshData(FetchInfo fetchInfo)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
     {
         if (fetchInfo.Extent == null)
             return;
@@ -142,9 +140,9 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
             // Explicitly set the change type to discrete for rasterization
             _fetchInfo = new FetchInfo(fetchInfo.Section, fetchInfo.CRS);
             if (_layer is IAsyncDataFetcher asyncDataFetcher)
-                Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo), _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
+                Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo, enqueueFetch), _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
             else
-                Delayer.ExecuteDelayed(Rasterize, _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
+                Delayer.ExecuteDelayed(RasterizeAsync, _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
         }
     }
 
@@ -162,5 +160,32 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
             0,
             section.ScreenWidth,
             section.ScreenHeight);
+    }
+
+    public FetchRequest[] GetFetchRequests(int activeFetchCount, int availableFetchSlots)
+    {
+        if (_latestFetchInfo.TryTake(out var fetchInfo))
+        {
+            _fetchInfo = fetchInfo;
+
+            if (_layer is IFetchableSource fetchableSource)
+                return fetchableSource.GetFetchRequests(activeFetchCount, availableFetchSlots);
+            else
+                return [new FetchRequest(_layer.Id, RasterizeAsync)];
+
+        }
+        return [];
+    }
+
+    public void ViewportChanged(FetchInfo fetchInfo)
+    {
+        _latestFetchInfo.Overwrite(fetchInfo);
+        if (_layer is IFetchableSource fetchableSource)
+            fetchableSource.ViewportChanged(fetchInfo);
+    }
+
+    protected virtual void OnRefreshDataRequest()
+    {
+        RefreshDataRequest?.Invoke(this, new Navigator.RefreshDataRequestEventArgs(ChangeType.Discrete));
     }
 }

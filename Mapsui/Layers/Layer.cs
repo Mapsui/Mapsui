@@ -19,14 +19,16 @@ namespace Mapsui.Layers;
 /// Create layer with name
 /// </summary>
 /// <param name="layerName">Name to use for layer</param>
-public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, ILayerDataSource<IProvider>
+public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, ILayerDataSource<IProvider>
 {
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();
     private IFeature[] _cache = [];
-    private readonly FetchMachine _fetchMachine = new();
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
     private int _delayBetweenCalls;
+    private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
+
+    public event EventHandler<Navigator.RefreshDataRequestEventArgs>? RefreshDataRequest;
 
     public List<Func<bool>> Animations { get; } = [];
     public Delayer Delayer { get; } = new();
@@ -84,19 +86,13 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
     }
 
     /// <inheritdoc />
-    public void AbortFetch()
-    {
-        _fetchMachine.Stop();
-    }
-
-    /// <inheritdoc />
     public void ClearCache()
     {
         _cache = [];
     }
 
     /// <inheritdoc />
-    public void RefreshData(FetchInfo fetchInfo)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
     {
         if (!Enabled) return;
         if (MinVisible > fetchInfo.Resolution) return;
@@ -105,7 +101,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
         Busy = true;
-        Delayer.ExecuteDelayed(() => _fetchMachine.Enqueue(() => FetchAsync(fetchInfo, ++_refreshCounter)), _delayBetweenCalls, 0);
+        Delayer.ExecuteDelayed(() => enqueueFetch(() => FetchAsync(fetchInfo, ++_refreshCounter)), _delayBetweenCalls, 0);
     }
 
     public override bool UpdateAnimations()
@@ -119,12 +115,23 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
         return areAnimationsRunning;
     }
 
+    private async Task FetchAsync(FetchInfo fetchInfo)
+    {
+        if (fetchInfo.ChangeType == ChangeType.Continuous)
+            throw new NotSupportedException("Continuous changes are not supported by ImageLayer.");
+
+        var dataSource = DataSource;
+        if (dataSource is null)
+            return;
+
+        await FetchAsync(fetchInfo, ++_refreshCounter);
+    }
+
     public async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter)
     {
-        fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
-
         try
         {
+            fetchInfo = fetchInfo.Grow(SymbolStyle.DefaultWidth);
             var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo).ConfigureAwait(false) : [];
             _cache = features.ToArray();
             if (_refreshCounter == refreshCounter)
@@ -138,5 +145,29 @@ public class Layer(string layerName) : BaseLayer(layerName), IAsyncDataFetcher, 
                 Busy = false;
             OnDataChanged(new DataChangedEventArgs(ex, Name));
         }
+    }
+
+    public FetchRequest[] GetFetchRequests(int activeFetches, int availableFetchSlots)
+    {
+        if (!Enabled)
+            return [];
+
+        if (activeFetches > 0) // Allow only one fetch in progress for this layer type.
+            return [];
+
+        if (_latestFetchInfo.TryTake(out var fetchInfo))
+            return [new FetchRequest(Id, () => FetchAsync(fetchInfo))];
+        return [];
+    }
+
+    public void ViewportChanged(FetchInfo fetchInfo)
+    {
+        Busy = true;
+        _latestFetchInfo.Overwrite(fetchInfo);
+    }
+
+    protected virtual void OnRefreshDataRequest()
+    {
+        RefreshDataRequest?.Invoke(this, new Navigator.RefreshDataRequestEventArgs(ChangeType.Discrete));
     }
 }

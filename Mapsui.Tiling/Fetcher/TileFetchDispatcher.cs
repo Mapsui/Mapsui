@@ -3,6 +3,7 @@ using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
@@ -12,46 +13,51 @@ public class TileFetchDispatcher(
     ITileCache<IFeature?> tileCache,
     ITileSchema tileSchema,
     Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
-    IDataFetchStrategy? dataFetchStrategy = null) : INotifyPropertyChanged
+    IDataFetchStrategy dataFetchStrategy,
+    ILayer layer) : INotifyPropertyChanged, IFetchableSource
 {
+    public static int DefaultNumberOfSimultaneousFetches { get; set; } = 4;
     private bool _busy;
-    private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
-    private readonly FetchMachine _fetchMachine = new(4);
-    private readonly MessageBox<FetchInfo> _latestFetchInfo = new();
+    private readonly IDataFetchStrategy _dataFetchStrategy = dataFetchStrategy;
+    private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
     private readonly FetchTracker _fetchTracker = new();
 
     public int NumberTilesNeeded { get; private set; }
 
     public event EventHandler<Exception?>? DataChanged;
     public event PropertyChangedEventHandler? PropertyChanged;
+    public event EventHandler<Navigator.RefreshDataRequestEventArgs>? RefreshDataRequest;
 
-    public void RefreshData(FetchInfo fetchInfo)
+    public void ViewportChanged(FetchInfo fetchInfo)
     {
         // Set Busy to true immediately, so that the caller can immediately start waiting for it to go back to false.
         // Not sure if this is the best solution. It will often go to true and back to false without doing something.
         Busy = true;
-        _latestFetchInfo.Put(fetchInfo);
-        _fetchMachine.Enqueue(ProcessRefreshDataAsync); // Calculations are done on the FetchMachine.
+
+        _latestFetchInfo.Overwrite(fetchInfo);
     }
 
-    private Task ProcessRefreshDataAsync()
+    public FetchRequest[] GetFetchRequests(int activeFetches, int availableFetchSlots)
     {
         if (_latestFetchInfo.TryTake(out var fetchInfo))
         {
+            if (!layer.Enabled
+                || layer.MaxVisible < fetchInfo.Resolution
+                || layer.MinVisible > fetchInfo.Resolution)
+                return [];
+
             NumberTilesNeeded = _fetchTracker.Update(fetchInfo, tileSchema, _dataFetchStrategy, tileCache);
-
-            StartFetching();
         }
-        return Task.CompletedTask; // To make it async because that allows for an easy way to enqueue.
-    }
-
-    public void StartFetching()
-    {
         Busy = !_fetchTracker.IsDone();
+
+        var fetchCount = Math.Min(Math.Max(DefaultNumberOfSimultaneousFetches - activeFetches, 0), availableFetchSlots);
+
         // We want to keep a limited number of tiles in progress because the extent could change again and we do not
         // want to fetch tiles that are not needed anymore.
-        while (_fetchTracker.TryTake(out var tileToFetch, _fetchMachine.NumberOfWorkers))
-            _fetchMachine.Enqueue(() => FetchOnThreadAsync(tileToFetch));
+        var result = new List<FetchRequest>();
+        while (_fetchTracker.TryTake(out var tileToFetch, fetchCount))
+            result.Add(new FetchRequest(layer.Id, () => FetchOnThreadAsync(tileToFetch)));
+        return result.ToArray();
     }
 
     private async Task FetchOnThreadAsync(TileInfo tileInfo)
@@ -82,8 +88,6 @@ public class TileFetchDispatcher(
 
         Busy = !_fetchTracker.IsDone();
         DataChanged?.Invoke(this, exception);
-
-        StartFetching();
     }
 
     public bool Busy
@@ -98,10 +102,7 @@ public class TileFetchDispatcher(
         }
     }
 
-    public void StopFetching()
-    {
-        _fetchMachine.Stop();
-    }
+    public int Id => layer.Id;
 
     private void OnPropertyChanged(string propertyName)
     {

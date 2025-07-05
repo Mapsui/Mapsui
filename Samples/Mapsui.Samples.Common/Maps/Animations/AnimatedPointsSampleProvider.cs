@@ -2,9 +2,11 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using BruTile.Predefined;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Tiling.Extensions;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
@@ -20,25 +22,30 @@ internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposa
     private readonly Timer _timer;
     private readonly Random _random = new(0);
     private List<PointFeature> _previousFeatures = new();
+    private List<PointFeature> features = new();
+    private static readonly MRect _extent = new GlobalSphericalMercator().Extent.ToMRect();
 
     public AnimatedPointsSampleProvider()
     {
-        _timer = new Timer(_ => DataHasChanged(), this, 0, 1600);
+        _timer = new Timer(_ =>
+        {
+            DataHasChanged();
+            features = CreateNewFeatures(_random, _previousFeatures);
+            _previousFeatures = MergeWithPreviousFeatures(_previousFeatures, features);
+        }, this, 0, 1600);
     }
 
     public event EventHandler? DataChanged;
 
     public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        var features = CreateNewFeatures(fetchInfo, _random, _previousFeatures);
-        _previousFeatures = MergeWithPreviousFeatures(_previousFeatures, features);
         return Task.FromResult((IEnumerable<IFeature>)features);
     }
 
-    private static List<PointFeature> CreateNewFeatures(FetchInfo fetchInfo, Random random, List<PointFeature> previousFeatures)
+    private static List<PointFeature> CreateNewFeatures(Random random, List<PointFeature> previousFeatures)
     {
         var features = new List<PointFeature>();
-        var points = RandomPointsBuilder.GenerateRandomPoints(fetchInfo.Extent, 10, random).ToList();
+        var points = RandomPointsBuilder.GenerateRandomPoints(_extent, 10, random).ToList();
         var count = 0;
         var randomItemToSkip = random.Next(points.Count);
 
