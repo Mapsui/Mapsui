@@ -14,7 +14,7 @@ public class TileFetchDispatcher(
     ITileSchema tileSchema,
     Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
     IDataFetchStrategy dataFetchStrategy,
-    ILayer layer) : INotifyPropertyChanged, ILayerDataFetcher
+    ILayer layer) : INotifyPropertyChanged, IDataFetchLayer
 {
     public static int DefaultNumberOfSimultaneousFetches { get; set; } = 4;
     private bool _busy;

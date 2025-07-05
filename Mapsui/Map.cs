@@ -314,7 +314,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         layer.DataChanged += LayerDataChanged;
         layer.PropertyChanged += LayerPropertyChanged;
-        if (layer is ILayerDataFetcher dataFetchLayer)
+        if (layer is IDataFetchLayer dataFetchLayer)
             dataFetchLayer.RefreshDataRequest += DataFetchLayer_RefreshDataRequest;
     }
 
@@ -327,7 +327,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         if (layer is IAsyncDataFetcher asyncLayer)
             asyncLayer.AbortFetch();
-        if (layer is ILayerDataFetcher dataFetchLayer)
+        if (layer is IDataFetchLayer dataFetchLayer)
             dataFetchLayer.RefreshDataRequest -= DataFetchLayer_RefreshDataRequest;
 
         layer.DataChanged -= LayerDataChanged;

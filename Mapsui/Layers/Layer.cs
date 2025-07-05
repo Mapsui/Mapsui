@@ -19,7 +19,7 @@ namespace Mapsui.Layers;
 /// Create layer with name
 /// </summary>
 /// <param name="layerName">Name to use for layer</param>
-public class Layer(string layerName) : BaseLayer(layerName), ILayerDataFetcher, ILayerDataSource<IProvider>
+public class Layer(string layerName) : BaseLayer(layerName), IDataFetchLayer, ILayerDataSource<IProvider>
 {
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();

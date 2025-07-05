@@ -15,7 +15,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvider>, IDisposable, ILayer, ILayerFeatureInfo
+public class ImageLayer : BaseLayer, IDataFetchLayer, ILayerDataSource<IProvider>, IDisposable, ILayer, ILayerFeatureInfo
 {
     private IEnumerable<IFeature> _cache = [];
     private IProvider? _dataSource;
