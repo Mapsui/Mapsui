@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
@@ -20,49 +19,77 @@ public class FetchMachineTests
     // Note, The Thread.Sleep(1) in the while loop is necessary to avoid
     // a hang in some rare cases.
 
+#pragma warning disable IDISP006 // Implement IDisposable
+    MemoryLayer _layer = new MemoryLayer();
+#pragma warning restore IDISP006 // Implement IDisposable
+
     [Test]
     public async Task TileFetcherShouldRequestAllTilesJustOnesAsync()
     {
         // Arrange
         var tileSource = new CountingTileSource();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo), new MinimalDataFetchStrategy(), _layer);
         var fetchMachine = new FetchMachine();
         var level = 3;
         var expectedTiles = 64;
-
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
+        fetchDispatcher.ViewportChanged(fetchInfo);
 
         // Act
-        // Get all tiles of level 3
-        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
-        // Assert
-        while (fetchDispatcher.Busy) { await Task.Delay(10); }
+        do
+        {
+            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            foreach (var request in requests)
+            {
+                await request.FetchFunc();
+            }
+        } while (fetchDispatcher.Busy);
 
+        // Assert
         ClassicAssert.AreEqual(expectedTiles, tileSource.CountByTile.Keys.Count);
         ClassicAssert.AreEqual(expectedTiles, tileSource.CountByTile.Values.Sum());
         ClassicAssert.AreEqual(expectedTiles, tileSource.TotalCount);
     }
 
     [Test]
-    public void TilesFetchedShouldNotBeFetchAgain()
+    public async Task TilesFetchedShouldNotBeFetchAgainAsync()
     {
         // Arrange
         var tileSource = new CountingTileSource();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(
+            cache,
+            tileSource.Schema,
+            async tileInfo => await TileToFeatureAsync(tileSource, tileInfo),
+            new MinimalDataFetchStrategy(),
+            _layer);
         var level = 3;
         var expectedTiles = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
-        var fetchMachine = new FetchMachine();
+        fetchDispatcher.ViewportChanged(fetchInfo);
 
-        // Act
-        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
-        while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+        // Act (first round)
+        do
+        {
+            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            foreach (var request in requests)
+            {
+                await request.FetchFunc();
+            }
+        } while (fetchDispatcher.Busy);
+
         var countAfterFirstTry = tileSource.CountByTile.Keys.Count;
-        // do it again
-        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
-        while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+
+        // Act (second round)
+        do
+        {
+            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            foreach (var request in requests)
+            {
+                await request.FetchFunc();
+            }
+        } while (fetchDispatcher.Busy);
 
         // Assert
         ClassicAssert.AreEqual(countAfterFirstTry, tileSource.CountByTile.Values.Sum());
@@ -71,81 +98,135 @@ public class FetchMachineTests
         ClassicAssert.AreEqual(expectedTiles, tileSource.TotalCount);
     }
 
-
     [Test]
-    public void TileRequestThatReturnsNullShouldNotBeRequestedAgain()
+    public async Task TileRequestThatReturnsNullShouldNotBeRequestedAgainAsync()
     {
         // Arrange
         var tileSource = new NullTileSource();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(
+            cache,
+            tileSource.Schema,
+            async tileInfo => await TileToFeatureAsync(tileSource, tileInfo),
+            new MinimalDataFetchStrategy(),
+            _layer);
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
-        var fetchMachine = new FetchMachine();
+        fetchDispatcher.ViewportChanged(fetchInfo);
 
-        // Act
-        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
-        while (fetchDispatcher.Busy) { Thread.Sleep(1); }
-        // do it again
-        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
-        while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+        // Act (first round)
+        do
+        {
+            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            foreach (var request in requests)
+            {
+                await request.FetchFunc();
+            }
+        } while (fetchDispatcher.Busy);
+
+        // Act (second round)
+        do
+        {
+            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            foreach (var request in requests)
+            {
+                await request.FetchFunc();
+            }
+        } while (fetchDispatcher.Busy);
 
         // Assert
         ClassicAssert.AreEqual(tilesInLevel, tileSource.TotalCount);
     }
 
     [Test]
-    public void TileFetcherWithFailingFetchesShouldTryAgain()
+    public async Task TileFetcherWithFailingFetchesShouldTryAgainAsync()
     {
         // Arrange
         var tileSource = new FailingTileSource();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(
+            cache,
+            tileSource.Schema,
+            async tileInfo => await TileToFeatureAsync(tileSource, tileInfo),
+            new MinimalDataFetchStrategy(),
+            _layer);
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
         var fetchMachine = new FetchMachine();
 
-        // Act
-        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
-        while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
-        // Act again
-        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
-        while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+        // Act (first round)
+        fetchDispatcher.ViewportChanged(fetchInfo);
+        do
+        {
+            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            foreach (var request in requests)
+            {
+                await request.FetchFunc();
+            }
+        } while (fetchDispatcher.Busy);
+
+
+        // Act (second round)
+        fetchDispatcher.ViewportChanged(fetchInfo);
+        do
+        {
+            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            foreach (var request in requests)
+            {
+                await request.FetchFunc();
+            }
+        } while (fetchDispatcher.Busy);
 
         // Assert
         ClassicAssert.AreEqual(tilesInLevel * 2, tileSource.TotalCount); // tried all tiles twice
     }
 
     [Test]
-    public void TileFetcherWithSometimesFailingFetchesShouldTryAgain()
+    public async Task TileFetcherWithSometimesFailingFetchesShouldTryAgainAsync()
     {
         // Arrange
         var tileSource = new SometimesFailingTileSource();
         var tileSchema = new GlobalSphericalMercator();
         using var cache = new MemoryCache<IFeature?>();
-        var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeatureAsync(tileSource, tileInfo));
+        var fetchDispatcher = new TileFetchDispatcher(
+            cache,
+            tileSource.Schema,
+            async tileInfo => await TileToFeatureAsync(tileSource, tileInfo),
+            new MinimalDataFetchStrategy(),
+            _layer);
         var level = 3;
         var tilesInLevel = 64;
         var fetchInfo = new FetchInfo(new MSection(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel));
-        var fetchMachine = new FetchMachine();
+        fetchDispatcher.ViewportChanged(fetchInfo);
 
-        // Act
-        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
-        while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+        // Act (first round)
+        do
+        {
+            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            foreach (var request in requests)
+            {
+                await request.FetchFunc();
+            }
+        } while (fetchDispatcher.Busy);
 
         var tileCountAfterFirstBatch = tileSource.TotalCount;
 
-        // Act again
-        fetchDispatcher.RefreshData(fetchInfo, fetchMachine.Enqueue);
-        while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+        // Act (second round)
+        do
+        {
+            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            foreach (var request in requests)
+            {
+                await request.FetchFunc();
+            }
+        } while (fetchDispatcher.Busy);
 
         // Assert
         ClassicAssert.GreaterOrEqual(tileSource.TotalCount, tileCountAfterFirstBatch);
         ClassicAssert.GreaterOrEqual(tileSource.CountByTile.Values.Sum(), tilesInLevel);
-
     }
 
     private async Task<RasterFeature?> TileToFeatureAsync(ILocalTileSource tileSource, TileInfo tileInfo)

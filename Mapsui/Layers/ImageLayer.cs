@@ -20,14 +20,16 @@ public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvid
     private IEnumerable<IFeature> _cache = [];
     private IProvider? _dataSource;
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
-    private LatestMailbox<FetchInfo> _fetchInfoMailbox = new();
+    private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
+
+    public event EventHandler<Navigator.RefreshDataRequestEventArgs>? RefreshDataRequest;
 
     public ImageLayer()
     {
         Style = new RasterStyle();
     }
 
-    public bool NeedsFetch => !_fetchInfoMailbox.IsEmpty;
+    public bool NeedsFetch => !_latestFetchInfo.IsEmpty;
 
     public ImageLayer(string layerName) : this()
     {
@@ -53,13 +55,7 @@ public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvid
         return _cache;
     }
 
-    public void ViewportChanged(FetchInfo fetchInfo)
-    {
-        _fetchInfoMailbox.Overwrite(fetchInfo);
-        Busy = true;
-    }
-
-    public FetchRequest[] GetFetchRequests(int activeFetches)
+    public FetchRequest[] GetFetchRequests(int activeFetches, int availableFetchSlots)
     {
         if (!Enabled)
             return [];
@@ -67,22 +63,21 @@ public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvid
         if (activeFetches > 0) // Allow only one fetch in progress for this layer type.
             return [];
 
-        return [new FetchRequest(Id, FetchAsync)];
+        if (_latestFetchInfo.TryTake(out var fetchInfo))
+            return [new FetchRequest(Id, () => FetchAsync(fetchInfo))];
+        return [];
     }
 
-    private async Task FetchAsync()
+    private async Task FetchAsync(FetchInfo fetchInfo)
     {
-        while (_fetchInfoMailbox.TryTake(out var fetchInfo))
-        {
-            if (fetchInfo.ChangeType == ChangeType.Continuous) return;
+        if (fetchInfo.ChangeType == ChangeType.Continuous)
+            throw new NotSupportedException("Continuous changes are not supported by ImageLayer.");
 
-            var dataSource = DataSource;
-            if (dataSource is null)
-                return;
+        var dataSource = DataSource;
+        if (dataSource is null)
+            return;
 
-            Busy = true;
-            await FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks);
-        }
+        await FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks);
     }
 
     private async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter, IProvider dataSource, long timeRequested)
@@ -116,5 +111,16 @@ public class ImageLayer : BaseLayer, ILayerDataFetcher, ILayerDataSource<IProvid
         }
 
         return new Dictionary<string, IEnumerable<IFeature>>();
+    }
+
+    public void ViewportChanged(FetchInfo fetchInfo)
+    {
+        Busy = true;
+        _latestFetchInfo.Overwrite(fetchInfo);
+    }
+
+    protected virtual void OnRefreshDataRequest()
+    {
+        RefreshDataRequest?.Invoke(this, new Navigator.RefreshDataRequestEventArgs(ChangeType.Discrete));
     }
 }

@@ -314,12 +314,21 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         layer.DataChanged += LayerDataChanged;
         layer.PropertyChanged += LayerPropertyChanged;
+        if (layer is ILayerDataFetcher dataFetchLayer)
+            dataFetchLayer.RefreshDataRequest += DataFetchLayer_RefreshDataRequest;
+    }
+
+    private void DataFetchLayer_RefreshDataRequest(object? sender, Navigator.RefreshDataRequestEventArgs e)
+    {
+        RefreshData(e.ChangeType);
     }
 
     private void LayerRemoved(ILayer layer)
     {
         if (layer is IAsyncDataFetcher asyncLayer)
             asyncLayer.AbortFetch();
+        if (layer is ILayerDataFetcher dataFetchLayer)
+            dataFetchLayer.RefreshDataRequest -= DataFetchLayer_RefreshDataRequest;
 
         layer.DataChanged -= LayerDataChanged;
         layer.PropertyChanged -= LayerPropertyChanged;
@@ -342,7 +351,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         return new MMinMax(mostZoomedOut, mostZoomedIn);
     }
 
-    private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
+    private static double[] DetermineResolutions(IEnumerable<ILayer> layers)
     {
         var items = new Dictionary<double, double>();
         const float normalizedDistanceThreshold = 0.75f;
