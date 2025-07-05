@@ -23,7 +23,7 @@ namespace Mapsui.Tiling.Layers;
 /// <summary>
 /// Layer, which displays a map consisting of individual tiles
 /// </summary>
-public class TileLayer : BaseLayer, IDataFetchLayer, IDisposable
+public class TileLayer : BaseLayer, IFetchableSource, IDisposable
 {
     private readonly ITileSource _tileSource;
     private readonly IRenderFetchStrategy _renderFetchStrategy;

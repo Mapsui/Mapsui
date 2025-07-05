@@ -9,7 +9,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class RasterizingLayer : BaseLayer, IDataFetchLayer, ISourceLayer
+public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
 {
     private readonly ConcurrentStack<RasterFeature> _cache;
     private readonly ILayer _layer;
@@ -168,8 +168,8 @@ public class RasterizingLayer : BaseLayer, IDataFetchLayer, ISourceLayer
         {
             _fetchInfo = fetchInfo;
 
-            if (_layer is IDataFetchLayer dataFetchLayer)
-                return dataFetchLayer.GetFetchRequests(activeFetchCount, availableFetchSlots);
+            if (_layer is IFetchableSource fetchableSource)
+                return fetchableSource.GetFetchRequests(activeFetchCount, availableFetchSlots);
             else
                 return [new FetchRequest(_layer.Id, RasterizeAsync)];
 
@@ -180,8 +180,8 @@ public class RasterizingLayer : BaseLayer, IDataFetchLayer, ISourceLayer
     public void ViewportChanged(FetchInfo fetchInfo)
     {
         _latestFetchInfo.Overwrite(fetchInfo);
-        if (_layer is IDataFetchLayer dataFetchLayer)
-            dataFetchLayer.ViewportChanged(fetchInfo);
+        if (_layer is IFetchableSource fetchableSource)
+            fetchableSource.ViewportChanged(fetchInfo);
     }
 
     protected virtual void OnRefreshDataRequest()

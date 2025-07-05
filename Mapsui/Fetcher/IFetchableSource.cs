@@ -4,7 +4,7 @@ using static Mapsui.Navigator;
 
 namespace Mapsui.Fetcher;
 
-public interface IDataFetchLayer
+public interface IFetchableSource
 {
     /// <summary>
     /// The layer identifier.

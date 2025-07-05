@@ -20,7 +20,7 @@ public class ShapefileProjectionSample : ISample
     }
 
     public string Name => "Shapefile with Projection";
-    public string Category => "1";
+    public string Category => "Projection";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 

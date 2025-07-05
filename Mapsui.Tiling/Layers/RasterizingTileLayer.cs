@@ -16,7 +16,7 @@ namespace Mapsui.Tiling.Layers;
 /// Rasterizing Tile Layer. A Layer that Rasterizes and Tiles the Layer. For Faster Performance.
 /// It recreates the Tiles if Data is changed.
 /// </summary>
-public class RasterizingTileLayer : TileLayer, ISourceLayer, IDataFetchLayer, ILayerFeatureInfo
+public class RasterizingTileLayer : TileLayer, ISourceLayer, IFetchableSource, ILayerFeatureInfo
 {
     /// <summary>
     ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
@@ -74,7 +74,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IDataFetchLayer, IL
     {
         Busy = true;
         base.ViewportChanged(fetchInfo);
-        if (SourceLayer is IDataFetchLayer dataFetchLayer)
+        if (SourceLayer is IFetchableSource dataFetchLayer)
             dataFetchLayer.ViewportChanged(fetchInfo);
     }
 }
