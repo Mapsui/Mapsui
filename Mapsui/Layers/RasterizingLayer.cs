@@ -18,16 +18,11 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
     private bool _busy;
     private MSection? _currentSection;
     private readonly IRenderer _rasterizer = DefaultRendererFactory.Create();
-    private FetchInfo? _fetchInfo;
-    private readonly Delayer _rasterizeDelayer = new();
     private readonly RenderFormat _renderFormat;
-    private const int _minimumDelay = 1000;
-    private readonly int _delayBetweenCalls;
+    private FetchInfo? _fetchInfo;
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
 
     public event EventHandler<Navigator.RefreshDataRequestEventArgs>? RefreshDataRequest;
-
-    public Delayer Delayer { get; } = new();
 
     /// <summary>
     ///     Creates a RasterizingLayer which rasterizes a layer for performance
@@ -45,11 +40,10 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
         RenderFormat renderFormat = RenderFormat.Png)
     {
         _renderFormat = renderFormat;
-        _renderFormat = renderFormat;
         _layer = layer;
-        _delayBetweenCalls = delayBeforeRasterize;
         Name = layer.Name;
-        if (rasterizer != null) _rasterizer = rasterizer;
+        if (rasterizer != null)
+            _rasterizer = rasterizer;
         _cache = new ConcurrentStack<RasterFeature>();
         _pixelDensity = pixelDensity;
         _layer.DataChanged += LayerOnDataChanged;
@@ -68,8 +62,8 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
         if (MaxVisible < _fetchInfo.Resolution) return;
         if (_busy) return;
 
-        // Will start immediately if there was no call _delayBetweenCalls milliseconds before and if not ChangeType.Continuous.
-        _rasterizeDelayer.ExecuteDelayed(RasterizeAsync, _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
+        _latestFetchInfo.Overwrite(_fetchInfo);
+        OnRefreshDataRequest();
     }
 
     private async Task RasterizeAsync()
@@ -119,10 +113,6 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
         return features.Where(f => f.Raster != null && f.Raster.Extent.Intersects(biggerBox)).ToList();
     }
 
-    public void AbortFetch()
-    {
-        if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
-    }
 
     public void ClearCache()
     {
@@ -147,7 +137,15 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
             _fetchInfo = fetchInfo;
 
             if (_layer is IFetchableSource fetchableSource)
-                return fetchableSource.GetFetchRequests(activeFetchCount, availableFetchSlots);
+                return [new FetchRequest(_layer.Id, async () =>
+                    {
+                        var fetchRequests = fetchableSource.GetFetchRequests(activeFetchCount, availableFetchSlots);
+                        foreach (var fetchRequest in fetchRequests)
+                        {
+                            await fetchRequest.FetchFunc();
+                        }
+                        await RasterizeAsync();
+                    })];
             else
                 return [new FetchRequest(_layer.Id, RasterizeAsync)];
 
