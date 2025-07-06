@@ -124,28 +124,6 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
         if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
     }
 
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
-    {
-        if (fetchInfo.Extent == null)
-            return;
-
-        if (!Enabled) return;
-        if (MinVisible > fetchInfo.Resolution) return;
-        if (MaxVisible < fetchInfo.Resolution) return;
-
-        if ((_currentSection == null) ||
-            (_currentSection.Resolution != fetchInfo.Section.Resolution) ||
-            !_currentSection.Extent.Contains(fetchInfo.Section.Extent))
-        {
-            // Explicitly set the change type to discrete for rasterization
-            _fetchInfo = new FetchInfo(fetchInfo.Section, fetchInfo.CRS);
-            if (_layer is IAsyncDataFetcher asyncDataFetcher)
-                Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo, enqueueFetch), _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
-            else
-                Delayer.ExecuteDelayed(RasterizeAsync, _delayBetweenCalls, _fetchInfo.ChangeType == ChangeType.Discrete ? 0 : _minimumDelay);
-        }
-    }
-
     public void ClearCache()
     {
         if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
