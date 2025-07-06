@@ -25,27 +25,16 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
     private readonly object _syncRoot = new();
     private IFeature[] _cache = [];
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
-    private int _delayBetweenCalls;
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
 
     public event EventHandler<Navigator.RefreshDataRequestEventArgs>? RefreshDataRequest;
 
     public List<Func<bool>> Animations { get; } = [];
-    public Delayer Delayer { get; } = new();
 
     /// <summary>
     /// Create a new layer
     /// </summary>
     public Layer() : this("Layer") { }
-
-    /// <summary>
-    /// Time to wait before fetching data
-    /// </summary>
-    public int FetchingPostponedInMilliseconds
-    {
-        get => _delayBetweenCalls;
-        set => _delayBetweenCalls = value;
-    }
 
     /// <summary>
     /// Data source for this layer
@@ -89,19 +78,6 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
     public void ClearCache()
     {
         _cache = [];
-    }
-
-    /// <inheritdoc />
-    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
-    {
-        if (!Enabled) return;
-        if (MinVisible > fetchInfo.Resolution) return;
-        if (MaxVisible < fetchInfo.Resolution) return;
-        if (DataSource == null) return;
-        if (fetchInfo.ChangeType == ChangeType.Continuous) return;
-
-        Busy = true;
-        Delayer.ExecuteDelayed(() => enqueueFetch(() => FetchAsync(fetchInfo, ++_refreshCounter)), _delayBetweenCalls, 0);
     }
 
     public override bool UpdateAnimations()
