@@ -62,7 +62,6 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
         if (MaxVisible < _fetchInfo.Resolution) return;
         if (_busy) return;
 
-        _latestFetchInfo.Overwrite(_fetchInfo);
         OnRefreshDataRequest();
     }
 
