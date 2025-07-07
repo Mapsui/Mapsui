@@ -98,4 +98,14 @@ public class FetchTracker
             return false;
         }
     }
+
+    public void Clear()
+    {
+        lock (_lock)
+        {
+            _tilesToFetch.Clear();
+            _tilesInProgress.Clear();
+            _tilesThatFailed.Clear();
+        }
+    }
 }

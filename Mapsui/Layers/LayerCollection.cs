@@ -84,6 +84,10 @@ public class LayerCollection : IEnumerable<ILayer>
                 asyncLayer.AbortFetch();
                 asyncLayer.ClearCache();
             }
+            if (entry is IFetchJobSource fetchJobSource)
+            {
+                fetchJobSource.ClearCache();
+            }
         }
         var layersToRemove = _entries.Select(e => e.Layer).ToArray();
         _entries = entries;
@@ -390,6 +394,10 @@ public class LayerCollection : IEnumerable<ILayer>
             {
                 asyncLayer.AbortFetch();
                 asyncLayer.ClearCache();
+            }
+            if (layer is IFetchJobSource fetchJobSource)
+            {
+                fetchJobSource.ClearCache();
             }
         }
 

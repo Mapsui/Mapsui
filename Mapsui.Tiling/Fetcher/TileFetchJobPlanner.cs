@@ -108,4 +108,10 @@ public class TileFetchJobPlanner(
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    public void ClearCache()
+    {
+        _latestFetchInfo.TryTake(out var _);
+        _fetchTracker.Clear();
+    }
 }

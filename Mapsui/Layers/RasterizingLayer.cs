@@ -115,7 +115,8 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
 
     public void ClearCache()
     {
-        if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
+        if (_layer is IFetchJobSource fetchJobSource)
+            fetchJobSource.ClearCache();
     }
 
     public static Viewport ToViewport(MSection section)

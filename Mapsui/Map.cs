@@ -271,7 +271,10 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         foreach (var layer in _layers)
         {
-            if (layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
+            if (layer is IAsyncDataFetcher asyncLayer)
+                asyncLayer.ClearCache();
+            if (layer is IFetchJobSource fetchJobSource)
+                fetchJobSource.ClearCache();
         }
     }
 
