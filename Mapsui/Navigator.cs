@@ -1,5 +1,6 @@
 ﻿using Mapsui.Animations;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Limiting;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
@@ -762,10 +763,5 @@ public class Navigator
             _defaultPanBounds = value;
             InitializeIfNeeded();
         }
-    }
-
-    public class FetchRequestedEventArgs(ChangeType changeType) : EventArgs
-    {
-        public ChangeType ChangeType { get; } = changeType;
     }
 }

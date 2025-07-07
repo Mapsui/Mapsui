@@ -193,7 +193,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    private void Navigator_FetchRequested(object? sender, Navigator.FetchRequestedEventArgs e)
+    private void Navigator_FetchRequested(object? sender, FetchRequestedEventArgs e)
     {
         RefreshData(e.ChangeType);
     }
@@ -318,7 +318,7 @@ public class Map : INotifyPropertyChanged, IDisposable
             fetchJobSource.FetchRequested += DataFetchLayer_FetchRequested;
     }
 
-    private void DataFetchLayer_FetchRequested(object? sender, Navigator.FetchRequestedEventArgs e)
+    private void DataFetchLayer_FetchRequested(object? sender, FetchRequestedEventArgs e)
     {
         RefreshData(e.ChangeType);
     }

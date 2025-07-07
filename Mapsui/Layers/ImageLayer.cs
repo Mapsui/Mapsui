@@ -22,7 +22,7 @@ public class ImageLayer : BaseLayer, IFetchJobSource, ILayerDataSource<IProvider
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
 
-    public event EventHandler<Navigator.FetchRequestedEventArgs>? FetchRequested;
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
     public ImageLayer()
     {
@@ -121,6 +121,6 @@ public class ImageLayer : BaseLayer, IFetchJobSource, ILayerDataSource<IProvider
 
     protected virtual void OnFetchRequested()
     {
-        FetchRequested?.Invoke(this, new Navigator.FetchRequestedEventArgs(ChangeType.Discrete));
+        FetchRequested?.Invoke(this, new FetchRequestedEventArgs(ChangeType.Discrete));
     }
 }

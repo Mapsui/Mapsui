@@ -1,6 +1,5 @@
 ﻿using Mapsui.Layers;
 using System;
-using static Mapsui.Navigator;
 
 namespace Mapsui.Fetcher;
 

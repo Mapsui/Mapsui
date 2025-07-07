@@ -34,7 +34,7 @@ public class TileLayer : BaseLayer, IFetchJobSource, IDisposable
     private readonly MRect? _extent;
     private readonly HttpClient _httpClient = new();
 
-    public event EventHandler<Navigator.FetchRequestedEventArgs>? FetchRequested;
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
     /// <summary>
     /// Create tile layer for given tile source
@@ -178,6 +178,6 @@ public class TileLayer : BaseLayer, IFetchJobSource, IDisposable
 
     protected virtual void OnFetchRequested()
     {
-        FetchRequested?.Invoke(this, new Navigator.FetchRequestedEventArgs(ChangeType.Discrete));
+        FetchRequested?.Invoke(this, new FetchRequestedEventArgs(ChangeType.Discrete));
     }
 }

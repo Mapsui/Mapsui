@@ -22,7 +22,7 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
     private FetchInfo? _fetchInfo;
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
 
-    public event EventHandler<Navigator.FetchRequestedEventArgs>? FetchRequested;
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
     /// <summary>
     ///     Creates a RasterizingLayer which rasterizes a layer for performance
@@ -161,6 +161,6 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
 
     protected virtual void OnFetchRequested()
     {
-        FetchRequested?.Invoke(this, new Navigator.FetchRequestedEventArgs(ChangeType.Discrete));
+        FetchRequested?.Invoke(this, new FetchRequestedEventArgs(ChangeType.Discrete));
     }
 }
