@@ -41,12 +41,13 @@ public class ImageLayer : BaseLayer, IFetchableSource, ILayerDataSource<IProvide
         get => _dataSource;
         set
         {
-            if (_dataSource == value) return;
+            if (_dataSource == value)
+                return;
             _dataSource = value;
+            ClearCache();
             OnPropertyChanged(nameof(DataSource));
-            // This is a synchronous version so it doesn't need to be run in the Background
-            // the Extent is already created on the creation of the Provider.
             Extent = DataSource?.GetExtent();
+            OnFetchRequested();
         }
     }
 
