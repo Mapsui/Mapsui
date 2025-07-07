@@ -9,7 +9,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
+public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
 {
     private readonly ConcurrentStack<RasterFeature> _cache;
     private readonly ILayer _layer;
@@ -115,8 +115,8 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
 
     public void ClearCache()
     {
-        if (_layer is IFetchJobSource fetchJobSource)
-            fetchJobSource.ClearCache();
+        if (_layer is IFetchableSource fetchableSource)
+            fetchableSource.ClearCache();
     }
 
     public static Viewport ToViewport(MSection section)
@@ -136,10 +136,10 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
         {
             _fetchInfo = fetchInfo;
 
-            if (_layer is IFetchJobSource fetchJobSource)
+            if (_layer is IFetchableSource fetchableSource)
                 return [new FetchJob(_layer.Id, async () =>
                     {
-                        var fetchJobs = fetchJobSource.GetFetchJobs(activeFetchCount, availableFetchSlots);
+                        var fetchJobs = fetchableSource.GetFetchJobs(activeFetchCount, availableFetchSlots);
                         foreach (var fetchJob in fetchJobs)
                         {
                             await fetchJob.FetchFunc();
@@ -156,8 +156,8 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
     public void ViewportChanged(FetchInfo fetchInfo)
     {
         _latestFetchInfo.Overwrite(fetchInfo);
-        if (_layer is IFetchJobSource fetchJobSource)
-            fetchJobSource.ViewportChanged(fetchInfo);
+        if (_layer is IFetchableSource fetchableSource)
+            fetchableSource.ViewportChanged(fetchInfo);
     }
 
     protected virtual void OnFetchRequested()

@@ -41,7 +41,7 @@ public sealed class LayerFetcher
 
     private void UpdateLayerViewports(FetchInfo fetchInfo)
     {
-        foreach (var layer in _layers.OfType<IFetchJobSource>())
+        foreach (var layer in _layers.OfType<IFetchableSource>())
         {
             layer.ViewportChanged(fetchInfo);
         }
@@ -49,7 +49,7 @@ public sealed class LayerFetcher
 
     private void UpdateFetches()
     {
-        foreach (var layer in _layers.OfType<IFetchJobSource>())
+        foreach (var layer in _layers.OfType<IFetchableSource>())
         {
             try
             {

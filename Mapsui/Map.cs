@@ -273,8 +273,8 @@ public class Map : INotifyPropertyChanged, IDisposable
         {
             if (layer is IAsyncDataFetcher asyncLayer)
                 asyncLayer.ClearCache();
-            if (layer is IFetchJobSource fetchJobSource)
-                fetchJobSource.ClearCache();
+            if (layer is IFetchableSource fetchableSource)
+                fetchableSource.ClearCache();
         }
     }
 
@@ -317,11 +317,11 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         layer.DataChanged += LayerDataChanged;
         layer.PropertyChanged += LayerPropertyChanged;
-        if (layer is IFetchJobSource fetchJobSource)
-            fetchJobSource.FetchRequested += DataFetchLayer_FetchRequested;
+        if (layer is IFetchableSource fetchableSource)
+            fetchableSource.FetchRequested += FetchableSource_FetchRequested;
     }
 
-    private void DataFetchLayer_FetchRequested(object? sender, FetchRequestedEventArgs e)
+    private void FetchableSource_FetchRequested(object? sender, FetchRequestedEventArgs e)
     {
         RefreshData(e.ChangeType);
     }
@@ -330,8 +330,8 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         if (layer is IAsyncDataFetcher asyncLayer)
             asyncLayer.AbortFetch();
-        if (layer is IFetchJobSource fetchJobSource)
-            fetchJobSource.FetchRequested -= DataFetchLayer_FetchRequested;
+        if (layer is IFetchableSource fetchableSource)
+            fetchableSource.FetchRequested -= FetchableSource_FetchRequested;
 
         layer.DataChanged -= LayerDataChanged;
         layer.PropertyChanged -= LayerPropertyChanged;

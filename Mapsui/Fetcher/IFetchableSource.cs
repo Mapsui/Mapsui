@@ -3,7 +3,7 @@ using System;
 
 namespace Mapsui.Fetcher;
 
-public interface IFetchJobSource
+public interface IFetchableSource
 {
     /// <summary>
     /// The layer identifier.
