@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Tiling.Fetcher;
 
-public class TileFetchJobPlanner(
+public class TileFetchPlanner(
     ITileCache<IFeature?> tileCache,
     ITileSchema tileSchema,
     Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,

@@ -30,7 +30,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     private readonly int _minExtraTiles;
     private readonly int _maxExtraTiles;
     private int _numberTilesNeeded;
-    private readonly TileFetchJobPlanner _fetchJobPlanner;
+    private readonly TileFetchPlanner _tileFetchPlanner;
     private readonly MRect? _extent;
     private readonly HttpClient _httpClient = new();
 
@@ -62,10 +62,10 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
         _minExtraTiles = minExtraTiles;
         _maxExtraTiles = maxExtraTiles;
-        _fetchJobPlanner = new TileFetchJobPlanner(MemoryCache, _tileSource.Schema,
+        _tileFetchPlanner = new TileFetchPlanner(MemoryCache, _tileSource.Schema,
             fetchTileAsFeature ?? ToFeatureAsync, dataFetchStrategy, this);
-        _fetchJobPlanner.DataChanged += TileFetchJobPlannerOnDataChanged;
-        _fetchJobPlanner.PropertyChanged += TileFetchJobPlannerOnPropertyChanged;
+        _tileFetchPlanner.DataChanged += TileFetchPlanner_OnDataChanged;
+        _tileFetchPlanner.PropertyChanged += TileFetchPlanner_OnPropertyChanged;
         // There should be a way to override the application wide default user agent.
         _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", HttpClientTools.GetDefaultApplicationUserAgent());
     }
@@ -101,7 +101,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
 
     public FetchJob[] GetFetchJobs(int activeFetches, int availableFetchSlots)
     {
-        return _fetchJobPlanner.GetFetchJobs(activeFetches, availableFetchSlots);
+        return _tileFetchPlanner.GetFetchJobs(activeFetches, availableFetchSlots);
     }
 
     protected override void Dispose(bool disposing)
@@ -115,23 +115,23 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         base.Dispose(disposing);
     }
 
-    private void TileFetchJobPlannerOnPropertyChanged(object? sender, PropertyChangedEventArgs propertyChangedEventArgs)
+    private void TileFetchPlanner_OnPropertyChanged(object? sender, PropertyChangedEventArgs propertyChangedEventArgs)
     {
         if (propertyChangedEventArgs.PropertyName == nameof(Busy))
-            Busy = _fetchJobPlanner.Busy;
+            Busy = _tileFetchPlanner.Busy;
     }
 
     private void UpdateMemoryCacheMinAndMax()
     {
         if (_minExtraTiles < 0 || _maxExtraTiles < 0) return;
-        if (_numberTilesNeeded == _fetchJobPlanner.NumberTilesNeeded) return;
+        if (_numberTilesNeeded == _tileFetchPlanner.NumberTilesNeeded) return;
 
-        _numberTilesNeeded = _fetchJobPlanner.NumberTilesNeeded;
+        _numberTilesNeeded = _tileFetchPlanner.NumberTilesNeeded;
         MemoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
         MemoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
     }
 
-    private void TileFetchJobPlannerOnDataChanged(object? sender, Exception? ex)
+    private void TileFetchPlanner_OnDataChanged(object? sender, Exception? ex)
     {
         OnDataChanged(new DataChangedEventArgs(ex, Name));
     }
@@ -173,7 +173,7 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     public virtual void ViewportChanged(FetchInfo fetchInfo)
     {
         Busy = true;
-        _fetchJobPlanner.ViewportChanged(fetchInfo);
+        _tileFetchPlanner.ViewportChanged(fetchInfo);
     }
 
     protected virtual void OnFetchRequested()
