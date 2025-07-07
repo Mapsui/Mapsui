@@ -26,7 +26,9 @@ public class TileFetchPlanner(
 
     public event EventHandler<Exception?>? DataChanged;
     public event PropertyChangedEventHandler? PropertyChanged;
+#pragma warning disable CS0067 // Not used but required by the interface.
     public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
+#pragma warning restore CS0067
 
     public void ViewportChanged(FetchInfo fetchInfo)
     {
