@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using BruTile;
+﻿using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Fetcher;
@@ -10,17 +8,16 @@ using Mapsui.Tiling.Extensions;
 using Mapsui.Tiling.Fetcher;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Fetcher;
 
 [TestFixture]
 public class FetchMachineTests
 {
-    // Note, The Thread.Sleep(1) in the while loop is necessary to avoid
-    // a hang in some rare cases.
-
 #pragma warning disable IDISP006 // Implement IDisposable
-    MemoryLayer _layer = new MemoryLayer();
+    MemoryLayer _layer = new();
 #pragma warning restore IDISP006 // Implement IDisposable
 
     [Test]
@@ -156,7 +153,6 @@ public class FetchMachineTests
         var fetchInfo = new FetchInfo(new MSection(tileSource.Schema.Extent.ToMRect(), tileSource.Schema.Resolutions[level].UnitsPerPixel));
         var fetchMachine = new FetchMachine();
 
-
         // Act (first round)
         fetchJobPlanner.ViewportChanged(fetchInfo);
         do
@@ -229,7 +225,7 @@ public class FetchMachineTests
         ClassicAssert.GreaterOrEqual(tileSource.CountByTile.Values.Sum(), tilesInLevel);
     }
 
-    private async Task<RasterFeature?> TileToFeatureAsync(ILocalTileSource tileSource, TileInfo tileInfo)
+    private static async Task<RasterFeature?> TileToFeatureAsync(ILocalTileSource tileSource, TileInfo tileInfo)
     {
         // A tile layer can return a null value. This indicates the tile is not
         // present in the source, permanently. If this is the case no further 
