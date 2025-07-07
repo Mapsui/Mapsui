@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -12,7 +11,7 @@ namespace Mapsui.Tests.Fetcher;
 public class FeatureFetcherTests
 {
     [Test]
-    public async Task Layer_BusyProperty_ChangesDuringFeatureFetchAsync(CancellationToken token)
+    public async Task Layer_BusyProperty_ChangesDuringFeatureFetchAsync()
     {
         // Arrange
         var extent = new MRect(0, 0, 10, 10);
