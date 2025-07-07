@@ -23,5 +23,5 @@ public interface IFetchJobSource
     /// <param name="fetchInfo"></param>
     public void ViewportChanged(FetchInfo fetchInfo);
 
-    public event EventHandler<RefreshDataRequestEventArgs>? RefreshDataRequest;
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 }

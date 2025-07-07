@@ -19,7 +19,7 @@ public class NavigatorTests
         navigator.OverridePanBounds = new MRect(-100, -100, 100, 100);
         int navigatedCounter = 0;
         navigator.SetViewportAnimations(CreateAnimation());
-        navigator.RefreshDataRequest += (s, e) => navigatedCounter++;
+        navigator.FetchRequested += (s, e) => navigatedCounter++;
 
         // Act
         navigator.CenterOn(10, 20);

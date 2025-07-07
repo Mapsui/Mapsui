@@ -60,7 +60,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IFetchJobSource, IL
         {
             ClearCache(); // It would cause less flicker if we could invalidate the tiles so that they could still be used by the renderer but would be replaced by the fetcher.
             DataHasChanged();
-            OnRefreshDataRequest();
+            OnFetchRequested();
         };
     }
 

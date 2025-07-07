@@ -26,7 +26,7 @@ public class TileFetchJobPlanner(
 
     public event EventHandler<Exception?>? DataChanged;
     public event PropertyChangedEventHandler? PropertyChanged;
-    public event EventHandler<Navigator.RefreshDataRequestEventArgs>? RefreshDataRequest;
+    public event EventHandler<Navigator.FetchRequestedEventArgs>? FetchRequested;
 
     public void ViewportChanged(FetchInfo fetchInfo)
     {

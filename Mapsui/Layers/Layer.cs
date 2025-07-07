@@ -27,7 +27,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchJobSource, IL
     private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
 
-    public event EventHandler<Navigator.RefreshDataRequestEventArgs>? RefreshDataRequest;
+    public event EventHandler<Navigator.FetchRequestedEventArgs>? FetchRequested;
 
     public List<Func<bool>> Animations { get; } = [];
 
@@ -142,8 +142,8 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchJobSource, IL
         _latestFetchInfo.Overwrite(fetchInfo);
     }
 
-    protected virtual void OnRefreshDataRequest()
+    protected virtual void OnFetchRequested()
     {
-        RefreshDataRequest?.Invoke(this, new Navigator.RefreshDataRequestEventArgs(ChangeType.Discrete));
+        FetchRequested?.Invoke(this, new Navigator.FetchRequestedEventArgs(ChangeType.Discrete));
     }
 }

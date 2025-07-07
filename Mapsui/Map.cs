@@ -44,7 +44,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         _layerFetcher = new LayerFetcher(Layers);
         Widgets.Add(CreateLoggingWidget(RefreshGraphics));
         Widgets.Add(CreatePerformanceWidget(this));
-        Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
+        Navigator.FetchRequested += Navigator_FetchRequested;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
 
@@ -193,7 +193,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    private void Navigator_RefreshDataRequest(object? sender, Navigator.RefreshDataRequestEventArgs e)
+    private void Navigator_FetchRequested(object? sender, Navigator.FetchRequestedEventArgs e)
     {
         RefreshData(e.ChangeType);
     }
@@ -315,10 +315,10 @@ public class Map : INotifyPropertyChanged, IDisposable
         layer.DataChanged += LayerDataChanged;
         layer.PropertyChanged += LayerPropertyChanged;
         if (layer is IFetchJobSource fetchJobSource)
-            fetchJobSource.RefreshDataRequest += DataFetchLayer_RefreshDataRequest;
+            fetchJobSource.FetchRequested += DataFetchLayer_FetchRequested;
     }
 
-    private void DataFetchLayer_RefreshDataRequest(object? sender, Navigator.RefreshDataRequestEventArgs e)
+    private void DataFetchLayer_FetchRequested(object? sender, Navigator.FetchRequestedEventArgs e)
     {
         RefreshData(e.ChangeType);
     }
@@ -328,7 +328,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         if (layer is IAsyncDataFetcher asyncLayer)
             asyncLayer.AbortFetch();
         if (layer is IFetchJobSource fetchJobSource)
-            fetchJobSource.RefreshDataRequest -= DataFetchLayer_RefreshDataRequest;
+            fetchJobSource.FetchRequested -= DataFetchLayer_FetchRequested;
 
         layer.DataChanged -= LayerDataChanged;
         layer.PropertyChanged -= LayerPropertyChanged;

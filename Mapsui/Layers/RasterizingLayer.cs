@@ -22,7 +22,7 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
     private FetchInfo? _fetchInfo;
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
 
-    public event EventHandler<Navigator.RefreshDataRequestEventArgs>? RefreshDataRequest;
+    public event EventHandler<Navigator.FetchRequestedEventArgs>? FetchRequested;
 
     /// <summary>
     ///     Creates a RasterizingLayer which rasterizes a layer for performance
@@ -62,7 +62,7 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
         if (MaxVisible < _fetchInfo.Resolution) return;
         if (_busy) return;
 
-        OnRefreshDataRequest();
+        OnFetchRequested();
     }
 
     private async Task RasterizeAsync()
@@ -159,8 +159,8 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
             fetchJobSource.ViewportChanged(fetchInfo);
     }
 
-    protected virtual void OnRefreshDataRequest()
+    protected virtual void OnFetchRequested()
     {
-        RefreshDataRequest?.Invoke(this, new Navigator.RefreshDataRequestEventArgs(ChangeType.Discrete));
+        FetchRequested?.Invoke(this, new Navigator.FetchRequestedEventArgs(ChangeType.Discrete));
     }
 }
