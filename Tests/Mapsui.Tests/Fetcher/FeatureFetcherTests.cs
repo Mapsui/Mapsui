@@ -33,13 +33,13 @@ public class FeatureFetcherTests
 
         var fetchInfo = new FetchInfo(new MSection(extent, 1), null, ChangeType.Discrete);
         layer.ViewportChanged(fetchInfo);
-        var requests = layer.GetFetchRequests(0, 8);
+        var requests = layer.GetFetchJobs(0, 8);
 
         // Act
-        foreach (var fetchRequest in requests)
+        foreach (var fetchJob in requests)
         {
             // This will trigger the DataChanged event
-            await fetchRequest.FetchFunc().ConfigureAwait(false);
+            await fetchJob.FetchFunc().ConfigureAwait(false);
         }
 
         // Assert

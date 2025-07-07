@@ -39,7 +39,7 @@ public class FetchMachineTests
         // Act
         do
         {
-            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            var requests = fetchDispatcher.GetFetchJobs(0, 8);
             foreach (var request in requests)
             {
                 await request.FetchFunc();
@@ -72,7 +72,7 @@ public class FetchMachineTests
         // Act (first round)
         do
         {
-            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            var requests = fetchDispatcher.GetFetchJobs(0, 8);
             foreach (var request in requests)
             {
                 await request.FetchFunc();
@@ -84,7 +84,7 @@ public class FetchMachineTests
         // Act (second round)
         do
         {
-            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            var requests = fetchDispatcher.GetFetchJobs(0, 8);
             foreach (var request in requests)
             {
                 await request.FetchFunc();
@@ -118,7 +118,7 @@ public class FetchMachineTests
         // Act (first round)
         do
         {
-            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            var requests = fetchDispatcher.GetFetchJobs(0, 8);
             foreach (var request in requests)
             {
                 await request.FetchFunc();
@@ -128,7 +128,7 @@ public class FetchMachineTests
         // Act (second round)
         do
         {
-            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            var requests = fetchDispatcher.GetFetchJobs(0, 8);
             foreach (var request in requests)
             {
                 await request.FetchFunc();
@@ -161,7 +161,7 @@ public class FetchMachineTests
         fetchDispatcher.ViewportChanged(fetchInfo);
         do
         {
-            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            var requests = fetchDispatcher.GetFetchJobs(0, 8);
             foreach (var request in requests)
             {
                 await request.FetchFunc();
@@ -173,7 +173,7 @@ public class FetchMachineTests
         fetchDispatcher.ViewportChanged(fetchInfo);
         do
         {
-            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            var requests = fetchDispatcher.GetFetchJobs(0, 8);
             foreach (var request in requests)
             {
                 await request.FetchFunc();
@@ -205,7 +205,7 @@ public class FetchMachineTests
         // Act (first round)
         do
         {
-            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            var requests = fetchDispatcher.GetFetchJobs(0, 8);
             foreach (var request in requests)
             {
                 await request.FetchFunc();
@@ -217,7 +217,7 @@ public class FetchMachineTests
         // Act (second round)
         do
         {
-            var requests = fetchDispatcher.GetFetchRequests(0, 8);
+            var requests = fetchDispatcher.GetFetchJobs(0, 8);
             foreach (var request in requests)
             {
                 await request.FetchFunc();

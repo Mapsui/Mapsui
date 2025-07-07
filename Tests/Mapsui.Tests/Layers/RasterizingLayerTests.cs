@@ -34,11 +34,11 @@ public class RasterizingLayerTests
 
         // act
         layer.ViewportChanged(fetchInfo);
-        var fetchRequests = layer.GetFetchRequests(0, 8);
-        foreach (var fetchRequest in fetchRequests)
+        var fetchJobs = layer.GetFetchJobs(0, 8);
+        foreach (var fetchJob in fetchJobs)
         {
             // This will trigger the DataChanged event
-            await fetchRequest.FetchFunc();
+            await fetchJob.FetchFunc();
         }
 
         // assert

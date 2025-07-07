@@ -4,7 +4,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
@@ -12,9 +11,8 @@ namespace Mapsui.Fetcher;
 
 public sealed class LayerFetcher
 {
-    private readonly int _maxConcurrent = 8;
-    private int _fetchRequestCount = 0;
-    private readonly ConcurrentDictionary<long, FetchRequest> _activeFetches = new();
+    private readonly int _maxConcurrentFetches = 8;
+    private readonly ConcurrentDictionary<long, FetchJob> _activeFetches = new();
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
     private readonly IEnumerable<ILayer> _layers;
 
@@ -43,7 +41,7 @@ public sealed class LayerFetcher
 
     private void UpdateLayerViewports(FetchInfo fetchInfo)
     {
-        foreach (var layer in _layers.OfType<IFetchableSource>())
+        foreach (var layer in _layers.OfType<IFetchJobSource>())
         {
             layer.ViewportChanged(fetchInfo);
         }
@@ -51,27 +49,25 @@ public sealed class LayerFetcher
 
     private void UpdateFetches()
     {
-        foreach (var layer in _layers.OfType<IFetchableSource>())
+        foreach (var layer in _layers.OfType<IFetchJobSource>())
         {
             try
             {
                 var activeFetchCountForLayer = _activeFetches.Count(kvp => kvp.Value.LayerId == layer.Id);
 
-                var availableFetchSlots = _maxConcurrent - _fetchRequestCount;
+                var availableFetchSlots = _maxConcurrentFetches - _activeFetches.Count;
                 if (availableFetchSlots == 0)
                     return;
-                var fetchRequests = layer.GetFetchRequests(activeFetchCountForLayer, availableFetchSlots);
+                var fetchJobs = layer.GetFetchJobs(activeFetchCountForLayer, availableFetchSlots);
 
-                foreach (var fetchRequest in fetchRequests)
+                foreach (var fetchJob in fetchJobs)
                 {
-                    Interlocked.Increment(ref _fetchRequestCount);
-
-                    _activeFetches[fetchRequest.RequestId] = fetchRequest;
+                    _activeFetches[fetchJob.JobId] = fetchJob;
                     _ = Task.Run(async () =>
                     {
                         try
                         {
-                            await fetchRequest.FetchFunc();
+                            await fetchJob.FetchFunc();
                         }
                         catch (Exception ex)
                         {
@@ -79,9 +75,8 @@ public sealed class LayerFetcher
                         }
                         finally
                         {
-                            _activeFetches.Remove(fetchRequest.RequestId, out var value);
-                            Interlocked.Decrement(ref _fetchRequestCount);
-                            _channel.Writer.TryWrite(true);
+                            _ = _activeFetches.Remove(fetchJob.JobId, out var value);
+                            _ = _channel.Writer.TryWrite(true);
                         }
                     }).ConfigureAwait(false);
                 }

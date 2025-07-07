@@ -15,7 +15,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class ImageLayer : BaseLayer, IFetchableSource, ILayerDataSource<IProvider>, IDisposable, ILayer, ILayerFeatureInfo
+public class ImageLayer : BaseLayer, IFetchJobSource, ILayerDataSource<IProvider>, IDisposable, ILayer, ILayerFeatureInfo
 {
     private IEnumerable<IFeature> _cache = [];
     private IProvider? _dataSource;
@@ -55,7 +55,7 @@ public class ImageLayer : BaseLayer, IFetchableSource, ILayerDataSource<IProvide
         return _cache;
     }
 
-    public FetchRequest[] GetFetchRequests(int activeFetches, int availableFetchSlots)
+    public FetchJob[] GetFetchJobs(int activeFetches, int availableFetchSlots)
     {
         if (!Enabled)
             return [];
@@ -64,7 +64,7 @@ public class ImageLayer : BaseLayer, IFetchableSource, ILayerDataSource<IProvide
             return [];
 
         if (_latestFetchInfo.TryTake(out var fetchInfo))
-            return [new FetchRequest(Id, () => FetchAsync(fetchInfo))];
+            return [new FetchJob(Id, () => FetchAsync(fetchInfo))];
         return [];
     }
 

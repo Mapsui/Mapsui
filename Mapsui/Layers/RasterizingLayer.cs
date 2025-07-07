@@ -9,7 +9,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
+public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
 {
     private readonly ConcurrentStack<RasterFeature> _cache;
     private readonly ILayer _layer;
@@ -129,24 +129,24 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
             section.ScreenHeight);
     }
 
-    public FetchRequest[] GetFetchRequests(int activeFetchCount, int availableFetchSlots)
+    public FetchJob[] GetFetchJobs(int activeFetchCount, int availableFetchSlots)
     {
         if (_latestFetchInfo.TryTake(out var fetchInfo))
         {
             _fetchInfo = fetchInfo;
 
-            if (_layer is IFetchableSource fetchableSource)
-                return [new FetchRequest(_layer.Id, async () =>
+            if (_layer is IFetchJobSource fetchableSource)
+                return [new FetchJob(_layer.Id, async () =>
                     {
-                        var fetchRequests = fetchableSource.GetFetchRequests(activeFetchCount, availableFetchSlots);
-                        foreach (var fetchRequest in fetchRequests)
+                        var fetchJobs = fetchableSource.GetFetchJobs(activeFetchCount, availableFetchSlots);
+                        foreach (var fetchJob in fetchJobs)
                         {
-                            await fetchRequest.FetchFunc();
+                            await fetchJob.FetchFunc();
                         }
                         await RasterizeAsync();
                     })];
             else
-                return [new FetchRequest(_layer.Id, RasterizeAsync)];
+                return [new FetchJob(_layer.Id, RasterizeAsync)];
 
         }
         return [];
@@ -155,7 +155,7 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
     public void ViewportChanged(FetchInfo fetchInfo)
     {
         _latestFetchInfo.Overwrite(fetchInfo);
-        if (_layer is IFetchableSource fetchableSource)
+        if (_layer is IFetchJobSource fetchableSource)
             fetchableSource.ViewportChanged(fetchInfo);
     }
 

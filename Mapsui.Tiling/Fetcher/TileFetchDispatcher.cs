@@ -14,7 +14,7 @@ public class TileFetchDispatcher(
     ITileSchema tileSchema,
     Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
     IDataFetchStrategy dataFetchStrategy,
-    ILayer layer) : INotifyPropertyChanged, IFetchableSource
+    ILayer layer) : INotifyPropertyChanged, IFetchJobSource
 {
     public static int DefaultNumberOfSimultaneousFetches { get; set; } = 4;
     private bool _busy;
@@ -37,7 +37,7 @@ public class TileFetchDispatcher(
         _latestFetchInfo.Overwrite(fetchInfo);
     }
 
-    public FetchRequest[] GetFetchRequests(int activeFetches, int availableFetchSlots)
+    public FetchJob[] GetFetchJobs(int activeFetches, int availableFetchSlots)
     {
         if (_latestFetchInfo.TryTake(out var fetchInfo))
         {
@@ -54,10 +54,10 @@ public class TileFetchDispatcher(
 
         // We want to keep a limited number of tiles in progress because the extent could change again and we do not
         // want to fetch tiles that are not needed anymore.
-        var result = new List<FetchRequest>();
+        var fetchJobs = new List<FetchJob>();
         while (_fetchTracker.TryTake(out var tileToFetch, fetchCount))
-            result.Add(new FetchRequest(layer.Id, () => FetchOnThreadAsync(tileToFetch)));
-        return result.ToArray();
+            fetchJobs.Add(new FetchJob(layer.Id, () => FetchOnThreadAsync(tileToFetch)));
+        return fetchJobs.ToArray();
     }
 
     private async Task FetchOnThreadAsync(TileInfo tileInfo)

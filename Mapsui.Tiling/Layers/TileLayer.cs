@@ -23,7 +23,7 @@ namespace Mapsui.Tiling.Layers;
 /// <summary>
 /// Layer, which displays a map consisting of individual tiles
 /// </summary>
-public class TileLayer : BaseLayer, IFetchableSource, IDisposable
+public class TileLayer : BaseLayer, IFetchJobSource, IDisposable
 {
     private readonly ITileSource _tileSource;
     private readonly IRenderFetchStrategy _renderFetchStrategy;
@@ -99,9 +99,9 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
         MemoryCache.Clear();
     }
 
-    public FetchRequest[] GetFetchRequests(int activeFetches, int availableFetchSlots)
+    public FetchJob[] GetFetchJobs(int activeFetches, int availableFetchSlots)
     {
-        return _tileFetchDispatcher.GetFetchRequests(activeFetches, availableFetchSlots);
+        return _tileFetchDispatcher.GetFetchJobs(activeFetches, availableFetchSlots);
     }
 
     protected override void Dispose(bool disposing)

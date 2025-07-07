@@ -19,7 +19,7 @@ namespace Mapsui.Layers;
 /// Create layer with name
 /// </summary>
 /// <param name="layerName">Name to use for layer</param>
-public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, ILayerDataSource<IProvider>
+public class Layer(string layerName) : BaseLayer(layerName), IFetchJobSource, ILayerDataSource<IProvider>
 {
     private IProvider? _dataSource;
     private readonly object _syncRoot = new();
@@ -123,7 +123,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
         }
     }
 
-    public FetchRequest[] GetFetchRequests(int activeFetches, int availableFetchSlots)
+    public FetchJob[] GetFetchJobs(int activeFetches, int availableFetchSlots)
     {
         if (!Enabled)
             return [];
@@ -132,7 +132,7 @@ public class Layer(string layerName) : BaseLayer(layerName), IFetchableSource, I
             return [];
 
         if (_latestFetchInfo.TryTake(out var fetchInfo))
-            return [new FetchRequest(Id, () => FetchAsync(fetchInfo))];
+            return [new FetchJob(Id, () => FetchAsync(fetchInfo))];
         return [];
     }
 
