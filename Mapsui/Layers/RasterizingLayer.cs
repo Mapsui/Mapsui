@@ -135,10 +135,10 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
         {
             _fetchInfo = fetchInfo;
 
-            if (_layer is IFetchJobSource fetchableSource)
+            if (_layer is IFetchJobSource fetchJobSource)
                 return [new FetchJob(_layer.Id, async () =>
                     {
-                        var fetchJobs = fetchableSource.GetFetchJobs(activeFetchCount, availableFetchSlots);
+                        var fetchJobs = fetchJobSource.GetFetchJobs(activeFetchCount, availableFetchSlots);
                         foreach (var fetchJob in fetchJobs)
                         {
                             await fetchJob.FetchFunc();
@@ -155,8 +155,8 @@ public class RasterizingLayer : BaseLayer, IFetchJobSource, ISourceLayer
     public void ViewportChanged(FetchInfo fetchInfo)
     {
         _latestFetchInfo.Overwrite(fetchInfo);
-        if (_layer is IFetchJobSource fetchableSource)
-            fetchableSource.ViewportChanged(fetchInfo);
+        if (_layer is IFetchJobSource fetchJobSource)
+            fetchJobSource.ViewportChanged(fetchInfo);
     }
 
     protected virtual void OnRefreshDataRequest()

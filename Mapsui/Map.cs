@@ -314,8 +314,8 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         layer.DataChanged += LayerDataChanged;
         layer.PropertyChanged += LayerPropertyChanged;
-        if (layer is IFetchableSource fetchableSource)
-            fetchableSource.RefreshDataRequest += DataFetchLayer_RefreshDataRequest;
+        if (layer is IFetchJobSource fetchJobSource)
+            fetchJobSource.RefreshDataRequest += DataFetchLayer_RefreshDataRequest;
     }
 
     private void DataFetchLayer_RefreshDataRequest(object? sender, Navigator.RefreshDataRequestEventArgs e)
@@ -327,8 +327,8 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         if (layer is IAsyncDataFetcher asyncLayer)
             asyncLayer.AbortFetch();
-        if (layer is IFetchableSource dataFetchLayer)
-            dataFetchLayer.RefreshDataRequest -= DataFetchLayer_RefreshDataRequest;
+        if (layer is IFetchJobSource fetchJobSource)
+            fetchJobSource.RefreshDataRequest -= DataFetchLayer_RefreshDataRequest;
 
         layer.DataChanged -= LayerDataChanged;
         layer.PropertyChanged -= LayerPropertyChanged;
