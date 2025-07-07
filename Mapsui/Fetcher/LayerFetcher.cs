@@ -28,7 +28,7 @@ public sealed class LayerFetcher
     {
         _latestFetchInfo.Overwrite(fetchInfo);
         UpdateLayerViewports(fetchInfo);
-        _channel.Writer.TryWrite(true);
+        _ = _channel.Writer.TryWrite(true);
     }
 
     private async Task AddConsumerAsync(Channel<bool> channel)
