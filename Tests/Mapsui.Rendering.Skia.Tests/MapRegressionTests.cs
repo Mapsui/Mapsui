@@ -64,6 +64,7 @@ public class MapRegressionTests
             new WmsBasilicataSample(), // Times out,
             new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
             new WfsGeometryFilterSample(), // Crashes on the build server.
+            new RasterizingTileLayerWithDynamicPointsSample(), // Changes because it is dynamic.
         ];
 
     [Test]

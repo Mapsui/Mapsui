@@ -114,7 +114,7 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
         return _features;
     }
 
-    public void RefreshData(FetchInfo fetchInfo)
+    public void RefreshData(FetchInfo fetchInfo, Action<Func<Task>> enqueueFetch)
     {
         if (_fetchInfo is null) // On the first call _fetchInfo is null and we should initialize the features.
             UpdateFeatures(fetchInfo);

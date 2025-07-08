@@ -61,9 +61,9 @@ public class RasterizedVectorTilesSample : ISample
         public string Name => "VexTile";
         public Attribution Attribution => new("Attributions");
 
-        public VectorTileSourceWrapper(ITileDataSource sqliteConnection)
+        public VectorTileSourceWrapper(ITileDataSource tileDataSource)
         {
-            _tileSource = new VectorTilesSource(sqliteConnection);
+            _tileSource = new VectorTilesSource(tileDataSource);
             _style.SetSourceProvider("openmaptiles", _tileSource);
         }
 

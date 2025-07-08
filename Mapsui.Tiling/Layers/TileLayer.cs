@@ -23,16 +23,18 @@ namespace Mapsui.Tiling.Layers;
 /// <summary>
 /// Layer, which displays a map consisting of individual tiles
 /// </summary>
-public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
+public class TileLayer : BaseLayer, IFetchableSource, IDisposable
 {
     private readonly ITileSource _tileSource;
     private readonly IRenderFetchStrategy _renderFetchStrategy;
     private readonly int _minExtraTiles;
     private readonly int _maxExtraTiles;
     private int _numberTilesNeeded;
-    private readonly TileFetchDispatcher _tileFetchDispatcher;
+    private readonly TileFetchPlanner _tileFetchPlanner;
     private readonly MRect? _extent;
     private readonly HttpClient _httpClient = new();
+
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
     /// <summary>
     /// Create tile layer for given tile source
@@ -60,9 +62,10 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
         _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
         _minExtraTiles = minExtraTiles;
         _maxExtraTiles = maxExtraTiles;
-        _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, _tileSource.Schema, fetchTileAsFeature ?? ToFeatureAsync, dataFetchStrategy);
-        _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
-        _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
+        _tileFetchPlanner = new TileFetchPlanner(MemoryCache, _tileSource.Schema,
+            fetchTileAsFeature ?? ToFeatureAsync, dataFetchStrategy, this);
+        _tileFetchPlanner.DataChanged += TileFetchPlanner_OnDataChanged;
+        _tileFetchPlanner.PropertyChanged += TileFetchPlanner_OnPropertyChanged;
         // There should be a way to override the application wide default user agent.
         _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", HttpClientTools.GetDefaultApplicationUserAgent());
     }
@@ -91,27 +94,14 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     }
 
     /// <inheritdoc />
-    public void AbortFetch()
-    {
-        _tileFetchDispatcher.StopFetching();
-    }
-
-    /// <inheritdoc />
     public void ClearCache()
     {
         MemoryCache.Clear();
     }
 
-    /// <inheritdoc />
-    public void RefreshData(FetchInfo fetchInfo)
+    public FetchJob[] GetFetchJobs(int activeFetches, int availableFetchSlots)
     {
-        if (Enabled
-            && fetchInfo.Extent?.GetArea() > 0
-            && MaxVisible >= fetchInfo.Resolution
-            && MinVisible <= fetchInfo.Resolution)
-        {
-            _tileFetchDispatcher.RefreshData(fetchInfo);
-        }
+        return _tileFetchPlanner.GetFetchJobs(activeFetches, availableFetchSlots);
     }
 
     protected override void Dispose(bool disposing)
@@ -125,23 +115,23 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
         base.Dispose(disposing);
     }
 
-    private void TileFetchDispatcherOnPropertyChanged(object? sender, PropertyChangedEventArgs propertyChangedEventArgs)
+    private void TileFetchPlanner_OnPropertyChanged(object? sender, PropertyChangedEventArgs propertyChangedEventArgs)
     {
         if (propertyChangedEventArgs.PropertyName == nameof(Busy))
-            Busy = _tileFetchDispatcher.Busy;
+            Busy = _tileFetchPlanner.Busy;
     }
 
     private void UpdateMemoryCacheMinAndMax()
     {
         if (_minExtraTiles < 0 || _maxExtraTiles < 0) return;
-        if (_numberTilesNeeded == _tileFetchDispatcher.NumberTilesNeeded) return;
+        if (_numberTilesNeeded == _tileFetchPlanner.NumberTilesNeeded) return;
 
-        _numberTilesNeeded = _tileFetchDispatcher.NumberTilesNeeded;
+        _numberTilesNeeded = _tileFetchPlanner.NumberTilesNeeded;
         MemoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
         MemoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
     }
 
-    private void TileFetchDispatcherOnDataChanged(object? sender, Exception? ex)
+    private void TileFetchPlanner_OnDataChanged(object? sender, Exception? ex)
     {
         OnDataChanged(new DataChangedEventArgs(ex, Name));
     }
@@ -178,5 +168,16 @@ public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
 
         if (tileData == null) return null;
         return new MRaster(tileData, tileInfo.Extent.ToMRect());
+    }
+
+    public virtual void ViewportChanged(FetchInfo fetchInfo)
+    {
+        Busy = true;
+        _tileFetchPlanner.ViewportChanged(fetchInfo);
+    }
+
+    protected virtual void OnFetchRequested()
+    {
+        FetchRequested?.Invoke(this, new FetchRequestedEventArgs(ChangeType.Discrete));
     }
 }

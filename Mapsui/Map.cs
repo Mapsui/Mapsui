@@ -30,8 +30,9 @@ public class Map : INotifyPropertyChanged, IDisposable
     private LayerCollection _layers = [];
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
+    private readonly LayerFetcher _layerFetcher;
 
-    public FetchMachine FetchMachine { get; } = new FetchMachine();
+    public FetchMachine FetchMachine { get; } = new(16);
 
     /// <summary>
     /// Initializes a new map
@@ -40,9 +41,10 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
+        _layerFetcher = new LayerFetcher(Layers);
         Widgets.Add(CreateLoggingWidget(RefreshGraphics));
         Widgets.Add(CreatePerformanceWidget(this));
-        Navigator.RefreshDataRequest += Navigator_RefreshDataRequest;
+        Navigator.FetchRequested += Navigator_FetchRequested;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
 
@@ -191,7 +193,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public event EventHandler<MapInfoEventArgs>? Info;
 
-    private void Navigator_RefreshDataRequest(object? sender, Navigator.RefreshDataRequestEventArgs e)
+    private void Navigator_FetchRequested(object? sender, FetchRequestedEventArgs e)
     {
         RefreshData(e.ChangeType);
     }
@@ -227,8 +229,11 @@ public class Map : INotifyPropertyChanged, IDisposable
         foreach (var layer in _layers.ToList())
         {
             if (layer is IAsyncDataFetcher asyncDataFetcher)
-                asyncDataFetcher.RefreshData(fetchInfo);
+                asyncDataFetcher.RefreshData(fetchInfo, FetchMachine.Enqueue);
         }
+
+        if (changeType == ChangeType.Discrete)
+            _layerFetcher.ViewportChanged(fetchInfo);
     }
 
     public void RefreshGraphics()
@@ -266,7 +271,10 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         foreach (var layer in _layers)
         {
-            if (layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
+            if (layer is IAsyncDataFetcher asyncLayer)
+                asyncLayer.ClearCache();
+            if (layer is IFetchableSource fetchableSource)
+                fetchableSource.ClearCache();
         }
     }
 
@@ -309,12 +317,21 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         layer.DataChanged += LayerDataChanged;
         layer.PropertyChanged += LayerPropertyChanged;
+        if (layer is IFetchableSource fetchableSource)
+            fetchableSource.FetchRequested += FetchableSource_FetchRequested;
+    }
+
+    private void FetchableSource_FetchRequested(object? sender, FetchRequestedEventArgs e)
+    {
+        RefreshData(e.ChangeType);
     }
 
     private void LayerRemoved(ILayer layer)
     {
         if (layer is IAsyncDataFetcher asyncLayer)
             asyncLayer.AbortFetch();
+        if (layer is IFetchableSource fetchableSource)
+            fetchableSource.FetchRequested -= FetchableSource_FetchRequested;
 
         layer.DataChanged -= LayerDataChanged;
         layer.PropertyChanged -= LayerPropertyChanged;
@@ -337,7 +354,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         return new MMinMax(mostZoomedOut, mostZoomedIn);
     }
 
-    private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
+    private static double[] DetermineResolutions(IEnumerable<ILayer> layers)
     {
         var items = new Dictionary<double, double>();
         const float normalizedDistanceThreshold = 0.75f;

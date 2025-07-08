@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -13,9 +11,7 @@ namespace Mapsui.Tests.Fetcher;
 public class FeatureFetcherTests
 {
     [Test]
-    [Repeat(100)]
-    [CancelAfter(1000)]
-    public async Task TestFeatureFetcherDelayAsync(CancellationToken token)
+    public async Task Layer_BusyProperty_ChangesDuringFeatureFetchAsync()
     {
         // Arrange
         var extent = new MRect(0, 0, 10, 10);
@@ -23,14 +19,10 @@ public class FeatureFetcherTests
         {
             DataSource = new MemoryProvider(GenerateRandomPoints(extent, 25))
         };
-        layer.FetchingPostponedInMilliseconds = 0;
 
         var notifications = new List<bool>();
 
-        // Because we use weak references for the PropertyChanged event handler it can get
-        // garbage collected if use a lambda directly assigned to the layer.PropertyChanged.
-        // So we need to create the variable below to prevent garbage collection.
-        PropertyChangedEventHandler propertyChanged = (s, e) =>
+        layer.PropertyChanged += (s, e) =>
         {
             if (e.PropertyName == nameof(Layer.Busy))
             {
@@ -38,29 +30,25 @@ public class FeatureFetcherTests
             }
         };
 
-        layer.PropertyChanged += propertyChanged;
         var fetchInfo = new FetchInfo(new MSection(extent, 1), null, ChangeType.Discrete);
+        layer.ViewportChanged(fetchInfo);
+        var requests = layer.GetFetchJobs(0, 8);
 
         // Act
-        layer.RefreshData(fetchInfo);
+        foreach (var fetchJob in requests)
+        {
+            // This will trigger the DataChanged event
+            await fetchJob.FetchFunc().ConfigureAwait(false);
+        }
 
         // Assert
-        await Task.Run(async () =>
-        {
-            while (notifications.Count < 2 && !token.IsCancellationRequested)
-            {
-                // Wait until we have two notifications
-                await Task.Delay(100);
-            }
-        }).ConfigureAwait(false);
-
         Assert.That(notifications.Count, Is.GreaterThan(0));
         Assert.That(notifications[0], Is.True);
         Assert.That(notifications.Count, Is.GreaterThan(1));
         Assert.That(notifications[1], Is.False);
     }
 
-    private static IEnumerable<IFeature> GenerateRandomPoints(MRect envelope, int count)
+    private static List<PointFeature> GenerateRandomPoints(MRect envelope, int count)
     {
         var random = new Random(0);
         var result = new List<PointFeature>();

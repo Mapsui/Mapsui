@@ -1,5 +1,6 @@
 ﻿using Mapsui.Animations;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Limiting;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
@@ -28,7 +29,7 @@ public class Navigator
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
     /// is made and after an animation has completed.
     /// </summary>
-    public event EventHandler<RefreshDataRequestEventArgs>? RefreshDataRequest;
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
     public event ViewportChangedEventHandler? ViewportChanged;
 
     /// <summary>
@@ -140,7 +141,7 @@ public class Navigator
 
                 _suppressNotifications = false;
                 OnViewportChanged(_viewport, _viewport);
-                OnRefreshDataRequest(ChangeType.Discrete);
+                OnFetchRequested(ChangeType.Discrete);
             }
         }
     }
@@ -450,7 +451,7 @@ public class Navigator
         if (PanLock)
             return;
 
-        SetViewportAnimations(FlingAnimation.Create(velocityX, velocityY, maxDuration, () => OnRefreshDataRequest(ChangeType.Discrete)));
+        SetViewportAnimations(FlingAnimation.Create(velocityX, velocityY, maxDuration, () => OnFetchRequested(ChangeType.Discrete)));
     }
 
     public void Manipulate(Manipulation? manipulation)
@@ -530,10 +531,14 @@ public class Navigator
 
     public void SetSize(double width, double height)
     {
+        if (Viewport.Width == width && Viewport.Height == height)
+            return; // No change in size, no need to update.
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
+        var wasInitialized = IsInitialized;
         InitializeIfNeeded();
-        OnRefreshDataRequest(ChangeType.Discrete);
+        if (wasInitialized) // Workaround to prevent double data refresh: Only call when it was already initialized because if it is not then it will be called in Initialize().
+            OnFetchRequested(ChangeType.Discrete);
     }
 
     private void InitializeIfNeeded()
@@ -542,14 +547,14 @@ public class Navigator
             Initialize(PanBounds ?? throw new Exception("PanBounds is null. This should not be possible when initializing."));
     }
 
-    private void OnRefreshDataRequest(ChangeType changeType)
+    private void OnFetchRequested(ChangeType changeType)
     {
         if (_suppressNotifications)
             return;
 
-        // At the moment we refresh the data on each RefreshDataRequest. Instead we should  always
+        // At the moment we refresh the data on each FetchRequested. Instead we should  always
         // refresh on ChangeType.Discrete, and do throttled requests on ChangeType.Continuous.
-        RefreshDataRequest?.Invoke(this, new RefreshDataRequestEventArgs(changeType));
+        FetchRequested?.Invoke(this, new FetchRequestedEventArgs(changeType));
     }
 
     private void ClearAnimations()
@@ -578,7 +583,7 @@ public class Navigator
         if (_animations.All(a => a.Done))
         {
             ClearAnimations();
-            OnRefreshDataRequest(ChangeType.Discrete);
+            OnFetchRequested(ChangeType.Discrete);
         }
         var animationResult = Animation.UpdateAnimations(Viewport, _animations);
 
@@ -587,7 +592,7 @@ public class Navigator
         if (ShouldAnimationsBeHaltedBecauseOfLimiting(animationResult.State, Viewport))
         {
             ClearAnimations();
-            OnRefreshDataRequest(ChangeType.Discrete);
+            OnFetchRequested(ChangeType.Discrete);
             return false; // Not running
         }
 
@@ -686,7 +691,7 @@ public class Navigator
         {
             ClearAnimations();
             SetViewportWithLimit(viewport);
-            OnRefreshDataRequest(ChangeType.Discrete);
+            OnFetchRequested(ChangeType.Discrete);
         }
         else
         {
@@ -694,7 +699,7 @@ public class Navigator
             // at this point. Not entirely sure if there could be too many consecutive animations
             // started to overload to the data refresh.
             if (_animations.Any())
-                OnRefreshDataRequest(ChangeType.Continuous);
+                OnFetchRequested(ChangeType.Continuous);
             SetViewportAnimations(ViewportAnimation.Create(Viewport, viewport, duration, easing));
         }
     }
@@ -758,10 +763,5 @@ public class Navigator
             _defaultPanBounds = value;
             InitializeIfNeeded();
         }
-    }
-
-    public class RefreshDataRequestEventArgs(ChangeType changeType) : EventArgs
-    {
-        public ChangeType ChangeType { get; } = changeType;
     }
 }
