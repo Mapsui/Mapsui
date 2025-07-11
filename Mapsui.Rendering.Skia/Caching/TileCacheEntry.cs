@@ -1,8 +1,7 @@
 ﻿using Mapsui.Rendering.Skia.Cache;
 using SkiaSharp;
-using System;
 
-namespace Mapsui.Rendering.Skia.Tiling;
+namespace Mapsui.Rendering.Skia.Caching;
 
 public sealed class TileCacheEntry(SKObject skObject) : ITileCacheEntry
 {
