@@ -22,6 +22,7 @@
 			SkiaRenderer;
 		</UnoFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'desktop' or $(UnoFeatures.Contains('SkiaRenderer'))">$(DefineConstants);__UNO_SKIA__</DefineConstants>
 	</PropertyGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">

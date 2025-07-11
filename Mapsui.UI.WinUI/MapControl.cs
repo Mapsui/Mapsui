@@ -23,19 +23,28 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml;
 #endif
 
+#if __UNO_SKIA__
+using SkiaSharp;
+using Uno.WinUI.Graphics2DSK;
+#endif
+
 #pragma warning disable Uno0001 // PointerWheelChanged is not implemented in Uno. Justification: This is not implemented in all platforms. Also see: https://github.com/unoplatform/uno/issues/15629
 
 namespace Mapsui.UI.WinUI;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
+#if __UNO_SKIA__
+    private readonly SKCanvasElement _skCanvasElement;
+#else
     // GPU does not work currently on Windows
-    public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
+    public static bool UseGPU = OperatingSystem.IsBrowser(); // Works not on iPhone Mini;
 #pragma warning disable IDISP002 // These should not be disposed here in WINUI they are not disposable and in UNO They shouldn't be disposed
     private readonly SKSwapChainPanel? _canvasGpu;
-    private readonly Rectangle _selectRectangle = CreateSelectRectangle();
     private readonly SKXamlCanvas? _canvas;
-#pragma warning restore IDISP002    
+#pragma warning restore IDISP002
+#endif
+    private readonly Rectangle _selectRectangle = CreateSelectRectangle();
 
     bool _shiftPressed;
 
@@ -47,6 +56,10 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
 
+#if __UNO_SKIA__
+        _skCanvasElement = new MapControlSKCanvasElement(this);
+        Children.Add(_skCanvasElement);
+#else
         if (UseGPU)
         {
             _canvasGpu = CreateGpuRenderTarget();
@@ -59,6 +72,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             Children.Add(_canvas);
             _canvas.PaintSurface += Canvas_PaintSurface;
         }
+#endif
 
         // The Canvas needs to be first set before calling the Shared Constructor or else it crashes in the InvalidateCanvas
         SharedConstructor();
@@ -91,12 +105,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public void InvalidateCanvas()
     {
+#if __UNO_SKIA__
+        RunOnUIThread(_skCanvasElement.Invalidate);
+#else
         if (_canvasGpu is not null)
             RunOnUIThread(_canvasGpu.Invalidate);
         else if (_canvas is not null)
             RunOnUIThread(_canvas.Invalidate);
         else
             throw new Exception("No canvas was assigned. This is unexpected.");
+#endif
     }
 
     private void MapControl_KeyUp(object sender, KeyRoutedEventArgs e)
@@ -284,11 +302,15 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public float? GetPixelDensity()
     {
+#if __UNO_SKIA__
+        return 1;
+#else
         var canvasWidth = UseGPU ? _canvasGpu!.CanvasSize.Width : _canvas!.CanvasSize.Width;
         var canvasActualWidth = UseGPU ? _canvasGpu!.ActualWidth : _canvas!.ActualWidth;
         if (canvasWidth <= 0 || canvasActualWidth <= 0)
             return null;
         return (float)(canvasWidth / canvasActualWidth);
+#endif
     }
 
     private bool GetShiftPressed() => _shiftPressed;
@@ -332,10 +354,23 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
+#if !__UNO_SKIA__
             _canvas?.Dispose();
             _canvasGpu?.Dispose();
+#endif
             _selectRectangle?.Dispose();
         }
     }
 #endif
+
+#if __UNO_SKIA__
+    public partial class MapControlSKCanvasElement(MapControl owner) : SKCanvasElement
+    {
+        protected override void RenderOverride(SKCanvas canvas, Size area)
+        {
+            owner._renderController?.Render(canvas);
+        }
+    }
+#endif
+
 }

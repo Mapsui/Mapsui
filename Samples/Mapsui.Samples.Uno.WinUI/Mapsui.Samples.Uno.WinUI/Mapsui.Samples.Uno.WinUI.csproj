@@ -31,6 +31,7 @@
     <UnoFeatures>
       SkiaRenderer;
 		</UnoFeatures>
+    <DefineConstants Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'desktop' or $(UnoFeatures.Contains('SkiaRenderer'))">$(DefineConstants);__UNO_SKIA__</DefineConstants>
   </PropertyGroup>
 	
 	<!--workaround for Uno.Resizetizer uses a newer skiasharp version then maui resizetizer -->
