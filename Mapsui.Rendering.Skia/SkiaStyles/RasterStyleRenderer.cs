@@ -4,6 +4,7 @@ using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
+using Mapsui.Rendering.Skia.Tiling;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
@@ -30,7 +31,7 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
             var tileCache = renderService.TileCache;
             tileCache.UpdateCache(currentIteration);
 
-            var tile = tileCache.GetOrCreate(raster, currentIteration);
+            var tile = tileCache.GetOrAdd(raster, ToTileCacheEntry, currentIteration);
             if (tile is null)
                 return false;
 
@@ -63,11 +64,23 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
         return true;
     }
 
-    private static void DrawRaster(SKCanvas canvas, float opacity, Tiling.TileCacheEntry tile, SKRect destination, RasterStyle rasterStyle)
+    public static ITileCacheEntry ToTileCacheEntry(MRaster raster)
     {
-        if (tile.SKObject is SKImage skImage)
+        if (raster.Data.IsSkp())
+        {
+            return new TileCacheEntry(SKPicture.Deserialize(raster.Data));
+        }
+
+        using var skData = SKData.CreateCopy(raster.Data);
+        var image = SKImage.FromEncodedData(skData);
+        return new TileCacheEntry(image);
+    }
+
+    private static void DrawRaster(SKCanvas canvas, float opacity, ITileCacheEntry tile, SKRect destination, RasterStyle rasterStyle)
+    {
+        if (tile.Object is SKImage skImage)
             BitmapRenderer.Draw(canvas, skImage, destination, opacity);
-        else if (tile.SKObject is SKPicture skPicture)
+        else if (tile.Object is SKPicture skPicture)
             PictureRenderer.Draw(canvas, skPicture, destination, opacity);
         else
             throw new InvalidOperationException("Unknown tile type");
