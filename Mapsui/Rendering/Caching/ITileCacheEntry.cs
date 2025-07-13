@@ -1,8 +1,6 @@
-﻿using System;
+﻿namespace Mapsui.Rendering.Caching;
 
-namespace Mapsui.Rendering.Skia.Cache;
-
-public interface ITileCacheEntry : IDisposable
+public interface ITileCacheEntry
 {
     public long IterationUsed { get; set; }
 

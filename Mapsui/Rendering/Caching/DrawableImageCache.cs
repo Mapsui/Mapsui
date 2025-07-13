@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Mapsui.Logging;
+using System;
 using System.Collections.Concurrent;
-using Mapsui.Rendering.Skia.Images;
 
-namespace Mapsui.Rendering.Skia.Cache;
+namespace Mapsui.Rendering.Caching;
 
 public sealed class DrawableImageCache : IDisposable
 {
@@ -16,6 +16,8 @@ public sealed class DrawableImageCache : IDisposable
         var drawableImage = tryCreateDrawableImage();
         if (drawableImage == null)
             return null;
+        if (_cache.ContainsKey(key))
+            Logger.Log(LogLevel.Error, "The image is create twice, this is not necessary and should be prevented.");
         return _cache[key] = drawableImage;
     }
 

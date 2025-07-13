@@ -1,7 +1,7 @@
 ﻿using System;
 using Mapsui.Cache;
 
-namespace Mapsui.Rendering.Skia.Cache;
+namespace Mapsui.Rendering.Caching;
 
 public sealed class VectorCache(IRenderService renderService, int capacity) : IDisposable
 {

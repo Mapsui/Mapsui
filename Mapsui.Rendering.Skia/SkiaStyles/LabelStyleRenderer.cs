@@ -13,6 +13,7 @@ using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Images;
+using Mapsui.Rendering.Caching;
 
 namespace Mapsui.Rendering.Skia;
 

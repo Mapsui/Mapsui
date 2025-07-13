@@ -17,8 +17,10 @@ public class ImageButtonWidgetRenderer : ISkiaWidgetRenderer
         if (button.Image == null)
             throw new InvalidOperationException("ImageSource is not set");
 
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
         var drawableImage = renderService.DrawableImageCache.GetOrCreate(button.Image.SourceId,
             () => ImageStyleRenderer.TryCreateDrawableImage(button.Image, renderService.ImageSourceCache));
+#pragma warning restore IDISP001
         if (drawableImage == null)
             return;
 

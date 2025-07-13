@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mapsui.Rendering.Skia.Cache;
+namespace Mapsui.Rendering.Caching;
 
 public sealed class TileCache : IDisposable
 {
@@ -51,7 +51,8 @@ public sealed class TileCache : IDisposable
             var entry = tileCache[key];
             tileCache.Remove(key);
 #pragma warning disable IDISP007
-            entry.Dispose();
+            if (entry.Object is IDisposable disposable)
+                disposable.Dispose();
 #pragma warning restore IDISP007
             counter++;
         }
@@ -64,7 +65,8 @@ public sealed class TileCache : IDisposable
             if (_tileCache.TryRemove(key, out var cachedTile)) // Remove before dispose to make sure the disposed object is not used anymore
             {
 #pragma warning disable IDISP007
-                cachedTile.Dispose();
+                if (cachedTile.Object is IDisposable disposable)
+                    disposable.Dispose();
 #pragma warning restore IDISP007
             }
         }

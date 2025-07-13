@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Rendering.Caching;
+using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache;
 

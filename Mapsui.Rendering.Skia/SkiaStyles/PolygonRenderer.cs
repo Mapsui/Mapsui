@@ -1,4 +1,5 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Rendering.Caching;
 using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.Images;
@@ -215,8 +216,10 @@ internal static class PolygonRenderer
     {
         if (image is null)
             return null;
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
         var drawableImage = renderService.DrawableImageCache.GetOrCreate(image.SourceId,
             () => ImageStyleRenderer.TryCreateDrawableImage(image, renderService.ImageSourceCache));
+#pragma warning restore IDISP001
         if (drawableImage == null)
             return null;
 
@@ -226,7 +229,9 @@ internal static class PolygonRenderer
                 return bitmapImage.Image;
 
             var imageRegionKey = image.GetSourceIdForBitmapRegion();
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
             var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, image.BitmapRegion));
+#pragma warning restore IDISP001
             if (regionDrawableImage == null)
                 return null;
             if (regionDrawableImage is BitmapDrawableImage regionBitmapImage)

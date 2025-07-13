@@ -32,10 +32,12 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         // The CalloutStyleRenderer creates an SKPicture for rendering. We store inside an SvgImage and put it in the image cache, but it is actually
         // just a drawable like any other. We probably should use the general cache instead.
 
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
         var contentDrawableImage = (SvgDrawableImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCalloutContent,
             () => new SvgDrawableImage(CreateCalloutContent(calloutStyle, renderService)))!;
         var drawableImage = (SvgDrawableImage)renderService.DrawableImageCache.GetOrCreate(calloutStyle.ImageIdOfCallout,
             () => new SvgDrawableImage(calloutStyle.BalloonDefinition.CreateCallout(contentDrawableImage.Picture)))!;
+#pragma warning restore IDISP001
 
         var offset = calloutStyle.Offset.Combine(calloutStyle.RelativeOffset.GetAbsoluteOffset(drawableImage.Picture.CullRect.Width, drawableImage.Picture.CullRect.Height));
 
@@ -78,8 +80,12 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
         if (callout.Type == CalloutType.Image && callout.Image is not null)
         {
             using var recorder = new SKPictureRecorder();
+
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
             var image = renderService.DrawableImageCache.GetOrCreate(callout.Image.SourceId,
                 () => ImageStyleRenderer.TryCreateDrawableImage(callout.Image, renderService.ImageSourceCache));
+#pragma warning restore IDISP001
+
             if (image is null)
             {
                 Logger.Log(LogLevel.Error, $"Image not found: {callout.Image.Source}");

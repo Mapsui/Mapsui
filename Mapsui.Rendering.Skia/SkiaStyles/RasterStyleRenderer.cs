@@ -1,10 +1,11 @@
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Rendering.Caching;
 using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Skia.Caching;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
-using Mapsui.Rendering.Skia.Tiling;
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
