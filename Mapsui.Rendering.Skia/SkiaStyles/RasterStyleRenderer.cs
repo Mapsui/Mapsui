@@ -78,9 +78,9 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
     private static void DrawRaster(SKCanvas canvas, float opacity, ITileCacheEntry tile, SKRect destination, RasterStyle rasterStyle)
     {
-        if (tile.Object is SKImage skImage)
+        if (tile.Data is SKImage skImage)
             BitmapRenderer.Draw(canvas, skImage, destination, opacity);
-        else if (tile.Object is SKPicture skPicture)
+        else if (tile.Data is SKPicture skPicture)
             PictureRenderer.Draw(canvas, skPicture, destination, opacity);
         else
             throw new InvalidOperationException("Unknown tile type");

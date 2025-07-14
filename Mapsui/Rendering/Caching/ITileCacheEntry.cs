@@ -4,5 +4,5 @@ public interface ITileCacheEntry
 {
     public long IterationUsed { get; set; }
 
-    public object Object { get; }
+    public object Data { get; }
 }

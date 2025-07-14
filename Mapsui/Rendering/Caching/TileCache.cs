@@ -49,9 +49,9 @@ public sealed class TileCache : IDisposable
         {
             if (counter >= numberToRemove) break;
             var entry = tileCache[key];
-            tileCache.Remove(key);
+            _ = tileCache.Remove(key);
 #pragma warning disable IDISP007
-            if (entry.Object is IDisposable disposable)
+            if (entry.Data is IDisposable disposable)
                 disposable.Dispose();
 #pragma warning restore IDISP007
             counter++;
@@ -65,7 +65,7 @@ public sealed class TileCache : IDisposable
             if (_tileCache.TryRemove(key, out var cachedTile)) // Remove before dispose to make sure the disposed object is not used anymore
             {
 #pragma warning disable IDISP007
-                if (cachedTile.Object is IDisposable disposable)
+                if (cachedTile.Data is IDisposable disposable)
                     disposable.Dispose();
 #pragma warning restore IDISP007
             }

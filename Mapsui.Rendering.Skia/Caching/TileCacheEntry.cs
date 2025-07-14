@@ -7,6 +7,6 @@ public sealed class TileCacheEntry(SKObject skObject) : ITileCacheEntry
 {
     private readonly SKObject _skObject = skObject;
 
-    public object Object => _skObject;
+    public object Data => _skObject;
     public long IterationUsed { get; set; }
 }
