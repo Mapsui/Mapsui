@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-android;net9.0-desktop;net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.19041</TargetFrameworks>
+    <TargetFrameworks>net9.0-desktop</TargetFrameworks>
 
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
@@ -31,6 +31,7 @@
     <UnoFeatures>
       SkiaRenderer;
 		</UnoFeatures>
+    <DefineConstants Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'desktop' or $(UnoFeatures.Contains('SkiaRenderer'))">$(DefineConstants);__UNO_SKIA__</DefineConstants>
   </PropertyGroup>
 	
 	<!--workaround for Uno.Resizetizer uses a newer skiasharp version then maui resizetizer -->

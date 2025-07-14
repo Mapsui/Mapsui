@@ -73,6 +73,7 @@
     <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="3.119.0" />
     <PackageVersion Include="SkiaSharp.Views.Uno" Version="3.119.0" />
     <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="3.119.0" />
+    <PackageVersion Include="Uno.WinUI.Graphics2DSK" Version="6.0.797" />
     <PackageVersion Include="SkiaSharp.Views.WinUI" Version="3.119.0" />
     <PackageVersion Include="SkiaSharp.Views.WPF" Version="3.119.0" />
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="3.119.0" />
