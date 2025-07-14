@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Uno.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net8.0-ios;net8.0-maccatalyst;net8.0-android;net8.0-windows10.0.19041;net8.0-browserwasm;net8.0-desktop;net9.0;net9.0-ios;net9.0-maccatalyst;net9.0-android;net9.0-browserwasm;net9.0-windows10.0.19041;net9.0-desktop</TargetFrameworks>
+    <TargetFrameworks>net9.0-desktop</TargetFrameworks>
     <UnoSingleProject>true</UnoSingleProject>
     <OutputType>Library</OutputType>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
@@ -22,6 +22,7 @@
 			SkiaRenderer;
 		</UnoFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'desktop' or $(UnoFeatures.Contains('SkiaRenderer'))">$(DefineConstants);__UNO_SKIA__</DefineConstants>
 	</PropertyGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
@@ -39,6 +40,10 @@
     <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22621.28" /> -->
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Uno.WinUI.Graphics2DSK" />
+  </ItemGroup>
+  
   <!--Harfbuzz Sharp references Workaround for this issue-->
   <!--https://github.com/mono/SkiaSharp/issues/1725-->
   <ItemGroup Condition="$(TargetFramework.Contains('browserwasm'))">
@@ -46,13 +51,6 @@
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
 
-  <ItemGroup Condition="!$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="SkiaSharp.Views.Uno.WinUI" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.Contains('windows'))">
-    <PackageReference Include="SkiaSharp.Views.WinUI" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
