@@ -178,8 +178,8 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (imageStyle.Image is not null)
         {
 #pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
-            var image = ((RenderService)renderService).DrawableImageCache.GetOrCreate(imageStyle.Image.SourceId,
-                () => TryCreateDrawableImage(imageStyle.Image, ((RenderService)renderService).ImageSourceCache));
+            var image = renderService.DrawableImageCache.GetOrCreate(imageStyle.Image.SourceId,
+                () => TryCreateDrawableImage(imageStyle.Image, renderService.ImageSourceCache));
 #pragma warning restore IDISP001
             if (image != null)
                 symbolSize = new Size(image.Width, image.Height);

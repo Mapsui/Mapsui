@@ -234,7 +234,7 @@ public sealed class MapRenderer : IRenderer
         }
     }
 
-    private void CustomLayerRendererCallback(SKCanvas canvas, Viewport viewport, ILayer layer, RenderService renderService)
+    private static void CustomLayerRendererCallback(SKCanvas canvas, Viewport viewport, ILayer layer, RenderService renderService)
     {
         if (_layerRenderers.TryGetValue(layer.CustomLayerRendererName!, out var layerRenderer))
             CustomLayerRenderer.RenderLayer(canvas, viewport, layer, renderService, layerRenderer);
@@ -242,7 +242,7 @@ public sealed class MapRenderer : IRenderer
             throw new Exception($"Layer renderer not found for {layer.GetType().Name}");
     }
 
-    private void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature,
+    private static void RenderFeature(SKCanvas canvas, Viewport viewport, ILayer layer, IStyle style, IFeature feature,
         RenderService renderService, float layerOpacity, long iteration)
     {
         // Check, if we have a special renderer for this style

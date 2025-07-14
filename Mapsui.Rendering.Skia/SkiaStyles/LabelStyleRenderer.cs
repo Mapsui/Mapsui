@@ -103,7 +103,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return image;
     }
 
-    private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, RenderService renderService)
+    private static void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, RenderService renderService)
     {
         using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, CreateFont);
         using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
@@ -328,7 +328,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return skFont;
     }
 
-    private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style, RenderService renderService)
+    private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style)
     {
         var paint = CreatePaint((style.ForeColor, style.LayerOpacity));
         paint.Style = style.PaintStyle;
@@ -397,7 +397,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     double IFeatureSize.FeatureSize(IStyle style, RenderService renderService, IFeature? feature)
     {
-        if (feature == null) throw new ArgumentNullException(nameof(feature));
+        ArgumentNullException.ThrowIfNull(feature);
 
         if (style is LabelStyle labelStyle)
         {
@@ -438,12 +438,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return size;
     }
 
-    private static SKPaint CreateHaloPaintHolder((LabelStyle labelStyle, Pen halo) style, RenderService renderService)
+    private static SKPaint CreateHaloPaintHolder((LabelStyle labelStyle, Pen halo) style)
     {
         LabelStyle labelStyle = style.labelStyle;
         Pen halo = style.halo;
         var strokeWidth = (float)halo!.Width * 2;
         var paintStyle = SKPaintStyle.StrokeAndFill;
-        return CreatePaint((labelStyle.Font, halo.Color, 1, paintStyle, strokeWidth), renderService);
+        return CreatePaint((labelStyle.Font, halo.Color, 1, paintStyle, strokeWidth));
     }
 }

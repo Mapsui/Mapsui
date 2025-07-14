@@ -2,6 +2,7 @@
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets;
+
 public class InputOnlyWidgetRenderer : ISkiaWidgetRenderer
 {
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService, float layerOpacity)
