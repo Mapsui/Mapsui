@@ -8,15 +8,12 @@ using Mapsui.Widgets;
 
 namespace Mapsui.Rendering;
 
-public interface IRenderer : IDisposable
+public interface IRenderer
 {
-    void Render(object target, Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Color? background = null);
+    void Render(object target, Viewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, RenderService renderService, Color? background = null);
     MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
-        Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100);
-    IRenderService RenderService { get; }
+        RenderService renderService, Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100);
     bool TryGetWidgetRenderer(Type widgetType, out IWidgetRenderer? widgetRenderer);
     bool TryGetStyleRenderer(Type widgetType, out IStyleRenderer? widgetRenderer);
-    ImageSourceCache ImageSourceCache { get; }
-    MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0);
-
+    MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService, int margin = 0);
 }

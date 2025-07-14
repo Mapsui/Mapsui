@@ -7,6 +7,7 @@
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
+using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
@@ -32,8 +33,6 @@ public class Map : INotifyPropertyChanged, IDisposable
     private IWidget[] _oldWidgets = [];
     private readonly LayerFetcher _layerFetcher;
 
-    public FetchMachine FetchMachine { get; } = new(16);
-
     /// <summary>
     /// Initializes a new map
     /// </summary>
@@ -47,6 +46,9 @@ public class Map : INotifyPropertyChanged, IDisposable
         Navigator.FetchRequested += Navigator_FetchRequested;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
     }
+
+    public FetchMachine FetchMachine { get; } = new(16); // This is still needed because we support the IAsyncDataFetcher interface.
+    public RenderService RenderService { get; set; } = new();
 
     /// <summary>
     /// Event that is triggered when the map is tapped. Can be a single tap, double tap or long press.

@@ -95,8 +95,9 @@ public class MapLiveTests
             if (map != null)
             {
                 // act
-                using var mapRenderer = CreateMapRenderer(mapControl);
-                using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
+                var mapRenderer = CreateMapRenderer(mapControl);
+                using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.RenderService,
+                    map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
                 // aside
                 if (bitmap is { Length: > 0 })

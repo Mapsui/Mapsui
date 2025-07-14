@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
 using Mapsui.Layers;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using NUnit.Framework;

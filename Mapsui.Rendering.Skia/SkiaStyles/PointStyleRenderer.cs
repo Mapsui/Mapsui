@@ -1,5 +1,4 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using SkiaSharp;
 

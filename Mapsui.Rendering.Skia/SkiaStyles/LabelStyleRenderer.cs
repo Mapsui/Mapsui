@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mapsui.Extensions;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Images;
 using Mapsui.Rendering.Caching;
 
@@ -74,13 +73,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return true;
     }
 
-    private static IDrawableImage CreateLabelAsBitmap((LabelStyle Style, string? Text, float LayerOpacity) valueTuple, IRenderService renderService)
+    private static IDrawableImage CreateLabelAsBitmap((LabelStyle Style, string? Text, float LayerOpacity) valueTuple, RenderService renderService)
     {
         var style = valueTuple.Style;
         var layerOpacity = valueTuple.LayerOpacity;
-        var vectorCache = ((RenderService)renderService).VectorCache;
-        using var fontHolder = vectorCache.GetOrCreate(style.Font, CreateFont);
-        using var paintHolder = vectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
+        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, CreateFont);
+        using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
         return new BitmapDrawableImage(CreateLabelAsImage(style, valueTuple.Text, font, paint, layerOpacity));
@@ -105,11 +103,10 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return image;
     }
 
-    private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, IRenderService renderService)
+    private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, RenderService renderService)
     {
-        var vectorCache = ((RenderService)renderService).VectorCache;
-        using var fontHolder = vectorCache.GetOrCreate(style.Font, CreateFont);
-        using var paintHolder = vectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
+        using var fontHolder = renderService.VectorCache.GetOrCreate(style.Font, CreateFont);
+        using var paintHolder = renderService.VectorCache.GetOrCreate((style.ForeColor, layerOpacity), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
 
@@ -225,7 +222,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         // If style has a halo value, than draw halo text
         if (style.Halo != null)
         {
-            using var paintHaloHolder = vectorCache.GetOrCreate((style, style.Halo), CreateHaloPaintHolder);
+            using var paintHaloHolder = renderService.VectorCache.GetOrCreate((style, style.Halo), CreateHaloPaintHolder);
             using var paintHalo = paintHaloHolder.Instance;
             if (lines != null)
             {
@@ -331,7 +328,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return skFont;
     }
 
-    private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style, IRenderService renderService)
+    private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style, RenderService renderService)
     {
         var paint = CreatePaint((style.ForeColor, style.LayerOpacity));
         paint.Style = style.PaintStyle;
@@ -398,30 +395,30 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => true;
 
-    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderingService, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, RenderService renderService, IFeature? feature)
     {
-        var skiaRenderService = (RenderService)renderingService;
         if (feature == null) throw new ArgumentNullException(nameof(feature));
 
         if (style is LabelStyle labelStyle)
         {
-            return FeatureSize(feature, labelStyle, skiaRenderService);
+            return FeatureSize(feature, labelStyle, renderService);
         }
 
         return 0;
     }
 
-    public static double FeatureSize(IFeature feature, LabelStyle labelStyle, IRenderService renderService)
+    public static double FeatureSize(IFeature feature, LabelStyle labelStyle, RenderService renderService)
     {
-        VectorCache vectorCache = ((RenderService)renderService).VectorCache;
         var text = labelStyle.GetLabelText(feature);
 
         if (string.IsNullOrEmpty(text))
             return 0;
 
         // for measuring the text size the opacity can be set to 1try
-        using var fontHolder = vectorCache.GetOrCreate(labelStyle.Font, CreateFont);
-        using var paintHolder = labelStyle.Halo != null ? vectorCache.GetOrCreate((labelStyle, labelStyle.Halo), CreateHaloPaintHolder) : vectorCache.GetOrCreate((labelStyle.ForeColor, 1f), CreatePaint);
+        using var fontHolder = renderService.VectorCache.GetOrCreate(labelStyle.Font, CreateFont);
+        using var paintHolder = labelStyle.Halo != null
+            ? renderService.VectorCache.GetOrCreate((labelStyle, labelStyle.Halo), CreateHaloPaintHolder)
+            : renderService.VectorCache.GetOrCreate((labelStyle.ForeColor, 1f), CreatePaint);
         var paint = paintHolder.Instance;
         var font = fontHolder.Instance;
         font.MeasureText(text, out var rect, paint);
@@ -436,12 +433,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);
 
         // add offset to size multiplied by two because the total size increased by the offset
-        size += (length * 2);
+        size += length * 2;
 
         return size;
     }
 
-    private static SKPaint CreateHaloPaintHolder((LabelStyle labelStyle, Pen halo) style, IRenderService renderService)
+    private static SKPaint CreateHaloPaintHolder((LabelStyle labelStyle, Pen halo) style, RenderService renderService)
     {
         LabelStyle labelStyle = style.labelStyle;
         Pen halo = style.halo;

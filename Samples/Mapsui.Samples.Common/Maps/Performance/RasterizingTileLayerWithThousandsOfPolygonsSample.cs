@@ -7,7 +7,6 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers;
 using Mapsui.Projections;
 using Mapsui.Rendering;
-using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
@@ -34,10 +33,9 @@ public sealed class RasterizingTileLayerWithThousandsOfPolygonsSample : IMapCont
 
     public Map CreateMap()
     {
-        // Todo: Our users should not need to be aware of the DefaultRendererFactory.
-        DefaultRendererFactory.Create = () => new MapRenderer(900000);
         _map?.Dispose();
         _map = new Map();
+        _map.RenderService = new RenderService(900000);
         _map.Layers.Add(Tiling.OpenStreetMap.CreateTileLayer());
         _map.Layers.Add(new RasterizingTileLayer(CreatePolygonLayer(), dataFetchStrategy: new MinimalDataFetchStrategy()));
         var home = SphericalMercator.FromLonLat(0, 0).ToMPoint();

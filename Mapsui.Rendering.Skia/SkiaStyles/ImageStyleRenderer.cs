@@ -1,5 +1,4 @@
 ﻿using Mapsui.Layers;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.Images;
 using Mapsui.Rendering.Skia.SkiaStyles;
@@ -162,7 +161,7 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => false;
 
-    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderService, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, RenderService renderService, IFeature? feature)
     {
         if (style is ImageStyle symbolStyle)
         {
@@ -172,7 +171,7 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return 0;
     }
 
-    public static double FeatureSize(ImageStyle imageStyle, IRenderService renderService)
+    public static double FeatureSize(ImageStyle imageStyle, RenderService renderService)
     {
         Size symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
 

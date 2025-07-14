@@ -357,7 +357,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (GetPixelDensity() is not float pixelDensity)
             throw new Exception("PixelDensity is not initialized");
 
-        using var stream = _renderController?.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality)
+        using var stream = _renderController?.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], Map.RenderService, pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality)
              ?? throw new ArgumentNullException(nameof(_renderController));
         return stream.ToArray();
     }
@@ -369,7 +369,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
     {
-        return _renderController?.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers)
+        return _renderController?.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers, Map.RenderService)
             ?? throw new ArgumentNullException(nameof(_renderController));
     }
 
