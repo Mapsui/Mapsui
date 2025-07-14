@@ -91,11 +91,12 @@ public class MapLiveTests
             using var mapControl = await SampleHelper.InitMapAsync(sample).ConfigureAwait(false);
             var map = mapControl.Map;
             await DisplayMapAsync(mapControl).ConfigureAwait(false);
+            MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
+            var mapRenderer = new MapRenderer();
 
             if (map != null)
             {
                 // act
-                var mapRenderer = CreateMapRenderer(mapControl);
                 using var bitmap = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers, map.RenderService,
                     map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
@@ -119,12 +120,6 @@ public class MapLiveTests
 #pragma warning restore IDISP007 // Don't dispose injected
             }
         }
-    }
-
-    private static MapRenderer CreateMapRenderer(IMapControl mapControl)
-    {
-        MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
-        return new MapRenderer();
     }
 
     [Test]
