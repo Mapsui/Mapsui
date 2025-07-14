@@ -96,7 +96,7 @@ public class MapLiveTests
             {
                 // act
                 var mapRenderer = CreateMapRenderer(mapControl);
-                using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.RenderService,
+                using var bitmap = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers, map.RenderService,
                     map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
 
                 // aside

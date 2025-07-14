@@ -22,9 +22,9 @@ public class TestRenderFormats
         {
             // act
             var mapRenderer = MapRegressionTests.CreateMapRenderer(mapControl);
-            using var bitmapPng = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers,
+            using var bitmapPng = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
                 map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
-            using var bitmapJpeg = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers,
+            using var bitmapJpeg = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
                 map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.Jpeg, 90);
 
             if (MapRendererTests.CompareBitmaps(bitmapPng, bitmapJpeg, 1, 0.995))
@@ -51,9 +51,9 @@ public class TestRenderFormats
         {
             // act
             var mapRenderer = MapRegressionTests.CreateMapRenderer(mapControl);
-            using var bitmapJpegLarge = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers,
+            using var bitmapJpegLarge = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
                 map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.Jpeg);
-            using var bitmapJpegSmall = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers,
+            using var bitmapJpegSmall = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
                 map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.Jpeg, 80);
 
             Assert.That(bitmapJpegSmall.Length < bitmapJpegLarge.Length);
@@ -73,9 +73,9 @@ public class TestRenderFormats
         {
             // act
             var mapRenderer = MapRegressionTests.CreateMapRenderer(mapControl);
-            using var bitmapWebPLarge = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers,
+            using var bitmapWebPLarge = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
                 map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.WebP);
-            using var bitmapWebPSmall = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers,
+            using var bitmapWebPSmall = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
                 map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.WebP, 80);
 
             Assert.That(bitmapWebPSmall.Length < bitmapWebPLarge.Length);
@@ -94,8 +94,8 @@ public class TestRenderFormats
         {
             // act
             var mapRenderer = MapRegressionTests.CreateMapRenderer(mapControl);
-            using var jpeg = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.Jpeg, 80);
-            using var webP = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.WebP, 80);
+            using var jpeg = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers, map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.Jpeg, 80);
+            using var webP = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers, map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers(), RenderFormat.WebP, 80);
 
             Assert.That(webP.Length < jpeg.Length);
         }
