@@ -1,5 +1,6 @@
 using Microsoft.UI;
 using SkiaSharp;
+
 #if __UNO_SKIA__
 using Windows.Foundation;
 using Uno.WinUI.Graphics2DSK;
@@ -121,7 +122,10 @@ partial class SKSwapChainPanelRenderControl : RenderControl
 #if __UNO_SKIA__
 partial class SKCanvasElementRenderControl : RenderControl
 {
+#pragma warning disable IDISP006
     private readonly MapControlSKCanvasElement _skCanvasElement;
+#pragma warning restore IDISP006
+
     public SKCanvasElementRenderControl(MapControl owner, Action<SKCanvas> renderCallback) : base(owner, renderCallback)
     {
         Content = _skCanvasElement = new MapControlSKCanvasElement(this);
