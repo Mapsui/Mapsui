@@ -90,7 +90,7 @@ public sealed class RegressionMapControl : IMapControl
 
     public void Dispose()
     {
-        Renderer.Dispose();
+        // Nothing to dispose
     }
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)

@@ -1,3 +1,5 @@
+using Uno.UI.Hosting;
+
 namespace Mapsui.Samples.Uno.WinUI;
 
 public class Program
@@ -11,6 +13,8 @@ public class Program
         .UseWebAssembly()
         .Build();
 
-        await host.RunAsync();
+        _ = host.RunAsync();
+
+        return 0;
     }
 }

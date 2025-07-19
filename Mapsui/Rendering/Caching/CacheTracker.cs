@@ -1,7 +1,7 @@
 ﻿using System;
 using Mapsui.Extensions;
 
-namespace Mapsui.Rendering.Skia.Cache;
+namespace Mapsui.Rendering.Caching;
 
 public readonly struct CacheTracker<T> : IDisposable
 {

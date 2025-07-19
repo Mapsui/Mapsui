@@ -19,14 +19,15 @@
       https://aka.platform.uno/singleproject-features
     -->
     <UnoFeatures>
-			SkiaRenderer;
-		</UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants Condition="
                      $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != '' and
                      $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'windows' and
                      ($([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'desktop' or $(UnoFeatures.Contains('SkiaRenderer')))">$(DefineConstants);__UNO_SKIA__</DefineConstants>
 	</PropertyGroup>
+
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
     <!--

@@ -21,10 +21,10 @@ internal class MapRendererTests
         using var map = VectorStyleSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol.png";
-        using var mapRenderer = new MapRenderer();
+        var mapRenderer = new MapRenderer();
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor, 2);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -41,11 +41,11 @@ internal class MapRendererTests
         using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_symbolstyle.png";
-        using var mapRenderer = new MapRenderer();
-        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+        var mapRenderer = new MapRenderer();
+        _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor, 2);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -62,11 +62,11 @@ internal class MapRendererTests
         using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_in_collection_with_symbolstyle.png";
-        using var mapRenderer = new MapRenderer();
-        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+        var mapRenderer = new MapRenderer();
+        _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor, 2);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -83,11 +83,11 @@ internal class MapRendererTests
         using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "points_with_svgsymbolstyle.png";
-        using var mapRenderer = new MapRenderer();
-        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+        var mapRenderer = new MapRenderer();
+        _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor, 2);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -104,11 +104,11 @@ internal class MapRendererTests
         using var map = await sample.CreateMapAsync();
         var viewport = new Viewport(256, 200, 1, 0, 512, 400);
         const string fileName = "bitmap_atlas.png";
-        using var mapRenderer = new MapRenderer();
-        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+        var mapRenderer = new MapRenderer();
+        _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -125,11 +125,11 @@ internal class MapRendererTests
         using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(4).ToViewport(200);
         const string fileName = "bitmap_symbol.png";
-        using var mapRenderer = new MapRenderer();
-        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+        var mapRenderer = new MapRenderer();
+        _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor, 2);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -145,10 +145,10 @@ internal class MapRendererTests
         using var map = SymbolTypesSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol_symboltype.png";
-        using var mapRenderer = new MapRenderer();
+        var mapRenderer = new MapRenderer();
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor, 2);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -164,10 +164,10 @@ internal class MapRendererTests
         using var map = PointInWorldUnitsSample.CreateMap();
         var viewport = map.Extent!.Multiply(3).ToViewport(200);
         const string fileName = "vector_symbol_unittype.png";
-        using var mapRenderer = new MapRenderer();
+        var mapRenderer = new MapRenderer();
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor, 2);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -184,11 +184,11 @@ internal class MapRendererTests
         using var map = await sample.CreateMapAsync();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "polygon.png";
-        using var mapRenderer = new MapRenderer();
-        _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+        var mapRenderer = new MapRenderer();
+        _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -204,10 +204,10 @@ internal class MapRendererTests
         using var map = LineSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "line.png";
-        using var mapRenderer = new MapRenderer();
+        var mapRenderer = new MapRenderer();
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -225,8 +225,8 @@ internal class MapRendererTests
         const string fileName = "geometry_collection.png";
 
         // act
-        using var mapRenderer = new MapRenderer();
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        var mapRenderer = new MapRenderer();
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor);
 
         // aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -242,10 +242,10 @@ internal class MapRendererTests
         using var map = await (new TilesSample()).CreateMapAsync();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "tilelayer.png";
-        using var mapRenderer = new MapRenderer();
+        var mapRenderer = new MapRenderer();
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -261,10 +261,10 @@ internal class MapRendererTests
         using var map = LabelSample.CreateMap();
         var viewport = map.Extent!.Multiply(2).ToViewport(300);
         const string fileName = "labels.png";
-        using var mapRenderer = new MapRenderer();
+        var mapRenderer = new MapRenderer();
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor, 2);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -280,10 +280,10 @@ internal class MapRendererTests
         using var map = ProjectionTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
         const string fileName = "projection.png";
-        using var mapRenderer = new MapRenderer();
+        var mapRenderer = new MapRenderer();
 
         // Act 
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -299,10 +299,10 @@ internal class MapRendererTests
         using var map = StackedLabelsTestSample.CreateMap();
         var viewport = map.Extent!.Multiply(1.2).ToViewport(600);
         const string fileName = "stacked_labels.png";
-        using var mapRenderer = new MapRenderer();
+        var mapRenderer = new MapRenderer();
 
         // Act 
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
@@ -318,10 +318,10 @@ internal class MapRendererTests
         using var map = WidgetsSample.CreateMap();
         var viewport = new Viewport(0, 0, 1, 0, 600, 600);
         const string fileName = "widgets.png";
-        using var mapRenderer = new MapRenderer();
+        var mapRenderer = new MapRenderer();
 
         // Act
-        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2, map.Widgets);
+        using var bitmap = mapRenderer.RenderToBitmapStream(viewport, map.Layers, map.RenderService, map.BackColor, 2, map.Widgets);
 
         // Aside
         File.WriteToGeneratedTestImagesFolder(fileName, bitmap);

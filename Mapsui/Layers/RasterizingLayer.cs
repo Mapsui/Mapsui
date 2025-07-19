@@ -21,6 +21,7 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
     private readonly RenderFormat _renderFormat;
     private FetchInfo? _fetchInfo;
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
+    private readonly RenderService _renderService = new();
 
     public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
@@ -82,7 +83,7 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
                 _currentSection = _fetchInfo.Section;
 
                 using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewport(_currentSection),
-                    [_layer], pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+                    [_layer], _renderService, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
 
                 _cache.Clear();
                 var features = new RasterFeature[1];

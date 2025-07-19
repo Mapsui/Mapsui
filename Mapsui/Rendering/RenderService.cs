@@ -1,8 +1,10 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Rendering.Caching;
+using Mapsui.Styles;
+using System;
 
-namespace Mapsui.Rendering.Skia.Cache;
+namespace Mapsui.Rendering;
 
-public sealed class RenderService : IRenderService
+public sealed class RenderService : IDisposable
 {
     public RenderService(int vectorCacheCapacity = 30000)
     {

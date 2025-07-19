@@ -1,5 +1,4 @@
 ﻿using Mapsui.Layers;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.Images;
 using Mapsui.Rendering.Skia.SkiaStyles;
@@ -30,8 +29,12 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (pointStyle is ImageStyle imageStyle)
         {
             var image = imageStyle.Image ?? throw new ArgumentNullException(nameof(imageStyle.Image));
+
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
             var drawableImage = renderService.DrawableImageCache.GetOrCreate(image.SourceId,
                 () => TryCreateDrawableImage(image, renderService.ImageSourceCache));
+#pragma warning restore IDISP001
+
             if (drawableImage == null)
                 return;
 
@@ -44,8 +47,12 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 if (image.BitmapRegion is not null) // Get image for region if specified
                 {
                     var key = image.GetSourceIdForBitmapRegion();
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
+#pragma warning disable IDISP003 // The cache is responsible for disposing the items created in the cache.
                     if (renderService.DrawableImageCache.GetOrCreate(key, () => CreateBitmapImageForRegion(bitmapImage, image.BitmapRegion)) is BitmapDrawableImage bitmapRegionImage)
                         bitmapImage = bitmapRegionImage;
+#pragma warning restore IDISP003
+#pragma warning restore IDISP001
                 }
 
                 DrawSKImage(canvas, bitmapImage.Image, opacity);
@@ -56,7 +63,9 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 if (image.SvgFillColor.HasValue || image.SvgStrokeColor.HasValue) // Get custom colored SVG if custom colors are set
                 {
                     var key = image.GetSourceIdForSvgWithCustomColors();
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
                     var coloredDrawableImage = renderService.DrawableImageCache.GetOrCreate(key, () => CreateCustomColoredSvg(image, svgImage));
+#pragma warning restore IDISP001
                     if (coloredDrawableImage is SvgDrawableImage customColoredSvgImage)
                         DrawSKPicture(canvas, customColoredSvgImage.Picture, opacity, image.BlendModeColor);
                     else if (coloredDrawableImage is BitmapDrawableImage coloredBitmap)
@@ -152,7 +161,7 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     bool IFeatureSize.NeedsFeature => false;
 
-    double IFeatureSize.FeatureSize(IStyle style, IRenderService renderService, IFeature? feature)
+    double IFeatureSize.FeatureSize(IStyle style, RenderService renderService, IFeature? feature)
     {
         if (style is ImageStyle symbolStyle)
         {
@@ -162,14 +171,16 @@ public class ImageStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         return 0;
     }
 
-    public static double FeatureSize(ImageStyle imageStyle, IRenderService renderService)
+    public static double FeatureSize(ImageStyle imageStyle, RenderService renderService)
     {
         Size symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
 
         if (imageStyle.Image is not null)
         {
-            var image = ((RenderService)renderService).DrawableImageCache.GetOrCreate(imageStyle.Image.SourceId,
-                () => TryCreateDrawableImage(imageStyle.Image, ((RenderService)renderService).ImageSourceCache));
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
+            var image = renderService.DrawableImageCache.GetOrCreate(imageStyle.Image.SourceId,
+                () => TryCreateDrawableImage(imageStyle.Image, renderService.ImageSourceCache));
+#pragma warning restore IDISP001
             if (image != null)
                 symbolSize = new Size(image.Width, image.Height);
         }

@@ -1,6 +1,7 @@
 ﻿using Mapsui.Styles;
 using SkiaSharp;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Mapsui.Rendering.Skia;
 
@@ -13,10 +14,16 @@ internal class BitmapRenderer
 
     public static void Draw(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity = 1f)
     {
-        var skPaint = GetPaint(layerOpacity, out var dispose);
-        canvas.DrawImage(bitmap, rect, _defaultSamplingOptions, skPaint);
-        if (dispose)
-            skPaint.Dispose();
+        if (IsSemiTransparent(layerOpacity)) // Unfortunately for opacity we need to set the Color and the Color is part of the LinePaint object. So we need to recreate the paint on every draw. 
+        {
+            using var skPaint = new SKPaint { Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity)) };
+            canvas.DrawImage(bitmap, rect, _defaultSamplingOptions, skPaint);
+        }
+        else
+        {
+            // If the layerOpacity is 1, we can use the default paint without creating a new one.
+            canvas.DrawImage(bitmap, rect, _defaultSamplingOptions, _defaultPaint);
+        }
     }
 
     public static void Draw(SKCanvas canvas, SKImage? bitmap, float x, float y, float rotation = 0,
@@ -67,20 +74,7 @@ internal class BitmapRenderer
         return 0; // center
     }
 
-    private static SKPaint GetPaint(float layerOpacity, out bool dispose)
-    {
-        if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
-        {
-            // Unfortunately for opacity we need to set the Color and the Color
-            // is part of the LinePaint object. So we need to recreate the paint on
-            // every draw. 
-            dispose = true;
-            return new SKPaint
-            {
-                Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity))
-            };
-        }
-        dispose = false;
-        return _defaultPaint;
-    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static bool IsSemiTransparent(float layerOpacity) =>
+        Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon;
 }

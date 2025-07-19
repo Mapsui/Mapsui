@@ -8,8 +8,8 @@ using SkiaSharp;
 using System;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Extensions;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia;
+using Mapsui.Rendering;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
 
