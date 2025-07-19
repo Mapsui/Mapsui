@@ -1,5 +1,5 @@
 #pragma warning disable IDE0005 // Using directive is unnecessary.
-//using Uno.Resizetizer;
+using Uno.Resizetizer;
 
 namespace Mapsui.Samples.Uno.WinUI;
 
@@ -11,7 +11,7 @@ public partial class App : Application
     /// </summary>
     public App()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
     protected Window? MainWindow { get; private set; }
@@ -45,7 +45,6 @@ public partial class App : Application
             rootFrame.Navigate(typeof(MainPage), args.Arguments);
         }
 
-        MainWindow.SetWindowIcon();
         // Ensure the current window is active
         MainWindow.Activate();
     }
