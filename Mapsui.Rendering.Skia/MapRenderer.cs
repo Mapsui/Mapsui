@@ -77,6 +77,12 @@ public sealed class MapRenderer : IRenderer
         Render(canvas, viewport, widgets, renderService, 1);
     }
 
+    public MemoryStream RenderToBitmapStream(Map map, float pixelDensity = 1,
+        RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
+    {
+        return RenderToBitmapStream(map.Navigator.Viewport, map.Layers, map.RenderService, map.BackColor, pixelDensity, map.Widgets, renderFormat, quality);
+    }
+
     public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService,
         Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
