@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Rendering.Skia.Cache;
+﻿namespace Mapsui.Rendering.Caching;
 
 public interface ICacheHolder
 {

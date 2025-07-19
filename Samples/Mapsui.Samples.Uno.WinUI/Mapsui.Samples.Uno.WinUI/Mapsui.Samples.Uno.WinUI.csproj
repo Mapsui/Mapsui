@@ -35,7 +35,7 @@
 	
 	<!--workaround for Uno.Resizetizer uses a newer skiasharp version then maui resizetizer -->
 	<ItemGroup>
-		<PackageReference Include="Uno.Resizetizer" VersionOverride="1.8.1">
+		<PackageReference Include="Uno.Resizetizer" VersionOverride="1.9.4">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>

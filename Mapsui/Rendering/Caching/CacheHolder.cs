@@ -2,7 +2,7 @@
 using System.Threading;
 using Mapsui.Extensions;
 
-namespace Mapsui.Rendering.Skia.Cache;
+namespace Mapsui.Rendering.Caching;
 
 public sealed class CacheHolder<T> : ICacheHolder, IDisposable
     where T : class

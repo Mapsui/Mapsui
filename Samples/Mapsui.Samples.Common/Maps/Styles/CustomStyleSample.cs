@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;

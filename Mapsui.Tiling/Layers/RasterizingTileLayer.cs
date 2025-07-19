@@ -22,7 +22,6 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IFetchableSource, I
     ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
     /// </summary>
     /// <param name="layer">The Layer to be rasterized</param>
-    /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
     /// <param name="pixelDensity"></param>
     /// <param name="minTiles">Minimum number of tiles to cache</param>
     /// <param name="maxTiles">Maximum number of tiles to cache</param>
@@ -35,7 +34,6 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IFetchableSource, I
     /// <param name="renderFormat">Format to Render To</param>
     public RasterizingTileLayer(
         ILayer layer,
-        IRenderer? rasterizer = null,
         float pixelDensity = 1,
         int minTiles = 200,
         int maxTiles = 300,
@@ -46,7 +44,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IFetchableSource, I
         IPersistentCache<byte[]>? persistentCache = null,
         IProjection? projection = null,
         RenderFormat renderFormat = RenderFormat.Png) : base(
-        new RasterizingTileSource(layer, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
+        new RasterizingTileSource(layer, pixelDensity, persistentCache, projection, renderFormat),
         minTiles,
         maxTiles,
         dataFetchStrategy,

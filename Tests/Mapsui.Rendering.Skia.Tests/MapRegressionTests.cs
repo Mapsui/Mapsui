@@ -16,7 +16,6 @@ using Mapsui.Samples.Common.Maps.WFS;
 using Mapsui.Samples.Common.Maps.Widgets;
 using Mapsui.Samples.Common.Maps.WMS;
 using Mapsui.Styles;
-using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
@@ -93,50 +92,52 @@ public class MapRegressionTests
     {
         try
         {
+            // Arrange
             var fileName = sample.GetType().Name + ".Regression.png";
             using var mapControl = await SampleHelper.InitMapAsync(sample).ConfigureAwait(false);
             var map = mapControl.Map;
             await SampleHelper.DisplayMapAsync(mapControl).ConfigureAwait(false);
             Performance.DefaultIsActive = ActiveMode.No; // Never show performance in rendering tests so that Release and Debug runs generate the same image.
+            MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
+            var mapRenderer = new MapRenderer();
 
             if (map != null)
             {
-                // act
-                using var mapRenderer = CreateMapRenderer(mapControl);
+                // Act
+
+                _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+
+                using var bitmap = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
+                    map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
+
+                // aside
+                if (bitmap is { Length: > 0 })
                 {
-                    _ = await mapRenderer.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+                    File.WriteToGeneratedRegressionFolder(fileName, bitmap);
+                }
+                else
+                {
+                    Assert.Fail("Should generate Image");
+                }
 
-                    using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
-
-                    // aside
-                    if (bitmap is { Length: > 0 })
+                // Assert
+                if (compareImages)
+                {
+                    using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
+                    if (originalStream == null)
                     {
-                        File.WriteToGeneratedRegressionFolder(fileName, bitmap);
+                        Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
                     }
                     else
                     {
-                        Assert.Fail("Should generate Image");
+                        ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995),
+                            $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
                     }
-
-                    // assert
-                    if (compareImages)
-                    {
-                        using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
-                        if (originalStream == null)
-                        {
-                            Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
-                        }
-                        else
-                        {
-                            ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995),
-                                $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
-                        }
-                    }
-                    else
-                    {
-                        // Don't compare images here because to unreliable
-                        ClassicAssert.True(true);
-                    }
+                }
+                else
+                {
+                    // Don't compare images here because to unreliable
+                    ClassicAssert.True(true);
                 }
             }
         }
@@ -149,12 +150,6 @@ public class MapRegressionTests
 #pragma warning restore IDISP007 // Don't dispose injected
             }
         }
-    }
-
-    internal static MapRenderer CreateMapRenderer(IMapControl mapControl)
-    {
-        MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
-        return new MapRenderer();
     }
 
     [Test]

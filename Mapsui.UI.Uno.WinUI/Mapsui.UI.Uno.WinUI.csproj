@@ -19,10 +19,10 @@
       https://aka.platform.uno/singleproject-features
     -->
     <UnoFeatures>
-			SkiaRenderer;
-		</UnoFeatures>
+      SkiaRenderer;
+    </UnoFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	</PropertyGroup>
+  </PropertyGroup>
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
     <!--

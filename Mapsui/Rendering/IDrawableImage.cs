@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mapsui.Rendering.Skia.Images;
+namespace Mapsui.Rendering;
 
 public interface IDrawableImage : IDisposable
 {

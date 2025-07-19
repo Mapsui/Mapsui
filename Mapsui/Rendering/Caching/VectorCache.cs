@@ -1,9 +1,9 @@
 ﻿using System;
 using Mapsui.Cache;
 
-namespace Mapsui.Rendering.Skia.Cache;
+namespace Mapsui.Rendering.Caching;
 
-public sealed class VectorCache(IRenderService renderService, int capacity) : IDisposable
+public sealed class VectorCache(RenderService renderService, int capacity) : IDisposable
 {
     private readonly LruCache<object, ICacheHolder> _cache = new(Math.Min(capacity, 1));
 
@@ -27,7 +27,7 @@ public sealed class VectorCache(IRenderService renderService, int capacity) : ID
         return holder?.Get<TPaint>() ?? new CacheTracker<TPaint>(toPaint(param));
     }
 
-    public CacheTracker<TPaint> GetOrCreate<TParam, TPaint>(TParam param, Func<TParam, IRenderService, TPaint> toPaint)
+    public CacheTracker<TPaint> GetOrCreate<TParam, TPaint>(TParam param, Func<TParam, RenderService, TPaint> toPaint)
         where TParam : notnull
         where TPaint : class
     {

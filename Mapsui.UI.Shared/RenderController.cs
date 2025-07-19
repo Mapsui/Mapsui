@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using static NetTopologySuite.Geometries.Utilities.GeometryMapper;
 #pragma warning restore IDE0005 // Using directive is unnecessary.
 
 namespace Mapsui.Rendering;
@@ -51,15 +52,15 @@ public sealed class RenderController : IDisposable
         _needsRefresh.Set();
     }
 
-    public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers,
-    Mapsui.Styles.Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
+    public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService,
+        Mapsui.Styles.Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
-        return _renderer.RenderToBitmapStream(viewport, layers, background, pixelDensity, widgets, renderFormat, quality);
+        return _renderer.RenderToBitmapStream(viewport, layers, renderService, background, pixelDensity, widgets, renderFormat, quality);
     }
 
-    public MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+    public MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService, int margin = 0)
     {
-        return _renderer.GetMapInfo(screenPosition, viewport, layers, margin);
+        return _renderer.GetMapInfo(screenPosition, viewport, layers, renderService, margin);
     }
 
     public void Dispose()
@@ -68,7 +69,6 @@ public sealed class RenderController : IDisposable
             return;
 
         _isRunning = false;
-        _renderer.Dispose();
 
         _disposed = true;
     }
@@ -120,9 +120,9 @@ public sealed class RenderController : IDisposable
         _stopwatch.Restart();
         _timestampStartDraw = GetTimestampInMilliseconds();
         // Fetch the image data for all image sources and call RefreshGraphics if new images were loaded.
-        _renderer.ImageSourceCache.FetchAllImageData(Mapsui.Styles.Image.SourceToSourceId, map.FetchMachine, RefreshGraphics);
+        map.RenderService.ImageSourceCache.FetchAllImageData(Mapsui.Styles.Image.SourceToSourceId, map.FetchMachine, RefreshGraphics);
 
-        _renderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.BackColor);
+        _renderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor);
 
         _isDrawingDone.Set();
         _stopwatch.Stop();

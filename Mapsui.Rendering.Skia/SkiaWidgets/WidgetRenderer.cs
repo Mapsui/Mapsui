@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Widgets;
 using SkiaSharp;
 
