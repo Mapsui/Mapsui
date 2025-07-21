@@ -11,7 +11,11 @@ using System.ComponentModel;
 using System.Linq;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Devices;
+#if ANDROID
+using System.Reflection;
+using System.Threading.Tasks;
+using SkiaSharp.Views.Maui.Handlers;
+#endif
 
 namespace Mapsui.UI.Maui;
 
@@ -355,33 +359,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
     private static bool GetShiftPressed() => false; // Work in progress: https://github.com/dotnet/maui/issues/16202
 
-    // Workaround for Android Not displaying Map on second time Display on Gpu
-    // https://github.com/mono/SkiaSharp/pull/3076
     protected override void OnParentSet()
     {
         base.OnParentSet();
         AttachToOnAppearing();
-    }
-
-    private void AttachToOnAppearing()
-    {
-        if (UseGPU && DeviceInfo.Platform == DevicePlatform.Android)
-        {
-            if (Parent != null)
-            {
-                _page = GetPage(Parent);
-                if (_page != null)
-                {
-                    _page.Appearing += Page_Appearing;
-                }
-            }
-        }
-    }
-
-    private void Page_Appearing(object? sender, EventArgs e)
-    {
-        IsVisible = false;
-        IsVisible = true;
     }
 
     private void Element_ParentChanged(object? sender, EventArgs e)
@@ -395,6 +376,43 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         AttachToOnAppearing();
     }
 
+    private record struct PointerRecording(ScreenPosition ScreenPosition, long Timestamp)
+    {
+    }
+
+    // Everything below is a workaround for Android not displaying the map after Maui page navigation (when using GPU)
+    // https://github.com/mono/SkiaSharp/issues/2550
+
+    private void AttachToOnAppearing()
+    {
+#if ANDROID
+        if (UseGPU && Parent != null)
+        {
+            _page = GetPage(Parent);
+            if (_page != null)
+            {
+                _page.Appearing += Page_Appearing;
+            }
+        }
+#endif
+    }
+
+    private void Page_Appearing(object? sender, EventArgs e)
+    {
+#if ANDROID
+        if (IsMaui9())
+        {
+            FixInvisible();
+        }
+        else
+        {
+            IsVisible = false;
+            IsVisible = true;
+        }
+#endif
+    }
+
+#if ANDROID
     private Page? GetPage(Element? element)
     {
         if (element == null)
@@ -417,7 +435,60 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
         return GetPage(element.Parent);
     }
 
-    private record struct PointerRecording(ScreenPosition ScreenPosition, long Timestamp)
+    private static FieldInfo? glThreadField;
+    private static FieldInfo? glThreadExitedField;
+    private Task? sizeNotifyTask;
+
+    private static void LoadReflectionFields(SkiaSharp.Views.Android.GLTextureView glTextureView)
     {
+        if (glThreadExitedField is not null)
+            return;
+
+        glThreadField = typeof(SkiaSharp.Views.Android.GLTextureView).GetField("glThread", BindingFlags.NonPublic | BindingFlags.Instance);
+        var glThread = glThreadField?.GetValue(glTextureView);
+        glThreadExitedField = glThread?.GetType().GetField("exited", BindingFlags.Instance | BindingFlags.Public);
     }
+
+    /// <summary>
+    /// An SKGLView may become invisible when it is reappearing after being off-screen. Calling this hack will trigger the View to render again properly.
+    /// This is because the SkiaSharp.Views.Android.GLTextureView.GLThread is restarted when an SKGLView has reappeared, and it by default assumes that
+    /// the size of the View is (0, 0) until notified otherwise. Instead of resizing this View, we are calling the GLTextureView's
+    /// OnSurfaceTextureSizeChanged function, which in turn will call the GLThread's OnWindowResize(int width, int height)
+    /// with the actual View's size to kick the GLThread back into action.
+    /// </summary>
+    public void FixInvisible()
+    {
+        var handler = _glView?.Handler as SKGLViewHandler;
+        if (handler is not null)
+        {
+            SkiaSharp.Views.Android.GLTextureView glTextureView = handler.PlatformView;
+            LoadReflectionFields(glTextureView);
+
+            // Ensure there's only a single polling Task that will fix the SKGLView's internal render thread
+            if (sizeNotifyTask is not null && !sizeNotifyTask.IsCompleted)
+            {
+                return;
+            }
+
+            sizeNotifyTask = Task.Run(async () =>
+            {
+                while (true)
+                {
+                    var glThread = glThreadField?.GetValue(glTextureView);
+                    bool? exited = (bool?)glThreadExitedField?.GetValue(glThread);
+                    if (exited.HasValue && exited.Value)
+                    {
+                        // The TextureView still has its old glThread. Wait for the new glThread to be created
+                        await Task.Delay(30);
+                        continue;
+                    }
+                    // Now notify the glThread of the actual size of the View
+                    glTextureView.OnSurfaceTextureSizeChanged(null, glTextureView.Width, glTextureView.Height);
+                    return;
+                }
+            });
+        }
+    }
+#endif
+
 }
