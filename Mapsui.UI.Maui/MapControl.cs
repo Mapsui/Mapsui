@@ -400,15 +400,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
     private void Page_Appearing(object? sender, EventArgs e)
     {
 #if ANDROID
-        if (IsMaui9())
-        {
-            FixInvisible();
-        }
-        else
-        {
-            IsVisible = false;
-            IsVisible = true;
-        }
+        FixInvisible();
 #endif
     }
 
