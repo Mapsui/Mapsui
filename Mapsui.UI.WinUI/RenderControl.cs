@@ -1,4 +1,7 @@
+using System;
 using Microsoft.UI;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using SkiaSharp;
 
 #if __UNO_SKIA__
@@ -47,8 +50,8 @@ partial class SKXamlCanvasRenderControl : RenderControl
     {
         Content = _skXamlCanvas = new SKXamlCanvas
         {
-            VerticalAlignment = VerticalAlignment.Stretch,
-            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch,
+            HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
             Background = new SolidColorBrush(Colors.Transparent)
         };
         _skXamlCanvas.PaintSurface += SKXamlCanvasOnPaintSurface;
@@ -88,8 +91,8 @@ partial class SKSwapChainPanelRenderControl : RenderControl
     {
         Content = _swapChainPanel = new SKSwapChainPanel
         {
-            VerticalAlignment = VerticalAlignment.Stretch,
-            HorizontalAlignment = HorizontalAlignment.Stretch,
+            VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch,
+            HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
             Background = new SolidColorBrush(Colors.Transparent)
         };
         _swapChainPanel.PaintSurface += SwapChainPanelOnPaintSurface;
