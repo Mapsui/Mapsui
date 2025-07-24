@@ -1,12 +1,13 @@
-using System;
 using Microsoft.UI;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 using SkiaSharp;
 
 #if __UNO_SKIA__
 using Windows.Foundation;
 using Uno.WinUI.Graphics2DSK;
+#else
+using System;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 #endif
 
 namespace Mapsui.UI.WinUI;
@@ -143,7 +144,7 @@ partial class SKCanvasElementRenderControl : RenderControl
     {
         protected override void RenderOverride(SKCanvas canvas, Size area)
         {
-            if (parent.Owner.GetPixelDensity() is { } pixelDensity)
+            if (parent.GetPixelDensity() is { } pixelDensity)
             {
                 canvas.Scale(pixelDensity);
             }
