@@ -4,7 +4,7 @@ using SkiaSharp;
 #if __UNO_SKIA__
 using Windows.Foundation;
 using Uno.WinUI.Graphics2DSK;
-#else
+#elif !__UNO_WINDOWS__
 using System;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;

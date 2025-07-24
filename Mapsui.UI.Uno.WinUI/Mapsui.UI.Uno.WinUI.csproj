@@ -22,6 +22,7 @@
       SkiaRenderer;
     </UnoFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">$(DefineConstants);__UNO_WINDOWS__</DefineConstants>
     <DefineConstants Condition="
                      $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != '' and
                      $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'windows' and
