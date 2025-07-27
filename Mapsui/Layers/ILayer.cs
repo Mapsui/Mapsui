@@ -30,12 +30,12 @@ public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable
     object? Tag { get; set; }
 
     /// <summary>
-    /// Minimum visible zoom level
+    /// Minimum visible zoom level at which the layer is displayed
     /// </summary>
     double MinVisible { get; }
 
     /// <summary>
-    /// Minimum visible zoom level
+    /// Maximum visible zoom level at which the layer is displayed
     /// </summary>
     double MaxVisible { get; }
 
