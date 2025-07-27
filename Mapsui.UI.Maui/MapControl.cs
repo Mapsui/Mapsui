@@ -438,7 +438,9 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
 
         glThreadField = typeof(SkiaSharp.Views.Android.GLTextureView).GetField("glThread", BindingFlags.NonPublic | BindingFlags.Instance);
         var glThread = glThreadField?.GetValue(glTextureView);
+#pragma warning disable IL2075
         glThreadExitedField = glThread?.GetType().GetField("exited", BindingFlags.Instance | BindingFlags.Public);
+#pragma warning restore IL2075
     }
 
     /// <summary>
