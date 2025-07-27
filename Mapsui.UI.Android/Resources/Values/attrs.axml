@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <declare-styleable name="start_with_openstreetmap_style">
-    <attr name="start_with_openstreetmap" format="boolean" />
-  </declare-styleable>
-</resources>

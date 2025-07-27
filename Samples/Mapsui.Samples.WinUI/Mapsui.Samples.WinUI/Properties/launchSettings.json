@@ -1,7 +1,0 @@
-﻿{
-    "profiles": {
-        "Windowing (Package)": {
-            "commandName": "MsixPackage"
-        }
-    }
-}
