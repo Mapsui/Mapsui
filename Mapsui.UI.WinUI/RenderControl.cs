@@ -5,7 +5,6 @@ using SkiaSharp;
 using Windows.Foundation;
 using Uno.WinUI.Graphics2DSK;
 #elif !__UNO_WINDOWS__
-using System;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 #endif
@@ -15,21 +14,21 @@ namespace Mapsui.UI.WinUI;
 abstract partial class RenderControl : UserControl
 {
     protected MapControl Owner { get; }
-    protected Action<SKCanvas> RenderCallback { get; }
+    protected System.Action<SKCanvas> RenderCallback { get; }
 
-    protected RenderControl(MapControl owner, Action<SKCanvas> renderCallback)
+    protected RenderControl(MapControl owner, System.Action<SKCanvas> renderCallback)
     {
         Owner = owner;
         RenderCallback = renderCallback;
     }
 
-    public static RenderControl CreateControl(MapControl owner, Action<SKCanvas> renderCallback)
+    public static RenderControl CreateControl(MapControl owner, System.Action<SKCanvas> renderCallback)
     {
 #if __UNO_SKIA__
         return new SKCanvasElementRenderControl(owner, renderCallback);
 #else
         // GPU does not work currently on Windows
-        bool useGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
+        bool useGPU = System.OperatingSystem.IsBrowser() || System.OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
         return useGPU
             ? new SKSwapChainPanelRenderControl(owner, renderCallback)
             : new SKXamlCanvasRenderControl(owner, renderCallback);
@@ -47,7 +46,7 @@ partial class SKXamlCanvasRenderControl : RenderControl
     private readonly SKXamlCanvas _skXamlCanvas;
 #pragma warning restore IDISP006
 
-    public SKXamlCanvasRenderControl(MapControl owner, Action<SKCanvas> renderCallback) : base(owner, renderCallback)
+    public SKXamlCanvasRenderControl(MapControl owner, System.Action<SKCanvas> renderCallback) : base(owner, renderCallback)
     {
         Content = _skXamlCanvas = new SKXamlCanvas
         {
@@ -88,7 +87,7 @@ partial class SKSwapChainPanelRenderControl : RenderControl
     private readonly SKSwapChainPanel _swapChainPanel;
 #pragma warning restore IDISP006
 
-    public SKSwapChainPanelRenderControl(MapControl owner, Action<SKCanvas> renderCallback) : base(owner, renderCallback)
+    public SKSwapChainPanelRenderControl(MapControl owner, System.Action<SKCanvas> renderCallback) : base(owner, renderCallback)
     {
         Content = _swapChainPanel = new SKSwapChainPanel
         {
