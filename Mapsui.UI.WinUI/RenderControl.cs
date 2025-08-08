@@ -4,14 +4,11 @@ using SkiaSharp;
 #if __UNO_SKIA__
 using Windows.Foundation;
 using Uno.WinUI.Graphics2DSK;
-#elif !__UNO_WINDOWS__
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 #endif
 
 namespace Mapsui.UI.WinUI;
 
-abstract partial class RenderControl : UserControl
+abstract partial class RenderControl : Microsoft.UI.Xaml.Controls.UserControl
 {
     protected MapControl Owner { get; }
     protected System.Action<SKCanvas> RenderCallback { get; }
@@ -52,7 +49,7 @@ partial class SKXamlCanvasRenderControl : RenderControl
         {
             VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch,
             HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
-            Background = new SolidColorBrush(Colors.Transparent)
+            Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(Colors.Transparent)
         };
         _skXamlCanvas.PaintSurface += SKXamlCanvasOnPaintSurface;
     }
@@ -93,7 +90,7 @@ partial class SKSwapChainPanelRenderControl : RenderControl
         {
             VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Stretch,
             HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Stretch,
-            Background = new SolidColorBrush(Colors.Transparent)
+            Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(Colors.Transparent)
         };
         _swapChainPanel.PaintSurface += SwapChainPanelOnPaintSurface;
     }
