@@ -29,13 +29,10 @@ namespace Mapsui.UI.WinUI;
 
 public partial class MapControl : Grid, IMapControl, IDisposable
 {
-    // GPU does not work currently on Windows
-    public static bool UseGPU = OperatingSystem.IsBrowser() || OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
-#pragma warning disable IDISP002 // These should not be disposed here in WINUI they are not disposable and in UNO They shouldn't be disposed
-    private readonly SKSwapChainPanel? _canvasGpu;
+#pragma warning disable IDISP002 // This should not be disposed here in WINUI it is not disposable and in UNO it shouldn't be disposed
+    private readonly RenderControl _renderControl;
+#pragma warning restore IDISP002
     private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-    private readonly SKXamlCanvas? _canvas;
-#pragma warning restore IDISP002    
 
     bool _shiftPressed;
 
@@ -47,18 +44,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
 
-        if (UseGPU)
-        {
-            _canvasGpu = CreateGpuRenderTarget();
-            Children.Add(_canvasGpu);
-            _canvasGpu.PaintSurface += CanvasGpu_PaintSurface;
-        }
-        else
-        {
-            _canvas = CreateRenderTarget();
-            Children.Add(_canvas);
-            _canvas.PaintSurface += Canvas_PaintSurface;
-        }
+        _renderControl = RenderControl.CreateControl(this, canvas => _renderController?.Render(canvas));
+        Children.Add(_renderControl);
 
         // The Canvas needs to be first set before calling the Shared Constructor or else it crashes in the InvalidateCanvas
         SharedConstructor();
@@ -91,12 +78,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public void InvalidateCanvas()
     {
-        if (_canvasGpu is not null)
-            RunOnUIThread(_canvasGpu.Invalidate);
-        else if (_canvas is not null)
-            RunOnUIThread(_canvas.Invalidate);
-        else
-            throw new Exception("No canvas was assigned. This is unexpected.");
+        RunOnUIThread(_renderControl.Invalidate);
     }
 
     private void MapControl_KeyUp(object sender, KeyRoutedEventArgs e)
@@ -173,26 +155,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         };
     }
 
-    private static SKXamlCanvas CreateRenderTarget()
-    {
-        return new SKXamlCanvas
-        {
-            VerticalAlignment = VerticalAlignment.Stretch,
-            HorizontalAlignment = HorizontalAlignment.Stretch,
-            Background = new SolidColorBrush(Colors.Transparent)
-        };
-    }
-
-    private static SKSwapChainPanel CreateGpuRenderTarget()
-    {
-        return new SKSwapChainPanel
-        {
-            VerticalAlignment = VerticalAlignment.Stretch,
-            HorizontalAlignment = HorizontalAlignment.Stretch,
-            Background = new SolidColorBrush(Colors.Transparent)
-        };
-    }
-
     private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
         var mousePointerPoint = e.GetCurrentPoint(this);
@@ -230,30 +192,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         }));
     }
 
-    private void Canvas_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
-    {
-        if (GetPixelDensity() is not float pixelDensity)
-            return;
-
-        var canvas = e.Surface.Canvas;
-
-        canvas.Scale(pixelDensity, pixelDensity);
-
-        _renderController?.Render(canvas);
-    }
-
-    private void CanvasGpu_PaintSurface(object? sender, SKPaintGLSurfaceEventArgs e)
-    {
-        if (GetPixelDensity() is not float pixelDensity)
-            return;
-
-        var canvas = e.Surface.Canvas;
-
-        canvas.Scale(pixelDensity, pixelDensity);
-
-        _renderController?.Render(canvas);
-    }
-
     private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
     {
         e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
@@ -282,14 +220,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
     }
 
-    public float? GetPixelDensity()
-    {
-        var canvasWidth = UseGPU ? _canvasGpu!.CanvasSize.Width : _canvas!.CanvasSize.Width;
-        var canvasActualWidth = UseGPU ? _canvasGpu!.ActualWidth : _canvas!.ActualWidth;
-        if (canvasWidth <= 0 || canvasActualWidth <= 0)
-            return null;
-        return (float)(canvasWidth / canvasActualWidth);
-    }
+    public float? GetPixelDensity() => _renderControl.GetPixelDensity();
 
     private bool GetShiftPressed() => _shiftPressed;
 
@@ -332,8 +263,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         if (disposing)
         {
-            _canvas?.Dispose();
-            _canvasGpu?.Dispose();
+            _renderControl.Dispose();
             _selectRectangle?.Dispose();
         }
     }
