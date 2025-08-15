@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net8.0-android</TargetFrameworks>
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
     <DefineConstants>__MAUI__</DefineConstants>
@@ -37,6 +37,11 @@
     <Compile Include="..\Mapsui.UI.Maui\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
     <Compile Include="..\Mapsui.UI.Maui\MapControl.cs" Link="MapControl.cs" />
     <Compile Include="..\Mapsui.UI.Maui\Utils\KnownColor.cs" Link="Utils\KnownColor.cs" />
+  </ItemGroup>
+
+  <!-- Android -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <Compile Include="..\Mapsui.UI.Maui\Platforms\Android\MapControl.cs" Link="Platforms\Android\MapControl.cs" />
   </ItemGroup>
  
   <ItemGroup>
