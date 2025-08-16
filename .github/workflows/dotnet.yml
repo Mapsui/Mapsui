@@ -3,9 +3,8 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
       - develop/4.1
-
   pull_request:
     branches: [ '**' ]
   # Allows you to run this workflow manually from the Actions tab
@@ -168,11 +167,11 @@ jobs:
         key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
             ${{ runner.os }}-nuget15-
-    # .Net 8 update
-    - name: Setup .NET 8 SDK
+    - name: Setup .NET SDKs
       uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
+           6.0.x
            8.0.4xx
          include-prerelease: false
     - name: Set up JDK 11
