@@ -1,6 +1,6 @@
 # Images
 
-In Mapsui v5 the Image class was added which simplifies the process of assigning images to symbols. Previously, in v4, you had to load the image in your code, register it, and then assign the image ID returned from the registration to the symbol. Now all you have to do is assign the path to the image to the Source field of the Image class.
+In Mapsui v5 the Image class was added which simplifies the process of working with images. Previously, in v4, you had to load the image in your code, register it, and then assign the image ID returned from the registration to the symbol. Now all you have to do is assign the path to the image to the Source field of the Image class.
 
 ### Supported Path Schemes for the Source
 
@@ -23,7 +23,7 @@ An Image Source can point to or contain an SVG (supported via [Svg.Skia](https:/
 
 The following Mapsui classes have an Image field:
 
-- SymbolStyle
+- ImageStyle
 - CalloutStyle
 - Brush
 - ImageButtonWidget
