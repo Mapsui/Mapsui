@@ -3,9 +3,8 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
       - develop/4.1
-
   pull_request:
     branches: [ '**' ]
   # Allows you to run this workflow manually from the Actions tab
@@ -31,12 +30,12 @@ jobs:
       with:
         nuget-version: latest
     - name: Setup .NET SDKs
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
-         dotnet-version: |
+        dotnet-version: |
            6.0.x
            8.0.4xx
-         include-prerelease: false
+        dotnet-quality: 'ga'
     # Android SDK Install
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
@@ -92,12 +91,12 @@ jobs:
       with:
          xcode-version: '16'
     - name: Setup .NET SDKs
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
-         dotnet-version: |
+        dotnet-version: |
            6.0.x
            8.0.4xx
-         include-prerelease: false
+        dotnet-quality: 'ga'
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     # macos image needs Visual Studio for Mac installed
@@ -168,13 +167,13 @@ jobs:
         key: ${{ runner.os }}-nuget15-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
             ${{ runner.os }}-nuget15-
-    # .Net 8 update
-    - name: Setup .NET 8 SDK
-      uses: actions/setup-dotnet@v3
+    - name: Setup .NET SDKs
+      uses: actions/setup-dotnet@v4
       with:
-         dotnet-version: |
+        dotnet-version: |
+           6.0.x
            8.0.4xx
-         include-prerelease: false
+        dotnet-quality: 'ga'
     - name: Set up JDK 11
       uses: actions/setup-java@v4
       with:
