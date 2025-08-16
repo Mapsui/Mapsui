@@ -1,10 +1,8 @@
 # Images
 
-In Mapsui v5 the Image class was added which simplifies the process of assigning images to symbols. Previously, in v4, you had to load the image in your code, register it, and then assign the image ID returned from the registration to the symbol. Now all you have to do is assign the path to the image to the Image.Source field.
+In Mapsui v5 the Image class was added which simplifies the process of assigning images to symbols. Previously, in v4, you had to load the image in your code, register it, and then assign the image ID returned from the registration to the symbol. Now all you have to do is assign the path to the image to the Source field of the Image class.
 
-## Image.Source
-
-### Supported Path Schemes
+### Supported Path Schemes for the Source
 
 Mapsui supports five types of schemes for specifying image paths: 'http(s)', 'file', 'embedded' (for pointing to embedded resources), 'svg-content' (for strings that contain the SVG xml itself) and 'base64-content' (for strings containing base64 encoded images). Here are some examples:
 
@@ -19,7 +17,7 @@ myStyle.Image.Source = "base64-content://iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAIAAAA
 
 ### Supported Image Source Types 
 
-An Image.Source can point to or contain an SVG (supported via [Svg.Skia](https://github.com/wieslawsoltes/Svg.Skia)) or a bitmap type, which can be PNG, WEBP, JPEG, and any other format [supported by SkiaSharp](https://learn.microsoft.com/en-us/dotnet/api/skiasharp.skencodedimageformat?view=skiasharp-2.88#fields).
+An Image Source can point to or contain an SVG (supported via [Svg.Skia](https://github.com/wieslawsoltes/Svg.Skia)) or a bitmap type, which can be PNG, WEBP, JPEG, and any other format [supported by SkiaSharp](https://learn.microsoft.com/en-us/dotnet/api/skiasharp.skencodedimageformat?view=skiasharp-2.88#fields).
 
 ### Image usage
 
