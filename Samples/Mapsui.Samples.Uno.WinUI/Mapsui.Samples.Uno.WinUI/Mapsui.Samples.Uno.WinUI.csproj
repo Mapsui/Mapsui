@@ -67,10 +67,35 @@
     </ItemGroup>
   </Target>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
-    <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-  </ItemGroup>
+  <Choose>
+    <When Condition="!$(TargetFramework.Contains('windows')) and $(UnoFeatures.Contains('SkiaRenderer'))">
+      <ItemGroup>
+        <!-- The UndefineProperties and SetTargetFramework properties below are necessary to force
+           this TFM of the projects below to be net9.0 even when the TFM of this project is net9.0-<platform>.
+           This is only necessary when SkiaRenderer is set and only for this sample app that uses ProjectReferences.
+           For user apps that use the Mapsui.UI.Uno.WinUI package (with PackageReferences), the logic below is unnecessary
+           and selecting the correct TFM is handled by Uno.Sdk  -->
+        <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj">
+          <UndefineProperties>RuntimeIdentifier</UndefineProperties>
+          <SetTargetFramework>TargetFramework=net9.0</SetTargetFramework>
+        </ProjectReference>
+        <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj">
+          <UndefineProperties>RuntimeIdentifier</UndefineProperties>
+          <SetTargetFramework>TargetFramework=net9.0</SetTargetFramework>
+        </ProjectReference>
+        <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
+          <UndefineProperties>RuntimeIdentifier</UndefineProperties>
+          <SetTargetFramework>TargetFramework=net9.0</SetTargetFramework>
+        </ProjectReference>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
+        <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
+        <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 
 </Project>
