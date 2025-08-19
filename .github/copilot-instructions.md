@@ -44,10 +44,12 @@ dotnet build --no-restore --configuration Debug Mapsui.Linux.slnf  # ~5 minutes
 ```
 
 **Platform-specific builds use solution filter files (.slnf):**
-- `Mapsui.Linux.slnf` - Linux-compatible projects
-- `Mapsui.Windows.slnf` - Windows-specific projects  
-- `Mapsui.Mac.slnf` - macOS projects
-- `Mapsui.slnx` - Full solution (Windows)
+- `Mapsui.Linux.slnf` - Linux-compatible projects (recommended for cross-platform development)
+- `Mapsui.slnx` - Full solution (Windows, used in CI)
+- `Mapsui.Tests.slnf` - Test projects only
+- UI-specific filters: `Mapsui.Maui.slnf`, `Mapsui.Blazor.slnf`, `Mapsui.Wpf.slnf`, etc.
+
+**Note**: Use `Mapsui.Linux.slnf` for development on non-Windows systems, `Mapsui.slnx` for full Windows builds.
 
 **Release builds:**
 ```bash
