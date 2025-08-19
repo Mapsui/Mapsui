@@ -71,3 +71,4 @@ AppPackages/
 /docs/samples
 /docs/api/pages
 .vscode
+./dotnet-install.sh
