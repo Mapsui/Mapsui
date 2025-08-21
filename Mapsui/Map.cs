@@ -448,7 +448,7 @@ public class Map : INotifyPropertyChanged, IDisposable
 
             Navigator.ViewportChanged -= Navigator_ViewportChanged;
             Navigator.FetchRequested -= Navigator_FetchRequested;
-            RenderService.ImageSourceCache.FetchRequested += FetchableSource_FetchRequested;
+            RenderService.ImageSourceCache.FetchRequested -= FetchableSource_FetchRequested;
         }
     }
 
