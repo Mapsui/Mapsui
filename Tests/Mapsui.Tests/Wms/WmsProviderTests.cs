@@ -25,6 +25,6 @@ internal class WmsProviderTests
         var legendUrls = provider.GetLegendRequestUrls();
 
         // assert
-        Assert.That(legendUrls.Count(, Is.True) == 2);
+        Assert.That(legendUrls.Count(), Is.EqualTo(2));
     }
 }

@@ -25,7 +25,7 @@ public class ProjectionTests
         var enumeration = geometry.Coordinates;
 
         // assert
-        Assert.That(enumeration.Count(, Is.EqualTo(expectedCoordinateCount)));
+        Assert.That(enumeration.Count(), Is.EqualTo(expectedCoordinateCount));
     }
 
     [Test]
@@ -39,7 +39,7 @@ public class ProjectionTests
         var enumeration = geometry.Coordinates;
 
         // assert
-        Assert.That(enumeration.Count(, Is.EqualTo(expectedCoordinateCount)));
+        Assert.That(enumeration.Count(), Is.EqualTo(expectedCoordinateCount));
     }
 
     [TestCase("EPSG:3857")]
