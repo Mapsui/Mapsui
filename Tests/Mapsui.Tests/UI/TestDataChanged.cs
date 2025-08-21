@@ -1,3 +1,4 @@
+using NUnit.Framework;
 ﻿using Mapsui.Fetcher;
 using Mapsui.UI;
 

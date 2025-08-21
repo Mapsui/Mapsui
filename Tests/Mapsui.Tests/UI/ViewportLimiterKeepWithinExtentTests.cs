@@ -1,7 +1,5 @@
 ﻿using Mapsui.Limiting;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.UI;
 
 [TestFixture]
@@ -23,7 +21,7 @@ public class ViewportLimiterKeepWithinExtentTests
         var result2 = limiter.Limit(viewport2, panBounds, null);
 
         // assert
-        ClassicAssert.AreEqual(result2, result1);
+        Assert.That(result1, Is.EqualTo(result2));
     }
 
     private static MRect GetLimitsOfItaly()

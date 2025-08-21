@@ -1,3 +1,4 @@
+using NUnit.Framework;
 ﻿using System.IO;
 
 namespace Mapsui.Tests.Utilities;
