@@ -4,6 +4,11 @@
 
 [![Breath Companion website](images/breath-companion.png)](https://software-notion.de/apps/breath-companion)
 
+### Droniq Maps
+
+[![Droniq Maps](images/droniq-maps.png)](https://droniq.de/en/droniq-maps/)
+
+
 ### Squadra
 
 [![Squadra](images/squadra.png)](https://bertt.github.io/squadra/)
