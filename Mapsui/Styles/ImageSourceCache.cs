@@ -111,6 +111,6 @@ public sealed class ImageSourceCache : IFetchableSource
 
     private bool NeedsFetching(IEnumerable<KeyValuePair<string, string>> sourceIds)
     {
-        return !sourceIds.Any(i => !_register.ContainsKey(i.Value));
+        return sourceIds.Any(i => !_register.ContainsKey(i.Value));
     }
 }
