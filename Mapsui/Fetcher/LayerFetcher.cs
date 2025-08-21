@@ -1,5 +1,6 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Styles;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -15,12 +16,14 @@ public sealed class LayerFetcher
     private readonly ConcurrentDictionary<long, FetchJob> _activeFetches = new();
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
     private readonly IEnumerable<ILayer> _layers;
+    private readonly ImageSourceCache _imageSourceCache;
 
     private readonly Channel<bool> _channel = Channel.CreateBounded<bool>(new BoundedChannelOptions(1) { AllowSynchronousContinuations = false, SingleReader = false });
 
-    public LayerFetcher(IEnumerable<ILayer> Layers)
+    public LayerFetcher(IEnumerable<ILayer> Layers, ImageSourceCache imageSourceCache)
     {
         _layers = Layers;
+        _imageSourceCache = imageSourceCache;
         _ = Task.Run(() => AddConsumerAsync(_channel));
     }
 
@@ -49,7 +52,9 @@ public sealed class LayerFetcher
 
     private void UpdateFetches()
     {
-        foreach (var layer in _layers.OfType<IFetchableSource>())
+        var fetchableSources = _layers.OfType<IFetchableSource>().ToList();
+        fetchableSources.Add(_imageSourceCache);
+        foreach (var layer in fetchableSources)
         {
             try
             {

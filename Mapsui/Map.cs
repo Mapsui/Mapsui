@@ -40,11 +40,12 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
-        _layerFetcher = new LayerFetcher(Layers);
+        _layerFetcher = new LayerFetcher(Layers, RenderService.ImageSourceCache);
         Widgets.Add(CreateLoggingWidget(RefreshGraphics));
         Widgets.Add(CreatePerformanceWidget(this));
         Navigator.FetchRequested += Navigator_FetchRequested;
         Navigator.ViewportChanged += Navigator_ViewportChanged;
+        RenderService.ImageSourceCache.FetchRequested += FetchableSource_FetchRequested;
     }
 
     public FetchMachine FetchMachine { get; } = new(16); // This is still needed because we support the IAsyncDataFetcher interface.
@@ -444,6 +445,10 @@ public class Map : INotifyPropertyChanged, IDisposable
                 LayerRemoved(layer); // Remove Event so that no memory leaks occur
             Layers.ClearAllGroups();
             RenderService.Dispose();
+
+            Navigator.ViewportChanged -= Navigator_ViewportChanged;
+            Navigator.FetchRequested -= Navigator_FetchRequested;
+            RenderService.ImageSourceCache.FetchRequested += FetchableSource_FetchRequested;
         }
     }
 

@@ -17,7 +17,7 @@ public sealed class DrawableImageCache : IDisposable
         if (drawableImage == null)
             return null;
         if (_cache.ContainsKey(key))
-            Logger.Log(LogLevel.Error, "The image is create twice, this is not necessary and should be prevented.");
+            Logger.Log(LogLevel.Error, "The image is created more than once, this is not necessary and should be prevented.");
         return _cache[key] = drawableImage;
     }
 
