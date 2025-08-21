@@ -31,7 +31,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     private LayerCollection _layers = [];
     private Color _backColor = Color.White;
     private IWidget[] _oldWidgets = [];
-    private readonly LayerFetcher _layerFetcher;
+    private readonly DataFetcher _dataFetcher;
 
     /// <summary>
     /// Initializes a new map
@@ -40,7 +40,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
-        _layerFetcher = new LayerFetcher(Layers, RenderService.ImageSourceCache);
+        _dataFetcher = new DataFetcher(Layers, RenderService.ImageSourceCache);
         Widgets.Add(CreateLoggingWidget(RefreshGraphics));
         Widgets.Add(CreatePerformanceWidget(this));
         Navigator.FetchRequested += Navigator_FetchRequested;
@@ -236,7 +236,7 @@ public class Map : INotifyPropertyChanged, IDisposable
         }
 
         if (changeType == ChangeType.Discrete)
-            _layerFetcher.ViewportChanged(fetchInfo);
+            _dataFetcher.ViewportChanged(fetchInfo);
     }
 
     public void RefreshGraphics()

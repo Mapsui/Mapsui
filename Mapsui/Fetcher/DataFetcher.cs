@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher;
 
-public sealed class LayerFetcher
+public sealed class DataFetcher
 {
     private readonly int _maxConcurrentFetches = 8;
     private readonly ConcurrentDictionary<long, FetchJob> _activeFetches = new();
@@ -20,7 +20,7 @@ public sealed class LayerFetcher
 
     private readonly Channel<bool> _channel = Channel.CreateBounded<bool>(new BoundedChannelOptions(1) { AllowSynchronousContinuations = false, SingleReader = false });
 
-    public LayerFetcher(IEnumerable<ILayer> Layers, ImageSourceCache imageSourceCache)
+    public DataFetcher(IEnumerable<ILayer> Layers, ImageSourceCache imageSourceCache)
     {
         _layers = Layers;
         _imageSourceCache = imageSourceCache;
