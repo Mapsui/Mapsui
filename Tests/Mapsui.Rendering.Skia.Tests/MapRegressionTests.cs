@@ -20,7 +20,6 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using System;
 using System.Linq;
 using System.Threading;
@@ -130,14 +129,14 @@ public class MapRegressionTests
                     }
                     else
                     {
-                        ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995),
+                        Assert.That(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995), Is.True,
                             $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
                     }
                 }
                 else
                 {
                     // Don't compare images here because to unreliable
-                    ClassicAssert.True(true);
+                    Assert.That(true, Is.True);
                 }
             }
         }
