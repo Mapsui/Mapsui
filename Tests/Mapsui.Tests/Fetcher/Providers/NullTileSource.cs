@@ -1,4 +1,4 @@
-﻿using BruTile;
+using BruTile;
 using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Fetcher.Providers;

@@ -1,8 +1,6 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.Layers;
 
 [TestFixture]
@@ -15,7 +13,7 @@ public class ILayerSourceTests
 
         if (memoryLayer is ILayerDataSource<IProvider> source)
         {
-            ClassicAssert.IsTrue(true, "should be true");
+            Assert.That(true, Is.True, "should be true");
         }
         else
         {

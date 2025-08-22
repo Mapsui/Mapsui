@@ -1,7 +1,6 @@
 using System;
 using Mapsui.UI.Maui;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 #pragma warning disable IDISP001 // Disposable object created
 #pragma warning disable IDISP007 // Don't Dispose injected
@@ -22,7 +21,7 @@ public class MapControlTests
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        ClassicAssert.IsTrue(weak.IsAlive);
+        Assert.That(weak.IsAlive, Is.True);
     }
 
 
@@ -38,7 +37,7 @@ public class MapControlTests
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        ClassicAssert.IsFalse(weak.IsAlive);
+        Assert.That(weak.IsAlive, Is.False);
     }
 
     private void Dispose(WeakReference weak)

@@ -6,8 +6,6 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.Layers;
 
 [TestFixture]
@@ -54,6 +52,6 @@ public class ImageLayerTests
 
         // assert
         waitHandle.WaitOne();
-        ClassicAssert.AreEqual(ExceptionMessage, exception?.Message);
+        Assert.That(exception?.Message, Is.EqualTo(ExceptionMessage));
     }
 }

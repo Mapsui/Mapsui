@@ -7,7 +7,6 @@ using Mapsui.Tests.Fetcher.Providers;
 using Mapsui.Tiling.Extensions;
 using Mapsui.Tiling.Fetcher;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,9 +43,9 @@ public class FetchMachineTests
         } while (tileFetchPlanner.Busy);
 
         // Assert
-        ClassicAssert.AreEqual(expectedTiles, tileSource.CountByTile.Keys.Count);
-        ClassicAssert.AreEqual(expectedTiles, tileSource.CountByTile.Values.Sum());
-        ClassicAssert.AreEqual(expectedTiles, tileSource.TotalCount);
+        Assert.That(tileSource.CountByTile.Keys.Count, Is.EqualTo(expectedTiles));
+        Assert.That(tileSource.CountByTile.Values.Sum(), Is.EqualTo(expectedTiles));
+        Assert.That(tileSource.TotalCount, Is.EqualTo(expectedTiles));
     }
 
     [Test]
@@ -89,10 +88,10 @@ public class FetchMachineTests
         } while (tileFetchPlanner.Busy);
 
         // Assert
-        ClassicAssert.AreEqual(countAfterFirstTry, tileSource.CountByTile.Values.Sum());
-        ClassicAssert.AreEqual(expectedTiles, tileSource.CountByTile.Keys.Count);
-        ClassicAssert.AreEqual(expectedTiles, tileSource.CountByTile.Values.Sum());
-        ClassicAssert.AreEqual(expectedTiles, tileSource.TotalCount);
+        Assert.That(tileSource.CountByTile.Values.Sum(), Is.EqualTo(countAfterFirstTry));
+        Assert.That(tileSource.CountByTile.Keys.Count, Is.EqualTo(expectedTiles));
+        Assert.That(tileSource.CountByTile.Values.Sum(), Is.EqualTo(expectedTiles));
+        Assert.That(tileSource.TotalCount, Is.EqualTo(expectedTiles));
     }
 
     [Test]
@@ -133,7 +132,7 @@ public class FetchMachineTests
         } while (tileFetchPlanner.Busy);
 
         // Assert
-        ClassicAssert.AreEqual(tilesInLevel, tileSource.TotalCount);
+        Assert.That(tileSource.TotalCount, Is.EqualTo(tilesInLevel));
     }
 
     [Test]
@@ -177,7 +176,7 @@ public class FetchMachineTests
         } while (tileFetchPlanner.Busy);
 
         // Assert
-        ClassicAssert.AreEqual(tilesInLevel * 2, tileSource.TotalCount); // tried all tiles twice
+        Assert.That(tileSource.TotalCount, Is.EqualTo(tilesInLevel * 2)); // tried all tiles twice
     }
 
     [Test]
@@ -221,8 +220,8 @@ public class FetchMachineTests
         } while (tileFetchPlanner.Busy);
 
         // Assert
-        ClassicAssert.GreaterOrEqual(tileSource.TotalCount, tileCountAfterFirstBatch);
-        ClassicAssert.GreaterOrEqual(tileSource.CountByTile.Values.Sum(), tilesInLevel);
+        Assert.That(tileSource.TotalCount, Is.GreaterThanOrEqualTo(tileCountAfterFirstBatch));
+        Assert.That(tileSource.CountByTile.Values.Sum(), Is.GreaterThanOrEqualTo(tilesInLevel));
     }
 
     private static async Task<RasterFeature?> TileToFeatureAsync(ILocalTileSource tileSource, TileInfo tileInfo)
