@@ -1,4 +1,5 @@
 using Mapsui.Fetcher;
+using Mapsui.Layers;
 using Mapsui.Logging;
 using System;
 using System.Collections.Concurrent;
@@ -11,9 +12,13 @@ namespace Mapsui.Styles;
 /// <summary>
 /// Class for managing all bitmaps, which are registered for Mapsui drawing
 /// </summary>
-public sealed class ImageSourceCache
+public sealed class ImageSourceCache : IFetchableSource
 {
     private readonly ConcurrentDictionary<string, byte[]> _register = [];
+
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
+
+    public int Id => -1; // This hacky! All layers have a unique Id provided by the BaseLayer. The -1 of the ImageSourceCache will not collide with the layer Ids, but if we add more IFetchableSources we might need to change this.
 
     /// <summary>
     /// Register an image for drawing
@@ -50,36 +55,6 @@ public sealed class ImageSourceCache
         return val;
     }
 
-    public void FetchAllImageData(ConcurrentDictionary<string, string> sourceToSourceId, FetchMachine fetchMachine, Action refreshGraphics)
-    {
-        var unregisteredImageSource = GetUnregisteredImageSources(sourceToSourceId);
-
-        if (unregisteredImageSource.Count == 0)
-        {
-            return; // Don't start a thread if there are no bitmap paths to initialize.
-        }
-
-        var needsRefresh = false;
-        foreach (var imageSource in unregisteredImageSource)
-        {
-            fetchMachine.Enqueue(async () =>
-            {
-                try
-                {
-                    if (await TryRegisterAsync(imageSource.Value, imageSource.Key))
-                        needsRefresh = true;
-                }
-                catch (Exception ex)
-                {
-                    // Todo: We might need to deal with failed initializations, and possible reties, but not too many retries.
-                    Logger.Log(LogLevel.Error, ex.Message, ex);
-                }
-            });
-        }
-        if (needsRefresh)
-            refreshGraphics();
-    }
-
     /// <summary>
     /// This variant is currently only used in tests. By awaiting the method the user can be sure that the images are loaded.
     /// </summary>
@@ -105,9 +80,37 @@ public sealed class ImageSourceCache
         return await Task.FromResult(true);
     }
 
-    private List<KeyValuePair<string, string>> GetUnregisteredImageSources(IEnumerable<KeyValuePair<string, string>> sourceIds)
+    public FetchJob[] GetFetchJobs(int activeFetchCount, int availableFetchSlots)
     {
-        return sourceIds.Where(i => !_register.ContainsKey(i.Value)).ToList();
+        if (!NeedsFetching(Image.SourceToSourceId)) // This is inefficient. Perhaps we should work with queue of un-fetched images that would be empty in most cases.
+            return [];
+
+        if (activeFetchCount > 0)
+            return []; // We currently do only one fetch.
+
+        return new[] {
+            new FetchJob(Id, async () =>
+                {
+                    _ = await FetchAllImageDataAsync(Image.SourceToSourceId);
+                })
+        };
     }
 
+    public void ViewportChanged(FetchInfo fetchInfo) { } // Currently not used in ImageSourceCache, but required by the interface.
+
+    public void ClearCache()
+    {
+        _register.Clear();
+        OnFetchRequested();
+    }
+
+    private void OnFetchRequested()
+    {
+        FetchRequested?.Invoke(this, new FetchRequestedEventArgs(ChangeType.Discrete));
+    }
+
+    private bool NeedsFetching(IEnumerable<KeyValuePair<string, string>> sourceIds)
+    {
+        return sourceIds.Any(i => !_register.ContainsKey(i.Value));
+    }
 }

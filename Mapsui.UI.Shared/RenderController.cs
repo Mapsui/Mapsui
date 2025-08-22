@@ -119,8 +119,6 @@ public sealed class RenderController : IDisposable
         // Start stopwatch before updating animations and drawing control
         _stopwatch.Restart();
         _timestampStartDraw = GetTimestampInMilliseconds();
-        // Fetch the image data for all image sources and call RefreshGraphics if new images were loaded.
-        map.RenderService.ImageSourceCache.FetchAllImageData(Mapsui.Styles.Image.SourceToSourceId, map.FetchMachine, RefreshGraphics);
 
         _renderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor);
 

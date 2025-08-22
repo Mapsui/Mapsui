@@ -9,25 +9,25 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher;
 
-public sealed class LayerFetcher
+public sealed class DataFetcher
 {
     private readonly int _maxConcurrentFetches = 8;
     private readonly ConcurrentDictionary<long, FetchJob> _activeFetches = new();
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
-    private readonly IEnumerable<ILayer> _layers;
+    private readonly Func<IEnumerable<IFetchableSource>> _getFetchableSources;
 
     private readonly Channel<bool> _channel = Channel.CreateBounded<bool>(new BoundedChannelOptions(1) { AllowSynchronousContinuations = false, SingleReader = false });
 
-    public LayerFetcher(IEnumerable<ILayer> Layers)
+    public DataFetcher(Func<IEnumerable<IFetchableSource>> getFetchableSources) // The constructor accepts a function so that it works for changes to the layer list.
     {
-        _layers = Layers;
+        _getFetchableSources = getFetchableSources;
         _ = Task.Run(() => AddConsumerAsync(_channel));
     }
 
     public void ViewportChanged(FetchInfo fetchInfo)
     {
         _latestFetchInfo.Overwrite(fetchInfo);
-        UpdateLayerViewports(fetchInfo);
+        UpdateViewports(fetchInfo);
         _ = _channel.Writer.TryWrite(true);
     }
 
@@ -39,26 +39,26 @@ public sealed class LayerFetcher
         }
     }
 
-    private void UpdateLayerViewports(FetchInfo fetchInfo)
+    private void UpdateViewports(FetchInfo fetchInfo)
     {
-        foreach (var layer in _layers.OfType<IFetchableSource>())
+        foreach (var fetchableSource in _getFetchableSources())
         {
-            layer.ViewportChanged(fetchInfo);
+            fetchableSource.ViewportChanged(fetchInfo);
         }
     }
 
     private void UpdateFetches()
     {
-        foreach (var layer in _layers.OfType<IFetchableSource>())
+        foreach (var fetchableSource in _getFetchableSources())
         {
             try
             {
-                var activeFetchCountForLayer = _activeFetches.Count(kvp => kvp.Value.LayerId == layer.Id);
+                var activeFetchCountForFetchableSource = _activeFetches.Count(kvp => kvp.Value.FetchableSourceId == fetchableSource.Id);
 
                 var availableFetchSlots = _maxConcurrentFetches - _activeFetches.Count;
                 if (availableFetchSlots == 0)
                     return;
-                var fetchJobs = layer.GetFetchJobs(activeFetchCountForLayer, availableFetchSlots);
+                var fetchJobs = fetchableSource.GetFetchJobs(activeFetchCountForFetchableSource, availableFetchSlots);
 
                 foreach (var fetchJob in fetchJobs)
                 {
@@ -71,7 +71,7 @@ public sealed class LayerFetcher
                         }
                         catch (Exception ex)
                         {
-                            Logger.Log(LogLevel.Error, $"Error fetching data for layer {layer.Id}: {ex.Message}", ex);
+                            Logger.Log(LogLevel.Error, $"Error fetching data for fetchable source {fetchableSource.Id}: {ex.Message}", ex);
                         }
                         finally
                         {
@@ -83,7 +83,7 @@ public sealed class LayerFetcher
             }
             catch (Exception ex)
             {
-                Logger.Log(LogLevel.Error, $"Error updating fetches for layer {layer.Id}: {ex.Message}", ex);
+                Logger.Log(LogLevel.Error, $"Error updating fetches for fetchable source {fetchableSource.Id}: {ex.Message}", ex);
             }
         }
     }
