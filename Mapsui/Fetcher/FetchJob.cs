@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Mapsui.Fetcher;
 
-public record FetchJob(int LayerId, Func<Task> FetchFunc)
+public record FetchJob(int FetchableSourceId, Func<Task> FetchFunc)
 {
     private static long _requestIdCounter = 0;
     public long JobId { get; } = Interlocked.Increment(ref _requestIdCounter);

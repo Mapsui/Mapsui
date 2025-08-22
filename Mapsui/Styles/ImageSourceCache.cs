@@ -18,7 +18,7 @@ public sealed class ImageSourceCache : IFetchableSource
 
     public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
-    public int Id => -1;
+    public int Id => -1; // This hacky! All layers have a unique Id provided by the BaseLayer. The -1 of the ImageSourceCache will not collide with the layer Ids, but if we add more IFetchableSources we might need to change this.
 
     /// <summary>
     /// Register an image for drawing

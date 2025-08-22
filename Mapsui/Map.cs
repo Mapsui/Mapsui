@@ -40,7 +40,7 @@ public class Map : INotifyPropertyChanged, IDisposable
     {
         BackColor = Color.White;
         Layers = [];
-        _dataFetcher = new DataFetcher(Layers, RenderService.ImageSourceCache);
+        _dataFetcher = new DataFetcher(GetFetchableSources);
         Widgets.Add(CreateLoggingWidget(RefreshGraphics));
         Widgets.Add(CreatePerformanceWidget(this));
         Navigator.FetchRequested += Navigator_FetchRequested;
@@ -489,4 +489,9 @@ public class Map : INotifyPropertyChanged, IDisposable
             e.Handled = true;
         }
     };
+
+    private IEnumerable<IFetchableSource> GetFetchableSources()
+    {
+        return _layers.OfType<IFetchableSource>().Concat(new[] { RenderService.ImageSourceCache });
+    }
 }
