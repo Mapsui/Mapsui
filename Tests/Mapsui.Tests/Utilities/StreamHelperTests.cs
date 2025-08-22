@@ -1,8 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Tests;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.Utilities;
 
 [TestFixture]
@@ -15,7 +13,7 @@ public class StreamHelperTests
         using var stream = File.ReadFromImagesFolder("Pin.svg");
 
         // assert
-        ClassicAssert.True(stream.IsSvg());
+        Assert.That(stream.IsSvg(), Is.True);
     }
 
     [Test]
@@ -25,7 +23,7 @@ public class StreamHelperTests
         using var stream = File.ReadFromImagesFolder("PinXml.svg");
 
         // assert
-        ClassicAssert.True(stream.IsSvg());
+        Assert.That(stream.IsSvg(), Is.True);
     }
 
     [Test]
@@ -35,6 +33,6 @@ public class StreamHelperTests
         using var stream = File.ReadFromImagesFolder("vector_symbol_unittype.png");
 
         // assert
-        ClassicAssert.IsFalse(stream.IsSvg());
+        Assert.That(stream.IsSvg(), Is.False);
     }
 }

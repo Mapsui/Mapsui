@@ -4,8 +4,6 @@ using System.Xml;
 using Mapsui.Providers.Wms;
 using Mapsui.Tests.Utilities;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.Wms;
 
 [TestFixture]
@@ -27,6 +25,6 @@ internal class WmsProviderTests
         var legendUrls = provider.GetLegendRequestUrls();
 
         // assert
-        ClassicAssert.True(legendUrls.Count() == 2);
+        Assert.That(legendUrls.Count(), Is.EqualTo(2));
     }
 }
