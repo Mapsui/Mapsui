@@ -1,8 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Utilities;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.Extensions;
 
 [TestFixture]
@@ -18,9 +16,9 @@ public class ViewportExtensionsTests
         var extent = viewport.ToExtent();
 
         // Assert
-        ClassicAssert.AreEqual(0, extent.Width);
-        ClassicAssert.AreEqual(0, extent.Height);
-        ClassicAssert.AreEqual(0, extent.GetArea());
+        Assert.That(extent.Width, Is.EqualTo(0));
+        Assert.That(extent.Height, Is.EqualTo(0));
+        Assert.That(extent.GetArea(), Is.EqualTo(0));
     }
 
     const double halfEpsilon = Constants.Epsilon * 0.5;
@@ -68,6 +66,6 @@ public class ViewportExtensionsTests
         var result = viewport.IsRotated();
 
         // Assert
-        ClassicAssert.AreEqual(IsRotated, result);
+        Assert.That(result, Is.EqualTo(IsRotated));
     }
 }

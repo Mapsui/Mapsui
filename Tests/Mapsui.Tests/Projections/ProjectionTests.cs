@@ -7,8 +7,6 @@ using Mapsui.Projections;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.Projections;
 
 [TestFixture]
@@ -27,7 +25,7 @@ public class ProjectionTests
         var enumeration = geometry.Coordinates;
 
         // assert
-        ClassicAssert.AreEqual(expectedCoordinateCount, enumeration.Count());
+        Assert.That(enumeration.Count(), Is.EqualTo(expectedCoordinateCount));
     }
 
     [Test]
@@ -41,7 +39,7 @@ public class ProjectionTests
         var enumeration = geometry.Coordinates;
 
         // assert
-        ClassicAssert.AreEqual(expectedCoordinateCount, enumeration.Count());
+        Assert.That(enumeration.Count(), Is.EqualTo(expectedCoordinateCount));
     }
 
     [TestCase("EPSG:3857")]
@@ -63,8 +61,8 @@ public class ProjectionTests
 
         for (var i = 0; i < coordinates.Count; i++)
         {
-            ClassicAssert.AreNotEqual(coordinates[i].X, projectedCoordinates[i].X);
-            ClassicAssert.AreNotEqual(coordinates[i].Y, projectedCoordinates[i].Y);
+            Assert.That(projectedCoordinates[i].X, Is.Not.EqualTo(coordinates[i].X));
+            Assert.That(projectedCoordinates[i].Y, Is.Not.EqualTo(coordinates[i].Y));
         }
     }
 
@@ -87,8 +85,8 @@ public class ProjectionTests
 
         for (var i = 0; i < coordinates.Count; i++)
         {
-            ClassicAssert.AreNotEqual(coordinates[i].X, projectedCoordinates[i].X);
-            ClassicAssert.AreNotEqual(coordinates[i].Y, projectedCoordinates[i].Y);
+            Assert.That(projectedCoordinates[i].X, Is.Not.EqualTo(coordinates[i].X));
+            Assert.That(projectedCoordinates[i].Y, Is.Not.EqualTo(coordinates[i].Y));
         }
     }
 
@@ -103,6 +101,6 @@ public class ProjectionTests
         using var shapeFile = new ShapeFile(countriesPath, false, true, new DotSpatialProjection());
 
         // assert
-        ClassicAssert.AreEqual(shapeFile.CRS, "EPSG:4326");
+        Assert.That("EPSG:4326", Is.EqualTo(shapeFile.CRS));
     }
 }

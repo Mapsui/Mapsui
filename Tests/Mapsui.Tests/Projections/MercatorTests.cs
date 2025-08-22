@@ -1,8 +1,6 @@
 ﻿using Mapsui.Projections;
 using Mapsui.Utilities;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.Projections;
 
 [TestFixture]
@@ -22,6 +20,6 @@ internal class MercatorTests
         // Assert
         var distanceInKilometer = Haversine.Distance(inLon, inLat, outLon, outLat);
         var distanceInCentimeter = distanceInKilometer * 100000;
-        ClassicAssert.Less(distanceInCentimeter, 1);
+        Assert.That(distanceInCentimeter, Is.LessThan(1));
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Mapsui.Styles;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Styles;
 
@@ -12,116 +11,116 @@ public static class ColorTests
     {
         var color = new Color(64, 128, 192);
 
-        ClassicAssert.True(color.R == 64);
-        ClassicAssert.True(color.G == 128);
-        ClassicAssert.True(color.B == 192);
-        ClassicAssert.True(color.A == 255);
+        Assert.That(color.R == 64, Is.True);
+        Assert.That(color.G == 128, Is.True);
+        Assert.That(color.B == 192, Is.True);
+        Assert.That(color.A == 255, Is.True);
     }
 
     [Test]
     public static void ColorFromKnownString()
     {
         var color = Color.LightBlue;
-        ClassicAssert.True(color.R == 0xAD && color.G == 0xD8 && color.B == 0xE6);
+        Assert.That(color.R == 0xAD && color.G == 0xD8 && color.B == 0xE6, Is.True);
 
         color = Color.PaleVioletRed;
-        ClassicAssert.True(color.R == 0xDB && color.G == 0x70 && color.B == 0x93);
+        Assert.That(color.R == 0xDB && color.G == 0x70 && color.B == 0x93, Is.True);
     }
 
     [Test]
     public static void ColorFromHtmlString()
     {
         var color = Color.FromString("#ADD8E6");
-        ClassicAssert.True(color.R == 0xAD && color.G == 0xD8 && color.B == 0xE6);
+        Assert.That(color.R == 0xAD && color.G == 0xD8 && color.B == 0xE6, Is.True);
 
         color = Color.FromString("#ABC");
-        ClassicAssert.True(color.R == 0xAA && color.G == 0xBB && color.B == 0xCC);
+        Assert.That(color.R == 0xAA && color.G == 0xBB && color.B == 0xCC, Is.True);
     }
 
     [Test]
     public static void ColorFromKnownColor()
     {
         var color = Color.FromString("Magenta");
-        ClassicAssert.True(color.R == Color.Magenta.R && color.G == Color.Magenta.G && color.B == Color.Magenta.B);
+        Assert.That(color.R == Color.Magenta.R && color.G == Color.Magenta.G && color.B == Color.Magenta.B, Is.True);
 
         color = Color.FromString("Yellow");
-        ClassicAssert.True(color.R == Color.Yellow.R && color.G == Color.Yellow.G && color.B == Color.Yellow.B);
+        Assert.That(color.R == Color.Yellow.R && color.G == Color.Yellow.G && color.B == Color.Yellow.B, Is.True);
     }
 
     [Test]
     public static void ColorFromRgbString()
     {
         var color = Color.FromString("rgb(64,128,192)");
-        ClassicAssert.True(color.R == 64 && color.G == 128 && color.B == 192);
+        Assert.That(color.R == 64 && color.G == 128 && color.B == 192, Is.True);
 
         color = Color.FromString("RGB(    64,  128,192    )   ");
-        ClassicAssert.True(color.R == 64 && color.G == 128 && color.B == 192);
+        Assert.That(color.R == 64 && color.G == 128 && color.B == 192, Is.True);
 
         color = Color.FromString("RGB(    64,  128,192    )   ");
-        ClassicAssert.True(color.R == 64 && color.G == 128 && color.B == 192);
+        Assert.That(color.R == 64 && color.G == 128 && color.B == 192, Is.True);
 
         color = Color.FromString("rGb    (    64 ,  128   ,192    )");
-        ClassicAssert.True(color.R == 64 && color.G == 128 && color.B == 192);
+        Assert.That(color.R == 64 && color.G == 128 && color.B == 192, Is.True);
     }
 
     [Test]
     public static void ColorFromRgbaString()
     {
         var color = Color.FromString("rgba(64,128,192,0.5)");
-        ClassicAssert.True(color.R == 64 && color.G == 128 && color.B == 192 && color.A == 127);
+        Assert.That(color.R == 64 && color.G == 128 && color.B == 192 && color.A == 127, Is.True);
 
         color = Color.FromString("RGBa(    64,  128,192  ,0.5  )   ");
-        ClassicAssert.True(color.R == 64 && color.G == 128 && color.B == 192 && color.A == 127);
+        Assert.That(color.R == 64 && color.G == 128 && color.B == 192 && color.A == 127, Is.True);
 
         color = Color.FromString("RGBA(    64,  128,192    ,0.5)   ");
-        ClassicAssert.True(color.R == 64 && color.G == 128 && color.B == 192 && color.A == 127);
+        Assert.That(color.R == 64 && color.G == 128 && color.B == 192 && color.A == 127, Is.True);
 
         color = Color.FromString("rGbA    (    64 ,  128   ,192,0.5    )");
-        ClassicAssert.True(color.R == 64 && color.G == 128 && color.B == 192 && color.A == 127);
+        Assert.That(color.R == 64 && color.G == 128 && color.B == 192 && color.A == 127, Is.True);
     }
 
     [Test]
     public static void ColorFromHslString()
     {
         var color = Color.FromString("hsl(180.0,50%,50%)");
-        ClassicAssert.True(color.R == 64 && color.G == 191 && color.B == 191);
+        Assert.That(color.R == 64 && color.G == 191 && color.B == 191, Is.True);
 
         color = Color.FromString("HSL(    180,  50,50  %  )   ");
-        ClassicAssert.True(color.R == 64 && color.G == 191 && color.B == 191);
+        Assert.That(color.R == 64 && color.G == 191 && color.B == 191, Is.True);
 
         color = Color.FromString("HsL(    180,  50,50%)   ");
-        ClassicAssert.True(color.R == 64 && color.G == 191 && color.B == 191);
+        Assert.That(color.R == 64 && color.G == 191 && color.B == 191, Is.True);
 
         color = Color.FromString("hSl    (    180. ,  50%   ,50    )");
-        ClassicAssert.True(color.R == 64 && color.G == 191 && color.B == 191);
+        Assert.That(color.R == 64 && color.G == 191 && color.B == 191, Is.True);
 
         color = Color.FromString("hSl    (    90.0 ,  25%   ,75    )");
-        ClassicAssert.True(color.R == 191 && color.G == 207 && color.B == 175);
+        Assert.That(color.R == 191 && color.G == 207 && color.B == 175, Is.True);
 
         color = Color.FromString("hSl    (    270. ,  75%   ,25    )");
-        ClassicAssert.True(color.R == 64 && color.G == 16 && color.B == 112);
+        Assert.That(color.R == 64 && color.G == 16 && color.B == 112, Is.True);
     }
 
     [Test]
     public static void ColorFromHslaString()
     {
         var color = Color.FromString("hsla(180.0,50%,50%,0.5)");
-        ClassicAssert.True(color.R == 64 && color.G == 191 && color.B == 191 && color.A == 127);
+        Assert.That(color.R == 64 && color.G == 191 && color.B == 191 && color.A == 127, Is.True);
 
         color = Color.FromString("HSLA(    180,  50,50  % , 0.5 )   ");
-        ClassicAssert.True(color.R == 64 && color.G == 191 && color.B == 191 && color.A == 127);
+        Assert.That(color.R == 64 && color.G == 191 && color.B == 191 && color.A == 127, Is.True);
 
         color = Color.FromString("HsLa(    180,  50,50%,0.5)   ");
-        ClassicAssert.True(color.R == 64 && color.G == 191 && color.B == 191 && color.A == 127);
+        Assert.That(color.R == 64 && color.G == 191 && color.B == 191 && color.A == 127, Is.True);
 
         color = Color.FromString("hSlA    (    180. ,  50%   ,50  ,.5  )");
-        ClassicAssert.True(color.R == 64 && color.G == 191 && color.B == 191 && color.A == 127);
+        Assert.That(color.R == 64 && color.G == 191 && color.B == 191 && color.A == 127, Is.True);
 
         color = Color.FromString("hSlA    (    90.0 ,  25%   ,75  , 0.5  )");
-        ClassicAssert.True(color.R == 191 && color.G == 207 && color.B == 175 && color.A == 127);
+        Assert.That(color.R == 191 && color.G == 207 && color.B == 175 && color.A == 127, Is.True);
 
         color = Color.FromString("hSlA    (    270. ,  75%   ,25 ,0.5   )");
-        ClassicAssert.True(color.R == 64 && color.G == 16 && color.B == 112 && color.A == 127);
+        Assert.That(color.R == 64 && color.G == 16 && color.B == 112 && color.A == 127, Is.True);
     }
 
     [Test]

@@ -1,7 +1,5 @@
 ﻿using Mapsui.Limiting;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.UI;
 
 [TestFixture]
@@ -20,7 +18,7 @@ public class ViewportLimiterTests
         var result = limiter.Limit(viewport, panBounds, null);
 
         // assert
-        ClassicAssert.AreEqual(20, result.CenterX);
-        ClassicAssert.AreEqual(40, result.CenterY);
+        Assert.That(result.CenterX, Is.EqualTo(20));
+        Assert.That(result.CenterY, Is.EqualTo(40));
     }
 }
