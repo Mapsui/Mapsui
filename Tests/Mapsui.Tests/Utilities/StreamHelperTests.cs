@@ -13,7 +13,7 @@ public class StreamHelperTests
         using var stream = File.ReadFromImagesFolder("Pin.svg");
 
         // assert
-        Assert.That(stream.IsSvg(, Is.True));
+        Assert.That(stream.IsSvg(), Is.True);
     }
 
     [Test]
@@ -23,7 +23,7 @@ public class StreamHelperTests
         using var stream = File.ReadFromImagesFolder("PinXml.svg");
 
         // assert
-        Assert.That(stream.IsSvg(, Is.True));
+        Assert.That(stream.IsSvg(), Is.True);
     }
 
     [Test]
@@ -33,6 +33,6 @@ public class StreamHelperTests
         using var stream = File.ReadFromImagesFolder("vector_symbol_unittype.png");
 
         // assert
-        Assert.That(stream.IsSvg(, Is.False));
+        Assert.That(stream.IsSvg(), Is.False);
     }
 }

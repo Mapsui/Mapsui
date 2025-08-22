@@ -18,7 +18,7 @@ public class ViewportExtensionsTests
         // Assert
         Assert.That(extent.Width, Is.EqualTo(0));
         Assert.That(extent.Height, Is.EqualTo(0));
-        Assert.That(extent.GetArea(, Is.EqualTo(0)));
+        Assert.That(extent.GetArea(), Is.EqualTo(0));
     }
 
     const double halfEpsilon = Constants.Epsilon * 0.5;

@@ -44,7 +44,7 @@ public class FetchMachineTests
 
         // Assert
         Assert.That(tileSource.CountByTile.Keys.Count, Is.EqualTo(expectedTiles));
-        Assert.That(tileSource.CountByTile.Values.Sum(, Is.EqualTo(expectedTiles)));
+        Assert.That(tileSource.CountByTile.Values.Sum(), Is.EqualTo(expectedTiles));
         Assert.That(tileSource.TotalCount, Is.EqualTo(expectedTiles));
     }
 
@@ -88,9 +88,9 @@ public class FetchMachineTests
         } while (tileFetchPlanner.Busy);
 
         // Assert
-        Assert.That(tileSource.CountByTile.Values.Sum(, Is.EqualTo(countAfterFirstTry)));
+        Assert.That(tileSource.CountByTile.Values.Sum(), Is.EqualTo(countAfterFirstTry));
         Assert.That(tileSource.CountByTile.Keys.Count, Is.EqualTo(expectedTiles));
-        Assert.That(tileSource.CountByTile.Values.Sum(, Is.EqualTo(expectedTiles)));
+        Assert.That(tileSource.CountByTile.Values.Sum(), Is.EqualTo(expectedTiles));
         Assert.That(tileSource.TotalCount, Is.EqualTo(expectedTiles));
     }
 
