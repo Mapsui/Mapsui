@@ -4,7 +4,6 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using NUnit.Framework;
 using System.Collections.Generic;
-using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Rendering;
 
@@ -20,21 +19,21 @@ internal class VisibleFeatureIteratorTests
         var vectorStyle2 = new VectorStyle();
         using var memoryLayer = new MemoryLayer { Style = new ThemeStyle(f => new StyleCollection { Styles = { vectorStyle1, vectorStyle2 } }) };
         var feature = new PointFeature(0, 0);
-        memoryLayer.Features = new List<IFeature> { feature };
+        memoryLayer.Features = [feature];
         var result = new Dictionary<IFeature, List<IStyle>>();
 
         // Act
         VisibleFeatureIterator.IterateLayers(viewport, [memoryLayer], 0, (v, l, s, f, o, i) =>
         {
-            if (result.ContainsKey(f))
-                result[f].Add(s);
+            if (result.TryGetValue(f, out var value))
+                value.Add(s);
             else
                 result[f] = [s];
         });
 
         // Assert
-        ClassicAssert.IsTrue(result[feature].Contains(vectorStyle1));
-        ClassicAssert.IsTrue(result[feature].Contains(vectorStyle2));
+        Assert.That(result[feature].Contains(vectorStyle1), Is.True);
+        Assert.That(result[feature].Contains(vectorStyle2), Is.True);
     }
 
 
@@ -52,7 +51,7 @@ internal class VisibleFeatureIteratorTests
         VisibleFeatureIterator.IterateLayers(viewport, [memoryLayer], 0, (v, l, s, f, o, i) => isApplied = true);
 
         // Assert
-        ClassicAssert.AreEqual(isAppliedExpected, isApplied, assertMessage);
+        Assert.That(isApplied, Is.EqualTo(isAppliedExpected), assertMessage);
     }
 
     [Test, TestCaseSource(nameof(StylesThatShouldBeAppliedOrNot)), TestCaseSource(nameof(FeatureStylesThatShouldBeAppliedOrNot))]
@@ -70,7 +69,7 @@ internal class VisibleFeatureIteratorTests
         VisibleFeatureIterator.IterateLayers(viewport, [memoryLayer], 0, (v, l, s, f, o, i) => isApplied = true);
 
         // Assert
-        ClassicAssert.AreEqual(isAppliedExpected, isApplied, assertMessage);
+        Assert.That(isApplied, Is.EqualTo(isAppliedExpected), assertMessage);
     }
 
     public static IEnumerable<TestCaseData> StylesThatShouldBeAppliedOrNot

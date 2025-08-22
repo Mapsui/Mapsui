@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net8.0-android</TargetFrameworks>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <DefineConstants>__MAUI__</DefineConstants>
+    <NoWarn>NU1703</NoWarn>
+    <PackageId>Mapsui.Maui8</PackageId>
+    <Description>Mapsui.Maui - Library for mapping for Maui 8</Description>
+    <PackageTags>$(PackageTags) maui</PackageTags>
+		<IsPackable>true</IsPackable>
+    <RootNamespace>Mapsui.UI.Maui</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EventArgs\**" />
+    <Compile Remove="Images\**" />
+    <Compile Remove="Objects\**" />
+    <EmbeddedResource Remove="EventArgs\**" />
+    <EmbeddedResource Remove="Images\**" />
+    <EmbeddedResource Remove="Objects\**" />
+    <MauiCss Remove="EventArgs\**" />
+    <MauiCss Remove="Images\**" />
+    <MauiCss Remove="Objects\**" />
+    <MauiXaml Remove="EventArgs\**" />
+    <MauiXaml Remove="Images\**" />
+    <MauiXaml Remove="Objects\**" />
+    <None Remove="EventArgs\**" />
+    <None Remove="Images\**" />
+    <None Remove="Objects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Mapsui.UI.Maui\Extensions\ColorExtensions.cs" Link="Extensions\ColorExtensions.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\Extensions\TextAlignmentExtensions.cs" Link="Extensions\TextAlignmentExtensions.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\MapControl.cs" Link="MapControl.cs" />
+    <Compile Include="..\Mapsui.UI.Maui\Utils\KnownColor.cs" Link="Utils\KnownColor.cs" />
+  </ItemGroup>
+
+  <!-- Android -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <Compile Include="..\Mapsui.UI.Maui\Platforms\Android\MapControl.cs" Link="Platforms\Android\MapControl.cs" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(Maui8Version)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="$(Maui8Version)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
+    <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+    <ProjectReference Include="..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
+
+  <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
+
+  <Import Project="..\Mapsui.UI.MapView\Mapsui.UI.MapView.projitems" Label="Shared" />
+
+</Project>

@@ -13,15 +13,15 @@ public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget bec
         InputAreaType = InputAreaType.Map;
     }
 
-    public override bool OnPointerPressed(Navigator navigator, WidgetEventArgs e)
-        => EditManipulation.OnPointerPressed(e, _editManager);
+    public override void OnPointerPressed(WidgetEventArgs e) =>
+        e.Handled = EditManipulation.OnPointerPressed(e, _editManager);
 
-    public override bool OnPointerMoved(Navigator navigator, WidgetEventArgs e) =>
-        EditManipulation.OnPointerMoved(e, _editManager);
+    public override void OnPointerMoved(WidgetEventArgs e) =>
+        e.Handled = EditManipulation.OnPointerMoved(e, _editManager);
 
-    public override bool OnPointerReleased(Navigator navigator, WidgetEventArgs e) =>
-        EditManipulation.OnPointerReleased(_editManager);
+    public override void OnPointerReleased(WidgetEventArgs e) =>
+        e.Handled = EditManipulation.OnPointerReleased(_editManager);
 
-    public override bool OnTapped(Navigator navigator, WidgetEventArgs e) =>
-        EditManipulation.OnTapped(navigator, e, _editManager);
+    public override void OnTapped(WidgetEventArgs e) =>
+        e.Handled = EditManipulation.OnTapped(e, _editManager);
 }

@@ -19,9 +19,16 @@
       https://aka.platform.uno/singleproject-features
     -->
     <UnoFeatures>
+      SkiaRenderer;
     </UnoFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">$(DefineConstants);__UNO_WINDOWS__</DefineConstants>
+    <DefineConstants Condition="
+                     $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != '' and
+                     $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'windows' and
+                     ($([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'desktop' or $(UnoFeatures.Contains('SkiaRenderer')))">$(DefineConstants);__UNO_SKIA__</DefineConstants>
 	</PropertyGroup>
+
 
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
     <!--
@@ -63,6 +70,7 @@
     <Compile Include="..\Mapsui.UI.WinUI\Extensions\PointExtensions.cs" Link="Extensions\PointExtensions.cs" />
     <Compile Include="..\Mapsui.UI.WinUI\Extensions\PointerPointExtensions.cs" Link="Extensions\PointerPointExtensions.cs" />
     <Compile Include="..\Mapsui.UI.WinUI\MapControl.cs" Link="MapControl.cs" />
+    <Compile Include="..\Mapsui.UI.WinUI\RenderControl.cs" Link="RenderControl.cs" />
     <Compile Include="..\Mapsui.UI.WinUI\SKSwapChainPanel.cs" Link="SKSwapChainPanel.cs" />
   </ItemGroup>
 

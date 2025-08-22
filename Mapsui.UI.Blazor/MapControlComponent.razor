@@ -1,9 +1,13 @@
 ﻿@inherits MapControl
 
-<div @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown 
-     @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove 
-     @ontouchstart=@OnTouchStart @ontouchmove=@OnTouchMove @ontouchend=@OnTouchEnd
-     @onwheel="OnMouseWheel" 
+<div @onmouseup=@OnMouseUp @onmouseup:preventDefault="true"
+     @onmousedown=@OnMouseDown @onmousedown:preventDefault="true" 
+     @onmousewheel=@OnMouseWheel @onmousewheel:preventDefault="true"
+     @onmousemove=@OnMouseMove @onmousemove:preventDefault="true" 
+     @ontouchstart=@OnTouchStart @ontouchstart:preventDefault="true" 
+     @ontouchmove=@OnTouchMove @ontouchmove:preventDefault="true"
+     @ontouchend=@OnTouchEnd @ontouchend:preventDefault="true"
+     @onwheel="OnMouseWheel" @onwheel:preventDefault="true"
      name="@_elementId" id="@_elementId">
 @if (MapControl.UseGPU)
 {

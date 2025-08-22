@@ -8,9 +8,9 @@ namespace Mapsui.Samples.Common.DataBuilders;
 
 public static class RandomPointsBuilder
 {
-    public static IEnumerable<PointFeature> CreateRandomFeatures(MRect? envelope, int count, Random? random = null)
+    public static IEnumerable<PointFeature> CreateRandomFeatures(MRect? envelope, int count, Random? random = null, int seed = 123)
     {
-        random ??= new Random(123);
+        random ??= new Random(seed);
 
         return CreateFeatures(GenerateRandomPoints(envelope, count, random));
     }

@@ -20,6 +20,7 @@ using Mapsui.Manipulations;
 using Mapsui.Styles;
 using System.Threading.Tasks;
 using LogLevel = Mapsui.Logging.LogLevel;
+
 #if __MAUI__
 using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui;
@@ -51,26 +52,13 @@ namespace Mapsui.UI.Wpf;
 
 public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
-    // Flag indicating if a drawing process is running
-    private bool _drawing;
-    // Flag indicating if the control has to be redrawn
-    private bool _invalidated;
-    // Flag indicating if a new drawing process should start
-    private bool _refresh;
-    // Action to call for a redraw of the control
-    private protected Action? _invalidate;
-    // Timer for loop to invalidating the control
-    private System.Threading.Timer? _invalidateTimer;
-    // Interval between two calls of the invalidate function in ms
-    private int _updateInterval = 16;
-    // Stopwatch for measuring drawing times
-    private readonly System.Diagnostics.Stopwatch _stopwatch = new();
-#pragma warning disable IDISP002 // Is disposed in CommonDispose
-    private readonly IRenderer _renderer = new MapRenderer();
-#pragma warning restore IDISP002
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
-    private static bool _firstRender = true;
+    private double _sharedWidth;
+    private double _sharedHeight;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    private RenderController? _renderController;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -89,133 +77,44 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 #endif
     public bool UseFling { get; set; } = true;
 
+    /// <summary>
+    /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+    /// the layers that have IsMapInfoLayer set to true. 
+    /// </summary>
+    /// <remarks>
+    /// The Map.Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
+    /// </remarks>
+    public event EventHandler<MapInfoEventArgs>? Info;
+    /// <summary>
+    /// Event that is triggered when the map is tapped. Can be a single tap, double tap or long press.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapTapped;
+    /// <summary>
+    /// Event that is triggered when on pointer down.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapPointerPressed;
+    /// <summary>
+    /// Event that is triggered when on pointer move. Can be a drag or hover.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapPointerMoved;
+    /// <summary>
+    /// Event that is triggered when on pointer up.
+    /// </summary>
+    public event EventHandler<MapEventArgs>? MapPointerReleased;
+
     private void SharedConstructor()
     {
         PlatformUtilities.SetOpenInBrowserFunc(OpenInBrowser);
-        // Create timer for invalidating the control
-        _invalidateTimer?.Dispose();
-        _invalidateTimer = new (InvalidateTimerCallback, null, Timeout.Infinite, 16);
-        // Start the invalidation timer
-        StartUpdates(false);
-        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
-        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+        Map = new Map();
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance); // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
+        _renderController = new(() => Map, InvalidateCanvas);
     }
 
-    private protected void CommonDrawControl(object canvas)
+    private void SharedOnSizeChanged(double width, double height)
     {
-        if (_drawing) return;
-        if (Renderer is null) return;
-        if (Map is null) return;
-        if (!Map.Navigator.Viewport.HasSize()) return;
-
-        if (_firstRender)
-        {
-            _firstRender = false;
-            Logger.Log(LogLevel.Information, $"First call to the Mapsui renderer");
-        }
-
-        // Start drawing
-        _drawing = true;
-
-        // Start stopwatch before updating animations and drawing control
-        _stopwatch.Restart();
-
-        // All requested updates up to this point will be handled by this redraw
-        _refresh = false;
-
-        // Start initializing symbol styles and refresh to trigger another render loop.
-        InitializeSymbolStyles((needRefresh) => 
-            { 
-                if (needRefresh) 
-                    RefreshGraphics(); 
-            }); 
-
-        Renderer.Render(canvas, Map.Navigator.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
-
-        // Stop stopwatch after drawing control
-        _stopwatch.Stop();
-
-        // If we are interested in performance measurements, we save the new drawing time
-        _performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
-
-        // End drawing
-        _drawing = false;
-        _invalidated = false;
-    }
-
-    public void InitializeSymbolStyles(Action<bool> doneInitializing) =>
-        ImageSourceCacheInitializer.FetchImagesInViewport(_renderer.ImageSourceCache, Map.Navigator.Viewport, 
-            Map.Layers, Map.Widgets, doneInitializing);
-    
-    private void InvalidateTimerCallback(object? state)
-    {
-        try
-        {
-            // In MAUI if you use binding there is an event where the new value is null even though
-            // the current value en the value you are binding to are not null. Perhaps this should be
-            // considered a bug.
-            if (Map is null) return;
-
-            // Check, if we have to redraw the screen
-
-            if (Map?.UpdateAnimations() == true)
-                _refresh = true;
-
-            // seems that this could be null sometimes
-            if (Map?.Navigator?.UpdateAnimations() ?? false)
-                _refresh = true;
-
-            // Check if widgets need refresh
-            if (!_refresh && (Map?.Widgets?.Any(w => w.NeedsRedraw) ?? false))
-                _refresh = true;
-
-            if (!_refresh)
-                return;
-
-            if (_drawing)
-            {
-                if (_performance != null)
-                    _performance.Dropped++;
-
-                return;
-            }
-
-            if (_invalidated)
-            {
-                return;
-            }
-
-            _invalidated = true;
-            _invalidate?.Invoke();
-        }
-        catch (Exception ex)
-        {
-            Logger.Log(LogLevel.Error, $"Error in render loop", ex);
-        }
-    }
-
-    /// <summary>
-    /// Start updates for control
-    /// </summary>
-    /// <remarks>
-    /// When this function is called, the control is redrawn if needed
-    /// </remarks>
-    public void StartUpdates(bool refresh = true)
-    {
-        _refresh = refresh;
-        _invalidateTimer?.Change(0, _updateInterval);
-    }
-
-    /// <summary>
-    /// Stop updates for control
-    /// </summary>
-    /// <remarks>
-    /// When this function is called, the control stops to redraw itself, 
-    /// even if it is needed
-    /// </remarks>
-    public void StopUpdates()
-    {
-        _invalidateTimer?.Change(Timeout.Infinite, Timeout.Infinite);
+        _sharedWidth = width;
+        _sharedHeight = height;
+        TryUpdateViewportSize();
     }
 
     /// <summary>
@@ -226,67 +125,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </remarks>
     public void ForceUpdate()
     {
-        _invalidated = true;
-        _invalidate?.Invoke();
+        InvalidateCanvas();
     }
-
-    /// <summary>
-    /// Interval between two redraws of the MapControl in ms
-    /// </summary>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)] 
-    public int UpdateInterval
-    {
-        get => _updateInterval;
-        set
-        {
-            if (value <= 0)
-                throw new ArgumentOutOfRangeException(nameof(UpdateInterval), value, "Parameter must be greater than zero");
-
-            if (_updateInterval != value)
-            {
-                _updateInterval = value;
-                StartUpdates();
-            }
-        }
-    }
-
-    private Performance? _performance;
-
-    /// <summary>
-    /// Object to save performance information about the drawing of the map
-    /// </summary>
-    /// <remarks>
-    /// If this is null, no performance information is saved.
-    /// </remarks>
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
-    public Performance? Performance
-    {
-        get => _performance;
-        set
-        {
-            if (_performance != value)
-            {
-                _performance = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    public float PixelDensity => (float)GetPixelDensity();
-
-    /// <summary>
-    /// Renderer that is used from this MapControl
-    /// </summary>
-    public IRenderer Renderer => _renderer;
-
-    /// <summary>
-    /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
-    /// the layers that have IsMapInfoLayer set to true. 
-    /// </summary>
-    /// <remarks>
-    /// The Map.Tapped event is preferred over the Info event. This event is kept for backwards compatibility.
-    /// </remarks>
-    public event EventHandler<MapInfoEventArgs>? Info;
 
     /// <summary>
     /// Called whenever a property is changed
@@ -354,7 +194,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     public void RefreshGraphics()
     {
-        _refresh = true;
+        _renderController?.RefreshGraphics();
     }
 
     private void Map_DataChanged(object? sender, DataChangedEventArgs? e)
@@ -383,7 +223,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(Map_DataChanged)}", exception);
         }
     }
-    // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
     private void Map_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
@@ -414,7 +253,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     }
 
     // ReSharper restore RedundantNameQualifier
-#pragma warning disable IDISP002 // Is Disposed in Common Dispose
+#pragma warning disable IDISP002 // Is Disposed in SharedDispose
     private DisposableWrapper<Map>? _map;
 #pragma warning restore IDISP002
 
@@ -438,20 +277,9 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         mapControl.AfterSetMap((Map)newValue);
     }
 
-
     public Map Map
     {
-        get
-        {
-            if (GetValue(MapProperty) is not Map map)
-            {
-                _map ??= new DisposableWrapper<Map>(new Map(), true);
-                map = _map.WrappedObject;
-                SetValue(MapProperty, map);
-            }
-
-            return map;
-        }
+        get => (Map)GetValue(MapProperty);
         set => SetValue(MapProperty, value);
     }
 
@@ -502,26 +330,11 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void AfterSetMap(Map? map)
     {
-        if (map is null) return; // Although the Map property can not null the map argument can null during initializing and binding.
-
-        if (HasSize())
-            map.Navigator.SetSize(ViewportWidth, ViewportHeight);
+        if (map is null)
+            return; // Although the Map property can not null the map argument can null during initializing and binding.
+        TryUpdateViewportSize();
         SubscribeToMapEvents(map);
         Refresh();
-    }
-
-    /// <inheritdoc />
-    public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
-    {
-        return new MPoint(
-            coordinateInDeviceIndependentUnits.X * PixelDensity,
-            coordinateInDeviceIndependentUnits.Y * PixelDensity);
-    }
-
-    /// <inheritdoc />
-    public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
-    {
-        return new MPoint(coordinateInPixels.X / PixelDensity, coordinateInPixels.Y / PixelDensity);
     }
 
     /// <summary>
@@ -541,18 +354,23 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// <inheritdoc />
     public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
-        using var stream = Renderer.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map?.Layers ?? [], pixelDensity: PixelDensity, renderFormat: renderFormat, quality: quality);
+        if (GetPixelDensity() is not float pixelDensity)
+            throw new Exception("PixelDensity is not initialized");
+
+        using var stream = _renderController?.RenderToBitmapStream(Map.Navigator.Viewport, layers ?? Map.Layers ?? [], Map.RenderService, pixelDensity: pixelDensity, renderFormat: renderFormat, quality: quality)
+             ?? throw new ArgumentNullException(nameof(_renderController));
         return stream.ToArray();
     }
 
     private MapInfoEventArgs CreateMapInfoEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
     {
-        return new MapInfoEventArgs(screenPosition, worldPosition, gestureType, Map.Navigator.Viewport, false, GetMapInfo, GetRemoteMapInfoAsync);
+        return new MapInfoEventArgs(screenPosition, worldPosition, gestureType, Map, GetMapInfo, GetRemoteMapInfoAsync);
     }
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)
     {
-        return Renderer.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers);
+        return _renderController?.GetMapInfo(screenPosition, Map.Navigator.Viewport, layers, Map.RenderService)
+            ?? throw new ArgumentNullException(nameof(_renderController));
     }
 
     protected Task<MapInfo> GetRemoteMapInfoAsync(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers)
@@ -560,38 +378,58 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, viewport, layers);
     }
 
-    private void SetViewportSize()
+    /// <summary>
+    /// Tries to set the size of the MapControl.Map.Viewport.
+    /// </summary>
+    private void TryUpdateViewportSize()
     {
-        var hadSize = Map.Navigator.Viewport.HasSize();
-        Map.Navigator.SetSize(ViewportWidth, ViewportHeight);
-        if (!hadSize && Map.Navigator.Viewport.HasSize()) Map.OnViewportSizeInitialized();
-        Refresh();
+        if (_sharedWidth <= 0 || _sharedHeight <= 0)
+            return;
+
+        if (Map is Map map)
+        {
+            var hadSize = map.Navigator.Viewport.HasSize();
+            map.Navigator.SetSize(_sharedWidth, _sharedHeight);
+            if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
+        }
     }
 
-    private void CommonDispose(bool disposing)
+    private void SharedDispose(bool disposing)
     {
         if (disposing)
         {
             Unsubscribe();
-            StopUpdates();
-            _invalidateTimer?.Dispose();
-            _invalidateTimer = null;
-            _renderer.Dispose();
             _map?.Dispose();
             _map = null;
         }
-        _invalidateTimer = null;
     }
 
+    private bool OnWidgetTapped(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, bool shiftPressed)
+    {
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, gestureType, Map, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+
+        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(screenPosition, Map);
+        foreach (var widget in touchedWidgets)
+        {
+            if (Logger.Settings.LogWidgetEvents)
+                Logger.Log(LogLevel.Information, $"{nameof(OnWidgetTapped)} - {widget.GetType().Name} {nameof(GestureType)}: {gestureType} KeyState: {shiftPressed}");
+            widget.OnTapped(eventArgs);
+            if (eventArgs.Handled)
+                return true;
+        }
+        return false;
+    }
 
     private bool OnWidgetPointerPressed(ScreenPosition screenPosition, MPoint worldPosition, bool shiftPressed)
     {
-        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, GestureType.Press, Map.Navigator.Viewport, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, GestureType.Press, Map, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
         
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
-            Logger.Log(LogLevel.Information, $"Widget.PointerPressed: {widget.GetType().Name}");
-            if (widget.OnPointerPressed(Map.Navigator, eventArgs))
+            if (Logger.Settings.LogWidgetEvents)
+                Logger.Log(LogLevel.Information, $"{nameof(OnWidgetPointerPressed)} - {widget.GetType().Name}");
+            widget.OnPointerPressed(eventArgs);
+            if (eventArgs.Handled)
                 return true;
         }
         return false;
@@ -599,39 +437,42 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private bool OnWidgetPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, bool shiftPressed)
     {
-        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, gestureType, Map.Navigator.Viewport, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, gestureType, Map, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
 
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
-            if (widget.OnPointerMoved(Map.Navigator, eventArgs))
+        {
+            widget.OnPointerMoved(eventArgs);
+            if (eventArgs.Handled)
                 return true;
+        }
         return false;
     }
 
     private bool OnWidgetPointerReleased(ScreenPosition screenPosition, MPoint worldPosition, bool shiftPressed)
     {
-        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, GestureType.Release, Map.Navigator.Viewport, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
+        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, GestureType.Release, Map, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
         
         foreach (var widget in WidgetInput.GetWidgetsAtPosition(screenPosition, Map))
         {
-            Logger.Log(LogLevel.Information, $"Widget.Released: {widget.GetType().Name}");
-            if (widget.OnPointerReleased(Map.Navigator, eventArgs))
+            if (Logger.Settings.LogWidgetEvents)
+                Logger.Log(LogLevel.Information, $"{nameof(OnWidgetPointerReleased)} - {widget.GetType().Name}");
+            widget.OnPointerReleased(eventArgs);
+            if (eventArgs.Handled)
                 return true;
         }
         return false;
     }
 
-    private bool OnWidgetTapped(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, bool shiftPressed)
+    private bool OnTapped(ScreenPosition screenPosition, GestureType gestureType)
     {
-        var eventArgs = new WidgetEventArgs(screenPosition, worldPosition, gestureType, Map.Navigator.Viewport, shiftPressed, GetMapInfo, GetRemoteMapInfoAsync);
-
-        var touchedWidgets = WidgetInput.GetWidgetsAtPosition(screenPosition, Map);
-        foreach (var widget in touchedWidgets)
-        {
-            Logger.Log(LogLevel.Information, $"Widget.Tapped: {widget.GetType().Name} {nameof(GestureType)}: {gestureType} KeyState: {shiftPressed}");
-            if (widget.OnTapped(Map.Navigator, eventArgs))
-                return true;
-        }
-
+        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
+        if (OnWidgetTapped(screenPosition, worldPosition, gestureType, GetShiftPressed()))
+            return true;
+        if (Map is null)
+            return false;
+        if (OnMapTapped(screenPosition, worldPosition, gestureType))
+            return true;
+        OnMapInfo(CreateMapInfoEventArgs(screenPosition, worldPosition, gestureType));
         return false;
     }
 
@@ -670,6 +511,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         if (screenPositions.Length != 1)
             return false;
+        if (GetPixelDensity() is not float pixelDensity)
+            return false;
 
         var handled = false;
         var screenPosition = screenPositions[0];
@@ -678,7 +521,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             handled = true; // Set to handled but still handle tap in the next line
         if (!handled && OnMapPointerReleased(screenPosition, worldPosition))
             handled = true;
-        if (_tapGestureTracker.TapIfNeeded(screenPositions[0], MaxTapGestureMovement * PixelDensity, OnMapTapped))
+        if (_tapGestureTracker.TapIfNeeded(screenPositions[0], MaxTapGestureMovement * pixelDensity, OnTapped))
             handled = true;
         if (UseFling)
             _flingTracker.FlingIfNeeded((vX, vY) => Map.Navigator.Fling(vX, vY, 1000));
@@ -686,47 +529,56 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         return handled;
     }
 
-    private bool OnMapTapped(ScreenPosition screenPosition, GestureType gestureType)
+    protected virtual bool OnMapTapped(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
     {
-        var worldPosition = Map.Navigator.Viewport.ScreenToWorld(screenPosition);
-        if (OnWidgetTapped(screenPosition, worldPosition, gestureType, GetShiftPressed()))
-            return true;
-        if (Map is null)
-            return false;
-        if (OnMapTapped(screenPosition, gestureType, worldPosition))
-            return true;
-        OnMapInfo(CreateMapInfoEventArgs(screenPosition, worldPosition, gestureType));
-        return false;
+        if (Logger.Settings.LogMapEvents)
+            Logger.Log(LogLevel.Information, $"{nameof(OnMapTapped)} - {nameof(GestureType)}: {gestureType}");
+
+        var eventArgs = new MapEventArgs(screenPosition, worldPosition, gestureType, Map, GetMapInfo,
+            GetRemoteMapInfoAsync);
+        Map.OnTapped(eventArgs);
+        if (!eventArgs.Handled)
+            MapTapped?.Invoke(this, eventArgs);
+
+        return eventArgs.Handled;
     }
 
-    private bool OnMapPointerPressed(ScreenPosition screenPosition, MPoint worldPosition)
+    protected virtual bool OnMapPointerPressed(ScreenPosition screenPosition, MPoint worldPosition)
     {
-        Logger.Log(LogLevel.Information, $"Map.PointerPressed");
+        if (Logger.Settings.LogMapEvents)
+            Logger.Log(LogLevel.Information, $"{nameof(OnMapPointerPressed)}");
 
-        return Map.OnPointerPressed(new MapEventArgs(screenPosition, worldPosition, GestureType.Press,
-            Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
+        var eventArgs = new MapEventArgs(screenPosition, worldPosition, GestureType.Press, Map, GetMapInfo, 
+            GetRemoteMapInfoAsync);
+        Map.OnPointerPressed(eventArgs);
+        if (!eventArgs.Handled)
+            MapPointerPressed?.Invoke(this, eventArgs);
+
+        return eventArgs.Handled;
     }
 
-    private bool OnMapPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
+    protected virtual bool OnMapPointerMoved(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
     {
-        return Map.OnPointerMoved(new MapEventArgs(screenPosition, worldPosition, gestureType, 
-            Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
+        var eventArgs = new MapEventArgs(screenPosition, worldPosition, gestureType,
+            Map, GetMapInfo, GetRemoteMapInfoAsync);
+        Map.OnPointerMoved(eventArgs);
+        if (!eventArgs.Handled)
+            MapPointerMoved?.Invoke(this, eventArgs);
+
+        return eventArgs.Handled;
     }
 
-    private bool OnMapPointerReleased(ScreenPosition screenPosition, MPoint worldPosition)
+    protected virtual bool OnMapPointerReleased(ScreenPosition screenPosition, MPoint worldPosition)
     {
-        Logger.Log(LogLevel.Information, $"Map.PointerReleased");
+        if (Logger.Settings.LogMapEvents)
+            Logger.Log(LogLevel.Information, $"{nameof(OnMapPointerReleased)}");
 
-        return Map.OnPointerReleased(new MapEventArgs(screenPosition, worldPosition, GestureType.Release, 
-            Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
+        var eventArgs = new MapEventArgs(screenPosition, worldPosition, GestureType.Release, Map, GetMapInfo, 
+            GetRemoteMapInfoAsync);
+        Map.OnPointerReleased(eventArgs);
+        if (!eventArgs.Handled)
+            MapPointerReleased?.Invoke(this, eventArgs);
+
+        return eventArgs.Handled;
     }
-
-    private bool OnMapTapped(ScreenPosition screenPosition, GestureType gestureType, MPoint worldPosition)
-    {
-        Logger.Log(LogLevel.Information, $"Map.Tapped. {nameof(GestureType)}: {gestureType}");
-        return Map.OnTapped(new MapEventArgs(screenPosition, worldPosition, gestureType, 
-            Map.Navigator.Viewport, GetMapInfo, GetRemoteMapInfoAsync));
-    }
-
-    private bool HasSize() => ViewportWidth > 0 && ViewportHeight > 0;
 }

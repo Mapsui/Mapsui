@@ -10,7 +10,7 @@ public class Image
     // Note, this is a static field and in the current implementation this dictionary can only grow, not shrink.
     // The idea is that the application holds a limited number of these resources. If the users needs to create
     // different images all the time something else has to be used, like the CustomStyleRenderer.
-    private static readonly ConcurrentDictionary<string, string> _uriToKey = [];
+    public static ConcurrentDictionary<string, string> SourceToSourceId { get; } = [];
 
     public required string Source
     {
@@ -20,7 +20,7 @@ public class Image
             ArgumentNullException.ThrowIfNull(value);
             ValidateUriSchema(value);
             _source = value;
-            SourceId = _uriToKey.GetOrAdd(_source, (k) => Guid.NewGuid().ToString());
+            SourceId = SourceToSourceId.GetOrAdd(_source, (k) => Guid.NewGuid().ToString());
         }
     }
 
@@ -38,6 +38,13 @@ public class Image
     /// source image. Note that each different color used will add an new object to the image cache.
     /// </summary>
     public Color? SvgStrokeColor { get; set; }
+
+    /// <summary>
+    /// When set to true an SVG image will be rasterized to a bitmap. This can improve performance but could affect 
+    /// the quality.
+    /// </summary>
+    [EditorBrowsable(EditorBrowsableState.Never)] // Experimental feature
+    public bool RasterizeSvg { get; set; }
 
     /// <summary>
     /// This allows for the automatic conversion of a string to an Image object. This was added to make the creation 
@@ -69,7 +76,10 @@ public class Image
 
     private static void ValidateUriSchema(string imageSource)
     {
-        var scheme = imageSource.Substring(0, imageSource.IndexOf(':'));
+        var indexOfColon = imageSource.IndexOf(':');
+        if (indexOfColon < 0)
+            throw new ArgumentException($"Invalid image source: '{imageSource}'. It should start with one of the supported URI schemes.");
+        var scheme = imageSource.Substring(0, indexOfColon);
         _ = scheme switch
         {
             ImageFetcher.SvgContentScheme => true, // We have to allow an invalid uri scheme

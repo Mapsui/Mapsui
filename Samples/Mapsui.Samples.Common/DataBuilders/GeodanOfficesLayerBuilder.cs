@@ -15,7 +15,7 @@ public class GeodanOfficesLayerBuilder
         var layer = new MemoryLayer
         {
             Features = new[] { geodanAmsterdam, geodanDenBosch }.ToFeatures(),
-            Style = new SymbolStyle
+            Style = new ImageStyle
             {
                 Image = imageSource,
                 Offset = new Offset { Y = 64 },

@@ -7,8 +7,6 @@ using Mapsui.Projections;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.Projections;
 
 [TestFixture]
@@ -27,7 +25,7 @@ public class ProjectionTests
         var enumeration = geometry.Coordinates;
 
         // assert
-        ClassicAssert.AreEqual(expectedCoordinateCount, enumeration.Count());
+        Assert.That(enumeration.Count(), Is.EqualTo(expectedCoordinateCount));
     }
 
     [Test]
@@ -41,11 +39,12 @@ public class ProjectionTests
         var enumeration = geometry.Coordinates;
 
         // assert
-        ClassicAssert.AreEqual(expectedCoordinateCount, enumeration.Count());
+        Assert.That(enumeration.Count(), Is.EqualTo(expectedCoordinateCount));
     }
 
-    [Test]
-    public void CoordinateProjectionTest()
+    [TestCase("EPSG:3857")]
+    [TestCase("EPSG:3395")]
+    public void CoordinateProjectionTest(string crs)
     {
         // arrange
         var multiPolygon = (MultiPolygon)_wktReader.Read("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
@@ -54,7 +53,7 @@ public class ProjectionTests
         var projection = new Projection();
 
         // act
-        projection.Project("EPSG:4326", "EPSG:3857", feature);
+        projection.Project("EPSG:4326", crs, feature);
 
         // assert
         var coordinates = multiPolygon.Coordinates.ToList();
@@ -62,13 +61,14 @@ public class ProjectionTests
 
         for (var i = 0; i < coordinates.Count; i++)
         {
-            ClassicAssert.AreNotEqual(coordinates[i].X, projectedCoordinates[i].X);
-            ClassicAssert.AreNotEqual(coordinates[i].Y, projectedCoordinates[i].Y);
+            Assert.That(projectedCoordinates[i].X, Is.Not.EqualTo(coordinates[i].X));
+            Assert.That(projectedCoordinates[i].Y, Is.Not.EqualTo(coordinates[i].Y));
         }
     }
 
-    [Test]
-    public void CoordinateNtsProjectionTest()
+    [TestCase("EPSG:3857")]
+    [TestCase("EPSG:3395")]
+    public void CoordinateNtsProjectionTest(string crs)
     {
         // arrange
         var multiPolygon = (MultiPolygon)_wktReader.Read("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
@@ -77,7 +77,7 @@ public class ProjectionTests
         var projection = new DotSpatialProjection();
 
         // act
-        projection.Project("EPSG:4326", "EPSG:3857", feature);
+        projection.Project("EPSG:4326", crs, feature);
 
         // assert
         var coordinates = multiPolygon.Coordinates.ToList();
@@ -85,8 +85,8 @@ public class ProjectionTests
 
         for (var i = 0; i < coordinates.Count; i++)
         {
-            ClassicAssert.AreNotEqual(coordinates[i].X, projectedCoordinates[i].X);
-            ClassicAssert.AreNotEqual(coordinates[i].Y, projectedCoordinates[i].Y);
+            Assert.That(projectedCoordinates[i].X, Is.Not.EqualTo(coordinates[i].X));
+            Assert.That(projectedCoordinates[i].Y, Is.Not.EqualTo(coordinates[i].Y));
         }
     }
 
@@ -101,6 +101,6 @@ public class ProjectionTests
         using var shapeFile = new ShapeFile(countriesPath, false, true, new DotSpatialProjection());
 
         // assert
-        ClassicAssert.AreEqual(shapeFile.CRS, "EPSG:4326");
+        Assert.That("EPSG:4326", Is.EqualTo(shapeFile.CRS));
     }
 }

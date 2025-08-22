@@ -27,18 +27,16 @@ public class ViewportZoomToResolutionAnimationSample : ISample
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
 
         var rotateButton = CreateButton("Zoom in", VerticalAlignment.Top);
-        rotateButton.Tapped = (s, e) =>
+        rotateButton.Tapped += (s, e) =>
         {
             map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 0.5, 500, Easing.CubicOut);
-            return false;
         };
         map.Widgets.Add(rotateButton);
 
         var rotateBackButton = CreateButton("Zoom out", VerticalAlignment.Bottom);
-        rotateBackButton.Tapped = (s, e) =>
+        rotateBackButton.Tapped += (s, e) =>
         {
             map.Navigator.ZoomTo(map.Navigator.Viewport.Resolution * 2, 500, Easing.CubicOut);
-            return false;
         };
         map.Widgets.Add(rotateBackButton);
 

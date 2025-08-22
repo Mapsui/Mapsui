@@ -2,7 +2,6 @@
 using Mapsui.Extensions;
 using NUnit.Framework;
 using System.Collections.Generic;
-using NUnit.Framework.Legacy;
 using Mapsui.Manipulations;
 
 namespace Mapsui.Tests;
@@ -19,16 +18,16 @@ public class NavigatorTests
         navigator.OverridePanBounds = new MRect(-100, -100, 100, 100);
         int navigatedCounter = 0;
         navigator.SetViewportAnimations(CreateAnimation());
-        navigator.RefreshDataRequest += (s, e) => navigatedCounter++;
+        navigator.FetchRequested += (s, e) => navigatedCounter++;
 
         // Act
         navigator.CenterOn(10, 20);
 
         // Assert
-        ClassicAssert.AreEqual(10, navigator.Viewport.CenterX);
-        ClassicAssert.AreEqual(20, navigator.Viewport.CenterY);
-        ClassicAssert.AreEqual(1, navigatedCounter, "Navigated is called");
-        ClassicAssert.AreEqual(0, navigator.GetAnimationsCount, "Animations are cleared");
+        Assert.That(navigator.Viewport.CenterX, Is.EqualTo(10));
+        Assert.That(navigator.Viewport.CenterY, Is.EqualTo(20));
+        Assert.That(navigatedCounter, Is.EqualTo(1), "Navigated is called");
+        Assert.That(navigator.GetAnimationsCount, Is.EqualTo(0), "Animations are cleared");
     }
 
     private static List<AnimationEntry<Viewport>> CreateAnimation()
@@ -53,14 +52,15 @@ public class NavigatorTests
         navigator.Manipulate(new Manipulation(currentTouchCenter, previousTouchCenter, scaleFactor, 0, 0));
 
         // Assert
-        ClassicAssert.AreEqual(expectedCenterX, navigator.Viewport.CenterX);
-        ClassicAssert.AreEqual(expectedCenterY, navigator.Viewport.CenterY);
+        Assert.That(navigator.Viewport.CenterX, Is.EqualTo(expectedCenterX));
+        Assert.That(navigator.Viewport.CenterY, Is.EqualTo(expectedCenterY));
     }
 
     [Test]
     public void ViewportChangedTest()
     {
-        Viewport oldViewport = new();
+        Viewport previousViewport = new();
+        Viewport currentViewport = new();
 
         var navigator = new Navigator();
         // Set PanBound and Size so that the viewport is initialized before the test.
@@ -68,34 +68,39 @@ public class NavigatorTests
         navigator.SetSize(10, 10);
 
         // Save changes to old viewport
-        navigator.ViewportChanged += (sender, args) =>
+        navigator.ViewportChanged += (s, e) =>
         {
-            oldViewport = args.OldViewport;
+            previousViewport = e.PreviousViewport;
+            currentViewport = e.Viewport;
         };
 
         // Test size change
-        var viewport = navigator.Viewport;
+        var previous = navigator.Viewport;
         navigator.SetSize(100, 100);
-        ClassicAssert.AreEqual(oldViewport, viewport);
-        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
+        Assert.That(previousViewport, Is.EqualTo(previous));
+        Assert.That(currentViewport, Is.EqualTo(navigator.Viewport));
+        Assert.That(previousViewport, Is.Not.EqualTo(currentViewport));
 
         // Test center change
-        viewport = navigator.Viewport;
+        previous = navigator.Viewport;
         navigator.CenterOn(10, 20);
-        ClassicAssert.AreEqual(oldViewport, viewport);
-        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
+        Assert.That(previousViewport, Is.EqualTo(previous));
+        Assert.That(currentViewport, Is.EqualTo(navigator.Viewport));
+        Assert.That(previousViewport, Is.Not.EqualTo(currentViewport));
 
         // Test resolution change
-        viewport = navigator.Viewport;
+        previous = navigator.Viewport;
         navigator.ZoomTo(10);
-        ClassicAssert.AreEqual(oldViewport, viewport);
-        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
+        Assert.That(previousViewport, Is.EqualTo(previous));
+        Assert.That(currentViewport, Is.EqualTo(navigator.Viewport));
+        Assert.That(previousViewport, Is.Not.EqualTo(currentViewport));
 
         // Test rotation change
-        viewport = navigator.Viewport;
+        previous = navigator.Viewport;
         navigator.RotateTo(10);
-        ClassicAssert.AreEqual(oldViewport, viewport);
-        ClassicAssert.AreNotEqual(oldViewport, navigator.Viewport);
+        Assert.That(previousViewport, Is.EqualTo(previous));
+        Assert.That(currentViewport, Is.EqualTo(navigator.Viewport));
+        Assert.That(previousViewport, Is.Not.EqualTo(currentViewport));
     }
 
     [Test]
@@ -110,6 +115,6 @@ public class NavigatorTests
         navigator.ZoomToBox(new MRect(100, 100, 200, 200));
 
         // Assert
-        ClassicAssert.AreEqual(extentBefore, navigator.Viewport.ToExtent());
+        Assert.That(navigator.Viewport.ToExtent(), Is.EqualTo(extentBefore));
     }
 }

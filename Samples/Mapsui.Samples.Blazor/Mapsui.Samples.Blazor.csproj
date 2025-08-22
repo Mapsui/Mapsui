@@ -13,8 +13,8 @@
 
   <!--Release enable all Performance-->
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <RunAOTCompilation>false</RunAOTCompilation>
-    <WasmStripILAfterAOT>false</WasmStripILAfterAOT>
+    <WasmNativeStrip>false</WasmNativeStrip>
+    <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
     <!--<RunAOTCompilation>true</RunAOTCompilation>-->
     <!--<WasmStripILAfterAOT>true</WasmStripILAfterAOT>-->
   </PropertyGroup>

@@ -42,17 +42,16 @@ public class ImageCalloutSample : ISample
         return map;
     }
 
-    private static bool MapTapped(Map map, MapEventArgs e)
+    private static void MapTapped(object? s, MapEventArgs e)
     {
-        var mapInfo = e.GetMapInfo(map.Layers.Where(l => l.Name == _pointLayerName));
+        var mapInfo = e.GetMapInfo(e.Map.Layers.Where(l => l.Name == _pointLayerName));
         var calloutStyle = mapInfo.Feature?.Styles.OfType<CalloutStyle>().FirstOrDefault();
         if (calloutStyle is not null)
         {
             calloutStyle.Enabled = !calloutStyle.Enabled;
             mapInfo.Layer?.DataHasChanged();
-            return true;
+            e.Handled = true;
         }
-        return false;
     }
 
     private static Layer CreatePointLayer()

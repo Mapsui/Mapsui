@@ -13,10 +13,9 @@ public class PolylineSample : IMapViewSample
 
     public bool UpdateLocation => true;
 
-    public bool OnTap(object? sender, EventArgs args)
+    public bool OnTap(object? s, MapClickedEventArgs e)
     {
-        var mapView = sender as UI.Maui.MapView;
-        var e = args as MapClickedEventArgs;
+        var mapView = s as UI.Maui.MapView;
 
         if (mapView == null)
             return false;

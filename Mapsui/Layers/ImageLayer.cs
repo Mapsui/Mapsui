@@ -6,10 +6,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
@@ -18,185 +15,93 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IDisposable, ILayer, ILayerFeatureInfo
+public class ImageLayer : BaseLayer, IFetchableSource, ILayerDataSource<IProvider>, IDisposable, ILayer, ILayerFeatureInfo
 {
-    private class FeatureSets
-    {
-        public long TimeRequested { get; set; }
-        public IEnumerable<RasterFeature> Features { get; set; } = [];
-    }
-
-    private bool _isFetching;
-    private bool _needsUpdate = true;
-    private FetchInfo? _fetchInfo;
-    private List<FeatureSets> _sets = [];
-    private readonly Timer? _startFetchTimer;
+    private IEnumerable<IFeature> _cache = [];
     private IProvider? _dataSource;
-    private readonly int _numberOfFeaturesReturned;
+    private int _refreshCounter; // To determine if fetching is still Busy. Multiple refreshes can be in progress. To know if the last one was handled we use this counter.
+    private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
+
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
     public ImageLayer()
     {
         Style = new RasterStyle();
-        _startFetchTimer = new Timer(StartFetchTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
-        _numberOfFeaturesReturned = 1;
     }
+
+    public bool NeedsFetch => !_latestFetchInfo.IsEmpty;
 
     public ImageLayer(string layerName) : this()
     {
         Name = layerName;
     }
 
-    /// <summary>
-    /// Delay before fetching a new wms image from the server
-    /// after the view has changed. Specified in milliseconds.
-    /// </summary>
-    public int FetchDelay { get; set; } = 1000;
-
     public IProvider? DataSource
     {
         get => _dataSource;
         set
         {
-            if (_dataSource == value) return;
+            if (_dataSource == value)
+                return;
             _dataSource = value;
+            ClearCache();
             OnPropertyChanged(nameof(DataSource));
-            // This is a synchronous version so it doesn't need to be run in the Background
-            // the Extent is already created on the creation of the Provider.
             Extent = DataSource?.GetExtent();
+            OnFetchRequested();
         }
-    }
-
-    private void StartFetchTimerElapsed(object? state)
-    {
-        var fetchInfo = _fetchInfo;
-
-        if (fetchInfo?.Section.Extent == null) return;
-        if (double.IsNaN(fetchInfo.Section.Resolution)) return;
-        StartNewFetch(fetchInfo);
     }
 
     public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
     {
-        var result = new List<IFeature>();
-        foreach (var featureSet in _sets.OrderBy(c => c.TimeRequested))
-        {
-            result.AddRange(GetFeaturesInView(box, featureSet.Features));
-        }
-        return result;
+        return _cache;
     }
 
-    private static IEnumerable<IFeature> GetFeaturesInView(MRect box, IEnumerable<RasterFeature> features)
+    public FetchJob[] GetFetchJobs(int activeFetches, int availableFetchSlots)
     {
-        foreach (var feature in features)
-        {
-            if (feature.Raster == null)
-                continue;
+        if (!Enabled)
+            return [];
 
-            if (box.Intersects(feature.Extent))
-            {
-                yield return feature;
-            }
-        }
+        if (activeFetches > 0) // Allow only one fetch in progress for this layer type.
+            return [];
+
+        if (_latestFetchInfo.TryTake(out var fetchInfo))
+            return [new FetchJob(Id, () => FetchAsync(fetchInfo))];
+        return [];
     }
 
-    public void AbortFetch()
+    private async Task FetchAsync(FetchInfo fetchInfo)
     {
-        // not implemented for ImageLayer
-    }
+        if (fetchInfo.ChangeType == ChangeType.Continuous)
+            throw new NotSupportedException("Continuous changes are not supported by ImageLayer.");
 
-    public void RefreshData(FetchInfo fetchInfo)
-    {
-        if (!Enabled) return;
-        // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.
-        if (fetchInfo.ChangeType == ChangeType.Continuous) return;
-
-        _fetchInfo = fetchInfo;
-        Logger.Log(LogLevel.Debug, @$"Refresh Data: Resolution: {fetchInfo.Resolution} Change Type: {fetchInfo.ChangeType} Extent: {fetchInfo.Extent} ");
-
-        Busy = true;
-        if (_isFetching)
-        {
-            _needsUpdate = true;
+        var dataSource = DataSource;
+        if (dataSource is null)
             return;
-        }
 
-        _startFetchTimer?.Change(FetchDelay, Timeout.Infinite);
+        await FetchAsync(fetchInfo, ++_refreshCounter, dataSource, DateTime.Now.Ticks);
     }
 
-    private void StartNewFetch(FetchInfo fetchInfo)
+    private async Task FetchAsync(FetchInfo fetchInfo, int refreshCounter, IProvider dataSource, long timeRequested)
     {
-        if (_dataSource == null) return;
-
-        _isFetching = true;
-        Busy = true;
-        _needsUpdate = false;
-
-        var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), _dataSource, DataArrived, DateTime.Now.Ticks);
-
-        Catch.TaskRun(async () =>
+        try
         {
-            try
-            {
-                Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");
-                await fetcher.FetchOnThreadAsync();
-                Logger.Log(LogLevel.Debug, $"Finished image fetch at {DateTime.Now.TimeOfDay}");
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message, ex);
-                OnDataChanged(new DataChangedEventArgs(ex, Name));
-            }
-        });
-    }
-
-    private void DataArrived(IEnumerable<IFeature>? arrivingFeatures, object? state)
-    {
-        ArgumentNullException.ThrowIfNull(arrivingFeatures);
-
-        // The data in the cache is stored in the map projection so it projected only once.
-        var features = arrivingFeatures.Cast<RasterFeature>().ToArray();
-
-        // We can get 0 features if some error was occurred up call stack
-        // We should not add new FeatureSets if we have not any feature
-
-        _isFetching = false;
-
-        if (features.Length != 0)
-        {
-            _sets.Add(new FeatureSets { TimeRequested = state == null ? 0 : (long)state, Features = features });
-
-            // Keep only two most recent sets. The older ones will be removed
-            _sets = _sets.OrderByDescending(c => c.TimeRequested).Take(_numberOfFeaturesReturned).ToList();
-
-            OnDataChanged(new DataChangedEventArgs(null, Name));
+            _cache = await dataSource.GetFeaturesAsync(fetchInfo);
+            if (_refreshCounter == refreshCounter)
+                Busy = false;
+            OnDataChanged(new DataChangedEventArgs(Name));
         }
-
-        if (_needsUpdate)
+        catch (Exception ex)
         {
-            if (_fetchInfo != null) StartNewFetch(_fetchInfo);
-        }
-        else
-        {
-            Busy = false;
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+            if (_refreshCounter == refreshCounter)
+                Busy = false;
+            OnDataChanged(new DataChangedEventArgs(ex, Name));
         }
     }
 
     public void ClearCache()
     {
-        foreach (var cache in _sets)
-        {
-            cache.Features = [];
-        }
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            _startFetchTimer?.Dispose();
-        }
-
-        base.Dispose(disposing);
+        _cache = [];
     }
 
     public async Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition)
@@ -207,5 +112,16 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         }
 
         return new Dictionary<string, IEnumerable<IFeature>>();
+    }
+
+    public void ViewportChanged(FetchInfo fetchInfo)
+    {
+        Busy = true;
+        _latestFetchInfo.Overwrite(fetchInfo);
+    }
+
+    protected virtual void OnFetchRequested()
+    {
+        FetchRequested?.Invoke(this, new FetchRequestedEventArgs(ChangeType.Discrete));
     }
 }

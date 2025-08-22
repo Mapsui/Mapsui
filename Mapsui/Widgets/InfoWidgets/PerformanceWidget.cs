@@ -1,4 +1,5 @@
-﻿using Mapsui.Widgets.ButtonWidgets;
+﻿using Mapsui.Utilities;
+using Mapsui.Widgets.ButtonWidgets;
 
 namespace Mapsui.Widgets.InfoWidgets;
 
@@ -9,15 +10,10 @@ namespace Mapsui.Widgets.InfoWidgets;
 /// With this, the user could see the drawing performance on the screen.
 /// It shows always the values for the last draw before this draw.
 /// </remarks>
-public class PerformanceWidget : ButtonWidget
+public class PerformanceWidget(Performance performance) : ButtonWidget
 {
-    public PerformanceWidget(Utilities.Performance performance)
-    {
-        Performance = performance;
-    }
-
     /// <summary>
     /// Performance object which holds the values
     /// </summary>
-    public Utilities.Performance Performance { get; }
+    public Performance Performance { get; } = performance;
 }

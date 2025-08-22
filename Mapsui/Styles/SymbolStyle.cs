@@ -1,7 +1,5 @@
 using System;
-using Mapsui.Utilities;
 
-// ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
 namespace Mapsui.Styles;
 
 public enum SymbolType
@@ -9,7 +7,6 @@ public enum SymbolType
     Ellipse,
     Rectangle,
     Triangle,
-    Image
 }
 
 public enum UnitType
@@ -18,7 +15,7 @@ public enum UnitType
     WorldUnit
 }
 
-public class SymbolStyle : VectorStyle, IHasImage
+public class SymbolStyle : VectorStyle, IPointStyle
 {
     public static double DefaultWidth { get; set; } = 32;
     public static double DefaultHeight { get; set; } = 32;
@@ -26,22 +23,6 @@ public class SymbolStyle : VectorStyle, IHasImage
     public SymbolType SymbolType { get; set; }
 
     public UnitType UnitType { get; set; }
-
-    private Image? _image;
-
-    /// <summary>
-    /// Path to the the image to display during rendering. This can be url, file path or embedded resource.
-    /// </summary>
-    public Image? Image
-    {
-        get => _image;
-        set
-        {
-            _image = value;
-            if (_image != null)
-                SymbolType = SymbolType.Image;
-        }
-    }
 
     /// <summary>
     /// Gets or sets the rotation of the symbol in degrees (clockwise is positive)
@@ -87,68 +68,4 @@ public class SymbolStyle : VectorStyle, IHasImage
     /// Should SymbolOffset position rotate with map
     /// </summary>
     public bool SymbolOffsetRotatesWithMap { get; set; }
-
-    public override bool Equals(object? obj)
-    {
-        if (!(obj is SymbolStyle style))
-            return false;
-        return Equals(style);
-    }
-
-    public bool Equals(SymbolStyle? symbolStyle)
-    {
-        if (symbolStyle == null)
-            return false;
-
-        if (!base.Equals(symbolStyle))
-            return false;
-
-        if (!SymbolScale.Equals(SymbolScale))
-            return false;
-
-        if ((Offset == null) ^ (symbolStyle.Offset == null))
-            return false;
-
-        if ((Offset != null) && !Offset.Equals(symbolStyle.Offset))
-            return false;
-
-        if (Math.Abs(SymbolRotation - symbolStyle.SymbolRotation) > Constants.Epsilon)
-            return false;
-
-        if (UnitType != symbolStyle.UnitType)
-            return false;
-
-        if (SymbolType != symbolStyle.SymbolType)
-            return false;
-
-        if (Image != symbolStyle.Image)
-            return false;
-
-        if (Math.Abs(Opacity - symbolStyle.Opacity) > Constants.Epsilon)
-            return false;
-
-        return true;
-    }
-
-    public override int GetHashCode()
-    {
-        return
-            Image?.GetHashCode() ^
-            SymbolScale.GetHashCode() ^
-            Offset.GetHashCode() ^
-            SymbolRotation.GetHashCode() ^
-            UnitType.GetHashCode() ^
-            SymbolType.GetHashCode() ^
-            base.GetHashCode() ?? 0;
-    }
-
-    public static bool operator ==(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)
-    {
-        return Equals(symbolStyle1, symbolStyle2);
-    }
-
-    public static bool operator !=(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)
-    {
-        return !Equals(symbolStyle1, symbolStyle2);
-    }
 }

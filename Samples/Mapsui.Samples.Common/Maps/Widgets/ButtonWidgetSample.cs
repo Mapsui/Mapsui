@@ -3,6 +3,7 @@ using Mapsui.Logging;
 using Mapsui.Manipulations;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using System;
@@ -28,37 +29,36 @@ public class ButtonWidgetSample : ISample
         map.Widgets.Add(CreateButtonWidget("Tap me", VerticalAlignment.Top, HorizontalAlignment.Left, (s, e) =>
         {
             if (e.GestureType == GestureType.DoubleTap)
-                return false;
-            s.Text = $"Tapped {++_tapCount} times";
+                return;
+            var button = Caster.TryCastOrThrow<ButtonWidget>(s);
+            button.Text = $"Tapped {++_tapCount} times";
             map.RefreshGraphics();
-            return false;
         }));
         map.Widgets.Add(CreateImageButtonWidget(VerticalAlignment.Top, HorizontalAlignment.Right, (s, e) =>
         {
             Logger.Log(LogLevel.Information, $"Image Tapped {++_imageTapCount} times");
             map.RefreshGraphics();
-            return false;
         }));
         map.Widgets.Add(CreateButtonWidget("Hello!", VerticalAlignment.Bottom, HorizontalAlignment.Right, (s, e) =>
         {
-            s.Text = $"{s.Text}!";
+            var button = Caster.TryCastOrThrow<ButtonWidget>(s);
+            button.Text = $"{button.Text}!";
             map.RefreshGraphics();
-            return false;
         }));
         map.Widgets.Add(CreateButtonWidget("Double Tap me", VerticalAlignment.Bottom, HorizontalAlignment.Left, (s, e) =>
         {
             if (e.GestureType == GestureType.SingleTap)
-                return false;
-            s.Text = $"Double Tapped {++_doubleTapCount} times";
+                return;
+            var button = Caster.TryCastOrThrow<ButtonWidget>(s);
+            button.Text = $"Double Tapped {++_doubleTapCount} times";
             map.RefreshGraphics();
-            return false;
         }));
 
         return Task.FromResult(map);
     }
 
     private static ButtonWidget CreateButtonWidget(string text, VerticalAlignment verticalAlignment,
-        HorizontalAlignment horizontalAlignment, Func<ButtonWidget, WidgetEventArgs, bool> tapped) => new()
+        HorizontalAlignment horizontalAlignment, EventHandler<WidgetEventArgs> tapped) => new()
         {
             Text = text,
             VerticalAlignment = verticalAlignment,
@@ -68,11 +68,11 @@ public class ButtonWidgetSample : ISample
             CornerRadius = 8,
             BackColor = new Color(0, 123, 255),
             TextColor = Color.White,
-            Tapped = tapped
+            WithTappedEvent = tapped
         };
 
     private static ImageButtonWidget CreateImageButtonWidget(VerticalAlignment verticalAlignment,
-        HorizontalAlignment horizontalAlignment, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
+        HorizontalAlignment horizontalAlignment, EventHandler<WidgetEventArgs> tapped) => new()
         {
             Image = "embedded://Mapsui.Resources.Images.MyLocationStill.svg",
             VerticalAlignment = verticalAlignment,
@@ -81,6 +81,6 @@ public class ButtonWidgetSample : ISample
             Padding = new MRect(10, 8),
             CornerRadius = 8,
             Envelope = new MRect(0, 0, 64, 64),
-            Tapped = tapped
+            WithTappedEvent = tapped
         };
 }

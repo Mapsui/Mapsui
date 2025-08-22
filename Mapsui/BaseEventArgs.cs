@@ -2,6 +2,7 @@
 using Mapsui.Manipulations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace Mapsui;
@@ -9,8 +10,8 @@ namespace Mapsui;
 public delegate Task<MapInfo> GetRemoteMapInfoAsyncDelegate(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers);
 public delegate MapInfo GetMapInfoDelegate(ScreenPosition screenPosition, IEnumerable<ILayer> layers);
 
-public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Viewport viewport,
-    GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync) : EventArgs
+public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType, Map map,
+    GetMapInfoDelegate getMapInfo, GetRemoteMapInfoAsyncDelegate getRemoteMapInfoAsync) : HandledEventArgs
 {
     /// <summary>
     /// Screen Position of touch in device independent units (or DIP or DP)
@@ -28,9 +29,9 @@ public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, 
     public GestureType GestureType { get; } = gestureType;
 
     /// <summary>
-    /// Viewport of the map at the moment of the event
+    /// The map from which the event was triggered.
     /// </summary>
-    public Viewport Viewport { get; } = viewport;
+    public Map Map { get; } = map;
 
     /// <summary>
     /// Function to get the MapInfo
@@ -40,5 +41,5 @@ public class BaseEventArgs(ScreenPosition screenPosition, MPoint worldPosition, 
     /// <summary>
     /// Function to get the remote MapInfo
     /// </summary>
-    public Func<IEnumerable<ILayer>, Task<MapInfo>> GetRemoteMapInfoAsync { get; } = (l) => getRemoteMapInfoAsync(screenPosition, viewport, l);
+    public Func<IEnumerable<ILayer>, Task<MapInfo>> GetRemoteMapInfoAsync { get; } = (l) => getRemoteMapInfoAsync(screenPosition, map.Navigator.Viewport, l);
 }

@@ -5,7 +5,6 @@
 using System;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
-using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
@@ -34,8 +33,6 @@ internal static class SampleHelper
         }
 
         await mapControl.WaitForLoadingAsync();
-        var fetchInfo = new FetchInfo(mapControl.Map.Navigator.Viewport.ToSection(), mapControl.Map.CRS);
-        mapControl.Map.RefreshData(fetchInfo);
 
         return mapControl;
     }

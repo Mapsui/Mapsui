@@ -1,7 +1,9 @@
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Caching;
+using Mapsui.Rendering.Skia.Caching;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -24,12 +26,12 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
                 return false;
 
             if (style is not RasterStyle)
-                return false;
+                throw new ArgumentException("Excepted a RasterStyle in the RasterStyleRenderer");
 
-            var tileCache = (TileCache)renderService.TileCache;
+            var tileCache = renderService.TileCache;
             tileCache.UpdateCache(currentIteration);
 
-            var tile = tileCache.GetOrCreate(raster, currentIteration);
+            var tile = tileCache.GetOrAdd(raster, ToTileCacheEntry, currentIteration);
             if (tile is null)
                 return false;
 
@@ -42,30 +44,14 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
             if (viewport.IsRotated())
             {
-                var priorMatrix = canvas.TotalMatrix;
-
-                var matrix = CreateRotationMatrix(viewport, extent, priorMatrix);
-
-                canvas.SetMatrix(matrix);
-
+                canvas.SetMatrix(CreateRotationMatrix(viewport, extent, canvas.TotalMatrix));
                 var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
-
-                if (tile.SKObject is SKImage skImage)
-                    BitmapRenderer.Draw(canvas, skImage, destination, opacity);
-                else if (tile.SKObject is SKPicture skPicture)
-                    PictureRenderer.Draw(canvas, skPicture, destination, opacity);
-                else
-                    throw new InvalidOperationException("Unknown tile type");
-
-                canvas.SetMatrix(priorMatrix);
+                DrawRaster(canvas, opacity, tile, destination, (RasterStyle)style);
             }
             else
             {
                 var destination = WorldToScreen(viewport, extent);
-                if (tile.SKObject is SKImage skImage)
-                    BitmapRenderer.Draw(canvas, skImage, RoundToPixel(destination), opacity);
-                else if (tile.SKObject is SKPicture skPicture)
-                    PictureRenderer.Draw(canvas, skPicture, RoundToPixel(destination), opacity);
+                DrawRaster(canvas, opacity, tile, RoundToPixel(destination), (RasterStyle)style);
             }
 
             canvas.Restore();
@@ -76,6 +62,36 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
         }
 
         return true;
+    }
+
+    public static ITileCacheEntry ToTileCacheEntry(MRaster raster)
+    {
+        if (raster.Data.IsSkp())
+        {
+            return new TileCacheEntry(SKPicture.Deserialize(raster.Data));
+        }
+
+        using var skData = SKData.CreateCopy(raster.Data);
+        var image = SKImage.FromEncodedData(skData);
+        return new TileCacheEntry(image);
+    }
+
+    private static void DrawRaster(SKCanvas canvas, float opacity, ITileCacheEntry tile, SKRect destination, RasterStyle rasterStyle)
+    {
+        if (tile.Data is SKImage skImage)
+            BitmapRenderer.Draw(canvas, skImage, destination, opacity);
+        else if (tile.Data is SKPicture skPicture)
+            PictureRenderer.Draw(canvas, skPicture, destination, opacity);
+        else
+            throw new InvalidOperationException("Unknown tile type");
+
+        if (rasterStyle.Outline != null)
+        {
+            var halfStrokeWidth = (float)rasterStyle.Outline.Width / 2;
+            destination.Inflate(-halfStrokeWidth, -halfStrokeWidth);
+            using var paint = new SKPaint { Color = rasterStyle.Outline.Color.ToSkia(), StrokeWidth = (float)rasterStyle.Outline.Width, IsStroke = true };
+            canvas.DrawRect(destination, paint);
+        }
     }
 
     private static SKMatrix CreateRotationMatrix(Viewport viewport, MRect rect, SKMatrix priorMatrix)

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Mapsui.Widgets;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Mapsui.Utilities;
 
@@ -12,17 +14,11 @@ public class Performance
     private int _count;
     private double _min, _max;
     private double _sum;
+    private double _runningFps;
+    private readonly double _alphaForRunningFps = 0.99;
+    private readonly Stopwatch _stopwatch = new();
 
-    public Performance(int maxValues = 20)
-    {
-        if (maxValues <= 0)
-            throw new ArgumentException("maxValues must not be equal or less 0");
-
-        _maxValues = maxValues;
-        _drawingTimes = new double[_maxValues];
-
-        Clear();
-    }
+    public static ActiveMode DefaultIsActive { get; set; } = ActiveMode.OnlyInDebugMode;
 
     /// <summary>
     /// Counter for number of redraws of map
@@ -55,9 +51,11 @@ public class Performance
     public int FPS => Mean == 0 ? 0 : (int)(1000.0 / Mean);
 
     /// <summary>
-    /// Number of dropped frames, because the screen is already updated
+    /// Running average of the actual frames per second.
     /// </summary>
-    public int Dropped { get; set; }
+    public double RunningFps => _runningFps;
+
+    public ActiveMode IsActive { get; set; } = DefaultIsActive;
 
     /// <summary>
     /// Time be used for the last drawing
@@ -95,12 +93,26 @@ public class Performance
         }
     }
 
+    public Performance(int maxValues = 20)
+    {
+        if (maxValues <= 0)
+            throw new ArgumentException("maxValues must not be equal or less 0");
+
+        _maxValues = maxValues;
+        _drawingTimes = new double[_maxValues];
+
+        Clear();
+    }
+
     /// <summary>
     /// Add next drawing time
     /// </summary>
     /// <param name="time"></param>
     public void Add(double time)
     {
+        if (!GetIsActive())
+            return;
+
         _sum = _sum - _drawingTimes[_pos] + time;
         _drawingTimes[_pos++] = time;
         _count++;
@@ -116,6 +128,17 @@ public class Performance
 
         if (_min > time)
             _min = time;
+
+        var elapsed = _stopwatch.ElapsedMilliseconds;
+        if (elapsed > 0)
+        {
+            double currentFps = 1000.0 / elapsed; // Milliseconds to FPS
+            if (_runningFps == 0)
+                _runningFps = currentFps;
+            else
+                _runningFps = _alphaForRunningFps * _runningFps + (1.0 - _alphaForRunningFps) * currentFps;
+        }
+        _stopwatch.Restart();
     }
 
     /// <summary>
@@ -131,7 +154,14 @@ public class Performance
         _max = 0;
         _count = 0;
         _turnaround = false;
-
-        Dropped = 0;
     }
+
+    public bool GetIsActive() =>
+        IsActive switch
+        {
+            ActiveMode.Yes => true,
+            ActiveMode.No => false,
+            ActiveMode.OnlyInDebugMode => Debugger.IsAttached,
+            _ => throw new NotSupportedException(nameof(IsActive))
+        };
 }

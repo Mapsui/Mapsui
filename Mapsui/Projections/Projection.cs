@@ -19,6 +19,8 @@ public class Projection : IProjection
         _fromLonLat["EPSG:4326"] = (x, y) => (x, y);
         _toLonLat["EPSG:3857"] = SphericalMercator.ToLonLat;
         _fromLonLat["EPSG:3857"] = SphericalMercator.FromLonLat;
+        _toLonLat["EPSG:3395"] = Mercator.ToLonLat;
+        _fromLonLat["EPSG:3395"] = Mercator.FromLonLat;
     }
 
     public (double X, double Y) Project(string fromCRS, string toCRS, double x, double y)

@@ -8,6 +8,7 @@ using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Manipulations;
+using Mapsui.Rendering;
 using Mapsui.UI.Avalonia.Extensions;
 using System;
 using System.Collections.Concurrent;
@@ -27,10 +28,6 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     public MapControl()
     {
-        SharedConstructor();
-
-        _invalidate = () => { RunOnUIThread(InvalidateVisual); };
-
         Initialized += MapControlInitialized;
 
         // Pointer events
@@ -46,10 +43,28 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         KeyUp += (s, e) => _shiftPressed = GetShiftPressed(e.KeyModifiers);
 
         ClipToBounds = true;
+
+        SharedConstructor();
     }
 
+    public void InvalidateCanvas()
+    {
+        RunOnUIThread(InvalidateVisual);
+    }
+
+    /// <summary>
+    /// This enables an alternative mouse wheel method where the step size on each mouse wheel event can be configured
+    /// by setting the ContinuousMouseWheelZoomStepSize.
+    /// </summary>
+    public bool UseContinuousMouseWheelZoom { get; set; } = false;
+    /// <summary>
+    /// The size of the mouse wheel steps used when UseContinuousMouseWheelZoom = true. The default is 0.1. A step 
+    /// size of 1 would doubling or halving the scale of the map on each event.    
+    /// </summary>
+    public double ContinuousMouseWheelZoomStepSize { get; set; } = 0.1;
+
     public static readonly DirectProperty<MapControl, Map> MapProperty =
-    AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
+        AvaloniaProperty.RegisterDirect<MapControl, Map>(nameof(Map), o => o.Map, (o, v) => o.Map = v);
 
     /// <summary> Clears the Touch State. Should only be called if the touch state seems out of sync 
     /// in a certain situation.</summary>
@@ -60,15 +75,14 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
     private static bool GetShiftPressed(KeyModifiers keyModifiers)
         => (keyModifiers & KeyModifiers.Shift) == KeyModifiers.Shift;
 
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
     {
-        base.OnPropertyChanged(change);
+        base.OnPropertyChanged(e);
 
-        switch (change.Property.Name)
+        switch (e.Property.Name)
         {
             case nameof(Bounds):
-                // Size changed
-                MapControlSizeChanged();
+                SharedOnSizeChanged(Bounds.Width, Bounds.Height);
                 break;
         }
     }
@@ -127,15 +141,24 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     private void MapControl_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
     {
-        // In Avalonia the touchpad can trigger the mouse wheel event. In that case there are more events and the Delta.Y is a double value, 
-        // which is usually smaller than 1.0. In the code below the deltas are accumulated until they are larger than 1.0. Only then 
-        // MouseWheelZoom is called.
-        _mouseWheelPos += e.Delta.Y;
-        if (Math.Abs(_mouseWheelPos) < 1.0) return; // Ignore the mouse wheel event if the accumulated delta is still too small
-        int delta = Math.Sign(_mouseWheelPos);
-        _mouseWheelPos -= delta;
+        if (UseContinuousMouseWheelZoom)
+        {
+            var stepSize = ContinuousMouseWheelZoomStepSize;
+            var scaleFactor = Math.Pow(2, e.Delta.Y > 0 ? -stepSize : stepSize);
+            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.GetPosition(this).ToScreenPosition());
+        }
+        else
+        {
+            // In Avalonia the touchpad can trigger the mouse wheel event. In that case there are more events and the Delta.Y is a double value, 
+            // which is usually smaller than 1.0. In the code below the deltas are accumulated until they are larger than 1.0. Only then 
+            // MouseWheelZoom is called.
+            _mouseWheelPos += e.Delta.Y;
+            if (Math.Abs(_mouseWheelPos) < 1.0) return; // Ignore the mouse wheel event if the accumulated delta is still too small
+            int delta = Math.Sign(_mouseWheelPos);
+            _mouseWheelPos -= delta;
 
-        Map.Navigator.MouseWheelZoom(delta, e.GetPosition(this).ToScreenPosition());
+            Map.Navigator.MouseWheelZoom(delta, e.GetPosition(this).ToScreenPosition());
+        }
     }
 
     private void MapControl_PointerExited(object? sender, PointerEventArgs e)
@@ -150,19 +173,14 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
 
     public override void Render(DrawingContext context)
     {
-        _drawOperation ??= new MapsuiCustomDrawOperation(new Rect(0, 0, Bounds.Width, Bounds.Height), this);
+        _drawOperation ??= new MapsuiCustomDrawOperation(new Rect(0, 0, Bounds.Width, Bounds.Height), _renderController);
         _drawOperation.Bounds = new Rect(0, 0, Bounds.Width, Bounds.Height);
         context.Custom(_drawOperation);
     }
 
-    private void MapControlInitialized(object? sender, EventArgs eventArgs)
+    private void MapControlInitialized(object? s, EventArgs e)
     {
-        SetViewportSize();
-    }
-
-    private void MapControlSizeChanged()
-    {
-        SetViewportSize();
+        SharedOnSizeChanged(Bounds.Width, Bounds.Height);
     }
 
     private static void RunOnUIThread(Action action)
@@ -184,16 +202,15 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
         });
     }
 
-    private double ViewportWidth => Bounds.Width;
-    private double ViewportHeight => Bounds.Height;
-
-    private double GetPixelDensity()
+    public float? GetPixelDensity()
     {
-        return VisualRoot?.RenderScaling ?? 1d;
+        return (float?)VisualRoot?.RenderScaling;
     }
 
-    private sealed class MapsuiCustomDrawOperation(Rect bounds, MapControl mapControl) : ICustomDrawOperation
+    private sealed class MapsuiCustomDrawOperation(Rect bounds, RenderController? renderController) : ICustomDrawOperation
     {
+        private readonly RenderController? _renderController = renderController;
+
         public void Dispose()
         {
             // No-op
@@ -207,7 +224,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             using var lease = leaseFeature.Lease();
             var canvas = lease.SkCanvas;
             canvas.Save();
-            mapControl.CommonDrawControl(canvas);
+            _renderController?.Render(canvas);
             canvas.Restore();
         }
 
@@ -232,7 +249,7 @@ public partial class MapControl : UserControl, IMapControl, IDisposable
             Map?.Dispose();
         }
 
-        CommonDispose(disposing);
+        SharedDispose(disposing);
     }
 
     public virtual void Dispose()

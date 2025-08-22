@@ -1,5 +1,3 @@
-// ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
-
 using System;
 
 namespace Mapsui.Styles;
@@ -26,9 +24,6 @@ public class Brush : IHasImage
 
     public Color? Color { get; set; }
 
-    // todo: 
-    // Perhaps rename to something like SecondaryColor. The 'Color' 
-    // field is itself a background in many cases. This is confusing
     public Color? Background { get; set; }
 
     public Image? Image

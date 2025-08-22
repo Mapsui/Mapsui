@@ -1,48 +1,21 @@
-// ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
 namespace Mapsui.Styles;
 
-public class Offset
+public class Offset(double x, double y)
 {
-    /// <summary>
-    /// Offset of images from the center of the image.
-    /// If IsRelative, than the offset is between -0.5 and +0.5.
-    /// </summary>
-    public Offset() { }
+    public double X { get; set; } = x;
+    public double Y { get; set; } = y;
 
-    public Offset(double x, double y)
-    {
-        X = x;
-        Y = y;
-    }
+    public Offset() : this(0, 0) { }
+    public Offset(Offset offset) : this(offset.X, offset.Y) { }
+    public Offset(MPoint point) : this(point.X, point.Y) { }
 
-    public Offset(Offset offset)
-    {
-        X = offset.X;
-        Y = offset.Y;
-    }
+    public MPoint ToPoint() => new(X, Y);
 
-    public Offset(MPoint point)
-    {
-        X = point.X;
-        Y = point.Y;
-    }
-
-    public double X { get; set; }
-    public double Y { get; set; }
-
-    public MPoint ToPoint()
-    {
-        return new MPoint(X, Y);
-    }
-
-    public Offset Combine(Offset offset)
-    {
-        return new Offset(X + offset.X, Y + offset.Y);
-    }
+    public Offset Combine(Offset offset) => new(X + offset.X, Y + offset.Y);
 
     public override bool Equals(object? obj)
     {
-        if (!(obj is Offset offset))
+        if (obj is not Offset offset)
             return false;
         return Equals(offset);
     }
@@ -52,25 +25,14 @@ public class Offset
         if (offset == null)
             return false;
 
-        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (X != offset.X) return false;
-        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (Y != offset.Y) return false;
         return true;
     }
 
-    public override int GetHashCode()
-    {
-        return X.GetHashCode() ^ Y.GetHashCode();
-    }
+    public override int GetHashCode() => X.GetHashCode() ^ Y.GetHashCode();
 
-    public static bool operator ==(Offset? offset1, Offset? offset2)
-    {
-        return Equals(offset1, offset2);
-    }
+    public static bool operator ==(Offset? offset1, Offset? offset2) => Equals(offset1, offset2);
 
-    public static bool operator !=(Offset? offset1, Offset? offset2)
-    {
-        return !Equals(offset1, offset2);
-    }
+    public static bool operator !=(Offset? offset1, Offset? offset2) => !Equals(offset1, offset2);
 }

@@ -16,16 +16,12 @@ namespace Mapsui.Tiling.Layers;
 /// Rasterizing Tile Layer. A Layer that Rasterizes and Tiles the Layer. For Faster Performance.
 /// It recreates the Tiles if Data is changed.
 /// </summary>
-public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, ILayerFeatureInfo
+public class RasterizingTileLayer : TileLayer, ISourceLayer, IFetchableSource, ILayerFeatureInfo
 {
-    private MRect? _currentExtent;
-    private double? _currentResolution;
-
     /// <summary>
     ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
     /// </summary>
     /// <param name="layer">The Layer to be rasterized</param>
-    /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
     /// <param name="pixelDensity"></param>
     /// <param name="minTiles">Minimum number of tiles to cache</param>
     /// <param name="maxTiles">Maximum number of tiles to cache</param>
@@ -38,7 +34,6 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
     /// <param name="renderFormat">Format to Render To</param>
     public RasterizingTileLayer(
         ILayer layer,
-        IRenderer? rasterizer = null,
         float pixelDensity = 1,
         int minTiles = 200,
         int maxTiles = 300,
@@ -49,7 +44,7 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
         IPersistentCache<byte[]>? persistentCache = null,
         IProjection? projection = null,
         RenderFormat renderFormat = RenderFormat.Png) : base(
-        new RasterizingTileSource(layer, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
+        new RasterizingTileSource(layer, pixelDensity, persistentCache, projection, renderFormat),
         minTiles,
         maxTiles,
         dataFetchStrategy,
@@ -61,20 +56,10 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
         Name = layer.Name;
         SourceLayer.DataChanged += (s, e) =>
         {
-            ClearCache();
+            ClearCache(); // It would cause less flicker if we could invalidate the tiles so that they could still be used by the renderer but would be replaced by the fetcher.
             DataHasChanged();
-            if (_currentExtent != null && _currentResolution != null)
-            {
-                RefreshData(new FetchInfo(new MSection(_currentExtent, _currentResolution.Value)));
-            }
+            OnFetchRequested();
         };
-    }
-
-    public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
-    {
-        _currentExtent = extent;
-        _currentResolution = resolution;
-        return base.GetFeatures(extent, resolution);
     }
 
     public ILayer SourceLayer { get; }
@@ -82,5 +67,12 @@ public class RasterizingTileLayer : TileLayer, ISourceLayer, IAsyncDataFetcher, 
     public Task<IDictionary<string, IEnumerable<IFeature>>> GetFeatureInfoAsync(Viewport viewport, ScreenPosition screenPosition)
     {
         return RasterizingTileSource.GetFeatureInfoAsync(viewport, screenPosition);
+    }
+    public override void ViewportChanged(FetchInfo fetchInfo)
+    {
+        Busy = true;
+        base.ViewportChanged(fetchInfo);
+        if (SourceLayer is IFetchableSource fetchableSource)
+            fetchableSource.ViewportChanged(fetchInfo);
     }
 }

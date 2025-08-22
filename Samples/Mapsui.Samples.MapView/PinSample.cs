@@ -23,20 +23,18 @@ public class PinSample : IMapViewSample
 
     public bool UpdateLocation => true;
 
-    public bool OnTap(object? sender, EventArgs args)
+    public bool OnTap(object? s, MapClickedEventArgs e)
     {
         // The namespace prefix is somehow necessary on Linux.
-        var mapClickedArgs = (MapClickedEventArgs)args;
-
-        if (sender is not UI.Maui.MapView mapView)
+        if (s is not UI.Maui.MapView mapView)
             return false;
 
         var assembly = typeof(AllSamples).GetTypeInfo().Assembly;
         foreach (var str in assembly.GetManifestResourceNames())
             System.Diagnostics.Debug.WriteLine(str);
 
-        var position = mapClickedArgs.Point;
-        switch (mapClickedArgs.GestureType)
+        var position = e.Point;
+        switch (e.GestureType)
         {
             case GestureType.SingleTap:
                 var pin = new Pin(mapView)

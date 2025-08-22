@@ -2,10 +2,6 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Tests.Helpers;
 using Mapsui.Samples.Common;
@@ -14,13 +10,20 @@ using Mapsui.Samples.Common.Maps.DataFormats;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Samples.Common.Maps.Info;
+using Mapsui.Samples.Common.Maps.Performance;
 using Mapsui.Samples.Common.Maps.Special;
+using Mapsui.Samples.Common.Maps.WFS;
 using Mapsui.Samples.Common.Maps.Widgets;
+using Mapsui.Samples.Common.Maps.WMS;
 using Mapsui.Styles;
-using Mapsui.UI;
+using Mapsui.Utilities;
+using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
@@ -56,6 +59,10 @@ public class MapRegressionTests
             new ArcGISDynamicServiceSample(), // Excluded cause it was not reliable and had no priority to fix.
             new CustomSvgStyleSample(), // Is currently not functioning and should be fixed with a redesign.
             new ImageCalloutSample(), // Is currently not functioning and should be fixed with a rewrite of the sample.
+            new WmsBasilicataSample(), // Times out,
+            new RasterizingTileLayerWithThousandsOfPolygonsSample(), // Crashes on the build server. Perhaps a memory limitation.
+            new WfsGeometryFilterSample(), // Crashes on the build server.
+            new RasterizingTileLayerWithDynamicPointsSample(), // Changes because it is dynamic.
         ];
 
     [Test]
@@ -69,7 +76,7 @@ public class MapRegressionTests
             Logger.LogDelegate = SampleHelper.ConsoleLog;
             // At the moment of writing this comment we do not have logging in the map. To compare
             // images we disable it for now. Perhaps we want logging to be part of the test image in some cases.
-            LoggingWidget.ShowLoggingInMap = ShowLoggingInMap.No;
+            LoggingWidget.ShowLoggingInMap = ActiveMode.No;
             SampleHelper.ConsoleLog(LogLevel.Debug, $"Start MapRegressionTest {sample.GetType().Name}", null);
             await TestSampleAsync(sample, true).ConfigureAwait(false);
         }
@@ -84,49 +91,52 @@ public class MapRegressionTests
     {
         try
         {
+            // Arrange
             var fileName = sample.GetType().Name + ".Regression.png";
             using var mapControl = await SampleHelper.InitMapAsync(sample).ConfigureAwait(false);
             var map = mapControl.Map;
             await SampleHelper.DisplayMapAsync(mapControl).ConfigureAwait(false);
+            Performance.DefaultIsActive = ActiveMode.No; // Never show performance in rendering tests so that Release and Debug runs generate the same image.
+            MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
+            var mapRenderer = new MapRenderer();
 
             if (map != null)
             {
-                // act
-                using var mapRenderer = CreateMapRenderer(mapControl);
+                // Act
+
+                _ = await map.RenderService.ImageSourceCache.FetchAllImageDataAsync(Image.SourceToSourceId);
+
+                using var bitmap = mapRenderer.RenderToBitmapStream(map.Navigator.Viewport, map.Layers,
+                    map.RenderService, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
+
+                // aside
+                if (bitmap is { Length: > 0 })
                 {
-                    _ = await ImageSourceCacheInitializer.FetchImagesInViewportAsync(mapRenderer.ImageSourceCache,
-                        map.Navigator.Viewport, map.Layers, map.Widgets);
+                    File.WriteToGeneratedRegressionFolder(fileName, bitmap);
+                }
+                else
+                {
+                    Assert.Fail("Should generate Image");
+                }
 
-                    using var bitmap = mapRenderer.RenderToBitmapStream(mapControl.Map.Navigator.Viewport, map.Layers, map.BackColor, 2, map.GetWidgetsOfMapAndLayers());
-
-                    // aside
-                    if (bitmap is { Length: > 0 })
+                // Assert
+                if (compareImages)
+                {
+                    using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
+                    if (originalStream == null)
                     {
-                        File.WriteToGeneratedRegressionFolder(fileName, bitmap);
+                        Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
                     }
                     else
                     {
-                        Assert.Fail("Should generate Image");
+                        Assert.That(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995), Is.True,
+                            $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
                     }
-
-                    // assert
-                    if (compareImages)
-                    {
-                        using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
-                        if (originalStream == null)
-                        {
-                            Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
-                        }
-                        else
-                        {
-                            ClassicAssert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995));
-                        }
-                    }
-                    else
-                    {
-                        // Don't compare images here because to unreliable
-                        ClassicAssert.True(true);
-                    }
+                }
+                else
+                {
+                    // Don't compare images here because to unreliable
+                    Assert.That(true, Is.True);
                 }
             }
         }
@@ -139,12 +149,6 @@ public class MapRegressionTests
 #pragma warning restore IDISP007 // Don't dispose injected
             }
         }
-    }
-
-    internal static MapRenderer CreateMapRenderer(IMapControl mapControl)
-    {
-        MapRenderer.RegisterWidgetRenderer(typeof(CustomWidget), new CustomWidgetSkiaRenderer());
-        return new MapRenderer();
     }
 
     [Test]

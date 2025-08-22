@@ -11,7 +11,7 @@ namespace Mapsui.Styles;
 /// <summary>
 /// Defines a style used for rendering labels
 /// </summary>
-public class LabelStyle : Style
+public class LabelStyle : BaseStyle
 {
     /// <summary>
     /// Label text alignment
@@ -100,18 +100,19 @@ public class LabelStyle : Style
     {
         Font = new Font(labelStyle.Font);
         Offset = new Offset(labelStyle.Offset);
-        CollisionDetection = false;
+        RelativeOffset = labelStyle.RelativeOffset != null ? new RelativeOffset(labelStyle.RelativeOffset) : new RelativeOffset();
+        CollisionDetection = labelStyle.CollisionDetection;
         ForeColor = new Color(labelStyle.ForeColor);
-        BackColor = (labelStyle.BackColor == null) ? null : new Brush(labelStyle.BackColor);
-        HorizontalAlignment = HorizontalAlignmentEnum.Center;
-        VerticalAlignment = VerticalAlignmentEnum.Center;
+        BackColor = labelStyle.BackColor == null ? null : new Brush(labelStyle.BackColor);
+        HorizontalAlignment = labelStyle.HorizontalAlignment;
+        VerticalAlignment = labelStyle.VerticalAlignment;
         MaxWidth = labelStyle.MaxWidth;
         WordWrap = labelStyle.WordWrap;
         LineHeight = labelStyle.LineHeight;
         Text = labelStyle.Text;
         LabelColumn = labelStyle.LabelColumn;
         LabelMethod = labelStyle.LabelMethod;
-        Halo = labelStyle.Halo;
+        Halo = labelStyle.Halo != null ? new Pen(labelStyle.Halo) : null;
         BorderColor = labelStyle.BorderColor;
         BorderThickness = labelStyle.BorderThickness;
         CornerRounding = labelStyle.CornerRounding;

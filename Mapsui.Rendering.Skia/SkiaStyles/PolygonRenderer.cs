@@ -1,5 +1,5 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Rendering.Skia.Cache;
+using Mapsui.Rendering.Caching;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.Images;
 using Mapsui.Styles;
@@ -70,10 +70,8 @@ internal static class PolygonRenderer
         }
     }
 
-    internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, IRenderService renderService)
+    internal static SKPaint CreateSkPaint((Brush? brush, float opacity, double rotation) valueTuple, RenderService renderService)
     {
-        var skiaRenderService = (RenderService)renderService;
-
         var brush = valueTuple.brush;
         var opacity = valueTuple.opacity;
         var rotation = valueTuple.rotation;
@@ -147,13 +145,13 @@ internal static class PolygonRenderer
                     break;
                 case FillStyle.Bitmap:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var skImage = GetSKImage(skiaRenderService, brush.Image ?? throw new Exception("Image can not be null when FillStyle is Bitmap"));
+                    var skImage = GetSKImage(renderService, brush.Image ?? throw new Exception("Image can not be null when FillStyle is Bitmap"));
                     if (skImage != null)
                         paintFill.Shader = skImage.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                     break;
                 case FillStyle.BitmapRotated:
                     paintFill.Style = SKPaintStyle.Fill;
-                    var skRotatedImage = GetSKImage(skiaRenderService, brush.Image ?? throw new Exception("Image can not be null when FillStyle is BitmapRotated"));
+                    var skRotatedImage = GetSKImage(renderService, brush.Image ?? throw new Exception("Image can not be null when FillStyle is BitmapRotated"));
                     if (skRotatedImage != null)
                         paintFill.Shader = skRotatedImage.ToShader(SKShaderTileMode.Repeat,
                             SKShaderTileMode.Repeat,
@@ -215,8 +213,10 @@ internal static class PolygonRenderer
     {
         if (image is null)
             return null;
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
         var drawableImage = renderService.DrawableImageCache.GetOrCreate(image.SourceId,
-            () => SymbolStyleRenderer.TryCreateDrawableImage(image, renderService.ImageSourceCache));
+            () => ImageStyleRenderer.TryCreateDrawableImage(image, renderService.ImageSourceCache));
+#pragma warning restore IDISP001
         if (drawableImage == null)
             return null;
 
@@ -226,7 +226,9 @@ internal static class PolygonRenderer
                 return bitmapImage.Image;
 
             var imageRegionKey = image.GetSourceIdForBitmapRegion();
+#pragma warning disable IDISP001 // The cache is responsible for disposing the items created in the cache.
             var regionDrawableImage = renderService.DrawableImageCache.GetOrCreate(imageRegionKey, () => CreateBitmapImage(bitmapImage.Image, image.BitmapRegion));
+#pragma warning restore IDISP001
             if (regionDrawableImage == null)
                 return null;
             if (regionDrawableImage is BitmapDrawableImage regionBitmapImage)

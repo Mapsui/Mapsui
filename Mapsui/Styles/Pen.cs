@@ -1,4 +1,3 @@
-// ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
 namespace Mapsui.Styles;
 
 public class Pen
@@ -96,6 +95,18 @@ public class Pen
         }
     }
 
+    public Pen(Pen pen)
+    {
+        Color = pen.Color;
+        Width = pen.Width;
+        PenStyle = pen.PenStyle;
+        DashArray = pen.DashArray != null ? (float[])pen.DashArray.Clone() : null;
+        DashOffset = pen.DashOffset;
+        PenStrokeCap = pen.PenStrokeCap;
+        StrokeJoin = pen.StrokeJoin;
+        StrokeMiterLimit = pen.StrokeMiterLimit;
+    }
+
     public static bool operator ==(Pen? pen1, Pen? pen2)
     {
         return Equals(pen1, pen2);
@@ -105,6 +116,4 @@ public class Pen
     {
         return !Equals(pen1, pen2);
     }
-
-
 }

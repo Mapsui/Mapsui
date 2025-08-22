@@ -56,7 +56,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.x     
+           9.0.301
+           8.0.407
     # Open JDK
     - name: Install Open JDK 11
       uses: actions/setup-java@v4
@@ -71,9 +72,9 @@ jobs:
     - name: Install workloads android wasm-tools wasm-tools-net8 maui-android
       run: dotnet workload install android wasm-tools wasm-tools-net8 maui-android
     - name: Install Uno Check
-      run: dotnet tool install -g Uno.Check
+      run: dotnet tool install -g Uno.Check --version 1.30.1
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip androidemulator
+      run: uno-check -v --ci --non-interactive --fix --skip androidemulator --dotnet 9.0.301
     - name: Restore dependencies
       run: dotnet restore Mapsui.Linux.slnf
     - name: Build Mapsui.Linux.slnf
@@ -118,23 +119,26 @@ jobs:
     - name: Set up Xcode 16
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '16'          
+        xcode-version: '16.4'          
     # .Net 9 update     
     - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.x
+           9.0.301
+           8.0.407
+    - name: Set MSBuildEnableWorkloadResolver
+      run: echo "MSBuildEnableWorkloadResolver=true" >> $GITHUB_ENV
     - name: install workloads maui macos android ios maccatalyst wasm-tools wasm-tools-net8
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
-    - name: install Uno.Check 1.26.1
-      run: dotnet tool install --global Uno.Check --version 1.26.1
+    - name: install Uno.Check 
+      run: dotnet tool install --global Uno.Check --version 1.31.7
     - name: install Android SDK 34
-      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator  
+      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --dotnet 9.0.301
     - name: Install newest Uno Check
       run: dotnet tool update -g uno.check
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator    
+      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --dotnet 9.0.301
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Build        
@@ -195,7 +199,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.x         
+           9.0.301
+           8.0.407
     # Java Sdk install 11
     - name: Install Open JDK 11
       uses: actions/setup-java@v4
@@ -209,17 +214,17 @@ jobs:
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
     - name: Install Uno Check
-      run: dotnet tool install -g Uno.Check
+      run: dotnet tool install -g Uno.Check --version 1.30.1
     - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy
+      run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.301
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.sln  
+      run: dotnet restore Mapsui.slnx  
     - name: Run dotnet format
       run: |
-        dotnet format whitespace Mapsui.sln --verbosity normal --verify-no-changes
-        dotnet format style Mapsui.sln --verbosity normal --verify-no-changes
+        dotnet format whitespace Mapsui.slnx --verbosity normal --verify-no-changes
+        dotnet format style Mapsui.slnx --verbosity normal --verify-no-changes
         # The analyzers still have errors be we are close to fixing all of them
-        # dotnet format  analyzers  Mapsui.sln --verbosity normal --verify-no-changes
+        # dotnet format  analyzers  Mapsui.slnx --verbosity normal --verify-no-changes
     # Test Build
     - name: Mapsui.Nts.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Nts.Tests/Mapsui.Nts.Tests.csproj
@@ -240,7 +245,7 @@ jobs:
       run: dotnet test Tests/Mapsui.UI.Maui.Tests/bin/Debug/net9.0-windows10.0.19041.0/Mapsui.UI.Maui.Tests.dll --blame-hang-timeout:60s
     # Release Build
     - name: Build nuget packages
-      run: dotnet pack Mapsui.sln --configuration Release /p:Version=$(git describe --tags) -o Artifacts
+      run: dotnet pack Mapsui.slnx --configuration Release /p:Version=$(git describe --tags) -o Artifacts
     - name: Cleanup
       run: git clean -fx -d -e Artifacts
     # Change Project References to nuget package references in samples    
@@ -249,10 +254,10 @@ jobs:
       run: |
        ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.sln  
+      run: dotnet restore Mapsui.slnx  
     # Samples Build 
     - name: Mapsui.Samples
-      run: dotnet build --no-restore --configuration Debug Mapsui.sln
+      run: dotnet build --no-restore --configuration Debug Mapsui.slnx
     # Publishing  
     - name: Upload packages
       uses: actions/upload-artifact@v4

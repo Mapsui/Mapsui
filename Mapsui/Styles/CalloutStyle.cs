@@ -57,7 +57,7 @@ public enum TailAlignment
 /// 3. Type = CalloutType.Custom
 ///    The bitmap with ID in Content will be shown
 /// </remarks>
-public class CalloutStyle : SymbolStyle, IHasImage
+public class CalloutStyle : ImageStyle, IHasImage
 {
     private CalloutType _type = CalloutType.Single;
     private double _rotation;
@@ -75,9 +75,6 @@ public class CalloutStyle : SymbolStyle, IHasImage
 
     public string ImageIdOfCallout { get; private set; } = Guid.NewGuid().ToString();
     public string ImageIdOfCalloutContent { get; private set; } = Guid.NewGuid().ToString();
-
-    public static new double DefaultWidth { get; set; } = 100;
-    public static new double DefaultHeight { get; set; } = 30;
 
     /// <summary>
     /// Type of Callout

@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.DataBuilders;
@@ -13,15 +13,14 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Topten.RichTextKit;
-using IStyle = Mapsui.Styles.IStyle;
+using RTK = Topten.RichTextKit;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class CustomCalloutStyleSample : IMapControlSample
 {
     public string Name => "Custom Callout Style";
-    public string Category => "Info";
+    public string Category => "MapInfo";
 
     private const string _customStyleLayerName = "Custom Callout Layer";
 
@@ -46,18 +45,17 @@ public class CustomCalloutStyleSample : IMapControlSample
         return map;
     }
 
-    private static bool MapTapped(Map map, MapEventArgs e)
+    private static void MapTapped(object? s, MapEventArgs e)
     {
-        var feature = e.GetMapInfo(map.Layers.Where(l => l.Name == _customStyleLayerName)).Feature;
+        var feature = e.GetMapInfo(e.Map.Layers.Where(l => l.Name == _customStyleLayerName)).Feature;
         if (feature is not null)
         {
             if (feature["show-callout"]?.ToString() == "true")
                 feature["show-callout"] = "false";
             else
                 feature["show-callout"] = "true";
-            return true;
+            e.Handled = true;
         }
-        return false;
     }
 
     private static MemoryLayer CreateCalloutLayer(IEnumerable<IFeature> features) => new()
@@ -84,7 +82,7 @@ public class CustomCalloutStyleSample : IMapControlSample
         return features;
     }
 
-    private static SymbolStyle CreatePinSymbol() => new()
+    private static ImageStyle CreatePinSymbol() => new()
     {
         Image = new Image
         {
@@ -149,10 +147,10 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         var subtitleFontColor = Color.Gray;
         var maxWidth = 120;
 
-        var styleSubtitle = new Topten.RichTextKit.Style();
-        var styleTitle = new Topten.RichTextKit.Style();
-        var textBlockTitle = new TextBlock();
-        var textBlockSubtitle = new TextBlock();
+        var styleSubtitle = new RTK.Style();
+        var styleTitle = new RTK.Style();
+        var textBlockTitle = new RTK.TextBlock();
+        var textBlockSubtitle = new RTK.TextBlock();
 
         styleSubtitle.FontFamily = subtitleFont.FontFamily;
         styleSubtitle.FontSize = (float)subtitleFont.Size;
@@ -185,8 +183,8 @@ public class CustomCalloutStyleRenderer : ISkiaStyleRenderer
         using var recorder = new SKPictureRecorder();
         using var canvas = recorder.BeginRecording(new SKRect(0, 0, width, height));
         // Draw text to canvas
-        textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
-        textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
+        textBlockTitle.Paint(canvas, new RTK.TextPaintOptions() { Edging = SKFontEdging.Antialias });
+        textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight), new RTK.TextPaintOptions() { Edging = SKFontEdging.Antialias });
         return recorder.EndRecording();
     }
 }

@@ -10,22 +10,20 @@ public class PointFeature : BaseFeature, IFeature
     public PointFeature(PointFeature pointFeature) : base(pointFeature)
     {
         Point = new MPoint(pointFeature.Point);
+        Extent = new MRect(Point.X, Point.Y);
     }
 
     public PointFeature(MPoint point)
     {
         Point = point ?? throw new ArgumentNullException(nameof(point));
+        Extent = new MRect(Point.X, Point.Y);
     }
 
-    public PointFeature(double x, double y)
-    {
-        Point = new MPoint(x, y);
-    }
+    public PointFeature(double x, double y) : this(new MPoint(x, y))
+    { }
 
-    public PointFeature((double x, double y) point)
-    {
-        Point = new MPoint(point.x, point.y);
-    }
+    public PointFeature((double x, double y) point) : this(new MPoint(point.x, point.y))
+    { }
 
     /// <summary>
     /// The location of the feature.
@@ -35,7 +33,7 @@ public class PointFeature : BaseFeature, IFeature
     /// <summary>
     /// Extent of feature
     /// </summary>
-    public override MRect Extent => Point.MRect;
+    public override MRect Extent { get; }
 
     /// <summary>
     /// Implementation of visitor pattern for coordinates
@@ -47,6 +45,12 @@ public class PointFeature : BaseFeature, IFeature
         {
             Point.X = x;
             Point.Y = y;
+            Extent.Min.X = x;
+            Extent.Min.Y = y;
+            Extent.Max.X = x;
+            Extent.Max.Y = y;
+            Extent.Centroid.X = x;
+            Extent.Centroid.Y = y;
         });
     }
 

@@ -1,4 +1,5 @@
 ﻿using Mapsui.Samples.Common;
+using Mapsui.UI.Maui;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -14,7 +15,7 @@ public partial class MainPage : ContentPage
     }
 
     readonly IEnumerable<ISampleBase> allSamples;
-    Func<object?, EventArgs, bool>? clicker;
+    Func<object?, MapClickedEventArgs, bool>? clicker;
 
     public MainPage()
     {

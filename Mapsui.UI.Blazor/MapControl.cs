@@ -16,7 +16,7 @@ public partial class MapControl : ComponentBase, IMapControl
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
-    private double _pixelDensityFromInterop = 1;
+    private float? _pixelDensityFromInterop;
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
@@ -39,25 +39,43 @@ public partial class MapControl : ComponentBase, IMapControl
     public MapControl()
     {
         SharedConstructor();
-
-        _invalidate = () =>
-        {
-            if (!OperatingSystem.IsBrowser())
-                throw new InvalidOperationException("Only browser is supported");
-
-            if (_viewCpu != null)
-                _viewCpu.Invalidate();
-            else if (_viewGpu != null)
-                _viewGpu?.Invalidate();
-            else
-                throw new InvalidOperationException("Both _viewCpu and _viewGpu are null");
-        };
     }
+
+    public void InvalidateCanvas()
+    {
+        if (!OperatingSystem.IsBrowser())
+            throw new InvalidOperationException("Only browser is supported");
+
+        if (_viewCpu != null)
+            _viewCpu.Invalidate();
+        else if (_viewGpu != null)
+            _viewGpu?.Invalidate();
+        else
+            throw new InvalidOperationException("Both _viewCpu and _viewGpu are null");
+    }
+
+    /// <summary>
+    /// This enables an alternative mouse wheel method where the step size on each mouse wheel event can be configured
+    /// by setting the ContinuousMouseWheelZoomStepSize.
+    /// </summary>
+    public bool UseContinuousMouseWheelZoom { get; set; } = false;
+    /// <summary>
+    /// The size of the mouse wheel steps used when UseContinuousMouseWheelZoom = true. The default is 0.1. A step 
+    /// size of 1 would doubling or halving the scale of the map on each event.    
+    /// </summary>
+    public double ContinuousMouseWheelZoomStepSize { get; set; } = 0.1;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
         RefreshGraphics();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+            await InitializingInteropAsync();
     }
 
     protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
@@ -91,26 +109,35 @@ public partial class MapControl : ComponentBase, IMapControl
         if (_canvasSize?.Width != info.Width || _canvasSize?.Height != info.Height)
         {
             _canvasSize = info;
-            OnSizeChanged();
+            OnSizeChanged(info);
         }
 
-        CommonDrawControl(canvas);
+        _renderController?.Render(canvas);
     }
 
     private void OnLoadComplete()
     {
         Catch.Exceptions(async () =>
         {
-            SetViewportSize();
+            SharedOnSizeChanged(_canvasSize?.Width ?? 0, _canvasSize?.Height ?? 0);
             await InitializingInteropAsync();
         });
     }
 
     protected void OnMouseWheel(WheelEventArgs e)
     {
-        var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-        var mousePosition = e.ToScreenPosition(_clientRect);
-        Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
+        if (UseContinuousMouseWheelZoom)
+        {
+            var stepSize = ContinuousMouseWheelZoomStepSize;
+            var scaleFactor = Math.Pow(2, e.DeltaY > 0 ? stepSize : -stepSize);
+            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToScreenPosition(_clientRect));
+        }
+        else
+        {
+            var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
+            var mousePosition = e.ToScreenPosition(_clientRect);
+            Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
+        }
     }
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
@@ -130,14 +157,21 @@ public partial class MapControl : ComponentBase, IMapControl
             throw new ArgumentException("Interop is null");
         }
 
-        await Interop.DisableMouseWheelAsync(_elementId);
-        await Interop.DisableTouchAsync(_elementId);
-        _pixelDensityFromInterop = await Interop.GetPixelDensityAsync();
+        try
+        {
+            await Interop.DisableMouseWheelAsync(_elementId);
+            await Interop.DisableTouchAsync(_elementId);
+            _pixelDensityFromInterop = (float)await Interop.GetPixelDensityAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An exception occurred in InitializingInteropAsync: {ex}");
+        }
     }
 
-    private void OnSizeChanged()
+    private void OnSizeChanged(SKImageInfo skImageInfo)
     {
-        SetViewportSize();
+        SharedOnSizeChanged(skImageInfo.Width, skImageInfo.Height);
         _ = UpdateBoundingRectAsync();
     }
 
@@ -193,7 +227,7 @@ public partial class MapControl : ComponentBase, IMapControl
         });
     }
 
-    private double GetPixelDensity()
+    public float? GetPixelDensity()
     {
         return _pixelDensityFromInterop;
     }
@@ -208,12 +242,9 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         if (disposing)
         {
-            CommonDispose(true);
+            SharedDispose(true);
         }
     }
-
-    private double ViewportWidth => _canvasSize?.Width ?? 0;
-    private double ViewportHeight => _canvasSize?.Height ?? 0;
 
     public string? Cursor { get; set; }
 

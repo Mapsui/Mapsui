@@ -23,7 +23,7 @@ Is responsible for all Viewport manipulations, this includes:
 - It checks `PanLock`, `ZoomLock`, `RotationLock`. 
 - It checks the pan bounds (`PanBounds`) and zoom bounds (`ZoomBounds`). Both depend on the kind of limiter that is used. 
 - It controls the animations. It makes sure only one viewport animation is executed at one time and a previous animation is cancelled before the new one is started. 
-- It calls a `RefreshDataRequest` event on a discrete viewport change or at the end of an animation (after drag or pinch RefreshData needs to called from the MapControl touch up). 
+- It calls a `FetchRequested` event on a discrete viewport change or at the end of an animation (after drag or pinch RefreshData needs to called from the MapControl touch up). 
 - It calls the `ViewportChanged` event on all viewport changes. 
 - It checks the validity of the viewport state (like if it has size) before any call is executed. 
 - It makes sure the resolution steps are used when using `ZoomIn`, `ZoomOut` or `MouseWheelZoom`.

@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using NUnit.Framework;
 
@@ -18,7 +17,7 @@ public class SymbolStyleFeatureSizeTests
         };
 
         using var renderService = new RenderService();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle);
 
         Assert.That(size, Is.EqualTo(Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1));
     }
@@ -33,7 +32,7 @@ public class SymbolStyleFeatureSizeTests
         };
 
         using var renderService = new RenderService();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle);
 
         Assert.That(size, Is.EqualTo((Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1) * 2));
     }
@@ -48,7 +47,7 @@ public class SymbolStyleFeatureSizeTests
         };
 
         using var renderService = new RenderService();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle);
 
         Assert.That(size, Is.EqualTo(Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1));
     }
@@ -63,7 +62,7 @@ public class SymbolStyleFeatureSizeTests
         };
 
         using var renderService = new RenderService();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle);
 
         Assert.That(size, Is.EqualTo(Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 2 * 2 + 1));
     }
@@ -78,7 +77,7 @@ public class SymbolStyleFeatureSizeTests
         };
 
         using var renderService = new RenderService();
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
+        var size = SymbolStyleRenderer.FeatureSize(symbolStyle);
 
         Assert.That(size, Is.EqualTo(Math.Max(SymbolStyle.DefaultHeight, SymbolStyle.DefaultWidth) + 1 + Math.Sqrt(2 * 2 + 2 * 2) * 2));
     }
@@ -88,18 +87,17 @@ public class SymbolStyleFeatureSizeTests
     {
         // Arrange
         using var renderService = new RenderService();
-        var symbolStyle = new SymbolStyle
+        var symbolStyle = new ImageStyle
         {
             Image = "embedded://Mapsui.Resources.Images.Pin.svg",
         };
 
-        await renderService.ImageSourceCache.TryRegisterAsync(symbolStyle.Image);
+        await renderService.ImageSourceCache.TryRegisterAsync(symbolStyle.Image.SourceId, symbolStyle.Image.Source);
 
         // Act
-        var size = SymbolStyleRenderer.FeatureSize(symbolStyle, renderService);
+        var size = ImageStyleRenderer.FeatureSize(symbolStyle, renderService);
 
         // Assert
         Assert.That(size, Is.EqualTo(56));
-
     }
 }

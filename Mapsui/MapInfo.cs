@@ -48,5 +48,5 @@ public class MapInfo(ScreenPosition screenPosition, MPoint worldPosition, double
     public double Resolution { get; } = resolution;
 
     /// <summary> List of MapInfo Records </summary>
-    public IEnumerable<MapInfoRecord> MapInfoRecords => _mapInfoRecords ??= [.. _records];
+    public IEnumerable<MapInfoRecord> MapInfoRecords => _mapInfoRecords ??= _records.ToArray();
 }

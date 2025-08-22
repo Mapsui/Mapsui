@@ -56,7 +56,7 @@ public class MapInfoWidget : TextBoxWidget
         TextColor = Color.White;
     }
 
-    private bool MapTapped(Map map, MapEventArgs e)
+    private void MapTapped(object? s, MapEventArgs e)
     {
         var mapInfo = e.GetMapInfo(_layers());
         Text = FeatureToText(mapInfo.Feature);
@@ -72,7 +72,6 @@ public class MapInfoWidget : TextBoxWidget
                 _map.RefreshGraphics();
             }
         });
-        return true;
     }
 
     public Func<IFeature?, string> FeatureToText { get; set; } = (f) =>
@@ -81,10 +80,18 @@ public class MapInfoWidget : TextBoxWidget
 
         var result = new StringBuilder();
 
-        result.Append("Info: ");
+        result.Append("MapInfo: ");
         foreach (var field in f.Fields)
-            result.Append($"{field}: {f[field]} - ");
+            result.Append($"{field}: {f[field]} | ");
+        result.Append($"{GetCoordinateString(f)}");
         result.Remove(result.Length - 2, 2);
         return result.ToString();
     };
+
+    private static string GetCoordinateString(IFeature f)
+    {
+        var builder = new StringBuilder();
+        f.CoordinateVisitor((x, y, setter) => builder.Append($"{x.ToString("f2")} {y.ToString("f2")} | ")); ;
+        return builder.ToString();
+    }
 }

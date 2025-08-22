@@ -23,7 +23,7 @@ public class LoggingWidgetSample : ISample
         };
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
-        var widget = new LoggingWidget()
+        var widget = new LoggingWidget(map.RefreshGraphics)
         {
             LogLevelFilter = LogLevel.Trace,
             TextSize = 11,

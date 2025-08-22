@@ -18,7 +18,9 @@ public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
 
     public void Setup(IMapControl mapControl)
     {
-        mapControl.Map = CreateMap(mapControl.PixelDensity);
+        // PixelDensity is not always known at startup. The RasterizingTileLayer should be initialized later.
+        var pixelDensity = mapControl.GetPixelDensity() ?? 1;
+        mapControl.Map = CreateMap(pixelDensity);
     }
 
     public static Map CreateMap(float pixelDensity)
@@ -31,7 +33,7 @@ public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
         return map;
     }
 
-    private static MemoryLayer CreateRandomPointLayer()
+    private static ObservableMemoryLayer<MPoint> CreateRandomPointLayer()
     {
         var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
         var observableCollection = new ObservableCollection<MPoint>();
@@ -52,6 +54,7 @@ public class RasterizingTileLayerWithDynamicPointsSample : IMapControlSample
             for (var i = 0; i < 100; i++)
             {
                 observableCollection.Add(new MPoint(rnd.Next(0, 5000000), rnd.Next(0, 5000000)));
+                layer.DataHasChanged();
                 await Task.Delay(100);
             }
         });

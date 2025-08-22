@@ -1,4 +1,4 @@
-﻿using Mapsui.Fetcher;
+using Mapsui.Fetcher;
 using Mapsui.UI;
 
 namespace Mapsui.Tests.UI;

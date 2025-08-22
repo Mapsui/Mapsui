@@ -6,8 +6,6 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
-
 namespace Mapsui.Tests.Layers;
 
 [TestFixture]
@@ -40,19 +38,20 @@ public class ImageLayerTests
         using var waitHandle = new AutoResetEvent(false);
         Exception? exception = null;
 
-        imageLayer.DataChanged += (_, args) =>
+        imageLayer.DataChanged += (s, e) =>
         {
-            exception = args.Error;
+            exception = e.Error;
             waitHandle.Go();
         };
 
         var fetchInfo = new FetchInfo(new MSection(new MRect(-1, -1, 0, 0), 1), null, ChangeType.Discrete);
+        var viewport = new Viewport(-0.5, -0.5, 1, 0, 1, 1);
 
         // act
-        map.RefreshData(fetchInfo);
+        map.RefreshData(viewport);
 
         // assert
         waitHandle.WaitOne();
-        ClassicAssert.AreEqual(ExceptionMessage, exception?.Message);
+        Assert.That(exception?.Message, Is.EqualTo(ExceptionMessage));
     }
 }

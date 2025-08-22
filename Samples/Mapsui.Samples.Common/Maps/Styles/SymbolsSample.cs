@@ -27,15 +27,12 @@ public class SymbolsSample : ISample
         return Task.FromResult(map);
     }
 
-    private static ILayer CreateStylesLayer(MRect? envelope)
+    private static ILayer CreateStylesLayer(MRect? envelope) => new MemoryLayer
     {
-        return new MemoryLayer
-        {
-            Name = "Styles Layer",
-            Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
-            Style = null,
-        };
-    }
+        Name = "Styles Layer",
+        Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
+        Style = null,
+    };
 
     private static IEnumerable<IFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
     {
@@ -50,7 +47,7 @@ public class SymbolsSample : ISample
             };
 
             feature.Styles.Add(styles[counter]);
-            feature.Styles.Add(SmalleDot());
+            feature.Styles.Add(CreateSmallDotStyle());
             features.Add(feature);
             counter++;
             if (counter == styles.Count) counter = 0;
@@ -60,24 +57,74 @@ public class SymbolsSample : ISample
         return features;
     }
 
-    private static IStyle SmalleDot()
-    {
-        return new SymbolStyle { SymbolScale = 0.2, Fill = new Brush(new Color(40, 40, 40)) };
-    }
+    private static SymbolStyle CreateSmallDotStyle() =>
+        new() { SymbolScale = 0.2, Fill = new Brush(new Color(40, 40, 40)) };
 
     private static IEnumerable<IStyle> CreateDiverseStyles()
     {
         const int radius = 16;
         return
         [
-            new SymbolStyle {SymbolScale = 0.8, Offset = new Offset(0, 0), SymbolType = SymbolType.Rectangle},
-            new SymbolStyle {SymbolScale = 0.6, Offset = new Offset(radius, radius), SymbolType = SymbolType.Rectangle, Fill = new Brush(Color.Red)},
-            new SymbolStyle {SymbolScale = 1, Offset = new Offset(radius, -radius), SymbolType = SymbolType.Rectangle},
-            new SymbolStyle {SymbolScale = 1, Offset = new Offset(-radius, -radius), SymbolType = SymbolType.Rectangle},
-            new SymbolStyle {SymbolScale = 0.8, Offset = new Offset(0, 0)},
-            new SymbolStyle {SymbolScale = 1.2, Offset = new Offset(radius, 0)},
-            new SymbolStyle {SymbolScale = 1, Offset = new Offset(0, radius)},
-            new SymbolStyle {SymbolScale = 1, Offset = new Offset(radius, radius)},
+            new SymbolStyle
+            {
+                SymbolScale = 0.8,
+                Offset = new Offset(0, 0),
+                SymbolType = SymbolType.Rectangle,
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.6,
+                Offset = new Offset(radius, radius),
+                SymbolType = SymbolType.Rectangle,
+                Fill = new Brush(Color.Red),
+                Outline = new Pen(Color.Gray, 1f),
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1,
+                Offset = new Offset(radius, -radius),
+                SymbolType = SymbolType.Rectangle,
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1,
+                Offset = new Offset(-radius, -radius),
+                SymbolType = SymbolType.Rectangle,
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 0.8,
+                Offset = new Offset(0, 0),
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1.2,
+                Offset = new Offset(radius, 0),
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1,
+                Offset = new Offset(0, radius),
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
+            new SymbolStyle
+            {
+                SymbolScale = 1,
+                Offset = new Offset(radius, radius),
+                Outline = new Pen(Color.Gray, 1f),
+                Fill = new Brush(Color.White)
+            },
             CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.7),
             CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.8),
             CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.9),
@@ -89,14 +136,14 @@ public class SymbolsSample : ISample
         ];
     }
 
-    private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
+    private static ImageStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { Image = embeddedResourcePath, SymbolScale = scale, Offset = new Offset(0, 32) };
+        return new ImageStyle { Image = embeddedResourcePath, SymbolScale = scale, Offset = new Offset(0, 32) };
     }
 
-    private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
+    private static ImageStyle CreateSvgStyle(string embeddedResourcePath, double scale)
     {
-        return new SymbolStyle { Image = embeddedResourcePath, SymbolScale = scale, RelativeOffset = new RelativeOffset(0.0, 0.5) };
+        return new ImageStyle { Image = embeddedResourcePath, SymbolScale = scale, RelativeOffset = new RelativeOffset(0.0, 0.5) };
     }
 
     private static PointFeature CreatePointWithStackedStyles() => new(new MPoint(5000000, -5000000))
@@ -107,17 +154,19 @@ public class SymbolsSample : ISample
             {
                 SymbolScale = 2.0f,
                 Fill = null,
-                Outline = new Pen { Color = Color.Yellow }
+                Outline = new Pen(Color.Yellow),
             },
             new SymbolStyle
             {
                 SymbolScale = 0.8f,
-                Fill = new Brush { Color = Color.Red }
+                Fill = new Brush(Color.Red),
+                Outline = new Pen(Color.Gray, 1f)
             },
             new SymbolStyle
             {
                 SymbolScale = 0.5f,
-                Fill = new Brush { Color = Color.Black }
+                Fill = new Brush (Color.Black),
+                Outline = new Pen(Color.Gray, 1f)
             },
             new LabelStyle
             {

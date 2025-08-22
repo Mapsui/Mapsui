@@ -1,5 +1,4 @@
 ﻿using Mapsui.Logging;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
@@ -16,8 +15,6 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     private readonly SKPaint _backgroundPaint;
     private readonly SKFont _font;
 
-    private float _levelWidth;
-
     /// <summary>
     /// Renderer for LoggingWidget
     /// </summary>
@@ -28,8 +25,6 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         _warningTextPaint = new SKPaint { Color = SKColors.Orange, };
         _errorTextPaint = new SKPaint { Color = SKColors.Red, };
         _backgroundPaint = new SKPaint { Color = SKColors.White, Style = SKPaintStyle.Fill, };
-
-        _levelWidth = _font.MeasureText(LogLevel.Information.ToString(), _informationTextPaint);
     }
 
     public void Draw(SKCanvas canvas, Viewport viewport, IWidget widget, RenderService renderService, float layerOpacity)
@@ -107,7 +102,5 @@ public class LoggingWidgetRenderer : ISkiaWidgetRenderer, IDisposable
         _font.Size = (float)loggingWidget.TextSize;
         _warningTextPaint.Color = loggingWidget.WarningTextColor.ToSkia();
         _informationTextPaint.Color = loggingWidget.InformationTextColor.ToSkia();
-
-        _levelWidth = _font.MeasureText(LogLevel.Information.ToString(), _informationTextPaint);
     }
 }

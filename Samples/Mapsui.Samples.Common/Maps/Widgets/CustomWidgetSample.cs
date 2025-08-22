@@ -8,8 +8,8 @@ using SkiaSharp;
 using System;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Extensions;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia;
+using Mapsui.Rendering;
 
 namespace Mapsui.Samples.Common.Maps.Widgets;
 
@@ -49,15 +49,14 @@ public class CustomWidget : BaseWidget
 
     public Color? Color { get; set; }
 
-    public override bool OnTapped(Navigator navigator, WidgetEventArgs e)
+    public override void OnTapped(WidgetEventArgs e)
     {
-        base.OnTapped(navigator, e);
+        base.OnTapped(e);
 
         if (e.GestureType == GestureType.SingleTap)
             Color = GenerateRandomColor();
         else
             Color = Mapsui.Styles.Color.Transparent;
-        return false;
     }
 
     public static Color GenerateRandomColor()

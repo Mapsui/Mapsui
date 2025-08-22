@@ -55,7 +55,7 @@ public class MyLocationLayerSample : ISample, IDisposable
             _myLocationLayer.UpdateMySpeed(points[_count].Item4);
 
             _count++;
-            return true;
+            e.Handled = true;
         };
 
         return Task.FromResult(map);

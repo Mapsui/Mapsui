@@ -14,9 +14,9 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
 {
     private const int _symbolSize = 32; // todo: determine margin by symbol size
     private const int _boxMargin = _symbolSize / 2;
-
     private readonly IProvider _provider = provider;
     private readonly LabelStyle _labelStyle = labelStyle;
+    private const double _clusterMargin = 50;
 
     public string? CRS { get; set; }
 
@@ -27,7 +27,7 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
     public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var features = await _provider.GetFeaturesAsync(fetchInfo);
-        return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
+        return GetFeaturesInView(fetchInfo, _labelStyle, features, _rectangleLine, _rectangleFill);
     }
 
     public MRect? GetExtent()
@@ -35,14 +35,14 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
         return _provider.GetExtent();
     }
 
-    private static IEnumerable<IFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
+    private static List<IFeature> GetFeaturesInView(FetchInfo fetchInfo, LabelStyle labelStyle,
         IEnumerable<IFeature>? features, Pen line, Brush? fill)
     {
         if (features == null)
             return [];
 
-        var margin = resolution * 50;
-        var clusters = ClusterFeatures(features, margin, labelStyle, resolution);
+        var margin = fetchInfo.Resolution * _clusterMargin;
+        var clusters = ClusterFeatures(fetchInfo, features, margin, labelStyle);
 
         const int textHeight = 18;
 
@@ -52,7 +52,7 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
         {
             if (cluster.Features?.Count > 1)
             {
-                result.Add(CreateBoxFeature(resolution, cluster, line, fill));
+                result.Add(CreateBoxFeature(fetchInfo.Resolution, cluster, line, fill));
             }
 
             var offsetY = double.NaN;
@@ -68,7 +68,7 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
                     offsetY = CalculateOffsetY(offsetY, textHeight);
 
                     var labelText = labelStyle.GetLabelText(pointFeature);
-                    var labelFeature = CreateLabelFeature(position, labelStyle, offsetY, labelText);
+                    var labelFeature = CreateFeatureWithLabel(position, labelStyle, offsetY, labelText);
 
                     result.Add(labelFeature);
                 }
@@ -92,35 +92,30 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
         return new MPoint(cluster.Box.Centroid.X, minY);
     }
 
-    private static IFeature CreateLabelFeature(MPoint position, LabelStyle labelStyle, double offsetY,
-        string? text)
+    private static PointFeature CreateFeatureWithLabel(MPoint position, LabelStyle labelStyle, double offsetY, string? text) => new(position)
     {
-        return new PointFeature(position)
-        {
-            Styles = new[]
+        Styles =
+        [
+            new LabelStyle(labelStyle)
             {
-                new LabelStyle(labelStyle)
-                {
-                    Offset = {Y = offsetY},
-                    LabelMethod = _ => text
-                }
+                Offset = { Y = offsetY },
+                LabelMethod = _ => text
             }
-        };
-    }
+        ]
+    };
 
-    private static IFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
-        Brush? fill)
+    private static GeometryFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line, Brush? fill)
     {
         return new GeometryFeature(GrowBox(cluster.Box, resolution).ToPolygon())
         {
-            Styles = new[]
-            {
+            Styles =
+            [
                 new VectorStyle
                 {
                     Outline = line,
                     Fill = fill
                 }
-            }
+            ]
         };
     }
 
@@ -132,10 +127,10 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
     }
 
     private static IEnumerable<Cluster> ClusterFeatures(
+        FetchInfo fetchInfo,
         IEnumerable<IFeature> features,
         double minDistance,
-        IStyle layerStyle,
-        double resolution)
+        IStyle layerStyle)
     {
         var clusters = new List<Cluster>();
 
@@ -145,12 +140,12 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
         foreach (var feature in features.OrderBy(f => f.Extent?.Centroid.Y))
         {
             if (layerStyle is IThemeStyle themeStyle)
-                style = themeStyle.GetStyle(feature);
+                style = themeStyle.GetStyle(feature, ToViewport(fetchInfo.Section));
 
             if ((style == null) ||
                 (style.Enabled == false) ||
-                (style.MinVisible > resolution) ||
-                (style.MaxVisible < resolution)) continue;
+                (style.MinVisible > fetchInfo.Resolution) ||
+                (style.MaxVisible < fetchInfo.Resolution)) continue;
 
             var found = false;
             foreach (var cluster in clusters)
@@ -175,5 +170,16 @@ public class StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen
     {
         public MRect Box { get; set; } = box;
         public IList<IFeature> Features { get; } = features;
+    }
+
+    public static Viewport ToViewport(MSection section)
+    {
+        return new Viewport(
+            section.Extent.Centroid.X,
+            section.Extent.Centroid.Y,
+            section.Resolution,
+            0,
+            section.ScreenWidth,
+            section.ScreenHeight);
     }
 }

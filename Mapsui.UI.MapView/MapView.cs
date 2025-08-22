@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
+using Mapsui.Manipulations;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -39,11 +40,9 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     private readonly ObservableRangeCollection<Pin> _pins = [];
     private readonly ObservableRangeCollection<Drawable> _drawables = [];
     private readonly ObservableRangeCollection<Callout> _callouts = [];
-    private readonly MapTappedWidget _mapTappedWidget;
 
     public MapView()
     {
-        _mapTappedWidget = new MapTappedWidget(HandlerTap);
         MyLocationFollow = false;
 
         IsClippedToBounds = true;
@@ -62,7 +61,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         // Add MapView layers to Map
         AddLayers();
-        AddWidgets();
 
         // Add some events to _mapControl.Map.Layers
         Map.Layers.Changed += HandleLayersChanged;
@@ -339,6 +337,15 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         return _pins.GetEnumerator();
     }
 
+    protected override bool OnMapTapped(ScreenPosition screenPosition, MPoint worldPosition, GestureType gestureType)
+    {
+        if (base.OnMapTapped(screenPosition, worldPosition, gestureType))
+            return true;
+
+        return HandlerTap(new MapEventArgs(screenPosition, worldPosition, gestureType, Map, GetMapInfo,
+            GetRemoteMapInfoAsync));
+    }
+
     protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
         base.OnPropertyChanged(propertyName);
@@ -358,7 +365,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             }
             else
             {
-                _mapMyLocationButton!.Image = "embedded://Mapsui.UI.Maui.Resources.Images.LocationNoCenter.svg";
+                _mapMyLocationButton!.Image = "embedded://Mapsui.UI.Maui.Images.LocationNoCenter.svg";
             }
 
             Refresh();
@@ -416,7 +423,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 // Readd them, so that they always on top
                 AddLayers();
-                AddWidgets();
 
                 // Remove widget buttons and readd them
                 RemoveButtons();
@@ -631,9 +637,8 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         }
     }
 
-    private bool HandlerTap(WidgetEventArgs e)
+    private bool HandlerTap(MapEventArgs e)
     {
-        var handled = false;
         var screenPosition = e.ScreenPosition;
 
         var map = Map;
@@ -642,19 +647,19 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             var worldPosition = map.Navigator.Viewport.ScreenToWorld(screenPosition);
             var getRemoteMapInfoAsync = () => RemoteMapInfoFetcher.GetRemoteMapInfoAsync(screenPosition, map.Navigator.Viewport, map.Layers);
             var mapInfoEventArgs = new MapInfoEventArgs(screenPosition, worldPosition,
-                e.GestureType, map.Navigator.Viewport, handled, GetMapInfo, GetRemoteMapInfoAsync);
+                e.GestureType, map, GetMapInfo, GetRemoteMapInfoAsync);
 
             HandlerInfo(mapInfoEventArgs);
 
-            handled = mapInfoEventArgs.Handled;
+            var handled = mapInfoEventArgs.Handled;
 
             if (!handled)
             {
                 // if nothing else was hit, then we hit the map
-                var args = new MapClickedEventArgs(worldPosition.ToNative(), e.GestureType);
-                MapClicked?.Invoke(this, args);
+                var eventArgs = new MapClickedEventArgs(worldPosition.ToNative(), e.GestureType);
+                MapClicked?.Invoke(this, eventArgs);
 
-                if (args.Handled)
+                if (eventArgs.Handled)
                 {
                     handled = true;
                     return handled;
@@ -667,15 +672,14 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             }
         }
 
-        return handled;
+        return false;
     }
 
     private void HandlerPinPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (Map.Navigator.Viewport.ToExtent() is not null)
         {
-            var fetchInfo = new FetchInfo(Map.Navigator.Viewport.ToSection(), Map?.CRS, ChangeType.Continuous);
-            Map?.RefreshData(fetchInfo);
+            Map.RefreshData(ChangeType.Continuous);
         }
 
         // Repaint map, because something could have changed
@@ -686,8 +690,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         if (Map.Navigator.Viewport.ToExtent() is not null)
         {
-            var fetchInfo = new FetchInfo(Map.Navigator.Viewport.ToSection(), Map?.CRS, ChangeType.Continuous);
-            Map?.RefreshData(fetchInfo);
+            Map.RefreshData(ChangeType.Continuous);
         }
 
         // Repaint map, because something could have changed
@@ -708,14 +711,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         // Add MapView layers
         Map?.Layers.Add([_mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer]);
-    }
-
-    /// <summary> Add Default Widgets </summary>
-    private void AddWidgets()
-    {
-        if (Map != null && !Map.Widgets.Contains(this._mapTappedWidget))
-            // Add MapView widgets
-            Map.Widgets.Add(this._mapTappedWidget);
     }
 
     /// <summary>
@@ -782,19 +777,19 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
     private void CreateButtons()
     {
-        _mapZoomInButton ??= CreateButton(0, 0, "embedded://Mapsui.UI.Maui.Images.ZoomIn.svg", (s, e) => { Map.Navigator.ZoomIn(); return true; });
+        _mapZoomInButton ??= CreateButton(0, 0, "embedded://Mapsui.UI.Maui.Images.ZoomIn.svg", (s, e) => { Map.Navigator.ZoomIn(); e.Handled = true; });
         _mapZoomInButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomInButton);
 
-        _mapZoomOutButton ??= CreateButton(0, 40, "embedded://Mapsui.UI.Maui.Images.ZoomOut.svg", (s, e) => { Map.Navigator.ZoomOut(); return true; });
+        _mapZoomOutButton ??= CreateButton(0, 40, "embedded://Mapsui.UI.Maui.Images.ZoomOut.svg", (s, e) => { Map.Navigator.ZoomOut(); e.Handled = true; });
         _mapZoomOutButton.Enabled = IsZoomButtonVisible;
         Map!.Widgets.Add(_mapZoomOutButton);
 
-        _mapMyLocationButton ??= CreateButton(0, 88, "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg", (s, e) => { MyLocationFollow = true; return true; });
+        _mapMyLocationButton ??= CreateButton(0, 88, "embedded://Mapsui.UI.Maui.Images.LocationCenter.svg", (s, e) => { MyLocationFollow = true; e.Handled = true; });
         _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
         Map!.Widgets.Add(_mapMyLocationButton);
 
-        _mapNorthingButton ??= CreateButton(0, 136, "embedded://Mapsui.UI.Maui.Images.RotationZero.svg", (s, e) => { RunOnUIThread(() => Map.Navigator.RotateTo(0)); return true; });
+        _mapNorthingButton ??= CreateButton(0, 136, "embedded://Mapsui.UI.Maui.Images.RotationZero.svg", (s, e) => { RunOnUIThread(() => { Map.Navigator.RotateTo(0); }); e.Handled = true; });
         _mapNorthingButton.Enabled = IsNorthingButtonVisible;
         Map!.Widgets.Add(_mapNorthingButton);
 
@@ -802,7 +797,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     }
 
     private ImageButtonWidget CreateButton(
-        float x, float y, string imageSource, Func<ImageButtonWidget, WidgetEventArgs, bool> tapped) => new()
+        float x, float y, string imageSource, EventHandler<WidgetEventArgs> tapped) => new()
         {
             Image = imageSource,
             HorizontalAlignment = Widgets.HorizontalAlignment.Absolute,
@@ -812,7 +807,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
             Height = ButtonSize,
             Rotation = 0,
             Enabled = true,
-            Tapped = tapped
+            WithTappedEvent = tapped
         };
 
     protected override void Dispose(bool disposing)

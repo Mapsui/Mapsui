@@ -23,7 +23,7 @@ public partial class App : Application
     protected override Window CreateWindow(IActivationState? activationState)
     {
         if (DeviceInfo.Idiom == DeviceIdiom.Phone)
-            return new Window(new MainPage());
+            return new Window(new NavigationPage(new MainPage()));
 
         return new Window(new MainPageLarge());
     }

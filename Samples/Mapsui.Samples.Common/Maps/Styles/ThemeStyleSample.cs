@@ -100,7 +100,7 @@ public class ThemeStyleSample : ISample
         };
     }
 
-    private static SymbolStyle CreateCityStyle() => new()
+    private static ImageStyle CreateCityStyle() => new()
     {
         Image = "embedded://Mapsui.Samples.Common.Images.location.png",
         Offset = new Offset { Y = 64 },

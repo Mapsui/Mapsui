@@ -1,3 +1,5 @@
+using Uno.UI.Hosting;
+
 namespace Mapsui.Samples.Uno.WinUI;
 
 public class Program
@@ -6,7 +8,12 @@ public class Program
 
     public static int Main(string[] args)
     {
-        Microsoft.UI.Xaml.Application.Start(_ => _app = new App());
+        var host = UnoPlatformHostBuilder.Create()
+        .App(() => new App())
+        .UseWebAssembly()
+        .Build();
+
+        _ = host.RunAsync();
 
         return 0;
     }

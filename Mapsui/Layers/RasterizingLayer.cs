@@ -2,14 +2,14 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
-//using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers;
 
-public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
+public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
 {
     private readonly ConcurrentStack<RasterFeature> _cache;
     private readonly ILayer _layer;
@@ -17,12 +17,13 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     private readonly object _syncLock = new();
     private bool _busy;
     private MSection? _currentSection;
-    private bool _modified;
     private readonly IRenderer _rasterizer = DefaultRendererFactory.Create();
-    private FetchInfo? _fetchInfo;
-    public Delayer Delayer { get; } = new();
-    private readonly Delayer _rasterizeDelayer = new();
     private readonly RenderFormat _renderFormat;
+    private FetchInfo? _fetchInfo;
+    private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
+    private readonly RenderService _renderService = new();
+
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
 
     /// <summary>
     ///     Creates a RasterizingLayer which rasterizes a layer for performance
@@ -40,15 +41,13 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         RenderFormat renderFormat = RenderFormat.Png)
     {
         _renderFormat = renderFormat;
-        _renderFormat = renderFormat;
         _layer = layer;
         Name = layer.Name;
-        if (rasterizer != null) _rasterizer = rasterizer;
+        if (rasterizer != null)
+            _rasterizer = rasterizer;
         _cache = new ConcurrentStack<RasterFeature>();
         _pixelDensity = pixelDensity;
         _layer.DataChanged += LayerOnDataChanged;
-        Delayer.MillisecondsBeforeCall = 1000;
-        Delayer.MillisecondsBetweenCalls = delayBeforeRasterize;
         Style = new RasterStyle(); // default raster style
     }
 
@@ -64,18 +63,14 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         if (MaxVisible < _fetchInfo.Resolution) return;
         if (_busy) return;
 
-        _modified = true;
-
-        // Will start immediately if it is not currently waiting. This well be in most cases.
-        _rasterizeDelayer.ExecuteDelayed(Rasterize);
+        OnFetchRequested();
     }
 
-    private void Rasterize()
+    private async Task RasterizeAsync()
     {
         if (!Enabled) return;
         if (_busy) return;
         _busy = true;
-        _modified = false;
 
         lock (_syncLock)
         {
@@ -88,22 +83,20 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
                 _currentSection = _fetchInfo.Section;
 
                 using var bitmapStream = _rasterizer.RenderToBitmapStream(ToViewport(_currentSection),
-                    [_layer], pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+                    [_layer], _renderService, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
 
                 _cache.Clear();
                 var features = new RasterFeature[1];
                 features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), _currentSection.Extent));
                 _cache.PushRange(features);
                 OnDataChanged(new DataChangedEventArgs(Name));
-
-                if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher)
-                    Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
             }
             finally
             {
                 _busy = false;
             }
         }
+        await Task.CompletedTask;
     }
 
     public static double SymbolSize { get; set; } = 64;
@@ -117,39 +110,14 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         // Use a larger extent so that symbols partially outside of the extent are included
         var biggerBox = box.Grow(resolution * SymbolSize * 0.5);
 
-        return features.Where(f => f.Raster != null && f.Raster.Intersects(biggerBox)).ToList();
+        return features.Where(f => f.Raster != null && f.Raster.Extent.Intersects(biggerBox)).ToList();
     }
 
-    public void AbortFetch()
-    {
-        if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
-    }
-
-    public void RefreshData(FetchInfo fetchInfo)
-    {
-        if (fetchInfo.Extent == null)
-            return;
-
-        if (!Enabled) return;
-        if (MinVisible > fetchInfo.Resolution) return;
-        if (MaxVisible < fetchInfo.Resolution) return;
-
-        if ((_currentSection == null) ||
-            (_currentSection.Resolution != fetchInfo.Section.Resolution) ||
-            !_currentSection.Extent.Contains(fetchInfo.Section.Extent))
-        {
-            // Explicitly set the change type to discrete for rasterization
-            _fetchInfo = new FetchInfo(fetchInfo.Section, fetchInfo.CRS);
-            if (_layer is IAsyncDataFetcher asyncDataFetcher)
-                Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
-            else
-                Delayer.ExecuteDelayed(Rasterize);
-        }
-    }
 
     public void ClearCache()
     {
-        if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
+        if (_layer is IFetchableSource fetchableSource)
+            fetchableSource.ClearCache();
     }
 
     public static Viewport ToViewport(MSection section)
@@ -161,5 +129,40 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
             0,
             section.ScreenWidth,
             section.ScreenHeight);
+    }
+
+    public FetchJob[] GetFetchJobs(int activeFetchCount, int availableFetchSlots)
+    {
+        if (_latestFetchInfo.TryTake(out var fetchInfo))
+        {
+            _fetchInfo = fetchInfo;
+
+            if (_layer is IFetchableSource fetchableSource)
+                return [new FetchJob(_layer.Id, async () =>
+                    {
+                        var fetchJobs = fetchableSource.GetFetchJobs(activeFetchCount, availableFetchSlots);
+                        foreach (var fetchJob in fetchJobs)
+                        {
+                            await fetchJob.FetchFunc();
+                        }
+                        await RasterizeAsync();
+                    })];
+            else
+                return [new FetchJob(_layer.Id, RasterizeAsync)];
+
+        }
+        return [];
+    }
+
+    public void ViewportChanged(FetchInfo fetchInfo)
+    {
+        _latestFetchInfo.Overwrite(fetchInfo);
+        if (_layer is IFetchableSource fetchableSource)
+            fetchableSource.ViewportChanged(fetchInfo);
+    }
+
+    protected virtual void OnFetchRequested()
+    {
+        FetchRequested?.Invoke(this, new FetchRequestedEventArgs(ChangeType.Discrete));
     }
 }

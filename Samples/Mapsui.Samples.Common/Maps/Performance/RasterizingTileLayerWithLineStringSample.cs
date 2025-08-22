@@ -10,7 +10,6 @@ using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
-#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 #pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.Performance;
@@ -22,7 +21,9 @@ public class RasterizingTileLayerWithLineStringSample : IMapControlSample
 
     public void Setup(IMapControl mapControl)
     {
-        mapControl.Map = CreateMap(mapControl.PixelDensity);
+        // PixelDensity is not always known at startup. The RasterizingTileLayer should be initialized later.
+        var pixelDensity = mapControl.GetPixelDensity() ?? 1;
+        mapControl.Map = CreateMap(pixelDensity);
     }
 
     public static Map CreateMap(float pixelDensity)
@@ -79,14 +80,16 @@ public class RasterizingTileLayerWithLineStringSample : IMapControlSample
         var vsout = new VectorStyle
         {
             Opacity = 0.5f,
+            Outline = new Pen(Color.Gray, 1f),
             Line = new Pen(Color.White, 10f),
+            Fill = new Brush(Color.White)
         };
 
         var vs = new VectorStyle
         {
-            Fill = null,
             Outline = null,
-            Line = { Color = Color.Red, Width = 5f }
+            Line = new Pen(Color.Red, 5f),
+            Fill = new Brush(Color.White)
         };
 
         feature.Styles.Add(vsout);

@@ -6,7 +6,7 @@ namespace Mapsui.Animations;
 
 public class MouseWheelAnimation
 {
-    private int _tickCount = int.MinValue;
+    private long _tickCount = long.MinValue;
     private double _destinationResolution;
 
     public int Duration { get; set; } = 600;
@@ -15,7 +15,7 @@ public class MouseWheelAnimation
     public double GetResolution(int mouseWheelDelta, double currentResolution, MMinMax? zoomBounds, IReadOnlyList<double> resolutions)
     {
         // If an animation is already running don't start from the current resolution, but from the 
-        // destination resolution of the previous animation. This way the consequetive mouse wheel
+        // destination resolution of the previous animation. This way the consecutive mouse wheel
         // ticks add up which allows for fast zooming to a detailed level.
         if (IsAnimating())
             currentResolution = _destinationResolution;
@@ -34,14 +34,14 @@ public class MouseWheelAnimation
         }
 
         // TickCount is fast https://stackoverflow.com/a/4075602/85325
-        _tickCount = Environment.TickCount;
+        _tickCount = Environment.TickCount64;
 
         return _destinationResolution;
     }
 
     private bool IsAnimating()
     {
-        var tickProgress = Environment.TickCount - _tickCount;
+        var tickProgress = Environment.TickCount64 - _tickCount;
         return tickProgress >= 0 && tickProgress < Duration;
     }
 }

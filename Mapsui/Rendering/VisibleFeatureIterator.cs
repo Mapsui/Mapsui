@@ -1,20 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui.Rendering;
 
 public static class VisibleFeatureIterator
 {
-    private static readonly object _iterationLock = new();
-
     public static void IterateLayers(Viewport viewport, IEnumerable<ILayer> layers, long iteration,
-        Action<Viewport, ILayer, IStyle, IFeature, float, long> callback)
+        Action<Viewport, ILayer, IStyle, IFeature, float, long> callback, Action<ILayer>? customLayerRendererCallback = null)
     {
         foreach (var layer in layers)
         {
@@ -22,12 +20,10 @@ public static class VisibleFeatureIterator
             if (layer.MinVisible > viewport.Resolution) continue;
             if (layer.MaxVisible < viewport.Resolution) continue;
 
-            // somehow it crashes when more then one iteration or rendering is done in parallel 
-            // TODO: find out which Caching path causes this. Because when the caching is disabled it works.
-            lock (_iterationLock)
-            {
+            if (layer.CustomLayerRendererName is not null && customLayerRendererCallback is not null)
+                customLayerRendererCallback(layer);
+            else
                 IterateLayer(viewport, layer, iteration, callback);
-            }
         }
     }
 
@@ -48,7 +44,7 @@ public static class VisibleFeatureIterator
             {
                 if (layerStyle is IThemeStyle themeStyle)
                 {
-                    var stylesFromThemeStyle = themeStyle.GetStyle(feature).GetStylesToApply(viewport.Resolution);
+                    var stylesFromThemeStyle = themeStyle.GetStyle(feature, viewport).GetStylesToApply(viewport.Resolution);
                     foreach (var styleFromThemeStyle in stylesFromThemeStyle)
                     {
                         callback(viewport, layer, styleFromThemeStyle, feature, (float)layer.Opacity, iteration);

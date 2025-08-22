@@ -15,7 +15,6 @@ public class DelayerTests
         // Arrange
         var delayer = new Delayer();
         Random random = new(43434768);
-        delayer.MillisecondsBetweenCalls = 1;
         var backgroundProcessing = new BackgroundProcessing();
         backgroundProcessing.Start(random, 100);
         int iterationCount = 10; // Increase this value for more rigorous testing
@@ -23,14 +22,14 @@ public class DelayerTests
         // Act
         for (var i = 0; i < iterationCount; i++)
         {
-            delayer.ExecuteDelayed(() => Math.Sqrt(random.NextDouble()));
+            delayer.ExecuteDelayed(() => Math.Sqrt(random.NextDouble()), 1, 0);
             await Task.Delay(1);
         }
 
         // Assert
         backgroundProcessing.Stop();
         var delayedMethodIsCalled = false;
-        delayer.ExecuteDelayed(() => delayedMethodIsCalled = true);
+        delayer.ExecuteDelayed(() => delayedMethodIsCalled = true, 1, 0);
         await WaitUntilConditionIsTrueAsync(() => delayedMethodIsCalled, 1000).ConfigureAwait(false);
         Assert.That(delayedMethodIsCalled, Is.True, "The delayed method is called");
     }

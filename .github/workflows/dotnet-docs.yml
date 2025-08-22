@@ -42,7 +42,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
          dotnet-version: |
-           9.0.x
+           9.0.301
+           8.0.407
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8 
     - name: Run DocFx
@@ -51,7 +52,25 @@ jobs:
       # build blazor samples to website/samples/
     - name: Build Blazor Website Sample
       shell: pwsh
-      run: ./Scripts/BuildSamplesWebsite.ps1     
+      run: ./Scripts/BuildSamplesWebsite.ps1   
+    - name: Checkout gh-pages branch to delete v5 folder
+      uses: actions/checkout@v4
+      with:
+        ref: gh-pages
+        path: gh-pages
+    - name: Delete v5 folder
+      shell: bash
+      run: |
+        rm -rf gh-pages/v5
+    - name: Push gh-pages branch with v5 folder deleted
+      shell: bash
+      run: |
+        cd gh-pages
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add -A
+        git commit -m "Clean v5 folder before redeploy" || echo "Nothing to commit"
+        git push
     - name: Upload artifact
       uses: peaceiris/actions-gh-pages@v4
       with:

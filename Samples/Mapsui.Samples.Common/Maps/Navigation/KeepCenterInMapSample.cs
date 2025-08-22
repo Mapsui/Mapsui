@@ -21,20 +21,20 @@ public class KeepCenterInMapSample : ISample
         // This is the default limiter. This limiter ensures that the center 
         // of the viewport always is within the PanBounds. When no OverridePanBounds
         // is specified the Navigator uses the Map.Extent as default. In this sample
-        // the extent of adagaskar is used. When the PanBounds are limited it usually makes
+        // the extent of Madagascar is used. When the PanBounds are limited it usually makes
         // sense to also limit the ZoomBounds.
 
-        var panBounds = GetLimitsOfMadagaskar();
+        var panBounds = GetLimitsOfMadagascar();
         map.Layers.Add(CreatePanBoundsLayer(panBounds));
 
         map.Navigator.OverridePanBounds = panBounds;
-        map.Navigator.OverrideZoomBounds = new MMinMax(0.15, 2500);
+        map.Navigator.OverrideZoomBounds = new MMinMax(0.15, 3000);
         map.Navigator.ZoomToBox(panBounds);
 
         return Task.FromResult(map);
     }
 
-    private static MRect GetLimitsOfMadagaskar()
+    private static MRect GetLimitsOfMadagascar()
     {
         var (minX, minY) = SphericalMercator.FromLonLat(41.8, -27.2);
         var (maxX, maxY) = SphericalMercator.FromLonLat(52.5, -11.6);

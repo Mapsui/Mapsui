@@ -4,13 +4,13 @@
 
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using Mapsui.Animations;
 using Mapsui.Fetcher;
 using Mapsui.Styles;
 using Mapsui.Widgets.ButtonWidgets;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Mapsui.Layers;
 
@@ -91,6 +91,11 @@ public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable
     /// List of native resolutions
     /// </summary>
     IReadOnlyList<double> Resolutions { get; }
+
+    /// <summary>
+    /// Name of the custom layer renderer. Set this value if you want to use a custom renderer for this layer.
+    /// </summary>
+    string? CustomLayerRendererName { get; set; }
 
     /// <summary>
     /// Event called when the data within the layer has changed allowing

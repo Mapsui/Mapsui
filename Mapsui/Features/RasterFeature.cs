@@ -25,7 +25,7 @@ public class RasterFeature : BaseFeature, IFeature
     /// <summary>
     /// Extent of feature
     /// </summary>
-    public override MRect? Extent => Raster;
+    public override MRect? Extent => Raster?.Extent;
 
     /// <summary>
     /// Implementation of visitor pattern for coordinates
@@ -34,7 +34,7 @@ public class RasterFeature : BaseFeature, IFeature
     public override void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
     {
         if (Raster != null)
-            foreach (var point in new[] { Raster.Min, Raster.Max })
+            foreach (var point in new[] { Raster.Extent.Min, Raster.Extent.Max })
                 visit(point.X, point.Y, (x, y) =>
                 {
                     point.X = x;

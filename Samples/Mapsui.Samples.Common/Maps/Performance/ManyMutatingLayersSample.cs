@@ -63,7 +63,7 @@ public sealed class ManyMutatingLayersSample : ISample, IDisposable
     private void InitializeTimer(Timer timer, Map map, IEnumerable<PointFeature> features)
     {
         var random = new Random(38445);
-        timer.Elapsed += (sender, args) => MutateFeatures(features, () => map.Refresh());
+        timer.Elapsed += (s, e) => MutateFeatures(features, () => map.Refresh());
         timer.Start();
     }
 

@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
@@ -14,12 +14,9 @@ using System.Collections.Generic;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-public class CustomStyle : IStyle
+public class CustomStyle : BaseStyle
 {
-    public double MinVisible { get; set; } = 0;
-    public double MaxVisible { get; set; } = double.MaxValue;
-    public bool Enabled { get; set; } = true;
-    public float Opacity { get; set; } = 0.7f;
+    public CustomStyle() => Opacity = 0.7f;
 }
 
 public class SkiaCustomStyleRenderer : ISkiaStyleRenderer

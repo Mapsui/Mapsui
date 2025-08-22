@@ -56,7 +56,7 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
 
         var feature = new GeometryFeature { Geometry = new Point(x, y) };
 
-        feature.Styles.Add(new SymbolStyle
+        feature.Styles.Add(new ImageStyle
         {
             Image = imageSource,
             Offset = new Offset { Y = -24 },

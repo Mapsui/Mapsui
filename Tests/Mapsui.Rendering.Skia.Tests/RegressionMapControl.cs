@@ -28,8 +28,7 @@ public sealed class RegressionMapControl : IMapControl
     public double UnSnapRotationDegrees { get; set; }
     public double ReSnapRotationDegrees { get; set; }
     public IRenderer Renderer { get; }
-    public float PixelDensity => 1;
-    public Performance? Performance { get; set; }
+    public float? GetPixelDensity() => 1f;
     public double ScreenWidth { get; private set; }
     public double ScreenHeight { get; private set; }
 
@@ -51,6 +50,8 @@ public sealed class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
+    public void InvalidateCanvas() { }
+
     public void RefreshData(ChangeType changeType = ChangeType.Discrete)
     {
         throw new NotImplementedException();
@@ -67,16 +68,6 @@ public sealed class RegressionMapControl : IMapControl
     }
 
     public void OpenInBrowser(string url)
-    {
-        throw new NotImplementedException();
-    }
-
-    public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
-    {
-        throw new NotImplementedException();
-    }
-
-    public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
     {
         throw new NotImplementedException();
     }
@@ -99,7 +90,7 @@ public sealed class RegressionMapControl : IMapControl
 
     public void Dispose()
     {
-        Renderer.Dispose();
+        // Nothing to dispose
     }
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, IEnumerable<ILayer> layers)

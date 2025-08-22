@@ -1,5 +1,6 @@
 ﻿using Mapsui.Animations;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Limiting;
 using Mapsui.Logging;
 using Mapsui.Manipulations;
@@ -14,11 +15,13 @@ public class Navigator
 {
     private Viewport _viewport = new();
     private IEnumerable<AnimationEntry<Viewport>> _animations = [];
-    private readonly List<Action> _initialization = [];
+    private readonly List<Action> _initialization;
     private MMinMax? _defaultZoomBounds;
     private MRect? _defaultPanBounds;
     private MMinMax? _overrideZoomBounds;
     private MRect? _overridePanBounds;
+    private readonly object _initializationLock = new();
+    private bool _suppressNotifications = true;
 
     public delegate void ViewportChangedEventHandler(object sender, ViewportChangedEventArgs e);
 
@@ -26,7 +29,7 @@ public class Navigator
     /// Called when a data refresh is needed. This directly after a non-animated viewport change
     /// is made and after an animation has completed.
     /// </summary>
-    public event EventHandler? RefreshDataRequest;
+    public event EventHandler<FetchRequestedEventArgs>? FetchRequested;
     public event ViewportChangedEventHandler? ViewportChanged;
 
     /// <summary>
@@ -109,30 +112,37 @@ public class Navigator
             if (_viewport == value) return;
             var oldViewport = _viewport;
             _viewport = value;
-            OnViewportChanged(oldViewport);
+            OnViewportChanged(oldViewport, _viewport);
         }
     }
 
     public bool IsInitialized { get; private set; } = false;
 
-    private void Initialize()
+    public Navigator()
     {
-        if (!IsInitialized)
+        _initialization = new List<Action> { () => ZoomToPanBounds() };
+    }
+
+    private void Initialize(MRect extent)
+    {
+        lock (_initializationLock)
         {
-            IsInitialized = true;
-
-            if (_initialization.Count == 0)
+            if (!IsInitialized)
             {
-                ZoomToPanBounds();
-                return;
-            }
+                IsInitialized = true;
 
-            foreach (var action in _initialization)
-            {
-                action();
-            }
+                // Actions could either modify the current state (after ZoomToBox above) or override the current state.
+                foreach (var action in _initialization)
+                {
+                    action();
+                }
 
-            _initialization.Clear();
+                _initialization.Clear();
+
+                _suppressNotifications = false;
+                OnViewportChanged(_viewport, _viewport);
+                OnFetchRequested(ChangeType.Discrete);
+            }
         }
     }
 
@@ -147,6 +157,23 @@ public class Navigator
     public IReadOnlyList<double> Resolutions => OverrideResolutions ?? DefaultResolutions;
 
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();
+
+    public void MouseWheelZoomContinuous(double scaleFactor, ScreenPosition centerOfZoom)
+    {
+        if (!Viewport.HasSize()) return;
+        if (scaleFactor == 1) return; // No change
+        if (scaleFactor <= Constants.Epsilon)
+        {
+            Logger.Log(LogLevel.Warning, "MouseWheelZoomContinuous was called with a mouseWheelDelta <= 0. This is unexpected.");
+            return;
+        }
+
+        // MouseWheelAnimation tracks the destination resolution which allows for faster zooming in if the next tick
+        // starts before the previous animation is finished. We may want something like that here as well.
+
+        var resolution = Viewport.Resolution * scaleFactor;
+        ZoomTo(resolution, centerOfZoom); // Not using animations for continuous zooming because the steps will be  small.
+    }
 
     public void MouseWheelZoom(int mouseWheelDelta, ScreenPosition centerOfZoom)
     {
@@ -388,7 +415,7 @@ public class Navigator
     /// <param name="duration">Duration for animation in milliseconds.</param>
     public void FlyTo(MPoint center, double maxResolution, long duration = 500)
     {
-        _animations = FlyToAnimation.Create(Viewport, center, maxResolution, duration);
+        SetViewportAnimations(FlyToAnimation.Create(Viewport, center, maxResolution, duration));
     }
 
     /// <summary>
@@ -424,7 +451,7 @@ public class Navigator
         if (PanLock)
             return;
 
-        _animations = FlingAnimation.Create(velocityX, velocityY, maxDuration);
+        SetViewportAnimations(FlingAnimation.Create(velocityX, velocityY, maxDuration, () => OnFetchRequested(ChangeType.Discrete)));
     }
 
     public void Manipulate(Manipulation? manipulation)
@@ -504,21 +531,30 @@ public class Navigator
 
     public void SetSize(double width, double height)
     {
+        if (Viewport.Width == width && Viewport.Height == height)
+            return; // No change in size, no need to update.
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
+        var wasInitialized = IsInitialized;
         InitializeIfNeeded();
-        OnRefreshDataRequest();
+        if (wasInitialized) // Workaround to prevent double data refresh: Only call when it was already initialized because if it is not then it will be called in Initialize().
+            OnFetchRequested(ChangeType.Discrete);
     }
 
     private void InitializeIfNeeded()
     {
         if (ShouldInitialize())
-            Initialize();
+            Initialize(PanBounds ?? throw new Exception("PanBounds is null. This should not be possible when initializing."));
     }
 
-    private void OnRefreshDataRequest()
+    private void OnFetchRequested(ChangeType changeType)
     {
-        RefreshDataRequest?.Invoke(this, EventArgs.Empty);
+        if (_suppressNotifications)
+            return;
+
+        // At the moment we refresh the data on each FetchRequested. Instead we should  always
+        // refresh on ChangeType.Discrete, and do throttled requests on ChangeType.Continuous.
+        FetchRequested?.Invoke(this, new FetchRequestedEventArgs(changeType));
     }
 
     private void ClearAnimations()
@@ -533,9 +569,12 @@ public class Navigator
     /// Property change event
     /// </summary>
     /// <param name="oldViewport">Name of property that changed</param>
-    private void OnViewportChanged(Viewport oldViewport)
+    private void OnViewportChanged(Viewport oldViewport, Viewport viewport)
     {
-        ViewportChanged?.Invoke(this, new ViewportChangedEventArgs(oldViewport));
+        if (_suppressNotifications)
+            return;
+
+        ViewportChanged?.Invoke(this, new ViewportChangedEventArgs(oldViewport, viewport));
     }
 
     public bool UpdateAnimations()
@@ -544,7 +583,7 @@ public class Navigator
         if (_animations.All(a => a.Done))
         {
             ClearAnimations();
-            OnRefreshDataRequest();
+            OnFetchRequested(ChangeType.Discrete);
         }
         var animationResult = Animation.UpdateAnimations(Viewport, _animations);
 
@@ -553,7 +592,7 @@ public class Navigator
         if (ShouldAnimationsBeHaltedBecauseOfLimiting(animationResult.State, Viewport))
         {
             ClearAnimations();
-            OnRefreshDataRequest();
+            OnFetchRequested(ChangeType.Discrete);
             return false; // Not running
         }
 
@@ -563,6 +602,7 @@ public class Navigator
     public void SetViewportAnimations(List<AnimationEntry<Viewport>> animations)
     {
         _animations = animations;
+        OnViewportChanged(Viewport, Viewport); // Call OnViewportChanged with current Viewport to trigger the invalidate loop so animations will be updated.
     }
 
     private void SetViewportWithLimit(Viewport viewport)
@@ -604,6 +644,9 @@ public class Navigator
         // From a users experience perspective we want the x/y change to be limited to the same degree
         // as the resolution. This is to prevent the situation where you zoom out while hitting the zoom bounds
         // and you see no change in resolution, but you will see a change in pan.
+
+        if (originalViewport.Resolution <= 0)
+            return goalViewport;
 
         var resolutionLimiting = CalculateResolutionLimiting(
             originalViewport.Resolution, goalViewport.Resolution, limitedViewport.Resolution);
@@ -648,13 +691,16 @@ public class Navigator
         {
             ClearAnimations();
             SetViewportWithLimit(viewport);
-            OnRefreshDataRequest();
+            OnFetchRequested(ChangeType.Discrete);
         }
         else
         {
+            // If an animation was already started we do a data refresh for the viewport 
+            // at this point. Not entirely sure if there could be too many consecutive animations
+            // started to overload to the data refresh.
             if (_animations.Any())
-                OnRefreshDataRequest();
-            _animations = ViewportAnimation.Create(Viewport, viewport, duration, easing);
+                OnFetchRequested(ChangeType.Continuous);
+            SetViewportAnimations(ViewportAnimation.Create(Viewport, viewport, duration, easing));
         }
     }
 
@@ -689,7 +735,7 @@ public class Navigator
 
     private bool ShouldInitialize() => !IsInitialized && CanInitialize();
 
-    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null; // Should we check on ZoomBounds too?
+    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null;
 
     internal int GetAnimationsCount => _animations.Count();
 

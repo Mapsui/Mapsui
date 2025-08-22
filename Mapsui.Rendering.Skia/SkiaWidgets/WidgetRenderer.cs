@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Widgets;
 using SkiaSharp;
 
@@ -42,9 +41,6 @@ public static class WidgetRenderer
             }
 
             ((ISkiaWidgetRenderer)renderer).Draw(canvas, viewport, widget, renderService, layerOpacity);
-
-            // Widget is redrawn
-            widget.NeedsRedraw = false;
         }
     }
 }
