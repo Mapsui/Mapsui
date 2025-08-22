@@ -6,7 +6,6 @@ using Mapsui.Layers;
 using Mapsui.Nts.Providers;
 using Mapsui.UI.Maui;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace Mapsui.Tests.Layers;
 
@@ -67,7 +66,7 @@ public class LayerThreadingTests
         await task3;
         await task1;
 
-        ClassicAssert.IsTrue(_exceptions.Count == 0); // no Exceptions should have occurred
+        Assert.That(_exceptions.Count, Is.EqualTo(0)); // no Exceptions should have occurred
     }
 
     private async Task GetFeaturesAsync(ObservableCollectionProvider<Callout> provider)
