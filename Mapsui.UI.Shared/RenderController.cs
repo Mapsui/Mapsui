@@ -35,7 +35,7 @@ public sealed class RenderController : IDisposable
     // Stopwatch for measuring drawing times
     private readonly Stopwatch _stopwatch = new();
 #pragma warning disable IDISP002 // Is disposed in SharedDispose
-    private readonly IRenderer _renderer = new MapRenderer();
+    private readonly IMapRenderer _renderer = new MapRenderer();
 #pragma warning restore IDISP002
     private readonly Func<Map?> _getMap;
 
