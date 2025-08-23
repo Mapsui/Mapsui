@@ -17,7 +17,7 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
     private readonly object _syncLock = new();
     private bool _busy;
     private MSection? _currentSection;
-    private readonly IRenderer _rasterizer = DefaultRendererFactory.Create();
+    private readonly IMapRenderer _rasterizer = DefaultRendererFactory.Create();
     private readonly RenderFormat _renderFormat;
     private FetchInfo? _fetchInfo;
     private readonly LatestMailbox<FetchInfo> _latestFetchInfo = new();
@@ -36,7 +36,7 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
     public RasterizingLayer(
         ILayer layer,
         int delayBeforeRasterize = 1000,
-        IRenderer? rasterizer = null,
+        IMapRenderer? rasterizer = null,
         float pixelDensity = 1,
         RenderFormat renderFormat = RenderFormat.Png)
     {

@@ -28,7 +28,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
     private readonly IProvider? _dataSource;
     private readonly RenderFormat _renderFormat;
     private readonly ConcurrentDictionary<TileIndex, double> _searchSizeCache = new();
-    private readonly IRenderer _defaultRenderer = DefaultRendererFactory.GetRenderer();
+    private readonly IMapRenderer _defaultRenderer = DefaultRendererFactory.GetRenderer();
 
     public RasterizingTileSource(
         ILayer layer,
@@ -77,7 +77,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         return result;
     }
 
-    private async Task<(MSection section, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo, IRenderer renderer, RenderService renderService)
+    private async Task<(MSection section, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo, IMapRenderer renderer, RenderService renderService)
     {
         var indexLevel = tileInfo.Index.Level;
         Schema.Resolutions.TryGetValue(indexLevel, out var tileResolution);
@@ -120,7 +120,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         return features;
     }
 
-    private async Task<double> GetAdditionalSearchSizeAroundAsync(TileInfo tileInfo, IRenderer renderer, MSection section, RenderService renderService)
+    private async Task<double> GetAdditionalSearchSizeAroundAsync(TileInfo tileInfo, IMapRenderer renderer, MSection section, RenderService renderService)
     {
         double additionalSearchSize = 0;
 
@@ -151,7 +151,7 @@ public class RasterizingTileSource : ILocalTileSource, ILayerFeatureInfo
         };
     }
 
-    private async Task<double> GetAdditionalSearchSizeAsync(TileInfo tileInfo, IRenderer renderer, MSection section, RenderService renderService)
+    private async Task<double> GetAdditionalSearchSizeAsync(TileInfo tileInfo, IMapRenderer renderer, MSection section, RenderService renderService)
     {
         if (!_searchSizeCache.TryGetValue(tileInfo.Index, out var result))
         {

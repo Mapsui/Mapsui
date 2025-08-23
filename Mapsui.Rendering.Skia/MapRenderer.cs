@@ -21,7 +21,7 @@ using System.Linq;
 
 namespace Mapsui.Rendering.Skia;
 
-public sealed class MapRenderer : IRenderer
+public sealed class MapRenderer : IMapRenderer
 {
     private long _currentIteration;
     private static readonly Dictionary<Type, IWidgetRenderer> _widgetRenderers = [];
