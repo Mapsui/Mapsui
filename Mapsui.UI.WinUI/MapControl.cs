@@ -244,7 +244,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         GC.SuppressFinalize(this);
     }
 #elif HAS_UNO && __IOS__ // on ios don't dispose _canvas, _canvasGPU, _selectRectangle, base class 
-    protected virtual void Dispose(bool disposing)
+    protected new virtual void Dispose(bool disposing)
     {
         SharedDispose(disposing);
     }
