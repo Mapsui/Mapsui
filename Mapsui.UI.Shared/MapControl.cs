@@ -56,9 +56,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     private readonly FlingTracker _flingTracker = new();
     private double _sharedWidth;
     private double _sharedHeight;
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     private RenderController? _renderController;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -117,6 +115,14 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         TryUpdateViewportSize();
     }
 
+    public void SetMapRenderer(IMapRenderer mapRenderer)
+    {
+        if (_renderController is null)
+            return;
+        _renderController.SetMapRenderer(mapRenderer);
+    }
+
+
     /// <summary>
     /// Force a update of control
     /// </summary>
@@ -167,7 +173,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         map.PropertyChanged += Map_PropertyChanged;
         map.RefreshGraphicsRequest += Map_RefreshGraphicsRequest;
     }
-
 
     private void Map_RefreshGraphicsRequest(object? sender, EventArgs e)
     {
