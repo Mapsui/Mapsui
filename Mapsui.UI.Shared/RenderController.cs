@@ -21,22 +21,16 @@ namespace Mapsui.Rendering;
 public sealed class RenderController : IDisposable
 {
     private bool _disposed;
-    // Action to call for a redraw of the control
-    private readonly Action? _invalidateCanvas;
-    // The minimum time in between invalidate calls in ms.
-    private readonly int _minimumTimeBetweenInvalidates = 4;
-    // The minimum time in between the start of two draw calls in ms
-    private readonly int _minimumTimeBetweenStartOfDrawCall = 8;
+    private readonly Action? _invalidateCanvas; // Action to call for a redraw of the control
+    private readonly int _minimumTimeBetweenInvalidates = 4; // The minimum time in between invalidate calls in ms.
+    private readonly int _minimumTimeBetweenStartOfDrawCall = 8; // The minimum time in between the start of two draw calls in ms
     private readonly AsyncAutoResetEvent _isDrawingDone = new(true);
     private readonly AsyncAutoResetEvent _needsRefresh = new(true);
     private static bool _firstDraw = true;
     private bool _isRunning = true;
     private int _timestampStartDraw;
-    // Stopwatch for measuring drawing times
-    private readonly Stopwatch _stopwatch = new();
-#pragma warning disable IDISP002 // Is disposed in SharedDispose
-    private readonly IMapRenderer _renderer = new MapRenderer();
-#pragma warning restore IDISP002
+    private readonly Stopwatch _stopwatch = new(); // Stopwatch for measuring drawing times
+    private IMapRenderer _mapRenderer = new MapRenderer();
     private readonly Func<Map?> _getMap;
 
     public RenderController(Func<Map?> getMap, Action InvalidateCanvas)
@@ -47,6 +41,8 @@ public sealed class RenderController : IDisposable
         Catch.TaskRun(InvalidateLoopAsync);
     }
 
+    public void SetMapRenderer(IMapRenderer mapRenderer) => _mapRenderer = mapRenderer;
+
     public void RefreshGraphics()
     {
         _needsRefresh.Set();
@@ -55,12 +51,12 @@ public sealed class RenderController : IDisposable
     public MemoryStream RenderToBitmapStream(Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService,
         Mapsui.Styles.Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png, int quality = 100)
     {
-        return _renderer.RenderToBitmapStream(viewport, layers, renderService, background, pixelDensity, widgets, renderFormat, quality);
+        return _mapRenderer.RenderToBitmapStream(viewport, layers, renderService, background, pixelDensity, widgets, renderFormat, quality);
     }
 
     public MapInfo GetMapInfo(ScreenPosition screenPosition, Viewport viewport, IEnumerable<ILayer> layers, RenderService renderService, int margin = 0)
     {
-        return _renderer.GetMapInfo(screenPosition, viewport, layers, renderService, margin);
+        return _mapRenderer.GetMapInfo(screenPosition, viewport, layers, renderService, margin);
     }
 
     public void Dispose()
@@ -103,7 +99,7 @@ public sealed class RenderController : IDisposable
 
     public void Render(object canvas)
     {
-        if (_renderer is null)
+        if (_mapRenderer is null)
             return;
         if (_getMap() is not Map map)
             return;
@@ -120,7 +116,7 @@ public sealed class RenderController : IDisposable
         _stopwatch.Restart();
         _timestampStartDraw = GetTimestampInMilliseconds();
 
-        _renderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor);
+        _mapRenderer.Render(canvas, map.Navigator.Viewport, map.Layers, map.Widgets, map.RenderService, map.BackColor);
 
         _isDrawingDone.Set();
         _stopwatch.Stop();
