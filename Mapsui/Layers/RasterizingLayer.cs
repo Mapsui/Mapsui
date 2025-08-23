@@ -36,7 +36,7 @@ public class RasterizingLayer : BaseLayer, IFetchableSource, ISourceLayer
     public RasterizingLayer(
         ILayer layer,
         int delayBeforeRasterize = 1000,
-        IRenderer? rasterizer = null,
+        IMapRenderer? rasterizer = null,
         float pixelDensity = 1,
         RenderFormat renderFormat = RenderFormat.Png)
     {
