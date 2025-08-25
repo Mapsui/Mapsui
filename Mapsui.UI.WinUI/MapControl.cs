@@ -210,8 +210,16 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private Manipulation ToManipulation(ManipulationDeltaRoutedEventArgs e)
     {
-        var previousCenter = TransformToVisual(this).Inverse.TransformPoint(e.Position).ToScreenPosition();
+        // Get the top-left corner of the current control relative to the screen
+        var transform = TransformToVisual(null); // null means relative to the root visual
+        var topLeft = transform.TransformPoint(new Point(0, 0));
+
+        // Calculate the relative position
+        var relativePosition = new Point(e.Position.X - topLeft.X, e.Position.Y - topLeft.Y);
+
+        var previousCenter = relativePosition.ToScreenPosition();
         var center = previousCenter.Offset(e.Delta.Translation.X, e.Delta.Translation.Y);
+
         return new Manipulation(center, previousCenter, e.Delta.Scale, e.Delta.Rotation, e.Cumulative.Rotation);
     }
 
