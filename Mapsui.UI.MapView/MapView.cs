@@ -56,7 +56,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
         // Add some events to _mapControl
         Map.Navigator.ViewportChanged += HandlerViewportChanged;
-        Info += (s, e) => HandlerInfo(e);
         SizeChanged += HandlerSizeChanged;
 
         // Add MapView layers to Map
@@ -430,7 +429,6 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
 
                 // Add event handlers
                 Map.Navigator.ViewportChanged += HandlerViewportChanged;
-                Info += (s, e) => HandlerInfo(e);
             }
         }
     }
