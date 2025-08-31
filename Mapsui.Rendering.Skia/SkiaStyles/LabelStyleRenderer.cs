@@ -312,10 +312,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
     private static SKFont CreateFont(Font font)
     {
-        var typeface = SKTypeface.FromFamilyName(font.FontFamily,
-            font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
-            SKFontStyleWidth.Normal,
-            font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
+        var typeface = CreateTypeface(font);
 
         SKFont skFont = new()
         {
@@ -326,6 +323,128 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         };
 
         return skFont;
+    }
+
+    private static SKTypeface CreateTypeface(Font font)
+    {
+        // First try to resolve the font through MAUI's font system if available
+        var typeface = TryCreateMauiFontTypeface(font);
+        if (typeface != null)
+            return typeface;
+
+        // Fall back to the standard SkiaSharp font resolution
+        return SKTypeface.FromFamilyName(font.FontFamily,
+            font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+            SKFontStyleWidth.Normal,
+            font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
+    }
+
+    /// <summary>
+    /// Attempts to create a typeface from MAUI-registered fonts.
+    /// This method tries to access fonts that were registered through MAUI's .ConfigureFonts() method.
+    /// </summary>
+    /// <param name="font">The font to create a typeface for</param>
+    /// <returns>A SKTypeface if the MAUI font is found, otherwise null</returns>
+    private static SKTypeface? TryCreateMauiFontTypeface(Font font)
+    {
+        if (string.IsNullOrEmpty(font.FontFamily))
+            return null;
+
+        try
+        {
+            // Try to load the font from embedded resources using common MAUI patterns
+            var fontStream = TryGetMauiFontStream(font.FontFamily);
+            if (fontStream != null)
+            {
+                using (fontStream)
+                {
+                    var typeface = SKTypeface.FromStream(fontStream);
+                    if (typeface != null)
+                        return typeface;
+                }
+            }
+        }
+        catch
+        {
+            // If MAUI font resolution fails, we'll fall back to the standard method
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Attempts to get a font stream from embedded resources using MAUI font naming patterns.
+    /// This method searches for font files in common MAUI embedded resource locations.
+    /// </summary>
+    /// <param name="fontAlias">The font alias (family name) to search for</param>
+    /// <returns>A stream to the font file if found, otherwise null</returns>
+    private static System.IO.Stream? TryGetMauiFontStream(string fontAlias)
+    {
+        try
+        {
+            // Get all assemblies that might contain the font
+            var assemblies = new[]
+            {
+                System.Reflection.Assembly.GetEntryAssembly(),
+                System.Reflection.Assembly.GetExecutingAssembly(),
+                System.Reflection.Assembly.GetCallingAssembly()
+            }.Where(a => a != null).Distinct().ToArray();
+
+            // Try different font file extensions
+            var fontExtensions = new[] { ".ttf", ".otf", ".woff", ".woff2" };
+            
+            foreach (var assembly in assemblies)
+            {
+                if (assembly == null) continue;
+
+                // Get all manifest resource names
+                var resourceNames = assembly.GetManifestResourceNames();
+                
+                // Look for resources that match the font alias
+                foreach (var extension in fontExtensions)
+                {
+                    // Try exact match with extension
+                    var exactMatch = resourceNames.FirstOrDefault(r => 
+                        r.EndsWith($"{fontAlias}{extension}", StringComparison.OrdinalIgnoreCase));
+                    
+                    if (exactMatch != null)
+                    {
+                        var stream = assembly.GetManifestResourceStream(exactMatch);
+                        if (stream != null && stream.Length > 0)
+                            return stream;
+                    }
+
+                    // Try common MAUI patterns
+                    var patterns = new[]
+                    {
+                        $"{fontAlias.ToLowerInvariant()}{extension}",
+                        $"{fontAlias.ToLowerInvariant()}-regular{extension}",
+                        $"{fontAlias.Replace(" ", "").ToLowerInvariant()}{extension}",
+                        $"{fontAlias.Replace(" ", "-").ToLowerInvariant()}{extension}"
+                    };
+
+                    foreach (var pattern in patterns)
+                    {
+                        var matchingResource = resourceNames.FirstOrDefault(r => 
+                            r.EndsWith(pattern, StringComparison.OrdinalIgnoreCase) ||
+                            r.Contains($".{pattern}", StringComparison.OrdinalIgnoreCase));
+                        
+                        if (matchingResource != null)
+                        {
+                            var stream = assembly.GetManifestResourceStream(matchingResource);
+                            if (stream != null && stream.Length > 0)
+                                return stream;
+                        }
+                    }
+                }
+            }
+        }
+        catch
+        {
+            // Ignore stream access errors
+        }
+
+        return null;
     }
 
     private static SKPaint CreatePaint((Font Font, Color ForeColor, float LayerOpacity, SKPaintStyle PaintStyle, float StrokeWidth) style)
