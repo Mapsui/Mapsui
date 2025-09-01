@@ -160,13 +160,20 @@ public class Navigator
 
     public void MouseWheelZoomContinuous(double scaleFactor, ScreenPosition centerOfZoom)
     {
-        if (!Viewport.HasSize()) return;
-        if (scaleFactor == 1) return; // No change
+        if (!Viewport.HasSize())
+            return;
+        if (ZoomLock)
+            return;
+        if (scaleFactor == 1)
+            return; // No change
         if (scaleFactor <= Constants.Epsilon)
         {
             Logger.Log(LogLevel.Warning, "MouseWheelZoomContinuous was called with a mouseWheelDelta <= 0. This is unexpected.");
             return;
         }
+
+        if (PanLock) // Avoid pan by zooming on center
+            centerOfZoom = Viewport.WorldToScreen(Viewport.CenterX, Viewport.CenterY);
 
         // MouseWheelAnimation tracks the destination resolution which allows for faster zooming in if the next tick
         // starts before the previous animation is finished. We may want something like that here as well.
@@ -177,6 +184,12 @@ public class Navigator
 
     public void MouseWheelZoom(int mouseWheelDelta, ScreenPosition centerOfZoom)
     {
+        if (ZoomLock)
+            return;
+
+        if (PanLock) // Avoid pan by zooming on center
+            centerOfZoom = Viewport.WorldToScreen(Viewport.CenterX, Viewport.CenterY);
+
         // It is unexpected that this method uses the MouseWheelAnimation.Animation and Easing. 
         // At the moment this solution allows the user to change these fields, so I don't want
         // them to become hardcoded values in the MapControl. There should be a more general
@@ -244,9 +257,6 @@ public class Navigator
             return;
         }
 
-        if (PanLock) return;
-        if (ZoomLock) return;
-
         var newViewport = Viewport with { CenterX = center.X, CenterY = center.Y, Resolution = resolution };
         SetViewport(newViewport, duration, easing);
     }
@@ -264,8 +274,6 @@ public class Navigator
             AddToInitialization(() => ZoomTo(resolution, duration, easing));
             return;
         }
-
-        if (ZoomLock) return;
 
         var newViewport = Viewport with { Resolution = resolution };
         SetViewport(newViewport, duration, easing);
@@ -291,17 +299,8 @@ public class Navigator
             return;
         }
 
-        if (ZoomLock) return;
-
         var (centerOfZoomX, centerOfZoomY) = Viewport.ScreenToWorldXY(
             centerOfZoomScreen.X, centerOfZoomScreen.Y);
-
-        if (PanLock)
-        {
-            // Avoid pan by zooming on center
-            centerOfZoomX = Viewport.CenterX;
-            centerOfZoomY = Viewport.CenterY;
-        }
 
         var (x, y) = TransformationAlgorithms.CalculateCenterOfMap(
             centerOfZoomX, centerOfZoomY, resolution, Viewport.CenterX, Viewport.CenterY, Viewport.Resolution);
@@ -311,23 +310,29 @@ public class Navigator
     }
 
     /// <summary>
-    /// Zoom in to the next resolution in the Navigator.Resolutions list.
+    /// Zoom in to the next resolution in the Navigator.Resolutions list. Respects ZoomLock.
     /// </summary>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomIn(long duration = -1, Easing? easing = default)
     {
+        if (ZoomLock)
+            return;
+
         var resolution = ZoomHelper.GetResolutionToZoomIn(Resolutions, Viewport.Resolution);
         ZoomTo(resolution, duration, easing);
     }
 
     /// <summary>
-    /// Zoom out to the next resolution in the Navigator.Resolutions list.
+    /// Zoom out to the next resolution in the Navigator.Resolutions list. Respects ZoomLock.
     /// </summary>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomOut(long duration = -1, Easing? easing = default)
     {
+        if (ZoomLock)
+            return;
+
         var resolution = ZoomHelper.GetResolutionToZoomOut(Resolutions, Viewport.Resolution);
         ZoomTo(resolution, duration, easing);
     }
@@ -401,8 +406,6 @@ public class Navigator
             return;
         }
 
-        if (PanLock) return;
-
         var newViewport = Viewport with { CenterX = center.X, CenterY = center.Y };
         SetViewport(newViewport, duration, easing);
     }
@@ -432,7 +435,8 @@ public class Navigator
             return;
         }
 
-        if (RotationLock) return;
+        if (RotationLock)
+            return;
 
         var newViewport = Viewport with { Rotation = rotation };
         SetViewport(newViewport, duration, easing);
@@ -711,25 +715,11 @@ public class Navigator
     private void AddToInitialization(Action action)
     {
         // Save state when this function is originally called
-        var panLock = PanLock;
-        var zoomLock = ZoomLock;
-        var rotationLock = RotationLock;
         // Add action to initialization list
         _initialization.Add(() =>
         {
-            // Save current state of locks
-            var savePanLock = PanLock;
-            var saveZoomLock = ZoomLock;
-            var saveRotationLock = RotationLock;
-            // Set locks like they were at the time the action was called
-            PanLock = panLock;
-            ZoomLock = zoomLock;
-            RotationLock = rotationLock;
             action();
             //Restore old settings of locks
-            PanLock = savePanLock;
-            ZoomLock = saveZoomLock;
-            RotationLock = saveRotationLock;
         });
     }
 
