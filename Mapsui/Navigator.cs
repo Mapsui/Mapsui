@@ -123,7 +123,7 @@ public class Navigator
         _initialization = new List<Action> { () => ZoomToPanBounds() };
     }
 
-    private void Initialize(MRect extent)
+    private void Initialize()
     {
         lock (_initializationLock)
         {
@@ -544,7 +544,7 @@ public class Navigator
     private void InitializeIfNeeded()
     {
         if (ShouldInitialize())
-            Initialize(PanBounds ?? throw new Exception("PanBounds is null. This should not be possible when initializing."));
+            Initialize();
     }
 
     private void OnFetchRequested(ChangeType changeType)
