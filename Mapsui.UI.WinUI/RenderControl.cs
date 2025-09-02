@@ -1,7 +1,10 @@
-using Windows.Foundation;
 using Microsoft.UI;
 using SkiaSharp;
+
+#if __UNO_WINUI__
 using Uno.WinUI.Graphics2DSK;
+using Windows.Foundation;
+#endif
 
 namespace Mapsui.UI.WinUI;
 
@@ -18,11 +21,13 @@ abstract partial class RenderControl : Microsoft.UI.Xaml.Controls.UserControl
 
     public static RenderControl CreateControl(MapControl owner, System.Action<SKCanvas> renderCallback)
     {
+#if __UNO_WINUI__
         if (SKCanvasElement.IsSupportedOnCurrentPlatform())
         {
             return new SKCanvasElementRenderControl(owner, renderCallback);
         }
         else
+#endif
         {
             // GPU does not work currently on Windows
             bool useGPU = System.OperatingSystem.IsBrowser() || System.OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
@@ -119,6 +124,7 @@ partial class SKSwapChainPanelRenderControl : RenderControl
     }
 }
 
+#if __UNO_WINUI__
 partial class SKCanvasElementRenderControl : RenderControl
 {
 #pragma warning disable IDISP006
@@ -156,3 +162,4 @@ partial class SKCanvasElementRenderControl : RenderControl
 
     public override float? GetPixelDensity() => 1;
 }
+#endif
