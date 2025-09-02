@@ -3,7 +3,6 @@ using Mapsui.Extensions;
 using System.Diagnostics.CodeAnalysis;
 using Mapsui.Logging;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Styles;
 using Mapsui.UI.Maui;
 using Mapsui.Manipulations;
 
@@ -70,15 +69,6 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
         if (mapInfo.Feature != null)
         {
             featureInfo.Text = $"Click Info:{Environment.NewLine}{mapInfo.Feature.ToDisplayText()}";
-
-            foreach (var style in mapInfo.Feature.Styles)
-            {
-                if (style is CalloutStyle)
-                {
-                    style.Enabled = !style.Enabled;
-                    e.Handled = true;
-                }
-            }
 
             mapView.RefreshGraphics();
         }
