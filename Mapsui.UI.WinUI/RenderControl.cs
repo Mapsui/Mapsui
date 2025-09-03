@@ -136,7 +136,7 @@ partial class SKCanvasElementRenderControl : RenderControl
         _skCanvasElement.Invalidate();
     }
 
-    private class MapControlSKCanvasElement(SKCanvasElementRenderControl parent) : SKCanvasElement
+    private partial class MapControlSKCanvasElement(SKCanvasElementRenderControl parent) : SKCanvasElement
     {
         protected override void RenderOverride(SKCanvas canvas, Size area)
         {
