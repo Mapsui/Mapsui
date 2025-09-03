@@ -49,7 +49,7 @@ jobs:
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.304
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.slnx -bl restore.binlog
+      run: dotnet restore Mapsui.slnx -bl:restore.binlog
       continue-on-error: true
     - name: Publish binlog
       uses: actions/upload-artifact@v4
