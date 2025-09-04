@@ -19,7 +19,7 @@
       https://aka.platform.uno/singleproject-features
     -->
     <UnoFeatures>
-      SkiaRenderer;
+      Skia;
     </UnoFeatures>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">$(DefineConstants);__UNO_WINDOWS__</DefineConstants>
