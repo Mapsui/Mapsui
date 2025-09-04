@@ -2,7 +2,6 @@
 using Mapsui.Layers;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.InfoWidgets;
@@ -14,14 +13,11 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 public class ToggleLabelsSample : ISample
 {
     public string Name => "Toggle Labels";
-    public string Category => "1";
+    public string Category => "Styles";
 
     private const string _layerName = "My Layer";
 
-    public Task<Map> CreateMapAsync()
-    {
-        return Task.FromResult(CreateMap());
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
@@ -30,17 +26,15 @@ public class ToggleLabelsSample : ISample
 
         var points = RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898);
 
-        var themeStyle = new ThemeStyle((f) =>
+        var themeStyle = new LabelStyle
         {
-            return new LabelStyle
-            {
-                Text = f["label"]?.ToString() ?? string.Empty,
-                Offset = new Offset(20, -56),
-                Font = new Font { Size = 32 },
-                BorderThickness = 1,
-                BorderColor = Color.DimGray,
-            };
-        });
+            LabelMethod = (f) => f["label"]?.ToString() ?? string.Empty,
+            Offset = new Offset(20, -56),
+            Font = new Font { Size = 32 },
+            BorderThickness = 1,
+            BorderColor = Color.DimGray,
+        };
+
 
         map.Layers.Add(CreateLayer(CreateFeatures(points), themeStyle));
 
@@ -50,7 +44,7 @@ public class ToggleLabelsSample : ISample
             Text = "Toggle Labels",
             Margin = new MRect(10),
             CornerRadius = 3,
-            BackColor = new Color(0, 123, 255),
+            BackColor = new Color(204, 85, 51),
             TextColor = Color.White,
             Padding = new MRect(4),
             VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Bottom,
@@ -59,15 +53,12 @@ public class ToggleLabelsSample : ISample
             {
                 themeStyle.Enabled = !themeStyle.Enabled;
             },
-
         });
 
         return map;
     }
 
-
-
-    private static MemoryLayer CreateLayer(IEnumerable<IFeature> features, ThemeStyle themeStyle) => new()
+    private static MemoryLayer CreateLayer(IEnumerable<IFeature> features, LabelStyle themeStyle) => new()
     {
         Name = _layerName,
         Features = features,
