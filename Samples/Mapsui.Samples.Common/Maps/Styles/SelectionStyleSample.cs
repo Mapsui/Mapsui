@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 internal class SelectionStyleSample : ISample
 {
     public string Name => "Select a feature";
-    public string Category => "Styles";
+    public string Category => "White";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
@@ -61,7 +61,7 @@ internal class SelectionStyleSample : ISample
     });
 
     private static SymbolStyle CreateSelectionSymbol(bool enabled) =>
-        new() { Fill = new Brush(Color.Orange), SymbolScale = 1.2, Enabled = enabled };
+        new() { Fill = new Brush(Color.White), SymbolScale = 1.4, Enabled = enabled, Outline = null, Opacity = 0.8f };
 
     private static SymbolStyle CreateSymbol() =>
         new() { Fill = new Brush(new Color(150, 150, 30)) };
