@@ -1,10 +1,12 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Nts.Extensions;
+using Mapsui.Providers;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
-using Mapsui.Tiling;
 using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.InfoWidgets;
+using NetTopologySuite.Geometries;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,35 +17,24 @@ public class ToggleLabelsSample : ISample
     public string Name => "Toggle Labels";
     public string Category => "Styles";
 
-    private const string _layerName = "My Layer";
-
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
         var map = new Map();
-        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateLayerWithBackgroundSquare());
 
+        var labelStyle = CreateAlphabetLabelStyle();
         var points = RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898);
+        map.Layers.Add(CreatePinLayer(CreateFeatures(points), labelStyle));
 
-        var themeStyle = new LabelStyle
-        {
-            LabelMethod = (f) => f["label"]?.ToString() ?? string.Empty,
-            Offset = new Offset(20, -56),
-            Font = new Font { Size = 32 },
-            BorderThickness = 1,
-            BorderColor = Color.DimGray,
-        };
-
-
-        map.Layers.Add(CreateLayer(CreateFeatures(points), themeStyle));
-
-        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _layerName));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins"));
         map.Widgets.Add(new ButtonWidget()
         {
             Text = "Toggle Labels",
+            TextSize = 24,
             Margin = new MRect(10),
-            CornerRadius = 3,
+            CornerRadius = 6,
             BackColor = new Color(204, 85, 51),
             TextColor = Color.White,
             Padding = new MRect(4),
@@ -51,24 +42,47 @@ public class ToggleLabelsSample : ISample
             HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Left,
             WithTappedEvent = (s, e) =>
             {
-                themeStyle.Enabled = !themeStyle.Enabled;
+                labelStyle.Enabled = !labelStyle.Enabled;
             },
         });
+
+        map.Navigator.ZoomToBox(map.Extent!.Grow(2000000));
 
         return map;
     }
 
-    private static MemoryLayer CreateLayer(IEnumerable<IFeature> features, LabelStyle themeStyle) => new()
+    private static LabelStyle CreateAlphabetLabelStyle()
     {
-        Name = _layerName,
+        return new LabelStyle
+        {
+            LabelMethod = (f) => f["label"]?.ToString() ?? string.Empty,
+            Offset = new Offset(20, -56),
+            Font = new Font { Size = 32 },
+            BorderThickness = 1,
+            BorderColor = Color.DimGray,
+        };
+    }
+
+    private static MemoryLayer CreatePinLayer(IEnumerable<IFeature> features, LabelStyle labelStyle) => new()
+    {
+        Name = "Pins",
         Features = features,
         Style = new StyleCollection
         {
             Styles = {
+                CreateSmallCircleSymbol(),
                 CreatePinSymbol(),
-                themeStyle,
+                labelStyle,
             },
         },
+    };
+
+    private static SymbolStyle CreateSmallCircleSymbol() => new SymbolStyle
+    {
+        SymbolType = SymbolType.Ellipse,
+        SymbolScale = 0.5,
+        Outline = new Pen(new Color(8, 8, 8)),
+        Fill = null
     };
 
     private static List<IFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)
@@ -98,4 +112,27 @@ public class ToggleLabelsSample : ISample
         },
         RelativeOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.        
     };
+
+    public static ILayer CreateLayerWithBackgroundSquare() => new Layer("Background")
+    {
+        DataSource = new MemoryProvider(CreateSquarePolygon(5000000).ToFeature()),
+        Style = new VectorStyle
+        {
+            Fill = new Brush(Color.LightGray),
+            Outline = new Pen
+            {
+                Color = Color.DimGray,
+                Width = 1,
+            }
+        }
+    };
+
+    private static Polygon CreateSquarePolygon(int halfWidth) => new Polygon(new LinearRing(new[]
+        {
+            new Coordinate(-halfWidth, -halfWidth),
+            new Coordinate(-halfWidth, halfWidth),
+            new Coordinate(halfWidth, halfWidth),
+            new Coordinate(halfWidth, -halfWidth),
+            new Coordinate(-halfWidth, -halfWidth) // Closing the ring
+        }));
 }
