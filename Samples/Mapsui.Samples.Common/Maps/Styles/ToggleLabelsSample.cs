@@ -110,7 +110,7 @@ public class ToggleLabelsSample : ISample
             SvgFillColor = Color.FromString("#4193CF"),
             SvgStrokeColor = Color.DimGray,
         },
-        RelativeOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.        
+        RelativeOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.
     };
 
     public static ILayer CreateLayerWithBackgroundSquare() => new Layer("Background")
