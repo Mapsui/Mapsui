@@ -34,8 +34,6 @@ public class ToggleLabelsSample : ISample
             BorderThickness = 1,
             BorderColor = Color.DimGray,
         };
-
-
         map.Layers.Add(CreateLayer(CreateFeatures(points), themeStyle));
 
         map.Widgets.Add(new MapInfoWidget(map, l => l.Name == _layerName));
