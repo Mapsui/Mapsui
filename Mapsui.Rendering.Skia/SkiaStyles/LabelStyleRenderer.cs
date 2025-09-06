@@ -99,7 +99,8 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         canvas.Clear();
 
         DrawBackground(style, backRect, canvas, layerOpacity);
-        canvas.DrawText(text, -rect.Left + 3, -rect.Top + 3, SKTextAlign.Left, skFont, paint);
+        // Important: compensate both vertical (-rect.Top) and horizontal (-rect.Left)
+        canvas.DrawText(text, -rect.Left + 3, -rect.Top + rect.Top + 3, SKTextAlign.Left, skFont, paint);
         return image;
     }
 
@@ -128,13 +129,15 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
 
         font.MeasureText(text, out rect, paint);
 
-        var baseline = -rect.Top;  // Distance from top to baseline of text
+        // Baseline is distance from top of bounds to baseline
+        var baseline = -rect.Top;
 
+        // We will use bounding box width/height (Right-Left, Bottom-Top), not advance width
         var drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
 
         if ((style.MaxWidth > 0 && drawRect.Width > maxWidth) || hasNewline)
         {
-            // Text has a line feed or should be shorten by character wrap
+            // Text has a line feed or should be shortened by character wrap
             if (hasNewline || style.WordWrap == LabelStyle.LineBreakMode.CharacterWrap)
             {
                 lines = SplitLines(text, font, paint, hasNewline ? drawRect.Width : maxWidth, string.Empty);
@@ -148,7 +151,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 drawRect = new SKRect(0, 0, width, (float)(drawRect.Height + style.LineHeight * emHeight * (lines.Length - 1)));
             }
 
-            // Text is to long, so wrap it by words
+            // Text is too long, so wrap it by words
             if (style.WordWrap == LabelStyle.LineBreakMode.WordWrap)
             {
                 lines = SplitLines(text, font, paint, maxWidth, " ");
@@ -162,7 +165,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 drawRect = new SKRect(0, 0, width, (float)(drawRect.Height + style.LineHeight * emHeight * (lines.Length - 1)));
             }
 
-            // Shorten it at beginning
+            // Shorten at beginning
             if (style.WordWrap == LabelStyle.LineBreakMode.HeadTruncation)
             {
                 var result = text?[(text.Length - (int)style.MaxWidth - 2)..];
@@ -173,7 +176,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
             }
 
-            // Shorten it at end
+            // Shorten at end
             if (style.WordWrap == LabelStyle.LineBreakMode.TailTruncation)
             {
                 var result = text?[..((int)style.MaxWidth + 2)];
@@ -184,7 +187,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
             }
 
-            // Shorten it in the middle
+            // Shorten in the middle
             if (style.WordWrap == LabelStyle.LineBreakMode.MiddleTruncation)
             {
                 var result1 = text?[..((int)(style.MaxWidth / 2) + 1)];
@@ -205,13 +208,36 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var horizontalAlign = CalcHorizontalAlignment(style.HorizontalAlignment);
         var verticalAlign = CalcVerticalAlignment(style.VerticalAlignment);
 
+        // If we have multiple lines, measure true bounding widths/left bearings per line and use those for alignment and background width
+        if (lines != null && lines.Length > 0)
+        {
+            float maxBoundWidth = 0f;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (string.IsNullOrEmpty(lines[i].Value))
+                {
+                    lines[i].BoundsLeft = 0;
+                    lines[i].BoundsWidth = 0;
+                    continue;
+                }
+
+                font.MeasureText(lines[i].Value, out var lineRect, paint);
+                lines[i].BoundsLeft = lineRect.Left;                       // may be negative
+                lines[i].BoundsWidth = lineRect.Right - lineRect.Left;     // bounding width
+                if (lines[i].BoundsWidth > maxBoundWidth) maxBoundWidth = lines[i].BoundsWidth;
+            }
+
+            // Replace drawRect width with bounding-based max width while keeping the previously computed height
+            drawRect = new SKRect(0, 0, maxBoundWidth, drawRect.Height);
+        }
+
         var offset = style.Offset.Combine(style.RelativeOffset.GetAbsoluteOffset(drawRect.Width, drawRect.Height));
 
         drawRect.Offset(
             x - drawRect.Width * horizontalAlign + (float)offset.X,
             y - drawRect.Height * verticalAlign + (float)offset.Y);
 
-        // If style has a background color, than draw background rectangle
+        // If style has a background color, draw background rectangle
         if (style.BackColor != null)
         {
             var backRect = drawRect;
@@ -219,43 +245,59 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             DrawBackground(style, backRect, target, layerOpacity);
         }
 
-        // If style has a halo value, than draw halo text
+        // Halo
         if (style.Halo != null)
         {
             using var paintHaloHolder = renderService.VectorCache.GetOrCreate((style, style.Halo), CreateHaloPaintHolder);
             using var paintHalo = paintHaloHolder.Instance;
+
             if (lines != null)
             {
                 var left = drawRect.Left;
                 foreach (var line in lines)
                 {
-                    if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center)
-                        target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, SKTextAlign.Left, font, paintHalo);
-                    else if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right)
-                        target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paintHalo);
-                    else
-                        target.DrawText(line.Value, left, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paintHalo);
+                    // For alignment, use bounding widths and compensate left bearing (line.BoundsLeft)
+                    float desiredLeft =
+                        style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center
+                            ? (float)(left + (drawRect.Width - line.BoundsWidth) * 0.5)
+                            : style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right
+                                ? left + drawRect.Width - line.BoundsWidth
+                                : left;
+
+                    // Origin x = desiredLeft - boundsLeft so that the bounding box's left edge equals desiredLeft
+                    float originX = desiredLeft - line.BoundsLeft;
+                    target.DrawText(line.Value, originX, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paintHalo);
                 }
             }
             else
-                target.DrawText(text, drawRect.Left, drawRect.Top + baseline, SKTextAlign.Left, font, paintHalo);
+            {
+                // Single line: compensate horizontal left bearing with -rect.Left
+                target.DrawText(text, drawRect.Left - rect.Left, drawRect.Top + baseline, SKTextAlign.Left, font, paintHalo);
+            }
         }
 
+        // Text
         if (lines != null)
         {
             var left = drawRect.Left;
             foreach (var line in lines)
             {
-                if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center)
-                    target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, SKTextAlign.Left, font, paint);
-                else if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right)
-                    target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paint);
-                else
-                    target.DrawText(line.Value, left, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paint);
+                float desiredLeft =
+                    style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center
+                        ? (float)(left + (drawRect.Width - line.BoundsWidth) * 0.5)
+                        : style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right
+                            ? left + drawRect.Width - line.BoundsWidth
+                            : left;
+
+                float originX = desiredLeft - line.BoundsLeft;
+                target.DrawText(line.Value, originX, drawRect.Top + line.Baseline, SKTextAlign.Left, font, paint);
             }
         }
         else
-            target.DrawText(text, drawRect.Left, drawRect.Top + baseline, SKTextAlign.Left, font, paint);
+        {
+            // Single line: compensate horizontal left bearing with -rect.Left
+            target.DrawText(text, drawRect.Left - rect.Left, drawRect.Top + baseline, SKTextAlign.Left, font, paint);
+        }
     }
 
     private static float CalcHorizontalAlignment(LabelStyle.HorizontalAlignmentEnum horizontalAlignment)
@@ -339,8 +381,10 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     private class Line
     {
         public string? Value { get; set; }
-        public float Width { get; set; }
-        public float Baseline { get; set; }
+        public float Width { get; set; } // Advance width used for wrapping decisions
+        public float Baseline { get; set; } // Baseline y for the line
+        public float BoundsLeft { get; set; } // Measured bounding box left (can be negative)
+        public float BoundsWidth { get; set; } // Measured bounding box width
     }
 
     private static Line[] SplitLines(string? text, SKFont font, SKPaint paint, float maxWidth, string splitCharacter)
