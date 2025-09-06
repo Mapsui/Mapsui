@@ -39,49 +39,37 @@ public class ShapefileSample : ISample
         return map;
     }
 
-    private static ILayer CreateCountryLayer(IProvider countrySource)
+    private static Layer CreateCountryLayer(IProvider countrySource) => new()
     {
-        return new Layer
-        {
-            Name = "Countries",
-            DataSource = countrySource,
-            Style = CreateCountryTheme()
-        };
-    }
+        Name = "Countries",
+        DataSource = countrySource,
+        Style = CreateCountryTheme()
+    };
 
-    private static ILayer CreateCityLayer(IProvider citySource)
+    private static Layer CreateCityLayer(IProvider citySource) => new()
     {
-        return new Layer
-        {
-            Name = "Cities",
-            DataSource = citySource,
-            Style = CreateCityTheme()
-        };
-    }
+        Name = "Cities",
+        DataSource = citySource,
+        Style = CreateCityTheme()
+    };
 
-    private static ILayer CreateCountryLabelLayer(IProvider countryProvider)
+    private static Layer CreateCountryLabelLayer(IProvider countryProvider) => new("Country labels")
     {
-        return new Layer("Country labels")
-        {
-            DataSource = countryProvider,
-            Enabled = true,
-            MaxVisible = double.MaxValue,
-            MinVisible = double.MinValue,
-            Style = CreateCountryLabelTheme()
-        };
-    }
+        DataSource = countryProvider,
+        Enabled = true,
+        MaxVisible = double.MaxValue,
+        MinVisible = double.MinValue,
+        Style = CreateCountryLabelTheme()
+    };
 
-    private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
+    private static Layer CreateCityLabelLayer(IProvider citiesProvider) => new("City labels")
     {
-        return new Layer("City labels")
-        {
-            DataSource = citiesProvider,
-            Enabled = true,
-            Style = CreateCityLabelStyle()
-        };
-    }
+        DataSource = citiesProvider,
+        Enabled = true,
+        Style = CreateCityLabelStyle()
+    };
 
-    private static IThemeStyle CreateCityTheme()
+    private static GradientTheme CreateCityTheme()
     {
         // Scaling city icons based on city population.
         // Cities below 1.000.000 gets the smallest symbol.
@@ -92,7 +80,7 @@ public class ShapefileSample : ISample
         return new GradientTheme("POPULATION", 1000000, 5000000, cityMin, cityMax);
     }
 
-    private static IThemeStyle CreateCountryTheme()
+    private static GradientTheme CreateCountryTheme()
     {
         // Set a gradient theme on the countries layer, based on Population density
         // First create two styles that specify min and max styles
@@ -103,43 +91,40 @@ public class ShapefileSample : ISample
         var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
 
         // Create theme using a density from 0 (min) to 400 (max)
-        return new GradientTheme("POPDENS", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
+        return new GradientTheme("POPDENS", 0, 400, min, max) { FillColorBlend = ColorBlend.TwoColors(Color.LightGray, Color.DimGray) };
     }
 
-    private static LabelStyle CreateCityLabelStyle()
+    private static LabelStyle CreateCityLabelStyle() => new()
     {
-        return new LabelStyle
-        {
-            ForeColor = Color.Black,
-            BackColor = new Brush { Color = Color.Orange },
-            Font = new Font { FontFamily = "GenericSerif", Size = 11 },
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-            Offset = new Offset { X = 0, Y = 0 },
-            Halo = new Pen { Color = Color.Yellow, Width = 2 },
-            CollisionDetection = true,
-            LabelColumn = "NAME"
-        };
-    }
+        ForeColor = Color.White,
+        BackColor = new Brush { Color = Color.Gray },
+        Font = new Font { FontFamily = "GenericSerif", Size = 11 },
+        HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+        VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+        Offset = new Offset { X = 0, Y = 0 },
+        Halo = new Pen { Color = Color.DimGray, Width = 1 },
+        CollisionDetection = true,
+        LabelColumn = "NAME"
+    };
 
     private static GradientTheme CreateCountryLabelTheme()
     {
         // Lets scale the labels so that big countries have larger texts as well
-        var backColor = new Brush { Color = new Color(255, 255, 255, 128) };
+        var backColor = new Brush { Color = new Color(255, 255, 255, 192) };
 
         var lblMin = new LabelStyle
         {
             ForeColor = Color.Black,
             BackColor = backColor,
-            Font = new Font { FontFamily = "GenericSerif", Size = 6 },
+            Font = new Font { FontFamily = "GenericSerif", Size = 9 },
             LabelColumn = "NAME"
         };
 
         var lblMax = new LabelStyle
         {
-            ForeColor = Color.Blue,
+            ForeColor = Color.Black,
             BackColor = backColor,
-            Font = new Font { FontFamily = "GenericSerif", Size = 9 },
+            Font = new Font { FontFamily = "GenericSerif", Size = 16, Bold = true },
             LabelColumn = "NAME"
         };
 
