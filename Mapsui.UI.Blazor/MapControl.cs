@@ -20,7 +20,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
-    public ScreenPosition? _lastMovePosition; // Workaround for missing touch position on touch-up.
+    private ScreenPosition? _lastTouchPosition; // Workaround for missing TouchEnd position.
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
@@ -266,6 +266,8 @@ public partial class MapControl : ComponentBase, IMapControl
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
             _manipulationTracker.Restart(positions);
 
+            _lastTouchPosition = positions.Length > 0 ? positions[0] : null; // Workaround for missing TouchEnd position
+
             if (OnPointerPressed(positions))
                 return;
         });
@@ -276,8 +278,8 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
-            if (positions.Length == 1)
-                _lastMovePosition = positions[0]; // Workaround for missing touch-up location.
+            if (positions.Length > 0)
+                _lastTouchPosition = positions[0]; // Workaround for missing TouchEnd position.
 
             if (OnPointerMoved(positions, false))
                 return;
@@ -287,14 +289,16 @@ public partial class MapControl : ComponentBase, IMapControl
         });
     }
 
-    public void OnTouchEnd(TouchEventArgs _)
+    public void OnTouchEnd(TouchEventArgs e)
     {
         Catch.Exceptions(() =>
         {
-            if (_lastMovePosition is null)
-                return;
-            var position = _lastMovePosition.Value;
-            OnPointerReleased([position]);
+            var positions = e.TargetTouches.ToScreenPositions(_clientRect);
+
+            if (positions.Length > 0)
+                OnPointerReleased(positions);
+            else if (_lastTouchPosition is ScreenPosition screenPosition) // Workaround for missing TouchEnd position.
+                OnPointerReleased([screenPosition]);
         });
     }
 
