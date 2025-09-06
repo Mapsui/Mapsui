@@ -20,7 +20,7 @@ public partial class MapControl : ComponentBase, IMapControl
     private BoundingClientRect _clientRect = new();
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
-    public ScreenPosition? _lastTouchPosition; // Workaround for missing TouchEnd position.
+    private ScreenPosition? _lastTouchPosition; // Workaround for missing TouchEnd position.
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
@@ -266,7 +266,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
             _manipulationTracker.Restart(positions);
 
-            _lastTouchPosition = positions.Length > 1 ? positions[0] : null; // Workaround for missing TouchEnd position
+            _lastTouchPosition = positions.Length > 0 ? positions[0] : null; // Workaround for missing TouchEnd position
 
             if (OnPointerPressed(positions))
                 return;
@@ -278,7 +278,7 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
-            if (positions.Length > 1)
+            if (positions.Length > 0)
                 _lastTouchPosition = positions[0]; // Workaround for missing TouchEnd position.
 
             if (OnPointerMoved(positions, false))
@@ -295,7 +295,7 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
 
-            if (positions.Length > 1)
+            if (positions.Length > 0)
                 OnPointerReleased(positions);
             else if (_lastTouchPosition is ScreenPosition screenPosition) // Workaround for missing TouchEnd position.
                 OnPointerReleased([screenPosition]);
