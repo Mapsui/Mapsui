@@ -32,7 +32,7 @@ abstract partial class RenderControl : Microsoft.UI.Xaml.Controls.UserControl
 #endif
     }
 
-    public abstract void Invalidate();
+    public abstract void InvalidateRender();
 
     public abstract float? GetPixelDensity();
 }
@@ -64,7 +64,7 @@ partial class SKXamlCanvasRenderControl : RenderControl
         }
     }
 
-    public override void Invalidate() => _skXamlCanvas.Invalidate();
+    public override void InvalidateRender() => _skXamlCanvas.Invalidate();
 
     public override float? GetPixelDensity()
     {
@@ -105,7 +105,7 @@ partial class SKSwapChainPanelRenderControl : RenderControl
         }
     }
 
-    public override void Invalidate() => _swapChainPanel.Invalidate();
+    public override void InvalidateRender() => _swapChainPanel.Invalidate();
 
     public override float? GetPixelDensity()
     {
@@ -131,12 +131,12 @@ partial class SKCanvasElementRenderControl : RenderControl
         Content = _skCanvasElement = new MapControlSKCanvasElement(this);
     }
 
-    public override void Invalidate()
+    public override void InvalidateRender()
     {
         _skCanvasElement.Invalidate();
     }
 
-    private class MapControlSKCanvasElement(SKCanvasElementRenderControl parent) : SKCanvasElement
+    private partial class MapControlSKCanvasElement(SKCanvasElementRenderControl parent) : SKCanvasElement
     {
         protected override void RenderOverride(SKCanvas canvas, Size area)
         {

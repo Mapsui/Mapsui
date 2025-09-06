@@ -9,175 +9,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
-  linuxBuild:      
-    runs-on: ubuntu-latest
-    steps:
-      # Workaround to provide additional free space.
-      #   https://github.com/actions/virtual-environments/issues/2840
-    - name: Clear space            
-      run: |
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-    - name: Free Disk Space (Ubuntu)
-      uses: jlumbroso/free-disk-space@main
-      with:
-        # this might remove tools that are actually needed,
-        # if set to "true" but frees about 6 GB
-        tool-cache: false
-        
-        # all of these default to true, but feel free to set to
-        # "false" if necessary for your workflow
-        android: false
-        dotnet: false
-        haskell: true
-        large-packages: true
-        docker-images: true
-        swap-storage: false
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0              
-        filter: tree:0    
-    # Cache Nugets
-    - uses: actions/cache@v4
-      with:
-        path: |
-           ~/.nuget/packages/*
-           !/.nuget/packages/Mapsui*    
-        key: ${{ runner.os }}-nuget22-${{ hashFiles('Directory.Packages.props') }}
-        restore-keys: |
-            ${{ runner.os }}-nuget22-
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v2  
-      with:
-        nuget-version: latest    
-    - name: Setup .NET 9 SDK
-      uses: actions/setup-dotnet@v4
-      with:
-         dotnet-version: |
-           9.0.304
-           8.0.407
-    # Open JDK
-    - name: Install Open JDK 11
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'microsoft'
-        java-version: '11'
-    # Android SDK Install
-    - name: Set up Android SDK
-      uses: android-actions/setup-android@v3
-      with:
-         cmdline-tools-version: '8512546'
-    - name: Install workloads android wasm-tools wasm-tools-net8 maui-android
-      run: dotnet workload install android wasm-tools wasm-tools-net8 maui-android
-    - name: Install Uno Check
-      run: dotnet tool install -g Uno.Check --version 1.30.1
-    - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip androidemulator --dotnet 9.0.304
-    - name: Restore dependencies
-      run: dotnet restore Mapsui.Linux.slnf
-    - name: Build Mapsui.Linux.slnf
-      run: dotnet build --no-restore --configuration Debug Mapsui.Linux.slnf
-   # Run Tests
-    - name: Run Mapsui.Tests
-      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net9.0/Mapsui.Tests.dll --blame-hang-timeout:60s
-    - name: Run Mapsui.Nts.Tests
-      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net9.0/Mapsui.Nts.Tests.dll --blame-hang-timeout:60s
-    - name: Run Mapsui.Rendering.Skia.Tests
-      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:60s
-    # Release Build
-    - name: Build Linux packages
-      run: dotnet pack /p:RestorePackages=true /p:Configuration=Release /p:Version=$(git describe --tags) Mapsui.Linux.slnf --output Artifacts
-    - name: Upload packages
-      uses: actions/upload-artifact@v4
-      with:
-        name: nupkg.linux
-        path: Artifacts/*.nupkg
-  
-  macBuild:  
-    # macos-15 is currently macos-13
-    runs-on: macos-15
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0              
-        filter: tree:0
-    # Cache Nugets
-    - uses: actions/cache@v4
-      with:
-        path: |
-           ~/.nuget/packages/*
-           !/.nuget/packages/Mapsui*
-        key: ${{ runner.os }}-nuget22-${{ hashFiles('Directory.Packages.props') }}
-        restore-keys: |
-            ${{ runner.os }}-nuget22-
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v2   
-      with:
-        nuget-version: latest
-    - name: Set up Xcode 16
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '16.4'          
-    # .Net 9 update     
-    - name: Setup .NET 9 SDK
-      uses: actions/setup-dotnet@v4
-      with:
-         dotnet-version: |
-           9.0.304
-           8.0.407
-    - name: Set MSBuildEnableWorkloadResolver
-      run: echo "MSBuildEnableWorkloadResolver=true" >> $GITHUB_ENV
-    - name: install workloads maui macos android ios maccatalyst wasm-tools wasm-tools-net8
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net8
-    - name: install Uno.Check 
-      run: dotnet tool install --global Uno.Check --version 1.31.7
-    - name: install Android SDK 34
-      run: uno-check -v --ci --non-interactive --fix --target android --skip androidemulator --dotnet 9.0.304
-    - name: Install newest Uno Check
-      run: dotnet tool update -g uno.check
-    - name: Uno Check
-      run: uno-check -v --ci --non-interactive --fix --skip xcode --skip androidemulator --dotnet 9.0.304
-    - name: Restore dependencies Mapsui.Mac
-      run: dotnet restore Mapsui.Mac.slnf       
-    # Build        
-    - name: Build Samples and Tests
-      run: dotnet build --no-restore --configuration Debug Mapsui.Mac.slnf   
-    # Run Tests   
-    - name: Run Mapsui.Tests
-      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net9.0/Mapsui.Tests.dll --blame-hang-timeout:60s
-    - name: Run Mapsui.Nts.Tests
-      run: dotnet test Tests/Mapsui.Nts.Tests/bin/Debug/net9.0/Mapsui.Nts.Tests.dll --blame-hang-timeout:60s
-    - name: Run Mapsui.Rendering.Skia.Tests
-      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net9.0/Mapsui.Rendering.Skia.Tests.dll --blame-hang-timeout:60s
-    # Release Build
-    - name: Build Mapsui
-      run: dotnet pack --no-restore --configuration Release Mapsui/Mapsui.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.Rendering.Skia
-      run: dotnet pack --no-restore --configuration Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.Tiling
-      run: dotnet pack --no-restore --configuration Release Mapsui.Tiling/Mapsui.Tiling.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.Nts
-      run: dotnet pack --no-restore --configuration Release Mapsui.Nts/Mapsui.Nts.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.ArcGIS
-      run: dotnet pack --no-restore --configuration Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.Extensions
-      run: dotnet pack --no-restore --configuration Release Mapsui.Extensions/Mapsui.Extensions.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.UI.Android
-      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.UI.iOS
-      run: dotnet pack --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.UI.Maui
-      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Build Mapsui.UI.Uno.WinUI
-      run: dotnet pack --no-restore --configuration Release Mapsui.UI.Uno.WinUI/Mapsui.UI.Uno.WinUI.csproj -o Artifacts -p:PackageVersion=$(git describe --tags)
-    - name: Upload packages
-      uses: actions/upload-artifact@v4
-      with:
-        name: nupkg.mac
-        path: Artifacts/*.nupkg     
-  
   winBuild:
     runs-on: windows-latest
     steps:
@@ -218,7 +49,7 @@ jobs:
     - name: Uno Check
       run: uno-check -v --ci --non-interactive --fix --skip vswin --skip androidemulator --skip androidsdk --skip psexecpolicy --dotnet 9.0.304
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.slnx  
+      run: dotnet restore Mapsui.slnx
     - name: Run dotnet format
       run: |
         dotnet format whitespace Mapsui.slnx --verbosity normal --verify-no-changes
@@ -254,7 +85,18 @@ jobs:
       run: |
        ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
     - name: Restore dependencies (dotnet)
-      run: dotnet restore Mapsui.slnx  
+      run: dotnet restore Mapsui.slnx -bl:restore.binlog
+      continue-on-error: true
+    - name: Publish binlog
+      uses: actions/upload-artifact@v4
+      with:
+        # Name of the artifact to upload.
+        # Optional. Default is 'artifact'
+        name: restore.binlog
+
+        # A file, directory or wildcard pattern that describes what to upload
+        # Required.
+        path: restore.binlog
     # Samples Build 
     - name: Mapsui.Samples
       run: dotnet build --no-restore --configuration Debug Mapsui.slnx

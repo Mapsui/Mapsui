@@ -78,7 +78,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     public void InvalidateCanvas()
     {
-        RunOnUIThread(_renderControl.Invalidate);
+        RunOnUIThread(_renderControl.InvalidateRender);
     }
 
     private void MapControl_KeyUp(object sender, KeyRoutedEventArgs e)
