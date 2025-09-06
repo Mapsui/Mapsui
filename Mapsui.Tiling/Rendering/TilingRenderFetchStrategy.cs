@@ -11,9 +11,9 @@ public class TilingRenderFetchStrategy : IRenderFetchStrategy
     private readonly IRenderFetchStrategy _renderFetchStrategy;
     private IList<IFeature>? _lastFetch;
 
-    public TilingRenderFetchStrategy(IRenderFetchStrategy? renderFetchStrategy)
+    public TilingRenderFetchStrategy(IRenderFetchStrategy? renderFetchStrategy = null)
     {
-        _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
+        _renderFetchStrategy = renderFetchStrategy ?? new MinimalRenderFetchStrategy();
     }
 
     public IList<IFeature> Get(MRect extent, double resolution, ITileSchema schema, ITileCache<IFeature?> memoryCache)
