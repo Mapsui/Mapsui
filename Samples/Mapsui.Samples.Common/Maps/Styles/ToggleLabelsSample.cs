@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class ToggleLabelsSample : ISample
 {
-    public string Name => "Alternate Labels";
+    public string Name => "Change Labels";
     public string Category => "Labels";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
@@ -35,7 +35,7 @@ public class ToggleLabelsSample : ISample
         map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins"));
         map.Widgets.Add(new ButtonWidget()
         {
-            Text = "Cycle Labels",
+            Text = "Change Labels",
             TextSize = 24,
             Margin = new MRect(10),
             CornerRadius = 6,
