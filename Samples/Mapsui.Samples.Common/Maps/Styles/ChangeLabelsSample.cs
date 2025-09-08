@@ -32,7 +32,10 @@ public class ChangeLabelsSample : ISample
         var features = CreateFeatures(RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898));
         map.Layers.Add(CreatePinLayer(features, labelStyle));
 
-        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins"));
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins")
+        {
+            HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Right
+        });
         map.Widgets.Add(new ButtonWidget()
         {
             Text = "Change Labels",
