@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 public class ToggleLabelsSample : ISample
 {
     public string Name => "Toggle Labels";
-    public string Category => "Styles";
+    public string Category => "1";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
@@ -42,6 +42,7 @@ public class ToggleLabelsSample : ISample
             HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Left,
             WithTappedEvent = (s, e) =>
             {
+                // Currently just toggles visibility of the active (default Uppercase) label style
                 labelStyle.Enabled = !labelStyle.Enabled;
             },
         });
@@ -51,9 +52,10 @@ public class ToggleLabelsSample : ISample
         return map;
     }
 
+    // Default selected column should be Uppercase
     private static LabelStyle CreateAlphabetLabelStyle() => new()
     {
-        LabelMethod = (f) => f["label"]?.ToString() ?? string.Empty,
+        LabelColumn = "Uppercase",
         Offset = new Offset(20, -56),
         Font = new Font { Size = 32 },
         BorderThickness = 1,
@@ -90,10 +92,18 @@ public class ToggleLabelsSample : ISample
         foreach (var point in randomPoints)
         {
             var feature = new PointFeature(point);
-            // Assign A..Z in sequence to the "label" field
-            feature["label"] = ((char)('A' + (i % 26))).ToString();
-            i++;
 
+            // Add three columns:
+            // Uppercase: A..Z
+            // lower-case: a..z (with dash in name as requested)
+            // Number: 1..26
+            var uppercaseChar = (char)('A' + (i % 26));
+            var lowercaseChar = (char)('a' + (i % 26));
+            feature["Uppercase"] = uppercaseChar.ToString();
+            feature["Lowercase"] = lowercaseChar.ToString();
+            feature["Number"] = (i % 26 + 1).ToString();
+
+            i++;
             features.Add(feature);
         }
         return features;
