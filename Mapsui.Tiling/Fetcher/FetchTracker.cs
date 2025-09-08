@@ -4,6 +4,7 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Tiling.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -17,7 +18,7 @@ public class FetchTracker
     private readonly HashSet<TileIndex> _tilesInProgress = [];
     private readonly HashSet<TileIndex> _tilesThatFailed = [];
 
-    public static int MaxTilesInOneRequest { get; set; } = 128;
+    public static int MaxTilesInOneRequest { get; set; } = 256;
 
     public int Update(FetchInfo fetchInfo, ITileSchema tileSchema, IDataFetchStrategy dataFetchStrategy, ITileCache<IFeature?> tileCache)
     {
@@ -32,12 +33,28 @@ public class FetchTracker
                   tileCache.Find(t.Index) == null
                   && !_tilesInProgress.Contains(t.Index)
                   && !_tilesThatFailed.Contains(t.Index)).ToList();
+
             if (tilesToFetchList.Count > MaxTilesInOneRequest)
             {
-                Logger.Log(LogLevel.Warning,
-                    $"The number tiles requested is '{tilesToFetchList.Count}' which exceeds the maximum " +
-                    $"of '{MaxTilesInOneRequest}'. The number of tiles will be limited to the maximum. Note, " +
-                    $"that this may indicate a bug or configuration error");
+                var message =
+                    $"The of tiles requested exceeds the maximum. " +
+                    $"The number of tiles will be limited to the maximum. " +
+                    $"This may indicate a bug or configuration error. " +
+                    $"Tiles requested: '{tilesToFetchList.Count}'. " +
+                    $"The maximum tiles to request: '{MaxTilesInOneRequest}'. " +
+                    $"The level: '{levelId}'. " +
+                    $"The resolution: '{fetchInfo.Resolution}'. " +
+                    $"The extent: '{fetchInfo.Extent}'.";
+
+                try // Throwing and catching to log the stack trace.
+                {
+                    throw new InvalidOperationException(message);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                }
+
                 tilesToFetchList = tilesToFetchList.Take(MaxTilesInOneRequest).ToList();
             }
 
