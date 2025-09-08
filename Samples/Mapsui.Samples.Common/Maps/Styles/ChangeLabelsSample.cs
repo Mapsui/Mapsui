@@ -7,15 +7,16 @@ using Mapsui.Styles;
 using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-public class ToggleLabelsSample : ISample
+public class ChangeLabelsSample : ISample
 {
-    public string Name => "Toggle Labels";
-    public string Category => "Styles";
+    public string Name => "Change Labels";
+    public string Category => "Labels";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
@@ -24,14 +25,20 @@ public class ToggleLabelsSample : ISample
         var map = new Map();
         map.Layers.Add(CreateLayerWithBackgroundSquare());
 
-        var labelStyle = CreateAlphabetLabelStyle();
-        var points = RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898);
-        map.Layers.Add(CreatePinLayer(CreateFeatures(points), labelStyle));
+        // Local (captured) state: 0 = Uppercase, 1 = Lowercase, 2 = Number, 3 = Null
+        var labelMode = 0;
 
-        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins"));
+        var labelStyle = CreateAlphabeticLabelStyle(() => labelMode);
+        var features = CreateFeatures(RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898));
+        map.Layers.Add(CreatePinLayer(features, labelStyle));
+
+        map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins")
+        {
+            HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Right
+        });
         map.Widgets.Add(new ButtonWidget()
         {
-            Text = "Toggle Labels",
+            Text = "Change Labels",
             TextSize = 24,
             Margin = new MRect(10),
             CornerRadius = 6,
@@ -42,26 +49,30 @@ public class ToggleLabelsSample : ISample
             HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Left,
             WithTappedEvent = (s, e) =>
             {
-                labelStyle.Enabled = !labelStyle.Enabled;
+                labelMode = (labelMode + 1) % 4;
+                map.RefreshData(); // Re-evaluate labels
             },
         });
 
         map.Navigator.ZoomToBox(map.Extent!.Grow(2000000));
-
         return map;
     }
 
-    private static LabelStyle CreateAlphabetLabelStyle()
+    private static LabelStyle CreateAlphabeticLabelStyle(Func<int> getLabelMode) => new()
     {
-        return new LabelStyle
+        LabelMethod = f => getLabelMode() switch
         {
-            LabelMethod = (f) => f["label"]?.ToString() ?? string.Empty,
-            Offset = new Offset(20, -56),
-            Font = new Font { Size = 32 },
-            BorderThickness = 1,
-            BorderColor = Color.DimGray,
-        };
-    }
+            0 => f["Uppercase"]?.ToString(),
+            1 => f["Lowercase"]?.ToString(),
+            2 => f["Number"]?.ToString(),
+            3 => null,
+            _ => null
+        },
+        Offset = new Offset(20, -56),
+        Font = new Font { Size = 32 },
+        BorderThickness = 1,
+        BorderColor = Color.DimGray,
+    };
 
     private static MemoryLayer CreatePinLayer(IEnumerable<IFeature> features, LabelStyle labelStyle) => new()
     {
@@ -77,26 +88,27 @@ public class ToggleLabelsSample : ISample
         },
     };
 
-    private static SymbolStyle CreateSmallCircleSymbol() => new SymbolStyle
+    private static SymbolStyle CreateSmallCircleSymbol() => new()
     {
         SymbolType = SymbolType.Ellipse,
         SymbolScale = 0.5,
         Outline = new Pen(new Color(8, 8, 8)),
-        Fill = null
+        Fill = null,
     };
 
     private static List<IFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)
     {
         var features = new List<IFeature>();
         var i = 0;
-
         foreach (var point in randomPoints)
         {
             var feature = new PointFeature(point);
-            // Assign A..Z in sequence to the "label" field
-            feature["label"] = ((char)('A' + (i % 26))).ToString();
+            var uppercaseChar = (char)('A' + (i % 26));
+            var lowercaseChar = (char)('a' + (i % 26));
+            feature["Uppercase"] = uppercaseChar.ToString();
+            feature["Lowercase"] = lowercaseChar.ToString();
+            feature["Number"] = (i % 26 + 1).ToString();
             i++;
-
             features.Add(feature);
         }
         return features;
@@ -113,7 +125,7 @@ public class ToggleLabelsSample : ISample
         RelativeOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.
     };
 
-    public static ILayer CreateLayerWithBackgroundSquare() => new Layer("Background")
+    public static Layer CreateLayerWithBackgroundSquare() => new("Background")
     {
         DataSource = new MemoryProvider(CreateSquarePolygon(5000000).ToFeature()),
         Style = new VectorStyle
@@ -127,12 +139,12 @@ public class ToggleLabelsSample : ISample
         }
     };
 
-    private static Polygon CreateSquarePolygon(int halfWidth) => new Polygon(new LinearRing(new[]
-        {
-            new Coordinate(-halfWidth, -halfWidth),
-            new Coordinate(-halfWidth, halfWidth),
-            new Coordinate(halfWidth, halfWidth),
-            new Coordinate(halfWidth, -halfWidth),
-            new Coordinate(-halfWidth, -halfWidth) // Closing the ring
-        }));
+    private static Polygon CreateSquarePolygon(int halfWidth) => new(new LinearRing(new[]
+    {
+        new Coordinate(-halfWidth, -halfWidth),
+        new Coordinate(-halfWidth, halfWidth),
+        new Coordinate(halfWidth, halfWidth),
+        new Coordinate(halfWidth, -halfWidth),
+        new Coordinate(-halfWidth, -halfWidth) // Closing the ring
+    }));
 }
