@@ -4,18 +4,20 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-public class ChangeLabelsSample : ISample
+public class ChangeLabelsAndShowSelectedSample : ISample
 {
-    public string Name => "Change Labels";
+    public string Name => "Change Labels and Select";
     public string Category => "Labels";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
@@ -25,12 +27,13 @@ public class ChangeLabelsSample : ISample
         var map = new Map();
         map.Layers.Add(CreateLayerWithBackgroundSquare());
 
-        // Local (captured) state: 0 = Uppercase, 1 = Lowercase, 2 = Number, 3 = Null
-        var labelMode = 0;
+        var labelMode = 0; // Captured state. Options: 0 = Uppercase, 1 = Lowercase, 2 = Number, 3 = Null
+        long? selectedFeatureId = null; // Captured state.
 
         var labelStyle = CreateAlphabeticLabelStyle(() => labelMode);
+        var selectedStyle = CreateSelectedFeatureStyle(() => selectedFeatureId);
         var features = CreateFeatures(RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898));
-        map.Layers.Add(CreatePinLayer(features, labelStyle));
+        map.Layers.Add(CreatePinLayer(features, labelStyle, selectedStyle));
 
         map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins")
         {
@@ -53,9 +56,25 @@ public class ChangeLabelsSample : ISample
                 map.RefreshData(); // Re-evaluate labels
             },
         });
+        map.Tapped += (s, e) =>
+        {
+            var feature = e.GetMapInfo([map.Layers.First(l => l.Name == "Pins")]).Feature;
+            selectedFeatureId = feature?.Id != null ? feature.Id : null;
+        };
 
         map.Navigator.ZoomToBox(map.Extent!.Grow(2000000));
         return map;
+    }
+
+    private static ThemeStyle CreateSelectedFeatureStyle(Func<long?> selectedFeatureId)
+    {
+        var selectedStyle = CreatePinSymbol(new Color(204, 85, 51));
+        var defaultStyle = CreatePinSymbol(new Color(65, 147, 207));
+
+        return new ThemeStyle((f) =>
+        {
+            return f.Id == selectedFeatureId() ? selectedStyle : defaultStyle;
+        });
     }
 
     private static LabelStyle CreateAlphabeticLabelStyle(Func<int> getLabelMode) => new()
@@ -74,19 +93,20 @@ public class ChangeLabelsSample : ISample
         BorderColor = Color.DimGray,
     };
 
-    private static MemoryLayer CreatePinLayer(IEnumerable<IFeature> features, LabelStyle labelStyle) => new()
-    {
-        Name = "Pins",
-        Features = features,
-        Style = new StyleCollection
+    private static MemoryLayer CreatePinLayer(IEnumerable<IFeature> features,
+        LabelStyle labelStyle, ThemeStyle selectedStyle) => new()
         {
-            Styles = {
+            Name = "Pins",
+            Features = features,
+            Style = new StyleCollection
+            {
+                Styles = {
                 CreateSmallCircleSymbol(),
-                CreatePinSymbol(),
+                selectedStyle,
                 labelStyle,
             },
-        },
-    };
+            },
+        };
 
     private static SymbolStyle CreateSmallCircleSymbol() => new()
     {
@@ -114,12 +134,12 @@ public class ChangeLabelsSample : ISample
         return features;
     }
 
-    private static ImageStyle CreatePinSymbol() => new()
+    private static ImageStyle CreatePinSymbol(Color color) => new()
     {
         Image = new Image
         {
             Source = "embedded://Mapsui.Resources.Images.pin.svg",
-            SvgFillColor = Color.FromString("#4193CF"),
+            SvgFillColor = color,
             SvgStrokeColor = Color.DimGray,
         },
         RelativeOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.
