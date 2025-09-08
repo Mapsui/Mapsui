@@ -55,7 +55,7 @@ public class ToggleLabelsSample : ISample
     // Default selected column should be Uppercase
     private static LabelStyle CreateAlphabetLabelStyle() => new()
     {
-        LabelColumn = "Uppercase",
+        LabelMethod = (f) => f["Uppercase"]?.ToString() ?? string.Empty,
         Offset = new Offset(20, -56),
         Font = new Font { Size = 32 },
         BorderThickness = 1,
