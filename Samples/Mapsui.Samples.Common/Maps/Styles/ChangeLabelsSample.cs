@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-public class ToggleLabelsSample : ISample
+public class ChangeLabelsSample : ISample
 {
     public string Name => "Change Labels";
     public string Category => "Labels";
