@@ -7,6 +7,7 @@ using Mapsui.Styles;
 using Mapsui.Widgets.ButtonWidgets;
 using Mapsui.Widgets.InfoWidgets;
 using NetTopologySuite.Geometries;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,11 +15,8 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class ToggleLabelsSample : ISample
 {
-    public string Name => "Toggle Labels";
-    public string Category => "1";
-
-    // 0 = Uppercase, 1 = Lowercase, 2 = Number, 3 = Null (no label)
-    private static int _labelMode = 0;
+    public string Name => "Alternate Labels";
+    public string Category => "Labels";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
@@ -27,7 +25,10 @@ public class ToggleLabelsSample : ISample
         var map = new Map();
         map.Layers.Add(CreateLayerWithBackgroundSquare());
 
-        var labelStyle = CreateAlphabetLabelStyle();
+        // Local (captured) state: 0 = Uppercase, 1 = Lowercase, 2 = Number, 3 = Null
+        var labelMode = 0;
+
+        var labelStyle = CreateAlphabeticLabelStyle(() => labelMode);
         var points = RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898);
         map.Layers.Add(CreatePinLayer(CreateFeatures(points), labelStyle));
 
@@ -45,25 +46,23 @@ public class ToggleLabelsSample : ISample
             HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Left,
             WithTappedEvent = (s, e) =>
             {
-                _labelMode = (_labelMode + 1) % 4;
-                // Force re-render so LabelMethod is re-evaluated
-                map.RefreshData();
+                labelMode = (labelMode + 1) % 4;
+                map.RefreshData(); // Re-evaluate labels
             },
         });
 
         map.Navigator.ZoomToBox(map.Extent!.Grow(2000000));
-
         return map;
     }
 
-    private static LabelStyle CreateAlphabetLabelStyle() => new()
+    private static LabelStyle CreateAlphabeticLabelStyle(Func<int> getLabelMode) => new()
     {
-        LabelMethod = f => _labelMode switch
+        LabelMethod = f => getLabelMode() switch
         {
             0 => f["Uppercase"]?.ToString(),
             1 => f["Lowercase"]?.ToString(),
             2 => f["Number"]?.ToString(),
-            3 => null, // Explicitly no label
+            3 => null,
             _ => null
         },
         Offset = new Offset(20, -56),
@@ -98,7 +97,6 @@ public class ToggleLabelsSample : ISample
     {
         var features = new List<IFeature>();
         var i = 0;
-
         foreach (var point in randomPoints)
         {
             var feature = new PointFeature(point);
