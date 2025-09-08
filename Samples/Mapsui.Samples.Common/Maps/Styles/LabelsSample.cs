@@ -10,8 +10,8 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 
 public class LabelsSample : ISample
 {
-    public string Name => "Labels";
-    public string Category => "Styles";
+    public string Name => "Label Styles";
+    public string Category => "Labels";
 
     public Task<Map> CreateMapAsync()
     {
