@@ -51,17 +51,14 @@ public class ToggleLabelsSample : ISample
         return map;
     }
 
-    private static LabelStyle CreateAlphabetLabelStyle()
+    private static LabelStyle CreateAlphabetLabelStyle() => new()
     {
-        return new LabelStyle
-        {
-            LabelMethod = (f) => f["label"]?.ToString() ?? string.Empty,
-            Offset = new Offset(20, -56),
-            Font = new Font { Size = 32 },
-            BorderThickness = 1,
-            BorderColor = Color.DimGray,
-        };
-    }
+        LabelMethod = (f) => f["label"]?.ToString() ?? string.Empty,
+        Offset = new Offset(20, -56),
+        Font = new Font { Size = 32 },
+        BorderThickness = 1,
+        BorderColor = Color.DimGray,
+    };
 
     private static MemoryLayer CreatePinLayer(IEnumerable<IFeature> features, LabelStyle labelStyle) => new()
     {
@@ -77,12 +74,12 @@ public class ToggleLabelsSample : ISample
         },
     };
 
-    private static SymbolStyle CreateSmallCircleSymbol() => new SymbolStyle
+    private static SymbolStyle CreateSmallCircleSymbol() => new()
     {
         SymbolType = SymbolType.Ellipse,
         SymbolScale = 0.5,
         Outline = new Pen(new Color(8, 8, 8)),
-        Fill = null
+        Fill = null,
     };
 
     private static List<IFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)
@@ -113,7 +110,7 @@ public class ToggleLabelsSample : ISample
         RelativeOffset = new RelativeOffset(0.0, 0.5), // The symbols point should be at the geolocation.
     };
 
-    public static ILayer CreateLayerWithBackgroundSquare() => new Layer("Background")
+    public static Layer CreateLayerWithBackgroundSquare() => new("Background")
     {
         DataSource = new MemoryProvider(CreateSquarePolygon(5000000).ToFeature()),
         Style = new VectorStyle
@@ -127,7 +124,7 @@ public class ToggleLabelsSample : ISample
         }
     };
 
-    private static Polygon CreateSquarePolygon(int halfWidth) => new Polygon(new LinearRing(new[]
+    private static Polygon CreateSquarePolygon(int halfWidth) => new(new LinearRing(new[]
         {
             new Coordinate(-halfWidth, -halfWidth),
             new Coordinate(-halfWidth, halfWidth),
