@@ -1,9 +1,9 @@
 using Microsoft.UI;
 using SkiaSharp;
 
-#if __UNO_SKIA__
-using Windows.Foundation;
+#if __UNO_WINUI__
 using Uno.WinUI.Graphics2DSK;
+using Windows.Foundation;
 #endif
 
 namespace Mapsui.UI.WinUI;
@@ -21,18 +21,23 @@ abstract partial class RenderControl : Microsoft.UI.Xaml.Controls.UserControl
 
     public static RenderControl CreateControl(MapControl owner, System.Action<SKCanvas> renderCallback)
     {
-#if __UNO_SKIA__
-        return new SKCanvasElementRenderControl(owner, renderCallback);
-#else
-        // GPU does not work currently on Windows
-        bool useGPU = System.OperatingSystem.IsBrowser() || System.OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
-        return useGPU
-            ? new SKSwapChainPanelRenderControl(owner, renderCallback)
-            : new SKXamlCanvasRenderControl(owner, renderCallback);
+#if __UNO_WINUI__
+        if (SKCanvasElement.IsSupportedOnCurrentPlatform())
+        {
+            return new SKCanvasElementRenderControl(owner, renderCallback);
+        }
+        else
 #endif
+        {
+            // GPU does not work currently on Windows
+            bool useGPU = System.OperatingSystem.IsBrowser() || System.OperatingSystem.IsAndroid(); // Works not on iPhone Mini;
+            return useGPU
+                ? new SKSwapChainPanelRenderControl(owner, renderCallback)
+                : new SKXamlCanvasRenderControl(owner, renderCallback);
+        }
     }
 
-    public abstract void Invalidate();
+    public abstract void InvalidateRender();
 
     public abstract float? GetPixelDensity();
 }
@@ -64,7 +69,7 @@ partial class SKXamlCanvasRenderControl : RenderControl
         }
     }
 
-    public override void Invalidate() => _skXamlCanvas.Invalidate();
+    public override void InvalidateRender() => _skXamlCanvas.Invalidate();
 
     public override float? GetPixelDensity()
     {
@@ -105,7 +110,7 @@ partial class SKSwapChainPanelRenderControl : RenderControl
         }
     }
 
-    public override void Invalidate() => _swapChainPanel.Invalidate();
+    public override void InvalidateRender() => _swapChainPanel.Invalidate();
 
     public override float? GetPixelDensity()
     {
@@ -119,7 +124,7 @@ partial class SKSwapChainPanelRenderControl : RenderControl
     }
 }
 
-#if __UNO_SKIA__
+#if __UNO_WINUI__
 partial class SKCanvasElementRenderControl : RenderControl
 {
 #pragma warning disable IDISP006
@@ -131,20 +136,27 @@ partial class SKCanvasElementRenderControl : RenderControl
         Content = _skCanvasElement = new MapControlSKCanvasElement(this);
     }
 
-    public override void Invalidate()
+    public override void InvalidateRender()
     {
         _skCanvasElement.Invalidate();
     }
 
-    private class MapControlSKCanvasElement(SKCanvasElementRenderControl parent) : SKCanvasElement
+    private partial class MapControlSKCanvasElement : SKCanvasElement
     {
+        private readonly SKCanvasElementRenderControl _parent;
+
+        public MapControlSKCanvasElement(SKCanvasElementRenderControl parent)
+        {
+            _parent = parent;
+        }
+
         protected override void RenderOverride(SKCanvas canvas, Size area)
         {
-            if (parent.GetPixelDensity() is { } pixelDensity)
+            if (_parent.GetPixelDensity() is { } pixelDensity)
             {
                 canvas.Scale(pixelDensity);
             }
-            parent.RenderCallback(canvas);
+            _parent.RenderCallback(canvas);
         }
     }
 
