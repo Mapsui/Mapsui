@@ -29,8 +29,8 @@ public class ChangeLabelsSample : ISample
         var labelMode = 0;
 
         var labelStyle = CreateAlphabeticLabelStyle(() => labelMode);
-        var points = RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898);
-        map.Layers.Add(CreatePinLayer(CreateFeatures(points), labelStyle));
+        var features = CreateFeatures(RandomPointsBuilder.GenerateRandomPoints(map.Extent, 26, 9898));
+        map.Layers.Add(CreatePinLayer(features, labelStyle));
 
         map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins"));
         map.Widgets.Add(new ButtonWidget()
