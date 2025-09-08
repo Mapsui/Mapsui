@@ -17,6 +17,9 @@ public class ToggleLabelsSample : ISample
     public string Name => "Toggle Labels";
     public string Category => "1";
 
+    // 0 = Uppercase, 1 = Lowercase, 2 = Number, 3 = Null (no label)
+    private static int _labelMode = 0;
+
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
@@ -31,7 +34,7 @@ public class ToggleLabelsSample : ISample
         map.Widgets.Add(new MapInfoWidget(map, l => l.Name == "Pins"));
         map.Widgets.Add(new ButtonWidget()
         {
-            Text = "Toggle Labels",
+            Text = "Cycle Labels",
             TextSize = 24,
             Margin = new MRect(10),
             CornerRadius = 6,
@@ -42,8 +45,9 @@ public class ToggleLabelsSample : ISample
             HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Left,
             WithTappedEvent = (s, e) =>
             {
-                // Currently just toggles visibility of the active (default Uppercase) label style
-                labelStyle.Enabled = !labelStyle.Enabled;
+                _labelMode = (_labelMode + 1) % 4;
+                // Force re-render so LabelMethod is re-evaluated
+                map.RefreshData();
             },
         });
 
@@ -52,10 +56,16 @@ public class ToggleLabelsSample : ISample
         return map;
     }
 
-    // Default selected column should be Uppercase
     private static LabelStyle CreateAlphabetLabelStyle() => new()
     {
-        LabelMethod = (f) => f["Uppercase"]?.ToString() ?? string.Empty,
+        LabelMethod = f => _labelMode switch
+        {
+            0 => f["Uppercase"]?.ToString(),
+            1 => f["Lowercase"]?.ToString(),
+            2 => f["Number"]?.ToString(),
+            3 => null, // Explicitly no label
+            _ => null
+        },
         Offset = new Offset(20, -56),
         Font = new Font { Size = 32 },
         BorderThickness = 1,
@@ -92,17 +102,11 @@ public class ToggleLabelsSample : ISample
         foreach (var point in randomPoints)
         {
             var feature = new PointFeature(point);
-
-            // Add three columns:
-            // Uppercase: A..Z
-            // lower-case: a..z (with dash in name as requested)
-            // Number: 1..26
             var uppercaseChar = (char)('A' + (i % 26));
             var lowercaseChar = (char)('a' + (i % 26));
             feature["Uppercase"] = uppercaseChar.ToString();
             feature["Lowercase"] = lowercaseChar.ToString();
             feature["Number"] = (i % 26 + 1).ToString();
-
             i++;
             features.Add(feature);
         }
