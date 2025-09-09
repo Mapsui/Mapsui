@@ -1,0 +1,49 @@
+changelog:
+  categories:
+    - title: "🐛 Fixes"
+      labels:
+        - "PR type: 🐛 Fix"
+        - "type: fix"
+        - "bug 🐛"
+        - "bug"
+        - "possible-bug"
+    - title: "🔨 Refactor"
+      labels:
+        - "PR type: ♻️ Refactor"
+        - "type: refactor"
+    - title: "📦 Updates"
+      labels:
+        - "PR type: 📦 Update"
+        - "type: update"
+        - "dependencies"
+    - title: "🛠️ Maintenance"
+      labels:
+        - "PR type: 🧰 Maintenance"
+        - "type: maintenance"
+        - "chore"
+    - title: "🧪 Samples"
+      labels:
+        - "PR type:  🧪Sample"
+        - "type: sample"
+        - "samples"
+    - title: "Other Changes"
+      labels:
+        - "*"
+      exclude:
+        labels:
+          - "PR type: 🐛 Fix"
+          - "type: fix"
+          - "bug 🐛"
+          - "bug"
+          - "possible-bug"
+          - "PR type: ♻️ Refactor"
+          - "type: refactor"
+          - "PR type: 📦 Update"
+          - "type: update"
+          - "dependencies"
+          - "PR type: 🧰 Maintenance"
+          - "type: maintenance"
+          - "chore"
+          - "PR type:  🧪Sample"
+          - "type: sample"
+          - "samples"
