@@ -6,39 +6,30 @@ changelog:
   categories:
     - title: "🐛 Fixes"
       labels:
-        - "type: fix"
-        - "bug"
-    - title: "🔨 Refactor"
+        - "PR type: 🐛 Fix"
+    - title: "♻️ Refactor"
       labels:
-        - "type: refactor"
+        - "PR type: ♻️ Refactor"
     - title: "📦 Updates"
       labels:
-        - "type: update"
-        - "dependencies"
+        - "PR type: ♻️ Update"
     - title: "🛠️ Maintenance"
       labels:
-        - "type: maintenance"
-        - "chore"
+        - "PR type: 🛠️ Maintenance"
     - title: "🧪 Samples"
       labels:
-        - "type: sample"
-        - "samples"
+        - "PR type: 🧪 Sample"
+    - title: "🔧 Infrastructure"
+      labels:
+        - "PR type: 🔧 Infrastructure"
+    - title: "🚀 Features"
+      labels:
+        - "PR type: 🚀 Feature"
+    - title: "📝 Documentation"
+      labels:
+        - "PR type: 📝 Documentation"
     # Optional: catch-all for PRs/issues without recognized type labels
-    - title: "Other Changes"
+    - title: "💩 Other Changes"
       labels:
         - "*"
-      exclude:
-        labels:
-          # Exclude already categorized labels
-          - "type: fix"
-          - "bug"
-          - "type: refactor"
-          - "type: update"
-          - "dependencies"
-          - "type: maintenance"
-          - "chore"
-          - "type: sample"
-          - "samples"
-  # Optionally, you can tweak the PR template mapping or exclude certain contributors, etc.
-
 # For more options, see: https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes#configuration
