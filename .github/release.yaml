@@ -1,1 +1,8 @@
-
+changelog:
+  categories:
+    - title: "Fixes"
+      labels:
+        - "PR type: Fix"
+    - title: "Other"
+      labels:
+        - "*"
