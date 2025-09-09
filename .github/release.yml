@@ -1,8 +1,35 @@
+# This configuration file enables categorized release notes using GitHub's automated release notes feature.
+# It groups pull requests and changes by label (e.g., 'type: fix', 'type: refactor') into custom sections,
+# similar to your screenshot. You may adjust label values to match your repo's conventions.
+
 changelog:
   categories:
-    - title: "Fixes"
+    - title: "🐛 Fixes"
       labels:
-        - "PR type: Fix"
-    - title: "Other"
+        - "PR type: 🐛 Fix"
+    - title: "♻️ Refactor"
+      labels:
+        - "PR type: ♻️ Refactor"
+    - title: "📦 Updates"
+      labels:
+        - "PR type: 📦 Update"
+    - title: "🛠️ Maintenance"
+      labels:
+        - "PR type: 🛠️ Maintenance"
+    - title: "🧪 Samples"
+      labels:
+        - "PR type: 🧪 Sample"
+    - title: "🔧 Infrastructure"
+      labels:
+        - "PR type: 🔧 Infrastructure"
+    - title: "🚀 Features"
+      labels:
+        - "PR type: 🚀 Feature"
+    - title: "📝 Documentation"
+      labels:
+        - "PR type: 📝 Documentation"
+    # Optional: catch-all for PRs/issues without recognized type labels
+    - title: "💩 Other Changes"
       labels:
         - "*"
+# For more options, see: https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes#configuration
