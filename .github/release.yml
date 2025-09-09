@@ -12,7 +12,7 @@ changelog:
         - "PR type: ♻️ Refactor"
     - title: "📦 Updates"
       labels:
-        - "PR type: ♻️ Update"
+        - "PR type: 📦 Update"
     - title: "🛠️ Maintenance"
       labels:
         - "PR type: 🛠️ Maintenance"
