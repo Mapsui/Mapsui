@@ -54,7 +54,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
-    private ScreenSize _screenSize;
+    private ScreenSize _screenSize = new(0, 0);
     private RenderController? _renderController;
 
     /// <summary>
