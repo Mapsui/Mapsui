@@ -37,8 +37,8 @@ public class FetchTracker
             if (tilesToFetchList.Count > MaxTilesInOneRequest)
             {
                 var message =
-                    $"The of tiles requested exceeds the maximum. " +
-                    $"The number of tiles will be limited to the maximum. " +
+                    $"The tiles requested exceeds the maximum. " +
+                    $"The number of tiles fetched will be limited to the maximum. " +
                     $"This may indicate a bug or configuration error. " +
                     $"Tiles requested: '{tilesToFetchList.Count}'. " +
                     $"The maximum tiles to request: '{MaxTilesInOneRequest}'. " +
