@@ -7,6 +7,7 @@ using Mapsui.Manipulations;
 using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Mapsui;
@@ -131,6 +132,8 @@ public class Navigator
             {
                 IsInitialized = true;
 
+                Logger.Log(LogLevel.Information, "Navigator: Starting initialization");
+
                 // Actions could either modify the current state (after ZoomToBox above) or override the current state.
                 foreach (var action in _initialization)
                 {
@@ -138,6 +141,8 @@ public class Navigator
                 }
 
                 _initialization.Clear();
+
+                Logger.Log(LogLevel.Information, "Navigator: Finished initialization");
 
                 _suppressNotifications = false;
                 OnViewportChanged(_viewport, _viewport);
@@ -168,7 +173,7 @@ public class Navigator
             return; // No change
         if (scaleFactor <= Constants.Epsilon)
         {
-            Logger.Log(LogLevel.Warning, "MouseWheelZoomContinuous was called with a mouseWheelDelta <= 0. This is unexpected.");
+            Logger.Log(LogLevel.Warning, "Navigator: MouseWheelZoomContinuous was called with a mouseWheelDelta <= 0. This is unexpected.");
             return;
         }
 
@@ -373,7 +378,7 @@ public class Navigator
     {
         if (level < 0 || level >= Resolutions.Count)
         {
-            Logger.Log(LogLevel.Warning, $"Zoom level '{level}' is not an index in the range of the resolutions list. " +
+            Logger.Log(LogLevel.Warning, $"Navigator: Zoom level '{level}' is not an index in the range of the resolutions list. " +
                 $"The resolutions list is length `{Resolutions.Count}`");
             return;
         }
@@ -712,12 +717,14 @@ public class Navigator
     /// Add a call to a function called before initialization of Viewport to a list
     /// </summary>
     /// <param name="action">Function called before initialization</param>
+    [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "<Pending>")]
     private void AddToInitialization(Action action)
     {
         // Save state when this function is originally called
         // Add action to initialization list
         _initialization.Add(() =>
         {
+            Logger.Log(LogLevel.Information, $"Navigator: Executing: '{MetaDataHelper.GetReadableActionName(action)}'");
             action();
             //Restore old settings of locks
         });
