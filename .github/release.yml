@@ -7,6 +7,9 @@ changelog:
     - title: "🐛 Fixes"
       labels:
         - "PR type: 🐛 Fix"
+    - title: "🚀 Features"
+      labels:
+        - "PR type: 🚀 Feature"
     - title: "♻️ Refactor"
       labels:
         - "PR type: ♻️ Refactor"
@@ -16,15 +19,12 @@ changelog:
     - title: "🛠️ Maintenance"
       labels:
         - "PR type: 🛠️ Maintenance"
-    - title: "🧪 Samples"
-      labels:
-        - "PR type: 🧪 Sample"
     - title: "🔧 Infrastructure"
       labels:
         - "PR type: 🔧 Infrastructure"
-    - title: "🚀 Features"
+    - title: "🧪 Samples"
       labels:
-        - "PR type: 🚀 Feature"
+        - "PR type: 🧪 Sample"
     - title: "📝 Documentation"
       labels:
         - "PR type: 📝 Documentation"
