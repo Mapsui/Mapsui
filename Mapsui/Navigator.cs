@@ -724,7 +724,7 @@ public class Navigator
         // Add action to initialization list
         _initialization.Add(() =>
         {
-            Logger.Log(LogLevel.Information, $"Navigator: Executing: '{MetaDataHelper.GetReadableActionName(action)}'");
+            Logger.Log(LogLevel.Information, $"Navigator: Executing '{MetaDataHelper.GetReadableActionName(action)}'");
             action();
             //Restore old settings of locks
         });
