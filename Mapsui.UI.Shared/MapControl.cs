@@ -54,7 +54,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
-    private ScreenSize _screenSize = new(0, 0);
+    private ScreenSize _mapControlScreenSize = new(0, 0);
     private RenderController? _renderController;
 
     /// <summary>
@@ -109,7 +109,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void SharedOnSizeChanged(double width, double height)
     {
-        _screenSize = new ScreenSize(width, height);
+        _mapControlScreenSize = new ScreenSize(width, height);
         TryUpdateViewportSize();
     }
 
@@ -386,13 +386,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </summary>
     private void TryUpdateViewportSize()
     {
-        if (_screenSize.Width <= 0 || _screenSize.Height <= 0)
+        if (_mapControlScreenSize.Width <= 0 || _mapControlScreenSize.Height <= 0)
             return;
 
         if (Map is Map map)
         {
             var hadSize = map.Navigator.Viewport.HasSize();
-            map.Navigator.SetSize(_screenSize.Width, _screenSize.Height);
+            map.Navigator.SetSize(_mapControlScreenSize.Width, _mapControlScreenSize.Height);
             if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
         }
     }

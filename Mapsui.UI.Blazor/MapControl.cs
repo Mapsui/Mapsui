@@ -14,7 +14,6 @@ public partial class MapControl : ComponentBase, IMapControl
     protected SKCanvasView? _viewCpu;
     protected SKGLView? _viewGpu;
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
-    private SKImageInfo? _canvasSize;
     private bool _onLoaded;
     private float? _pixelDensityFromInterop;
     private BoundingClientRect _clientRect = new();
@@ -78,23 +77,9 @@ public partial class MapControl : ComponentBase, IMapControl
             await InitializingInteropAsync();
     }
 
-    protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
-    {
-        // the the canvas and properties
-        var canvas = e.Surface.Canvas;
-        var info = e.Info;
+    protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e) => OnPaintSurface(e.Surface.Canvas, e.Info);
 
-        OnPaintSurface(canvas, info);
-    }
-
-    protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e)
-    {
-        // the the canvas and properties
-        var canvas = e.Surface.Canvas;
-        var info = e.Info;
-
-        OnPaintSurface(canvas, info);
-    }
+    protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e) => OnPaintSurface(e.Surface.Canvas, e.Info);
 
     protected void OnPaintSurface(SKCanvas canvas, SKImageInfo info)
     {
@@ -105,24 +90,17 @@ public partial class MapControl : ComponentBase, IMapControl
             OnLoadComplete();
         }
 
-        // Size changed Workaround
-        if (_canvasSize?.Width != info.Width || _canvasSize?.Height != info.Height)
+        // Workaround for problems with the size changed events.
+        if (_mapControlScreenSize?.Width != info.Width || _mapControlScreenSize?.Height != info.Height)
         {
-            _canvasSize = info;
-            OnSizeChanged(info);
+            SharedOnSizeChanged(info.Width, info.Height);
+            _ = UpdateBoundingRectAsync();
         }
 
         _renderController?.Render(canvas);
     }
 
-    private void OnLoadComplete()
-    {
-        Catch.Exceptions(async () =>
-        {
-            SharedOnSizeChanged(_canvasSize?.Width ?? 0, _canvasSize?.Height ?? 0);
-            await InitializingInteropAsync();
-        });
-    }
+    private void OnLoadComplete() => Catch.Exceptions(InitializingInteropAsync);
 
     protected void OnMouseWheel(WheelEventArgs e)
     {
@@ -167,12 +145,6 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             Console.WriteLine($"An exception occurred in InitializingInteropAsync: {ex}");
         }
-    }
-
-    private void OnSizeChanged(SKImageInfo skImageInfo)
-    {
-        SharedOnSizeChanged(skImageInfo.Width, skImageInfo.Height);
-        _ = UpdateBoundingRectAsync();
     }
 
     private async Task UpdateBoundingRectAsync()
