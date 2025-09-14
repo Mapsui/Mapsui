@@ -542,6 +542,8 @@ public class Navigator
     {
         if (Viewport.Width == width && Viewport.Height == height)
             return; // No change in size, no need to update.
+
+        Logger.Log(LogLevel.Information, $"Navigator: SetSize {width} x {height}");
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
         var wasInitialized = IsInitialized;
