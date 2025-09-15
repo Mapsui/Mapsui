@@ -35,18 +35,18 @@ public class NavigatorTests
         return new List<AnimationEntry<Viewport>> { new AnimationEntry<Viewport>(new Viewport(), new Viewport()) };
     }
 
-    [TestCase(0.5, 70, -40)]
-    [TestCase(1, 30, 0)]
-    [TestCase(2, -50, 80)]
+    [TestCase(0.5, 20, -20)]
+    [TestCase(1, 0, 0)]
+    [TestCase(1.5, -20, 20)]
     public void PinchWithDeltaResolution(double scaleFactor, double expectedCenterX, double expectedCenterY)
     {
         // Arrange
         var navigator = new Navigator();
         navigator.SetSize(100, 100);
-        navigator.OverridePanBounds = new MRect(-100, -100, 100, 100);
-        navigator.CenterOn(10, 20);
+        navigator.OverridePanBounds = new MRect(-1000, -1000, 1000, 1000);
+        navigator.CenterOnAndZoomTo(new MPoint(0, 0), 1);
         var currentTouchCenter = new ScreenPosition(10, 10);
-        var previousTouchCenter = new ScreenPosition(20, 20);
+        var previousTouchCenter = new ScreenPosition(10, 10);
 
         // Act
         navigator.Manipulate(new Manipulation(currentTouchCenter, previousTouchCenter, scaleFactor, 0, 0));
@@ -104,17 +104,17 @@ public class NavigatorTests
     }
 
     [Test]
-    public void TestIfExtentCanNotChangeIfPanBoundsIsNotSet()
+    public void TestIfExtentCanChangeIfPanBoundsIsNotSet()
     {
         // Arrange
         var navigator = new Navigator();
         navigator.SetSize(100, 100);
-        var extentBefore = navigator.Viewport.ToExtent();
+        var targetExtent = new MRect(100, 100, 200, 200);
 
         // Act
-        navigator.ZoomToBox(new MRect(100, 100, 200, 200));
+        navigator.ZoomToBox(targetExtent);
 
         // Assert
-        Assert.That(navigator.Viewport.ToExtent(), Is.EqualTo(extentBefore));
+        Assert.That(navigator.Viewport.ToExtent(), Is.EqualTo(targetExtent));
     }
 }

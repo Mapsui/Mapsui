@@ -16,12 +16,12 @@ public class Navigator
 {
     private Viewport _viewport = new();
     private IEnumerable<AnimationEntry<Viewport>> _animations = [];
-    private readonly List<Action> _initialization;
+    private readonly List<Action> _postponedCalls;
     private MMinMax? _defaultZoomBounds;
     private MRect? _defaultPanBounds;
     private MMinMax? _overrideZoomBounds;
     private MRect? _overridePanBounds;
-    private readonly object _initializationLock = new();
+    private readonly object _postponedCallsLock = new();
     private bool _suppressNotifications = true;
 
     public delegate void ViewportChangedEventHandler(object sender, ViewportChangedEventArgs e);
@@ -117,34 +117,44 @@ public class Navigator
         }
     }
 
-    public bool IsInitialized { get; private set; } = false;
+    public bool HasExecutedPostponedCalls { get; private set; } = false;
 
     public Navigator()
     {
-        _initialization = new List<Action> { () => ZoomToPanBounds() };
+        // Add a default postponed call which will be executed as soon as the size is known.
+        _postponedCalls = new List<Action> { DefaultPostponedCall };
     }
 
-    private void Initialize()
+    private void DefaultPostponedCall()
     {
-        lock (_initializationLock)
+        if (PanBounds is null)
         {
-            if (!IsInitialized)
-            {
-                IsInitialized = true;
+            Logger.Log(LogLevel.Information, $"Navigator: Not zooming to {nameof(PanBounds)} at startup because they are not set.");
+        }
+        else
+        {
+            Logger.Log(LogLevel.Information, $"Navigator: Zooming to {nameof(PanBounds)} at startup.");
+            ZoomToPanBounds();
+        }
+    }
 
-                Logger.Log(LogLevel.Information, "Navigator: Starting initialization");
+    private void ExecutedPostponedCalls()
+    {
+        lock (_postponedCallsLock)
+        {
+            if (!HasExecutedPostponedCalls)
+            {
+                HasExecutedPostponedCalls = true;
 
                 // Actions could either modify the current state (after ZoomToBox above) or override the current state.
-                foreach (var action in _initialization)
+                foreach (var postponedCall in _postponedCalls)
                 {
-                    action();
+                    postponedCall();
                 }
 
-                _initialization.Clear();
+                _postponedCalls.Clear();
 
-                Logger.Log(LogLevel.Information, "Navigator: Finished initialization");
-
-                _suppressNotifications = false;
+                _suppressNotifications = false; // Multiple postponed calls will trigger only one refresh because of suppression during startup.
                 OnViewportChanged(_viewport, _viewport);
                 OnFetchRequested(ChangeType.Discrete);
             }
@@ -215,13 +225,18 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToBox(MRect? box, MBoxFit boxFit = MBoxFit.Fit, long duration = -1, Easing? easing = default)
     {
-        if (!IsInitialized)
+        if (!HasExecutedPostponedCalls)
         {
             AddToInitialization(() => ZoomToBox(box, boxFit, duration, easing));
             return;
         }
 
-        if (box == null) return;
+        if (box == null)
+        {
+            if (Viewport.Resolution <= 0)
+                Logger.Log(LogLevel.Warning, $"Navigator: {nameof(ZoomToBox)} was called but the {nameof(box)} was null. This is unexpected.");
+            return;
+        }
         if (box.Width <= 0 || box.Height <= 0) return;
 
         var resolution = ZoomHelper.CalculateResolutionForWorldSize(
@@ -238,7 +253,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomToPanBounds(MBoxFit boxFit = MBoxFit.Fill, long duration = -1, Easing? easing = default)
     {
-        if (!IsInitialized)
+        if (!HasExecutedPostponedCalls)
         {
             AddToInitialization(() => ZoomToPanBounds(boxFit, duration, easing));
             return;
@@ -256,7 +271,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void CenterOnAndZoomTo(MPoint center, double resolution, long duration = -1, Easing? easing = default)
     {
-        if (!IsInitialized)
+        if (!HasExecutedPostponedCalls)
         {
             AddToInitialization(() => CenterOnAndZoomTo(center, resolution, duration, easing));
             return;
@@ -274,7 +289,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void ZoomTo(double resolution, long duration = -1, Easing? easing = default)
     {
-        if (!IsInitialized)
+        if (!HasExecutedPostponedCalls)
         {
             AddToInitialization(() => ZoomTo(resolution, duration, easing));
             return;
@@ -298,7 +313,7 @@ public class Navigator
     /// <param name="easing">The easing of the animation when duration is > 0</param>
     public void ZoomTo(double resolution, ScreenPosition centerOfZoomScreen, long duration = -1, Easing? easing = default)
     {
-        if (!IsInitialized)
+        if (!HasExecutedPostponedCalls)
         {
             AddToInitialization(() => ZoomTo(resolution, centerOfZoomScreen, duration, easing));
             return;
@@ -405,7 +420,7 @@ public class Navigator
     /// <param name="easing">Function for easing</param>
     public void CenterOn(MPoint center, long duration = -1, Easing? easing = default)
     {
-        if (!IsInitialized)
+        if (!HasExecutedPostponedCalls)
         {
             AddToInitialization(() => CenterOn(center, duration, easing));
             return;
@@ -434,7 +449,7 @@ public class Navigator
     /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
     public void RotateTo(double rotation, long duration = -1, Easing? easing = default)
     {
-        if (!IsInitialized)
+        if (!HasExecutedPostponedCalls)
         {
             AddToInitialization(() => RotateTo(rotation, duration, easing));
             return;
@@ -546,7 +561,7 @@ public class Navigator
         Logger.Log(LogLevel.Information, $"Navigator: SetSize {width} x {height}");
         ClearAnimations();
         SetViewportWithLimit(Viewport with { Width = width, Height = height });
-        var wasInitialized = IsInitialized;
+        var wasInitialized = HasExecutedPostponedCalls;
         InitializeIfNeeded();
         if (wasInitialized) // Workaround to prevent double data refresh: Only call when it was already initialized because if it is not then it will be called in Initialize().
             OnFetchRequested(ChangeType.Discrete);
@@ -554,8 +569,8 @@ public class Navigator
 
     private void InitializeIfNeeded()
     {
-        if (ShouldInitialize())
-            Initialize();
+        if (!HasExecutedPostponedCalls && Viewport.HasSize())
+            ExecutedPostponedCalls();
     }
 
     private void OnFetchRequested(ChangeType changeType)
@@ -698,6 +713,9 @@ public class Navigator
 
     public void SetViewport(Viewport viewport, long duration = -1, Easing? easing = default)
     {
+        if (viewport.Resolution <= 0)
+            Logger.Log(LogLevel.Warning, $"Navigator: The Viewport was set but Resolution is {viewport.Resolution}. This is unexpected.");
+
         if (duration <= 0)
         {
             ClearAnimations();
@@ -724,17 +742,13 @@ public class Navigator
     {
         // Save state when this function is originally called
         // Add action to initialization list
-        _initialization.Add(() =>
+        _postponedCalls.Add(() =>
         {
-            Logger.Log(LogLevel.Information, $"Navigator: Executing '{MetaDataHelper.GetReadableActionName(action)}'");
+            Logger.Log(LogLevel.Information, $"Navigator: Executing postponed call '{MetaDataHelper.GetReadableActionName(action)}'");
             action();
             //Restore old settings of locks
         });
     }
-
-    private bool ShouldInitialize() => !IsInitialized && CanInitialize();
-
-    private bool CanInitialize() => Viewport.HasSize() && PanBounds is not null;
 
     internal int GetAnimationsCount => _animations.Count();
 
