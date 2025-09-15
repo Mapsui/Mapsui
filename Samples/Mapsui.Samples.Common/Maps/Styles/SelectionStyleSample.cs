@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps.Styles;
 internal class SelectionStyleSample : ISample
 {
     public string Name => "Select a feature";
-    public string Category => "White";
+    public string Category => "Styles";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
