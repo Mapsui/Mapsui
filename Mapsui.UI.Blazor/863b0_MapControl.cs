@@ -16,7 +16,7 @@ public partial class MapControl : ComponentBase, IMapControl
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
     private bool _onLoaded;
     private float? _pixelDensityFromInterop;
-    private BoundingClientRect _clientRect = new(); // We need to know the offset for touch.
+    private BoundingClientRect _clientRect = new(); // Needed to convert touch positions to screen positions.
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
     private ScreenPosition? _lastTouchPosition; // Workaround for missing TouchEnd position.
