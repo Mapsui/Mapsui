@@ -51,7 +51,7 @@ public sealed class RasterizedVectorTilesSample : ISample, IDisposable
     private static TileLayer CreateLayer(SqliteDataSource sqliteDataSource)
     {
 
-        var tileSource = new VectorTileSourceWrapper(sqliteDataSource);
+        var tileSource = new VectorTileSource(sqliteDataSource);
         return new TileLayer(tileSource, dataFetchStrategy: new DataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
         {
             Name = "VexTile.TileSource.Mvt",
@@ -70,7 +70,7 @@ public sealed class RasterizedVectorTilesSample : ISample, IDisposable
         _sqliteDataSource.Dispose();
     }
 
-    private sealed class VectorTileSourceWrapper : ILocalTileSource
+    private sealed class VectorTileSource : ILocalTileSource
     {
         private readonly VectorTilesSource _tileSource;
         private readonly VectorStyle _style = new(VectorStyleKind.Default);
@@ -78,7 +78,7 @@ public sealed class RasterizedVectorTilesSample : ISample, IDisposable
         public string Name => "VexTile";
         public Attribution Attribution => new("Attributions");
 
-        public VectorTileSourceWrapper(ITileDataSource tileDataSource)
+        public VectorTileSource(ITileDataSource tileDataSource)
         {
             _tileSource = new VectorTilesSource(tileDataSource);
             _style.SetSourceProvider("openmaptiles", _tileSource);
