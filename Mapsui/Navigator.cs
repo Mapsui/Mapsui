@@ -122,19 +122,20 @@ public class Navigator
     public Navigator()
     {
         // Add a default postponed call which will be executed as soon as the size is known.
-        _postponedCalls = new List<Action> { () =>
-            {
-                if (PanBounds is null)
-                {
-                    Logger.Log(LogLevel.Information, $"Navigator: Not zooming to {nameof(PanBounds)} at startup because they are not set.");
-                }
-                else
-                {
-                    Logger.Log(LogLevel.Information, $"Navigator: Zooming to {nameof(PanBounds)} at startup.");
-                    ZoomToPanBounds();
-                }
-            }
-        };
+        _postponedCalls = new List<Action> { DefaultPostponedCall };
+    }
+
+    private void DefaultPostponedCall()
+    {
+        if (PanBounds is null)
+        {
+            Logger.Log(LogLevel.Information, $"Navigator: Not zooming to {nameof(PanBounds)} at startup because they are not set.");
+        }
+        else
+        {
+            Logger.Log(LogLevel.Information, $"Navigator: Zooming to {nameof(PanBounds)} at startup.");
+            ZoomToPanBounds();
+        }
     }
 
     private void ExecutedPostponedCalls()
