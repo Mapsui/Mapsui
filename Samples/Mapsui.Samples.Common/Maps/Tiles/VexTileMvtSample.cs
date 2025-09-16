@@ -1,5 +1,4 @@
-﻿using BruTile;
-using BruTile.Predefined;
+﻿using Mapsui.Experimental.VectorTiles;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling;
 using Mapsui.Tiling.Fetcher;
@@ -8,11 +7,7 @@ using SQLite;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using VexTile.Common.Enums;
-using VexTile.Common.Sources;
 using VexTile.Data.Sources;
-using VexTile.Renderer.Mvt.AliFlux;
-using VexTile.Renderer.Mvt.AliFlux.Sources;
 
 namespace Mapsui.Samples.Common.Maps.Tiles;
 
@@ -68,26 +63,5 @@ public sealed class RasterizedVectorTilesSample : ISample, IDisposable
     void IDisposable.Dispose()
     {
         _sqliteDataSource.Dispose();
-    }
-
-    private sealed class VectorTileSource : ILocalTileSource
-    {
-        private readonly VectorTilesSource _tileSource;
-        private readonly VectorStyle _style = new(VectorStyleKind.Default);
-        public ITileSchema Schema => new GlobalSphericalMercator { YAxis = YAxis.OSM };
-        public string Name => "VexTile";
-        public Attribution Attribution => new("Attributions");
-
-        public VectorTileSource(ITileDataSource tileDataSource)
-        {
-            _tileSource = new VectorTilesSource(tileDataSource);
-            _style.SetSourceProvider("openmaptiles", _tileSource);
-        }
-
-        public Task<byte[]?> GetTileAsync(BruTile.TileInfo tileInfo)
-        {
-            var canvas = new SkiaCanvas();
-            return TileRendererFactory.RenderAsync(_style, canvas, tileInfo.Index.Col, (int)Schema.GetMatrixHeight(tileInfo.Index.Level) - tileInfo.Index.Row - 1, tileInfo.Index.Level, 256, 256);
-        }
     }
 }
