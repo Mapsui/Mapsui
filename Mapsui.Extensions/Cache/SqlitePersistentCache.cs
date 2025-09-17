@@ -1,17 +1,24 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.IO.Compression;
-using BruTile;
+﻿using BruTile;
 using BruTile.Cache;
 using Mapsui.Cache;
 using Mapsui.Logging;
 using SQLite;
+using SQLitePCL;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.IO.Compression;
 
 namespace Mapsui.Extensions.Cache;
 
 public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCache
 {
+    static SqlitePersistentCache()
+    {
+        // Initialize Sqlite
+        Batteries.Init();
+    }
+
     private readonly string _file;
     private readonly TimeSpan _cacheExpireTime;
     private const string _noCompression = "no";
