@@ -18,6 +18,7 @@ public sealed class RasterizedVectorTilesSample : ISample, IDisposable
     static RasterizedVectorTilesSample()
     {
         MbTilesDeployer.CopyEmbeddedResourceToFile("zurich.mbtiles");
+        SQLitePCL.Batteries.Init();
     }
 
     public RasterizedVectorTilesSample()
@@ -47,7 +48,7 @@ public sealed class RasterizedVectorTilesSample : ISample, IDisposable
     {
 
         var tileSource = new RasterizedVectorTileSource(sqliteDataSource);
-        return new TileLayer(tileSource, dataFetchStrategy: new DataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
+        return new TileLayer(tileSource, dataFetchStrategy: new MinimalDataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
         {
             Name = "VexTile.TileSource.Mvt",
         };
