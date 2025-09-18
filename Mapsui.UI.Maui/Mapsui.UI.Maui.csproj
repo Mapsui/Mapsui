@@ -36,8 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" VersionOverride="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />    
   </ItemGroup>
 
   <ItemGroup>
