@@ -76,8 +76,10 @@
     <PackageVersion Include="SkiaSharp.Views.WinUI" Version="3.119.0" />
     <PackageVersion Include="SkiaSharp.Views.WPF" Version="3.119.0" />
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="3.119.0" />
-    <PackageVersion Include="sqlite-net-pcl" Version="1.9.172" />
-    <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+    <PackageVersion Include="SourceGear.sqlite3" Version="3.50.4.2" />
+    <PackageVersion Include="sqlite-net-base" Version="1.9.172" />
+    <PackageVersion Include="SQLitePCLRaw.config.e_sqlite3" Version="3.0.2" />
+    <PackageVersion Include="SQLitePCLRaw.core" Version="3.0.2" />
     <PackageVersion Include="Svg.Skia" Version="3.0.0" />
     <PackageVersion Include="System.Formats.Asn1" Version="9.0.0" />
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />

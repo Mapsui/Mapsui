@@ -38,8 +38,8 @@ public class VectorStyleRenderer : ISkiaStyleRenderer, IFeatureSize
                 case LineString lineString:
                     LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity, renderService, position);
                     break;
-                case null:
-                    throw new ArgumentException($"Geometry is null, Layer: {layer.Name}");
+                case null: // A geometry may be null. It might be a mistake but logging in the renderer would flood the log.
+                    break;
                 default:
                     throw new ArgumentException($"Unknown geometry type: {geometry?.GetType()}, Layer: {layer.Name}");
             }

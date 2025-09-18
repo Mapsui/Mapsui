@@ -16,8 +16,10 @@
     <PackageReference Include="BruTile" />
     <PackageReference Include="BitMiracle.LibTiff.NET" />
     <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="sqlite-net-pcl" />
-    <PackageReference Include="SQLitePCLRaw.bundle_green" />
+    <PackageReference Include="sqlite-net-base" />
+    <PackageReference Include="SQLitePCLRaw.config.e_sqlite3" />
+    <PackageReference Include="SQLitePCLRaw.core" />
+    <PackageReference Include="SourceGear.sqlite3" />
     <PackageReference Include="DotSpatial.Projections" />
   </ItemGroup>
 
