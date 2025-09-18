@@ -46,7 +46,7 @@ public sealed class RasterizedVectorTilesSample : ISample, IDisposable
     private static TileLayer CreateLayer(SqliteDataSource sqliteDataSource)
     {
 
-        var tileSource = new VectorTileSource(sqliteDataSource);
+        var tileSource = new RasterizedVectorTileSource(sqliteDataSource);
         return new TileLayer(tileSource, dataFetchStrategy: new DataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
         {
             Name = "VexTile.TileSource.Mvt",

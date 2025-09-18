@@ -8,12 +8,12 @@ using VexTile.Renderer.Mvt.AliFlux.Sources;
 
 namespace Mapsui.Experimental.VectorTiles;
 
-public sealed class VectorTileSource : ILocalTileSource
+public sealed class RasterizedVectorTileSource : ILocalTileSource
 {
     private readonly VectorTilesSource _tileSource;
     private readonly VectorStyle _style = new(VectorStyleKind.Default);
 
-    public VectorTileSource(ITileDataSource tileDataSource)
+    public RasterizedVectorTileSource(ITileDataSource tileDataSource)
     {
         _tileSource = new VectorTilesSource(tileDataSource);
         _style.SetSourceProvider("openmaptiles", _tileSource);
