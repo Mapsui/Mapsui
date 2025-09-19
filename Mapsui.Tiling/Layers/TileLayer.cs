@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -172,6 +173,9 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
 
     public virtual void ViewportChanged(FetchInfo fetchInfo)
     {
+        if (fetchInfo.Section.CheckIfAreaIsTooBig())
+            return; // Check added for this issue: https://github.com/Mapsui/Mapsui/issues/3105
+
         Busy = true;
         _tileFetchPlanner.ViewportChanged(fetchInfo);
     }

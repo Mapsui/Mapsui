@@ -19,6 +19,7 @@ public class FetchTracker
     private readonly HashSet<TileIndex> _tilesThatFailed = [];
 
     public static int MaxTilesInOneRequest { get; set; } = 256;
+    public static int DefaultTilesToCoverViewportCount = 32; // We need this number to know how many tiles to keep in cache. Usually we calculate it but this is not always possible. We return something not too big or small.
 
     public int Update(FetchInfo fetchInfo, ITileSchema tileSchema, IDataFetchStrategy dataFetchStrategy, ITileCache<IFeature?> tileCache)
     {
@@ -27,8 +28,11 @@ public class FetchTracker
             _tilesThatFailed.Clear(); // Try them again on new refresh data event.
 
             var levelId = BruTile.Utilities.GetNearestLevel(tileSchema.Resolutions, fetchInfo.Resolution);
-            var tilesToCoverViewport = dataFetchStrategy.Get(tileSchema, fetchInfo.Extent.ToExtent(), levelId);
 
+            if (fetchInfo.Section.CheckIfAreaIsTooBig())
+                return DefaultTilesToCoverViewportCount;
+
+            var tilesToCoverViewport = dataFetchStrategy.Get(tileSchema, fetchInfo.Extent.ToExtent(), levelId);
             var tilesToFetchList = tilesToCoverViewport.Where(t =>
                   tileCache.Find(t.Index) == null
                   && !_tilesInProgress.Contains(t.Index)
@@ -63,6 +67,8 @@ public class FetchTracker
             return tilesToCoverViewport.Count;
         }
     }
+
+
 
     public bool IsDone()
     {
