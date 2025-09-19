@@ -4,14 +4,14 @@ namespace Mapsui.Rendering;
 
 public static class DefaultRendererFactory
 {
-    private static IRenderer? _renderer;
+    private static IMapRenderer? _renderer;
     static DefaultRendererFactory()
     {
         Create = () => throw new Exception("No method to create a renderer was registered");
     }
 
-    public static Func<IRenderer> Create { get; set; }
-    public static IRenderer GetRenderer()
+    public static Func<IMapRenderer> Create { get; set; }
+    public static IMapRenderer GetRenderer()
     {
         return _renderer ??= Create();
     }

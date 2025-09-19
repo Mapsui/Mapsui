@@ -54,11 +54,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 {
     private readonly TapGestureTracker _tapGestureTracker = new();
     private readonly FlingTracker _flingTracker = new();
-    private double _sharedWidth;
-    private double _sharedHeight;
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    private ScreenSize _mapControlScreenSize = new(0, 0);
     private RenderController? _renderController;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     /// <summary>
     /// The movement allowed between a touch down and touch up in a touch gestures in device independent pixels.
@@ -112,10 +109,17 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void SharedOnSizeChanged(double width, double height)
     {
-        _sharedWidth = width;
-        _sharedHeight = height;
+        _mapControlScreenSize = new ScreenSize(width, height);
         TryUpdateViewportSize();
     }
+
+    public void SetMapRenderer(IMapRenderer mapRenderer)
+    {
+        if (_renderController is null)
+            return;
+        _renderController.SetMapRenderer(mapRenderer);
+    }
+
 
     /// <summary>
     /// Force a update of control
@@ -167,7 +171,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         map.PropertyChanged += Map_PropertyChanged;
         map.RefreshGraphicsRequest += Map_RefreshGraphicsRequest;
     }
-
 
     private void Map_RefreshGraphicsRequest(object? sender, EventArgs e)
     {
@@ -383,13 +386,13 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </summary>
     private void TryUpdateViewportSize()
     {
-        if (_sharedWidth <= 0 || _sharedHeight <= 0)
+        if (_mapControlScreenSize.Width <= 0 || _mapControlScreenSize.Height <= 0)
             return;
 
         if (Map is Map map)
         {
             var hadSize = map.Navigator.Viewport.HasSize();
-            map.Navigator.SetSize(_sharedWidth, _sharedHeight);
+            map.Navigator.SetSize(_mapControlScreenSize.Width, _mapControlScreenSize.Height);
             if (!hadSize && map.Navigator.Viewport.HasSize()) map.OnViewportSizeInitialized();
         }
     }
@@ -581,4 +584,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
         return eventArgs.Handled;
     }
+
+    private record ScreenSize(double Width, double Height);
 }

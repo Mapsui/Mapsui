@@ -3,7 +3,6 @@ using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Styles;
 using Mapsui.UI.Maui;
 using Compass = Microsoft.Maui.Devices.Sensors.Compass;
 using Mapsui.Manipulations;
@@ -40,8 +39,6 @@ public sealed partial class MapPage : ContentPage, IDisposable
 
         mapView.MyLocationLayer.UpdateMyLocation(new Position());
 
-        mapView.Info += MapView_Info;
-
         Catch.TaskRun(StartGPS);
 
         try
@@ -66,28 +63,6 @@ public sealed partial class MapPage : ContentPage, IDisposable
     {
         mapView.IsVisible = true;
         mapView.Refresh();
-    }
-
-    private void MapView_Info(object? sender, MapInfoEventArgs? e)
-    {
-        if (e is null)
-            return;
-
-        var mapInfo = e.GetMapInfo(mapView.MapInfoLayers);
-
-        if (mapInfo.Feature != null)
-        {
-            foreach (var style in mapInfo.Feature.Styles)
-            {
-                if (style is CalloutStyle)
-                {
-                    style.Enabled = !style.Enabled;
-                    e.Handled = true;
-                }
-            }
-
-            mapView.RefreshGraphics();
-        }
     }
 
     private void OnMapClicked(object? sender, MapClickedEventArgs e)

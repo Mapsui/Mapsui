@@ -51,19 +51,18 @@ public class GeoJsonInfoSample : ISample
         return map;
     }
 
-    private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
-        => new Layer("City labels")
-        {
-            DataSource = citiesProvider,
-            Enabled = true,
-            Style = CreateCityLabelStyle(),
-        };
+    private static Layer CreateCityLabelLayer(IProvider citiesProvider) => new("City labels")
+    {
+        DataSource = citiesProvider,
+        Enabled = true,
+        Style = CreateCityLabelStyle(),
+    };
 
     private static LabelStyle CreateCityLabelStyle()
-        => new LabelStyle
+        => new()
         {
             ForeColor = Color.Black,
-            BackColor = new Brush(Color.White),
+            BackColor = new Brush(new Color(242, 239, 233)),
             LabelColumn = "city",
         };
 }

@@ -7,26 +7,26 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using RTK = Topten.RichTextKit;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
-public class CustomCalloutStyleSample : IMapControlSample
+public class CustomCalloutStyleSample : ISample
 {
     public string Name => "Custom Callout Style";
     public string Category => "MapInfo";
 
     private const string _customStyleLayerName = "Custom Callout Layer";
 
-    public void Setup(IMapControl mapControl)
+    public Task<Map> CreateMapAsync()
     {
-        mapControl.Map = CreateMap();
+        return Task.FromResult(CreateMap());
     }
 
     public static Map CreateMap()

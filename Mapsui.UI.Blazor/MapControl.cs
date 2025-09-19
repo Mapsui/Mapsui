@@ -14,13 +14,12 @@ public partial class MapControl : ComponentBase, IMapControl
     protected SKCanvasView? _viewCpu;
     protected SKGLView? _viewGpu;
     protected readonly string _elementId = Guid.NewGuid().ToString("N");
-    private SKImageInfo? _canvasSize;
     private bool _onLoaded;
     private float? _pixelDensityFromInterop;
-    private BoundingClientRect _clientRect = new();
+    private BoundingClientRect _clientRect = new(); // We need to know the offset for touch.
     private MapsuiJsInterop? _interop;
     private readonly ManipulationTracker _manipulationTracker = new();
-    public ScreenPosition? _lastMovePosition; // Workaround for missing touch position on touch-up.
+    private ScreenPosition? _lastTouchPosition; // Workaround for missing TouchEnd position.
 
     [Inject]
     private IJSRuntime? JsRuntime { get; set; }
@@ -78,23 +77,9 @@ public partial class MapControl : ComponentBase, IMapControl
             await InitializingInteropAsync();
     }
 
-    protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
-    {
-        // the the canvas and properties
-        var canvas = e.Surface.Canvas;
-        var info = e.Info;
+    protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e) => OnPaintSurface(e.Surface.Canvas, e.Info);
 
-        OnPaintSurface(canvas, info);
-    }
-
-    protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e)
-    {
-        // the the canvas and properties
-        var canvas = e.Surface.Canvas;
-        var info = e.Info;
-
-        OnPaintSurface(canvas, info);
-    }
+    protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e) => OnPaintSurface(e.Surface.Canvas, e.Info);
 
     protected void OnPaintSurface(SKCanvas canvas, SKImageInfo info)
     {
@@ -105,24 +90,16 @@ public partial class MapControl : ComponentBase, IMapControl
             OnLoadComplete();
         }
 
-        // Size changed Workaround
-        if (_canvasSize?.Width != info.Width || _canvasSize?.Height != info.Height)
+        // Workaround for problems with the size changed events.
+        if (_mapControlScreenSize?.Width != info.Width || _mapControlScreenSize?.Height != info.Height)
         {
-            _canvasSize = info;
-            OnSizeChanged(info);
+            SharedOnSizeChanged(info.Width, info.Height);
+            _ = UpdateBoundingRectAsync(); // Update bounding rect for touch
         }
-
         _renderController?.Render(canvas);
     }
 
-    private void OnLoadComplete()
-    {
-        Catch.Exceptions(async () =>
-        {
-            SharedOnSizeChanged(_canvasSize?.Width ?? 0, _canvasSize?.Height ?? 0);
-            await InitializingInteropAsync();
-        });
-    }
+    private void OnLoadComplete() => Catch.Exceptions(InitializingInteropAsync);
 
     protected void OnMouseWheel(WheelEventArgs e)
     {
@@ -130,12 +107,12 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             var stepSize = ContinuousMouseWheelZoomStepSize;
             var scaleFactor = Math.Pow(2, e.DeltaY > 0 ? stepSize : -stepSize);
-            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToScreenPosition(_clientRect));
+            Map.Navigator.MouseWheelZoomContinuous(scaleFactor, e.ToScreenPosition());
         }
         else
         {
             var mouseWheelDelta = (int)e.DeltaY * -1; // so that it zooms like on windows
-            var mousePosition = e.ToScreenPosition(_clientRect);
+            var mousePosition = e.ToScreenPosition();
             Map.Navigator.MouseWheelZoom(mouseWheelDelta, mousePosition);
         }
     }
@@ -169,12 +146,6 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
-    private void OnSizeChanged(SKImageInfo skImageInfo)
-    {
-        SharedOnSizeChanged(skImageInfo.Width, skImageInfo.Height);
-        _ = UpdateBoundingRectAsync();
-    }
-
     private async Task UpdateBoundingRectAsync()
     {
         _clientRect = await BoundingClientRectAsync();
@@ -190,9 +161,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            // The client rect needs updating for scrolling. I would rather do that on the onscroll event but it does not fire on this element.
-            _ = UpdateBoundingRectAsync();
-            var position = e.ToScreenPosition(_clientRect);
+            var position = e.ToScreenPosition();
 
             _manipulationTracker.Restart([position]);
 
@@ -206,7 +175,7 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var isHovering = !IsMouseButtonPressed(e);
-            var position = e.ToScreenPosition(_clientRect);
+            var position = e.ToScreenPosition();
 
             if (OnPointerMoved([position], isHovering))
                 return;
@@ -222,7 +191,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         Catch.Exceptions(() =>
         {
-            var position = e.ToScreenPosition(_clientRect);
+            var position = e.ToScreenPosition();
             OnPointerReleased([position]);
         });
     }
@@ -266,6 +235,8 @@ public partial class MapControl : ComponentBase, IMapControl
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
             _manipulationTracker.Restart(positions);
 
+            _lastTouchPosition = positions.Length > 0 ? positions[0] : null; // Workaround for missing TouchEnd position
+
             if (OnPointerPressed(positions))
                 return;
         });
@@ -276,8 +247,8 @@ public partial class MapControl : ComponentBase, IMapControl
         Catch.Exceptions(() =>
         {
             var positions = e.TargetTouches.ToScreenPositions(_clientRect);
-            if (positions.Length == 1)
-                _lastMovePosition = positions[0]; // Workaround for missing touch-up location.
+            if (positions.Length > 0)
+                _lastTouchPosition = positions[0]; // Workaround for missing TouchEnd position.
 
             if (OnPointerMoved(positions, false))
                 return;
@@ -287,14 +258,16 @@ public partial class MapControl : ComponentBase, IMapControl
         });
     }
 
-    public void OnTouchEnd(TouchEventArgs _)
+    public void OnTouchEnd(TouchEventArgs e)
     {
         Catch.Exceptions(() =>
         {
-            if (_lastMovePosition is null)
-                return;
-            var position = _lastMovePosition.Value;
-            OnPointerReleased([position]);
+            var positions = e.TargetTouches.ToScreenPositions(_clientRect);
+
+            if (positions.Length > 0)
+                OnPointerReleased(positions);
+            else if (_lastTouchPosition is ScreenPosition screenPosition) // Workaround for missing TouchEnd position.
+                OnPointerReleased([screenPosition]);
         });
     }
 
