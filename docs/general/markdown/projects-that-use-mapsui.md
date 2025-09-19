@@ -8,6 +8,9 @@
 
 [![Droniq Maps](images/droniq-maps.png)](https://droniq.de/en/droniq-maps/)
 
+### LokqlDx - KQL data explorer
+
+[![LokqlDx - KQL data explorer](images/lokql.png)](https://github.com/NeilMacMullen/kusto-loco)
 
 ### Squadra
 
