@@ -20,7 +20,6 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.InfoWidgets;
 using NUnit.Framework;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -143,12 +142,8 @@ public class MapRegressionTests
         }
         finally
         {
-            if (sample is IDisposable disposable)
-            {
-#pragma warning disable IDISP007 // Don't dispose injected
-                disposable.Dispose();
-#pragma warning restore IDISP007 // Don't dispose injected
-            }
+            // At this point we would like to dispose the samples but the instance is created
+            // once and reused for all retries. Instead we should create an instance per test run.
         }
     }
 
