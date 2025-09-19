@@ -255,7 +255,6 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         }
     }
 
-    // ReSharper restore RedundantNameQualifier
 #pragma warning disable IDISP002 // Is Disposed in SharedDispose
     private DisposableWrapper<Map>? _map;
 #pragma warning restore IDISP002

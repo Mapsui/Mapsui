@@ -20,28 +20,24 @@ public class GeoTiffProvider : IProvider, IDisposable
     {
         public double Width;
         public double Height;
-        // ReSharper disable NotAccessedField.Local
         public double HResolution;
         public double VResolution;
-        // ReSharper restore NotAccessedField.Local
     }
 
     private struct WorldProperties
     {
         public double PixelSizeX;
-        // ReSharper disable NotAccessedField.Local
         public double RotationAroundYAxis;
         public double RotationAroundXAxis;
-        // ReSharper restore NotAccessedField.Local
         public double PixelSizeY;
         public double XCenterOfUpperLeftPixel;
         public double YCenterOfUpperLeftPixel;
     }
 
-    private const string WorldExtension = ".tfw";
-    private readonly IFeature _feature;
+    private const string _worldExtension = ".tfw";
+    private readonly RasterFeature _feature;
     private readonly MRect _extent;
-    private MRaster _mRaster;
+    private readonly MRaster _mRaster;
 
     public GeoTiffProvider(string tiffPath, List<Color>? noDataColors = null)
     {
@@ -50,7 +46,7 @@ public class GeoTiffProvider : IProvider, IDisposable
             throw new ArgumentException($"Tiff file expected at {tiffPath}");
         }
 
-        var worldPath = GetPathWithoutExtension(tiffPath) + WorldExtension;
+        var worldPath = GetPathWithoutExtension(tiffPath) + _worldExtension;
         if (!File.Exists(worldPath))
         {
             throw new ArgumentException($"World file expected at {worldPath}");
@@ -98,8 +94,8 @@ public class GeoTiffProvider : IProvider, IDisposable
         return imageStream;
     }
 
-    private const TiffTag TIFFTAG_ModelPixelScaleTag = (TiffTag)33550;
-    private const TiffTag TIFFTAG_ModelTiepointTag = (TiffTag)33922;
+    private const TiffTag _tIFFTAG_ModelPixelScaleTag = (TiffTag)33550;
+    private const TiffTag _tIFFTAG_ModelTiepointTag = (TiffTag)33922;
 
     private Tiff.TiffExtendProc? _parentExtender;
 
@@ -107,14 +103,13 @@ public class GeoTiffProvider : IProvider, IDisposable
     {
         TiffFieldInfo[] tiffFieldInfo =
         {
-                new TiffFieldInfo(TIFFTAG_ModelPixelScaleTag, 3, 3, TiffType.DOUBLE, FieldBit.Custom, true, false, "ModelPixelScaleTag"),
-                new TiffFieldInfo(TIFFTAG_ModelTiepointTag, 6, 6, TiffType.DOUBLE, FieldBit.Custom, false, true, "ModelTiepointTag"),
+                new(_tIFFTAG_ModelPixelScaleTag, 3, 3, TiffType.DOUBLE, FieldBit.Custom, true, false, "ModelPixelScaleTag"),
+                new(_tIFFTAG_ModelTiepointTag, 6, 6, TiffType.DOUBLE, FieldBit.Custom, false, true, "ModelTiepointTag"),
             };
 
         tif.MergeFieldInfo(tiffFieldInfo, tiffFieldInfo.Length);
 
-        if (_parentExtender != null)
-            _parentExtender(tif);
+        _parentExtender?.Invoke(tif);
     }
 
     private TiffProperties LoadTiff(string location)
@@ -277,7 +272,6 @@ public class GeoTiffProvider : IProvider, IDisposable
     public virtual void Dispose()
     {
         (_feature as IDisposable)?.Dispose();
-        Tiff.SetTagExtender(_parentExtender); // set previous Tag Extender
+        _ = Tiff.SetTagExtender(_parentExtender); // set previous Tag Extender
     }
 }
-

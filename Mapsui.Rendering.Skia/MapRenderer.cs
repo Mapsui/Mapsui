@@ -319,7 +319,6 @@ public sealed class MapRenderer : IMapRenderer
                         {
                             try
                             {
-                                // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
                                 surface.Canvas.Save();
                                 // 1) Clear the entire bitmap
                                 surface.Canvas.Clear(SKColors.Transparent);
@@ -330,7 +329,6 @@ public sealed class MapRenderer : IMapRenderer
                                     // 4) Add feature and style to result
                                     mapList.Add(new MapInfoRecord(feature, style, layer));
                                 surface.Canvas.Restore();
-                                // ReSharper restore AccessToDisposedClosure
                             }
                             catch (Exception exception)
                             {

@@ -12,8 +12,6 @@ using System.Web;
 using System.Xml;
 using Mapsui.Projections;
 
-// ReSharper disable InconsistentNaming
-
 namespace Mapsui.Providers.Wfs.Utilities;
 
 public class WFS_2_0_0_TextResources : WFS_2_0_0_XPathTextResources, IWFS_TextResources

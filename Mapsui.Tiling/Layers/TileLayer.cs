@@ -48,7 +48,6 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
     /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
     /// <param name="fetchTileAsFeature">Fetch tile as feature</param>
-    // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
     public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
         IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
         int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Task<IFeature?>>? fetchTileAsFeature = null)

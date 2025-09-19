@@ -6,7 +6,6 @@
 
 using System.Collections.Generic;
 using System.Text;
-// ReSharper disable InconsistentNaming
 
 namespace Mapsui.Providers.Wfs.Utilities;
 

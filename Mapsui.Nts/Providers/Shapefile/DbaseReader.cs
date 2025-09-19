@@ -27,7 +27,6 @@ internal sealed class DbaseReader : IDisposable
         public Type DataType;
         public int Decimals;
         public int Length;
-        // ReSharper disable once NotAccessedField.Local
         public int Address;
     }
 
@@ -157,7 +156,6 @@ internal sealed class DbaseReader : IDisposable
         _headerIsParsed = true;
     }
 
-    // ReSharper disable once CyclomaticComplexity // It's a switch statement!
     private static Encoding GetDbaseLanguageDriver(byte dbasecode)
     {
         switch (dbasecode)
