@@ -73,10 +73,11 @@ public class MapRegressionTests
         var original = Logger.LogDelegate;
         try
         {
+            SQLitePCL.Batteries.Init();
             Logger.LogDelegate = SampleHelper.ConsoleLog;
             // At the moment of writing this comment we do not have logging in the map. To compare
             // images we disable it for now. Perhaps we want logging to be part of the test image in some cases.
-            LoggingWidget.ShowLoggingInMap = ActiveMode.No;
+            LoggingWidget.ShowLoggingInMap = ActiveMode.No; // We do not want logging in the mag
             SampleHelper.ConsoleLog(LogLevel.Debug, $"Start MapRegressionTest {sample.GetType().Name}", null);
             await TestSampleAsync(sample, true).ConfigureAwait(false);
         }
