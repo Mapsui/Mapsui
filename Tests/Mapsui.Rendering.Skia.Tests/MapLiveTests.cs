@@ -57,6 +57,7 @@ public class MapLiveTests
         var original = Logger.LogDelegate;
         try
         {
+            SQLitePCL.Batteries.Init();
             Logger.LogDelegate = ConsoleLog;
             // At the moment of writing this comment we do not have logging in the map. To compare
             // images we disable it for now. Perhaps we want logging to be part of the test image in some cases.
