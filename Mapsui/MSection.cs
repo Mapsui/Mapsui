@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Extensions;
+using System;
 
 namespace Mapsui;
 
@@ -10,9 +11,9 @@ public record MSection
 {
     public MSection(MRect extent, double resolution)
     {
-
         Extent = extent ?? throw new ArgumentNullException(nameof(extent));
         Resolution = resolution;
+        _ = this.CheckIfAreaIsTooBig();
     }
 
     public MRect Extent { get; }
