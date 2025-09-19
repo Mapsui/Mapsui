@@ -77,7 +77,7 @@
     <PackageVersion Include="SkiaSharp.Views.WPF" Version="3.119.0" />
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="3.119.0" />
     <PackageVersion Include="SourceGear.sqlite3" Version="3.50.4.2" />
-    <PackageVersion Include="sqlite-net-base" Version="1.9.172" />
+    <PackageVersion Include="sqlite-net-base" Version="1.10.196-beta" />
     <PackageVersion Include="SQLitePCLRaw.config.e_sqlite3" Version="3.0.2" />
     <PackageVersion Include="SQLitePCLRaw.core" Version="3.0.2" />
     <PackageVersion Include="Svg.Skia" Version="3.0.0" />
