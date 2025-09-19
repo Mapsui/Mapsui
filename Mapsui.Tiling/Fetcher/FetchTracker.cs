@@ -68,8 +68,6 @@ public class FetchTracker
         }
     }
 
-
-
     public bool IsDone()
     {
         lock (_lock)
