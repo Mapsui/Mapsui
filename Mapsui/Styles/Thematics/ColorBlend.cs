@@ -63,10 +63,8 @@ public class ColorBlend
             throw new ArgumentException("Colors and Positions arrays must be of equal length");
         if (Colors.Length < 2)
             throw new ArgumentException("At least two colors must be defined in the ColorBlend");
-        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (Positions[0] != 0f)
             throw new ArgumentException("First position value must be 0.0f");
-        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (Positions[^1] != 1f)
             throw new ArgumentException("Last position value must be 1.0f");
         if (pos > 1 || pos < 0) pos -= Math.Floor(pos);

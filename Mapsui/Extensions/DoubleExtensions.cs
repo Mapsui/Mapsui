@@ -6,7 +6,6 @@ public static class DoubleExtensions
     {
         if (double.IsNaN(target)) return true;
         if (double.IsInfinity(target)) return true;
-        // ReSharper disable once CompareOfFloatsByEqualityOperator
         return target == 0;
     }
 }

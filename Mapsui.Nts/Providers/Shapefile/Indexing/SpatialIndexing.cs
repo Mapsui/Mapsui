@@ -144,8 +144,8 @@ public class QuadTree : IDisposable
     {
         using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
         using var br = new BinaryReader(fs);
-        // ReSharper disable once CompareOfFloatsByEqualityOperator
-        if (br.ReadDouble() != Indexfileversion) //Check fileindex version
+
+        if (br.ReadDouble() != Indexfileversion) // Check file index version
         {
             fs.Close();
             throw new ObsoleteFileFormatException(

@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
-// ReSharper disable All - This is a workaround for a limitation of the nuget package
 namespace Mapsui.Utilities;
 
 /// <summary>
