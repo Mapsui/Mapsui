@@ -13,7 +13,7 @@ public static class MSectionExtensions
         {
             var message =
                 $"The area requested is very large. " +
-                $"The map mega pixels is '{totalMegaPixels:F2}'." +
+                $"The map section is '{totalMegaPixels:F2}' mega pixels in size." +
                 $"This may indicate a bug or configuration error. " +
                 $"The '{nameof(MaxMegaPixels)}' is '{MaxMegaPixels}'." +
                 $"Change the '{nameof(MSectionExtensions)}.{nameof(MaxMegaPixels)}' setting if the area is supposed to be this big." +
