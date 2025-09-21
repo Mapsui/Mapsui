@@ -32,7 +32,7 @@ public class DynamicSymbolScaleStyleSample : ISample
     private static MemoryLayer CreateLayerWithDynamicScaleStyle(Map map) => new()
     {
         Name = "Dynamic Symbol Scale",
-        Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent!.Grow(-map.Extent.Width * 0.94), 50, seed: 245),
+        Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent!.Grow(map.Extent.Width * 0.94 - map.Extent.Width), 50, seed: 245),
         Style = CreateDynamicSymbolScaleStyle()
     };
 
