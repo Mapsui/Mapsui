@@ -362,9 +362,12 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         SKFont skFont = new()
         {
             Embolden = false,
-            EmbeddedBitmaps = true,
+            //EmbeddedBitmaps = true,
             Size = (float)font.Size,
             Typeface = typeface,
+            //Subpixel = true,
+            //Hinting = SKFontHinting.None,
+            //Edging = SKFontEdging.Antialias,
         };
 
         return skFont;

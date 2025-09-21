@@ -759,7 +759,6 @@ public class ShapeFile : IProvider, IDisposable, IProviderExtended
     /// <remarks><see cref="FilterDelegate">Filtering</see> is not applied to this method</remarks>
     /// <param name="oid">Object ID</param>
     /// <returns>geometry</returns>
-    // ReSharper disable once CyclomaticComplexity // Fix when changes need to be made here
     private Geometry? ReadGeometry(uint oid)
     {
         if (_brShapeFile is null) return null;

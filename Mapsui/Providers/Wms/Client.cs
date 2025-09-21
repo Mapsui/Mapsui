@@ -548,8 +548,6 @@ public class Client
     /// </summary>
     /// <param name="xmlLayer"></param>
     /// <returns></returns>
-    // ReSharper disable once FunctionComplexityOverflow 
-    // ReSharper disable once CyclomaticComplexity
     private WmsServerLayer ParseLayer(XmlNode? xmlLayer)
     {
         var wmsServerLayer = new WmsServerLayer();
