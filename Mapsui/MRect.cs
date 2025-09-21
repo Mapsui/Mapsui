@@ -33,10 +33,10 @@ public class MRect : IEquatable<MRect>
 
     public MRect(double minX, double minY, double maxX, double maxY)
     {
+        ThrowIfMinIsGreaterThanMax(minX, minY, maxX, maxY);
         Min = new MPoint(minX, minY);
         Max = new MPoint(maxX, maxY);
-        SwapMinAndMaxIfNeeded();
-        Centroid = new(Min.X + Width * 0.5, Min.Y + Height * 0.5);
+        Centroid = new(minX + Width * 0.5, minY + Height * 0.5);
     }
 
     public MRect(double value) : this(value, value, value, value) { }
@@ -130,9 +130,7 @@ public class MRect : IEquatable<MRect>
 
     public MRect Grow(double amountInX, double amountInY)
     {
-        var grownBox = new MRect(Min.X - amountInX, Min.Y - amountInY, Max.X + amountInX, MaxY + amountInY);
-        grownBox.SwapMinAndMaxIfNeeded();
-        return grownBox;
+        return new MRect(Min.X - amountInX, Min.Y - amountInY, Max.X + amountInX, MaxY + amountInY);
     }
 
     public bool Intersects(MRect? rect)
@@ -245,15 +243,12 @@ public class MRect : IEquatable<MRect>
         return !Equals(left, right);
     }
 
-    private void SwapMinAndMaxIfNeeded()
+    private static void ThrowIfMinIsGreaterThanMax(double minX, double minY, double maxX, double maxY)
     {
-        if (Min.X > Max.X)
-        {
-            (Min.X, Max.X) = (Max.X, Min.X);
-        }
-        if (Min.Y > Max.Y)
-        {
-            (Min.Y, Max.Y) = (Max.Y, Min.Y);
-        }
+        // Now validates instead of swapping: throw if inputs are invalid.
+        if (minX > maxX)
+            throw new ArgumentException("minX can not be greater than maxX");
+        if (minY > maxY)
+            throw new ArgumentException("minY can not be greater than maxY");
     }
 }
