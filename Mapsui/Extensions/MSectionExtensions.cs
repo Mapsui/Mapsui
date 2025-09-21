@@ -4,7 +4,7 @@ namespace Mapsui.Extensions;
 
 public static class MSectionExtensions
 {
-    public static int MaxPixels { get; set; } = 256 * 256 * 32; // Rough estimate of what is too big for realistic scenarios. It is based on TileWidth * TileHeight * MaxTilesInOneRequest
+    public static int MaxPixels { get; set; } = 256 * 256 * 256; // Rough estimate of what is too big for realistic scenarios. It is based on TileWidth * TileHeight * MaxTilesInOneRequest
     public static bool CheckIfAreaIsTooBig(this MSection section)
     {
         var pixelsPerUnit = 1 / section.Resolution;
