@@ -7,7 +7,7 @@ namespace Mapsui;
 /// MSection represents a part of the map defined by the extent and the resolution to indicate the level of detail.
 /// It's main purpose is to define which data should be fetched.
 /// </summary>
-public record MSection
+public class MSection
 {
     public MSection(MRect extent, double resolution)
     {
