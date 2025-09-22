@@ -29,9 +29,6 @@ public class FetchTracker
 
             var levelId = BruTile.Utilities.GetNearestLevel(tileSchema.Resolutions, fetchInfo.Resolution);
 
-            if (fetchInfo.Section.CheckIfAreaIsTooBig())
-                return DefaultTilesToCoverViewportCount;
-
             var tilesToCoverViewport = dataFetchStrategy.Get(tileSchema, fetchInfo.Extent.ToExtent(), levelId);
             var tilesToFetchList = tilesToCoverViewport.Where(t =>
                   tileCache.Find(t.Index) == null
