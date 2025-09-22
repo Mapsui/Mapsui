@@ -36,6 +36,7 @@ public sealed class RasterizedVectorTileSource : ILocalTileSource
             ? matrixHeight - tileInfo.Index.Row - 1
             : tileInfo.Index.Row;
 
-        return TileRendererFactory.RenderAsync(_style, canvas, col, row, tileInfo.Index.Level, 256, 256);
+        return TileRendererFactory.RenderAsync(_style, canvas, col, row, tileInfo.Index.Level,
+            _schema.GetTileWidth(tileInfo.Index.Level), _schema.GetTileHeight(tileInfo.Index.Level));
     }
 }
