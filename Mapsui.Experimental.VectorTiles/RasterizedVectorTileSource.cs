@@ -12,14 +12,16 @@ public sealed class RasterizedVectorTileSource : ILocalTileSource
 {
     private readonly VectorTilesSource _tileSource;
     private readonly VectorStyle _style = new(VectorStyleKind.Default);
+    private readonly ITileSchema _schema;
 
-    public RasterizedVectorTileSource(ITileDataSource tileDataSource)
+    public RasterizedVectorTileSource(ITileDataSource tileDataSource, ITileSchema? schema = null)
     {
+        _schema = schema ?? new GlobalSphericalMercator { YAxis = YAxis.OSM };
         _tileSource = new VectorTilesSource(tileDataSource);
         _style.SetSourceProvider("openmaptiles", _tileSource);
     }
 
-    public ITileSchema Schema => new GlobalSphericalMercator { YAxis = YAxis.OSM };
+    public ITileSchema Schema => _schema;
     public string Name => "VexTile";
     public Attribution Attribution => new("Attributions");
 
@@ -27,8 +29,13 @@ public sealed class RasterizedVectorTileSource : ILocalTileSource
     {
         var canvas = new SkiaCanvas();
         var col = tileInfo.Index.Col;
-        // We have to correct for the Y axis direction here. Eventually we want VexTile to use the BruTile schema so it would adopt the Y axis direction automatically.d
-        var row = (int)Schema.GetMatrixHeight(tileInfo.Index.Level) - tileInfo.Index.Row - 1;
+
+        // Flip Y only when using OSM axis direction
+        var matrixHeight = (int)Schema.GetMatrixHeight(tileInfo.Index.Level);
+        var row = Schema.YAxis == YAxis.OSM
+            ? matrixHeight - tileInfo.Index.Row - 1
+            : tileInfo.Index.Row;
+
         return TileRendererFactory.RenderAsync(_style, canvas, col, row, tileInfo.Index.Level, 256, 256);
     }
 }
