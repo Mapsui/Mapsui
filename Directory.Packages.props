@@ -80,7 +80,7 @@
     <PackageVersion Include="sqlite-net-base" Version="1.10.196-beta" />
     <PackageVersion Include="SQLitePCLRaw.config.e_sqlite3" Version="3.0.2" />
     <PackageVersion Include="SQLitePCLRaw.core" Version="3.0.2" />
-    <PackageVersion Include="Svg.Skia" Version="3.0.0" />
+    <PackageVersion Include="Svg.Skia" Version="3.2.1" />
     <PackageVersion Include="System.Formats.Asn1" Version="9.0.0" />
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.167" />
