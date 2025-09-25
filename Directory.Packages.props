@@ -55,6 +55,7 @@
     <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="17.12.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="[8.0.0,9.0.0)" />
+    <PackageVersion Include="Microsoft.Maui.Resizetizer" Version="9.0.40" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="[2.6.2,3.0.0)" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.13.2" />
