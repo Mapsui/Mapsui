@@ -80,7 +80,7 @@
 
 	<ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" VersionOverride="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Resizetizer">
+    <PackageReference Include="Microsoft.Maui.Resizetizer" VersionOverride="$(MauiResizetizerVersion)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
