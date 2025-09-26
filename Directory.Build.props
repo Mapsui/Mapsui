@@ -21,7 +21,7 @@
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	  <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
     <MauiVersion>9.0.50</MauiVersion>
-    <!-- Workaround until Uno.Resizetizer does not upgrade to SkiaSharp 3.116 !-->
+    <!-- Workaround until Uno.Resizetizer does upgrade to SkiaSharp 3.116 !-->
     <MauiResizetizerVersion>9.0.40</MauiResizetizerVersion>
     <Maui8Version>8.0.100</Maui8Version>
   </PropertyGroup>
