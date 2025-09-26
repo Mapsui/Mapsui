@@ -44,7 +44,7 @@ public sealed class DataFetcher
     {
         if (fetchInfo.Section.CheckIfAreaIsTooBig())
         {
-            Logger.Log(LogLevel.Error, $"The area of the section is too big in the DataFetcher.ViewportChanged method with parameters: Extent: {fetchInfo.Extent}, Resolution: {fetchInfo.Resolution}");
+            Logger.Log(LogLevel.Error, $"The area of the section is too big in the DataFetcher.UpdateViewports method with parameters: Extent: {fetchInfo.Extent}, Resolution: {fetchInfo.Resolution}");
             return; // Check added for this issue: https://github.com/Mapsui/Mapsui/issues/3105
         }
 
