@@ -256,8 +256,10 @@ jobs:
     - name: Restore dependencies (dotnet)
       run: dotnet restore Mapsui.slnx  
     # Samples Build 
-    - name: Mapsui.Samples
-      run: dotnet build --no-restore --configuration Debug Mapsui.slnx
+    - name: Mapsui Samples without MAUI
+      run: dotnet build --no-restore --configuration Debug Mapsui.WithoutMaui.slnf
+    - name: Mapsui Samples MAUI
+      run: dotnet build --no-restore --configuration Debug Mapsui.Maui.slnf
     # Publishing  
     - name: Upload packages
       uses: actions/upload-artifact@v4
