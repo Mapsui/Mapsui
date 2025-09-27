@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Logging;
 using System;
 using System.Collections.Concurrent;
@@ -41,6 +42,12 @@ public sealed class DataFetcher
 
     private void UpdateViewports(FetchInfo fetchInfo)
     {
+        if (fetchInfo.Section.CheckIfAreaIsTooBig())
+        {
+            Logger.Log(LogLevel.Error, $"The area of the section is too big in the DataFetcher.UpdateViewports method with parameters: Extent: {fetchInfo.Extent}, Resolution: {fetchInfo.Resolution}");
+            return; // Check added for this issue: https://github.com/Mapsui/Mapsui/issues/3105
+        }
+
         foreach (var fetchableSource in _getFetchableSources())
         {
             fetchableSource.ViewportChanged(fetchInfo);

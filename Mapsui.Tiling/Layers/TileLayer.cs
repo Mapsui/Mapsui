@@ -173,7 +173,10 @@ public class TileLayer : BaseLayer, IFetchableSource, IDisposable
     public virtual void ViewportChanged(FetchInfo fetchInfo)
     {
         if (fetchInfo.Section.CheckIfAreaIsTooBig())
+        {
+            Logging.Logger.Log(Logging.LogLevel.Error, $"The area of the section is too big in the TileLayer.ViewportChanged method with parameters: Extent: {fetchInfo.Extent}, Resolution: {fetchInfo.Resolution}");
             return; // Check added for this issue: https://github.com/Mapsui/Mapsui/issues/3105
+        }
 
         Busy = true;
         _tileFetchPlanner.ViewportChanged(fetchInfo);
