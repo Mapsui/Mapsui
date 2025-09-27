@@ -25,7 +25,7 @@ public sealed class RasterizedVectorTileSource : ILocalTileSource
     public string Name => "VexTile";
     public Attribution Attribution => new("Attributions");
 
-    public Task<byte[]?> GetTileAsync(BruTile.TileInfo tileInfo)
+    public async Task<byte[]?> GetTileAsync(BruTile.TileInfo tileInfo)
     {
         var canvas = new SkiaCanvas();
         var col = tileInfo.Index.Col;
@@ -38,7 +38,8 @@ public sealed class RasterizedVectorTileSource : ILocalTileSource
 
         var tileWidth = _schema.GetTileWidth(tileInfo.Index.Level);
         var tileHeight = _schema.GetTileHeight(tileInfo.Index.Level);
-        return TileRendererFactory.RenderAsync(_style, canvas, col, row, tileInfo.Index.Level,
+        await TileRendererFactory.RenderAsync(_style, canvas, col, row, tileInfo.Index.Level,
             tileWidth, tileHeight);
+        return canvas.ToPngByteArray();
     }
 }
