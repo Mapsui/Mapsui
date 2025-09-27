@@ -10,6 +10,6 @@
     "rollForward": "disable"
   },
   "msbuild-sdks": {
-    "Uno.Sdk": "6.2.29"
+    "Uno.Sdk": "6.2.36"
   }
 }
