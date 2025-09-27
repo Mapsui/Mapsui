@@ -1,4 +1,5 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Logging;
 using System;
 
 namespace Mapsui;
@@ -13,7 +14,8 @@ public class MSection
     {
         Extent = extent ?? throw new ArgumentNullException(nameof(extent));
         Resolution = resolution;
-        _ = this.CheckIfAreaIsTooBig();
+        if (this.CheckIfAreaIsTooBig())
+            Logger.Log(LogLevel.Error, $"The area of the section is too big in the MSection constructor with parameters: Extent: {extent}, Resolution: {resolution}");
     }
 
     public MRect Extent { get; }
