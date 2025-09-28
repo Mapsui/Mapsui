@@ -74,7 +74,7 @@
       <UndefineProperties>RuntimeIdentifier</UndefineProperties>
       <SetTargetFramework>TargetFramework=net9.0</SetTargetFramework>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+    <ProjectReference Include="..\..\..\Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
       <UndefineProperties>RuntimeIdentifier</UndefineProperties>
       <SetTargetFramework>TargetFramework=net9.0</SetTargetFramework>
     </ProjectReference>
