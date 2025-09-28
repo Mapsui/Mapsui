@@ -3,13 +3,12 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class ProjectionTestSample : ISample
 {

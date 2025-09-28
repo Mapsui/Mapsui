@@ -2,11 +2,10 @@ using System.IO;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers.Shapefile;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.Tests.Common.Utilities;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class ShapefileZoomSample : ISample
 {
@@ -30,8 +29,19 @@ public class ShapefileZoomSample : ISample
         var shapeFilePath = Path.Combine(TestShapeFilesDeployer.ShapeFilesLocation, "test_file.shp");
         var shpSource = new ShapeFile(shapeFilePath, calculateBoundingBoxes: true);
 
+        // Add the new layer
+        map.Layers.Add(CreateLayer(shpSource));
+
+        map.CRS = "EPSG:3857";
+        map.Navigator.CenterOnAndZoomTo(new MPoint(253442.5275139774, 5522921.705309941), 152);
+
+        return map;
+    }
+
+    private static Layer CreateLayer(ShapeFile shpSource)
+    {
         // Apply basic styles
-        var layer = new Layer
+        return new Layer
         {
             DataSource = shpSource,
             Style = new VectorStyle
@@ -44,13 +54,5 @@ public class ShapefileZoomSample : ISample
                 }
             }
         };
-
-        // Add the new layer
-        map.Layers.Add(layer);
-
-        map.CRS = "EPSG:3857";
-        map.Navigator.CenterOnAndZoomTo(new MPoint(253442.5275139774, 5522921.705309941), 152);
-
-        return map;
     }
 }

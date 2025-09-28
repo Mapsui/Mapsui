@@ -1,7 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Widgets;
@@ -14,7 +13,7 @@ using System.Threading.Tasks;
 #pragma warning disable IDISP003
 #pragma warning disable IDISP001
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 public sealed class TouchPointSample : ISample, IDisposable
 {

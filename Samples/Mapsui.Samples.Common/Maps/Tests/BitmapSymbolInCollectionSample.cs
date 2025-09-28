@@ -2,11 +2,10 @@
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class BitmapSymbolInCollectionSample : ISample
 {
@@ -14,7 +13,6 @@ public class BitmapSymbolInCollectionSample : ISample
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
-
 
     public static Map CreateMap()
     {

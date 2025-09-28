@@ -10,7 +10,7 @@ namespace Mapsui.Tests.Common.Maps;
 
 public class VectorStyleSample : ISample
 {
-    public string Name => "Vector Style";
+    public string Name => "VectorStyle on points";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

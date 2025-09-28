@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tests.Common.TestTools;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class StackedLabelsTestSample : ISample
 {
