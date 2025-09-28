@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Tests.Extensions;
+using Mapsui.Samples.Common.Maps.Tests;
 using Mapsui.Styles;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
