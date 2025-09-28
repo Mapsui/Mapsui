@@ -11,7 +11,8 @@ namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class StackedLabelsTestSample : ISample
 {
-    private const string LabelColumn = "Label";
+    private const string _labelColumn = "Label";
+
     public string Category => "Tests";
     public string Name => "Stacked Labels";
 
@@ -21,8 +22,10 @@ public class StackedLabelsTestSample : ISample
     {
         var random = new Random(6);
         var features = RandomPointsBuilder.CreateRandomFeatures(new MRect(-100, -100, 100, 100), 20, random);
+#pragma warning disable IDISP001 // Dispose created
         var layer = CreateLayer(features);
-        var stackedLabelLayer = CreateStackedLabelLayer(features, LabelColumn);
+        var stackedLabelLayer = CreateStackedLabelLayer(features, _labelColumn);
+#pragma warning restore IDISP001 // Dispose created
 
         var map = new Map
         {
@@ -37,26 +40,20 @@ public class StackedLabelsTestSample : ISample
         return map;
     }
 
-    private static TestLayer CreateStackedLabelLayer(IEnumerable<IFeature> provider, string labelColumn)
+    private static TestLayer CreateStackedLabelLayer(IEnumerable<IFeature> provider, string labelColumn) => new()
     {
-        return new TestLayer
-        {
-            DataSource = new StackedLabelProvider(new MemoryProvider(provider), new LabelStyle { LabelColumn = labelColumn }),
-            Style = null
-        };
-    }
+        DataSource = new StackedLabelProvider(new MemoryProvider(provider), new LabelStyle { LabelColumn = labelColumn }),
+        Style = null
+    };
 
-    private static MemoryLayer CreateLayer(IEnumerable<IFeature> features)
+    private static MemoryLayer CreateLayer(IEnumerable<IFeature> features) => new()
     {
-        return new MemoryLayer
+        Features = features,
+        Style = new SymbolStyle
         {
-            Features = features,
-            Style = new SymbolStyle
-            {
-                SymbolScale = 1,
-                Outline = new Pen(Color.Gray, 1f),
-                Fill = new Brush(new Color { A = 128, R = 8, G = 20, B = 192 })
-            }
-        };
-    }
+            SymbolScale = 1,
+            Outline = new Pen(Color.Gray, 1f),
+            Fill = new Brush(new Color { A = 128, R = 8, G = 20, B = 192 })
+        }
+    };
 }
