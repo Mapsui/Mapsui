@@ -32,8 +32,7 @@ public class MapRegressionTests
 {
     static MapRegressionTests()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Samples.Common.Samples.Register();
     }
 
     private static ISampleBase[]? _excludedSamples;
