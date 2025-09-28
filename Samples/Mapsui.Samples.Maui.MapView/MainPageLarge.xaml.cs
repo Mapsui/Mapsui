@@ -12,9 +12,8 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
 {
     static MainPageLarge()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
-        Mapsui.Samples.Maui.MapView.Samples.Register();
+        Common.Samples.Register();
+        MapView.Samples.Register();
     }
 
     readonly IEnumerable<ISampleBase> _allSamples;

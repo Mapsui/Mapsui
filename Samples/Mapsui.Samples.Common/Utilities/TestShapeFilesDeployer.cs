@@ -2,9 +2,9 @@
 using System.IO;
 using System.Reflection;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Tests.Common.Maps;
+using Mapsui.Samples.Common.Maps.Tests;
 
-namespace Mapsui.Tests.Common.Utilities;
+namespace Mapsui.Samples.Common.Utilities;
 
 public static class TestShapeFilesDeployer
 {

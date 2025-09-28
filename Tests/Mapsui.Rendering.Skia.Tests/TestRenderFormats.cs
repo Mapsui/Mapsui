@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using Mapsui.Rendering.Skia.Tests.Utilities;
-using Mapsui.Tests.Common.Maps;
+using Mapsui.Samples.Common.Maps.Tests;
 using NUnit.Framework;
 
 namespace Mapsui.Rendering.Skia.Tests;

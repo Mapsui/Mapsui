@@ -2,8 +2,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
-using Mapsui.Tests.Common.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Tests;
 
@@ -27,7 +27,9 @@ public class ShapefileZoomSample : ISample
         var map = new Map();
 
         var shapeFilePath = Path.Combine(TestShapeFilesDeployer.ShapeFilesLocation, "test_file.shp");
+#pragma warning disable IDISP001 // Dispose created
         var shpSource = new ShapeFile(shapeFilePath, calculateBoundingBoxes: true);
+#pragma warning restore IDISP001 // Dispose created
 
         // Add the new layer
         map.Layers.Add(CreateLayer(shpSource));
