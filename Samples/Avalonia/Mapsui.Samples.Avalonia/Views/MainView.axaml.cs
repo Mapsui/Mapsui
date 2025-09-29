@@ -13,8 +13,7 @@ public partial class MainView : UserControl
 {
     static MainView()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Common.Samples.Register();
     }
 
     public MainView()
@@ -40,7 +39,6 @@ public partial class MainView : UserControl
     private void FillComboBoxWithCategories()
     {
         Common.Samples.Register();
-        Tests.Common.Samples.Register();
 
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c).ToArray();
 

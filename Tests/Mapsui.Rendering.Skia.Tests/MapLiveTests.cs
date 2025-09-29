@@ -27,8 +27,7 @@ public class MapLiveTests
 {
     static MapLiveTests()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Samples.Common.Samples.Register();
     }
 
     private static ISampleBase[]? _excludedSamples;

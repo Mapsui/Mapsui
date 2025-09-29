@@ -4,6 +4,7 @@
 
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Tests.Helpers;
+using Mapsui.Rendering.Skia.Tests.Utilities;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.DataFormats;
@@ -31,8 +32,7 @@ public class MapRegressionTests
 {
     static MapRegressionTests()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Samples.Common.Samples.Register();
     }
 
     private static ISampleBase[]? _excludedSamples;
@@ -129,7 +129,7 @@ public class MapRegressionTests
                     }
                     else
                     {
-                        Assert.That(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.995), Is.True,
+                        Assert.That(BitmapComparer.Compare(originalStream, bitmap, 1, 0.995), Is.True,
                             $"Fail in sample '{sample.Name}' in category '{sample.Category}'. Image compare failed. The generated image is not equal to the reference image.");
                     }
                 }

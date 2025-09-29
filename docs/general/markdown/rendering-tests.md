@@ -16,7 +16,7 @@ Every rendering test that can fail corresponds a sample. You can view any sample
 You need to know the name and the category of the sample. For this you need to look at the error of the failed test. Which could be:
 
 ```
-Failed TestSampleAsync(Mapsui.Tests.Common.Maps.LineSample) [4 s]
+Failed TestSampleAsync(Mapsui.Samples.Common.Maps.Tests.LineSample) [4 s]
 ```
 In this case the sample is in the file `LineSample.cs`. If you open that file you will see it is named `Line` and in category `Tests`.
 

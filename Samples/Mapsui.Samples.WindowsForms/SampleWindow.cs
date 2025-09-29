@@ -22,7 +22,6 @@ public partial class SampleWindow : Form
         Text = "Samples for Mapsui.WindowsForms";
         BackColor = Color.White;
 
-        Tests.Common.Samples.Register();
         Common.Samples.Register();
 
         var layout = new TableLayoutPanel();
@@ -132,7 +131,6 @@ public partial class SampleWindow : Form
     private void FillComboBoxWithCategories()
     {
         Common.Samples.Register();
-        Tests.Common.Samples.Register();
 
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c).ToArray();
 

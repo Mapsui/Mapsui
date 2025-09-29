@@ -9,9 +9,8 @@ public partial class MainPage : ContentPage
 {
     static MainPage()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
-        Mapsui.Samples.Maui.MapView.Samples.Register();
+        Common.Samples.Register();
+        MapView.Samples.Register();
     }
 
     readonly IEnumerable<ISampleBase> allSamples;

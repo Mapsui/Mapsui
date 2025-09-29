@@ -19,7 +19,6 @@ public sealed partial class MainWindow : Window
 {
     static MainWindow()
     {
-        Mapsui.Tests.Common.Samples.Register();
         Mapsui.Samples.Common.Samples.Register();
     }
 

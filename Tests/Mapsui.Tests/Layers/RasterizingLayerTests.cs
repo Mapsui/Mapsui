@@ -8,7 +8,6 @@ using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Tests.Common.TestTools;
 using Mapsui.Tiling.Extensions;
 using NetTopologySuite.Geometries;
 using NUnit.Framework;
@@ -49,7 +48,7 @@ public class RasterizingLayerTests
         Assert.That(rasterFeature.Raster!.Data.Length, Is.EqualTo(5354));
     }
 
-    private static TestLayer CreatePointLayer()
+    private static Layer CreatePointLayer()
     {
         var random = new Random(3);
         var features = new List<IFeature>();
@@ -58,6 +57,6 @@ public class RasterizingLayerTests
             features.Add(new GeometryFeature(
                 new Point(random.Next(100000, 5000000), random.Next(100000, 5000000))));
         }
-        return new TestLayer() { DataSource = new MemoryProvider(features) };
+        return new Layer() { DataSource = new MemoryProvider(features) };
     }
 }
