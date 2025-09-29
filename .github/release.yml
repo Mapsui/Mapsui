@@ -19,9 +19,9 @@ changelog:
     - title: "🛠️ Maintenance"
       labels:
         - "PR type: 🛠️ Maintenance"
-    - title: "🔧 Infrastructure"
+    - title: "⚙️ Infrastructure"
       labels:
-        - "PR type: 🔧 Infrastructure"
+        - "PR type: ⚙️ Infrastructure"
     - title: "🧪 Samples"
       labels:
         - "PR type: 🧪 Sample"

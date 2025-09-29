@@ -1,32 +1,43 @@
-﻿using Mapsui.Logging;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
+using System.Threading;
 
 namespace Mapsui.Rendering.Caching;
 
 public sealed class DrawableImageCache : IDisposable
 {
-    private readonly ConcurrentDictionary<string, IDrawableImage> _cache = new();
+    // Store Lazy so we can use GetOrAdd while allowing the factory to return null without inserting nulls.
+    private readonly ConcurrentDictionary<string, Lazy<IDrawableImage?>> _cache = new();
 
     public IDrawableImage? GetOrCreate(string key, Func<IDrawableImage?> tryCreateDrawableImage)
     {
-        if (_cache.TryGetValue(key, out var value))
-            return value;
+        var lazy = _cache.GetOrAdd(
+            key,
+            static (_, factory) => new Lazy<IDrawableImage?>(factory, LazyThreadSafetyMode.ExecutionAndPublication),
+            tryCreateDrawableImage);
 
-        var drawableImage = tryCreateDrawableImage();
-        if (drawableImage == null)
+        var value = lazy.Value;
+
+        // If creation failed (null), remove the placeholder so future attempts can retry.
+        if (value is null)
+        {
+            _cache.TryRemove(key, out _);
             return null;
-        if (_cache.ContainsKey(key))
-            Logger.Log(LogLevel.Error, "The image is created more than once, this is not necessary and should be prevented.");
-        return _cache[key] = drawableImage;
+        }
+
+        return value;
     }
 
     public void Dispose()
     {
         foreach (var key in _cache.Keys)
         {
-            if (_cache.TryRemove(key, out var value)) // Remove before disposing so that we never have a disposed object in the cache
-                value.Dispose();
+            if (_cache.TryRemove(key, out var lazy))
+            {
+                // Avoid creating entries during disposal.
+                if (lazy.IsValueCreated)
+                    lazy.Value?.Dispose();
+            }
         }
     }
 }
