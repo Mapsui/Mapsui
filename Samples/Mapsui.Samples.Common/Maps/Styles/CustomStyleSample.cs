@@ -6,11 +6,11 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using Mapsui.Widgets.InfoWidgets;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Styles;
 
@@ -48,17 +48,14 @@ public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
     }
 }
 
-public class CustomStyleSample : IMapControlSample
+public class CustomStyleSample : ISample
 {
+    private const string _mapInfoLayerName = "Custom Style Layer";
+
     public string Name => "Custom Style";
     public string Category => "Styles";
 
-    private const string _mapInfoLayerName = "Custom Style Layer";
-
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
+    public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
 
     public static Map CreateMap()
     {
