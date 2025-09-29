@@ -17,7 +17,7 @@ public class PolygonTestSample : ISample
 
     public static Map CreateMap()
     {
-        var imageSource = "embedded://Mapsui.Samples.Common.Resources.Images.avion_silhouette.png";
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.avion_silhouette.png";
 
 #pragma warning disable IDISP001 // Dispose created
         var layer = CreateLayer(imageSource);

@@ -42,8 +42,8 @@ public class BitmapAtlasSample : ISample
 
     public static List<IFeature> CreateFeatures()
     {
-        var atlasImageSource = "embedded://Mapsui.Samples.Common.Resources.Images.osm-liberty.png";
-        var svgTigerImageSource = "embedded://Mapsui.Samples.Common.Resources.Images.Ghostscript_Tiger.svg";
+        var atlasImageSource = "embedded://Mapsui.Samples.Common.Images.osm-liberty.png";
+        var svgTigerImageSource = "embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
         var spriteAmusementPark15 = new BitmapRegion(106, 0, 21, 21);
         var spriteClothingStore15 = new BitmapRegion(84, 106, 21, 21);
         var spriteDentist15 = new BitmapRegion(147, 64, 21, 21);

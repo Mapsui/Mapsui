@@ -47,7 +47,7 @@ public class PointsSample : ISample
 
     private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
     {
-        var path = "Mapsui.Samples.Common.Resources.GeoData.Json.congo.json";
+        var path = "Mapsui.Samples.Common.GeoData.Json.congo.json";
         var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
         using var stream = assembly.GetManifestResourceStream(path) ?? throw new InvalidOperationException($"{path} not found");
         var cities = DeserializeFromStream(stream);
@@ -76,7 +76,7 @@ public class PointsSample : ISample
 
     private static ImageStyle CreateBitmapStyle()
     {
-        var imageSource = "embedded://Mapsui.Samples.Common.Resources.Images.home.png"; // Designed by Freepik http://www.freepik.com
+        var imageSource = "embedded://Mapsui.Samples.Common.Images.home.png"; // Designed by Freepik http://www.freepik.com
         var bitmapHeight = 176; // To set the offset correct we need to know the bitmap height
         return new ImageStyle { Image = imageSource, SymbolScale = 0.20, Offset = new Offset(0, bitmapHeight * 0.5) };
     }

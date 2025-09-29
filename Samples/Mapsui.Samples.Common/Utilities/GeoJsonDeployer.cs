@@ -14,6 +14,6 @@ public static class GeoJsonDeployer
     {
         geoJson = Path.GetFileNameWithoutExtension(geoJson);
         var assembly = typeof(GeoJsonSample).GetTypeInfo().Assembly;
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.GeoJson.", GeoJsonLocation, geoJson + ".geojson");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.GeoJson.", GeoJsonLocation, geoJson + ".geojson");
     }
 }

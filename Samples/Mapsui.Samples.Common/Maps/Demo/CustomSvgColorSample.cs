@@ -74,7 +74,7 @@ public class CustomSvgStyleSample : ISample
             {
                 Image = new Image
                 {
-                    Source = "embedded://Mapsui.Samples.Common.Resources.Images.arrow.svg",
+                    Source = "embedded://Mapsui.Samples.Common.Images.arrow.svg",
                     SvgFillColor = GetTypeColor((int)f.Id % 4),
                     SvgStrokeColor = rasterizeSvg() ? Color.FromRgba(16, 16, 16, 255) : Color.FromRgba(17, 17, 17, 255), // Use slightly different color to make sure bitmap and svg get different cache keys. This is a hack for the purpose of this sample. You do not need this in your own app.
                     RasterizeSvg = rasterizeSvg(),
