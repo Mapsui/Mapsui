@@ -19,7 +19,7 @@ namespace Mapsui.UI.Maui;
 /// </summary>
 public partial class MapControl : ContentView, IMapControl, IDisposable
 {
-    public static bool UseGPU = !IsMaui9();
+    public static bool UseGPU { get; set; } = true;
 
     private readonly SKGLView? _glView;
     private readonly SKCanvasView? _canvasView;
