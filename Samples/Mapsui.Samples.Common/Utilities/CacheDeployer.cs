@@ -14,6 +14,6 @@ public static class CacheDeployer
     {
         cache = Path.GetFileNameWithoutExtension(cache);
         var assembly = typeof(WmsProjectionTilingSample).GetTypeInfo().Assembly;
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.Cache.", CacheLocation, cache + ".sqlite");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.Cache.", CacheLocation, cache + ".sqlite");
     }
 }

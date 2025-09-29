@@ -65,7 +65,7 @@ public class ImageCalloutSample : ISample
 
     private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
     {
-        const string path = "Mapsui.Samples.Common.Resources.GeoData.Json.congo.json";
+        const string path = "Mapsui.Samples.Common.GeoData.Json.congo.json";
         var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
         using var stream = assembly.GetManifestResourceStream(path) ?? throw new NullReferenceException();
         var cities = DeserializeFromStream(stream);
@@ -76,7 +76,7 @@ public class ImageCalloutSample : ISample
             feature["name"] = c.Name;
             feature["country"] = c.Country;
 
-            var calloutStyle = CreateCalloutStyle("embedded://Mapsui.Samples.Common.Resources.Images.loc.png");
+            var calloutStyle = CreateCalloutStyle("embedded://Mapsui.Samples.Common.Images.loc.png");
             feature.Styles.Add(calloutStyle);
             return feature;
         }).ToArray();

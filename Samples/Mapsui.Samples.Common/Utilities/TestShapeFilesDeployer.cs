@@ -14,10 +14,10 @@ public static class TestShapeFilesDeployer
     {
         shapefile = Path.GetFileNameWithoutExtension(shapefile);
         var assembly = typeof(ShapefileZoomSample).GetTypeInfo().Assembly;
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".dbf");
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".prj");
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".shp");
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".shx");
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".shp.sidx");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".dbf");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".prj");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".shp");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".shx");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.Shapefiles.", ShapeFilesLocation, shapefile + ".shp.sidx");
     }
 }

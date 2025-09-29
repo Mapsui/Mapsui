@@ -13,6 +13,6 @@ public static class MbTilesDeployer
     public static void CopyEmbeddedResourceToFile(string fileName)
     {
         var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-        assembly.CopyEmbeddedResourceToFile(@"Mapsui.Samples.Common.Resources.GeoData.MbTiles.", MbTilesLocation, fileName);
+        assembly.CopyEmbeddedResourceToFile(@"Mapsui.Samples.Common.GeoData.MbTiles.", MbTilesLocation, fileName);
     }
 }
