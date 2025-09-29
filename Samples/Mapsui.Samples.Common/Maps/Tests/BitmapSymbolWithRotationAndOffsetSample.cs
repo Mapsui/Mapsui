@@ -2,11 +2,10 @@
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class BitmapSymbolWithRotationAndOffsetSample : ISample
 {
@@ -14,7 +13,6 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
-
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>")]
     public static Map CreateMap()
@@ -52,7 +50,7 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
 
     private static GeometryFeature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
     {
-        var imageSource = "embedded://Mapsui.Tests.Common.Resources.Images.iconthatneedsoffset.png";
+        var imageSource = "embedded://Mapsui.Samples.Common.Resources.Images.iconthatneedsoffset.png";
 
         var feature = new GeometryFeature { Geometry = new Point(x, y) };
 

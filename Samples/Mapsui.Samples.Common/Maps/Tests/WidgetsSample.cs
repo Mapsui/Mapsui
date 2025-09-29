@@ -1,11 +1,10 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using System.Threading.Tasks;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class WidgetsSample : ISample
 {
@@ -14,7 +13,6 @@ public class WidgetsSample : ISample
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());
-
 
     public static Map CreateMap()
     {

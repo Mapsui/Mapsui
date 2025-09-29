@@ -1,13 +1,11 @@
 ﻿using Mapsui.Layers;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 #pragma warning disable IDISP001 // Dispose created
 
-namespace Mapsui.Tests.Common.Maps;
-
+namespace Mapsui.Samples.Common.Maps.Tests;
 public class SvgSymbolSample : ISample
 {
     public string Name => "Svg Symbol";

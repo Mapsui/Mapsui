@@ -20,7 +20,6 @@
       "SourceGenerators\\Mapsui.Sample.SourceGenerator\\Mapsui.Sample.SourceGenerator.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
-      "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
       "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj"
     ]
   }

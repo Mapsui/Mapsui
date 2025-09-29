@@ -17,8 +17,7 @@ public sealed partial class MainPage : Page
 {
     static MainPage()
     {
-        Mapsui.Tests.Common.Samples.Register();
-        Mapsui.Samples.Common.Samples.Register();
+        Common.Samples.Register();
     }
 
     public MainPage()

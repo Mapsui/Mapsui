@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Mapsui.Layers;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 #pragma warning disable IDISP001 // Dispose created
 
 public class VectorStyleSample : ISample
 {
-    public string Name => "Vector Style";
+    public string Name => "VectorStyle on points";
     public string Category => "Tests";
 
     public Task<Map> CreateMapAsync() => Task.FromResult(CreateMap());

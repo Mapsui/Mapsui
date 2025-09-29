@@ -3,11 +3,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using NetTopologySuite.IO;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class PolygonTestSample : ISample
 {
@@ -18,7 +17,7 @@ public class PolygonTestSample : ISample
 
     public static Map CreateMap()
     {
-        var imageSource = "embedded://mapsui.tests.common.resources.images.avion_silhouette.png";
+        var imageSource = "embedded://Mapsui.Samples.Common.Resources.Images.avion_silhouette.png";
 
 #pragma warning disable IDISP001 // Dispose created
         var layer = CreateLayer(imageSource);

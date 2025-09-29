@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Mapsui.Layers;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 
-namespace Mapsui.Tests.Common.Maps;
+namespace Mapsui.Samples.Common.Maps.Tests;
 
 public class GeometryCollectionTestSample : ISample
 {
@@ -33,5 +32,4 @@ public class GeometryCollectionTestSample : ISample
             Name = "Line"
         };
     }
-
 }
