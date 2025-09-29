@@ -50,7 +50,7 @@ public class BitmapSymbolWithRotationAndOffsetSample : ISample
 
     private static GeometryFeature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
     {
-        var imageSource = "embedded://mapsui.samples.common.resources.images.iconthatneedsoffset.png";
+        var imageSource = "embedded://Mapsui.Samples.Common.Resources.Images.iconthatneedsoffset.png";
 
         var feature = new GeometryFeature { Geometry = new Point(x, y) };
 
