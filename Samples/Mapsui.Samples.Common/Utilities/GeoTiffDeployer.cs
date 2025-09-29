@@ -14,7 +14,7 @@ public static class GeoTiffDeployer
     {
         geoTif = Path.GetFileNameWithoutExtension(geoTif);
         var assembly = typeof(GeoTiffSample).GetTypeInfo().Assembly;
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.GeoTiff.", GeoTiffLocation, geoTif + ".tfw");
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.GeoTiff.", GeoTiffLocation, geoTif + ".tif");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.GeoTiff.", GeoTiffLocation, geoTif + ".tfw");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.GeoTiff.", GeoTiffLocation, geoTif + ".tif");
     }
 }

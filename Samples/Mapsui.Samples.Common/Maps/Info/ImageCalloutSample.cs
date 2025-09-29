@@ -65,7 +65,7 @@ public class ImageCalloutSample : ISample
 
     private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
     {
-        const string path = "Mapsui.Samples.Common.GeoData.Json.congo.json";
+        const string path = "Mapsui.Samples.Common.Resources.GeoData.Json.congo.json";
         var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
         using var stream = assembly.GetManifestResourceStream(path) ?? throw new NullReferenceException();
         var cities = DeserializeFromStream(stream);

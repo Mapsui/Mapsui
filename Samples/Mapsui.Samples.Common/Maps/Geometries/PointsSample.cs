@@ -47,7 +47,7 @@ public class PointsSample : ISample
 
     private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
     {
-        var path = "Mapsui.Samples.Common.GeoData.Json.congo.json";
+        var path = "Mapsui.Samples.Common.Resources.GeoData.Json.congo.json";
         var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
         using var stream = assembly.GetManifestResourceStream(path) ?? throw new InvalidOperationException($"{path} not found");
         var cities = DeserializeFromStream(stream);

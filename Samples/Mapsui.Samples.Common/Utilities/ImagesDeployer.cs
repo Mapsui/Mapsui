@@ -14,6 +14,6 @@ public static class ImagesDeployer
     {
         image = Path.GetFileNameWithoutExtension(image);
         var assembly = typeof(GeoJsonSample).GetTypeInfo().Assembly;
-        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.Images.", ImagesLocation, image + ".jpeg");
+        assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Resources.GeoData.Images.", ImagesLocation, image + ".jpeg");
     }
 }

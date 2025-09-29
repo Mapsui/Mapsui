@@ -10,28 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="GeoData\GeoJson\countries.geojson" />
-    <None Remove="GeoData\MbTiles\zurich.mbtiles" />
-    <None Remove="GeoData\TrueMarble\0\0\0.png" />
-    <None Remove="GeoData\TrueMarble\1\0\0.png" />
-    <None Remove="GeoData\TrueMarble\1\0\1.png" />
-    <None Remove="GeoData\TrueMarble\1\1\0.png" />
-    <None Remove="GeoData\TrueMarble\1\1\1.png" />
-    <None Remove="GeoData\World\cities.dbf" />
-    <None Remove="GeoData\World\cities.prj" />
-    <None Remove="GeoData\World\cities.shp" />
-    <None Remove="GeoData\World\cities.shp.sidx" />
-    <None Remove="GeoData\World\cities.shx" />
-    <None Remove="GeoData\World\countries.dbf" />
-    <None Remove="GeoData\World\countries.prj" />
-    <None Remove="GeoData\World\countries.shp" />
-    <None Remove="GeoData\World\countries.shp.sidx" />
-    <None Remove="GeoData\World\countries.shx" />
-    <None Remove="GeoData\World\rivers.dbf" />
-    <None Remove="GeoData\World\rivers.prj" />
-    <None Remove="GeoData\World\rivers.shp" />
-    <None Remove="GeoData\World\rivers.shp.sidx" />
-    <None Remove="GeoData\World\rivers.shx" />
     <None Remove="Images\arrow.svg" />
     <None Remove="Images\checkered.png" />
     <None Remove="Images\circle.png" />
@@ -49,92 +27,89 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="GeoData\GeoJson\countries.geojson" />
-    <EmbeddedResource Include="GeoData\Images\a123330.jpeg">
+    <EmbeddedResource Include="Resources\GeoData\GeoJson\cities.geojson" />
+    <EmbeddedResource Include="Resources\GeoData\GeoJson\countries.geojson" />
+    <EmbeddedResource Include="Resources\GeoData\GeoTiff\example.tfw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="GeoData\GeoJson\cities.geojson" />
-    <EmbeddedResource Include="GeoData\Json\cities.json" />
-    <EmbeddedResource Include="GeoData\Json\congo.json" />
-    <EmbeddedResource Include="GeoData\Json\countries-hires.json" />
-    <EmbeddedResource Include="GeoData\MbTiles\el-molar.mbtiles" />
-    <EmbeddedResource Include="GeoData\MbTiles\torrejon-de-ardoz.mbtiles">
+    <EmbeddedResource Include="Resources\GeoData\GeoTiff\example.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\GeoData\Images\a123330.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\GeoData\Json\cities.json" />
+    <EmbeddedResource Include="Resources\GeoData\Json\congo.json" />
+    <EmbeddedResource Include="Resources\GeoData\Json\countries-hires.json" />
+    <EmbeddedResource Include="Resources\GeoData\MbTiles\el-molar.mbtiles" />
+    <EmbeddedResource Include="Resources\GeoData\MbTiles\torrejon-de-ardoz.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\MbTiles\world.mbtiles">
+    <EmbeddedResource Include="Resources\GeoData\MbTiles\world.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\MbTiles\zurich.mbtiles" />
-    <EmbeddedResource Include="GeoData\TrueMarble\0\0\0.png">
+    <EmbeddedResource Include="Resources\GeoData\MbTiles\zurich.mbtiles" />
+    <EmbeddedResource Include="Resources\GeoData\TrueMarble\0\0\0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\TrueMarble\1\0\0.png">
+    <EmbeddedResource Include="Resources\GeoData\TrueMarble\1\0\0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\TrueMarble\1\0\1.png">
+    <EmbeddedResource Include="Resources\GeoData\TrueMarble\1\0\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\TrueMarble\1\1\0.png">
+    <EmbeddedResource Include="Resources\GeoData\TrueMarble\1\1\0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\TrueMarble\1\1\1.png">
+    <EmbeddedResource Include="Resources\GeoData\TrueMarble\1\1\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\cities.dbf">
+    <EmbeddedResource Include="Resources\GeoData\World\cities.dbf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\cities.prj">
+    <EmbeddedResource Include="Resources\GeoData\World\cities.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\cities.shp">
+    <EmbeddedResource Include="Resources\GeoData\World\cities.shp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\cities.shp.sidx">
+    <EmbeddedResource Include="Resources\GeoData\World\cities.shp.sidx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\cities.shx">
+    <EmbeddedResource Include="Resources\GeoData\World\cities.shx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\countries.dbf">
+    <EmbeddedResource Include="Resources\GeoData\World\countries.dbf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\countries.prj">
+    <EmbeddedResource Include="Resources\GeoData\World\countries.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\countries.shp">
+    <EmbeddedResource Include="Resources\GeoData\World\countries.shp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\countries.shp.sidx">
+    <EmbeddedResource Include="Resources\GeoData\World\countries.shp.sidx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\countries.shx">
+    <EmbeddedResource Include="Resources\GeoData\World\countries.shx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\rivers.dbf">
+    <EmbeddedResource Include="Resources\GeoData\World\rivers.dbf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\rivers.prj">
+    <EmbeddedResource Include="Resources\GeoData\World\rivers.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\rivers.shp">
+    <EmbeddedResource Include="Resources\GeoData\World\rivers.shp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\rivers.shp.sidx">
+    <EmbeddedResource Include="Resources\GeoData\World\rivers.shp.sidx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\rivers.shx">
+    <EmbeddedResource Include="Resources\GeoData\World\rivers.shx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Images\arrow.svg" />
-    <EmbeddedResource Include="GeoData\GeoTiff\example.tfw">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\GeoTiff\example.tif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Images\home.png" />
     <EmbeddedResource Include="Resources\Images\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -185,11 +160,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GeoData\Cache\" />
+    <Folder Include="Resources\GeoData\Cache\" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\..\Tests\Mapsui.Rendering.Skia.Tests\Resources\Cache\WmsSample.sqlite" Link="GeoData\Cache\WmsSample.sqlite" />
+    <EmbeddedResource Include="..\..\Tests\Mapsui.Rendering.Skia.Tests\Resources\Cache\WmsSample.sqlite" Link="Resources\GeoData\Cache\WmsSample.sqlite" />
   </ItemGroup>
 
   <PropertyGroup>
