@@ -186,7 +186,6 @@
 
   <ItemGroup>
     <Folder Include="GeoData\Cache\" />
-    <Folder Include="Images\" />
   </ItemGroup>
 
   <ItemGroup>
