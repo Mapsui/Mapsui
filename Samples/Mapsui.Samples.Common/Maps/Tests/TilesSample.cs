@@ -111,7 +111,7 @@ public class TilesSample : ISample
 
         private static Stream GetTileStream(TileIndex index)
         {
-            var path = $"Mapsui.Samples.Common.Resources.SampleTiles.{index.Level}_{index.Col}_{index.Row}.png";
+            var path = $"Mapsui.Samples.Common.GeoData.TilesAsEmbeddedResource.{index.Level}_{index.Col}_{index.Row}.png";
             var data = typeof(SampleTileSource).GetTypeInfo().Assembly.GetManifestResourceStream(path);
             return data ?? throw new Exception($"Resource could not be found: {path}");
         }
