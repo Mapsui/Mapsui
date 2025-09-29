@@ -32,13 +32,11 @@
     <None Remove="GeoData\World\rivers.shp" />
     <None Remove="GeoData\World\rivers.shp.sidx" />
     <None Remove="GeoData\World\rivers.shx" />
-    <None Remove="Images\arrow.png" />
     <None Remove="Images\arrow.svg" />
     <None Remove="Images\checkered.png" />
     <None Remove="Images\circle.png" />
     <None Remove="Images\example.tfw" />
     <None Remove="Images\example.tif" />
-    <None Remove="Images\Ghostscript_Tiger.png" />
     <None Remove="Images\Ghostscript_Tiger.svg" />
     <None Remove="Images\home.png" />
     <None Remove="Images\icon.png" />
@@ -130,28 +128,21 @@
     <EmbeddedResource Include="GeoData\World\rivers.shx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\arrow.png" />
-    <EmbeddedResource Include="Images\arrow.svg" />
+    <EmbeddedResource Include="Resources\Images\arrow.svg" />
     <EmbeddedResource Include="GeoData\GeoTiff\example.tfw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GeoData\GeoTiff\example.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\checkered.png" />
-    <EmbeddedResource Include="Images\circle.png" />
-    <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
-    <EmbeddedResource Include="Images\Ghostscript_Tiger.svg" />
-    <EmbeddedResource Include="Images\home.png" />
-    <EmbeddedResource Include="Images\icon.png">
+    <EmbeddedResource Include="Resources\Images\home.png" />
+    <EmbeddedResource Include="Resources\Images\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\ic_place_black_24dp.png" />
-    <EmbeddedResource Include="Images\loc.png" />
-    <EmbeddedResource Include="Images\location.png" />
-    <EmbeddedResource Include="Images\netherlands.jpg" />
-    <EmbeddedResource Include="Images\osm-liberty.png" />
-    <EmbeddedResource Include="Images\Pin.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_place_black_24dp.png" />
+    <EmbeddedResource Include="Resources\Images\loc.png" />
+    <EmbeddedResource Include="Resources\Images\location.png" />
+    <EmbeddedResource Include="Resources\Images\netherlands.jpg" />
     <EmbeddedResource Include="Resources\Images\avion_silhouette.png" />
     <EmbeddedResource Include="Resources\Images\checkered.png" />
     <EmbeddedResource Include="Resources\Images\circle.png" />
@@ -195,6 +186,7 @@
 
   <ItemGroup>
     <Folder Include="GeoData\Cache\" />
+    <Folder Include="Images\" />
   </ItemGroup>
 
   <ItemGroup>

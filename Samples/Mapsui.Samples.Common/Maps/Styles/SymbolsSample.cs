@@ -125,14 +125,14 @@ public class SymbolsSample : ISample
                 Outline = new Pen(Color.Gray, 1f),
                 Fill = new Brush(Color.White)
             },
-            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.7),
-            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.8),
-            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.9),
-            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 1.0),
-            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Pin.svg", 0.7),
-            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Pin.svg", 0.8),
-            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05),
-            CreateSvgStyle("embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.1),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Resources.Images.ic_place_black_24dp.png", 0.7),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Resources.Images.ic_place_black_24dp.png", 0.8),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Resources.Images.ic_place_black_24dp.png", 0.9),
+            CreateBitmapStyle("embedded://Mapsui.Samples.Common.Resources.Images.ic_place_black_24dp.png", 1.0),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Resources.Images.Pin.svg", 0.7),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Resources.Images.Pin.svg", 0.8),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Resources.Images.Ghostscript_Tiger.svg", 0.05),
+            CreateSvgStyle("embedded://Mapsui.Samples.Common.Resources.Images.Ghostscript_Tiger.svg", 0.1),
         ];
     }
 

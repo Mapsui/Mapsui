@@ -49,7 +49,7 @@ public class WmtsSample : ISample
     {
         var geodanAmsterdam = new MPoint(122698, 483922);
         var geodanDenBosch = new MPoint(148949, 411446);
-        var imageSource = "embedded://Mapsui.Samples.Common.Images.location.png";
+        var imageSource = "embedded://Mapsui.Samples.Common.Resources.Images.location.png";
 
         var layer = new MemoryLayer
         {

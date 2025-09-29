@@ -61,7 +61,7 @@ public class AtlasSample : ISample
     {
         Image = new Image
         {
-            Source = "embedded://Mapsui.Samples.Common.Images.osm-liberty.png",
+            Source = "embedded://Mapsui.Samples.Common.Resources.Images.osm-liberty.png",
             BitmapRegion = new BitmapRegion(x, y, 21, 21),
         },
     };

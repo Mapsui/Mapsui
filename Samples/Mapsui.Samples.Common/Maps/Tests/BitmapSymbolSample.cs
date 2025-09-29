@@ -37,8 +37,8 @@ public class BitmapSymbolSample : ISample
 
     public static IEnumerable<IFeature> CreateFeatures()
     {
-        var circleImageSource = "embedded://Mapsui.Samples.Common.Images.circle.png";
-        var checkeredImageSource = "embedded://Mapsui.Samples.Common.Images.checkered.png";
+        var circleImageSource = "embedded://Mapsui.Samples.Common.Resources.Images.circle.png";
+        var checkeredImageSource = "embedded://Mapsui.Samples.Common.Resources.Images.checkered.png";
 
         return
         [

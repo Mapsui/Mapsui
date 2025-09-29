@@ -72,7 +72,7 @@ public class ManyPinsSample : IMapViewSample
                 foreach (var r in assembly.GetManifestResourceNames())
                     System.Diagnostics.Debug.WriteLine(r);
 
-                var resourceName = "embedded://Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
+                var resourceName = "embedded://Mapsui.Samples.Common.Resources.Images.Ghostscript_Tiger.svg";
                 mapView?.Pins.Add(new Pin(mapView)
                 {
                     Label = $"PinType.Svg {markerNum++}",

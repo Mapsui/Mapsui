@@ -76,7 +76,7 @@ public class ImageCalloutSample : ISample
             feature["name"] = c.Name;
             feature["country"] = c.Country;
 
-            var calloutStyle = CreateCalloutStyle("embedded://Mapsui.Samples.Common.Images.loc.png");
+            var calloutStyle = CreateCalloutStyle("embedded://Mapsui.Samples.Common.Resources.Images.loc.png");
             feature.Styles.Add(calloutStyle);
             return feature;
         }).ToArray();
