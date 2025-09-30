@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.Extensions.Cache;
 
+[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
 public class Tile
 {
     public int Level { get; set; }
