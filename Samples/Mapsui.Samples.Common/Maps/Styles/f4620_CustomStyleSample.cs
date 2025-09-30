@@ -25,8 +25,7 @@ public class CustomStyleSample : ISample
 
     public static Map CreateMap()
     {
-        // This the crucial part where we tell the renderer that a CustomStyle should be
-        // rendered with the SkiaCustomStyleRenderer
+        // This the crucial part where the renderer that a CustomStyle should be rendered with the SkiaCustomStyleRenderer
         MapRenderer.RegisterStyleRenderer(typeof(CustomStyle), new SkiaCustomStyleRenderer());
 
         var map = new Map();
@@ -71,7 +70,7 @@ public class CustomStyleSample : ISample
 
     public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
     {
-        private static Random _random = new(1);
+        private static Random Random = new(1);
 
         public bool Draw(SKCanvas canvas, Viewport viewport, ILayer layer, IFeature feature, IStyle style, RenderService renderService, long iteration)
         {
@@ -79,7 +78,7 @@ public class CustomStyleSample : ISample
             var worldPoint = pointFeature.Point;
 
             var screenPoint = viewport.WorldToScreen(worldPoint);
-            var color = new SKColor((byte)_random.Next(0, 256), (byte)_random.Next(0, 256), (byte)_random.Next(0, 256), (byte)(256.0 * layer.Opacity * style.Opacity));
+            var color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)(256.0 * layer.Opacity * style.Opacity));
             using var colored = new SKPaint { Color = color, IsAntialias = true };
             using var black = new SKPaint { Color = SKColors.Black, IsAntialias = true };
 
