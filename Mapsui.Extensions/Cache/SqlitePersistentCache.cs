@@ -155,7 +155,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             Compression = compress.Compression,
         };
 
-        connection.Insert(data);
+        connection.Insert(data, data.GetType());
     }
 
     public void Remove(TileIndex index)
@@ -199,7 +199,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             Data = compress.data,
             Compression = compress.Compression,
         };
-        connection.InsertOrReplace(data);
+        connection.InsertOrReplace(data, data.GetType());
     }
 
     public void Remove(string url, byte[]? postData)
