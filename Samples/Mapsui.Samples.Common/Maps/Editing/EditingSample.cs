@@ -22,7 +22,6 @@ public class EditingSample : IMapControlSample
 {
     private EditManager _editManager = new();
     private WritableLayer? _targetLayer;
-    private IMapControl? _mapControl;
     private IFeature[]? _tempFeatures;
 
     public string Name => "Editing";
@@ -32,7 +31,6 @@ public class EditingSample : IMapControlSample
         _editManager = InitEditMode(mapControl, EditMode.Modify);
         mapControl.Map.Navigator.ZoomToBox(_editManager.GetGrownExtent());
         InitEditWidgets(mapControl.Map);
-        _mapControl = mapControl;
     }
 
     public static EditManager InitEditMode(IMapControl mapControl, EditMode editMode)
@@ -117,7 +115,7 @@ public class EditingSample : IMapControlSample
                 var selectedFeatures = _editManager.Layer?.GetFeatures().Where(f => (bool?)f["Selected"] == true) ?? [];
                 foreach (var selectedFeature in selectedFeatures)
                     _editManager.Layer?.TryRemove(selectedFeature);
-                _mapControl?.RefreshGraphics();
+                e.Map.RefreshGraphics();
             }
             e.Handled = true;
         }
@@ -297,11 +295,11 @@ public class EditingSample : IMapControlSample
                 _targetLayer.Clear();
                 _targetLayer.AddRange(_tempFeatures.Copy());
                 _targetLayer.DataHasChanged();
-                _mapControl?.RefreshGraphics();
+                e.Map.RefreshGraphics();
             }
 
             _editManager.Layer?.Clear();
-            _mapControl?.RefreshGraphics();
+            e.Map.RefreshGraphics();
             _editManager.EditMode = EditMode.None;
             _tempFeatures = null;
             e.Handled = true;
@@ -330,7 +328,7 @@ public class EditingSample : IMapControlSample
             _editManager.Layer?.AddRange(features);
             _targetLayer?.Clear();
 
-            _mapControl?.RefreshGraphics();
+            e.Map.RefreshGraphics();
             e.Handled = true;
         }
     };
@@ -350,7 +348,7 @@ public class EditingSample : IMapControlSample
             _targetLayer?.AddRange(_editManager.Layer?.GetFeatures().Copy() ?? []);
             _editManager.Layer?.Clear();
 
-            _mapControl?.RefreshGraphics();
+            e.Map.RefreshGraphics();
             e.Handled = true;
         }
     };
