@@ -25,7 +25,7 @@ public class CustomStyleSample : ISample
 
     public static Map CreateMap()
     {
-        // This the crucial part where we tell the renderer that a CustomStyle should be
+        // This is the crucial part where we tell the renderer that a CustomStyle should be
         // rendered with the SkiaCustomStyleRenderer
         MapRenderer.RegisterStyleRenderer(typeof(CustomStyle), new SkiaCustomStyleRenderer());
 

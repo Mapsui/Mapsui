@@ -1,4 +1,4 @@
-// Copyright (c) The Mapsui authors.
+﻿// Copyright (c) The Mapsui authors.
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
@@ -49,7 +49,9 @@ public static class Algorithms
     /// <returns>Returns the rotated point</returns>
     public static MPoint RotateClockwiseDegrees(double x, double y, double degrees)
     {
-        var radians = DegreesToRadians(degrees);
+        // Normalize angle to avoid precision loss for very large values (observed on iOS)
+        var normalizedDegrees = Math.IEEERemainder(degrees, 360.0);
+        var radians = normalizedDegrees * _toRadians;
 
         return RotateClockwiseRadians(x, y, radians);
     }
@@ -63,10 +65,17 @@ public static class Algorithms
     /// <returns>Returns the rotated point</returns>
     public static MPoint RotateClockwiseRadians(double x, double y, double radians)
     {
-        var cos = Math.Cos(-radians);
-        var sin = Math.Sin(-radians);
-        var newX = x * cos - y * sin;
-        var newY = x * sin + y * cos;
+        // Normalize to [-π, π] to improve argument reduction accuracy across platforms
+        var r = Math.IEEERemainder(radians, 2 * Math.PI);
+
+        // Compute sin/cos together for accuracy and performance
+        (var sin, var cos) = Math.SinCos(r);
+
+        // Clockwise rotation by r is equivalent to using sin(-r) and cos(-r)
+        var sinClockwise = -sin;
+
+        var newX = x * cos - y * sinClockwise; // = x*cos + y*sin
+        var newY = x * sinClockwise + y * cos; // = -x*sin + y*cos
 
         return new MPoint(newX, newY);
     }
