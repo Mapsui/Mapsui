@@ -1,5 +1,6 @@
 ﻿using Mapsui.Nts.Editing;
 using Mapsui.Widgets;
+using Mapsui.Layers;
 
 namespace Mapsui.Nts.Widgets;
 
@@ -11,6 +12,24 @@ public class EditingWidget : InputOnlyWidget // Derived from InputOnlyWidget bec
     {
         _editManager = editManager;
         InputAreaType = InputAreaType.Map;
+    }
+
+    public EditMode EditMode
+    {
+        get => _editManager.EditMode;
+        set => _editManager.EditMode = value;
+    }
+
+    public bool SelectMode
+    {
+        get => _editManager.SelectMode;
+        set => _editManager.SelectMode = value;
+    }
+
+    public WritableLayer? Layer
+    {
+        get => _editManager.Layer;
+        set => _editManager.Layer = value;
     }
 
     public override void OnPointerPressed(WidgetEventArgs e) =>
