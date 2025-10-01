@@ -52,7 +52,8 @@ Focus: More shared code in platforms. This will affect MapControls, Widgets and 
 - [x] All fetching through a single pipeline https://github.com/Mapsui/Mapsui/issues/2269
 
 Not (yet) done:
-- [ ] Dispose the samples if needed.
+
+- [ ] Dispose the samples if needed: https://github.com/Mapsui/Mapsui/issues/2254
 - [ ] Fix the remaining warnings wrt IDispose.
 
 ## Mapsui 6 options:
