@@ -2,7 +2,7 @@
 
 ## Some background
 
-To get smooth performance while panning and zooming, data needs to be fetched on a background thread. Even if it is fetched on a background thread, it will use resources which could be noticeable in the UI thread if not managed efficiently.
+To get smooth performance while panning and zooming data needs to be fetched on a background thread. Even if it is fetched on a background thread it will use resources which could be noticeable in the responsiveness of the map. The asynchronous data fetching of Mapsui tries to take this into account to optimize the user experience.
 
 ## ChangeType 
 

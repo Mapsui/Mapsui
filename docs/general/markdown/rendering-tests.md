@@ -45,4 +45,4 @@ My way of working is like this. I copy all original files over the original file
 ```ps
 PS> .\Scripts\CopyGeneratedImagesOverOriginalImages.ps1
 ```
-Then there will be many git changes because smaller differences have been accepted by the tests in the past. You need to revert all files that did not cause a test to fail. This is because we want to reduce the number of changes in our git history, especialy if they are binary files.
+Then there will be many git changes because smaller differences have been accepted by the tests in the past. You need to revert all files that did not cause a test to fail. This is because we want to reduce the number of changes in our git history, especially if they are binary files.

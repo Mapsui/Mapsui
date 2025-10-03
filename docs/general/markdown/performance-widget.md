@@ -13,7 +13,7 @@ if (mapControl.Performance == null)
     mapControl.Performance = new Utilities.Performance(10);
 ```
 
-2) Create the PerformanceWidget. As parameter you have to provide the Performance object, that the widget should be use
+2) Create the PerformanceWidget. As parameter you have to provide the Performance object, that the widget should use
 
 ```csharp
 var widget = new Widgets.Performance.PerformanceWidget(mapControl.Performance);
@@ -49,7 +49,7 @@ The first two parameters are the X and Y coordinates for the widget. Third param
 
 ```csharp
 if (mapControl.Performance == null)
-    mapControl. Performance = new Utilities.Performance();
+    mapControl.Performance = new Utilities.Performance();
 
 var widget = new Widgets.Performance.PerformanceWidget(mapControl.Performance);
 
