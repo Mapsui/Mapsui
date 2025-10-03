@@ -3,18 +3,18 @@
 Mapsui is a map component for apps built with: MAUI, WPF, Avalonia, [Uno Platform](https://github.com/unoplatform/uno), Blazor, WinUI, Windows Forms, Eto, .NET Android and .NET iOS. 
 
 ## Quick Start
-Below is a table with the nuget packages for all the supported UI frameworks. The right most column has a link to the guickstart.
+Below is a table with the NuGet packages for all the supported UI frameworks. The rightmost column has a link to the quickstart.
 
 ## Samples
-After going through the guickstart you should look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/samples/). Each sample has an accompaning 'source code' tab you can use to build your own version. 
+After going through the quickstart you should look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/samples/). 
 
 ## Samples V5
-Mapsui V5  has it's own sample website [here](https://mapsui.com/v5/samples).
+Mapsui V5 has its own sample website [here](https://mapsui.com/v5/samples).
 
 ## Documentation
 The documentation can be found at [mapsui.com](https://mapsui.com).
 
-## UI Framework Nugets
+## UI Framework NuGets
 
 | Package | Version  | Downloads | Quickstart Guide |
 | ---------------|:-------------:|:-------------:|:------------------------------------------------------------------------------------:|
@@ -32,7 +32,7 @@ The documentation can be found at [mapsui.com](https://mapsui.com).
 | Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) |           [Eto](https://mapsui.com/documentation/getting-started-eto.html)           |
 | Mapsui.WindowsForms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WindowsForms/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.WindowsForms.svg)](https://www.nuget.org/packages/Mapsui.WindowsForms) | [WindowsForms](https://mapsui.com/v5/#__tabbed_1_10) |
 
-## Core Nugets
+## Core NuGets
 
 | Package | Version  | Downloads |
 | ---------------|:-------------:|:-------------:|
@@ -50,9 +50,9 @@ The documentation can be found at [mapsui.com](https://mapsui.com).
 | Build docs | [![Build status](https://github.com/mapsui/mapsui/actions/workflows/dotnet-docs.yml/badge.svg)](https://github.com/Mapsui/Mapsui/actions/workflows/dotnet-docs.yml?query=branch%3Amaster) |
 
 ## Community
-- If you have an issue please submit it [here on github](https://github.com/mapsui/Mapsui/issues).
-- If you have a question post is [here](https://github.com/Mapsui/Mapsui/discussions).
-- Follow us on [twitter](https://twitter.com/mapsui).
+- If you have an issue please submit it [here on GitHub](https://github.com/mapsui/Mapsui/issues).
+- If you have a question post it [here](https://github.com/Mapsui/Mapsui/discussions).
+- Follow us on [Twitter](https://twitter.com/mapsui).
 
 ## How can I help as a user
 - Write clear issues. Mention the Mapsui version and which platform you use.
