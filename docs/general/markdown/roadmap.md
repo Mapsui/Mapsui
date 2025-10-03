@@ -1,5 +1,5 @@
 # Roadmap 
-*Updated Januari 2024*
+*Updated January 2024*
 
 ## Mapsui 4
 
