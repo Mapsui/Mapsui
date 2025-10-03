@@ -3,45 +3,45 @@
 Mapsui is a map component for apps built with: MAUI, WPF, Avalonia, [Uno Platform](https://github.com/unoplatform/uno), Blazor, WinUI, Windows Forms, Eto, .NET Android and .NET iOS. 
 
 ## Quick Start
-Below is a table with the nuget packages for all the supported UI frameworks. The right most column has a link to the guickstart.
+Below is a table with the NuGet packages for all the supported UI frameworks. The rightmost column has a link to the quickstart.
 
 ## Samples
-After going through the guickstart you should look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/samples/). Each sample has an accompaning 'source code' tab you can use to build your own version. 
+After going through the quickstart you should look into the samples. All samples work the same on all platforms. You can view online samples presented in Blazor [here](https://mapsui.com/samples/). 
 
 ## Samples V5
-Mapsui V5  has it's own sample website [here](https://mapsui.com/v5/samples).
+Mapsui V5 has its own sample website [here](https://mapsui.com/v5/samples).
 
 ## Documentation
 The documentation can be found at [mapsui.com](https://mapsui.com).
 
-## UI Framework Nugets
+## UI Framework NuGets
 
 | Package | Version  | Downloads | Quickstart Guide |
 | ---------------|:-------------:|:-------------:|:------------------------------------------------------------------------------------:|
-| Mapsui.Maui   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Maui.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Maui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Maui.svg)](https://www.nuget.org/packages/Mapsui.Maui) |          [MAUI](https://mapsui.com/documentation/getting-started-maui.html)          |
-| Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Wpf.svg)](https://www.nuget.org/packages/Mapsui.Wpf) |           [WPF](https://mapsui.com/documentation/getting-started-wpf.html)           |
-| Mapsui.Avalonia     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Avalonia.svg)](https://www.nuget.org/packages/Mapsui.Avalonia) |      [Avalonia](https://mapsui.com/documentation/getting-started-avalonia.html)      |
-| Mapsui.Avalonia.V0     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.V0.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia.V0/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Avalonia.V0.svg)](https://www.nuget.org/packages/Mapsui.Avalonia.V0) |      [Avalonia.V0](https://mapsui.com/documentation/getting-started-avalonia.html)      |
-| Mapsui.Uno.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg)](https://www.nuget.org/packages/Mapsui.Uno.WinUI) |     [Uno.WinUI](https://mapsui.com/documentation/getting-started-uno-winui.html)     |
-| Mapsui.Uno     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.svg)](https://www.nuget.org/packages/Mapsui.Uno) |           [Uno](https://mapsui.com/documentation/getting-started-uno.html)           |
-| Mapsui.Blazor     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Blazor.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Blazor/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Blazor.svg)](https://www.nuget.org/packages/Mapsui.Blazor) |        [Blazor](https://mapsui.com/documentation/getting-started-blazor.html)        |
-| Mapsui.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.WinUI.svg)](https://www.nuget.org/packages/Mapsui.WinUI) |         [WinUI](https://mapsui.com/documentation/getting-started-winui.html)         |
-| Mapsui.Forms   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Forms.svg)](https://www.nuget.org/packages/Mapsui.Forms) | [Xamarin Forms](https://mapsui.com/documentation/getting-started-xamarin-forms.html) |
-| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) |       [Android](https://mapsui.com/documentation/getting-started-android.html)       |
-| Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) |           [iOS](https://mapsui.com/documentation/getting-started-ios.html)           |
-| Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) |           [Eto](https://mapsui.com/documentation/getting-started-eto.html)           |
-| Mapsui.WindowsForms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WindowsForms/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.WindowsForms.svg)](https://www.nuget.org/packages/Mapsui.WindowsForms) | [WindowsForms](https://mapsui.com/v5/#__tabbed_1_10) |
+| Mapsui.Maui   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Maui.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Maui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Maui.svg)](https://www.nuget.org/packages/Mapsui.Maui/) | [Quickstart](https://mapsui.com/quickstart/maui) |
+| Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Wpf.svg)](https://www.nuget.org/packages/Mapsui.Wpf/) | [Quickstart](https://mapsui.com/quickstart/wpf) |
+| Mapsui.Avalonia     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Avalonia.svg)](https://www.nuget.org/packages/Mapsui.Avalonia/) | [Quickstart](https://mapsui.com/quickstart/avalonia) |
+| Mapsui.Avalonia.V0     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.V0.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia.V0/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Avalonia.V0.svg)](https://www.nuget.org/packages/Mapsui.Avalonia.V0/) | [Quickstart](https://mapsui.com/quickstart/avalonia-v0) |
+| Mapsui.Uno.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) | [Quickstart](https://mapsui.com/quickstart/uno-winui) |
+| Mapsui.Uno     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.svg)](https://www.nuget.org/packages/Mapsui.Uno/) | [Quickstart](https://mapsui.com/quickstart/uno) |
+| Mapsui.Blazor     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Blazor.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Blazor/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Blazor.svg)](https://www.nuget.org/packages/Mapsui.Blazor/) | [Quickstart](https://mapsui.com/quickstart/blazor) |
+| Mapsui.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.WinUI.svg)](https://www.nuget.org/packages/Mapsui.WinUI/) | [Quickstart](https://mapsui.com/quickstart/winui) |
+| Mapsui.Forms   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Forms.svg)](https://www.nuget.org/packages/Mapsui.Forms/) | [Quickstart](https://mapsui.com/quickstart/forms) |
+| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android/) | [Quickstart](https://mapsui.com/quickstart/android) |
+| Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS/) | [Quickstart](https://mapsui.com/quickstart/ios) |
+| Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto/) | [Quickstart](https://mapsui.com/quickstart/eto) |
+| Mapsui.WindowsForms | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WindowsForms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WindowsForms/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.WindowsForms.svg)](https://www.nuget.org/packages/Mapsui.WindowsForms/) | [Quickstart](https://mapsui.com/quickstart/windowsforms) |
 
-## Core Nugets
+## Core NuGets
 
 | Package | Version  | Downloads |
 | ---------------|:-------------:|:-------------:|
-| Mapsui         | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.svg)](https://www.nuget.org/packages/Mapsui) |
-| Mapsui.Nts | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Nts.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Nts/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Nts.svg)](https://www.nuget.org/packages/Mapsui.Nts) |
-| Mapsui.Tiling | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Tiling.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Tiling/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Tiling.svg)](https://www.nuget.org/packages/Mapsui.Tiling) |
-| Mapsui.Rendering.Skia | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Rendering.Skia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Rendering.Skia/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Rendering.Skia.svg)](https://www.nuget.org/packages/Mapsui.Rendering.Skia) |
-| Mapsui.ArcGIS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.ArcGIS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.ArcGIS/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.ArcGIS.svg)](https://www.nuget.org/packages/Mapsui.ArcGIS) |
-| Mapsui.Extensions | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Extensions.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Extensions/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Extensions.svg)](https://www.nuget.org/packages/Mapsui.Extensions) |
+| Mapsui         | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.svg)](https://www.nuget.org/packages/Mapsui/) |
+| Mapsui.Nts | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Nts.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Nts/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Nts.svg)](https://www.nuget.org/packages/Mapsui.Nts/) |
+| Mapsui.Tiling | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Tiling.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Tiling/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Tiling.svg)](https://www.nuget.org/packages/Mapsui.Tiling/) |
+| Mapsui.Rendering.Skia | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Rendering.Skia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Rendering.Skia/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Rendering.Skia.svg)](https://www.nuget.org/packages/Mapsui.Rendering.Skia/) |
+| Mapsui.ArcGIS | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.ArcGIS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.ArcGIS/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.ArcGIS.svg)](https://www.nuget.org/packages/Mapsui.ArcGIS/) |
+| Mapsui.Extensions | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Extensions.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Extensions/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Extensions.svg)](https://www.nuget.org/packages/Mapsui.Extensions/) |
 
 ## Build Status
 | platform | status |
@@ -50,9 +50,9 @@ The documentation can be found at [mapsui.com](https://mapsui.com).
 | Build docs | [![Build status](https://github.com/mapsui/mapsui/actions/workflows/dotnet-docs.yml/badge.svg)](https://github.com/Mapsui/Mapsui/actions/workflows/dotnet-docs.yml?query=branch%3Amaster) |
 
 ## Community
-- If you have an issue please submit it [here on github](https://github.com/mapsui/Mapsui/issues).
-- If you have a question post is [here](https://github.com/Mapsui/Mapsui/discussions).
-- Follow us on [twitter](https://twitter.com/mapsui).
+- If you have an issue please submit it [here on GitHub](https://github.com/mapsui/Mapsui/issues).
+- If you have a question post it [here](https://github.com/Mapsui/Mapsui/discussions).
+- Follow us on [Twitter](https://twitter.com/mapsui).
 
 ## How can I help as a user
 - Write clear issues. Mention the Mapsui version and which platform you use.
