@@ -26,7 +26,7 @@ Testing is hard. In v5 we support nine different UI frameworks and a single fram
 - [ ] In Widgets|Button: Pressed next to widget, move above the widget and release there. The widget should not change the tap count.
 - [ ] In Widgets|Button: Pressed on the widget, move next to the widget and release there. The widget should not change the tap count.
 - [ ] In Widgets|Button: Double Tap should increase the tap count by one.
-- [ ] In Widgets|Hyperlink: Tap on hyperlink should open een browser page.
+- [ ] In Widgets|Hyperlink: Tap on hyperlink should open a browser page.
 - [ ] In Demo|MapInfo: MapInfo should show on the bottom left in the map.
 - [ ] In Info|SingleCallout: Callout should show on tap on symbol, should disappear on a second tap on either symbol or callout.
 - [ ] In Info|CustomCallout: Callout should not toggle the callout but only show info bottom left.
