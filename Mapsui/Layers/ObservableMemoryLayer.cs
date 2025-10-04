@@ -11,7 +11,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
     where T : class
 {
     private ObservableCollection<T>? _observableCollection;
-    private readonly ConcurrentHashSet<IFeature> _shadowCollection = new ConcurrentHashSet<IFeature>();
+    private readonly ConcurrentHashSet<IFeature> _shadowCollection = new();
     private readonly Func<T, IFeature?> _getFeature;
 
     public ObservableMemoryLayer(Func<T, IFeature?> getFeature, string? name = null) : base(
@@ -52,6 +52,8 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                         _shadowCollection.Add(feature);
                 }
             }
+            FeaturesWereModified();
+            DataHasChanged();
         }
     }
 
