@@ -14,10 +14,9 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class ObservableMemoryLayerSample : ISample
 {
-    private static readonly Color _green = new(57, 194, 74);
-    private static readonly Color _red = new(244, 67, 54);
-    private static readonly Color _yellow = Color.Yellow;
-    private static readonly Color _backgroundColor = Color.LightGray;
+    private static readonly Color _intermediateColor = new(192, 108, 132);
+    private static readonly Color _lightColor = new(248, 177, 149);
+    private static readonly Color _darkColor = new(108, 91, 123);
 
     public string Name => $"{nameof(ObservableMemoryLayer<PointFeature>)}";
     public string Category => "1";
@@ -31,7 +30,8 @@ public class ObservableMemoryLayerSample : ISample
     {
         var map = new Map
         {
-            CRS = "EPSG:3857"
+            CRS = "EPSG:3857",
+            BackColor = Color.LightGray,
         };
         map.Layers.Add(CreateLayerWithBackgroundSquare());
         var observableCollection = CreateNewObservableCollection(3);
@@ -53,8 +53,8 @@ public class ObservableMemoryLayerSample : ISample
             VerticalAlignment = VerticalAlignment.Bottom,
             Margin = new MRect(10, 10),
             Padding = new MRect(6, 6),
-            BackColor = _red,
-            TextColor = Color.White,
+            BackColor = _intermediateColor,
+            TextColor = Color.WhiteSmoke,
             TextSize = 16,
             CornerRadius = 4,
             WithTappedEvent = (s, e) =>
@@ -78,8 +78,8 @@ public class ObservableMemoryLayerSample : ISample
             VerticalAlignment = VerticalAlignment.Bottom,
             Margin = new MRect(10, 48),
             Padding = new MRect(6, 6),
-            BackColor = _green,
-            TextColor = Color.White,
+            BackColor = _intermediateColor,
+            TextColor = Color.WhiteSmoke,
             TextSize = 16,
             CornerRadius = 4,
             WithTappedEvent = (s, e) =>
@@ -97,10 +97,9 @@ public class ObservableMemoryLayerSample : ISample
             Name = "Points",
             Style = new SymbolStyle
             {
-                SymbolType = SymbolType.Triangle,
-                SymbolScale = 1.5,
-                Outline = new Pen(Color.DimGray, 1),
-                Fill = new Brush(_yellow)
+                SymbolType = SymbolType.Rectangle,
+                Outline = new Pen(_lightColor, 1),
+                Fill = new Brush(_intermediateColor)
             },
             ObservableCollection = observableCollection,
         };
@@ -119,7 +118,8 @@ public class ObservableMemoryLayerSample : ISample
         DataSource = new MemoryProvider(CreateSquarePolygon(5000000).ToFeature()),
         Style = new VectorStyle
         {
-            Fill = new Brush(_backgroundColor), // Light blue background
+            Fill = new Brush(_darkColor),
+            Outline = null,
         }
     };
 
