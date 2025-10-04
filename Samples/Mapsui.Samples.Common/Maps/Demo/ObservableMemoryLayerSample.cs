@@ -14,9 +14,10 @@ namespace Mapsui.Samples.Common.Maps.Demo;
 
 public class ObservableMemoryLayerSample : ISample
 {
-    // Add these color definitions at the top of the class
-    private static readonly Color _green = new(60, 180, 75);
-    private static readonly Color _red = new(230, 50, 50);
+    private static readonly Color _green = new(57, 194, 74);
+    private static readonly Color _red = new(244, 67, 54);
+    private static readonly Color _yellow = Color.Yellow;
+    private static readonly Color _backgroundColor = Color.LightGray;
 
     public string Name => $"{nameof(ObservableMemoryLayer<PointFeature>)}";
     public string Category => "1";
@@ -38,6 +39,7 @@ public class ObservableMemoryLayerSample : ISample
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
         map.Widgets.Add(CreateAddPointButton(observableCollection));
         map.Widgets.Add(CreateRemovePointButton(observableCollection));
+        map.Navigator.ZoomToBox(map.Extent!.Grow(2000000));
         return map;
     }
 
@@ -67,7 +69,6 @@ public class ObservableMemoryLayerSample : ISample
         };
     }
 
-    // Update CreateAddPointButton to use WarmGreen
     private static ButtonWidget CreateAddPointButton(ObservableCollection<PointFeature> observableCollection)
     {
         return new ButtonWidget
@@ -75,7 +76,7 @@ public class ObservableMemoryLayerSample : ISample
             Text = "Add point",
             HorizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment = VerticalAlignment.Bottom,
-            Margin = new MRect(10, 44),
+            Margin = new MRect(10, 48),
             Padding = new MRect(6, 6),
             BackColor = _green,
             TextColor = Color.White,
@@ -89,7 +90,6 @@ public class ObservableMemoryLayerSample : ISample
         };
     }
 
-    // Update CreateNewObservableLayer to use WarmGreen for the point color
     private static ObservableMemoryLayer<PointFeature> CreateNewObservableLayer(ObservableCollection<PointFeature> observableCollection)
     {
         return new ObservableMemoryLayer<PointFeature>(f => f)
@@ -99,8 +99,8 @@ public class ObservableMemoryLayerSample : ISample
             {
                 SymbolType = SymbolType.Triangle,
                 SymbolScale = 1.5,
-                Outline = new Pen(Color.White, 1),
-                Fill = new Brush(_green)
+                Outline = new Pen(Color.DimGray, 1),
+                Fill = new Brush(_yellow)
             },
             ObservableCollection = observableCollection,
         };
@@ -119,12 +119,7 @@ public class ObservableMemoryLayerSample : ISample
         DataSource = new MemoryProvider(CreateSquarePolygon(5000000).ToFeature()),
         Style = new VectorStyle
         {
-            Fill = new Brush(Color.LightGray),
-            Outline = new Pen
-            {
-                Color = Color.DimGray,
-                Width = 1,
-            }
+            Fill = new Brush(_backgroundColor), // Light blue background
         }
     };
 
