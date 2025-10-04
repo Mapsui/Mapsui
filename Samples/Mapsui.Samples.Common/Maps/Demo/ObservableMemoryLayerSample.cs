@@ -19,7 +19,7 @@ public class ObservableMemoryLayerSample : ISample
     private static readonly Color _darkColor = new(108, 91, 123);
 
     public string Name => $"{nameof(ObservableMemoryLayer<PointFeature>)}";
-    public string Category => "1";
+    public string Category => "Special";
 
     public Task<Map> CreateMapAsync()
     {
