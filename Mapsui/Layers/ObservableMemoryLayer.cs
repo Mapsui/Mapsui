@@ -7,6 +7,15 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Layers;
 
+/// <summary>
+/// Represents a memory-based layer that exposes its data as an observable collection and synchronizes feature changes
+/// with the underlying feature set.
+/// </summary>
+/// <remarks>This class enables two-way synchronization between an ObservableCollection of items and the set of
+/// features exposed by the layer. Changes to the collection are automatically reflected in the feature set, and vice
+/// versa. This is useful for scenarios where UI or other components need to observe and react to changes in the layer's
+/// data in real time.</remarks>
+/// <typeparam name="T">The type of items contained in the observable collection. Must be a reference type.</typeparam>
 public class ObservableMemoryLayer<T> : MemoryLayer
     where T : class
 {
@@ -14,6 +23,13 @@ public class ObservableMemoryLayer<T> : MemoryLayer
     private readonly ConcurrentHashSet<IFeature> _shadowCollection = new();
     private readonly Func<T, IFeature?> _getFeature;
 
+    /// <summary>
+    /// Initializes a new instance of the ObservableMemoryLayer class with the specified feature selector and optional
+    /// name.
+    /// </summary>
+    /// <param name="getFeature">A function gets the IFeature instance related to the item of type T. This function is used to map items in the
+    /// layer to their corresponding features. Cannot be null.</param>
+    /// <param name="name">The optional name to assign to the layer. If null, a default name based on the type is used.</param>
     public ObservableMemoryLayer(Func<T, IFeature?> getFeature, string? name = null) : base(
         name ?? nameof(ObservableMemoryLayer<T>))
     {
@@ -26,6 +42,13 @@ public class ObservableMemoryLayer<T> : MemoryLayer
     /// </summary>
     public new IEnumerable<IFeature> Features => _shadowCollection;
 
+    /// <summary>
+    /// Gets or sets the underlying collection of items to observe for changes.
+    /// </summary>
+    /// <remarks>Assigning a new collection will update the internal state to reflect the contents of the
+    /// provided collection and subscribe to its change notifications. If the collection is replaced, any previous event
+    /// subscriptions are removed. Setting this property to null will clear the internal state and unsubscribe from
+    /// change notifications.</remarks>
     public ObservableCollection<T>? ObservableCollection
     {
         get => _observableCollection;
