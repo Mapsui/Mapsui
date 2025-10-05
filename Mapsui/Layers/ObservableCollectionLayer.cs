@@ -24,7 +24,6 @@ public class ObservableCollectionLayer<T> : BaseLayer
     private ObservableCollection<T>? _observableCollection;
     private readonly ConcurrentHashSet<ShadowItem<T>> _shadowCollection = new();
     private readonly Func<T, IFeature?> _itemToFeature;
-    private IFeature[] _localFeatures = [];
     private MRect? _extent;
 
     /// <summary>
@@ -37,7 +36,6 @@ public class ObservableCollectionLayer<T> : BaseLayer
     public ObservableCollectionLayer(Func<T, IFeature?> itemToFeature, string? name = null) : base(name ?? nameof(ObservableCollectionLayer<T>))
     {
         _itemToFeature = itemToFeature;
-        UpdateFeatures();
     }
 
     /// <summary>
@@ -71,7 +69,8 @@ public class ObservableCollectionLayer<T> : BaseLayer
                     }
                 }
             }
-            UpdateFeatures();
+            FeaturesWereModified();
+            DataHasChanged();
         }
     }
 
@@ -105,7 +104,6 @@ public class ObservableCollectionLayer<T> : BaseLayer
                     }
                 }
 
-                UpdateFeatures();
                 FeaturesWereModified();
                 DataHasChanged();
                 break;
@@ -122,7 +120,6 @@ public class ObservableCollectionLayer<T> : BaseLayer
                         }
                     }
 
-                UpdateFeatures();
                 FeaturesWereModified();
                 DataHasChanged();
                 break;
@@ -130,18 +127,6 @@ public class ObservableCollectionLayer<T> : BaseLayer
                 // do nothing
                 break;
         }
-    }
-
-    private void UpdateFeatures()
-    {
-        _localFeatures = _shadowCollection.Select(i => i.Feature).ToArray();
-        _extent = _localFeatures.GetExtent();
-    }
-
-    public void FeaturesWereModified()
-    {
-        _localFeatures = _shadowCollection.Select(i => i.Feature).ToArray();
-        _extent = _localFeatures.GetExtent();
     }
 
     public override IEnumerable<IFeature> GetFeatures(MRect? rect, double resolution)
@@ -152,7 +137,7 @@ public class ObservableCollectionLayer<T> : BaseLayer
         var biggerRect = rect.Grow(
                 SymbolStyle.DefaultWidth * 2 * resolution,
                 SymbolStyle.DefaultHeight * 2 * resolution);
-        foreach (var feature in _localFeatures)
+        foreach (var feature in _shadowCollection.Select(i => i.Feature).ToArray())
         {
             if (feature?.Extent?.Intersects(biggerRect) == true)
                 yield return feature;
@@ -162,6 +147,11 @@ public class ObservableCollectionLayer<T> : BaseLayer
     public override Func<IEnumerable<IFeature>, IEnumerable<IFeature>> SortFeatures { get; set; } = (_localFeatures) => _localFeatures.OrderBy(f => f.Id);
 
     public override MRect? Extent => _extent;
+
+    private void FeaturesWereModified()
+    {
+        _extent = _shadowCollection.Select(i => i.Feature).GetExtent();
+    }
 
     private class ShadowItem<U>(U item, IFeature feature)
     {
