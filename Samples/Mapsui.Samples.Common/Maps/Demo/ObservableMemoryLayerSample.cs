@@ -39,7 +39,7 @@ public class ObservableMemoryLayerSample : ISample
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
         map.Widgets.Add(CreateAddPointButton(observableCollection));
         map.Widgets.Add(CreateRemovePointButton(observableCollection));
-        map.Navigator.ZoomToBox(map.Extent!.Grow(2000000));
+        map.Navigator.ZoomToBox(map.Extent!.Grow(10000000));
         return map;
     }
 
