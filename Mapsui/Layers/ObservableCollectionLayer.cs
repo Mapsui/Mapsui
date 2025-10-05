@@ -31,7 +31,7 @@ public class ObservableCollectionLayer<T> : BaseLayer
     /// Initializes a new instance of the ObservableCollectionLayer class with the specified feature selector and optional
     /// name.
     /// </summary>
-    /// <param name="itemToFeature">A function gets the IFeature instance related to the item of type T. This function is used to map items in the
+    /// <param name="itemToFeature">A function that gets the IFeature instance related to the item of type T. This function is used to map items in the
     /// layer to their corresponding features. Cannot be null.</param>
     /// <param name="name">The optional name to assign to the layer. If null, a default name based on the type is used.</param>
     public ObservableCollectionLayer(Func<T, IFeature?> itemToFeature, string? name = null) : base(name ?? nameof(ObservableCollectionLayer<T>))
