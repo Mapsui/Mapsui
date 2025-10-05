@@ -20,28 +20,14 @@ public class ObservableMemoryLayer<T> : MemoryLayer
 {
     private ObservableCollection<T>? _observableCollection;
     private readonly ConcurrentHashSet<ShadowItem<T>> _shadowCollection = new();
-    private readonly Func<T, IFeature?> _itemToFeature;
+    private readonly Func<T, IFeature?> _createFeature;
 
-    /// <summary>
-    /// Initializes a new instance of the ObservableMemoryLayer class with the specified feature selector and optional
-    /// name.
-    /// </summary>
-    /// <param name="itemToFeature">A function gets the IFeature instance related to the item of type T. This function is used to map items in the
-    /// layer to their corresponding features. Cannot be null.</param>
-    /// <param name="name">The optional name to assign to the layer. If null, a default name based on the type is used.</param>
-    public ObservableMemoryLayer(Func<T, IFeature?> itemToFeature, string? name = null) : base(name ?? nameof(ObservableMemoryLayer<T>))
+    public ObservableMemoryLayer(Func<T, IFeature?> createFeature, string? name = null) : base(name ?? nameof(ObservableMemoryLayer<T>))
     {
-        _itemToFeature = itemToFeature;
+        _createFeature = createFeature;
         Features = _shadowCollection.Select(i => i.Feature);
     }
 
-    /// <summary>
-    /// Gets or sets the underlying collection of items to observe for changes.
-    /// </summary>
-    /// <remarks>Assigning a new collection will update the internal state to reflect the contents of the
-    /// provided collection and subscribe to its change notifications. If the collection is replaced, any previous event
-    /// subscriptions are removed. Setting this property to null will clear the internal state and unsubscribe from
-    /// change notifications.</remarks>
     public ObservableCollection<T>? ObservableCollection
     {
         get => _observableCollection;
@@ -59,7 +45,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                 _shadowCollection.Clear();
                 foreach (var it in _observableCollection.ToArray()) // collection has been changed.
                 {
-                    var feature = _itemToFeature(it);
+                    var feature = _createFeature(it);
                     if (feature != null)
                     {
                         _ = _shadowCollection.Add(new ShadowItem<T>(it, feature));
@@ -91,7 +77,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                 {
                     foreach (var it in e.NewItems)
                     {
-                        var feature = _itemToFeature((T)it);
+                        var feature = _createFeature((T)it);
                         if (feature != null)
                         {
                             var shadowItem = new ShadowItem<T>((T)it, feature);
@@ -109,12 +95,12 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                 if (_observableCollection != null)
                     foreach (var it in _observableCollection)
                     {
-                        var feature = _itemToFeature(it);
+                        var feature = _createFeature(it);
                         if (feature != null)
                         {
                             var shadowItem = new ShadowItem<T>(it, feature);
-                            _ = _shadowCollection.Add(shadowItem);
-                            Features = _shadowCollection.Select(i => i.Feature);
+                            _shadowCollection.Add(shadowItem);
+                            base.Features = _shadowCollection.Select(i => i.Feature);
                         }
                     }
 
