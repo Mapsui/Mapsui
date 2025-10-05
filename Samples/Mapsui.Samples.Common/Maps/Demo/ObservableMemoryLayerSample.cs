@@ -7,6 +7,7 @@ using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidgets;
 using NetTopologySuite.Geometries;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ public class ObservableMemoryLayerSample : ISample
     private static readonly Color _lightColor = new(248, 177, 149);
     private static readonly Color _darkColor = new(108, 91, 123);
 
-    public string Name => $"{nameof(ObservableMemoryLayer<PointFeature>)}";
+    public string Name => $"{nameof(ObservableMemoryLayer<BusStop>)}";
     public string Category => "Special";
 
     public Task<Map> CreateMapAsync()
@@ -28,73 +29,73 @@ public class ObservableMemoryLayerSample : ISample
 
     public static Map CreateMap()
     {
+        // The busStops ObservableCollection represents something in your app that is mostly unrelated to mapping but
+        // that you want to display in the map. Perhaps it was already in your app before you added Mapsui.
+        var busStops = CreateObservableCollectionOfBusStops(3);
+
         var map = new Map
         {
             CRS = "EPSG:3857",
             BackColor = Color.LightGray,
         };
-        map.Layers.Add(CreateLayerWithBackgroundSquare());
-        var observableCollection = CreateNewObservableCollection(3);
-        map.Layers.Add(CreateNewObservableLayer(observableCollection));
+        map.Layers.Add(CreateBackgroundWithGraySquare());
+
+        // The function to create a feature is the link from your BusStop to a Mapsui feature.
+        map.Layers.Add(CreateObservableMemoryLayer(busStops, (BusStop b) => new PointFeature(b.X, b.Y)));
         map.Widgets.Add(new ZoomInOutWidget { Margin = new MRect(20, 40) });
-        map.Widgets.Add(CreateAddPointButton(observableCollection));
-        map.Widgets.Add(CreateRemovePointButton(observableCollection));
         map.Navigator.ZoomToBox(map.Extent!.Grow(10000000));
+
+        // For this sample we need Mapsui buttons but in your app adding and removing could be done elsewhere.
+        map.Widgets.Add(CreateAddBusStopButton(busStops));
+        map.Widgets.Add(CreateRemoveBusStopButton(busStops));
+
         return map;
     }
 
-    // Update CreateRemovePointButton to use WarmRed
-    private static ButtonWidget CreateRemovePointButton(ObservableCollection<PointFeature> observableCollection)
+    private static ButtonWidget CreateRemoveBusStopButton(ObservableCollection<BusStop> observableCollection) => new()
     {
-        return new ButtonWidget
+        Text = "Remove point",
+        HorizontalAlignment = HorizontalAlignment.Left,
+        VerticalAlignment = VerticalAlignment.Bottom,
+        Margin = new MRect(10, 10),
+        Padding = new MRect(6, 6),
+        BackColor = _intermediateColor,
+        TextColor = Color.WhiteSmoke,
+        TextSize = 16,
+        CornerRadius = 4,
+        WithTappedEvent = (s, e) =>
         {
-            Text = "Remove point",
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Bottom,
-            Margin = new MRect(10, 10),
-            Padding = new MRect(6, 6),
-            BackColor = _intermediateColor,
-            TextColor = Color.WhiteSmoke,
-            TextSize = 16,
-            CornerRadius = 4,
-            WithTappedEvent = (s, e) =>
+            if (observableCollection.Count == 0)
             {
-                if (observableCollection.Count == 0)
-                {
-                    Logger.Log(LogLevel.Information, "No more points to remove");
-                    return;
-                }
-                observableCollection.RemoveAt(observableCollection.Count - 1);
+                Logger.Log(LogLevel.Information, "No more points to remove");
+                return;
             }
-        };
-    }
+            observableCollection.RemoveAt(observableCollection.Count - 1);
+        }
+    };
 
-    private static ButtonWidget CreateAddPointButton(ObservableCollection<PointFeature> observableCollection)
+    private static ButtonWidget CreateAddBusStopButton(ObservableCollection<BusStop> observableCollection) => new()
     {
-        return new ButtonWidget
+        Text = "Add point",
+        HorizontalAlignment = HorizontalAlignment.Left,
+        VerticalAlignment = VerticalAlignment.Bottom,
+        Margin = new MRect(10, 48),
+        Padding = new MRect(6, 6),
+        BackColor = _intermediateColor,
+        TextColor = Color.WhiteSmoke,
+        TextSize = 16,
+        CornerRadius = 4,
+        WithTappedEvent = (s, e) =>
         {
-            Text = "Add point",
-            HorizontalAlignment = HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Bottom,
-            Margin = new MRect(10, 48),
-            Padding = new MRect(6, 6),
-            BackColor = _intermediateColor,
-            TextColor = Color.WhiteSmoke,
-            TextSize = 16,
-            CornerRadius = 4,
-            WithTappedEvent = (s, e) =>
-            {
-                var count = observableCollection.Count;
-                observableCollection.Add(new PointFeature(count * 1_000_000, count * 1_000_000));
-            }
-        };
-    }
+            var count = observableCollection.Count;
+            observableCollection.Add(new BusStop("BusStop", count * 1_000_000, count * 1_000_000));
+        }
+    };
 
-    private static ObservableMemoryLayer<PointFeature> CreateNewObservableLayer(ObservableCollection<PointFeature> observableCollection)
-    {
-        return new ObservableMemoryLayer<PointFeature>(f => f)
+    private static ObservableMemoryLayer<BusStop> CreateObservableMemoryLayer(
+        ObservableCollection<BusStop> observableCollection, Func<BusStop, IFeature?> createFeature) => new(createFeature)
         {
-            Name = "Points",
+            Name = "BusStops",
             Style = new SymbolStyle
             {
                 SymbolType = SymbolType.Rectangle,
@@ -103,17 +104,16 @@ public class ObservableMemoryLayerSample : ISample
             },
             ObservableCollection = observableCollection,
         };
-    }
 
-    private static ObservableCollection<PointFeature> CreateNewObservableCollection(int pointCount)
+    private static ObservableCollection<BusStop> CreateObservableCollectionOfBusStops(int pointCount)
     {
-        var collection = new ObservableCollection<PointFeature>();
+        var busStops = new ObservableCollection<BusStop>();
         for (int i = 0; i < pointCount; i++)
-            collection.Add(new PointFeature(i * 1_000_000, i * 1_000_000));
-        return collection;
+            busStops.Add(new BusStop("BusStop", i * 1_000_000, i * 1_000_000));
+        return busStops;
     }
 
-    public static Layer CreateLayerWithBackgroundSquare() => new("Background")
+    public static Layer CreateBackgroundWithGraySquare() => new("Background")
     {
         DataSource = new MemoryProvider(CreateSquarePolygon(5000000).ToFeature()),
         Style = new VectorStyle
@@ -131,4 +131,13 @@ public class ObservableMemoryLayerSample : ISample
         new Coordinate(halfWidth, -halfWidth),
         new Coordinate(-halfWidth, -halfWidth) // Closing the ring
     }));
+
+    // This is some class in your app that you want to visualize in the map.
+    // It has no dependency on Mapsui and that is no problem.
+    public class BusStop(string name, double x, double y)
+    {
+        public string Name { get; } = name;
+        public double X { get; } = x;
+        public double Y { get; } = y;
+    }
 }
