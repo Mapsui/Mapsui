@@ -63,10 +63,11 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                     if (feature != null)
                     {
                         _ = _shadowCollection.Add(new ShadowItem<T>(it, feature));
-                        Features = _shadowCollection.Select(i => i.Feature);
                     }
                 }
             }
+            FeaturesWereModified();
+            DataHasChanged();
         }
     }
 
@@ -96,7 +97,6 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                         {
                             var shadowItem = new ShadowItem<T>((T)it, feature);
                             _shadowCollection.Add(shadowItem);
-                            Features = _shadowCollection.Select(i => i.Feature);
                         }
                     }
                 }
@@ -114,7 +114,6 @@ public class ObservableMemoryLayer<T> : MemoryLayer
                         {
                             var shadowItem = new ShadowItem<T>(it, feature);
                             _ = _shadowCollection.Add(shadowItem);
-                            Features = _shadowCollection.Select(i => i.Feature);
                         }
                     }
 
@@ -129,7 +128,7 @@ public class ObservableMemoryLayer<T> : MemoryLayer
 
     private class ShadowItem<U>(U item, IFeature feature)
     {
-        public U Item { get; set; } = item;
-        public IFeature Feature { get; set; } = feature;
+        public U Item { get; } = item;
+        public IFeature Feature { get; } = feature;
     }
 }
